@@ -106,6 +106,10 @@ func Provider() tfbridge.ProviderInfo {
 			// 		"tags": {Type: tfbridge.MakeType(mainPkg, "Tags")},
 			// 	},
 			// },
+			"aviatrix_vpc": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixVpc")},
+			"aviatrix_account": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAccount")},
+			"aviatrix_account_user": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAccountUser")},
+			"aviatrix_app_domain": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAppDomain")},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
 			// Map each resource in the Terraform provider to a Pulumi function. An example

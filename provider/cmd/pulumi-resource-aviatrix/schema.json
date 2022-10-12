@@ -100,6 +100,129 @@
             },
             "type": "object"
         },
+        "aviatrix:index/AviatrixVpcPrivateSubnet:AviatrixVpcPrivateSubnet": {
+            "properties": {
+                "cidr": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "name": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "subnetId": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "cidr",
+                        "name",
+                        "subnetId"
+                    ]
+                }
+            }
+        },
+        "aviatrix:index/AviatrixVpcPublicSubnet:AviatrixVpcPublicSubnet": {
+            "properties": {
+                "cidr": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "name": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "subnetId": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "cidr",
+                        "name",
+                        "subnetId"
+                    ]
+                }
+            }
+        },
+        "aviatrix:index/AviatrixVpcSubnet:AviatrixVpcSubnet": {
+            "properties": {
+                "cidr": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    },
+                    "willReplaceOnChanges": true
+                },
+                "name": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    },
+                    "willReplaceOnChanges": true
+                },
+                "region": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    },
+                    "willReplaceOnChanges": true
+                },
+                "subnetId": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "subnetId"
+                    ]
+                }
+            }
+        },
         "aviatrix:index/ProviderIgnoreTags:ProviderIgnoreTags": {
             "properties": {
                 "keyPrefixes": {
@@ -188,5 +311,326 @@
             "password",
             "username"
         ]
+    },
+    "resources": {
+        "aviatrix:index/aviatrixVpc:AviatrixVpc": {
+            "properties": {
+                "accountName": {
+                    "type": "string",
+                    "description": "Account name. This account will be used to create an Aviatrix VPC.\n"
+                },
+                "availabilityDomains": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of OCI availability domains.\n"
+                },
+                "aviatrixFirenetVpc": {
+                    "type": "boolean",
+                    "description": "Specify the VPC as Aviatrix FireNet VPC or not. Required to be false for GCP provider.\n"
+                },
+                "aviatrixTransitVpc": {
+                    "type": "boolean",
+                    "description": "Specify the VPC as Aviatrix Transit VPC or not. Required to be false for GCP provider.\n"
+                },
+                "azureVnetResourceId": {
+                    "type": "string",
+                    "description": "Azure vnet resource ID.\n"
+                },
+                "cidr": {
+                    "type": "string",
+                    "description": "Subnet of the VPC to be created. Required to be empty for GCP provider, and non-empty for other providers.\n"
+                },
+                "cloudType": {
+                    "type": "integer",
+                    "description": "Type of cloud service provider.\n"
+                },
+                "enableNativeGwlb": {
+                    "type": "boolean",
+                    "description": "Enable Native AWS GWLB for FireNet Function. Only valid with cloud_type = 1 (AWS). Valid values: true or false. Default\nvalue: false. Available as of provider version R2.18+.\n"
+                },
+                "enablePrivateOobSubnet": {
+                    "type": "boolean",
+                    "description": "Switch to enable private oob subnet. Only supported for AWS/AWSGov provider. Valid values: true, false. Default value:\nfalse.\n"
+                },
+                "faultDomains": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of OCI fault domains.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the VPC to be created.\n"
+                },
+                "numOfSubnetPairs": {
+                    "type": "integer",
+                    "description": "Number of public subnet and private subnet pair to be created.\n"
+                },
+                "privateModeSubnets": {
+                    "type": "boolean",
+                    "description": "Switch to only launch private subnets. Only available when Private Mode is enabled on the Controller.\n"
+                },
+                "privateSubnets": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/aviatrix:index/AviatrixVpcPrivateSubnet:AviatrixVpcPrivateSubnet"
+                    },
+                    "description": "List of private subnet of the VPC to be created.\n"
+                },
+                "publicSubnets": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/aviatrix:index/AviatrixVpcPublicSubnet:AviatrixVpcPublicSubnet"
+                    },
+                    "description": "List of public subnet of the VPC to be created.\n"
+                },
+                "region": {
+                    "type": "string",
+                    "description": "Region of cloud provider. Required to be empty for GCP provider, and non-empty for other providers.\n"
+                },
+                "resourceGroup": {
+                    "type": "string",
+                    "description": "Resource group of the Azure VPC created.\n"
+                },
+                "routeTables": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of route table ids associated with this VPC.\n"
+                },
+                "subnetSize": {
+                    "type": "integer",
+                    "description": "Subnet size.\n"
+                },
+                "subnets": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/aviatrix:index/AviatrixVpcSubnet:AviatrixVpcSubnet"
+                    },
+                    "description": "List of subnet of the VPC to be created. Required to be non-empty for GCP provider, and empty for other providers.\n"
+                },
+                "vpcId": {
+                    "type": "string",
+                    "description": "ID of the VPC created.\n"
+                }
+            },
+            "required": [
+                "accountName",
+                "availabilityDomains",
+                "azureVnetResourceId",
+                "cloudType",
+                "faultDomains",
+                "name",
+                "privateSubnets",
+                "publicSubnets",
+                "resourceGroup",
+                "routeTables",
+                "subnets",
+                "vpcId"
+            ],
+            "inputProperties": {
+                "accountName": {
+                    "type": "string",
+                    "description": "Account name. This account will be used to create an Aviatrix VPC.\n",
+                    "willReplaceOnChanges": true
+                },
+                "aviatrixFirenetVpc": {
+                    "type": "boolean",
+                    "description": "Specify the VPC as Aviatrix FireNet VPC or not. Required to be false for GCP provider.\n",
+                    "willReplaceOnChanges": true
+                },
+                "aviatrixTransitVpc": {
+                    "type": "boolean",
+                    "description": "Specify the VPC as Aviatrix Transit VPC or not. Required to be false for GCP provider.\n",
+                    "willReplaceOnChanges": true
+                },
+                "cidr": {
+                    "type": "string",
+                    "description": "Subnet of the VPC to be created. Required to be empty for GCP provider, and non-empty for other providers.\n",
+                    "willReplaceOnChanges": true
+                },
+                "cloudType": {
+                    "type": "integer",
+                    "description": "Type of cloud service provider.\n",
+                    "willReplaceOnChanges": true
+                },
+                "enableNativeGwlb": {
+                    "type": "boolean",
+                    "description": "Enable Native AWS GWLB for FireNet Function. Only valid with cloud_type = 1 (AWS). Valid values: true or false. Default\nvalue: false. Available as of provider version R2.18+.\n"
+                },
+                "enablePrivateOobSubnet": {
+                    "type": "boolean",
+                    "description": "Switch to enable private oob subnet. Only supported for AWS/AWSGov provider. Valid values: true, false. Default value:\nfalse.\n",
+                    "willReplaceOnChanges": true
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the VPC to be created.\n",
+                    "willReplaceOnChanges": true
+                },
+                "numOfSubnetPairs": {
+                    "type": "integer",
+                    "description": "Number of public subnet and private subnet pair to be created.\n",
+                    "willReplaceOnChanges": true
+                },
+                "privateModeSubnets": {
+                    "type": "boolean",
+                    "description": "Switch to only launch private subnets. Only available when Private Mode is enabled on the Controller.\n",
+                    "willReplaceOnChanges": true
+                },
+                "region": {
+                    "type": "string",
+                    "description": "Region of cloud provider. Required to be empty for GCP provider, and non-empty for other providers.\n",
+                    "willReplaceOnChanges": true
+                },
+                "resourceGroup": {
+                    "type": "string",
+                    "description": "Resource group of the Azure VPC created.\n",
+                    "willReplaceOnChanges": true
+                },
+                "subnetSize": {
+                    "type": "integer",
+                    "description": "Subnet size.\n",
+                    "willReplaceOnChanges": true
+                },
+                "subnets": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/aviatrix:index/AviatrixVpcSubnet:AviatrixVpcSubnet"
+                    },
+                    "description": "List of subnet of the VPC to be created. Required to be non-empty for GCP provider, and empty for other providers.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "accountName",
+                "cloudType"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AviatrixVpc resources.\n",
+                "properties": {
+                    "accountName": {
+                        "type": "string",
+                        "description": "Account name. This account will be used to create an Aviatrix VPC.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "availabilityDomains": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of OCI availability domains.\n"
+                    },
+                    "aviatrixFirenetVpc": {
+                        "type": "boolean",
+                        "description": "Specify the VPC as Aviatrix FireNet VPC or not. Required to be false for GCP provider.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "aviatrixTransitVpc": {
+                        "type": "boolean",
+                        "description": "Specify the VPC as Aviatrix Transit VPC or not. Required to be false for GCP provider.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "azureVnetResourceId": {
+                        "type": "string",
+                        "description": "Azure vnet resource ID.\n"
+                    },
+                    "cidr": {
+                        "type": "string",
+                        "description": "Subnet of the VPC to be created. Required to be empty for GCP provider, and non-empty for other providers.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "cloudType": {
+                        "type": "integer",
+                        "description": "Type of cloud service provider.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "enableNativeGwlb": {
+                        "type": "boolean",
+                        "description": "Enable Native AWS GWLB for FireNet Function. Only valid with cloud_type = 1 (AWS). Valid values: true or false. Default\nvalue: false. Available as of provider version R2.18+.\n"
+                    },
+                    "enablePrivateOobSubnet": {
+                        "type": "boolean",
+                        "description": "Switch to enable private oob subnet. Only supported for AWS/AWSGov provider. Valid values: true, false. Default value:\nfalse.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "faultDomains": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of OCI fault domains.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the VPC to be created.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "numOfSubnetPairs": {
+                        "type": "integer",
+                        "description": "Number of public subnet and private subnet pair to be created.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "privateModeSubnets": {
+                        "type": "boolean",
+                        "description": "Switch to only launch private subnets. Only available when Private Mode is enabled on the Controller.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "privateSubnets": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/aviatrix:index/AviatrixVpcPrivateSubnet:AviatrixVpcPrivateSubnet"
+                        },
+                        "description": "List of private subnet of the VPC to be created.\n"
+                    },
+                    "publicSubnets": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/aviatrix:index/AviatrixVpcPublicSubnet:AviatrixVpcPublicSubnet"
+                        },
+                        "description": "List of public subnet of the VPC to be created.\n"
+                    },
+                    "region": {
+                        "type": "string",
+                        "description": "Region of cloud provider. Required to be empty for GCP provider, and non-empty for other providers.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "resourceGroup": {
+                        "type": "string",
+                        "description": "Resource group of the Azure VPC created.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "routeTables": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of route table ids associated with this VPC.\n"
+                    },
+                    "subnetSize": {
+                        "type": "integer",
+                        "description": "Subnet size.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "subnets": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/aviatrix:index/AviatrixVpcSubnet:AviatrixVpcSubnet"
+                        },
+                        "description": "List of subnet of the VPC to be created. Required to be non-empty for GCP provider, and empty for other providers.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "vpcId": {
+                        "type": "string",
+                        "description": "ID of the VPC created.\n"
+                    }
+                },
+                "type": "object"
+            }
+        }
     }
 }
