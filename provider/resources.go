@@ -18,11 +18,12 @@ import (
 	"fmt"
 	"path/filepath"
 
+	"github.com/astipkovits/pulumi-aviatrix/provider/pkg/version"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	shim "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim"
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
-	"github.com/astipkovits/pulumi-aviatrix/provider/pkg/version"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
+
 	//"github.com/terraform-providers/terraform-provider-aviatrix/aviatrix"
 	"github.com/AviatrixSystems/terraform-provider-aviatrix/v2/aviatrix"
 )
@@ -93,7 +94,7 @@ func Provider() tfbridge.ProviderInfo {
 			// },
 		},
 		PreConfigureCallback: preConfigureCallback,
-		Resources:            map[string]*tfbridge.ResourceInfo{
+		Resources: map[string]*tfbridge.ResourceInfo{
 			// Map each resource in the Terraform provider to a Pulumi type. Two examples
 			// are below - the single line form is the common case. The multi-line form is
 			// needed only if you wish to override types or other default options.
@@ -106,10 +107,27 @@ func Provider() tfbridge.ProviderInfo {
 			// 		"tags": {Type: tfbridge.MakeType(mainPkg, "Tags")},
 			// 	},
 			// },
-			"aviatrix_vpc": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixVpc")},
-			"aviatrix_account": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAccount")},
-			"aviatrix_account_user": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAccountUser")},
-			"aviatrix_app_domain": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAppDomain")},
+			"aviatrix_vpc":                                {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixVpc")},
+			"aviatrix_account":                            {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAccount")},
+			"aviatrix_account_user":                       {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAccountUser")},
+			"aviatrix_app_domain":                         {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAppDomain")},
+			"aviatrix_arm_peer":                           {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixArmPeer")},
+			"aviatrix_aws_guard_duty":                     {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAwsGuardDuty")},
+			"aviatrix_aws_peer":                           {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAwsPeer")},
+			"aviatrix_aws_tgw":                            {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAwsTgw")},
+			"aviatrix_aws_tgw_connect":                    {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAwsTgwConnect")},
+			"aviatrix_aws_tgw_connect_peer":               {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAwsTgwConnectPeer")},
+			"aviatrix_aws_tgw_directconnect":              {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAwsTgwDirectconnect")},
+			"aviatrix_aws_tgw_intra_domain_inspection":    {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAwsTgwIntraDomainInspection")},
+			"aviatrix_aws_tgw_network_domain":             {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAwsTgwNetworkDomain")},
+			"aviatrix_aws_tgw_peering":                    {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAwsTgwPeering")},
+			"aviatrix_aws_tgw_peering_domain_conn":        {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAwsTgwPeeringDomainConn")},
+			"aviatrix_aws_tgw_security_domain":            {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAwsTgwSecurityDomain")},
+			"aviatrix_aws_tgw_security_domain_connection": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAwsTgwSecurityDomainConn")},
+			"aviatrix_aws_tgw_transit_gateway_attachment": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAwsTgwTransitGatewayAttachment")},
+			"aviatrix_aws_tgw_vpc_attachment":             {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAwsTgwVpcAttachment")},
+			"aviatrix_aws_tgw_vpn_conn":                   {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAwsTgwVpnConn")},
+			"aviatrix_azure_peer":                         {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAzurePeer")},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
 			// Map each resource in the Terraform provider to a Pulumi function. An example
