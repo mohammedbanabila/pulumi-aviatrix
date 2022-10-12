@@ -24,7 +24,7 @@ import (
 	"github.com/astipkovits/pulumi-aviatrix/provider/pkg/version"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 	//"github.com/terraform-providers/terraform-provider-aviatrix/aviatrix"
-	"github.com/AviatrixSystems/terraform-provider-aviatrix/v2"
+	"github.com/AviatrixSystems/terraform-provider-aviatrix/v2/aviatrix"
 )
 
 // all of the token components used below.

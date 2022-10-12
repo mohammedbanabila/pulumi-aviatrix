@@ -1,0 +1,192 @@
+{
+    "name": "aviatrix",
+    "displayName": "Aviatrix",
+    "description": "A Pulumi package for creating and managing aviatrix cloud resources.",
+    "keywords": [
+        "pulumi",
+        "aviatrix",
+        "category/cloud"
+    ],
+    "homepage": "https://www.pulumi.com",
+    "license": "Apache-2.0",
+    "attribution": "This Pulumi package is based on the [`aviatrix` Terraform Provider](https://github.com/AviatrixSystems/terraform-provider-aviatrix).",
+    "repository": "https://github.com/astipkovits/pulumi-aviatrix",
+    "publisher": "Aviatrix",
+    "meta": {
+        "moduleFormat": "(.*)(?:/[^/]*)"
+    },
+    "language": {
+        "csharp": {
+            "compatibility": "tfbridge20",
+            "namespaces": null,
+            "packageReferences": {
+                "Pulumi": "3.*"
+            }
+        },
+        "go": {
+            "generateExtraInputTypes": true,
+            "generateResourceContainerTypes": true,
+            "importBasePath": "github.com/pulumi/pulumi-aviatrix/sdk/go/aviatrix"
+        },
+        "nodejs": {
+            "compatibility": "tfbridge20",
+            "dependencies": {
+                "@pulumi/pulumi": "^3.0.0"
+            },
+            "devDependencies": {
+                "@types/mime": "^2.0.0",
+                "@types/node": "^10.0.0"
+            },
+            "disableUnionOutputTypes": true,
+            "packageDescription": "A Pulumi package for creating and managing aviatrix cloud resources.",
+            "packageName": "",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/AviatrixSystems/terraform-provider-aviatrix)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-aviatrix` repo](https://github.com/astipkovits/pulumi-aviatrix/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-aviatrix` repo](https://github.com/AviatrixSystems/terraform-provider-aviatrix/issues).",
+            "typescriptVersion": ""
+        },
+        "python": {
+            "compatibility": "tfbridge20",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/AviatrixSystems/terraform-provider-aviatrix)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-aviatrix` repo](https://github.com/astipkovits/pulumi-aviatrix/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-aviatrix` repo](https://github.com/AviatrixSystems/terraform-provider-aviatrix/issues).",
+            "requires": {
+                "pulumi": "\u003e=3.0.0,\u003c4.0.0"
+            }
+        }
+    },
+    "config": {
+        "variables": {
+            "controllerIp": {
+                "type": "string"
+            },
+            "ignoreTags": {
+                "$ref": "#/types/aviatrix:config/ignoreTags:ignoreTags",
+                "description": "Configuration block with settings to ignore tags across all resources.\n"
+            },
+            "password": {
+                "type": "string"
+            },
+            "pathToCaCertificate": {
+                "type": "string"
+            },
+            "skipVersionValidation": {
+                "type": "boolean"
+            },
+            "username": {
+                "type": "string"
+            },
+            "verifySslCertificate": {
+                "type": "boolean"
+            }
+        },
+        "defaults": [
+            "controllerIp",
+            "password",
+            "username"
+        ]
+    },
+    "types": {
+        "aviatrix:config/ignoreTags:ignoreTags": {
+            "properties": {
+                "keyPrefixes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "keys": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "aviatrix:index/ProviderIgnoreTags:ProviderIgnoreTags": {
+            "properties": {
+                "keyPrefixes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "keys": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        }
+    },
+    "provider": {
+        "description": "The provider type for the aviatrix package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
+        "properties": {
+            "controllerIp": {
+                "type": "string"
+            },
+            "ignoreTags": {
+                "$ref": "#/types/aviatrix:index/ProviderIgnoreTags:ProviderIgnoreTags",
+                "description": "Configuration block with settings to ignore tags across all resources.\n"
+            },
+            "password": {
+                "type": "string"
+            },
+            "pathToCaCertificate": {
+                "type": "string"
+            },
+            "skipVersionValidation": {
+                "type": "boolean"
+            },
+            "username": {
+                "type": "string"
+            },
+            "verifySslCertificate": {
+                "type": "boolean"
+            }
+        },
+        "required": [
+            "controllerIp",
+            "password",
+            "username"
+        ],
+        "inputProperties": {
+            "controllerIp": {
+                "type": "string"
+            },
+            "ignoreTags": {
+                "$ref": "#/types/aviatrix:index/ProviderIgnoreTags:ProviderIgnoreTags",
+                "description": "Configuration block with settings to ignore tags across all resources.\n"
+            },
+            "password": {
+                "type": "string"
+            },
+            "pathToCaCertificate": {
+                "type": "string"
+            },
+            "skipVersionValidation": {
+                "type": "boolean"
+            },
+            "username": {
+                "type": "string"
+            },
+            "verifySslCertificate": {
+                "type": "boolean"
+            }
+        },
+        "requiredInputs": [
+            "controllerIp",
+            "password",
+            "username"
+        ]
+    }
+}

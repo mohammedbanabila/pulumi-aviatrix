@@ -2,7 +2,7 @@ PROJECT_NAME := aviatrix Package
 
 SHELL            := /bin/bash
 PACK             := aviatrix
-ORG              := pulumi
+ORG              := astipkovits
 PROJECT          := github.com/${ORG}/pulumi-${PACK}
 NODE_MODULE_NAME := @pulumi/${PACK}
 TF_NAME          := ${PACK}
