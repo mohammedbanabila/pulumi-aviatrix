@@ -1,4 +1,4 @@
-# Terraform Bridge Provider Boilerplate
+# Terraform Bridge Provider Boilerplate - Aviatrix
 
 This repository contains boilerplate code for building a new Pulumi provider which wraps an existing Terraform provider.  
 
