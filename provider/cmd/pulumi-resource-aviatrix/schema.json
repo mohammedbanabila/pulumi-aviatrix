@@ -11,6 +11,7 @@
     "license": "Apache-2.0",
     "attribution": "This Pulumi package is based on the [`aviatrix` Terraform Provider](https://github.com/AviatrixSystems/terraform-provider-aviatrix).",
     "repository": "https://github.com/astipkovits/pulumi-aviatrix",
+    "pluginDownloadURL": "https://github.com/astipkovits/pulumi-aviatrix/releases/",
     "publisher": "Aviatrix",
     "meta": {
         "moduleFormat": "(.*)(?:/[^/]*)"
@@ -99,6 +100,317 @@
                 }
             },
             "type": "object"
+        },
+        "aviatrix:index/AviatrixAppDomainSelector:AviatrixAppDomainSelector": {
+            "properties": {
+                "matchExpressions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/aviatrix:index/AviatrixAppDomainSelectorMatchExpression:AviatrixAppDomainSelectorMatchExpression"
+                    },
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object",
+            "required": [
+                "matchExpressions"
+            ]
+        },
+        "aviatrix:index/AviatrixAppDomainSelectorMatchExpression:AviatrixAppDomainSelectorMatchExpression": {
+            "properties": {
+                "accountId": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "accountName": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "cidr": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "region": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "resId": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "type": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "zone": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "aviatrix:index/AviatrixAwsTgwSecurityDomain:AviatrixAwsTgwSecurityDomain": {
+            "properties": {
+                "attachedVpcs": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/aviatrix:index/AviatrixAwsTgwSecurityDomainAttachedVpc:AviatrixAwsTgwSecurityDomainAttachedVpc"
+                    },
+                    "deprecationMessage": "Please set `manage_vpc_attachment` to false, and use the standalone aviatrix_aws_tgw_vpc_attachment resource instead.",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "aviatrixFirewall": {
+                    "type": "boolean",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "connectedDomains": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "nativeEgress": {
+                    "type": "boolean",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "nativeFirewall": {
+                    "type": "boolean",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "securityDomainName": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object",
+            "required": [
+                "securityDomainName"
+            ]
+        },
+        "aviatrix:index/AviatrixAwsTgwSecurityDomainAttachedVpc:AviatrixAwsTgwSecurityDomainAttachedVpc": {
+            "properties": {
+                "customizedRouteAdvertisement": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "customizedRoutes": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "disableLocalRoutePropagation": {
+                    "type": "boolean",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "routeTables": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "subnets": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "vpcAccountName": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "vpcId": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "vpcRegion": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object",
+            "required": [
+                "vpcAccountName",
+                "vpcId",
+                "vpcRegion"
+            ]
+        },
+        "aviatrix:index/AviatrixAwsTgwVpnConnVpnTunnelData:AviatrixAwsTgwVpnConnVpnTunnelData": {
+            "properties": {
+                "lastStatusChangeTime": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "routeCount": {
+                    "type": "integer",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "status": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "statusMessage": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "tgwAsn": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "tunnelName": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "vpnInsideAddress": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "vpnOutsideAddress": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "lastStatusChangeTime",
+                        "routeCount",
+                        "status",
+                        "statusMessage",
+                        "tgwAsn",
+                        "tunnelName",
+                        "vpnInsideAddress",
+                        "vpnOutsideAddress"
+                    ]
+                }
+            }
         },
         "aviatrix:index/AviatrixVpcPrivateSubnet:AviatrixVpcPrivateSubnet": {
             "properties": {
@@ -313,6 +625,3038 @@
         ]
     },
     "resources": {
+        "aviatrix:index/aviatrixAccount:AviatrixAccount": {
+            "properties": {
+                "accountName": {
+                    "type": "string",
+                    "description": "Account name. This can be used for logging in to CloudN console or UserConnect controller.\n"
+                },
+                "alicloudAccessKey": {
+                    "type": "string",
+                    "description": "Alibaba Cloud Access Key.\n"
+                },
+                "alicloudAccountId": {
+                    "type": "string",
+                    "description": "Alibaba Cloud Account ID to associate with Aviatrix account.\n"
+                },
+                "alicloudSecretKey": {
+                    "type": "string",
+                    "description": "Alibaba Cloud Secret Key.\n"
+                },
+                "armApplicationId": {
+                    "type": "string",
+                    "description": "Azure Application ID.\n"
+                },
+                "armApplicationKey": {
+                    "type": "string",
+                    "description": "Azure Application Key.\n"
+                },
+                "armDirectoryId": {
+                    "type": "string",
+                    "description": "Azure Directory ID.\n"
+                },
+                "armSubscriptionId": {
+                    "type": "string",
+                    "description": "Azure Subscription ID.\n"
+                },
+                "auditAccount": {
+                    "type": "boolean",
+                    "description": "Enable account audit.\n"
+                },
+                "awsAccessKey": {
+                    "type": "string",
+                    "description": "AWS Access Key.\n"
+                },
+                "awsAccountNumber": {
+                    "type": "string",
+                    "description": "AWS Account number to associate with Aviatrix account. Should be 12 digits.\n"
+                },
+                "awsCaCertPath": {
+                    "type": "string",
+                    "description": "AWS Top Secret Region or Secret Region Custom Certificate Authority file path on the controller.\n"
+                },
+                "awsGatewayRoleApp": {
+                    "type": "string",
+                    "description": "AWS App role ARN for gateways.\n"
+                },
+                "awsGatewayRoleEc2": {
+                    "type": "string",
+                    "description": "AWS EC2 role ARN for gateways.\n"
+                },
+                "awsIam": {
+                    "type": "boolean",
+                    "description": "AWS IAM-role based flag.\n"
+                },
+                "awsRoleApp": {
+                    "type": "string",
+                    "description": "AWS App role ARN.\n"
+                },
+                "awsRoleEc2": {
+                    "type": "string",
+                    "description": "AWS EC2 role ARN.\n"
+                },
+                "awsSecretKey": {
+                    "type": "string",
+                    "description": "AWS Secret Key.\n"
+                },
+                "awschinaAccessKey": {
+                    "type": "string",
+                    "description": "AWS China Access Key.\n"
+                },
+                "awschinaAccountNumber": {
+                    "type": "string",
+                    "description": "AWS China Account Number.\n"
+                },
+                "awschinaIam": {
+                    "type": "boolean",
+                    "description": "AWS China IAM-role based flag.\n"
+                },
+                "awschinaRoleApp": {
+                    "type": "string",
+                    "description": "AWS China App Role ARN.\n"
+                },
+                "awschinaRoleEc2": {
+                    "type": "string",
+                    "description": "AWS China EC2 Role ARN.\n"
+                },
+                "awschinaSecretKey": {
+                    "type": "string",
+                    "description": "AWS China Secret Key.\n"
+                },
+                "awsgovAccessKey": {
+                    "type": "string",
+                    "description": "AWS Gov Access Key.\n"
+                },
+                "awsgovAccountNumber": {
+                    "type": "string",
+                    "description": "AWS Gov Account number to associate with Aviatrix account.\n"
+                },
+                "awsgovIam": {
+                    "type": "boolean",
+                    "description": "AWSGov IAM-role based flag\n"
+                },
+                "awsgovRoleApp": {
+                    "type": "string",
+                    "description": "AWSGov App role ARN\n"
+                },
+                "awsgovRoleEc2": {
+                    "type": "string",
+                    "description": "AWSGov EC2 role ARN\n"
+                },
+                "awsgovSecretKey": {
+                    "type": "string",
+                    "description": "AWS Gov Secret Key.\n"
+                },
+                "awssAccountNumber": {
+                    "type": "string",
+                    "description": "AWS Secret Region Account Number.\n"
+                },
+                "awssCaChainCert": {
+                    "type": "string",
+                    "description": "AWS Secret Region Custom Certificate Authority file path.\n"
+                },
+                "awssCapAccountName": {
+                    "type": "string",
+                    "description": "AWS Secret Region CAP Account Name.\n"
+                },
+                "awssCapAgency": {
+                    "type": "string",
+                    "description": "AWS Secret Region CAP Agency.\n"
+                },
+                "awssCapCert": {
+                    "type": "string",
+                    "description": "AWS Secret Region CAP Certificate file path.\n"
+                },
+                "awssCapCertKey": {
+                    "type": "string",
+                    "description": "AWS Secret Region CAP Certificate Key file path.\n"
+                },
+                "awssCapCertKeyPath": {
+                    "type": "string",
+                    "description": "AWS Secret Region CAP Certificate Key file path on the controller.\n"
+                },
+                "awssCapCertPath": {
+                    "type": "string",
+                    "description": "AWS Secret Region CAP Certificate file path on the controller.\n"
+                },
+                "awssCapRoleName": {
+                    "type": "string",
+                    "description": "AWS Secret Region CAP Role Name.\n"
+                },
+                "awssCapUrl": {
+                    "type": "string",
+                    "description": "AWS Secret Region CAP Endpoint URL.\n"
+                },
+                "awstsAccountNumber": {
+                    "type": "string",
+                    "description": "AWS Top Secret Region Account Number.\n"
+                },
+                "awstsCaChainCert": {
+                    "type": "string",
+                    "description": "AWS Top Secret Region Custom Certificate Authority file path.\n"
+                },
+                "awstsCapAgency": {
+                    "type": "string",
+                    "description": "AWS Top Secret Region CAP Agency.\n"
+                },
+                "awstsCapCert": {
+                    "type": "string",
+                    "description": "AWS Top Secret Region CAP Certificate file path.\n"
+                },
+                "awstsCapCertKey": {
+                    "type": "string",
+                    "description": "AWS Top Secret Region CAP Certificate Key file path.\n"
+                },
+                "awstsCapCertKeyPath": {
+                    "type": "string",
+                    "description": "AWS Top Secret Region CAP Certificate Key file path on the controller.\n"
+                },
+                "awstsCapCertPath": {
+                    "type": "string",
+                    "description": "AWS Top Secret Region CAP Certificate file path on the controller.\n"
+                },
+                "awstsCapMission": {
+                    "type": "string",
+                    "description": "AWS Top Secret Region CAP Mission.\n"
+                },
+                "awstsCapRoleName": {
+                    "type": "string",
+                    "description": "AWS Top Secret Region CAP Role Name.\n"
+                },
+                "awstsCapUrl": {
+                    "type": "string",
+                    "description": "AWS Top Secret Region CAP Endpoint URL.\n"
+                },
+                "azurechinaApplicationId": {
+                    "type": "string",
+                    "description": "Azure China Application ID.\n"
+                },
+                "azurechinaApplicationKey": {
+                    "type": "string",
+                    "description": "Azure China Application Key.\n"
+                },
+                "azurechinaDirectoryId": {
+                    "type": "string",
+                    "description": "Azure China Directory ID.\n"
+                },
+                "azurechinaSubscriptionId": {
+                    "type": "string",
+                    "description": "Azure China Subscription ID.\n"
+                },
+                "azuregovApplicationId": {
+                    "type": "string",
+                    "description": "Azure Gov Application ID.\n"
+                },
+                "azuregovApplicationKey": {
+                    "type": "string",
+                    "description": "Azure Gov Application Key.\n"
+                },
+                "azuregovDirectoryId": {
+                    "type": "string",
+                    "description": "Azure Gov Directory ID.\n"
+                },
+                "azuregovSubscriptionId": {
+                    "type": "string",
+                    "description": "Azure Gov Subscription ID.\n"
+                },
+                "cloudType": {
+                    "type": "integer",
+                    "description": "Type of cloud service provider.\n"
+                },
+                "gcloudProjectCredentialsFilepath": {
+                    "type": "string",
+                    "description": "GCloud Project credentials local file path.\n"
+                },
+                "gcloudProjectId": {
+                    "type": "string",
+                    "description": "GCloud Project ID.\n"
+                },
+                "ociApiPrivateKeyFilepath": {
+                    "type": "string",
+                    "description": "OCI API Private Key local file path.\n"
+                },
+                "ociCompartmentId": {
+                    "type": "string",
+                    "description": "OCI Compartment OCID.\n"
+                },
+                "ociTenancyId": {
+                    "type": "string",
+                    "description": "OCI Tenancy OCID.\n"
+                },
+                "ociUserId": {
+                    "type": "string",
+                    "description": "OCI User OCID.\n"
+                },
+                "rbacGroups": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of RBAC permission group names.\n"
+                }
+            },
+            "required": [
+                "accountName",
+                "awsCaCertPath",
+                "awsRoleApp",
+                "awsRoleEc2",
+                "awschinaRoleApp",
+                "awschinaRoleEc2",
+                "awsgovRoleApp",
+                "awsgovRoleEc2",
+                "awssCapCertKeyPath",
+                "awssCapCertPath",
+                "awstsCapCertKeyPath",
+                "awstsCapCertPath",
+                "cloudType"
+            ],
+            "inputProperties": {
+                "accountName": {
+                    "type": "string",
+                    "description": "Account name. This can be used for logging in to CloudN console or UserConnect controller.\n",
+                    "willReplaceOnChanges": true
+                },
+                "alicloudAccessKey": {
+                    "type": "string",
+                    "description": "Alibaba Cloud Access Key.\n"
+                },
+                "alicloudAccountId": {
+                    "type": "string",
+                    "description": "Alibaba Cloud Account ID to associate with Aviatrix account.\n"
+                },
+                "alicloudSecretKey": {
+                    "type": "string",
+                    "description": "Alibaba Cloud Secret Key.\n"
+                },
+                "armApplicationId": {
+                    "type": "string",
+                    "description": "Azure Application ID.\n"
+                },
+                "armApplicationKey": {
+                    "type": "string",
+                    "description": "Azure Application Key.\n"
+                },
+                "armDirectoryId": {
+                    "type": "string",
+                    "description": "Azure Directory ID.\n"
+                },
+                "armSubscriptionId": {
+                    "type": "string",
+                    "description": "Azure Subscription ID.\n"
+                },
+                "auditAccount": {
+                    "type": "boolean",
+                    "description": "Enable account audit.\n"
+                },
+                "awsAccessKey": {
+                    "type": "string",
+                    "description": "AWS Access Key.\n"
+                },
+                "awsAccountNumber": {
+                    "type": "string",
+                    "description": "AWS Account number to associate with Aviatrix account. Should be 12 digits.\n"
+                },
+                "awsGatewayRoleApp": {
+                    "type": "string",
+                    "description": "AWS App role ARN for gateways.\n"
+                },
+                "awsGatewayRoleEc2": {
+                    "type": "string",
+                    "description": "AWS EC2 role ARN for gateways.\n"
+                },
+                "awsIam": {
+                    "type": "boolean",
+                    "description": "AWS IAM-role based flag.\n"
+                },
+                "awsRoleApp": {
+                    "type": "string",
+                    "description": "AWS App role ARN.\n"
+                },
+                "awsRoleEc2": {
+                    "type": "string",
+                    "description": "AWS EC2 role ARN.\n"
+                },
+                "awsSecretKey": {
+                    "type": "string",
+                    "description": "AWS Secret Key.\n"
+                },
+                "awschinaAccessKey": {
+                    "type": "string",
+                    "description": "AWS China Access Key.\n"
+                },
+                "awschinaAccountNumber": {
+                    "type": "string",
+                    "description": "AWS China Account Number.\n"
+                },
+                "awschinaIam": {
+                    "type": "boolean",
+                    "description": "AWS China IAM-role based flag.\n"
+                },
+                "awschinaRoleApp": {
+                    "type": "string",
+                    "description": "AWS China App Role ARN.\n"
+                },
+                "awschinaRoleEc2": {
+                    "type": "string",
+                    "description": "AWS China EC2 Role ARN.\n"
+                },
+                "awschinaSecretKey": {
+                    "type": "string",
+                    "description": "AWS China Secret Key.\n"
+                },
+                "awsgovAccessKey": {
+                    "type": "string",
+                    "description": "AWS Gov Access Key.\n"
+                },
+                "awsgovAccountNumber": {
+                    "type": "string",
+                    "description": "AWS Gov Account number to associate with Aviatrix account.\n"
+                },
+                "awsgovIam": {
+                    "type": "boolean",
+                    "description": "AWSGov IAM-role based flag\n"
+                },
+                "awsgovRoleApp": {
+                    "type": "string",
+                    "description": "AWSGov App role ARN\n"
+                },
+                "awsgovRoleEc2": {
+                    "type": "string",
+                    "description": "AWSGov EC2 role ARN\n"
+                },
+                "awsgovSecretKey": {
+                    "type": "string",
+                    "description": "AWS Gov Secret Key.\n"
+                },
+                "awssAccountNumber": {
+                    "type": "string",
+                    "description": "AWS Secret Region Account Number.\n"
+                },
+                "awssCaChainCert": {
+                    "type": "string",
+                    "description": "AWS Secret Region Custom Certificate Authority file path.\n"
+                },
+                "awssCapAccountName": {
+                    "type": "string",
+                    "description": "AWS Secret Region CAP Account Name.\n"
+                },
+                "awssCapAgency": {
+                    "type": "string",
+                    "description": "AWS Secret Region CAP Agency.\n"
+                },
+                "awssCapCert": {
+                    "type": "string",
+                    "description": "AWS Secret Region CAP Certificate file path.\n"
+                },
+                "awssCapCertKey": {
+                    "type": "string",
+                    "description": "AWS Secret Region CAP Certificate Key file path.\n"
+                },
+                "awssCapRoleName": {
+                    "type": "string",
+                    "description": "AWS Secret Region CAP Role Name.\n"
+                },
+                "awssCapUrl": {
+                    "type": "string",
+                    "description": "AWS Secret Region CAP Endpoint URL.\n"
+                },
+                "awstsAccountNumber": {
+                    "type": "string",
+                    "description": "AWS Top Secret Region Account Number.\n"
+                },
+                "awstsCaChainCert": {
+                    "type": "string",
+                    "description": "AWS Top Secret Region Custom Certificate Authority file path.\n"
+                },
+                "awstsCapAgency": {
+                    "type": "string",
+                    "description": "AWS Top Secret Region CAP Agency.\n"
+                },
+                "awstsCapCert": {
+                    "type": "string",
+                    "description": "AWS Top Secret Region CAP Certificate file path.\n"
+                },
+                "awstsCapCertKey": {
+                    "type": "string",
+                    "description": "AWS Top Secret Region CAP Certificate Key file path.\n"
+                },
+                "awstsCapMission": {
+                    "type": "string",
+                    "description": "AWS Top Secret Region CAP Mission.\n"
+                },
+                "awstsCapRoleName": {
+                    "type": "string",
+                    "description": "AWS Top Secret Region CAP Role Name.\n"
+                },
+                "awstsCapUrl": {
+                    "type": "string",
+                    "description": "AWS Top Secret Region CAP Endpoint URL.\n"
+                },
+                "azurechinaApplicationId": {
+                    "type": "string",
+                    "description": "Azure China Application ID.\n"
+                },
+                "azurechinaApplicationKey": {
+                    "type": "string",
+                    "description": "Azure China Application Key.\n"
+                },
+                "azurechinaDirectoryId": {
+                    "type": "string",
+                    "description": "Azure China Directory ID.\n"
+                },
+                "azurechinaSubscriptionId": {
+                    "type": "string",
+                    "description": "Azure China Subscription ID.\n"
+                },
+                "azuregovApplicationId": {
+                    "type": "string",
+                    "description": "Azure Gov Application ID.\n"
+                },
+                "azuregovApplicationKey": {
+                    "type": "string",
+                    "description": "Azure Gov Application Key.\n"
+                },
+                "azuregovDirectoryId": {
+                    "type": "string",
+                    "description": "Azure Gov Directory ID.\n"
+                },
+                "azuregovSubscriptionId": {
+                    "type": "string",
+                    "description": "Azure Gov Subscription ID.\n"
+                },
+                "cloudType": {
+                    "type": "integer",
+                    "description": "Type of cloud service provider.\n"
+                },
+                "gcloudProjectCredentialsFilepath": {
+                    "type": "string",
+                    "description": "GCloud Project credentials local file path.\n"
+                },
+                "gcloudProjectId": {
+                    "type": "string",
+                    "description": "GCloud Project ID.\n"
+                },
+                "ociApiPrivateKeyFilepath": {
+                    "type": "string",
+                    "description": "OCI API Private Key local file path.\n"
+                },
+                "ociCompartmentId": {
+                    "type": "string",
+                    "description": "OCI Compartment OCID.\n"
+                },
+                "ociTenancyId": {
+                    "type": "string",
+                    "description": "OCI Tenancy OCID.\n"
+                },
+                "ociUserId": {
+                    "type": "string",
+                    "description": "OCI User OCID.\n"
+                },
+                "rbacGroups": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of RBAC permission group names.\n"
+                }
+            },
+            "requiredInputs": [
+                "accountName",
+                "cloudType"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AviatrixAccount resources.\n",
+                "properties": {
+                    "accountName": {
+                        "type": "string",
+                        "description": "Account name. This can be used for logging in to CloudN console or UserConnect controller.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "alicloudAccessKey": {
+                        "type": "string",
+                        "description": "Alibaba Cloud Access Key.\n"
+                    },
+                    "alicloudAccountId": {
+                        "type": "string",
+                        "description": "Alibaba Cloud Account ID to associate with Aviatrix account.\n"
+                    },
+                    "alicloudSecretKey": {
+                        "type": "string",
+                        "description": "Alibaba Cloud Secret Key.\n"
+                    },
+                    "armApplicationId": {
+                        "type": "string",
+                        "description": "Azure Application ID.\n"
+                    },
+                    "armApplicationKey": {
+                        "type": "string",
+                        "description": "Azure Application Key.\n"
+                    },
+                    "armDirectoryId": {
+                        "type": "string",
+                        "description": "Azure Directory ID.\n"
+                    },
+                    "armSubscriptionId": {
+                        "type": "string",
+                        "description": "Azure Subscription ID.\n"
+                    },
+                    "auditAccount": {
+                        "type": "boolean",
+                        "description": "Enable account audit.\n"
+                    },
+                    "awsAccessKey": {
+                        "type": "string",
+                        "description": "AWS Access Key.\n"
+                    },
+                    "awsAccountNumber": {
+                        "type": "string",
+                        "description": "AWS Account number to associate with Aviatrix account. Should be 12 digits.\n"
+                    },
+                    "awsCaCertPath": {
+                        "type": "string",
+                        "description": "AWS Top Secret Region or Secret Region Custom Certificate Authority file path on the controller.\n"
+                    },
+                    "awsGatewayRoleApp": {
+                        "type": "string",
+                        "description": "AWS App role ARN for gateways.\n"
+                    },
+                    "awsGatewayRoleEc2": {
+                        "type": "string",
+                        "description": "AWS EC2 role ARN for gateways.\n"
+                    },
+                    "awsIam": {
+                        "type": "boolean",
+                        "description": "AWS IAM-role based flag.\n"
+                    },
+                    "awsRoleApp": {
+                        "type": "string",
+                        "description": "AWS App role ARN.\n"
+                    },
+                    "awsRoleEc2": {
+                        "type": "string",
+                        "description": "AWS EC2 role ARN.\n"
+                    },
+                    "awsSecretKey": {
+                        "type": "string",
+                        "description": "AWS Secret Key.\n"
+                    },
+                    "awschinaAccessKey": {
+                        "type": "string",
+                        "description": "AWS China Access Key.\n"
+                    },
+                    "awschinaAccountNumber": {
+                        "type": "string",
+                        "description": "AWS China Account Number.\n"
+                    },
+                    "awschinaIam": {
+                        "type": "boolean",
+                        "description": "AWS China IAM-role based flag.\n"
+                    },
+                    "awschinaRoleApp": {
+                        "type": "string",
+                        "description": "AWS China App Role ARN.\n"
+                    },
+                    "awschinaRoleEc2": {
+                        "type": "string",
+                        "description": "AWS China EC2 Role ARN.\n"
+                    },
+                    "awschinaSecretKey": {
+                        "type": "string",
+                        "description": "AWS China Secret Key.\n"
+                    },
+                    "awsgovAccessKey": {
+                        "type": "string",
+                        "description": "AWS Gov Access Key.\n"
+                    },
+                    "awsgovAccountNumber": {
+                        "type": "string",
+                        "description": "AWS Gov Account number to associate with Aviatrix account.\n"
+                    },
+                    "awsgovIam": {
+                        "type": "boolean",
+                        "description": "AWSGov IAM-role based flag\n"
+                    },
+                    "awsgovRoleApp": {
+                        "type": "string",
+                        "description": "AWSGov App role ARN\n"
+                    },
+                    "awsgovRoleEc2": {
+                        "type": "string",
+                        "description": "AWSGov EC2 role ARN\n"
+                    },
+                    "awsgovSecretKey": {
+                        "type": "string",
+                        "description": "AWS Gov Secret Key.\n"
+                    },
+                    "awssAccountNumber": {
+                        "type": "string",
+                        "description": "AWS Secret Region Account Number.\n"
+                    },
+                    "awssCaChainCert": {
+                        "type": "string",
+                        "description": "AWS Secret Region Custom Certificate Authority file path.\n"
+                    },
+                    "awssCapAccountName": {
+                        "type": "string",
+                        "description": "AWS Secret Region CAP Account Name.\n"
+                    },
+                    "awssCapAgency": {
+                        "type": "string",
+                        "description": "AWS Secret Region CAP Agency.\n"
+                    },
+                    "awssCapCert": {
+                        "type": "string",
+                        "description": "AWS Secret Region CAP Certificate file path.\n"
+                    },
+                    "awssCapCertKey": {
+                        "type": "string",
+                        "description": "AWS Secret Region CAP Certificate Key file path.\n"
+                    },
+                    "awssCapCertKeyPath": {
+                        "type": "string",
+                        "description": "AWS Secret Region CAP Certificate Key file path on the controller.\n"
+                    },
+                    "awssCapCertPath": {
+                        "type": "string",
+                        "description": "AWS Secret Region CAP Certificate file path on the controller.\n"
+                    },
+                    "awssCapRoleName": {
+                        "type": "string",
+                        "description": "AWS Secret Region CAP Role Name.\n"
+                    },
+                    "awssCapUrl": {
+                        "type": "string",
+                        "description": "AWS Secret Region CAP Endpoint URL.\n"
+                    },
+                    "awstsAccountNumber": {
+                        "type": "string",
+                        "description": "AWS Top Secret Region Account Number.\n"
+                    },
+                    "awstsCaChainCert": {
+                        "type": "string",
+                        "description": "AWS Top Secret Region Custom Certificate Authority file path.\n"
+                    },
+                    "awstsCapAgency": {
+                        "type": "string",
+                        "description": "AWS Top Secret Region CAP Agency.\n"
+                    },
+                    "awstsCapCert": {
+                        "type": "string",
+                        "description": "AWS Top Secret Region CAP Certificate file path.\n"
+                    },
+                    "awstsCapCertKey": {
+                        "type": "string",
+                        "description": "AWS Top Secret Region CAP Certificate Key file path.\n"
+                    },
+                    "awstsCapCertKeyPath": {
+                        "type": "string",
+                        "description": "AWS Top Secret Region CAP Certificate Key file path on the controller.\n"
+                    },
+                    "awstsCapCertPath": {
+                        "type": "string",
+                        "description": "AWS Top Secret Region CAP Certificate file path on the controller.\n"
+                    },
+                    "awstsCapMission": {
+                        "type": "string",
+                        "description": "AWS Top Secret Region CAP Mission.\n"
+                    },
+                    "awstsCapRoleName": {
+                        "type": "string",
+                        "description": "AWS Top Secret Region CAP Role Name.\n"
+                    },
+                    "awstsCapUrl": {
+                        "type": "string",
+                        "description": "AWS Top Secret Region CAP Endpoint URL.\n"
+                    },
+                    "azurechinaApplicationId": {
+                        "type": "string",
+                        "description": "Azure China Application ID.\n"
+                    },
+                    "azurechinaApplicationKey": {
+                        "type": "string",
+                        "description": "Azure China Application Key.\n"
+                    },
+                    "azurechinaDirectoryId": {
+                        "type": "string",
+                        "description": "Azure China Directory ID.\n"
+                    },
+                    "azurechinaSubscriptionId": {
+                        "type": "string",
+                        "description": "Azure China Subscription ID.\n"
+                    },
+                    "azuregovApplicationId": {
+                        "type": "string",
+                        "description": "Azure Gov Application ID.\n"
+                    },
+                    "azuregovApplicationKey": {
+                        "type": "string",
+                        "description": "Azure Gov Application Key.\n"
+                    },
+                    "azuregovDirectoryId": {
+                        "type": "string",
+                        "description": "Azure Gov Directory ID.\n"
+                    },
+                    "azuregovSubscriptionId": {
+                        "type": "string",
+                        "description": "Azure Gov Subscription ID.\n"
+                    },
+                    "cloudType": {
+                        "type": "integer",
+                        "description": "Type of cloud service provider.\n"
+                    },
+                    "gcloudProjectCredentialsFilepath": {
+                        "type": "string",
+                        "description": "GCloud Project credentials local file path.\n"
+                    },
+                    "gcloudProjectId": {
+                        "type": "string",
+                        "description": "GCloud Project ID.\n"
+                    },
+                    "ociApiPrivateKeyFilepath": {
+                        "type": "string",
+                        "description": "OCI API Private Key local file path.\n"
+                    },
+                    "ociCompartmentId": {
+                        "type": "string",
+                        "description": "OCI Compartment OCID.\n"
+                    },
+                    "ociTenancyId": {
+                        "type": "string",
+                        "description": "OCI Tenancy OCID.\n"
+                    },
+                    "ociUserId": {
+                        "type": "string",
+                        "description": "OCI User OCID.\n"
+                    },
+                    "rbacGroups": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of RBAC permission group names.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "aviatrix:index/aviatrixAccountUser:AviatrixAccountUser": {
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "description": "Email of address of account user to be created.\n"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "Login password for the account user to be created.\n"
+                },
+                "username": {
+                    "type": "string",
+                    "description": "Name of account user to be created. It can only include alphanumeric characters(lower case only), hyphens, dots or\nunderscores. 1 to 80 in length. No spaces are allowed.\n"
+                }
+            },
+            "required": [
+                "email",
+                "password",
+                "username"
+            ],
+            "inputProperties": {
+                "email": {
+                    "type": "string",
+                    "description": "Email of address of account user to be created.\n"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "Login password for the account user to be created.\n",
+                    "willReplaceOnChanges": true
+                },
+                "username": {
+                    "type": "string",
+                    "description": "Name of account user to be created. It can only include alphanumeric characters(lower case only), hyphens, dots or\nunderscores. 1 to 80 in length. No spaces are allowed.\n"
+                }
+            },
+            "requiredInputs": [
+                "email",
+                "password",
+                "username"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AviatrixAccountUser resources.\n",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "description": "Email of address of account user to be created.\n"
+                    },
+                    "password": {
+                        "type": "string",
+                        "description": "Login password for the account user to be created.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "username": {
+                        "type": "string",
+                        "description": "Name of account user to be created. It can only include alphanumeric characters(lower case only), hyphens, dots or\nunderscores. 1 to 80 in length. No spaces are allowed.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "aviatrix:index/aviatrixAppDomain:AviatrixAppDomain": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name of the App Domain.\n"
+                },
+                "selector": {
+                    "$ref": "#/types/aviatrix:index/AviatrixAppDomainSelector:AviatrixAppDomainSelector",
+                    "description": "List of match expressions for the App Domain.\n"
+                },
+                "uuid": {
+                    "type": "string",
+                    "description": "UUID of the App Domain.\n"
+                }
+            },
+            "required": [
+                "name",
+                "selector",
+                "uuid"
+            ],
+            "inputProperties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name of the App Domain.\n"
+                },
+                "selector": {
+                    "$ref": "#/types/aviatrix:index/AviatrixAppDomainSelector:AviatrixAppDomainSelector",
+                    "description": "List of match expressions for the App Domain.\n"
+                }
+            },
+            "requiredInputs": [
+                "selector"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AviatrixAppDomain resources.\n",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the App Domain.\n"
+                    },
+                    "selector": {
+                        "$ref": "#/types/aviatrix:index/AviatrixAppDomainSelector:AviatrixAppDomainSelector",
+                        "description": "List of match expressions for the App Domain.\n"
+                    },
+                    "uuid": {
+                        "type": "string",
+                        "description": "UUID of the App Domain.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "aviatrix:index/aviatrixArmPeer:AviatrixArmPeer": {
+            "properties": {
+                "accountName1": {
+                    "type": "string",
+                    "description": "This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.\n"
+                },
+                "accountName2": {
+                    "type": "string",
+                    "description": "This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.\n"
+                },
+                "vnetCidr1s": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of VNet CIDR of vnet_name_resource_group1.\n"
+                },
+                "vnetCidr2s": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of VNet CIDR of vnet_name_resource_group2.\n"
+                },
+                "vnetNameResourceGroup1": {
+                    "type": "string",
+                    "description": "VNet-Name of Azure cloud.\n"
+                },
+                "vnetNameResourceGroup2": {
+                    "type": "string",
+                    "description": "VNet-Name of Azure cloud.\n"
+                },
+                "vnetReg1": {
+                    "type": "string",
+                    "description": "Region of Azure cloud.\n"
+                },
+                "vnetReg2": {
+                    "type": "string",
+                    "description": "Region of Azure cloud.\n"
+                }
+            },
+            "required": [
+                "accountName1",
+                "accountName2",
+                "vnetCidr1s",
+                "vnetCidr2s",
+                "vnetNameResourceGroup1",
+                "vnetNameResourceGroup2",
+                "vnetReg1",
+                "vnetReg2"
+            ],
+            "inputProperties": {
+                "accountName1": {
+                    "type": "string",
+                    "description": "This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.\n",
+                    "willReplaceOnChanges": true
+                },
+                "accountName2": {
+                    "type": "string",
+                    "description": "This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.\n",
+                    "willReplaceOnChanges": true
+                },
+                "vnetNameResourceGroup1": {
+                    "type": "string",
+                    "description": "VNet-Name of Azure cloud.\n",
+                    "willReplaceOnChanges": true
+                },
+                "vnetNameResourceGroup2": {
+                    "type": "string",
+                    "description": "VNet-Name of Azure cloud.\n",
+                    "willReplaceOnChanges": true
+                },
+                "vnetReg1": {
+                    "type": "string",
+                    "description": "Region of Azure cloud.\n",
+                    "willReplaceOnChanges": true
+                },
+                "vnetReg2": {
+                    "type": "string",
+                    "description": "Region of Azure cloud.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "accountName1",
+                "accountName2",
+                "vnetNameResourceGroup1",
+                "vnetNameResourceGroup2",
+                "vnetReg1",
+                "vnetReg2"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AviatrixArmPeer resources.\n",
+                "properties": {
+                    "accountName1": {
+                        "type": "string",
+                        "description": "This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "accountName2": {
+                        "type": "string",
+                        "description": "This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "vnetCidr1s": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of VNet CIDR of vnet_name_resource_group1.\n"
+                    },
+                    "vnetCidr2s": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of VNet CIDR of vnet_name_resource_group2.\n"
+                    },
+                    "vnetNameResourceGroup1": {
+                        "type": "string",
+                        "description": "VNet-Name of Azure cloud.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "vnetNameResourceGroup2": {
+                        "type": "string",
+                        "description": "VNet-Name of Azure cloud.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "vnetReg1": {
+                        "type": "string",
+                        "description": "Region of Azure cloud.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "vnetReg2": {
+                        "type": "string",
+                        "description": "Region of Azure cloud.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "aviatrix:index/aviatrixAwsGuardDuty:AviatrixAwsGuardDuty": {
+            "properties": {
+                "accountName": {
+                    "type": "string",
+                    "description": "Account name\n"
+                },
+                "excludedIps": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Excluded IPs.\n"
+                },
+                "region": {
+                    "type": "string",
+                    "description": "Region.\n"
+                }
+            },
+            "required": [
+                "accountName",
+                "region"
+            ],
+            "inputProperties": {
+                "accountName": {
+                    "type": "string",
+                    "description": "Account name\n",
+                    "willReplaceOnChanges": true
+                },
+                "excludedIps": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Excluded IPs.\n"
+                },
+                "region": {
+                    "type": "string",
+                    "description": "Region.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "accountName",
+                "region"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AviatrixAwsGuardDuty resources.\n",
+                "properties": {
+                    "accountName": {
+                        "type": "string",
+                        "description": "Account name\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "excludedIps": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Excluded IPs.\n"
+                    },
+                    "region": {
+                        "type": "string",
+                        "description": "Region.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "aviatrix:index/aviatrixAwsPeer:AviatrixAwsPeer": {
+            "properties": {
+                "accountName1": {
+                    "type": "string",
+                    "description": "This parameter represents the name of an AWS Cloud-Account in Aviatrix controller.\n"
+                },
+                "accountName2": {
+                    "type": "string",
+                    "description": "This parameter represents the name of an AWS Cloud-Account in Aviatrix controller.\n"
+                },
+                "rtbList1Outputs": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of route table ID of vpc_id1.\n"
+                },
+                "rtbList1s": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of Route table ID.\n"
+                },
+                "rtbList2Outputs": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of route table ID of vpc_id2.\n"
+                },
+                "rtbList2s": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of Route table ID.\n"
+                },
+                "vpcId1": {
+                    "type": "string",
+                    "description": "VPC-ID of AWS cloud.\n"
+                },
+                "vpcId2": {
+                    "type": "string",
+                    "description": "VPC-ID of AWS cloud.\n"
+                },
+                "vpcReg1": {
+                    "type": "string",
+                    "description": "Region of AWS cloud.\n"
+                },
+                "vpcReg2": {
+                    "type": "string",
+                    "description": "Region of AWS cloud.\n"
+                }
+            },
+            "required": [
+                "accountName1",
+                "accountName2",
+                "rtbList1Outputs",
+                "rtbList2Outputs",
+                "vpcId1",
+                "vpcId2",
+                "vpcReg1",
+                "vpcReg2"
+            ],
+            "inputProperties": {
+                "accountName1": {
+                    "type": "string",
+                    "description": "This parameter represents the name of an AWS Cloud-Account in Aviatrix controller.\n",
+                    "willReplaceOnChanges": true
+                },
+                "accountName2": {
+                    "type": "string",
+                    "description": "This parameter represents the name of an AWS Cloud-Account in Aviatrix controller.\n",
+                    "willReplaceOnChanges": true
+                },
+                "rtbList1s": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of Route table ID.\n",
+                    "willReplaceOnChanges": true
+                },
+                "rtbList2s": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of Route table ID.\n",
+                    "willReplaceOnChanges": true
+                },
+                "vpcId1": {
+                    "type": "string",
+                    "description": "VPC-ID of AWS cloud.\n",
+                    "willReplaceOnChanges": true
+                },
+                "vpcId2": {
+                    "type": "string",
+                    "description": "VPC-ID of AWS cloud.\n",
+                    "willReplaceOnChanges": true
+                },
+                "vpcReg1": {
+                    "type": "string",
+                    "description": "Region of AWS cloud.\n",
+                    "willReplaceOnChanges": true
+                },
+                "vpcReg2": {
+                    "type": "string",
+                    "description": "Region of AWS cloud.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "accountName1",
+                "accountName2",
+                "vpcId1",
+                "vpcId2",
+                "vpcReg1",
+                "vpcReg2"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AviatrixAwsPeer resources.\n",
+                "properties": {
+                    "accountName1": {
+                        "type": "string",
+                        "description": "This parameter represents the name of an AWS Cloud-Account in Aviatrix controller.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "accountName2": {
+                        "type": "string",
+                        "description": "This parameter represents the name of an AWS Cloud-Account in Aviatrix controller.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "rtbList1Outputs": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of route table ID of vpc_id1.\n"
+                    },
+                    "rtbList1s": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of Route table ID.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "rtbList2Outputs": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of route table ID of vpc_id2.\n"
+                    },
+                    "rtbList2s": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of Route table ID.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "vpcId1": {
+                        "type": "string",
+                        "description": "VPC-ID of AWS cloud.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "vpcId2": {
+                        "type": "string",
+                        "description": "VPC-ID of AWS cloud.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "vpcReg1": {
+                        "type": "string",
+                        "description": "Region of AWS cloud.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "vpcReg2": {
+                        "type": "string",
+                        "description": "Region of AWS cloud.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "aviatrix:index/aviatrixAwsTgw:AviatrixAwsTgw": {
+            "properties": {
+                "accountName": {
+                    "type": "string",
+                    "description": "This parameter represents the name of a Cloud-Account in Aviatrix controller.\n"
+                },
+                "attachedAviatrixTransitGateways": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of Names of Aviatrix Transit Gateway to attach to one of the three default domains.\n",
+                    "deprecationMessage": "Please set `manage_transit_gateway_attachment` to false, and use the standalone aviatrix_aws_tgw_transit_gateway_attachment resource instead."
+                },
+                "awsSideAsNumber": {
+                    "type": "string",
+                    "description": "BGP Local ASN (Autonomous System Number), Integer between 1-4294967294.\n"
+                },
+                "cidrs": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "TGW CIDRs.\n"
+                },
+                "cloudType": {
+                    "type": "integer",
+                    "description": "Type of cloud service provider, requires an integer value. Supported for AWS (1) and AWS GOV (256). Default value: 1.\n"
+                },
+                "enableMulticast": {
+                    "type": "boolean",
+                    "description": "Enable Multicast.\n"
+                },
+                "inspectionMode": {
+                    "type": "string",
+                    "description": "Inspection mode. Valid values: 'Domain-based' and 'Connection-based'.\n"
+                },
+                "manageSecurityDomain": {
+                    "type": "boolean",
+                    "description": "This parameter is a switch used to determine whether or not to manage security domains to the TGW using the\naviatrix_aws_tgw resource. If this is set to false, security domains must be managed using the\naviatrix_aws_tgw_security_domain resource. Valid values: true, false. Default value: true.\n"
+                },
+                "manageTransitGatewayAttachment": {
+                    "type": "boolean",
+                    "description": "This parameter is a switch used to determine whether or not to manage transit gateway attachments to the TGW using the\naviatrix_aws_tgw resource. If this is set to false, attachment of transit gateways must be done using the\naviatrix_aws_tgw_transit_gateway_attachment resource. Valid values: true, false. Default value: true.\n"
+                },
+                "manageVpcAttachment": {
+                    "type": "boolean",
+                    "description": "This parameter is a switch used to determine whether or not to manage VPC attachments to the TGW using the\naviatrix_aws_tgw resource. If this is set to false, attachment of VPCs must be done using the\naviatrix_aws_tgw_vpc_attachment resource. Valid values: true, false. Default value: true.\n"
+                },
+                "region": {
+                    "type": "string",
+                    "description": "Region of cloud provider.\n"
+                },
+                "securityDomains": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/aviatrix:index/AviatrixAwsTgwSecurityDomain:AviatrixAwsTgwSecurityDomain"
+                    },
+                    "description": "Security Domains to create together with AWS TGW's creation.\n",
+                    "deprecationMessage": "Please set `manage_security_domain` to false, and use the standalone aviatrix_aws_tgw_network_domain resource instead."
+                },
+                "tgwId": {
+                    "type": "string",
+                    "description": "TGW ID.\n"
+                },
+                "tgwName": {
+                    "type": "string",
+                    "description": "Name of the AWS TGW which is going to be created.\n"
+                }
+            },
+            "required": [
+                "accountName",
+                "awsSideAsNumber",
+                "region",
+                "tgwId",
+                "tgwName"
+            ],
+            "inputProperties": {
+                "accountName": {
+                    "type": "string",
+                    "description": "This parameter represents the name of a Cloud-Account in Aviatrix controller.\n"
+                },
+                "attachedAviatrixTransitGateways": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of Names of Aviatrix Transit Gateway to attach to one of the three default domains.\n",
+                    "deprecationMessage": "Please set `manage_transit_gateway_attachment` to false, and use the standalone aviatrix_aws_tgw_transit_gateway_attachment resource instead."
+                },
+                "awsSideAsNumber": {
+                    "type": "string",
+                    "description": "BGP Local ASN (Autonomous System Number), Integer between 1-4294967294.\n",
+                    "willReplaceOnChanges": true
+                },
+                "cidrs": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "TGW CIDRs.\n"
+                },
+                "cloudType": {
+                    "type": "integer",
+                    "description": "Type of cloud service provider, requires an integer value. Supported for AWS (1) and AWS GOV (256). Default value: 1.\n"
+                },
+                "enableMulticast": {
+                    "type": "boolean",
+                    "description": "Enable Multicast.\n"
+                },
+                "inspectionMode": {
+                    "type": "string",
+                    "description": "Inspection mode. Valid values: 'Domain-based' and 'Connection-based'.\n"
+                },
+                "manageSecurityDomain": {
+                    "type": "boolean",
+                    "description": "This parameter is a switch used to determine whether or not to manage security domains to the TGW using the\naviatrix_aws_tgw resource. If this is set to false, security domains must be managed using the\naviatrix_aws_tgw_security_domain resource. Valid values: true, false. Default value: true.\n"
+                },
+                "manageTransitGatewayAttachment": {
+                    "type": "boolean",
+                    "description": "This parameter is a switch used to determine whether or not to manage transit gateway attachments to the TGW using the\naviatrix_aws_tgw resource. If this is set to false, attachment of transit gateways must be done using the\naviatrix_aws_tgw_transit_gateway_attachment resource. Valid values: true, false. Default value: true.\n"
+                },
+                "manageVpcAttachment": {
+                    "type": "boolean",
+                    "description": "This parameter is a switch used to determine whether or not to manage VPC attachments to the TGW using the\naviatrix_aws_tgw resource. If this is set to false, attachment of VPCs must be done using the\naviatrix_aws_tgw_vpc_attachment resource. Valid values: true, false. Default value: true.\n"
+                },
+                "region": {
+                    "type": "string",
+                    "description": "Region of cloud provider.\n"
+                },
+                "securityDomains": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/aviatrix:index/AviatrixAwsTgwSecurityDomain:AviatrixAwsTgwSecurityDomain"
+                    },
+                    "description": "Security Domains to create together with AWS TGW's creation.\n",
+                    "deprecationMessage": "Please set `manage_security_domain` to false, and use the standalone aviatrix_aws_tgw_network_domain resource instead."
+                },
+                "tgwName": {
+                    "type": "string",
+                    "description": "Name of the AWS TGW which is going to be created.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "accountName",
+                "awsSideAsNumber",
+                "region",
+                "tgwName"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AviatrixAwsTgw resources.\n",
+                "properties": {
+                    "accountName": {
+                        "type": "string",
+                        "description": "This parameter represents the name of a Cloud-Account in Aviatrix controller.\n"
+                    },
+                    "attachedAviatrixTransitGateways": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of Names of Aviatrix Transit Gateway to attach to one of the three default domains.\n",
+                        "deprecationMessage": "Please set `manage_transit_gateway_attachment` to false, and use the standalone aviatrix_aws_tgw_transit_gateway_attachment resource instead."
+                    },
+                    "awsSideAsNumber": {
+                        "type": "string",
+                        "description": "BGP Local ASN (Autonomous System Number), Integer between 1-4294967294.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "cidrs": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "TGW CIDRs.\n"
+                    },
+                    "cloudType": {
+                        "type": "integer",
+                        "description": "Type of cloud service provider, requires an integer value. Supported for AWS (1) and AWS GOV (256). Default value: 1.\n"
+                    },
+                    "enableMulticast": {
+                        "type": "boolean",
+                        "description": "Enable Multicast.\n"
+                    },
+                    "inspectionMode": {
+                        "type": "string",
+                        "description": "Inspection mode. Valid values: 'Domain-based' and 'Connection-based'.\n"
+                    },
+                    "manageSecurityDomain": {
+                        "type": "boolean",
+                        "description": "This parameter is a switch used to determine whether or not to manage security domains to the TGW using the\naviatrix_aws_tgw resource. If this is set to false, security domains must be managed using the\naviatrix_aws_tgw_security_domain resource. Valid values: true, false. Default value: true.\n"
+                    },
+                    "manageTransitGatewayAttachment": {
+                        "type": "boolean",
+                        "description": "This parameter is a switch used to determine whether or not to manage transit gateway attachments to the TGW using the\naviatrix_aws_tgw resource. If this is set to false, attachment of transit gateways must be done using the\naviatrix_aws_tgw_transit_gateway_attachment resource. Valid values: true, false. Default value: true.\n"
+                    },
+                    "manageVpcAttachment": {
+                        "type": "boolean",
+                        "description": "This parameter is a switch used to determine whether or not to manage VPC attachments to the TGW using the\naviatrix_aws_tgw resource. If this is set to false, attachment of VPCs must be done using the\naviatrix_aws_tgw_vpc_attachment resource. Valid values: true, false. Default value: true.\n"
+                    },
+                    "region": {
+                        "type": "string",
+                        "description": "Region of cloud provider.\n"
+                    },
+                    "securityDomains": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/aviatrix:index/AviatrixAwsTgwSecurityDomain:AviatrixAwsTgwSecurityDomain"
+                        },
+                        "description": "Security Domains to create together with AWS TGW's creation.\n",
+                        "deprecationMessage": "Please set `manage_security_domain` to false, and use the standalone aviatrix_aws_tgw_network_domain resource instead."
+                    },
+                    "tgwId": {
+                        "type": "string",
+                        "description": "TGW ID.\n"
+                    },
+                    "tgwName": {
+                        "type": "string",
+                        "description": "Name of the AWS TGW which is going to be created.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "aviatrix:index/aviatrixAwsTgwConnect:AviatrixAwsTgwConnect": {
+            "properties": {
+                "connectAttachmentId": {
+                    "type": "string",
+                    "description": "Connect Attachment ID.\n"
+                },
+                "connectionName": {
+                    "type": "string",
+                    "description": "Connection Name.\n"
+                },
+                "networkDomainName": {
+                    "type": "string",
+                    "description": "Network Domain Name.\n"
+                },
+                "securityDomainName": {
+                    "type": "string",
+                    "description": "Security Domain Name.\n",
+                    "deprecationMessage": "Please use network_domain_name instead."
+                },
+                "tgwName": {
+                    "type": "string",
+                    "description": "AWS TGW Name.\n"
+                },
+                "transportAttachmentId": {
+                    "type": "string",
+                    "description": "Transport Attachment ID.\n"
+                },
+                "transportVpcId": {
+                    "type": "string",
+                    "description": "Transport Attachment VPC ID.\n"
+                }
+            },
+            "required": [
+                "connectAttachmentId",
+                "connectionName",
+                "tgwName",
+                "transportAttachmentId",
+                "transportVpcId"
+            ],
+            "inputProperties": {
+                "connectionName": {
+                    "type": "string",
+                    "description": "Connection Name.\n",
+                    "willReplaceOnChanges": true
+                },
+                "networkDomainName": {
+                    "type": "string",
+                    "description": "Network Domain Name.\n",
+                    "willReplaceOnChanges": true
+                },
+                "securityDomainName": {
+                    "type": "string",
+                    "description": "Security Domain Name.\n",
+                    "deprecationMessage": "Please use network_domain_name instead.",
+                    "willReplaceOnChanges": true
+                },
+                "tgwName": {
+                    "type": "string",
+                    "description": "AWS TGW Name.\n",
+                    "willReplaceOnChanges": true
+                },
+                "transportVpcId": {
+                    "type": "string",
+                    "description": "Transport Attachment VPC ID.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "connectionName",
+                "tgwName",
+                "transportVpcId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AviatrixAwsTgwConnect resources.\n",
+                "properties": {
+                    "connectAttachmentId": {
+                        "type": "string",
+                        "description": "Connect Attachment ID.\n"
+                    },
+                    "connectionName": {
+                        "type": "string",
+                        "description": "Connection Name.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "networkDomainName": {
+                        "type": "string",
+                        "description": "Network Domain Name.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "securityDomainName": {
+                        "type": "string",
+                        "description": "Security Domain Name.\n",
+                        "deprecationMessage": "Please use network_domain_name instead.",
+                        "willReplaceOnChanges": true
+                    },
+                    "tgwName": {
+                        "type": "string",
+                        "description": "AWS TGW Name.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "transportAttachmentId": {
+                        "type": "string",
+                        "description": "Transport Attachment ID.\n"
+                    },
+                    "transportVpcId": {
+                        "type": "string",
+                        "description": "Transport Attachment VPC ID.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "aviatrix:index/aviatrixAwsTgwConnectPeer:AviatrixAwsTgwConnectPeer": {
+            "properties": {
+                "bgpInsideCidrs": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Set of BGP Inside CIDR Blocks.\n"
+                },
+                "connectAttachmentId": {
+                    "type": "string",
+                    "description": "Connect Attachment ID.\n"
+                },
+                "connectPeerId": {
+                    "type": "string",
+                    "description": "Connect Peer ID.\n"
+                },
+                "connectPeerName": {
+                    "type": "string",
+                    "description": "Connect Peer Name.\n"
+                },
+                "connectionName": {
+                    "type": "string",
+                    "description": "AWS TGW Connect connection name.\n"
+                },
+                "peerAsNumber": {
+                    "type": "string",
+                    "description": "Peer AS Number.\n"
+                },
+                "peerGreAddress": {
+                    "type": "string",
+                    "description": "Peer GRE IP Address.\n"
+                },
+                "tgwGreAddress": {
+                    "type": "string",
+                    "description": "AWS TGW GRE IP Address.\n"
+                },
+                "tgwName": {
+                    "type": "string",
+                    "description": "AWS TGW Name.\n"
+                }
+            },
+            "required": [
+                "bgpInsideCidrs",
+                "connectAttachmentId",
+                "connectPeerId",
+                "connectPeerName",
+                "connectionName",
+                "peerAsNumber",
+                "peerGreAddress",
+                "tgwName"
+            ],
+            "inputProperties": {
+                "bgpInsideCidrs": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Set of BGP Inside CIDR Blocks.\n",
+                    "willReplaceOnChanges": true
+                },
+                "connectAttachmentId": {
+                    "type": "string",
+                    "description": "Connect Attachment ID.\n",
+                    "willReplaceOnChanges": true
+                },
+                "connectPeerName": {
+                    "type": "string",
+                    "description": "Connect Peer Name.\n",
+                    "willReplaceOnChanges": true
+                },
+                "connectionName": {
+                    "type": "string",
+                    "description": "AWS TGW Connect connection name.\n",
+                    "willReplaceOnChanges": true
+                },
+                "peerAsNumber": {
+                    "type": "string",
+                    "description": "Peer AS Number.\n",
+                    "willReplaceOnChanges": true
+                },
+                "peerGreAddress": {
+                    "type": "string",
+                    "description": "Peer GRE IP Address.\n",
+                    "willReplaceOnChanges": true
+                },
+                "tgwGreAddress": {
+                    "type": "string",
+                    "description": "AWS TGW GRE IP Address.\n",
+                    "willReplaceOnChanges": true
+                },
+                "tgwName": {
+                    "type": "string",
+                    "description": "AWS TGW Name.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "bgpInsideCidrs",
+                "connectAttachmentId",
+                "connectPeerName",
+                "connectionName",
+                "peerAsNumber",
+                "peerGreAddress",
+                "tgwName"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AviatrixAwsTgwConnectPeer resources.\n",
+                "properties": {
+                    "bgpInsideCidrs": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Set of BGP Inside CIDR Blocks.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "connectAttachmentId": {
+                        "type": "string",
+                        "description": "Connect Attachment ID.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "connectPeerId": {
+                        "type": "string",
+                        "description": "Connect Peer ID.\n"
+                    },
+                    "connectPeerName": {
+                        "type": "string",
+                        "description": "Connect Peer Name.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "connectionName": {
+                        "type": "string",
+                        "description": "AWS TGW Connect connection name.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "peerAsNumber": {
+                        "type": "string",
+                        "description": "Peer AS Number.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "peerGreAddress": {
+                        "type": "string",
+                        "description": "Peer GRE IP Address.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "tgwGreAddress": {
+                        "type": "string",
+                        "description": "AWS TGW GRE IP Address.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "tgwName": {
+                        "type": "string",
+                        "description": "AWS TGW Name.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "aviatrix:index/aviatrixAwsTgwDirectconnect:AviatrixAwsTgwDirectconnect": {
+            "properties": {
+                "allowedPrefix": {
+                    "type": "string",
+                    "description": "Public IP address. Example: '40.0.0.0'.\n"
+                },
+                "directconnectAccountName": {
+                    "type": "string",
+                    "description": "This parameter represents the name of an Account in Aviatrix controller.\n"
+                },
+                "dxGatewayId": {
+                    "type": "string",
+                    "description": "This parameter represents the name of a Direct Connect Gateway ID.\n"
+                },
+                "enableLearnedCidrsApproval": {
+                    "type": "boolean",
+                    "description": "Switch to enable/disable encrypted transit approval for direct connection. Valid values: true, false.\n"
+                },
+                "networkDomainName": {
+                    "type": "string",
+                    "description": "The name of an Aviatrix network domain, to which the direct connect gateway will be attached.\n"
+                },
+                "securityDomainName": {
+                    "type": "string",
+                    "description": "The name of an Aviatrix security domain, to which the direct connect gateway will be attached.\n",
+                    "deprecationMessage": "Please use network_domain_name instead."
+                },
+                "tgwName": {
+                    "type": "string",
+                    "description": "This parameter represents the name of an AWS TGW.\n"
+                }
+            },
+            "required": [
+                "allowedPrefix",
+                "directconnectAccountName",
+                "dxGatewayId",
+                "tgwName"
+            ],
+            "inputProperties": {
+                "allowedPrefix": {
+                    "type": "string",
+                    "description": "Public IP address. Example: '40.0.0.0'.\n"
+                },
+                "directconnectAccountName": {
+                    "type": "string",
+                    "description": "This parameter represents the name of an Account in Aviatrix controller.\n",
+                    "willReplaceOnChanges": true
+                },
+                "dxGatewayId": {
+                    "type": "string",
+                    "description": "This parameter represents the name of a Direct Connect Gateway ID.\n",
+                    "willReplaceOnChanges": true
+                },
+                "enableLearnedCidrsApproval": {
+                    "type": "boolean",
+                    "description": "Switch to enable/disable encrypted transit approval for direct connection. Valid values: true, false.\n"
+                },
+                "networkDomainName": {
+                    "type": "string",
+                    "description": "The name of an Aviatrix network domain, to which the direct connect gateway will be attached.\n",
+                    "willReplaceOnChanges": true
+                },
+                "securityDomainName": {
+                    "type": "string",
+                    "description": "The name of an Aviatrix security domain, to which the direct connect gateway will be attached.\n",
+                    "deprecationMessage": "Please use network_domain_name instead.",
+                    "willReplaceOnChanges": true
+                },
+                "tgwName": {
+                    "type": "string",
+                    "description": "This parameter represents the name of an AWS TGW.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "allowedPrefix",
+                "directconnectAccountName",
+                "dxGatewayId",
+                "tgwName"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AviatrixAwsTgwDirectconnect resources.\n",
+                "properties": {
+                    "allowedPrefix": {
+                        "type": "string",
+                        "description": "Public IP address. Example: '40.0.0.0'.\n"
+                    },
+                    "directconnectAccountName": {
+                        "type": "string",
+                        "description": "This parameter represents the name of an Account in Aviatrix controller.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "dxGatewayId": {
+                        "type": "string",
+                        "description": "This parameter represents the name of a Direct Connect Gateway ID.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "enableLearnedCidrsApproval": {
+                        "type": "boolean",
+                        "description": "Switch to enable/disable encrypted transit approval for direct connection. Valid values: true, false.\n"
+                    },
+                    "networkDomainName": {
+                        "type": "string",
+                        "description": "The name of an Aviatrix network domain, to which the direct connect gateway will be attached.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "securityDomainName": {
+                        "type": "string",
+                        "description": "The name of an Aviatrix security domain, to which the direct connect gateway will be attached.\n",
+                        "deprecationMessage": "Please use network_domain_name instead.",
+                        "willReplaceOnChanges": true
+                    },
+                    "tgwName": {
+                        "type": "string",
+                        "description": "This parameter represents the name of an AWS TGW.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "aviatrix:index/aviatrixAwsTgwIntraDomainInspection:AviatrixAwsTgwIntraDomainInspection": {
+            "properties": {
+                "firewallDomainName": {
+                    "type": "string",
+                    "description": "Firewall domain name.\n"
+                },
+                "routeDomainName": {
+                    "type": "string",
+                    "description": "Route domain name.\n"
+                },
+                "tgwName": {
+                    "type": "string",
+                    "description": "AWS TGW name.\n"
+                }
+            },
+            "required": [
+                "firewallDomainName",
+                "routeDomainName",
+                "tgwName"
+            ],
+            "inputProperties": {
+                "firewallDomainName": {
+                    "type": "string",
+                    "description": "Firewall domain name.\n",
+                    "willReplaceOnChanges": true
+                },
+                "routeDomainName": {
+                    "type": "string",
+                    "description": "Route domain name.\n",
+                    "willReplaceOnChanges": true
+                },
+                "tgwName": {
+                    "type": "string",
+                    "description": "AWS TGW name.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "firewallDomainName",
+                "routeDomainName",
+                "tgwName"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AviatrixAwsTgwIntraDomainInspection resources.\n",
+                "properties": {
+                    "firewallDomainName": {
+                        "type": "string",
+                        "description": "Firewall domain name.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "routeDomainName": {
+                        "type": "string",
+                        "description": "Route domain name.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "tgwName": {
+                        "type": "string",
+                        "description": "AWS TGW name.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "aviatrix:index/aviatrixAwsTgwNetworkDomain:AviatrixAwsTgwNetworkDomain": {
+            "properties": {
+                "aviatrixFirewall": {
+                    "type": "boolean",
+                    "description": "Set to true if the network domain is an aviatrix firewall domain.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Network domain name.\n"
+                },
+                "nativeEgress": {
+                    "type": "boolean",
+                    "description": "Set to true if the network domain is a native egress domain.\n"
+                },
+                "nativeFirewall": {
+                    "type": "boolean",
+                    "description": "Set to true if the network domain is a native firewall domain.\n"
+                },
+                "tgwName": {
+                    "type": "string",
+                    "description": "AWS TGW name.\n"
+                }
+            },
+            "required": [
+                "name",
+                "tgwName"
+            ],
+            "inputProperties": {
+                "aviatrixFirewall": {
+                    "type": "boolean",
+                    "description": "Set to true if the network domain is an aviatrix firewall domain.\n",
+                    "willReplaceOnChanges": true
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Network domain name.\n",
+                    "willReplaceOnChanges": true
+                },
+                "nativeEgress": {
+                    "type": "boolean",
+                    "description": "Set to true if the network domain is a native egress domain.\n",
+                    "willReplaceOnChanges": true
+                },
+                "nativeFirewall": {
+                    "type": "boolean",
+                    "description": "Set to true if the network domain is a native firewall domain.\n",
+                    "willReplaceOnChanges": true
+                },
+                "tgwName": {
+                    "type": "string",
+                    "description": "AWS TGW name.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "tgwName"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AviatrixAwsTgwNetworkDomain resources.\n",
+                "properties": {
+                    "aviatrixFirewall": {
+                        "type": "boolean",
+                        "description": "Set to true if the network domain is an aviatrix firewall domain.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Network domain name.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "nativeEgress": {
+                        "type": "boolean",
+                        "description": "Set to true if the network domain is a native egress domain.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "nativeFirewall": {
+                        "type": "boolean",
+                        "description": "Set to true if the network domain is a native firewall domain.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "tgwName": {
+                        "type": "string",
+                        "description": "AWS TGW name.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "aviatrix:index/aviatrixAwsTgwPeering:AviatrixAwsTgwPeering": {
+            "properties": {
+                "tgwName1": {
+                    "type": "string",
+                    "description": "Name of the first AWS tgw to make a peer pair.\n"
+                },
+                "tgwName2": {
+                    "type": "string",
+                    "description": "Name of the second AWS tgw to make a peer pair.\n"
+                }
+            },
+            "required": [
+                "tgwName1",
+                "tgwName2"
+            ],
+            "inputProperties": {
+                "tgwName1": {
+                    "type": "string",
+                    "description": "Name of the first AWS tgw to make a peer pair.\n",
+                    "willReplaceOnChanges": true
+                },
+                "tgwName2": {
+                    "type": "string",
+                    "description": "Name of the second AWS tgw to make a peer pair.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "tgwName1",
+                "tgwName2"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AviatrixAwsTgwPeering resources.\n",
+                "properties": {
+                    "tgwName1": {
+                        "type": "string",
+                        "description": "Name of the first AWS tgw to make a peer pair.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "tgwName2": {
+                        "type": "string",
+                        "description": "Name of the second AWS tgw to make a peer pair.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "aviatrix:index/aviatrixAwsTgwPeeringDomainConn:AviatrixAwsTgwPeeringDomainConn": {
+            "properties": {
+                "domainName1": {
+                    "type": "string",
+                    "description": "The name of the source domain to make a connection.\n"
+                },
+                "domainName2": {
+                    "type": "string",
+                    "description": "The name of the destination domain to make a connection.\n"
+                },
+                "tgwName1": {
+                    "type": "string",
+                    "description": "The AWS tgw name of the source domain to make a connection.\n"
+                },
+                "tgwName2": {
+                    "type": "string",
+                    "description": "The AWS tgw name of the destination domain to make a connection.\n"
+                }
+            },
+            "required": [
+                "domainName1",
+                "domainName2",
+                "tgwName1",
+                "tgwName2"
+            ],
+            "inputProperties": {
+                "domainName1": {
+                    "type": "string",
+                    "description": "The name of the source domain to make a connection.\n",
+                    "willReplaceOnChanges": true
+                },
+                "domainName2": {
+                    "type": "string",
+                    "description": "The name of the destination domain to make a connection.\n",
+                    "willReplaceOnChanges": true
+                },
+                "tgwName1": {
+                    "type": "string",
+                    "description": "The AWS tgw name of the source domain to make a connection.\n",
+                    "willReplaceOnChanges": true
+                },
+                "tgwName2": {
+                    "type": "string",
+                    "description": "The AWS tgw name of the destination domain to make a connection.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "domainName1",
+                "domainName2",
+                "tgwName1",
+                "tgwName2"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AviatrixAwsTgwPeeringDomainConn resources.\n",
+                "properties": {
+                    "domainName1": {
+                        "type": "string",
+                        "description": "The name of the source domain to make a connection.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "domainName2": {
+                        "type": "string",
+                        "description": "The name of the destination domain to make a connection.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "tgwName1": {
+                        "type": "string",
+                        "description": "The AWS tgw name of the source domain to make a connection.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "tgwName2": {
+                        "type": "string",
+                        "description": "The AWS tgw name of the destination domain to make a connection.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "aviatrix:index/aviatrixAwsTgwSecurityDomain:AviatrixAwsTgwSecurityDomain": {
+            "properties": {
+                "aviatrixFirewall": {
+                    "type": "boolean",
+                    "description": "Set to true if the security domain is an aviatrix firewall domain.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Security domain name.\n"
+                },
+                "nativeEgress": {
+                    "type": "boolean",
+                    "description": "Set to true if the security domain is a native egress domain.\n"
+                },
+                "nativeFirewall": {
+                    "type": "boolean",
+                    "description": "Set to true if the security domain is a native firewall domain.\n"
+                },
+                "tgwName": {
+                    "type": "string",
+                    "description": "AWS TGW name.\n"
+                }
+            },
+            "required": [
+                "name",
+                "tgwName"
+            ],
+            "inputProperties": {
+                "aviatrixFirewall": {
+                    "type": "boolean",
+                    "description": "Set to true if the security domain is an aviatrix firewall domain.\n",
+                    "willReplaceOnChanges": true
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Security domain name.\n",
+                    "willReplaceOnChanges": true
+                },
+                "nativeEgress": {
+                    "type": "boolean",
+                    "description": "Set to true if the security domain is a native egress domain.\n",
+                    "willReplaceOnChanges": true
+                },
+                "nativeFirewall": {
+                    "type": "boolean",
+                    "description": "Set to true if the security domain is a native firewall domain.\n",
+                    "willReplaceOnChanges": true
+                },
+                "tgwName": {
+                    "type": "string",
+                    "description": "AWS TGW name.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "tgwName"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AviatrixAwsTgwSecurityDomain resources.\n",
+                "properties": {
+                    "aviatrixFirewall": {
+                        "type": "boolean",
+                        "description": "Set to true if the security domain is an aviatrix firewall domain.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Security domain name.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "nativeEgress": {
+                        "type": "boolean",
+                        "description": "Set to true if the security domain is a native egress domain.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "nativeFirewall": {
+                        "type": "boolean",
+                        "description": "Set to true if the security domain is a native firewall domain.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "tgwName": {
+                        "type": "string",
+                        "description": "AWS TGW name.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "aviatrix:index/aviatrixAwsTgwSecurityDomainConn:AviatrixAwsTgwSecurityDomainConn": {
+            "properties": {
+                "domainName1": {
+                    "type": "string",
+                    "description": "Security domain name 1.\n"
+                },
+                "domainName2": {
+                    "type": "string",
+                    "description": "Security domain name 2.\n"
+                },
+                "tgwName": {
+                    "type": "string",
+                    "description": "AWS TGW name.\n"
+                }
+            },
+            "required": [
+                "domainName1",
+                "domainName2",
+                "tgwName"
+            ],
+            "inputProperties": {
+                "domainName1": {
+                    "type": "string",
+                    "description": "Security domain name 1.\n",
+                    "willReplaceOnChanges": true
+                },
+                "domainName2": {
+                    "type": "string",
+                    "description": "Security domain name 2.\n",
+                    "willReplaceOnChanges": true
+                },
+                "tgwName": {
+                    "type": "string",
+                    "description": "AWS TGW name.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "domainName1",
+                "domainName2",
+                "tgwName"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AviatrixAwsTgwSecurityDomainConn resources.\n",
+                "properties": {
+                    "domainName1": {
+                        "type": "string",
+                        "description": "Security domain name 1.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "domainName2": {
+                        "type": "string",
+                        "description": "Security domain name 2.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "tgwName": {
+                        "type": "string",
+                        "description": "AWS TGW name.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "aviatrix:index/aviatrixAwsTgwTransitGatewayAttachment:AviatrixAwsTgwTransitGatewayAttachment": {
+            "properties": {
+                "region": {
+                    "type": "string",
+                    "description": "Region of cloud provider.\n"
+                },
+                "tgwName": {
+                    "type": "string",
+                    "description": "Name of the AWS TGW.\n"
+                },
+                "transitGatewayName": {
+                    "type": "string",
+                    "description": "Name of the transit gateway to be attached to tgw.\n"
+                },
+                "vpcAccountName": {
+                    "type": "string",
+                    "description": "This parameter represents the name of a Cloud-Account in Aviatrix controller.\n"
+                },
+                "vpcId": {
+                    "type": "string",
+                    "description": "This parameter represents the ID of the VPC.\n"
+                }
+            },
+            "required": [
+                "region",
+                "tgwName",
+                "transitGatewayName",
+                "vpcAccountName",
+                "vpcId"
+            ],
+            "inputProperties": {
+                "region": {
+                    "type": "string",
+                    "description": "Region of cloud provider.\n",
+                    "willReplaceOnChanges": true
+                },
+                "tgwName": {
+                    "type": "string",
+                    "description": "Name of the AWS TGW.\n",
+                    "willReplaceOnChanges": true
+                },
+                "transitGatewayName": {
+                    "type": "string",
+                    "description": "Name of the transit gateway to be attached to tgw.\n",
+                    "willReplaceOnChanges": true
+                },
+                "vpcAccountName": {
+                    "type": "string",
+                    "description": "This parameter represents the name of a Cloud-Account in Aviatrix controller.\n",
+                    "willReplaceOnChanges": true
+                },
+                "vpcId": {
+                    "type": "string",
+                    "description": "This parameter represents the ID of the VPC.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "region",
+                "tgwName",
+                "transitGatewayName",
+                "vpcAccountName",
+                "vpcId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AviatrixAwsTgwTransitGatewayAttachment resources.\n",
+                "properties": {
+                    "region": {
+                        "type": "string",
+                        "description": "Region of cloud provider.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "tgwName": {
+                        "type": "string",
+                        "description": "Name of the AWS TGW.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "transitGatewayName": {
+                        "type": "string",
+                        "description": "Name of the transit gateway to be attached to tgw.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "vpcAccountName": {
+                        "type": "string",
+                        "description": "This parameter represents the name of a Cloud-Account in Aviatrix controller.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "vpcId": {
+                        "type": "string",
+                        "description": "This parameter represents the ID of the VPC.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "aviatrix:index/aviatrixAwsTgwVpcAttachment:AviatrixAwsTgwVpcAttachment": {
+            "properties": {
+                "customizedRouteAdvertisement": {
+                    "type": "string",
+                    "description": "Advanced option. Customized route(s) to be advertised to other VPCs that are connected to the same TGW.\n"
+                },
+                "customizedRoutes": {
+                    "type": "string",
+                    "description": "Advanced option. Customized Spoke VPC Routes. It allows the admin to enter non-RFC1918 routes in the VPC route table\ntargeting the TGW.\n"
+                },
+                "disableLocalRoutePropagation": {
+                    "type": "boolean",
+                    "description": "Advanced option. If set to true, it disables automatic route propagation of this VPC to other VPCs within the same\nnetwork domain.\n"
+                },
+                "edgeAttachment": {
+                    "type": "string",
+                    "description": "Edge attachment ID. To allow access to the private IP of the MGMT interface of the Firewalls, set this attribute to\nenable Management Access From Onprem. This feature advertises the Firewalls private MGMT subnet to your Edge domain.\n"
+                },
+                "networkDomainName": {
+                    "type": "string",
+                    "description": "The name of the network domain.\n"
+                },
+                "region": {
+                    "type": "string",
+                    "description": "Region of cloud provider.\n"
+                },
+                "routeTables": {
+                    "type": "string",
+                    "description": "Advanced option. Route tables separated by ',' to participate in TGW Orchestrator, i.e., learned routes will be\npropagated to these route tables.\n"
+                },
+                "securityDomainName": {
+                    "type": "string",
+                    "description": "The name of the security domain.\n",
+                    "deprecationMessage": "Please use network_domain_name instead."
+                },
+                "subnets": {
+                    "type": "string",
+                    "description": "Advanced option. VPC subnets separated by ',' to attach to the VPC. If left blank, Aviatrix Controller automatically\nselects a subnet representing each AZ for the VPC attachment.\n"
+                },
+                "tgwName": {
+                    "type": "string",
+                    "description": "Name of the AWS TGW.\n"
+                },
+                "vpcAccountName": {
+                    "type": "string",
+                    "description": "This parameter represents the name of a Cloud-Account in Aviatrix controller.\n"
+                },
+                "vpcId": {
+                    "type": "string",
+                    "description": "This parameter represents the ID of the VPC.\n"
+                }
+            },
+            "required": [
+                "region",
+                "routeTables",
+                "subnets",
+                "tgwName",
+                "vpcAccountName",
+                "vpcId"
+            ],
+            "inputProperties": {
+                "customizedRouteAdvertisement": {
+                    "type": "string",
+                    "description": "Advanced option. Customized route(s) to be advertised to other VPCs that are connected to the same TGW.\n"
+                },
+                "customizedRoutes": {
+                    "type": "string",
+                    "description": "Advanced option. Customized Spoke VPC Routes. It allows the admin to enter non-RFC1918 routes in the VPC route table\ntargeting the TGW.\n"
+                },
+                "disableLocalRoutePropagation": {
+                    "type": "boolean",
+                    "description": "Advanced option. If set to true, it disables automatic route propagation of this VPC to other VPCs within the same\nnetwork domain.\n",
+                    "willReplaceOnChanges": true
+                },
+                "edgeAttachment": {
+                    "type": "string",
+                    "description": "Edge attachment ID. To allow access to the private IP of the MGMT interface of the Firewalls, set this attribute to\nenable Management Access From Onprem. This feature advertises the Firewalls private MGMT subnet to your Edge domain.\n"
+                },
+                "networkDomainName": {
+                    "type": "string",
+                    "description": "The name of the network domain.\n",
+                    "willReplaceOnChanges": true
+                },
+                "region": {
+                    "type": "string",
+                    "description": "Region of cloud provider.\n"
+                },
+                "routeTables": {
+                    "type": "string",
+                    "description": "Advanced option. Route tables separated by ',' to participate in TGW Orchestrator, i.e., learned routes will be\npropagated to these route tables.\n",
+                    "willReplaceOnChanges": true
+                },
+                "securityDomainName": {
+                    "type": "string",
+                    "description": "The name of the security domain.\n",
+                    "deprecationMessage": "Please use network_domain_name instead.",
+                    "willReplaceOnChanges": true
+                },
+                "subnets": {
+                    "type": "string",
+                    "description": "Advanced option. VPC subnets separated by ',' to attach to the VPC. If left blank, Aviatrix Controller automatically\nselects a subnet representing each AZ for the VPC attachment.\n",
+                    "willReplaceOnChanges": true
+                },
+                "tgwName": {
+                    "type": "string",
+                    "description": "Name of the AWS TGW.\n",
+                    "willReplaceOnChanges": true
+                },
+                "vpcAccountName": {
+                    "type": "string",
+                    "description": "This parameter represents the name of a Cloud-Account in Aviatrix controller.\n"
+                },
+                "vpcId": {
+                    "type": "string",
+                    "description": "This parameter represents the ID of the VPC.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "region",
+                "tgwName",
+                "vpcAccountName",
+                "vpcId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AviatrixAwsTgwVpcAttachment resources.\n",
+                "properties": {
+                    "customizedRouteAdvertisement": {
+                        "type": "string",
+                        "description": "Advanced option. Customized route(s) to be advertised to other VPCs that are connected to the same TGW.\n"
+                    },
+                    "customizedRoutes": {
+                        "type": "string",
+                        "description": "Advanced option. Customized Spoke VPC Routes. It allows the admin to enter non-RFC1918 routes in the VPC route table\ntargeting the TGW.\n"
+                    },
+                    "disableLocalRoutePropagation": {
+                        "type": "boolean",
+                        "description": "Advanced option. If set to true, it disables automatic route propagation of this VPC to other VPCs within the same\nnetwork domain.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "edgeAttachment": {
+                        "type": "string",
+                        "description": "Edge attachment ID. To allow access to the private IP of the MGMT interface of the Firewalls, set this attribute to\nenable Management Access From Onprem. This feature advertises the Firewalls private MGMT subnet to your Edge domain.\n"
+                    },
+                    "networkDomainName": {
+                        "type": "string",
+                        "description": "The name of the network domain.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "region": {
+                        "type": "string",
+                        "description": "Region of cloud provider.\n"
+                    },
+                    "routeTables": {
+                        "type": "string",
+                        "description": "Advanced option. Route tables separated by ',' to participate in TGW Orchestrator, i.e., learned routes will be\npropagated to these route tables.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "securityDomainName": {
+                        "type": "string",
+                        "description": "The name of the security domain.\n",
+                        "deprecationMessage": "Please use network_domain_name instead.",
+                        "willReplaceOnChanges": true
+                    },
+                    "subnets": {
+                        "type": "string",
+                        "description": "Advanced option. VPC subnets separated by ',' to attach to the VPC. If left blank, Aviatrix Controller automatically\nselects a subnet representing each AZ for the VPC attachment.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "tgwName": {
+                        "type": "string",
+                        "description": "Name of the AWS TGW.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "vpcAccountName": {
+                        "type": "string",
+                        "description": "This parameter represents the name of a Cloud-Account in Aviatrix controller.\n"
+                    },
+                    "vpcId": {
+                        "type": "string",
+                        "description": "This parameter represents the ID of the VPC.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "aviatrix:index/aviatrixAwsTgwVpnConn:AviatrixAwsTgwVpnConn": {
+            "properties": {
+                "connectionName": {
+                    "type": "string",
+                    "description": "Unique name of the connection.\n"
+                },
+                "connectionType": {
+                    "type": "string",
+                    "description": "Connection type. Valid values: 'dynamic', 'static'. 'dynamic' stands for a BGP VPN connection; 'static' stands for a\nstatic VPN connection. Default value: 'dynamic'.\n"
+                },
+                "enableGlobalAcceleration": {
+                    "type": "boolean",
+                    "description": "Enable Global Acceleration.\n"
+                },
+                "enableLearnedCidrsApproval": {
+                    "type": "boolean",
+                    "description": "Switch to enable/disable encrypted transit approval for vpn connection. Valid values: true, false.\n"
+                },
+                "insideIpCidrTun1": {
+                    "type": "string",
+                    "description": "Inside IP CIDR for Tunnel 1. A /30 CIDR in 169.254.0.0/16.\n"
+                },
+                "insideIpCidrTun2": {
+                    "type": "string",
+                    "description": "Inside IP CIDR for Tunnel 2. A /30 CIDR in 169.254.0.0/16.\n"
+                },
+                "preSharedKeyTun1": {
+                    "type": "string",
+                    "description": "Pre-Shared Key for Tunnel 1. A 8-64 character string with alphanumeric, underscore(_) and dot(.). It cannot start with 0\n"
+                },
+                "preSharedKeyTun2": {
+                    "type": "string",
+                    "description": "Pre-Shared Key for Tunnel 2. A 8-64 character string with alphanumeric, underscore(_) and dot(.). It cannot start with 0\n"
+                },
+                "publicIp": {
+                    "type": "string",
+                    "description": "Public IP address. Example: '40.0.0.0'.\n"
+                },
+                "remoteAsNumber": {
+                    "type": "string",
+                    "description": "AWS side as a number. Integer between 1-4294967294. Example: '12'. Required for a dynamic VPN connection.\n"
+                },
+                "remoteCidr": {
+                    "type": "string",
+                    "description": "Remote CIDRs joined as a string with ','. Required for a static VPN connection.\n"
+                },
+                "routeDomainName": {
+                    "type": "string",
+                    "description": "The name of a route domain, to which the vpn will be attached.\n"
+                },
+                "tgwName": {
+                    "type": "string",
+                    "description": "This parameter represents the name of an AWS TGW.\n"
+                },
+                "vpnId": {
+                    "type": "string",
+                    "description": "ID of the vpn connection.\n"
+                },
+                "vpnTunnelDatas": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/aviatrix:index/AviatrixAwsTgwVpnConnVpnTunnelData:AviatrixAwsTgwVpnConnVpnTunnelData"
+                    },
+                    "description": "VPN tunnel data.\n"
+                }
+            },
+            "required": [
+                "connectionName",
+                "publicIp",
+                "routeDomainName",
+                "tgwName",
+                "vpnId",
+                "vpnTunnelDatas"
+            ],
+            "inputProperties": {
+                "connectionName": {
+                    "type": "string",
+                    "description": "Unique name of the connection.\n",
+                    "willReplaceOnChanges": true
+                },
+                "connectionType": {
+                    "type": "string",
+                    "description": "Connection type. Valid values: 'dynamic', 'static'. 'dynamic' stands for a BGP VPN connection; 'static' stands for a\nstatic VPN connection. Default value: 'dynamic'.\n",
+                    "willReplaceOnChanges": true
+                },
+                "enableGlobalAcceleration": {
+                    "type": "boolean",
+                    "description": "Enable Global Acceleration.\n",
+                    "willReplaceOnChanges": true
+                },
+                "enableLearnedCidrsApproval": {
+                    "type": "boolean",
+                    "description": "Switch to enable/disable encrypted transit approval for vpn connection. Valid values: true, false.\n"
+                },
+                "insideIpCidrTun1": {
+                    "type": "string",
+                    "description": "Inside IP CIDR for Tunnel 1. A /30 CIDR in 169.254.0.0/16.\n",
+                    "willReplaceOnChanges": true
+                },
+                "insideIpCidrTun2": {
+                    "type": "string",
+                    "description": "Inside IP CIDR for Tunnel 2. A /30 CIDR in 169.254.0.0/16.\n",
+                    "willReplaceOnChanges": true
+                },
+                "preSharedKeyTun1": {
+                    "type": "string",
+                    "description": "Pre-Shared Key for Tunnel 1. A 8-64 character string with alphanumeric, underscore(_) and dot(.). It cannot start with 0\n",
+                    "willReplaceOnChanges": true
+                },
+                "preSharedKeyTun2": {
+                    "type": "string",
+                    "description": "Pre-Shared Key for Tunnel 2. A 8-64 character string with alphanumeric, underscore(_) and dot(.). It cannot start with 0\n",
+                    "willReplaceOnChanges": true
+                },
+                "publicIp": {
+                    "type": "string",
+                    "description": "Public IP address. Example: '40.0.0.0'.\n",
+                    "willReplaceOnChanges": true
+                },
+                "remoteAsNumber": {
+                    "type": "string",
+                    "description": "AWS side as a number. Integer between 1-4294967294. Example: '12'. Required for a dynamic VPN connection.\n",
+                    "willReplaceOnChanges": true
+                },
+                "remoteCidr": {
+                    "type": "string",
+                    "description": "Remote CIDRs joined as a string with ','. Required for a static VPN connection.\n",
+                    "willReplaceOnChanges": true
+                },
+                "routeDomainName": {
+                    "type": "string",
+                    "description": "The name of a route domain, to which the vpn will be attached.\n",
+                    "willReplaceOnChanges": true
+                },
+                "tgwName": {
+                    "type": "string",
+                    "description": "This parameter represents the name of an AWS TGW.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "connectionName",
+                "publicIp",
+                "routeDomainName",
+                "tgwName"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AviatrixAwsTgwVpnConn resources.\n",
+                "properties": {
+                    "connectionName": {
+                        "type": "string",
+                        "description": "Unique name of the connection.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "connectionType": {
+                        "type": "string",
+                        "description": "Connection type. Valid values: 'dynamic', 'static'. 'dynamic' stands for a BGP VPN connection; 'static' stands for a\nstatic VPN connection. Default value: 'dynamic'.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "enableGlobalAcceleration": {
+                        "type": "boolean",
+                        "description": "Enable Global Acceleration.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "enableLearnedCidrsApproval": {
+                        "type": "boolean",
+                        "description": "Switch to enable/disable encrypted transit approval for vpn connection. Valid values: true, false.\n"
+                    },
+                    "insideIpCidrTun1": {
+                        "type": "string",
+                        "description": "Inside IP CIDR for Tunnel 1. A /30 CIDR in 169.254.0.0/16.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "insideIpCidrTun2": {
+                        "type": "string",
+                        "description": "Inside IP CIDR for Tunnel 2. A /30 CIDR in 169.254.0.0/16.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "preSharedKeyTun1": {
+                        "type": "string",
+                        "description": "Pre-Shared Key for Tunnel 1. A 8-64 character string with alphanumeric, underscore(_) and dot(.). It cannot start with 0\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "preSharedKeyTun2": {
+                        "type": "string",
+                        "description": "Pre-Shared Key for Tunnel 2. A 8-64 character string with alphanumeric, underscore(_) and dot(.). It cannot start with 0\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "publicIp": {
+                        "type": "string",
+                        "description": "Public IP address. Example: '40.0.0.0'.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "remoteAsNumber": {
+                        "type": "string",
+                        "description": "AWS side as a number. Integer between 1-4294967294. Example: '12'. Required for a dynamic VPN connection.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "remoteCidr": {
+                        "type": "string",
+                        "description": "Remote CIDRs joined as a string with ','. Required for a static VPN connection.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "routeDomainName": {
+                        "type": "string",
+                        "description": "The name of a route domain, to which the vpn will be attached.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "tgwName": {
+                        "type": "string",
+                        "description": "This parameter represents the name of an AWS TGW.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "vpnId": {
+                        "type": "string",
+                        "description": "ID of the vpn connection.\n"
+                    },
+                    "vpnTunnelDatas": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/aviatrix:index/AviatrixAwsTgwVpnConnVpnTunnelData:AviatrixAwsTgwVpnConnVpnTunnelData"
+                        },
+                        "description": "VPN tunnel data.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "aviatrix:index/aviatrixAzurePeer:AviatrixAzurePeer": {
+            "properties": {
+                "accountName1": {
+                    "type": "string",
+                    "description": "This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.\n"
+                },
+                "accountName2": {
+                    "type": "string",
+                    "description": "This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.\n"
+                },
+                "vnetCidr1s": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of VNet CIDR of vnet_name_resource_group1.\n"
+                },
+                "vnetCidr2s": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of VNet CIDR of vnet_name_resource_group2.\n"
+                },
+                "vnetNameResourceGroup1": {
+                    "type": "string",
+                    "description": "VNet-Name of Azure cloud.\n"
+                },
+                "vnetNameResourceGroup2": {
+                    "type": "string",
+                    "description": "VNet-Name of Azure cloud.\n"
+                },
+                "vnetReg1": {
+                    "type": "string",
+                    "description": "Region of Azure cloud.\n"
+                },
+                "vnetReg2": {
+                    "type": "string",
+                    "description": "Region of Azure cloud.\n"
+                }
+            },
+            "required": [
+                "accountName1",
+                "accountName2",
+                "vnetCidr1s",
+                "vnetCidr2s",
+                "vnetNameResourceGroup1",
+                "vnetNameResourceGroup2",
+                "vnetReg1",
+                "vnetReg2"
+            ],
+            "inputProperties": {
+                "accountName1": {
+                    "type": "string",
+                    "description": "This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.\n",
+                    "willReplaceOnChanges": true
+                },
+                "accountName2": {
+                    "type": "string",
+                    "description": "This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.\n",
+                    "willReplaceOnChanges": true
+                },
+                "vnetNameResourceGroup1": {
+                    "type": "string",
+                    "description": "VNet-Name of Azure cloud.\n",
+                    "willReplaceOnChanges": true
+                },
+                "vnetNameResourceGroup2": {
+                    "type": "string",
+                    "description": "VNet-Name of Azure cloud.\n",
+                    "willReplaceOnChanges": true
+                },
+                "vnetReg1": {
+                    "type": "string",
+                    "description": "Region of Azure cloud.\n",
+                    "willReplaceOnChanges": true
+                },
+                "vnetReg2": {
+                    "type": "string",
+                    "description": "Region of Azure cloud.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "accountName1",
+                "accountName2",
+                "vnetNameResourceGroup1",
+                "vnetNameResourceGroup2",
+                "vnetReg1",
+                "vnetReg2"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AviatrixAzurePeer resources.\n",
+                "properties": {
+                    "accountName1": {
+                        "type": "string",
+                        "description": "This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "accountName2": {
+                        "type": "string",
+                        "description": "This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "vnetCidr1s": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of VNet CIDR of vnet_name_resource_group1.\n"
+                    },
+                    "vnetCidr2s": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of VNet CIDR of vnet_name_resource_group2.\n"
+                    },
+                    "vnetNameResourceGroup1": {
+                        "type": "string",
+                        "description": "VNet-Name of Azure cloud.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "vnetNameResourceGroup2": {
+                        "type": "string",
+                        "description": "VNet-Name of Azure cloud.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "vnetReg1": {
+                        "type": "string",
+                        "description": "Region of Azure cloud.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "vnetReg2": {
+                        "type": "string",
+                        "description": "Region of Azure cloud.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
         "aviatrix:index/aviatrixVpc:AviatrixVpc": {
             "properties": {
                 "accountName": {
