@@ -53,6 +53,28 @@ export interface AviatrixAwsTgwVpnConnVpnTunnelData {
     vpnOutsideAddress: string;
 }
 
+export interface AviatrixFqdnDomainName {
+    action?: string;
+    fqdn: string;
+    port: string;
+    proto: string;
+}
+
+export interface AviatrixFqdnGwFilterTagList {
+    gwName: string;
+    sourceIpLists?: string[];
+}
+
+export interface AviatrixTransitGatewayBgpLanInterface {
+    subnet: string;
+    vpcId: string;
+}
+
+export interface AviatrixTransitGatewayHaBgpLanInterface {
+    subnet: string;
+    vpcId: string;
+}
+
 export interface AviatrixVpcPrivateSubnet {
     cidr: string;
     name: string;
@@ -69,6 +91,24 @@ export interface AviatrixVpcSubnet {
     cidr?: string;
     name?: string;
     region?: string;
+    subnetId: string;
+}
+
+export interface GetAviatrixVpcPrivateSubnet {
+    cidr: string;
+    name: string;
+    subnetId: string;
+}
+
+export interface GetAviatrixVpcPublicSubnet {
+    cidr: string;
+    name: string;
+    subnetId: string;
+}
+
+export interface GetAviatrixVpcSubnet {
+    cidr: string;
+    name: string;
     subnetId: string;
 }
 

@@ -16,9 +16,16 @@ __all__ = [
     'AviatrixAwsTgwSecurityDomain',
     'AviatrixAwsTgwSecurityDomainAttachedVpc',
     'AviatrixAwsTgwVpnConnVpnTunnelData',
+    'AviatrixFqdnDomainName',
+    'AviatrixFqdnGwFilterTagList',
+    'AviatrixTransitGatewayBgpLanInterface',
+    'AviatrixTransitGatewayHaBgpLanInterface',
     'AviatrixVpcPrivateSubnet',
     'AviatrixVpcPublicSubnet',
     'AviatrixVpcSubnet',
+    'GetAviatrixVpcPrivateSubnetResult',
+    'GetAviatrixVpcPublicSubnetResult',
+    'GetAviatrixVpcSubnetResult',
 ]
 
 @pulumi.output_type
@@ -413,6 +420,151 @@ class AviatrixAwsTgwVpnConnVpnTunnelData(dict):
 
 
 @pulumi.output_type
+class AviatrixFqdnDomainName(dict):
+    def __init__(__self__, *,
+                 fqdn: str,
+                 port: str,
+                 proto: str,
+                 action: Optional[str] = None):
+        pulumi.set(__self__, "fqdn", fqdn)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "proto", proto)
+        if action is not None:
+            pulumi.set(__self__, "action", action)
+
+    @property
+    @pulumi.getter
+    def fqdn(self) -> str:
+        return pulumi.get(self, "fqdn")
+
+    @property
+    @pulumi.getter
+    def port(self) -> str:
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def proto(self) -> str:
+        return pulumi.get(self, "proto")
+
+    @property
+    @pulumi.getter
+    def action(self) -> Optional[str]:
+        return pulumi.get(self, "action")
+
+
+@pulumi.output_type
+class AviatrixFqdnGwFilterTagList(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "gwName":
+            suggest = "gw_name"
+        elif key == "sourceIpLists":
+            suggest = "source_ip_lists"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in AviatrixFqdnGwFilterTagList. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        AviatrixFqdnGwFilterTagList.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        AviatrixFqdnGwFilterTagList.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 gw_name: str,
+                 source_ip_lists: Optional[Sequence[str]] = None):
+        pulumi.set(__self__, "gw_name", gw_name)
+        if source_ip_lists is not None:
+            pulumi.set(__self__, "source_ip_lists", source_ip_lists)
+
+    @property
+    @pulumi.getter(name="gwName")
+    def gw_name(self) -> str:
+        return pulumi.get(self, "gw_name")
+
+    @property
+    @pulumi.getter(name="sourceIpLists")
+    def source_ip_lists(self) -> Optional[Sequence[str]]:
+        return pulumi.get(self, "source_ip_lists")
+
+
+@pulumi.output_type
+class AviatrixTransitGatewayBgpLanInterface(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "vpcId":
+            suggest = "vpc_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in AviatrixTransitGatewayBgpLanInterface. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        AviatrixTransitGatewayBgpLanInterface.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        AviatrixTransitGatewayBgpLanInterface.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 subnet: str,
+                 vpc_id: str):
+        pulumi.set(__self__, "subnet", subnet)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter
+    def subnet(self) -> str:
+        return pulumi.get(self, "subnet")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class AviatrixTransitGatewayHaBgpLanInterface(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "vpcId":
+            suggest = "vpc_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in AviatrixTransitGatewayHaBgpLanInterface. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        AviatrixTransitGatewayHaBgpLanInterface.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        AviatrixTransitGatewayHaBgpLanInterface.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 subnet: str,
+                 vpc_id: str):
+        pulumi.set(__self__, "subnet", subnet)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter
+    def subnet(self) -> str:
+        return pulumi.get(self, "subnet")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
 class AviatrixVpcPrivateSubnet(dict):
     @staticmethod
     def __key_warning(key: str):
@@ -555,6 +707,84 @@ class AviatrixVpcSubnet(dict):
     @property
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> Optional[str]:
+        return pulumi.get(self, "subnet_id")
+
+
+@pulumi.output_type
+class GetAviatrixVpcPrivateSubnetResult(dict):
+    def __init__(__self__, *,
+                 cidr: str,
+                 name: str,
+                 subnet_id: str):
+        pulumi.set(__self__, "cidr", cidr)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+
+    @property
+    @pulumi.getter
+    def cidr(self) -> str:
+        return pulumi.get(self, "cidr")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        return pulumi.get(self, "subnet_id")
+
+
+@pulumi.output_type
+class GetAviatrixVpcPublicSubnetResult(dict):
+    def __init__(__self__, *,
+                 cidr: str,
+                 name: str,
+                 subnet_id: str):
+        pulumi.set(__self__, "cidr", cidr)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+
+    @property
+    @pulumi.getter
+    def cidr(self) -> str:
+        return pulumi.get(self, "cidr")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        return pulumi.get(self, "subnet_id")
+
+
+@pulumi.output_type
+class GetAviatrixVpcSubnetResult(dict):
+    def __init__(__self__, *,
+                 cidr: str,
+                 name: str,
+                 subnet_id: str):
+        pulumi.set(__self__, "cidr", cidr)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+
+    @property
+    @pulumi.getter
+    def cidr(self) -> str:
+        return pulumi.get(self, "cidr")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
         return pulumi.get(self, "subnet_id")
 
 

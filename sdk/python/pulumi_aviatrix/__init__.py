@@ -24,8 +24,43 @@ from .aviatrix_aws_tgw_security_domain_conn import *
 from .aviatrix_aws_tgw_transit_gateway_attachment import *
 from .aviatrix_aws_tgw_vpc_attachment import *
 from .aviatrix_aws_tgw_vpn_conn import *
-from .aviatrix_azure_peer import *
+from .aviatrix_azure_spoke_native_peering import *
+from .aviatrix_azure_vng_conn import *
+from .aviatrix_cloudn_registration import *
+from .aviatrix_cloudn_transit_gateway_attachment import *
+from .aviatrix_cloudwatch_agent import *
+from .aviatrix_controller_bgp_max_as_limit_config import *
+from .aviatrix_controller_cert_domain_config import *
+from .aviatrix_controller_config import *
+from .aviatrix_controller_email_config import *
+from .aviatrix_controller_email_exception_notification_config import *
+from .aviatrix_controller_gateway_keepalive_config import *
+from .aviatrix_controller_private_mode_config import *
+from .aviatrix_controller_private_oob import *
+from .aviatrix_controller_security_group_management_config import *
+from .aviatrix_copilot_association import *
+from .aviatrix_copilot_security_group_management_config import *
+from .aviatrix_datadog_agent import *
+from .aviatrix_device_interface_config import *
+from .aviatrix_edge_caag import *
+from .aviatrix_edge_spoke import *
+from .aviatrix_edge_spoke_external_device_conn import *
+from .aviatrix_edge_spoke_transit_attachment import *
+from .aviatrix_fqdn import *
+from .aviatrix_fqdn_pass_through import *
+from .aviatrix_fqdn_tag_rule import *
+from .aviatrix_gateway import *
+from .aviatrix_site2_cloud import *
+from .aviatrix_spoke_gateway import *
+from .aviatrix_spoke_transit_attachment import *
+from .aviatrix_spoke_vpc import *
+from .aviatrix_trans_peer import *
+from .aviatrix_transit_gateway import *
+from .aviatrix_transit_gateway_peering import *
+from .aviatrix_transit_vpc import *
 from .aviatrix_vpc import *
+from .get_aviatrix_spoke_gateway import *
+from .get_aviatrix_vpc import *
 from .provider import *
 from ._inputs import *
 from . import outputs
@@ -194,10 +229,274 @@ _utilities.register(
  },
  {
   "pkg": "aviatrix",
-  "mod": "index/aviatrixAzurePeer",
+  "mod": "index/aviatrixAzureSpokeNativePeering",
   "fqn": "pulumi_aviatrix",
   "classes": {
-   "aviatrix:index/aviatrixAzurePeer:AviatrixAzurePeer": "AviatrixAzurePeer"
+   "aviatrix:index/aviatrixAzureSpokeNativePeering:AviatrixAzureSpokeNativePeering": "AviatrixAzureSpokeNativePeering"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixAzureVngConn",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixAzureVngConn:AviatrixAzureVngConn": "AviatrixAzureVngConn"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixCloudnRegistration",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixCloudnRegistration:AviatrixCloudnRegistration": "AviatrixCloudnRegistration"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixCloudnTransitGatewayAttachment",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixCloudnTransitGatewayAttachment:AviatrixCloudnTransitGatewayAttachment": "AviatrixCloudnTransitGatewayAttachment"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixCloudwatchAgent",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixCloudwatchAgent:AviatrixCloudwatchAgent": "AviatrixCloudwatchAgent"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixControllerBgpMaxAsLimitConfig",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixControllerBgpMaxAsLimitConfig:AviatrixControllerBgpMaxAsLimitConfig": "AviatrixControllerBgpMaxAsLimitConfig"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixControllerCertDomainConfig",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixControllerCertDomainConfig:AviatrixControllerCertDomainConfig": "AviatrixControllerCertDomainConfig"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixControllerConfig",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixControllerConfig:AviatrixControllerConfig": "AviatrixControllerConfig"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixControllerEmailConfig",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixControllerEmailConfig:AviatrixControllerEmailConfig": "AviatrixControllerEmailConfig"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixControllerEmailExceptionNotificationConfig",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixControllerEmailExceptionNotificationConfig:AviatrixControllerEmailExceptionNotificationConfig": "AviatrixControllerEmailExceptionNotificationConfig"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixControllerGatewayKeepaliveConfig",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixControllerGatewayKeepaliveConfig:AviatrixControllerGatewayKeepaliveConfig": "AviatrixControllerGatewayKeepaliveConfig"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixControllerPrivateModeConfig",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixControllerPrivateModeConfig:AviatrixControllerPrivateModeConfig": "AviatrixControllerPrivateModeConfig"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixControllerPrivateOob",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixControllerPrivateOob:AviatrixControllerPrivateOob": "AviatrixControllerPrivateOob"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixControllerSecurityGroupManagementConfig",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixControllerSecurityGroupManagementConfig:AviatrixControllerSecurityGroupManagementConfig": "AviatrixControllerSecurityGroupManagementConfig"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixCopilotAssociation",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixCopilotAssociation:AviatrixCopilotAssociation": "AviatrixCopilotAssociation"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixCopilotSecurityGroupManagementConfig",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixCopilotSecurityGroupManagementConfig:AviatrixCopilotSecurityGroupManagementConfig": "AviatrixCopilotSecurityGroupManagementConfig"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixDatadogAgent",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixDatadogAgent:AviatrixDatadogAgent": "AviatrixDatadogAgent"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixDeviceInterfaceConfig",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixDeviceInterfaceConfig:AviatrixDeviceInterfaceConfig": "AviatrixDeviceInterfaceConfig"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixEdgeCaag",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixEdgeCaag:AviatrixEdgeCaag": "AviatrixEdgeCaag"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixEdgeSpoke",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixEdgeSpoke:AviatrixEdgeSpoke": "AviatrixEdgeSpoke"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixEdgeSpokeExternalDeviceConn",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixEdgeSpokeExternalDeviceConn:AviatrixEdgeSpokeExternalDeviceConn": "AviatrixEdgeSpokeExternalDeviceConn"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixEdgeSpokeTransitAttachment",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixEdgeSpokeTransitAttachment:AviatrixEdgeSpokeTransitAttachment": "AviatrixEdgeSpokeTransitAttachment"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixFqdn",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixFqdn:AviatrixFqdn": "AviatrixFqdn"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixFqdnPassThrough",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixFqdnPassThrough:AviatrixFqdnPassThrough": "AviatrixFqdnPassThrough"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixFqdnTagRule",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixFqdnTagRule:AviatrixFqdnTagRule": "AviatrixFqdnTagRule"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixGateway",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixGateway:AviatrixGateway": "AviatrixGateway"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixSite2Cloud",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixSite2Cloud:AviatrixSite2Cloud": "AviatrixSite2Cloud"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixSpokeGateway",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixSpokeGateway:AviatrixSpokeGateway": "AviatrixSpokeGateway"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixSpokeTransitAttachment",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixSpokeTransitAttachment:AviatrixSpokeTransitAttachment": "AviatrixSpokeTransitAttachment"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixSpokeVpc",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixSpokeVpc:AviatrixSpokeVpc": "AviatrixSpokeVpc"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixTransPeer",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixTransPeer:AviatrixTransPeer": "AviatrixTransPeer"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixTransitGateway",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixTransitGateway:AviatrixTransitGateway": "AviatrixTransitGateway"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixTransitGatewayPeering",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixTransitGatewayPeering:AviatrixTransitGatewayPeering": "AviatrixTransitGatewayPeering"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixTransitVpc",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixTransitVpc:AviatrixTransitVpc": "AviatrixTransitVpc"
   }
  },
  {

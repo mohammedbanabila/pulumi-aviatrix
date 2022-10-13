@@ -53,6 +53,28 @@ export interface AviatrixAwsTgwVpnConnVpnTunnelData {
     vpnOutsideAddress?: pulumi.Input<string>;
 }
 
+export interface AviatrixFqdnDomainName {
+    action?: pulumi.Input<string>;
+    fqdn: pulumi.Input<string>;
+    port: pulumi.Input<string>;
+    proto: pulumi.Input<string>;
+}
+
+export interface AviatrixFqdnGwFilterTagList {
+    gwName: pulumi.Input<string>;
+    sourceIpLists?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface AviatrixTransitGatewayBgpLanInterface {
+    subnet: pulumi.Input<string>;
+    vpcId: pulumi.Input<string>;
+}
+
+export interface AviatrixTransitGatewayHaBgpLanInterface {
+    subnet: pulumi.Input<string>;
+    vpcId: pulumi.Input<string>;
+}
+
 export interface AviatrixVpcPrivateSubnet {
     cidr?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
