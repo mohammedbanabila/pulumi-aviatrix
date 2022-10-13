@@ -58,8 +58,74 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &AviatrixAwsTgwVpcAttachment{}
 	case "aviatrix:index/aviatrixAwsTgwVpnConn:AviatrixAwsTgwVpnConn":
 		r = &AviatrixAwsTgwVpnConn{}
-	case "aviatrix:index/aviatrixAzurePeer:AviatrixAzurePeer":
-		r = &AviatrixAzurePeer{}
+	case "aviatrix:index/aviatrixAzureSpokeNativePeering:AviatrixAzureSpokeNativePeering":
+		r = &AviatrixAzureSpokeNativePeering{}
+	case "aviatrix:index/aviatrixAzureVngConn:AviatrixAzureVngConn":
+		r = &AviatrixAzureVngConn{}
+	case "aviatrix:index/aviatrixCloudnRegistration:AviatrixCloudnRegistration":
+		r = &AviatrixCloudnRegistration{}
+	case "aviatrix:index/aviatrixCloudnTransitGatewayAttachment:AviatrixCloudnTransitGatewayAttachment":
+		r = &AviatrixCloudnTransitGatewayAttachment{}
+	case "aviatrix:index/aviatrixCloudwatchAgent:AviatrixCloudwatchAgent":
+		r = &AviatrixCloudwatchAgent{}
+	case "aviatrix:index/aviatrixControllerBgpMaxAsLimitConfig:AviatrixControllerBgpMaxAsLimitConfig":
+		r = &AviatrixControllerBgpMaxAsLimitConfig{}
+	case "aviatrix:index/aviatrixControllerCertDomainConfig:AviatrixControllerCertDomainConfig":
+		r = &AviatrixControllerCertDomainConfig{}
+	case "aviatrix:index/aviatrixControllerConfig:AviatrixControllerConfig":
+		r = &AviatrixControllerConfig{}
+	case "aviatrix:index/aviatrixControllerEmailConfig:AviatrixControllerEmailConfig":
+		r = &AviatrixControllerEmailConfig{}
+	case "aviatrix:index/aviatrixControllerEmailExceptionNotificationConfig:AviatrixControllerEmailExceptionNotificationConfig":
+		r = &AviatrixControllerEmailExceptionNotificationConfig{}
+	case "aviatrix:index/aviatrixControllerGatewayKeepaliveConfig:AviatrixControllerGatewayKeepaliveConfig":
+		r = &AviatrixControllerGatewayKeepaliveConfig{}
+	case "aviatrix:index/aviatrixControllerPrivateModeConfig:AviatrixControllerPrivateModeConfig":
+		r = &AviatrixControllerPrivateModeConfig{}
+	case "aviatrix:index/aviatrixControllerPrivateOob:AviatrixControllerPrivateOob":
+		r = &AviatrixControllerPrivateOob{}
+	case "aviatrix:index/aviatrixControllerSecurityGroupManagementConfig:AviatrixControllerSecurityGroupManagementConfig":
+		r = &AviatrixControllerSecurityGroupManagementConfig{}
+	case "aviatrix:index/aviatrixCopilotAssociation:AviatrixCopilotAssociation":
+		r = &AviatrixCopilotAssociation{}
+	case "aviatrix:index/aviatrixCopilotSecurityGroupManagementConfig:AviatrixCopilotSecurityGroupManagementConfig":
+		r = &AviatrixCopilotSecurityGroupManagementConfig{}
+	case "aviatrix:index/aviatrixDatadogAgent:AviatrixDatadogAgent":
+		r = &AviatrixDatadogAgent{}
+	case "aviatrix:index/aviatrixDeviceInterfaceConfig:AviatrixDeviceInterfaceConfig":
+		r = &AviatrixDeviceInterfaceConfig{}
+	case "aviatrix:index/aviatrixEdgeCaag:AviatrixEdgeCaag":
+		r = &AviatrixEdgeCaag{}
+	case "aviatrix:index/aviatrixEdgeSpoke:AviatrixEdgeSpoke":
+		r = &AviatrixEdgeSpoke{}
+	case "aviatrix:index/aviatrixEdgeSpokeExternalDeviceConn:AviatrixEdgeSpokeExternalDeviceConn":
+		r = &AviatrixEdgeSpokeExternalDeviceConn{}
+	case "aviatrix:index/aviatrixEdgeSpokeTransitAttachment:AviatrixEdgeSpokeTransitAttachment":
+		r = &AviatrixEdgeSpokeTransitAttachment{}
+	case "aviatrix:index/aviatrixFqdn:AviatrixFqdn":
+		r = &AviatrixFqdn{}
+	case "aviatrix:index/aviatrixFqdnPassThrough:AviatrixFqdnPassThrough":
+		r = &AviatrixFqdnPassThrough{}
+	case "aviatrix:index/aviatrixFqdnTagRule:AviatrixFqdnTagRule":
+		r = &AviatrixFqdnTagRule{}
+	case "aviatrix:index/aviatrixGateway:AviatrixGateway":
+		r = &AviatrixGateway{}
+	case "aviatrix:index/aviatrixSite2Cloud:AviatrixSite2Cloud":
+		r = &AviatrixSite2Cloud{}
+	case "aviatrix:index/aviatrixSpokeGateway:AviatrixSpokeGateway":
+		r = &AviatrixSpokeGateway{}
+	case "aviatrix:index/aviatrixSpokeTransitAttachment:AviatrixSpokeTransitAttachment":
+		r = &AviatrixSpokeTransitAttachment{}
+	case "aviatrix:index/aviatrixSpokeVpc:AviatrixSpokeVpc":
+		r = &AviatrixSpokeVpc{}
+	case "aviatrix:index/aviatrixTransPeer:AviatrixTransPeer":
+		r = &AviatrixTransPeer{}
+	case "aviatrix:index/aviatrixTransitGateway:AviatrixTransitGateway":
+		r = &AviatrixTransitGateway{}
+	case "aviatrix:index/aviatrixTransitGatewayPeering:AviatrixTransitGatewayPeering":
+		r = &AviatrixTransitGatewayPeering{}
+	case "aviatrix:index/aviatrixTransitVpc:AviatrixTransitVpc":
+		r = &AviatrixTransitVpc{}
 	case "aviatrix:index/aviatrixVpc:AviatrixVpc":
 		r = &AviatrixVpc{}
 	default:
@@ -187,7 +253,172 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"aviatrix",
-		"index/aviatrixAzurePeer",
+		"index/aviatrixAzureSpokeNativePeering",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixAzureVngConn",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixCloudnRegistration",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixCloudnTransitGatewayAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixCloudwatchAgent",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixControllerBgpMaxAsLimitConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixControllerCertDomainConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixControllerConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixControllerEmailConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixControllerEmailExceptionNotificationConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixControllerGatewayKeepaliveConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixControllerPrivateModeConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixControllerPrivateOob",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixControllerSecurityGroupManagementConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixCopilotAssociation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixCopilotSecurityGroupManagementConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixDatadogAgent",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixDeviceInterfaceConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixEdgeCaag",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixEdgeSpoke",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixEdgeSpokeExternalDeviceConn",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixEdgeSpokeTransitAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixFqdn",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixFqdnPassThrough",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixFqdnTagRule",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixGateway",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixSite2Cloud",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixSpokeGateway",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixSpokeTransitAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixSpokeVpc",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixTransPeer",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixTransitGateway",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixTransitGatewayPeering",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixTransitVpc",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

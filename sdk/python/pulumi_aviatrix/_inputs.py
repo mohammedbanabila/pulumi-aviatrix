@@ -15,6 +15,10 @@ __all__ = [
     'AviatrixAwsTgwSecurityDomainArgs',
     'AviatrixAwsTgwSecurityDomainAttachedVpcArgs',
     'AviatrixAwsTgwVpnConnVpnTunnelDataArgs',
+    'AviatrixFqdnDomainNameArgs',
+    'AviatrixFqdnGwFilterTagListArgs',
+    'AviatrixTransitGatewayBgpLanInterfaceArgs',
+    'AviatrixTransitGatewayHaBgpLanInterfaceArgs',
     'AviatrixVpcPrivateSubnetArgs',
     'AviatrixVpcPublicSubnetArgs',
     'AviatrixVpcSubnetArgs',
@@ -414,6 +418,138 @@ class AviatrixAwsTgwVpnConnVpnTunnelDataArgs:
     @vpn_outside_address.setter
     def vpn_outside_address(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "vpn_outside_address", value)
+
+
+@pulumi.input_type
+class AviatrixFqdnDomainNameArgs:
+    def __init__(__self__, *,
+                 fqdn: pulumi.Input[str],
+                 port: pulumi.Input[str],
+                 proto: pulumi.Input[str],
+                 action: Optional[pulumi.Input[str]] = None):
+        pulumi.set(__self__, "fqdn", fqdn)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "proto", proto)
+        if action is not None:
+            pulumi.set(__self__, "action", action)
+
+    @property
+    @pulumi.getter
+    def fqdn(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "fqdn")
+
+    @fqdn.setter
+    def fqdn(self, value: pulumi.Input[str]):
+        pulumi.set(self, "fqdn", value)
+
+    @property
+    @pulumi.getter
+    def port(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "port")
+
+    @port.setter
+    def port(self, value: pulumi.Input[str]):
+        pulumi.set(self, "port", value)
+
+    @property
+    @pulumi.getter
+    def proto(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "proto")
+
+    @proto.setter
+    def proto(self, value: pulumi.Input[str]):
+        pulumi.set(self, "proto", value)
+
+    @property
+    @pulumi.getter
+    def action(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "action")
+
+    @action.setter
+    def action(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "action", value)
+
+
+@pulumi.input_type
+class AviatrixFqdnGwFilterTagListArgs:
+    def __init__(__self__, *,
+                 gw_name: pulumi.Input[str],
+                 source_ip_lists: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        pulumi.set(__self__, "gw_name", gw_name)
+        if source_ip_lists is not None:
+            pulumi.set(__self__, "source_ip_lists", source_ip_lists)
+
+    @property
+    @pulumi.getter(name="gwName")
+    def gw_name(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "gw_name")
+
+    @gw_name.setter
+    def gw_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "gw_name", value)
+
+    @property
+    @pulumi.getter(name="sourceIpLists")
+    def source_ip_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        return pulumi.get(self, "source_ip_lists")
+
+    @source_ip_lists.setter
+    def source_ip_lists(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "source_ip_lists", value)
+
+
+@pulumi.input_type
+class AviatrixTransitGatewayBgpLanInterfaceArgs:
+    def __init__(__self__, *,
+                 subnet: pulumi.Input[str],
+                 vpc_id: pulumi.Input[str]):
+        pulumi.set(__self__, "subnet", subnet)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter
+    def subnet(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "subnet")
+
+    @subnet.setter
+    def subnet(self, value: pulumi.Input[str]):
+        pulumi.set(self, "subnet", value)
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "vpc_id")
+
+    @vpc_id.setter
+    def vpc_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "vpc_id", value)
+
+
+@pulumi.input_type
+class AviatrixTransitGatewayHaBgpLanInterfaceArgs:
+    def __init__(__self__, *,
+                 subnet: pulumi.Input[str],
+                 vpc_id: pulumi.Input[str]):
+        pulumi.set(__self__, "subnet", subnet)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter
+    def subnet(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "subnet")
+
+    @subnet.setter
+    def subnet(self, value: pulumi.Input[str]):
+        pulumi.set(self, "subnet", value)
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "vpc_id")
+
+    @vpc_id.setter
+    def vpc_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "vpc_id", value)
 
 
 @pulumi.input_type
