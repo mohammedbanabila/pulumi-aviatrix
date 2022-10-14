@@ -107,7 +107,7 @@ func Provider() tfbridge.ProviderInfo {
 			// 		"tags": {Type: tfbridge.MakeType(mainPkg, "Tags")},
 			// 	},
 			// },
-			"aviatrix_vpc":                                            {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixVpc")},
+			"aviatrix_vpc":                                            {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixVpc"), Docs: &tfbridge.DocInfo{Source: "docs/resources/aviatrix_vpc.md"}},
 			"aviatrix_account":                                        {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAccount")},
 			"aviatrix_account_user":                                   {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAccountUser")},
 			"aviatrix_app_domain":                                     {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAppDomain")},
@@ -228,6 +228,7 @@ func Provider() tfbridge.ProviderInfo {
 			"aviatrix_vpc_tracker":                      {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getAviatrixVpcTracker")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
+			PackageName: "@astipkovits/aviatrix",
 			// List any npm dependencies and their versions
 			Dependencies: map[string]string{
 				"@pulumi/pulumi": "^3.0.0",
@@ -249,7 +250,7 @@ func Provider() tfbridge.ProviderInfo {
 		},
 		Golang: &tfbridge.GolangInfo{
 			ImportBasePath: filepath.Join(
-				fmt.Sprintf("github.com/pulumi/pulumi-%[1]s/sdk/", mainPkg),
+				fmt.Sprintf("github.com/astipkovits/pulumi-%[1]s/sdk/", mainPkg),
 				tfbridge.GetModuleMajorVersion(version.Version),
 				"go",
 				mainPkg,
@@ -257,6 +258,7 @@ func Provider() tfbridge.ProviderInfo {
 			GenerateResourceContainerTypes: true,
 		},
 		CSharp: &tfbridge.CSharpInfo{
+			//RootNamespace: "astipkovits",
 			PackageReferences: map[string]string{
 				"Pulumi": "3.*",
 			},
