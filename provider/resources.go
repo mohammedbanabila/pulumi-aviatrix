@@ -189,6 +189,9 @@ func Provider() tfbridge.ProviderInfo {
 			"aviatrix_segmentation_network_domain":                    {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixSegmentationNetworkDomain")},
 			"aviatrix_segmentation_network_domain_association":        {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixSegmentationNetworkDomainAssociation")},
 			"aviatrix_segmentation_network_domain_connection_policy":  {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixSegmentationNetworkDomainConnectionPolicy")},
+			"aviatrix_segmentation_security_domain":                   {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixSegmentationSecurityDomain")},
+			"aviatrix_segmentation_security_domain_association":       {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixSegmentationSecurityDomainAssociation")},
+			"aviatrix_segmentation_security_domain_connection_policy": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixSegmentationSecurityDomainConnectionPolicy")},
 			"aviatrix_site2cloud_ca_cert_tag":                         {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixSite2CloudCaCertTag")},
 			"aviatrix_splunk_logging":                                 {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixSplunkLogging")},
 			"aviatrix_spoke_external_device_conn":                     {Tok: tfbridge.MakeResource(mainPkg, mainMod, "aviatrix_spoke_external_device_conn")},
@@ -208,7 +211,7 @@ func Provider() tfbridge.ProviderInfo {
 			// Map each resource in the Terraform provider to a Pulumi function.
 			"aviatrix_spoke_gateway":                    {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getAviatrixSpokeGateway")},
 			"aviatrix_vpc":                              {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getAviatrixVpc")},
-			"aviatrix_account":                          {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getAviatrixVpc")},
+			"aviatrix_account":                          {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getAviatrixAccount")},
 			"aviatrix_caller_identity":                  {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getAviatrixCallerIdentity")},
 			"aviatrix_device_interfaces":                {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getAviatrixDeviceInterfaces")},
 			"aviatrix_firenet":                          {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getAviatrixFirenet")},
