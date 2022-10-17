@@ -24,6 +24,7 @@ export * from "./aviatrixAwsTgwSecurityDomainConn";
 export * from "./aviatrixAwsTgwTransitGatewayAttachment";
 export * from "./aviatrixAwsTgwVpcAttachment";
 export * from "./aviatrixAwsTgwVpnConn";
+export * from "./aviatrixAzurePeer";
 export * from "./aviatrixAzureSpokeNativePeering";
 export * from "./aviatrixAzureVngConn";
 export * from "./aviatrixCloudnRegistration";
@@ -46,21 +47,80 @@ export * from "./aviatrixEdgeCaag";
 export * from "./aviatrixEdgeSpoke";
 export * from "./aviatrixEdgeSpokeExternalDeviceConn";
 export * from "./aviatrixEdgeSpokeTransitAttachment";
+export * from "./aviatrixFilebeatForwarder";
+export * from "./aviatrixFirenet";
+export * from "./aviatrixFirewall";
+export * from "./aviatrixFirewallInstance";
+export * from "./aviatrixFirewallInstanceAssociation";
+export * from "./aviatrixFirewallManagementAccess";
+export * from "./aviatrixFirewallPolicy";
+export * from "./aviatrixFirewallTag";
 export * from "./aviatrixFqdn";
 export * from "./aviatrixFqdnPassThrough";
 export * from "./aviatrixFqdnTagRule";
 export * from "./aviatrixGateway";
+export * from "./aviatrixGatewayCertificateConfig";
+export * from "./aviatrixGatewayDnat";
+export * from "./aviatrixGatewaySnat";
+export * from "./aviatrixGeoVpn";
+export * from "./aviatrixMicrosegPolicyList";
+export * from "./aviatrixNetflowAgent";
+export * from "./aviatrixPeriodicPing";
+export * from "./aviatrixPrivateModeLb";
+export * from "./aviatrixPrivateModeMulticloudEndpoint";
+export * from "./aviatrixProxyConfig";
+export * from "./aviatrixRbacGroup";
+export * from "./aviatrixRbacGroupAccessAccountAttachment";
+export * from "./aviatrixRbacGroupPermissionAttachment";
+export * from "./aviatrixRbacGroupUserAttachment";
+export * from "./aviatrixRemoteSyslog";
+export * from "./aviatrixSamlEndpoint";
+export * from "./aviatrixSegmentationNetworkDomain";
+export * from "./aviatrixSegmentationNetworkDomainAssociation";
+export * from "./aviatrixSegmentationNetworkDomainConnectionPolicy";
+export * from "./aviatrixSegmentationSecurityDomain";
+export * from "./aviatrixSegmentationSecurityDomainAssociation";
+export * from "./aviatrixSegmentationSecurityDomainConnectionPolicy";
 export * from "./aviatrixSite2Cloud";
+export * from "./aviatrixSite2CloudCaCertTag";
+export * from "./aviatrixSplunkLogging";
 export * from "./aviatrixSpokeGateway";
+export * from "./aviatrixSpokeGatewaySubnetGroup";
 export * from "./aviatrixSpokeTransitAttachment";
 export * from "./aviatrixSpokeVpc";
+export * from "./aviatrixSumologicForwarder";
 export * from "./aviatrixTransPeer";
+export * from "./aviatrixTransitCloudnConn";
+export * from "./aviatrixTransitExternalDeviceConn";
+export * from "./aviatrixTransitFirenetPolicy";
 export * from "./aviatrixTransitGateway";
 export * from "./aviatrixTransitGatewayPeering";
 export * from "./aviatrixTransitVpc";
+export * from "./aviatrixTunnel";
+export * from "./aviatrixVgwConn";
 export * from "./aviatrixVpc";
+export * from "./aviatrixVpnCertDownload";
+export * from "./aviatrixVpnProfile";
+export * from "./aviatrixVpnUser";
+export * from "./aviatrixVpnUserAccelerator";
+export * from "./aviatrix_spoke_external_device_conn";
+export * from "./getAviatrixAccount";
+export * from "./getAviatrixCallerIdentity";
+export * from "./getAviatrixDeviceInterfaces";
+export * from "./getAviatrixFirenet";
+export * from "./getAviatrixFirenetFirewallManager";
+export * from "./getAviatrixFirenetVendorIntegration";
+export * from "./getAviatrixFirewall";
+export * from "./getAviatrixFirewallInstanceImages";
+export * from "./getAviatrixGateway";
+export * from "./getAviatrixGatewayImage";
+export * from "./getAviatrixNetworkDomains";
 export * from "./getAviatrixSpokeGateway";
+export * from "./getAviatrixSpokeGatewayInspectionSubnets";
+export * from "./getAviatrixTransitGateway";
+export * from "./getAviatrixTransitGateways";
 export * from "./getAviatrixVpc";
+export * from "./getAviatrixVpcTracker";
 export * from "./provider";
 
 // Export sub-modules:
@@ -92,6 +152,7 @@ import { AviatrixAwsTgwSecurityDomainConn } from "./aviatrixAwsTgwSecurityDomain
 import { AviatrixAwsTgwTransitGatewayAttachment } from "./aviatrixAwsTgwTransitGatewayAttachment";
 import { AviatrixAwsTgwVpcAttachment } from "./aviatrixAwsTgwVpcAttachment";
 import { AviatrixAwsTgwVpnConn } from "./aviatrixAwsTgwVpnConn";
+import { AviatrixAzurePeer } from "./aviatrixAzurePeer";
 import { AviatrixAzureSpokeNativePeering } from "./aviatrixAzureSpokeNativePeering";
 import { AviatrixAzureVngConn } from "./aviatrixAzureVngConn";
 import { AviatrixCloudnRegistration } from "./aviatrixCloudnRegistration";
@@ -114,19 +175,63 @@ import { AviatrixEdgeCaag } from "./aviatrixEdgeCaag";
 import { AviatrixEdgeSpoke } from "./aviatrixEdgeSpoke";
 import { AviatrixEdgeSpokeExternalDeviceConn } from "./aviatrixEdgeSpokeExternalDeviceConn";
 import { AviatrixEdgeSpokeTransitAttachment } from "./aviatrixEdgeSpokeTransitAttachment";
+import { AviatrixFilebeatForwarder } from "./aviatrixFilebeatForwarder";
+import { AviatrixFirenet } from "./aviatrixFirenet";
+import { AviatrixFirewall } from "./aviatrixFirewall";
+import { AviatrixFirewallInstance } from "./aviatrixFirewallInstance";
+import { AviatrixFirewallInstanceAssociation } from "./aviatrixFirewallInstanceAssociation";
+import { AviatrixFirewallManagementAccess } from "./aviatrixFirewallManagementAccess";
+import { AviatrixFirewallPolicy } from "./aviatrixFirewallPolicy";
+import { AviatrixFirewallTag } from "./aviatrixFirewallTag";
 import { AviatrixFqdn } from "./aviatrixFqdn";
 import { AviatrixFqdnPassThrough } from "./aviatrixFqdnPassThrough";
 import { AviatrixFqdnTagRule } from "./aviatrixFqdnTagRule";
 import { AviatrixGateway } from "./aviatrixGateway";
+import { AviatrixGatewayCertificateConfig } from "./aviatrixGatewayCertificateConfig";
+import { AviatrixGatewayDnat } from "./aviatrixGatewayDnat";
+import { AviatrixGatewaySnat } from "./aviatrixGatewaySnat";
+import { AviatrixGeoVpn } from "./aviatrixGeoVpn";
+import { AviatrixMicrosegPolicyList } from "./aviatrixMicrosegPolicyList";
+import { AviatrixNetflowAgent } from "./aviatrixNetflowAgent";
+import { AviatrixPeriodicPing } from "./aviatrixPeriodicPing";
+import { AviatrixPrivateModeLb } from "./aviatrixPrivateModeLb";
+import { AviatrixPrivateModeMulticloudEndpoint } from "./aviatrixPrivateModeMulticloudEndpoint";
+import { AviatrixProxyConfig } from "./aviatrixProxyConfig";
+import { AviatrixRbacGroup } from "./aviatrixRbacGroup";
+import { AviatrixRbacGroupAccessAccountAttachment } from "./aviatrixRbacGroupAccessAccountAttachment";
+import { AviatrixRbacGroupPermissionAttachment } from "./aviatrixRbacGroupPermissionAttachment";
+import { AviatrixRbacGroupUserAttachment } from "./aviatrixRbacGroupUserAttachment";
+import { AviatrixRemoteSyslog } from "./aviatrixRemoteSyslog";
+import { AviatrixSamlEndpoint } from "./aviatrixSamlEndpoint";
+import { AviatrixSegmentationNetworkDomain } from "./aviatrixSegmentationNetworkDomain";
+import { AviatrixSegmentationNetworkDomainAssociation } from "./aviatrixSegmentationNetworkDomainAssociation";
+import { AviatrixSegmentationNetworkDomainConnectionPolicy } from "./aviatrixSegmentationNetworkDomainConnectionPolicy";
+import { AviatrixSegmentationSecurityDomain } from "./aviatrixSegmentationSecurityDomain";
+import { AviatrixSegmentationSecurityDomainAssociation } from "./aviatrixSegmentationSecurityDomainAssociation";
+import { AviatrixSegmentationSecurityDomainConnectionPolicy } from "./aviatrixSegmentationSecurityDomainConnectionPolicy";
 import { AviatrixSite2Cloud } from "./aviatrixSite2Cloud";
+import { AviatrixSite2CloudCaCertTag } from "./aviatrixSite2CloudCaCertTag";
+import { AviatrixSplunkLogging } from "./aviatrixSplunkLogging";
 import { AviatrixSpokeGateway } from "./aviatrixSpokeGateway";
+import { AviatrixSpokeGatewaySubnetGroup } from "./aviatrixSpokeGatewaySubnetGroup";
 import { AviatrixSpokeTransitAttachment } from "./aviatrixSpokeTransitAttachment";
 import { AviatrixSpokeVpc } from "./aviatrixSpokeVpc";
+import { AviatrixSumologicForwarder } from "./aviatrixSumologicForwarder";
 import { AviatrixTransPeer } from "./aviatrixTransPeer";
+import { AviatrixTransitCloudnConn } from "./aviatrixTransitCloudnConn";
+import { AviatrixTransitExternalDeviceConn } from "./aviatrixTransitExternalDeviceConn";
+import { AviatrixTransitFirenetPolicy } from "./aviatrixTransitFirenetPolicy";
 import { AviatrixTransitGateway } from "./aviatrixTransitGateway";
 import { AviatrixTransitGatewayPeering } from "./aviatrixTransitGatewayPeering";
 import { AviatrixTransitVpc } from "./aviatrixTransitVpc";
+import { AviatrixTunnel } from "./aviatrixTunnel";
+import { AviatrixVgwConn } from "./aviatrixVgwConn";
 import { AviatrixVpc } from "./aviatrixVpc";
+import { AviatrixVpnCertDownload } from "./aviatrixVpnCertDownload";
+import { AviatrixVpnProfile } from "./aviatrixVpnProfile";
+import { AviatrixVpnUser } from "./aviatrixVpnUser";
+import { AviatrixVpnUserAccelerator } from "./aviatrixVpnUserAccelerator";
+import { Aviatrix_spoke_external_device_conn } from "./aviatrix_spoke_external_device_conn";
 
 const _module = {
     version: utilities.getVersion(),
@@ -170,6 +275,8 @@ const _module = {
                 return new AviatrixAwsTgwVpcAttachment(name, <any>undefined, { urn })
             case "aviatrix:index/aviatrixAwsTgwVpnConn:AviatrixAwsTgwVpnConn":
                 return new AviatrixAwsTgwVpnConn(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixAzurePeer:AviatrixAzurePeer":
+                return new AviatrixAzurePeer(name, <any>undefined, { urn })
             case "aviatrix:index/aviatrixAzureSpokeNativePeering:AviatrixAzureSpokeNativePeering":
                 return new AviatrixAzureSpokeNativePeering(name, <any>undefined, { urn })
             case "aviatrix:index/aviatrixAzureVngConn:AviatrixAzureVngConn":
@@ -214,6 +321,22 @@ const _module = {
                 return new AviatrixEdgeSpokeExternalDeviceConn(name, <any>undefined, { urn })
             case "aviatrix:index/aviatrixEdgeSpokeTransitAttachment:AviatrixEdgeSpokeTransitAttachment":
                 return new AviatrixEdgeSpokeTransitAttachment(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixFilebeatForwarder:AviatrixFilebeatForwarder":
+                return new AviatrixFilebeatForwarder(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixFirenet:AviatrixFirenet":
+                return new AviatrixFirenet(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixFirewall:AviatrixFirewall":
+                return new AviatrixFirewall(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixFirewallInstance:AviatrixFirewallInstance":
+                return new AviatrixFirewallInstance(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixFirewallInstanceAssociation:AviatrixFirewallInstanceAssociation":
+                return new AviatrixFirewallInstanceAssociation(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixFirewallManagementAccess:AviatrixFirewallManagementAccess":
+                return new AviatrixFirewallManagementAccess(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixFirewallPolicy:AviatrixFirewallPolicy":
+                return new AviatrixFirewallPolicy(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixFirewallTag:AviatrixFirewallTag":
+                return new AviatrixFirewallTag(name, <any>undefined, { urn })
             case "aviatrix:index/aviatrixFqdn:AviatrixFqdn":
                 return new AviatrixFqdn(name, <any>undefined, { urn })
             case "aviatrix:index/aviatrixFqdnPassThrough:AviatrixFqdnPassThrough":
@@ -222,24 +345,96 @@ const _module = {
                 return new AviatrixFqdnTagRule(name, <any>undefined, { urn })
             case "aviatrix:index/aviatrixGateway:AviatrixGateway":
                 return new AviatrixGateway(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixGatewayCertificateConfig:AviatrixGatewayCertificateConfig":
+                return new AviatrixGatewayCertificateConfig(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixGatewayDnat:AviatrixGatewayDnat":
+                return new AviatrixGatewayDnat(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixGatewaySnat:AviatrixGatewaySnat":
+                return new AviatrixGatewaySnat(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixGeoVpn:AviatrixGeoVpn":
+                return new AviatrixGeoVpn(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixMicrosegPolicyList:AviatrixMicrosegPolicyList":
+                return new AviatrixMicrosegPolicyList(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixNetflowAgent:AviatrixNetflowAgent":
+                return new AviatrixNetflowAgent(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixPeriodicPing:AviatrixPeriodicPing":
+                return new AviatrixPeriodicPing(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixPrivateModeLb:AviatrixPrivateModeLb":
+                return new AviatrixPrivateModeLb(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixPrivateModeMulticloudEndpoint:AviatrixPrivateModeMulticloudEndpoint":
+                return new AviatrixPrivateModeMulticloudEndpoint(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixProxyConfig:AviatrixProxyConfig":
+                return new AviatrixProxyConfig(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixRbacGroup:AviatrixRbacGroup":
+                return new AviatrixRbacGroup(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixRbacGroupAccessAccountAttachment:AviatrixRbacGroupAccessAccountAttachment":
+                return new AviatrixRbacGroupAccessAccountAttachment(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixRbacGroupPermissionAttachment:AviatrixRbacGroupPermissionAttachment":
+                return new AviatrixRbacGroupPermissionAttachment(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixRbacGroupUserAttachment:AviatrixRbacGroupUserAttachment":
+                return new AviatrixRbacGroupUserAttachment(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixRemoteSyslog:AviatrixRemoteSyslog":
+                return new AviatrixRemoteSyslog(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixSamlEndpoint:AviatrixSamlEndpoint":
+                return new AviatrixSamlEndpoint(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixSegmentationNetworkDomain:AviatrixSegmentationNetworkDomain":
+                return new AviatrixSegmentationNetworkDomain(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixSegmentationNetworkDomainAssociation:AviatrixSegmentationNetworkDomainAssociation":
+                return new AviatrixSegmentationNetworkDomainAssociation(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixSegmentationNetworkDomainConnectionPolicy:AviatrixSegmentationNetworkDomainConnectionPolicy":
+                return new AviatrixSegmentationNetworkDomainConnectionPolicy(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixSegmentationSecurityDomain:AviatrixSegmentationSecurityDomain":
+                return new AviatrixSegmentationSecurityDomain(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixSegmentationSecurityDomainAssociation:AviatrixSegmentationSecurityDomainAssociation":
+                return new AviatrixSegmentationSecurityDomainAssociation(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixSegmentationSecurityDomainConnectionPolicy:AviatrixSegmentationSecurityDomainConnectionPolicy":
+                return new AviatrixSegmentationSecurityDomainConnectionPolicy(name, <any>undefined, { urn })
             case "aviatrix:index/aviatrixSite2Cloud:AviatrixSite2Cloud":
                 return new AviatrixSite2Cloud(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixSite2CloudCaCertTag:AviatrixSite2CloudCaCertTag":
+                return new AviatrixSite2CloudCaCertTag(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixSplunkLogging:AviatrixSplunkLogging":
+                return new AviatrixSplunkLogging(name, <any>undefined, { urn })
             case "aviatrix:index/aviatrixSpokeGateway:AviatrixSpokeGateway":
                 return new AviatrixSpokeGateway(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixSpokeGatewaySubnetGroup:AviatrixSpokeGatewaySubnetGroup":
+                return new AviatrixSpokeGatewaySubnetGroup(name, <any>undefined, { urn })
             case "aviatrix:index/aviatrixSpokeTransitAttachment:AviatrixSpokeTransitAttachment":
                 return new AviatrixSpokeTransitAttachment(name, <any>undefined, { urn })
             case "aviatrix:index/aviatrixSpokeVpc:AviatrixSpokeVpc":
                 return new AviatrixSpokeVpc(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixSumologicForwarder:AviatrixSumologicForwarder":
+                return new AviatrixSumologicForwarder(name, <any>undefined, { urn })
             case "aviatrix:index/aviatrixTransPeer:AviatrixTransPeer":
                 return new AviatrixTransPeer(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixTransitCloudnConn:AviatrixTransitCloudnConn":
+                return new AviatrixTransitCloudnConn(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixTransitExternalDeviceConn:AviatrixTransitExternalDeviceConn":
+                return new AviatrixTransitExternalDeviceConn(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixTransitFirenetPolicy:AviatrixTransitFirenetPolicy":
+                return new AviatrixTransitFirenetPolicy(name, <any>undefined, { urn })
             case "aviatrix:index/aviatrixTransitGateway:AviatrixTransitGateway":
                 return new AviatrixTransitGateway(name, <any>undefined, { urn })
             case "aviatrix:index/aviatrixTransitGatewayPeering:AviatrixTransitGatewayPeering":
                 return new AviatrixTransitGatewayPeering(name, <any>undefined, { urn })
             case "aviatrix:index/aviatrixTransitVpc:AviatrixTransitVpc":
                 return new AviatrixTransitVpc(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixTunnel:AviatrixTunnel":
+                return new AviatrixTunnel(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixVgwConn:AviatrixVgwConn":
+                return new AviatrixVgwConn(name, <any>undefined, { urn })
             case "aviatrix:index/aviatrixVpc:AviatrixVpc":
                 return new AviatrixVpc(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixVpnCertDownload:AviatrixVpnCertDownload":
+                return new AviatrixVpnCertDownload(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixVpnProfile:AviatrixVpnProfile":
+                return new AviatrixVpnProfile(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixVpnUser:AviatrixVpnUser":
+                return new AviatrixVpnUser(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrixVpnUserAccelerator:AviatrixVpnUserAccelerator":
+                return new AviatrixVpnUserAccelerator(name, <any>undefined, { urn })
+            case "aviatrix:index/aviatrix_spoke_external_device_conn:aviatrix_spoke_external_device_conn":
+                return new Aviatrix_spoke_external_device_conn(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
@@ -264,6 +459,7 @@ pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixAwsTgwSecurityD
 pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixAwsTgwTransitGatewayAttachment", _module)
 pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixAwsTgwVpcAttachment", _module)
 pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixAwsTgwVpnConn", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixAzurePeer", _module)
 pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixAzureSpokeNativePeering", _module)
 pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixAzureVngConn", _module)
 pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixCloudnRegistration", _module)
@@ -286,19 +482,63 @@ pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixEdgeCaag", _mod
 pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixEdgeSpoke", _module)
 pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixEdgeSpokeExternalDeviceConn", _module)
 pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixEdgeSpokeTransitAttachment", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixFilebeatForwarder", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixFirenet", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixFirewall", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixFirewallInstance", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixFirewallInstanceAssociation", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixFirewallManagementAccess", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixFirewallPolicy", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixFirewallTag", _module)
 pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixFqdn", _module)
 pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixFqdnPassThrough", _module)
 pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixFqdnTagRule", _module)
 pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixGateway", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixGatewayCertificateConfig", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixGatewayDnat", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixGatewaySnat", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixGeoVpn", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixMicrosegPolicyList", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixNetflowAgent", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixPeriodicPing", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixPrivateModeLb", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixPrivateModeMulticloudEndpoint", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixProxyConfig", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixRbacGroup", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixRbacGroupAccessAccountAttachment", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixRbacGroupPermissionAttachment", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixRbacGroupUserAttachment", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixRemoteSyslog", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixSamlEndpoint", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixSegmentationNetworkDomain", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixSegmentationNetworkDomainAssociation", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixSegmentationNetworkDomainConnectionPolicy", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixSegmentationSecurityDomain", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixSegmentationSecurityDomainAssociation", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixSegmentationSecurityDomainConnectionPolicy", _module)
 pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixSite2Cloud", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixSite2CloudCaCertTag", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixSplunkLogging", _module)
 pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixSpokeGateway", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixSpokeGatewaySubnetGroup", _module)
 pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixSpokeTransitAttachment", _module)
 pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixSpokeVpc", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixSumologicForwarder", _module)
 pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixTransPeer", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixTransitCloudnConn", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixTransitExternalDeviceConn", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixTransitFirenetPolicy", _module)
 pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixTransitGateway", _module)
 pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixTransitGatewayPeering", _module)
 pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixTransitVpc", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixTunnel", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixVgwConn", _module)
 pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixVpc", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixVpnCertDownload", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixVpnProfile", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixVpnUser", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixVpnUserAccelerator", _module)
+pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrix_spoke_external_device_conn", _module)
 
 import { Provider } from "./provider";
 

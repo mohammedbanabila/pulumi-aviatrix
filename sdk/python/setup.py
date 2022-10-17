@@ -46,7 +46,7 @@ setup(name='pulumi_aviatrix',
           'install': InstallPluginCommand,
       },
       keywords='pulumi aviatrix category/cloud',
-      url='https://www.pulumi.com',
+      url='https://www.aviatrix.com',
       project_urls={
           'Repository': 'https://github.com/astipkovits/pulumi-aviatrix'
       },

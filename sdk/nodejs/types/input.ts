@@ -53,6 +53,32 @@ export interface AviatrixAwsTgwVpnConnVpnTunnelData {
     vpnOutsideAddress?: pulumi.Input<string>;
 }
 
+export interface AviatrixFirenetFirewallInstanceAssociation {
+    attached?: pulumi.Input<boolean>;
+    egressInterface?: pulumi.Input<string>;
+    firenetGwName: pulumi.Input<string>;
+    firewallName?: pulumi.Input<string>;
+    instanceId: pulumi.Input<string>;
+    lanInterface?: pulumi.Input<string>;
+    managementInterface?: pulumi.Input<string>;
+    vendorType?: pulumi.Input<string>;
+}
+
+export interface AviatrixFirewallPolicy {
+    action: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
+    dstIp: pulumi.Input<string>;
+    logEnabled?: pulumi.Input<boolean>;
+    port: pulumi.Input<string>;
+    protocol?: pulumi.Input<string>;
+    srcIp: pulumi.Input<string>;
+}
+
+export interface AviatrixFirewallTagCidrList {
+    cidr: pulumi.Input<string>;
+    cidrTagName: pulumi.Input<string>;
+}
+
 export interface AviatrixFqdnDomainName {
     action?: pulumi.Input<string>;
     fqdn: pulumi.Input<string>;
@@ -63,6 +89,128 @@ export interface AviatrixFqdnDomainName {
 export interface AviatrixFqdnGwFilterTagList {
     gwName: pulumi.Input<string>;
     sourceIpLists?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface AviatrixGatewayDnatConnectionPolicy {
+    applyRouteEntry?: pulumi.Input<boolean>;
+    connection?: pulumi.Input<string>;
+    dnatIps?: pulumi.Input<string>;
+    dnatPort?: pulumi.Input<string>;
+    dstCidr?: pulumi.Input<string>;
+    dstPort?: pulumi.Input<string>;
+    excludeRtb?: pulumi.Input<string>;
+    interface?: pulumi.Input<string>;
+    mark?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string>;
+    srcCidr?: pulumi.Input<string>;
+    srcPort?: pulumi.Input<string>;
+}
+
+export interface AviatrixGatewayDnatDnatPolicy {
+    applyRouteEntry?: pulumi.Input<boolean>;
+    connection?: pulumi.Input<string>;
+    dnatIps?: pulumi.Input<string>;
+    dnatPort?: pulumi.Input<string>;
+    dstCidr?: pulumi.Input<string>;
+    dstPort?: pulumi.Input<string>;
+    excludeRtb?: pulumi.Input<string>;
+    interface?: pulumi.Input<string>;
+    mark?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string>;
+    srcCidr?: pulumi.Input<string>;
+    srcPort?: pulumi.Input<string>;
+}
+
+export interface AviatrixGatewayDnatInterfacePolicy {
+    applyRouteEntry?: pulumi.Input<boolean>;
+    connection?: pulumi.Input<string>;
+    dnatIps?: pulumi.Input<string>;
+    dnatPort?: pulumi.Input<string>;
+    dstCidr?: pulumi.Input<string>;
+    dstPort?: pulumi.Input<string>;
+    excludeRtb?: pulumi.Input<string>;
+    interface?: pulumi.Input<string>;
+    mark?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string>;
+    srcCidr?: pulumi.Input<string>;
+    srcPort?: pulumi.Input<string>;
+}
+
+export interface AviatrixGatewaySnatConnectionPolicy {
+    applyRouteEntry?: pulumi.Input<boolean>;
+    connection?: pulumi.Input<string>;
+    dstCidr?: pulumi.Input<string>;
+    dstPort?: pulumi.Input<string>;
+    excludeRtb?: pulumi.Input<string>;
+    interface?: pulumi.Input<string>;
+    mark?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string>;
+    snatIps?: pulumi.Input<string>;
+    snatPort?: pulumi.Input<string>;
+    srcCidr?: pulumi.Input<string>;
+    srcPort?: pulumi.Input<string>;
+}
+
+export interface AviatrixGatewaySnatInterfacePolicy {
+    applyRouteEntry?: pulumi.Input<boolean>;
+    connection?: pulumi.Input<string>;
+    dstCidr?: pulumi.Input<string>;
+    dstPort?: pulumi.Input<string>;
+    excludeRtb?: pulumi.Input<string>;
+    interface?: pulumi.Input<string>;
+    mark?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string>;
+    snatIps?: pulumi.Input<string>;
+    snatPort?: pulumi.Input<string>;
+    srcCidr?: pulumi.Input<string>;
+    srcPort?: pulumi.Input<string>;
+}
+
+export interface AviatrixGatewaySnatSnatPolicy {
+    applyRouteEntry?: pulumi.Input<boolean>;
+    connection?: pulumi.Input<string>;
+    dstCidr?: pulumi.Input<string>;
+    dstPort?: pulumi.Input<string>;
+    excludeRtb?: pulumi.Input<string>;
+    interface?: pulumi.Input<string>;
+    mark?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string>;
+    snatIps?: pulumi.Input<string>;
+    snatPort?: pulumi.Input<string>;
+    srcCidr?: pulumi.Input<string>;
+    srcPort?: pulumi.Input<string>;
+}
+
+export interface AviatrixMicrosegPolicyListPolicy {
+    action: pulumi.Input<string>;
+    dstAppDomains: pulumi.Input<pulumi.Input<string>[]>;
+    logging?: pulumi.Input<boolean>;
+    name: pulumi.Input<string>;
+    portRanges?: pulumi.Input<pulumi.Input<inputs.AviatrixMicrosegPolicyListPolicyPortRange>[]>;
+    priority?: pulumi.Input<number>;
+    protocol: pulumi.Input<string>;
+    srcAppDomains: pulumi.Input<pulumi.Input<string>[]>;
+    uuid?: pulumi.Input<string>;
+    watch?: pulumi.Input<boolean>;
+}
+
+export interface AviatrixMicrosegPolicyListPolicyPortRange {
+    hi?: pulumi.Input<number>;
+    lo: pulumi.Input<number>;
+}
+
+export interface AviatrixPrivateModeLbProxy {
+    instanceId: pulumi.Input<string>;
+    vpcId: pulumi.Input<string>;
+}
+
+export interface AviatrixSite2CloudCaCertTagCaCertificate {
+    certContent: pulumi.Input<string>;
+    commonName?: pulumi.Input<string>;
+    expirationTime?: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    issuerName?: pulumi.Input<string>;
+    uniqueSerial?: pulumi.Input<string>;
 }
 
 export interface AviatrixTransitGatewayBgpLanInterface {
@@ -92,6 +240,35 @@ export interface AviatrixVpcSubnet {
     name?: pulumi.Input<string>;
     region?: pulumi.Input<string>;
     subnetId?: pulumi.Input<string>;
+}
+
+export interface AviatrixVpnProfilePolicy {
+    action: pulumi.Input<string>;
+    port: pulumi.Input<string>;
+    proto: pulumi.Input<string>;
+    target: pulumi.Input<string>;
+}
+
+export interface GetAviatrixFirenetFirewallInstanceAssociation {
+    attached?: boolean;
+    egressInterface?: string;
+    firenetGwName?: string;
+    firewallName?: string;
+    instanceId?: string;
+    lanInterface?: string;
+    managementInterface?: string;
+    vendorType?: string;
+}
+
+export interface GetAviatrixFirenetFirewallInstanceAssociationArgs {
+    attached?: pulumi.Input<boolean>;
+    egressInterface?: pulumi.Input<string>;
+    firenetGwName?: pulumi.Input<string>;
+    firewallName?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string>;
+    lanInterface?: pulumi.Input<string>;
+    managementInterface?: pulumi.Input<string>;
+    vendorType?: pulumi.Input<string>;
 }
 
 export interface ProviderIgnoreTags {

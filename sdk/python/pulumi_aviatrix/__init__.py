@@ -24,6 +24,7 @@ from .aviatrix_aws_tgw_security_domain_conn import *
 from .aviatrix_aws_tgw_transit_gateway_attachment import *
 from .aviatrix_aws_tgw_vpc_attachment import *
 from .aviatrix_aws_tgw_vpn_conn import *
+from .aviatrix_azure_peer import *
 from .aviatrix_azure_spoke_native_peering import *
 from .aviatrix_azure_vng_conn import *
 from .aviatrix_cloudn_registration import *
@@ -46,21 +47,80 @@ from .aviatrix_edge_caag import *
 from .aviatrix_edge_spoke import *
 from .aviatrix_edge_spoke_external_device_conn import *
 from .aviatrix_edge_spoke_transit_attachment import *
+from .aviatrix_filebeat_forwarder import *
+from .aviatrix_firenet import *
+from .aviatrix_firewall import *
+from .aviatrix_firewall_instance import *
+from .aviatrix_firewall_instance_association import *
+from .aviatrix_firewall_management_access import *
+from .aviatrix_firewall_policy import *
+from .aviatrix_firewall_tag import *
 from .aviatrix_fqdn import *
 from .aviatrix_fqdn_pass_through import *
 from .aviatrix_fqdn_tag_rule import *
 from .aviatrix_gateway import *
+from .aviatrix_gateway_certificate_config import *
+from .aviatrix_gateway_dnat import *
+from .aviatrix_gateway_snat import *
+from .aviatrix_geo_vpn import *
+from .aviatrix_microseg_policy_list import *
+from .aviatrix_netflow_agent import *
+from .aviatrix_periodic_ping import *
+from .aviatrix_private_mode_lb import *
+from .aviatrix_private_mode_multicloud_endpoint import *
+from .aviatrix_proxy_config import *
+from .aviatrix_rbac_group import *
+from .aviatrix_rbac_group_access_account_attachment import *
+from .aviatrix_rbac_group_permission_attachment import *
+from .aviatrix_rbac_group_user_attachment import *
+from .aviatrix_remote_syslog import *
+from .aviatrix_saml_endpoint import *
+from .aviatrix_segmentation_network_domain import *
+from .aviatrix_segmentation_network_domain_association import *
+from .aviatrix_segmentation_network_domain_connection_policy import *
+from .aviatrix_segmentation_security_domain import *
+from .aviatrix_segmentation_security_domain_association import *
+from .aviatrix_segmentation_security_domain_connection_policy import *
 from .aviatrix_site2_cloud import *
+from .aviatrix_site2_cloud_ca_cert_tag import *
+from .aviatrix_splunk_logging import *
+from .aviatrix_spoke_external_device_conn import *
 from .aviatrix_spoke_gateway import *
+from .aviatrix_spoke_gateway_subnet_group import *
 from .aviatrix_spoke_transit_attachment import *
 from .aviatrix_spoke_vpc import *
+from .aviatrix_sumologic_forwarder import *
 from .aviatrix_trans_peer import *
+from .aviatrix_transit_cloudn_conn import *
+from .aviatrix_transit_external_device_conn import *
+from .aviatrix_transit_firenet_policy import *
 from .aviatrix_transit_gateway import *
 from .aviatrix_transit_gateway_peering import *
 from .aviatrix_transit_vpc import *
+from .aviatrix_tunnel import *
+from .aviatrix_vgw_conn import *
 from .aviatrix_vpc import *
+from .aviatrix_vpn_cert_download import *
+from .aviatrix_vpn_profile import *
+from .aviatrix_vpn_user import *
+from .aviatrix_vpn_user_accelerator import *
+from .get_aviatrix_account import *
+from .get_aviatrix_caller_identity import *
+from .get_aviatrix_device_interfaces import *
+from .get_aviatrix_firenet import *
+from .get_aviatrix_firenet_firewall_manager import *
+from .get_aviatrix_firenet_vendor_integration import *
+from .get_aviatrix_firewall import *
+from .get_aviatrix_firewall_instance_images import *
+from .get_aviatrix_gateway import *
+from .get_aviatrix_gateway_image import *
+from .get_aviatrix_network_domains import *
 from .get_aviatrix_spoke_gateway import *
+from .get_aviatrix_spoke_gateway_inspection_subnets import *
+from .get_aviatrix_transit_gateway import *
+from .get_aviatrix_transit_gateways import *
 from .get_aviatrix_vpc import *
+from .get_aviatrix_vpc_tracker import *
 from .provider import *
 from ._inputs import *
 from . import outputs
@@ -225,6 +285,14 @@ _utilities.register(
   "fqn": "pulumi_aviatrix",
   "classes": {
    "aviatrix:index/aviatrixAwsTgwVpnConn:AviatrixAwsTgwVpnConn": "AviatrixAwsTgwVpnConn"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixAzurePeer",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixAzurePeer:AviatrixAzurePeer": "AviatrixAzurePeer"
   }
  },
  {
@@ -405,6 +473,70 @@ _utilities.register(
  },
  {
   "pkg": "aviatrix",
+  "mod": "index/aviatrixFilebeatForwarder",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixFilebeatForwarder:AviatrixFilebeatForwarder": "AviatrixFilebeatForwarder"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixFirenet",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixFirenet:AviatrixFirenet": "AviatrixFirenet"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixFirewall",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixFirewall:AviatrixFirewall": "AviatrixFirewall"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixFirewallInstance",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixFirewallInstance:AviatrixFirewallInstance": "AviatrixFirewallInstance"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixFirewallInstanceAssociation",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixFirewallInstanceAssociation:AviatrixFirewallInstanceAssociation": "AviatrixFirewallInstanceAssociation"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixFirewallManagementAccess",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixFirewallManagementAccess:AviatrixFirewallManagementAccess": "AviatrixFirewallManagementAccess"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixFirewallPolicy",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixFirewallPolicy:AviatrixFirewallPolicy": "AviatrixFirewallPolicy"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixFirewallTag",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixFirewallTag:AviatrixFirewallTag": "AviatrixFirewallTag"
+  }
+ },
+ {
+  "pkg": "aviatrix",
   "mod": "index/aviatrixFqdn",
   "fqn": "pulumi_aviatrix",
   "classes": {
@@ -437,6 +569,182 @@ _utilities.register(
  },
  {
   "pkg": "aviatrix",
+  "mod": "index/aviatrixGatewayCertificateConfig",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixGatewayCertificateConfig:AviatrixGatewayCertificateConfig": "AviatrixGatewayCertificateConfig"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixGatewayDnat",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixGatewayDnat:AviatrixGatewayDnat": "AviatrixGatewayDnat"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixGatewaySnat",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixGatewaySnat:AviatrixGatewaySnat": "AviatrixGatewaySnat"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixGeoVpn",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixGeoVpn:AviatrixGeoVpn": "AviatrixGeoVpn"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixMicrosegPolicyList",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixMicrosegPolicyList:AviatrixMicrosegPolicyList": "AviatrixMicrosegPolicyList"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixNetflowAgent",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixNetflowAgent:AviatrixNetflowAgent": "AviatrixNetflowAgent"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixPeriodicPing",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixPeriodicPing:AviatrixPeriodicPing": "AviatrixPeriodicPing"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixPrivateModeLb",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixPrivateModeLb:AviatrixPrivateModeLb": "AviatrixPrivateModeLb"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixPrivateModeMulticloudEndpoint",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixPrivateModeMulticloudEndpoint:AviatrixPrivateModeMulticloudEndpoint": "AviatrixPrivateModeMulticloudEndpoint"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixProxyConfig",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixProxyConfig:AviatrixProxyConfig": "AviatrixProxyConfig"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixRbacGroup",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixRbacGroup:AviatrixRbacGroup": "AviatrixRbacGroup"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixRbacGroupAccessAccountAttachment",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixRbacGroupAccessAccountAttachment:AviatrixRbacGroupAccessAccountAttachment": "AviatrixRbacGroupAccessAccountAttachment"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixRbacGroupPermissionAttachment",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixRbacGroupPermissionAttachment:AviatrixRbacGroupPermissionAttachment": "AviatrixRbacGroupPermissionAttachment"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixRbacGroupUserAttachment",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixRbacGroupUserAttachment:AviatrixRbacGroupUserAttachment": "AviatrixRbacGroupUserAttachment"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixRemoteSyslog",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixRemoteSyslog:AviatrixRemoteSyslog": "AviatrixRemoteSyslog"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixSamlEndpoint",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixSamlEndpoint:AviatrixSamlEndpoint": "AviatrixSamlEndpoint"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixSegmentationNetworkDomain",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixSegmentationNetworkDomain:AviatrixSegmentationNetworkDomain": "AviatrixSegmentationNetworkDomain"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixSegmentationNetworkDomainAssociation",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixSegmentationNetworkDomainAssociation:AviatrixSegmentationNetworkDomainAssociation": "AviatrixSegmentationNetworkDomainAssociation"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixSegmentationNetworkDomainConnectionPolicy",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixSegmentationNetworkDomainConnectionPolicy:AviatrixSegmentationNetworkDomainConnectionPolicy": "AviatrixSegmentationNetworkDomainConnectionPolicy"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixSegmentationSecurityDomain",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixSegmentationSecurityDomain:AviatrixSegmentationSecurityDomain": "AviatrixSegmentationSecurityDomain"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixSegmentationSecurityDomainAssociation",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixSegmentationSecurityDomainAssociation:AviatrixSegmentationSecurityDomainAssociation": "AviatrixSegmentationSecurityDomainAssociation"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixSegmentationSecurityDomainConnectionPolicy",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixSegmentationSecurityDomainConnectionPolicy:AviatrixSegmentationSecurityDomainConnectionPolicy": "AviatrixSegmentationSecurityDomainConnectionPolicy"
+  }
+ },
+ {
+  "pkg": "aviatrix",
   "mod": "index/aviatrixSite2Cloud",
   "fqn": "pulumi_aviatrix",
   "classes": {
@@ -445,10 +753,34 @@ _utilities.register(
  },
  {
   "pkg": "aviatrix",
+  "mod": "index/aviatrixSite2CloudCaCertTag",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixSite2CloudCaCertTag:AviatrixSite2CloudCaCertTag": "AviatrixSite2CloudCaCertTag"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixSplunkLogging",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixSplunkLogging:AviatrixSplunkLogging": "AviatrixSplunkLogging"
+  }
+ },
+ {
+  "pkg": "aviatrix",
   "mod": "index/aviatrixSpokeGateway",
   "fqn": "pulumi_aviatrix",
   "classes": {
    "aviatrix:index/aviatrixSpokeGateway:AviatrixSpokeGateway": "AviatrixSpokeGateway"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixSpokeGatewaySubnetGroup",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixSpokeGatewaySubnetGroup:AviatrixSpokeGatewaySubnetGroup": "AviatrixSpokeGatewaySubnetGroup"
   }
  },
  {
@@ -469,10 +801,42 @@ _utilities.register(
  },
  {
   "pkg": "aviatrix",
+  "mod": "index/aviatrixSumologicForwarder",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixSumologicForwarder:AviatrixSumologicForwarder": "AviatrixSumologicForwarder"
+  }
+ },
+ {
+  "pkg": "aviatrix",
   "mod": "index/aviatrixTransPeer",
   "fqn": "pulumi_aviatrix",
   "classes": {
    "aviatrix:index/aviatrixTransPeer:AviatrixTransPeer": "AviatrixTransPeer"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixTransitCloudnConn",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixTransitCloudnConn:AviatrixTransitCloudnConn": "AviatrixTransitCloudnConn"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixTransitExternalDeviceConn",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixTransitExternalDeviceConn:AviatrixTransitExternalDeviceConn": "AviatrixTransitExternalDeviceConn"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixTransitFirenetPolicy",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixTransitFirenetPolicy:AviatrixTransitFirenetPolicy": "AviatrixTransitFirenetPolicy"
   }
  },
  {
@@ -501,10 +865,66 @@ _utilities.register(
  },
  {
   "pkg": "aviatrix",
+  "mod": "index/aviatrixTunnel",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixTunnel:AviatrixTunnel": "AviatrixTunnel"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixVgwConn",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixVgwConn:AviatrixVgwConn": "AviatrixVgwConn"
+  }
+ },
+ {
+  "pkg": "aviatrix",
   "mod": "index/aviatrixVpc",
   "fqn": "pulumi_aviatrix",
   "classes": {
    "aviatrix:index/aviatrixVpc:AviatrixVpc": "AviatrixVpc"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixVpnCertDownload",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixVpnCertDownload:AviatrixVpnCertDownload": "AviatrixVpnCertDownload"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixVpnProfile",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixVpnProfile:AviatrixVpnProfile": "AviatrixVpnProfile"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixVpnUser",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixVpnUser:AviatrixVpnUser": "AviatrixVpnUser"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrixVpnUserAccelerator",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrixVpnUserAccelerator:AviatrixVpnUserAccelerator": "AviatrixVpnUserAccelerator"
+  }
+ },
+ {
+  "pkg": "aviatrix",
+  "mod": "index/aviatrix_spoke_external_device_conn",
+  "fqn": "pulumi_aviatrix",
+  "classes": {
+   "aviatrix:index/aviatrix_spoke_external_device_conn:aviatrix_spoke_external_device_conn": "Aviatrix_spoke_external_device_conn"
   }
  }
 ]

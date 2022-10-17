@@ -1,5 +1,5 @@
 {
-    "name": "@pulumi/aviatrix",
+    "name": "@astipkovits/aviatrix",
     "version": "${VERSION}",
     "description": "A Pulumi package for creating and managing aviatrix cloud resources.",
     "keywords": [
@@ -7,7 +7,7 @@
         "aviatrix",
         "category/cloud"
     ],
-    "homepage": "https://www.pulumi.com",
+    "homepage": "https://www.aviatrix.com",
     "repository": "https://github.com/astipkovits/pulumi-aviatrix",
     "license": "Apache-2.0",
     "scripts": {

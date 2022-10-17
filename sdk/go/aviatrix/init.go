@@ -58,6 +58,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &AviatrixAwsTgwVpcAttachment{}
 	case "aviatrix:index/aviatrixAwsTgwVpnConn:AviatrixAwsTgwVpnConn":
 		r = &AviatrixAwsTgwVpnConn{}
+	case "aviatrix:index/aviatrixAzurePeer:AviatrixAzurePeer":
+		r = &AviatrixAzurePeer{}
 	case "aviatrix:index/aviatrixAzureSpokeNativePeering:AviatrixAzureSpokeNativePeering":
 		r = &AviatrixAzureSpokeNativePeering{}
 	case "aviatrix:index/aviatrixAzureVngConn:AviatrixAzureVngConn":
@@ -102,6 +104,22 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &AviatrixEdgeSpokeExternalDeviceConn{}
 	case "aviatrix:index/aviatrixEdgeSpokeTransitAttachment:AviatrixEdgeSpokeTransitAttachment":
 		r = &AviatrixEdgeSpokeTransitAttachment{}
+	case "aviatrix:index/aviatrixFilebeatForwarder:AviatrixFilebeatForwarder":
+		r = &AviatrixFilebeatForwarder{}
+	case "aviatrix:index/aviatrixFirenet:AviatrixFirenet":
+		r = &AviatrixFirenet{}
+	case "aviatrix:index/aviatrixFirewall:AviatrixFirewall":
+		r = &AviatrixFirewall{}
+	case "aviatrix:index/aviatrixFirewallInstance:AviatrixFirewallInstance":
+		r = &AviatrixFirewallInstance{}
+	case "aviatrix:index/aviatrixFirewallInstanceAssociation:AviatrixFirewallInstanceAssociation":
+		r = &AviatrixFirewallInstanceAssociation{}
+	case "aviatrix:index/aviatrixFirewallManagementAccess:AviatrixFirewallManagementAccess":
+		r = &AviatrixFirewallManagementAccess{}
+	case "aviatrix:index/aviatrixFirewallPolicy:AviatrixFirewallPolicy":
+		r = &AviatrixFirewallPolicy{}
+	case "aviatrix:index/aviatrixFirewallTag:AviatrixFirewallTag":
+		r = &AviatrixFirewallTag{}
 	case "aviatrix:index/aviatrixFqdn:AviatrixFqdn":
 		r = &AviatrixFqdn{}
 	case "aviatrix:index/aviatrixFqdnPassThrough:AviatrixFqdnPassThrough":
@@ -110,24 +128,96 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &AviatrixFqdnTagRule{}
 	case "aviatrix:index/aviatrixGateway:AviatrixGateway":
 		r = &AviatrixGateway{}
+	case "aviatrix:index/aviatrixGatewayCertificateConfig:AviatrixGatewayCertificateConfig":
+		r = &AviatrixGatewayCertificateConfig{}
+	case "aviatrix:index/aviatrixGatewayDnat:AviatrixGatewayDnat":
+		r = &AviatrixGatewayDnat{}
+	case "aviatrix:index/aviatrixGatewaySnat:AviatrixGatewaySnat":
+		r = &AviatrixGatewaySnat{}
+	case "aviatrix:index/aviatrixGeoVpn:AviatrixGeoVpn":
+		r = &AviatrixGeoVpn{}
+	case "aviatrix:index/aviatrixMicrosegPolicyList:AviatrixMicrosegPolicyList":
+		r = &AviatrixMicrosegPolicyList{}
+	case "aviatrix:index/aviatrixNetflowAgent:AviatrixNetflowAgent":
+		r = &AviatrixNetflowAgent{}
+	case "aviatrix:index/aviatrixPeriodicPing:AviatrixPeriodicPing":
+		r = &AviatrixPeriodicPing{}
+	case "aviatrix:index/aviatrixPrivateModeLb:AviatrixPrivateModeLb":
+		r = &AviatrixPrivateModeLb{}
+	case "aviatrix:index/aviatrixPrivateModeMulticloudEndpoint:AviatrixPrivateModeMulticloudEndpoint":
+		r = &AviatrixPrivateModeMulticloudEndpoint{}
+	case "aviatrix:index/aviatrixProxyConfig:AviatrixProxyConfig":
+		r = &AviatrixProxyConfig{}
+	case "aviatrix:index/aviatrixRbacGroup:AviatrixRbacGroup":
+		r = &AviatrixRbacGroup{}
+	case "aviatrix:index/aviatrixRbacGroupAccessAccountAttachment:AviatrixRbacGroupAccessAccountAttachment":
+		r = &AviatrixRbacGroupAccessAccountAttachment{}
+	case "aviatrix:index/aviatrixRbacGroupPermissionAttachment:AviatrixRbacGroupPermissionAttachment":
+		r = &AviatrixRbacGroupPermissionAttachment{}
+	case "aviatrix:index/aviatrixRbacGroupUserAttachment:AviatrixRbacGroupUserAttachment":
+		r = &AviatrixRbacGroupUserAttachment{}
+	case "aviatrix:index/aviatrixRemoteSyslog:AviatrixRemoteSyslog":
+		r = &AviatrixRemoteSyslog{}
+	case "aviatrix:index/aviatrixSamlEndpoint:AviatrixSamlEndpoint":
+		r = &AviatrixSamlEndpoint{}
+	case "aviatrix:index/aviatrixSegmentationNetworkDomain:AviatrixSegmentationNetworkDomain":
+		r = &AviatrixSegmentationNetworkDomain{}
+	case "aviatrix:index/aviatrixSegmentationNetworkDomainAssociation:AviatrixSegmentationNetworkDomainAssociation":
+		r = &AviatrixSegmentationNetworkDomainAssociation{}
+	case "aviatrix:index/aviatrixSegmentationNetworkDomainConnectionPolicy:AviatrixSegmentationNetworkDomainConnectionPolicy":
+		r = &AviatrixSegmentationNetworkDomainConnectionPolicy{}
+	case "aviatrix:index/aviatrixSegmentationSecurityDomain:AviatrixSegmentationSecurityDomain":
+		r = &AviatrixSegmentationSecurityDomain{}
+	case "aviatrix:index/aviatrixSegmentationSecurityDomainAssociation:AviatrixSegmentationSecurityDomainAssociation":
+		r = &AviatrixSegmentationSecurityDomainAssociation{}
+	case "aviatrix:index/aviatrixSegmentationSecurityDomainConnectionPolicy:AviatrixSegmentationSecurityDomainConnectionPolicy":
+		r = &AviatrixSegmentationSecurityDomainConnectionPolicy{}
 	case "aviatrix:index/aviatrixSite2Cloud:AviatrixSite2Cloud":
 		r = &AviatrixSite2Cloud{}
+	case "aviatrix:index/aviatrixSite2CloudCaCertTag:AviatrixSite2CloudCaCertTag":
+		r = &AviatrixSite2CloudCaCertTag{}
+	case "aviatrix:index/aviatrixSplunkLogging:AviatrixSplunkLogging":
+		r = &AviatrixSplunkLogging{}
 	case "aviatrix:index/aviatrixSpokeGateway:AviatrixSpokeGateway":
 		r = &AviatrixSpokeGateway{}
+	case "aviatrix:index/aviatrixSpokeGatewaySubnetGroup:AviatrixSpokeGatewaySubnetGroup":
+		r = &AviatrixSpokeGatewaySubnetGroup{}
 	case "aviatrix:index/aviatrixSpokeTransitAttachment:AviatrixSpokeTransitAttachment":
 		r = &AviatrixSpokeTransitAttachment{}
 	case "aviatrix:index/aviatrixSpokeVpc:AviatrixSpokeVpc":
 		r = &AviatrixSpokeVpc{}
+	case "aviatrix:index/aviatrixSumologicForwarder:AviatrixSumologicForwarder":
+		r = &AviatrixSumologicForwarder{}
 	case "aviatrix:index/aviatrixTransPeer:AviatrixTransPeer":
 		r = &AviatrixTransPeer{}
+	case "aviatrix:index/aviatrixTransitCloudnConn:AviatrixTransitCloudnConn":
+		r = &AviatrixTransitCloudnConn{}
+	case "aviatrix:index/aviatrixTransitExternalDeviceConn:AviatrixTransitExternalDeviceConn":
+		r = &AviatrixTransitExternalDeviceConn{}
+	case "aviatrix:index/aviatrixTransitFirenetPolicy:AviatrixTransitFirenetPolicy":
+		r = &AviatrixTransitFirenetPolicy{}
 	case "aviatrix:index/aviatrixTransitGateway:AviatrixTransitGateway":
 		r = &AviatrixTransitGateway{}
 	case "aviatrix:index/aviatrixTransitGatewayPeering:AviatrixTransitGatewayPeering":
 		r = &AviatrixTransitGatewayPeering{}
 	case "aviatrix:index/aviatrixTransitVpc:AviatrixTransitVpc":
 		r = &AviatrixTransitVpc{}
+	case "aviatrix:index/aviatrixTunnel:AviatrixTunnel":
+		r = &AviatrixTunnel{}
+	case "aviatrix:index/aviatrixVgwConn:AviatrixVgwConn":
+		r = &AviatrixVgwConn{}
 	case "aviatrix:index/aviatrixVpc:AviatrixVpc":
 		r = &AviatrixVpc{}
+	case "aviatrix:index/aviatrixVpnCertDownload:AviatrixVpnCertDownload":
+		r = &AviatrixVpnCertDownload{}
+	case "aviatrix:index/aviatrixVpnProfile:AviatrixVpnProfile":
+		r = &AviatrixVpnProfile{}
+	case "aviatrix:index/aviatrixVpnUser:AviatrixVpnUser":
+		r = &AviatrixVpnUser{}
+	case "aviatrix:index/aviatrixVpnUserAccelerator:AviatrixVpnUserAccelerator":
+		r = &AviatrixVpnUserAccelerator{}
+	case "aviatrix:index/aviatrix_spoke_external_device_conn:aviatrix_spoke_external_device_conn":
+		r = &Aviatrix_spoke_external_device_conn{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -253,6 +343,11 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"aviatrix",
+		"index/aviatrixAzurePeer",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
 		"index/aviatrixAzureSpokeNativePeering",
 		&module{version},
 	)
@@ -363,6 +458,46 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"aviatrix",
+		"index/aviatrixFilebeatForwarder",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixFirenet",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixFirewall",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixFirewallInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixFirewallInstanceAssociation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixFirewallManagementAccess",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixFirewallPolicy",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixFirewallTag",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
 		"index/aviatrixFqdn",
 		&module{version},
 	)
@@ -383,12 +518,137 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"aviatrix",
+		"index/aviatrixGatewayCertificateConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixGatewayDnat",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixGatewaySnat",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixGeoVpn",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixMicrosegPolicyList",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixNetflowAgent",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixPeriodicPing",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixPrivateModeLb",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixPrivateModeMulticloudEndpoint",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixProxyConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixRbacGroup",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixRbacGroupAccessAccountAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixRbacGroupPermissionAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixRbacGroupUserAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixRemoteSyslog",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixSamlEndpoint",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixSegmentationNetworkDomain",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixSegmentationNetworkDomainAssociation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixSegmentationNetworkDomainConnectionPolicy",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixSegmentationSecurityDomain",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixSegmentationSecurityDomainAssociation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixSegmentationSecurityDomainConnectionPolicy",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
 		"index/aviatrixSite2Cloud",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"aviatrix",
+		"index/aviatrixSite2CloudCaCertTag",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixSplunkLogging",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
 		"index/aviatrixSpokeGateway",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixSpokeGatewaySubnetGroup",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -403,7 +663,27 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"aviatrix",
+		"index/aviatrixSumologicForwarder",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
 		"index/aviatrixTransPeer",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixTransitCloudnConn",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixTransitExternalDeviceConn",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixTransitFirenetPolicy",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -423,7 +703,42 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"aviatrix",
+		"index/aviatrixTunnel",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixVgwConn",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
 		"index/aviatrixVpc",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixVpnCertDownload",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixVpnProfile",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixVpnUser",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrixVpnUserAccelerator",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"aviatrix",
+		"index/aviatrix_spoke_external_device_conn",
 		&module{version},
 	)
 	pulumi.RegisterResourcePackage(

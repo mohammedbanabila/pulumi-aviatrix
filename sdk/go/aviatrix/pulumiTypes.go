@@ -682,6 +682,372 @@ func (o AviatrixAwsTgwVpnConnVpnTunnelDataArrayOutput) Index(i pulumi.IntInput) 
 	}).(AviatrixAwsTgwVpnConnVpnTunnelDataOutput)
 }
 
+type AviatrixFirenetFirewallInstanceAssociation struct {
+	Attached            *bool   `pulumi:"attached"`
+	EgressInterface     *string `pulumi:"egressInterface"`
+	FirenetGwName       string  `pulumi:"firenetGwName"`
+	FirewallName        *string `pulumi:"firewallName"`
+	InstanceId          string  `pulumi:"instanceId"`
+	LanInterface        *string `pulumi:"lanInterface"`
+	ManagementInterface *string `pulumi:"managementInterface"`
+	VendorType          *string `pulumi:"vendorType"`
+}
+
+// AviatrixFirenetFirewallInstanceAssociationInput is an input type that accepts AviatrixFirenetFirewallInstanceAssociationArgs and AviatrixFirenetFirewallInstanceAssociationOutput values.
+// You can construct a concrete instance of `AviatrixFirenetFirewallInstanceAssociationInput` via:
+//
+//	AviatrixFirenetFirewallInstanceAssociationArgs{...}
+type AviatrixFirenetFirewallInstanceAssociationInput interface {
+	pulumi.Input
+
+	ToAviatrixFirenetFirewallInstanceAssociationOutput() AviatrixFirenetFirewallInstanceAssociationOutput
+	ToAviatrixFirenetFirewallInstanceAssociationOutputWithContext(context.Context) AviatrixFirenetFirewallInstanceAssociationOutput
+}
+
+type AviatrixFirenetFirewallInstanceAssociationArgs struct {
+	Attached            pulumi.BoolPtrInput   `pulumi:"attached"`
+	EgressInterface     pulumi.StringPtrInput `pulumi:"egressInterface"`
+	FirenetGwName       pulumi.StringInput    `pulumi:"firenetGwName"`
+	FirewallName        pulumi.StringPtrInput `pulumi:"firewallName"`
+	InstanceId          pulumi.StringInput    `pulumi:"instanceId"`
+	LanInterface        pulumi.StringPtrInput `pulumi:"lanInterface"`
+	ManagementInterface pulumi.StringPtrInput `pulumi:"managementInterface"`
+	VendorType          pulumi.StringPtrInput `pulumi:"vendorType"`
+}
+
+func (AviatrixFirenetFirewallInstanceAssociationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AviatrixFirenetFirewallInstanceAssociation)(nil)).Elem()
+}
+
+func (i AviatrixFirenetFirewallInstanceAssociationArgs) ToAviatrixFirenetFirewallInstanceAssociationOutput() AviatrixFirenetFirewallInstanceAssociationOutput {
+	return i.ToAviatrixFirenetFirewallInstanceAssociationOutputWithContext(context.Background())
+}
+
+func (i AviatrixFirenetFirewallInstanceAssociationArgs) ToAviatrixFirenetFirewallInstanceAssociationOutputWithContext(ctx context.Context) AviatrixFirenetFirewallInstanceAssociationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AviatrixFirenetFirewallInstanceAssociationOutput)
+}
+
+// AviatrixFirenetFirewallInstanceAssociationArrayInput is an input type that accepts AviatrixFirenetFirewallInstanceAssociationArray and AviatrixFirenetFirewallInstanceAssociationArrayOutput values.
+// You can construct a concrete instance of `AviatrixFirenetFirewallInstanceAssociationArrayInput` via:
+//
+//	AviatrixFirenetFirewallInstanceAssociationArray{ AviatrixFirenetFirewallInstanceAssociationArgs{...} }
+type AviatrixFirenetFirewallInstanceAssociationArrayInput interface {
+	pulumi.Input
+
+	ToAviatrixFirenetFirewallInstanceAssociationArrayOutput() AviatrixFirenetFirewallInstanceAssociationArrayOutput
+	ToAviatrixFirenetFirewallInstanceAssociationArrayOutputWithContext(context.Context) AviatrixFirenetFirewallInstanceAssociationArrayOutput
+}
+
+type AviatrixFirenetFirewallInstanceAssociationArray []AviatrixFirenetFirewallInstanceAssociationInput
+
+func (AviatrixFirenetFirewallInstanceAssociationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AviatrixFirenetFirewallInstanceAssociation)(nil)).Elem()
+}
+
+func (i AviatrixFirenetFirewallInstanceAssociationArray) ToAviatrixFirenetFirewallInstanceAssociationArrayOutput() AviatrixFirenetFirewallInstanceAssociationArrayOutput {
+	return i.ToAviatrixFirenetFirewallInstanceAssociationArrayOutputWithContext(context.Background())
+}
+
+func (i AviatrixFirenetFirewallInstanceAssociationArray) ToAviatrixFirenetFirewallInstanceAssociationArrayOutputWithContext(ctx context.Context) AviatrixFirenetFirewallInstanceAssociationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AviatrixFirenetFirewallInstanceAssociationArrayOutput)
+}
+
+type AviatrixFirenetFirewallInstanceAssociationOutput struct{ *pulumi.OutputState }
+
+func (AviatrixFirenetFirewallInstanceAssociationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AviatrixFirenetFirewallInstanceAssociation)(nil)).Elem()
+}
+
+func (o AviatrixFirenetFirewallInstanceAssociationOutput) ToAviatrixFirenetFirewallInstanceAssociationOutput() AviatrixFirenetFirewallInstanceAssociationOutput {
+	return o
+}
+
+func (o AviatrixFirenetFirewallInstanceAssociationOutput) ToAviatrixFirenetFirewallInstanceAssociationOutputWithContext(ctx context.Context) AviatrixFirenetFirewallInstanceAssociationOutput {
+	return o
+}
+
+func (o AviatrixFirenetFirewallInstanceAssociationOutput) Attached() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v AviatrixFirenetFirewallInstanceAssociation) *bool { return v.Attached }).(pulumi.BoolPtrOutput)
+}
+
+func (o AviatrixFirenetFirewallInstanceAssociationOutput) EgressInterface() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixFirenetFirewallInstanceAssociation) *string { return v.EgressInterface }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixFirenetFirewallInstanceAssociationOutput) FirenetGwName() pulumi.StringOutput {
+	return o.ApplyT(func(v AviatrixFirenetFirewallInstanceAssociation) string { return v.FirenetGwName }).(pulumi.StringOutput)
+}
+
+func (o AviatrixFirenetFirewallInstanceAssociationOutput) FirewallName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixFirenetFirewallInstanceAssociation) *string { return v.FirewallName }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixFirenetFirewallInstanceAssociationOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v AviatrixFirenetFirewallInstanceAssociation) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+func (o AviatrixFirenetFirewallInstanceAssociationOutput) LanInterface() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixFirenetFirewallInstanceAssociation) *string { return v.LanInterface }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixFirenetFirewallInstanceAssociationOutput) ManagementInterface() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixFirenetFirewallInstanceAssociation) *string { return v.ManagementInterface }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixFirenetFirewallInstanceAssociationOutput) VendorType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixFirenetFirewallInstanceAssociation) *string { return v.VendorType }).(pulumi.StringPtrOutput)
+}
+
+type AviatrixFirenetFirewallInstanceAssociationArrayOutput struct{ *pulumi.OutputState }
+
+func (AviatrixFirenetFirewallInstanceAssociationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AviatrixFirenetFirewallInstanceAssociation)(nil)).Elem()
+}
+
+func (o AviatrixFirenetFirewallInstanceAssociationArrayOutput) ToAviatrixFirenetFirewallInstanceAssociationArrayOutput() AviatrixFirenetFirewallInstanceAssociationArrayOutput {
+	return o
+}
+
+func (o AviatrixFirenetFirewallInstanceAssociationArrayOutput) ToAviatrixFirenetFirewallInstanceAssociationArrayOutputWithContext(ctx context.Context) AviatrixFirenetFirewallInstanceAssociationArrayOutput {
+	return o
+}
+
+func (o AviatrixFirenetFirewallInstanceAssociationArrayOutput) Index(i pulumi.IntInput) AviatrixFirenetFirewallInstanceAssociationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AviatrixFirenetFirewallInstanceAssociation {
+		return vs[0].([]AviatrixFirenetFirewallInstanceAssociation)[vs[1].(int)]
+	}).(AviatrixFirenetFirewallInstanceAssociationOutput)
+}
+
+type AviatrixFirewallPolicyType struct {
+	Action      string  `pulumi:"action"`
+	Description *string `pulumi:"description"`
+	DstIp       string  `pulumi:"dstIp"`
+	LogEnabled  *bool   `pulumi:"logEnabled"`
+	Port        string  `pulumi:"port"`
+	Protocol    *string `pulumi:"protocol"`
+	SrcIp       string  `pulumi:"srcIp"`
+}
+
+// AviatrixFirewallPolicyTypeInput is an input type that accepts AviatrixFirewallPolicyTypeArgs and AviatrixFirewallPolicyTypeOutput values.
+// You can construct a concrete instance of `AviatrixFirewallPolicyTypeInput` via:
+//
+//	AviatrixFirewallPolicyTypeArgs{...}
+type AviatrixFirewallPolicyTypeInput interface {
+	pulumi.Input
+
+	ToAviatrixFirewallPolicyTypeOutput() AviatrixFirewallPolicyTypeOutput
+	ToAviatrixFirewallPolicyTypeOutputWithContext(context.Context) AviatrixFirewallPolicyTypeOutput
+}
+
+type AviatrixFirewallPolicyTypeArgs struct {
+	Action      pulumi.StringInput    `pulumi:"action"`
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	DstIp       pulumi.StringInput    `pulumi:"dstIp"`
+	LogEnabled  pulumi.BoolPtrInput   `pulumi:"logEnabled"`
+	Port        pulumi.StringInput    `pulumi:"port"`
+	Protocol    pulumi.StringPtrInput `pulumi:"protocol"`
+	SrcIp       pulumi.StringInput    `pulumi:"srcIp"`
+}
+
+func (AviatrixFirewallPolicyTypeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AviatrixFirewallPolicyType)(nil)).Elem()
+}
+
+func (i AviatrixFirewallPolicyTypeArgs) ToAviatrixFirewallPolicyTypeOutput() AviatrixFirewallPolicyTypeOutput {
+	return i.ToAviatrixFirewallPolicyTypeOutputWithContext(context.Background())
+}
+
+func (i AviatrixFirewallPolicyTypeArgs) ToAviatrixFirewallPolicyTypeOutputWithContext(ctx context.Context) AviatrixFirewallPolicyTypeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AviatrixFirewallPolicyTypeOutput)
+}
+
+// AviatrixFirewallPolicyTypeArrayInput is an input type that accepts AviatrixFirewallPolicyTypeArray and AviatrixFirewallPolicyTypeArrayOutput values.
+// You can construct a concrete instance of `AviatrixFirewallPolicyTypeArrayInput` via:
+//
+//	AviatrixFirewallPolicyTypeArray{ AviatrixFirewallPolicyTypeArgs{...} }
+type AviatrixFirewallPolicyTypeArrayInput interface {
+	pulumi.Input
+
+	ToAviatrixFirewallPolicyTypeArrayOutput() AviatrixFirewallPolicyTypeArrayOutput
+	ToAviatrixFirewallPolicyTypeArrayOutputWithContext(context.Context) AviatrixFirewallPolicyTypeArrayOutput
+}
+
+type AviatrixFirewallPolicyTypeArray []AviatrixFirewallPolicyTypeInput
+
+func (AviatrixFirewallPolicyTypeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AviatrixFirewallPolicyType)(nil)).Elem()
+}
+
+func (i AviatrixFirewallPolicyTypeArray) ToAviatrixFirewallPolicyTypeArrayOutput() AviatrixFirewallPolicyTypeArrayOutput {
+	return i.ToAviatrixFirewallPolicyTypeArrayOutputWithContext(context.Background())
+}
+
+func (i AviatrixFirewallPolicyTypeArray) ToAviatrixFirewallPolicyTypeArrayOutputWithContext(ctx context.Context) AviatrixFirewallPolicyTypeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AviatrixFirewallPolicyTypeArrayOutput)
+}
+
+type AviatrixFirewallPolicyTypeOutput struct{ *pulumi.OutputState }
+
+func (AviatrixFirewallPolicyTypeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AviatrixFirewallPolicyType)(nil)).Elem()
+}
+
+func (o AviatrixFirewallPolicyTypeOutput) ToAviatrixFirewallPolicyTypeOutput() AviatrixFirewallPolicyTypeOutput {
+	return o
+}
+
+func (o AviatrixFirewallPolicyTypeOutput) ToAviatrixFirewallPolicyTypeOutputWithContext(ctx context.Context) AviatrixFirewallPolicyTypeOutput {
+	return o
+}
+
+func (o AviatrixFirewallPolicyTypeOutput) Action() pulumi.StringOutput {
+	return o.ApplyT(func(v AviatrixFirewallPolicyType) string { return v.Action }).(pulumi.StringOutput)
+}
+
+func (o AviatrixFirewallPolicyTypeOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixFirewallPolicyType) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixFirewallPolicyTypeOutput) DstIp() pulumi.StringOutput {
+	return o.ApplyT(func(v AviatrixFirewallPolicyType) string { return v.DstIp }).(pulumi.StringOutput)
+}
+
+func (o AviatrixFirewallPolicyTypeOutput) LogEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v AviatrixFirewallPolicyType) *bool { return v.LogEnabled }).(pulumi.BoolPtrOutput)
+}
+
+func (o AviatrixFirewallPolicyTypeOutput) Port() pulumi.StringOutput {
+	return o.ApplyT(func(v AviatrixFirewallPolicyType) string { return v.Port }).(pulumi.StringOutput)
+}
+
+func (o AviatrixFirewallPolicyTypeOutput) Protocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixFirewallPolicyType) *string { return v.Protocol }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixFirewallPolicyTypeOutput) SrcIp() pulumi.StringOutput {
+	return o.ApplyT(func(v AviatrixFirewallPolicyType) string { return v.SrcIp }).(pulumi.StringOutput)
+}
+
+type AviatrixFirewallPolicyTypeArrayOutput struct{ *pulumi.OutputState }
+
+func (AviatrixFirewallPolicyTypeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AviatrixFirewallPolicyType)(nil)).Elem()
+}
+
+func (o AviatrixFirewallPolicyTypeArrayOutput) ToAviatrixFirewallPolicyTypeArrayOutput() AviatrixFirewallPolicyTypeArrayOutput {
+	return o
+}
+
+func (o AviatrixFirewallPolicyTypeArrayOutput) ToAviatrixFirewallPolicyTypeArrayOutputWithContext(ctx context.Context) AviatrixFirewallPolicyTypeArrayOutput {
+	return o
+}
+
+func (o AviatrixFirewallPolicyTypeArrayOutput) Index(i pulumi.IntInput) AviatrixFirewallPolicyTypeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AviatrixFirewallPolicyType {
+		return vs[0].([]AviatrixFirewallPolicyType)[vs[1].(int)]
+	}).(AviatrixFirewallPolicyTypeOutput)
+}
+
+type AviatrixFirewallTagCidrList struct {
+	Cidr        string `pulumi:"cidr"`
+	CidrTagName string `pulumi:"cidrTagName"`
+}
+
+// AviatrixFirewallTagCidrListInput is an input type that accepts AviatrixFirewallTagCidrListArgs and AviatrixFirewallTagCidrListOutput values.
+// You can construct a concrete instance of `AviatrixFirewallTagCidrListInput` via:
+//
+//	AviatrixFirewallTagCidrListArgs{...}
+type AviatrixFirewallTagCidrListInput interface {
+	pulumi.Input
+
+	ToAviatrixFirewallTagCidrListOutput() AviatrixFirewallTagCidrListOutput
+	ToAviatrixFirewallTagCidrListOutputWithContext(context.Context) AviatrixFirewallTagCidrListOutput
+}
+
+type AviatrixFirewallTagCidrListArgs struct {
+	Cidr        pulumi.StringInput `pulumi:"cidr"`
+	CidrTagName pulumi.StringInput `pulumi:"cidrTagName"`
+}
+
+func (AviatrixFirewallTagCidrListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AviatrixFirewallTagCidrList)(nil)).Elem()
+}
+
+func (i AviatrixFirewallTagCidrListArgs) ToAviatrixFirewallTagCidrListOutput() AviatrixFirewallTagCidrListOutput {
+	return i.ToAviatrixFirewallTagCidrListOutputWithContext(context.Background())
+}
+
+func (i AviatrixFirewallTagCidrListArgs) ToAviatrixFirewallTagCidrListOutputWithContext(ctx context.Context) AviatrixFirewallTagCidrListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AviatrixFirewallTagCidrListOutput)
+}
+
+// AviatrixFirewallTagCidrListArrayInput is an input type that accepts AviatrixFirewallTagCidrListArray and AviatrixFirewallTagCidrListArrayOutput values.
+// You can construct a concrete instance of `AviatrixFirewallTagCidrListArrayInput` via:
+//
+//	AviatrixFirewallTagCidrListArray{ AviatrixFirewallTagCidrListArgs{...} }
+type AviatrixFirewallTagCidrListArrayInput interface {
+	pulumi.Input
+
+	ToAviatrixFirewallTagCidrListArrayOutput() AviatrixFirewallTagCidrListArrayOutput
+	ToAviatrixFirewallTagCidrListArrayOutputWithContext(context.Context) AviatrixFirewallTagCidrListArrayOutput
+}
+
+type AviatrixFirewallTagCidrListArray []AviatrixFirewallTagCidrListInput
+
+func (AviatrixFirewallTagCidrListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AviatrixFirewallTagCidrList)(nil)).Elem()
+}
+
+func (i AviatrixFirewallTagCidrListArray) ToAviatrixFirewallTagCidrListArrayOutput() AviatrixFirewallTagCidrListArrayOutput {
+	return i.ToAviatrixFirewallTagCidrListArrayOutputWithContext(context.Background())
+}
+
+func (i AviatrixFirewallTagCidrListArray) ToAviatrixFirewallTagCidrListArrayOutputWithContext(ctx context.Context) AviatrixFirewallTagCidrListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AviatrixFirewallTagCidrListArrayOutput)
+}
+
+type AviatrixFirewallTagCidrListOutput struct{ *pulumi.OutputState }
+
+func (AviatrixFirewallTagCidrListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AviatrixFirewallTagCidrList)(nil)).Elem()
+}
+
+func (o AviatrixFirewallTagCidrListOutput) ToAviatrixFirewallTagCidrListOutput() AviatrixFirewallTagCidrListOutput {
+	return o
+}
+
+func (o AviatrixFirewallTagCidrListOutput) ToAviatrixFirewallTagCidrListOutputWithContext(ctx context.Context) AviatrixFirewallTagCidrListOutput {
+	return o
+}
+
+func (o AviatrixFirewallTagCidrListOutput) Cidr() pulumi.StringOutput {
+	return o.ApplyT(func(v AviatrixFirewallTagCidrList) string { return v.Cidr }).(pulumi.StringOutput)
+}
+
+func (o AviatrixFirewallTagCidrListOutput) CidrTagName() pulumi.StringOutput {
+	return o.ApplyT(func(v AviatrixFirewallTagCidrList) string { return v.CidrTagName }).(pulumi.StringOutput)
+}
+
+type AviatrixFirewallTagCidrListArrayOutput struct{ *pulumi.OutputState }
+
+func (AviatrixFirewallTagCidrListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AviatrixFirewallTagCidrList)(nil)).Elem()
+}
+
+func (o AviatrixFirewallTagCidrListArrayOutput) ToAviatrixFirewallTagCidrListArrayOutput() AviatrixFirewallTagCidrListArrayOutput {
+	return o
+}
+
+func (o AviatrixFirewallTagCidrListArrayOutput) ToAviatrixFirewallTagCidrListArrayOutputWithContext(ctx context.Context) AviatrixFirewallTagCidrListArrayOutput {
+	return o
+}
+
+func (o AviatrixFirewallTagCidrListArrayOutput) Index(i pulumi.IntInput) AviatrixFirewallTagCidrListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AviatrixFirewallTagCidrList {
+		return vs[0].([]AviatrixFirewallTagCidrList)[vs[1].(int)]
+	}).(AviatrixFirewallTagCidrListOutput)
+}
+
 type AviatrixFqdnDomainName struct {
 	Action *string `pulumi:"action"`
 	Fqdn   string  `pulumi:"fqdn"`
@@ -892,6 +1258,1440 @@ func (o AviatrixFqdnGwFilterTagListArrayOutput) Index(i pulumi.IntInput) Aviatri
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AviatrixFqdnGwFilterTagList {
 		return vs[0].([]AviatrixFqdnGwFilterTagList)[vs[1].(int)]
 	}).(AviatrixFqdnGwFilterTagListOutput)
+}
+
+type AviatrixGatewayDnatConnectionPolicy struct {
+	ApplyRouteEntry *bool   `pulumi:"applyRouteEntry"`
+	Connection      *string `pulumi:"connection"`
+	DnatIps         *string `pulumi:"dnatIps"`
+	DnatPort        *string `pulumi:"dnatPort"`
+	DstCidr         *string `pulumi:"dstCidr"`
+	DstPort         *string `pulumi:"dstPort"`
+	ExcludeRtb      *string `pulumi:"excludeRtb"`
+	Interface       *string `pulumi:"interface"`
+	Mark            *string `pulumi:"mark"`
+	Protocol        *string `pulumi:"protocol"`
+	SrcCidr         *string `pulumi:"srcCidr"`
+	SrcPort         *string `pulumi:"srcPort"`
+}
+
+// AviatrixGatewayDnatConnectionPolicyInput is an input type that accepts AviatrixGatewayDnatConnectionPolicyArgs and AviatrixGatewayDnatConnectionPolicyOutput values.
+// You can construct a concrete instance of `AviatrixGatewayDnatConnectionPolicyInput` via:
+//
+//	AviatrixGatewayDnatConnectionPolicyArgs{...}
+type AviatrixGatewayDnatConnectionPolicyInput interface {
+	pulumi.Input
+
+	ToAviatrixGatewayDnatConnectionPolicyOutput() AviatrixGatewayDnatConnectionPolicyOutput
+	ToAviatrixGatewayDnatConnectionPolicyOutputWithContext(context.Context) AviatrixGatewayDnatConnectionPolicyOutput
+}
+
+type AviatrixGatewayDnatConnectionPolicyArgs struct {
+	ApplyRouteEntry pulumi.BoolPtrInput   `pulumi:"applyRouteEntry"`
+	Connection      pulumi.StringPtrInput `pulumi:"connection"`
+	DnatIps         pulumi.StringPtrInput `pulumi:"dnatIps"`
+	DnatPort        pulumi.StringPtrInput `pulumi:"dnatPort"`
+	DstCidr         pulumi.StringPtrInput `pulumi:"dstCidr"`
+	DstPort         pulumi.StringPtrInput `pulumi:"dstPort"`
+	ExcludeRtb      pulumi.StringPtrInput `pulumi:"excludeRtb"`
+	Interface       pulumi.StringPtrInput `pulumi:"interface"`
+	Mark            pulumi.StringPtrInput `pulumi:"mark"`
+	Protocol        pulumi.StringPtrInput `pulumi:"protocol"`
+	SrcCidr         pulumi.StringPtrInput `pulumi:"srcCidr"`
+	SrcPort         pulumi.StringPtrInput `pulumi:"srcPort"`
+}
+
+func (AviatrixGatewayDnatConnectionPolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AviatrixGatewayDnatConnectionPolicy)(nil)).Elem()
+}
+
+func (i AviatrixGatewayDnatConnectionPolicyArgs) ToAviatrixGatewayDnatConnectionPolicyOutput() AviatrixGatewayDnatConnectionPolicyOutput {
+	return i.ToAviatrixGatewayDnatConnectionPolicyOutputWithContext(context.Background())
+}
+
+func (i AviatrixGatewayDnatConnectionPolicyArgs) ToAviatrixGatewayDnatConnectionPolicyOutputWithContext(ctx context.Context) AviatrixGatewayDnatConnectionPolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AviatrixGatewayDnatConnectionPolicyOutput)
+}
+
+// AviatrixGatewayDnatConnectionPolicyArrayInput is an input type that accepts AviatrixGatewayDnatConnectionPolicyArray and AviatrixGatewayDnatConnectionPolicyArrayOutput values.
+// You can construct a concrete instance of `AviatrixGatewayDnatConnectionPolicyArrayInput` via:
+//
+//	AviatrixGatewayDnatConnectionPolicyArray{ AviatrixGatewayDnatConnectionPolicyArgs{...} }
+type AviatrixGatewayDnatConnectionPolicyArrayInput interface {
+	pulumi.Input
+
+	ToAviatrixGatewayDnatConnectionPolicyArrayOutput() AviatrixGatewayDnatConnectionPolicyArrayOutput
+	ToAviatrixGatewayDnatConnectionPolicyArrayOutputWithContext(context.Context) AviatrixGatewayDnatConnectionPolicyArrayOutput
+}
+
+type AviatrixGatewayDnatConnectionPolicyArray []AviatrixGatewayDnatConnectionPolicyInput
+
+func (AviatrixGatewayDnatConnectionPolicyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AviatrixGatewayDnatConnectionPolicy)(nil)).Elem()
+}
+
+func (i AviatrixGatewayDnatConnectionPolicyArray) ToAviatrixGatewayDnatConnectionPolicyArrayOutput() AviatrixGatewayDnatConnectionPolicyArrayOutput {
+	return i.ToAviatrixGatewayDnatConnectionPolicyArrayOutputWithContext(context.Background())
+}
+
+func (i AviatrixGatewayDnatConnectionPolicyArray) ToAviatrixGatewayDnatConnectionPolicyArrayOutputWithContext(ctx context.Context) AviatrixGatewayDnatConnectionPolicyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AviatrixGatewayDnatConnectionPolicyArrayOutput)
+}
+
+type AviatrixGatewayDnatConnectionPolicyOutput struct{ *pulumi.OutputState }
+
+func (AviatrixGatewayDnatConnectionPolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AviatrixGatewayDnatConnectionPolicy)(nil)).Elem()
+}
+
+func (o AviatrixGatewayDnatConnectionPolicyOutput) ToAviatrixGatewayDnatConnectionPolicyOutput() AviatrixGatewayDnatConnectionPolicyOutput {
+	return o
+}
+
+func (o AviatrixGatewayDnatConnectionPolicyOutput) ToAviatrixGatewayDnatConnectionPolicyOutputWithContext(ctx context.Context) AviatrixGatewayDnatConnectionPolicyOutput {
+	return o
+}
+
+func (o AviatrixGatewayDnatConnectionPolicyOutput) ApplyRouteEntry() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatConnectionPolicy) *bool { return v.ApplyRouteEntry }).(pulumi.BoolPtrOutput)
+}
+
+func (o AviatrixGatewayDnatConnectionPolicyOutput) Connection() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatConnectionPolicy) *string { return v.Connection }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewayDnatConnectionPolicyOutput) DnatIps() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatConnectionPolicy) *string { return v.DnatIps }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewayDnatConnectionPolicyOutput) DnatPort() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatConnectionPolicy) *string { return v.DnatPort }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewayDnatConnectionPolicyOutput) DstCidr() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatConnectionPolicy) *string { return v.DstCidr }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewayDnatConnectionPolicyOutput) DstPort() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatConnectionPolicy) *string { return v.DstPort }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewayDnatConnectionPolicyOutput) ExcludeRtb() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatConnectionPolicy) *string { return v.ExcludeRtb }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewayDnatConnectionPolicyOutput) Interface() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatConnectionPolicy) *string { return v.Interface }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewayDnatConnectionPolicyOutput) Mark() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatConnectionPolicy) *string { return v.Mark }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewayDnatConnectionPolicyOutput) Protocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatConnectionPolicy) *string { return v.Protocol }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewayDnatConnectionPolicyOutput) SrcCidr() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatConnectionPolicy) *string { return v.SrcCidr }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewayDnatConnectionPolicyOutput) SrcPort() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatConnectionPolicy) *string { return v.SrcPort }).(pulumi.StringPtrOutput)
+}
+
+type AviatrixGatewayDnatConnectionPolicyArrayOutput struct{ *pulumi.OutputState }
+
+func (AviatrixGatewayDnatConnectionPolicyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AviatrixGatewayDnatConnectionPolicy)(nil)).Elem()
+}
+
+func (o AviatrixGatewayDnatConnectionPolicyArrayOutput) ToAviatrixGatewayDnatConnectionPolicyArrayOutput() AviatrixGatewayDnatConnectionPolicyArrayOutput {
+	return o
+}
+
+func (o AviatrixGatewayDnatConnectionPolicyArrayOutput) ToAviatrixGatewayDnatConnectionPolicyArrayOutputWithContext(ctx context.Context) AviatrixGatewayDnatConnectionPolicyArrayOutput {
+	return o
+}
+
+func (o AviatrixGatewayDnatConnectionPolicyArrayOutput) Index(i pulumi.IntInput) AviatrixGatewayDnatConnectionPolicyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AviatrixGatewayDnatConnectionPolicy {
+		return vs[0].([]AviatrixGatewayDnatConnectionPolicy)[vs[1].(int)]
+	}).(AviatrixGatewayDnatConnectionPolicyOutput)
+}
+
+type AviatrixGatewayDnatDnatPolicy struct {
+	ApplyRouteEntry *bool   `pulumi:"applyRouteEntry"`
+	Connection      *string `pulumi:"connection"`
+	DnatIps         *string `pulumi:"dnatIps"`
+	DnatPort        *string `pulumi:"dnatPort"`
+	DstCidr         *string `pulumi:"dstCidr"`
+	DstPort         *string `pulumi:"dstPort"`
+	ExcludeRtb      *string `pulumi:"excludeRtb"`
+	Interface       *string `pulumi:"interface"`
+	Mark            *string `pulumi:"mark"`
+	Protocol        *string `pulumi:"protocol"`
+	SrcCidr         *string `pulumi:"srcCidr"`
+	SrcPort         *string `pulumi:"srcPort"`
+}
+
+// AviatrixGatewayDnatDnatPolicyInput is an input type that accepts AviatrixGatewayDnatDnatPolicyArgs and AviatrixGatewayDnatDnatPolicyOutput values.
+// You can construct a concrete instance of `AviatrixGatewayDnatDnatPolicyInput` via:
+//
+//	AviatrixGatewayDnatDnatPolicyArgs{...}
+type AviatrixGatewayDnatDnatPolicyInput interface {
+	pulumi.Input
+
+	ToAviatrixGatewayDnatDnatPolicyOutput() AviatrixGatewayDnatDnatPolicyOutput
+	ToAviatrixGatewayDnatDnatPolicyOutputWithContext(context.Context) AviatrixGatewayDnatDnatPolicyOutput
+}
+
+type AviatrixGatewayDnatDnatPolicyArgs struct {
+	ApplyRouteEntry pulumi.BoolPtrInput   `pulumi:"applyRouteEntry"`
+	Connection      pulumi.StringPtrInput `pulumi:"connection"`
+	DnatIps         pulumi.StringPtrInput `pulumi:"dnatIps"`
+	DnatPort        pulumi.StringPtrInput `pulumi:"dnatPort"`
+	DstCidr         pulumi.StringPtrInput `pulumi:"dstCidr"`
+	DstPort         pulumi.StringPtrInput `pulumi:"dstPort"`
+	ExcludeRtb      pulumi.StringPtrInput `pulumi:"excludeRtb"`
+	Interface       pulumi.StringPtrInput `pulumi:"interface"`
+	Mark            pulumi.StringPtrInput `pulumi:"mark"`
+	Protocol        pulumi.StringPtrInput `pulumi:"protocol"`
+	SrcCidr         pulumi.StringPtrInput `pulumi:"srcCidr"`
+	SrcPort         pulumi.StringPtrInput `pulumi:"srcPort"`
+}
+
+func (AviatrixGatewayDnatDnatPolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AviatrixGatewayDnatDnatPolicy)(nil)).Elem()
+}
+
+func (i AviatrixGatewayDnatDnatPolicyArgs) ToAviatrixGatewayDnatDnatPolicyOutput() AviatrixGatewayDnatDnatPolicyOutput {
+	return i.ToAviatrixGatewayDnatDnatPolicyOutputWithContext(context.Background())
+}
+
+func (i AviatrixGatewayDnatDnatPolicyArgs) ToAviatrixGatewayDnatDnatPolicyOutputWithContext(ctx context.Context) AviatrixGatewayDnatDnatPolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AviatrixGatewayDnatDnatPolicyOutput)
+}
+
+// AviatrixGatewayDnatDnatPolicyArrayInput is an input type that accepts AviatrixGatewayDnatDnatPolicyArray and AviatrixGatewayDnatDnatPolicyArrayOutput values.
+// You can construct a concrete instance of `AviatrixGatewayDnatDnatPolicyArrayInput` via:
+//
+//	AviatrixGatewayDnatDnatPolicyArray{ AviatrixGatewayDnatDnatPolicyArgs{...} }
+type AviatrixGatewayDnatDnatPolicyArrayInput interface {
+	pulumi.Input
+
+	ToAviatrixGatewayDnatDnatPolicyArrayOutput() AviatrixGatewayDnatDnatPolicyArrayOutput
+	ToAviatrixGatewayDnatDnatPolicyArrayOutputWithContext(context.Context) AviatrixGatewayDnatDnatPolicyArrayOutput
+}
+
+type AviatrixGatewayDnatDnatPolicyArray []AviatrixGatewayDnatDnatPolicyInput
+
+func (AviatrixGatewayDnatDnatPolicyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AviatrixGatewayDnatDnatPolicy)(nil)).Elem()
+}
+
+func (i AviatrixGatewayDnatDnatPolicyArray) ToAviatrixGatewayDnatDnatPolicyArrayOutput() AviatrixGatewayDnatDnatPolicyArrayOutput {
+	return i.ToAviatrixGatewayDnatDnatPolicyArrayOutputWithContext(context.Background())
+}
+
+func (i AviatrixGatewayDnatDnatPolicyArray) ToAviatrixGatewayDnatDnatPolicyArrayOutputWithContext(ctx context.Context) AviatrixGatewayDnatDnatPolicyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AviatrixGatewayDnatDnatPolicyArrayOutput)
+}
+
+type AviatrixGatewayDnatDnatPolicyOutput struct{ *pulumi.OutputState }
+
+func (AviatrixGatewayDnatDnatPolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AviatrixGatewayDnatDnatPolicy)(nil)).Elem()
+}
+
+func (o AviatrixGatewayDnatDnatPolicyOutput) ToAviatrixGatewayDnatDnatPolicyOutput() AviatrixGatewayDnatDnatPolicyOutput {
+	return o
+}
+
+func (o AviatrixGatewayDnatDnatPolicyOutput) ToAviatrixGatewayDnatDnatPolicyOutputWithContext(ctx context.Context) AviatrixGatewayDnatDnatPolicyOutput {
+	return o
+}
+
+func (o AviatrixGatewayDnatDnatPolicyOutput) ApplyRouteEntry() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatDnatPolicy) *bool { return v.ApplyRouteEntry }).(pulumi.BoolPtrOutput)
+}
+
+func (o AviatrixGatewayDnatDnatPolicyOutput) Connection() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatDnatPolicy) *string { return v.Connection }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewayDnatDnatPolicyOutput) DnatIps() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatDnatPolicy) *string { return v.DnatIps }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewayDnatDnatPolicyOutput) DnatPort() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatDnatPolicy) *string { return v.DnatPort }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewayDnatDnatPolicyOutput) DstCidr() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatDnatPolicy) *string { return v.DstCidr }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewayDnatDnatPolicyOutput) DstPort() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatDnatPolicy) *string { return v.DstPort }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewayDnatDnatPolicyOutput) ExcludeRtb() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatDnatPolicy) *string { return v.ExcludeRtb }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewayDnatDnatPolicyOutput) Interface() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatDnatPolicy) *string { return v.Interface }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewayDnatDnatPolicyOutput) Mark() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatDnatPolicy) *string { return v.Mark }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewayDnatDnatPolicyOutput) Protocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatDnatPolicy) *string { return v.Protocol }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewayDnatDnatPolicyOutput) SrcCidr() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatDnatPolicy) *string { return v.SrcCidr }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewayDnatDnatPolicyOutput) SrcPort() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatDnatPolicy) *string { return v.SrcPort }).(pulumi.StringPtrOutput)
+}
+
+type AviatrixGatewayDnatDnatPolicyArrayOutput struct{ *pulumi.OutputState }
+
+func (AviatrixGatewayDnatDnatPolicyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AviatrixGatewayDnatDnatPolicy)(nil)).Elem()
+}
+
+func (o AviatrixGatewayDnatDnatPolicyArrayOutput) ToAviatrixGatewayDnatDnatPolicyArrayOutput() AviatrixGatewayDnatDnatPolicyArrayOutput {
+	return o
+}
+
+func (o AviatrixGatewayDnatDnatPolicyArrayOutput) ToAviatrixGatewayDnatDnatPolicyArrayOutputWithContext(ctx context.Context) AviatrixGatewayDnatDnatPolicyArrayOutput {
+	return o
+}
+
+func (o AviatrixGatewayDnatDnatPolicyArrayOutput) Index(i pulumi.IntInput) AviatrixGatewayDnatDnatPolicyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AviatrixGatewayDnatDnatPolicy {
+		return vs[0].([]AviatrixGatewayDnatDnatPolicy)[vs[1].(int)]
+	}).(AviatrixGatewayDnatDnatPolicyOutput)
+}
+
+type AviatrixGatewayDnatInterfacePolicy struct {
+	ApplyRouteEntry *bool   `pulumi:"applyRouteEntry"`
+	Connection      *string `pulumi:"connection"`
+	DnatIps         *string `pulumi:"dnatIps"`
+	DnatPort        *string `pulumi:"dnatPort"`
+	DstCidr         *string `pulumi:"dstCidr"`
+	DstPort         *string `pulumi:"dstPort"`
+	ExcludeRtb      *string `pulumi:"excludeRtb"`
+	Interface       *string `pulumi:"interface"`
+	Mark            *string `pulumi:"mark"`
+	Protocol        *string `pulumi:"protocol"`
+	SrcCidr         *string `pulumi:"srcCidr"`
+	SrcPort         *string `pulumi:"srcPort"`
+}
+
+// AviatrixGatewayDnatInterfacePolicyInput is an input type that accepts AviatrixGatewayDnatInterfacePolicyArgs and AviatrixGatewayDnatInterfacePolicyOutput values.
+// You can construct a concrete instance of `AviatrixGatewayDnatInterfacePolicyInput` via:
+//
+//	AviatrixGatewayDnatInterfacePolicyArgs{...}
+type AviatrixGatewayDnatInterfacePolicyInput interface {
+	pulumi.Input
+
+	ToAviatrixGatewayDnatInterfacePolicyOutput() AviatrixGatewayDnatInterfacePolicyOutput
+	ToAviatrixGatewayDnatInterfacePolicyOutputWithContext(context.Context) AviatrixGatewayDnatInterfacePolicyOutput
+}
+
+type AviatrixGatewayDnatInterfacePolicyArgs struct {
+	ApplyRouteEntry pulumi.BoolPtrInput   `pulumi:"applyRouteEntry"`
+	Connection      pulumi.StringPtrInput `pulumi:"connection"`
+	DnatIps         pulumi.StringPtrInput `pulumi:"dnatIps"`
+	DnatPort        pulumi.StringPtrInput `pulumi:"dnatPort"`
+	DstCidr         pulumi.StringPtrInput `pulumi:"dstCidr"`
+	DstPort         pulumi.StringPtrInput `pulumi:"dstPort"`
+	ExcludeRtb      pulumi.StringPtrInput `pulumi:"excludeRtb"`
+	Interface       pulumi.StringPtrInput `pulumi:"interface"`
+	Mark            pulumi.StringPtrInput `pulumi:"mark"`
+	Protocol        pulumi.StringPtrInput `pulumi:"protocol"`
+	SrcCidr         pulumi.StringPtrInput `pulumi:"srcCidr"`
+	SrcPort         pulumi.StringPtrInput `pulumi:"srcPort"`
+}
+
+func (AviatrixGatewayDnatInterfacePolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AviatrixGatewayDnatInterfacePolicy)(nil)).Elem()
+}
+
+func (i AviatrixGatewayDnatInterfacePolicyArgs) ToAviatrixGatewayDnatInterfacePolicyOutput() AviatrixGatewayDnatInterfacePolicyOutput {
+	return i.ToAviatrixGatewayDnatInterfacePolicyOutputWithContext(context.Background())
+}
+
+func (i AviatrixGatewayDnatInterfacePolicyArgs) ToAviatrixGatewayDnatInterfacePolicyOutputWithContext(ctx context.Context) AviatrixGatewayDnatInterfacePolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AviatrixGatewayDnatInterfacePolicyOutput)
+}
+
+// AviatrixGatewayDnatInterfacePolicyArrayInput is an input type that accepts AviatrixGatewayDnatInterfacePolicyArray and AviatrixGatewayDnatInterfacePolicyArrayOutput values.
+// You can construct a concrete instance of `AviatrixGatewayDnatInterfacePolicyArrayInput` via:
+//
+//	AviatrixGatewayDnatInterfacePolicyArray{ AviatrixGatewayDnatInterfacePolicyArgs{...} }
+type AviatrixGatewayDnatInterfacePolicyArrayInput interface {
+	pulumi.Input
+
+	ToAviatrixGatewayDnatInterfacePolicyArrayOutput() AviatrixGatewayDnatInterfacePolicyArrayOutput
+	ToAviatrixGatewayDnatInterfacePolicyArrayOutputWithContext(context.Context) AviatrixGatewayDnatInterfacePolicyArrayOutput
+}
+
+type AviatrixGatewayDnatInterfacePolicyArray []AviatrixGatewayDnatInterfacePolicyInput
+
+func (AviatrixGatewayDnatInterfacePolicyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AviatrixGatewayDnatInterfacePolicy)(nil)).Elem()
+}
+
+func (i AviatrixGatewayDnatInterfacePolicyArray) ToAviatrixGatewayDnatInterfacePolicyArrayOutput() AviatrixGatewayDnatInterfacePolicyArrayOutput {
+	return i.ToAviatrixGatewayDnatInterfacePolicyArrayOutputWithContext(context.Background())
+}
+
+func (i AviatrixGatewayDnatInterfacePolicyArray) ToAviatrixGatewayDnatInterfacePolicyArrayOutputWithContext(ctx context.Context) AviatrixGatewayDnatInterfacePolicyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AviatrixGatewayDnatInterfacePolicyArrayOutput)
+}
+
+type AviatrixGatewayDnatInterfacePolicyOutput struct{ *pulumi.OutputState }
+
+func (AviatrixGatewayDnatInterfacePolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AviatrixGatewayDnatInterfacePolicy)(nil)).Elem()
+}
+
+func (o AviatrixGatewayDnatInterfacePolicyOutput) ToAviatrixGatewayDnatInterfacePolicyOutput() AviatrixGatewayDnatInterfacePolicyOutput {
+	return o
+}
+
+func (o AviatrixGatewayDnatInterfacePolicyOutput) ToAviatrixGatewayDnatInterfacePolicyOutputWithContext(ctx context.Context) AviatrixGatewayDnatInterfacePolicyOutput {
+	return o
+}
+
+func (o AviatrixGatewayDnatInterfacePolicyOutput) ApplyRouteEntry() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatInterfacePolicy) *bool { return v.ApplyRouteEntry }).(pulumi.BoolPtrOutput)
+}
+
+func (o AviatrixGatewayDnatInterfacePolicyOutput) Connection() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatInterfacePolicy) *string { return v.Connection }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewayDnatInterfacePolicyOutput) DnatIps() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatInterfacePolicy) *string { return v.DnatIps }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewayDnatInterfacePolicyOutput) DnatPort() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatInterfacePolicy) *string { return v.DnatPort }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewayDnatInterfacePolicyOutput) DstCidr() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatInterfacePolicy) *string { return v.DstCidr }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewayDnatInterfacePolicyOutput) DstPort() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatInterfacePolicy) *string { return v.DstPort }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewayDnatInterfacePolicyOutput) ExcludeRtb() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatInterfacePolicy) *string { return v.ExcludeRtb }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewayDnatInterfacePolicyOutput) Interface() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatInterfacePolicy) *string { return v.Interface }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewayDnatInterfacePolicyOutput) Mark() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatInterfacePolicy) *string { return v.Mark }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewayDnatInterfacePolicyOutput) Protocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatInterfacePolicy) *string { return v.Protocol }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewayDnatInterfacePolicyOutput) SrcCidr() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatInterfacePolicy) *string { return v.SrcCidr }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewayDnatInterfacePolicyOutput) SrcPort() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewayDnatInterfacePolicy) *string { return v.SrcPort }).(pulumi.StringPtrOutput)
+}
+
+type AviatrixGatewayDnatInterfacePolicyArrayOutput struct{ *pulumi.OutputState }
+
+func (AviatrixGatewayDnatInterfacePolicyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AviatrixGatewayDnatInterfacePolicy)(nil)).Elem()
+}
+
+func (o AviatrixGatewayDnatInterfacePolicyArrayOutput) ToAviatrixGatewayDnatInterfacePolicyArrayOutput() AviatrixGatewayDnatInterfacePolicyArrayOutput {
+	return o
+}
+
+func (o AviatrixGatewayDnatInterfacePolicyArrayOutput) ToAviatrixGatewayDnatInterfacePolicyArrayOutputWithContext(ctx context.Context) AviatrixGatewayDnatInterfacePolicyArrayOutput {
+	return o
+}
+
+func (o AviatrixGatewayDnatInterfacePolicyArrayOutput) Index(i pulumi.IntInput) AviatrixGatewayDnatInterfacePolicyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AviatrixGatewayDnatInterfacePolicy {
+		return vs[0].([]AviatrixGatewayDnatInterfacePolicy)[vs[1].(int)]
+	}).(AviatrixGatewayDnatInterfacePolicyOutput)
+}
+
+type AviatrixGatewaySnatConnectionPolicy struct {
+	ApplyRouteEntry *bool   `pulumi:"applyRouteEntry"`
+	Connection      *string `pulumi:"connection"`
+	DstCidr         *string `pulumi:"dstCidr"`
+	DstPort         *string `pulumi:"dstPort"`
+	ExcludeRtb      *string `pulumi:"excludeRtb"`
+	Interface       *string `pulumi:"interface"`
+	Mark            *string `pulumi:"mark"`
+	Protocol        *string `pulumi:"protocol"`
+	SnatIps         *string `pulumi:"snatIps"`
+	SnatPort        *string `pulumi:"snatPort"`
+	SrcCidr         *string `pulumi:"srcCidr"`
+	SrcPort         *string `pulumi:"srcPort"`
+}
+
+// AviatrixGatewaySnatConnectionPolicyInput is an input type that accepts AviatrixGatewaySnatConnectionPolicyArgs and AviatrixGatewaySnatConnectionPolicyOutput values.
+// You can construct a concrete instance of `AviatrixGatewaySnatConnectionPolicyInput` via:
+//
+//	AviatrixGatewaySnatConnectionPolicyArgs{...}
+type AviatrixGatewaySnatConnectionPolicyInput interface {
+	pulumi.Input
+
+	ToAviatrixGatewaySnatConnectionPolicyOutput() AviatrixGatewaySnatConnectionPolicyOutput
+	ToAviatrixGatewaySnatConnectionPolicyOutputWithContext(context.Context) AviatrixGatewaySnatConnectionPolicyOutput
+}
+
+type AviatrixGatewaySnatConnectionPolicyArgs struct {
+	ApplyRouteEntry pulumi.BoolPtrInput   `pulumi:"applyRouteEntry"`
+	Connection      pulumi.StringPtrInput `pulumi:"connection"`
+	DstCidr         pulumi.StringPtrInput `pulumi:"dstCidr"`
+	DstPort         pulumi.StringPtrInput `pulumi:"dstPort"`
+	ExcludeRtb      pulumi.StringPtrInput `pulumi:"excludeRtb"`
+	Interface       pulumi.StringPtrInput `pulumi:"interface"`
+	Mark            pulumi.StringPtrInput `pulumi:"mark"`
+	Protocol        pulumi.StringPtrInput `pulumi:"protocol"`
+	SnatIps         pulumi.StringPtrInput `pulumi:"snatIps"`
+	SnatPort        pulumi.StringPtrInput `pulumi:"snatPort"`
+	SrcCidr         pulumi.StringPtrInput `pulumi:"srcCidr"`
+	SrcPort         pulumi.StringPtrInput `pulumi:"srcPort"`
+}
+
+func (AviatrixGatewaySnatConnectionPolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AviatrixGatewaySnatConnectionPolicy)(nil)).Elem()
+}
+
+func (i AviatrixGatewaySnatConnectionPolicyArgs) ToAviatrixGatewaySnatConnectionPolicyOutput() AviatrixGatewaySnatConnectionPolicyOutput {
+	return i.ToAviatrixGatewaySnatConnectionPolicyOutputWithContext(context.Background())
+}
+
+func (i AviatrixGatewaySnatConnectionPolicyArgs) ToAviatrixGatewaySnatConnectionPolicyOutputWithContext(ctx context.Context) AviatrixGatewaySnatConnectionPolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AviatrixGatewaySnatConnectionPolicyOutput)
+}
+
+// AviatrixGatewaySnatConnectionPolicyArrayInput is an input type that accepts AviatrixGatewaySnatConnectionPolicyArray and AviatrixGatewaySnatConnectionPolicyArrayOutput values.
+// You can construct a concrete instance of `AviatrixGatewaySnatConnectionPolicyArrayInput` via:
+//
+//	AviatrixGatewaySnatConnectionPolicyArray{ AviatrixGatewaySnatConnectionPolicyArgs{...} }
+type AviatrixGatewaySnatConnectionPolicyArrayInput interface {
+	pulumi.Input
+
+	ToAviatrixGatewaySnatConnectionPolicyArrayOutput() AviatrixGatewaySnatConnectionPolicyArrayOutput
+	ToAviatrixGatewaySnatConnectionPolicyArrayOutputWithContext(context.Context) AviatrixGatewaySnatConnectionPolicyArrayOutput
+}
+
+type AviatrixGatewaySnatConnectionPolicyArray []AviatrixGatewaySnatConnectionPolicyInput
+
+func (AviatrixGatewaySnatConnectionPolicyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AviatrixGatewaySnatConnectionPolicy)(nil)).Elem()
+}
+
+func (i AviatrixGatewaySnatConnectionPolicyArray) ToAviatrixGatewaySnatConnectionPolicyArrayOutput() AviatrixGatewaySnatConnectionPolicyArrayOutput {
+	return i.ToAviatrixGatewaySnatConnectionPolicyArrayOutputWithContext(context.Background())
+}
+
+func (i AviatrixGatewaySnatConnectionPolicyArray) ToAviatrixGatewaySnatConnectionPolicyArrayOutputWithContext(ctx context.Context) AviatrixGatewaySnatConnectionPolicyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AviatrixGatewaySnatConnectionPolicyArrayOutput)
+}
+
+type AviatrixGatewaySnatConnectionPolicyOutput struct{ *pulumi.OutputState }
+
+func (AviatrixGatewaySnatConnectionPolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AviatrixGatewaySnatConnectionPolicy)(nil)).Elem()
+}
+
+func (o AviatrixGatewaySnatConnectionPolicyOutput) ToAviatrixGatewaySnatConnectionPolicyOutput() AviatrixGatewaySnatConnectionPolicyOutput {
+	return o
+}
+
+func (o AviatrixGatewaySnatConnectionPolicyOutput) ToAviatrixGatewaySnatConnectionPolicyOutputWithContext(ctx context.Context) AviatrixGatewaySnatConnectionPolicyOutput {
+	return o
+}
+
+func (o AviatrixGatewaySnatConnectionPolicyOutput) ApplyRouteEntry() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatConnectionPolicy) *bool { return v.ApplyRouteEntry }).(pulumi.BoolPtrOutput)
+}
+
+func (o AviatrixGatewaySnatConnectionPolicyOutput) Connection() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatConnectionPolicy) *string { return v.Connection }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewaySnatConnectionPolicyOutput) DstCidr() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatConnectionPolicy) *string { return v.DstCidr }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewaySnatConnectionPolicyOutput) DstPort() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatConnectionPolicy) *string { return v.DstPort }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewaySnatConnectionPolicyOutput) ExcludeRtb() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatConnectionPolicy) *string { return v.ExcludeRtb }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewaySnatConnectionPolicyOutput) Interface() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatConnectionPolicy) *string { return v.Interface }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewaySnatConnectionPolicyOutput) Mark() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatConnectionPolicy) *string { return v.Mark }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewaySnatConnectionPolicyOutput) Protocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatConnectionPolicy) *string { return v.Protocol }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewaySnatConnectionPolicyOutput) SnatIps() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatConnectionPolicy) *string { return v.SnatIps }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewaySnatConnectionPolicyOutput) SnatPort() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatConnectionPolicy) *string { return v.SnatPort }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewaySnatConnectionPolicyOutput) SrcCidr() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatConnectionPolicy) *string { return v.SrcCidr }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewaySnatConnectionPolicyOutput) SrcPort() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatConnectionPolicy) *string { return v.SrcPort }).(pulumi.StringPtrOutput)
+}
+
+type AviatrixGatewaySnatConnectionPolicyArrayOutput struct{ *pulumi.OutputState }
+
+func (AviatrixGatewaySnatConnectionPolicyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AviatrixGatewaySnatConnectionPolicy)(nil)).Elem()
+}
+
+func (o AviatrixGatewaySnatConnectionPolicyArrayOutput) ToAviatrixGatewaySnatConnectionPolicyArrayOutput() AviatrixGatewaySnatConnectionPolicyArrayOutput {
+	return o
+}
+
+func (o AviatrixGatewaySnatConnectionPolicyArrayOutput) ToAviatrixGatewaySnatConnectionPolicyArrayOutputWithContext(ctx context.Context) AviatrixGatewaySnatConnectionPolicyArrayOutput {
+	return o
+}
+
+func (o AviatrixGatewaySnatConnectionPolicyArrayOutput) Index(i pulumi.IntInput) AviatrixGatewaySnatConnectionPolicyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AviatrixGatewaySnatConnectionPolicy {
+		return vs[0].([]AviatrixGatewaySnatConnectionPolicy)[vs[1].(int)]
+	}).(AviatrixGatewaySnatConnectionPolicyOutput)
+}
+
+type AviatrixGatewaySnatInterfacePolicy struct {
+	ApplyRouteEntry *bool   `pulumi:"applyRouteEntry"`
+	Connection      *string `pulumi:"connection"`
+	DstCidr         *string `pulumi:"dstCidr"`
+	DstPort         *string `pulumi:"dstPort"`
+	ExcludeRtb      *string `pulumi:"excludeRtb"`
+	Interface       *string `pulumi:"interface"`
+	Mark            *string `pulumi:"mark"`
+	Protocol        *string `pulumi:"protocol"`
+	SnatIps         *string `pulumi:"snatIps"`
+	SnatPort        *string `pulumi:"snatPort"`
+	SrcCidr         *string `pulumi:"srcCidr"`
+	SrcPort         *string `pulumi:"srcPort"`
+}
+
+// AviatrixGatewaySnatInterfacePolicyInput is an input type that accepts AviatrixGatewaySnatInterfacePolicyArgs and AviatrixGatewaySnatInterfacePolicyOutput values.
+// You can construct a concrete instance of `AviatrixGatewaySnatInterfacePolicyInput` via:
+//
+//	AviatrixGatewaySnatInterfacePolicyArgs{...}
+type AviatrixGatewaySnatInterfacePolicyInput interface {
+	pulumi.Input
+
+	ToAviatrixGatewaySnatInterfacePolicyOutput() AviatrixGatewaySnatInterfacePolicyOutput
+	ToAviatrixGatewaySnatInterfacePolicyOutputWithContext(context.Context) AviatrixGatewaySnatInterfacePolicyOutput
+}
+
+type AviatrixGatewaySnatInterfacePolicyArgs struct {
+	ApplyRouteEntry pulumi.BoolPtrInput   `pulumi:"applyRouteEntry"`
+	Connection      pulumi.StringPtrInput `pulumi:"connection"`
+	DstCidr         pulumi.StringPtrInput `pulumi:"dstCidr"`
+	DstPort         pulumi.StringPtrInput `pulumi:"dstPort"`
+	ExcludeRtb      pulumi.StringPtrInput `pulumi:"excludeRtb"`
+	Interface       pulumi.StringPtrInput `pulumi:"interface"`
+	Mark            pulumi.StringPtrInput `pulumi:"mark"`
+	Protocol        pulumi.StringPtrInput `pulumi:"protocol"`
+	SnatIps         pulumi.StringPtrInput `pulumi:"snatIps"`
+	SnatPort        pulumi.StringPtrInput `pulumi:"snatPort"`
+	SrcCidr         pulumi.StringPtrInput `pulumi:"srcCidr"`
+	SrcPort         pulumi.StringPtrInput `pulumi:"srcPort"`
+}
+
+func (AviatrixGatewaySnatInterfacePolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AviatrixGatewaySnatInterfacePolicy)(nil)).Elem()
+}
+
+func (i AviatrixGatewaySnatInterfacePolicyArgs) ToAviatrixGatewaySnatInterfacePolicyOutput() AviatrixGatewaySnatInterfacePolicyOutput {
+	return i.ToAviatrixGatewaySnatInterfacePolicyOutputWithContext(context.Background())
+}
+
+func (i AviatrixGatewaySnatInterfacePolicyArgs) ToAviatrixGatewaySnatInterfacePolicyOutputWithContext(ctx context.Context) AviatrixGatewaySnatInterfacePolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AviatrixGatewaySnatInterfacePolicyOutput)
+}
+
+// AviatrixGatewaySnatInterfacePolicyArrayInput is an input type that accepts AviatrixGatewaySnatInterfacePolicyArray and AviatrixGatewaySnatInterfacePolicyArrayOutput values.
+// You can construct a concrete instance of `AviatrixGatewaySnatInterfacePolicyArrayInput` via:
+//
+//	AviatrixGatewaySnatInterfacePolicyArray{ AviatrixGatewaySnatInterfacePolicyArgs{...} }
+type AviatrixGatewaySnatInterfacePolicyArrayInput interface {
+	pulumi.Input
+
+	ToAviatrixGatewaySnatInterfacePolicyArrayOutput() AviatrixGatewaySnatInterfacePolicyArrayOutput
+	ToAviatrixGatewaySnatInterfacePolicyArrayOutputWithContext(context.Context) AviatrixGatewaySnatInterfacePolicyArrayOutput
+}
+
+type AviatrixGatewaySnatInterfacePolicyArray []AviatrixGatewaySnatInterfacePolicyInput
+
+func (AviatrixGatewaySnatInterfacePolicyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AviatrixGatewaySnatInterfacePolicy)(nil)).Elem()
+}
+
+func (i AviatrixGatewaySnatInterfacePolicyArray) ToAviatrixGatewaySnatInterfacePolicyArrayOutput() AviatrixGatewaySnatInterfacePolicyArrayOutput {
+	return i.ToAviatrixGatewaySnatInterfacePolicyArrayOutputWithContext(context.Background())
+}
+
+func (i AviatrixGatewaySnatInterfacePolicyArray) ToAviatrixGatewaySnatInterfacePolicyArrayOutputWithContext(ctx context.Context) AviatrixGatewaySnatInterfacePolicyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AviatrixGatewaySnatInterfacePolicyArrayOutput)
+}
+
+type AviatrixGatewaySnatInterfacePolicyOutput struct{ *pulumi.OutputState }
+
+func (AviatrixGatewaySnatInterfacePolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AviatrixGatewaySnatInterfacePolicy)(nil)).Elem()
+}
+
+func (o AviatrixGatewaySnatInterfacePolicyOutput) ToAviatrixGatewaySnatInterfacePolicyOutput() AviatrixGatewaySnatInterfacePolicyOutput {
+	return o
+}
+
+func (o AviatrixGatewaySnatInterfacePolicyOutput) ToAviatrixGatewaySnatInterfacePolicyOutputWithContext(ctx context.Context) AviatrixGatewaySnatInterfacePolicyOutput {
+	return o
+}
+
+func (o AviatrixGatewaySnatInterfacePolicyOutput) ApplyRouteEntry() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatInterfacePolicy) *bool { return v.ApplyRouteEntry }).(pulumi.BoolPtrOutput)
+}
+
+func (o AviatrixGatewaySnatInterfacePolicyOutput) Connection() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatInterfacePolicy) *string { return v.Connection }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewaySnatInterfacePolicyOutput) DstCidr() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatInterfacePolicy) *string { return v.DstCidr }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewaySnatInterfacePolicyOutput) DstPort() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatInterfacePolicy) *string { return v.DstPort }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewaySnatInterfacePolicyOutput) ExcludeRtb() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatInterfacePolicy) *string { return v.ExcludeRtb }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewaySnatInterfacePolicyOutput) Interface() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatInterfacePolicy) *string { return v.Interface }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewaySnatInterfacePolicyOutput) Mark() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatInterfacePolicy) *string { return v.Mark }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewaySnatInterfacePolicyOutput) Protocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatInterfacePolicy) *string { return v.Protocol }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewaySnatInterfacePolicyOutput) SnatIps() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatInterfacePolicy) *string { return v.SnatIps }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewaySnatInterfacePolicyOutput) SnatPort() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatInterfacePolicy) *string { return v.SnatPort }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewaySnatInterfacePolicyOutput) SrcCidr() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatInterfacePolicy) *string { return v.SrcCidr }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewaySnatInterfacePolicyOutput) SrcPort() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatInterfacePolicy) *string { return v.SrcPort }).(pulumi.StringPtrOutput)
+}
+
+type AviatrixGatewaySnatInterfacePolicyArrayOutput struct{ *pulumi.OutputState }
+
+func (AviatrixGatewaySnatInterfacePolicyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AviatrixGatewaySnatInterfacePolicy)(nil)).Elem()
+}
+
+func (o AviatrixGatewaySnatInterfacePolicyArrayOutput) ToAviatrixGatewaySnatInterfacePolicyArrayOutput() AviatrixGatewaySnatInterfacePolicyArrayOutput {
+	return o
+}
+
+func (o AviatrixGatewaySnatInterfacePolicyArrayOutput) ToAviatrixGatewaySnatInterfacePolicyArrayOutputWithContext(ctx context.Context) AviatrixGatewaySnatInterfacePolicyArrayOutput {
+	return o
+}
+
+func (o AviatrixGatewaySnatInterfacePolicyArrayOutput) Index(i pulumi.IntInput) AviatrixGatewaySnatInterfacePolicyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AviatrixGatewaySnatInterfacePolicy {
+		return vs[0].([]AviatrixGatewaySnatInterfacePolicy)[vs[1].(int)]
+	}).(AviatrixGatewaySnatInterfacePolicyOutput)
+}
+
+type AviatrixGatewaySnatSnatPolicy struct {
+	ApplyRouteEntry *bool   `pulumi:"applyRouteEntry"`
+	Connection      *string `pulumi:"connection"`
+	DstCidr         *string `pulumi:"dstCidr"`
+	DstPort         *string `pulumi:"dstPort"`
+	ExcludeRtb      *string `pulumi:"excludeRtb"`
+	Interface       *string `pulumi:"interface"`
+	Mark            *string `pulumi:"mark"`
+	Protocol        *string `pulumi:"protocol"`
+	SnatIps         *string `pulumi:"snatIps"`
+	SnatPort        *string `pulumi:"snatPort"`
+	SrcCidr         *string `pulumi:"srcCidr"`
+	SrcPort         *string `pulumi:"srcPort"`
+}
+
+// AviatrixGatewaySnatSnatPolicyInput is an input type that accepts AviatrixGatewaySnatSnatPolicyArgs and AviatrixGatewaySnatSnatPolicyOutput values.
+// You can construct a concrete instance of `AviatrixGatewaySnatSnatPolicyInput` via:
+//
+//	AviatrixGatewaySnatSnatPolicyArgs{...}
+type AviatrixGatewaySnatSnatPolicyInput interface {
+	pulumi.Input
+
+	ToAviatrixGatewaySnatSnatPolicyOutput() AviatrixGatewaySnatSnatPolicyOutput
+	ToAviatrixGatewaySnatSnatPolicyOutputWithContext(context.Context) AviatrixGatewaySnatSnatPolicyOutput
+}
+
+type AviatrixGatewaySnatSnatPolicyArgs struct {
+	ApplyRouteEntry pulumi.BoolPtrInput   `pulumi:"applyRouteEntry"`
+	Connection      pulumi.StringPtrInput `pulumi:"connection"`
+	DstCidr         pulumi.StringPtrInput `pulumi:"dstCidr"`
+	DstPort         pulumi.StringPtrInput `pulumi:"dstPort"`
+	ExcludeRtb      pulumi.StringPtrInput `pulumi:"excludeRtb"`
+	Interface       pulumi.StringPtrInput `pulumi:"interface"`
+	Mark            pulumi.StringPtrInput `pulumi:"mark"`
+	Protocol        pulumi.StringPtrInput `pulumi:"protocol"`
+	SnatIps         pulumi.StringPtrInput `pulumi:"snatIps"`
+	SnatPort        pulumi.StringPtrInput `pulumi:"snatPort"`
+	SrcCidr         pulumi.StringPtrInput `pulumi:"srcCidr"`
+	SrcPort         pulumi.StringPtrInput `pulumi:"srcPort"`
+}
+
+func (AviatrixGatewaySnatSnatPolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AviatrixGatewaySnatSnatPolicy)(nil)).Elem()
+}
+
+func (i AviatrixGatewaySnatSnatPolicyArgs) ToAviatrixGatewaySnatSnatPolicyOutput() AviatrixGatewaySnatSnatPolicyOutput {
+	return i.ToAviatrixGatewaySnatSnatPolicyOutputWithContext(context.Background())
+}
+
+func (i AviatrixGatewaySnatSnatPolicyArgs) ToAviatrixGatewaySnatSnatPolicyOutputWithContext(ctx context.Context) AviatrixGatewaySnatSnatPolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AviatrixGatewaySnatSnatPolicyOutput)
+}
+
+// AviatrixGatewaySnatSnatPolicyArrayInput is an input type that accepts AviatrixGatewaySnatSnatPolicyArray and AviatrixGatewaySnatSnatPolicyArrayOutput values.
+// You can construct a concrete instance of `AviatrixGatewaySnatSnatPolicyArrayInput` via:
+//
+//	AviatrixGatewaySnatSnatPolicyArray{ AviatrixGatewaySnatSnatPolicyArgs{...} }
+type AviatrixGatewaySnatSnatPolicyArrayInput interface {
+	pulumi.Input
+
+	ToAviatrixGatewaySnatSnatPolicyArrayOutput() AviatrixGatewaySnatSnatPolicyArrayOutput
+	ToAviatrixGatewaySnatSnatPolicyArrayOutputWithContext(context.Context) AviatrixGatewaySnatSnatPolicyArrayOutput
+}
+
+type AviatrixGatewaySnatSnatPolicyArray []AviatrixGatewaySnatSnatPolicyInput
+
+func (AviatrixGatewaySnatSnatPolicyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AviatrixGatewaySnatSnatPolicy)(nil)).Elem()
+}
+
+func (i AviatrixGatewaySnatSnatPolicyArray) ToAviatrixGatewaySnatSnatPolicyArrayOutput() AviatrixGatewaySnatSnatPolicyArrayOutput {
+	return i.ToAviatrixGatewaySnatSnatPolicyArrayOutputWithContext(context.Background())
+}
+
+func (i AviatrixGatewaySnatSnatPolicyArray) ToAviatrixGatewaySnatSnatPolicyArrayOutputWithContext(ctx context.Context) AviatrixGatewaySnatSnatPolicyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AviatrixGatewaySnatSnatPolicyArrayOutput)
+}
+
+type AviatrixGatewaySnatSnatPolicyOutput struct{ *pulumi.OutputState }
+
+func (AviatrixGatewaySnatSnatPolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AviatrixGatewaySnatSnatPolicy)(nil)).Elem()
+}
+
+func (o AviatrixGatewaySnatSnatPolicyOutput) ToAviatrixGatewaySnatSnatPolicyOutput() AviatrixGatewaySnatSnatPolicyOutput {
+	return o
+}
+
+func (o AviatrixGatewaySnatSnatPolicyOutput) ToAviatrixGatewaySnatSnatPolicyOutputWithContext(ctx context.Context) AviatrixGatewaySnatSnatPolicyOutput {
+	return o
+}
+
+func (o AviatrixGatewaySnatSnatPolicyOutput) ApplyRouteEntry() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatSnatPolicy) *bool { return v.ApplyRouteEntry }).(pulumi.BoolPtrOutput)
+}
+
+func (o AviatrixGatewaySnatSnatPolicyOutput) Connection() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatSnatPolicy) *string { return v.Connection }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewaySnatSnatPolicyOutput) DstCidr() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatSnatPolicy) *string { return v.DstCidr }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewaySnatSnatPolicyOutput) DstPort() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatSnatPolicy) *string { return v.DstPort }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewaySnatSnatPolicyOutput) ExcludeRtb() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatSnatPolicy) *string { return v.ExcludeRtb }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewaySnatSnatPolicyOutput) Interface() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatSnatPolicy) *string { return v.Interface }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewaySnatSnatPolicyOutput) Mark() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatSnatPolicy) *string { return v.Mark }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewaySnatSnatPolicyOutput) Protocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatSnatPolicy) *string { return v.Protocol }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewaySnatSnatPolicyOutput) SnatIps() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatSnatPolicy) *string { return v.SnatIps }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewaySnatSnatPolicyOutput) SnatPort() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatSnatPolicy) *string { return v.SnatPort }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewaySnatSnatPolicyOutput) SrcCidr() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatSnatPolicy) *string { return v.SrcCidr }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixGatewaySnatSnatPolicyOutput) SrcPort() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixGatewaySnatSnatPolicy) *string { return v.SrcPort }).(pulumi.StringPtrOutput)
+}
+
+type AviatrixGatewaySnatSnatPolicyArrayOutput struct{ *pulumi.OutputState }
+
+func (AviatrixGatewaySnatSnatPolicyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AviatrixGatewaySnatSnatPolicy)(nil)).Elem()
+}
+
+func (o AviatrixGatewaySnatSnatPolicyArrayOutput) ToAviatrixGatewaySnatSnatPolicyArrayOutput() AviatrixGatewaySnatSnatPolicyArrayOutput {
+	return o
+}
+
+func (o AviatrixGatewaySnatSnatPolicyArrayOutput) ToAviatrixGatewaySnatSnatPolicyArrayOutputWithContext(ctx context.Context) AviatrixGatewaySnatSnatPolicyArrayOutput {
+	return o
+}
+
+func (o AviatrixGatewaySnatSnatPolicyArrayOutput) Index(i pulumi.IntInput) AviatrixGatewaySnatSnatPolicyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AviatrixGatewaySnatSnatPolicy {
+		return vs[0].([]AviatrixGatewaySnatSnatPolicy)[vs[1].(int)]
+	}).(AviatrixGatewaySnatSnatPolicyOutput)
+}
+
+type AviatrixMicrosegPolicyListPolicy struct {
+	Action        string                                      `pulumi:"action"`
+	DstAppDomains []string                                    `pulumi:"dstAppDomains"`
+	Logging       *bool                                       `pulumi:"logging"`
+	Name          string                                      `pulumi:"name"`
+	PortRanges    []AviatrixMicrosegPolicyListPolicyPortRange `pulumi:"portRanges"`
+	Priority      *int                                        `pulumi:"priority"`
+	Protocol      string                                      `pulumi:"protocol"`
+	SrcAppDomains []string                                    `pulumi:"srcAppDomains"`
+	Uuid          *string                                     `pulumi:"uuid"`
+	Watch         *bool                                       `pulumi:"watch"`
+}
+
+// AviatrixMicrosegPolicyListPolicyInput is an input type that accepts AviatrixMicrosegPolicyListPolicyArgs and AviatrixMicrosegPolicyListPolicyOutput values.
+// You can construct a concrete instance of `AviatrixMicrosegPolicyListPolicyInput` via:
+//
+//	AviatrixMicrosegPolicyListPolicyArgs{...}
+type AviatrixMicrosegPolicyListPolicyInput interface {
+	pulumi.Input
+
+	ToAviatrixMicrosegPolicyListPolicyOutput() AviatrixMicrosegPolicyListPolicyOutput
+	ToAviatrixMicrosegPolicyListPolicyOutputWithContext(context.Context) AviatrixMicrosegPolicyListPolicyOutput
+}
+
+type AviatrixMicrosegPolicyListPolicyArgs struct {
+	Action        pulumi.StringInput                                  `pulumi:"action"`
+	DstAppDomains pulumi.StringArrayInput                             `pulumi:"dstAppDomains"`
+	Logging       pulumi.BoolPtrInput                                 `pulumi:"logging"`
+	Name          pulumi.StringInput                                  `pulumi:"name"`
+	PortRanges    AviatrixMicrosegPolicyListPolicyPortRangeArrayInput `pulumi:"portRanges"`
+	Priority      pulumi.IntPtrInput                                  `pulumi:"priority"`
+	Protocol      pulumi.StringInput                                  `pulumi:"protocol"`
+	SrcAppDomains pulumi.StringArrayInput                             `pulumi:"srcAppDomains"`
+	Uuid          pulumi.StringPtrInput                               `pulumi:"uuid"`
+	Watch         pulumi.BoolPtrInput                                 `pulumi:"watch"`
+}
+
+func (AviatrixMicrosegPolicyListPolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AviatrixMicrosegPolicyListPolicy)(nil)).Elem()
+}
+
+func (i AviatrixMicrosegPolicyListPolicyArgs) ToAviatrixMicrosegPolicyListPolicyOutput() AviatrixMicrosegPolicyListPolicyOutput {
+	return i.ToAviatrixMicrosegPolicyListPolicyOutputWithContext(context.Background())
+}
+
+func (i AviatrixMicrosegPolicyListPolicyArgs) ToAviatrixMicrosegPolicyListPolicyOutputWithContext(ctx context.Context) AviatrixMicrosegPolicyListPolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AviatrixMicrosegPolicyListPolicyOutput)
+}
+
+// AviatrixMicrosegPolicyListPolicyArrayInput is an input type that accepts AviatrixMicrosegPolicyListPolicyArray and AviatrixMicrosegPolicyListPolicyArrayOutput values.
+// You can construct a concrete instance of `AviatrixMicrosegPolicyListPolicyArrayInput` via:
+//
+//	AviatrixMicrosegPolicyListPolicyArray{ AviatrixMicrosegPolicyListPolicyArgs{...} }
+type AviatrixMicrosegPolicyListPolicyArrayInput interface {
+	pulumi.Input
+
+	ToAviatrixMicrosegPolicyListPolicyArrayOutput() AviatrixMicrosegPolicyListPolicyArrayOutput
+	ToAviatrixMicrosegPolicyListPolicyArrayOutputWithContext(context.Context) AviatrixMicrosegPolicyListPolicyArrayOutput
+}
+
+type AviatrixMicrosegPolicyListPolicyArray []AviatrixMicrosegPolicyListPolicyInput
+
+func (AviatrixMicrosegPolicyListPolicyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AviatrixMicrosegPolicyListPolicy)(nil)).Elem()
+}
+
+func (i AviatrixMicrosegPolicyListPolicyArray) ToAviatrixMicrosegPolicyListPolicyArrayOutput() AviatrixMicrosegPolicyListPolicyArrayOutput {
+	return i.ToAviatrixMicrosegPolicyListPolicyArrayOutputWithContext(context.Background())
+}
+
+func (i AviatrixMicrosegPolicyListPolicyArray) ToAviatrixMicrosegPolicyListPolicyArrayOutputWithContext(ctx context.Context) AviatrixMicrosegPolicyListPolicyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AviatrixMicrosegPolicyListPolicyArrayOutput)
+}
+
+type AviatrixMicrosegPolicyListPolicyOutput struct{ *pulumi.OutputState }
+
+func (AviatrixMicrosegPolicyListPolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AviatrixMicrosegPolicyListPolicy)(nil)).Elem()
+}
+
+func (o AviatrixMicrosegPolicyListPolicyOutput) ToAviatrixMicrosegPolicyListPolicyOutput() AviatrixMicrosegPolicyListPolicyOutput {
+	return o
+}
+
+func (o AviatrixMicrosegPolicyListPolicyOutput) ToAviatrixMicrosegPolicyListPolicyOutputWithContext(ctx context.Context) AviatrixMicrosegPolicyListPolicyOutput {
+	return o
+}
+
+func (o AviatrixMicrosegPolicyListPolicyOutput) Action() pulumi.StringOutput {
+	return o.ApplyT(func(v AviatrixMicrosegPolicyListPolicy) string { return v.Action }).(pulumi.StringOutput)
+}
+
+func (o AviatrixMicrosegPolicyListPolicyOutput) DstAppDomains() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AviatrixMicrosegPolicyListPolicy) []string { return v.DstAppDomains }).(pulumi.StringArrayOutput)
+}
+
+func (o AviatrixMicrosegPolicyListPolicyOutput) Logging() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v AviatrixMicrosegPolicyListPolicy) *bool { return v.Logging }).(pulumi.BoolPtrOutput)
+}
+
+func (o AviatrixMicrosegPolicyListPolicyOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v AviatrixMicrosegPolicyListPolicy) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o AviatrixMicrosegPolicyListPolicyOutput) PortRanges() AviatrixMicrosegPolicyListPolicyPortRangeArrayOutput {
+	return o.ApplyT(func(v AviatrixMicrosegPolicyListPolicy) []AviatrixMicrosegPolicyListPolicyPortRange {
+		return v.PortRanges
+	}).(AviatrixMicrosegPolicyListPolicyPortRangeArrayOutput)
+}
+
+func (o AviatrixMicrosegPolicyListPolicyOutput) Priority() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AviatrixMicrosegPolicyListPolicy) *int { return v.Priority }).(pulumi.IntPtrOutput)
+}
+
+func (o AviatrixMicrosegPolicyListPolicyOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v AviatrixMicrosegPolicyListPolicy) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+func (o AviatrixMicrosegPolicyListPolicyOutput) SrcAppDomains() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AviatrixMicrosegPolicyListPolicy) []string { return v.SrcAppDomains }).(pulumi.StringArrayOutput)
+}
+
+func (o AviatrixMicrosegPolicyListPolicyOutput) Uuid() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixMicrosegPolicyListPolicy) *string { return v.Uuid }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixMicrosegPolicyListPolicyOutput) Watch() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v AviatrixMicrosegPolicyListPolicy) *bool { return v.Watch }).(pulumi.BoolPtrOutput)
+}
+
+type AviatrixMicrosegPolicyListPolicyArrayOutput struct{ *pulumi.OutputState }
+
+func (AviatrixMicrosegPolicyListPolicyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AviatrixMicrosegPolicyListPolicy)(nil)).Elem()
+}
+
+func (o AviatrixMicrosegPolicyListPolicyArrayOutput) ToAviatrixMicrosegPolicyListPolicyArrayOutput() AviatrixMicrosegPolicyListPolicyArrayOutput {
+	return o
+}
+
+func (o AviatrixMicrosegPolicyListPolicyArrayOutput) ToAviatrixMicrosegPolicyListPolicyArrayOutputWithContext(ctx context.Context) AviatrixMicrosegPolicyListPolicyArrayOutput {
+	return o
+}
+
+func (o AviatrixMicrosegPolicyListPolicyArrayOutput) Index(i pulumi.IntInput) AviatrixMicrosegPolicyListPolicyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AviatrixMicrosegPolicyListPolicy {
+		return vs[0].([]AviatrixMicrosegPolicyListPolicy)[vs[1].(int)]
+	}).(AviatrixMicrosegPolicyListPolicyOutput)
+}
+
+type AviatrixMicrosegPolicyListPolicyPortRange struct {
+	Hi *int `pulumi:"hi"`
+	Lo int  `pulumi:"lo"`
+}
+
+// AviatrixMicrosegPolicyListPolicyPortRangeInput is an input type that accepts AviatrixMicrosegPolicyListPolicyPortRangeArgs and AviatrixMicrosegPolicyListPolicyPortRangeOutput values.
+// You can construct a concrete instance of `AviatrixMicrosegPolicyListPolicyPortRangeInput` via:
+//
+//	AviatrixMicrosegPolicyListPolicyPortRangeArgs{...}
+type AviatrixMicrosegPolicyListPolicyPortRangeInput interface {
+	pulumi.Input
+
+	ToAviatrixMicrosegPolicyListPolicyPortRangeOutput() AviatrixMicrosegPolicyListPolicyPortRangeOutput
+	ToAviatrixMicrosegPolicyListPolicyPortRangeOutputWithContext(context.Context) AviatrixMicrosegPolicyListPolicyPortRangeOutput
+}
+
+type AviatrixMicrosegPolicyListPolicyPortRangeArgs struct {
+	Hi pulumi.IntPtrInput `pulumi:"hi"`
+	Lo pulumi.IntInput    `pulumi:"lo"`
+}
+
+func (AviatrixMicrosegPolicyListPolicyPortRangeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AviatrixMicrosegPolicyListPolicyPortRange)(nil)).Elem()
+}
+
+func (i AviatrixMicrosegPolicyListPolicyPortRangeArgs) ToAviatrixMicrosegPolicyListPolicyPortRangeOutput() AviatrixMicrosegPolicyListPolicyPortRangeOutput {
+	return i.ToAviatrixMicrosegPolicyListPolicyPortRangeOutputWithContext(context.Background())
+}
+
+func (i AviatrixMicrosegPolicyListPolicyPortRangeArgs) ToAviatrixMicrosegPolicyListPolicyPortRangeOutputWithContext(ctx context.Context) AviatrixMicrosegPolicyListPolicyPortRangeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AviatrixMicrosegPolicyListPolicyPortRangeOutput)
+}
+
+// AviatrixMicrosegPolicyListPolicyPortRangeArrayInput is an input type that accepts AviatrixMicrosegPolicyListPolicyPortRangeArray and AviatrixMicrosegPolicyListPolicyPortRangeArrayOutput values.
+// You can construct a concrete instance of `AviatrixMicrosegPolicyListPolicyPortRangeArrayInput` via:
+//
+//	AviatrixMicrosegPolicyListPolicyPortRangeArray{ AviatrixMicrosegPolicyListPolicyPortRangeArgs{...} }
+type AviatrixMicrosegPolicyListPolicyPortRangeArrayInput interface {
+	pulumi.Input
+
+	ToAviatrixMicrosegPolicyListPolicyPortRangeArrayOutput() AviatrixMicrosegPolicyListPolicyPortRangeArrayOutput
+	ToAviatrixMicrosegPolicyListPolicyPortRangeArrayOutputWithContext(context.Context) AviatrixMicrosegPolicyListPolicyPortRangeArrayOutput
+}
+
+type AviatrixMicrosegPolicyListPolicyPortRangeArray []AviatrixMicrosegPolicyListPolicyPortRangeInput
+
+func (AviatrixMicrosegPolicyListPolicyPortRangeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AviatrixMicrosegPolicyListPolicyPortRange)(nil)).Elem()
+}
+
+func (i AviatrixMicrosegPolicyListPolicyPortRangeArray) ToAviatrixMicrosegPolicyListPolicyPortRangeArrayOutput() AviatrixMicrosegPolicyListPolicyPortRangeArrayOutput {
+	return i.ToAviatrixMicrosegPolicyListPolicyPortRangeArrayOutputWithContext(context.Background())
+}
+
+func (i AviatrixMicrosegPolicyListPolicyPortRangeArray) ToAviatrixMicrosegPolicyListPolicyPortRangeArrayOutputWithContext(ctx context.Context) AviatrixMicrosegPolicyListPolicyPortRangeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AviatrixMicrosegPolicyListPolicyPortRangeArrayOutput)
+}
+
+type AviatrixMicrosegPolicyListPolicyPortRangeOutput struct{ *pulumi.OutputState }
+
+func (AviatrixMicrosegPolicyListPolicyPortRangeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AviatrixMicrosegPolicyListPolicyPortRange)(nil)).Elem()
+}
+
+func (o AviatrixMicrosegPolicyListPolicyPortRangeOutput) ToAviatrixMicrosegPolicyListPolicyPortRangeOutput() AviatrixMicrosegPolicyListPolicyPortRangeOutput {
+	return o
+}
+
+func (o AviatrixMicrosegPolicyListPolicyPortRangeOutput) ToAviatrixMicrosegPolicyListPolicyPortRangeOutputWithContext(ctx context.Context) AviatrixMicrosegPolicyListPolicyPortRangeOutput {
+	return o
+}
+
+func (o AviatrixMicrosegPolicyListPolicyPortRangeOutput) Hi() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AviatrixMicrosegPolicyListPolicyPortRange) *int { return v.Hi }).(pulumi.IntPtrOutput)
+}
+
+func (o AviatrixMicrosegPolicyListPolicyPortRangeOutput) Lo() pulumi.IntOutput {
+	return o.ApplyT(func(v AviatrixMicrosegPolicyListPolicyPortRange) int { return v.Lo }).(pulumi.IntOutput)
+}
+
+type AviatrixMicrosegPolicyListPolicyPortRangeArrayOutput struct{ *pulumi.OutputState }
+
+func (AviatrixMicrosegPolicyListPolicyPortRangeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AviatrixMicrosegPolicyListPolicyPortRange)(nil)).Elem()
+}
+
+func (o AviatrixMicrosegPolicyListPolicyPortRangeArrayOutput) ToAviatrixMicrosegPolicyListPolicyPortRangeArrayOutput() AviatrixMicrosegPolicyListPolicyPortRangeArrayOutput {
+	return o
+}
+
+func (o AviatrixMicrosegPolicyListPolicyPortRangeArrayOutput) ToAviatrixMicrosegPolicyListPolicyPortRangeArrayOutputWithContext(ctx context.Context) AviatrixMicrosegPolicyListPolicyPortRangeArrayOutput {
+	return o
+}
+
+func (o AviatrixMicrosegPolicyListPolicyPortRangeArrayOutput) Index(i pulumi.IntInput) AviatrixMicrosegPolicyListPolicyPortRangeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AviatrixMicrosegPolicyListPolicyPortRange {
+		return vs[0].([]AviatrixMicrosegPolicyListPolicyPortRange)[vs[1].(int)]
+	}).(AviatrixMicrosegPolicyListPolicyPortRangeOutput)
+}
+
+type AviatrixPrivateModeLbProxy struct {
+	InstanceId string `pulumi:"instanceId"`
+	VpcId      string `pulumi:"vpcId"`
+}
+
+// AviatrixPrivateModeLbProxyInput is an input type that accepts AviatrixPrivateModeLbProxyArgs and AviatrixPrivateModeLbProxyOutput values.
+// You can construct a concrete instance of `AviatrixPrivateModeLbProxyInput` via:
+//
+//	AviatrixPrivateModeLbProxyArgs{...}
+type AviatrixPrivateModeLbProxyInput interface {
+	pulumi.Input
+
+	ToAviatrixPrivateModeLbProxyOutput() AviatrixPrivateModeLbProxyOutput
+	ToAviatrixPrivateModeLbProxyOutputWithContext(context.Context) AviatrixPrivateModeLbProxyOutput
+}
+
+type AviatrixPrivateModeLbProxyArgs struct {
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	VpcId      pulumi.StringInput `pulumi:"vpcId"`
+}
+
+func (AviatrixPrivateModeLbProxyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AviatrixPrivateModeLbProxy)(nil)).Elem()
+}
+
+func (i AviatrixPrivateModeLbProxyArgs) ToAviatrixPrivateModeLbProxyOutput() AviatrixPrivateModeLbProxyOutput {
+	return i.ToAviatrixPrivateModeLbProxyOutputWithContext(context.Background())
+}
+
+func (i AviatrixPrivateModeLbProxyArgs) ToAviatrixPrivateModeLbProxyOutputWithContext(ctx context.Context) AviatrixPrivateModeLbProxyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AviatrixPrivateModeLbProxyOutput)
+}
+
+// AviatrixPrivateModeLbProxyArrayInput is an input type that accepts AviatrixPrivateModeLbProxyArray and AviatrixPrivateModeLbProxyArrayOutput values.
+// You can construct a concrete instance of `AviatrixPrivateModeLbProxyArrayInput` via:
+//
+//	AviatrixPrivateModeLbProxyArray{ AviatrixPrivateModeLbProxyArgs{...} }
+type AviatrixPrivateModeLbProxyArrayInput interface {
+	pulumi.Input
+
+	ToAviatrixPrivateModeLbProxyArrayOutput() AviatrixPrivateModeLbProxyArrayOutput
+	ToAviatrixPrivateModeLbProxyArrayOutputWithContext(context.Context) AviatrixPrivateModeLbProxyArrayOutput
+}
+
+type AviatrixPrivateModeLbProxyArray []AviatrixPrivateModeLbProxyInput
+
+func (AviatrixPrivateModeLbProxyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AviatrixPrivateModeLbProxy)(nil)).Elem()
+}
+
+func (i AviatrixPrivateModeLbProxyArray) ToAviatrixPrivateModeLbProxyArrayOutput() AviatrixPrivateModeLbProxyArrayOutput {
+	return i.ToAviatrixPrivateModeLbProxyArrayOutputWithContext(context.Background())
+}
+
+func (i AviatrixPrivateModeLbProxyArray) ToAviatrixPrivateModeLbProxyArrayOutputWithContext(ctx context.Context) AviatrixPrivateModeLbProxyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AviatrixPrivateModeLbProxyArrayOutput)
+}
+
+type AviatrixPrivateModeLbProxyOutput struct{ *pulumi.OutputState }
+
+func (AviatrixPrivateModeLbProxyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AviatrixPrivateModeLbProxy)(nil)).Elem()
+}
+
+func (o AviatrixPrivateModeLbProxyOutput) ToAviatrixPrivateModeLbProxyOutput() AviatrixPrivateModeLbProxyOutput {
+	return o
+}
+
+func (o AviatrixPrivateModeLbProxyOutput) ToAviatrixPrivateModeLbProxyOutputWithContext(ctx context.Context) AviatrixPrivateModeLbProxyOutput {
+	return o
+}
+
+func (o AviatrixPrivateModeLbProxyOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v AviatrixPrivateModeLbProxy) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+func (o AviatrixPrivateModeLbProxyOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v AviatrixPrivateModeLbProxy) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+type AviatrixPrivateModeLbProxyArrayOutput struct{ *pulumi.OutputState }
+
+func (AviatrixPrivateModeLbProxyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AviatrixPrivateModeLbProxy)(nil)).Elem()
+}
+
+func (o AviatrixPrivateModeLbProxyArrayOutput) ToAviatrixPrivateModeLbProxyArrayOutput() AviatrixPrivateModeLbProxyArrayOutput {
+	return o
+}
+
+func (o AviatrixPrivateModeLbProxyArrayOutput) ToAviatrixPrivateModeLbProxyArrayOutputWithContext(ctx context.Context) AviatrixPrivateModeLbProxyArrayOutput {
+	return o
+}
+
+func (o AviatrixPrivateModeLbProxyArrayOutput) Index(i pulumi.IntInput) AviatrixPrivateModeLbProxyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AviatrixPrivateModeLbProxy {
+		return vs[0].([]AviatrixPrivateModeLbProxy)[vs[1].(int)]
+	}).(AviatrixPrivateModeLbProxyOutput)
+}
+
+type AviatrixSite2CloudCaCertTagCaCertificate struct {
+	CertContent    string  `pulumi:"certContent"`
+	CommonName     *string `pulumi:"commonName"`
+	ExpirationTime *string `pulumi:"expirationTime"`
+	Id             *string `pulumi:"id"`
+	IssuerName     *string `pulumi:"issuerName"`
+	UniqueSerial   *string `pulumi:"uniqueSerial"`
+}
+
+// AviatrixSite2CloudCaCertTagCaCertificateInput is an input type that accepts AviatrixSite2CloudCaCertTagCaCertificateArgs and AviatrixSite2CloudCaCertTagCaCertificateOutput values.
+// You can construct a concrete instance of `AviatrixSite2CloudCaCertTagCaCertificateInput` via:
+//
+//	AviatrixSite2CloudCaCertTagCaCertificateArgs{...}
+type AviatrixSite2CloudCaCertTagCaCertificateInput interface {
+	pulumi.Input
+
+	ToAviatrixSite2CloudCaCertTagCaCertificateOutput() AviatrixSite2CloudCaCertTagCaCertificateOutput
+	ToAviatrixSite2CloudCaCertTagCaCertificateOutputWithContext(context.Context) AviatrixSite2CloudCaCertTagCaCertificateOutput
+}
+
+type AviatrixSite2CloudCaCertTagCaCertificateArgs struct {
+	CertContent    pulumi.StringInput    `pulumi:"certContent"`
+	CommonName     pulumi.StringPtrInput `pulumi:"commonName"`
+	ExpirationTime pulumi.StringPtrInput `pulumi:"expirationTime"`
+	Id             pulumi.StringPtrInput `pulumi:"id"`
+	IssuerName     pulumi.StringPtrInput `pulumi:"issuerName"`
+	UniqueSerial   pulumi.StringPtrInput `pulumi:"uniqueSerial"`
+}
+
+func (AviatrixSite2CloudCaCertTagCaCertificateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AviatrixSite2CloudCaCertTagCaCertificate)(nil)).Elem()
+}
+
+func (i AviatrixSite2CloudCaCertTagCaCertificateArgs) ToAviatrixSite2CloudCaCertTagCaCertificateOutput() AviatrixSite2CloudCaCertTagCaCertificateOutput {
+	return i.ToAviatrixSite2CloudCaCertTagCaCertificateOutputWithContext(context.Background())
+}
+
+func (i AviatrixSite2CloudCaCertTagCaCertificateArgs) ToAviatrixSite2CloudCaCertTagCaCertificateOutputWithContext(ctx context.Context) AviatrixSite2CloudCaCertTagCaCertificateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AviatrixSite2CloudCaCertTagCaCertificateOutput)
+}
+
+// AviatrixSite2CloudCaCertTagCaCertificateArrayInput is an input type that accepts AviatrixSite2CloudCaCertTagCaCertificateArray and AviatrixSite2CloudCaCertTagCaCertificateArrayOutput values.
+// You can construct a concrete instance of `AviatrixSite2CloudCaCertTagCaCertificateArrayInput` via:
+//
+//	AviatrixSite2CloudCaCertTagCaCertificateArray{ AviatrixSite2CloudCaCertTagCaCertificateArgs{...} }
+type AviatrixSite2CloudCaCertTagCaCertificateArrayInput interface {
+	pulumi.Input
+
+	ToAviatrixSite2CloudCaCertTagCaCertificateArrayOutput() AviatrixSite2CloudCaCertTagCaCertificateArrayOutput
+	ToAviatrixSite2CloudCaCertTagCaCertificateArrayOutputWithContext(context.Context) AviatrixSite2CloudCaCertTagCaCertificateArrayOutput
+}
+
+type AviatrixSite2CloudCaCertTagCaCertificateArray []AviatrixSite2CloudCaCertTagCaCertificateInput
+
+func (AviatrixSite2CloudCaCertTagCaCertificateArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AviatrixSite2CloudCaCertTagCaCertificate)(nil)).Elem()
+}
+
+func (i AviatrixSite2CloudCaCertTagCaCertificateArray) ToAviatrixSite2CloudCaCertTagCaCertificateArrayOutput() AviatrixSite2CloudCaCertTagCaCertificateArrayOutput {
+	return i.ToAviatrixSite2CloudCaCertTagCaCertificateArrayOutputWithContext(context.Background())
+}
+
+func (i AviatrixSite2CloudCaCertTagCaCertificateArray) ToAviatrixSite2CloudCaCertTagCaCertificateArrayOutputWithContext(ctx context.Context) AviatrixSite2CloudCaCertTagCaCertificateArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AviatrixSite2CloudCaCertTagCaCertificateArrayOutput)
+}
+
+type AviatrixSite2CloudCaCertTagCaCertificateOutput struct{ *pulumi.OutputState }
+
+func (AviatrixSite2CloudCaCertTagCaCertificateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AviatrixSite2CloudCaCertTagCaCertificate)(nil)).Elem()
+}
+
+func (o AviatrixSite2CloudCaCertTagCaCertificateOutput) ToAviatrixSite2CloudCaCertTagCaCertificateOutput() AviatrixSite2CloudCaCertTagCaCertificateOutput {
+	return o
+}
+
+func (o AviatrixSite2CloudCaCertTagCaCertificateOutput) ToAviatrixSite2CloudCaCertTagCaCertificateOutputWithContext(ctx context.Context) AviatrixSite2CloudCaCertTagCaCertificateOutput {
+	return o
+}
+
+func (o AviatrixSite2CloudCaCertTagCaCertificateOutput) CertContent() pulumi.StringOutput {
+	return o.ApplyT(func(v AviatrixSite2CloudCaCertTagCaCertificate) string { return v.CertContent }).(pulumi.StringOutput)
+}
+
+func (o AviatrixSite2CloudCaCertTagCaCertificateOutput) CommonName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixSite2CloudCaCertTagCaCertificate) *string { return v.CommonName }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixSite2CloudCaCertTagCaCertificateOutput) ExpirationTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixSite2CloudCaCertTagCaCertificate) *string { return v.ExpirationTime }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixSite2CloudCaCertTagCaCertificateOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixSite2CloudCaCertTagCaCertificate) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixSite2CloudCaCertTagCaCertificateOutput) IssuerName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixSite2CloudCaCertTagCaCertificate) *string { return v.IssuerName }).(pulumi.StringPtrOutput)
+}
+
+func (o AviatrixSite2CloudCaCertTagCaCertificateOutput) UniqueSerial() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AviatrixSite2CloudCaCertTagCaCertificate) *string { return v.UniqueSerial }).(pulumi.StringPtrOutput)
+}
+
+type AviatrixSite2CloudCaCertTagCaCertificateArrayOutput struct{ *pulumi.OutputState }
+
+func (AviatrixSite2CloudCaCertTagCaCertificateArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AviatrixSite2CloudCaCertTagCaCertificate)(nil)).Elem()
+}
+
+func (o AviatrixSite2CloudCaCertTagCaCertificateArrayOutput) ToAviatrixSite2CloudCaCertTagCaCertificateArrayOutput() AviatrixSite2CloudCaCertTagCaCertificateArrayOutput {
+	return o
+}
+
+func (o AviatrixSite2CloudCaCertTagCaCertificateArrayOutput) ToAviatrixSite2CloudCaCertTagCaCertificateArrayOutputWithContext(ctx context.Context) AviatrixSite2CloudCaCertTagCaCertificateArrayOutput {
+	return o
+}
+
+func (o AviatrixSite2CloudCaCertTagCaCertificateArrayOutput) Index(i pulumi.IntInput) AviatrixSite2CloudCaCertTagCaCertificateOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AviatrixSite2CloudCaCertTagCaCertificate {
+		return vs[0].([]AviatrixSite2CloudCaCertTagCaCertificate)[vs[1].(int)]
+	}).(AviatrixSite2CloudCaCertTagCaCertificateOutput)
 }
 
 type AviatrixTransitGatewayBgpLanInterface struct {
@@ -1418,6 +3218,118 @@ func (o AviatrixVpcSubnetArrayOutput) Index(i pulumi.IntInput) AviatrixVpcSubnet
 	}).(AviatrixVpcSubnetOutput)
 }
 
+type AviatrixVpnProfilePolicy struct {
+	Action string `pulumi:"action"`
+	Port   string `pulumi:"port"`
+	Proto  string `pulumi:"proto"`
+	Target string `pulumi:"target"`
+}
+
+// AviatrixVpnProfilePolicyInput is an input type that accepts AviatrixVpnProfilePolicyArgs and AviatrixVpnProfilePolicyOutput values.
+// You can construct a concrete instance of `AviatrixVpnProfilePolicyInput` via:
+//
+//	AviatrixVpnProfilePolicyArgs{...}
+type AviatrixVpnProfilePolicyInput interface {
+	pulumi.Input
+
+	ToAviatrixVpnProfilePolicyOutput() AviatrixVpnProfilePolicyOutput
+	ToAviatrixVpnProfilePolicyOutputWithContext(context.Context) AviatrixVpnProfilePolicyOutput
+}
+
+type AviatrixVpnProfilePolicyArgs struct {
+	Action pulumi.StringInput `pulumi:"action"`
+	Port   pulumi.StringInput `pulumi:"port"`
+	Proto  pulumi.StringInput `pulumi:"proto"`
+	Target pulumi.StringInput `pulumi:"target"`
+}
+
+func (AviatrixVpnProfilePolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AviatrixVpnProfilePolicy)(nil)).Elem()
+}
+
+func (i AviatrixVpnProfilePolicyArgs) ToAviatrixVpnProfilePolicyOutput() AviatrixVpnProfilePolicyOutput {
+	return i.ToAviatrixVpnProfilePolicyOutputWithContext(context.Background())
+}
+
+func (i AviatrixVpnProfilePolicyArgs) ToAviatrixVpnProfilePolicyOutputWithContext(ctx context.Context) AviatrixVpnProfilePolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AviatrixVpnProfilePolicyOutput)
+}
+
+// AviatrixVpnProfilePolicyArrayInput is an input type that accepts AviatrixVpnProfilePolicyArray and AviatrixVpnProfilePolicyArrayOutput values.
+// You can construct a concrete instance of `AviatrixVpnProfilePolicyArrayInput` via:
+//
+//	AviatrixVpnProfilePolicyArray{ AviatrixVpnProfilePolicyArgs{...} }
+type AviatrixVpnProfilePolicyArrayInput interface {
+	pulumi.Input
+
+	ToAviatrixVpnProfilePolicyArrayOutput() AviatrixVpnProfilePolicyArrayOutput
+	ToAviatrixVpnProfilePolicyArrayOutputWithContext(context.Context) AviatrixVpnProfilePolicyArrayOutput
+}
+
+type AviatrixVpnProfilePolicyArray []AviatrixVpnProfilePolicyInput
+
+func (AviatrixVpnProfilePolicyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AviatrixVpnProfilePolicy)(nil)).Elem()
+}
+
+func (i AviatrixVpnProfilePolicyArray) ToAviatrixVpnProfilePolicyArrayOutput() AviatrixVpnProfilePolicyArrayOutput {
+	return i.ToAviatrixVpnProfilePolicyArrayOutputWithContext(context.Background())
+}
+
+func (i AviatrixVpnProfilePolicyArray) ToAviatrixVpnProfilePolicyArrayOutputWithContext(ctx context.Context) AviatrixVpnProfilePolicyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AviatrixVpnProfilePolicyArrayOutput)
+}
+
+type AviatrixVpnProfilePolicyOutput struct{ *pulumi.OutputState }
+
+func (AviatrixVpnProfilePolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AviatrixVpnProfilePolicy)(nil)).Elem()
+}
+
+func (o AviatrixVpnProfilePolicyOutput) ToAviatrixVpnProfilePolicyOutput() AviatrixVpnProfilePolicyOutput {
+	return o
+}
+
+func (o AviatrixVpnProfilePolicyOutput) ToAviatrixVpnProfilePolicyOutputWithContext(ctx context.Context) AviatrixVpnProfilePolicyOutput {
+	return o
+}
+
+func (o AviatrixVpnProfilePolicyOutput) Action() pulumi.StringOutput {
+	return o.ApplyT(func(v AviatrixVpnProfilePolicy) string { return v.Action }).(pulumi.StringOutput)
+}
+
+func (o AviatrixVpnProfilePolicyOutput) Port() pulumi.StringOutput {
+	return o.ApplyT(func(v AviatrixVpnProfilePolicy) string { return v.Port }).(pulumi.StringOutput)
+}
+
+func (o AviatrixVpnProfilePolicyOutput) Proto() pulumi.StringOutput {
+	return o.ApplyT(func(v AviatrixVpnProfilePolicy) string { return v.Proto }).(pulumi.StringOutput)
+}
+
+func (o AviatrixVpnProfilePolicyOutput) Target() pulumi.StringOutput {
+	return o.ApplyT(func(v AviatrixVpnProfilePolicy) string { return v.Target }).(pulumi.StringOutput)
+}
+
+type AviatrixVpnProfilePolicyArrayOutput struct{ *pulumi.OutputState }
+
+func (AviatrixVpnProfilePolicyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AviatrixVpnProfilePolicy)(nil)).Elem()
+}
+
+func (o AviatrixVpnProfilePolicyArrayOutput) ToAviatrixVpnProfilePolicyArrayOutput() AviatrixVpnProfilePolicyArrayOutput {
+	return o
+}
+
+func (o AviatrixVpnProfilePolicyArrayOutput) ToAviatrixVpnProfilePolicyArrayOutputWithContext(ctx context.Context) AviatrixVpnProfilePolicyArrayOutput {
+	return o
+}
+
+func (o AviatrixVpnProfilePolicyArrayOutput) Index(i pulumi.IntInput) AviatrixVpnProfilePolicyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AviatrixVpnProfilePolicy {
+		return vs[0].([]AviatrixVpnProfilePolicy)[vs[1].(int)]
+	}).(AviatrixVpnProfilePolicyOutput)
+}
+
 type ProviderIgnoreTags struct {
 	KeyPrefixes []string `pulumi:"keyPrefixes"`
 	Keys        []string `pulumi:"keys"`
@@ -1564,6 +3476,1472 @@ func (o ProviderIgnoreTagsPtrOutput) Keys() pulumi.StringArrayOutput {
 		}
 		return v.Keys
 	}).(pulumi.StringArrayOutput)
+}
+
+type GetAviatrixDeviceInterfacesWanInterface struct {
+	WanPrimaryInterface         string `pulumi:"wanPrimaryInterface"`
+	WanPrimaryInterfacePublicIp string `pulumi:"wanPrimaryInterfacePublicIp"`
+}
+
+// GetAviatrixDeviceInterfacesWanInterfaceInput is an input type that accepts GetAviatrixDeviceInterfacesWanInterfaceArgs and GetAviatrixDeviceInterfacesWanInterfaceOutput values.
+// You can construct a concrete instance of `GetAviatrixDeviceInterfacesWanInterfaceInput` via:
+//
+//	GetAviatrixDeviceInterfacesWanInterfaceArgs{...}
+type GetAviatrixDeviceInterfacesWanInterfaceInput interface {
+	pulumi.Input
+
+	ToGetAviatrixDeviceInterfacesWanInterfaceOutput() GetAviatrixDeviceInterfacesWanInterfaceOutput
+	ToGetAviatrixDeviceInterfacesWanInterfaceOutputWithContext(context.Context) GetAviatrixDeviceInterfacesWanInterfaceOutput
+}
+
+type GetAviatrixDeviceInterfacesWanInterfaceArgs struct {
+	WanPrimaryInterface         pulumi.StringInput `pulumi:"wanPrimaryInterface"`
+	WanPrimaryInterfacePublicIp pulumi.StringInput `pulumi:"wanPrimaryInterfacePublicIp"`
+}
+
+func (GetAviatrixDeviceInterfacesWanInterfaceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAviatrixDeviceInterfacesWanInterface)(nil)).Elem()
+}
+
+func (i GetAviatrixDeviceInterfacesWanInterfaceArgs) ToGetAviatrixDeviceInterfacesWanInterfaceOutput() GetAviatrixDeviceInterfacesWanInterfaceOutput {
+	return i.ToGetAviatrixDeviceInterfacesWanInterfaceOutputWithContext(context.Background())
+}
+
+func (i GetAviatrixDeviceInterfacesWanInterfaceArgs) ToGetAviatrixDeviceInterfacesWanInterfaceOutputWithContext(ctx context.Context) GetAviatrixDeviceInterfacesWanInterfaceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAviatrixDeviceInterfacesWanInterfaceOutput)
+}
+
+// GetAviatrixDeviceInterfacesWanInterfaceArrayInput is an input type that accepts GetAviatrixDeviceInterfacesWanInterfaceArray and GetAviatrixDeviceInterfacesWanInterfaceArrayOutput values.
+// You can construct a concrete instance of `GetAviatrixDeviceInterfacesWanInterfaceArrayInput` via:
+//
+//	GetAviatrixDeviceInterfacesWanInterfaceArray{ GetAviatrixDeviceInterfacesWanInterfaceArgs{...} }
+type GetAviatrixDeviceInterfacesWanInterfaceArrayInput interface {
+	pulumi.Input
+
+	ToGetAviatrixDeviceInterfacesWanInterfaceArrayOutput() GetAviatrixDeviceInterfacesWanInterfaceArrayOutput
+	ToGetAviatrixDeviceInterfacesWanInterfaceArrayOutputWithContext(context.Context) GetAviatrixDeviceInterfacesWanInterfaceArrayOutput
+}
+
+type GetAviatrixDeviceInterfacesWanInterfaceArray []GetAviatrixDeviceInterfacesWanInterfaceInput
+
+func (GetAviatrixDeviceInterfacesWanInterfaceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAviatrixDeviceInterfacesWanInterface)(nil)).Elem()
+}
+
+func (i GetAviatrixDeviceInterfacesWanInterfaceArray) ToGetAviatrixDeviceInterfacesWanInterfaceArrayOutput() GetAviatrixDeviceInterfacesWanInterfaceArrayOutput {
+	return i.ToGetAviatrixDeviceInterfacesWanInterfaceArrayOutputWithContext(context.Background())
+}
+
+func (i GetAviatrixDeviceInterfacesWanInterfaceArray) ToGetAviatrixDeviceInterfacesWanInterfaceArrayOutputWithContext(ctx context.Context) GetAviatrixDeviceInterfacesWanInterfaceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAviatrixDeviceInterfacesWanInterfaceArrayOutput)
+}
+
+type GetAviatrixDeviceInterfacesWanInterfaceOutput struct{ *pulumi.OutputState }
+
+func (GetAviatrixDeviceInterfacesWanInterfaceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAviatrixDeviceInterfacesWanInterface)(nil)).Elem()
+}
+
+func (o GetAviatrixDeviceInterfacesWanInterfaceOutput) ToGetAviatrixDeviceInterfacesWanInterfaceOutput() GetAviatrixDeviceInterfacesWanInterfaceOutput {
+	return o
+}
+
+func (o GetAviatrixDeviceInterfacesWanInterfaceOutput) ToGetAviatrixDeviceInterfacesWanInterfaceOutputWithContext(ctx context.Context) GetAviatrixDeviceInterfacesWanInterfaceOutput {
+	return o
+}
+
+func (o GetAviatrixDeviceInterfacesWanInterfaceOutput) WanPrimaryInterface() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixDeviceInterfacesWanInterface) string { return v.WanPrimaryInterface }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixDeviceInterfacesWanInterfaceOutput) WanPrimaryInterfacePublicIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixDeviceInterfacesWanInterface) string { return v.WanPrimaryInterfacePublicIp }).(pulumi.StringOutput)
+}
+
+type GetAviatrixDeviceInterfacesWanInterfaceArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAviatrixDeviceInterfacesWanInterfaceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAviatrixDeviceInterfacesWanInterface)(nil)).Elem()
+}
+
+func (o GetAviatrixDeviceInterfacesWanInterfaceArrayOutput) ToGetAviatrixDeviceInterfacesWanInterfaceArrayOutput() GetAviatrixDeviceInterfacesWanInterfaceArrayOutput {
+	return o
+}
+
+func (o GetAviatrixDeviceInterfacesWanInterfaceArrayOutput) ToGetAviatrixDeviceInterfacesWanInterfaceArrayOutputWithContext(ctx context.Context) GetAviatrixDeviceInterfacesWanInterfaceArrayOutput {
+	return o
+}
+
+func (o GetAviatrixDeviceInterfacesWanInterfaceArrayOutput) Index(i pulumi.IntInput) GetAviatrixDeviceInterfacesWanInterfaceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAviatrixDeviceInterfacesWanInterface {
+		return vs[0].([]GetAviatrixDeviceInterfacesWanInterface)[vs[1].(int)]
+	}).(GetAviatrixDeviceInterfacesWanInterfaceOutput)
+}
+
+type GetAviatrixFirenetFirewallInstanceAssociation struct {
+	Attached            bool   `pulumi:"attached"`
+	EgressInterface     string `pulumi:"egressInterface"`
+	FirenetGwName       string `pulumi:"firenetGwName"`
+	FirewallName        string `pulumi:"firewallName"`
+	InstanceId          string `pulumi:"instanceId"`
+	LanInterface        string `pulumi:"lanInterface"`
+	ManagementInterface string `pulumi:"managementInterface"`
+	VendorType          string `pulumi:"vendorType"`
+}
+
+// GetAviatrixFirenetFirewallInstanceAssociationInput is an input type that accepts GetAviatrixFirenetFirewallInstanceAssociationArgs and GetAviatrixFirenetFirewallInstanceAssociationOutput values.
+// You can construct a concrete instance of `GetAviatrixFirenetFirewallInstanceAssociationInput` via:
+//
+//	GetAviatrixFirenetFirewallInstanceAssociationArgs{...}
+type GetAviatrixFirenetFirewallInstanceAssociationInput interface {
+	pulumi.Input
+
+	ToGetAviatrixFirenetFirewallInstanceAssociationOutput() GetAviatrixFirenetFirewallInstanceAssociationOutput
+	ToGetAviatrixFirenetFirewallInstanceAssociationOutputWithContext(context.Context) GetAviatrixFirenetFirewallInstanceAssociationOutput
+}
+
+type GetAviatrixFirenetFirewallInstanceAssociationArgs struct {
+	Attached            pulumi.BoolInput   `pulumi:"attached"`
+	EgressInterface     pulumi.StringInput `pulumi:"egressInterface"`
+	FirenetGwName       pulumi.StringInput `pulumi:"firenetGwName"`
+	FirewallName        pulumi.StringInput `pulumi:"firewallName"`
+	InstanceId          pulumi.StringInput `pulumi:"instanceId"`
+	LanInterface        pulumi.StringInput `pulumi:"lanInterface"`
+	ManagementInterface pulumi.StringInput `pulumi:"managementInterface"`
+	VendorType          pulumi.StringInput `pulumi:"vendorType"`
+}
+
+func (GetAviatrixFirenetFirewallInstanceAssociationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAviatrixFirenetFirewallInstanceAssociation)(nil)).Elem()
+}
+
+func (i GetAviatrixFirenetFirewallInstanceAssociationArgs) ToGetAviatrixFirenetFirewallInstanceAssociationOutput() GetAviatrixFirenetFirewallInstanceAssociationOutput {
+	return i.ToGetAviatrixFirenetFirewallInstanceAssociationOutputWithContext(context.Background())
+}
+
+func (i GetAviatrixFirenetFirewallInstanceAssociationArgs) ToGetAviatrixFirenetFirewallInstanceAssociationOutputWithContext(ctx context.Context) GetAviatrixFirenetFirewallInstanceAssociationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAviatrixFirenetFirewallInstanceAssociationOutput)
+}
+
+// GetAviatrixFirenetFirewallInstanceAssociationArrayInput is an input type that accepts GetAviatrixFirenetFirewallInstanceAssociationArray and GetAviatrixFirenetFirewallInstanceAssociationArrayOutput values.
+// You can construct a concrete instance of `GetAviatrixFirenetFirewallInstanceAssociationArrayInput` via:
+//
+//	GetAviatrixFirenetFirewallInstanceAssociationArray{ GetAviatrixFirenetFirewallInstanceAssociationArgs{...} }
+type GetAviatrixFirenetFirewallInstanceAssociationArrayInput interface {
+	pulumi.Input
+
+	ToGetAviatrixFirenetFirewallInstanceAssociationArrayOutput() GetAviatrixFirenetFirewallInstanceAssociationArrayOutput
+	ToGetAviatrixFirenetFirewallInstanceAssociationArrayOutputWithContext(context.Context) GetAviatrixFirenetFirewallInstanceAssociationArrayOutput
+}
+
+type GetAviatrixFirenetFirewallInstanceAssociationArray []GetAviatrixFirenetFirewallInstanceAssociationInput
+
+func (GetAviatrixFirenetFirewallInstanceAssociationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAviatrixFirenetFirewallInstanceAssociation)(nil)).Elem()
+}
+
+func (i GetAviatrixFirenetFirewallInstanceAssociationArray) ToGetAviatrixFirenetFirewallInstanceAssociationArrayOutput() GetAviatrixFirenetFirewallInstanceAssociationArrayOutput {
+	return i.ToGetAviatrixFirenetFirewallInstanceAssociationArrayOutputWithContext(context.Background())
+}
+
+func (i GetAviatrixFirenetFirewallInstanceAssociationArray) ToGetAviatrixFirenetFirewallInstanceAssociationArrayOutputWithContext(ctx context.Context) GetAviatrixFirenetFirewallInstanceAssociationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAviatrixFirenetFirewallInstanceAssociationArrayOutput)
+}
+
+type GetAviatrixFirenetFirewallInstanceAssociationOutput struct{ *pulumi.OutputState }
+
+func (GetAviatrixFirenetFirewallInstanceAssociationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAviatrixFirenetFirewallInstanceAssociation)(nil)).Elem()
+}
+
+func (o GetAviatrixFirenetFirewallInstanceAssociationOutput) ToGetAviatrixFirenetFirewallInstanceAssociationOutput() GetAviatrixFirenetFirewallInstanceAssociationOutput {
+	return o
+}
+
+func (o GetAviatrixFirenetFirewallInstanceAssociationOutput) ToGetAviatrixFirenetFirewallInstanceAssociationOutputWithContext(ctx context.Context) GetAviatrixFirenetFirewallInstanceAssociationOutput {
+	return o
+}
+
+func (o GetAviatrixFirenetFirewallInstanceAssociationOutput) Attached() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetAviatrixFirenetFirewallInstanceAssociation) bool { return v.Attached }).(pulumi.BoolOutput)
+}
+
+func (o GetAviatrixFirenetFirewallInstanceAssociationOutput) EgressInterface() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixFirenetFirewallInstanceAssociation) string { return v.EgressInterface }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixFirenetFirewallInstanceAssociationOutput) FirenetGwName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixFirenetFirewallInstanceAssociation) string { return v.FirenetGwName }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixFirenetFirewallInstanceAssociationOutput) FirewallName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixFirenetFirewallInstanceAssociation) string { return v.FirewallName }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixFirenetFirewallInstanceAssociationOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixFirenetFirewallInstanceAssociation) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixFirenetFirewallInstanceAssociationOutput) LanInterface() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixFirenetFirewallInstanceAssociation) string { return v.LanInterface }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixFirenetFirewallInstanceAssociationOutput) ManagementInterface() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixFirenetFirewallInstanceAssociation) string { return v.ManagementInterface }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixFirenetFirewallInstanceAssociationOutput) VendorType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixFirenetFirewallInstanceAssociation) string { return v.VendorType }).(pulumi.StringOutput)
+}
+
+type GetAviatrixFirenetFirewallInstanceAssociationArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAviatrixFirenetFirewallInstanceAssociationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAviatrixFirenetFirewallInstanceAssociation)(nil)).Elem()
+}
+
+func (o GetAviatrixFirenetFirewallInstanceAssociationArrayOutput) ToGetAviatrixFirenetFirewallInstanceAssociationArrayOutput() GetAviatrixFirenetFirewallInstanceAssociationArrayOutput {
+	return o
+}
+
+func (o GetAviatrixFirenetFirewallInstanceAssociationArrayOutput) ToGetAviatrixFirenetFirewallInstanceAssociationArrayOutputWithContext(ctx context.Context) GetAviatrixFirenetFirewallInstanceAssociationArrayOutput {
+	return o
+}
+
+func (o GetAviatrixFirenetFirewallInstanceAssociationArrayOutput) Index(i pulumi.IntInput) GetAviatrixFirenetFirewallInstanceAssociationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAviatrixFirenetFirewallInstanceAssociation {
+		return vs[0].([]GetAviatrixFirenetFirewallInstanceAssociation)[vs[1].(int)]
+	}).(GetAviatrixFirenetFirewallInstanceAssociationOutput)
+}
+
+type GetAviatrixFirewallInstanceImagesFirewallImage struct {
+	FirewallImage         string   `pulumi:"firewallImage"`
+	FirewallImageVersions []string `pulumi:"firewallImageVersions"`
+	FirewallSizes         []string `pulumi:"firewallSizes"`
+}
+
+// GetAviatrixFirewallInstanceImagesFirewallImageInput is an input type that accepts GetAviatrixFirewallInstanceImagesFirewallImageArgs and GetAviatrixFirewallInstanceImagesFirewallImageOutput values.
+// You can construct a concrete instance of `GetAviatrixFirewallInstanceImagesFirewallImageInput` via:
+//
+//	GetAviatrixFirewallInstanceImagesFirewallImageArgs{...}
+type GetAviatrixFirewallInstanceImagesFirewallImageInput interface {
+	pulumi.Input
+
+	ToGetAviatrixFirewallInstanceImagesFirewallImageOutput() GetAviatrixFirewallInstanceImagesFirewallImageOutput
+	ToGetAviatrixFirewallInstanceImagesFirewallImageOutputWithContext(context.Context) GetAviatrixFirewallInstanceImagesFirewallImageOutput
+}
+
+type GetAviatrixFirewallInstanceImagesFirewallImageArgs struct {
+	FirewallImage         pulumi.StringInput      `pulumi:"firewallImage"`
+	FirewallImageVersions pulumi.StringArrayInput `pulumi:"firewallImageVersions"`
+	FirewallSizes         pulumi.StringArrayInput `pulumi:"firewallSizes"`
+}
+
+func (GetAviatrixFirewallInstanceImagesFirewallImageArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAviatrixFirewallInstanceImagesFirewallImage)(nil)).Elem()
+}
+
+func (i GetAviatrixFirewallInstanceImagesFirewallImageArgs) ToGetAviatrixFirewallInstanceImagesFirewallImageOutput() GetAviatrixFirewallInstanceImagesFirewallImageOutput {
+	return i.ToGetAviatrixFirewallInstanceImagesFirewallImageOutputWithContext(context.Background())
+}
+
+func (i GetAviatrixFirewallInstanceImagesFirewallImageArgs) ToGetAviatrixFirewallInstanceImagesFirewallImageOutputWithContext(ctx context.Context) GetAviatrixFirewallInstanceImagesFirewallImageOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAviatrixFirewallInstanceImagesFirewallImageOutput)
+}
+
+// GetAviatrixFirewallInstanceImagesFirewallImageArrayInput is an input type that accepts GetAviatrixFirewallInstanceImagesFirewallImageArray and GetAviatrixFirewallInstanceImagesFirewallImageArrayOutput values.
+// You can construct a concrete instance of `GetAviatrixFirewallInstanceImagesFirewallImageArrayInput` via:
+//
+//	GetAviatrixFirewallInstanceImagesFirewallImageArray{ GetAviatrixFirewallInstanceImagesFirewallImageArgs{...} }
+type GetAviatrixFirewallInstanceImagesFirewallImageArrayInput interface {
+	pulumi.Input
+
+	ToGetAviatrixFirewallInstanceImagesFirewallImageArrayOutput() GetAviatrixFirewallInstanceImagesFirewallImageArrayOutput
+	ToGetAviatrixFirewallInstanceImagesFirewallImageArrayOutputWithContext(context.Context) GetAviatrixFirewallInstanceImagesFirewallImageArrayOutput
+}
+
+type GetAviatrixFirewallInstanceImagesFirewallImageArray []GetAviatrixFirewallInstanceImagesFirewallImageInput
+
+func (GetAviatrixFirewallInstanceImagesFirewallImageArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAviatrixFirewallInstanceImagesFirewallImage)(nil)).Elem()
+}
+
+func (i GetAviatrixFirewallInstanceImagesFirewallImageArray) ToGetAviatrixFirewallInstanceImagesFirewallImageArrayOutput() GetAviatrixFirewallInstanceImagesFirewallImageArrayOutput {
+	return i.ToGetAviatrixFirewallInstanceImagesFirewallImageArrayOutputWithContext(context.Background())
+}
+
+func (i GetAviatrixFirewallInstanceImagesFirewallImageArray) ToGetAviatrixFirewallInstanceImagesFirewallImageArrayOutputWithContext(ctx context.Context) GetAviatrixFirewallInstanceImagesFirewallImageArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAviatrixFirewallInstanceImagesFirewallImageArrayOutput)
+}
+
+type GetAviatrixFirewallInstanceImagesFirewallImageOutput struct{ *pulumi.OutputState }
+
+func (GetAviatrixFirewallInstanceImagesFirewallImageOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAviatrixFirewallInstanceImagesFirewallImage)(nil)).Elem()
+}
+
+func (o GetAviatrixFirewallInstanceImagesFirewallImageOutput) ToGetAviatrixFirewallInstanceImagesFirewallImageOutput() GetAviatrixFirewallInstanceImagesFirewallImageOutput {
+	return o
+}
+
+func (o GetAviatrixFirewallInstanceImagesFirewallImageOutput) ToGetAviatrixFirewallInstanceImagesFirewallImageOutputWithContext(ctx context.Context) GetAviatrixFirewallInstanceImagesFirewallImageOutput {
+	return o
+}
+
+func (o GetAviatrixFirewallInstanceImagesFirewallImageOutput) FirewallImage() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixFirewallInstanceImagesFirewallImage) string { return v.FirewallImage }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixFirewallInstanceImagesFirewallImageOutput) FirewallImageVersions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetAviatrixFirewallInstanceImagesFirewallImage) []string { return v.FirewallImageVersions }).(pulumi.StringArrayOutput)
+}
+
+func (o GetAviatrixFirewallInstanceImagesFirewallImageOutput) FirewallSizes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetAviatrixFirewallInstanceImagesFirewallImage) []string { return v.FirewallSizes }).(pulumi.StringArrayOutput)
+}
+
+type GetAviatrixFirewallInstanceImagesFirewallImageArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAviatrixFirewallInstanceImagesFirewallImageArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAviatrixFirewallInstanceImagesFirewallImage)(nil)).Elem()
+}
+
+func (o GetAviatrixFirewallInstanceImagesFirewallImageArrayOutput) ToGetAviatrixFirewallInstanceImagesFirewallImageArrayOutput() GetAviatrixFirewallInstanceImagesFirewallImageArrayOutput {
+	return o
+}
+
+func (o GetAviatrixFirewallInstanceImagesFirewallImageArrayOutput) ToGetAviatrixFirewallInstanceImagesFirewallImageArrayOutputWithContext(ctx context.Context) GetAviatrixFirewallInstanceImagesFirewallImageArrayOutput {
+	return o
+}
+
+func (o GetAviatrixFirewallInstanceImagesFirewallImageArrayOutput) Index(i pulumi.IntInput) GetAviatrixFirewallInstanceImagesFirewallImageOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAviatrixFirewallInstanceImagesFirewallImage {
+		return vs[0].([]GetAviatrixFirewallInstanceImagesFirewallImage)[vs[1].(int)]
+	}).(GetAviatrixFirewallInstanceImagesFirewallImageOutput)
+}
+
+type GetAviatrixFirewallPolicyType struct {
+	Action      string `pulumi:"action"`
+	Description string `pulumi:"description"`
+	DstIp       string `pulumi:"dstIp"`
+	LogEnabled  bool   `pulumi:"logEnabled"`
+	Port        string `pulumi:"port"`
+	Protocol    string `pulumi:"protocol"`
+	SrcIp       string `pulumi:"srcIp"`
+}
+
+// GetAviatrixFirewallPolicyTypeInput is an input type that accepts GetAviatrixFirewallPolicyTypeArgs and GetAviatrixFirewallPolicyTypeOutput values.
+// You can construct a concrete instance of `GetAviatrixFirewallPolicyTypeInput` via:
+//
+//	GetAviatrixFirewallPolicyTypeArgs{...}
+type GetAviatrixFirewallPolicyTypeInput interface {
+	pulumi.Input
+
+	ToGetAviatrixFirewallPolicyTypeOutput() GetAviatrixFirewallPolicyTypeOutput
+	ToGetAviatrixFirewallPolicyTypeOutputWithContext(context.Context) GetAviatrixFirewallPolicyTypeOutput
+}
+
+type GetAviatrixFirewallPolicyTypeArgs struct {
+	Action      pulumi.StringInput `pulumi:"action"`
+	Description pulumi.StringInput `pulumi:"description"`
+	DstIp       pulumi.StringInput `pulumi:"dstIp"`
+	LogEnabled  pulumi.BoolInput   `pulumi:"logEnabled"`
+	Port        pulumi.StringInput `pulumi:"port"`
+	Protocol    pulumi.StringInput `pulumi:"protocol"`
+	SrcIp       pulumi.StringInput `pulumi:"srcIp"`
+}
+
+func (GetAviatrixFirewallPolicyTypeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAviatrixFirewallPolicyType)(nil)).Elem()
+}
+
+func (i GetAviatrixFirewallPolicyTypeArgs) ToGetAviatrixFirewallPolicyTypeOutput() GetAviatrixFirewallPolicyTypeOutput {
+	return i.ToGetAviatrixFirewallPolicyTypeOutputWithContext(context.Background())
+}
+
+func (i GetAviatrixFirewallPolicyTypeArgs) ToGetAviatrixFirewallPolicyTypeOutputWithContext(ctx context.Context) GetAviatrixFirewallPolicyTypeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAviatrixFirewallPolicyTypeOutput)
+}
+
+// GetAviatrixFirewallPolicyTypeArrayInput is an input type that accepts GetAviatrixFirewallPolicyTypeArray and GetAviatrixFirewallPolicyTypeArrayOutput values.
+// You can construct a concrete instance of `GetAviatrixFirewallPolicyTypeArrayInput` via:
+//
+//	GetAviatrixFirewallPolicyTypeArray{ GetAviatrixFirewallPolicyTypeArgs{...} }
+type GetAviatrixFirewallPolicyTypeArrayInput interface {
+	pulumi.Input
+
+	ToGetAviatrixFirewallPolicyTypeArrayOutput() GetAviatrixFirewallPolicyTypeArrayOutput
+	ToGetAviatrixFirewallPolicyTypeArrayOutputWithContext(context.Context) GetAviatrixFirewallPolicyTypeArrayOutput
+}
+
+type GetAviatrixFirewallPolicyTypeArray []GetAviatrixFirewallPolicyTypeInput
+
+func (GetAviatrixFirewallPolicyTypeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAviatrixFirewallPolicyType)(nil)).Elem()
+}
+
+func (i GetAviatrixFirewallPolicyTypeArray) ToGetAviatrixFirewallPolicyTypeArrayOutput() GetAviatrixFirewallPolicyTypeArrayOutput {
+	return i.ToGetAviatrixFirewallPolicyTypeArrayOutputWithContext(context.Background())
+}
+
+func (i GetAviatrixFirewallPolicyTypeArray) ToGetAviatrixFirewallPolicyTypeArrayOutputWithContext(ctx context.Context) GetAviatrixFirewallPolicyTypeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAviatrixFirewallPolicyTypeArrayOutput)
+}
+
+type GetAviatrixFirewallPolicyTypeOutput struct{ *pulumi.OutputState }
+
+func (GetAviatrixFirewallPolicyTypeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAviatrixFirewallPolicyType)(nil)).Elem()
+}
+
+func (o GetAviatrixFirewallPolicyTypeOutput) ToGetAviatrixFirewallPolicyTypeOutput() GetAviatrixFirewallPolicyTypeOutput {
+	return o
+}
+
+func (o GetAviatrixFirewallPolicyTypeOutput) ToGetAviatrixFirewallPolicyTypeOutputWithContext(ctx context.Context) GetAviatrixFirewallPolicyTypeOutput {
+	return o
+}
+
+func (o GetAviatrixFirewallPolicyTypeOutput) Action() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixFirewallPolicyType) string { return v.Action }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixFirewallPolicyTypeOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixFirewallPolicyType) string { return v.Description }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixFirewallPolicyTypeOutput) DstIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixFirewallPolicyType) string { return v.DstIp }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixFirewallPolicyTypeOutput) LogEnabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetAviatrixFirewallPolicyType) bool { return v.LogEnabled }).(pulumi.BoolOutput)
+}
+
+func (o GetAviatrixFirewallPolicyTypeOutput) Port() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixFirewallPolicyType) string { return v.Port }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixFirewallPolicyTypeOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixFirewallPolicyType) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixFirewallPolicyTypeOutput) SrcIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixFirewallPolicyType) string { return v.SrcIp }).(pulumi.StringOutput)
+}
+
+type GetAviatrixFirewallPolicyTypeArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAviatrixFirewallPolicyTypeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAviatrixFirewallPolicyType)(nil)).Elem()
+}
+
+func (o GetAviatrixFirewallPolicyTypeArrayOutput) ToGetAviatrixFirewallPolicyTypeArrayOutput() GetAviatrixFirewallPolicyTypeArrayOutput {
+	return o
+}
+
+func (o GetAviatrixFirewallPolicyTypeArrayOutput) ToGetAviatrixFirewallPolicyTypeArrayOutputWithContext(ctx context.Context) GetAviatrixFirewallPolicyTypeArrayOutput {
+	return o
+}
+
+func (o GetAviatrixFirewallPolicyTypeArrayOutput) Index(i pulumi.IntInput) GetAviatrixFirewallPolicyTypeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAviatrixFirewallPolicyType {
+		return vs[0].([]GetAviatrixFirewallPolicyType)[vs[1].(int)]
+	}).(GetAviatrixFirewallPolicyTypeOutput)
+}
+
+type GetAviatrixNetworkDomainsNetworkDomain struct {
+	Account                   string `pulumi:"account"`
+	CloudType                 string `pulumi:"cloudType"`
+	EgressInspection          bool   `pulumi:"egressInspection"`
+	EgressInspectionName      string `pulumi:"egressInspectionName"`
+	InspectionPolicy          string `pulumi:"inspectionPolicy"`
+	IntraDomainInspection     bool   `pulumi:"intraDomainInspection"`
+	IntraDomainInspectionName string `pulumi:"intraDomainInspectionName"`
+	Name                      string `pulumi:"name"`
+	Region                    string `pulumi:"region"`
+	RouteTableId              string `pulumi:"routeTableId"`
+	TgwName                   string `pulumi:"tgwName"`
+	Type                      string `pulumi:"type"`
+}
+
+// GetAviatrixNetworkDomainsNetworkDomainInput is an input type that accepts GetAviatrixNetworkDomainsNetworkDomainArgs and GetAviatrixNetworkDomainsNetworkDomainOutput values.
+// You can construct a concrete instance of `GetAviatrixNetworkDomainsNetworkDomainInput` via:
+//
+//	GetAviatrixNetworkDomainsNetworkDomainArgs{...}
+type GetAviatrixNetworkDomainsNetworkDomainInput interface {
+	pulumi.Input
+
+	ToGetAviatrixNetworkDomainsNetworkDomainOutput() GetAviatrixNetworkDomainsNetworkDomainOutput
+	ToGetAviatrixNetworkDomainsNetworkDomainOutputWithContext(context.Context) GetAviatrixNetworkDomainsNetworkDomainOutput
+}
+
+type GetAviatrixNetworkDomainsNetworkDomainArgs struct {
+	Account                   pulumi.StringInput `pulumi:"account"`
+	CloudType                 pulumi.StringInput `pulumi:"cloudType"`
+	EgressInspection          pulumi.BoolInput   `pulumi:"egressInspection"`
+	EgressInspectionName      pulumi.StringInput `pulumi:"egressInspectionName"`
+	InspectionPolicy          pulumi.StringInput `pulumi:"inspectionPolicy"`
+	IntraDomainInspection     pulumi.BoolInput   `pulumi:"intraDomainInspection"`
+	IntraDomainInspectionName pulumi.StringInput `pulumi:"intraDomainInspectionName"`
+	Name                      pulumi.StringInput `pulumi:"name"`
+	Region                    pulumi.StringInput `pulumi:"region"`
+	RouteTableId              pulumi.StringInput `pulumi:"routeTableId"`
+	TgwName                   pulumi.StringInput `pulumi:"tgwName"`
+	Type                      pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetAviatrixNetworkDomainsNetworkDomainArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAviatrixNetworkDomainsNetworkDomain)(nil)).Elem()
+}
+
+func (i GetAviatrixNetworkDomainsNetworkDomainArgs) ToGetAviatrixNetworkDomainsNetworkDomainOutput() GetAviatrixNetworkDomainsNetworkDomainOutput {
+	return i.ToGetAviatrixNetworkDomainsNetworkDomainOutputWithContext(context.Background())
+}
+
+func (i GetAviatrixNetworkDomainsNetworkDomainArgs) ToGetAviatrixNetworkDomainsNetworkDomainOutputWithContext(ctx context.Context) GetAviatrixNetworkDomainsNetworkDomainOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAviatrixNetworkDomainsNetworkDomainOutput)
+}
+
+// GetAviatrixNetworkDomainsNetworkDomainArrayInput is an input type that accepts GetAviatrixNetworkDomainsNetworkDomainArray and GetAviatrixNetworkDomainsNetworkDomainArrayOutput values.
+// You can construct a concrete instance of `GetAviatrixNetworkDomainsNetworkDomainArrayInput` via:
+//
+//	GetAviatrixNetworkDomainsNetworkDomainArray{ GetAviatrixNetworkDomainsNetworkDomainArgs{...} }
+type GetAviatrixNetworkDomainsNetworkDomainArrayInput interface {
+	pulumi.Input
+
+	ToGetAviatrixNetworkDomainsNetworkDomainArrayOutput() GetAviatrixNetworkDomainsNetworkDomainArrayOutput
+	ToGetAviatrixNetworkDomainsNetworkDomainArrayOutputWithContext(context.Context) GetAviatrixNetworkDomainsNetworkDomainArrayOutput
+}
+
+type GetAviatrixNetworkDomainsNetworkDomainArray []GetAviatrixNetworkDomainsNetworkDomainInput
+
+func (GetAviatrixNetworkDomainsNetworkDomainArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAviatrixNetworkDomainsNetworkDomain)(nil)).Elem()
+}
+
+func (i GetAviatrixNetworkDomainsNetworkDomainArray) ToGetAviatrixNetworkDomainsNetworkDomainArrayOutput() GetAviatrixNetworkDomainsNetworkDomainArrayOutput {
+	return i.ToGetAviatrixNetworkDomainsNetworkDomainArrayOutputWithContext(context.Background())
+}
+
+func (i GetAviatrixNetworkDomainsNetworkDomainArray) ToGetAviatrixNetworkDomainsNetworkDomainArrayOutputWithContext(ctx context.Context) GetAviatrixNetworkDomainsNetworkDomainArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAviatrixNetworkDomainsNetworkDomainArrayOutput)
+}
+
+type GetAviatrixNetworkDomainsNetworkDomainOutput struct{ *pulumi.OutputState }
+
+func (GetAviatrixNetworkDomainsNetworkDomainOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAviatrixNetworkDomainsNetworkDomain)(nil)).Elem()
+}
+
+func (o GetAviatrixNetworkDomainsNetworkDomainOutput) ToGetAviatrixNetworkDomainsNetworkDomainOutput() GetAviatrixNetworkDomainsNetworkDomainOutput {
+	return o
+}
+
+func (o GetAviatrixNetworkDomainsNetworkDomainOutput) ToGetAviatrixNetworkDomainsNetworkDomainOutputWithContext(ctx context.Context) GetAviatrixNetworkDomainsNetworkDomainOutput {
+	return o
+}
+
+func (o GetAviatrixNetworkDomainsNetworkDomainOutput) Account() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixNetworkDomainsNetworkDomain) string { return v.Account }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixNetworkDomainsNetworkDomainOutput) CloudType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixNetworkDomainsNetworkDomain) string { return v.CloudType }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixNetworkDomainsNetworkDomainOutput) EgressInspection() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetAviatrixNetworkDomainsNetworkDomain) bool { return v.EgressInspection }).(pulumi.BoolOutput)
+}
+
+func (o GetAviatrixNetworkDomainsNetworkDomainOutput) EgressInspectionName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixNetworkDomainsNetworkDomain) string { return v.EgressInspectionName }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixNetworkDomainsNetworkDomainOutput) InspectionPolicy() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixNetworkDomainsNetworkDomain) string { return v.InspectionPolicy }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixNetworkDomainsNetworkDomainOutput) IntraDomainInspection() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetAviatrixNetworkDomainsNetworkDomain) bool { return v.IntraDomainInspection }).(pulumi.BoolOutput)
+}
+
+func (o GetAviatrixNetworkDomainsNetworkDomainOutput) IntraDomainInspectionName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixNetworkDomainsNetworkDomain) string { return v.IntraDomainInspectionName }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixNetworkDomainsNetworkDomainOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixNetworkDomainsNetworkDomain) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixNetworkDomainsNetworkDomainOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixNetworkDomainsNetworkDomain) string { return v.Region }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixNetworkDomainsNetworkDomainOutput) RouteTableId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixNetworkDomainsNetworkDomain) string { return v.RouteTableId }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixNetworkDomainsNetworkDomainOutput) TgwName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixNetworkDomainsNetworkDomain) string { return v.TgwName }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixNetworkDomainsNetworkDomainOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixNetworkDomainsNetworkDomain) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetAviatrixNetworkDomainsNetworkDomainArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAviatrixNetworkDomainsNetworkDomainArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAviatrixNetworkDomainsNetworkDomain)(nil)).Elem()
+}
+
+func (o GetAviatrixNetworkDomainsNetworkDomainArrayOutput) ToGetAviatrixNetworkDomainsNetworkDomainArrayOutput() GetAviatrixNetworkDomainsNetworkDomainArrayOutput {
+	return o
+}
+
+func (o GetAviatrixNetworkDomainsNetworkDomainArrayOutput) ToGetAviatrixNetworkDomainsNetworkDomainArrayOutputWithContext(ctx context.Context) GetAviatrixNetworkDomainsNetworkDomainArrayOutput {
+	return o
+}
+
+func (o GetAviatrixNetworkDomainsNetworkDomainArrayOutput) Index(i pulumi.IntInput) GetAviatrixNetworkDomainsNetworkDomainOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAviatrixNetworkDomainsNetworkDomain {
+		return vs[0].([]GetAviatrixNetworkDomainsNetworkDomain)[vs[1].(int)]
+	}).(GetAviatrixNetworkDomainsNetworkDomainOutput)
+}
+
+type GetAviatrixTransitGatewayBgpLanInterface struct {
+	Subnet string `pulumi:"subnet"`
+	VpcId  string `pulumi:"vpcId"`
+}
+
+// GetAviatrixTransitGatewayBgpLanInterfaceInput is an input type that accepts GetAviatrixTransitGatewayBgpLanInterfaceArgs and GetAviatrixTransitGatewayBgpLanInterfaceOutput values.
+// You can construct a concrete instance of `GetAviatrixTransitGatewayBgpLanInterfaceInput` via:
+//
+//	GetAviatrixTransitGatewayBgpLanInterfaceArgs{...}
+type GetAviatrixTransitGatewayBgpLanInterfaceInput interface {
+	pulumi.Input
+
+	ToGetAviatrixTransitGatewayBgpLanInterfaceOutput() GetAviatrixTransitGatewayBgpLanInterfaceOutput
+	ToGetAviatrixTransitGatewayBgpLanInterfaceOutputWithContext(context.Context) GetAviatrixTransitGatewayBgpLanInterfaceOutput
+}
+
+type GetAviatrixTransitGatewayBgpLanInterfaceArgs struct {
+	Subnet pulumi.StringInput `pulumi:"subnet"`
+	VpcId  pulumi.StringInput `pulumi:"vpcId"`
+}
+
+func (GetAviatrixTransitGatewayBgpLanInterfaceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAviatrixTransitGatewayBgpLanInterface)(nil)).Elem()
+}
+
+func (i GetAviatrixTransitGatewayBgpLanInterfaceArgs) ToGetAviatrixTransitGatewayBgpLanInterfaceOutput() GetAviatrixTransitGatewayBgpLanInterfaceOutput {
+	return i.ToGetAviatrixTransitGatewayBgpLanInterfaceOutputWithContext(context.Background())
+}
+
+func (i GetAviatrixTransitGatewayBgpLanInterfaceArgs) ToGetAviatrixTransitGatewayBgpLanInterfaceOutputWithContext(ctx context.Context) GetAviatrixTransitGatewayBgpLanInterfaceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAviatrixTransitGatewayBgpLanInterfaceOutput)
+}
+
+// GetAviatrixTransitGatewayBgpLanInterfaceArrayInput is an input type that accepts GetAviatrixTransitGatewayBgpLanInterfaceArray and GetAviatrixTransitGatewayBgpLanInterfaceArrayOutput values.
+// You can construct a concrete instance of `GetAviatrixTransitGatewayBgpLanInterfaceArrayInput` via:
+//
+//	GetAviatrixTransitGatewayBgpLanInterfaceArray{ GetAviatrixTransitGatewayBgpLanInterfaceArgs{...} }
+type GetAviatrixTransitGatewayBgpLanInterfaceArrayInput interface {
+	pulumi.Input
+
+	ToGetAviatrixTransitGatewayBgpLanInterfaceArrayOutput() GetAviatrixTransitGatewayBgpLanInterfaceArrayOutput
+	ToGetAviatrixTransitGatewayBgpLanInterfaceArrayOutputWithContext(context.Context) GetAviatrixTransitGatewayBgpLanInterfaceArrayOutput
+}
+
+type GetAviatrixTransitGatewayBgpLanInterfaceArray []GetAviatrixTransitGatewayBgpLanInterfaceInput
+
+func (GetAviatrixTransitGatewayBgpLanInterfaceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAviatrixTransitGatewayBgpLanInterface)(nil)).Elem()
+}
+
+func (i GetAviatrixTransitGatewayBgpLanInterfaceArray) ToGetAviatrixTransitGatewayBgpLanInterfaceArrayOutput() GetAviatrixTransitGatewayBgpLanInterfaceArrayOutput {
+	return i.ToGetAviatrixTransitGatewayBgpLanInterfaceArrayOutputWithContext(context.Background())
+}
+
+func (i GetAviatrixTransitGatewayBgpLanInterfaceArray) ToGetAviatrixTransitGatewayBgpLanInterfaceArrayOutputWithContext(ctx context.Context) GetAviatrixTransitGatewayBgpLanInterfaceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAviatrixTransitGatewayBgpLanInterfaceArrayOutput)
+}
+
+type GetAviatrixTransitGatewayBgpLanInterfaceOutput struct{ *pulumi.OutputState }
+
+func (GetAviatrixTransitGatewayBgpLanInterfaceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAviatrixTransitGatewayBgpLanInterface)(nil)).Elem()
+}
+
+func (o GetAviatrixTransitGatewayBgpLanInterfaceOutput) ToGetAviatrixTransitGatewayBgpLanInterfaceOutput() GetAviatrixTransitGatewayBgpLanInterfaceOutput {
+	return o
+}
+
+func (o GetAviatrixTransitGatewayBgpLanInterfaceOutput) ToGetAviatrixTransitGatewayBgpLanInterfaceOutputWithContext(ctx context.Context) GetAviatrixTransitGatewayBgpLanInterfaceOutput {
+	return o
+}
+
+func (o GetAviatrixTransitGatewayBgpLanInterfaceOutput) Subnet() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewayBgpLanInterface) string { return v.Subnet }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixTransitGatewayBgpLanInterfaceOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewayBgpLanInterface) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+type GetAviatrixTransitGatewayBgpLanInterfaceArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAviatrixTransitGatewayBgpLanInterfaceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAviatrixTransitGatewayBgpLanInterface)(nil)).Elem()
+}
+
+func (o GetAviatrixTransitGatewayBgpLanInterfaceArrayOutput) ToGetAviatrixTransitGatewayBgpLanInterfaceArrayOutput() GetAviatrixTransitGatewayBgpLanInterfaceArrayOutput {
+	return o
+}
+
+func (o GetAviatrixTransitGatewayBgpLanInterfaceArrayOutput) ToGetAviatrixTransitGatewayBgpLanInterfaceArrayOutputWithContext(ctx context.Context) GetAviatrixTransitGatewayBgpLanInterfaceArrayOutput {
+	return o
+}
+
+func (o GetAviatrixTransitGatewayBgpLanInterfaceArrayOutput) Index(i pulumi.IntInput) GetAviatrixTransitGatewayBgpLanInterfaceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAviatrixTransitGatewayBgpLanInterface {
+		return vs[0].([]GetAviatrixTransitGatewayBgpLanInterface)[vs[1].(int)]
+	}).(GetAviatrixTransitGatewayBgpLanInterfaceOutput)
+}
+
+type GetAviatrixTransitGatewayHaBgpLanInterface struct {
+	Subnet string `pulumi:"subnet"`
+	VpcId  string `pulumi:"vpcId"`
+}
+
+// GetAviatrixTransitGatewayHaBgpLanInterfaceInput is an input type that accepts GetAviatrixTransitGatewayHaBgpLanInterfaceArgs and GetAviatrixTransitGatewayHaBgpLanInterfaceOutput values.
+// You can construct a concrete instance of `GetAviatrixTransitGatewayHaBgpLanInterfaceInput` via:
+//
+//	GetAviatrixTransitGatewayHaBgpLanInterfaceArgs{...}
+type GetAviatrixTransitGatewayHaBgpLanInterfaceInput interface {
+	pulumi.Input
+
+	ToGetAviatrixTransitGatewayHaBgpLanInterfaceOutput() GetAviatrixTransitGatewayHaBgpLanInterfaceOutput
+	ToGetAviatrixTransitGatewayHaBgpLanInterfaceOutputWithContext(context.Context) GetAviatrixTransitGatewayHaBgpLanInterfaceOutput
+}
+
+type GetAviatrixTransitGatewayHaBgpLanInterfaceArgs struct {
+	Subnet pulumi.StringInput `pulumi:"subnet"`
+	VpcId  pulumi.StringInput `pulumi:"vpcId"`
+}
+
+func (GetAviatrixTransitGatewayHaBgpLanInterfaceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAviatrixTransitGatewayHaBgpLanInterface)(nil)).Elem()
+}
+
+func (i GetAviatrixTransitGatewayHaBgpLanInterfaceArgs) ToGetAviatrixTransitGatewayHaBgpLanInterfaceOutput() GetAviatrixTransitGatewayHaBgpLanInterfaceOutput {
+	return i.ToGetAviatrixTransitGatewayHaBgpLanInterfaceOutputWithContext(context.Background())
+}
+
+func (i GetAviatrixTransitGatewayHaBgpLanInterfaceArgs) ToGetAviatrixTransitGatewayHaBgpLanInterfaceOutputWithContext(ctx context.Context) GetAviatrixTransitGatewayHaBgpLanInterfaceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAviatrixTransitGatewayHaBgpLanInterfaceOutput)
+}
+
+// GetAviatrixTransitGatewayHaBgpLanInterfaceArrayInput is an input type that accepts GetAviatrixTransitGatewayHaBgpLanInterfaceArray and GetAviatrixTransitGatewayHaBgpLanInterfaceArrayOutput values.
+// You can construct a concrete instance of `GetAviatrixTransitGatewayHaBgpLanInterfaceArrayInput` via:
+//
+//	GetAviatrixTransitGatewayHaBgpLanInterfaceArray{ GetAviatrixTransitGatewayHaBgpLanInterfaceArgs{...} }
+type GetAviatrixTransitGatewayHaBgpLanInterfaceArrayInput interface {
+	pulumi.Input
+
+	ToGetAviatrixTransitGatewayHaBgpLanInterfaceArrayOutput() GetAviatrixTransitGatewayHaBgpLanInterfaceArrayOutput
+	ToGetAviatrixTransitGatewayHaBgpLanInterfaceArrayOutputWithContext(context.Context) GetAviatrixTransitGatewayHaBgpLanInterfaceArrayOutput
+}
+
+type GetAviatrixTransitGatewayHaBgpLanInterfaceArray []GetAviatrixTransitGatewayHaBgpLanInterfaceInput
+
+func (GetAviatrixTransitGatewayHaBgpLanInterfaceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAviatrixTransitGatewayHaBgpLanInterface)(nil)).Elem()
+}
+
+func (i GetAviatrixTransitGatewayHaBgpLanInterfaceArray) ToGetAviatrixTransitGatewayHaBgpLanInterfaceArrayOutput() GetAviatrixTransitGatewayHaBgpLanInterfaceArrayOutput {
+	return i.ToGetAviatrixTransitGatewayHaBgpLanInterfaceArrayOutputWithContext(context.Background())
+}
+
+func (i GetAviatrixTransitGatewayHaBgpLanInterfaceArray) ToGetAviatrixTransitGatewayHaBgpLanInterfaceArrayOutputWithContext(ctx context.Context) GetAviatrixTransitGatewayHaBgpLanInterfaceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAviatrixTransitGatewayHaBgpLanInterfaceArrayOutput)
+}
+
+type GetAviatrixTransitGatewayHaBgpLanInterfaceOutput struct{ *pulumi.OutputState }
+
+func (GetAviatrixTransitGatewayHaBgpLanInterfaceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAviatrixTransitGatewayHaBgpLanInterface)(nil)).Elem()
+}
+
+func (o GetAviatrixTransitGatewayHaBgpLanInterfaceOutput) ToGetAviatrixTransitGatewayHaBgpLanInterfaceOutput() GetAviatrixTransitGatewayHaBgpLanInterfaceOutput {
+	return o
+}
+
+func (o GetAviatrixTransitGatewayHaBgpLanInterfaceOutput) ToGetAviatrixTransitGatewayHaBgpLanInterfaceOutputWithContext(ctx context.Context) GetAviatrixTransitGatewayHaBgpLanInterfaceOutput {
+	return o
+}
+
+func (o GetAviatrixTransitGatewayHaBgpLanInterfaceOutput) Subnet() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewayHaBgpLanInterface) string { return v.Subnet }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixTransitGatewayHaBgpLanInterfaceOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewayHaBgpLanInterface) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+type GetAviatrixTransitGatewayHaBgpLanInterfaceArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAviatrixTransitGatewayHaBgpLanInterfaceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAviatrixTransitGatewayHaBgpLanInterface)(nil)).Elem()
+}
+
+func (o GetAviatrixTransitGatewayHaBgpLanInterfaceArrayOutput) ToGetAviatrixTransitGatewayHaBgpLanInterfaceArrayOutput() GetAviatrixTransitGatewayHaBgpLanInterfaceArrayOutput {
+	return o
+}
+
+func (o GetAviatrixTransitGatewayHaBgpLanInterfaceArrayOutput) ToGetAviatrixTransitGatewayHaBgpLanInterfaceArrayOutputWithContext(ctx context.Context) GetAviatrixTransitGatewayHaBgpLanInterfaceArrayOutput {
+	return o
+}
+
+func (o GetAviatrixTransitGatewayHaBgpLanInterfaceArrayOutput) Index(i pulumi.IntInput) GetAviatrixTransitGatewayHaBgpLanInterfaceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAviatrixTransitGatewayHaBgpLanInterface {
+		return vs[0].([]GetAviatrixTransitGatewayHaBgpLanInterface)[vs[1].(int)]
+	}).(GetAviatrixTransitGatewayHaBgpLanInterfaceOutput)
+}
+
+type GetAviatrixTransitGatewaysGatewayList struct {
+	AccountName                     string                                                   `pulumi:"accountName"`
+	AllocateNewEip                  bool                                                     `pulumi:"allocateNewEip"`
+	AvailabilityDomain              string                                                   `pulumi:"availabilityDomain"`
+	AzureEipNameResourceGroup       string                                                   `pulumi:"azureEipNameResourceGroup"`
+	BgpEcmp                         bool                                                     `pulumi:"bgpEcmp"`
+	BgpHoldTime                     int                                                      `pulumi:"bgpHoldTime"`
+	BgpLanInterfaces                []GetAviatrixTransitGatewaysGatewayListBgpLanInterface   `pulumi:"bgpLanInterfaces"`
+	BgpLanIpLists                   []string                                                 `pulumi:"bgpLanIpLists"`
+	BgpPollingTime                  string                                                   `pulumi:"bgpPollingTime"`
+	CloudInstanceId                 string                                                   `pulumi:"cloudInstanceId"`
+	CloudType                       int                                                      `pulumi:"cloudType"`
+	ConnectedTransit                bool                                                     `pulumi:"connectedTransit"`
+	CustomizedSpokeVpcRoutes        string                                                   `pulumi:"customizedSpokeVpcRoutes"`
+	EnableActiveStandby             bool                                                     `pulumi:"enableActiveStandby"`
+	EnableActiveStandbyPreemptive   bool                                                     `pulumi:"enableActiveStandbyPreemptive"`
+	EnableBgpOverLan                bool                                                     `pulumi:"enableBgpOverLan"`
+	EnableEncryptVolume             bool                                                     `pulumi:"enableEncryptVolume"`
+	EnableGatewayLoadBalancer       bool                                                     `pulumi:"enableGatewayLoadBalancer"`
+	EnableHybridConnection          bool                                                     `pulumi:"enableHybridConnection"`
+	EnableJumboFrame                bool                                                     `pulumi:"enableJumboFrame"`
+	EnableMonitorGatewaySubnets     bool                                                     `pulumi:"enableMonitorGatewaySubnets"`
+	EnableMultiTierTransit          bool                                                     `pulumi:"enableMultiTierTransit"`
+	EnablePrivateOob                bool                                                     `pulumi:"enablePrivateOob"`
+	EnableSegmentation              bool                                                     `pulumi:"enableSegmentation"`
+	EnableSpotInstance              bool                                                     `pulumi:"enableSpotInstance"`
+	EnableTransitSummarizeCidrToTgw bool                                                     `pulumi:"enableTransitSummarizeCidrToTgw"`
+	EnableVpcDnsServer              bool                                                     `pulumi:"enableVpcDnsServer"`
+	ExcludedAdvertisedSpokeRoutes   string                                                   `pulumi:"excludedAdvertisedSpokeRoutes"`
+	FaultDomain                     string                                                   `pulumi:"faultDomain"`
+	FilteredSpokeVpcRoutes          string                                                   `pulumi:"filteredSpokeVpcRoutes"`
+	GwName                          string                                                   `pulumi:"gwName"`
+	GwSize                          string                                                   `pulumi:"gwSize"`
+	HaBgpLanInterfaces              []GetAviatrixTransitGatewaysGatewayListHaBgpLanInterface `pulumi:"haBgpLanInterfaces"`
+	HaBgpLanIpLists                 []string                                                 `pulumi:"haBgpLanIpLists"`
+	ImageVersion                    string                                                   `pulumi:"imageVersion"`
+	InsaneMode                      bool                                                     `pulumi:"insaneMode"`
+	InsaneModeAz                    string                                                   `pulumi:"insaneModeAz"`
+	LanPrivateSubnet                string                                                   `pulumi:"lanPrivateSubnet"`
+	LanVpcId                        string                                                   `pulumi:"lanVpcId"`
+	LearnedCidrsApprovalMode        string                                                   `pulumi:"learnedCidrsApprovalMode"`
+	LocalAsNumber                   string                                                   `pulumi:"localAsNumber"`
+	MonitorExcludeLists             []string                                                 `pulumi:"monitorExcludeLists"`
+	OobAvailabilityZone             string                                                   `pulumi:"oobAvailabilityZone"`
+	OobManagementSubnet             string                                                   `pulumi:"oobManagementSubnet"`
+	PrependAsPaths                  []string                                                 `pulumi:"prependAsPaths"`
+	PrivateIp                       string                                                   `pulumi:"privateIp"`
+	PublicIp                        string                                                   `pulumi:"publicIp"`
+	SecurityGroupId                 string                                                   `pulumi:"securityGroupId"`
+	SingleAzHa                      bool                                                     `pulumi:"singleAzHa"`
+	SingleIpSnat                    bool                                                     `pulumi:"singleIpSnat"`
+	SoftwareVersion                 string                                                   `pulumi:"softwareVersion"`
+	SpotPrice                       string                                                   `pulumi:"spotPrice"`
+	Subnet                          string                                                   `pulumi:"subnet"`
+	TunnelDetectionTime             int                                                      `pulumi:"tunnelDetectionTime"`
+	VpcId                           string                                                   `pulumi:"vpcId"`
+	VpcReg                          string                                                   `pulumi:"vpcReg"`
+	Zone                            string                                                   `pulumi:"zone"`
+}
+
+// GetAviatrixTransitGatewaysGatewayListInput is an input type that accepts GetAviatrixTransitGatewaysGatewayListArgs and GetAviatrixTransitGatewaysGatewayListOutput values.
+// You can construct a concrete instance of `GetAviatrixTransitGatewaysGatewayListInput` via:
+//
+//	GetAviatrixTransitGatewaysGatewayListArgs{...}
+type GetAviatrixTransitGatewaysGatewayListInput interface {
+	pulumi.Input
+
+	ToGetAviatrixTransitGatewaysGatewayListOutput() GetAviatrixTransitGatewaysGatewayListOutput
+	ToGetAviatrixTransitGatewaysGatewayListOutputWithContext(context.Context) GetAviatrixTransitGatewaysGatewayListOutput
+}
+
+type GetAviatrixTransitGatewaysGatewayListArgs struct {
+	AccountName                     pulumi.StringInput                                               `pulumi:"accountName"`
+	AllocateNewEip                  pulumi.BoolInput                                                 `pulumi:"allocateNewEip"`
+	AvailabilityDomain              pulumi.StringInput                                               `pulumi:"availabilityDomain"`
+	AzureEipNameResourceGroup       pulumi.StringInput                                               `pulumi:"azureEipNameResourceGroup"`
+	BgpEcmp                         pulumi.BoolInput                                                 `pulumi:"bgpEcmp"`
+	BgpHoldTime                     pulumi.IntInput                                                  `pulumi:"bgpHoldTime"`
+	BgpLanInterfaces                GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayInput   `pulumi:"bgpLanInterfaces"`
+	BgpLanIpLists                   pulumi.StringArrayInput                                          `pulumi:"bgpLanIpLists"`
+	BgpPollingTime                  pulumi.StringInput                                               `pulumi:"bgpPollingTime"`
+	CloudInstanceId                 pulumi.StringInput                                               `pulumi:"cloudInstanceId"`
+	CloudType                       pulumi.IntInput                                                  `pulumi:"cloudType"`
+	ConnectedTransit                pulumi.BoolInput                                                 `pulumi:"connectedTransit"`
+	CustomizedSpokeVpcRoutes        pulumi.StringInput                                               `pulumi:"customizedSpokeVpcRoutes"`
+	EnableActiveStandby             pulumi.BoolInput                                                 `pulumi:"enableActiveStandby"`
+	EnableActiveStandbyPreemptive   pulumi.BoolInput                                                 `pulumi:"enableActiveStandbyPreemptive"`
+	EnableBgpOverLan                pulumi.BoolInput                                                 `pulumi:"enableBgpOverLan"`
+	EnableEncryptVolume             pulumi.BoolInput                                                 `pulumi:"enableEncryptVolume"`
+	EnableGatewayLoadBalancer       pulumi.BoolInput                                                 `pulumi:"enableGatewayLoadBalancer"`
+	EnableHybridConnection          pulumi.BoolInput                                                 `pulumi:"enableHybridConnection"`
+	EnableJumboFrame                pulumi.BoolInput                                                 `pulumi:"enableJumboFrame"`
+	EnableMonitorGatewaySubnets     pulumi.BoolInput                                                 `pulumi:"enableMonitorGatewaySubnets"`
+	EnableMultiTierTransit          pulumi.BoolInput                                                 `pulumi:"enableMultiTierTransit"`
+	EnablePrivateOob                pulumi.BoolInput                                                 `pulumi:"enablePrivateOob"`
+	EnableSegmentation              pulumi.BoolInput                                                 `pulumi:"enableSegmentation"`
+	EnableSpotInstance              pulumi.BoolInput                                                 `pulumi:"enableSpotInstance"`
+	EnableTransitSummarizeCidrToTgw pulumi.BoolInput                                                 `pulumi:"enableTransitSummarizeCidrToTgw"`
+	EnableVpcDnsServer              pulumi.BoolInput                                                 `pulumi:"enableVpcDnsServer"`
+	ExcludedAdvertisedSpokeRoutes   pulumi.StringInput                                               `pulumi:"excludedAdvertisedSpokeRoutes"`
+	FaultDomain                     pulumi.StringInput                                               `pulumi:"faultDomain"`
+	FilteredSpokeVpcRoutes          pulumi.StringInput                                               `pulumi:"filteredSpokeVpcRoutes"`
+	GwName                          pulumi.StringInput                                               `pulumi:"gwName"`
+	GwSize                          pulumi.StringInput                                               `pulumi:"gwSize"`
+	HaBgpLanInterfaces              GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayInput `pulumi:"haBgpLanInterfaces"`
+	HaBgpLanIpLists                 pulumi.StringArrayInput                                          `pulumi:"haBgpLanIpLists"`
+	ImageVersion                    pulumi.StringInput                                               `pulumi:"imageVersion"`
+	InsaneMode                      pulumi.BoolInput                                                 `pulumi:"insaneMode"`
+	InsaneModeAz                    pulumi.StringInput                                               `pulumi:"insaneModeAz"`
+	LanPrivateSubnet                pulumi.StringInput                                               `pulumi:"lanPrivateSubnet"`
+	LanVpcId                        pulumi.StringInput                                               `pulumi:"lanVpcId"`
+	LearnedCidrsApprovalMode        pulumi.StringInput                                               `pulumi:"learnedCidrsApprovalMode"`
+	LocalAsNumber                   pulumi.StringInput                                               `pulumi:"localAsNumber"`
+	MonitorExcludeLists             pulumi.StringArrayInput                                          `pulumi:"monitorExcludeLists"`
+	OobAvailabilityZone             pulumi.StringInput                                               `pulumi:"oobAvailabilityZone"`
+	OobManagementSubnet             pulumi.StringInput                                               `pulumi:"oobManagementSubnet"`
+	PrependAsPaths                  pulumi.StringArrayInput                                          `pulumi:"prependAsPaths"`
+	PrivateIp                       pulumi.StringInput                                               `pulumi:"privateIp"`
+	PublicIp                        pulumi.StringInput                                               `pulumi:"publicIp"`
+	SecurityGroupId                 pulumi.StringInput                                               `pulumi:"securityGroupId"`
+	SingleAzHa                      pulumi.BoolInput                                                 `pulumi:"singleAzHa"`
+	SingleIpSnat                    pulumi.BoolInput                                                 `pulumi:"singleIpSnat"`
+	SoftwareVersion                 pulumi.StringInput                                               `pulumi:"softwareVersion"`
+	SpotPrice                       pulumi.StringInput                                               `pulumi:"spotPrice"`
+	Subnet                          pulumi.StringInput                                               `pulumi:"subnet"`
+	TunnelDetectionTime             pulumi.IntInput                                                  `pulumi:"tunnelDetectionTime"`
+	VpcId                           pulumi.StringInput                                               `pulumi:"vpcId"`
+	VpcReg                          pulumi.StringInput                                               `pulumi:"vpcReg"`
+	Zone                            pulumi.StringInput                                               `pulumi:"zone"`
+}
+
+func (GetAviatrixTransitGatewaysGatewayListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAviatrixTransitGatewaysGatewayList)(nil)).Elem()
+}
+
+func (i GetAviatrixTransitGatewaysGatewayListArgs) ToGetAviatrixTransitGatewaysGatewayListOutput() GetAviatrixTransitGatewaysGatewayListOutput {
+	return i.ToGetAviatrixTransitGatewaysGatewayListOutputWithContext(context.Background())
+}
+
+func (i GetAviatrixTransitGatewaysGatewayListArgs) ToGetAviatrixTransitGatewaysGatewayListOutputWithContext(ctx context.Context) GetAviatrixTransitGatewaysGatewayListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAviatrixTransitGatewaysGatewayListOutput)
+}
+
+// GetAviatrixTransitGatewaysGatewayListArrayInput is an input type that accepts GetAviatrixTransitGatewaysGatewayListArray and GetAviatrixTransitGatewaysGatewayListArrayOutput values.
+// You can construct a concrete instance of `GetAviatrixTransitGatewaysGatewayListArrayInput` via:
+//
+//	GetAviatrixTransitGatewaysGatewayListArray{ GetAviatrixTransitGatewaysGatewayListArgs{...} }
+type GetAviatrixTransitGatewaysGatewayListArrayInput interface {
+	pulumi.Input
+
+	ToGetAviatrixTransitGatewaysGatewayListArrayOutput() GetAviatrixTransitGatewaysGatewayListArrayOutput
+	ToGetAviatrixTransitGatewaysGatewayListArrayOutputWithContext(context.Context) GetAviatrixTransitGatewaysGatewayListArrayOutput
+}
+
+type GetAviatrixTransitGatewaysGatewayListArray []GetAviatrixTransitGatewaysGatewayListInput
+
+func (GetAviatrixTransitGatewaysGatewayListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAviatrixTransitGatewaysGatewayList)(nil)).Elem()
+}
+
+func (i GetAviatrixTransitGatewaysGatewayListArray) ToGetAviatrixTransitGatewaysGatewayListArrayOutput() GetAviatrixTransitGatewaysGatewayListArrayOutput {
+	return i.ToGetAviatrixTransitGatewaysGatewayListArrayOutputWithContext(context.Background())
+}
+
+func (i GetAviatrixTransitGatewaysGatewayListArray) ToGetAviatrixTransitGatewaysGatewayListArrayOutputWithContext(ctx context.Context) GetAviatrixTransitGatewaysGatewayListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAviatrixTransitGatewaysGatewayListArrayOutput)
+}
+
+type GetAviatrixTransitGatewaysGatewayListOutput struct{ *pulumi.OutputState }
+
+func (GetAviatrixTransitGatewaysGatewayListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAviatrixTransitGatewaysGatewayList)(nil)).Elem()
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) ToGetAviatrixTransitGatewaysGatewayListOutput() GetAviatrixTransitGatewaysGatewayListOutput {
+	return o
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) ToGetAviatrixTransitGatewaysGatewayListOutputWithContext(ctx context.Context) GetAviatrixTransitGatewaysGatewayListOutput {
+	return o
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) AccountName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.AccountName }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) AllocateNewEip() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.AllocateNewEip }).(pulumi.BoolOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) AvailabilityDomain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.AvailabilityDomain }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) AzureEipNameResourceGroup() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.AzureEipNameResourceGroup }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) BgpEcmp() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.BgpEcmp }).(pulumi.BoolOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) BgpHoldTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) int { return v.BgpHoldTime }).(pulumi.IntOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) BgpLanInterfaces() GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) []GetAviatrixTransitGatewaysGatewayListBgpLanInterface {
+		return v.BgpLanInterfaces
+	}).(GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) BgpLanIpLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) []string { return v.BgpLanIpLists }).(pulumi.StringArrayOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) BgpPollingTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.BgpPollingTime }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) CloudInstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.CloudInstanceId }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) CloudType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) int { return v.CloudType }).(pulumi.IntOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) ConnectedTransit() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.ConnectedTransit }).(pulumi.BoolOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) CustomizedSpokeVpcRoutes() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.CustomizedSpokeVpcRoutes }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) EnableActiveStandby() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.EnableActiveStandby }).(pulumi.BoolOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) EnableActiveStandbyPreemptive() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.EnableActiveStandbyPreemptive }).(pulumi.BoolOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) EnableBgpOverLan() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.EnableBgpOverLan }).(pulumi.BoolOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) EnableEncryptVolume() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.EnableEncryptVolume }).(pulumi.BoolOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) EnableGatewayLoadBalancer() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.EnableGatewayLoadBalancer }).(pulumi.BoolOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) EnableHybridConnection() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.EnableHybridConnection }).(pulumi.BoolOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) EnableJumboFrame() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.EnableJumboFrame }).(pulumi.BoolOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) EnableMonitorGatewaySubnets() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.EnableMonitorGatewaySubnets }).(pulumi.BoolOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) EnableMultiTierTransit() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.EnableMultiTierTransit }).(pulumi.BoolOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) EnablePrivateOob() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.EnablePrivateOob }).(pulumi.BoolOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) EnableSegmentation() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.EnableSegmentation }).(pulumi.BoolOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) EnableSpotInstance() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.EnableSpotInstance }).(pulumi.BoolOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) EnableTransitSummarizeCidrToTgw() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.EnableTransitSummarizeCidrToTgw }).(pulumi.BoolOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) EnableVpcDnsServer() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.EnableVpcDnsServer }).(pulumi.BoolOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) ExcludedAdvertisedSpokeRoutes() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.ExcludedAdvertisedSpokeRoutes }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) FaultDomain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.FaultDomain }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) FilteredSpokeVpcRoutes() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.FilteredSpokeVpcRoutes }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) GwName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.GwName }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) GwSize() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.GwSize }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) HaBgpLanInterfaces() GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) []GetAviatrixTransitGatewaysGatewayListHaBgpLanInterface {
+		return v.HaBgpLanInterfaces
+	}).(GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) HaBgpLanIpLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) []string { return v.HaBgpLanIpLists }).(pulumi.StringArrayOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) ImageVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.ImageVersion }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) InsaneMode() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.InsaneMode }).(pulumi.BoolOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) InsaneModeAz() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.InsaneModeAz }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) LanPrivateSubnet() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.LanPrivateSubnet }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) LanVpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.LanVpcId }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) LearnedCidrsApprovalMode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.LearnedCidrsApprovalMode }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) LocalAsNumber() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.LocalAsNumber }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) MonitorExcludeLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) []string { return v.MonitorExcludeLists }).(pulumi.StringArrayOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) OobAvailabilityZone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.OobAvailabilityZone }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) OobManagementSubnet() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.OobManagementSubnet }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) PrependAsPaths() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) []string { return v.PrependAsPaths }).(pulumi.StringArrayOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) PrivateIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.PrivateIp }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) PublicIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.PublicIp }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) SecurityGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.SecurityGroupId }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) SingleAzHa() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.SingleAzHa }).(pulumi.BoolOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) SingleIpSnat() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.SingleIpSnat }).(pulumi.BoolOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) SoftwareVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.SoftwareVersion }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) SpotPrice() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.SpotPrice }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) Subnet() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.Subnet }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) TunnelDetectionTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) int { return v.TunnelDetectionTime }).(pulumi.IntOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) VpcReg() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.VpcReg }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type GetAviatrixTransitGatewaysGatewayListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAviatrixTransitGatewaysGatewayListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAviatrixTransitGatewaysGatewayList)(nil)).Elem()
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListArrayOutput) ToGetAviatrixTransitGatewaysGatewayListArrayOutput() GetAviatrixTransitGatewaysGatewayListArrayOutput {
+	return o
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListArrayOutput) ToGetAviatrixTransitGatewaysGatewayListArrayOutputWithContext(ctx context.Context) GetAviatrixTransitGatewaysGatewayListArrayOutput {
+	return o
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListArrayOutput) Index(i pulumi.IntInput) GetAviatrixTransitGatewaysGatewayListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAviatrixTransitGatewaysGatewayList {
+		return vs[0].([]GetAviatrixTransitGatewaysGatewayList)[vs[1].(int)]
+	}).(GetAviatrixTransitGatewaysGatewayListOutput)
+}
+
+type GetAviatrixTransitGatewaysGatewayListBgpLanInterface struct {
+	Subnet string `pulumi:"subnet"`
+	VpcId  string `pulumi:"vpcId"`
+}
+
+// GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceInput is an input type that accepts GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArgs and GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceOutput values.
+// You can construct a concrete instance of `GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceInput` via:
+//
+//	GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArgs{...}
+type GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceInput interface {
+	pulumi.Input
+
+	ToGetAviatrixTransitGatewaysGatewayListBgpLanInterfaceOutput() GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceOutput
+	ToGetAviatrixTransitGatewaysGatewayListBgpLanInterfaceOutputWithContext(context.Context) GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceOutput
+}
+
+type GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArgs struct {
+	Subnet pulumi.StringInput `pulumi:"subnet"`
+	VpcId  pulumi.StringInput `pulumi:"vpcId"`
+}
+
+func (GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAviatrixTransitGatewaysGatewayListBgpLanInterface)(nil)).Elem()
+}
+
+func (i GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArgs) ToGetAviatrixTransitGatewaysGatewayListBgpLanInterfaceOutput() GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceOutput {
+	return i.ToGetAviatrixTransitGatewaysGatewayListBgpLanInterfaceOutputWithContext(context.Background())
+}
+
+func (i GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArgs) ToGetAviatrixTransitGatewaysGatewayListBgpLanInterfaceOutputWithContext(ctx context.Context) GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceOutput)
+}
+
+// GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayInput is an input type that accepts GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArray and GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayOutput values.
+// You can construct a concrete instance of `GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayInput` via:
+//
+//	GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArray{ GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArgs{...} }
+type GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayInput interface {
+	pulumi.Input
+
+	ToGetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayOutput() GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayOutput
+	ToGetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayOutputWithContext(context.Context) GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayOutput
+}
+
+type GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArray []GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceInput
+
+func (GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAviatrixTransitGatewaysGatewayListBgpLanInterface)(nil)).Elem()
+}
+
+func (i GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArray) ToGetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayOutput() GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayOutput {
+	return i.ToGetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayOutputWithContext(context.Background())
+}
+
+func (i GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArray) ToGetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayOutputWithContext(ctx context.Context) GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayOutput)
+}
+
+type GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceOutput struct{ *pulumi.OutputState }
+
+func (GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAviatrixTransitGatewaysGatewayListBgpLanInterface)(nil)).Elem()
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceOutput) ToGetAviatrixTransitGatewaysGatewayListBgpLanInterfaceOutput() GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceOutput {
+	return o
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceOutput) ToGetAviatrixTransitGatewaysGatewayListBgpLanInterfaceOutputWithContext(ctx context.Context) GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceOutput {
+	return o
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceOutput) Subnet() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayListBgpLanInterface) string { return v.Subnet }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayListBgpLanInterface) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+type GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAviatrixTransitGatewaysGatewayListBgpLanInterface)(nil)).Elem()
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayOutput) ToGetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayOutput() GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayOutput {
+	return o
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayOutput) ToGetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayOutputWithContext(ctx context.Context) GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayOutput {
+	return o
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayOutput) Index(i pulumi.IntInput) GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAviatrixTransitGatewaysGatewayListBgpLanInterface {
+		return vs[0].([]GetAviatrixTransitGatewaysGatewayListBgpLanInterface)[vs[1].(int)]
+	}).(GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceOutput)
+}
+
+type GetAviatrixTransitGatewaysGatewayListHaBgpLanInterface struct {
+	Subnet string `pulumi:"subnet"`
+	VpcId  string `pulumi:"vpcId"`
+}
+
+// GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceInput is an input type that accepts GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArgs and GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceOutput values.
+// You can construct a concrete instance of `GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceInput` via:
+//
+//	GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArgs{...}
+type GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceInput interface {
+	pulumi.Input
+
+	ToGetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceOutput() GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceOutput
+	ToGetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceOutputWithContext(context.Context) GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceOutput
+}
+
+type GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArgs struct {
+	Subnet pulumi.StringInput `pulumi:"subnet"`
+	VpcId  pulumi.StringInput `pulumi:"vpcId"`
+}
+
+func (GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAviatrixTransitGatewaysGatewayListHaBgpLanInterface)(nil)).Elem()
+}
+
+func (i GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArgs) ToGetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceOutput() GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceOutput {
+	return i.ToGetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceOutputWithContext(context.Background())
+}
+
+func (i GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArgs) ToGetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceOutputWithContext(ctx context.Context) GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceOutput)
+}
+
+// GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayInput is an input type that accepts GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArray and GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayOutput values.
+// You can construct a concrete instance of `GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayInput` via:
+//
+//	GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArray{ GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArgs{...} }
+type GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayInput interface {
+	pulumi.Input
+
+	ToGetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayOutput() GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayOutput
+	ToGetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayOutputWithContext(context.Context) GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayOutput
+}
+
+type GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArray []GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceInput
+
+func (GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAviatrixTransitGatewaysGatewayListHaBgpLanInterface)(nil)).Elem()
+}
+
+func (i GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArray) ToGetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayOutput() GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayOutput {
+	return i.ToGetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayOutputWithContext(context.Background())
+}
+
+func (i GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArray) ToGetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayOutputWithContext(ctx context.Context) GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayOutput)
+}
+
+type GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceOutput struct{ *pulumi.OutputState }
+
+func (GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAviatrixTransitGatewaysGatewayListHaBgpLanInterface)(nil)).Elem()
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceOutput) ToGetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceOutput() GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceOutput {
+	return o
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceOutput) ToGetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceOutputWithContext(ctx context.Context) GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceOutput {
+	return o
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceOutput) Subnet() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayListHaBgpLanInterface) string { return v.Subnet }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayListHaBgpLanInterface) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+type GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAviatrixTransitGatewaysGatewayListHaBgpLanInterface)(nil)).Elem()
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayOutput) ToGetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayOutput() GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayOutput {
+	return o
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayOutput) ToGetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayOutputWithContext(ctx context.Context) GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayOutput {
+	return o
+}
+
+func (o GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayOutput) Index(i pulumi.IntInput) GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAviatrixTransitGatewaysGatewayListHaBgpLanInterface {
+		return vs[0].([]GetAviatrixTransitGatewaysGatewayListHaBgpLanInterface)[vs[1].(int)]
+	}).(GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceOutput)
 }
 
 type GetAviatrixVpcPrivateSubnet struct {
@@ -1884,6 +5262,254 @@ func (o GetAviatrixVpcSubnetArrayOutput) Index(i pulumi.IntInput) GetAviatrixVpc
 	}).(GetAviatrixVpcSubnetOutput)
 }
 
+type GetAviatrixVpcTrackerVpcList struct {
+	AccountName   string                               `pulumi:"accountName"`
+	Cidr          string                               `pulumi:"cidr"`
+	CloudType     int                                  `pulumi:"cloudType"`
+	InstanceCount int                                  `pulumi:"instanceCount"`
+	Name          string                               `pulumi:"name"`
+	Region        string                               `pulumi:"region"`
+	Subnets       []GetAviatrixVpcTrackerVpcListSubnet `pulumi:"subnets"`
+	VpcId         string                               `pulumi:"vpcId"`
+}
+
+// GetAviatrixVpcTrackerVpcListInput is an input type that accepts GetAviatrixVpcTrackerVpcListArgs and GetAviatrixVpcTrackerVpcListOutput values.
+// You can construct a concrete instance of `GetAviatrixVpcTrackerVpcListInput` via:
+//
+//	GetAviatrixVpcTrackerVpcListArgs{...}
+type GetAviatrixVpcTrackerVpcListInput interface {
+	pulumi.Input
+
+	ToGetAviatrixVpcTrackerVpcListOutput() GetAviatrixVpcTrackerVpcListOutput
+	ToGetAviatrixVpcTrackerVpcListOutputWithContext(context.Context) GetAviatrixVpcTrackerVpcListOutput
+}
+
+type GetAviatrixVpcTrackerVpcListArgs struct {
+	AccountName   pulumi.StringInput                           `pulumi:"accountName"`
+	Cidr          pulumi.StringInput                           `pulumi:"cidr"`
+	CloudType     pulumi.IntInput                              `pulumi:"cloudType"`
+	InstanceCount pulumi.IntInput                              `pulumi:"instanceCount"`
+	Name          pulumi.StringInput                           `pulumi:"name"`
+	Region        pulumi.StringInput                           `pulumi:"region"`
+	Subnets       GetAviatrixVpcTrackerVpcListSubnetArrayInput `pulumi:"subnets"`
+	VpcId         pulumi.StringInput                           `pulumi:"vpcId"`
+}
+
+func (GetAviatrixVpcTrackerVpcListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAviatrixVpcTrackerVpcList)(nil)).Elem()
+}
+
+func (i GetAviatrixVpcTrackerVpcListArgs) ToGetAviatrixVpcTrackerVpcListOutput() GetAviatrixVpcTrackerVpcListOutput {
+	return i.ToGetAviatrixVpcTrackerVpcListOutputWithContext(context.Background())
+}
+
+func (i GetAviatrixVpcTrackerVpcListArgs) ToGetAviatrixVpcTrackerVpcListOutputWithContext(ctx context.Context) GetAviatrixVpcTrackerVpcListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAviatrixVpcTrackerVpcListOutput)
+}
+
+// GetAviatrixVpcTrackerVpcListArrayInput is an input type that accepts GetAviatrixVpcTrackerVpcListArray and GetAviatrixVpcTrackerVpcListArrayOutput values.
+// You can construct a concrete instance of `GetAviatrixVpcTrackerVpcListArrayInput` via:
+//
+//	GetAviatrixVpcTrackerVpcListArray{ GetAviatrixVpcTrackerVpcListArgs{...} }
+type GetAviatrixVpcTrackerVpcListArrayInput interface {
+	pulumi.Input
+
+	ToGetAviatrixVpcTrackerVpcListArrayOutput() GetAviatrixVpcTrackerVpcListArrayOutput
+	ToGetAviatrixVpcTrackerVpcListArrayOutputWithContext(context.Context) GetAviatrixVpcTrackerVpcListArrayOutput
+}
+
+type GetAviatrixVpcTrackerVpcListArray []GetAviatrixVpcTrackerVpcListInput
+
+func (GetAviatrixVpcTrackerVpcListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAviatrixVpcTrackerVpcList)(nil)).Elem()
+}
+
+func (i GetAviatrixVpcTrackerVpcListArray) ToGetAviatrixVpcTrackerVpcListArrayOutput() GetAviatrixVpcTrackerVpcListArrayOutput {
+	return i.ToGetAviatrixVpcTrackerVpcListArrayOutputWithContext(context.Background())
+}
+
+func (i GetAviatrixVpcTrackerVpcListArray) ToGetAviatrixVpcTrackerVpcListArrayOutputWithContext(ctx context.Context) GetAviatrixVpcTrackerVpcListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAviatrixVpcTrackerVpcListArrayOutput)
+}
+
+type GetAviatrixVpcTrackerVpcListOutput struct{ *pulumi.OutputState }
+
+func (GetAviatrixVpcTrackerVpcListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAviatrixVpcTrackerVpcList)(nil)).Elem()
+}
+
+func (o GetAviatrixVpcTrackerVpcListOutput) ToGetAviatrixVpcTrackerVpcListOutput() GetAviatrixVpcTrackerVpcListOutput {
+	return o
+}
+
+func (o GetAviatrixVpcTrackerVpcListOutput) ToGetAviatrixVpcTrackerVpcListOutputWithContext(ctx context.Context) GetAviatrixVpcTrackerVpcListOutput {
+	return o
+}
+
+func (o GetAviatrixVpcTrackerVpcListOutput) AccountName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixVpcTrackerVpcList) string { return v.AccountName }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixVpcTrackerVpcListOutput) Cidr() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixVpcTrackerVpcList) string { return v.Cidr }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixVpcTrackerVpcListOutput) CloudType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAviatrixVpcTrackerVpcList) int { return v.CloudType }).(pulumi.IntOutput)
+}
+
+func (o GetAviatrixVpcTrackerVpcListOutput) InstanceCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAviatrixVpcTrackerVpcList) int { return v.InstanceCount }).(pulumi.IntOutput)
+}
+
+func (o GetAviatrixVpcTrackerVpcListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixVpcTrackerVpcList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixVpcTrackerVpcListOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixVpcTrackerVpcList) string { return v.Region }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixVpcTrackerVpcListOutput) Subnets() GetAviatrixVpcTrackerVpcListSubnetArrayOutput {
+	return o.ApplyT(func(v GetAviatrixVpcTrackerVpcList) []GetAviatrixVpcTrackerVpcListSubnet { return v.Subnets }).(GetAviatrixVpcTrackerVpcListSubnetArrayOutput)
+}
+
+func (o GetAviatrixVpcTrackerVpcListOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixVpcTrackerVpcList) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+type GetAviatrixVpcTrackerVpcListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAviatrixVpcTrackerVpcListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAviatrixVpcTrackerVpcList)(nil)).Elem()
+}
+
+func (o GetAviatrixVpcTrackerVpcListArrayOutput) ToGetAviatrixVpcTrackerVpcListArrayOutput() GetAviatrixVpcTrackerVpcListArrayOutput {
+	return o
+}
+
+func (o GetAviatrixVpcTrackerVpcListArrayOutput) ToGetAviatrixVpcTrackerVpcListArrayOutputWithContext(ctx context.Context) GetAviatrixVpcTrackerVpcListArrayOutput {
+	return o
+}
+
+func (o GetAviatrixVpcTrackerVpcListArrayOutput) Index(i pulumi.IntInput) GetAviatrixVpcTrackerVpcListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAviatrixVpcTrackerVpcList {
+		return vs[0].([]GetAviatrixVpcTrackerVpcList)[vs[1].(int)]
+	}).(GetAviatrixVpcTrackerVpcListOutput)
+}
+
+type GetAviatrixVpcTrackerVpcListSubnet struct {
+	Cidr   string `pulumi:"cidr"`
+	GwIp   string `pulumi:"gwIp"`
+	Name   string `pulumi:"name"`
+	Region string `pulumi:"region"`
+}
+
+// GetAviatrixVpcTrackerVpcListSubnetInput is an input type that accepts GetAviatrixVpcTrackerVpcListSubnetArgs and GetAviatrixVpcTrackerVpcListSubnetOutput values.
+// You can construct a concrete instance of `GetAviatrixVpcTrackerVpcListSubnetInput` via:
+//
+//	GetAviatrixVpcTrackerVpcListSubnetArgs{...}
+type GetAviatrixVpcTrackerVpcListSubnetInput interface {
+	pulumi.Input
+
+	ToGetAviatrixVpcTrackerVpcListSubnetOutput() GetAviatrixVpcTrackerVpcListSubnetOutput
+	ToGetAviatrixVpcTrackerVpcListSubnetOutputWithContext(context.Context) GetAviatrixVpcTrackerVpcListSubnetOutput
+}
+
+type GetAviatrixVpcTrackerVpcListSubnetArgs struct {
+	Cidr   pulumi.StringInput `pulumi:"cidr"`
+	GwIp   pulumi.StringInput `pulumi:"gwIp"`
+	Name   pulumi.StringInput `pulumi:"name"`
+	Region pulumi.StringInput `pulumi:"region"`
+}
+
+func (GetAviatrixVpcTrackerVpcListSubnetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAviatrixVpcTrackerVpcListSubnet)(nil)).Elem()
+}
+
+func (i GetAviatrixVpcTrackerVpcListSubnetArgs) ToGetAviatrixVpcTrackerVpcListSubnetOutput() GetAviatrixVpcTrackerVpcListSubnetOutput {
+	return i.ToGetAviatrixVpcTrackerVpcListSubnetOutputWithContext(context.Background())
+}
+
+func (i GetAviatrixVpcTrackerVpcListSubnetArgs) ToGetAviatrixVpcTrackerVpcListSubnetOutputWithContext(ctx context.Context) GetAviatrixVpcTrackerVpcListSubnetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAviatrixVpcTrackerVpcListSubnetOutput)
+}
+
+// GetAviatrixVpcTrackerVpcListSubnetArrayInput is an input type that accepts GetAviatrixVpcTrackerVpcListSubnetArray and GetAviatrixVpcTrackerVpcListSubnetArrayOutput values.
+// You can construct a concrete instance of `GetAviatrixVpcTrackerVpcListSubnetArrayInput` via:
+//
+//	GetAviatrixVpcTrackerVpcListSubnetArray{ GetAviatrixVpcTrackerVpcListSubnetArgs{...} }
+type GetAviatrixVpcTrackerVpcListSubnetArrayInput interface {
+	pulumi.Input
+
+	ToGetAviatrixVpcTrackerVpcListSubnetArrayOutput() GetAviatrixVpcTrackerVpcListSubnetArrayOutput
+	ToGetAviatrixVpcTrackerVpcListSubnetArrayOutputWithContext(context.Context) GetAviatrixVpcTrackerVpcListSubnetArrayOutput
+}
+
+type GetAviatrixVpcTrackerVpcListSubnetArray []GetAviatrixVpcTrackerVpcListSubnetInput
+
+func (GetAviatrixVpcTrackerVpcListSubnetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAviatrixVpcTrackerVpcListSubnet)(nil)).Elem()
+}
+
+func (i GetAviatrixVpcTrackerVpcListSubnetArray) ToGetAviatrixVpcTrackerVpcListSubnetArrayOutput() GetAviatrixVpcTrackerVpcListSubnetArrayOutput {
+	return i.ToGetAviatrixVpcTrackerVpcListSubnetArrayOutputWithContext(context.Background())
+}
+
+func (i GetAviatrixVpcTrackerVpcListSubnetArray) ToGetAviatrixVpcTrackerVpcListSubnetArrayOutputWithContext(ctx context.Context) GetAviatrixVpcTrackerVpcListSubnetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAviatrixVpcTrackerVpcListSubnetArrayOutput)
+}
+
+type GetAviatrixVpcTrackerVpcListSubnetOutput struct{ *pulumi.OutputState }
+
+func (GetAviatrixVpcTrackerVpcListSubnetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAviatrixVpcTrackerVpcListSubnet)(nil)).Elem()
+}
+
+func (o GetAviatrixVpcTrackerVpcListSubnetOutput) ToGetAviatrixVpcTrackerVpcListSubnetOutput() GetAviatrixVpcTrackerVpcListSubnetOutput {
+	return o
+}
+
+func (o GetAviatrixVpcTrackerVpcListSubnetOutput) ToGetAviatrixVpcTrackerVpcListSubnetOutputWithContext(ctx context.Context) GetAviatrixVpcTrackerVpcListSubnetOutput {
+	return o
+}
+
+func (o GetAviatrixVpcTrackerVpcListSubnetOutput) Cidr() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixVpcTrackerVpcListSubnet) string { return v.Cidr }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixVpcTrackerVpcListSubnetOutput) GwIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixVpcTrackerVpcListSubnet) string { return v.GwIp }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixVpcTrackerVpcListSubnetOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixVpcTrackerVpcListSubnet) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o GetAviatrixVpcTrackerVpcListSubnetOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAviatrixVpcTrackerVpcListSubnet) string { return v.Region }).(pulumi.StringOutput)
+}
+
+type GetAviatrixVpcTrackerVpcListSubnetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAviatrixVpcTrackerVpcListSubnetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAviatrixVpcTrackerVpcListSubnet)(nil)).Elem()
+}
+
+func (o GetAviatrixVpcTrackerVpcListSubnetArrayOutput) ToGetAviatrixVpcTrackerVpcListSubnetArrayOutput() GetAviatrixVpcTrackerVpcListSubnetArrayOutput {
+	return o
+}
+
+func (o GetAviatrixVpcTrackerVpcListSubnetArrayOutput) ToGetAviatrixVpcTrackerVpcListSubnetArrayOutputWithContext(ctx context.Context) GetAviatrixVpcTrackerVpcListSubnetArrayOutput {
+	return o
+}
+
+func (o GetAviatrixVpcTrackerVpcListSubnetArrayOutput) Index(i pulumi.IntInput) GetAviatrixVpcTrackerVpcListSubnetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAviatrixVpcTrackerVpcListSubnet {
+		return vs[0].([]GetAviatrixVpcTrackerVpcListSubnet)[vs[1].(int)]
+	}).(GetAviatrixVpcTrackerVpcListSubnetOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixAppDomainSelectorInput)(nil)).Elem(), AviatrixAppDomainSelectorArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixAppDomainSelectorPtrInput)(nil)).Elem(), AviatrixAppDomainSelectorArgs{})
@@ -1895,10 +5521,36 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixAwsTgwSecurityDomainAttachedVpcArrayInput)(nil)).Elem(), AviatrixAwsTgwSecurityDomainAttachedVpcArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixAwsTgwVpnConnVpnTunnelDataInput)(nil)).Elem(), AviatrixAwsTgwVpnConnVpnTunnelDataArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixAwsTgwVpnConnVpnTunnelDataArrayInput)(nil)).Elem(), AviatrixAwsTgwVpnConnVpnTunnelDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixFirenetFirewallInstanceAssociationInput)(nil)).Elem(), AviatrixFirenetFirewallInstanceAssociationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixFirenetFirewallInstanceAssociationArrayInput)(nil)).Elem(), AviatrixFirenetFirewallInstanceAssociationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixFirewallPolicyTypeInput)(nil)).Elem(), AviatrixFirewallPolicyTypeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixFirewallPolicyTypeArrayInput)(nil)).Elem(), AviatrixFirewallPolicyTypeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixFirewallTagCidrListInput)(nil)).Elem(), AviatrixFirewallTagCidrListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixFirewallTagCidrListArrayInput)(nil)).Elem(), AviatrixFirewallTagCidrListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixFqdnDomainNameInput)(nil)).Elem(), AviatrixFqdnDomainNameArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixFqdnDomainNameArrayInput)(nil)).Elem(), AviatrixFqdnDomainNameArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixFqdnGwFilterTagListInput)(nil)).Elem(), AviatrixFqdnGwFilterTagListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixFqdnGwFilterTagListArrayInput)(nil)).Elem(), AviatrixFqdnGwFilterTagListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixGatewayDnatConnectionPolicyInput)(nil)).Elem(), AviatrixGatewayDnatConnectionPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixGatewayDnatConnectionPolicyArrayInput)(nil)).Elem(), AviatrixGatewayDnatConnectionPolicyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixGatewayDnatDnatPolicyInput)(nil)).Elem(), AviatrixGatewayDnatDnatPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixGatewayDnatDnatPolicyArrayInput)(nil)).Elem(), AviatrixGatewayDnatDnatPolicyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixGatewayDnatInterfacePolicyInput)(nil)).Elem(), AviatrixGatewayDnatInterfacePolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixGatewayDnatInterfacePolicyArrayInput)(nil)).Elem(), AviatrixGatewayDnatInterfacePolicyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixGatewaySnatConnectionPolicyInput)(nil)).Elem(), AviatrixGatewaySnatConnectionPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixGatewaySnatConnectionPolicyArrayInput)(nil)).Elem(), AviatrixGatewaySnatConnectionPolicyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixGatewaySnatInterfacePolicyInput)(nil)).Elem(), AviatrixGatewaySnatInterfacePolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixGatewaySnatInterfacePolicyArrayInput)(nil)).Elem(), AviatrixGatewaySnatInterfacePolicyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixGatewaySnatSnatPolicyInput)(nil)).Elem(), AviatrixGatewaySnatSnatPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixGatewaySnatSnatPolicyArrayInput)(nil)).Elem(), AviatrixGatewaySnatSnatPolicyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixMicrosegPolicyListPolicyInput)(nil)).Elem(), AviatrixMicrosegPolicyListPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixMicrosegPolicyListPolicyArrayInput)(nil)).Elem(), AviatrixMicrosegPolicyListPolicyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixMicrosegPolicyListPolicyPortRangeInput)(nil)).Elem(), AviatrixMicrosegPolicyListPolicyPortRangeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixMicrosegPolicyListPolicyPortRangeArrayInput)(nil)).Elem(), AviatrixMicrosegPolicyListPolicyPortRangeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixPrivateModeLbProxyInput)(nil)).Elem(), AviatrixPrivateModeLbProxyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixPrivateModeLbProxyArrayInput)(nil)).Elem(), AviatrixPrivateModeLbProxyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixSite2CloudCaCertTagCaCertificateInput)(nil)).Elem(), AviatrixSite2CloudCaCertTagCaCertificateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixSite2CloudCaCertTagCaCertificateArrayInput)(nil)).Elem(), AviatrixSite2CloudCaCertTagCaCertificateArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixTransitGatewayBgpLanInterfaceInput)(nil)).Elem(), AviatrixTransitGatewayBgpLanInterfaceArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixTransitGatewayBgpLanInterfaceArrayInput)(nil)).Elem(), AviatrixTransitGatewayBgpLanInterfaceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixTransitGatewayHaBgpLanInterfaceInput)(nil)).Elem(), AviatrixTransitGatewayHaBgpLanInterfaceArgs{})
@@ -1909,14 +5561,40 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixVpcPublicSubnetArrayInput)(nil)).Elem(), AviatrixVpcPublicSubnetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixVpcSubnetInput)(nil)).Elem(), AviatrixVpcSubnetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixVpcSubnetArrayInput)(nil)).Elem(), AviatrixVpcSubnetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixVpnProfilePolicyInput)(nil)).Elem(), AviatrixVpnProfilePolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AviatrixVpnProfilePolicyArrayInput)(nil)).Elem(), AviatrixVpnProfilePolicyArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProviderIgnoreTagsInput)(nil)).Elem(), ProviderIgnoreTagsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProviderIgnoreTagsPtrInput)(nil)).Elem(), ProviderIgnoreTagsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAviatrixDeviceInterfacesWanInterfaceInput)(nil)).Elem(), GetAviatrixDeviceInterfacesWanInterfaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAviatrixDeviceInterfacesWanInterfaceArrayInput)(nil)).Elem(), GetAviatrixDeviceInterfacesWanInterfaceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAviatrixFirenetFirewallInstanceAssociationInput)(nil)).Elem(), GetAviatrixFirenetFirewallInstanceAssociationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAviatrixFirenetFirewallInstanceAssociationArrayInput)(nil)).Elem(), GetAviatrixFirenetFirewallInstanceAssociationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAviatrixFirewallInstanceImagesFirewallImageInput)(nil)).Elem(), GetAviatrixFirewallInstanceImagesFirewallImageArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAviatrixFirewallInstanceImagesFirewallImageArrayInput)(nil)).Elem(), GetAviatrixFirewallInstanceImagesFirewallImageArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAviatrixFirewallPolicyTypeInput)(nil)).Elem(), GetAviatrixFirewallPolicyTypeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAviatrixFirewallPolicyTypeArrayInput)(nil)).Elem(), GetAviatrixFirewallPolicyTypeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAviatrixNetworkDomainsNetworkDomainInput)(nil)).Elem(), GetAviatrixNetworkDomainsNetworkDomainArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAviatrixNetworkDomainsNetworkDomainArrayInput)(nil)).Elem(), GetAviatrixNetworkDomainsNetworkDomainArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAviatrixTransitGatewayBgpLanInterfaceInput)(nil)).Elem(), GetAviatrixTransitGatewayBgpLanInterfaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAviatrixTransitGatewayBgpLanInterfaceArrayInput)(nil)).Elem(), GetAviatrixTransitGatewayBgpLanInterfaceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAviatrixTransitGatewayHaBgpLanInterfaceInput)(nil)).Elem(), GetAviatrixTransitGatewayHaBgpLanInterfaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAviatrixTransitGatewayHaBgpLanInterfaceArrayInput)(nil)).Elem(), GetAviatrixTransitGatewayHaBgpLanInterfaceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAviatrixTransitGatewaysGatewayListInput)(nil)).Elem(), GetAviatrixTransitGatewaysGatewayListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAviatrixTransitGatewaysGatewayListArrayInput)(nil)).Elem(), GetAviatrixTransitGatewaysGatewayListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceInput)(nil)).Elem(), GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayInput)(nil)).Elem(), GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceInput)(nil)).Elem(), GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayInput)(nil)).Elem(), GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAviatrixVpcPrivateSubnetInput)(nil)).Elem(), GetAviatrixVpcPrivateSubnetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAviatrixVpcPrivateSubnetArrayInput)(nil)).Elem(), GetAviatrixVpcPrivateSubnetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAviatrixVpcPublicSubnetInput)(nil)).Elem(), GetAviatrixVpcPublicSubnetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAviatrixVpcPublicSubnetArrayInput)(nil)).Elem(), GetAviatrixVpcPublicSubnetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAviatrixVpcSubnetInput)(nil)).Elem(), GetAviatrixVpcSubnetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAviatrixVpcSubnetArrayInput)(nil)).Elem(), GetAviatrixVpcSubnetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAviatrixVpcTrackerVpcListInput)(nil)).Elem(), GetAviatrixVpcTrackerVpcListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAviatrixVpcTrackerVpcListArrayInput)(nil)).Elem(), GetAviatrixVpcTrackerVpcListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAviatrixVpcTrackerVpcListSubnetInput)(nil)).Elem(), GetAviatrixVpcTrackerVpcListSubnetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAviatrixVpcTrackerVpcListSubnetArrayInput)(nil)).Elem(), GetAviatrixVpcTrackerVpcListSubnetArray{})
 	pulumi.RegisterOutputType(AviatrixAppDomainSelectorOutput{})
 	pulumi.RegisterOutputType(AviatrixAppDomainSelectorPtrOutput{})
 	pulumi.RegisterOutputType(AviatrixAppDomainSelectorMatchExpressionOutput{})
@@ -1927,10 +5605,36 @@ func init() {
 	pulumi.RegisterOutputType(AviatrixAwsTgwSecurityDomainAttachedVpcArrayOutput{})
 	pulumi.RegisterOutputType(AviatrixAwsTgwVpnConnVpnTunnelDataOutput{})
 	pulumi.RegisterOutputType(AviatrixAwsTgwVpnConnVpnTunnelDataArrayOutput{})
+	pulumi.RegisterOutputType(AviatrixFirenetFirewallInstanceAssociationOutput{})
+	pulumi.RegisterOutputType(AviatrixFirenetFirewallInstanceAssociationArrayOutput{})
+	pulumi.RegisterOutputType(AviatrixFirewallPolicyTypeOutput{})
+	pulumi.RegisterOutputType(AviatrixFirewallPolicyTypeArrayOutput{})
+	pulumi.RegisterOutputType(AviatrixFirewallTagCidrListOutput{})
+	pulumi.RegisterOutputType(AviatrixFirewallTagCidrListArrayOutput{})
 	pulumi.RegisterOutputType(AviatrixFqdnDomainNameOutput{})
 	pulumi.RegisterOutputType(AviatrixFqdnDomainNameArrayOutput{})
 	pulumi.RegisterOutputType(AviatrixFqdnGwFilterTagListOutput{})
 	pulumi.RegisterOutputType(AviatrixFqdnGwFilterTagListArrayOutput{})
+	pulumi.RegisterOutputType(AviatrixGatewayDnatConnectionPolicyOutput{})
+	pulumi.RegisterOutputType(AviatrixGatewayDnatConnectionPolicyArrayOutput{})
+	pulumi.RegisterOutputType(AviatrixGatewayDnatDnatPolicyOutput{})
+	pulumi.RegisterOutputType(AviatrixGatewayDnatDnatPolicyArrayOutput{})
+	pulumi.RegisterOutputType(AviatrixGatewayDnatInterfacePolicyOutput{})
+	pulumi.RegisterOutputType(AviatrixGatewayDnatInterfacePolicyArrayOutput{})
+	pulumi.RegisterOutputType(AviatrixGatewaySnatConnectionPolicyOutput{})
+	pulumi.RegisterOutputType(AviatrixGatewaySnatConnectionPolicyArrayOutput{})
+	pulumi.RegisterOutputType(AviatrixGatewaySnatInterfacePolicyOutput{})
+	pulumi.RegisterOutputType(AviatrixGatewaySnatInterfacePolicyArrayOutput{})
+	pulumi.RegisterOutputType(AviatrixGatewaySnatSnatPolicyOutput{})
+	pulumi.RegisterOutputType(AviatrixGatewaySnatSnatPolicyArrayOutput{})
+	pulumi.RegisterOutputType(AviatrixMicrosegPolicyListPolicyOutput{})
+	pulumi.RegisterOutputType(AviatrixMicrosegPolicyListPolicyArrayOutput{})
+	pulumi.RegisterOutputType(AviatrixMicrosegPolicyListPolicyPortRangeOutput{})
+	pulumi.RegisterOutputType(AviatrixMicrosegPolicyListPolicyPortRangeArrayOutput{})
+	pulumi.RegisterOutputType(AviatrixPrivateModeLbProxyOutput{})
+	pulumi.RegisterOutputType(AviatrixPrivateModeLbProxyArrayOutput{})
+	pulumi.RegisterOutputType(AviatrixSite2CloudCaCertTagCaCertificateOutput{})
+	pulumi.RegisterOutputType(AviatrixSite2CloudCaCertTagCaCertificateArrayOutput{})
 	pulumi.RegisterOutputType(AviatrixTransitGatewayBgpLanInterfaceOutput{})
 	pulumi.RegisterOutputType(AviatrixTransitGatewayBgpLanInterfaceArrayOutput{})
 	pulumi.RegisterOutputType(AviatrixTransitGatewayHaBgpLanInterfaceOutput{})
@@ -1941,12 +5645,38 @@ func init() {
 	pulumi.RegisterOutputType(AviatrixVpcPublicSubnetArrayOutput{})
 	pulumi.RegisterOutputType(AviatrixVpcSubnetOutput{})
 	pulumi.RegisterOutputType(AviatrixVpcSubnetArrayOutput{})
+	pulumi.RegisterOutputType(AviatrixVpnProfilePolicyOutput{})
+	pulumi.RegisterOutputType(AviatrixVpnProfilePolicyArrayOutput{})
 	pulumi.RegisterOutputType(ProviderIgnoreTagsOutput{})
 	pulumi.RegisterOutputType(ProviderIgnoreTagsPtrOutput{})
+	pulumi.RegisterOutputType(GetAviatrixDeviceInterfacesWanInterfaceOutput{})
+	pulumi.RegisterOutputType(GetAviatrixDeviceInterfacesWanInterfaceArrayOutput{})
+	pulumi.RegisterOutputType(GetAviatrixFirenetFirewallInstanceAssociationOutput{})
+	pulumi.RegisterOutputType(GetAviatrixFirenetFirewallInstanceAssociationArrayOutput{})
+	pulumi.RegisterOutputType(GetAviatrixFirewallInstanceImagesFirewallImageOutput{})
+	pulumi.RegisterOutputType(GetAviatrixFirewallInstanceImagesFirewallImageArrayOutput{})
+	pulumi.RegisterOutputType(GetAviatrixFirewallPolicyTypeOutput{})
+	pulumi.RegisterOutputType(GetAviatrixFirewallPolicyTypeArrayOutput{})
+	pulumi.RegisterOutputType(GetAviatrixNetworkDomainsNetworkDomainOutput{})
+	pulumi.RegisterOutputType(GetAviatrixNetworkDomainsNetworkDomainArrayOutput{})
+	pulumi.RegisterOutputType(GetAviatrixTransitGatewayBgpLanInterfaceOutput{})
+	pulumi.RegisterOutputType(GetAviatrixTransitGatewayBgpLanInterfaceArrayOutput{})
+	pulumi.RegisterOutputType(GetAviatrixTransitGatewayHaBgpLanInterfaceOutput{})
+	pulumi.RegisterOutputType(GetAviatrixTransitGatewayHaBgpLanInterfaceArrayOutput{})
+	pulumi.RegisterOutputType(GetAviatrixTransitGatewaysGatewayListOutput{})
+	pulumi.RegisterOutputType(GetAviatrixTransitGatewaysGatewayListArrayOutput{})
+	pulumi.RegisterOutputType(GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceOutput{})
+	pulumi.RegisterOutputType(GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayOutput{})
+	pulumi.RegisterOutputType(GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceOutput{})
+	pulumi.RegisterOutputType(GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayOutput{})
 	pulumi.RegisterOutputType(GetAviatrixVpcPrivateSubnetOutput{})
 	pulumi.RegisterOutputType(GetAviatrixVpcPrivateSubnetArrayOutput{})
 	pulumi.RegisterOutputType(GetAviatrixVpcPublicSubnetOutput{})
 	pulumi.RegisterOutputType(GetAviatrixVpcPublicSubnetArrayOutput{})
 	pulumi.RegisterOutputType(GetAviatrixVpcSubnetOutput{})
 	pulumi.RegisterOutputType(GetAviatrixVpcSubnetArrayOutput{})
+	pulumi.RegisterOutputType(GetAviatrixVpcTrackerVpcListOutput{})
+	pulumi.RegisterOutputType(GetAviatrixVpcTrackerVpcListArrayOutput{})
+	pulumi.RegisterOutputType(GetAviatrixVpcTrackerVpcListSubnetOutput{})
+	pulumi.RegisterOutputType(GetAviatrixVpcTrackerVpcListSubnetArrayOutput{})
 }

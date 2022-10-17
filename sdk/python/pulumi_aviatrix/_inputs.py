@@ -15,14 +15,29 @@ __all__ = [
     'AviatrixAwsTgwSecurityDomainArgs',
     'AviatrixAwsTgwSecurityDomainAttachedVpcArgs',
     'AviatrixAwsTgwVpnConnVpnTunnelDataArgs',
+    'AviatrixFirenetFirewallInstanceAssociationArgs',
+    'AviatrixFirewallPolicyArgs',
+    'AviatrixFirewallTagCidrListArgs',
     'AviatrixFqdnDomainNameArgs',
     'AviatrixFqdnGwFilterTagListArgs',
+    'AviatrixGatewayDnatConnectionPolicyArgs',
+    'AviatrixGatewayDnatDnatPolicyArgs',
+    'AviatrixGatewayDnatInterfacePolicyArgs',
+    'AviatrixGatewaySnatConnectionPolicyArgs',
+    'AviatrixGatewaySnatInterfacePolicyArgs',
+    'AviatrixGatewaySnatSnatPolicyArgs',
+    'AviatrixMicrosegPolicyListPolicyArgs',
+    'AviatrixMicrosegPolicyListPolicyPortRangeArgs',
+    'AviatrixPrivateModeLbProxyArgs',
+    'AviatrixSite2CloudCaCertTagCaCertificateArgs',
     'AviatrixTransitGatewayBgpLanInterfaceArgs',
     'AviatrixTransitGatewayHaBgpLanInterfaceArgs',
     'AviatrixVpcPrivateSubnetArgs',
     'AviatrixVpcPublicSubnetArgs',
     'AviatrixVpcSubnetArgs',
+    'AviatrixVpnProfilePolicyArgs',
     'ProviderIgnoreTagsArgs',
+    'GetAviatrixFirenetFirewallInstanceAssociationArgs',
 ]
 
 @pulumi.input_type
@@ -421,6 +436,217 @@ class AviatrixAwsTgwVpnConnVpnTunnelDataArgs:
 
 
 @pulumi.input_type
+class AviatrixFirenetFirewallInstanceAssociationArgs:
+    def __init__(__self__, *,
+                 firenet_gw_name: pulumi.Input[str],
+                 instance_id: pulumi.Input[str],
+                 attached: Optional[pulumi.Input[bool]] = None,
+                 egress_interface: Optional[pulumi.Input[str]] = None,
+                 firewall_name: Optional[pulumi.Input[str]] = None,
+                 lan_interface: Optional[pulumi.Input[str]] = None,
+                 management_interface: Optional[pulumi.Input[str]] = None,
+                 vendor_type: Optional[pulumi.Input[str]] = None):
+        pulumi.set(__self__, "firenet_gw_name", firenet_gw_name)
+        pulumi.set(__self__, "instance_id", instance_id)
+        if attached is not None:
+            pulumi.set(__self__, "attached", attached)
+        if egress_interface is not None:
+            pulumi.set(__self__, "egress_interface", egress_interface)
+        if firewall_name is not None:
+            pulumi.set(__self__, "firewall_name", firewall_name)
+        if lan_interface is not None:
+            pulumi.set(__self__, "lan_interface", lan_interface)
+        if management_interface is not None:
+            pulumi.set(__self__, "management_interface", management_interface)
+        if vendor_type is not None:
+            pulumi.set(__self__, "vendor_type", vendor_type)
+
+    @property
+    @pulumi.getter(name="firenetGwName")
+    def firenet_gw_name(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "firenet_gw_name")
+
+    @firenet_gw_name.setter
+    def firenet_gw_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "firenet_gw_name", value)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "instance_id")
+
+    @instance_id.setter
+    def instance_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "instance_id", value)
+
+    @property
+    @pulumi.getter
+    def attached(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "attached")
+
+    @attached.setter
+    def attached(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "attached", value)
+
+    @property
+    @pulumi.getter(name="egressInterface")
+    def egress_interface(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "egress_interface")
+
+    @egress_interface.setter
+    def egress_interface(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "egress_interface", value)
+
+    @property
+    @pulumi.getter(name="firewallName")
+    def firewall_name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "firewall_name")
+
+    @firewall_name.setter
+    def firewall_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "firewall_name", value)
+
+    @property
+    @pulumi.getter(name="lanInterface")
+    def lan_interface(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "lan_interface")
+
+    @lan_interface.setter
+    def lan_interface(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "lan_interface", value)
+
+    @property
+    @pulumi.getter(name="managementInterface")
+    def management_interface(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "management_interface")
+
+    @management_interface.setter
+    def management_interface(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "management_interface", value)
+
+    @property
+    @pulumi.getter(name="vendorType")
+    def vendor_type(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "vendor_type")
+
+    @vendor_type.setter
+    def vendor_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vendor_type", value)
+
+
+@pulumi.input_type
+class AviatrixFirewallPolicyArgs:
+    def __init__(__self__, *,
+                 action: pulumi.Input[str],
+                 dst_ip: pulumi.Input[str],
+                 port: pulumi.Input[str],
+                 src_ip: pulumi.Input[str],
+                 description: Optional[pulumi.Input[str]] = None,
+                 log_enabled: Optional[pulumi.Input[bool]] = None,
+                 protocol: Optional[pulumi.Input[str]] = None):
+        pulumi.set(__self__, "action", action)
+        pulumi.set(__self__, "dst_ip", dst_ip)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "src_ip", src_ip)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if log_enabled is not None:
+            pulumi.set(__self__, "log_enabled", log_enabled)
+        if protocol is not None:
+            pulumi.set(__self__, "protocol", protocol)
+
+    @property
+    @pulumi.getter
+    def action(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "action")
+
+    @action.setter
+    def action(self, value: pulumi.Input[str]):
+        pulumi.set(self, "action", value)
+
+    @property
+    @pulumi.getter(name="dstIp")
+    def dst_ip(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "dst_ip")
+
+    @dst_ip.setter
+    def dst_ip(self, value: pulumi.Input[str]):
+        pulumi.set(self, "dst_ip", value)
+
+    @property
+    @pulumi.getter
+    def port(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "port")
+
+    @port.setter
+    def port(self, value: pulumi.Input[str]):
+        pulumi.set(self, "port", value)
+
+    @property
+    @pulumi.getter(name="srcIp")
+    def src_ip(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "src_ip")
+
+    @src_ip.setter
+    def src_ip(self, value: pulumi.Input[str]):
+        pulumi.set(self, "src_ip", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter(name="logEnabled")
+    def log_enabled(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "log_enabled")
+
+    @log_enabled.setter
+    def log_enabled(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "log_enabled", value)
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "protocol")
+
+    @protocol.setter
+    def protocol(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "protocol", value)
+
+
+@pulumi.input_type
+class AviatrixFirewallTagCidrListArgs:
+    def __init__(__self__, *,
+                 cidr: pulumi.Input[str],
+                 cidr_tag_name: pulumi.Input[str]):
+        pulumi.set(__self__, "cidr", cidr)
+        pulumi.set(__self__, "cidr_tag_name", cidr_tag_name)
+
+    @property
+    @pulumi.getter
+    def cidr(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "cidr")
+
+    @cidr.setter
+    def cidr(self, value: pulumi.Input[str]):
+        pulumi.set(self, "cidr", value)
+
+    @property
+    @pulumi.getter(name="cidrTagName")
+    def cidr_tag_name(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "cidr_tag_name")
+
+    @cidr_tag_name.setter
+    def cidr_tag_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "cidr_tag_name", value)
+
+
+@pulumi.input_type
 class AviatrixFqdnDomainNameArgs:
     def __init__(__self__, *,
                  fqdn: pulumi.Input[str],
@@ -496,6 +722,1151 @@ class AviatrixFqdnGwFilterTagListArgs:
     @source_ip_lists.setter
     def source_ip_lists(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
         pulumi.set(self, "source_ip_lists", value)
+
+
+@pulumi.input_type
+class AviatrixGatewayDnatConnectionPolicyArgs:
+    def __init__(__self__, *,
+                 apply_route_entry: Optional[pulumi.Input[bool]] = None,
+                 connection: Optional[pulumi.Input[str]] = None,
+                 dnat_ips: Optional[pulumi.Input[str]] = None,
+                 dnat_port: Optional[pulumi.Input[str]] = None,
+                 dst_cidr: Optional[pulumi.Input[str]] = None,
+                 dst_port: Optional[pulumi.Input[str]] = None,
+                 exclude_rtb: Optional[pulumi.Input[str]] = None,
+                 interface: Optional[pulumi.Input[str]] = None,
+                 mark: Optional[pulumi.Input[str]] = None,
+                 protocol: Optional[pulumi.Input[str]] = None,
+                 src_cidr: Optional[pulumi.Input[str]] = None,
+                 src_port: Optional[pulumi.Input[str]] = None):
+        if apply_route_entry is not None:
+            pulumi.set(__self__, "apply_route_entry", apply_route_entry)
+        if connection is not None:
+            pulumi.set(__self__, "connection", connection)
+        if dnat_ips is not None:
+            pulumi.set(__self__, "dnat_ips", dnat_ips)
+        if dnat_port is not None:
+            pulumi.set(__self__, "dnat_port", dnat_port)
+        if dst_cidr is not None:
+            pulumi.set(__self__, "dst_cidr", dst_cidr)
+        if dst_port is not None:
+            pulumi.set(__self__, "dst_port", dst_port)
+        if exclude_rtb is not None:
+            pulumi.set(__self__, "exclude_rtb", exclude_rtb)
+        if interface is not None:
+            pulumi.set(__self__, "interface", interface)
+        if mark is not None:
+            pulumi.set(__self__, "mark", mark)
+        if protocol is not None:
+            pulumi.set(__self__, "protocol", protocol)
+        if src_cidr is not None:
+            pulumi.set(__self__, "src_cidr", src_cidr)
+        if src_port is not None:
+            pulumi.set(__self__, "src_port", src_port)
+
+    @property
+    @pulumi.getter(name="applyRouteEntry")
+    def apply_route_entry(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "apply_route_entry")
+
+    @apply_route_entry.setter
+    def apply_route_entry(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "apply_route_entry", value)
+
+    @property
+    @pulumi.getter
+    def connection(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "connection")
+
+    @connection.setter
+    def connection(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "connection", value)
+
+    @property
+    @pulumi.getter(name="dnatIps")
+    def dnat_ips(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "dnat_ips")
+
+    @dnat_ips.setter
+    def dnat_ips(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dnat_ips", value)
+
+    @property
+    @pulumi.getter(name="dnatPort")
+    def dnat_port(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "dnat_port")
+
+    @dnat_port.setter
+    def dnat_port(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dnat_port", value)
+
+    @property
+    @pulumi.getter(name="dstCidr")
+    def dst_cidr(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "dst_cidr")
+
+    @dst_cidr.setter
+    def dst_cidr(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dst_cidr", value)
+
+    @property
+    @pulumi.getter(name="dstPort")
+    def dst_port(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "dst_port")
+
+    @dst_port.setter
+    def dst_port(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dst_port", value)
+
+    @property
+    @pulumi.getter(name="excludeRtb")
+    def exclude_rtb(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "exclude_rtb")
+
+    @exclude_rtb.setter
+    def exclude_rtb(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "exclude_rtb", value)
+
+    @property
+    @pulumi.getter
+    def interface(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "interface")
+
+    @interface.setter
+    def interface(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "interface", value)
+
+    @property
+    @pulumi.getter
+    def mark(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "mark")
+
+    @mark.setter
+    def mark(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "mark", value)
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "protocol")
+
+    @protocol.setter
+    def protocol(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "protocol", value)
+
+    @property
+    @pulumi.getter(name="srcCidr")
+    def src_cidr(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "src_cidr")
+
+    @src_cidr.setter
+    def src_cidr(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "src_cidr", value)
+
+    @property
+    @pulumi.getter(name="srcPort")
+    def src_port(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "src_port")
+
+    @src_port.setter
+    def src_port(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "src_port", value)
+
+
+@pulumi.input_type
+class AviatrixGatewayDnatDnatPolicyArgs:
+    def __init__(__self__, *,
+                 apply_route_entry: Optional[pulumi.Input[bool]] = None,
+                 connection: Optional[pulumi.Input[str]] = None,
+                 dnat_ips: Optional[pulumi.Input[str]] = None,
+                 dnat_port: Optional[pulumi.Input[str]] = None,
+                 dst_cidr: Optional[pulumi.Input[str]] = None,
+                 dst_port: Optional[pulumi.Input[str]] = None,
+                 exclude_rtb: Optional[pulumi.Input[str]] = None,
+                 interface: Optional[pulumi.Input[str]] = None,
+                 mark: Optional[pulumi.Input[str]] = None,
+                 protocol: Optional[pulumi.Input[str]] = None,
+                 src_cidr: Optional[pulumi.Input[str]] = None,
+                 src_port: Optional[pulumi.Input[str]] = None):
+        if apply_route_entry is not None:
+            pulumi.set(__self__, "apply_route_entry", apply_route_entry)
+        if connection is not None:
+            pulumi.set(__self__, "connection", connection)
+        if dnat_ips is not None:
+            pulumi.set(__self__, "dnat_ips", dnat_ips)
+        if dnat_port is not None:
+            pulumi.set(__self__, "dnat_port", dnat_port)
+        if dst_cidr is not None:
+            pulumi.set(__self__, "dst_cidr", dst_cidr)
+        if dst_port is not None:
+            pulumi.set(__self__, "dst_port", dst_port)
+        if exclude_rtb is not None:
+            pulumi.set(__self__, "exclude_rtb", exclude_rtb)
+        if interface is not None:
+            pulumi.set(__self__, "interface", interface)
+        if mark is not None:
+            pulumi.set(__self__, "mark", mark)
+        if protocol is not None:
+            pulumi.set(__self__, "protocol", protocol)
+        if src_cidr is not None:
+            pulumi.set(__self__, "src_cidr", src_cidr)
+        if src_port is not None:
+            pulumi.set(__self__, "src_port", src_port)
+
+    @property
+    @pulumi.getter(name="applyRouteEntry")
+    def apply_route_entry(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "apply_route_entry")
+
+    @apply_route_entry.setter
+    def apply_route_entry(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "apply_route_entry", value)
+
+    @property
+    @pulumi.getter
+    def connection(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "connection")
+
+    @connection.setter
+    def connection(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "connection", value)
+
+    @property
+    @pulumi.getter(name="dnatIps")
+    def dnat_ips(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "dnat_ips")
+
+    @dnat_ips.setter
+    def dnat_ips(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dnat_ips", value)
+
+    @property
+    @pulumi.getter(name="dnatPort")
+    def dnat_port(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "dnat_port")
+
+    @dnat_port.setter
+    def dnat_port(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dnat_port", value)
+
+    @property
+    @pulumi.getter(name="dstCidr")
+    def dst_cidr(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "dst_cidr")
+
+    @dst_cidr.setter
+    def dst_cidr(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dst_cidr", value)
+
+    @property
+    @pulumi.getter(name="dstPort")
+    def dst_port(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "dst_port")
+
+    @dst_port.setter
+    def dst_port(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dst_port", value)
+
+    @property
+    @pulumi.getter(name="excludeRtb")
+    def exclude_rtb(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "exclude_rtb")
+
+    @exclude_rtb.setter
+    def exclude_rtb(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "exclude_rtb", value)
+
+    @property
+    @pulumi.getter
+    def interface(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "interface")
+
+    @interface.setter
+    def interface(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "interface", value)
+
+    @property
+    @pulumi.getter
+    def mark(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "mark")
+
+    @mark.setter
+    def mark(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "mark", value)
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "protocol")
+
+    @protocol.setter
+    def protocol(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "protocol", value)
+
+    @property
+    @pulumi.getter(name="srcCidr")
+    def src_cidr(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "src_cidr")
+
+    @src_cidr.setter
+    def src_cidr(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "src_cidr", value)
+
+    @property
+    @pulumi.getter(name="srcPort")
+    def src_port(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "src_port")
+
+    @src_port.setter
+    def src_port(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "src_port", value)
+
+
+@pulumi.input_type
+class AviatrixGatewayDnatInterfacePolicyArgs:
+    def __init__(__self__, *,
+                 apply_route_entry: Optional[pulumi.Input[bool]] = None,
+                 connection: Optional[pulumi.Input[str]] = None,
+                 dnat_ips: Optional[pulumi.Input[str]] = None,
+                 dnat_port: Optional[pulumi.Input[str]] = None,
+                 dst_cidr: Optional[pulumi.Input[str]] = None,
+                 dst_port: Optional[pulumi.Input[str]] = None,
+                 exclude_rtb: Optional[pulumi.Input[str]] = None,
+                 interface: Optional[pulumi.Input[str]] = None,
+                 mark: Optional[pulumi.Input[str]] = None,
+                 protocol: Optional[pulumi.Input[str]] = None,
+                 src_cidr: Optional[pulumi.Input[str]] = None,
+                 src_port: Optional[pulumi.Input[str]] = None):
+        if apply_route_entry is not None:
+            pulumi.set(__self__, "apply_route_entry", apply_route_entry)
+        if connection is not None:
+            pulumi.set(__self__, "connection", connection)
+        if dnat_ips is not None:
+            pulumi.set(__self__, "dnat_ips", dnat_ips)
+        if dnat_port is not None:
+            pulumi.set(__self__, "dnat_port", dnat_port)
+        if dst_cidr is not None:
+            pulumi.set(__self__, "dst_cidr", dst_cidr)
+        if dst_port is not None:
+            pulumi.set(__self__, "dst_port", dst_port)
+        if exclude_rtb is not None:
+            pulumi.set(__self__, "exclude_rtb", exclude_rtb)
+        if interface is not None:
+            pulumi.set(__self__, "interface", interface)
+        if mark is not None:
+            pulumi.set(__self__, "mark", mark)
+        if protocol is not None:
+            pulumi.set(__self__, "protocol", protocol)
+        if src_cidr is not None:
+            pulumi.set(__self__, "src_cidr", src_cidr)
+        if src_port is not None:
+            pulumi.set(__self__, "src_port", src_port)
+
+    @property
+    @pulumi.getter(name="applyRouteEntry")
+    def apply_route_entry(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "apply_route_entry")
+
+    @apply_route_entry.setter
+    def apply_route_entry(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "apply_route_entry", value)
+
+    @property
+    @pulumi.getter
+    def connection(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "connection")
+
+    @connection.setter
+    def connection(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "connection", value)
+
+    @property
+    @pulumi.getter(name="dnatIps")
+    def dnat_ips(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "dnat_ips")
+
+    @dnat_ips.setter
+    def dnat_ips(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dnat_ips", value)
+
+    @property
+    @pulumi.getter(name="dnatPort")
+    def dnat_port(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "dnat_port")
+
+    @dnat_port.setter
+    def dnat_port(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dnat_port", value)
+
+    @property
+    @pulumi.getter(name="dstCidr")
+    def dst_cidr(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "dst_cidr")
+
+    @dst_cidr.setter
+    def dst_cidr(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dst_cidr", value)
+
+    @property
+    @pulumi.getter(name="dstPort")
+    def dst_port(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "dst_port")
+
+    @dst_port.setter
+    def dst_port(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dst_port", value)
+
+    @property
+    @pulumi.getter(name="excludeRtb")
+    def exclude_rtb(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "exclude_rtb")
+
+    @exclude_rtb.setter
+    def exclude_rtb(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "exclude_rtb", value)
+
+    @property
+    @pulumi.getter
+    def interface(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "interface")
+
+    @interface.setter
+    def interface(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "interface", value)
+
+    @property
+    @pulumi.getter
+    def mark(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "mark")
+
+    @mark.setter
+    def mark(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "mark", value)
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "protocol")
+
+    @protocol.setter
+    def protocol(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "protocol", value)
+
+    @property
+    @pulumi.getter(name="srcCidr")
+    def src_cidr(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "src_cidr")
+
+    @src_cidr.setter
+    def src_cidr(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "src_cidr", value)
+
+    @property
+    @pulumi.getter(name="srcPort")
+    def src_port(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "src_port")
+
+    @src_port.setter
+    def src_port(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "src_port", value)
+
+
+@pulumi.input_type
+class AviatrixGatewaySnatConnectionPolicyArgs:
+    def __init__(__self__, *,
+                 apply_route_entry: Optional[pulumi.Input[bool]] = None,
+                 connection: Optional[pulumi.Input[str]] = None,
+                 dst_cidr: Optional[pulumi.Input[str]] = None,
+                 dst_port: Optional[pulumi.Input[str]] = None,
+                 exclude_rtb: Optional[pulumi.Input[str]] = None,
+                 interface: Optional[pulumi.Input[str]] = None,
+                 mark: Optional[pulumi.Input[str]] = None,
+                 protocol: Optional[pulumi.Input[str]] = None,
+                 snat_ips: Optional[pulumi.Input[str]] = None,
+                 snat_port: Optional[pulumi.Input[str]] = None,
+                 src_cidr: Optional[pulumi.Input[str]] = None,
+                 src_port: Optional[pulumi.Input[str]] = None):
+        if apply_route_entry is not None:
+            pulumi.set(__self__, "apply_route_entry", apply_route_entry)
+        if connection is not None:
+            pulumi.set(__self__, "connection", connection)
+        if dst_cidr is not None:
+            pulumi.set(__self__, "dst_cidr", dst_cidr)
+        if dst_port is not None:
+            pulumi.set(__self__, "dst_port", dst_port)
+        if exclude_rtb is not None:
+            pulumi.set(__self__, "exclude_rtb", exclude_rtb)
+        if interface is not None:
+            pulumi.set(__self__, "interface", interface)
+        if mark is not None:
+            pulumi.set(__self__, "mark", mark)
+        if protocol is not None:
+            pulumi.set(__self__, "protocol", protocol)
+        if snat_ips is not None:
+            pulumi.set(__self__, "snat_ips", snat_ips)
+        if snat_port is not None:
+            pulumi.set(__self__, "snat_port", snat_port)
+        if src_cidr is not None:
+            pulumi.set(__self__, "src_cidr", src_cidr)
+        if src_port is not None:
+            pulumi.set(__self__, "src_port", src_port)
+
+    @property
+    @pulumi.getter(name="applyRouteEntry")
+    def apply_route_entry(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "apply_route_entry")
+
+    @apply_route_entry.setter
+    def apply_route_entry(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "apply_route_entry", value)
+
+    @property
+    @pulumi.getter
+    def connection(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "connection")
+
+    @connection.setter
+    def connection(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "connection", value)
+
+    @property
+    @pulumi.getter(name="dstCidr")
+    def dst_cidr(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "dst_cidr")
+
+    @dst_cidr.setter
+    def dst_cidr(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dst_cidr", value)
+
+    @property
+    @pulumi.getter(name="dstPort")
+    def dst_port(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "dst_port")
+
+    @dst_port.setter
+    def dst_port(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dst_port", value)
+
+    @property
+    @pulumi.getter(name="excludeRtb")
+    def exclude_rtb(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "exclude_rtb")
+
+    @exclude_rtb.setter
+    def exclude_rtb(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "exclude_rtb", value)
+
+    @property
+    @pulumi.getter
+    def interface(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "interface")
+
+    @interface.setter
+    def interface(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "interface", value)
+
+    @property
+    @pulumi.getter
+    def mark(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "mark")
+
+    @mark.setter
+    def mark(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "mark", value)
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "protocol")
+
+    @protocol.setter
+    def protocol(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "protocol", value)
+
+    @property
+    @pulumi.getter(name="snatIps")
+    def snat_ips(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "snat_ips")
+
+    @snat_ips.setter
+    def snat_ips(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "snat_ips", value)
+
+    @property
+    @pulumi.getter(name="snatPort")
+    def snat_port(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "snat_port")
+
+    @snat_port.setter
+    def snat_port(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "snat_port", value)
+
+    @property
+    @pulumi.getter(name="srcCidr")
+    def src_cidr(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "src_cidr")
+
+    @src_cidr.setter
+    def src_cidr(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "src_cidr", value)
+
+    @property
+    @pulumi.getter(name="srcPort")
+    def src_port(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "src_port")
+
+    @src_port.setter
+    def src_port(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "src_port", value)
+
+
+@pulumi.input_type
+class AviatrixGatewaySnatInterfacePolicyArgs:
+    def __init__(__self__, *,
+                 apply_route_entry: Optional[pulumi.Input[bool]] = None,
+                 connection: Optional[pulumi.Input[str]] = None,
+                 dst_cidr: Optional[pulumi.Input[str]] = None,
+                 dst_port: Optional[pulumi.Input[str]] = None,
+                 exclude_rtb: Optional[pulumi.Input[str]] = None,
+                 interface: Optional[pulumi.Input[str]] = None,
+                 mark: Optional[pulumi.Input[str]] = None,
+                 protocol: Optional[pulumi.Input[str]] = None,
+                 snat_ips: Optional[pulumi.Input[str]] = None,
+                 snat_port: Optional[pulumi.Input[str]] = None,
+                 src_cidr: Optional[pulumi.Input[str]] = None,
+                 src_port: Optional[pulumi.Input[str]] = None):
+        if apply_route_entry is not None:
+            pulumi.set(__self__, "apply_route_entry", apply_route_entry)
+        if connection is not None:
+            pulumi.set(__self__, "connection", connection)
+        if dst_cidr is not None:
+            pulumi.set(__self__, "dst_cidr", dst_cidr)
+        if dst_port is not None:
+            pulumi.set(__self__, "dst_port", dst_port)
+        if exclude_rtb is not None:
+            pulumi.set(__self__, "exclude_rtb", exclude_rtb)
+        if interface is not None:
+            pulumi.set(__self__, "interface", interface)
+        if mark is not None:
+            pulumi.set(__self__, "mark", mark)
+        if protocol is not None:
+            pulumi.set(__self__, "protocol", protocol)
+        if snat_ips is not None:
+            pulumi.set(__self__, "snat_ips", snat_ips)
+        if snat_port is not None:
+            pulumi.set(__self__, "snat_port", snat_port)
+        if src_cidr is not None:
+            pulumi.set(__self__, "src_cidr", src_cidr)
+        if src_port is not None:
+            pulumi.set(__self__, "src_port", src_port)
+
+    @property
+    @pulumi.getter(name="applyRouteEntry")
+    def apply_route_entry(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "apply_route_entry")
+
+    @apply_route_entry.setter
+    def apply_route_entry(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "apply_route_entry", value)
+
+    @property
+    @pulumi.getter
+    def connection(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "connection")
+
+    @connection.setter
+    def connection(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "connection", value)
+
+    @property
+    @pulumi.getter(name="dstCidr")
+    def dst_cidr(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "dst_cidr")
+
+    @dst_cidr.setter
+    def dst_cidr(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dst_cidr", value)
+
+    @property
+    @pulumi.getter(name="dstPort")
+    def dst_port(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "dst_port")
+
+    @dst_port.setter
+    def dst_port(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dst_port", value)
+
+    @property
+    @pulumi.getter(name="excludeRtb")
+    def exclude_rtb(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "exclude_rtb")
+
+    @exclude_rtb.setter
+    def exclude_rtb(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "exclude_rtb", value)
+
+    @property
+    @pulumi.getter
+    def interface(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "interface")
+
+    @interface.setter
+    def interface(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "interface", value)
+
+    @property
+    @pulumi.getter
+    def mark(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "mark")
+
+    @mark.setter
+    def mark(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "mark", value)
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "protocol")
+
+    @protocol.setter
+    def protocol(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "protocol", value)
+
+    @property
+    @pulumi.getter(name="snatIps")
+    def snat_ips(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "snat_ips")
+
+    @snat_ips.setter
+    def snat_ips(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "snat_ips", value)
+
+    @property
+    @pulumi.getter(name="snatPort")
+    def snat_port(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "snat_port")
+
+    @snat_port.setter
+    def snat_port(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "snat_port", value)
+
+    @property
+    @pulumi.getter(name="srcCidr")
+    def src_cidr(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "src_cidr")
+
+    @src_cidr.setter
+    def src_cidr(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "src_cidr", value)
+
+    @property
+    @pulumi.getter(name="srcPort")
+    def src_port(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "src_port")
+
+    @src_port.setter
+    def src_port(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "src_port", value)
+
+
+@pulumi.input_type
+class AviatrixGatewaySnatSnatPolicyArgs:
+    def __init__(__self__, *,
+                 apply_route_entry: Optional[pulumi.Input[bool]] = None,
+                 connection: Optional[pulumi.Input[str]] = None,
+                 dst_cidr: Optional[pulumi.Input[str]] = None,
+                 dst_port: Optional[pulumi.Input[str]] = None,
+                 exclude_rtb: Optional[pulumi.Input[str]] = None,
+                 interface: Optional[pulumi.Input[str]] = None,
+                 mark: Optional[pulumi.Input[str]] = None,
+                 protocol: Optional[pulumi.Input[str]] = None,
+                 snat_ips: Optional[pulumi.Input[str]] = None,
+                 snat_port: Optional[pulumi.Input[str]] = None,
+                 src_cidr: Optional[pulumi.Input[str]] = None,
+                 src_port: Optional[pulumi.Input[str]] = None):
+        if apply_route_entry is not None:
+            pulumi.set(__self__, "apply_route_entry", apply_route_entry)
+        if connection is not None:
+            pulumi.set(__self__, "connection", connection)
+        if dst_cidr is not None:
+            pulumi.set(__self__, "dst_cidr", dst_cidr)
+        if dst_port is not None:
+            pulumi.set(__self__, "dst_port", dst_port)
+        if exclude_rtb is not None:
+            pulumi.set(__self__, "exclude_rtb", exclude_rtb)
+        if interface is not None:
+            pulumi.set(__self__, "interface", interface)
+        if mark is not None:
+            pulumi.set(__self__, "mark", mark)
+        if protocol is not None:
+            pulumi.set(__self__, "protocol", protocol)
+        if snat_ips is not None:
+            pulumi.set(__self__, "snat_ips", snat_ips)
+        if snat_port is not None:
+            pulumi.set(__self__, "snat_port", snat_port)
+        if src_cidr is not None:
+            pulumi.set(__self__, "src_cidr", src_cidr)
+        if src_port is not None:
+            pulumi.set(__self__, "src_port", src_port)
+
+    @property
+    @pulumi.getter(name="applyRouteEntry")
+    def apply_route_entry(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "apply_route_entry")
+
+    @apply_route_entry.setter
+    def apply_route_entry(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "apply_route_entry", value)
+
+    @property
+    @pulumi.getter
+    def connection(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "connection")
+
+    @connection.setter
+    def connection(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "connection", value)
+
+    @property
+    @pulumi.getter(name="dstCidr")
+    def dst_cidr(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "dst_cidr")
+
+    @dst_cidr.setter
+    def dst_cidr(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dst_cidr", value)
+
+    @property
+    @pulumi.getter(name="dstPort")
+    def dst_port(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "dst_port")
+
+    @dst_port.setter
+    def dst_port(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dst_port", value)
+
+    @property
+    @pulumi.getter(name="excludeRtb")
+    def exclude_rtb(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "exclude_rtb")
+
+    @exclude_rtb.setter
+    def exclude_rtb(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "exclude_rtb", value)
+
+    @property
+    @pulumi.getter
+    def interface(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "interface")
+
+    @interface.setter
+    def interface(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "interface", value)
+
+    @property
+    @pulumi.getter
+    def mark(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "mark")
+
+    @mark.setter
+    def mark(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "mark", value)
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "protocol")
+
+    @protocol.setter
+    def protocol(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "protocol", value)
+
+    @property
+    @pulumi.getter(name="snatIps")
+    def snat_ips(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "snat_ips")
+
+    @snat_ips.setter
+    def snat_ips(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "snat_ips", value)
+
+    @property
+    @pulumi.getter(name="snatPort")
+    def snat_port(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "snat_port")
+
+    @snat_port.setter
+    def snat_port(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "snat_port", value)
+
+    @property
+    @pulumi.getter(name="srcCidr")
+    def src_cidr(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "src_cidr")
+
+    @src_cidr.setter
+    def src_cidr(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "src_cidr", value)
+
+    @property
+    @pulumi.getter(name="srcPort")
+    def src_port(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "src_port")
+
+    @src_port.setter
+    def src_port(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "src_port", value)
+
+
+@pulumi.input_type
+class AviatrixMicrosegPolicyListPolicyArgs:
+    def __init__(__self__, *,
+                 action: pulumi.Input[str],
+                 dst_app_domains: pulumi.Input[Sequence[pulumi.Input[str]]],
+                 name: pulumi.Input[str],
+                 protocol: pulumi.Input[str],
+                 src_app_domains: pulumi.Input[Sequence[pulumi.Input[str]]],
+                 logging: Optional[pulumi.Input[bool]] = None,
+                 port_ranges: Optional[pulumi.Input[Sequence[pulumi.Input['AviatrixMicrosegPolicyListPolicyPortRangeArgs']]]] = None,
+                 priority: Optional[pulumi.Input[int]] = None,
+                 uuid: Optional[pulumi.Input[str]] = None,
+                 watch: Optional[pulumi.Input[bool]] = None):
+        pulumi.set(__self__, "action", action)
+        pulumi.set(__self__, "dst_app_domains", dst_app_domains)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "protocol", protocol)
+        pulumi.set(__self__, "src_app_domains", src_app_domains)
+        if logging is not None:
+            pulumi.set(__self__, "logging", logging)
+        if port_ranges is not None:
+            pulumi.set(__self__, "port_ranges", port_ranges)
+        if priority is not None:
+            pulumi.set(__self__, "priority", priority)
+        if uuid is not None:
+            pulumi.set(__self__, "uuid", uuid)
+        if watch is not None:
+            pulumi.set(__self__, "watch", watch)
+
+    @property
+    @pulumi.getter
+    def action(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "action")
+
+    @action.setter
+    def action(self, value: pulumi.Input[str]):
+        pulumi.set(self, "action", value)
+
+    @property
+    @pulumi.getter(name="dstAppDomains")
+    def dst_app_domains(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        return pulumi.get(self, "dst_app_domains")
+
+    @dst_app_domains.setter
+    def dst_app_domains(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "dst_app_domains", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "protocol")
+
+    @protocol.setter
+    def protocol(self, value: pulumi.Input[str]):
+        pulumi.set(self, "protocol", value)
+
+    @property
+    @pulumi.getter(name="srcAppDomains")
+    def src_app_domains(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        return pulumi.get(self, "src_app_domains")
+
+    @src_app_domains.setter
+    def src_app_domains(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "src_app_domains", value)
+
+    @property
+    @pulumi.getter
+    def logging(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "logging")
+
+    @logging.setter
+    def logging(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "logging", value)
+
+    @property
+    @pulumi.getter(name="portRanges")
+    def port_ranges(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['AviatrixMicrosegPolicyListPolicyPortRangeArgs']]]]:
+        return pulumi.get(self, "port_ranges")
+
+    @port_ranges.setter
+    def port_ranges(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['AviatrixMicrosegPolicyListPolicyPortRangeArgs']]]]):
+        pulumi.set(self, "port_ranges", value)
+
+    @property
+    @pulumi.getter
+    def priority(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "priority")
+
+    @priority.setter
+    def priority(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "priority", value)
+
+    @property
+    @pulumi.getter
+    def uuid(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "uuid")
+
+    @uuid.setter
+    def uuid(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "uuid", value)
+
+    @property
+    @pulumi.getter
+    def watch(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "watch")
+
+    @watch.setter
+    def watch(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "watch", value)
+
+
+@pulumi.input_type
+class AviatrixMicrosegPolicyListPolicyPortRangeArgs:
+    def __init__(__self__, *,
+                 lo: pulumi.Input[int],
+                 hi: Optional[pulumi.Input[int]] = None):
+        pulumi.set(__self__, "lo", lo)
+        if hi is not None:
+            pulumi.set(__self__, "hi", hi)
+
+    @property
+    @pulumi.getter
+    def lo(self) -> pulumi.Input[int]:
+        return pulumi.get(self, "lo")
+
+    @lo.setter
+    def lo(self, value: pulumi.Input[int]):
+        pulumi.set(self, "lo", value)
+
+    @property
+    @pulumi.getter
+    def hi(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "hi")
+
+    @hi.setter
+    def hi(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "hi", value)
+
+
+@pulumi.input_type
+class AviatrixPrivateModeLbProxyArgs:
+    def __init__(__self__, *,
+                 instance_id: pulumi.Input[str],
+                 vpc_id: pulumi.Input[str]):
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "instance_id")
+
+    @instance_id.setter
+    def instance_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "instance_id", value)
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "vpc_id")
+
+    @vpc_id.setter
+    def vpc_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "vpc_id", value)
+
+
+@pulumi.input_type
+class AviatrixSite2CloudCaCertTagCaCertificateArgs:
+    def __init__(__self__, *,
+                 cert_content: pulumi.Input[str],
+                 common_name: Optional[pulumi.Input[str]] = None,
+                 expiration_time: Optional[pulumi.Input[str]] = None,
+                 id: Optional[pulumi.Input[str]] = None,
+                 issuer_name: Optional[pulumi.Input[str]] = None,
+                 unique_serial: Optional[pulumi.Input[str]] = None):
+        pulumi.set(__self__, "cert_content", cert_content)
+        if common_name is not None:
+            pulumi.set(__self__, "common_name", common_name)
+        if expiration_time is not None:
+            pulumi.set(__self__, "expiration_time", expiration_time)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if issuer_name is not None:
+            pulumi.set(__self__, "issuer_name", issuer_name)
+        if unique_serial is not None:
+            pulumi.set(__self__, "unique_serial", unique_serial)
+
+    @property
+    @pulumi.getter(name="certContent")
+    def cert_content(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "cert_content")
+
+    @cert_content.setter
+    def cert_content(self, value: pulumi.Input[str]):
+        pulumi.set(self, "cert_content", value)
+
+    @property
+    @pulumi.getter(name="commonName")
+    def common_name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "common_name")
+
+    @common_name.setter
+    def common_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "common_name", value)
+
+    @property
+    @pulumi.getter(name="expirationTime")
+    def expiration_time(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "expiration_time")
+
+    @expiration_time.setter
+    def expiration_time(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "expiration_time", value)
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "id")
+
+    @id.setter
+    def id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "id", value)
+
+    @property
+    @pulumi.getter(name="issuerName")
+    def issuer_name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "issuer_name")
+
+    @issuer_name.setter
+    def issuer_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "issuer_name", value)
+
+    @property
+    @pulumi.getter(name="uniqueSerial")
+    def unique_serial(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "unique_serial")
+
+    @unique_serial.setter
+    def unique_serial(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "unique_serial", value)
 
 
 @pulumi.input_type
@@ -688,6 +2059,55 @@ class AviatrixVpcSubnetArgs:
 
 
 @pulumi.input_type
+class AviatrixVpnProfilePolicyArgs:
+    def __init__(__self__, *,
+                 action: pulumi.Input[str],
+                 port: pulumi.Input[str],
+                 proto: pulumi.Input[str],
+                 target: pulumi.Input[str]):
+        pulumi.set(__self__, "action", action)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "proto", proto)
+        pulumi.set(__self__, "target", target)
+
+    @property
+    @pulumi.getter
+    def action(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "action")
+
+    @action.setter
+    def action(self, value: pulumi.Input[str]):
+        pulumi.set(self, "action", value)
+
+    @property
+    @pulumi.getter
+    def port(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "port")
+
+    @port.setter
+    def port(self, value: pulumi.Input[str]):
+        pulumi.set(self, "port", value)
+
+    @property
+    @pulumi.getter
+    def proto(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "proto")
+
+    @proto.setter
+    def proto(self, value: pulumi.Input[str]):
+        pulumi.set(self, "proto", value)
+
+    @property
+    @pulumi.getter
+    def target(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "target")
+
+    @target.setter
+    def target(self, value: pulumi.Input[str]):
+        pulumi.set(self, "target", value)
+
+
+@pulumi.input_type
 class ProviderIgnoreTagsArgs:
     def __init__(__self__, *,
                  key_prefixes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -714,5 +2134,98 @@ class ProviderIgnoreTagsArgs:
     @keys.setter
     def keys(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
         pulumi.set(self, "keys", value)
+
+
+@pulumi.input_type
+class GetAviatrixFirenetFirewallInstanceAssociationArgs:
+    def __init__(__self__, *,
+                 attached: bool,
+                 egress_interface: str,
+                 firenet_gw_name: str,
+                 firewall_name: str,
+                 instance_id: str,
+                 lan_interface: str,
+                 management_interface: str,
+                 vendor_type: str):
+        pulumi.set(__self__, "attached", attached)
+        pulumi.set(__self__, "egress_interface", egress_interface)
+        pulumi.set(__self__, "firenet_gw_name", firenet_gw_name)
+        pulumi.set(__self__, "firewall_name", firewall_name)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "lan_interface", lan_interface)
+        pulumi.set(__self__, "management_interface", management_interface)
+        pulumi.set(__self__, "vendor_type", vendor_type)
+
+    @property
+    @pulumi.getter
+    def attached(self) -> bool:
+        return pulumi.get(self, "attached")
+
+    @attached.setter
+    def attached(self, value: bool):
+        pulumi.set(self, "attached", value)
+
+    @property
+    @pulumi.getter(name="egressInterface")
+    def egress_interface(self) -> str:
+        return pulumi.get(self, "egress_interface")
+
+    @egress_interface.setter
+    def egress_interface(self, value: str):
+        pulumi.set(self, "egress_interface", value)
+
+    @property
+    @pulumi.getter(name="firenetGwName")
+    def firenet_gw_name(self) -> str:
+        return pulumi.get(self, "firenet_gw_name")
+
+    @firenet_gw_name.setter
+    def firenet_gw_name(self, value: str):
+        pulumi.set(self, "firenet_gw_name", value)
+
+    @property
+    @pulumi.getter(name="firewallName")
+    def firewall_name(self) -> str:
+        return pulumi.get(self, "firewall_name")
+
+    @firewall_name.setter
+    def firewall_name(self, value: str):
+        pulumi.set(self, "firewall_name", value)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        return pulumi.get(self, "instance_id")
+
+    @instance_id.setter
+    def instance_id(self, value: str):
+        pulumi.set(self, "instance_id", value)
+
+    @property
+    @pulumi.getter(name="lanInterface")
+    def lan_interface(self) -> str:
+        return pulumi.get(self, "lan_interface")
+
+    @lan_interface.setter
+    def lan_interface(self, value: str):
+        pulumi.set(self, "lan_interface", value)
+
+    @property
+    @pulumi.getter(name="managementInterface")
+    def management_interface(self) -> str:
+        return pulumi.get(self, "management_interface")
+
+    @management_interface.setter
+    def management_interface(self, value: str):
+        pulumi.set(self, "management_interface", value)
+
+    @property
+    @pulumi.getter(name="vendorType")
+    def vendor_type(self) -> str:
+        return pulumi.get(self, "vendor_type")
+
+    @vendor_type.setter
+    def vendor_type(self, value: str):
+        pulumi.set(self, "vendor_type", value)
 
 

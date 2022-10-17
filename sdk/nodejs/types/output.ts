@@ -53,6 +53,32 @@ export interface AviatrixAwsTgwVpnConnVpnTunnelData {
     vpnOutsideAddress: string;
 }
 
+export interface AviatrixFirenetFirewallInstanceAssociation {
+    attached?: boolean;
+    egressInterface?: string;
+    firenetGwName: string;
+    firewallName?: string;
+    instanceId: string;
+    lanInterface?: string;
+    managementInterface?: string;
+    vendorType?: string;
+}
+
+export interface AviatrixFirewallPolicy {
+    action: string;
+    description?: string;
+    dstIp: string;
+    logEnabled?: boolean;
+    port: string;
+    protocol?: string;
+    srcIp: string;
+}
+
+export interface AviatrixFirewallTagCidrList {
+    cidr: string;
+    cidrTagName: string;
+}
+
 export interface AviatrixFqdnDomainName {
     action?: string;
     fqdn: string;
@@ -63,6 +89,128 @@ export interface AviatrixFqdnDomainName {
 export interface AviatrixFqdnGwFilterTagList {
     gwName: string;
     sourceIpLists?: string[];
+}
+
+export interface AviatrixGatewayDnatConnectionPolicy {
+    applyRouteEntry: boolean;
+    connection: string;
+    dnatIps: string;
+    dnatPort: string;
+    dstCidr: string;
+    dstPort: string;
+    excludeRtb: string;
+    interface: string;
+    mark: string;
+    protocol: string;
+    srcCidr: string;
+    srcPort: string;
+}
+
+export interface AviatrixGatewayDnatDnatPolicy {
+    applyRouteEntry?: boolean;
+    connection?: string;
+    dnatIps?: string;
+    dnatPort?: string;
+    dstCidr?: string;
+    dstPort?: string;
+    excludeRtb?: string;
+    interface?: string;
+    mark?: string;
+    protocol?: string;
+    srcCidr?: string;
+    srcPort?: string;
+}
+
+export interface AviatrixGatewayDnatInterfacePolicy {
+    applyRouteEntry: boolean;
+    connection: string;
+    dnatIps: string;
+    dnatPort: string;
+    dstCidr: string;
+    dstPort: string;
+    excludeRtb: string;
+    interface: string;
+    mark: string;
+    protocol: string;
+    srcCidr: string;
+    srcPort: string;
+}
+
+export interface AviatrixGatewaySnatConnectionPolicy {
+    applyRouteEntry: boolean;
+    connection: string;
+    dstCidr: string;
+    dstPort: string;
+    excludeRtb: string;
+    interface: string;
+    mark: string;
+    protocol: string;
+    snatIps: string;
+    snatPort: string;
+    srcCidr: string;
+    srcPort: string;
+}
+
+export interface AviatrixGatewaySnatInterfacePolicy {
+    applyRouteEntry: boolean;
+    connection: string;
+    dstCidr: string;
+    dstPort: string;
+    excludeRtb: string;
+    interface: string;
+    mark: string;
+    protocol: string;
+    snatIps: string;
+    snatPort: string;
+    srcCidr: string;
+    srcPort: string;
+}
+
+export interface AviatrixGatewaySnatSnatPolicy {
+    applyRouteEntry?: boolean;
+    connection?: string;
+    dstCidr?: string;
+    dstPort?: string;
+    excludeRtb?: string;
+    interface?: string;
+    mark?: string;
+    protocol?: string;
+    snatIps?: string;
+    snatPort?: string;
+    srcCidr?: string;
+    srcPort?: string;
+}
+
+export interface AviatrixMicrosegPolicyListPolicy {
+    action: string;
+    dstAppDomains: string[];
+    logging?: boolean;
+    name: string;
+    portRanges?: outputs.AviatrixMicrosegPolicyListPolicyPortRange[];
+    priority?: number;
+    protocol: string;
+    srcAppDomains: string[];
+    uuid: string;
+    watch?: boolean;
+}
+
+export interface AviatrixMicrosegPolicyListPolicyPortRange {
+    hi?: number;
+    lo: number;
+}
+
+export interface AviatrixPrivateModeLbProxy {
+    instanceId: string;
+    vpcId: string;
+}
+
+export interface AviatrixSite2CloudCaCertTagCaCertificate {
+    certContent: string;
+    commonName: string;
+    expirationTime: string;
+    id: string;
+    issuerName: string;
+    uniqueSerial: string;
 }
 
 export interface AviatrixTransitGatewayBgpLanInterface {
@@ -94,6 +242,140 @@ export interface AviatrixVpcSubnet {
     subnetId: string;
 }
 
+export interface AviatrixVpnProfilePolicy {
+    action: string;
+    port: string;
+    proto: string;
+    target: string;
+}
+
+export interface GetAviatrixDeviceInterfacesWanInterface {
+    wanPrimaryInterface: string;
+    wanPrimaryInterfacePublicIp: string;
+}
+
+export interface GetAviatrixFirenetFirewallInstanceAssociation {
+    attached: boolean;
+    egressInterface: string;
+    firenetGwName: string;
+    firewallName: string;
+    instanceId: string;
+    lanInterface: string;
+    managementInterface: string;
+    vendorType: string;
+}
+
+export interface GetAviatrixFirewallInstanceImagesFirewallImage {
+    firewallImage: string;
+    firewallImageVersions: string[];
+    firewallSizes: string[];
+}
+
+export interface GetAviatrixFirewallPolicy {
+    action: string;
+    description: string;
+    dstIp: string;
+    logEnabled: boolean;
+    port: string;
+    protocol: string;
+    srcIp: string;
+}
+
+export interface GetAviatrixNetworkDomainsNetworkDomain {
+    account: string;
+    cloudType: string;
+    egressInspection: boolean;
+    egressInspectionName: string;
+    inspectionPolicy: string;
+    intraDomainInspection: boolean;
+    intraDomainInspectionName: string;
+    name: string;
+    region: string;
+    routeTableId: string;
+    tgwName: string;
+    type: string;
+}
+
+export interface GetAviatrixTransitGatewayBgpLanInterface {
+    subnet: string;
+    vpcId: string;
+}
+
+export interface GetAviatrixTransitGatewayHaBgpLanInterface {
+    subnet: string;
+    vpcId: string;
+}
+
+export interface GetAviatrixTransitGatewaysGatewayList {
+    accountName: string;
+    allocateNewEip: boolean;
+    availabilityDomain: string;
+    azureEipNameResourceGroup: string;
+    bgpEcmp: boolean;
+    bgpHoldTime: number;
+    bgpLanInterfaces: outputs.GetAviatrixTransitGatewaysGatewayListBgpLanInterface[];
+    bgpLanIpLists: string[];
+    bgpPollingTime: string;
+    cloudInstanceId: string;
+    cloudType: number;
+    connectedTransit: boolean;
+    customizedSpokeVpcRoutes: string;
+    enableActiveStandby: boolean;
+    enableActiveStandbyPreemptive: boolean;
+    enableBgpOverLan: boolean;
+    enableEncryptVolume: boolean;
+    enableGatewayLoadBalancer: boolean;
+    enableHybridConnection: boolean;
+    enableJumboFrame: boolean;
+    enableMonitorGatewaySubnets: boolean;
+    enableMultiTierTransit: boolean;
+    enablePrivateOob: boolean;
+    enableSegmentation: boolean;
+    enableSpotInstance: boolean;
+    enableTransitSummarizeCidrToTgw: boolean;
+    enableVpcDnsServer: boolean;
+    excludedAdvertisedSpokeRoutes: string;
+    faultDomain: string;
+    filteredSpokeVpcRoutes: string;
+    gwName: string;
+    gwSize: string;
+    haBgpLanInterfaces: outputs.GetAviatrixTransitGatewaysGatewayListHaBgpLanInterface[];
+    haBgpLanIpLists: string[];
+    imageVersion: string;
+    insaneMode: boolean;
+    insaneModeAz: string;
+    lanPrivateSubnet: string;
+    lanVpcId: string;
+    learnedCidrsApprovalMode: string;
+    localAsNumber: string;
+    monitorExcludeLists: string[];
+    oobAvailabilityZone: string;
+    oobManagementSubnet: string;
+    prependAsPaths: string[];
+    privateIp: string;
+    publicIp: string;
+    securityGroupId: string;
+    singleAzHa: boolean;
+    singleIpSnat: boolean;
+    softwareVersion: string;
+    spotPrice: string;
+    subnet: string;
+    tunnelDetectionTime: number;
+    vpcId: string;
+    vpcReg: string;
+    zone: string;
+}
+
+export interface GetAviatrixTransitGatewaysGatewayListBgpLanInterface {
+    subnet: string;
+    vpcId: string;
+}
+
+export interface GetAviatrixTransitGatewaysGatewayListHaBgpLanInterface {
+    subnet: string;
+    vpcId: string;
+}
+
 export interface GetAviatrixVpcPrivateSubnet {
     cidr: string;
     name: string;
@@ -110,6 +392,24 @@ export interface GetAviatrixVpcSubnet {
     cidr: string;
     name: string;
     subnetId: string;
+}
+
+export interface GetAviatrixVpcTrackerVpcList {
+    accountName: string;
+    cidr: string;
+    cloudType: number;
+    instanceCount: number;
+    name: string;
+    region: string;
+    subnets: outputs.GetAviatrixVpcTrackerVpcListSubnet[];
+    vpcId: string;
+}
+
+export interface GetAviatrixVpcTrackerVpcListSubnet {
+    cidr: string;
+    gwIp: string;
+    name: string;
+    region: string;
 }
 
 export namespace config {
