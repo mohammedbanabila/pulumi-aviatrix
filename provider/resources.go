@@ -78,7 +78,7 @@ func Provider() tfbridge.ProviderInfo {
 		// https://www.pulumi.com/docs/guides/pulumi-packages/schema/#package.
 		Keywords:   []string{"pulumi", "aviatrix", "category/cloud"},
 		License:    "Apache-2.0",
-		Homepage:   "https://www.pulumi.com",
+		Homepage:   "https://www.aviatrix.com",
 		Repository: "https://github.com/astipkovits/pulumi-aviatrix",
 		// The GitHub Org for the provider - defaults to `terraform-providers`. Note that this
 		// should match the TF provider module's require directive, not any replace directives.
@@ -107,7 +107,7 @@ func Provider() tfbridge.ProviderInfo {
 			// 		"tags": {Type: tfbridge.MakeType(mainPkg, "Tags")},
 			// 	},
 			// },
-			"aviatrix_vpc":                                            {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixVpc"), Docs: &tfbridge.DocInfo{Source: "docs/resources/aviatrix_vpc.md"}},
+			"aviatrix_vpc":                                            {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixVpc"), Docs: &tfbridge.DocInfo{Source: "github.com/AviatrixSystems/terraform-provider-aviatrix/docs/resources/aviatrix_vpc.md"}},
 			"aviatrix_account":                                        {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAccount")},
 			"aviatrix_account_user":                                   {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAccountUser")},
 			"aviatrix_app_domain":                                     {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAppDomain")},
