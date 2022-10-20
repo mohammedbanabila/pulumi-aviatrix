@@ -27,7 +27,7 @@
         "go": {
             "generateExtraInputTypes": true,
             "generateResourceContainerTypes": true,
-            "importBasePath": "github.com/astipkovits/pulumi-aviatrix/sdk/v2/go/aviatrix"
+            "importBasePath": "github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
         },
         "nodejs": {
             "compatibility": "tfbridge20",
