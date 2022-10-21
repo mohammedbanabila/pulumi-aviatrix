@@ -1,5 +1,5 @@
 {
   "resource": true,
   "name": "aviatrix",
-  "server": "https://github.com/astipkovits/pulumi-aviatrix/releases/download/${VERSION}/"
+  "server": "github://api.github.com/astipkovits"
 }

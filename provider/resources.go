@@ -73,7 +73,7 @@ func Provider() tfbridge.ProviderInfo {
 		// e.g https://github.com/org/pulumi-provider-name/releases/
 		//PluginDownloadURL: "https://github.com/astipkovits/pulumi-aviatrix/raw/main/releases/",
                 //e.g. https://github.com/astipkovits/pulumi-aviatrix/releases/download/v0.0.2/pulumi-resource-aviatrix-v0.0.2-darwin-arm64.tar.gz
-                PluginDownloadURL: "https://github.com/astipkovits/pulumi-aviatrix/releases/download/${VERSION}/",
+                PluginDownloadURL: "github://api.github.com/astipkovits",
 		Description:       "A Pulumi package for creating and managing aviatrix cloud resources.",
 		// category/cloud tag helps with categorizing the package in the Pulumi Registry.
 		// For all available categories, see `Keywords` in
