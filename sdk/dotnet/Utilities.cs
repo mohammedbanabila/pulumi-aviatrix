@@ -53,7 +53,7 @@ namespace Pulumi.Aviatrix
         {
             var dst = src ?? new global::Pulumi.InvokeOptions{};
             dst.Version = src?.Version ?? Version;
-            dst.PluginDownloadURL = src?.PluginDownloadURL ?? "https://github.com/astipkovits/pulumi-aviatrix/raw/main/releases/";
+            dst.PluginDownloadURL = src?.PluginDownloadURL ?? "https://github.com/astipkovits/pulumi-aviatrix/releases/download/${VERSION}/";
             return dst;
         }
 

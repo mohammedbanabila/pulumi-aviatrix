@@ -25,6 +25,6 @@
     "pulumi": {
         "resource": true,
         "name": "aviatrix",
-        "server": "https://github.com/astipkovits/pulumi-aviatrix/raw/main/releases/"
+        "server": "https://github.com/astipkovits/pulumi-aviatrix/releases/download/${VERSION}/"
     }
 }

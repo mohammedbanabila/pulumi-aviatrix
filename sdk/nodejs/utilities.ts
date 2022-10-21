@@ -50,5 +50,5 @@ export function getVersion(): string {
 
 /** @internal */
 export function resourceOptsDefaults(): any {
-    return { version: getVersion(), pluginDownloadURL: "https://github.com/astipkovits/pulumi-aviatrix/raw/main/releases/" };
+    return { version: getVersion(), pluginDownloadURL: "https://github.com/astipkovits/pulumi-aviatrix/releases/download/${VERSION}/" };
 }
