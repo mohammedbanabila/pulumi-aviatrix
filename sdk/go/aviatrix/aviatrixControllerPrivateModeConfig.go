@@ -11,14 +11,51 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_controller_private_mode_config** resource allows management of an Aviatrix Controller's Private Mode configuration. This resource is available as of provider version R2.23+.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixControllerPrivateModeConfig(ctx, "test", &aviatrix.AviatrixControllerPrivateModeConfigArgs{
+//				EnablePrivateMode: pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **aviatrix_controller_private_mode_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixControllerPrivateModeConfig:AviatrixControllerPrivateModeConfig test 10-11-12-13
+//
+// ```
 type AviatrixControllerPrivateModeConfig struct {
 	pulumi.CustomResourceState
 
-	// Copilot instance ID to associate with the Controller for Private Mode.
+	// Instance ID of a copilot instance to associate with an Aviatrix Controller in Private Mode. The copilot instance must be in the same VPC as the Aviatrix Controller.
 	CopilotInstanceId pulumi.StringPtrOutput `pulumi:"copilotInstanceId"`
-	// Whether to enable Private Mode on the Controller.
+	// Whether to enable Private Mode on an Aviatrix Controller.
 	EnablePrivateMode pulumi.BoolOutput `pulumi:"enablePrivateMode"`
-	// Set of proxies.
+	// Set of Controller proxies for Private Mode.
 	Proxies pulumi.StringArrayOutput `pulumi:"proxies"`
 }
 
@@ -55,20 +92,20 @@ func GetAviatrixControllerPrivateModeConfig(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixControllerPrivateModeConfig resources.
 type aviatrixControllerPrivateModeConfigState struct {
-	// Copilot instance ID to associate with the Controller for Private Mode.
+	// Instance ID of a copilot instance to associate with an Aviatrix Controller in Private Mode. The copilot instance must be in the same VPC as the Aviatrix Controller.
 	CopilotInstanceId *string `pulumi:"copilotInstanceId"`
-	// Whether to enable Private Mode on the Controller.
+	// Whether to enable Private Mode on an Aviatrix Controller.
 	EnablePrivateMode *bool `pulumi:"enablePrivateMode"`
-	// Set of proxies.
+	// Set of Controller proxies for Private Mode.
 	Proxies []string `pulumi:"proxies"`
 }
 
 type AviatrixControllerPrivateModeConfigState struct {
-	// Copilot instance ID to associate with the Controller for Private Mode.
+	// Instance ID of a copilot instance to associate with an Aviatrix Controller in Private Mode. The copilot instance must be in the same VPC as the Aviatrix Controller.
 	CopilotInstanceId pulumi.StringPtrInput
-	// Whether to enable Private Mode on the Controller.
+	// Whether to enable Private Mode on an Aviatrix Controller.
 	EnablePrivateMode pulumi.BoolPtrInput
-	// Set of proxies.
+	// Set of Controller proxies for Private Mode.
 	Proxies pulumi.StringArrayInput
 }
 
@@ -77,21 +114,21 @@ func (AviatrixControllerPrivateModeConfigState) ElementType() reflect.Type {
 }
 
 type aviatrixControllerPrivateModeConfigArgs struct {
-	// Copilot instance ID to associate with the Controller for Private Mode.
+	// Instance ID of a copilot instance to associate with an Aviatrix Controller in Private Mode. The copilot instance must be in the same VPC as the Aviatrix Controller.
 	CopilotInstanceId *string `pulumi:"copilotInstanceId"`
-	// Whether to enable Private Mode on the Controller.
+	// Whether to enable Private Mode on an Aviatrix Controller.
 	EnablePrivateMode bool `pulumi:"enablePrivateMode"`
-	// Set of proxies.
+	// Set of Controller proxies for Private Mode.
 	Proxies []string `pulumi:"proxies"`
 }
 
 // The set of arguments for constructing a AviatrixControllerPrivateModeConfig resource.
 type AviatrixControllerPrivateModeConfigArgs struct {
-	// Copilot instance ID to associate with the Controller for Private Mode.
+	// Instance ID of a copilot instance to associate with an Aviatrix Controller in Private Mode. The copilot instance must be in the same VPC as the Aviatrix Controller.
 	CopilotInstanceId pulumi.StringPtrInput
-	// Whether to enable Private Mode on the Controller.
+	// Whether to enable Private Mode on an Aviatrix Controller.
 	EnablePrivateMode pulumi.BoolInput
-	// Set of proxies.
+	// Set of Controller proxies for Private Mode.
 	Proxies pulumi.StringArrayInput
 }
 
@@ -182,17 +219,17 @@ func (o AviatrixControllerPrivateModeConfigOutput) ToAviatrixControllerPrivateMo
 	return o
 }
 
-// Copilot instance ID to associate with the Controller for Private Mode.
+// Instance ID of a copilot instance to associate with an Aviatrix Controller in Private Mode. The copilot instance must be in the same VPC as the Aviatrix Controller.
 func (o AviatrixControllerPrivateModeConfigOutput) CopilotInstanceId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixControllerPrivateModeConfig) pulumi.StringPtrOutput { return v.CopilotInstanceId }).(pulumi.StringPtrOutput)
 }
 
-// Whether to enable Private Mode on the Controller.
+// Whether to enable Private Mode on an Aviatrix Controller.
 func (o AviatrixControllerPrivateModeConfigOutput) EnablePrivateMode() pulumi.BoolOutput {
 	return o.ApplyT(func(v *AviatrixControllerPrivateModeConfig) pulumi.BoolOutput { return v.EnablePrivateMode }).(pulumi.BoolOutput)
 }
 
-// Set of proxies.
+// Set of Controller proxies for Private Mode.
 func (o AviatrixControllerPrivateModeConfigOutput) Proxies() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixControllerPrivateModeConfig) pulumi.StringArrayOutput { return v.Proxies }).(pulumi.StringArrayOutput)
 }

@@ -30,7 +30,7 @@ namespace Pulumi.Aviatrix
             }
         }
 
-        private static readonly Pulumi.Config __config = new Pulumi.Config("aviatrix");
+        private static readonly global::Pulumi.Config __config = new global::Pulumi.Config("aviatrix");
 
         private static readonly __Value<string?> _controllerIp = new __Value<string?>(() => __config.Get("controllerIp"));
         public static string? ControllerIp

@@ -17,7 +17,7 @@ class AviatrixControllerGatewayKeepaliveConfigArgs:
                  keepalive_speed: pulumi.Input[str]):
         """
         The set of arguments for constructing a AviatrixControllerGatewayKeepaliveConfig resource.
-        :param pulumi.Input[str] keepalive_speed: Gateway keepalive speed.
+        :param pulumi.Input[str] keepalive_speed: The gateway keepalive template name. Must be one of "slow", "medium" or "fast". Visit [here](https://docs.aviatrix.com/HowTos/gateway.html#gateway-keepalives) for the complete documentation about the gateway keepalive configuration.
         """
         pulumi.set(__self__, "keepalive_speed", keepalive_speed)
 
@@ -25,7 +25,7 @@ class AviatrixControllerGatewayKeepaliveConfigArgs:
     @pulumi.getter(name="keepaliveSpeed")
     def keepalive_speed(self) -> pulumi.Input[str]:
         """
-        Gateway keepalive speed.
+        The gateway keepalive template name. Must be one of "slow", "medium" or "fast". Visit [here](https://docs.aviatrix.com/HowTos/gateway.html#gateway-keepalives) for the complete documentation about the gateway keepalive configuration.
         """
         return pulumi.get(self, "keepalive_speed")
 
@@ -40,7 +40,7 @@ class _AviatrixControllerGatewayKeepaliveConfigState:
                  keepalive_speed: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixControllerGatewayKeepaliveConfig resources.
-        :param pulumi.Input[str] keepalive_speed: Gateway keepalive speed.
+        :param pulumi.Input[str] keepalive_speed: The gateway keepalive template name. Must be one of "slow", "medium" or "fast". Visit [here](https://docs.aviatrix.com/HowTos/gateway.html#gateway-keepalives) for the complete documentation about the gateway keepalive configuration.
         """
         if keepalive_speed is not None:
             pulumi.set(__self__, "keepalive_speed", keepalive_speed)
@@ -49,7 +49,7 @@ class _AviatrixControllerGatewayKeepaliveConfigState:
     @pulumi.getter(name="keepaliveSpeed")
     def keepalive_speed(self) -> Optional[pulumi.Input[str]]:
         """
-        Gateway keepalive speed.
+        The gateway keepalive template name. Must be one of "slow", "medium" or "fast". Visit [here](https://docs.aviatrix.com/HowTos/gateway.html#gateway-keepalives) for the complete documentation about the gateway keepalive configuration.
         """
         return pulumi.get(self, "keepalive_speed")
 
@@ -66,10 +66,29 @@ class AviatrixControllerGatewayKeepaliveConfig(pulumi.CustomResource):
                  keepalive_speed: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixControllerGatewayKeepaliveConfig resource with the given unique name, props, and options.
+        The **aviatrix_controller_gateway_keepalive_config** resource allows management of an Aviatrix Controller's gateway keepalive template configuration. This resource is available as of provider version R2.19.2+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Controller Gateway Keepalive config
+        test_gateway_keepalive = aviatrix.AviatrixControllerGatewayKeepaliveConfig("testGatewayKeepalive", keepalive_speed="medium")
+        ```
+
+        ## Import
+
+        **aviatrix_controller_gateway_keepalive_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixControllerGatewayKeepaliveConfig:AviatrixControllerGatewayKeepaliveConfig test_gateway_keepalive 10-11-12-13
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] keepalive_speed: Gateway keepalive speed.
+        :param pulumi.Input[str] keepalive_speed: The gateway keepalive template name. Must be one of "slow", "medium" or "fast". Visit [here](https://docs.aviatrix.com/HowTos/gateway.html#gateway-keepalives) for the complete documentation about the gateway keepalive configuration.
         """
         ...
     @overload
@@ -78,7 +97,26 @@ class AviatrixControllerGatewayKeepaliveConfig(pulumi.CustomResource):
                  args: AviatrixControllerGatewayKeepaliveConfigArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixControllerGatewayKeepaliveConfig resource with the given unique name, props, and options.
+        The **aviatrix_controller_gateway_keepalive_config** resource allows management of an Aviatrix Controller's gateway keepalive template configuration. This resource is available as of provider version R2.19.2+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Controller Gateway Keepalive config
+        test_gateway_keepalive = aviatrix.AviatrixControllerGatewayKeepaliveConfig("testGatewayKeepalive", keepalive_speed="medium")
+        ```
+
+        ## Import
+
+        **aviatrix_controller_gateway_keepalive_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixControllerGatewayKeepaliveConfig:AviatrixControllerGatewayKeepaliveConfig test_gateway_keepalive 10-11-12-13
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixControllerGatewayKeepaliveConfigArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -125,7 +163,7 @@ class AviatrixControllerGatewayKeepaliveConfig(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] keepalive_speed: Gateway keepalive speed.
+        :param pulumi.Input[str] keepalive_speed: The gateway keepalive template name. Must be one of "slow", "medium" or "fast". Visit [here](https://docs.aviatrix.com/HowTos/gateway.html#gateway-keepalives) for the complete documentation about the gateway keepalive configuration.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -138,7 +176,7 @@ class AviatrixControllerGatewayKeepaliveConfig(pulumi.CustomResource):
     @pulumi.getter(name="keepaliveSpeed")
     def keepalive_speed(self) -> pulumi.Output[str]:
         """
-        Gateway keepalive speed.
+        The gateway keepalive template name. Must be one of "slow", "medium" or "fast". Visit [here](https://docs.aviatrix.com/HowTos/gateway.html#gateway-keepalives) for the complete documentation about the gateway keepalive configuration.
         """
         return pulumi.get(self, "keepalive_speed")
 

@@ -18,8 +18,8 @@ class AviatrixGatewayCertificateConfigArgs:
                  ca_private_key: pulumi.Input[str]):
         """
         The set of arguments for constructing a AviatrixGatewayCertificateConfig resource.
-        :param pulumi.Input[str] ca_certificate: CA Certificate.
-        :param pulumi.Input[str] ca_private_key: CA Private Key.
+        :param pulumi.Input[str] ca_certificate: CA Certificate in PEM format. To read certificate from a file please use the built-in `file` function.
+        :param pulumi.Input[str] ca_private_key: CA Private Key. To read the private key from a file please use the built-in `file` function.
         """
         pulumi.set(__self__, "ca_certificate", ca_certificate)
         pulumi.set(__self__, "ca_private_key", ca_private_key)
@@ -28,7 +28,7 @@ class AviatrixGatewayCertificateConfigArgs:
     @pulumi.getter(name="caCertificate")
     def ca_certificate(self) -> pulumi.Input[str]:
         """
-        CA Certificate.
+        CA Certificate in PEM format. To read certificate from a file please use the built-in `file` function.
         """
         return pulumi.get(self, "ca_certificate")
 
@@ -40,7 +40,7 @@ class AviatrixGatewayCertificateConfigArgs:
     @pulumi.getter(name="caPrivateKey")
     def ca_private_key(self) -> pulumi.Input[str]:
         """
-        CA Private Key.
+        CA Private Key. To read the private key from a file please use the built-in `file` function.
         """
         return pulumi.get(self, "ca_private_key")
 
@@ -56,8 +56,8 @@ class _AviatrixGatewayCertificateConfigState:
                  ca_private_key: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixGatewayCertificateConfig resources.
-        :param pulumi.Input[str] ca_certificate: CA Certificate.
-        :param pulumi.Input[str] ca_private_key: CA Private Key.
+        :param pulumi.Input[str] ca_certificate: CA Certificate in PEM format. To read certificate from a file please use the built-in `file` function.
+        :param pulumi.Input[str] ca_private_key: CA Private Key. To read the private key from a file please use the built-in `file` function.
         """
         if ca_certificate is not None:
             pulumi.set(__self__, "ca_certificate", ca_certificate)
@@ -68,7 +68,7 @@ class _AviatrixGatewayCertificateConfigState:
     @pulumi.getter(name="caCertificate")
     def ca_certificate(self) -> Optional[pulumi.Input[str]]:
         """
-        CA Certificate.
+        CA Certificate in PEM format. To read certificate from a file please use the built-in `file` function.
         """
         return pulumi.get(self, "ca_certificate")
 
@@ -80,7 +80,7 @@ class _AviatrixGatewayCertificateConfigState:
     @pulumi.getter(name="caPrivateKey")
     def ca_private_key(self) -> Optional[pulumi.Input[str]]:
         """
-        CA Private Key.
+        CA Private Key. To read the private key from a file please use the built-in `file` function.
         """
         return pulumi.get(self, "ca_private_key")
 
@@ -98,11 +98,32 @@ class AviatrixGatewayCertificateConfig(pulumi.CustomResource):
                  ca_private_key: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixGatewayCertificateConfig resource with the given unique name, props, and options.
+        The **aviatrix_gateway_certificate_config** resource allows the management of Aviatrix [gateway certificate](https://docs.aviatrix.com/HowTos/controller_certificate.html#gateway-certificate-management) configuration. Available as of provider version R2.18.1+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Aviatrix Gateway Certificate Management
+        test_gateway_cert = aviatrix.AviatrixGatewayCertificateConfig("testGatewayCert",
+            ca_certificate=(lambda path: open(path).read())("path/to/CA_cert.pem"),
+            ca_private_key=(lambda path: open(path).read())("path/to/CA_private.key"))
+        ```
+
+        ## Import
+
+        !> **WARNING:** When importing, the provider cannot read your private key or certificate into the state file. After importing, if you do not want to change the values of the CA private key or certificate you must set the attributes `ca_certificate` and `ca_private_key` to the empty string (""). Otherwise, Terraform will see a diff and force replacement. `aviatrix_gateway_certificate_config` can be imported using controller IP with the dots(.) replaces with dashes(-), e.g. controller IP is 10.11.12.13
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixGatewayCertificateConfig:AviatrixGatewayCertificateConfig test 10-11-12-13
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] ca_certificate: CA Certificate.
-        :param pulumi.Input[str] ca_private_key: CA Private Key.
+        :param pulumi.Input[str] ca_certificate: CA Certificate in PEM format. To read certificate from a file please use the built-in `file` function.
+        :param pulumi.Input[str] ca_private_key: CA Private Key. To read the private key from a file please use the built-in `file` function.
         """
         ...
     @overload
@@ -111,7 +132,28 @@ class AviatrixGatewayCertificateConfig(pulumi.CustomResource):
                  args: AviatrixGatewayCertificateConfigArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixGatewayCertificateConfig resource with the given unique name, props, and options.
+        The **aviatrix_gateway_certificate_config** resource allows the management of Aviatrix [gateway certificate](https://docs.aviatrix.com/HowTos/controller_certificate.html#gateway-certificate-management) configuration. Available as of provider version R2.18.1+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Aviatrix Gateway Certificate Management
+        test_gateway_cert = aviatrix.AviatrixGatewayCertificateConfig("testGatewayCert",
+            ca_certificate=(lambda path: open(path).read())("path/to/CA_cert.pem"),
+            ca_private_key=(lambda path: open(path).read())("path/to/CA_private.key"))
+        ```
+
+        ## Import
+
+        !> **WARNING:** When importing, the provider cannot read your private key or certificate into the state file. After importing, if you do not want to change the values of the CA private key or certificate you must set the attributes `ca_certificate` and `ca_private_key` to the empty string (""). Otherwise, Terraform will see a diff and force replacement. `aviatrix_gateway_certificate_config` can be imported using controller IP with the dots(.) replaces with dashes(-), e.g. controller IP is 10.11.12.13
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixGatewayCertificateConfig:AviatrixGatewayCertificateConfig test 10-11-12-13
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixGatewayCertificateConfigArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -143,7 +185,9 @@ class AviatrixGatewayCertificateConfig(pulumi.CustomResource):
             __props__.__dict__["ca_certificate"] = ca_certificate
             if ca_private_key is None and not opts.urn:
                 raise TypeError("Missing required property 'ca_private_key'")
-            __props__.__dict__["ca_private_key"] = ca_private_key
+            __props__.__dict__["ca_private_key"] = None if ca_private_key is None else pulumi.Output.secret(ca_private_key)
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["caPrivateKey"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(AviatrixGatewayCertificateConfig, __self__).__init__(
             'aviatrix:index/aviatrixGatewayCertificateConfig:AviatrixGatewayCertificateConfig',
             resource_name,
@@ -163,8 +207,8 @@ class AviatrixGatewayCertificateConfig(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] ca_certificate: CA Certificate.
-        :param pulumi.Input[str] ca_private_key: CA Private Key.
+        :param pulumi.Input[str] ca_certificate: CA Certificate in PEM format. To read certificate from a file please use the built-in `file` function.
+        :param pulumi.Input[str] ca_private_key: CA Private Key. To read the private key from a file please use the built-in `file` function.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -178,7 +222,7 @@ class AviatrixGatewayCertificateConfig(pulumi.CustomResource):
     @pulumi.getter(name="caCertificate")
     def ca_certificate(self) -> pulumi.Output[str]:
         """
-        CA Certificate.
+        CA Certificate in PEM format. To read certificate from a file please use the built-in `file` function.
         """
         return pulumi.get(self, "ca_certificate")
 
@@ -186,7 +230,7 @@ class AviatrixGatewayCertificateConfig(pulumi.CustomResource):
     @pulumi.getter(name="caPrivateKey")
     def ca_private_key(self) -> pulumi.Output[str]:
         """
-        CA Private Key.
+        CA Private Key. To read the private key from a file please use the built-in `file` function.
         """
         return pulumi.get(self, "ca_private_key")
 

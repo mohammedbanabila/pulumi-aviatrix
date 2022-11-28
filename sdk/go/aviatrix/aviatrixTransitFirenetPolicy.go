@@ -11,12 +11,50 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_transit_firenet_policy** resource allows the creation and management of Aviatrix Transit FireNet policies that determine which resources should be inspected in the Transit FireNet solution.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixTransitFirenetPolicy(ctx, "testTransitFirenetPolicy", &aviatrix.AviatrixTransitFirenetPolicyArgs{
+//				InspectedResourceName:     pulumi.String("SPOKE:spokeGw1"),
+//				TransitFirenetGatewayName: pulumi.String("transitGw1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **transit_firenet_policy** can be imported using the `transit_firenet_gateway_name` and `inspected_resource_name`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixTransitFirenetPolicy:AviatrixTransitFirenetPolicy test transit_firenet_gateway_name~inspected_resource_name
+//
+// ```
 type AviatrixTransitFirenetPolicy struct {
 	pulumi.CustomResourceState
 
-	// Name of the resource to be added to transit firenet policy.
+	// The name of the resource which will be inspected.
 	InspectedResourceName pulumi.StringOutput `pulumi:"inspectedResourceName"`
-	// Name of the transit firenet gateway.
+	// Name of the Transit FireNet-enabled transit gateway. Currently supports AWS and Azure.
 	TransitFirenetGatewayName pulumi.StringOutput `pulumi:"transitFirenetGatewayName"`
 }
 
@@ -56,16 +94,16 @@ func GetAviatrixTransitFirenetPolicy(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixTransitFirenetPolicy resources.
 type aviatrixTransitFirenetPolicyState struct {
-	// Name of the resource to be added to transit firenet policy.
+	// The name of the resource which will be inspected.
 	InspectedResourceName *string `pulumi:"inspectedResourceName"`
-	// Name of the transit firenet gateway.
+	// Name of the Transit FireNet-enabled transit gateway. Currently supports AWS and Azure.
 	TransitFirenetGatewayName *string `pulumi:"transitFirenetGatewayName"`
 }
 
 type AviatrixTransitFirenetPolicyState struct {
-	// Name of the resource to be added to transit firenet policy.
+	// The name of the resource which will be inspected.
 	InspectedResourceName pulumi.StringPtrInput
-	// Name of the transit firenet gateway.
+	// Name of the Transit FireNet-enabled transit gateway. Currently supports AWS and Azure.
 	TransitFirenetGatewayName pulumi.StringPtrInput
 }
 
@@ -74,17 +112,17 @@ func (AviatrixTransitFirenetPolicyState) ElementType() reflect.Type {
 }
 
 type aviatrixTransitFirenetPolicyArgs struct {
-	// Name of the resource to be added to transit firenet policy.
+	// The name of the resource which will be inspected.
 	InspectedResourceName string `pulumi:"inspectedResourceName"`
-	// Name of the transit firenet gateway.
+	// Name of the Transit FireNet-enabled transit gateway. Currently supports AWS and Azure.
 	TransitFirenetGatewayName string `pulumi:"transitFirenetGatewayName"`
 }
 
 // The set of arguments for constructing a AviatrixTransitFirenetPolicy resource.
 type AviatrixTransitFirenetPolicyArgs struct {
-	// Name of the resource to be added to transit firenet policy.
+	// The name of the resource which will be inspected.
 	InspectedResourceName pulumi.StringInput
-	// Name of the transit firenet gateway.
+	// Name of the Transit FireNet-enabled transit gateway. Currently supports AWS and Azure.
 	TransitFirenetGatewayName pulumi.StringInput
 }
 
@@ -175,12 +213,12 @@ func (o AviatrixTransitFirenetPolicyOutput) ToAviatrixTransitFirenetPolicyOutput
 	return o
 }
 
-// Name of the resource to be added to transit firenet policy.
+// The name of the resource which will be inspected.
 func (o AviatrixTransitFirenetPolicyOutput) InspectedResourceName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixTransitFirenetPolicy) pulumi.StringOutput { return v.InspectedResourceName }).(pulumi.StringOutput)
 }
 
-// Name of the transit firenet gateway.
+// Name of the Transit FireNet-enabled transit gateway. Currently supports AWS and Azure.
 func (o AviatrixTransitFirenetPolicyOutput) TransitFirenetGatewayName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixTransitFirenetPolicy) pulumi.StringOutput { return v.TransitFirenetGatewayName }).(pulumi.StringOutput)
 }

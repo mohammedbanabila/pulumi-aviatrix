@@ -4,6 +4,29 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_segmentation_security_domain** resource handles creation of [Transit Segmentation](https://docs.aviatrix.com/HowTos/transit_segmentation_faq.html) Security Domains.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Segmentation Security Domain
+ * const testSegmentationSecurityDomain = new aviatrix.AviatrixSegmentationSecurityDomain("test_segmentation_security_domain", {
+ *     domainName: "domain-a",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **aviatrix_segmentation_security_domain** can be imported using the `domain_name`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixSegmentationSecurityDomain:AviatrixSegmentationSecurityDomain test domain_name
+ * ```
+ */
 export class AviatrixSegmentationSecurityDomain extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixSegmentationSecurityDomain resource's state with the given name, ID, and optional extra
@@ -33,7 +56,7 @@ export class AviatrixSegmentationSecurityDomain extends pulumi.CustomResource {
     }
 
     /**
-     * Security domain name.
+     * Name of the Security Domain.
      */
     public readonly domainName!: pulumi.Output<string>;
 
@@ -68,7 +91,7 @@ export class AviatrixSegmentationSecurityDomain extends pulumi.CustomResource {
  */
 export interface AviatrixSegmentationSecurityDomainState {
     /**
-     * Security domain name.
+     * Name of the Security Domain.
      */
     domainName?: pulumi.Input<string>;
 }
@@ -78,7 +101,7 @@ export interface AviatrixSegmentationSecurityDomainState {
  */
 export interface AviatrixSegmentationSecurityDomainArgs {
     /**
-     * Security domain name.
+     * Name of the Security Domain.
      */
     domainName: pulumi.Input<string>;
 }

@@ -19,9 +19,9 @@ class AviatrixProxyConfigArgs:
                  proxy_ca_certificate: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a AviatrixProxyConfig resource.
-        :param pulumi.Input[str] http_proxy: http proxy URL.
-        :param pulumi.Input[str] https_proxy: https proxy URL.
-        :param pulumi.Input[str] proxy_ca_certificate: Server CA Certificate file.
+        :param pulumi.Input[str] http_proxy: Http proxy URL.
+        :param pulumi.Input[str] https_proxy: Https proxy URL.
+        :param pulumi.Input[str] proxy_ca_certificate: Server CA Certificate file. Use the `file` function to read from a file.
         """
         pulumi.set(__self__, "http_proxy", http_proxy)
         pulumi.set(__self__, "https_proxy", https_proxy)
@@ -32,7 +32,7 @@ class AviatrixProxyConfigArgs:
     @pulumi.getter(name="httpProxy")
     def http_proxy(self) -> pulumi.Input[str]:
         """
-        http proxy URL.
+        Http proxy URL.
         """
         return pulumi.get(self, "http_proxy")
 
@@ -44,7 +44,7 @@ class AviatrixProxyConfigArgs:
     @pulumi.getter(name="httpsProxy")
     def https_proxy(self) -> pulumi.Input[str]:
         """
-        https proxy URL.
+        Https proxy URL.
         """
         return pulumi.get(self, "https_proxy")
 
@@ -56,7 +56,7 @@ class AviatrixProxyConfigArgs:
     @pulumi.getter(name="proxyCaCertificate")
     def proxy_ca_certificate(self) -> Optional[pulumi.Input[str]]:
         """
-        Server CA Certificate file.
+        Server CA Certificate file. Use the `file` function to read from a file.
         """
         return pulumi.get(self, "proxy_ca_certificate")
 
@@ -73,9 +73,9 @@ class _AviatrixProxyConfigState:
                  proxy_ca_certificate: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixProxyConfig resources.
-        :param pulumi.Input[str] http_proxy: http proxy URL.
-        :param pulumi.Input[str] https_proxy: https proxy URL.
-        :param pulumi.Input[str] proxy_ca_certificate: Server CA Certificate file.
+        :param pulumi.Input[str] http_proxy: Http proxy URL.
+        :param pulumi.Input[str] https_proxy: Https proxy URL.
+        :param pulumi.Input[str] proxy_ca_certificate: Server CA Certificate file. Use the `file` function to read from a file.
         """
         if http_proxy is not None:
             pulumi.set(__self__, "http_proxy", http_proxy)
@@ -88,7 +88,7 @@ class _AviatrixProxyConfigState:
     @pulumi.getter(name="httpProxy")
     def http_proxy(self) -> Optional[pulumi.Input[str]]:
         """
-        http proxy URL.
+        Http proxy URL.
         """
         return pulumi.get(self, "http_proxy")
 
@@ -100,7 +100,7 @@ class _AviatrixProxyConfigState:
     @pulumi.getter(name="httpsProxy")
     def https_proxy(self) -> Optional[pulumi.Input[str]]:
         """
-        https proxy URL.
+        Https proxy URL.
         """
         return pulumi.get(self, "https_proxy")
 
@@ -112,7 +112,7 @@ class _AviatrixProxyConfigState:
     @pulumi.getter(name="proxyCaCertificate")
     def proxy_ca_certificate(self) -> Optional[pulumi.Input[str]]:
         """
-        Server CA Certificate file.
+        Server CA Certificate file. Use the `file` function to read from a file.
         """
         return pulumi.get(self, "proxy_ca_certificate")
 
@@ -131,12 +131,34 @@ class AviatrixProxyConfig(pulumi.CustomResource):
                  proxy_ca_certificate: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixProxyConfig resource with the given unique name, props, and options.
+        The **aviatrix_proxy_config** resource allows management of an Aviatrix Controller's proxy configurations.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Controller Proxy Config
+        test_proxy_config = aviatrix.AviatrixProxyConfig("testProxyConfig",
+            http_proxy="172.31.52.145:3127",
+            https_proxy="172.31.52.145:3129",
+            proxy_ca_certificate=(lambda path: open(path).read())("/path/to/ca.pem"))
+        ```
+
+        ## Import
+
+        **controller_proxy_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixProxyConfig:AviatrixProxyConfig test 10-11-12-13
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] http_proxy: http proxy URL.
-        :param pulumi.Input[str] https_proxy: https proxy URL.
-        :param pulumi.Input[str] proxy_ca_certificate: Server CA Certificate file.
+        :param pulumi.Input[str] http_proxy: Http proxy URL.
+        :param pulumi.Input[str] https_proxy: Https proxy URL.
+        :param pulumi.Input[str] proxy_ca_certificate: Server CA Certificate file. Use the `file` function to read from a file.
         """
         ...
     @overload
@@ -145,7 +167,29 @@ class AviatrixProxyConfig(pulumi.CustomResource):
                  args: AviatrixProxyConfigArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixProxyConfig resource with the given unique name, props, and options.
+        The **aviatrix_proxy_config** resource allows management of an Aviatrix Controller's proxy configurations.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Controller Proxy Config
+        test_proxy_config = aviatrix.AviatrixProxyConfig("testProxyConfig",
+            http_proxy="172.31.52.145:3127",
+            https_proxy="172.31.52.145:3129",
+            proxy_ca_certificate=(lambda path: open(path).read())("/path/to/ca.pem"))
+        ```
+
+        ## Import
+
+        **controller_proxy_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixProxyConfig:AviatrixProxyConfig test 10-11-12-13
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixProxyConfigArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -200,9 +244,9 @@ class AviatrixProxyConfig(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] http_proxy: http proxy URL.
-        :param pulumi.Input[str] https_proxy: https proxy URL.
-        :param pulumi.Input[str] proxy_ca_certificate: Server CA Certificate file.
+        :param pulumi.Input[str] http_proxy: Http proxy URL.
+        :param pulumi.Input[str] https_proxy: Https proxy URL.
+        :param pulumi.Input[str] proxy_ca_certificate: Server CA Certificate file. Use the `file` function to read from a file.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -217,7 +261,7 @@ class AviatrixProxyConfig(pulumi.CustomResource):
     @pulumi.getter(name="httpProxy")
     def http_proxy(self) -> pulumi.Output[str]:
         """
-        http proxy URL.
+        Http proxy URL.
         """
         return pulumi.get(self, "http_proxy")
 
@@ -225,7 +269,7 @@ class AviatrixProxyConfig(pulumi.CustomResource):
     @pulumi.getter(name="httpsProxy")
     def https_proxy(self) -> pulumi.Output[str]:
         """
-        https proxy URL.
+        Https proxy URL.
         """
         return pulumi.get(self, "https_proxy")
 
@@ -233,7 +277,7 @@ class AviatrixProxyConfig(pulumi.CustomResource):
     @pulumi.getter(name="proxyCaCertificate")
     def proxy_ca_certificate(self) -> pulumi.Output[Optional[str]]:
         """
-        Server CA Certificate file.
+        Server CA Certificate file. Use the `file` function to read from a file.
         """
         return pulumi.get(self, "proxy_ca_certificate")
 

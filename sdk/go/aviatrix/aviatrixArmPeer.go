@@ -11,6 +11,50 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_arm_peer** resource allows the creation and management of Aviatrix ARM peerings.
+//
+// !> **WARNING:** The `AviatrixArmPeer` resource is deprecated as of **Release 2.12**. It is currently kept for backward-compatibility and will be removed in the future. Please use the Azure peer resource instead. If this is already in the state, please remove it from the state file and import as `AviatrixAzurePeer`.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixArmPeer(ctx, "testArmpeer", &aviatrix.AviatrixArmPeerArgs{
+//				AccountName1:           pulumi.String("test1-account"),
+//				AccountName2:           pulumi.String("test2-account"),
+//				VnetNameResourceGroup1: pulumi.String("vpc-abcd1234"),
+//				VnetNameResourceGroup2: pulumi.String("vpc-rdef3333"),
+//				VnetReg1:               pulumi.String("us-east-1"),
+//				VnetReg2:               pulumi.String("us-west-1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **arm_peer** can be imported using the `vnet_name_resource_group1` and `vnet_name_resource_group2`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixArmPeer:AviatrixArmPeer test vnet_name_resource_group1~vnet_name_resource_group2
+//
+// ```
 type AviatrixArmPeer struct {
 	pulumi.CustomResourceState
 
@@ -22,13 +66,13 @@ type AviatrixArmPeer struct {
 	VnetCidr1s pulumi.StringArrayOutput `pulumi:"vnetCidr1s"`
 	// List of VNet CIDR of vnet_name_resource_group2.
 	VnetCidr2s pulumi.StringArrayOutput `pulumi:"vnetCidr2s"`
-	// VNet-Name of Azure cloud.
+	// VNet-Name of Azure cloud. Example: "VNet_Name:Resource_Group_Name".
 	VnetNameResourceGroup1 pulumi.StringOutput `pulumi:"vnetNameResourceGroup1"`
-	// VNet-Name of Azure cloud.
+	// VNet-Name of Azure cloud. Example: "VNet_Name:Resource_Group_Name".
 	VnetNameResourceGroup2 pulumi.StringOutput `pulumi:"vnetNameResourceGroup2"`
-	// Region of Azure cloud.
+	// Region of Azure cloud. Example: "East US 2".
 	VnetReg1 pulumi.StringOutput `pulumi:"vnetReg1"`
-	// Region of Azure cloud.
+	// Region of Azure cloud. Example: "East US 2".
 	VnetReg2 pulumi.StringOutput `pulumi:"vnetReg2"`
 }
 
@@ -88,13 +132,13 @@ type aviatrixArmPeerState struct {
 	VnetCidr1s []string `pulumi:"vnetCidr1s"`
 	// List of VNet CIDR of vnet_name_resource_group2.
 	VnetCidr2s []string `pulumi:"vnetCidr2s"`
-	// VNet-Name of Azure cloud.
+	// VNet-Name of Azure cloud. Example: "VNet_Name:Resource_Group_Name".
 	VnetNameResourceGroup1 *string `pulumi:"vnetNameResourceGroup1"`
-	// VNet-Name of Azure cloud.
+	// VNet-Name of Azure cloud. Example: "VNet_Name:Resource_Group_Name".
 	VnetNameResourceGroup2 *string `pulumi:"vnetNameResourceGroup2"`
-	// Region of Azure cloud.
+	// Region of Azure cloud. Example: "East US 2".
 	VnetReg1 *string `pulumi:"vnetReg1"`
-	// Region of Azure cloud.
+	// Region of Azure cloud. Example: "East US 2".
 	VnetReg2 *string `pulumi:"vnetReg2"`
 }
 
@@ -107,13 +151,13 @@ type AviatrixArmPeerState struct {
 	VnetCidr1s pulumi.StringArrayInput
 	// List of VNet CIDR of vnet_name_resource_group2.
 	VnetCidr2s pulumi.StringArrayInput
-	// VNet-Name of Azure cloud.
+	// VNet-Name of Azure cloud. Example: "VNet_Name:Resource_Group_Name".
 	VnetNameResourceGroup1 pulumi.StringPtrInput
-	// VNet-Name of Azure cloud.
+	// VNet-Name of Azure cloud. Example: "VNet_Name:Resource_Group_Name".
 	VnetNameResourceGroup2 pulumi.StringPtrInput
-	// Region of Azure cloud.
+	// Region of Azure cloud. Example: "East US 2".
 	VnetReg1 pulumi.StringPtrInput
-	// Region of Azure cloud.
+	// Region of Azure cloud. Example: "East US 2".
 	VnetReg2 pulumi.StringPtrInput
 }
 
@@ -126,13 +170,13 @@ type aviatrixArmPeerArgs struct {
 	AccountName1 string `pulumi:"accountName1"`
 	// This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.
 	AccountName2 string `pulumi:"accountName2"`
-	// VNet-Name of Azure cloud.
+	// VNet-Name of Azure cloud. Example: "VNet_Name:Resource_Group_Name".
 	VnetNameResourceGroup1 string `pulumi:"vnetNameResourceGroup1"`
-	// VNet-Name of Azure cloud.
+	// VNet-Name of Azure cloud. Example: "VNet_Name:Resource_Group_Name".
 	VnetNameResourceGroup2 string `pulumi:"vnetNameResourceGroup2"`
-	// Region of Azure cloud.
+	// Region of Azure cloud. Example: "East US 2".
 	VnetReg1 string `pulumi:"vnetReg1"`
-	// Region of Azure cloud.
+	// Region of Azure cloud. Example: "East US 2".
 	VnetReg2 string `pulumi:"vnetReg2"`
 }
 
@@ -142,13 +186,13 @@ type AviatrixArmPeerArgs struct {
 	AccountName1 pulumi.StringInput
 	// This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.
 	AccountName2 pulumi.StringInput
-	// VNet-Name of Azure cloud.
+	// VNet-Name of Azure cloud. Example: "VNet_Name:Resource_Group_Name".
 	VnetNameResourceGroup1 pulumi.StringInput
-	// VNet-Name of Azure cloud.
+	// VNet-Name of Azure cloud. Example: "VNet_Name:Resource_Group_Name".
 	VnetNameResourceGroup2 pulumi.StringInput
-	// Region of Azure cloud.
+	// Region of Azure cloud. Example: "East US 2".
 	VnetReg1 pulumi.StringInput
-	// Region of Azure cloud.
+	// Region of Azure cloud. Example: "East US 2".
 	VnetReg2 pulumi.StringInput
 }
 
@@ -259,22 +303,22 @@ func (o AviatrixArmPeerOutput) VnetCidr2s() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixArmPeer) pulumi.StringArrayOutput { return v.VnetCidr2s }).(pulumi.StringArrayOutput)
 }
 
-// VNet-Name of Azure cloud.
+// VNet-Name of Azure cloud. Example: "VNet_Name:Resource_Group_Name".
 func (o AviatrixArmPeerOutput) VnetNameResourceGroup1() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixArmPeer) pulumi.StringOutput { return v.VnetNameResourceGroup1 }).(pulumi.StringOutput)
 }
 
-// VNet-Name of Azure cloud.
+// VNet-Name of Azure cloud. Example: "VNet_Name:Resource_Group_Name".
 func (o AviatrixArmPeerOutput) VnetNameResourceGroup2() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixArmPeer) pulumi.StringOutput { return v.VnetNameResourceGroup2 }).(pulumi.StringOutput)
 }
 
-// Region of Azure cloud.
+// Region of Azure cloud. Example: "East US 2".
 func (o AviatrixArmPeerOutput) VnetReg1() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixArmPeer) pulumi.StringOutput { return v.VnetReg1 }).(pulumi.StringOutput)
 }
 
-// Region of Azure cloud.
+// Region of Azure cloud. Example: "East US 2".
 func (o AviatrixArmPeerOutput) VnetReg2() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixArmPeer) pulumi.StringOutput { return v.VnetReg2 }).(pulumi.StringOutput)
 }

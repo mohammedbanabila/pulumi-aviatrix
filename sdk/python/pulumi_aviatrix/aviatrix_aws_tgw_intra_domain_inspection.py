@@ -19,9 +19,9 @@ class AviatrixAwsTgwIntraDomainInspectionArgs:
                  tgw_name: pulumi.Input[str]):
         """
         The set of arguments for constructing a AviatrixAwsTgwIntraDomainInspection resource.
-        :param pulumi.Input[str] firewall_domain_name: Firewall domain name.
-        :param pulumi.Input[str] route_domain_name: Route domain name.
-        :param pulumi.Input[str] tgw_name: AWS TGW name.
+        :param pulumi.Input[str] firewall_domain_name: The name of a firewall security domain.
+        :param pulumi.Input[str] route_domain_name: The name of a security domain.
+        :param pulumi.Input[str] tgw_name: The AWS TGW name.
         """
         pulumi.set(__self__, "firewall_domain_name", firewall_domain_name)
         pulumi.set(__self__, "route_domain_name", route_domain_name)
@@ -31,7 +31,7 @@ class AviatrixAwsTgwIntraDomainInspectionArgs:
     @pulumi.getter(name="firewallDomainName")
     def firewall_domain_name(self) -> pulumi.Input[str]:
         """
-        Firewall domain name.
+        The name of a firewall security domain.
         """
         return pulumi.get(self, "firewall_domain_name")
 
@@ -43,7 +43,7 @@ class AviatrixAwsTgwIntraDomainInspectionArgs:
     @pulumi.getter(name="routeDomainName")
     def route_domain_name(self) -> pulumi.Input[str]:
         """
-        Route domain name.
+        The name of a security domain.
         """
         return pulumi.get(self, "route_domain_name")
 
@@ -55,7 +55,7 @@ class AviatrixAwsTgwIntraDomainInspectionArgs:
     @pulumi.getter(name="tgwName")
     def tgw_name(self) -> pulumi.Input[str]:
         """
-        AWS TGW name.
+        The AWS TGW name.
         """
         return pulumi.get(self, "tgw_name")
 
@@ -72,9 +72,9 @@ class _AviatrixAwsTgwIntraDomainInspectionState:
                  tgw_name: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixAwsTgwIntraDomainInspection resources.
-        :param pulumi.Input[str] firewall_domain_name: Firewall domain name.
-        :param pulumi.Input[str] route_domain_name: Route domain name.
-        :param pulumi.Input[str] tgw_name: AWS TGW name.
+        :param pulumi.Input[str] firewall_domain_name: The name of a firewall security domain.
+        :param pulumi.Input[str] route_domain_name: The name of a security domain.
+        :param pulumi.Input[str] tgw_name: The AWS TGW name.
         """
         if firewall_domain_name is not None:
             pulumi.set(__self__, "firewall_domain_name", firewall_domain_name)
@@ -87,7 +87,7 @@ class _AviatrixAwsTgwIntraDomainInspectionState:
     @pulumi.getter(name="firewallDomainName")
     def firewall_domain_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Firewall domain name.
+        The name of a firewall security domain.
         """
         return pulumi.get(self, "firewall_domain_name")
 
@@ -99,7 +99,7 @@ class _AviatrixAwsTgwIntraDomainInspectionState:
     @pulumi.getter(name="routeDomainName")
     def route_domain_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Route domain name.
+        The name of a security domain.
         """
         return pulumi.get(self, "route_domain_name")
 
@@ -111,7 +111,7 @@ class _AviatrixAwsTgwIntraDomainInspectionState:
     @pulumi.getter(name="tgwName")
     def tgw_name(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS TGW name.
+        The AWS TGW name.
         """
         return pulumi.get(self, "tgw_name")
 
@@ -130,12 +130,34 @@ class AviatrixAwsTgwIntraDomainInspection(pulumi.CustomResource):
                  tgw_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixAwsTgwIntraDomainInspection resource with the given unique name, props, and options.
+        The **aviatrix_aws_tgw_intra_domain_inspection** resource allows the creation and management of intra domain inspection of security domains in an AWS TGW.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Intra Domain Inspection
+        test = aviatrix.AviatrixAwsTgwIntraDomainInspection("test",
+            firewall_domain_name="firewall-domain",
+            route_domain_name="mysd",
+            tgw_name="test-AWS-TGW")
+        ```
+
+        ## Import
+
+        **aviatrix_aws_tgw_intra_domain_inspection** can be imported using the `tgw_name` and `route_domain_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAwsTgwIntraDomainInspection:AviatrixAwsTgwIntraDomainInspection test tgw_name~route_domain_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] firewall_domain_name: Firewall domain name.
-        :param pulumi.Input[str] route_domain_name: Route domain name.
-        :param pulumi.Input[str] tgw_name: AWS TGW name.
+        :param pulumi.Input[str] firewall_domain_name: The name of a firewall security domain.
+        :param pulumi.Input[str] route_domain_name: The name of a security domain.
+        :param pulumi.Input[str] tgw_name: The AWS TGW name.
         """
         ...
     @overload
@@ -144,7 +166,29 @@ class AviatrixAwsTgwIntraDomainInspection(pulumi.CustomResource):
                  args: AviatrixAwsTgwIntraDomainInspectionArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixAwsTgwIntraDomainInspection resource with the given unique name, props, and options.
+        The **aviatrix_aws_tgw_intra_domain_inspection** resource allows the creation and management of intra domain inspection of security domains in an AWS TGW.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Intra Domain Inspection
+        test = aviatrix.AviatrixAwsTgwIntraDomainInspection("test",
+            firewall_domain_name="firewall-domain",
+            route_domain_name="mysd",
+            tgw_name="test-AWS-TGW")
+        ```
+
+        ## Import
+
+        **aviatrix_aws_tgw_intra_domain_inspection** can be imported using the `tgw_name` and `route_domain_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAwsTgwIntraDomainInspection:AviatrixAwsTgwIntraDomainInspection test tgw_name~route_domain_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixAwsTgwIntraDomainInspectionArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -201,9 +245,9 @@ class AviatrixAwsTgwIntraDomainInspection(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] firewall_domain_name: Firewall domain name.
-        :param pulumi.Input[str] route_domain_name: Route domain name.
-        :param pulumi.Input[str] tgw_name: AWS TGW name.
+        :param pulumi.Input[str] firewall_domain_name: The name of a firewall security domain.
+        :param pulumi.Input[str] route_domain_name: The name of a security domain.
+        :param pulumi.Input[str] tgw_name: The AWS TGW name.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -218,7 +262,7 @@ class AviatrixAwsTgwIntraDomainInspection(pulumi.CustomResource):
     @pulumi.getter(name="firewallDomainName")
     def firewall_domain_name(self) -> pulumi.Output[str]:
         """
-        Firewall domain name.
+        The name of a firewall security domain.
         """
         return pulumi.get(self, "firewall_domain_name")
 
@@ -226,7 +270,7 @@ class AviatrixAwsTgwIntraDomainInspection(pulumi.CustomResource):
     @pulumi.getter(name="routeDomainName")
     def route_domain_name(self) -> pulumi.Output[str]:
         """
-        Route domain name.
+        The name of a security domain.
         """
         return pulumi.get(self, "route_domain_name")
 
@@ -234,7 +278,7 @@ class AviatrixAwsTgwIntraDomainInspection(pulumi.CustomResource):
     @pulumi.getter(name="tgwName")
     def tgw_name(self) -> pulumi.Output[str]:
         """
-        AWS TGW name.
+        The AWS TGW name.
         """
         return pulumi.get(self, "tgw_name")
 

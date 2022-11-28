@@ -13,8 +13,17 @@ namespace Pulumi.Aviatrix.Outputs
     [OutputType]
     public sealed class GetAviatrixVpcPrivateSubnetResult
     {
+        /// <summary>
+        /// Private subnet CIDR.
+        /// </summary>
         public readonly string Cidr;
+        /// <summary>
+        /// Name of the Aviatrix VPC.
+        /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// Private subnet ID.
+        /// </summary>
         public readonly string SubnetId;
 
         [OutputConstructor]

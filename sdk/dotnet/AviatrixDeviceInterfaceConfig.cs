@@ -9,23 +9,54 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_device_interface_config** resource allows the configuration of the WAN primary interface and IP for a device, for use in CloudN.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Configure the primary WAN interface and IP for a device.
+    ///     var testDeviceInterfaceConfig = new Aviatrix.AviatrixDeviceInterfaceConfig("testDeviceInterfaceConfig", new()
+    ///     {
+    ///         DeviceName = "test-device",
+    ///         WanPrimaryInterface = "eth0",
+    ///         WanPrimaryInterfacePublicIp = "181.12.43.21",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **device_interface_config** can be imported using the `device_name`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixDeviceInterfaceConfig:AviatrixDeviceInterfaceConfig test device_name
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixDeviceInterfaceConfig:AviatrixDeviceInterfaceConfig")]
     public partial class AviatrixDeviceInterfaceConfig : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Name of device.
+        /// Name of the device.
         /// </summary>
         [Output("deviceName")]
         public Output<string> DeviceName { get; private set; } = null!;
 
         /// <summary>
-        /// WAN primary interface of the device.
+        /// Name of the WAN primary interface.
         /// </summary>
         [Output("wanPrimaryInterface")]
         public Output<string> WanPrimaryInterface { get; private set; } = null!;
 
         /// <summary>
-        /// WAN primary interface public IP address.
+        /// The WAN Primary interface public IP.
         /// </summary>
         [Output("wanPrimaryInterfacePublicIp")]
         public Output<string> WanPrimaryInterfacePublicIp { get; private set; } = null!;
@@ -78,19 +109,19 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixDeviceInterfaceConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Name of device.
+        /// Name of the device.
         /// </summary>
         [Input("deviceName", required: true)]
         public Input<string> DeviceName { get; set; } = null!;
 
         /// <summary>
-        /// WAN primary interface of the device.
+        /// Name of the WAN primary interface.
         /// </summary>
         [Input("wanPrimaryInterface", required: true)]
         public Input<string> WanPrimaryInterface { get; set; } = null!;
 
         /// <summary>
-        /// WAN primary interface public IP address.
+        /// The WAN Primary interface public IP.
         /// </summary>
         [Input("wanPrimaryInterfacePublicIp", required: true)]
         public Input<string> WanPrimaryInterfacePublicIp { get; set; } = null!;
@@ -104,19 +135,19 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixDeviceInterfaceConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Name of device.
+        /// Name of the device.
         /// </summary>
         [Input("deviceName")]
         public Input<string>? DeviceName { get; set; }
 
         /// <summary>
-        /// WAN primary interface of the device.
+        /// Name of the WAN primary interface.
         /// </summary>
         [Input("wanPrimaryInterface")]
         public Input<string>? WanPrimaryInterface { get; set; }
 
         /// <summary>
-        /// WAN primary interface public IP address.
+        /// The WAN Primary interface public IP.
         /// </summary>
         [Input("wanPrimaryInterfacePublicIp")]
         public Input<string>? WanPrimaryInterfacePublicIp { get; set; }

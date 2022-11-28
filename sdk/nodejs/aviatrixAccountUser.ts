@@ -4,6 +4,33 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_account_user** resource allows the creation and management of Aviatrix user accounts.
+ *
+ * > **NOTE:** With the release of Controller 5.4 (compatible with Aviatrix provider R2.13), Role-Based Access Control (RBAC) is now integrated into the Accounts workflow. Any **aviatrix_account_user** created in 5.3 by default will have admin privileges (attached to the 'admin' RBAC permission group). In 5.4, any new account users created will no longer have the option to specify an `accountName`, but rather have the option to attach the user to specific RBAC groups through the **aviatrix_rbac_group_user_attachment** resource for more granular security control. Account users created in 5.4 will have minimal access (read_only) unless otherwise specified in the RBAC group permissions that the users are attached to.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix User Account
+ * const testAccountuser = new aviatrix.AviatrixAccountUser("test_accountuser", {
+ *     email: "username1@testdomain.com",
+ *     password: "passwordforuser1-1234",
+ *     username: "username1",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **account_user** can be imported using the `username` (when doing import, need to leave `password` argument blank), e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixAccountUser:AviatrixAccountUser test username
+ * ```
+ */
 export class AviatrixAccountUser extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixAccountUser resource's state with the given name, ID, and optional extra
@@ -37,12 +64,11 @@ export class AviatrixAccountUser extends pulumi.CustomResource {
      */
     public readonly email!: pulumi.Output<string>;
     /**
-     * Login password for the account user to be created.
+     * Login password for the account user to be created. If password is changed, current account will be destroyed and a new account will be created.
      */
     public readonly password!: pulumi.Output<string>;
     /**
-     * Name of account user to be created. It can only include alphanumeric characters(lower case only), hyphens, dots or
-     * underscores. 1 to 80 in length. No spaces are allowed.
+     * Name of account user to be created. It can only include alphanumeric characters(lower case only), hyphens, dots or underscores. 1 to 80 in length. No spaces are allowed.
      */
     public readonly username!: pulumi.Output<string>;
 
@@ -74,10 +100,12 @@ export class AviatrixAccountUser extends pulumi.CustomResource {
                 throw new Error("Missing required property 'username'");
             }
             resourceInputs["email"] = args ? args.email : undefined;
-            resourceInputs["password"] = args ? args.password : undefined;
+            resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
             resourceInputs["username"] = args ? args.username : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["password"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(AviatrixAccountUser.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -91,12 +119,11 @@ export interface AviatrixAccountUserState {
      */
     email?: pulumi.Input<string>;
     /**
-     * Login password for the account user to be created.
+     * Login password for the account user to be created. If password is changed, current account will be destroyed and a new account will be created.
      */
     password?: pulumi.Input<string>;
     /**
-     * Name of account user to be created. It can only include alphanumeric characters(lower case only), hyphens, dots or
-     * underscores. 1 to 80 in length. No spaces are allowed.
+     * Name of account user to be created. It can only include alphanumeric characters(lower case only), hyphens, dots or underscores. 1 to 80 in length. No spaces are allowed.
      */
     username?: pulumi.Input<string>;
 }
@@ -110,12 +137,11 @@ export interface AviatrixAccountUserArgs {
      */
     email: pulumi.Input<string>;
     /**
-     * Login password for the account user to be created.
+     * Login password for the account user to be created. If password is changed, current account will be destroyed and a new account will be created.
      */
     password: pulumi.Input<string>;
     /**
-     * Name of account user to be created. It can only include alphanumeric characters(lower case only), hyphens, dots or
-     * underscores. 1 to 80 in length. No spaces are allowed.
+     * Name of account user to be created. It can only include alphanumeric characters(lower case only), hyphens, dots or underscores. 1 to 80 in length. No spaces are allowed.
      */
     username: pulumi.Input<string>;
 }

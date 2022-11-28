@@ -10,6 +10,33 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_spoke_gateway_inspection_subnets** data source provides all subnets available for the subnet inspection feature.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err = aviatrix.GetAviatrixSpokeGatewayInspectionSubnets(ctx, &GetAviatrixSpokeGatewayInspectionSubnetsArgs{
+//				GwName: "gatewayname",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 func GetAviatrixSpokeGatewayInspectionSubnets(ctx *pulumi.Context, args *GetAviatrixSpokeGatewayInspectionSubnetsArgs, opts ...pulumi.InvokeOption) (*GetAviatrixSpokeGatewayInspectionSubnetsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetAviatrixSpokeGatewayInspectionSubnetsResult
@@ -22,6 +49,7 @@ func GetAviatrixSpokeGatewayInspectionSubnets(ctx *pulumi.Context, args *GetAvia
 
 // A collection of arguments for invoking getAviatrixSpokeGatewayInspectionSubnets.
 type GetAviatrixSpokeGatewayInspectionSubnetsArgs struct {
+	// Spoke gateway name.
 	GwName string `pulumi:"gwName"`
 }
 
@@ -29,7 +57,8 @@ type GetAviatrixSpokeGatewayInspectionSubnetsArgs struct {
 type GetAviatrixSpokeGatewayInspectionSubnetsResult struct {
 	GwName string `pulumi:"gwName"`
 	// The provider-assigned unique ID for this managed resource.
-	Id                    string   `pulumi:"id"`
+	Id string `pulumi:"id"`
+	// The list of all subnets available for the subnet inspection feature. This attribute is only supported for Azure.
 	SubnetsForInspections []string `pulumi:"subnetsForInspections"`
 }
 
@@ -48,6 +77,7 @@ func GetAviatrixSpokeGatewayInspectionSubnetsOutput(ctx *pulumi.Context, args Ge
 
 // A collection of arguments for invoking getAviatrixSpokeGatewayInspectionSubnets.
 type GetAviatrixSpokeGatewayInspectionSubnetsOutputArgs struct {
+	// Spoke gateway name.
 	GwName pulumi.StringInput `pulumi:"gwName"`
 }
 
@@ -79,6 +109,7 @@ func (o GetAviatrixSpokeGatewayInspectionSubnetsResultOutput) Id() pulumi.String
 	return o.ApplyT(func(v GetAviatrixSpokeGatewayInspectionSubnetsResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
+// The list of all subnets available for the subnet inspection feature. This attribute is only supported for Azure.
 func (o GetAviatrixSpokeGatewayInspectionSubnetsResultOutput) SubnetsForInspections() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetAviatrixSpokeGatewayInspectionSubnetsResult) []string { return v.SubnetsForInspections }).(pulumi.StringArrayOutput)
 }

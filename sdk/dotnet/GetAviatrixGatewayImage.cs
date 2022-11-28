@@ -11,19 +11,39 @@ namespace Pulumi.Aviatrix
 {
     public static class GetAviatrixGatewayImage
     {
+        /// <summary>
+        /// The **aviatrix_gateway_image** data source provides the current image version that pairs with the given software version
+        /// and cloud type.
+        /// 
+        /// This data source is useful for getting the correct image_version for a gateway when upgrading the software_version of
+        /// the gateway.
+        /// </summary>
         public static Task<GetAviatrixGatewayImageResult> InvokeAsync(GetAviatrixGatewayImageArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAviatrixGatewayImageResult>("aviatrix:index/getAviatrixGatewayImage:getAviatrixGatewayImage", args ?? new GetAviatrixGatewayImageArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAviatrixGatewayImageResult>("aviatrix:index/getAviatrixGatewayImage:getAviatrixGatewayImage", args ?? new GetAviatrixGatewayImageArgs(), options.WithDefaults());
 
+        /// <summary>
+        /// The **aviatrix_gateway_image** data source provides the current image version that pairs with the given software version
+        /// and cloud type.
+        /// 
+        /// This data source is useful for getting the correct image_version for a gateway when upgrading the software_version of
+        /// the gateway.
+        /// </summary>
         public static Output<GetAviatrixGatewayImageResult> Invoke(GetAviatrixGatewayImageInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAviatrixGatewayImageResult>("aviatrix:index/getAviatrixGatewayImage:getAviatrixGatewayImage", args ?? new GetAviatrixGatewayImageInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAviatrixGatewayImageResult>("aviatrix:index/getAviatrixGatewayImage:getAviatrixGatewayImage", args ?? new GetAviatrixGatewayImageInvokeArgs(), options.WithDefaults());
     }
 
 
     public sealed class GetAviatrixGatewayImageArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// Cloud type. Type: Integer. Example: 1 (AWS)
+        /// </summary>
         [Input("cloudType", required: true)]
         public int CloudType { get; set; }
 
+        /// <summary>
+        /// Software version. Type: String. Example: "6.4.2487"
+        /// </summary>
         [Input("softwareVersion", required: true)]
         public string SoftwareVersion { get; set; } = null!;
 
@@ -35,9 +55,15 @@ namespace Pulumi.Aviatrix
 
     public sealed class GetAviatrixGatewayImageInvokeArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// Cloud type. Type: Integer. Example: 1 (AWS)
+        /// </summary>
         [Input("cloudType", required: true)]
         public Input<int> CloudType { get; set; } = null!;
 
+        /// <summary>
+        /// Software version. Type: String. Example: "6.4.2487"
+        /// </summary>
         [Input("softwareVersion", required: true)]
         public Input<string> SoftwareVersion { get; set; } = null!;
 
@@ -56,6 +82,9 @@ namespace Pulumi.Aviatrix
         /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// Image version that is compatible with the given cloud_type and software_version.
+        /// </summary>
         public readonly string ImageVersion;
         public readonly string SoftwareVersion;
 

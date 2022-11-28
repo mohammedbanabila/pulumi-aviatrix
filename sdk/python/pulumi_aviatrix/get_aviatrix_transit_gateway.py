@@ -291,66 +291,106 @@ class GetAviatrixTransitGatewayResult:
     @property
     @pulumi.getter(name="accountName")
     def account_name(self) -> str:
+        """
+        Aviatrix account name.
+        """
         return pulumi.get(self, "account_name")
 
     @property
     @pulumi.getter(name="allocateNewEip")
     def allocate_new_eip(self) -> bool:
+        """
+        When value is false, an idle address in Elastic IP pool is reused for this gateway. Otherwise, a new Elastic IP is allocated and used for this gateway.
+        """
         return pulumi.get(self, "allocate_new_eip")
 
     @property
     @pulumi.getter(name="approvedLearnedCidrs")
     def approved_learned_cidrs(self) -> Sequence[str]:
+        """
+        Approved learned CIDRs.
+        """
         return pulumi.get(self, "approved_learned_cidrs")
 
     @property
     @pulumi.getter(name="availabilityDomain")
     def availability_domain(self) -> str:
+        """
+        Availability domain for OCI.
+        """
         return pulumi.get(self, "availability_domain")
 
     @property
     @pulumi.getter(name="azureEipNameResourceGroup")
     def azure_eip_name_resource_group(self) -> str:
+        """
+        The name of the public IP address and its resource group in Azure to assign to this Transit Gateway.
+        """
         return pulumi.get(self, "azure_eip_name_resource_group")
 
     @property
     @pulumi.getter(name="bgpEcmp")
     def bgp_ecmp(self) -> bool:
+        """
+        Status of Equal Cost Multi Path (ECMP) routing for the next hop.
+        """
         return pulumi.get(self, "bgp_ecmp")
 
     @property
     @pulumi.getter(name="bgpHoldTime")
     def bgp_hold_time(self) -> int:
+        """
+        BGP Hold Time.
+        """
         return pulumi.get(self, "bgp_hold_time")
 
     @property
     @pulumi.getter(name="bgpLanInterfaces")
     def bgp_lan_interfaces(self) -> Sequence['outputs.GetAviatrixTransitGatewayBgpLanInterfaceResult']:
+        """
+        Interfaces to run BGP protocol on top of the ethernet interface, to connect to the onprem/remote peer.
+        """
         return pulumi.get(self, "bgp_lan_interfaces")
 
     @property
     @pulumi.getter(name="bgpLanIpLists")
     def bgp_lan_ip_lists(self) -> Sequence[str]:
+        """
+        List of available BGP LAN interface IPs for transit external device connection creation. Only supports GCP and Azure.
+        """
         return pulumi.get(self, "bgp_lan_ip_lists")
 
     @property
     @pulumi.getter(name="bgpManualSpokeAdvertiseCidrs")
     def bgp_manual_spoke_advertise_cidrs(self) -> str:
+        """
+        Intended CIDR list to advertise to VGW.
+        """
         return pulumi.get(self, "bgp_manual_spoke_advertise_cidrs")
 
     @property
     @pulumi.getter(name="bgpPollingTime")
     def bgp_polling_time(self) -> str:
+        """
+        BGP route polling time.
+        """
         return pulumi.get(self, "bgp_polling_time")
 
     @property
     @pulumi.getter(name="cloudInstanceId")
     def cloud_instance_id(self) -> str:
+        """
+        Instance ID of the transit gateway.
+        """
         return pulumi.get(self, "cloud_instance_id")
 
     @property
     @pulumi.getter(name="cloudType")
     def cloud_type(self) -> int:
+        """
+        Type of cloud service provider.
+        * `connected_transit"` -  Status of Connected Transit of transit gateway.
+        """
         return pulumi.get(self, "cloud_type")
 
     @property
@@ -361,176 +401,282 @@ class GetAviatrixTransitGatewayResult:
     @property
     @pulumi.getter(name="customizedSpokeVpcRoutes")
     def customized_spoke_vpc_routes(self) -> str:
+        """
+        A list of comma separated CIDRs to be customized for the spoke VPC routes.
+        """
         return pulumi.get(self, "customized_spoke_vpc_routes")
 
     @property
     @pulumi.getter(name="customizedTransitVpcRoutes")
     def customized_transit_vpc_routes(self) -> Sequence[str]:
+        """
+        A list of CIDRs to be customized for the transit VPC routes.
+        """
         return pulumi.get(self, "customized_transit_vpc_routes")
 
     @property
     @pulumi.getter
     def eip(self) -> str:
+        """
+        The EIP address of the Transit Gateway.
+        """
         return pulumi.get(self, "eip")
 
     @property
     @pulumi.getter(name="enableActiveStandby")
     def enable_active_standby(self) -> bool:
+        """
+        Status of Active-Standby Mode.
+        """
         return pulumi.get(self, "enable_active_standby")
 
     @property
     @pulumi.getter(name="enableActiveStandbyPreemptive")
     def enable_active_standby_preemptive(self) -> bool:
+        """
+        Status of Preemptive Mode for Active-Standby.
+        """
         return pulumi.get(self, "enable_active_standby_preemptive")
 
     @property
     @pulumi.getter(name="enableAdvertiseTransitCidr")
     def enable_advertise_transit_cidr(self) -> bool:
+        """
+        Status of Advertise Transit VPC network CIDR of the transit gateway.
+        """
         return pulumi.get(self, "enable_advertise_transit_cidr")
 
     @property
     @pulumi.getter(name="enableBgpOverLan")
     def enable_bgp_over_lan(self) -> bool:
+        """
+        Status of BGP over LAN functionality.
+        """
         return pulumi.get(self, "enable_bgp_over_lan")
 
     @property
     @pulumi.getter(name="enableEgressTransitFirenet")
     def enable_egress_transit_firenet(self) -> bool:
+        """
+        Status of Egress Transit FireNet being enabled on the gateway.
+        """
         return pulumi.get(self, "enable_egress_transit_firenet")
 
     @property
     @pulumi.getter(name="enableEncryptVolume")
     def enable_encrypt_volume(self) -> bool:
+        """
+        Status of Encrypt Gateway EBS Volume of the transit gateway.
+        """
         return pulumi.get(self, "enable_encrypt_volume")
 
     @property
     @pulumi.getter(name="enableFirenet")
     def enable_firenet(self) -> bool:
+        """
+        Status of FireNet Interfaces of the transit gateway.
+        """
         return pulumi.get(self, "enable_firenet")
 
     @property
     @pulumi.getter(name="enableGatewayLoadBalancer")
     def enable_gateway_load_balancer(self) -> bool:
+        """
+        Status of AWS Gateway Load Balancer.
+        """
         return pulumi.get(self, "enable_gateway_load_balancer")
 
     @property
     @pulumi.getter(name="enableHybridConnection")
     def enable_hybrid_connection(self) -> bool:
+        """
+        Sign of readiness for TGW connection.
+        """
         return pulumi.get(self, "enable_hybrid_connection")
 
     @property
     @pulumi.getter(name="enableJumboFrame")
     def enable_jumbo_frame(self) -> bool:
+        """
+        Status of jumbo frame support.
+        """
         return pulumi.get(self, "enable_jumbo_frame")
 
     @property
     @pulumi.getter(name="enableLearnedCidrsApproval")
     def enable_learned_cidrs_approval(self) -> bool:
+        """
+        Status of Encrypted Transit Approval for transit gateway.
+        """
         return pulumi.get(self, "enable_learned_cidrs_approval")
 
     @property
     @pulumi.getter(name="enableMonitorGatewaySubnets")
     def enable_monitor_gateway_subnets(self) -> bool:
+        """
+        Status of monitor gateway subnets.
+        """
         return pulumi.get(self, "enable_monitor_gateway_subnets")
 
     @property
     @pulumi.getter(name="enableMultiTierTransit")
     def enable_multi_tier_transit(self) -> bool:
+        """
+        Status of multi-tier transit mode on transit gateway.
+        """
         return pulumi.get(self, "enable_multi_tier_transit")
 
     @property
     @pulumi.getter(name="enablePrivateOob")
     def enable_private_oob(self) -> bool:
+        """
+        Status of private OOB for the transit gateway.
+        """
         return pulumi.get(self, "enable_private_oob")
 
     @property
     @pulumi.getter(name="enableSegmentation")
     def enable_segmentation(self) -> bool:
+        """
+        Status of segmentation.
+        """
         return pulumi.get(self, "enable_segmentation")
 
     @property
     @pulumi.getter(name="enableSpotInstance")
     def enable_spot_instance(self) -> bool:
+        """
+        Status of spot instance.
+        """
         return pulumi.get(self, "enable_spot_instance")
 
     @property
     @pulumi.getter(name="enableTransitFirenet")
     def enable_transit_firenet(self) -> bool:
+        """
+        Status of Transit FireNet Interfaces of the transit gateway.
+        """
         return pulumi.get(self, "enable_transit_firenet")
 
     @property
     @pulumi.getter(name="enableTransitSummarizeCidrToTgw")
     def enable_transit_summarize_cidr_to_tgw(self) -> bool:
+        """
+        Status of transit summarize CIDR to TGW.
+        """
         return pulumi.get(self, "enable_transit_summarize_cidr_to_tgw")
 
     @property
     @pulumi.getter(name="enableVpcDnsServer")
     def enable_vpc_dns_server(self) -> bool:
+        """
+        Status of Vpc Dns Server of the transit Gateway.
+        """
         return pulumi.get(self, "enable_vpc_dns_server")
 
     @property
     @pulumi.getter(name="excludedAdvertisedSpokeRoutes")
     def excluded_advertised_spoke_routes(self) -> str:
+        """
+        A list of comma separated CIDRs to be advertised to on-prem as "Excluded CIDR List".
+        """
         return pulumi.get(self, "excluded_advertised_spoke_routes")
 
     @property
     @pulumi.getter(name="faultDomain")
     def fault_domain(self) -> str:
+        """
+        Fault domain for OCI.
+        """
         return pulumi.get(self, "fault_domain")
 
     @property
     @pulumi.getter(name="filteredSpokeVpcRoutes")
     def filtered_spoke_vpc_routes(self) -> str:
+        """
+        A list of comma separated CIDRs to be filtered from the spoke VPC route table.
+        """
         return pulumi.get(self, "filtered_spoke_vpc_routes")
 
     @property
     @pulumi.getter(name="gwName")
     def gw_name(self) -> str:
+        """
+        Aviatrix transit gateway name.
+        """
         return pulumi.get(self, "gw_name")
 
     @property
     @pulumi.getter(name="gwSize")
     def gw_size(self) -> str:
+        """
+        Size of transit gateway instance.
+        """
         return pulumi.get(self, "gw_size")
 
     @property
     @pulumi.getter(name="haAvailabilityDomain")
     def ha_availability_domain(self) -> str:
+        """
+        HA gateway availability domain for OCI.
+        """
         return pulumi.get(self, "ha_availability_domain")
 
     @property
     @pulumi.getter(name="haAzureEipNameResourceGroup")
     def ha_azure_eip_name_resource_group(self) -> str:
+        """
+        The name of the public IP address and its resource group in Azure to assign to the HA Transit Gateway.
+        """
         return pulumi.get(self, "ha_azure_eip_name_resource_group")
 
     @property
     @pulumi.getter(name="haBgpLanInterfaces")
     def ha_bgp_lan_interfaces(self) -> Sequence['outputs.GetAviatrixTransitGatewayHaBgpLanInterfaceResult']:
+        """
+        Interfaces to run BGP protocol on top of the ethernet interface, to connect to the onprem/remote peer. Only available for GCP HA Transit.
+        """
         return pulumi.get(self, "ha_bgp_lan_interfaces")
 
     @property
     @pulumi.getter(name="haBgpLanIpLists")
     def ha_bgp_lan_ip_lists(self) -> Sequence[str]:
+        """
+        List of available BGP LAN interface IPs for transit external device HA connection creation. Only supports GCP and Azure.
+        """
         return pulumi.get(self, "ha_bgp_lan_ip_lists")
 
     @property
     @pulumi.getter(name="haCloudInstanceId")
     def ha_cloud_instance_id(self) -> str:
+        """
+        Cloud instance ID of HA transit gateway.
+        """
         return pulumi.get(self, "ha_cloud_instance_id")
 
     @property
     @pulumi.getter(name="haEip")
     def ha_eip(self) -> str:
+        """
+        The EIP address of the HA Transit Gateway.
+        """
         return pulumi.get(self, "ha_eip")
 
     @property
     @pulumi.getter(name="haFaultDomain")
     def ha_fault_domain(self) -> str:
+        """
+        HA gateway fault domain for OCI.
+        """
         return pulumi.get(self, "ha_fault_domain")
 
     @property
     @pulumi.getter(name="haGwName")
     def ha_gw_name(self) -> str:
+        """
+        Aviatrix transit gateway unique name of HA transit gateway.
+        * `ha_gw_size"` - HA Gateway Size.
+        """
         return pulumi.get(self, "ha_gw_name")
 
     @property
@@ -541,56 +687,89 @@ class GetAviatrixTransitGatewayResult:
     @property
     @pulumi.getter(name="haImageVersion")
     def ha_image_version(self) -> str:
+        """
+        The image version of the HA gateway.
+        """
         return pulumi.get(self, "ha_image_version")
 
     @property
     @pulumi.getter(name="haInsaneModeAz")
     def ha_insane_mode_az(self) -> str:
+        """
+        AZ of subnet being created for Insane Mode Transit HA Gateway.
+        """
         return pulumi.get(self, "ha_insane_mode_az")
 
     @property
     @pulumi.getter(name="haLanInterfaceCidr")
     def ha_lan_interface_cidr(self) -> str:
+        """
+        Transit gateway lan interface cidr for the HA gateway.
+        """
         return pulumi.get(self, "ha_lan_interface_cidr")
 
     @property
     @pulumi.getter(name="haOobAvailabilityZone")
     def ha_oob_availability_zone(self) -> str:
+        """
+        HA OOB availability zone.
+        """
         return pulumi.get(self, "ha_oob_availability_zone")
 
     @property
     @pulumi.getter(name="haOobManagementSubnet")
     def ha_oob_management_subnet(self) -> str:
+        """
+        HA OOB management subnet.
+        """
         return pulumi.get(self, "ha_oob_management_subnet")
 
     @property
     @pulumi.getter(name="haPrivateIp")
     def ha_private_ip(self) -> str:
+        """
+        Private IP address that assigned to the HA Transit Gateway.
+        """
         return pulumi.get(self, "ha_private_ip")
 
     @property
     @pulumi.getter(name="haPublicIp")
     def ha_public_ip(self) -> str:
+        """
+        Public IP address that assigned to the HA Transit Gateway.
+        """
         return pulumi.get(self, "ha_public_ip")
 
     @property
     @pulumi.getter(name="haSecurityGroupId")
     def ha_security_group_id(self) -> str:
+        """
+        HA security group used for the transit gateway.
+        """
         return pulumi.get(self, "ha_security_group_id")
 
     @property
     @pulumi.getter(name="haSoftwareVersion")
     def ha_software_version(self) -> str:
+        """
+        The software version of the HA gateway.
+        """
         return pulumi.get(self, "ha_software_version")
 
     @property
     @pulumi.getter(name="haSubnet")
     def ha_subnet(self) -> str:
+        """
+        HA Subnet.
+        """
         return pulumi.get(self, "ha_subnet")
 
     @property
     @pulumi.getter(name="haZone")
     def ha_zone(self) -> str:
+        """
+        HA Zone.
+        """
         return pulumi.get(self, "ha_zone")
 
     @property
@@ -604,106 +783,169 @@ class GetAviatrixTransitGatewayResult:
     @property
     @pulumi.getter(name="imageVersion")
     def image_version(self) -> str:
+        """
+        The image version of the gateway.
+        """
         return pulumi.get(self, "image_version")
 
     @property
     @pulumi.getter(name="insaneMode")
     def insane_mode(self) -> bool:
+        """
+        Status of Insane Mode of the transit gateway.
+        """
         return pulumi.get(self, "insane_mode")
 
     @property
     @pulumi.getter(name="insaneModeAz")
     def insane_mode_az(self) -> str:
+        """
+        AZ of subnet being created for Insane Mode transit gateway.
+        """
         return pulumi.get(self, "insane_mode_az")
 
     @property
     @pulumi.getter(name="lanInterfaceCidr")
     def lan_interface_cidr(self) -> str:
+        """
+        Transit gateway lan interface cidr.
+        """
         return pulumi.get(self, "lan_interface_cidr")
 
     @property
     @pulumi.getter(name="lanPrivateSubnet")
     def lan_private_subnet(self) -> str:
+        """
+        LAN Private Subnet for GCP Transit FireNet.
+        """
         return pulumi.get(self, "lan_private_subnet")
 
     @property
     @pulumi.getter(name="lanVpcId")
     def lan_vpc_id(self) -> str:
+        """
+        LAN VPC ID for GCP Transit FireNet.
+        """
         return pulumi.get(self, "lan_vpc_id")
 
     @property
     @pulumi.getter(name="learnedCidrsApprovalMode")
     def learned_cidrs_approval_mode(self) -> str:
+        """
+        Learned CIDRs approval mode.
+        """
         return pulumi.get(self, "learned_cidrs_approval_mode")
 
     @property
     @pulumi.getter(name="localAsNumber")
     def local_as_number(self) -> str:
+        """
+        Local ASN number.
+        """
         return pulumi.get(self, "local_as_number")
 
     @property
     @pulumi.getter(name="monitorExcludeLists")
     def monitor_exclude_lists(self) -> Sequence[str]:
+        """
+        A set of monitored instance IDs.
+        """
         return pulumi.get(self, "monitor_exclude_lists")
 
     @property
     @pulumi.getter(name="oobAvailabilityZone")
     def oob_availability_zone(self) -> str:
+        """
+        OOB availability zone.
+        """
         return pulumi.get(self, "oob_availability_zone")
 
     @property
     @pulumi.getter(name="oobManagementSubnet")
     def oob_management_subnet(self) -> str:
+        """
+        OOB management subnet.
+        """
         return pulumi.get(self, "oob_management_subnet")
 
     @property
     @pulumi.getter(name="prependAsPaths")
     def prepend_as_paths(self) -> Sequence[str]:
+        """
+        List of AS numbers to populate BGP AP_PATH field when it advertises to VGW or peer devices.
+        """
         return pulumi.get(self, "prepend_as_paths")
 
     @property
     @pulumi.getter(name="privateIp")
     def private_ip(self) -> str:
+        """
+        Private IP address of the transit gateway created.
+        """
         return pulumi.get(self, "private_ip")
 
     @property
     @pulumi.getter(name="publicIp")
     def public_ip(self) -> str:
+        """
+        Public IP address of the Transit Gateway created.
+        """
         return pulumi.get(self, "public_ip")
 
     @property
     @pulumi.getter(name="securityGroupId")
     def security_group_id(self) -> str:
+        """
+        Security group used for the transit gateway.
+        """
         return pulumi.get(self, "security_group_id")
 
     @property
     @pulumi.getter(name="singleAzHa")
     def single_az_ha(self) -> bool:
+        """
+        Status of Single AZ HA of transit gateway.
+        """
         return pulumi.get(self, "single_az_ha")
 
     @property
     @pulumi.getter(name="singleIpSnat")
     def single_ip_snat(self) -> bool:
+        """
+        Status of Single IP Source Nat mode of the transit gateway.
+        """
         return pulumi.get(self, "single_ip_snat")
 
     @property
     @pulumi.getter(name="softwareVersion")
     def software_version(self) -> str:
+        """
+        The software version of the gateway.
+        """
         return pulumi.get(self, "software_version")
 
     @property
     @pulumi.getter(name="spotPrice")
     def spot_price(self) -> str:
+        """
+        Price for spot instance.
+        """
         return pulumi.get(self, "spot_price")
 
     @property
     @pulumi.getter
     def subnet(self) -> str:
+        """
+        Subnet Info.
+        """
         return pulumi.get(self, "subnet")
 
     @property
     @pulumi.getter(name="tagLists")
     def tag_lists(self) -> Sequence[str]:
+        """
+        Instance tag of cloud provider.
+        """
         return pulumi.get(self, "tag_lists")
 
     @property
@@ -719,16 +961,25 @@ class GetAviatrixTransitGatewayResult:
     @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> str:
+        """
+        VPC-ID of GCP cloud provider.
+        """
         return pulumi.get(self, "vpc_id")
 
     @property
     @pulumi.getter(name="vpcReg")
     def vpc_reg(self) -> str:
+        """
+        Region of cloud provider.
+        """
         return pulumi.get(self, "vpc_reg")
 
     @property
     @pulumi.getter
     def zone(self) -> str:
+        """
+        Availability Zone for Azure.
+        """
         return pulumi.get(self, "zone")
 
 
@@ -831,7 +1082,21 @@ class AwaitableGetAviatrixTransitGatewayResult(GetAviatrixTransitGatewayResult):
 def get_aviatrix_transit_gateway(gw_name: Optional[str] = None,
                                  opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetAviatrixTransitGatewayResult:
     """
-    Use this data source to access information about an existing resource.
+    The **aviatrix_transit_gateway** data source provides details about a specific transit gateway created by the Aviatrix Controller.
+
+    This data source can prove useful when a module accepts a transit gateway's detail as an input variable. For example, requiring the transit gateway's name for a spoke gateway's attachment.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_aviatrix as aviatrix
+
+    foo = aviatrix.get_aviatrix_transit_gateway(gw_name="gatewayname")
+    ```
+
+
+    :param str gw_name: Transit gateway name.
     """
     __args__ = dict()
     __args__['gwName'] = gw_name
@@ -933,6 +1198,20 @@ def get_aviatrix_transit_gateway(gw_name: Optional[str] = None,
 def get_aviatrix_transit_gateway_output(gw_name: Optional[pulumi.Input[str]] = None,
                                         opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetAviatrixTransitGatewayResult]:
     """
-    Use this data source to access information about an existing resource.
+    The **aviatrix_transit_gateway** data source provides details about a specific transit gateway created by the Aviatrix Controller.
+
+    This data source can prove useful when a module accepts a transit gateway's detail as an input variable. For example, requiring the transit gateway's name for a spoke gateway's attachment.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_aviatrix as aviatrix
+
+    foo = aviatrix.get_aviatrix_transit_gateway(gw_name="gatewayname")
+    ```
+
+
+    :param str gw_name: Transit gateway name.
     """
     ...

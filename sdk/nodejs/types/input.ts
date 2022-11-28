@@ -2,43 +2,112 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 
 export interface AviatrixAppDomainSelector {
+    /**
+     * List of match expressions. The App Domain will be a union of all resources matched by each `matchExpressions`.`matchExpressions` blocks cannot be empty.
+     */
     matchExpressions: pulumi.Input<pulumi.Input<inputs.AviatrixAppDomainSelectorMatchExpression>[]>;
 }
 
 export interface AviatrixAppDomainSelectorMatchExpression {
+    /**
+     * - Account ID this expression matches.
+     */
     accountId?: pulumi.Input<string>;
+    /**
+     * - Account name this expression matches.
+     */
     accountName?: pulumi.Input<string>;
+    /**
+     * - CIDR block or IP Address this expression matches. `cidr` cannot be used with any other filters in the same `matchExpressions` block.
+     */
     cidr?: pulumi.Input<string>;
+    /**
+     * - Region this expression matches.
+     */
     region?: pulumi.Input<string>;
+    /**
+     * - Resource ID this expression matches.
+     */
     resId?: pulumi.Input<string>;
+    /**
+     * - Map of tags this expression matches.
+     */
     tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * - Type of resource this expression matches. Must be one of "vm", "vpc" or "subnet". `type` is required when `cidr` is not used.
+     */
     type?: pulumi.Input<string>;
+    /**
+     * - Zone this expression matches.
+     */
     zone?: pulumi.Input<string>;
 }
 
 export interface AviatrixAwsTgwSecurityDomain {
     /**
+     * A list of VPCs attached to the domain (name: `securityDomainName`) together with its creation. This list needs to be null for "Aviatrix_Edge_Domain".
+     *
      * @deprecated Please set `manage_vpc_attachment` to false, and use the standalone aviatrix_aws_tgw_vpc_attachment resource instead.
      */
     attachedVpcs?: pulumi.Input<pulumi.Input<inputs.AviatrixAwsTgwSecurityDomainAttachedVpc>[]>;
+    /**
+     * Set to true if the security domain is to be used as an Aviatrix Firewall Domain for the Aviatrix Firewall Network. Valid values: true, false. Default value: false.
+     */
     aviatrixFirewall?: pulumi.Input<boolean>;
+    /**
+     * A list of domains connected to the domain (name: `securityDomainName`) together with its creation.
+     */
     connectedDomains?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Set to true if the security domain is to be used as a native egress domain (for non-Aviatrix Firewall Network-based central Internet bound traffic). Valid values: true, false. Default value: false.
+     */
     nativeEgress?: pulumi.Input<boolean>;
+    /**
+     * Set to true if the security domain is to be used as a native firewall domain (for non-Aviatrix Firewall Network-based firewall traffic inspection). Valid values: true, false. Default value: false.
+     */
     nativeFirewall?: pulumi.Input<boolean>;
+    /**
+     * Three default domains ("Aviatrix_Edge_Domain", "Default_Domain" and "Shared_Service_Domain") are required with AWS TGW's creation.
+     */
     securityDomainName: pulumi.Input<string>;
 }
 
 export interface AviatrixAwsTgwSecurityDomainAttachedVpc {
+    /**
+     * Advanced option. Customized route(s) to be advertised to other VPCs that are connected to the same TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
+     */
     customizedRouteAdvertisement?: pulumi.Input<string>;
+    /**
+     * Advanced option. Customized Spoke VPC Routes. It allows the admin to enter non-RFC1918 routes in the VPC route table targeting the TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
+     */
     customizedRoutes?: pulumi.Input<string>;
+    /**
+     * Advanced option. If set to true, it disables automatic route propagation of this VPC to other VPCs within the same security domain. Valid values: true, false. Default value: false.
+     */
     disableLocalRoutePropagation?: pulumi.Input<boolean>;
+    /**
+     * Advanced option. Route tables separated by ',' to participate in TGW Orchestrator, i.e., learned routes will be propagated to these route tables. Example: "rtb-212ff547,rtb-045397874c170c745".
+     */
     routeTables?: pulumi.Input<string>;
+    /**
+     * Advanced option. VPC subnets separated by ',' to attach to the VPC. If left blank, the Aviatrix Controller automatically selects a subnet representing each AZ for the VPC attachment. Example: "subnet-214f5646,subnet-085e8c81a89d70846".
+     */
     subnets?: pulumi.Input<string>;
+    /**
+     * Cloud account name of the VPC in the Aviatrix controller.
+     */
     vpcAccountName: pulumi.Input<string>;
+    /**
+     * VPC ID of the VPC to be attached to the security domain
+     */
     vpcId: pulumi.Input<string>;
+    /**
+     * Region of the VPC, needs to be consistent with AWS TGW's region.
+     */
     vpcRegion: pulumi.Input<string>;
 }
 
@@ -54,220 +123,657 @@ export interface AviatrixAwsTgwVpnConnVpnTunnelData {
 }
 
 export interface AviatrixFirenetFirewallInstanceAssociation {
+    /**
+     * Switch to attach/detach firewall instance to/from FireNet. Valid values: true, false. Default value: false.
+     */
     attached?: pulumi.Input<boolean>;
+    /**
+     * Egress interface ID. **Required if it is a firewall instance.**
+     */
     egressInterface?: pulumi.Input<string>;
+    /**
+     * Name of the primary FireNet gateway.
+     */
     firenetGwName: pulumi.Input<string>;
+    /**
+     * Firewall instance name. **Required if it is a firewall instance.**
+     */
     firewallName?: pulumi.Input<string>;
+    /**
+     * ID of Firewall instance.
+     */
     instanceId: pulumi.Input<string>;
+    /**
+     * Lan interface ID. **Required if it is a firewall instance or FQDN gateway in Azure.**
+     */
     lanInterface?: pulumi.Input<string>;
+    /**
+     * Management interface ID. **Required if it is a firewall instance.**
+     */
     managementInterface?: pulumi.Input<string>;
+    /**
+     * Type of firewall. Valid values: "Generic", "fqdnGateway". Default value: "Generic". Value "fqdnGateway" is required for FQDN gateway.
+     */
     vendorType?: pulumi.Input<string>;
 }
 
 export interface AviatrixFirewallPolicy {
+    /**
+     * Valid values: "allow", "deny" and "force-drop" (in stateful firewall rule to allow immediate packet dropping on established sessions).
+     */
     action: pulumi.Input<string>;
+    /**
+     * Description of the policy. Example: "This is policy no.1".
+     */
     description?: pulumi.Input<string>;
+    /**
+     * Destination address, a valid IPv4 address or tag name such "HR" or "marketing" etc. Example: "10.30.0.0/16". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
+     */
     dstIp: pulumi.Input<string>;
+    /**
+     * Valid values: true, false. Default value: false.
+     */
     logEnabled?: pulumi.Input<boolean>;
+    /**
+     * A single port or a range of port numbers. Example: "25", "25:1024".
+     */
     port: pulumi.Input<string>;
+    /**
+     * : Valid values: "all", "tcp", "udp", "icmp", "sctp", "rdp", "dccp". Default value: "all".
+     */
     protocol?: pulumi.Input<string>;
+    /**
+     * Source address, a valid IPv4 address or tag name such "HR" or "marketing" etc. Example: "10.30.0.0/16". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
+     */
     srcIp: pulumi.Input<string>;
 }
 
 export interface AviatrixFirewallTagCidrList {
+    /**
+     * CIDR address to filter. Example: "10.88.88.88/32".
+     */
     cidr: pulumi.Input<string>;
+    /**
+     * A name to identify the CIDR. Example: "policy1".
+     */
     cidrTagName: pulumi.Input<string>;
 }
 
 export interface AviatrixFqdnDomainName {
+    /**
+     * What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base Policy' if no value provided.
+     * * For protocol "all", port must be set to "all".
+     * * For protocol “icmp”, port must be set to “ping”.
+     */
     action?: pulumi.Input<string>;
+    /**
+     * FQDN. Example: "facebook.com".
+     */
     fqdn: pulumi.Input<string>;
+    /**
+     * Port. Example "25".
+     */
     port: pulumi.Input<string>;
+    /**
+     * Protocol. Valid values: "all", "tcp", "udp", "icmp".
+     */
     proto: pulumi.Input<string>;
 }
 
 export interface AviatrixFqdnGwFilterTagList {
+    /**
+     * Name of the gateway to attach to the specific tag.
+     */
     gwName: pulumi.Input<string>;
+    /**
+     * List of source IPs in the VPC qualified for a specific tag.
+     */
     sourceIpLists?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface AviatrixGatewayDnatConnectionPolicy {
+    /**
+     * This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.19.2+.
+     */
     applyRouteEntry?: pulumi.Input<boolean>;
+    /**
+     * This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+     */
     connection?: pulumi.Input<string>;
+    /**
+     * This is a rule field that specifies the translated destination IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+     */
     dnatIps?: pulumi.Input<string>;
+    /**
+     * This is a rule field that specifies the translated destination port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+     */
     dnatPort?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+     */
     dstCidr?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+     */
     dstPort?: pulumi.Input<string>;
+    /**
+     * This field specifies which VPC private route table will not be programmed with the default route entry.
+     */
     excludeRtb?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+     */
     interface?: pulumi.Input<string>;
+    /**
+     * This is a rule field that specifies a tag or mark of a TCP session when all qualifier conditions meet. When not specified, this field is not used.
+     */
     mark?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a destination port protocol where the rule applies. When not specified, this field is not used.
+     */
     protocol?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+     */
     srcCidr?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+     */
     srcPort?: pulumi.Input<string>;
 }
 
 export interface AviatrixGatewayDnatDnatPolicy {
+    /**
+     * This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.19.2+.
+     */
     applyRouteEntry?: pulumi.Input<boolean>;
+    /**
+     * This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+     */
     connection?: pulumi.Input<string>;
+    /**
+     * This is a rule field that specifies the translated destination IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+     */
     dnatIps?: pulumi.Input<string>;
+    /**
+     * This is a rule field that specifies the translated destination port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+     */
     dnatPort?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+     */
     dstCidr?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+     */
     dstPort?: pulumi.Input<string>;
+    /**
+     * This field specifies which VPC private route table will not be programmed with the default route entry.
+     */
     excludeRtb?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+     */
     interface?: pulumi.Input<string>;
+    /**
+     * This is a rule field that specifies a tag or mark of a TCP session when all qualifier conditions meet. When not specified, this field is not used.
+     */
     mark?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a destination port protocol where the rule applies. When not specified, this field is not used.
+     */
     protocol?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+     */
     srcCidr?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+     */
     srcPort?: pulumi.Input<string>;
 }
 
 export interface AviatrixGatewayDnatInterfacePolicy {
+    /**
+     * This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.19.2+.
+     */
     applyRouteEntry?: pulumi.Input<boolean>;
+    /**
+     * This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+     */
     connection?: pulumi.Input<string>;
+    /**
+     * This is a rule field that specifies the translated destination IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+     */
     dnatIps?: pulumi.Input<string>;
+    /**
+     * This is a rule field that specifies the translated destination port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+     */
     dnatPort?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+     */
     dstCidr?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+     */
     dstPort?: pulumi.Input<string>;
+    /**
+     * This field specifies which VPC private route table will not be programmed with the default route entry.
+     */
     excludeRtb?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+     */
     interface?: pulumi.Input<string>;
+    /**
+     * This is a rule field that specifies a tag or mark of a TCP session when all qualifier conditions meet. When not specified, this field is not used.
+     */
     mark?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a destination port protocol where the rule applies. When not specified, this field is not used.
+     */
     protocol?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+     */
     srcCidr?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+     */
     srcPort?: pulumi.Input<string>;
 }
 
 export interface AviatrixGatewaySnatConnectionPolicy {
+    /**
+     * This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.21.0+.
+     */
     applyRouteEntry?: pulumi.Input<boolean>;
+    /**
+     * This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+     */
     connection?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+     */
     dstCidr?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+     */
     dstPort?: pulumi.Input<string>;
+    /**
+     * This field specifies which VPC private route table will not be programmed with the default route entry.
+     */
     excludeRtb?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+     */
     interface?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a tag or mark of a TCP session where the rule applies. When not specified, this field is not used.
+     */
     mark?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a destination port protocol where the rule applies. Valid values: 'all', 'tcp', 'udp', 'icmp'. 'Default: 'all'.
+     */
     protocol?: pulumi.Input<string>;
+    /**
+     * This is a rule field that specifies the changed source IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+     */
     snatIps?: pulumi.Input<string>;
+    /**
+     * This is a rule field that specifies the changed source port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+     */
     snatPort?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+     */
     srcCidr?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+     */
     srcPort?: pulumi.Input<string>;
 }
 
 export interface AviatrixGatewaySnatInterfacePolicy {
+    /**
+     * This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.21.0+.
+     */
     applyRouteEntry?: pulumi.Input<boolean>;
+    /**
+     * This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+     */
     connection?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+     */
     dstCidr?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+     */
     dstPort?: pulumi.Input<string>;
+    /**
+     * This field specifies which VPC private route table will not be programmed with the default route entry.
+     */
     excludeRtb?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+     */
     interface?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a tag or mark of a TCP session where the rule applies. When not specified, this field is not used.
+     */
     mark?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a destination port protocol where the rule applies. Valid values: 'all', 'tcp', 'udp', 'icmp'. 'Default: 'all'.
+     */
     protocol?: pulumi.Input<string>;
+    /**
+     * This is a rule field that specifies the changed source IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+     */
     snatIps?: pulumi.Input<string>;
+    /**
+     * This is a rule field that specifies the changed source port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+     */
     snatPort?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+     */
     srcCidr?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+     */
     srcPort?: pulumi.Input<string>;
 }
 
 export interface AviatrixGatewaySnatSnatPolicy {
+    /**
+     * This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.21.0+.
+     */
     applyRouteEntry?: pulumi.Input<boolean>;
+    /**
+     * This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+     */
     connection?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+     */
     dstCidr?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+     */
     dstPort?: pulumi.Input<string>;
+    /**
+     * This field specifies which VPC private route table will not be programmed with the default route entry.
+     */
     excludeRtb?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+     */
     interface?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a tag or mark of a TCP session where the rule applies. When not specified, this field is not used.
+     */
     mark?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a destination port protocol where the rule applies. Valid values: 'all', 'tcp', 'udp', 'icmp'. 'Default: 'all'.
+     */
     protocol?: pulumi.Input<string>;
+    /**
+     * This is a rule field that specifies the changed source IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+     */
     snatIps?: pulumi.Input<string>;
+    /**
+     * This is a rule field that specifies the changed source port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+     */
     snatPort?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+     */
     srcCidr?: pulumi.Input<string>;
+    /**
+     * This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+     */
     srcPort?: pulumi.Input<string>;
 }
 
 export interface AviatrixMicrosegPolicyListPolicy {
+    /**
+     * Action for the policy. Must be one of PERMIT or DENY.
+     */
     action: pulumi.Input<string>;
+    /**
+     * List of App Domain UUIDs for the destination for the policy.
+     */
     dstAppDomains: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Whether to enable logging for packets that match the policy. Type: Boolean.
+     */
     logging?: pulumi.Input<boolean>;
+    /**
+     * Name of the policy.
+     */
     name: pulumi.Input<string>;
+    /**
+     * List of port ranges for the policy. Cannot be used when `protocol` is "ICMP".
+     */
     portRanges?: pulumi.Input<pulumi.Input<inputs.AviatrixMicrosegPolicyListPolicyPortRange>[]>;
+    /**
+     * Priority for the policy. Default: 0. Type: Integer.
+     */
     priority?: pulumi.Input<number>;
+    /**
+     * Protocol for the policy. Must be one of TCP, UDP, ICMP or ANY.
+     */
     protocol: pulumi.Input<string>;
+    /**
+     * List of App Domain UUIDs for the source for the policy.
+     */
     srcAppDomains: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * UUID for the Policy.
+     */
     uuid?: pulumi.Input<string>;
+    /**
+     * Whether to enforce the policy or only watch packets. If "true" packets are only watched. This allows you to observe if the traffic impacted by this rule causes any inadvertent issues (such as traffic being dropped). Type: Boolean.
+     */
     watch?: pulumi.Input<boolean>;
 }
 
 export interface AviatrixMicrosegPolicyListPolicyPortRange {
+    /**
+     * Upper bound for the range of ports. When not set, `lo` is the only port that matches the policy.
+     */
     hi?: pulumi.Input<number>;
+    /**
+     * Lower bound for the range of ports.
+     */
     lo: pulumi.Input<number>;
 }
 
 export interface AviatrixPrivateModeLbProxy {
+    /**
+     * Instance ID of the proxy.
+     */
     instanceId: pulumi.Input<string>;
+    /**
+     * VPC ID of the proxy.
+     */
     vpcId: pulumi.Input<string>;
 }
 
 export interface AviatrixSite2CloudCaCertTagCaCertificate {
+    /**
+     * Content of cert certificate to create only one cert. One CA cert only per file.
+     */
     certContent: pulumi.Input<string>;
+    /**
+     * Common name of created cert.
+     */
     commonName?: pulumi.Input<string>;
+    /**
+     * Expiration time of created cert.
+     */
     expirationTime?: pulumi.Input<string>;
+    /**
+     * Unique id of created cert.
+     */
     id?: pulumi.Input<string>;
+    /**
+     * Issuer name of created cert.
+     */
     issuerName?: pulumi.Input<string>;
+    /**
+     * Unique serial of created cert.
+     */
     uniqueSerial?: pulumi.Input<string>;
 }
 
 export interface AviatrixTransitGatewayBgpLanInterface {
+    /**
+     * A VPC Network address range selected from one of the available network ranges.
+     */
     subnet: pulumi.Input<string>;
+    /**
+     * VPC-ID/VNet-Name of cloud provider.
+     */
     vpcId: pulumi.Input<string>;
 }
 
 export interface AviatrixTransitGatewayHaBgpLanInterface {
+    /**
+     * A VPC Network address range selected from one of the available network ranges.
+     */
     subnet: pulumi.Input<string>;
+    /**
+     * VPC-ID/VNet-Name of cloud provider.
+     */
     vpcId: pulumi.Input<string>;
 }
 
 export interface AviatrixVpcPrivateSubnet {
+    /**
+     * CIDR block.
+     */
     cidr?: pulumi.Input<string>;
+    /**
+     * Name of this subnet.
+     */
     name?: pulumi.Input<string>;
+    /**
+     * ID of this subnet.
+     */
     subnetId?: pulumi.Input<string>;
 }
 
 export interface AviatrixVpcPublicSubnet {
+    /**
+     * CIDR block.
+     */
     cidr?: pulumi.Input<string>;
+    /**
+     * Name of this subnet.
+     */
     name?: pulumi.Input<string>;
+    /**
+     * ID of this subnet.
+     */
     subnetId?: pulumi.Input<string>;
 }
 
 export interface AviatrixVpcSubnet {
+    /**
+     * CIDR block.
+     */
     cidr?: pulumi.Input<string>;
+    /**
+     * Name of this subnet.
+     */
     name?: pulumi.Input<string>;
+    /**
+     * Region of this subnet.
+     */
     region?: pulumi.Input<string>;
+    /**
+     * ID of this subnet.
+     */
     subnetId?: pulumi.Input<string>;
 }
 
 export interface AviatrixVpnProfilePolicy {
+    /**
+     * Should be the opposite of the base rule for correct behavior. Valid values for action: "allow", "deny".
+     */
     action: pulumi.Input<string>;
+    /**
+     * Port to be allowed or denied. Valid values for port: a single port or a range of port numbers e.g.: "25", "25:1024". For "all" and "icmp", port should only be "0:65535".
+     */
     port: pulumi.Input<string>;
+    /**
+     * Protocol to allow or deny. Valid values for protocol: "all", "tcp", "udp", "icmp", "sctp", "rdp", "dccp".
+     */
     proto: pulumi.Input<string>;
+    /**
+     * CIDR to be allowed or denied. Valid values for target: IPv4 CIDRs. Example: "10.30.0.0/16".
+     */
     target: pulumi.Input<string>;
 }
 
 export interface GetAviatrixFirenetFirewallInstanceAssociation {
     attached?: boolean;
     egressInterface?: string;
+    /**
+     * Name of the primary FireNet gateway.
+     */
     firenetGwName?: string;
+    /**
+     * Firewall instance name.
+     * * `lanInterface`- Lan interface ID.
+     */
     firewallName?: string;
+    /**
+     * ID of Firewall instance.
+     */
     instanceId?: string;
     lanInterface?: string;
+    /**
+     * Management interface ID.
+     * * `egressInterface`- Egress interface ID.
+     * * `attached`- Switch to attach/detach firewall instance to/from fireNet.
+     */
     managementInterface?: string;
+    /**
+     * Type of the firewall.
+     */
     vendorType?: string;
 }
 
 export interface GetAviatrixFirenetFirewallInstanceAssociationArgs {
     attached?: pulumi.Input<boolean>;
     egressInterface?: pulumi.Input<string>;
+    /**
+     * Name of the primary FireNet gateway.
+     */
     firenetGwName?: pulumi.Input<string>;
+    /**
+     * Firewall instance name.
+     * * `lanInterface`- Lan interface ID.
+     */
     firewallName?: pulumi.Input<string>;
+    /**
+     * ID of Firewall instance.
+     */
     instanceId?: pulumi.Input<string>;
     lanInterface?: pulumi.Input<string>;
+    /**
+     * Management interface ID.
+     * * `egressInterface`- Egress interface ID.
+     * * `attached`- Switch to attach/detach firewall instance to/from fireNet.
+     */
     managementInterface?: pulumi.Input<string>;
+    /**
+     * Type of the firewall.
+     */
     vendorType?: pulumi.Input<string>;
 }
 

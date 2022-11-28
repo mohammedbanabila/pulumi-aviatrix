@@ -11,85 +11,95 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_firewall_instance** resource allows the creation and management of Aviatrix Firewall Instances.
+//
+// This resource is used in [Aviatrix FireNet](https://docs.aviatrix.com/HowTos/firewall_network_faq.html) and [Aviatrix Transit FireNet](https://docs.aviatrix.com/HowTos/transit_firenet_faq.html) solutions, in conjunction with other resources that may include, and are not limited to: **firenet**, **firewall_instance_association**, **aws_tgw** and **transit_gateway** resources.
+//
+// ## Import
+//
+// **firewall_instance** can be imported using the `instance_id`. For Azure or AzureGov FireNet instances, the value will be the `firewall_name` concatenated with a ":" and the Resource Group of the `vpc_id` set for that instance. e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixFirewallInstance:AviatrixFirewallInstance test instance_id
+//
+// ```
 type AviatrixFirewallInstance struct {
 	pulumi.CustomResourceState
 
-	// Availability domain for OCI.
+	// Availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 	AvailabilityDomain pulumi.StringOutput `pulumi:"availabilityDomain"`
-	// Advanced option. Bootstrap bucket name. Only available for AWS and GCP.
+	// Only available for AWS and GCP. For GCP, only Palo Alto Networks VM-Series deployment can use this attribute. In advanced mode, specify a bootstrap bucket name where the initial configuration and policy file is stored.
 	BootstrapBucketName pulumi.StringPtrOutput `pulumi:"bootstrapBucketName"`
-	// Advanced option. Bootstrap storage name. Applicable to Azure and Palo Alto Networks VM-Series/Fortinet Series deployment
-	// only.
+	// Advanced option. Bootstrap storage name. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series/Fortinet Series deployment only. Available as of provider version R2.17.1+.
 	BootstrapStorageName pulumi.StringPtrOutput `pulumi:"bootstrapStorageName"`
-	// Cloud Type
+	// Cloud Type.
 	CloudType pulumi.IntOutput `pulumi:"cloudType"`
-	// Advanced option. Bootstrap storage name. Applicable to Azure and Fortinet Series deployment only.
+	// Advanced option. Container folder. Applicable to Azure or AzureGov and Fortinet Series deployment only.
 	ContainerFolder pulumi.StringPtrOutput `pulumi:"containerFolder"`
 	// ID of Egress Interface created.
 	EgressInterface pulumi.StringOutput `pulumi:"egressInterface"`
-	// Egress Interface Subnet.
+	// Egress Interface Subnet. Select the subnet whose name contains “FW-ingress-egress”. For GCP, `egressSubnet` must be in the form `cidr~~region~~name`.
 	EgressSubnet pulumi.StringOutput `pulumi:"egressSubnet"`
-	// Egress VPC ID. Required for GCP.
+	// Egress VPC ID. Required for GCP. Available as of provider version R2.18.1+.
 	EgressVpcId pulumi.StringPtrOutput `pulumi:"egressVpcId"`
-	// Fault domain for OCI.
+	// Fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 	FaultDomain pulumi.StringOutput `pulumi:"faultDomain"`
-	// Advanced option. File share folder. Applicable to Azure and Palo Alto Networks VM-Series deployment only.
+	// Advanced option. File share folder. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series deployment only. Available as of provider version R2.17.1+.
 	FileShareFolder pulumi.StringPtrOutput `pulumi:"fileShareFolder"`
-	// Name of the primary FireNet gateway.
+	// Name of the primary FireNet gateway. **Required for all FireNet deployments that do not utilize the TGW-Integrated FireNet with AWS Native GWLB VPC.**
 	FirenetGwName pulumi.StringPtrOutput `pulumi:"firenetGwName"`
-	// One of the AWS AMIs from Palo Alto Networks.
+	// One of the AWS/Azure/GCP AMIs from various vendors such as Palo Alto Networks.
 	FirewallImage pulumi.StringOutput `pulumi:"firewallImage"`
-	// Firewall image ID.
+	// Firewall image ID. Applicable to AWS and Azure only. For AWS, please use AMI ID. For Azure, the format is “Publisher:Offer:Plan:Version”. Available as of provider version R2.19+.
 	FirewallImageId pulumi.StringOutput `pulumi:"firewallImageId"`
-	// Version of firewall image.
+	// Version of firewall image. If not specified, Controller will automatically select the latest version available.
 	FirewallImageVersion pulumi.StringOutput `pulumi:"firewallImageVersion"`
 	// Name of the firewall instance to be created.
 	FirewallName pulumi.StringOutput `pulumi:"firewallName"`
-	// Instance size of the firewall.
+	// Instance size of the firewall. Example: "m5.xlarge".
 	FirewallSize pulumi.StringOutput `pulumi:"firewallSize"`
-	// GCP VPC ID
+	// GCP Only. The current VPC ID.
 	GcpVpcId pulumi.StringOutput `pulumi:"gcpVpcId"`
-	// Advanced option. IAM role. Only available for AWS.
+	// Only available for AWS. In advanced mode, create an IAM Role on the AWS account that launched the FireNet gateway. Create a policy to attach to the role. The policy is to allow access to "Bootstrap Bucket".
 	IamRole pulumi.StringPtrOutput `pulumi:"iamRole"`
 	// ID of the firewall instance created.
 	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
-	// Applicable to AWS deployment only. AWS Key Pair name. If not provided, a Key Pair will be generated.
+	// Applicable to AWS deployment only. AWS Key Pair name. If not provided a Key Pair will be generated.
 	KeyName pulumi.StringPtrOutput `pulumi:"keyName"`
 	// ID of Lan Interface created.
 	LanInterface pulumi.StringOutput `pulumi:"lanInterface"`
 	// ID of Management Interface created.
 	ManagementInterface pulumi.StringOutput `pulumi:"managementInterface"`
-	// Management Interface Subnet. Required for Palo Alto Networks VM-Series, and required to be empty for Check Point or
-	// Fortinet series.
+	// Management Interface Subnet. Select the subnet whose name contains “gateway and firewall management”. For GCP, `managementSubnet` must be in the form `cidr~~region~~name`. Required for Palo Alto Networks VM-Series and OCI Check Point firewalls. Otherwise, it must be empty.
 	ManagementSubnet pulumi.StringPtrOutput `pulumi:"managementSubnet"`
-	// Management VPC ID. Required for GCP Palo Alto Networks VM-Series. Required to be empty for GCP Check Point or Fortinet
-	// series.
+	// Management VPC ID. Only used for GCP firewall. Required for Palo Alto Networks VM-Series, and required to be empty for Check Point or Fortinet series. Available as of provider version R2.18.1+.
 	ManagementVpcId pulumi.StringPtrOutput `pulumi:"managementVpcId"`
-	// Authentication method. Applicable to Azure deployment only.
+	// Applicable to Azure or AzureGov deployment only.
 	Password pulumi.StringPtrOutput `pulumi:"password"`
 	// Management Public IP.
 	PublicIp pulumi.StringOutput `pulumi:"publicIp"`
-	// Advanced option. Bootstrap storage name. Applicable to Azure and Fortinet Series deployment only.
+	// Advanced option. SAS URL Config. Applicable to Azure or AzureGov and Fortinet Series deployment only.
 	SasUrlConfig pulumi.StringPtrOutput `pulumi:"sasUrlConfig"`
-	// Advanced option. Bootstrap storage name. Applicable to Azure and Fortinet Series deployment only.
+	// Advanced option. SAS URL License. Applicable to Azure or AzureGov and Fortinet Series deployment only.
 	SasUrlLicense pulumi.StringPtrOutput `pulumi:"sasUrlLicense"`
-	// Advanced option. Share directory. Applicable to Azure and Palo Alto Networks VM-Series deployment only.
+	// Advanced option. Share directory. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series deployment only. Available as of provider version R2.17.1+.
 	ShareDirectory pulumi.StringPtrOutput `pulumi:"shareDirectory"`
-	// Advanced option. Bic key. Applicable to Azure and Check Point Series deployment only.
+	// Advanced option. Sic key. Applicable to Check Point Series deployment only.
 	SicKey pulumi.StringPtrOutput `pulumi:"sicKey"`
-	// Authentication method. Applicable to Azure deployment only.
+	// Applicable to Azure or AzureGov deployment only.
 	SshPublicKey pulumi.StringPtrOutput `pulumi:"sshPublicKey"`
-	// Advanced option. Storage access key. Applicable to Azure and Palo Alto Networks VM-Series deployment only.
+	// Advanced option. Storage access key. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series deployment only. Available as of provider version R2.17.1+.
 	StorageAccessKey pulumi.StringPtrOutput `pulumi:"storageAccessKey"`
-	// A map of tags to assign to the firewall instance.
+	// Mapping of key value pairs of tags for a firewall instance. Only available for AWS, AWSGov, GCP and Azure firewall instances. For AWS, AWSGov and Azure allowed characters are: letters, spaces, and numbers plus the following special characters: + - = . _ : @. For GCP allowed characters are: lowercase letters, numbers, "-" and "_". Example: {"key1" = "value1", "key2" = "value2"}.
 	Tags pulumi.StringMapOutput `pulumi:"tags"`
-	// Advanced option. Bootstrap storage name. Applicable to Check Point Series and Fortinet Series deployment only.
+	// Advanced option. User Data. Applicable to Check Point Series and Fortinet Series deployment only. Type: String.
 	UserData pulumi.StringPtrOutput `pulumi:"userData"`
-	// Applicable to Azure deployment only. 'admin' as a username is not accepted.
+	// Applicable to Azure or AzureGov deployment only. "admin" as a username is not accepted.
 	Username pulumi.StringPtrOutput `pulumi:"username"`
-	// ID of the Security VPC.
+	// VPC ID of the Security VPC. For GCP, `vpcId` must be in the form vpc_id~-~gcloud_project_id.
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
-	// Availability Zone. Only available for AWS, GCP and Azure.
+	// Availability Zone. Required if creating a Firewall Instance with a Native AWS GWLB-enabled VPC. Applicable to AWS, Azure, and GCP only. Available as of provider version R2.17+.
 	Zone pulumi.StringOutput `pulumi:"zone"`
 }
 
@@ -115,6 +125,29 @@ func NewAviatrixFirewallInstance(ctx *pulumi.Context,
 	if args.VpcId == nil {
 		return nil, errors.New("invalid value for required argument 'VpcId'")
 	}
+	if args.KeyName != nil {
+		args.KeyName = pulumi.ToSecret(args.KeyName).(pulumi.StringPtrOutput)
+	}
+	if args.Password != nil {
+		args.Password = pulumi.ToSecret(args.Password).(pulumi.StringPtrOutput)
+	}
+	if args.SicKey != nil {
+		args.SicKey = pulumi.ToSecret(args.SicKey).(pulumi.StringPtrOutput)
+	}
+	if args.SshPublicKey != nil {
+		args.SshPublicKey = pulumi.ToSecret(args.SshPublicKey).(pulumi.StringPtrOutput)
+	}
+	if args.StorageAccessKey != nil {
+		args.StorageAccessKey = pulumi.ToSecret(args.StorageAccessKey).(pulumi.StringPtrOutput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"keyName",
+		"password",
+		"sicKey",
+		"sshPublicKey",
+		"storageAccessKey",
+	})
+	opts = append(opts, secrets)
 	opts = pkgResourceDefaultOpts(opts)
 	var resource AviatrixFirewallInstance
 	err := ctx.RegisterResource("aviatrix:index/aviatrixFirewallInstance:AviatrixFirewallInstance", name, args, &resource, opts...)
@@ -138,162 +171,156 @@ func GetAviatrixFirewallInstance(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixFirewallInstance resources.
 type aviatrixFirewallInstanceState struct {
-	// Availability domain for OCI.
+	// Availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 	AvailabilityDomain *string `pulumi:"availabilityDomain"`
-	// Advanced option. Bootstrap bucket name. Only available for AWS and GCP.
+	// Only available for AWS and GCP. For GCP, only Palo Alto Networks VM-Series deployment can use this attribute. In advanced mode, specify a bootstrap bucket name where the initial configuration and policy file is stored.
 	BootstrapBucketName *string `pulumi:"bootstrapBucketName"`
-	// Advanced option. Bootstrap storage name. Applicable to Azure and Palo Alto Networks VM-Series/Fortinet Series deployment
-	// only.
+	// Advanced option. Bootstrap storage name. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series/Fortinet Series deployment only. Available as of provider version R2.17.1+.
 	BootstrapStorageName *string `pulumi:"bootstrapStorageName"`
-	// Cloud Type
+	// Cloud Type.
 	CloudType *int `pulumi:"cloudType"`
-	// Advanced option. Bootstrap storage name. Applicable to Azure and Fortinet Series deployment only.
+	// Advanced option. Container folder. Applicable to Azure or AzureGov and Fortinet Series deployment only.
 	ContainerFolder *string `pulumi:"containerFolder"`
 	// ID of Egress Interface created.
 	EgressInterface *string `pulumi:"egressInterface"`
-	// Egress Interface Subnet.
+	// Egress Interface Subnet. Select the subnet whose name contains “FW-ingress-egress”. For GCP, `egressSubnet` must be in the form `cidr~~region~~name`.
 	EgressSubnet *string `pulumi:"egressSubnet"`
-	// Egress VPC ID. Required for GCP.
+	// Egress VPC ID. Required for GCP. Available as of provider version R2.18.1+.
 	EgressVpcId *string `pulumi:"egressVpcId"`
-	// Fault domain for OCI.
+	// Fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 	FaultDomain *string `pulumi:"faultDomain"`
-	// Advanced option. File share folder. Applicable to Azure and Palo Alto Networks VM-Series deployment only.
+	// Advanced option. File share folder. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series deployment only. Available as of provider version R2.17.1+.
 	FileShareFolder *string `pulumi:"fileShareFolder"`
-	// Name of the primary FireNet gateway.
+	// Name of the primary FireNet gateway. **Required for all FireNet deployments that do not utilize the TGW-Integrated FireNet with AWS Native GWLB VPC.**
 	FirenetGwName *string `pulumi:"firenetGwName"`
-	// One of the AWS AMIs from Palo Alto Networks.
+	// One of the AWS/Azure/GCP AMIs from various vendors such as Palo Alto Networks.
 	FirewallImage *string `pulumi:"firewallImage"`
-	// Firewall image ID.
+	// Firewall image ID. Applicable to AWS and Azure only. For AWS, please use AMI ID. For Azure, the format is “Publisher:Offer:Plan:Version”. Available as of provider version R2.19+.
 	FirewallImageId *string `pulumi:"firewallImageId"`
-	// Version of firewall image.
+	// Version of firewall image. If not specified, Controller will automatically select the latest version available.
 	FirewallImageVersion *string `pulumi:"firewallImageVersion"`
 	// Name of the firewall instance to be created.
 	FirewallName *string `pulumi:"firewallName"`
-	// Instance size of the firewall.
+	// Instance size of the firewall. Example: "m5.xlarge".
 	FirewallSize *string `pulumi:"firewallSize"`
-	// GCP VPC ID
+	// GCP Only. The current VPC ID.
 	GcpVpcId *string `pulumi:"gcpVpcId"`
-	// Advanced option. IAM role. Only available for AWS.
+	// Only available for AWS. In advanced mode, create an IAM Role on the AWS account that launched the FireNet gateway. Create a policy to attach to the role. The policy is to allow access to "Bootstrap Bucket".
 	IamRole *string `pulumi:"iamRole"`
 	// ID of the firewall instance created.
 	InstanceId *string `pulumi:"instanceId"`
-	// Applicable to AWS deployment only. AWS Key Pair name. If not provided, a Key Pair will be generated.
+	// Applicable to AWS deployment only. AWS Key Pair name. If not provided a Key Pair will be generated.
 	KeyName *string `pulumi:"keyName"`
 	// ID of Lan Interface created.
 	LanInterface *string `pulumi:"lanInterface"`
 	// ID of Management Interface created.
 	ManagementInterface *string `pulumi:"managementInterface"`
-	// Management Interface Subnet. Required for Palo Alto Networks VM-Series, and required to be empty for Check Point or
-	// Fortinet series.
+	// Management Interface Subnet. Select the subnet whose name contains “gateway and firewall management”. For GCP, `managementSubnet` must be in the form `cidr~~region~~name`. Required for Palo Alto Networks VM-Series and OCI Check Point firewalls. Otherwise, it must be empty.
 	ManagementSubnet *string `pulumi:"managementSubnet"`
-	// Management VPC ID. Required for GCP Palo Alto Networks VM-Series. Required to be empty for GCP Check Point or Fortinet
-	// series.
+	// Management VPC ID. Only used for GCP firewall. Required for Palo Alto Networks VM-Series, and required to be empty for Check Point or Fortinet series. Available as of provider version R2.18.1+.
 	ManagementVpcId *string `pulumi:"managementVpcId"`
-	// Authentication method. Applicable to Azure deployment only.
+	// Applicable to Azure or AzureGov deployment only.
 	Password *string `pulumi:"password"`
 	// Management Public IP.
 	PublicIp *string `pulumi:"publicIp"`
-	// Advanced option. Bootstrap storage name. Applicable to Azure and Fortinet Series deployment only.
+	// Advanced option. SAS URL Config. Applicable to Azure or AzureGov and Fortinet Series deployment only.
 	SasUrlConfig *string `pulumi:"sasUrlConfig"`
-	// Advanced option. Bootstrap storage name. Applicable to Azure and Fortinet Series deployment only.
+	// Advanced option. SAS URL License. Applicable to Azure or AzureGov and Fortinet Series deployment only.
 	SasUrlLicense *string `pulumi:"sasUrlLicense"`
-	// Advanced option. Share directory. Applicable to Azure and Palo Alto Networks VM-Series deployment only.
+	// Advanced option. Share directory. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series deployment only. Available as of provider version R2.17.1+.
 	ShareDirectory *string `pulumi:"shareDirectory"`
-	// Advanced option. Bic key. Applicable to Azure and Check Point Series deployment only.
+	// Advanced option. Sic key. Applicable to Check Point Series deployment only.
 	SicKey *string `pulumi:"sicKey"`
-	// Authentication method. Applicable to Azure deployment only.
+	// Applicable to Azure or AzureGov deployment only.
 	SshPublicKey *string `pulumi:"sshPublicKey"`
-	// Advanced option. Storage access key. Applicable to Azure and Palo Alto Networks VM-Series deployment only.
+	// Advanced option. Storage access key. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series deployment only. Available as of provider version R2.17.1+.
 	StorageAccessKey *string `pulumi:"storageAccessKey"`
-	// A map of tags to assign to the firewall instance.
+	// Mapping of key value pairs of tags for a firewall instance. Only available for AWS, AWSGov, GCP and Azure firewall instances. For AWS, AWSGov and Azure allowed characters are: letters, spaces, and numbers plus the following special characters: + - = . _ : @. For GCP allowed characters are: lowercase letters, numbers, "-" and "_". Example: {"key1" = "value1", "key2" = "value2"}.
 	Tags map[string]string `pulumi:"tags"`
-	// Advanced option. Bootstrap storage name. Applicable to Check Point Series and Fortinet Series deployment only.
+	// Advanced option. User Data. Applicable to Check Point Series and Fortinet Series deployment only. Type: String.
 	UserData *string `pulumi:"userData"`
-	// Applicable to Azure deployment only. 'admin' as a username is not accepted.
+	// Applicable to Azure or AzureGov deployment only. "admin" as a username is not accepted.
 	Username *string `pulumi:"username"`
-	// ID of the Security VPC.
+	// VPC ID of the Security VPC. For GCP, `vpcId` must be in the form vpc_id~-~gcloud_project_id.
 	VpcId *string `pulumi:"vpcId"`
-	// Availability Zone. Only available for AWS, GCP and Azure.
+	// Availability Zone. Required if creating a Firewall Instance with a Native AWS GWLB-enabled VPC. Applicable to AWS, Azure, and GCP only. Available as of provider version R2.17+.
 	Zone *string `pulumi:"zone"`
 }
 
 type AviatrixFirewallInstanceState struct {
-	// Availability domain for OCI.
+	// Availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 	AvailabilityDomain pulumi.StringPtrInput
-	// Advanced option. Bootstrap bucket name. Only available for AWS and GCP.
+	// Only available for AWS and GCP. For GCP, only Palo Alto Networks VM-Series deployment can use this attribute. In advanced mode, specify a bootstrap bucket name where the initial configuration and policy file is stored.
 	BootstrapBucketName pulumi.StringPtrInput
-	// Advanced option. Bootstrap storage name. Applicable to Azure and Palo Alto Networks VM-Series/Fortinet Series deployment
-	// only.
+	// Advanced option. Bootstrap storage name. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series/Fortinet Series deployment only. Available as of provider version R2.17.1+.
 	BootstrapStorageName pulumi.StringPtrInput
-	// Cloud Type
+	// Cloud Type.
 	CloudType pulumi.IntPtrInput
-	// Advanced option. Bootstrap storage name. Applicable to Azure and Fortinet Series deployment only.
+	// Advanced option. Container folder. Applicable to Azure or AzureGov and Fortinet Series deployment only.
 	ContainerFolder pulumi.StringPtrInput
 	// ID of Egress Interface created.
 	EgressInterface pulumi.StringPtrInput
-	// Egress Interface Subnet.
+	// Egress Interface Subnet. Select the subnet whose name contains “FW-ingress-egress”. For GCP, `egressSubnet` must be in the form `cidr~~region~~name`.
 	EgressSubnet pulumi.StringPtrInput
-	// Egress VPC ID. Required for GCP.
+	// Egress VPC ID. Required for GCP. Available as of provider version R2.18.1+.
 	EgressVpcId pulumi.StringPtrInput
-	// Fault domain for OCI.
+	// Fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 	FaultDomain pulumi.StringPtrInput
-	// Advanced option. File share folder. Applicable to Azure and Palo Alto Networks VM-Series deployment only.
+	// Advanced option. File share folder. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series deployment only. Available as of provider version R2.17.1+.
 	FileShareFolder pulumi.StringPtrInput
-	// Name of the primary FireNet gateway.
+	// Name of the primary FireNet gateway. **Required for all FireNet deployments that do not utilize the TGW-Integrated FireNet with AWS Native GWLB VPC.**
 	FirenetGwName pulumi.StringPtrInput
-	// One of the AWS AMIs from Palo Alto Networks.
+	// One of the AWS/Azure/GCP AMIs from various vendors such as Palo Alto Networks.
 	FirewallImage pulumi.StringPtrInput
-	// Firewall image ID.
+	// Firewall image ID. Applicable to AWS and Azure only. For AWS, please use AMI ID. For Azure, the format is “Publisher:Offer:Plan:Version”. Available as of provider version R2.19+.
 	FirewallImageId pulumi.StringPtrInput
-	// Version of firewall image.
+	// Version of firewall image. If not specified, Controller will automatically select the latest version available.
 	FirewallImageVersion pulumi.StringPtrInput
 	// Name of the firewall instance to be created.
 	FirewallName pulumi.StringPtrInput
-	// Instance size of the firewall.
+	// Instance size of the firewall. Example: "m5.xlarge".
 	FirewallSize pulumi.StringPtrInput
-	// GCP VPC ID
+	// GCP Only. The current VPC ID.
 	GcpVpcId pulumi.StringPtrInput
-	// Advanced option. IAM role. Only available for AWS.
+	// Only available for AWS. In advanced mode, create an IAM Role on the AWS account that launched the FireNet gateway. Create a policy to attach to the role. The policy is to allow access to "Bootstrap Bucket".
 	IamRole pulumi.StringPtrInput
 	// ID of the firewall instance created.
 	InstanceId pulumi.StringPtrInput
-	// Applicable to AWS deployment only. AWS Key Pair name. If not provided, a Key Pair will be generated.
+	// Applicable to AWS deployment only. AWS Key Pair name. If not provided a Key Pair will be generated.
 	KeyName pulumi.StringPtrInput
 	// ID of Lan Interface created.
 	LanInterface pulumi.StringPtrInput
 	// ID of Management Interface created.
 	ManagementInterface pulumi.StringPtrInput
-	// Management Interface Subnet. Required for Palo Alto Networks VM-Series, and required to be empty for Check Point or
-	// Fortinet series.
+	// Management Interface Subnet. Select the subnet whose name contains “gateway and firewall management”. For GCP, `managementSubnet` must be in the form `cidr~~region~~name`. Required for Palo Alto Networks VM-Series and OCI Check Point firewalls. Otherwise, it must be empty.
 	ManagementSubnet pulumi.StringPtrInput
-	// Management VPC ID. Required for GCP Palo Alto Networks VM-Series. Required to be empty for GCP Check Point or Fortinet
-	// series.
+	// Management VPC ID. Only used for GCP firewall. Required for Palo Alto Networks VM-Series, and required to be empty for Check Point or Fortinet series. Available as of provider version R2.18.1+.
 	ManagementVpcId pulumi.StringPtrInput
-	// Authentication method. Applicable to Azure deployment only.
+	// Applicable to Azure or AzureGov deployment only.
 	Password pulumi.StringPtrInput
 	// Management Public IP.
 	PublicIp pulumi.StringPtrInput
-	// Advanced option. Bootstrap storage name. Applicable to Azure and Fortinet Series deployment only.
+	// Advanced option. SAS URL Config. Applicable to Azure or AzureGov and Fortinet Series deployment only.
 	SasUrlConfig pulumi.StringPtrInput
-	// Advanced option. Bootstrap storage name. Applicable to Azure and Fortinet Series deployment only.
+	// Advanced option. SAS URL License. Applicable to Azure or AzureGov and Fortinet Series deployment only.
 	SasUrlLicense pulumi.StringPtrInput
-	// Advanced option. Share directory. Applicable to Azure and Palo Alto Networks VM-Series deployment only.
+	// Advanced option. Share directory. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series deployment only. Available as of provider version R2.17.1+.
 	ShareDirectory pulumi.StringPtrInput
-	// Advanced option. Bic key. Applicable to Azure and Check Point Series deployment only.
+	// Advanced option. Sic key. Applicable to Check Point Series deployment only.
 	SicKey pulumi.StringPtrInput
-	// Authentication method. Applicable to Azure deployment only.
+	// Applicable to Azure or AzureGov deployment only.
 	SshPublicKey pulumi.StringPtrInput
-	// Advanced option. Storage access key. Applicable to Azure and Palo Alto Networks VM-Series deployment only.
+	// Advanced option. Storage access key. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series deployment only. Available as of provider version R2.17.1+.
 	StorageAccessKey pulumi.StringPtrInput
-	// A map of tags to assign to the firewall instance.
+	// Mapping of key value pairs of tags for a firewall instance. Only available for AWS, AWSGov, GCP and Azure firewall instances. For AWS, AWSGov and Azure allowed characters are: letters, spaces, and numbers plus the following special characters: + - = . _ : @. For GCP allowed characters are: lowercase letters, numbers, "-" and "_". Example: {"key1" = "value1", "key2" = "value2"}.
 	Tags pulumi.StringMapInput
-	// Advanced option. Bootstrap storage name. Applicable to Check Point Series and Fortinet Series deployment only.
+	// Advanced option. User Data. Applicable to Check Point Series and Fortinet Series deployment only. Type: String.
 	UserData pulumi.StringPtrInput
-	// Applicable to Azure deployment only. 'admin' as a username is not accepted.
+	// Applicable to Azure or AzureGov deployment only. "admin" as a username is not accepted.
 	Username pulumi.StringPtrInput
-	// ID of the Security VPC.
+	// VPC ID of the Security VPC. For GCP, `vpcId` must be in the form vpc_id~-~gcloud_project_id.
 	VpcId pulumi.StringPtrInput
-	// Availability Zone. Only available for AWS, GCP and Azure.
+	// Availability Zone. Required if creating a Firewall Instance with a Native AWS GWLB-enabled VPC. Applicable to AWS, Azure, and GCP only. Available as of provider version R2.17+.
 	Zone pulumi.StringPtrInput
 }
 
@@ -302,135 +329,129 @@ func (AviatrixFirewallInstanceState) ElementType() reflect.Type {
 }
 
 type aviatrixFirewallInstanceArgs struct {
-	// Availability domain for OCI.
+	// Availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 	AvailabilityDomain *string `pulumi:"availabilityDomain"`
-	// Advanced option. Bootstrap bucket name. Only available for AWS and GCP.
+	// Only available for AWS and GCP. For GCP, only Palo Alto Networks VM-Series deployment can use this attribute. In advanced mode, specify a bootstrap bucket name where the initial configuration and policy file is stored.
 	BootstrapBucketName *string `pulumi:"bootstrapBucketName"`
-	// Advanced option. Bootstrap storage name. Applicable to Azure and Palo Alto Networks VM-Series/Fortinet Series deployment
-	// only.
+	// Advanced option. Bootstrap storage name. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series/Fortinet Series deployment only. Available as of provider version R2.17.1+.
 	BootstrapStorageName *string `pulumi:"bootstrapStorageName"`
-	// Advanced option. Bootstrap storage name. Applicable to Azure and Fortinet Series deployment only.
+	// Advanced option. Container folder. Applicable to Azure or AzureGov and Fortinet Series deployment only.
 	ContainerFolder *string `pulumi:"containerFolder"`
-	// Egress Interface Subnet.
+	// Egress Interface Subnet. Select the subnet whose name contains “FW-ingress-egress”. For GCP, `egressSubnet` must be in the form `cidr~~region~~name`.
 	EgressSubnet string `pulumi:"egressSubnet"`
-	// Egress VPC ID. Required for GCP.
+	// Egress VPC ID. Required for GCP. Available as of provider version R2.18.1+.
 	EgressVpcId *string `pulumi:"egressVpcId"`
-	// Fault domain for OCI.
+	// Fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 	FaultDomain *string `pulumi:"faultDomain"`
-	// Advanced option. File share folder. Applicable to Azure and Palo Alto Networks VM-Series deployment only.
+	// Advanced option. File share folder. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series deployment only. Available as of provider version R2.17.1+.
 	FileShareFolder *string `pulumi:"fileShareFolder"`
-	// Name of the primary FireNet gateway.
+	// Name of the primary FireNet gateway. **Required for all FireNet deployments that do not utilize the TGW-Integrated FireNet with AWS Native GWLB VPC.**
 	FirenetGwName *string `pulumi:"firenetGwName"`
-	// One of the AWS AMIs from Palo Alto Networks.
+	// One of the AWS/Azure/GCP AMIs from various vendors such as Palo Alto Networks.
 	FirewallImage string `pulumi:"firewallImage"`
-	// Firewall image ID.
+	// Firewall image ID. Applicable to AWS and Azure only. For AWS, please use AMI ID. For Azure, the format is “Publisher:Offer:Plan:Version”. Available as of provider version R2.19+.
 	FirewallImageId *string `pulumi:"firewallImageId"`
-	// Version of firewall image.
+	// Version of firewall image. If not specified, Controller will automatically select the latest version available.
 	FirewallImageVersion *string `pulumi:"firewallImageVersion"`
 	// Name of the firewall instance to be created.
 	FirewallName string `pulumi:"firewallName"`
-	// Instance size of the firewall.
+	// Instance size of the firewall. Example: "m5.xlarge".
 	FirewallSize string `pulumi:"firewallSize"`
-	// Advanced option. IAM role. Only available for AWS.
+	// Only available for AWS. In advanced mode, create an IAM Role on the AWS account that launched the FireNet gateway. Create a policy to attach to the role. The policy is to allow access to "Bootstrap Bucket".
 	IamRole *string `pulumi:"iamRole"`
-	// Applicable to AWS deployment only. AWS Key Pair name. If not provided, a Key Pair will be generated.
+	// Applicable to AWS deployment only. AWS Key Pair name. If not provided a Key Pair will be generated.
 	KeyName *string `pulumi:"keyName"`
-	// Management Interface Subnet. Required for Palo Alto Networks VM-Series, and required to be empty for Check Point or
-	// Fortinet series.
+	// Management Interface Subnet. Select the subnet whose name contains “gateway and firewall management”. For GCP, `managementSubnet` must be in the form `cidr~~region~~name`. Required for Palo Alto Networks VM-Series and OCI Check Point firewalls. Otherwise, it must be empty.
 	ManagementSubnet *string `pulumi:"managementSubnet"`
-	// Management VPC ID. Required for GCP Palo Alto Networks VM-Series. Required to be empty for GCP Check Point or Fortinet
-	// series.
+	// Management VPC ID. Only used for GCP firewall. Required for Palo Alto Networks VM-Series, and required to be empty for Check Point or Fortinet series. Available as of provider version R2.18.1+.
 	ManagementVpcId *string `pulumi:"managementVpcId"`
-	// Authentication method. Applicable to Azure deployment only.
+	// Applicable to Azure or AzureGov deployment only.
 	Password *string `pulumi:"password"`
-	// Advanced option. Bootstrap storage name. Applicable to Azure and Fortinet Series deployment only.
+	// Advanced option. SAS URL Config. Applicable to Azure or AzureGov and Fortinet Series deployment only.
 	SasUrlConfig *string `pulumi:"sasUrlConfig"`
-	// Advanced option. Bootstrap storage name. Applicable to Azure and Fortinet Series deployment only.
+	// Advanced option. SAS URL License. Applicable to Azure or AzureGov and Fortinet Series deployment only.
 	SasUrlLicense *string `pulumi:"sasUrlLicense"`
-	// Advanced option. Share directory. Applicable to Azure and Palo Alto Networks VM-Series deployment only.
+	// Advanced option. Share directory. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series deployment only. Available as of provider version R2.17.1+.
 	ShareDirectory *string `pulumi:"shareDirectory"`
-	// Advanced option. Bic key. Applicable to Azure and Check Point Series deployment only.
+	// Advanced option. Sic key. Applicable to Check Point Series deployment only.
 	SicKey *string `pulumi:"sicKey"`
-	// Authentication method. Applicable to Azure deployment only.
+	// Applicable to Azure or AzureGov deployment only.
 	SshPublicKey *string `pulumi:"sshPublicKey"`
-	// Advanced option. Storage access key. Applicable to Azure and Palo Alto Networks VM-Series deployment only.
+	// Advanced option. Storage access key. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series deployment only. Available as of provider version R2.17.1+.
 	StorageAccessKey *string `pulumi:"storageAccessKey"`
-	// A map of tags to assign to the firewall instance.
+	// Mapping of key value pairs of tags for a firewall instance. Only available for AWS, AWSGov, GCP and Azure firewall instances. For AWS, AWSGov and Azure allowed characters are: letters, spaces, and numbers plus the following special characters: + - = . _ : @. For GCP allowed characters are: lowercase letters, numbers, "-" and "_". Example: {"key1" = "value1", "key2" = "value2"}.
 	Tags map[string]string `pulumi:"tags"`
-	// Advanced option. Bootstrap storage name. Applicable to Check Point Series and Fortinet Series deployment only.
+	// Advanced option. User Data. Applicable to Check Point Series and Fortinet Series deployment only. Type: String.
 	UserData *string `pulumi:"userData"`
-	// Applicable to Azure deployment only. 'admin' as a username is not accepted.
+	// Applicable to Azure or AzureGov deployment only. "admin" as a username is not accepted.
 	Username *string `pulumi:"username"`
-	// ID of the Security VPC.
+	// VPC ID of the Security VPC. For GCP, `vpcId` must be in the form vpc_id~-~gcloud_project_id.
 	VpcId string `pulumi:"vpcId"`
-	// Availability Zone. Only available for AWS, GCP and Azure.
+	// Availability Zone. Required if creating a Firewall Instance with a Native AWS GWLB-enabled VPC. Applicable to AWS, Azure, and GCP only. Available as of provider version R2.17+.
 	Zone *string `pulumi:"zone"`
 }
 
 // The set of arguments for constructing a AviatrixFirewallInstance resource.
 type AviatrixFirewallInstanceArgs struct {
-	// Availability domain for OCI.
+	// Availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 	AvailabilityDomain pulumi.StringPtrInput
-	// Advanced option. Bootstrap bucket name. Only available for AWS and GCP.
+	// Only available for AWS and GCP. For GCP, only Palo Alto Networks VM-Series deployment can use this attribute. In advanced mode, specify a bootstrap bucket name where the initial configuration and policy file is stored.
 	BootstrapBucketName pulumi.StringPtrInput
-	// Advanced option. Bootstrap storage name. Applicable to Azure and Palo Alto Networks VM-Series/Fortinet Series deployment
-	// only.
+	// Advanced option. Bootstrap storage name. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series/Fortinet Series deployment only. Available as of provider version R2.17.1+.
 	BootstrapStorageName pulumi.StringPtrInput
-	// Advanced option. Bootstrap storage name. Applicable to Azure and Fortinet Series deployment only.
+	// Advanced option. Container folder. Applicable to Azure or AzureGov and Fortinet Series deployment only.
 	ContainerFolder pulumi.StringPtrInput
-	// Egress Interface Subnet.
+	// Egress Interface Subnet. Select the subnet whose name contains “FW-ingress-egress”. For GCP, `egressSubnet` must be in the form `cidr~~region~~name`.
 	EgressSubnet pulumi.StringInput
-	// Egress VPC ID. Required for GCP.
+	// Egress VPC ID. Required for GCP. Available as of provider version R2.18.1+.
 	EgressVpcId pulumi.StringPtrInput
-	// Fault domain for OCI.
+	// Fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 	FaultDomain pulumi.StringPtrInput
-	// Advanced option. File share folder. Applicable to Azure and Palo Alto Networks VM-Series deployment only.
+	// Advanced option. File share folder. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series deployment only. Available as of provider version R2.17.1+.
 	FileShareFolder pulumi.StringPtrInput
-	// Name of the primary FireNet gateway.
+	// Name of the primary FireNet gateway. **Required for all FireNet deployments that do not utilize the TGW-Integrated FireNet with AWS Native GWLB VPC.**
 	FirenetGwName pulumi.StringPtrInput
-	// One of the AWS AMIs from Palo Alto Networks.
+	// One of the AWS/Azure/GCP AMIs from various vendors such as Palo Alto Networks.
 	FirewallImage pulumi.StringInput
-	// Firewall image ID.
+	// Firewall image ID. Applicable to AWS and Azure only. For AWS, please use AMI ID. For Azure, the format is “Publisher:Offer:Plan:Version”. Available as of provider version R2.19+.
 	FirewallImageId pulumi.StringPtrInput
-	// Version of firewall image.
+	// Version of firewall image. If not specified, Controller will automatically select the latest version available.
 	FirewallImageVersion pulumi.StringPtrInput
 	// Name of the firewall instance to be created.
 	FirewallName pulumi.StringInput
-	// Instance size of the firewall.
+	// Instance size of the firewall. Example: "m5.xlarge".
 	FirewallSize pulumi.StringInput
-	// Advanced option. IAM role. Only available for AWS.
+	// Only available for AWS. In advanced mode, create an IAM Role on the AWS account that launched the FireNet gateway. Create a policy to attach to the role. The policy is to allow access to "Bootstrap Bucket".
 	IamRole pulumi.StringPtrInput
-	// Applicable to AWS deployment only. AWS Key Pair name. If not provided, a Key Pair will be generated.
+	// Applicable to AWS deployment only. AWS Key Pair name. If not provided a Key Pair will be generated.
 	KeyName pulumi.StringPtrInput
-	// Management Interface Subnet. Required for Palo Alto Networks VM-Series, and required to be empty for Check Point or
-	// Fortinet series.
+	// Management Interface Subnet. Select the subnet whose name contains “gateway and firewall management”. For GCP, `managementSubnet` must be in the form `cidr~~region~~name`. Required for Palo Alto Networks VM-Series and OCI Check Point firewalls. Otherwise, it must be empty.
 	ManagementSubnet pulumi.StringPtrInput
-	// Management VPC ID. Required for GCP Palo Alto Networks VM-Series. Required to be empty for GCP Check Point or Fortinet
-	// series.
+	// Management VPC ID. Only used for GCP firewall. Required for Palo Alto Networks VM-Series, and required to be empty for Check Point or Fortinet series. Available as of provider version R2.18.1+.
 	ManagementVpcId pulumi.StringPtrInput
-	// Authentication method. Applicable to Azure deployment only.
+	// Applicable to Azure or AzureGov deployment only.
 	Password pulumi.StringPtrInput
-	// Advanced option. Bootstrap storage name. Applicable to Azure and Fortinet Series deployment only.
+	// Advanced option. SAS URL Config. Applicable to Azure or AzureGov and Fortinet Series deployment only.
 	SasUrlConfig pulumi.StringPtrInput
-	// Advanced option. Bootstrap storage name. Applicable to Azure and Fortinet Series deployment only.
+	// Advanced option. SAS URL License. Applicable to Azure or AzureGov and Fortinet Series deployment only.
 	SasUrlLicense pulumi.StringPtrInput
-	// Advanced option. Share directory. Applicable to Azure and Palo Alto Networks VM-Series deployment only.
+	// Advanced option. Share directory. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series deployment only. Available as of provider version R2.17.1+.
 	ShareDirectory pulumi.StringPtrInput
-	// Advanced option. Bic key. Applicable to Azure and Check Point Series deployment only.
+	// Advanced option. Sic key. Applicable to Check Point Series deployment only.
 	SicKey pulumi.StringPtrInput
-	// Authentication method. Applicable to Azure deployment only.
+	// Applicable to Azure or AzureGov deployment only.
 	SshPublicKey pulumi.StringPtrInput
-	// Advanced option. Storage access key. Applicable to Azure and Palo Alto Networks VM-Series deployment only.
+	// Advanced option. Storage access key. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series deployment only. Available as of provider version R2.17.1+.
 	StorageAccessKey pulumi.StringPtrInput
-	// A map of tags to assign to the firewall instance.
+	// Mapping of key value pairs of tags for a firewall instance. Only available for AWS, AWSGov, GCP and Azure firewall instances. For AWS, AWSGov and Azure allowed characters are: letters, spaces, and numbers plus the following special characters: + - = . _ : @. For GCP allowed characters are: lowercase letters, numbers, "-" and "_". Example: {"key1" = "value1", "key2" = "value2"}.
 	Tags pulumi.StringMapInput
-	// Advanced option. Bootstrap storage name. Applicable to Check Point Series and Fortinet Series deployment only.
+	// Advanced option. User Data. Applicable to Check Point Series and Fortinet Series deployment only. Type: String.
 	UserData pulumi.StringPtrInput
-	// Applicable to Azure deployment only. 'admin' as a username is not accepted.
+	// Applicable to Azure or AzureGov deployment only. "admin" as a username is not accepted.
 	Username pulumi.StringPtrInput
-	// ID of the Security VPC.
+	// VPC ID of the Security VPC. For GCP, `vpcId` must be in the form vpc_id~-~gcloud_project_id.
 	VpcId pulumi.StringInput
-	// Availability Zone. Only available for AWS, GCP and Azure.
+	// Availability Zone. Required if creating a Firewall Instance with a Native AWS GWLB-enabled VPC. Applicable to AWS, Azure, and GCP only. Available as of provider version R2.17+.
 	Zone pulumi.StringPtrInput
 }
 
@@ -521,28 +542,27 @@ func (o AviatrixFirewallInstanceOutput) ToAviatrixFirewallInstanceOutputWithCont
 	return o
 }
 
-// Availability domain for OCI.
+// Availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 func (o AviatrixFirewallInstanceOutput) AvailabilityDomain() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringOutput { return v.AvailabilityDomain }).(pulumi.StringOutput)
 }
 
-// Advanced option. Bootstrap bucket name. Only available for AWS and GCP.
+// Only available for AWS and GCP. For GCP, only Palo Alto Networks VM-Series deployment can use this attribute. In advanced mode, specify a bootstrap bucket name where the initial configuration and policy file is stored.
 func (o AviatrixFirewallInstanceOutput) BootstrapBucketName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringPtrOutput { return v.BootstrapBucketName }).(pulumi.StringPtrOutput)
 }
 
-// Advanced option. Bootstrap storage name. Applicable to Azure and Palo Alto Networks VM-Series/Fortinet Series deployment
-// only.
+// Advanced option. Bootstrap storage name. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series/Fortinet Series deployment only. Available as of provider version R2.17.1+.
 func (o AviatrixFirewallInstanceOutput) BootstrapStorageName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringPtrOutput { return v.BootstrapStorageName }).(pulumi.StringPtrOutput)
 }
 
-// Cloud Type
+// Cloud Type.
 func (o AviatrixFirewallInstanceOutput) CloudType() pulumi.IntOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.IntOutput { return v.CloudType }).(pulumi.IntOutput)
 }
 
-// Advanced option. Bootstrap storage name. Applicable to Azure and Fortinet Series deployment only.
+// Advanced option. Container folder. Applicable to Azure or AzureGov and Fortinet Series deployment only.
 func (o AviatrixFirewallInstanceOutput) ContainerFolder() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringPtrOutput { return v.ContainerFolder }).(pulumi.StringPtrOutput)
 }
@@ -552,42 +572,42 @@ func (o AviatrixFirewallInstanceOutput) EgressInterface() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringOutput { return v.EgressInterface }).(pulumi.StringOutput)
 }
 
-// Egress Interface Subnet.
+// Egress Interface Subnet. Select the subnet whose name contains “FW-ingress-egress”. For GCP, `egressSubnet` must be in the form `cidr~~region~~name`.
 func (o AviatrixFirewallInstanceOutput) EgressSubnet() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringOutput { return v.EgressSubnet }).(pulumi.StringOutput)
 }
 
-// Egress VPC ID. Required for GCP.
+// Egress VPC ID. Required for GCP. Available as of provider version R2.18.1+.
 func (o AviatrixFirewallInstanceOutput) EgressVpcId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringPtrOutput { return v.EgressVpcId }).(pulumi.StringPtrOutput)
 }
 
-// Fault domain for OCI.
+// Fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 func (o AviatrixFirewallInstanceOutput) FaultDomain() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringOutput { return v.FaultDomain }).(pulumi.StringOutput)
 }
 
-// Advanced option. File share folder. Applicable to Azure and Palo Alto Networks VM-Series deployment only.
+// Advanced option. File share folder. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series deployment only. Available as of provider version R2.17.1+.
 func (o AviatrixFirewallInstanceOutput) FileShareFolder() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringPtrOutput { return v.FileShareFolder }).(pulumi.StringPtrOutput)
 }
 
-// Name of the primary FireNet gateway.
+// Name of the primary FireNet gateway. **Required for all FireNet deployments that do not utilize the TGW-Integrated FireNet with AWS Native GWLB VPC.**
 func (o AviatrixFirewallInstanceOutput) FirenetGwName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringPtrOutput { return v.FirenetGwName }).(pulumi.StringPtrOutput)
 }
 
-// One of the AWS AMIs from Palo Alto Networks.
+// One of the AWS/Azure/GCP AMIs from various vendors such as Palo Alto Networks.
 func (o AviatrixFirewallInstanceOutput) FirewallImage() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringOutput { return v.FirewallImage }).(pulumi.StringOutput)
 }
 
-// Firewall image ID.
+// Firewall image ID. Applicable to AWS and Azure only. For AWS, please use AMI ID. For Azure, the format is “Publisher:Offer:Plan:Version”. Available as of provider version R2.19+.
 func (o AviatrixFirewallInstanceOutput) FirewallImageId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringOutput { return v.FirewallImageId }).(pulumi.StringOutput)
 }
 
-// Version of firewall image.
+// Version of firewall image. If not specified, Controller will automatically select the latest version available.
 func (o AviatrixFirewallInstanceOutput) FirewallImageVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringOutput { return v.FirewallImageVersion }).(pulumi.StringOutput)
 }
@@ -597,17 +617,17 @@ func (o AviatrixFirewallInstanceOutput) FirewallName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringOutput { return v.FirewallName }).(pulumi.StringOutput)
 }
 
-// Instance size of the firewall.
+// Instance size of the firewall. Example: "m5.xlarge".
 func (o AviatrixFirewallInstanceOutput) FirewallSize() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringOutput { return v.FirewallSize }).(pulumi.StringOutput)
 }
 
-// GCP VPC ID
+// GCP Only. The current VPC ID.
 func (o AviatrixFirewallInstanceOutput) GcpVpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringOutput { return v.GcpVpcId }).(pulumi.StringOutput)
 }
 
-// Advanced option. IAM role. Only available for AWS.
+// Only available for AWS. In advanced mode, create an IAM Role on the AWS account that launched the FireNet gateway. Create a policy to attach to the role. The policy is to allow access to "Bootstrap Bucket".
 func (o AviatrixFirewallInstanceOutput) IamRole() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringPtrOutput { return v.IamRole }).(pulumi.StringPtrOutput)
 }
@@ -617,7 +637,7 @@ func (o AviatrixFirewallInstanceOutput) InstanceId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringOutput { return v.InstanceId }).(pulumi.StringOutput)
 }
 
-// Applicable to AWS deployment only. AWS Key Pair name. If not provided, a Key Pair will be generated.
+// Applicable to AWS deployment only. AWS Key Pair name. If not provided a Key Pair will be generated.
 func (o AviatrixFirewallInstanceOutput) KeyName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringPtrOutput { return v.KeyName }).(pulumi.StringPtrOutput)
 }
@@ -632,19 +652,17 @@ func (o AviatrixFirewallInstanceOutput) ManagementInterface() pulumi.StringOutpu
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringOutput { return v.ManagementInterface }).(pulumi.StringOutput)
 }
 
-// Management Interface Subnet. Required for Palo Alto Networks VM-Series, and required to be empty for Check Point or
-// Fortinet series.
+// Management Interface Subnet. Select the subnet whose name contains “gateway and firewall management”. For GCP, `managementSubnet` must be in the form `cidr~~region~~name`. Required for Palo Alto Networks VM-Series and OCI Check Point firewalls. Otherwise, it must be empty.
 func (o AviatrixFirewallInstanceOutput) ManagementSubnet() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringPtrOutput { return v.ManagementSubnet }).(pulumi.StringPtrOutput)
 }
 
-// Management VPC ID. Required for GCP Palo Alto Networks VM-Series. Required to be empty for GCP Check Point or Fortinet
-// series.
+// Management VPC ID. Only used for GCP firewall. Required for Palo Alto Networks VM-Series, and required to be empty for Check Point or Fortinet series. Available as of provider version R2.18.1+.
 func (o AviatrixFirewallInstanceOutput) ManagementVpcId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringPtrOutput { return v.ManagementVpcId }).(pulumi.StringPtrOutput)
 }
 
-// Authentication method. Applicable to Azure deployment only.
+// Applicable to Azure or AzureGov deployment only.
 func (o AviatrixFirewallInstanceOutput) Password() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringPtrOutput { return v.Password }).(pulumi.StringPtrOutput)
 }
@@ -654,57 +672,57 @@ func (o AviatrixFirewallInstanceOutput) PublicIp() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringOutput { return v.PublicIp }).(pulumi.StringOutput)
 }
 
-// Advanced option. Bootstrap storage name. Applicable to Azure and Fortinet Series deployment only.
+// Advanced option. SAS URL Config. Applicable to Azure or AzureGov and Fortinet Series deployment only.
 func (o AviatrixFirewallInstanceOutput) SasUrlConfig() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringPtrOutput { return v.SasUrlConfig }).(pulumi.StringPtrOutput)
 }
 
-// Advanced option. Bootstrap storage name. Applicable to Azure and Fortinet Series deployment only.
+// Advanced option. SAS URL License. Applicable to Azure or AzureGov and Fortinet Series deployment only.
 func (o AviatrixFirewallInstanceOutput) SasUrlLicense() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringPtrOutput { return v.SasUrlLicense }).(pulumi.StringPtrOutput)
 }
 
-// Advanced option. Share directory. Applicable to Azure and Palo Alto Networks VM-Series deployment only.
+// Advanced option. Share directory. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series deployment only. Available as of provider version R2.17.1+.
 func (o AviatrixFirewallInstanceOutput) ShareDirectory() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringPtrOutput { return v.ShareDirectory }).(pulumi.StringPtrOutput)
 }
 
-// Advanced option. Bic key. Applicable to Azure and Check Point Series deployment only.
+// Advanced option. Sic key. Applicable to Check Point Series deployment only.
 func (o AviatrixFirewallInstanceOutput) SicKey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringPtrOutput { return v.SicKey }).(pulumi.StringPtrOutput)
 }
 
-// Authentication method. Applicable to Azure deployment only.
+// Applicable to Azure or AzureGov deployment only.
 func (o AviatrixFirewallInstanceOutput) SshPublicKey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringPtrOutput { return v.SshPublicKey }).(pulumi.StringPtrOutput)
 }
 
-// Advanced option. Storage access key. Applicable to Azure and Palo Alto Networks VM-Series deployment only.
+// Advanced option. Storage access key. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series deployment only. Available as of provider version R2.17.1+.
 func (o AviatrixFirewallInstanceOutput) StorageAccessKey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringPtrOutput { return v.StorageAccessKey }).(pulumi.StringPtrOutput)
 }
 
-// A map of tags to assign to the firewall instance.
+// Mapping of key value pairs of tags for a firewall instance. Only available for AWS, AWSGov, GCP and Azure firewall instances. For AWS, AWSGov and Azure allowed characters are: letters, spaces, and numbers plus the following special characters: + - = . _ : @. For GCP allowed characters are: lowercase letters, numbers, "-" and "_". Example: {"key1" = "value1", "key2" = "value2"}.
 func (o AviatrixFirewallInstanceOutput) Tags() pulumi.StringMapOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringMapOutput { return v.Tags }).(pulumi.StringMapOutput)
 }
 
-// Advanced option. Bootstrap storage name. Applicable to Check Point Series and Fortinet Series deployment only.
+// Advanced option. User Data. Applicable to Check Point Series and Fortinet Series deployment only. Type: String.
 func (o AviatrixFirewallInstanceOutput) UserData() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringPtrOutput { return v.UserData }).(pulumi.StringPtrOutput)
 }
 
-// Applicable to Azure deployment only. 'admin' as a username is not accepted.
+// Applicable to Azure or AzureGov deployment only. "admin" as a username is not accepted.
 func (o AviatrixFirewallInstanceOutput) Username() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringPtrOutput { return v.Username }).(pulumi.StringPtrOutput)
 }
 
-// ID of the Security VPC.
+// VPC ID of the Security VPC. For GCP, `vpcId` must be in the form vpc_id~-~gcloud_project_id.
 func (o AviatrixFirewallInstanceOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
 }
 
-// Availability Zone. Only available for AWS, GCP and Azure.
+// Availability Zone. Required if creating a Firewall Instance with a Native AWS GWLB-enabled VPC. Applicable to AWS, Azure, and GCP only. Available as of provider version R2.17+.
 func (o AviatrixFirewallInstanceOutput) Zone() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixFirewallInstance) pulumi.StringOutput { return v.Zone }).(pulumi.StringOutput)
 }

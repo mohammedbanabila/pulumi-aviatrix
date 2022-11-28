@@ -9,17 +9,56 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Gateway FQDN filter pass-through
+    ///     var testFqdnPassThrough = new Aviatrix.AviatrixFqdnPassThrough("testFqdnPassThrough", new()
+    ///     {
+    ///         GwName = aviatrix_gateway.Test_gw_aws.Gw_name,
+    ///         PassThroughCidrs = new[]
+    ///         {
+    ///             "10.0.0.0/24",
+    ///             "10.0.1.0/24",
+    ///             "10.0.2.0/24",
+    ///         },
+    ///     }, new CustomResourceOptions
+    ///     {
+    ///         DependsOn = new[]
+    ///         {
+    ///             aviatrix_fqdn.Test_fqdn,
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **fqdn_pass_through** can be imported using the `gw_name`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixFqdnPassThrough:AviatrixFqdnPassThrough test gw_name
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixFqdnPassThrough:AviatrixFqdnPassThrough")]
     public partial class AviatrixFqdnPassThrough : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Gateway to apply FQDN pass-through rules to.
+        /// Gateway name to apply pass-through rules to.
         /// </summary>
         [Output("gwName")]
         public Output<string> GwName { get; private set; } = null!;
 
         /// <summary>
-        /// CIDRs to allow originating requests to ignore FQDN filtering rules.
+        /// List of origin CIDR's to allow to pass-through FQDN filtering rules. Minimum list length: 1.
         /// </summary>
         [Output("passThroughCidrs")]
         public Output<ImmutableArray<string>> PassThroughCidrs { get; private set; } = null!;
@@ -72,7 +111,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixFqdnPassThroughArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Gateway to apply FQDN pass-through rules to.
+        /// Gateway name to apply pass-through rules to.
         /// </summary>
         [Input("gwName", required: true)]
         public Input<string> GwName { get; set; } = null!;
@@ -81,7 +120,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _passThroughCidrs;
 
         /// <summary>
-        /// CIDRs to allow originating requests to ignore FQDN filtering rules.
+        /// List of origin CIDR's to allow to pass-through FQDN filtering rules. Minimum list length: 1.
         /// </summary>
         public InputList<string> PassThroughCidrs
         {
@@ -98,7 +137,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixFqdnPassThroughState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Gateway to apply FQDN pass-through rules to.
+        /// Gateway name to apply pass-through rules to.
         /// </summary>
         [Input("gwName")]
         public Input<string>? GwName { get; set; }
@@ -107,7 +146,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _passThroughCidrs;
 
         /// <summary>
-        /// CIDRs to allow originating requests to ignore FQDN filtering rules.
+        /// List of origin CIDR's to allow to pass-through FQDN filtering rules. Minimum list length: 1.
         /// </summary>
         public InputList<string> PassThroughCidrs
         {

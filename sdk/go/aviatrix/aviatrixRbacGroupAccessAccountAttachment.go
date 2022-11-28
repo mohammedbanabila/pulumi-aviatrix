@@ -11,12 +11,50 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_rbac_group_access_account_attachment** resource allows the creation and management of access account attachments to Aviatrix (Role-Based Access Control) RBAC groups.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixRbacGroupAccessAccountAttachment(ctx, "testAttachment", &aviatrix.AviatrixRbacGroupAccessAccountAttachmentArgs{
+//				AccessAccountName: pulumi.String("account_name"),
+//				GroupName:         pulumi.String("write_only"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **rbac_group_access_account_attachment** can be imported using the `group_name` and `access_account_name`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixRbacGroupAccessAccountAttachment:AviatrixRbacGroupAccessAccountAttachment test group_name~access_account_name
+//
+// ```
 type AviatrixRbacGroupAccessAccountAttachment struct {
 	pulumi.CustomResourceState
 
-	// Access account name.
+	// Account name. This can be used for logging in to CloudN console or UserConnect controller.
 	AccessAccountName pulumi.StringOutput `pulumi:"accessAccountName"`
-	// RBAC permission group name.
+	// This parameter represents the name of a RBAC group.
 	GroupName pulumi.StringOutput `pulumi:"groupName"`
 }
 
@@ -56,16 +94,16 @@ func GetAviatrixRbacGroupAccessAccountAttachment(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixRbacGroupAccessAccountAttachment resources.
 type aviatrixRbacGroupAccessAccountAttachmentState struct {
-	// Access account name.
+	// Account name. This can be used for logging in to CloudN console or UserConnect controller.
 	AccessAccountName *string `pulumi:"accessAccountName"`
-	// RBAC permission group name.
+	// This parameter represents the name of a RBAC group.
 	GroupName *string `pulumi:"groupName"`
 }
 
 type AviatrixRbacGroupAccessAccountAttachmentState struct {
-	// Access account name.
+	// Account name. This can be used for logging in to CloudN console or UserConnect controller.
 	AccessAccountName pulumi.StringPtrInput
-	// RBAC permission group name.
+	// This parameter represents the name of a RBAC group.
 	GroupName pulumi.StringPtrInput
 }
 
@@ -74,17 +112,17 @@ func (AviatrixRbacGroupAccessAccountAttachmentState) ElementType() reflect.Type 
 }
 
 type aviatrixRbacGroupAccessAccountAttachmentArgs struct {
-	// Access account name.
+	// Account name. This can be used for logging in to CloudN console or UserConnect controller.
 	AccessAccountName string `pulumi:"accessAccountName"`
-	// RBAC permission group name.
+	// This parameter represents the name of a RBAC group.
 	GroupName string `pulumi:"groupName"`
 }
 
 // The set of arguments for constructing a AviatrixRbacGroupAccessAccountAttachment resource.
 type AviatrixRbacGroupAccessAccountAttachmentArgs struct {
-	// Access account name.
+	// Account name. This can be used for logging in to CloudN console or UserConnect controller.
 	AccessAccountName pulumi.StringInput
-	// RBAC permission group name.
+	// This parameter represents the name of a RBAC group.
 	GroupName pulumi.StringInput
 }
 
@@ -175,12 +213,12 @@ func (o AviatrixRbacGroupAccessAccountAttachmentOutput) ToAviatrixRbacGroupAcces
 	return o
 }
 
-// Access account name.
+// Account name. This can be used for logging in to CloudN console or UserConnect controller.
 func (o AviatrixRbacGroupAccessAccountAttachmentOutput) AccessAccountName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixRbacGroupAccessAccountAttachment) pulumi.StringOutput { return v.AccessAccountName }).(pulumi.StringOutput)
 }
 
-// RBAC permission group name.
+// This parameter represents the name of a RBAC group.
 func (o AviatrixRbacGroupAccessAccountAttachmentOutput) GroupName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixRbacGroupAccessAccountAttachment) pulumi.StringOutput { return v.GroupName }).(pulumi.StringOutput)
 }

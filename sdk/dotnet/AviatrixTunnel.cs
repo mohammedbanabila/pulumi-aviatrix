@@ -9,11 +9,41 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_tunnel** resource allows the creation and management of Aviatrix Encrypted Peering tunnels.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix AWS Tunnel
+    ///     var testTunnel = new Aviatrix.AviatrixTunnel("testTunnel", new()
+    ///     {
+    ///         GwName1 = "avtx-gw1",
+    ///         GwName2 = "avtx-gw2",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **tunnel** can be imported using the `gw_name1` and `gw_name2`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixTunnel:AviatrixTunnel test gw_name1~gw_name2
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixTunnel:AviatrixTunnel")]
     public partial class AviatrixTunnel : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Whether Peering HA is enabled. Valid inputs: true or false.
+        /// Enable this attribute if peering-HA is enabled on the gateways. Valid values: true, false. Default value: false.
         /// </summary>
         [Output("enableHa")]
         public Output<bool?> EnableHa { get; private set; } = null!;
@@ -31,19 +61,19 @@ namespace Pulumi.Aviatrix
         public Output<string> GwName2 { get; private set; } = null!;
 
         /// <summary>
-        /// Status of the HA tunnel.
+        /// (Computed) Status of the HA tunnel.
         /// </summary>
         [Output("peeringHastatus")]
         public Output<string> PeeringHastatus { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the peering link.
+        /// (Computed) Name of the peering link.
         /// </summary>
         [Output("peeringLink")]
         public Output<string> PeeringLink { get; private set; } = null!;
 
         /// <summary>
-        /// Status of the tunnel.
+        /// (Computed) Status of the tunnel.
         /// </summary>
         [Output("peeringState")]
         public Output<string> PeeringState { get; private set; } = null!;
@@ -96,7 +126,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixTunnelArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Whether Peering HA is enabled. Valid inputs: true or false.
+        /// Enable this attribute if peering-HA is enabled on the gateways. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableHa")]
         public Input<bool>? EnableHa { get; set; }
@@ -122,7 +152,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixTunnelState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Whether Peering HA is enabled. Valid inputs: true or false.
+        /// Enable this attribute if peering-HA is enabled on the gateways. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableHa")]
         public Input<bool>? EnableHa { get; set; }
@@ -140,19 +170,19 @@ namespace Pulumi.Aviatrix
         public Input<string>? GwName2 { get; set; }
 
         /// <summary>
-        /// Status of the HA tunnel.
+        /// (Computed) Status of the HA tunnel.
         /// </summary>
         [Input("peeringHastatus")]
         public Input<string>? PeeringHastatus { get; set; }
 
         /// <summary>
-        /// Name of the peering link.
+        /// (Computed) Name of the peering link.
         /// </summary>
         [Input("peeringLink")]
         public Input<string>? PeeringLink { get; set; }
 
         /// <summary>
-        /// Status of the tunnel.
+        /// (Computed) Status of the tunnel.
         /// </summary>
         [Input("peeringState")]
         public Input<string>? PeeringState { get; set; }

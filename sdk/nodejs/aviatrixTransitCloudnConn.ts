@@ -4,6 +4,57 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_transit_cloudn_conn** resource creates and manages the connection between an Aviatrix Transit Gateway and an Aviatrix CloudN device. Available as of provider version R2.21.0+.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Transit Gateway to CloudN Connection
+ * const test = new aviatrix.AviatrixTransitCloudnConn("test", {
+ *     bgpLocalAsNum: "123",
+ *     cloudnAsNum: "345",
+ *     cloudnNeighborAsNum: "65005",
+ *     cloudnNeighborIp: "182.1.2.3",
+ *     cloudnRemoteIp: "172.12.13.14",
+ *     connectionName: "my_conn",
+ *     gwName: "transitGw",
+ *     vpcId: "vpc-abcd1234",
+ * });
+ * ```
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Transit Gateway to CloudN Connection with HA
+ * const test = new aviatrix.AviatrixTransitCloudnConn("test", {
+ *     backupCloudnAsNum: "123",
+ *     backupCloudnIp: "1.2.3.6",
+ *     backupCloudnNeighborAsNum: "345",
+ *     backupCloudnNeighborIp: "1.2.3.7",
+ *     bgpLocalAsNum: "123",
+ *     cloudnAsNum: "345",
+ *     cloudnNeighborAsNum: "65005",
+ *     cloudnNeighborIp: "1.2.3.5",
+ *     cloudnRemoteIp: "1.2.3.4",
+ *     connectionName: "my_conn",
+ *     enableHa: true,
+ *     gwName: "transitGw",
+ *     vpcId: "vpc-abcd1234",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **transit_cloudn_conn** can be imported using the `connection_name` and `vpc_id`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixTransitCloudnConn:AviatrixTransitCloudnConn test connection_name~vpc_id
+ * ```
+ */
 export class AviatrixTransitCloudnConn extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixTransitCloudnConn resource's state with the given name, ID, and optional extra
@@ -33,83 +84,83 @@ export class AviatrixTransitCloudnConn extends pulumi.CustomResource {
     }
 
     /**
-     * Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
+     * Set of approved CIDRs. Requires `enableLearnedCidrsApproval` to be true. Type: Set(String).
      */
     public readonly approvedCidrs!: pulumi.Output<string[]>;
     /**
-     * Backup Aviatrix CloudN BGP ASN.
+     * BGP AS Number of HA CloudN. Type: String.
      */
     public readonly backupCloudnAsNum!: pulumi.Output<string | undefined>;
     /**
-     * Backup Aviatrix CloudN IP Address.
+     * IP Address of HA CloudN. Required when `enableHa` is true. Type: String.
      */
     public readonly backupCloudnIp!: pulumi.Output<string | undefined>;
     /**
-     * Backup Aviatrix CloudN LAN Interface Neighbor's BGP ASN.
+     * BGP AS Number of HA CloudN Neighbor. Type: String.
      */
     public readonly backupCloudnNeighborAsNum!: pulumi.Output<string | undefined>;
     /**
-     * Backup Aviatrix CloudN LAN Interface Neighbor's IP Address.
+     * IP Address of HA CloudN Neighbor. Type: String.
      */
     public readonly backupCloudnNeighborIp!: pulumi.Output<string | undefined>;
     /**
-     * Enable direct connect to Backup Aviatrix CloudN over private network.
+     * Flag to enable direct connect over private network to HA CloudN. Type: Boolean.
      */
     public readonly backupDirectConnect!: pulumi.Output<boolean | undefined>;
     /**
-     * Enable Insane Mode for connection to Backup Aviatrix CloudN.
+     * Flag to enable insane mode connection to HA CloudN. Type: Boolean.
      */
     public readonly backupInsaneMode!: pulumi.Output<boolean | undefined>;
     /**
-     * BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+     * BGP AS Number of the Transit Gateway. Type: String.
      */
     public readonly bgpLocalAsNum!: pulumi.Output<string>;
     /**
-     * Aviatrix CloudN BGP ASN (Autonomous System Number). Integer between 1-4294967294.
+     * BGP AS Number of the Aviatrix CloudN. Type: String.
      */
     public readonly cloudnAsNum!: pulumi.Output<string>;
     /**
-     * CloudN LAN Interface Neighbor's BGP ASN.
+     * BGP AS Number of the Aviatrix CloudN neighbor. Type: String.
      */
     public readonly cloudnNeighborAsNum!: pulumi.Output<string>;
     /**
-     * Aviatrix CloudN LAN Interface Neighbor's IP Address.
+     * IP Address of Aviatrix CloudN neighbor. Type: String.
      */
     public readonly cloudnNeighborIp!: pulumi.Output<string>;
     /**
-     * Aviatrix CloudN IP Address.
+     * IP Address of Aviatrix CloudN. Type: String.
      */
     public readonly cloudnRemoteIp!: pulumi.Output<string>;
     /**
-     * The name of the transit Aviatrix CloudN connection.
+     * Name of the Transit Gateway to CloudN Connection. Type: String.
      */
     public readonly connectionName!: pulumi.Output<string>;
     /**
-     * Enable Direct Connect for private network infrastructure.
+     * Enable direct connect over private network. Type: Boolean. Default: true.
      */
     public readonly directConnect!: pulumi.Output<boolean | undefined>;
     /**
-     * Enable connection to HA CloudN.
+     * Enable connection to HA CloudN. Type: Boolean.
      */
     public readonly enableHa!: pulumi.Output<boolean | undefined>;
     /**
-     * Enable learned CIDRs approval.
+     * Enable encrypted transit approval for connection. Type: Boolean.
      */
     public readonly enableLearnedCidrsApproval!: pulumi.Output<boolean | undefined>;
     /**
-     * Enable load balancing between Aviatrix CloudN and Backup CloudN.
+     * Flag to enable load balancing between CloudN and HA CloudN. Type: Boolean.
      */
     public readonly enableLoadBalancing!: pulumi.Output<boolean | undefined>;
     /**
-     * The name of the Transit Gateway.
+     * Name of the Transit Gateway. Type: String.
      */
     public readonly gwName!: pulumi.Output<string>;
     /**
-     * Enable Insane Mode for this connection.
+     * Enable insane mode connection. Type: Boolean.
      */
     public readonly insaneMode!: pulumi.Output<boolean | undefined>;
     /**
-     * The ID of the VPC where the Transit Gateway is located.
+     * VPC ID of the Aviatrix Transit Gateway. Type: String.
      */
     public readonly vpcId!: pulumi.Output<string>;
 
@@ -203,83 +254,83 @@ export class AviatrixTransitCloudnConn extends pulumi.CustomResource {
  */
 export interface AviatrixTransitCloudnConnState {
     /**
-     * Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
+     * Set of approved CIDRs. Requires `enableLearnedCidrsApproval` to be true. Type: Set(String).
      */
     approvedCidrs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Backup Aviatrix CloudN BGP ASN.
+     * BGP AS Number of HA CloudN. Type: String.
      */
     backupCloudnAsNum?: pulumi.Input<string>;
     /**
-     * Backup Aviatrix CloudN IP Address.
+     * IP Address of HA CloudN. Required when `enableHa` is true. Type: String.
      */
     backupCloudnIp?: pulumi.Input<string>;
     /**
-     * Backup Aviatrix CloudN LAN Interface Neighbor's BGP ASN.
+     * BGP AS Number of HA CloudN Neighbor. Type: String.
      */
     backupCloudnNeighborAsNum?: pulumi.Input<string>;
     /**
-     * Backup Aviatrix CloudN LAN Interface Neighbor's IP Address.
+     * IP Address of HA CloudN Neighbor. Type: String.
      */
     backupCloudnNeighborIp?: pulumi.Input<string>;
     /**
-     * Enable direct connect to Backup Aviatrix CloudN over private network.
+     * Flag to enable direct connect over private network to HA CloudN. Type: Boolean.
      */
     backupDirectConnect?: pulumi.Input<boolean>;
     /**
-     * Enable Insane Mode for connection to Backup Aviatrix CloudN.
+     * Flag to enable insane mode connection to HA CloudN. Type: Boolean.
      */
     backupInsaneMode?: pulumi.Input<boolean>;
     /**
-     * BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+     * BGP AS Number of the Transit Gateway. Type: String.
      */
     bgpLocalAsNum?: pulumi.Input<string>;
     /**
-     * Aviatrix CloudN BGP ASN (Autonomous System Number). Integer between 1-4294967294.
+     * BGP AS Number of the Aviatrix CloudN. Type: String.
      */
     cloudnAsNum?: pulumi.Input<string>;
     /**
-     * CloudN LAN Interface Neighbor's BGP ASN.
+     * BGP AS Number of the Aviatrix CloudN neighbor. Type: String.
      */
     cloudnNeighborAsNum?: pulumi.Input<string>;
     /**
-     * Aviatrix CloudN LAN Interface Neighbor's IP Address.
+     * IP Address of Aviatrix CloudN neighbor. Type: String.
      */
     cloudnNeighborIp?: pulumi.Input<string>;
     /**
-     * Aviatrix CloudN IP Address.
+     * IP Address of Aviatrix CloudN. Type: String.
      */
     cloudnRemoteIp?: pulumi.Input<string>;
     /**
-     * The name of the transit Aviatrix CloudN connection.
+     * Name of the Transit Gateway to CloudN Connection. Type: String.
      */
     connectionName?: pulumi.Input<string>;
     /**
-     * Enable Direct Connect for private network infrastructure.
+     * Enable direct connect over private network. Type: Boolean. Default: true.
      */
     directConnect?: pulumi.Input<boolean>;
     /**
-     * Enable connection to HA CloudN.
+     * Enable connection to HA CloudN. Type: Boolean.
      */
     enableHa?: pulumi.Input<boolean>;
     /**
-     * Enable learned CIDRs approval.
+     * Enable encrypted transit approval for connection. Type: Boolean.
      */
     enableLearnedCidrsApproval?: pulumi.Input<boolean>;
     /**
-     * Enable load balancing between Aviatrix CloudN and Backup CloudN.
+     * Flag to enable load balancing between CloudN and HA CloudN. Type: Boolean.
      */
     enableLoadBalancing?: pulumi.Input<boolean>;
     /**
-     * The name of the Transit Gateway.
+     * Name of the Transit Gateway. Type: String.
      */
     gwName?: pulumi.Input<string>;
     /**
-     * Enable Insane Mode for this connection.
+     * Enable insane mode connection. Type: Boolean.
      */
     insaneMode?: pulumi.Input<boolean>;
     /**
-     * The ID of the VPC where the Transit Gateway is located.
+     * VPC ID of the Aviatrix Transit Gateway. Type: String.
      */
     vpcId?: pulumi.Input<string>;
 }
@@ -289,83 +340,83 @@ export interface AviatrixTransitCloudnConnState {
  */
 export interface AviatrixTransitCloudnConnArgs {
     /**
-     * Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
+     * Set of approved CIDRs. Requires `enableLearnedCidrsApproval` to be true. Type: Set(String).
      */
     approvedCidrs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Backup Aviatrix CloudN BGP ASN.
+     * BGP AS Number of HA CloudN. Type: String.
      */
     backupCloudnAsNum?: pulumi.Input<string>;
     /**
-     * Backup Aviatrix CloudN IP Address.
+     * IP Address of HA CloudN. Required when `enableHa` is true. Type: String.
      */
     backupCloudnIp?: pulumi.Input<string>;
     /**
-     * Backup Aviatrix CloudN LAN Interface Neighbor's BGP ASN.
+     * BGP AS Number of HA CloudN Neighbor. Type: String.
      */
     backupCloudnNeighborAsNum?: pulumi.Input<string>;
     /**
-     * Backup Aviatrix CloudN LAN Interface Neighbor's IP Address.
+     * IP Address of HA CloudN Neighbor. Type: String.
      */
     backupCloudnNeighborIp?: pulumi.Input<string>;
     /**
-     * Enable direct connect to Backup Aviatrix CloudN over private network.
+     * Flag to enable direct connect over private network to HA CloudN. Type: Boolean.
      */
     backupDirectConnect?: pulumi.Input<boolean>;
     /**
-     * Enable Insane Mode for connection to Backup Aviatrix CloudN.
+     * Flag to enable insane mode connection to HA CloudN. Type: Boolean.
      */
     backupInsaneMode?: pulumi.Input<boolean>;
     /**
-     * BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+     * BGP AS Number of the Transit Gateway. Type: String.
      */
     bgpLocalAsNum: pulumi.Input<string>;
     /**
-     * Aviatrix CloudN BGP ASN (Autonomous System Number). Integer between 1-4294967294.
+     * BGP AS Number of the Aviatrix CloudN. Type: String.
      */
     cloudnAsNum: pulumi.Input<string>;
     /**
-     * CloudN LAN Interface Neighbor's BGP ASN.
+     * BGP AS Number of the Aviatrix CloudN neighbor. Type: String.
      */
     cloudnNeighborAsNum: pulumi.Input<string>;
     /**
-     * Aviatrix CloudN LAN Interface Neighbor's IP Address.
+     * IP Address of Aviatrix CloudN neighbor. Type: String.
      */
     cloudnNeighborIp: pulumi.Input<string>;
     /**
-     * Aviatrix CloudN IP Address.
+     * IP Address of Aviatrix CloudN. Type: String.
      */
     cloudnRemoteIp: pulumi.Input<string>;
     /**
-     * The name of the transit Aviatrix CloudN connection.
+     * Name of the Transit Gateway to CloudN Connection. Type: String.
      */
     connectionName: pulumi.Input<string>;
     /**
-     * Enable Direct Connect for private network infrastructure.
+     * Enable direct connect over private network. Type: Boolean. Default: true.
      */
     directConnect?: pulumi.Input<boolean>;
     /**
-     * Enable connection to HA CloudN.
+     * Enable connection to HA CloudN. Type: Boolean.
      */
     enableHa?: pulumi.Input<boolean>;
     /**
-     * Enable learned CIDRs approval.
+     * Enable encrypted transit approval for connection. Type: Boolean.
      */
     enableLearnedCidrsApproval?: pulumi.Input<boolean>;
     /**
-     * Enable load balancing between Aviatrix CloudN and Backup CloudN.
+     * Flag to enable load balancing between CloudN and HA CloudN. Type: Boolean.
      */
     enableLoadBalancing?: pulumi.Input<boolean>;
     /**
-     * The name of the Transit Gateway.
+     * Name of the Transit Gateway. Type: String.
      */
     gwName: pulumi.Input<string>;
     /**
-     * Enable Insane Mode for this connection.
+     * Enable insane mode connection. Type: Boolean.
      */
     insaneMode?: pulumi.Input<boolean>;
     /**
-     * The ID of the VPC where the Transit Gateway is located.
+     * VPC ID of the Aviatrix Transit Gateway. Type: String.
      */
     vpcId: pulumi.Input<string>;
 }

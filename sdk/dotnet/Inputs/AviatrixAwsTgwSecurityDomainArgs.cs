@@ -14,6 +14,10 @@ namespace Pulumi.Aviatrix.Inputs
     {
         [Input("attachedVpcs")]
         private InputList<Inputs.AviatrixAwsTgwSecurityDomainAttachedVpcArgs>? _attachedVpcs;
+
+        /// <summary>
+        /// A list of VPCs attached to the domain (name: `security_domain_name`) together with its creation. This list needs to be null for "Aviatrix_Edge_Domain".
+        /// </summary>
         [Obsolete(@"Please set `manage_vpc_attachment` to false, and use the standalone aviatrix_aws_tgw_vpc_attachment resource instead.")]
         public InputList<Inputs.AviatrixAwsTgwSecurityDomainAttachedVpcArgs> AttachedVpcs
         {
@@ -21,23 +25,39 @@ namespace Pulumi.Aviatrix.Inputs
             set => _attachedVpcs = value;
         }
 
+        /// <summary>
+        /// Set to true if the security domain is to be used as an Aviatrix Firewall Domain for the Aviatrix Firewall Network. Valid values: true, false. Default value: false.
+        /// </summary>
         [Input("aviatrixFirewall")]
         public Input<bool>? AviatrixFirewall { get; set; }
 
         [Input("connectedDomains")]
         private InputList<string>? _connectedDomains;
+
+        /// <summary>
+        /// A list of domains connected to the domain (name: `security_domain_name`) together with its creation.
+        /// </summary>
         public InputList<string> ConnectedDomains
         {
             get => _connectedDomains ?? (_connectedDomains = new InputList<string>());
             set => _connectedDomains = value;
         }
 
+        /// <summary>
+        /// Set to true if the security domain is to be used as a native egress domain (for non-Aviatrix Firewall Network-based central Internet bound traffic). Valid values: true, false. Default value: false.
+        /// </summary>
         [Input("nativeEgress")]
         public Input<bool>? NativeEgress { get; set; }
 
+        /// <summary>
+        /// Set to true if the security domain is to be used as a native firewall domain (for non-Aviatrix Firewall Network-based firewall traffic inspection). Valid values: true, false. Default value: false.
+        /// </summary>
         [Input("nativeFirewall")]
         public Input<bool>? NativeFirewall { get; set; }
 
+        /// <summary>
+        /// Three default domains ("Aviatrix_Edge_Domain", "Default_Domain" and "Shared_Service_Domain") are required with AWS TGW's creation.
+        /// </summary>
         [Input("securityDomainName", required: true)]
         public Input<string> SecurityDomainName { get; set; } = null!;
 

@@ -17,7 +17,7 @@ class AviatrixControllerEmailExceptionNotificationConfigArgs:
                  enable_email_exception_notification: Optional[pulumi.Input[bool]] = None):
         """
         The set of arguments for constructing a AviatrixControllerEmailExceptionNotificationConfig resource.
-        :param pulumi.Input[bool] enable_email_exception_notification: Enable email exception notification.
+        :param pulumi.Input[bool] enable_email_exception_notification: Enable exception email notification. When set to true, exception email will be sent to "exception@aviatrix.com", when set to false, exception email will be sent to controller's admin email. Valid values: true, false. Default value: true.
         """
         if enable_email_exception_notification is not None:
             pulumi.set(__self__, "enable_email_exception_notification", enable_email_exception_notification)
@@ -26,7 +26,7 @@ class AviatrixControllerEmailExceptionNotificationConfigArgs:
     @pulumi.getter(name="enableEmailExceptionNotification")
     def enable_email_exception_notification(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable email exception notification.
+        Enable exception email notification. When set to true, exception email will be sent to "exception@aviatrix.com", when set to false, exception email will be sent to controller's admin email. Valid values: true, false. Default value: true.
         """
         return pulumi.get(self, "enable_email_exception_notification")
 
@@ -41,7 +41,7 @@ class _AviatrixControllerEmailExceptionNotificationConfigState:
                  enable_email_exception_notification: Optional[pulumi.Input[bool]] = None):
         """
         Input properties used for looking up and filtering AviatrixControllerEmailExceptionNotificationConfig resources.
-        :param pulumi.Input[bool] enable_email_exception_notification: Enable email exception notification.
+        :param pulumi.Input[bool] enable_email_exception_notification: Enable exception email notification. When set to true, exception email will be sent to "exception@aviatrix.com", when set to false, exception email will be sent to controller's admin email. Valid values: true, false. Default value: true.
         """
         if enable_email_exception_notification is not None:
             pulumi.set(__self__, "enable_email_exception_notification", enable_email_exception_notification)
@@ -50,7 +50,7 @@ class _AviatrixControllerEmailExceptionNotificationConfigState:
     @pulumi.getter(name="enableEmailExceptionNotification")
     def enable_email_exception_notification(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable email exception notification.
+        Enable exception email notification. When set to true, exception email will be sent to "exception@aviatrix.com", when set to false, exception email will be sent to controller's admin email. Valid values: true, false. Default value: true.
         """
         return pulumi.get(self, "enable_email_exception_notification")
 
@@ -67,10 +67,29 @@ class AviatrixControllerEmailExceptionNotificationConfig(pulumi.CustomResource):
                  enable_email_exception_notification: Optional[pulumi.Input[bool]] = None,
                  __props__=None):
         """
-        Create a AviatrixControllerEmailExceptionNotificationConfig resource with the given unique name, props, and options.
+        The **aviatrix_controller_email_exception_notification_config** resource allows management of an Aviatrix Controller's email exception notification config. This resource is available as of provider version R2.19+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix controller email exception notification config
+        test = aviatrix.AviatrixControllerEmailExceptionNotificationConfig("test", enable_email_exception_notification=False)
+        ```
+
+        ## Import
+
+        **aviatrix_controller_email_exception_notification_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixControllerEmailExceptionNotificationConfig:AviatrixControllerEmailExceptionNotificationConfig test 10-11-12-13
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[bool] enable_email_exception_notification: Enable email exception notification.
+        :param pulumi.Input[bool] enable_email_exception_notification: Enable exception email notification. When set to true, exception email will be sent to "exception@aviatrix.com", when set to false, exception email will be sent to controller's admin email. Valid values: true, false. Default value: true.
         """
         ...
     @overload
@@ -79,7 +98,26 @@ class AviatrixControllerEmailExceptionNotificationConfig(pulumi.CustomResource):
                  args: Optional[AviatrixControllerEmailExceptionNotificationConfigArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixControllerEmailExceptionNotificationConfig resource with the given unique name, props, and options.
+        The **aviatrix_controller_email_exception_notification_config** resource allows management of an Aviatrix Controller's email exception notification config. This resource is available as of provider version R2.19+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix controller email exception notification config
+        test = aviatrix.AviatrixControllerEmailExceptionNotificationConfig("test", enable_email_exception_notification=False)
+        ```
+
+        ## Import
+
+        **aviatrix_controller_email_exception_notification_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixControllerEmailExceptionNotificationConfig:AviatrixControllerEmailExceptionNotificationConfig test 10-11-12-13
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixControllerEmailExceptionNotificationConfigArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -124,7 +162,7 @@ class AviatrixControllerEmailExceptionNotificationConfig(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[bool] enable_email_exception_notification: Enable email exception notification.
+        :param pulumi.Input[bool] enable_email_exception_notification: Enable exception email notification. When set to true, exception email will be sent to "exception@aviatrix.com", when set to false, exception email will be sent to controller's admin email. Valid values: true, false. Default value: true.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -137,7 +175,7 @@ class AviatrixControllerEmailExceptionNotificationConfig(pulumi.CustomResource):
     @pulumi.getter(name="enableEmailExceptionNotification")
     def enable_email_exception_notification(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enable email exception notification.
+        Enable exception email notification. When set to true, exception email will be sent to "exception@aviatrix.com", when set to false, exception email will be sent to controller's admin email. Valid values: true, false. Default value: true.
         """
         return pulumi.get(self, "enable_email_exception_notification")
 

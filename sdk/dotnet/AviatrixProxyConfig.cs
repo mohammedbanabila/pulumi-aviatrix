@@ -9,23 +9,55 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_proxy_config** resource allows management of an Aviatrix Controller's proxy configurations.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.IO;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Controller Proxy Config
+    ///     var testProxyConfig = new Aviatrix.AviatrixProxyConfig("testProxyConfig", new()
+    ///     {
+    ///         HttpProxy = "172.31.52.145:3127",
+    ///         HttpsProxy = "172.31.52.145:3129",
+    ///         ProxyCaCertificate = File.ReadAllText("/path/to/ca.pem"),
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **controller_proxy_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixProxyConfig:AviatrixProxyConfig test 10-11-12-13
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixProxyConfig:AviatrixProxyConfig")]
     public partial class AviatrixProxyConfig : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// http proxy URL.
+        /// Http proxy URL.
         /// </summary>
         [Output("httpProxy")]
         public Output<string> HttpProxy { get; private set; } = null!;
 
         /// <summary>
-        /// https proxy URL.
+        /// Https proxy URL.
         /// </summary>
         [Output("httpsProxy")]
         public Output<string> HttpsProxy { get; private set; } = null!;
 
         /// <summary>
-        /// Server CA Certificate file.
+        /// Server CA Certificate file. Use the `file` function to read from a file.
         /// </summary>
         [Output("proxyCaCertificate")]
         public Output<string?> ProxyCaCertificate { get; private set; } = null!;
@@ -78,19 +110,19 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixProxyConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// http proxy URL.
+        /// Http proxy URL.
         /// </summary>
         [Input("httpProxy", required: true)]
         public Input<string> HttpProxy { get; set; } = null!;
 
         /// <summary>
-        /// https proxy URL.
+        /// Https proxy URL.
         /// </summary>
         [Input("httpsProxy", required: true)]
         public Input<string> HttpsProxy { get; set; } = null!;
 
         /// <summary>
-        /// Server CA Certificate file.
+        /// Server CA Certificate file. Use the `file` function to read from a file.
         /// </summary>
         [Input("proxyCaCertificate")]
         public Input<string>? ProxyCaCertificate { get; set; }
@@ -104,19 +136,19 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixProxyConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// http proxy URL.
+        /// Http proxy URL.
         /// </summary>
         [Input("httpProxy")]
         public Input<string>? HttpProxy { get; set; }
 
         /// <summary>
-        /// https proxy URL.
+        /// Https proxy URL.
         /// </summary>
         [Input("httpsProxy")]
         public Input<string>? HttpsProxy { get; set; }
 
         /// <summary>
-        /// Server CA Certificate file.
+        /// Server CA Certificate file. Use the `file` function to read from a file.
         /// </summary>
         [Input("proxyCaCertificate")]
         public Input<string>? ProxyCaCertificate { get; set; }

@@ -11,19 +11,58 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixFqdnTagRule(ctx, "testFqdn", &aviatrix.AviatrixFqdnTagRuleArgs{
+//				Fqdn:        pulumi.String("reddit.com"),
+//				FqdnTagName: pulumi.String("my_tag"),
+//				Port:        pulumi.String("443"),
+//				Protocol:    pulumi.String("tcp"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **fqdn_tag_rule** can be imported using the `fqdn_tag_name`, `fqdn`, `protocol`, `port` and `action` separated by `~`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixFqdnTagRule:AviatrixFqdnTagRule test "fqdn_tag_name~fqdn~protocol~port~action"
+//
+// ```
 type AviatrixFqdnTagRule struct {
 	pulumi.CustomResourceState
 
-	// What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base
-	// Policy' if no value is provided.
+	// What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base Policy' if no value provided.
+	// * For protocol "all", port must be set to "all".
+	// * For protocol “icmp”, port must be set to “ping”.
 	Action pulumi.StringPtrOutput `pulumi:"action"`
-	// FQDN.
+	// FQDN. Example: "facebook.com".
 	Fqdn pulumi.StringOutput `pulumi:"fqdn"`
-	// FQDN Filter Tag Name to attach this domain.
+	// FQDN Filter tag name.
 	FqdnTagName pulumi.StringOutput `pulumi:"fqdnTagName"`
-	// Port.
+	// Port. Example "25".
 	Port pulumi.StringOutput `pulumi:"port"`
-	// Protocol.
+	// Protocol. Valid values: "all", "tcp", "udp", "icmp".
 	Protocol pulumi.StringOutput `pulumi:"protocol"`
 }
 
@@ -69,30 +108,32 @@ func GetAviatrixFqdnTagRule(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixFqdnTagRule resources.
 type aviatrixFqdnTagRuleState struct {
-	// What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base
-	// Policy' if no value is provided.
+	// What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base Policy' if no value provided.
+	// * For protocol "all", port must be set to "all".
+	// * For protocol “icmp”, port must be set to “ping”.
 	Action *string `pulumi:"action"`
-	// FQDN.
+	// FQDN. Example: "facebook.com".
 	Fqdn *string `pulumi:"fqdn"`
-	// FQDN Filter Tag Name to attach this domain.
+	// FQDN Filter tag name.
 	FqdnTagName *string `pulumi:"fqdnTagName"`
-	// Port.
+	// Port. Example "25".
 	Port *string `pulumi:"port"`
-	// Protocol.
+	// Protocol. Valid values: "all", "tcp", "udp", "icmp".
 	Protocol *string `pulumi:"protocol"`
 }
 
 type AviatrixFqdnTagRuleState struct {
-	// What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base
-	// Policy' if no value is provided.
+	// What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base Policy' if no value provided.
+	// * For protocol "all", port must be set to "all".
+	// * For protocol “icmp”, port must be set to “ping”.
 	Action pulumi.StringPtrInput
-	// FQDN.
+	// FQDN. Example: "facebook.com".
 	Fqdn pulumi.StringPtrInput
-	// FQDN Filter Tag Name to attach this domain.
+	// FQDN Filter tag name.
 	FqdnTagName pulumi.StringPtrInput
-	// Port.
+	// Port. Example "25".
 	Port pulumi.StringPtrInput
-	// Protocol.
+	// Protocol. Valid values: "all", "tcp", "udp", "icmp".
 	Protocol pulumi.StringPtrInput
 }
 
@@ -101,31 +142,33 @@ func (AviatrixFqdnTagRuleState) ElementType() reflect.Type {
 }
 
 type aviatrixFqdnTagRuleArgs struct {
-	// What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base
-	// Policy' if no value is provided.
+	// What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base Policy' if no value provided.
+	// * For protocol "all", port must be set to "all".
+	// * For protocol “icmp”, port must be set to “ping”.
 	Action *string `pulumi:"action"`
-	// FQDN.
+	// FQDN. Example: "facebook.com".
 	Fqdn string `pulumi:"fqdn"`
-	// FQDN Filter Tag Name to attach this domain.
+	// FQDN Filter tag name.
 	FqdnTagName string `pulumi:"fqdnTagName"`
-	// Port.
+	// Port. Example "25".
 	Port string `pulumi:"port"`
-	// Protocol.
+	// Protocol. Valid values: "all", "tcp", "udp", "icmp".
 	Protocol string `pulumi:"protocol"`
 }
 
 // The set of arguments for constructing a AviatrixFqdnTagRule resource.
 type AviatrixFqdnTagRuleArgs struct {
-	// What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base
-	// Policy' if no value is provided.
+	// What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base Policy' if no value provided.
+	// * For protocol "all", port must be set to "all".
+	// * For protocol “icmp”, port must be set to “ping”.
 	Action pulumi.StringPtrInput
-	// FQDN.
+	// FQDN. Example: "facebook.com".
 	Fqdn pulumi.StringInput
-	// FQDN Filter Tag Name to attach this domain.
+	// FQDN Filter tag name.
 	FqdnTagName pulumi.StringInput
-	// Port.
+	// Port. Example "25".
 	Port pulumi.StringInput
-	// Protocol.
+	// Protocol. Valid values: "all", "tcp", "udp", "icmp".
 	Protocol pulumi.StringInput
 }
 
@@ -216,28 +259,29 @@ func (o AviatrixFqdnTagRuleOutput) ToAviatrixFqdnTagRuleOutputWithContext(ctx co
 	return o
 }
 
-// What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base
-// Policy' if no value is provided.
+// What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base Policy' if no value provided.
+// * For protocol "all", port must be set to "all".
+// * For protocol “icmp”, port must be set to “ping”.
 func (o AviatrixFqdnTagRuleOutput) Action() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixFqdnTagRule) pulumi.StringPtrOutput { return v.Action }).(pulumi.StringPtrOutput)
 }
 
-// FQDN.
+// FQDN. Example: "facebook.com".
 func (o AviatrixFqdnTagRuleOutput) Fqdn() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixFqdnTagRule) pulumi.StringOutput { return v.Fqdn }).(pulumi.StringOutput)
 }
 
-// FQDN Filter Tag Name to attach this domain.
+// FQDN Filter tag name.
 func (o AviatrixFqdnTagRuleOutput) FqdnTagName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixFqdnTagRule) pulumi.StringOutput { return v.FqdnTagName }).(pulumi.StringOutput)
 }
 
-// Port.
+// Port. Example "25".
 func (o AviatrixFqdnTagRuleOutput) Port() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixFqdnTagRule) pulumi.StringOutput { return v.Port }).(pulumi.StringOutput)
 }
 
-// Protocol.
+// Protocol. Valid values: "all", "tcp", "udp", "icmp".
 func (o AviatrixFqdnTagRuleOutput) Protocol() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixFqdnTagRule) pulumi.StringOutput { return v.Protocol }).(pulumi.StringOutput)
 }

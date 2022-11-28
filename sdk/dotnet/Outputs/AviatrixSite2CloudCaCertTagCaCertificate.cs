@@ -13,11 +13,29 @@ namespace Pulumi.Aviatrix.Outputs
     [OutputType]
     public sealed class AviatrixSite2CloudCaCertTagCaCertificate
     {
+        /// <summary>
+        /// Content of cert certificate to create only one cert. One CA cert only per file.
+        /// </summary>
         public readonly string CertContent;
+        /// <summary>
+        /// Common name of created cert.
+        /// </summary>
         public readonly string? CommonName;
+        /// <summary>
+        /// Expiration time of created cert.
+        /// </summary>
         public readonly string? ExpirationTime;
+        /// <summary>
+        /// Unique id of created cert.
+        /// </summary>
         public readonly string? Id;
+        /// <summary>
+        /// Issuer name of created cert.
+        /// </summary>
         public readonly string? IssuerName;
+        /// <summary>
+        /// Unique serial of created cert.
+        /// </summary>
         public readonly string? UniqueSerial;
 
         [OutputConstructor]

@@ -9,11 +9,40 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_copilot_association** resource allows management of controller CoPilot Association. This resource is available as of provider version R2.19+.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create a CoPilot Association
+    ///     var testCopilotAssociation = new Aviatrix.AviatrixCopilotAssociation("testCopilotAssociation", new()
+    ///     {
+    ///         CopilotAddress = "copilot.aviatrix.com",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **aviatrix_copilot_association** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixCopilotAssociation:AviatrixCopilotAssociation test_copilot_association 10-11-12-13
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixCopilotAssociation:AviatrixCopilotAssociation")]
     public partial class AviatrixCopilotAssociation : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// CoPilot IP Address or Hostname.
+        /// CoPilot instance IP Address or Hostname.
         /// </summary>
         [Output("copilotAddress")]
         public Output<string> CopilotAddress { get; private set; } = null!;
@@ -66,7 +95,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixCopilotAssociationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// CoPilot IP Address or Hostname.
+        /// CoPilot instance IP Address or Hostname.
         /// </summary>
         [Input("copilotAddress", required: true)]
         public Input<string> CopilotAddress { get; set; } = null!;
@@ -80,7 +109,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixCopilotAssociationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// CoPilot IP Address or Hostname.
+        /// CoPilot instance IP Address or Hostname.
         /// </summary>
         [Input("copilotAddress")]
         public Input<string>? CopilotAddress { get; set; }

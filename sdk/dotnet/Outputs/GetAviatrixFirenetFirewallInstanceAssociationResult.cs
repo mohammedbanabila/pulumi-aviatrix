@@ -15,11 +15,29 @@ namespace Pulumi.Aviatrix.Outputs
     {
         public readonly bool Attached;
         public readonly string EgressInterface;
+        /// <summary>
+        /// Name of the primary FireNet gateway.
+        /// </summary>
         public readonly string FirenetGwName;
+        /// <summary>
+        /// Firewall instance name.
+        /// * `lan_interface`- Lan interface ID.
+        /// </summary>
         public readonly string FirewallName;
+        /// <summary>
+        /// ID of Firewall instance.
+        /// </summary>
         public readonly string InstanceId;
         public readonly string LanInterface;
+        /// <summary>
+        /// Management interface ID.
+        /// * `egress_interface`- Egress interface ID.
+        /// * `attached`- Switch to attach/detach firewall instance to/from fireNet.
+        /// </summary>
         public readonly string ManagementInterface;
+        /// <summary>
+        /// Type of the firewall.
+        /// </summary>
         public readonly string VendorType;
 
         [OutputConstructor]

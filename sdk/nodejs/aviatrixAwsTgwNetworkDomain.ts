@@ -4,6 +4,60 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_aws_tgw_network_domain** resource allows the creation and management of Aviatrix network domains.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@astipkovits/aviatrix";
+ *
+ * // Create an Aviatrix AWS TGW network domain
+ * const testAwsTgw = new aviatrix.AviatrixAwsTgw("testAwsTgw", {
+ *     accountName: "devops",
+ *     awsSideAsNumber: "64512",
+ *     region: "us-east-1",
+ *     tgwName: "test-AWS-TGW",
+ *     manageSecurityDomain: false,
+ *     manageVpcAttachment: false,
+ *     manageTransitGatewayAttachment: false,
+ * });
+ * const defaultDomain = new aviatrix.AviatrixAwsTgwNetworkDomain("defaultDomain", {tgwName: testAwsTgw.tgwName});
+ * const sharedServiceDomain = new aviatrix.AviatrixAwsTgwNetworkDomain("sharedServiceDomain", {tgwName: testAwsTgw.tgwName});
+ * const aviatrixEdgeDomain = new aviatrix.AviatrixAwsTgwNetworkDomain("aviatrixEdgeDomain", {tgwName: testAwsTgw.tgwName});
+ * const defaultSdConn1 = new aviatrix.AviatrixAwsTgwSecurityDomainConn("defaultSdConn1", {
+ *     tgwName: testAwsTgw.tgwName,
+ *     domainName1: aviatrixEdgeDomain.name,
+ *     domainName2: defaultDomain.name,
+ * });
+ * const defaultSdConn2 = new aviatrix.AviatrixAwsTgwSecurityDomainConn("defaultSdConn2", {
+ *     tgwName: testAwsTgw.tgwName,
+ *     domainName1: aviatrixEdgeDomain.name,
+ *     domainName2: sharedServiceDomain.name,
+ * });
+ * const defaultSdConn3 = new aviatrix.AviatrixAwsTgwSecurityDomainConn("defaultSdConn3", {
+ *     tgwName: testAwsTgw.tgwName,
+ *     domainName1: defaultDomain.name,
+ *     domainName2: sharedServiceDomain.name,
+ * });
+ * const test = new aviatrix.AviatrixAwsTgwNetworkDomain("test", {tgwName: testAwsTgw.tgwName}, {
+ *     dependsOn: [
+ *         defaultDomain,
+ *         sharedServiceDomain,
+ *         aviatrixEdgeDomain,
+ *     ],
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **aws_tgw_network_domain** can be imported using the `name` and `tgw_name`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixAwsTgwNetworkDomain:AviatrixAwsTgwNetworkDomain test tgw_name~name
+ * ```
+ */
 export class AviatrixAwsTgwNetworkDomain extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixAwsTgwNetworkDomain resource's state with the given name, ID, and optional extra
@@ -33,23 +87,23 @@ export class AviatrixAwsTgwNetworkDomain extends pulumi.CustomResource {
     }
 
     /**
-     * Set to true if the network domain is an aviatrix firewall domain.
+     * Set to true if the network domain is to be used as an Aviatrix Firewall Domain for the Aviatrix Firewall Network. Valid values: true, false. Default value: false.
      */
     public readonly aviatrixFirewall!: pulumi.Output<boolean | undefined>;
     /**
-     * Network domain name.
+     * The name of the network domain.
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * Set to true if the network domain is a native egress domain.
+     * Set to true if the network domain is to be used as a native egress domain (for non-Aviatrix Firewall Network-based central Internet bound traffic). Valid values: true, false. Default value: false.
      */
     public readonly nativeEgress!: pulumi.Output<boolean | undefined>;
     /**
-     * Set to true if the network domain is a native firewall domain.
+     * Set to true if the network domain is to be used as a native firewall domain (for non-Aviatrix Firewall Network-based firewall traffic inspection). Valid values: true, false. Default value: false.
      */
     public readonly nativeFirewall!: pulumi.Output<boolean | undefined>;
     /**
-     * AWS TGW name.
+     * The AWS TGW name of the network domain.
      */
     public readonly tgwName!: pulumi.Output<string>;
 
@@ -92,23 +146,23 @@ export class AviatrixAwsTgwNetworkDomain extends pulumi.CustomResource {
  */
 export interface AviatrixAwsTgwNetworkDomainState {
     /**
-     * Set to true if the network domain is an aviatrix firewall domain.
+     * Set to true if the network domain is to be used as an Aviatrix Firewall Domain for the Aviatrix Firewall Network. Valid values: true, false. Default value: false.
      */
     aviatrixFirewall?: pulumi.Input<boolean>;
     /**
-     * Network domain name.
+     * The name of the network domain.
      */
     name?: pulumi.Input<string>;
     /**
-     * Set to true if the network domain is a native egress domain.
+     * Set to true if the network domain is to be used as a native egress domain (for non-Aviatrix Firewall Network-based central Internet bound traffic). Valid values: true, false. Default value: false.
      */
     nativeEgress?: pulumi.Input<boolean>;
     /**
-     * Set to true if the network domain is a native firewall domain.
+     * Set to true if the network domain is to be used as a native firewall domain (for non-Aviatrix Firewall Network-based firewall traffic inspection). Valid values: true, false. Default value: false.
      */
     nativeFirewall?: pulumi.Input<boolean>;
     /**
-     * AWS TGW name.
+     * The AWS TGW name of the network domain.
      */
     tgwName?: pulumi.Input<string>;
 }
@@ -118,23 +172,23 @@ export interface AviatrixAwsTgwNetworkDomainState {
  */
 export interface AviatrixAwsTgwNetworkDomainArgs {
     /**
-     * Set to true if the network domain is an aviatrix firewall domain.
+     * Set to true if the network domain is to be used as an Aviatrix Firewall Domain for the Aviatrix Firewall Network. Valid values: true, false. Default value: false.
      */
     aviatrixFirewall?: pulumi.Input<boolean>;
     /**
-     * Network domain name.
+     * The name of the network domain.
      */
     name?: pulumi.Input<string>;
     /**
-     * Set to true if the network domain is a native egress domain.
+     * Set to true if the network domain is to be used as a native egress domain (for non-Aviatrix Firewall Network-based central Internet bound traffic). Valid values: true, false. Default value: false.
      */
     nativeEgress?: pulumi.Input<boolean>;
     /**
-     * Set to true if the network domain is a native firewall domain.
+     * Set to true if the network domain is to be used as a native firewall domain (for non-Aviatrix Firewall Network-based firewall traffic inspection). Valid values: true, false. Default value: false.
      */
     nativeFirewall?: pulumi.Input<boolean>;
     /**
-     * AWS TGW name.
+     * The AWS TGW name of the network domain.
      */
     tgwName: pulumi.Input<string>;
 }

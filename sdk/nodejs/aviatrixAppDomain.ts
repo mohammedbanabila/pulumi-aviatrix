@@ -2,9 +2,48 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * !> **WARNING** **aviatrix_app_domain** is part of the Micro-segmentation private preview feature for R2.22.0. If you wish to enable a private preview mode feature, please contact your sales representative or Aviatrix Support.
+ * The **aviatrix_app_domain** resource handles the creation and management of App Domains. Available as of Provider R2.22.0+.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix App Domain
+ * const testAppDomainIp = new aviatrix.AviatrixAppDomain("test_app_domain_ip", {
+ *     selector: {
+ *         matchExpressions: [
+ *             {
+ *                 accountName: "devops",
+ *                 region: "us-west-2",
+ *                 tags: {
+ *                     k3: "v3",
+ *                 },
+ *                 type: "vm",
+ *             },
+ *             {
+ *                 cidr: "10.0.0.0/16",
+ *             },
+ *         ],
+ *     },
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **aviatrix_app_domain** can be imported using the `uuid`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixAppDomain:AviatrixAppDomain test 41984f8b-5a37-4272-89b3-57c79e9ff77c
+ * ```
+ */
 export class AviatrixAppDomain extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixAppDomain resource's state with the given name, ID, and optional extra
@@ -38,7 +77,7 @@ export class AviatrixAppDomain extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * List of match expressions for the App Domain.
+     * Block containing match expressions to filter the App Domain.
      */
     public readonly selector!: pulumi.Output<outputs.AviatrixAppDomainSelector>;
     /**
@@ -85,7 +124,7 @@ export interface AviatrixAppDomainState {
      */
     name?: pulumi.Input<string>;
     /**
-     * List of match expressions for the App Domain.
+     * Block containing match expressions to filter the App Domain.
      */
     selector?: pulumi.Input<inputs.AviatrixAppDomainSelector>;
     /**
@@ -103,7 +142,7 @@ export interface AviatrixAppDomainArgs {
      */
     name?: pulumi.Input<string>;
     /**
-     * List of match expressions for the App Domain.
+     * Block containing match expressions to filter the App Domain.
      */
     selector: pulumi.Input<inputs.AviatrixAppDomainSelector>;
 }

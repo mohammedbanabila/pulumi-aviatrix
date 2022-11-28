@@ -10,10 +10,47 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_controller_email_exception_notification_config** resource allows management of an Aviatrix Controller's email exception notification config. This resource is available as of provider version R2.19+.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixControllerEmailExceptionNotificationConfig(ctx, "test", &aviatrix.AviatrixControllerEmailExceptionNotificationConfigArgs{
+//				EnableEmailExceptionNotification: pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **aviatrix_controller_email_exception_notification_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixControllerEmailExceptionNotificationConfig:AviatrixControllerEmailExceptionNotificationConfig test 10-11-12-13
+//
+// ```
 type AviatrixControllerEmailExceptionNotificationConfig struct {
 	pulumi.CustomResourceState
 
-	// Enable email exception notification.
+	// Enable exception email notification. When set to true, exception email will be sent to "exception@aviatrix.com", when set to false, exception email will be sent to controller's admin email. Valid values: true, false. Default value: true.
 	EnableEmailExceptionNotification pulumi.BoolPtrOutput `pulumi:"enableEmailExceptionNotification"`
 }
 
@@ -47,12 +84,12 @@ func GetAviatrixControllerEmailExceptionNotificationConfig(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixControllerEmailExceptionNotificationConfig resources.
 type aviatrixControllerEmailExceptionNotificationConfigState struct {
-	// Enable email exception notification.
+	// Enable exception email notification. When set to true, exception email will be sent to "exception@aviatrix.com", when set to false, exception email will be sent to controller's admin email. Valid values: true, false. Default value: true.
 	EnableEmailExceptionNotification *bool `pulumi:"enableEmailExceptionNotification"`
 }
 
 type AviatrixControllerEmailExceptionNotificationConfigState struct {
-	// Enable email exception notification.
+	// Enable exception email notification. When set to true, exception email will be sent to "exception@aviatrix.com", when set to false, exception email will be sent to controller's admin email. Valid values: true, false. Default value: true.
 	EnableEmailExceptionNotification pulumi.BoolPtrInput
 }
 
@@ -61,13 +98,13 @@ func (AviatrixControllerEmailExceptionNotificationConfigState) ElementType() ref
 }
 
 type aviatrixControllerEmailExceptionNotificationConfigArgs struct {
-	// Enable email exception notification.
+	// Enable exception email notification. When set to true, exception email will be sent to "exception@aviatrix.com", when set to false, exception email will be sent to controller's admin email. Valid values: true, false. Default value: true.
 	EnableEmailExceptionNotification *bool `pulumi:"enableEmailExceptionNotification"`
 }
 
 // The set of arguments for constructing a AviatrixControllerEmailExceptionNotificationConfig resource.
 type AviatrixControllerEmailExceptionNotificationConfigArgs struct {
-	// Enable email exception notification.
+	// Enable exception email notification. When set to true, exception email will be sent to "exception@aviatrix.com", when set to false, exception email will be sent to controller's admin email. Valid values: true, false. Default value: true.
 	EnableEmailExceptionNotification pulumi.BoolPtrInput
 }
 
@@ -158,7 +195,7 @@ func (o AviatrixControllerEmailExceptionNotificationConfigOutput) ToAviatrixCont
 	return o
 }
 
-// Enable email exception notification.
+// Enable exception email notification. When set to true, exception email will be sent to "exception@aviatrix.com", when set to false, exception email will be sent to controller's admin email. Valid values: true, false. Default value: true.
 func (o AviatrixControllerEmailExceptionNotificationConfigOutput) EnableEmailExceptionNotification() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixControllerEmailExceptionNotificationConfig) pulumi.BoolPtrOutput {
 		return v.EnableEmailExceptionNotification

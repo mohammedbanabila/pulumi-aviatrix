@@ -2,9 +2,25 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * Use this data source to get the list of device WAN interfaces for use in other resources.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Aviatrix Device Interfaces Data Source
+ * const test = pulumi.output(aviatrix.getAviatrixDeviceInterfaces({
+ *     deviceName: "test-device",
+ * }));
+ * ```
+ */
 export function getAviatrixDeviceInterfaces(args: GetAviatrixDeviceInterfacesArgs, opts?: pulumi.InvokeOptions): Promise<GetAviatrixDeviceInterfacesResult> {
     if (!opts) {
         opts = {}
@@ -20,6 +36,9 @@ export function getAviatrixDeviceInterfaces(args: GetAviatrixDeviceInterfacesArg
  * A collection of arguments for invoking getAviatrixDeviceInterfaces.
  */
 export interface GetAviatrixDeviceInterfacesArgs {
+    /**
+     * Device name.
+     */
     deviceName: string;
 }
 
@@ -32,6 +51,9 @@ export interface GetAviatrixDeviceInterfacesResult {
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * List of WAN interfaces.
+     */
     readonly wanInterfaces: outputs.GetAviatrixDeviceInterfacesWanInterface[];
 }
 
@@ -43,5 +65,8 @@ export function getAviatrixDeviceInterfacesOutput(args: GetAviatrixDeviceInterfa
  * A collection of arguments for invoking getAviatrixDeviceInterfaces.
  */
 export interface GetAviatrixDeviceInterfacesOutputArgs {
+    /**
+     * Device name.
+     */
     deviceName: pulumi.Input<string>;
 }

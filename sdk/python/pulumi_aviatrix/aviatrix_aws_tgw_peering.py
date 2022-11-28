@@ -18,8 +18,8 @@ class AviatrixAwsTgwPeeringArgs:
                  tgw_name2: pulumi.Input[str]):
         """
         The set of arguments for constructing a AviatrixAwsTgwPeering resource.
-        :param pulumi.Input[str] tgw_name1: Name of the first AWS tgw to make a peer pair.
-        :param pulumi.Input[str] tgw_name2: Name of the second AWS tgw to make a peer pair.
+        :param pulumi.Input[str] tgw_name1: This parameter represents name of the first AWS TGW to make a peer pair.
+        :param pulumi.Input[str] tgw_name2: This parameter represents name of the second AWS TGW to make a peer pair.
         """
         pulumi.set(__self__, "tgw_name1", tgw_name1)
         pulumi.set(__self__, "tgw_name2", tgw_name2)
@@ -28,7 +28,7 @@ class AviatrixAwsTgwPeeringArgs:
     @pulumi.getter(name="tgwName1")
     def tgw_name1(self) -> pulumi.Input[str]:
         """
-        Name of the first AWS tgw to make a peer pair.
+        This parameter represents name of the first AWS TGW to make a peer pair.
         """
         return pulumi.get(self, "tgw_name1")
 
@@ -40,7 +40,7 @@ class AviatrixAwsTgwPeeringArgs:
     @pulumi.getter(name="tgwName2")
     def tgw_name2(self) -> pulumi.Input[str]:
         """
-        Name of the second AWS tgw to make a peer pair.
+        This parameter represents name of the second AWS TGW to make a peer pair.
         """
         return pulumi.get(self, "tgw_name2")
 
@@ -56,8 +56,8 @@ class _AviatrixAwsTgwPeeringState:
                  tgw_name2: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixAwsTgwPeering resources.
-        :param pulumi.Input[str] tgw_name1: Name of the first AWS tgw to make a peer pair.
-        :param pulumi.Input[str] tgw_name2: Name of the second AWS tgw to make a peer pair.
+        :param pulumi.Input[str] tgw_name1: This parameter represents name of the first AWS TGW to make a peer pair.
+        :param pulumi.Input[str] tgw_name2: This parameter represents name of the second AWS TGW to make a peer pair.
         """
         if tgw_name1 is not None:
             pulumi.set(__self__, "tgw_name1", tgw_name1)
@@ -68,7 +68,7 @@ class _AviatrixAwsTgwPeeringState:
     @pulumi.getter(name="tgwName1")
     def tgw_name1(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the first AWS tgw to make a peer pair.
+        This parameter represents name of the first AWS TGW to make a peer pair.
         """
         return pulumi.get(self, "tgw_name1")
 
@@ -80,7 +80,7 @@ class _AviatrixAwsTgwPeeringState:
     @pulumi.getter(name="tgwName2")
     def tgw_name2(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the second AWS tgw to make a peer pair.
+        This parameter represents name of the second AWS TGW to make a peer pair.
         """
         return pulumi.get(self, "tgw_name2")
 
@@ -98,11 +98,32 @@ class AviatrixAwsTgwPeering(pulumi.CustomResource):
                  tgw_name2: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixAwsTgwPeering resource with the given unique name, props, and options.
+        The **aviatrix_aws_tgw_peering** resource allows the creation and management of Aviatrix-created inter-region peerings between AWS TGWs.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS Tgw Peering
+        test = aviatrix.AviatrixAwsTgwPeering("test",
+            tgw_name1="tgw1",
+            tgw_name2="tgw2")
+        ```
+
+        ## Import
+
+        **aws_tgw_peering** can be imported using the `tgw_name1` and `tgw_name2`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAwsTgwPeering:AviatrixAwsTgwPeering test tgw_name1~tgw_name2
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] tgw_name1: Name of the first AWS tgw to make a peer pair.
-        :param pulumi.Input[str] tgw_name2: Name of the second AWS tgw to make a peer pair.
+        :param pulumi.Input[str] tgw_name1: This parameter represents name of the first AWS TGW to make a peer pair.
+        :param pulumi.Input[str] tgw_name2: This parameter represents name of the second AWS TGW to make a peer pair.
         """
         ...
     @overload
@@ -111,7 +132,28 @@ class AviatrixAwsTgwPeering(pulumi.CustomResource):
                  args: AviatrixAwsTgwPeeringArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixAwsTgwPeering resource with the given unique name, props, and options.
+        The **aviatrix_aws_tgw_peering** resource allows the creation and management of Aviatrix-created inter-region peerings between AWS TGWs.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS Tgw Peering
+        test = aviatrix.AviatrixAwsTgwPeering("test",
+            tgw_name1="tgw1",
+            tgw_name2="tgw2")
+        ```
+
+        ## Import
+
+        **aws_tgw_peering** can be imported using the `tgw_name1` and `tgw_name2`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAwsTgwPeering:AviatrixAwsTgwPeering test tgw_name1~tgw_name2
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixAwsTgwPeeringArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -163,8 +205,8 @@ class AviatrixAwsTgwPeering(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] tgw_name1: Name of the first AWS tgw to make a peer pair.
-        :param pulumi.Input[str] tgw_name2: Name of the second AWS tgw to make a peer pair.
+        :param pulumi.Input[str] tgw_name1: This parameter represents name of the first AWS TGW to make a peer pair.
+        :param pulumi.Input[str] tgw_name2: This parameter represents name of the second AWS TGW to make a peer pair.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -178,7 +220,7 @@ class AviatrixAwsTgwPeering(pulumi.CustomResource):
     @pulumi.getter(name="tgwName1")
     def tgw_name1(self) -> pulumi.Output[str]:
         """
-        Name of the first AWS tgw to make a peer pair.
+        This parameter represents name of the first AWS TGW to make a peer pair.
         """
         return pulumi.get(self, "tgw_name1")
 
@@ -186,7 +228,7 @@ class AviatrixAwsTgwPeering(pulumi.CustomResource):
     @pulumi.getter(name="tgwName2")
     def tgw_name2(self) -> pulumi.Output[str]:
         """
-        Name of the second AWS tgw to make a peer pair.
+        This parameter represents name of the second AWS TGW to make a peer pair.
         """
         return pulumi.get(self, "tgw_name2")
 

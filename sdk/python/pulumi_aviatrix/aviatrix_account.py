@@ -78,66 +78,66 @@ class AviatrixAccountArgs:
         """
         The set of arguments for constructing a AviatrixAccount resource.
         :param pulumi.Input[str] account_name: Account name. This can be used for logging in to CloudN console or UserConnect controller.
-        :param pulumi.Input[int] cloud_type: Type of cloud service provider.
-        :param pulumi.Input[str] alicloud_access_key: Alibaba Cloud Access Key.
-        :param pulumi.Input[str] alicloud_account_id: Alibaba Cloud Account ID to associate with Aviatrix account.
-        :param pulumi.Input[str] alicloud_secret_key: Alibaba Cloud Secret Key.
-        :param pulumi.Input[str] arm_application_id: Azure Application ID.
-        :param pulumi.Input[str] arm_application_key: Azure Application Key.
-        :param pulumi.Input[str] arm_directory_id: Azure Directory ID.
-        :param pulumi.Input[str] arm_subscription_id: Azure Subscription ID.
+        :param pulumi.Input[int] cloud_type: Type of cloud service provider. Only AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina and Alibaba Cloud are supported currently. Enter 1 for AWS, 4 for GCP, 8 for Azure, 16 for OCI, 32 for AzureGov, 256 for AWSGov, 1024 for AWSChina or 2048 for AzureChina, 8192 for Alibaba Cloud.
+        :param pulumi.Input[str] alicloud_access_key: Alibaba Cloud Access Key. Required when creating an account for Alibaba Cloud.
+        :param pulumi.Input[str] alicloud_account_id: Alibaba Cloud Account number to associate with Aviatrix account. Required when creating an account for Alibaba Cloud.
+        :param pulumi.Input[str] alicloud_secret_key: Alibaba Cloud Secret Key. Required when creating an account for Alibaba Cloud.
+        :param pulumi.Input[str] arm_application_id: Azure ARM Application ID. Required when creating an account for Azure.
+        :param pulumi.Input[str] arm_application_key: Azure ARM Application key. Required when creating an account for Azure.
+        :param pulumi.Input[str] arm_directory_id: Azure ARM Directory ID. Required when creating an account for Azure.
+        :param pulumi.Input[str] arm_subscription_id: Azure ARM Subscription ID. Required when creating an account for Azure.
         :param pulumi.Input[bool] audit_account: Enable account audit.
-        :param pulumi.Input[str] aws_access_key: AWS Access Key.
-        :param pulumi.Input[str] aws_account_number: AWS Account number to associate with Aviatrix account. Should be 12 digits.
-        :param pulumi.Input[str] aws_gateway_role_app: AWS App role ARN for gateways.
-        :param pulumi.Input[str] aws_gateway_role_ec2: AWS EC2 role ARN for gateways.
-        :param pulumi.Input[bool] aws_iam: AWS IAM-role based flag.
-        :param pulumi.Input[str] aws_role_app: AWS App role ARN.
-        :param pulumi.Input[str] aws_role_ec2: AWS EC2 role ARN.
-        :param pulumi.Input[str] aws_secret_key: AWS Secret Key.
-        :param pulumi.Input[str] awschina_access_key: AWS China Access Key.
-        :param pulumi.Input[str] awschina_account_number: AWS China Account Number.
-        :param pulumi.Input[bool] awschina_iam: AWS China IAM-role based flag.
-        :param pulumi.Input[str] awschina_role_app: AWS China App Role ARN.
-        :param pulumi.Input[str] awschina_role_ec2: AWS China EC2 Role ARN.
-        :param pulumi.Input[str] awschina_secret_key: AWS China Secret Key.
-        :param pulumi.Input[str] awsgov_access_key: AWS Gov Access Key.
-        :param pulumi.Input[str] awsgov_account_number: AWS Gov Account number to associate with Aviatrix account.
-        :param pulumi.Input[bool] awsgov_iam: AWSGov IAM-role based flag
-        :param pulumi.Input[str] awsgov_role_app: AWSGov App role ARN
-        :param pulumi.Input[str] awsgov_role_ec2: AWSGov EC2 role ARN
-        :param pulumi.Input[str] awsgov_secret_key: AWS Gov Secret Key.
-        :param pulumi.Input[str] awss_account_number: AWS Secret Region Account Number.
-        :param pulumi.Input[str] awss_ca_chain_cert: AWS Secret Region Custom Certificate Authority file path.
-        :param pulumi.Input[str] awss_cap_account_name: AWS Secret Region CAP Account Name.
-        :param pulumi.Input[str] awss_cap_agency: AWS Secret Region CAP Agency.
-        :param pulumi.Input[str] awss_cap_cert: AWS Secret Region CAP Certificate file path.
-        :param pulumi.Input[str] awss_cap_cert_key: AWS Secret Region CAP Certificate Key file path.
-        :param pulumi.Input[str] awss_cap_role_name: AWS Secret Region CAP Role Name.
-        :param pulumi.Input[str] awss_cap_url: AWS Secret Region CAP Endpoint URL.
-        :param pulumi.Input[str] awsts_account_number: AWS Top Secret Region Account Number.
-        :param pulumi.Input[str] awsts_ca_chain_cert: AWS Top Secret Region Custom Certificate Authority file path.
-        :param pulumi.Input[str] awsts_cap_agency: AWS Top Secret Region CAP Agency.
-        :param pulumi.Input[str] awsts_cap_cert: AWS Top Secret Region CAP Certificate file path.
-        :param pulumi.Input[str] awsts_cap_cert_key: AWS Top Secret Region CAP Certificate Key file path.
-        :param pulumi.Input[str] awsts_cap_mission: AWS Top Secret Region CAP Mission.
-        :param pulumi.Input[str] awsts_cap_role_name: AWS Top Secret Region CAP Role Name.
-        :param pulumi.Input[str] awsts_cap_url: AWS Top Secret Region CAP Endpoint URL.
-        :param pulumi.Input[str] azurechina_application_id: Azure China Application ID.
-        :param pulumi.Input[str] azurechina_application_key: Azure China Application Key.
-        :param pulumi.Input[str] azurechina_directory_id: Azure China Directory ID.
-        :param pulumi.Input[str] azurechina_subscription_id: Azure China Subscription ID.
-        :param pulumi.Input[str] azuregov_application_id: Azure Gov Application ID.
-        :param pulumi.Input[str] azuregov_application_key: Azure Gov Application Key.
-        :param pulumi.Input[str] azuregov_directory_id: Azure Gov Directory ID.
-        :param pulumi.Input[str] azuregov_subscription_id: Azure Gov Subscription ID.
-        :param pulumi.Input[str] gcloud_project_credentials_filepath: GCloud Project credentials local file path.
+        :param pulumi.Input[str] aws_access_key: AWS Access Key. Required when `aws_iam` is "false" and when creating an account for AWS.
+        :param pulumi.Input[str] aws_account_number: AWS Account number to associate with Aviatrix account. Required when creating an account for AWS.
+        :param pulumi.Input[str] aws_gateway_role_app: A separate AWS App role ARN to assign to gateways created by the controller. Required when `aws_gateway_role_ec2` is set. Only allowed when `aws_iam`, `awsgov_iam`, or `awschina_iam` is "true" when creating an account for AWS, AWSGov or AWSChina, respectively. Available as of provider version R2.19+.
+        :param pulumi.Input[str] aws_gateway_role_ec2: A separate AWS EC2 role ARN to assign to gateways created by the controller. Required when `aws_gateway_role_app` is set. Only allowed when `aws_iam`, `awsgov_iam`, or `awschina_iam` is "true" when creating an account for AWS, AWSGov or AWSChina, respectively. Available as of provider version R2.19+.
+        :param pulumi.Input[bool] aws_iam: AWS IAM-role based flag, this option is for UserConnect.
+        :param pulumi.Input[str] aws_role_app: AWS App role ARN, this option is for UserConnect. Required when `aws_iam` is "true" and when creating an account for AWS.
+        :param pulumi.Input[str] aws_role_ec2: AWS EC2 role ARN, this option is for UserConnect. Required when `aws_iam` is "true" and when creating an account for AWS.
+        :param pulumi.Input[str] aws_secret_key: AWS Secret Key. Required when `aws_iam` is "false" and when creating an account for AWS.
+        :param pulumi.Input[str] awschina_access_key: AWSChina Access Key. Required when `awschina_iam` is "false" and when creating an account for AWSChina. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awschina_account_number: AWSChina Account number to associate with Aviatrix account. Required when creating an account for AWSChina. Available as of provider version 2.19+.
+        :param pulumi.Input[bool] awschina_iam: AWSChina IAM-role based flag. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awschina_role_app: AWSChina App role ARN. Available when `awschina_iam` is "true" and when creating an account for AWSChina. If left empty, the ARN will be computed. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awschina_role_ec2: AWSChina EC2 role ARN. Available when `awschina_iam` is "true" and when creating an account for AWSChina. If left empty, the ARN will be computed. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awschina_secret_key: AWSChina Secret Key. Required when `awschina_iam` is "false" and when creating an account for AWSChina. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awsgov_access_key: AWS Access Key. Required when creating an account for AWSGov.
+        :param pulumi.Input[str] awsgov_account_number: AWSGov Account number to associate with Aviatrix account. Required when creating an account for AWSGov.
+        :param pulumi.Input[bool] awsgov_iam: AWSGov IAM-role based flag. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awsgov_role_app: AWSGov App role ARN. Available when `awsgov_iam` is "true" and when creating an account for AWSGov. If left empty, the ARN will be computed. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awsgov_role_ec2: AWSGov EC2 role ARN. Available when `awsgov_iam` is "true" and when creating an account for AWSGov. If left empty, the ARN will be computed. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awsgov_secret_key: AWS Secret Key. Required when creating an account for AWSGov.
+        :param pulumi.Input[str] awss_account_number: AWS Secret Region Account Number. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awss_ca_chain_cert: AWS Secret Region Custom Certificate Authority local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awss_cap_account_name: AWS Secret Region Account Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awss_cap_agency: AWS Secret Region CAP Agency. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awss_cap_cert: AWS Secret Region CAP Certificate local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awss_cap_cert_key: AWS Secret Region CAP Certificate Key local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awss_cap_role_name: AWS Secret Region Role Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awss_cap_url: AWS Secret Region CAP Url. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_account_number: AWS Top Secret Region Account Number. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_ca_chain_cert: AWS Top Secret Region Custom Certificate Authority local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_cap_agency: AWS Top Secret Region CAP Agency. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_cap_cert: AWS Top Secret Region CAP Certificate local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_cap_cert_key: AWS Top Secret Region CAP Certificate Key local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_cap_mission: AWS Top Secret Region Mission. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_cap_role_name: AWS Top Secret Region Role Name. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_cap_url: AWS Top Secret Region CAP Url. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] azurechina_application_id: AzureChina ARM Application ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
+        :param pulumi.Input[str] azurechina_application_key: AzureChina ARM Application key. Required when creating an account for AzureChina. Available as of provider version 2.19+.
+        :param pulumi.Input[str] azurechina_directory_id: AzureChina ARM Directory ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
+        :param pulumi.Input[str] azurechina_subscription_id: AzureChina ARM Subscription ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
+        :param pulumi.Input[str] azuregov_application_id: AzureGov ARM Application ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
+        :param pulumi.Input[str] azuregov_application_key: AzureGov ARM Application key. Required when creating an account for AzureGov. Available as of provider version R2.19+.
+        :param pulumi.Input[str] azuregov_directory_id: AzureGov ARM Directory ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
+        :param pulumi.Input[str] azuregov_subscription_id: AzureGov ARM Subscription ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
+        :param pulumi.Input[str] gcloud_project_credentials_filepath: GCloud Project Credentials [local filepath].json. Required when creating an account for GCP.
         :param pulumi.Input[str] gcloud_project_id: GCloud Project ID.
-        :param pulumi.Input[str] oci_api_private_key_filepath: OCI API Private Key local file path.
-        :param pulumi.Input[str] oci_compartment_id: OCI Compartment OCID.
-        :param pulumi.Input[str] oci_tenancy_id: OCI Tenancy OCID.
-        :param pulumi.Input[str] oci_user_id: OCI User OCID.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] rbac_groups: List of RBAC permission group names.
+        :param pulumi.Input[str] oci_api_private_key_filepath: Oracle OCI API Private Key local file path. Required when creating an account for OCI.
+        :param pulumi.Input[str] oci_compartment_id: Oracle OCI Compartment ID. Required when creating an account for OCI.
+        :param pulumi.Input[str] oci_tenancy_id: Oracle OCI Tenancy ID. Required when creating an account for OCI.
+        :param pulumi.Input[str] oci_user_id: Oracle OCI User ID. Required when creating an account for OCI.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] rbac_groups: A list of existing RBAC group names. This attribute should only be used when creating an account. Updating this attribute will have no effect. Available as of provider version R2.23.0+.
         """
         pulumi.set(__self__, "account_name", account_name)
         pulumi.set(__self__, "cloud_type", cloud_type)
@@ -276,7 +276,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="cloudType")
     def cloud_type(self) -> pulumi.Input[int]:
         """
-        Type of cloud service provider.
+        Type of cloud service provider. Only AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina and Alibaba Cloud are supported currently. Enter 1 for AWS, 4 for GCP, 8 for Azure, 16 for OCI, 32 for AzureGov, 256 for AWSGov, 1024 for AWSChina or 2048 for AzureChina, 8192 for Alibaba Cloud.
         """
         return pulumi.get(self, "cloud_type")
 
@@ -288,7 +288,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="alicloudAccessKey")
     def alicloud_access_key(self) -> Optional[pulumi.Input[str]]:
         """
-        Alibaba Cloud Access Key.
+        Alibaba Cloud Access Key. Required when creating an account for Alibaba Cloud.
         """
         return pulumi.get(self, "alicloud_access_key")
 
@@ -300,7 +300,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="alicloudAccountId")
     def alicloud_account_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Alibaba Cloud Account ID to associate with Aviatrix account.
+        Alibaba Cloud Account number to associate with Aviatrix account. Required when creating an account for Alibaba Cloud.
         """
         return pulumi.get(self, "alicloud_account_id")
 
@@ -312,7 +312,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="alicloudSecretKey")
     def alicloud_secret_key(self) -> Optional[pulumi.Input[str]]:
         """
-        Alibaba Cloud Secret Key.
+        Alibaba Cloud Secret Key. Required when creating an account for Alibaba Cloud.
         """
         return pulumi.get(self, "alicloud_secret_key")
 
@@ -324,7 +324,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="armApplicationId")
     def arm_application_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Azure Application ID.
+        Azure ARM Application ID. Required when creating an account for Azure.
         """
         return pulumi.get(self, "arm_application_id")
 
@@ -336,7 +336,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="armApplicationKey")
     def arm_application_key(self) -> Optional[pulumi.Input[str]]:
         """
-        Azure Application Key.
+        Azure ARM Application key. Required when creating an account for Azure.
         """
         return pulumi.get(self, "arm_application_key")
 
@@ -348,7 +348,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="armDirectoryId")
     def arm_directory_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Azure Directory ID.
+        Azure ARM Directory ID. Required when creating an account for Azure.
         """
         return pulumi.get(self, "arm_directory_id")
 
@@ -360,7 +360,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="armSubscriptionId")
     def arm_subscription_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Azure Subscription ID.
+        Azure ARM Subscription ID. Required when creating an account for Azure.
         """
         return pulumi.get(self, "arm_subscription_id")
 
@@ -384,7 +384,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awsAccessKey")
     def aws_access_key(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Access Key.
+        AWS Access Key. Required when `aws_iam` is "false" and when creating an account for AWS.
         """
         return pulumi.get(self, "aws_access_key")
 
@@ -396,7 +396,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awsAccountNumber")
     def aws_account_number(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Account number to associate with Aviatrix account. Should be 12 digits.
+        AWS Account number to associate with Aviatrix account. Required when creating an account for AWS.
         """
         return pulumi.get(self, "aws_account_number")
 
@@ -408,7 +408,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awsGatewayRoleApp")
     def aws_gateway_role_app(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS App role ARN for gateways.
+        A separate AWS App role ARN to assign to gateways created by the controller. Required when `aws_gateway_role_ec2` is set. Only allowed when `aws_iam`, `awsgov_iam`, or `awschina_iam` is "true" when creating an account for AWS, AWSGov or AWSChina, respectively. Available as of provider version R2.19+.
         """
         return pulumi.get(self, "aws_gateway_role_app")
 
@@ -420,7 +420,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awsGatewayRoleEc2")
     def aws_gateway_role_ec2(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS EC2 role ARN for gateways.
+        A separate AWS EC2 role ARN to assign to gateways created by the controller. Required when `aws_gateway_role_app` is set. Only allowed when `aws_iam`, `awsgov_iam`, or `awschina_iam` is "true" when creating an account for AWS, AWSGov or AWSChina, respectively. Available as of provider version R2.19+.
         """
         return pulumi.get(self, "aws_gateway_role_ec2")
 
@@ -432,7 +432,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awsIam")
     def aws_iam(self) -> Optional[pulumi.Input[bool]]:
         """
-        AWS IAM-role based flag.
+        AWS IAM-role based flag, this option is for UserConnect.
         """
         return pulumi.get(self, "aws_iam")
 
@@ -444,7 +444,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awsRoleApp")
     def aws_role_app(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS App role ARN.
+        AWS App role ARN, this option is for UserConnect. Required when `aws_iam` is "true" and when creating an account for AWS.
         """
         return pulumi.get(self, "aws_role_app")
 
@@ -456,7 +456,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awsRoleEc2")
     def aws_role_ec2(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS EC2 role ARN.
+        AWS EC2 role ARN, this option is for UserConnect. Required when `aws_iam` is "true" and when creating an account for AWS.
         """
         return pulumi.get(self, "aws_role_ec2")
 
@@ -468,7 +468,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awsSecretKey")
     def aws_secret_key(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Secret Key.
+        AWS Secret Key. Required when `aws_iam` is "false" and when creating an account for AWS.
         """
         return pulumi.get(self, "aws_secret_key")
 
@@ -480,7 +480,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awschinaAccessKey")
     def awschina_access_key(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS China Access Key.
+        AWSChina Access Key. Required when `awschina_iam` is "false" and when creating an account for AWSChina. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "awschina_access_key")
 
@@ -492,7 +492,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awschinaAccountNumber")
     def awschina_account_number(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS China Account Number.
+        AWSChina Account number to associate with Aviatrix account. Required when creating an account for AWSChina. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "awschina_account_number")
 
@@ -504,7 +504,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awschinaIam")
     def awschina_iam(self) -> Optional[pulumi.Input[bool]]:
         """
-        AWS China IAM-role based flag.
+        AWSChina IAM-role based flag. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "awschina_iam")
 
@@ -516,7 +516,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awschinaRoleApp")
     def awschina_role_app(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS China App Role ARN.
+        AWSChina App role ARN. Available when `awschina_iam` is "true" and when creating an account for AWSChina. If left empty, the ARN will be computed. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "awschina_role_app")
 
@@ -528,7 +528,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awschinaRoleEc2")
     def awschina_role_ec2(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS China EC2 Role ARN.
+        AWSChina EC2 role ARN. Available when `awschina_iam` is "true" and when creating an account for AWSChina. If left empty, the ARN will be computed. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "awschina_role_ec2")
 
@@ -540,7 +540,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awschinaSecretKey")
     def awschina_secret_key(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS China Secret Key.
+        AWSChina Secret Key. Required when `awschina_iam` is "false" and when creating an account for AWSChina. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "awschina_secret_key")
 
@@ -552,7 +552,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awsgovAccessKey")
     def awsgov_access_key(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Gov Access Key.
+        AWS Access Key. Required when creating an account for AWSGov.
         """
         return pulumi.get(self, "awsgov_access_key")
 
@@ -564,7 +564,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awsgovAccountNumber")
     def awsgov_account_number(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Gov Account number to associate with Aviatrix account.
+        AWSGov Account number to associate with Aviatrix account. Required when creating an account for AWSGov.
         """
         return pulumi.get(self, "awsgov_account_number")
 
@@ -576,7 +576,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awsgovIam")
     def awsgov_iam(self) -> Optional[pulumi.Input[bool]]:
         """
-        AWSGov IAM-role based flag
+        AWSGov IAM-role based flag. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "awsgov_iam")
 
@@ -588,7 +588,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awsgovRoleApp")
     def awsgov_role_app(self) -> Optional[pulumi.Input[str]]:
         """
-        AWSGov App role ARN
+        AWSGov App role ARN. Available when `awsgov_iam` is "true" and when creating an account for AWSGov. If left empty, the ARN will be computed. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "awsgov_role_app")
 
@@ -600,7 +600,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awsgovRoleEc2")
     def awsgov_role_ec2(self) -> Optional[pulumi.Input[str]]:
         """
-        AWSGov EC2 role ARN
+        AWSGov EC2 role ARN. Available when `awsgov_iam` is "true" and when creating an account for AWSGov. If left empty, the ARN will be computed. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "awsgov_role_ec2")
 
@@ -612,7 +612,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awsgovSecretKey")
     def awsgov_secret_key(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Gov Secret Key.
+        AWS Secret Key. Required when creating an account for AWSGov.
         """
         return pulumi.get(self, "awsgov_secret_key")
 
@@ -624,7 +624,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awssAccountNumber")
     def awss_account_number(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Secret Region Account Number.
+        AWS Secret Region Account Number. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awss_account_number")
 
@@ -636,7 +636,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awssCaChainCert")
     def awss_ca_chain_cert(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Secret Region Custom Certificate Authority file path.
+        AWS Secret Region Custom Certificate Authority local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awss_ca_chain_cert")
 
@@ -648,7 +648,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awssCapAccountName")
     def awss_cap_account_name(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Secret Region CAP Account Name.
+        AWS Secret Region Account Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awss_cap_account_name")
 
@@ -660,7 +660,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awssCapAgency")
     def awss_cap_agency(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Secret Region CAP Agency.
+        AWS Secret Region CAP Agency. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awss_cap_agency")
 
@@ -672,7 +672,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awssCapCert")
     def awss_cap_cert(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Secret Region CAP Certificate file path.
+        AWS Secret Region CAP Certificate local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awss_cap_cert")
 
@@ -684,7 +684,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awssCapCertKey")
     def awss_cap_cert_key(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Secret Region CAP Certificate Key file path.
+        AWS Secret Region CAP Certificate Key local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awss_cap_cert_key")
 
@@ -696,7 +696,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awssCapRoleName")
     def awss_cap_role_name(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Secret Region CAP Role Name.
+        AWS Secret Region Role Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awss_cap_role_name")
 
@@ -708,7 +708,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awssCapUrl")
     def awss_cap_url(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Secret Region CAP Endpoint URL.
+        AWS Secret Region CAP Url. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awss_cap_url")
 
@@ -720,7 +720,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awstsAccountNumber")
     def awsts_account_number(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Top Secret Region Account Number.
+        AWS Top Secret Region Account Number. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awsts_account_number")
 
@@ -732,7 +732,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awstsCaChainCert")
     def awsts_ca_chain_cert(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Top Secret Region Custom Certificate Authority file path.
+        AWS Top Secret Region Custom Certificate Authority local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awsts_ca_chain_cert")
 
@@ -744,7 +744,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awstsCapAgency")
     def awsts_cap_agency(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Top Secret Region CAP Agency.
+        AWS Top Secret Region CAP Agency. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awsts_cap_agency")
 
@@ -756,7 +756,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awstsCapCert")
     def awsts_cap_cert(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Top Secret Region CAP Certificate file path.
+        AWS Top Secret Region CAP Certificate local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awsts_cap_cert")
 
@@ -768,7 +768,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awstsCapCertKey")
     def awsts_cap_cert_key(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Top Secret Region CAP Certificate Key file path.
+        AWS Top Secret Region CAP Certificate Key local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awsts_cap_cert_key")
 
@@ -780,7 +780,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awstsCapMission")
     def awsts_cap_mission(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Top Secret Region CAP Mission.
+        AWS Top Secret Region Mission. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awsts_cap_mission")
 
@@ -792,7 +792,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awstsCapRoleName")
     def awsts_cap_role_name(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Top Secret Region CAP Role Name.
+        AWS Top Secret Region Role Name. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awsts_cap_role_name")
 
@@ -804,7 +804,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="awstsCapUrl")
     def awsts_cap_url(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Top Secret Region CAP Endpoint URL.
+        AWS Top Secret Region CAP Url. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awsts_cap_url")
 
@@ -816,7 +816,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="azurechinaApplicationId")
     def azurechina_application_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Azure China Application ID.
+        AzureChina ARM Application ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "azurechina_application_id")
 
@@ -828,7 +828,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="azurechinaApplicationKey")
     def azurechina_application_key(self) -> Optional[pulumi.Input[str]]:
         """
-        Azure China Application Key.
+        AzureChina ARM Application key. Required when creating an account for AzureChina. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "azurechina_application_key")
 
@@ -840,7 +840,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="azurechinaDirectoryId")
     def azurechina_directory_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Azure China Directory ID.
+        AzureChina ARM Directory ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "azurechina_directory_id")
 
@@ -852,7 +852,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="azurechinaSubscriptionId")
     def azurechina_subscription_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Azure China Subscription ID.
+        AzureChina ARM Subscription ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "azurechina_subscription_id")
 
@@ -864,7 +864,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="azuregovApplicationId")
     def azuregov_application_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Azure Gov Application ID.
+        AzureGov ARM Application ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
         """
         return pulumi.get(self, "azuregov_application_id")
 
@@ -876,7 +876,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="azuregovApplicationKey")
     def azuregov_application_key(self) -> Optional[pulumi.Input[str]]:
         """
-        Azure Gov Application Key.
+        AzureGov ARM Application key. Required when creating an account for AzureGov. Available as of provider version R2.19+.
         """
         return pulumi.get(self, "azuregov_application_key")
 
@@ -888,7 +888,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="azuregovDirectoryId")
     def azuregov_directory_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Azure Gov Directory ID.
+        AzureGov ARM Directory ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
         """
         return pulumi.get(self, "azuregov_directory_id")
 
@@ -900,7 +900,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="azuregovSubscriptionId")
     def azuregov_subscription_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Azure Gov Subscription ID.
+        AzureGov ARM Subscription ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
         """
         return pulumi.get(self, "azuregov_subscription_id")
 
@@ -912,7 +912,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="gcloudProjectCredentialsFilepath")
     def gcloud_project_credentials_filepath(self) -> Optional[pulumi.Input[str]]:
         """
-        GCloud Project credentials local file path.
+        GCloud Project Credentials [local filepath].json. Required when creating an account for GCP.
         """
         return pulumi.get(self, "gcloud_project_credentials_filepath")
 
@@ -936,7 +936,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="ociApiPrivateKeyFilepath")
     def oci_api_private_key_filepath(self) -> Optional[pulumi.Input[str]]:
         """
-        OCI API Private Key local file path.
+        Oracle OCI API Private Key local file path. Required when creating an account for OCI.
         """
         return pulumi.get(self, "oci_api_private_key_filepath")
 
@@ -948,7 +948,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="ociCompartmentId")
     def oci_compartment_id(self) -> Optional[pulumi.Input[str]]:
         """
-        OCI Compartment OCID.
+        Oracle OCI Compartment ID. Required when creating an account for OCI.
         """
         return pulumi.get(self, "oci_compartment_id")
 
@@ -960,7 +960,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="ociTenancyId")
     def oci_tenancy_id(self) -> Optional[pulumi.Input[str]]:
         """
-        OCI Tenancy OCID.
+        Oracle OCI Tenancy ID. Required when creating an account for OCI.
         """
         return pulumi.get(self, "oci_tenancy_id")
 
@@ -972,7 +972,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="ociUserId")
     def oci_user_id(self) -> Optional[pulumi.Input[str]]:
         """
-        OCI User OCID.
+        Oracle OCI User ID. Required when creating an account for OCI.
         """
         return pulumi.get(self, "oci_user_id")
 
@@ -984,7 +984,7 @@ class AviatrixAccountArgs:
     @pulumi.getter(name="rbacGroups")
     def rbac_groups(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of RBAC permission group names.
+        A list of existing RBAC group names. This attribute should only be used when creating an account. Updating this attribute will have no effect. Available as of provider version R2.23.0+.
         """
         return pulumi.get(self, "rbac_groups")
 
@@ -1065,71 +1065,71 @@ class _AviatrixAccountState:
         """
         Input properties used for looking up and filtering AviatrixAccount resources.
         :param pulumi.Input[str] account_name: Account name. This can be used for logging in to CloudN console or UserConnect controller.
-        :param pulumi.Input[str] alicloud_access_key: Alibaba Cloud Access Key.
-        :param pulumi.Input[str] alicloud_account_id: Alibaba Cloud Account ID to associate with Aviatrix account.
-        :param pulumi.Input[str] alicloud_secret_key: Alibaba Cloud Secret Key.
-        :param pulumi.Input[str] arm_application_id: Azure Application ID.
-        :param pulumi.Input[str] arm_application_key: Azure Application Key.
-        :param pulumi.Input[str] arm_directory_id: Azure Directory ID.
-        :param pulumi.Input[str] arm_subscription_id: Azure Subscription ID.
+        :param pulumi.Input[str] alicloud_access_key: Alibaba Cloud Access Key. Required when creating an account for Alibaba Cloud.
+        :param pulumi.Input[str] alicloud_account_id: Alibaba Cloud Account number to associate with Aviatrix account. Required when creating an account for Alibaba Cloud.
+        :param pulumi.Input[str] alicloud_secret_key: Alibaba Cloud Secret Key. Required when creating an account for Alibaba Cloud.
+        :param pulumi.Input[str] arm_application_id: Azure ARM Application ID. Required when creating an account for Azure.
+        :param pulumi.Input[str] arm_application_key: Azure ARM Application key. Required when creating an account for Azure.
+        :param pulumi.Input[str] arm_directory_id: Azure ARM Directory ID. Required when creating an account for Azure.
+        :param pulumi.Input[str] arm_subscription_id: Azure ARM Subscription ID. Required when creating an account for Azure.
         :param pulumi.Input[bool] audit_account: Enable account audit.
-        :param pulumi.Input[str] aws_access_key: AWS Access Key.
-        :param pulumi.Input[str] aws_account_number: AWS Account number to associate with Aviatrix account. Should be 12 digits.
-        :param pulumi.Input[str] aws_ca_cert_path: AWS Top Secret Region or Secret Region Custom Certificate Authority file path on the controller.
-        :param pulumi.Input[str] aws_gateway_role_app: AWS App role ARN for gateways.
-        :param pulumi.Input[str] aws_gateway_role_ec2: AWS EC2 role ARN for gateways.
-        :param pulumi.Input[bool] aws_iam: AWS IAM-role based flag.
-        :param pulumi.Input[str] aws_role_app: AWS App role ARN.
-        :param pulumi.Input[str] aws_role_ec2: AWS EC2 role ARN.
-        :param pulumi.Input[str] aws_secret_key: AWS Secret Key.
-        :param pulumi.Input[str] awschina_access_key: AWS China Access Key.
-        :param pulumi.Input[str] awschina_account_number: AWS China Account Number.
-        :param pulumi.Input[bool] awschina_iam: AWS China IAM-role based flag.
-        :param pulumi.Input[str] awschina_role_app: AWS China App Role ARN.
-        :param pulumi.Input[str] awschina_role_ec2: AWS China EC2 Role ARN.
-        :param pulumi.Input[str] awschina_secret_key: AWS China Secret Key.
-        :param pulumi.Input[str] awsgov_access_key: AWS Gov Access Key.
-        :param pulumi.Input[str] awsgov_account_number: AWS Gov Account number to associate with Aviatrix account.
-        :param pulumi.Input[bool] awsgov_iam: AWSGov IAM-role based flag
-        :param pulumi.Input[str] awsgov_role_app: AWSGov App role ARN
-        :param pulumi.Input[str] awsgov_role_ec2: AWSGov EC2 role ARN
-        :param pulumi.Input[str] awsgov_secret_key: AWS Gov Secret Key.
-        :param pulumi.Input[str] awss_account_number: AWS Secret Region Account Number.
-        :param pulumi.Input[str] awss_ca_chain_cert: AWS Secret Region Custom Certificate Authority file path.
-        :param pulumi.Input[str] awss_cap_account_name: AWS Secret Region CAP Account Name.
-        :param pulumi.Input[str] awss_cap_agency: AWS Secret Region CAP Agency.
-        :param pulumi.Input[str] awss_cap_cert: AWS Secret Region CAP Certificate file path.
-        :param pulumi.Input[str] awss_cap_cert_key: AWS Secret Region CAP Certificate Key file path.
-        :param pulumi.Input[str] awss_cap_cert_key_path: AWS Secret Region CAP Certificate Key file path on the controller.
-        :param pulumi.Input[str] awss_cap_cert_path: AWS Secret Region CAP Certificate file path on the controller.
-        :param pulumi.Input[str] awss_cap_role_name: AWS Secret Region CAP Role Name.
-        :param pulumi.Input[str] awss_cap_url: AWS Secret Region CAP Endpoint URL.
-        :param pulumi.Input[str] awsts_account_number: AWS Top Secret Region Account Number.
-        :param pulumi.Input[str] awsts_ca_chain_cert: AWS Top Secret Region Custom Certificate Authority file path.
-        :param pulumi.Input[str] awsts_cap_agency: AWS Top Secret Region CAP Agency.
-        :param pulumi.Input[str] awsts_cap_cert: AWS Top Secret Region CAP Certificate file path.
-        :param pulumi.Input[str] awsts_cap_cert_key: AWS Top Secret Region CAP Certificate Key file path.
-        :param pulumi.Input[str] awsts_cap_cert_key_path: AWS Top Secret Region CAP Certificate Key file path on the controller.
-        :param pulumi.Input[str] awsts_cap_cert_path: AWS Top Secret Region CAP Certificate file path on the controller.
-        :param pulumi.Input[str] awsts_cap_mission: AWS Top Secret Region CAP Mission.
-        :param pulumi.Input[str] awsts_cap_role_name: AWS Top Secret Region CAP Role Name.
-        :param pulumi.Input[str] awsts_cap_url: AWS Top Secret Region CAP Endpoint URL.
-        :param pulumi.Input[str] azurechina_application_id: Azure China Application ID.
-        :param pulumi.Input[str] azurechina_application_key: Azure China Application Key.
-        :param pulumi.Input[str] azurechina_directory_id: Azure China Directory ID.
-        :param pulumi.Input[str] azurechina_subscription_id: Azure China Subscription ID.
-        :param pulumi.Input[str] azuregov_application_id: Azure Gov Application ID.
-        :param pulumi.Input[str] azuregov_application_key: Azure Gov Application Key.
-        :param pulumi.Input[str] azuregov_directory_id: Azure Gov Directory ID.
-        :param pulumi.Input[str] azuregov_subscription_id: Azure Gov Subscription ID.
-        :param pulumi.Input[int] cloud_type: Type of cloud service provider.
-        :param pulumi.Input[str] gcloud_project_credentials_filepath: GCloud Project credentials local file path.
+        :param pulumi.Input[str] aws_access_key: AWS Access Key. Required when `aws_iam` is "false" and when creating an account for AWS.
+        :param pulumi.Input[str] aws_account_number: AWS Account number to associate with Aviatrix account. Required when creating an account for AWS.
+        :param pulumi.Input[str] aws_ca_cert_path: (Optional) AWS Top Secret Region or Secret Region Custom Certificate Authority file name on the controller. Available as of provider R2.19.5+.
+        :param pulumi.Input[str] aws_gateway_role_app: A separate AWS App role ARN to assign to gateways created by the controller. Required when `aws_gateway_role_ec2` is set. Only allowed when `aws_iam`, `awsgov_iam`, or `awschina_iam` is "true" when creating an account for AWS, AWSGov or AWSChina, respectively. Available as of provider version R2.19+.
+        :param pulumi.Input[str] aws_gateway_role_ec2: A separate AWS EC2 role ARN to assign to gateways created by the controller. Required when `aws_gateway_role_app` is set. Only allowed when `aws_iam`, `awsgov_iam`, or `awschina_iam` is "true" when creating an account for AWS, AWSGov or AWSChina, respectively. Available as of provider version R2.19+.
+        :param pulumi.Input[bool] aws_iam: AWS IAM-role based flag, this option is for UserConnect.
+        :param pulumi.Input[str] aws_role_app: AWS App role ARN, this option is for UserConnect. Required when `aws_iam` is "true" and when creating an account for AWS.
+        :param pulumi.Input[str] aws_role_ec2: AWS EC2 role ARN, this option is for UserConnect. Required when `aws_iam` is "true" and when creating an account for AWS.
+        :param pulumi.Input[str] aws_secret_key: AWS Secret Key. Required when `aws_iam` is "false" and when creating an account for AWS.
+        :param pulumi.Input[str] awschina_access_key: AWSChina Access Key. Required when `awschina_iam` is "false" and when creating an account for AWSChina. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awschina_account_number: AWSChina Account number to associate with Aviatrix account. Required when creating an account for AWSChina. Available as of provider version 2.19+.
+        :param pulumi.Input[bool] awschina_iam: AWSChina IAM-role based flag. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awschina_role_app: AWSChina App role ARN. Available when `awschina_iam` is "true" and when creating an account for AWSChina. If left empty, the ARN will be computed. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awschina_role_ec2: AWSChina EC2 role ARN. Available when `awschina_iam` is "true" and when creating an account for AWSChina. If left empty, the ARN will be computed. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awschina_secret_key: AWSChina Secret Key. Required when `awschina_iam` is "false" and when creating an account for AWSChina. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awsgov_access_key: AWS Access Key. Required when creating an account for AWSGov.
+        :param pulumi.Input[str] awsgov_account_number: AWSGov Account number to associate with Aviatrix account. Required when creating an account for AWSGov.
+        :param pulumi.Input[bool] awsgov_iam: AWSGov IAM-role based flag. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awsgov_role_app: AWSGov App role ARN. Available when `awsgov_iam` is "true" and when creating an account for AWSGov. If left empty, the ARN will be computed. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awsgov_role_ec2: AWSGov EC2 role ARN. Available when `awsgov_iam` is "true" and when creating an account for AWSGov. If left empty, the ARN will be computed. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awsgov_secret_key: AWS Secret Key. Required when creating an account for AWSGov.
+        :param pulumi.Input[str] awss_account_number: AWS Secret Region Account Number. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awss_ca_chain_cert: AWS Secret Region Custom Certificate Authority local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awss_cap_account_name: AWS Secret Region Account Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awss_cap_agency: AWS Secret Region CAP Agency. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awss_cap_cert: AWS Secret Region CAP Certificate local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awss_cap_cert_key: AWS Secret Region CAP Certificate Key local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awss_cap_cert_key_path: (Optional) AWS Secret Region CAP Certificate Key file name on the controller. Available as of provider R2.19.5+.
+        :param pulumi.Input[str] awss_cap_cert_path: (Optional) AWS Secret Region CAP Certificate file name on the controller. Available as of provider R2.19.5+.
+        :param pulumi.Input[str] awss_cap_role_name: AWS Secret Region Role Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awss_cap_url: AWS Secret Region CAP Url. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_account_number: AWS Top Secret Region Account Number. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_ca_chain_cert: AWS Top Secret Region Custom Certificate Authority local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_cap_agency: AWS Top Secret Region CAP Agency. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_cap_cert: AWS Top Secret Region CAP Certificate local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_cap_cert_key: AWS Top Secret Region CAP Certificate Key local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_cap_cert_key_path: (Optional) AWS Top Secret Region CAP Certificate Key file name on the controller. Available as of provider R2.19.5+.
+        :param pulumi.Input[str] awsts_cap_cert_path: (Optional) AWS Top Secret Region CAP Certificate file name on the controller. Available as of provider R2.19.5+.
+        :param pulumi.Input[str] awsts_cap_mission: AWS Top Secret Region Mission. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_cap_role_name: AWS Top Secret Region Role Name. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_cap_url: AWS Top Secret Region CAP Url. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] azurechina_application_id: AzureChina ARM Application ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
+        :param pulumi.Input[str] azurechina_application_key: AzureChina ARM Application key. Required when creating an account for AzureChina. Available as of provider version 2.19+.
+        :param pulumi.Input[str] azurechina_directory_id: AzureChina ARM Directory ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
+        :param pulumi.Input[str] azurechina_subscription_id: AzureChina ARM Subscription ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
+        :param pulumi.Input[str] azuregov_application_id: AzureGov ARM Application ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
+        :param pulumi.Input[str] azuregov_application_key: AzureGov ARM Application key. Required when creating an account for AzureGov. Available as of provider version R2.19+.
+        :param pulumi.Input[str] azuregov_directory_id: AzureGov ARM Directory ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
+        :param pulumi.Input[str] azuregov_subscription_id: AzureGov ARM Subscription ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
+        :param pulumi.Input[int] cloud_type: Type of cloud service provider. Only AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina and Alibaba Cloud are supported currently. Enter 1 for AWS, 4 for GCP, 8 for Azure, 16 for OCI, 32 for AzureGov, 256 for AWSGov, 1024 for AWSChina or 2048 for AzureChina, 8192 for Alibaba Cloud.
+        :param pulumi.Input[str] gcloud_project_credentials_filepath: GCloud Project Credentials [local filepath].json. Required when creating an account for GCP.
         :param pulumi.Input[str] gcloud_project_id: GCloud Project ID.
-        :param pulumi.Input[str] oci_api_private_key_filepath: OCI API Private Key local file path.
-        :param pulumi.Input[str] oci_compartment_id: OCI Compartment OCID.
-        :param pulumi.Input[str] oci_tenancy_id: OCI Tenancy OCID.
-        :param pulumi.Input[str] oci_user_id: OCI User OCID.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] rbac_groups: List of RBAC permission group names.
+        :param pulumi.Input[str] oci_api_private_key_filepath: Oracle OCI API Private Key local file path. Required when creating an account for OCI.
+        :param pulumi.Input[str] oci_compartment_id: Oracle OCI Compartment ID. Required when creating an account for OCI.
+        :param pulumi.Input[str] oci_tenancy_id: Oracle OCI Tenancy ID. Required when creating an account for OCI.
+        :param pulumi.Input[str] oci_user_id: Oracle OCI User ID. Required when creating an account for OCI.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] rbac_groups: A list of existing RBAC group names. This attribute should only be used when creating an account. Updating this attribute will have no effect. Available as of provider version R2.23.0+.
         """
         if account_name is not None:
             pulumi.set(__self__, "account_name", account_name)
@@ -1280,7 +1280,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="alicloudAccessKey")
     def alicloud_access_key(self) -> Optional[pulumi.Input[str]]:
         """
-        Alibaba Cloud Access Key.
+        Alibaba Cloud Access Key. Required when creating an account for Alibaba Cloud.
         """
         return pulumi.get(self, "alicloud_access_key")
 
@@ -1292,7 +1292,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="alicloudAccountId")
     def alicloud_account_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Alibaba Cloud Account ID to associate with Aviatrix account.
+        Alibaba Cloud Account number to associate with Aviatrix account. Required when creating an account for Alibaba Cloud.
         """
         return pulumi.get(self, "alicloud_account_id")
 
@@ -1304,7 +1304,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="alicloudSecretKey")
     def alicloud_secret_key(self) -> Optional[pulumi.Input[str]]:
         """
-        Alibaba Cloud Secret Key.
+        Alibaba Cloud Secret Key. Required when creating an account for Alibaba Cloud.
         """
         return pulumi.get(self, "alicloud_secret_key")
 
@@ -1316,7 +1316,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="armApplicationId")
     def arm_application_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Azure Application ID.
+        Azure ARM Application ID. Required when creating an account for Azure.
         """
         return pulumi.get(self, "arm_application_id")
 
@@ -1328,7 +1328,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="armApplicationKey")
     def arm_application_key(self) -> Optional[pulumi.Input[str]]:
         """
-        Azure Application Key.
+        Azure ARM Application key. Required when creating an account for Azure.
         """
         return pulumi.get(self, "arm_application_key")
 
@@ -1340,7 +1340,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="armDirectoryId")
     def arm_directory_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Azure Directory ID.
+        Azure ARM Directory ID. Required when creating an account for Azure.
         """
         return pulumi.get(self, "arm_directory_id")
 
@@ -1352,7 +1352,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="armSubscriptionId")
     def arm_subscription_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Azure Subscription ID.
+        Azure ARM Subscription ID. Required when creating an account for Azure.
         """
         return pulumi.get(self, "arm_subscription_id")
 
@@ -1376,7 +1376,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awsAccessKey")
     def aws_access_key(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Access Key.
+        AWS Access Key. Required when `aws_iam` is "false" and when creating an account for AWS.
         """
         return pulumi.get(self, "aws_access_key")
 
@@ -1388,7 +1388,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awsAccountNumber")
     def aws_account_number(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Account number to associate with Aviatrix account. Should be 12 digits.
+        AWS Account number to associate with Aviatrix account. Required when creating an account for AWS.
         """
         return pulumi.get(self, "aws_account_number")
 
@@ -1400,7 +1400,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awsCaCertPath")
     def aws_ca_cert_path(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Top Secret Region or Secret Region Custom Certificate Authority file path on the controller.
+        (Optional) AWS Top Secret Region or Secret Region Custom Certificate Authority file name on the controller. Available as of provider R2.19.5+.
         """
         return pulumi.get(self, "aws_ca_cert_path")
 
@@ -1412,7 +1412,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awsGatewayRoleApp")
     def aws_gateway_role_app(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS App role ARN for gateways.
+        A separate AWS App role ARN to assign to gateways created by the controller. Required when `aws_gateway_role_ec2` is set. Only allowed when `aws_iam`, `awsgov_iam`, or `awschina_iam` is "true" when creating an account for AWS, AWSGov or AWSChina, respectively. Available as of provider version R2.19+.
         """
         return pulumi.get(self, "aws_gateway_role_app")
 
@@ -1424,7 +1424,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awsGatewayRoleEc2")
     def aws_gateway_role_ec2(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS EC2 role ARN for gateways.
+        A separate AWS EC2 role ARN to assign to gateways created by the controller. Required when `aws_gateway_role_app` is set. Only allowed when `aws_iam`, `awsgov_iam`, or `awschina_iam` is "true" when creating an account for AWS, AWSGov or AWSChina, respectively. Available as of provider version R2.19+.
         """
         return pulumi.get(self, "aws_gateway_role_ec2")
 
@@ -1436,7 +1436,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awsIam")
     def aws_iam(self) -> Optional[pulumi.Input[bool]]:
         """
-        AWS IAM-role based flag.
+        AWS IAM-role based flag, this option is for UserConnect.
         """
         return pulumi.get(self, "aws_iam")
 
@@ -1448,7 +1448,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awsRoleApp")
     def aws_role_app(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS App role ARN.
+        AWS App role ARN, this option is for UserConnect. Required when `aws_iam` is "true" and when creating an account for AWS.
         """
         return pulumi.get(self, "aws_role_app")
 
@@ -1460,7 +1460,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awsRoleEc2")
     def aws_role_ec2(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS EC2 role ARN.
+        AWS EC2 role ARN, this option is for UserConnect. Required when `aws_iam` is "true" and when creating an account for AWS.
         """
         return pulumi.get(self, "aws_role_ec2")
 
@@ -1472,7 +1472,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awsSecretKey")
     def aws_secret_key(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Secret Key.
+        AWS Secret Key. Required when `aws_iam` is "false" and when creating an account for AWS.
         """
         return pulumi.get(self, "aws_secret_key")
 
@@ -1484,7 +1484,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awschinaAccessKey")
     def awschina_access_key(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS China Access Key.
+        AWSChina Access Key. Required when `awschina_iam` is "false" and when creating an account for AWSChina. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "awschina_access_key")
 
@@ -1496,7 +1496,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awschinaAccountNumber")
     def awschina_account_number(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS China Account Number.
+        AWSChina Account number to associate with Aviatrix account. Required when creating an account for AWSChina. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "awschina_account_number")
 
@@ -1508,7 +1508,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awschinaIam")
     def awschina_iam(self) -> Optional[pulumi.Input[bool]]:
         """
-        AWS China IAM-role based flag.
+        AWSChina IAM-role based flag. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "awschina_iam")
 
@@ -1520,7 +1520,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awschinaRoleApp")
     def awschina_role_app(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS China App Role ARN.
+        AWSChina App role ARN. Available when `awschina_iam` is "true" and when creating an account for AWSChina. If left empty, the ARN will be computed. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "awschina_role_app")
 
@@ -1532,7 +1532,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awschinaRoleEc2")
     def awschina_role_ec2(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS China EC2 Role ARN.
+        AWSChina EC2 role ARN. Available when `awschina_iam` is "true" and when creating an account for AWSChina. If left empty, the ARN will be computed. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "awschina_role_ec2")
 
@@ -1544,7 +1544,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awschinaSecretKey")
     def awschina_secret_key(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS China Secret Key.
+        AWSChina Secret Key. Required when `awschina_iam` is "false" and when creating an account for AWSChina. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "awschina_secret_key")
 
@@ -1556,7 +1556,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awsgovAccessKey")
     def awsgov_access_key(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Gov Access Key.
+        AWS Access Key. Required when creating an account for AWSGov.
         """
         return pulumi.get(self, "awsgov_access_key")
 
@@ -1568,7 +1568,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awsgovAccountNumber")
     def awsgov_account_number(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Gov Account number to associate with Aviatrix account.
+        AWSGov Account number to associate with Aviatrix account. Required when creating an account for AWSGov.
         """
         return pulumi.get(self, "awsgov_account_number")
 
@@ -1580,7 +1580,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awsgovIam")
     def awsgov_iam(self) -> Optional[pulumi.Input[bool]]:
         """
-        AWSGov IAM-role based flag
+        AWSGov IAM-role based flag. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "awsgov_iam")
 
@@ -1592,7 +1592,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awsgovRoleApp")
     def awsgov_role_app(self) -> Optional[pulumi.Input[str]]:
         """
-        AWSGov App role ARN
+        AWSGov App role ARN. Available when `awsgov_iam` is "true" and when creating an account for AWSGov. If left empty, the ARN will be computed. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "awsgov_role_app")
 
@@ -1604,7 +1604,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awsgovRoleEc2")
     def awsgov_role_ec2(self) -> Optional[pulumi.Input[str]]:
         """
-        AWSGov EC2 role ARN
+        AWSGov EC2 role ARN. Available when `awsgov_iam` is "true" and when creating an account for AWSGov. If left empty, the ARN will be computed. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "awsgov_role_ec2")
 
@@ -1616,7 +1616,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awsgovSecretKey")
     def awsgov_secret_key(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Gov Secret Key.
+        AWS Secret Key. Required when creating an account for AWSGov.
         """
         return pulumi.get(self, "awsgov_secret_key")
 
@@ -1628,7 +1628,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awssAccountNumber")
     def awss_account_number(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Secret Region Account Number.
+        AWS Secret Region Account Number. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awss_account_number")
 
@@ -1640,7 +1640,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awssCaChainCert")
     def awss_ca_chain_cert(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Secret Region Custom Certificate Authority file path.
+        AWS Secret Region Custom Certificate Authority local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awss_ca_chain_cert")
 
@@ -1652,7 +1652,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awssCapAccountName")
     def awss_cap_account_name(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Secret Region CAP Account Name.
+        AWS Secret Region Account Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awss_cap_account_name")
 
@@ -1664,7 +1664,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awssCapAgency")
     def awss_cap_agency(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Secret Region CAP Agency.
+        AWS Secret Region CAP Agency. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awss_cap_agency")
 
@@ -1676,7 +1676,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awssCapCert")
     def awss_cap_cert(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Secret Region CAP Certificate file path.
+        AWS Secret Region CAP Certificate local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awss_cap_cert")
 
@@ -1688,7 +1688,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awssCapCertKey")
     def awss_cap_cert_key(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Secret Region CAP Certificate Key file path.
+        AWS Secret Region CAP Certificate Key local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awss_cap_cert_key")
 
@@ -1700,7 +1700,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awssCapCertKeyPath")
     def awss_cap_cert_key_path(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Secret Region CAP Certificate Key file path on the controller.
+        (Optional) AWS Secret Region CAP Certificate Key file name on the controller. Available as of provider R2.19.5+.
         """
         return pulumi.get(self, "awss_cap_cert_key_path")
 
@@ -1712,7 +1712,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awssCapCertPath")
     def awss_cap_cert_path(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Secret Region CAP Certificate file path on the controller.
+        (Optional) AWS Secret Region CAP Certificate file name on the controller. Available as of provider R2.19.5+.
         """
         return pulumi.get(self, "awss_cap_cert_path")
 
@@ -1724,7 +1724,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awssCapRoleName")
     def awss_cap_role_name(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Secret Region CAP Role Name.
+        AWS Secret Region Role Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awss_cap_role_name")
 
@@ -1736,7 +1736,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awssCapUrl")
     def awss_cap_url(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Secret Region CAP Endpoint URL.
+        AWS Secret Region CAP Url. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awss_cap_url")
 
@@ -1748,7 +1748,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awstsAccountNumber")
     def awsts_account_number(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Top Secret Region Account Number.
+        AWS Top Secret Region Account Number. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awsts_account_number")
 
@@ -1760,7 +1760,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awstsCaChainCert")
     def awsts_ca_chain_cert(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Top Secret Region Custom Certificate Authority file path.
+        AWS Top Secret Region Custom Certificate Authority local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awsts_ca_chain_cert")
 
@@ -1772,7 +1772,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awstsCapAgency")
     def awsts_cap_agency(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Top Secret Region CAP Agency.
+        AWS Top Secret Region CAP Agency. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awsts_cap_agency")
 
@@ -1784,7 +1784,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awstsCapCert")
     def awsts_cap_cert(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Top Secret Region CAP Certificate file path.
+        AWS Top Secret Region CAP Certificate local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awsts_cap_cert")
 
@@ -1796,7 +1796,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awstsCapCertKey")
     def awsts_cap_cert_key(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Top Secret Region CAP Certificate Key file path.
+        AWS Top Secret Region CAP Certificate Key local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awsts_cap_cert_key")
 
@@ -1808,7 +1808,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awstsCapCertKeyPath")
     def awsts_cap_cert_key_path(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Top Secret Region CAP Certificate Key file path on the controller.
+        (Optional) AWS Top Secret Region CAP Certificate Key file name on the controller. Available as of provider R2.19.5+.
         """
         return pulumi.get(self, "awsts_cap_cert_key_path")
 
@@ -1820,7 +1820,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awstsCapCertPath")
     def awsts_cap_cert_path(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Top Secret Region CAP Certificate file path on the controller.
+        (Optional) AWS Top Secret Region CAP Certificate file name on the controller. Available as of provider R2.19.5+.
         """
         return pulumi.get(self, "awsts_cap_cert_path")
 
@@ -1832,7 +1832,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awstsCapMission")
     def awsts_cap_mission(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Top Secret Region CAP Mission.
+        AWS Top Secret Region Mission. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awsts_cap_mission")
 
@@ -1844,7 +1844,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awstsCapRoleName")
     def awsts_cap_role_name(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Top Secret Region CAP Role Name.
+        AWS Top Secret Region Role Name. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awsts_cap_role_name")
 
@@ -1856,7 +1856,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="awstsCapUrl")
     def awsts_cap_url(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS Top Secret Region CAP Endpoint URL.
+        AWS Top Secret Region CAP Url. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awsts_cap_url")
 
@@ -1868,7 +1868,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="azurechinaApplicationId")
     def azurechina_application_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Azure China Application ID.
+        AzureChina ARM Application ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "azurechina_application_id")
 
@@ -1880,7 +1880,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="azurechinaApplicationKey")
     def azurechina_application_key(self) -> Optional[pulumi.Input[str]]:
         """
-        Azure China Application Key.
+        AzureChina ARM Application key. Required when creating an account for AzureChina. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "azurechina_application_key")
 
@@ -1892,7 +1892,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="azurechinaDirectoryId")
     def azurechina_directory_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Azure China Directory ID.
+        AzureChina ARM Directory ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "azurechina_directory_id")
 
@@ -1904,7 +1904,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="azurechinaSubscriptionId")
     def azurechina_subscription_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Azure China Subscription ID.
+        AzureChina ARM Subscription ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "azurechina_subscription_id")
 
@@ -1916,7 +1916,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="azuregovApplicationId")
     def azuregov_application_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Azure Gov Application ID.
+        AzureGov ARM Application ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
         """
         return pulumi.get(self, "azuregov_application_id")
 
@@ -1928,7 +1928,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="azuregovApplicationKey")
     def azuregov_application_key(self) -> Optional[pulumi.Input[str]]:
         """
-        Azure Gov Application Key.
+        AzureGov ARM Application key. Required when creating an account for AzureGov. Available as of provider version R2.19+.
         """
         return pulumi.get(self, "azuregov_application_key")
 
@@ -1940,7 +1940,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="azuregovDirectoryId")
     def azuregov_directory_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Azure Gov Directory ID.
+        AzureGov ARM Directory ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
         """
         return pulumi.get(self, "azuregov_directory_id")
 
@@ -1952,7 +1952,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="azuregovSubscriptionId")
     def azuregov_subscription_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Azure Gov Subscription ID.
+        AzureGov ARM Subscription ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
         """
         return pulumi.get(self, "azuregov_subscription_id")
 
@@ -1964,7 +1964,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="cloudType")
     def cloud_type(self) -> Optional[pulumi.Input[int]]:
         """
-        Type of cloud service provider.
+        Type of cloud service provider. Only AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina and Alibaba Cloud are supported currently. Enter 1 for AWS, 4 for GCP, 8 for Azure, 16 for OCI, 32 for AzureGov, 256 for AWSGov, 1024 for AWSChina or 2048 for AzureChina, 8192 for Alibaba Cloud.
         """
         return pulumi.get(self, "cloud_type")
 
@@ -1976,7 +1976,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="gcloudProjectCredentialsFilepath")
     def gcloud_project_credentials_filepath(self) -> Optional[pulumi.Input[str]]:
         """
-        GCloud Project credentials local file path.
+        GCloud Project Credentials [local filepath].json. Required when creating an account for GCP.
         """
         return pulumi.get(self, "gcloud_project_credentials_filepath")
 
@@ -2000,7 +2000,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="ociApiPrivateKeyFilepath")
     def oci_api_private_key_filepath(self) -> Optional[pulumi.Input[str]]:
         """
-        OCI API Private Key local file path.
+        Oracle OCI API Private Key local file path. Required when creating an account for OCI.
         """
         return pulumi.get(self, "oci_api_private_key_filepath")
 
@@ -2012,7 +2012,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="ociCompartmentId")
     def oci_compartment_id(self) -> Optional[pulumi.Input[str]]:
         """
-        OCI Compartment OCID.
+        Oracle OCI Compartment ID. Required when creating an account for OCI.
         """
         return pulumi.get(self, "oci_compartment_id")
 
@@ -2024,7 +2024,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="ociTenancyId")
     def oci_tenancy_id(self) -> Optional[pulumi.Input[str]]:
         """
-        OCI Tenancy OCID.
+        Oracle OCI Tenancy ID. Required when creating an account for OCI.
         """
         return pulumi.get(self, "oci_tenancy_id")
 
@@ -2036,7 +2036,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="ociUserId")
     def oci_user_id(self) -> Optional[pulumi.Input[str]]:
         """
-        OCI User OCID.
+        Oracle OCI User ID. Required when creating an account for OCI.
         """
         return pulumi.get(self, "oci_user_id")
 
@@ -2048,7 +2048,7 @@ class _AviatrixAccountState:
     @pulumi.getter(name="rbacGroups")
     def rbac_groups(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of RBAC permission group names.
+        A list of existing RBAC group names. This attribute should only be used when creating an account. Updating this attribute will have no effect. Available as of provider version R2.23.0+.
         """
         return pulumi.get(self, "rbac_groups")
 
@@ -2125,70 +2125,81 @@ class AviatrixAccount(pulumi.CustomResource):
                  rbac_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
-        Create a AviatrixAccount resource with the given unique name, props, and options.
+        The **aviatrix_account** resource allows the creation and management of Aviatrix cloud accounts.
+
+        > **NOTE:** With the release of Controller 5.4 (compatible with Aviatrix provider R2.13), Role-Based Access Control (RBAC) is now integrated into the Accounts workflow. Any **aviatrix_account** created in 5.3 by default will have admin privileges (attached to the 'admin' RBAC permission group). In 5.4, any new accounts created will not be attached to any RBAC group unless otherwise specified through the **aviatrix_rbac_group_access_account_attachment** resource.
+
+        ## Import
+
+        **account** can be imported using the `account_name` (when doing import, need to leave sensitive attributes blank), e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAccount:AviatrixAccount test account_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] account_name: Account name. This can be used for logging in to CloudN console or UserConnect controller.
-        :param pulumi.Input[str] alicloud_access_key: Alibaba Cloud Access Key.
-        :param pulumi.Input[str] alicloud_account_id: Alibaba Cloud Account ID to associate with Aviatrix account.
-        :param pulumi.Input[str] alicloud_secret_key: Alibaba Cloud Secret Key.
-        :param pulumi.Input[str] arm_application_id: Azure Application ID.
-        :param pulumi.Input[str] arm_application_key: Azure Application Key.
-        :param pulumi.Input[str] arm_directory_id: Azure Directory ID.
-        :param pulumi.Input[str] arm_subscription_id: Azure Subscription ID.
+        :param pulumi.Input[str] alicloud_access_key: Alibaba Cloud Access Key. Required when creating an account for Alibaba Cloud.
+        :param pulumi.Input[str] alicloud_account_id: Alibaba Cloud Account number to associate with Aviatrix account. Required when creating an account for Alibaba Cloud.
+        :param pulumi.Input[str] alicloud_secret_key: Alibaba Cloud Secret Key. Required when creating an account for Alibaba Cloud.
+        :param pulumi.Input[str] arm_application_id: Azure ARM Application ID. Required when creating an account for Azure.
+        :param pulumi.Input[str] arm_application_key: Azure ARM Application key. Required when creating an account for Azure.
+        :param pulumi.Input[str] arm_directory_id: Azure ARM Directory ID. Required when creating an account for Azure.
+        :param pulumi.Input[str] arm_subscription_id: Azure ARM Subscription ID. Required when creating an account for Azure.
         :param pulumi.Input[bool] audit_account: Enable account audit.
-        :param pulumi.Input[str] aws_access_key: AWS Access Key.
-        :param pulumi.Input[str] aws_account_number: AWS Account number to associate with Aviatrix account. Should be 12 digits.
-        :param pulumi.Input[str] aws_gateway_role_app: AWS App role ARN for gateways.
-        :param pulumi.Input[str] aws_gateway_role_ec2: AWS EC2 role ARN for gateways.
-        :param pulumi.Input[bool] aws_iam: AWS IAM-role based flag.
-        :param pulumi.Input[str] aws_role_app: AWS App role ARN.
-        :param pulumi.Input[str] aws_role_ec2: AWS EC2 role ARN.
-        :param pulumi.Input[str] aws_secret_key: AWS Secret Key.
-        :param pulumi.Input[str] awschina_access_key: AWS China Access Key.
-        :param pulumi.Input[str] awschina_account_number: AWS China Account Number.
-        :param pulumi.Input[bool] awschina_iam: AWS China IAM-role based flag.
-        :param pulumi.Input[str] awschina_role_app: AWS China App Role ARN.
-        :param pulumi.Input[str] awschina_role_ec2: AWS China EC2 Role ARN.
-        :param pulumi.Input[str] awschina_secret_key: AWS China Secret Key.
-        :param pulumi.Input[str] awsgov_access_key: AWS Gov Access Key.
-        :param pulumi.Input[str] awsgov_account_number: AWS Gov Account number to associate with Aviatrix account.
-        :param pulumi.Input[bool] awsgov_iam: AWSGov IAM-role based flag
-        :param pulumi.Input[str] awsgov_role_app: AWSGov App role ARN
-        :param pulumi.Input[str] awsgov_role_ec2: AWSGov EC2 role ARN
-        :param pulumi.Input[str] awsgov_secret_key: AWS Gov Secret Key.
-        :param pulumi.Input[str] awss_account_number: AWS Secret Region Account Number.
-        :param pulumi.Input[str] awss_ca_chain_cert: AWS Secret Region Custom Certificate Authority file path.
-        :param pulumi.Input[str] awss_cap_account_name: AWS Secret Region CAP Account Name.
-        :param pulumi.Input[str] awss_cap_agency: AWS Secret Region CAP Agency.
-        :param pulumi.Input[str] awss_cap_cert: AWS Secret Region CAP Certificate file path.
-        :param pulumi.Input[str] awss_cap_cert_key: AWS Secret Region CAP Certificate Key file path.
-        :param pulumi.Input[str] awss_cap_role_name: AWS Secret Region CAP Role Name.
-        :param pulumi.Input[str] awss_cap_url: AWS Secret Region CAP Endpoint URL.
-        :param pulumi.Input[str] awsts_account_number: AWS Top Secret Region Account Number.
-        :param pulumi.Input[str] awsts_ca_chain_cert: AWS Top Secret Region Custom Certificate Authority file path.
-        :param pulumi.Input[str] awsts_cap_agency: AWS Top Secret Region CAP Agency.
-        :param pulumi.Input[str] awsts_cap_cert: AWS Top Secret Region CAP Certificate file path.
-        :param pulumi.Input[str] awsts_cap_cert_key: AWS Top Secret Region CAP Certificate Key file path.
-        :param pulumi.Input[str] awsts_cap_mission: AWS Top Secret Region CAP Mission.
-        :param pulumi.Input[str] awsts_cap_role_name: AWS Top Secret Region CAP Role Name.
-        :param pulumi.Input[str] awsts_cap_url: AWS Top Secret Region CAP Endpoint URL.
-        :param pulumi.Input[str] azurechina_application_id: Azure China Application ID.
-        :param pulumi.Input[str] azurechina_application_key: Azure China Application Key.
-        :param pulumi.Input[str] azurechina_directory_id: Azure China Directory ID.
-        :param pulumi.Input[str] azurechina_subscription_id: Azure China Subscription ID.
-        :param pulumi.Input[str] azuregov_application_id: Azure Gov Application ID.
-        :param pulumi.Input[str] azuregov_application_key: Azure Gov Application Key.
-        :param pulumi.Input[str] azuregov_directory_id: Azure Gov Directory ID.
-        :param pulumi.Input[str] azuregov_subscription_id: Azure Gov Subscription ID.
-        :param pulumi.Input[int] cloud_type: Type of cloud service provider.
-        :param pulumi.Input[str] gcloud_project_credentials_filepath: GCloud Project credentials local file path.
+        :param pulumi.Input[str] aws_access_key: AWS Access Key. Required when `aws_iam` is "false" and when creating an account for AWS.
+        :param pulumi.Input[str] aws_account_number: AWS Account number to associate with Aviatrix account. Required when creating an account for AWS.
+        :param pulumi.Input[str] aws_gateway_role_app: A separate AWS App role ARN to assign to gateways created by the controller. Required when `aws_gateway_role_ec2` is set. Only allowed when `aws_iam`, `awsgov_iam`, or `awschina_iam` is "true" when creating an account for AWS, AWSGov or AWSChina, respectively. Available as of provider version R2.19+.
+        :param pulumi.Input[str] aws_gateway_role_ec2: A separate AWS EC2 role ARN to assign to gateways created by the controller. Required when `aws_gateway_role_app` is set. Only allowed when `aws_iam`, `awsgov_iam`, or `awschina_iam` is "true" when creating an account for AWS, AWSGov or AWSChina, respectively. Available as of provider version R2.19+.
+        :param pulumi.Input[bool] aws_iam: AWS IAM-role based flag, this option is for UserConnect.
+        :param pulumi.Input[str] aws_role_app: AWS App role ARN, this option is for UserConnect. Required when `aws_iam` is "true" and when creating an account for AWS.
+        :param pulumi.Input[str] aws_role_ec2: AWS EC2 role ARN, this option is for UserConnect. Required when `aws_iam` is "true" and when creating an account for AWS.
+        :param pulumi.Input[str] aws_secret_key: AWS Secret Key. Required when `aws_iam` is "false" and when creating an account for AWS.
+        :param pulumi.Input[str] awschina_access_key: AWSChina Access Key. Required when `awschina_iam` is "false" and when creating an account for AWSChina. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awschina_account_number: AWSChina Account number to associate with Aviatrix account. Required when creating an account for AWSChina. Available as of provider version 2.19+.
+        :param pulumi.Input[bool] awschina_iam: AWSChina IAM-role based flag. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awschina_role_app: AWSChina App role ARN. Available when `awschina_iam` is "true" and when creating an account for AWSChina. If left empty, the ARN will be computed. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awschina_role_ec2: AWSChina EC2 role ARN. Available when `awschina_iam` is "true" and when creating an account for AWSChina. If left empty, the ARN will be computed. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awschina_secret_key: AWSChina Secret Key. Required when `awschina_iam` is "false" and when creating an account for AWSChina. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awsgov_access_key: AWS Access Key. Required when creating an account for AWSGov.
+        :param pulumi.Input[str] awsgov_account_number: AWSGov Account number to associate with Aviatrix account. Required when creating an account for AWSGov.
+        :param pulumi.Input[bool] awsgov_iam: AWSGov IAM-role based flag. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awsgov_role_app: AWSGov App role ARN. Available when `awsgov_iam` is "true" and when creating an account for AWSGov. If left empty, the ARN will be computed. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awsgov_role_ec2: AWSGov EC2 role ARN. Available when `awsgov_iam` is "true" and when creating an account for AWSGov. If left empty, the ARN will be computed. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awsgov_secret_key: AWS Secret Key. Required when creating an account for AWSGov.
+        :param pulumi.Input[str] awss_account_number: AWS Secret Region Account Number. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awss_ca_chain_cert: AWS Secret Region Custom Certificate Authority local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awss_cap_account_name: AWS Secret Region Account Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awss_cap_agency: AWS Secret Region CAP Agency. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awss_cap_cert: AWS Secret Region CAP Certificate local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awss_cap_cert_key: AWS Secret Region CAP Certificate Key local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awss_cap_role_name: AWS Secret Region Role Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awss_cap_url: AWS Secret Region CAP Url. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_account_number: AWS Top Secret Region Account Number. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_ca_chain_cert: AWS Top Secret Region Custom Certificate Authority local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_cap_agency: AWS Top Secret Region CAP Agency. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_cap_cert: AWS Top Secret Region CAP Certificate local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_cap_cert_key: AWS Top Secret Region CAP Certificate Key local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_cap_mission: AWS Top Secret Region Mission. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_cap_role_name: AWS Top Secret Region Role Name. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_cap_url: AWS Top Secret Region CAP Url. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] azurechina_application_id: AzureChina ARM Application ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
+        :param pulumi.Input[str] azurechina_application_key: AzureChina ARM Application key. Required when creating an account for AzureChina. Available as of provider version 2.19+.
+        :param pulumi.Input[str] azurechina_directory_id: AzureChina ARM Directory ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
+        :param pulumi.Input[str] azurechina_subscription_id: AzureChina ARM Subscription ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
+        :param pulumi.Input[str] azuregov_application_id: AzureGov ARM Application ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
+        :param pulumi.Input[str] azuregov_application_key: AzureGov ARM Application key. Required when creating an account for AzureGov. Available as of provider version R2.19+.
+        :param pulumi.Input[str] azuregov_directory_id: AzureGov ARM Directory ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
+        :param pulumi.Input[str] azuregov_subscription_id: AzureGov ARM Subscription ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
+        :param pulumi.Input[int] cloud_type: Type of cloud service provider. Only AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina and Alibaba Cloud are supported currently. Enter 1 for AWS, 4 for GCP, 8 for Azure, 16 for OCI, 32 for AzureGov, 256 for AWSGov, 1024 for AWSChina or 2048 for AzureChina, 8192 for Alibaba Cloud.
+        :param pulumi.Input[str] gcloud_project_credentials_filepath: GCloud Project Credentials [local filepath].json. Required when creating an account for GCP.
         :param pulumi.Input[str] gcloud_project_id: GCloud Project ID.
-        :param pulumi.Input[str] oci_api_private_key_filepath: OCI API Private Key local file path.
-        :param pulumi.Input[str] oci_compartment_id: OCI Compartment OCID.
-        :param pulumi.Input[str] oci_tenancy_id: OCI Tenancy OCID.
-        :param pulumi.Input[str] oci_user_id: OCI User OCID.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] rbac_groups: List of RBAC permission group names.
+        :param pulumi.Input[str] oci_api_private_key_filepath: Oracle OCI API Private Key local file path. Required when creating an account for OCI.
+        :param pulumi.Input[str] oci_compartment_id: Oracle OCI Compartment ID. Required when creating an account for OCI.
+        :param pulumi.Input[str] oci_tenancy_id: Oracle OCI Tenancy ID. Required when creating an account for OCI.
+        :param pulumi.Input[str] oci_user_id: Oracle OCI User ID. Required when creating an account for OCI.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] rbac_groups: A list of existing RBAC group names. This attribute should only be used when creating an account. Updating this attribute will have no effect. Available as of provider version R2.23.0+.
         """
         ...
     @overload
@@ -2197,7 +2208,18 @@ class AviatrixAccount(pulumi.CustomResource):
                  args: AviatrixAccountArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixAccount resource with the given unique name, props, and options.
+        The **aviatrix_account** resource allows the creation and management of Aviatrix cloud accounts.
+
+        > **NOTE:** With the release of Controller 5.4 (compatible with Aviatrix provider R2.13), Role-Based Access Control (RBAC) is now integrated into the Accounts workflow. Any **aviatrix_account** created in 5.3 by default will have admin privileges (attached to the 'admin' RBAC permission group). In 5.4, any new accounts created will not be attached to any RBAC group unless otherwise specified through the **aviatrix_rbac_group_access_account_attachment** resource.
+
+        ## Import
+
+        **account** can be imported using the `account_name` (when doing import, need to leave sensitive attributes blank), e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAccount:AviatrixAccount test account_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixAccountArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -2286,73 +2308,75 @@ class AviatrixAccount(pulumi.CustomResource):
             if account_name is None and not opts.urn:
                 raise TypeError("Missing required property 'account_name'")
             __props__.__dict__["account_name"] = account_name
-            __props__.__dict__["alicloud_access_key"] = alicloud_access_key
+            __props__.__dict__["alicloud_access_key"] = None if alicloud_access_key is None else pulumi.Output.secret(alicloud_access_key)
             __props__.__dict__["alicloud_account_id"] = alicloud_account_id
-            __props__.__dict__["alicloud_secret_key"] = alicloud_secret_key
-            __props__.__dict__["arm_application_id"] = arm_application_id
-            __props__.__dict__["arm_application_key"] = arm_application_key
-            __props__.__dict__["arm_directory_id"] = arm_directory_id
+            __props__.__dict__["alicloud_secret_key"] = None if alicloud_secret_key is None else pulumi.Output.secret(alicloud_secret_key)
+            __props__.__dict__["arm_application_id"] = None if arm_application_id is None else pulumi.Output.secret(arm_application_id)
+            __props__.__dict__["arm_application_key"] = None if arm_application_key is None else pulumi.Output.secret(arm_application_key)
+            __props__.__dict__["arm_directory_id"] = None if arm_directory_id is None else pulumi.Output.secret(arm_directory_id)
             __props__.__dict__["arm_subscription_id"] = arm_subscription_id
             __props__.__dict__["audit_account"] = audit_account
-            __props__.__dict__["aws_access_key"] = aws_access_key
+            __props__.__dict__["aws_access_key"] = None if aws_access_key is None else pulumi.Output.secret(aws_access_key)
             __props__.__dict__["aws_account_number"] = aws_account_number
             __props__.__dict__["aws_gateway_role_app"] = aws_gateway_role_app
             __props__.__dict__["aws_gateway_role_ec2"] = aws_gateway_role_ec2
             __props__.__dict__["aws_iam"] = aws_iam
             __props__.__dict__["aws_role_app"] = aws_role_app
             __props__.__dict__["aws_role_ec2"] = aws_role_ec2
-            __props__.__dict__["aws_secret_key"] = aws_secret_key
-            __props__.__dict__["awschina_access_key"] = awschina_access_key
+            __props__.__dict__["aws_secret_key"] = None if aws_secret_key is None else pulumi.Output.secret(aws_secret_key)
+            __props__.__dict__["awschina_access_key"] = None if awschina_access_key is None else pulumi.Output.secret(awschina_access_key)
             __props__.__dict__["awschina_account_number"] = awschina_account_number
             __props__.__dict__["awschina_iam"] = awschina_iam
             __props__.__dict__["awschina_role_app"] = awschina_role_app
             __props__.__dict__["awschina_role_ec2"] = awschina_role_ec2
-            __props__.__dict__["awschina_secret_key"] = awschina_secret_key
-            __props__.__dict__["awsgov_access_key"] = awsgov_access_key
+            __props__.__dict__["awschina_secret_key"] = None if awschina_secret_key is None else pulumi.Output.secret(awschina_secret_key)
+            __props__.__dict__["awsgov_access_key"] = None if awsgov_access_key is None else pulumi.Output.secret(awsgov_access_key)
             __props__.__dict__["awsgov_account_number"] = awsgov_account_number
             __props__.__dict__["awsgov_iam"] = awsgov_iam
             __props__.__dict__["awsgov_role_app"] = awsgov_role_app
             __props__.__dict__["awsgov_role_ec2"] = awsgov_role_ec2
-            __props__.__dict__["awsgov_secret_key"] = awsgov_secret_key
+            __props__.__dict__["awsgov_secret_key"] = None if awsgov_secret_key is None else pulumi.Output.secret(awsgov_secret_key)
             __props__.__dict__["awss_account_number"] = awss_account_number
-            __props__.__dict__["awss_ca_chain_cert"] = awss_ca_chain_cert
+            __props__.__dict__["awss_ca_chain_cert"] = None if awss_ca_chain_cert is None else pulumi.Output.secret(awss_ca_chain_cert)
             __props__.__dict__["awss_cap_account_name"] = awss_cap_account_name
             __props__.__dict__["awss_cap_agency"] = awss_cap_agency
-            __props__.__dict__["awss_cap_cert"] = awss_cap_cert
-            __props__.__dict__["awss_cap_cert_key"] = awss_cap_cert_key
+            __props__.__dict__["awss_cap_cert"] = None if awss_cap_cert is None else pulumi.Output.secret(awss_cap_cert)
+            __props__.__dict__["awss_cap_cert_key"] = None if awss_cap_cert_key is None else pulumi.Output.secret(awss_cap_cert_key)
             __props__.__dict__["awss_cap_role_name"] = awss_cap_role_name
             __props__.__dict__["awss_cap_url"] = awss_cap_url
             __props__.__dict__["awsts_account_number"] = awsts_account_number
-            __props__.__dict__["awsts_ca_chain_cert"] = awsts_ca_chain_cert
+            __props__.__dict__["awsts_ca_chain_cert"] = None if awsts_ca_chain_cert is None else pulumi.Output.secret(awsts_ca_chain_cert)
             __props__.__dict__["awsts_cap_agency"] = awsts_cap_agency
-            __props__.__dict__["awsts_cap_cert"] = awsts_cap_cert
-            __props__.__dict__["awsts_cap_cert_key"] = awsts_cap_cert_key
+            __props__.__dict__["awsts_cap_cert"] = None if awsts_cap_cert is None else pulumi.Output.secret(awsts_cap_cert)
+            __props__.__dict__["awsts_cap_cert_key"] = None if awsts_cap_cert_key is None else pulumi.Output.secret(awsts_cap_cert_key)
             __props__.__dict__["awsts_cap_mission"] = awsts_cap_mission
             __props__.__dict__["awsts_cap_role_name"] = awsts_cap_role_name
             __props__.__dict__["awsts_cap_url"] = awsts_cap_url
-            __props__.__dict__["azurechina_application_id"] = azurechina_application_id
-            __props__.__dict__["azurechina_application_key"] = azurechina_application_key
-            __props__.__dict__["azurechina_directory_id"] = azurechina_directory_id
+            __props__.__dict__["azurechina_application_id"] = None if azurechina_application_id is None else pulumi.Output.secret(azurechina_application_id)
+            __props__.__dict__["azurechina_application_key"] = None if azurechina_application_key is None else pulumi.Output.secret(azurechina_application_key)
+            __props__.__dict__["azurechina_directory_id"] = None if azurechina_directory_id is None else pulumi.Output.secret(azurechina_directory_id)
             __props__.__dict__["azurechina_subscription_id"] = azurechina_subscription_id
-            __props__.__dict__["azuregov_application_id"] = azuregov_application_id
-            __props__.__dict__["azuregov_application_key"] = azuregov_application_key
-            __props__.__dict__["azuregov_directory_id"] = azuregov_directory_id
+            __props__.__dict__["azuregov_application_id"] = None if azuregov_application_id is None else pulumi.Output.secret(azuregov_application_id)
+            __props__.__dict__["azuregov_application_key"] = None if azuregov_application_key is None else pulumi.Output.secret(azuregov_application_key)
+            __props__.__dict__["azuregov_directory_id"] = None if azuregov_directory_id is None else pulumi.Output.secret(azuregov_directory_id)
             __props__.__dict__["azuregov_subscription_id"] = azuregov_subscription_id
             if cloud_type is None and not opts.urn:
                 raise TypeError("Missing required property 'cloud_type'")
             __props__.__dict__["cloud_type"] = cloud_type
             __props__.__dict__["gcloud_project_credentials_filepath"] = gcloud_project_credentials_filepath
             __props__.__dict__["gcloud_project_id"] = gcloud_project_id
-            __props__.__dict__["oci_api_private_key_filepath"] = oci_api_private_key_filepath
-            __props__.__dict__["oci_compartment_id"] = oci_compartment_id
-            __props__.__dict__["oci_tenancy_id"] = oci_tenancy_id
-            __props__.__dict__["oci_user_id"] = oci_user_id
+            __props__.__dict__["oci_api_private_key_filepath"] = None if oci_api_private_key_filepath is None else pulumi.Output.secret(oci_api_private_key_filepath)
+            __props__.__dict__["oci_compartment_id"] = None if oci_compartment_id is None else pulumi.Output.secret(oci_compartment_id)
+            __props__.__dict__["oci_tenancy_id"] = None if oci_tenancy_id is None else pulumi.Output.secret(oci_tenancy_id)
+            __props__.__dict__["oci_user_id"] = None if oci_user_id is None else pulumi.Output.secret(oci_user_id)
             __props__.__dict__["rbac_groups"] = rbac_groups
             __props__.__dict__["aws_ca_cert_path"] = None
             __props__.__dict__["awss_cap_cert_key_path"] = None
             __props__.__dict__["awss_cap_cert_path"] = None
             __props__.__dict__["awsts_cap_cert_key_path"] = None
             __props__.__dict__["awsts_cap_cert_path"] = None
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["alicloudAccessKey", "alicloudSecretKey", "armApplicationId", "armApplicationKey", "armDirectoryId", "awsAccessKey", "awsSecretKey", "awschinaAccessKey", "awschinaSecretKey", "awsgovAccessKey", "awsgovSecretKey", "awssCaChainCert", "awssCapCert", "awssCapCertKey", "awstsCaChainCert", "awstsCapCert", "awstsCapCertKey", "azurechinaApplicationId", "azurechinaApplicationKey", "azurechinaDirectoryId", "azuregovApplicationId", "azuregovApplicationKey", "azuregovDirectoryId", "ociApiPrivateKeyFilepath", "ociCompartmentId", "ociTenancyId", "ociUserId"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(AviatrixAccount, __self__).__init__(
             'aviatrix:index/aviatrixAccount:AviatrixAccount',
             resource_name,
@@ -2437,71 +2461,71 @@ class AviatrixAccount(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] account_name: Account name. This can be used for logging in to CloudN console or UserConnect controller.
-        :param pulumi.Input[str] alicloud_access_key: Alibaba Cloud Access Key.
-        :param pulumi.Input[str] alicloud_account_id: Alibaba Cloud Account ID to associate with Aviatrix account.
-        :param pulumi.Input[str] alicloud_secret_key: Alibaba Cloud Secret Key.
-        :param pulumi.Input[str] arm_application_id: Azure Application ID.
-        :param pulumi.Input[str] arm_application_key: Azure Application Key.
-        :param pulumi.Input[str] arm_directory_id: Azure Directory ID.
-        :param pulumi.Input[str] arm_subscription_id: Azure Subscription ID.
+        :param pulumi.Input[str] alicloud_access_key: Alibaba Cloud Access Key. Required when creating an account for Alibaba Cloud.
+        :param pulumi.Input[str] alicloud_account_id: Alibaba Cloud Account number to associate with Aviatrix account. Required when creating an account for Alibaba Cloud.
+        :param pulumi.Input[str] alicloud_secret_key: Alibaba Cloud Secret Key. Required when creating an account for Alibaba Cloud.
+        :param pulumi.Input[str] arm_application_id: Azure ARM Application ID. Required when creating an account for Azure.
+        :param pulumi.Input[str] arm_application_key: Azure ARM Application key. Required when creating an account for Azure.
+        :param pulumi.Input[str] arm_directory_id: Azure ARM Directory ID. Required when creating an account for Azure.
+        :param pulumi.Input[str] arm_subscription_id: Azure ARM Subscription ID. Required when creating an account for Azure.
         :param pulumi.Input[bool] audit_account: Enable account audit.
-        :param pulumi.Input[str] aws_access_key: AWS Access Key.
-        :param pulumi.Input[str] aws_account_number: AWS Account number to associate with Aviatrix account. Should be 12 digits.
-        :param pulumi.Input[str] aws_ca_cert_path: AWS Top Secret Region or Secret Region Custom Certificate Authority file path on the controller.
-        :param pulumi.Input[str] aws_gateway_role_app: AWS App role ARN for gateways.
-        :param pulumi.Input[str] aws_gateway_role_ec2: AWS EC2 role ARN for gateways.
-        :param pulumi.Input[bool] aws_iam: AWS IAM-role based flag.
-        :param pulumi.Input[str] aws_role_app: AWS App role ARN.
-        :param pulumi.Input[str] aws_role_ec2: AWS EC2 role ARN.
-        :param pulumi.Input[str] aws_secret_key: AWS Secret Key.
-        :param pulumi.Input[str] awschina_access_key: AWS China Access Key.
-        :param pulumi.Input[str] awschina_account_number: AWS China Account Number.
-        :param pulumi.Input[bool] awschina_iam: AWS China IAM-role based flag.
-        :param pulumi.Input[str] awschina_role_app: AWS China App Role ARN.
-        :param pulumi.Input[str] awschina_role_ec2: AWS China EC2 Role ARN.
-        :param pulumi.Input[str] awschina_secret_key: AWS China Secret Key.
-        :param pulumi.Input[str] awsgov_access_key: AWS Gov Access Key.
-        :param pulumi.Input[str] awsgov_account_number: AWS Gov Account number to associate with Aviatrix account.
-        :param pulumi.Input[bool] awsgov_iam: AWSGov IAM-role based flag
-        :param pulumi.Input[str] awsgov_role_app: AWSGov App role ARN
-        :param pulumi.Input[str] awsgov_role_ec2: AWSGov EC2 role ARN
-        :param pulumi.Input[str] awsgov_secret_key: AWS Gov Secret Key.
-        :param pulumi.Input[str] awss_account_number: AWS Secret Region Account Number.
-        :param pulumi.Input[str] awss_ca_chain_cert: AWS Secret Region Custom Certificate Authority file path.
-        :param pulumi.Input[str] awss_cap_account_name: AWS Secret Region CAP Account Name.
-        :param pulumi.Input[str] awss_cap_agency: AWS Secret Region CAP Agency.
-        :param pulumi.Input[str] awss_cap_cert: AWS Secret Region CAP Certificate file path.
-        :param pulumi.Input[str] awss_cap_cert_key: AWS Secret Region CAP Certificate Key file path.
-        :param pulumi.Input[str] awss_cap_cert_key_path: AWS Secret Region CAP Certificate Key file path on the controller.
-        :param pulumi.Input[str] awss_cap_cert_path: AWS Secret Region CAP Certificate file path on the controller.
-        :param pulumi.Input[str] awss_cap_role_name: AWS Secret Region CAP Role Name.
-        :param pulumi.Input[str] awss_cap_url: AWS Secret Region CAP Endpoint URL.
-        :param pulumi.Input[str] awsts_account_number: AWS Top Secret Region Account Number.
-        :param pulumi.Input[str] awsts_ca_chain_cert: AWS Top Secret Region Custom Certificate Authority file path.
-        :param pulumi.Input[str] awsts_cap_agency: AWS Top Secret Region CAP Agency.
-        :param pulumi.Input[str] awsts_cap_cert: AWS Top Secret Region CAP Certificate file path.
-        :param pulumi.Input[str] awsts_cap_cert_key: AWS Top Secret Region CAP Certificate Key file path.
-        :param pulumi.Input[str] awsts_cap_cert_key_path: AWS Top Secret Region CAP Certificate Key file path on the controller.
-        :param pulumi.Input[str] awsts_cap_cert_path: AWS Top Secret Region CAP Certificate file path on the controller.
-        :param pulumi.Input[str] awsts_cap_mission: AWS Top Secret Region CAP Mission.
-        :param pulumi.Input[str] awsts_cap_role_name: AWS Top Secret Region CAP Role Name.
-        :param pulumi.Input[str] awsts_cap_url: AWS Top Secret Region CAP Endpoint URL.
-        :param pulumi.Input[str] azurechina_application_id: Azure China Application ID.
-        :param pulumi.Input[str] azurechina_application_key: Azure China Application Key.
-        :param pulumi.Input[str] azurechina_directory_id: Azure China Directory ID.
-        :param pulumi.Input[str] azurechina_subscription_id: Azure China Subscription ID.
-        :param pulumi.Input[str] azuregov_application_id: Azure Gov Application ID.
-        :param pulumi.Input[str] azuregov_application_key: Azure Gov Application Key.
-        :param pulumi.Input[str] azuregov_directory_id: Azure Gov Directory ID.
-        :param pulumi.Input[str] azuregov_subscription_id: Azure Gov Subscription ID.
-        :param pulumi.Input[int] cloud_type: Type of cloud service provider.
-        :param pulumi.Input[str] gcloud_project_credentials_filepath: GCloud Project credentials local file path.
+        :param pulumi.Input[str] aws_access_key: AWS Access Key. Required when `aws_iam` is "false" and when creating an account for AWS.
+        :param pulumi.Input[str] aws_account_number: AWS Account number to associate with Aviatrix account. Required when creating an account for AWS.
+        :param pulumi.Input[str] aws_ca_cert_path: (Optional) AWS Top Secret Region or Secret Region Custom Certificate Authority file name on the controller. Available as of provider R2.19.5+.
+        :param pulumi.Input[str] aws_gateway_role_app: A separate AWS App role ARN to assign to gateways created by the controller. Required when `aws_gateway_role_ec2` is set. Only allowed when `aws_iam`, `awsgov_iam`, or `awschina_iam` is "true" when creating an account for AWS, AWSGov or AWSChina, respectively. Available as of provider version R2.19+.
+        :param pulumi.Input[str] aws_gateway_role_ec2: A separate AWS EC2 role ARN to assign to gateways created by the controller. Required when `aws_gateway_role_app` is set. Only allowed when `aws_iam`, `awsgov_iam`, or `awschina_iam` is "true" when creating an account for AWS, AWSGov or AWSChina, respectively. Available as of provider version R2.19+.
+        :param pulumi.Input[bool] aws_iam: AWS IAM-role based flag, this option is for UserConnect.
+        :param pulumi.Input[str] aws_role_app: AWS App role ARN, this option is for UserConnect. Required when `aws_iam` is "true" and when creating an account for AWS.
+        :param pulumi.Input[str] aws_role_ec2: AWS EC2 role ARN, this option is for UserConnect. Required when `aws_iam` is "true" and when creating an account for AWS.
+        :param pulumi.Input[str] aws_secret_key: AWS Secret Key. Required when `aws_iam` is "false" and when creating an account for AWS.
+        :param pulumi.Input[str] awschina_access_key: AWSChina Access Key. Required when `awschina_iam` is "false" and when creating an account for AWSChina. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awschina_account_number: AWSChina Account number to associate with Aviatrix account. Required when creating an account for AWSChina. Available as of provider version 2.19+.
+        :param pulumi.Input[bool] awschina_iam: AWSChina IAM-role based flag. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awschina_role_app: AWSChina App role ARN. Available when `awschina_iam` is "true" and when creating an account for AWSChina. If left empty, the ARN will be computed. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awschina_role_ec2: AWSChina EC2 role ARN. Available when `awschina_iam` is "true" and when creating an account for AWSChina. If left empty, the ARN will be computed. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awschina_secret_key: AWSChina Secret Key. Required when `awschina_iam` is "false" and when creating an account for AWSChina. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awsgov_access_key: AWS Access Key. Required when creating an account for AWSGov.
+        :param pulumi.Input[str] awsgov_account_number: AWSGov Account number to associate with Aviatrix account. Required when creating an account for AWSGov.
+        :param pulumi.Input[bool] awsgov_iam: AWSGov IAM-role based flag. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awsgov_role_app: AWSGov App role ARN. Available when `awsgov_iam` is "true" and when creating an account for AWSGov. If left empty, the ARN will be computed. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awsgov_role_ec2: AWSGov EC2 role ARN. Available when `awsgov_iam` is "true" and when creating an account for AWSGov. If left empty, the ARN will be computed. Available as of provider version 2.19+.
+        :param pulumi.Input[str] awsgov_secret_key: AWS Secret Key. Required when creating an account for AWSGov.
+        :param pulumi.Input[str] awss_account_number: AWS Secret Region Account Number. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awss_ca_chain_cert: AWS Secret Region Custom Certificate Authority local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awss_cap_account_name: AWS Secret Region Account Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awss_cap_agency: AWS Secret Region CAP Agency. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awss_cap_cert: AWS Secret Region CAP Certificate local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awss_cap_cert_key: AWS Secret Region CAP Certificate Key local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awss_cap_cert_key_path: (Optional) AWS Secret Region CAP Certificate Key file name on the controller. Available as of provider R2.19.5+.
+        :param pulumi.Input[str] awss_cap_cert_path: (Optional) AWS Secret Region CAP Certificate file name on the controller. Available as of provider R2.19.5+.
+        :param pulumi.Input[str] awss_cap_role_name: AWS Secret Region Role Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awss_cap_url: AWS Secret Region CAP Url. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_account_number: AWS Top Secret Region Account Number. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_ca_chain_cert: AWS Top Secret Region Custom Certificate Authority local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_cap_agency: AWS Top Secret Region CAP Agency. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_cap_cert: AWS Top Secret Region CAP Certificate local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_cap_cert_key: AWS Top Secret Region CAP Certificate Key local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_cap_cert_key_path: (Optional) AWS Top Secret Region CAP Certificate Key file name on the controller. Available as of provider R2.19.5+.
+        :param pulumi.Input[str] awsts_cap_cert_path: (Optional) AWS Top Secret Region CAP Certificate file name on the controller. Available as of provider R2.19.5+.
+        :param pulumi.Input[str] awsts_cap_mission: AWS Top Secret Region Mission. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_cap_role_name: AWS Top Secret Region Role Name. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] awsts_cap_url: AWS Top Secret Region CAP Url. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        :param pulumi.Input[str] azurechina_application_id: AzureChina ARM Application ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
+        :param pulumi.Input[str] azurechina_application_key: AzureChina ARM Application key. Required when creating an account for AzureChina. Available as of provider version 2.19+.
+        :param pulumi.Input[str] azurechina_directory_id: AzureChina ARM Directory ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
+        :param pulumi.Input[str] azurechina_subscription_id: AzureChina ARM Subscription ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
+        :param pulumi.Input[str] azuregov_application_id: AzureGov ARM Application ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
+        :param pulumi.Input[str] azuregov_application_key: AzureGov ARM Application key. Required when creating an account for AzureGov. Available as of provider version R2.19+.
+        :param pulumi.Input[str] azuregov_directory_id: AzureGov ARM Directory ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
+        :param pulumi.Input[str] azuregov_subscription_id: AzureGov ARM Subscription ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
+        :param pulumi.Input[int] cloud_type: Type of cloud service provider. Only AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina and Alibaba Cloud are supported currently. Enter 1 for AWS, 4 for GCP, 8 for Azure, 16 for OCI, 32 for AzureGov, 256 for AWSGov, 1024 for AWSChina or 2048 for AzureChina, 8192 for Alibaba Cloud.
+        :param pulumi.Input[str] gcloud_project_credentials_filepath: GCloud Project Credentials [local filepath].json. Required when creating an account for GCP.
         :param pulumi.Input[str] gcloud_project_id: GCloud Project ID.
-        :param pulumi.Input[str] oci_api_private_key_filepath: OCI API Private Key local file path.
-        :param pulumi.Input[str] oci_compartment_id: OCI Compartment OCID.
-        :param pulumi.Input[str] oci_tenancy_id: OCI Tenancy OCID.
-        :param pulumi.Input[str] oci_user_id: OCI User OCID.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] rbac_groups: List of RBAC permission group names.
+        :param pulumi.Input[str] oci_api_private_key_filepath: Oracle OCI API Private Key local file path. Required when creating an account for OCI.
+        :param pulumi.Input[str] oci_compartment_id: Oracle OCI Compartment ID. Required when creating an account for OCI.
+        :param pulumi.Input[str] oci_tenancy_id: Oracle OCI Tenancy ID. Required when creating an account for OCI.
+        :param pulumi.Input[str] oci_user_id: Oracle OCI User ID. Required when creating an account for OCI.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] rbac_groups: A list of existing RBAC group names. This attribute should only be used when creating an account. Updating this attribute will have no effect. Available as of provider version R2.23.0+.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -2587,7 +2611,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="alicloudAccessKey")
     def alicloud_access_key(self) -> pulumi.Output[Optional[str]]:
         """
-        Alibaba Cloud Access Key.
+        Alibaba Cloud Access Key. Required when creating an account for Alibaba Cloud.
         """
         return pulumi.get(self, "alicloud_access_key")
 
@@ -2595,7 +2619,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="alicloudAccountId")
     def alicloud_account_id(self) -> pulumi.Output[Optional[str]]:
         """
-        Alibaba Cloud Account ID to associate with Aviatrix account.
+        Alibaba Cloud Account number to associate with Aviatrix account. Required when creating an account for Alibaba Cloud.
         """
         return pulumi.get(self, "alicloud_account_id")
 
@@ -2603,7 +2627,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="alicloudSecretKey")
     def alicloud_secret_key(self) -> pulumi.Output[Optional[str]]:
         """
-        Alibaba Cloud Secret Key.
+        Alibaba Cloud Secret Key. Required when creating an account for Alibaba Cloud.
         """
         return pulumi.get(self, "alicloud_secret_key")
 
@@ -2611,7 +2635,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="armApplicationId")
     def arm_application_id(self) -> pulumi.Output[Optional[str]]:
         """
-        Azure Application ID.
+        Azure ARM Application ID. Required when creating an account for Azure.
         """
         return pulumi.get(self, "arm_application_id")
 
@@ -2619,7 +2643,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="armApplicationKey")
     def arm_application_key(self) -> pulumi.Output[Optional[str]]:
         """
-        Azure Application Key.
+        Azure ARM Application key. Required when creating an account for Azure.
         """
         return pulumi.get(self, "arm_application_key")
 
@@ -2627,7 +2651,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="armDirectoryId")
     def arm_directory_id(self) -> pulumi.Output[Optional[str]]:
         """
-        Azure Directory ID.
+        Azure ARM Directory ID. Required when creating an account for Azure.
         """
         return pulumi.get(self, "arm_directory_id")
 
@@ -2635,7 +2659,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="armSubscriptionId")
     def arm_subscription_id(self) -> pulumi.Output[Optional[str]]:
         """
-        Azure Subscription ID.
+        Azure ARM Subscription ID. Required when creating an account for Azure.
         """
         return pulumi.get(self, "arm_subscription_id")
 
@@ -2651,7 +2675,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awsAccessKey")
     def aws_access_key(self) -> pulumi.Output[Optional[str]]:
         """
-        AWS Access Key.
+        AWS Access Key. Required when `aws_iam` is "false" and when creating an account for AWS.
         """
         return pulumi.get(self, "aws_access_key")
 
@@ -2659,7 +2683,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awsAccountNumber")
     def aws_account_number(self) -> pulumi.Output[Optional[str]]:
         """
-        AWS Account number to associate with Aviatrix account. Should be 12 digits.
+        AWS Account number to associate with Aviatrix account. Required when creating an account for AWS.
         """
         return pulumi.get(self, "aws_account_number")
 
@@ -2667,7 +2691,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awsCaCertPath")
     def aws_ca_cert_path(self) -> pulumi.Output[str]:
         """
-        AWS Top Secret Region or Secret Region Custom Certificate Authority file path on the controller.
+        (Optional) AWS Top Secret Region or Secret Region Custom Certificate Authority file name on the controller. Available as of provider R2.19.5+.
         """
         return pulumi.get(self, "aws_ca_cert_path")
 
@@ -2675,7 +2699,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awsGatewayRoleApp")
     def aws_gateway_role_app(self) -> pulumi.Output[Optional[str]]:
         """
-        AWS App role ARN for gateways.
+        A separate AWS App role ARN to assign to gateways created by the controller. Required when `aws_gateway_role_ec2` is set. Only allowed when `aws_iam`, `awsgov_iam`, or `awschina_iam` is "true" when creating an account for AWS, AWSGov or AWSChina, respectively. Available as of provider version R2.19+.
         """
         return pulumi.get(self, "aws_gateway_role_app")
 
@@ -2683,7 +2707,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awsGatewayRoleEc2")
     def aws_gateway_role_ec2(self) -> pulumi.Output[Optional[str]]:
         """
-        AWS EC2 role ARN for gateways.
+        A separate AWS EC2 role ARN to assign to gateways created by the controller. Required when `aws_gateway_role_app` is set. Only allowed when `aws_iam`, `awsgov_iam`, or `awschina_iam` is "true" when creating an account for AWS, AWSGov or AWSChina, respectively. Available as of provider version R2.19+.
         """
         return pulumi.get(self, "aws_gateway_role_ec2")
 
@@ -2691,7 +2715,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awsIam")
     def aws_iam(self) -> pulumi.Output[Optional[bool]]:
         """
-        AWS IAM-role based flag.
+        AWS IAM-role based flag, this option is for UserConnect.
         """
         return pulumi.get(self, "aws_iam")
 
@@ -2699,7 +2723,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awsRoleApp")
     def aws_role_app(self) -> pulumi.Output[str]:
         """
-        AWS App role ARN.
+        AWS App role ARN, this option is for UserConnect. Required when `aws_iam` is "true" and when creating an account for AWS.
         """
         return pulumi.get(self, "aws_role_app")
 
@@ -2707,7 +2731,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awsRoleEc2")
     def aws_role_ec2(self) -> pulumi.Output[str]:
         """
-        AWS EC2 role ARN.
+        AWS EC2 role ARN, this option is for UserConnect. Required when `aws_iam` is "true" and when creating an account for AWS.
         """
         return pulumi.get(self, "aws_role_ec2")
 
@@ -2715,7 +2739,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awsSecretKey")
     def aws_secret_key(self) -> pulumi.Output[Optional[str]]:
         """
-        AWS Secret Key.
+        AWS Secret Key. Required when `aws_iam` is "false" and when creating an account for AWS.
         """
         return pulumi.get(self, "aws_secret_key")
 
@@ -2723,7 +2747,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awschinaAccessKey")
     def awschina_access_key(self) -> pulumi.Output[Optional[str]]:
         """
-        AWS China Access Key.
+        AWSChina Access Key. Required when `awschina_iam` is "false" and when creating an account for AWSChina. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "awschina_access_key")
 
@@ -2731,7 +2755,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awschinaAccountNumber")
     def awschina_account_number(self) -> pulumi.Output[Optional[str]]:
         """
-        AWS China Account Number.
+        AWSChina Account number to associate with Aviatrix account. Required when creating an account for AWSChina. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "awschina_account_number")
 
@@ -2739,7 +2763,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awschinaIam")
     def awschina_iam(self) -> pulumi.Output[Optional[bool]]:
         """
-        AWS China IAM-role based flag.
+        AWSChina IAM-role based flag. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "awschina_iam")
 
@@ -2747,7 +2771,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awschinaRoleApp")
     def awschina_role_app(self) -> pulumi.Output[str]:
         """
-        AWS China App Role ARN.
+        AWSChina App role ARN. Available when `awschina_iam` is "true" and when creating an account for AWSChina. If left empty, the ARN will be computed. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "awschina_role_app")
 
@@ -2755,7 +2779,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awschinaRoleEc2")
     def awschina_role_ec2(self) -> pulumi.Output[str]:
         """
-        AWS China EC2 Role ARN.
+        AWSChina EC2 role ARN. Available when `awschina_iam` is "true" and when creating an account for AWSChina. If left empty, the ARN will be computed. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "awschina_role_ec2")
 
@@ -2763,7 +2787,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awschinaSecretKey")
     def awschina_secret_key(self) -> pulumi.Output[Optional[str]]:
         """
-        AWS China Secret Key.
+        AWSChina Secret Key. Required when `awschina_iam` is "false" and when creating an account for AWSChina. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "awschina_secret_key")
 
@@ -2771,7 +2795,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awsgovAccessKey")
     def awsgov_access_key(self) -> pulumi.Output[Optional[str]]:
         """
-        AWS Gov Access Key.
+        AWS Access Key. Required when creating an account for AWSGov.
         """
         return pulumi.get(self, "awsgov_access_key")
 
@@ -2779,7 +2803,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awsgovAccountNumber")
     def awsgov_account_number(self) -> pulumi.Output[Optional[str]]:
         """
-        AWS Gov Account number to associate with Aviatrix account.
+        AWSGov Account number to associate with Aviatrix account. Required when creating an account for AWSGov.
         """
         return pulumi.get(self, "awsgov_account_number")
 
@@ -2787,7 +2811,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awsgovIam")
     def awsgov_iam(self) -> pulumi.Output[Optional[bool]]:
         """
-        AWSGov IAM-role based flag
+        AWSGov IAM-role based flag. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "awsgov_iam")
 
@@ -2795,7 +2819,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awsgovRoleApp")
     def awsgov_role_app(self) -> pulumi.Output[str]:
         """
-        AWSGov App role ARN
+        AWSGov App role ARN. Available when `awsgov_iam` is "true" and when creating an account for AWSGov. If left empty, the ARN will be computed. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "awsgov_role_app")
 
@@ -2803,7 +2827,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awsgovRoleEc2")
     def awsgov_role_ec2(self) -> pulumi.Output[str]:
         """
-        AWSGov EC2 role ARN
+        AWSGov EC2 role ARN. Available when `awsgov_iam` is "true" and when creating an account for AWSGov. If left empty, the ARN will be computed. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "awsgov_role_ec2")
 
@@ -2811,7 +2835,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awsgovSecretKey")
     def awsgov_secret_key(self) -> pulumi.Output[Optional[str]]:
         """
-        AWS Gov Secret Key.
+        AWS Secret Key. Required when creating an account for AWSGov.
         """
         return pulumi.get(self, "awsgov_secret_key")
 
@@ -2819,7 +2843,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awssAccountNumber")
     def awss_account_number(self) -> pulumi.Output[Optional[str]]:
         """
-        AWS Secret Region Account Number.
+        AWS Secret Region Account Number. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awss_account_number")
 
@@ -2827,7 +2851,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awssCaChainCert")
     def awss_ca_chain_cert(self) -> pulumi.Output[Optional[str]]:
         """
-        AWS Secret Region Custom Certificate Authority file path.
+        AWS Secret Region Custom Certificate Authority local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awss_ca_chain_cert")
 
@@ -2835,7 +2859,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awssCapAccountName")
     def awss_cap_account_name(self) -> pulumi.Output[Optional[str]]:
         """
-        AWS Secret Region CAP Account Name.
+        AWS Secret Region Account Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awss_cap_account_name")
 
@@ -2843,7 +2867,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awssCapAgency")
     def awss_cap_agency(self) -> pulumi.Output[Optional[str]]:
         """
-        AWS Secret Region CAP Agency.
+        AWS Secret Region CAP Agency. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awss_cap_agency")
 
@@ -2851,7 +2875,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awssCapCert")
     def awss_cap_cert(self) -> pulumi.Output[Optional[str]]:
         """
-        AWS Secret Region CAP Certificate file path.
+        AWS Secret Region CAP Certificate local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awss_cap_cert")
 
@@ -2859,7 +2883,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awssCapCertKey")
     def awss_cap_cert_key(self) -> pulumi.Output[Optional[str]]:
         """
-        AWS Secret Region CAP Certificate Key file path.
+        AWS Secret Region CAP Certificate Key local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awss_cap_cert_key")
 
@@ -2867,7 +2891,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awssCapCertKeyPath")
     def awss_cap_cert_key_path(self) -> pulumi.Output[str]:
         """
-        AWS Secret Region CAP Certificate Key file path on the controller.
+        (Optional) AWS Secret Region CAP Certificate Key file name on the controller. Available as of provider R2.19.5+.
         """
         return pulumi.get(self, "awss_cap_cert_key_path")
 
@@ -2875,7 +2899,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awssCapCertPath")
     def awss_cap_cert_path(self) -> pulumi.Output[str]:
         """
-        AWS Secret Region CAP Certificate file path on the controller.
+        (Optional) AWS Secret Region CAP Certificate file name on the controller. Available as of provider R2.19.5+.
         """
         return pulumi.get(self, "awss_cap_cert_path")
 
@@ -2883,7 +2907,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awssCapRoleName")
     def awss_cap_role_name(self) -> pulumi.Output[Optional[str]]:
         """
-        AWS Secret Region CAP Role Name.
+        AWS Secret Region Role Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awss_cap_role_name")
 
@@ -2891,7 +2915,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awssCapUrl")
     def awss_cap_url(self) -> pulumi.Output[Optional[str]]:
         """
-        AWS Secret Region CAP Endpoint URL.
+        AWS Secret Region CAP Url. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awss_cap_url")
 
@@ -2899,7 +2923,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awstsAccountNumber")
     def awsts_account_number(self) -> pulumi.Output[Optional[str]]:
         """
-        AWS Top Secret Region Account Number.
+        AWS Top Secret Region Account Number. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awsts_account_number")
 
@@ -2907,7 +2931,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awstsCaChainCert")
     def awsts_ca_chain_cert(self) -> pulumi.Output[Optional[str]]:
         """
-        AWS Top Secret Region Custom Certificate Authority file path.
+        AWS Top Secret Region Custom Certificate Authority local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awsts_ca_chain_cert")
 
@@ -2915,7 +2939,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awstsCapAgency")
     def awsts_cap_agency(self) -> pulumi.Output[Optional[str]]:
         """
-        AWS Top Secret Region CAP Agency.
+        AWS Top Secret Region CAP Agency. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awsts_cap_agency")
 
@@ -2923,7 +2947,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awstsCapCert")
     def awsts_cap_cert(self) -> pulumi.Output[Optional[str]]:
         """
-        AWS Top Secret Region CAP Certificate file path.
+        AWS Top Secret Region CAP Certificate local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awsts_cap_cert")
 
@@ -2931,7 +2955,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awstsCapCertKey")
     def awsts_cap_cert_key(self) -> pulumi.Output[Optional[str]]:
         """
-        AWS Top Secret Region CAP Certificate Key file path.
+        AWS Top Secret Region CAP Certificate Key local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awsts_cap_cert_key")
 
@@ -2939,7 +2963,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awstsCapCertKeyPath")
     def awsts_cap_cert_key_path(self) -> pulumi.Output[str]:
         """
-        AWS Top Secret Region CAP Certificate Key file path on the controller.
+        (Optional) AWS Top Secret Region CAP Certificate Key file name on the controller. Available as of provider R2.19.5+.
         """
         return pulumi.get(self, "awsts_cap_cert_key_path")
 
@@ -2947,7 +2971,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awstsCapCertPath")
     def awsts_cap_cert_path(self) -> pulumi.Output[str]:
         """
-        AWS Top Secret Region CAP Certificate file path on the controller.
+        (Optional) AWS Top Secret Region CAP Certificate file name on the controller. Available as of provider R2.19.5+.
         """
         return pulumi.get(self, "awsts_cap_cert_path")
 
@@ -2955,7 +2979,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awstsCapMission")
     def awsts_cap_mission(self) -> pulumi.Output[Optional[str]]:
         """
-        AWS Top Secret Region CAP Mission.
+        AWS Top Secret Region Mission. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awsts_cap_mission")
 
@@ -2963,7 +2987,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awstsCapRoleName")
     def awsts_cap_role_name(self) -> pulumi.Output[Optional[str]]:
         """
-        AWS Top Secret Region CAP Role Name.
+        AWS Top Secret Region Role Name. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awsts_cap_role_name")
 
@@ -2971,7 +2995,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="awstsCapUrl")
     def awsts_cap_url(self) -> pulumi.Output[Optional[str]]:
         """
-        AWS Top Secret Region CAP Endpoint URL.
+        AWS Top Secret Region CAP Url. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "awsts_cap_url")
 
@@ -2979,7 +3003,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="azurechinaApplicationId")
     def azurechina_application_id(self) -> pulumi.Output[Optional[str]]:
         """
-        Azure China Application ID.
+        AzureChina ARM Application ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "azurechina_application_id")
 
@@ -2987,7 +3011,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="azurechinaApplicationKey")
     def azurechina_application_key(self) -> pulumi.Output[Optional[str]]:
         """
-        Azure China Application Key.
+        AzureChina ARM Application key. Required when creating an account for AzureChina. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "azurechina_application_key")
 
@@ -2995,7 +3019,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="azurechinaDirectoryId")
     def azurechina_directory_id(self) -> pulumi.Output[Optional[str]]:
         """
-        Azure China Directory ID.
+        AzureChina ARM Directory ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "azurechina_directory_id")
 
@@ -3003,7 +3027,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="azurechinaSubscriptionId")
     def azurechina_subscription_id(self) -> pulumi.Output[Optional[str]]:
         """
-        Azure China Subscription ID.
+        AzureChina ARM Subscription ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
         """
         return pulumi.get(self, "azurechina_subscription_id")
 
@@ -3011,7 +3035,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="azuregovApplicationId")
     def azuregov_application_id(self) -> pulumi.Output[Optional[str]]:
         """
-        Azure Gov Application ID.
+        AzureGov ARM Application ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
         """
         return pulumi.get(self, "azuregov_application_id")
 
@@ -3019,7 +3043,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="azuregovApplicationKey")
     def azuregov_application_key(self) -> pulumi.Output[Optional[str]]:
         """
-        Azure Gov Application Key.
+        AzureGov ARM Application key. Required when creating an account for AzureGov. Available as of provider version R2.19+.
         """
         return pulumi.get(self, "azuregov_application_key")
 
@@ -3027,7 +3051,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="azuregovDirectoryId")
     def azuregov_directory_id(self) -> pulumi.Output[Optional[str]]:
         """
-        Azure Gov Directory ID.
+        AzureGov ARM Directory ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
         """
         return pulumi.get(self, "azuregov_directory_id")
 
@@ -3035,7 +3059,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="azuregovSubscriptionId")
     def azuregov_subscription_id(self) -> pulumi.Output[Optional[str]]:
         """
-        Azure Gov Subscription ID.
+        AzureGov ARM Subscription ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
         """
         return pulumi.get(self, "azuregov_subscription_id")
 
@@ -3043,7 +3067,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="cloudType")
     def cloud_type(self) -> pulumi.Output[int]:
         """
-        Type of cloud service provider.
+        Type of cloud service provider. Only AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina and Alibaba Cloud are supported currently. Enter 1 for AWS, 4 for GCP, 8 for Azure, 16 for OCI, 32 for AzureGov, 256 for AWSGov, 1024 for AWSChina or 2048 for AzureChina, 8192 for Alibaba Cloud.
         """
         return pulumi.get(self, "cloud_type")
 
@@ -3051,7 +3075,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="gcloudProjectCredentialsFilepath")
     def gcloud_project_credentials_filepath(self) -> pulumi.Output[Optional[str]]:
         """
-        GCloud Project credentials local file path.
+        GCloud Project Credentials [local filepath].json. Required when creating an account for GCP.
         """
         return pulumi.get(self, "gcloud_project_credentials_filepath")
 
@@ -3067,7 +3091,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="ociApiPrivateKeyFilepath")
     def oci_api_private_key_filepath(self) -> pulumi.Output[Optional[str]]:
         """
-        OCI API Private Key local file path.
+        Oracle OCI API Private Key local file path. Required when creating an account for OCI.
         """
         return pulumi.get(self, "oci_api_private_key_filepath")
 
@@ -3075,7 +3099,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="ociCompartmentId")
     def oci_compartment_id(self) -> pulumi.Output[Optional[str]]:
         """
-        OCI Compartment OCID.
+        Oracle OCI Compartment ID. Required when creating an account for OCI.
         """
         return pulumi.get(self, "oci_compartment_id")
 
@@ -3083,7 +3107,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="ociTenancyId")
     def oci_tenancy_id(self) -> pulumi.Output[Optional[str]]:
         """
-        OCI Tenancy OCID.
+        Oracle OCI Tenancy ID. Required when creating an account for OCI.
         """
         return pulumi.get(self, "oci_tenancy_id")
 
@@ -3091,7 +3115,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="ociUserId")
     def oci_user_id(self) -> pulumi.Output[Optional[str]]:
         """
-        OCI User OCID.
+        Oracle OCI User ID. Required when creating an account for OCI.
         """
         return pulumi.get(self, "oci_user_id")
 
@@ -3099,7 +3123,7 @@ class AviatrixAccount(pulumi.CustomResource):
     @pulumi.getter(name="rbacGroups")
     def rbac_groups(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        List of RBAC permission group names.
+        A list of existing RBAC group names. This attribute should only be used when creating an account. Updating this attribute will have no effect. Available as of provider version R2.23.0+.
         """
         return pulumi.get(self, "rbac_groups")
 

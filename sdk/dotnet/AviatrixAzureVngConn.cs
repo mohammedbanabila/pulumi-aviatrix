@@ -9,35 +9,65 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_azure_vng_conn** resource allows the creation and management of the connection between Aviatrix Transit Gateway and Azure VNG.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Attach an Azure VNG to an Aviatrix Transit Gateway
+    ///     var test = new Aviatrix.AviatrixAzureVngConn("test", new()
+    ///     {
+    ///         ConnectionName = "connection",
+    ///         PrimaryGatewayName = "primary-gateway",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **aviatrix_azure_vng_conn** can be imported using the `connection_name`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixAzureVngConn:AviatrixAzureVngConn test connection
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixAzureVngConn:AviatrixAzureVngConn")]
     public partial class AviatrixAzureVngConn : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// VNG attached or not
+        /// The status of the connection.
         /// </summary>
         [Output("attached")]
         public Output<bool> Attached { get; private set; } = null!;
 
         /// <summary>
-        /// Connection name
+        /// Connection name.
         /// </summary>
         [Output("connectionName")]
         public Output<string> ConnectionName { get; private set; } = null!;
 
         /// <summary>
-        /// Primary gateway name
+        /// Primary Aviatrix transit gateway name.
         /// </summary>
         [Output("primaryGatewayName")]
         public Output<string> PrimaryGatewayName { get; private set; } = null!;
 
         /// <summary>
-        /// VNG name
+        /// Name of Azure VNG.
         /// </summary>
         [Output("vngName")]
         public Output<string> VngName { get; private set; } = null!;
 
         /// <summary>
-        /// VPC ID
+        /// VPC ID.
         /// </summary>
         [Output("vpcId")]
         public Output<string> VpcId { get; private set; } = null!;
@@ -90,13 +120,13 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixAzureVngConnArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Connection name
+        /// Connection name.
         /// </summary>
         [Input("connectionName", required: true)]
         public Input<string> ConnectionName { get; set; } = null!;
 
         /// <summary>
-        /// Primary gateway name
+        /// Primary Aviatrix transit gateway name.
         /// </summary>
         [Input("primaryGatewayName", required: true)]
         public Input<string> PrimaryGatewayName { get; set; } = null!;
@@ -110,31 +140,31 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixAzureVngConnState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// VNG attached or not
+        /// The status of the connection.
         /// </summary>
         [Input("attached")]
         public Input<bool>? Attached { get; set; }
 
         /// <summary>
-        /// Connection name
+        /// Connection name.
         /// </summary>
         [Input("connectionName")]
         public Input<string>? ConnectionName { get; set; }
 
         /// <summary>
-        /// Primary gateway name
+        /// Primary Aviatrix transit gateway name.
         /// </summary>
         [Input("primaryGatewayName")]
         public Input<string>? PrimaryGatewayName { get; set; }
 
         /// <summary>
-        /// VNG name
+        /// Name of Azure VNG.
         /// </summary>
         [Input("vngName")]
         public Input<string>? VngName { get; set; }
 
         /// <summary>
-        /// VPC ID
+        /// VPC ID.
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }

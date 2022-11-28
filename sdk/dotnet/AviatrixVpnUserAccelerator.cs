@@ -9,11 +9,40 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_vpn_user_accelerator** resource manages the [Aviatrix VPN User Accelerator](https://docs.aviatrix.com/HowTos/user_accelerator.html).
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Vpn User Accelerator
+    ///     var testVpcAccelerator = new Aviatrix.AviatrixVpnUserAccelerator("testVpcAccelerator", new()
+    ///     {
+    ///         ElbName = "Aviatrix-vpc-abcd2134",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **vpn_user_accelerator** can be imported using the `elb_name`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixVpnUserAccelerator:AviatrixVpnUserAccelerator test Aviatrix-vpc-abcd1234
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixVpnUserAccelerator:AviatrixVpnUserAccelerator")]
     public partial class AviatrixVpnUserAccelerator : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// ELB to include into the VPN User Accelerator.
+        /// Name of ELB to be added to VPN User Accelerator. Example: "Aviatrix-vpc-abcd2134".
         /// </summary>
         [Output("elbName")]
         public Output<string> ElbName { get; private set; } = null!;
@@ -66,7 +95,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixVpnUserAcceleratorArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// ELB to include into the VPN User Accelerator.
+        /// Name of ELB to be added to VPN User Accelerator. Example: "Aviatrix-vpc-abcd2134".
         /// </summary>
         [Input("elbName", required: true)]
         public Input<string> ElbName { get; set; } = null!;
@@ -80,7 +109,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixVpnUserAcceleratorState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// ELB to include into the VPN User Accelerator.
+        /// Name of ELB to be added to VPN User Accelerator. Example: "Aviatrix-vpc-abcd2134".
         /// </summary>
         [Input("elbName")]
         public Input<string>? ElbName { get; set; }

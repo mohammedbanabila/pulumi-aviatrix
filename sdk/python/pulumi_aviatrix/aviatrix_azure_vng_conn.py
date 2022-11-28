@@ -18,8 +18,8 @@ class AviatrixAzureVngConnArgs:
                  primary_gateway_name: pulumi.Input[str]):
         """
         The set of arguments for constructing a AviatrixAzureVngConn resource.
-        :param pulumi.Input[str] connection_name: Connection name
-        :param pulumi.Input[str] primary_gateway_name: Primary gateway name
+        :param pulumi.Input[str] connection_name: Connection name.
+        :param pulumi.Input[str] primary_gateway_name: Primary Aviatrix transit gateway name.
         """
         pulumi.set(__self__, "connection_name", connection_name)
         pulumi.set(__self__, "primary_gateway_name", primary_gateway_name)
@@ -28,7 +28,7 @@ class AviatrixAzureVngConnArgs:
     @pulumi.getter(name="connectionName")
     def connection_name(self) -> pulumi.Input[str]:
         """
-        Connection name
+        Connection name.
         """
         return pulumi.get(self, "connection_name")
 
@@ -40,7 +40,7 @@ class AviatrixAzureVngConnArgs:
     @pulumi.getter(name="primaryGatewayName")
     def primary_gateway_name(self) -> pulumi.Input[str]:
         """
-        Primary gateway name
+        Primary Aviatrix transit gateway name.
         """
         return pulumi.get(self, "primary_gateway_name")
 
@@ -59,11 +59,11 @@ class _AviatrixAzureVngConnState:
                  vpc_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixAzureVngConn resources.
-        :param pulumi.Input[bool] attached: VNG attached or not
-        :param pulumi.Input[str] connection_name: Connection name
-        :param pulumi.Input[str] primary_gateway_name: Primary gateway name
-        :param pulumi.Input[str] vng_name: VNG name
-        :param pulumi.Input[str] vpc_id: VPC ID
+        :param pulumi.Input[bool] attached: The status of the connection.
+        :param pulumi.Input[str] connection_name: Connection name.
+        :param pulumi.Input[str] primary_gateway_name: Primary Aviatrix transit gateway name.
+        :param pulumi.Input[str] vng_name: Name of Azure VNG.
+        :param pulumi.Input[str] vpc_id: VPC ID.
         """
         if attached is not None:
             pulumi.set(__self__, "attached", attached)
@@ -80,7 +80,7 @@ class _AviatrixAzureVngConnState:
     @pulumi.getter
     def attached(self) -> Optional[pulumi.Input[bool]]:
         """
-        VNG attached or not
+        The status of the connection.
         """
         return pulumi.get(self, "attached")
 
@@ -92,7 +92,7 @@ class _AviatrixAzureVngConnState:
     @pulumi.getter(name="connectionName")
     def connection_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Connection name
+        Connection name.
         """
         return pulumi.get(self, "connection_name")
 
@@ -104,7 +104,7 @@ class _AviatrixAzureVngConnState:
     @pulumi.getter(name="primaryGatewayName")
     def primary_gateway_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Primary gateway name
+        Primary Aviatrix transit gateway name.
         """
         return pulumi.get(self, "primary_gateway_name")
 
@@ -116,7 +116,7 @@ class _AviatrixAzureVngConnState:
     @pulumi.getter(name="vngName")
     def vng_name(self) -> Optional[pulumi.Input[str]]:
         """
-        VNG name
+        Name of Azure VNG.
         """
         return pulumi.get(self, "vng_name")
 
@@ -128,7 +128,7 @@ class _AviatrixAzureVngConnState:
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
-        VPC ID
+        VPC ID.
         """
         return pulumi.get(self, "vpc_id")
 
@@ -146,11 +146,32 @@ class AviatrixAzureVngConn(pulumi.CustomResource):
                  primary_gateway_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixAzureVngConn resource with the given unique name, props, and options.
+        The **aviatrix_azure_vng_conn** resource allows the creation and management of the connection between Aviatrix Transit Gateway and Azure VNG.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Attach an Azure VNG to an Aviatrix Transit Gateway
+        test = aviatrix.AviatrixAzureVngConn("test",
+            connection_name="connection",
+            primary_gateway_name="primary-gateway")
+        ```
+
+        ## Import
+
+        **aviatrix_azure_vng_conn** can be imported using the `connection_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAzureVngConn:AviatrixAzureVngConn test connection
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] connection_name: Connection name
-        :param pulumi.Input[str] primary_gateway_name: Primary gateway name
+        :param pulumi.Input[str] connection_name: Connection name.
+        :param pulumi.Input[str] primary_gateway_name: Primary Aviatrix transit gateway name.
         """
         ...
     @overload
@@ -159,7 +180,28 @@ class AviatrixAzureVngConn(pulumi.CustomResource):
                  args: AviatrixAzureVngConnArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixAzureVngConn resource with the given unique name, props, and options.
+        The **aviatrix_azure_vng_conn** resource allows the creation and management of the connection between Aviatrix Transit Gateway and Azure VNG.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Attach an Azure VNG to an Aviatrix Transit Gateway
+        test = aviatrix.AviatrixAzureVngConn("test",
+            connection_name="connection",
+            primary_gateway_name="primary-gateway")
+        ```
+
+        ## Import
+
+        **aviatrix_azure_vng_conn** can be imported using the `connection_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAzureVngConn:AviatrixAzureVngConn test connection
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixAzureVngConnArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -217,11 +259,11 @@ class AviatrixAzureVngConn(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[bool] attached: VNG attached or not
-        :param pulumi.Input[str] connection_name: Connection name
-        :param pulumi.Input[str] primary_gateway_name: Primary gateway name
-        :param pulumi.Input[str] vng_name: VNG name
-        :param pulumi.Input[str] vpc_id: VPC ID
+        :param pulumi.Input[bool] attached: The status of the connection.
+        :param pulumi.Input[str] connection_name: Connection name.
+        :param pulumi.Input[str] primary_gateway_name: Primary Aviatrix transit gateway name.
+        :param pulumi.Input[str] vng_name: Name of Azure VNG.
+        :param pulumi.Input[str] vpc_id: VPC ID.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -238,7 +280,7 @@ class AviatrixAzureVngConn(pulumi.CustomResource):
     @pulumi.getter
     def attached(self) -> pulumi.Output[bool]:
         """
-        VNG attached or not
+        The status of the connection.
         """
         return pulumi.get(self, "attached")
 
@@ -246,7 +288,7 @@ class AviatrixAzureVngConn(pulumi.CustomResource):
     @pulumi.getter(name="connectionName")
     def connection_name(self) -> pulumi.Output[str]:
         """
-        Connection name
+        Connection name.
         """
         return pulumi.get(self, "connection_name")
 
@@ -254,7 +296,7 @@ class AviatrixAzureVngConn(pulumi.CustomResource):
     @pulumi.getter(name="primaryGatewayName")
     def primary_gateway_name(self) -> pulumi.Output[str]:
         """
-        Primary gateway name
+        Primary Aviatrix transit gateway name.
         """
         return pulumi.get(self, "primary_gateway_name")
 
@@ -262,7 +304,7 @@ class AviatrixAzureVngConn(pulumi.CustomResource):
     @pulumi.getter(name="vngName")
     def vng_name(self) -> pulumi.Output[str]:
         """
-        VNG name
+        Name of Azure VNG.
         """
         return pulumi.get(self, "vng_name")
 
@@ -270,7 +312,7 @@ class AviatrixAzureVngConn(pulumi.CustomResource):
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> pulumi.Output[str]:
         """
-        VPC ID
+        VPC ID.
         """
         return pulumi.get(self, "vpc_id")
 

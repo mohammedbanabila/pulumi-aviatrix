@@ -13,13 +13,37 @@ namespace Pulumi.Aviatrix.Outputs
     [OutputType]
     public sealed class AviatrixAppDomainSelectorMatchExpression
     {
+        /// <summary>
+        /// - Account ID this expression matches.
+        /// </summary>
         public readonly string? AccountId;
+        /// <summary>
+        /// - Account name this expression matches.
+        /// </summary>
         public readonly string? AccountName;
+        /// <summary>
+        /// - CIDR block or IP Address this expression matches. `cidr` cannot be used with any other filters in the same `match_expressions` block.
+        /// </summary>
         public readonly string? Cidr;
+        /// <summary>
+        /// - Region this expression matches.
+        /// </summary>
         public readonly string? Region;
+        /// <summary>
+        /// - Resource ID this expression matches.
+        /// </summary>
         public readonly string? ResId;
+        /// <summary>
+        /// - Map of tags this expression matches.
+        /// </summary>
         public readonly ImmutableDictionary<string, string>? Tags;
+        /// <summary>
+        /// - Type of resource this expression matches. Must be one of "vm", "vpc" or "subnet". `type` is required when `cidr` is not used.
+        /// </summary>
         public readonly string? Type;
+        /// <summary>
+        /// - Zone this expression matches.
+        /// </summary>
         public readonly string? Zone;
 
         [OutputConstructor]

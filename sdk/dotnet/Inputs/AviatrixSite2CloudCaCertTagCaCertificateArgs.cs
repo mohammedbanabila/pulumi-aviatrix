@@ -12,21 +12,39 @@ namespace Pulumi.Aviatrix.Inputs
 
     public sealed class AviatrixSite2CloudCaCertTagCaCertificateArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Content of cert certificate to create only one cert. One CA cert only per file.
+        /// </summary>
         [Input("certContent", required: true)]
         public Input<string> CertContent { get; set; } = null!;
 
+        /// <summary>
+        /// Common name of created cert.
+        /// </summary>
         [Input("commonName")]
         public Input<string>? CommonName { get; set; }
 
+        /// <summary>
+        /// Expiration time of created cert.
+        /// </summary>
         [Input("expirationTime")]
         public Input<string>? ExpirationTime { get; set; }
 
+        /// <summary>
+        /// Unique id of created cert.
+        /// </summary>
         [Input("id")]
         public Input<string>? Id { get; set; }
 
+        /// <summary>
+        /// Issuer name of created cert.
+        /// </summary>
         [Input("issuerName")]
         public Input<string>? IssuerName { get; set; }
 
+        /// <summary>
+        /// Unique serial of created cert.
+        /// </summary>
         [Input("uniqueSerial")]
         public Input<string>? UniqueSerial { get; set; }
 

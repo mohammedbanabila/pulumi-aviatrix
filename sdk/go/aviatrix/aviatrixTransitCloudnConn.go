@@ -11,48 +11,127 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_transit_cloudn_conn** resource creates and manages the connection between an Aviatrix Transit Gateway and an Aviatrix CloudN device. Available as of provider version R2.21.0+.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixTransitCloudnConn(ctx, "test", &aviatrix.AviatrixTransitCloudnConnArgs{
+//				BgpLocalAsNum:       pulumi.String("123"),
+//				CloudnAsNum:         pulumi.String("345"),
+//				CloudnNeighborAsNum: pulumi.String("65005"),
+//				CloudnNeighborIp:    pulumi.String("182.1.2.3"),
+//				CloudnRemoteIp:      pulumi.String("172.12.13.14"),
+//				ConnectionName:      pulumi.String("my_conn"),
+//				GwName:              pulumi.String("transitGw"),
+//				VpcId:               pulumi.String("vpc-abcd1234"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixTransitCloudnConn(ctx, "test", &aviatrix.AviatrixTransitCloudnConnArgs{
+//				BackupCloudnAsNum:         pulumi.String("123"),
+//				BackupCloudnIp:            pulumi.String("1.2.3.6"),
+//				BackupCloudnNeighborAsNum: pulumi.String("345"),
+//				BackupCloudnNeighborIp:    pulumi.String("1.2.3.7"),
+//				BgpLocalAsNum:             pulumi.String("123"),
+//				CloudnAsNum:               pulumi.String("345"),
+//				CloudnNeighborAsNum:       pulumi.String("65005"),
+//				CloudnNeighborIp:          pulumi.String("1.2.3.5"),
+//				CloudnRemoteIp:            pulumi.String("1.2.3.4"),
+//				ConnectionName:            pulumi.String("my_conn"),
+//				EnableHa:                  pulumi.Bool(true),
+//				GwName:                    pulumi.String("transitGw"),
+//				VpcId:                     pulumi.String("vpc-abcd1234"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **transit_cloudn_conn** can be imported using the `connection_name` and `vpc_id`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixTransitCloudnConn:AviatrixTransitCloudnConn test connection_name~vpc_id
+//
+// ```
 type AviatrixTransitCloudnConn struct {
 	pulumi.CustomResourceState
 
-	// Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
+	// Set of approved CIDRs. Requires `enableLearnedCidrsApproval` to be true. Type: Set(String).
 	ApprovedCidrs pulumi.StringArrayOutput `pulumi:"approvedCidrs"`
-	// Backup Aviatrix CloudN BGP ASN.
+	// BGP AS Number of HA CloudN. Type: String.
 	BackupCloudnAsNum pulumi.StringPtrOutput `pulumi:"backupCloudnAsNum"`
-	// Backup Aviatrix CloudN IP Address.
+	// IP Address of HA CloudN. Required when `enableHa` is true. Type: String.
 	BackupCloudnIp pulumi.StringPtrOutput `pulumi:"backupCloudnIp"`
-	// Backup Aviatrix CloudN LAN Interface Neighbor's BGP ASN.
+	// BGP AS Number of HA CloudN Neighbor. Type: String.
 	BackupCloudnNeighborAsNum pulumi.StringPtrOutput `pulumi:"backupCloudnNeighborAsNum"`
-	// Backup Aviatrix CloudN LAN Interface Neighbor's IP Address.
+	// IP Address of HA CloudN Neighbor. Type: String.
 	BackupCloudnNeighborIp pulumi.StringPtrOutput `pulumi:"backupCloudnNeighborIp"`
-	// Enable direct connect to Backup Aviatrix CloudN over private network.
+	// Flag to enable direct connect over private network to HA CloudN. Type: Boolean.
 	BackupDirectConnect pulumi.BoolPtrOutput `pulumi:"backupDirectConnect"`
-	// Enable Insane Mode for connection to Backup Aviatrix CloudN.
+	// Flag to enable insane mode connection to HA CloudN. Type: Boolean.
 	BackupInsaneMode pulumi.BoolPtrOutput `pulumi:"backupInsaneMode"`
-	// BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+	// BGP AS Number of the Transit Gateway. Type: String.
 	BgpLocalAsNum pulumi.StringOutput `pulumi:"bgpLocalAsNum"`
-	// Aviatrix CloudN BGP ASN (Autonomous System Number). Integer between 1-4294967294.
+	// BGP AS Number of the Aviatrix CloudN. Type: String.
 	CloudnAsNum pulumi.StringOutput `pulumi:"cloudnAsNum"`
-	// CloudN LAN Interface Neighbor's BGP ASN.
+	// BGP AS Number of the Aviatrix CloudN neighbor. Type: String.
 	CloudnNeighborAsNum pulumi.StringOutput `pulumi:"cloudnNeighborAsNum"`
-	// Aviatrix CloudN LAN Interface Neighbor's IP Address.
+	// IP Address of Aviatrix CloudN neighbor. Type: String.
 	CloudnNeighborIp pulumi.StringOutput `pulumi:"cloudnNeighborIp"`
-	// Aviatrix CloudN IP Address.
+	// IP Address of Aviatrix CloudN. Type: String.
 	CloudnRemoteIp pulumi.StringOutput `pulumi:"cloudnRemoteIp"`
-	// The name of the transit Aviatrix CloudN connection.
+	// Name of the Transit Gateway to CloudN Connection. Type: String.
 	ConnectionName pulumi.StringOutput `pulumi:"connectionName"`
-	// Enable Direct Connect for private network infrastructure.
+	// Enable direct connect over private network. Type: Boolean. Default: true.
 	DirectConnect pulumi.BoolPtrOutput `pulumi:"directConnect"`
-	// Enable connection to HA CloudN.
+	// Enable connection to HA CloudN. Type: Boolean.
 	EnableHa pulumi.BoolPtrOutput `pulumi:"enableHa"`
-	// Enable learned CIDRs approval.
+	// Enable encrypted transit approval for connection. Type: Boolean.
 	EnableLearnedCidrsApproval pulumi.BoolPtrOutput `pulumi:"enableLearnedCidrsApproval"`
-	// Enable load balancing between Aviatrix CloudN and Backup CloudN.
+	// Flag to enable load balancing between CloudN and HA CloudN. Type: Boolean.
 	EnableLoadBalancing pulumi.BoolPtrOutput `pulumi:"enableLoadBalancing"`
-	// The name of the Transit Gateway.
+	// Name of the Transit Gateway. Type: String.
 	GwName pulumi.StringOutput `pulumi:"gwName"`
-	// Enable Insane Mode for this connection.
+	// Enable insane mode connection. Type: Boolean.
 	InsaneMode pulumi.BoolPtrOutput `pulumi:"insaneMode"`
-	// The ID of the VPC where the Transit Gateway is located.
+	// VPC ID of the Aviatrix Transit Gateway. Type: String.
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
 }
 
@@ -110,88 +189,88 @@ func GetAviatrixTransitCloudnConn(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixTransitCloudnConn resources.
 type aviatrixTransitCloudnConnState struct {
-	// Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
+	// Set of approved CIDRs. Requires `enableLearnedCidrsApproval` to be true. Type: Set(String).
 	ApprovedCidrs []string `pulumi:"approvedCidrs"`
-	// Backup Aviatrix CloudN BGP ASN.
+	// BGP AS Number of HA CloudN. Type: String.
 	BackupCloudnAsNum *string `pulumi:"backupCloudnAsNum"`
-	// Backup Aviatrix CloudN IP Address.
+	// IP Address of HA CloudN. Required when `enableHa` is true. Type: String.
 	BackupCloudnIp *string `pulumi:"backupCloudnIp"`
-	// Backup Aviatrix CloudN LAN Interface Neighbor's BGP ASN.
+	// BGP AS Number of HA CloudN Neighbor. Type: String.
 	BackupCloudnNeighborAsNum *string `pulumi:"backupCloudnNeighborAsNum"`
-	// Backup Aviatrix CloudN LAN Interface Neighbor's IP Address.
+	// IP Address of HA CloudN Neighbor. Type: String.
 	BackupCloudnNeighborIp *string `pulumi:"backupCloudnNeighborIp"`
-	// Enable direct connect to Backup Aviatrix CloudN over private network.
+	// Flag to enable direct connect over private network to HA CloudN. Type: Boolean.
 	BackupDirectConnect *bool `pulumi:"backupDirectConnect"`
-	// Enable Insane Mode for connection to Backup Aviatrix CloudN.
+	// Flag to enable insane mode connection to HA CloudN. Type: Boolean.
 	BackupInsaneMode *bool `pulumi:"backupInsaneMode"`
-	// BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+	// BGP AS Number of the Transit Gateway. Type: String.
 	BgpLocalAsNum *string `pulumi:"bgpLocalAsNum"`
-	// Aviatrix CloudN BGP ASN (Autonomous System Number). Integer between 1-4294967294.
+	// BGP AS Number of the Aviatrix CloudN. Type: String.
 	CloudnAsNum *string `pulumi:"cloudnAsNum"`
-	// CloudN LAN Interface Neighbor's BGP ASN.
+	// BGP AS Number of the Aviatrix CloudN neighbor. Type: String.
 	CloudnNeighborAsNum *string `pulumi:"cloudnNeighborAsNum"`
-	// Aviatrix CloudN LAN Interface Neighbor's IP Address.
+	// IP Address of Aviatrix CloudN neighbor. Type: String.
 	CloudnNeighborIp *string `pulumi:"cloudnNeighborIp"`
-	// Aviatrix CloudN IP Address.
+	// IP Address of Aviatrix CloudN. Type: String.
 	CloudnRemoteIp *string `pulumi:"cloudnRemoteIp"`
-	// The name of the transit Aviatrix CloudN connection.
+	// Name of the Transit Gateway to CloudN Connection. Type: String.
 	ConnectionName *string `pulumi:"connectionName"`
-	// Enable Direct Connect for private network infrastructure.
+	// Enable direct connect over private network. Type: Boolean. Default: true.
 	DirectConnect *bool `pulumi:"directConnect"`
-	// Enable connection to HA CloudN.
+	// Enable connection to HA CloudN. Type: Boolean.
 	EnableHa *bool `pulumi:"enableHa"`
-	// Enable learned CIDRs approval.
+	// Enable encrypted transit approval for connection. Type: Boolean.
 	EnableLearnedCidrsApproval *bool `pulumi:"enableLearnedCidrsApproval"`
-	// Enable load balancing between Aviatrix CloudN and Backup CloudN.
+	// Flag to enable load balancing between CloudN and HA CloudN. Type: Boolean.
 	EnableLoadBalancing *bool `pulumi:"enableLoadBalancing"`
-	// The name of the Transit Gateway.
+	// Name of the Transit Gateway. Type: String.
 	GwName *string `pulumi:"gwName"`
-	// Enable Insane Mode for this connection.
+	// Enable insane mode connection. Type: Boolean.
 	InsaneMode *bool `pulumi:"insaneMode"`
-	// The ID of the VPC where the Transit Gateway is located.
+	// VPC ID of the Aviatrix Transit Gateway. Type: String.
 	VpcId *string `pulumi:"vpcId"`
 }
 
 type AviatrixTransitCloudnConnState struct {
-	// Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
+	// Set of approved CIDRs. Requires `enableLearnedCidrsApproval` to be true. Type: Set(String).
 	ApprovedCidrs pulumi.StringArrayInput
-	// Backup Aviatrix CloudN BGP ASN.
+	// BGP AS Number of HA CloudN. Type: String.
 	BackupCloudnAsNum pulumi.StringPtrInput
-	// Backup Aviatrix CloudN IP Address.
+	// IP Address of HA CloudN. Required when `enableHa` is true. Type: String.
 	BackupCloudnIp pulumi.StringPtrInput
-	// Backup Aviatrix CloudN LAN Interface Neighbor's BGP ASN.
+	// BGP AS Number of HA CloudN Neighbor. Type: String.
 	BackupCloudnNeighborAsNum pulumi.StringPtrInput
-	// Backup Aviatrix CloudN LAN Interface Neighbor's IP Address.
+	// IP Address of HA CloudN Neighbor. Type: String.
 	BackupCloudnNeighborIp pulumi.StringPtrInput
-	// Enable direct connect to Backup Aviatrix CloudN over private network.
+	// Flag to enable direct connect over private network to HA CloudN. Type: Boolean.
 	BackupDirectConnect pulumi.BoolPtrInput
-	// Enable Insane Mode for connection to Backup Aviatrix CloudN.
+	// Flag to enable insane mode connection to HA CloudN. Type: Boolean.
 	BackupInsaneMode pulumi.BoolPtrInput
-	// BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+	// BGP AS Number of the Transit Gateway. Type: String.
 	BgpLocalAsNum pulumi.StringPtrInput
-	// Aviatrix CloudN BGP ASN (Autonomous System Number). Integer between 1-4294967294.
+	// BGP AS Number of the Aviatrix CloudN. Type: String.
 	CloudnAsNum pulumi.StringPtrInput
-	// CloudN LAN Interface Neighbor's BGP ASN.
+	// BGP AS Number of the Aviatrix CloudN neighbor. Type: String.
 	CloudnNeighborAsNum pulumi.StringPtrInput
-	// Aviatrix CloudN LAN Interface Neighbor's IP Address.
+	// IP Address of Aviatrix CloudN neighbor. Type: String.
 	CloudnNeighborIp pulumi.StringPtrInput
-	// Aviatrix CloudN IP Address.
+	// IP Address of Aviatrix CloudN. Type: String.
 	CloudnRemoteIp pulumi.StringPtrInput
-	// The name of the transit Aviatrix CloudN connection.
+	// Name of the Transit Gateway to CloudN Connection. Type: String.
 	ConnectionName pulumi.StringPtrInput
-	// Enable Direct Connect for private network infrastructure.
+	// Enable direct connect over private network. Type: Boolean. Default: true.
 	DirectConnect pulumi.BoolPtrInput
-	// Enable connection to HA CloudN.
+	// Enable connection to HA CloudN. Type: Boolean.
 	EnableHa pulumi.BoolPtrInput
-	// Enable learned CIDRs approval.
+	// Enable encrypted transit approval for connection. Type: Boolean.
 	EnableLearnedCidrsApproval pulumi.BoolPtrInput
-	// Enable load balancing between Aviatrix CloudN and Backup CloudN.
+	// Flag to enable load balancing between CloudN and HA CloudN. Type: Boolean.
 	EnableLoadBalancing pulumi.BoolPtrInput
-	// The name of the Transit Gateway.
+	// Name of the Transit Gateway. Type: String.
 	GwName pulumi.StringPtrInput
-	// Enable Insane Mode for this connection.
+	// Enable insane mode connection. Type: Boolean.
 	InsaneMode pulumi.BoolPtrInput
-	// The ID of the VPC where the Transit Gateway is located.
+	// VPC ID of the Aviatrix Transit Gateway. Type: String.
 	VpcId pulumi.StringPtrInput
 }
 
@@ -200,89 +279,89 @@ func (AviatrixTransitCloudnConnState) ElementType() reflect.Type {
 }
 
 type aviatrixTransitCloudnConnArgs struct {
-	// Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
+	// Set of approved CIDRs. Requires `enableLearnedCidrsApproval` to be true. Type: Set(String).
 	ApprovedCidrs []string `pulumi:"approvedCidrs"`
-	// Backup Aviatrix CloudN BGP ASN.
+	// BGP AS Number of HA CloudN. Type: String.
 	BackupCloudnAsNum *string `pulumi:"backupCloudnAsNum"`
-	// Backup Aviatrix CloudN IP Address.
+	// IP Address of HA CloudN. Required when `enableHa` is true. Type: String.
 	BackupCloudnIp *string `pulumi:"backupCloudnIp"`
-	// Backup Aviatrix CloudN LAN Interface Neighbor's BGP ASN.
+	// BGP AS Number of HA CloudN Neighbor. Type: String.
 	BackupCloudnNeighborAsNum *string `pulumi:"backupCloudnNeighborAsNum"`
-	// Backup Aviatrix CloudN LAN Interface Neighbor's IP Address.
+	// IP Address of HA CloudN Neighbor. Type: String.
 	BackupCloudnNeighborIp *string `pulumi:"backupCloudnNeighborIp"`
-	// Enable direct connect to Backup Aviatrix CloudN over private network.
+	// Flag to enable direct connect over private network to HA CloudN. Type: Boolean.
 	BackupDirectConnect *bool `pulumi:"backupDirectConnect"`
-	// Enable Insane Mode for connection to Backup Aviatrix CloudN.
+	// Flag to enable insane mode connection to HA CloudN. Type: Boolean.
 	BackupInsaneMode *bool `pulumi:"backupInsaneMode"`
-	// BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+	// BGP AS Number of the Transit Gateway. Type: String.
 	BgpLocalAsNum string `pulumi:"bgpLocalAsNum"`
-	// Aviatrix CloudN BGP ASN (Autonomous System Number). Integer between 1-4294967294.
+	// BGP AS Number of the Aviatrix CloudN. Type: String.
 	CloudnAsNum string `pulumi:"cloudnAsNum"`
-	// CloudN LAN Interface Neighbor's BGP ASN.
+	// BGP AS Number of the Aviatrix CloudN neighbor. Type: String.
 	CloudnNeighborAsNum string `pulumi:"cloudnNeighborAsNum"`
-	// Aviatrix CloudN LAN Interface Neighbor's IP Address.
+	// IP Address of Aviatrix CloudN neighbor. Type: String.
 	CloudnNeighborIp string `pulumi:"cloudnNeighborIp"`
-	// Aviatrix CloudN IP Address.
+	// IP Address of Aviatrix CloudN. Type: String.
 	CloudnRemoteIp string `pulumi:"cloudnRemoteIp"`
-	// The name of the transit Aviatrix CloudN connection.
+	// Name of the Transit Gateway to CloudN Connection. Type: String.
 	ConnectionName string `pulumi:"connectionName"`
-	// Enable Direct Connect for private network infrastructure.
+	// Enable direct connect over private network. Type: Boolean. Default: true.
 	DirectConnect *bool `pulumi:"directConnect"`
-	// Enable connection to HA CloudN.
+	// Enable connection to HA CloudN. Type: Boolean.
 	EnableHa *bool `pulumi:"enableHa"`
-	// Enable learned CIDRs approval.
+	// Enable encrypted transit approval for connection. Type: Boolean.
 	EnableLearnedCidrsApproval *bool `pulumi:"enableLearnedCidrsApproval"`
-	// Enable load balancing between Aviatrix CloudN and Backup CloudN.
+	// Flag to enable load balancing between CloudN and HA CloudN. Type: Boolean.
 	EnableLoadBalancing *bool `pulumi:"enableLoadBalancing"`
-	// The name of the Transit Gateway.
+	// Name of the Transit Gateway. Type: String.
 	GwName string `pulumi:"gwName"`
-	// Enable Insane Mode for this connection.
+	// Enable insane mode connection. Type: Boolean.
 	InsaneMode *bool `pulumi:"insaneMode"`
-	// The ID of the VPC where the Transit Gateway is located.
+	// VPC ID of the Aviatrix Transit Gateway. Type: String.
 	VpcId string `pulumi:"vpcId"`
 }
 
 // The set of arguments for constructing a AviatrixTransitCloudnConn resource.
 type AviatrixTransitCloudnConnArgs struct {
-	// Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
+	// Set of approved CIDRs. Requires `enableLearnedCidrsApproval` to be true. Type: Set(String).
 	ApprovedCidrs pulumi.StringArrayInput
-	// Backup Aviatrix CloudN BGP ASN.
+	// BGP AS Number of HA CloudN. Type: String.
 	BackupCloudnAsNum pulumi.StringPtrInput
-	// Backup Aviatrix CloudN IP Address.
+	// IP Address of HA CloudN. Required when `enableHa` is true. Type: String.
 	BackupCloudnIp pulumi.StringPtrInput
-	// Backup Aviatrix CloudN LAN Interface Neighbor's BGP ASN.
+	// BGP AS Number of HA CloudN Neighbor. Type: String.
 	BackupCloudnNeighborAsNum pulumi.StringPtrInput
-	// Backup Aviatrix CloudN LAN Interface Neighbor's IP Address.
+	// IP Address of HA CloudN Neighbor. Type: String.
 	BackupCloudnNeighborIp pulumi.StringPtrInput
-	// Enable direct connect to Backup Aviatrix CloudN over private network.
+	// Flag to enable direct connect over private network to HA CloudN. Type: Boolean.
 	BackupDirectConnect pulumi.BoolPtrInput
-	// Enable Insane Mode for connection to Backup Aviatrix CloudN.
+	// Flag to enable insane mode connection to HA CloudN. Type: Boolean.
 	BackupInsaneMode pulumi.BoolPtrInput
-	// BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+	// BGP AS Number of the Transit Gateway. Type: String.
 	BgpLocalAsNum pulumi.StringInput
-	// Aviatrix CloudN BGP ASN (Autonomous System Number). Integer between 1-4294967294.
+	// BGP AS Number of the Aviatrix CloudN. Type: String.
 	CloudnAsNum pulumi.StringInput
-	// CloudN LAN Interface Neighbor's BGP ASN.
+	// BGP AS Number of the Aviatrix CloudN neighbor. Type: String.
 	CloudnNeighborAsNum pulumi.StringInput
-	// Aviatrix CloudN LAN Interface Neighbor's IP Address.
+	// IP Address of Aviatrix CloudN neighbor. Type: String.
 	CloudnNeighborIp pulumi.StringInput
-	// Aviatrix CloudN IP Address.
+	// IP Address of Aviatrix CloudN. Type: String.
 	CloudnRemoteIp pulumi.StringInput
-	// The name of the transit Aviatrix CloudN connection.
+	// Name of the Transit Gateway to CloudN Connection. Type: String.
 	ConnectionName pulumi.StringInput
-	// Enable Direct Connect for private network infrastructure.
+	// Enable direct connect over private network. Type: Boolean. Default: true.
 	DirectConnect pulumi.BoolPtrInput
-	// Enable connection to HA CloudN.
+	// Enable connection to HA CloudN. Type: Boolean.
 	EnableHa pulumi.BoolPtrInput
-	// Enable learned CIDRs approval.
+	// Enable encrypted transit approval for connection. Type: Boolean.
 	EnableLearnedCidrsApproval pulumi.BoolPtrInput
-	// Enable load balancing between Aviatrix CloudN and Backup CloudN.
+	// Flag to enable load balancing between CloudN and HA CloudN. Type: Boolean.
 	EnableLoadBalancing pulumi.BoolPtrInput
-	// The name of the Transit Gateway.
+	// Name of the Transit Gateway. Type: String.
 	GwName pulumi.StringInput
-	// Enable Insane Mode for this connection.
+	// Enable insane mode connection. Type: Boolean.
 	InsaneMode pulumi.BoolPtrInput
-	// The ID of the VPC where the Transit Gateway is located.
+	// VPC ID of the Aviatrix Transit Gateway. Type: String.
 	VpcId pulumi.StringInput
 }
 
@@ -373,102 +452,102 @@ func (o AviatrixTransitCloudnConnOutput) ToAviatrixTransitCloudnConnOutputWithCo
 	return o
 }
 
-// Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
+// Set of approved CIDRs. Requires `enableLearnedCidrsApproval` to be true. Type: Set(String).
 func (o AviatrixTransitCloudnConnOutput) ApprovedCidrs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixTransitCloudnConn) pulumi.StringArrayOutput { return v.ApprovedCidrs }).(pulumi.StringArrayOutput)
 }
 
-// Backup Aviatrix CloudN BGP ASN.
+// BGP AS Number of HA CloudN. Type: String.
 func (o AviatrixTransitCloudnConnOutput) BackupCloudnAsNum() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitCloudnConn) pulumi.StringPtrOutput { return v.BackupCloudnAsNum }).(pulumi.StringPtrOutput)
 }
 
-// Backup Aviatrix CloudN IP Address.
+// IP Address of HA CloudN. Required when `enableHa` is true. Type: String.
 func (o AviatrixTransitCloudnConnOutput) BackupCloudnIp() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitCloudnConn) pulumi.StringPtrOutput { return v.BackupCloudnIp }).(pulumi.StringPtrOutput)
 }
 
-// Backup Aviatrix CloudN LAN Interface Neighbor's BGP ASN.
+// BGP AS Number of HA CloudN Neighbor. Type: String.
 func (o AviatrixTransitCloudnConnOutput) BackupCloudnNeighborAsNum() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitCloudnConn) pulumi.StringPtrOutput { return v.BackupCloudnNeighborAsNum }).(pulumi.StringPtrOutput)
 }
 
-// Backup Aviatrix CloudN LAN Interface Neighbor's IP Address.
+// IP Address of HA CloudN Neighbor. Type: String.
 func (o AviatrixTransitCloudnConnOutput) BackupCloudnNeighborIp() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitCloudnConn) pulumi.StringPtrOutput { return v.BackupCloudnNeighborIp }).(pulumi.StringPtrOutput)
 }
 
-// Enable direct connect to Backup Aviatrix CloudN over private network.
+// Flag to enable direct connect over private network to HA CloudN. Type: Boolean.
 func (o AviatrixTransitCloudnConnOutput) BackupDirectConnect() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitCloudnConn) pulumi.BoolPtrOutput { return v.BackupDirectConnect }).(pulumi.BoolPtrOutput)
 }
 
-// Enable Insane Mode for connection to Backup Aviatrix CloudN.
+// Flag to enable insane mode connection to HA CloudN. Type: Boolean.
 func (o AviatrixTransitCloudnConnOutput) BackupInsaneMode() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitCloudnConn) pulumi.BoolPtrOutput { return v.BackupInsaneMode }).(pulumi.BoolPtrOutput)
 }
 
-// BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+// BGP AS Number of the Transit Gateway. Type: String.
 func (o AviatrixTransitCloudnConnOutput) BgpLocalAsNum() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixTransitCloudnConn) pulumi.StringOutput { return v.BgpLocalAsNum }).(pulumi.StringOutput)
 }
 
-// Aviatrix CloudN BGP ASN (Autonomous System Number). Integer between 1-4294967294.
+// BGP AS Number of the Aviatrix CloudN. Type: String.
 func (o AviatrixTransitCloudnConnOutput) CloudnAsNum() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixTransitCloudnConn) pulumi.StringOutput { return v.CloudnAsNum }).(pulumi.StringOutput)
 }
 
-// CloudN LAN Interface Neighbor's BGP ASN.
+// BGP AS Number of the Aviatrix CloudN neighbor. Type: String.
 func (o AviatrixTransitCloudnConnOutput) CloudnNeighborAsNum() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixTransitCloudnConn) pulumi.StringOutput { return v.CloudnNeighborAsNum }).(pulumi.StringOutput)
 }
 
-// Aviatrix CloudN LAN Interface Neighbor's IP Address.
+// IP Address of Aviatrix CloudN neighbor. Type: String.
 func (o AviatrixTransitCloudnConnOutput) CloudnNeighborIp() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixTransitCloudnConn) pulumi.StringOutput { return v.CloudnNeighborIp }).(pulumi.StringOutput)
 }
 
-// Aviatrix CloudN IP Address.
+// IP Address of Aviatrix CloudN. Type: String.
 func (o AviatrixTransitCloudnConnOutput) CloudnRemoteIp() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixTransitCloudnConn) pulumi.StringOutput { return v.CloudnRemoteIp }).(pulumi.StringOutput)
 }
 
-// The name of the transit Aviatrix CloudN connection.
+// Name of the Transit Gateway to CloudN Connection. Type: String.
 func (o AviatrixTransitCloudnConnOutput) ConnectionName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixTransitCloudnConn) pulumi.StringOutput { return v.ConnectionName }).(pulumi.StringOutput)
 }
 
-// Enable Direct Connect for private network infrastructure.
+// Enable direct connect over private network. Type: Boolean. Default: true.
 func (o AviatrixTransitCloudnConnOutput) DirectConnect() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitCloudnConn) pulumi.BoolPtrOutput { return v.DirectConnect }).(pulumi.BoolPtrOutput)
 }
 
-// Enable connection to HA CloudN.
+// Enable connection to HA CloudN. Type: Boolean.
 func (o AviatrixTransitCloudnConnOutput) EnableHa() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitCloudnConn) pulumi.BoolPtrOutput { return v.EnableHa }).(pulumi.BoolPtrOutput)
 }
 
-// Enable learned CIDRs approval.
+// Enable encrypted transit approval for connection. Type: Boolean.
 func (o AviatrixTransitCloudnConnOutput) EnableLearnedCidrsApproval() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitCloudnConn) pulumi.BoolPtrOutput { return v.EnableLearnedCidrsApproval }).(pulumi.BoolPtrOutput)
 }
 
-// Enable load balancing between Aviatrix CloudN and Backup CloudN.
+// Flag to enable load balancing between CloudN and HA CloudN. Type: Boolean.
 func (o AviatrixTransitCloudnConnOutput) EnableLoadBalancing() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitCloudnConn) pulumi.BoolPtrOutput { return v.EnableLoadBalancing }).(pulumi.BoolPtrOutput)
 }
 
-// The name of the Transit Gateway.
+// Name of the Transit Gateway. Type: String.
 func (o AviatrixTransitCloudnConnOutput) GwName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixTransitCloudnConn) pulumi.StringOutput { return v.GwName }).(pulumi.StringOutput)
 }
 
-// Enable Insane Mode for this connection.
+// Enable insane mode connection. Type: Boolean.
 func (o AviatrixTransitCloudnConnOutput) InsaneMode() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitCloudnConn) pulumi.BoolPtrOutput { return v.InsaneMode }).(pulumi.BoolPtrOutput)
 }
 
-// The ID of the VPC where the Transit Gateway is located.
+// VPC ID of the Aviatrix Transit Gateway. Type: String.
 func (o AviatrixTransitCloudnConnOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixTransitCloudnConn) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
 }

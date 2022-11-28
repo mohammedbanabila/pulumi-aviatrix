@@ -11,14 +11,53 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_aws_tgw_intra_domain_inspection** resource allows the creation and management of intra domain inspection of security domains in an AWS TGW.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixAwsTgwIntraDomainInspection(ctx, "test", &aviatrix.AviatrixAwsTgwIntraDomainInspectionArgs{
+//				FirewallDomainName: pulumi.String("firewall-domain"),
+//				RouteDomainName:    pulumi.String("mysd"),
+//				TgwName:            pulumi.String("test-AWS-TGW"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **aviatrix_aws_tgw_intra_domain_inspection** can be imported using the `tgw_name` and `route_domain_name`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixAwsTgwIntraDomainInspection:AviatrixAwsTgwIntraDomainInspection test tgw_name~route_domain_name
+//
+// ```
 type AviatrixAwsTgwIntraDomainInspection struct {
 	pulumi.CustomResourceState
 
-	// Firewall domain name.
+	// The name of a firewall security domain.
 	FirewallDomainName pulumi.StringOutput `pulumi:"firewallDomainName"`
-	// Route domain name.
+	// The name of a security domain.
 	RouteDomainName pulumi.StringOutput `pulumi:"routeDomainName"`
-	// AWS TGW name.
+	// The AWS TGW name.
 	TgwName pulumi.StringOutput `pulumi:"tgwName"`
 }
 
@@ -61,20 +100,20 @@ func GetAviatrixAwsTgwIntraDomainInspection(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixAwsTgwIntraDomainInspection resources.
 type aviatrixAwsTgwIntraDomainInspectionState struct {
-	// Firewall domain name.
+	// The name of a firewall security domain.
 	FirewallDomainName *string `pulumi:"firewallDomainName"`
-	// Route domain name.
+	// The name of a security domain.
 	RouteDomainName *string `pulumi:"routeDomainName"`
-	// AWS TGW name.
+	// The AWS TGW name.
 	TgwName *string `pulumi:"tgwName"`
 }
 
 type AviatrixAwsTgwIntraDomainInspectionState struct {
-	// Firewall domain name.
+	// The name of a firewall security domain.
 	FirewallDomainName pulumi.StringPtrInput
-	// Route domain name.
+	// The name of a security domain.
 	RouteDomainName pulumi.StringPtrInput
-	// AWS TGW name.
+	// The AWS TGW name.
 	TgwName pulumi.StringPtrInput
 }
 
@@ -83,21 +122,21 @@ func (AviatrixAwsTgwIntraDomainInspectionState) ElementType() reflect.Type {
 }
 
 type aviatrixAwsTgwIntraDomainInspectionArgs struct {
-	// Firewall domain name.
+	// The name of a firewall security domain.
 	FirewallDomainName string `pulumi:"firewallDomainName"`
-	// Route domain name.
+	// The name of a security domain.
 	RouteDomainName string `pulumi:"routeDomainName"`
-	// AWS TGW name.
+	// The AWS TGW name.
 	TgwName string `pulumi:"tgwName"`
 }
 
 // The set of arguments for constructing a AviatrixAwsTgwIntraDomainInspection resource.
 type AviatrixAwsTgwIntraDomainInspectionArgs struct {
-	// Firewall domain name.
+	// The name of a firewall security domain.
 	FirewallDomainName pulumi.StringInput
-	// Route domain name.
+	// The name of a security domain.
 	RouteDomainName pulumi.StringInput
-	// AWS TGW name.
+	// The AWS TGW name.
 	TgwName pulumi.StringInput
 }
 
@@ -188,17 +227,17 @@ func (o AviatrixAwsTgwIntraDomainInspectionOutput) ToAviatrixAwsTgwIntraDomainIn
 	return o
 }
 
-// Firewall domain name.
+// The name of a firewall security domain.
 func (o AviatrixAwsTgwIntraDomainInspectionOutput) FirewallDomainName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwIntraDomainInspection) pulumi.StringOutput { return v.FirewallDomainName }).(pulumi.StringOutput)
 }
 
-// Route domain name.
+// The name of a security domain.
 func (o AviatrixAwsTgwIntraDomainInspectionOutput) RouteDomainName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwIntraDomainInspection) pulumi.StringOutput { return v.RouteDomainName }).(pulumi.StringOutput)
 }
 
-// AWS TGW name.
+// The AWS TGW name.
 func (o AviatrixAwsTgwIntraDomainInspectionOutput) TgwName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwIntraDomainInspection) pulumi.StringOutput { return v.TgwName }).(pulumi.StringOutput)
 }

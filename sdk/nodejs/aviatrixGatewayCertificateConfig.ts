@@ -4,6 +4,31 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_gateway_certificate_config** resource allows the management of Aviatrix [gateway certificate](https://docs.aviatrix.com/HowTos/controller_certificate.html#gateway-certificate-management) configuration. Available as of provider version R2.18.1+.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@astipkovits/aviatrix";
+ * import * as fs from "fs";
+ *
+ * // Aviatrix Gateway Certificate Management
+ * const testGatewayCert = new aviatrix.AviatrixGatewayCertificateConfig("testGatewayCert", {
+ *     caCertificate: fs.readFileSync("path/to/CA_cert.pem"),
+ *     caPrivateKey: fs.readFileSync("path/to/CA_private.key"),
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * !> **WARNING:** When importing, the provider cannot read your private key or certificate into the state file. After importing, if you do not want to change the values of the CA private key or certificate you must set the attributes `ca_certificate` and `ca_private_key` to the empty string (""). Otherwise, Terraform will see a diff and force replacement. `aviatrix_gateway_certificate_config` can be imported using controller IP with the dots(.) replaces with dashes(-), e.g. controller IP is 10.11.12.13
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixGatewayCertificateConfig:AviatrixGatewayCertificateConfig test 10-11-12-13
+ * ```
+ */
 export class AviatrixGatewayCertificateConfig extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixGatewayCertificateConfig resource's state with the given name, ID, and optional extra
@@ -33,11 +58,11 @@ export class AviatrixGatewayCertificateConfig extends pulumi.CustomResource {
     }
 
     /**
-     * CA Certificate.
+     * CA Certificate in PEM format. To read certificate from a file please use the built-in `file` function.
      */
     public readonly caCertificate!: pulumi.Output<string>;
     /**
-     * CA Private Key.
+     * CA Private Key. To read the private key from a file please use the built-in `file` function.
      */
     public readonly caPrivateKey!: pulumi.Output<string>;
 
@@ -65,9 +90,11 @@ export class AviatrixGatewayCertificateConfig extends pulumi.CustomResource {
                 throw new Error("Missing required property 'caPrivateKey'");
             }
             resourceInputs["caCertificate"] = args ? args.caCertificate : undefined;
-            resourceInputs["caPrivateKey"] = args ? args.caPrivateKey : undefined;
+            resourceInputs["caPrivateKey"] = args?.caPrivateKey ? pulumi.secret(args.caPrivateKey) : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["caPrivateKey"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(AviatrixGatewayCertificateConfig.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -77,11 +104,11 @@ export class AviatrixGatewayCertificateConfig extends pulumi.CustomResource {
  */
 export interface AviatrixGatewayCertificateConfigState {
     /**
-     * CA Certificate.
+     * CA Certificate in PEM format. To read certificate from a file please use the built-in `file` function.
      */
     caCertificate?: pulumi.Input<string>;
     /**
-     * CA Private Key.
+     * CA Private Key. To read the private key from a file please use the built-in `file` function.
      */
     caPrivateKey?: pulumi.Input<string>;
 }
@@ -91,11 +118,11 @@ export interface AviatrixGatewayCertificateConfigState {
  */
 export interface AviatrixGatewayCertificateConfigArgs {
     /**
-     * CA Certificate.
+     * CA Certificate in PEM format. To read certificate from a file please use the built-in `file` function.
      */
     caCertificate: pulumi.Input<string>;
     /**
-     * CA Private Key.
+     * CA Private Key. To read the private key from a file please use the built-in `file` function.
      */
     caPrivateKey: pulumi.Input<string>;
 }

@@ -9,6 +9,55 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// !&gt; **WARNING** **aviatrix_app_domain** is part of the Micro-segmentation private preview feature for R2.22.0. If you wish to enable a private preview mode feature, please contact your sales representative or Aviatrix Support.
+    /// The **aviatrix_app_domain** resource handles the creation and management of App Domains. Available as of Provider R2.22.0+.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix App Domain
+    ///     var testAppDomainIp = new Aviatrix.AviatrixAppDomain("testAppDomainIp", new()
+    ///     {
+    ///         Selector = new Aviatrix.Inputs.AviatrixAppDomainSelectorArgs
+    ///         {
+    ///             MatchExpressions = new[]
+    ///             {
+    ///                 new Aviatrix.Inputs.AviatrixAppDomainSelectorMatchExpressionArgs
+    ///                 {
+    ///                     AccountName = "devops",
+    ///                     Region = "us-west-2",
+    ///                     Tags = 
+    ///                     {
+    ///                         { "k3", "v3" },
+    ///                     },
+    ///                     Type = "vm",
+    ///                 },
+    ///                 new Aviatrix.Inputs.AviatrixAppDomainSelectorMatchExpressionArgs
+    ///                 {
+    ///                     Cidr = "10.0.0.0/16",
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **aviatrix_app_domain** can be imported using the `uuid`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixAppDomain:AviatrixAppDomain test 41984f8b-5a37-4272-89b3-57c79e9ff77c
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixAppDomain:AviatrixAppDomain")]
     public partial class AviatrixAppDomain : global::Pulumi.CustomResource
     {
@@ -19,7 +68,7 @@ namespace Pulumi.Aviatrix
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// List of match expressions for the App Domain.
+        /// Block containing match expressions to filter the App Domain.
         /// </summary>
         [Output("selector")]
         public Output<Outputs.AviatrixAppDomainSelector> Selector { get; private set; } = null!;
@@ -84,7 +133,7 @@ namespace Pulumi.Aviatrix
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// List of match expressions for the App Domain.
+        /// Block containing match expressions to filter the App Domain.
         /// </summary>
         [Input("selector", required: true)]
         public Input<Inputs.AviatrixAppDomainSelectorArgs> Selector { get; set; } = null!;
@@ -104,7 +153,7 @@ namespace Pulumi.Aviatrix
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// List of match expressions for the App Domain.
+        /// Block containing match expressions to filter the App Domain.
         /// </summary>
         [Input("selector")]
         public Input<Inputs.AviatrixAppDomainSelectorGetArgs>? Selector { get; set; }

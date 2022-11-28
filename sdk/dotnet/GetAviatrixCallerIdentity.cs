@@ -11,14 +11,20 @@ namespace Pulumi.Aviatrix
 {
     public static class GetAviatrixCallerIdentity
     {
+        /// <summary>
+        /// The **aviatrix_caller_identity** data source provides the Aviatrix CID for use in other resources.
+        /// </summary>
         public static Task<GetAviatrixCallerIdentityResult> InvokeAsync(InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAviatrixCallerIdentityResult>("aviatrix:index/getAviatrixCallerIdentity:getAviatrixCallerIdentity", InvokeArgs.Empty, options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAviatrixCallerIdentityResult>("aviatrix:index/getAviatrixCallerIdentity:getAviatrixCallerIdentity", InvokeArgs.Empty, options.WithDefaults());
     }
 
 
     [OutputType]
     public sealed class GetAviatrixCallerIdentityResult
     {
+        /// <summary>
+        /// Aviatrix caller identity.
+        /// </summary>
         public readonly string Cid;
         /// <summary>
         /// The provider-assigned unique ID for this managed resource.

@@ -11,14 +11,55 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// !> **WARNING:** Resource 'aviatrix_aws_tgw_security_domain_connection' will be deprecated in future releases. Please use resource 'aviatrix_aws_tgw_peering_domain_conn' instead.
+//
+// The **aviatrix_aws_tgw_security_domain_connection** resource allows the creation and management of the connections between security domains in an AWS TGW.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixAwsTgwSecurityDomainConn(ctx, "test", &aviatrix.AviatrixAwsTgwSecurityDomainConnArgs{
+//				DomainName1: pulumi.String("domain1"),
+//				DomainName2: pulumi.String("domain2"),
+//				TgwName:     pulumi.String("tgw"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **aws_tgw_security_domain_connection** can be imported using the `tgw_name`, `domain_name1` and `domain_name2`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixAwsTgwSecurityDomainConn:AviatrixAwsTgwSecurityDomainConn test tgw_name~domain_name1~domain_name2
+//
+// ```
 type AviatrixAwsTgwSecurityDomainConn struct {
 	pulumi.CustomResourceState
 
-	// Security domain name 1.
+	// The name of a security domain to make a connection.
 	DomainName1 pulumi.StringOutput `pulumi:"domainName1"`
-	// Security domain name 2.
+	// The name of another security domain to make a connection.
 	DomainName2 pulumi.StringOutput `pulumi:"domainName2"`
-	// AWS TGW name.
+	// The AWS TGW name.
 	TgwName pulumi.StringOutput `pulumi:"tgwName"`
 }
 
@@ -61,20 +102,20 @@ func GetAviatrixAwsTgwSecurityDomainConn(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixAwsTgwSecurityDomainConn resources.
 type aviatrixAwsTgwSecurityDomainConnState struct {
-	// Security domain name 1.
+	// The name of a security domain to make a connection.
 	DomainName1 *string `pulumi:"domainName1"`
-	// Security domain name 2.
+	// The name of another security domain to make a connection.
 	DomainName2 *string `pulumi:"domainName2"`
-	// AWS TGW name.
+	// The AWS TGW name.
 	TgwName *string `pulumi:"tgwName"`
 }
 
 type AviatrixAwsTgwSecurityDomainConnState struct {
-	// Security domain name 1.
+	// The name of a security domain to make a connection.
 	DomainName1 pulumi.StringPtrInput
-	// Security domain name 2.
+	// The name of another security domain to make a connection.
 	DomainName2 pulumi.StringPtrInput
-	// AWS TGW name.
+	// The AWS TGW name.
 	TgwName pulumi.StringPtrInput
 }
 
@@ -83,21 +124,21 @@ func (AviatrixAwsTgwSecurityDomainConnState) ElementType() reflect.Type {
 }
 
 type aviatrixAwsTgwSecurityDomainConnArgs struct {
-	// Security domain name 1.
+	// The name of a security domain to make a connection.
 	DomainName1 string `pulumi:"domainName1"`
-	// Security domain name 2.
+	// The name of another security domain to make a connection.
 	DomainName2 string `pulumi:"domainName2"`
-	// AWS TGW name.
+	// The AWS TGW name.
 	TgwName string `pulumi:"tgwName"`
 }
 
 // The set of arguments for constructing a AviatrixAwsTgwSecurityDomainConn resource.
 type AviatrixAwsTgwSecurityDomainConnArgs struct {
-	// Security domain name 1.
+	// The name of a security domain to make a connection.
 	DomainName1 pulumi.StringInput
-	// Security domain name 2.
+	// The name of another security domain to make a connection.
 	DomainName2 pulumi.StringInput
-	// AWS TGW name.
+	// The AWS TGW name.
 	TgwName pulumi.StringInput
 }
 
@@ -188,17 +229,17 @@ func (o AviatrixAwsTgwSecurityDomainConnOutput) ToAviatrixAwsTgwSecurityDomainCo
 	return o
 }
 
-// Security domain name 1.
+// The name of a security domain to make a connection.
 func (o AviatrixAwsTgwSecurityDomainConnOutput) DomainName1() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwSecurityDomainConn) pulumi.StringOutput { return v.DomainName1 }).(pulumi.StringOutput)
 }
 
-// Security domain name 2.
+// The name of another security domain to make a connection.
 func (o AviatrixAwsTgwSecurityDomainConnOutput) DomainName2() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwSecurityDomainConn) pulumi.StringOutput { return v.DomainName2 }).(pulumi.StringOutput)
 }
 
-// AWS TGW name.
+// The AWS TGW name.
 func (o AviatrixAwsTgwSecurityDomainConnOutput) TgwName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwSecurityDomainConn) pulumi.StringOutput { return v.TgwName }).(pulumi.StringOutput)
 }

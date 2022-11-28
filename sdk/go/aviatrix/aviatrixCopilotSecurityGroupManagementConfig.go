@@ -11,22 +11,64 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_copilot_security_group_management_config** resource allows management of controller CoPilot security group management configuration. This resource is available as of provider version R2.23+.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixCopilotSecurityGroupManagementConfig(ctx, "test", &aviatrix.AviatrixCopilotSecurityGroupManagementConfigArgs{
+//				AccountName:                          pulumi.String("aws-account"),
+//				CloudType:                            pulumi.Int(1),
+//				EnableCopilotSecurityGroupManagement: pulumi.Bool(true),
+//				InstanceId:                           pulumi.String("i-1234567890"),
+//				Region:                               pulumi.String("us-east-1"),
+//				VpcId:                                pulumi.String("vpc-1234567890"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **aviatrix_copilot_security_group_management_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixCopilotSecurityGroupManagementConfig:AviatrixCopilotSecurityGroupManagementConfig test 10-11-12-13
+//
+// ```
 type AviatrixCopilotSecurityGroupManagementConfig struct {
 	pulumi.CustomResourceState
 
-	// Access account name.
+	// Aviatrix access account name. Required to enable copilot security group management.
 	AccountName pulumi.StringPtrOutput `pulumi:"accountName"`
-	// Cloud type.
+	// Cloud type. The type of this attribute is Integer. Only support AWS, Azure and OCI. Required to enable copilot security group management.
 	CloudType pulumi.IntPtrOutput `pulumi:"cloudType"`
-	// Switch to enable copilot security group management.
+	// Switch to enable copilot security group management. Valid values: true, false.
 	EnableCopilotSecurityGroupManagement pulumi.BoolOutput `pulumi:"enableCopilotSecurityGroupManagement"`
-	// Copilot instance ID.
+	// CoPilot instance ID. Required to enable copilot security group management.
 	InstanceId pulumi.StringPtrOutput `pulumi:"instanceId"`
-	// Copilot region. Valid for AWS and Azure.
+	// Region where CoPilot is deployed. Required and valid for AWS and Azure.
 	Region pulumi.StringPtrOutput `pulumi:"region"`
-	// VPC ID.
+	// VPC ID. Required to enable copilot security group management.
 	VpcId pulumi.StringPtrOutput `pulumi:"vpcId"`
-	// Copilot zone. Valid for GCP.
+	// Zone where CoPilot is deployed. Required and valid for GCP.
 	Zone pulumi.StringPtrOutput `pulumi:"zone"`
 }
 
@@ -63,36 +105,36 @@ func GetAviatrixCopilotSecurityGroupManagementConfig(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixCopilotSecurityGroupManagementConfig resources.
 type aviatrixCopilotSecurityGroupManagementConfigState struct {
-	// Access account name.
+	// Aviatrix access account name. Required to enable copilot security group management.
 	AccountName *string `pulumi:"accountName"`
-	// Cloud type.
+	// Cloud type. The type of this attribute is Integer. Only support AWS, Azure and OCI. Required to enable copilot security group management.
 	CloudType *int `pulumi:"cloudType"`
-	// Switch to enable copilot security group management.
+	// Switch to enable copilot security group management. Valid values: true, false.
 	EnableCopilotSecurityGroupManagement *bool `pulumi:"enableCopilotSecurityGroupManagement"`
-	// Copilot instance ID.
+	// CoPilot instance ID. Required to enable copilot security group management.
 	InstanceId *string `pulumi:"instanceId"`
-	// Copilot region. Valid for AWS and Azure.
+	// Region where CoPilot is deployed. Required and valid for AWS and Azure.
 	Region *string `pulumi:"region"`
-	// VPC ID.
+	// VPC ID. Required to enable copilot security group management.
 	VpcId *string `pulumi:"vpcId"`
-	// Copilot zone. Valid for GCP.
+	// Zone where CoPilot is deployed. Required and valid for GCP.
 	Zone *string `pulumi:"zone"`
 }
 
 type AviatrixCopilotSecurityGroupManagementConfigState struct {
-	// Access account name.
+	// Aviatrix access account name. Required to enable copilot security group management.
 	AccountName pulumi.StringPtrInput
-	// Cloud type.
+	// Cloud type. The type of this attribute is Integer. Only support AWS, Azure and OCI. Required to enable copilot security group management.
 	CloudType pulumi.IntPtrInput
-	// Switch to enable copilot security group management.
+	// Switch to enable copilot security group management. Valid values: true, false.
 	EnableCopilotSecurityGroupManagement pulumi.BoolPtrInput
-	// Copilot instance ID.
+	// CoPilot instance ID. Required to enable copilot security group management.
 	InstanceId pulumi.StringPtrInput
-	// Copilot region. Valid for AWS and Azure.
+	// Region where CoPilot is deployed. Required and valid for AWS and Azure.
 	Region pulumi.StringPtrInput
-	// VPC ID.
+	// VPC ID. Required to enable copilot security group management.
 	VpcId pulumi.StringPtrInput
-	// Copilot zone. Valid for GCP.
+	// Zone where CoPilot is deployed. Required and valid for GCP.
 	Zone pulumi.StringPtrInput
 }
 
@@ -101,37 +143,37 @@ func (AviatrixCopilotSecurityGroupManagementConfigState) ElementType() reflect.T
 }
 
 type aviatrixCopilotSecurityGroupManagementConfigArgs struct {
-	// Access account name.
+	// Aviatrix access account name. Required to enable copilot security group management.
 	AccountName *string `pulumi:"accountName"`
-	// Cloud type.
+	// Cloud type. The type of this attribute is Integer. Only support AWS, Azure and OCI. Required to enable copilot security group management.
 	CloudType *int `pulumi:"cloudType"`
-	// Switch to enable copilot security group management.
+	// Switch to enable copilot security group management. Valid values: true, false.
 	EnableCopilotSecurityGroupManagement bool `pulumi:"enableCopilotSecurityGroupManagement"`
-	// Copilot instance ID.
+	// CoPilot instance ID. Required to enable copilot security group management.
 	InstanceId *string `pulumi:"instanceId"`
-	// Copilot region. Valid for AWS and Azure.
+	// Region where CoPilot is deployed. Required and valid for AWS and Azure.
 	Region *string `pulumi:"region"`
-	// VPC ID.
+	// VPC ID. Required to enable copilot security group management.
 	VpcId *string `pulumi:"vpcId"`
-	// Copilot zone. Valid for GCP.
+	// Zone where CoPilot is deployed. Required and valid for GCP.
 	Zone *string `pulumi:"zone"`
 }
 
 // The set of arguments for constructing a AviatrixCopilotSecurityGroupManagementConfig resource.
 type AviatrixCopilotSecurityGroupManagementConfigArgs struct {
-	// Access account name.
+	// Aviatrix access account name. Required to enable copilot security group management.
 	AccountName pulumi.StringPtrInput
-	// Cloud type.
+	// Cloud type. The type of this attribute is Integer. Only support AWS, Azure and OCI. Required to enable copilot security group management.
 	CloudType pulumi.IntPtrInput
-	// Switch to enable copilot security group management.
+	// Switch to enable copilot security group management. Valid values: true, false.
 	EnableCopilotSecurityGroupManagement pulumi.BoolInput
-	// Copilot instance ID.
+	// CoPilot instance ID. Required to enable copilot security group management.
 	InstanceId pulumi.StringPtrInput
-	// Copilot region. Valid for AWS and Azure.
+	// Region where CoPilot is deployed. Required and valid for AWS and Azure.
 	Region pulumi.StringPtrInput
-	// VPC ID.
+	// VPC ID. Required to enable copilot security group management.
 	VpcId pulumi.StringPtrInput
-	// Copilot zone. Valid for GCP.
+	// Zone where CoPilot is deployed. Required and valid for GCP.
 	Zone pulumi.StringPtrInput
 }
 
@@ -222,39 +264,39 @@ func (o AviatrixCopilotSecurityGroupManagementConfigOutput) ToAviatrixCopilotSec
 	return o
 }
 
-// Access account name.
+// Aviatrix access account name. Required to enable copilot security group management.
 func (o AviatrixCopilotSecurityGroupManagementConfigOutput) AccountName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixCopilotSecurityGroupManagementConfig) pulumi.StringPtrOutput { return v.AccountName }).(pulumi.StringPtrOutput)
 }
 
-// Cloud type.
+// Cloud type. The type of this attribute is Integer. Only support AWS, Azure and OCI. Required to enable copilot security group management.
 func (o AviatrixCopilotSecurityGroupManagementConfigOutput) CloudType() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *AviatrixCopilotSecurityGroupManagementConfig) pulumi.IntPtrOutput { return v.CloudType }).(pulumi.IntPtrOutput)
 }
 
-// Switch to enable copilot security group management.
+// Switch to enable copilot security group management. Valid values: true, false.
 func (o AviatrixCopilotSecurityGroupManagementConfigOutput) EnableCopilotSecurityGroupManagement() pulumi.BoolOutput {
 	return o.ApplyT(func(v *AviatrixCopilotSecurityGroupManagementConfig) pulumi.BoolOutput {
 		return v.EnableCopilotSecurityGroupManagement
 	}).(pulumi.BoolOutput)
 }
 
-// Copilot instance ID.
+// CoPilot instance ID. Required to enable copilot security group management.
 func (o AviatrixCopilotSecurityGroupManagementConfigOutput) InstanceId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixCopilotSecurityGroupManagementConfig) pulumi.StringPtrOutput { return v.InstanceId }).(pulumi.StringPtrOutput)
 }
 
-// Copilot region. Valid for AWS and Azure.
+// Region where CoPilot is deployed. Required and valid for AWS and Azure.
 func (o AviatrixCopilotSecurityGroupManagementConfigOutput) Region() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixCopilotSecurityGroupManagementConfig) pulumi.StringPtrOutput { return v.Region }).(pulumi.StringPtrOutput)
 }
 
-// VPC ID.
+// VPC ID. Required to enable copilot security group management.
 func (o AviatrixCopilotSecurityGroupManagementConfigOutput) VpcId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixCopilotSecurityGroupManagementConfig) pulumi.StringPtrOutput { return v.VpcId }).(pulumi.StringPtrOutput)
 }
 
-// Copilot zone. Valid for GCP.
+// Zone where CoPilot is deployed. Required and valid for GCP.
 func (o AviatrixCopilotSecurityGroupManagementConfigOutput) Zone() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixCopilotSecurityGroupManagementConfig) pulumi.StringPtrOutput { return v.Zone }).(pulumi.StringPtrOutput)
 }

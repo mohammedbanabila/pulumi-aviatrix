@@ -10,6 +10,33 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Use this data source to get the list of device WAN interfaces for use in other resources.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err = aviatrix.GetAviatrixDeviceInterfaces(ctx, &GetAviatrixDeviceInterfacesArgs{
+//				DeviceName: "test-device",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 func GetAviatrixDeviceInterfaces(ctx *pulumi.Context, args *GetAviatrixDeviceInterfacesArgs, opts ...pulumi.InvokeOption) (*GetAviatrixDeviceInterfacesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetAviatrixDeviceInterfacesResult
@@ -22,6 +49,7 @@ func GetAviatrixDeviceInterfaces(ctx *pulumi.Context, args *GetAviatrixDeviceInt
 
 // A collection of arguments for invoking getAviatrixDeviceInterfaces.
 type GetAviatrixDeviceInterfacesArgs struct {
+	// Device name.
 	DeviceName string `pulumi:"deviceName"`
 }
 
@@ -29,7 +57,8 @@ type GetAviatrixDeviceInterfacesArgs struct {
 type GetAviatrixDeviceInterfacesResult struct {
 	DeviceName string `pulumi:"deviceName"`
 	// The provider-assigned unique ID for this managed resource.
-	Id            string                                    `pulumi:"id"`
+	Id string `pulumi:"id"`
+	// List of WAN interfaces.
 	WanInterfaces []GetAviatrixDeviceInterfacesWanInterface `pulumi:"wanInterfaces"`
 }
 
@@ -48,6 +77,7 @@ func GetAviatrixDeviceInterfacesOutput(ctx *pulumi.Context, args GetAviatrixDevi
 
 // A collection of arguments for invoking getAviatrixDeviceInterfaces.
 type GetAviatrixDeviceInterfacesOutputArgs struct {
+	// Device name.
 	DeviceName pulumi.StringInput `pulumi:"deviceName"`
 }
 
@@ -79,6 +109,7 @@ func (o GetAviatrixDeviceInterfacesResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixDeviceInterfacesResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
+// List of WAN interfaces.
 func (o GetAviatrixDeviceInterfacesResultOutput) WanInterfaces() GetAviatrixDeviceInterfacesWanInterfaceArrayOutput {
 	return o.ApplyT(func(v GetAviatrixDeviceInterfacesResult) []GetAviatrixDeviceInterfacesWanInterface {
 		return v.WanInterfaces

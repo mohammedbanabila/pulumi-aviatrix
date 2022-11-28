@@ -18,8 +18,8 @@ class AviatrixTransitFirenetPolicyArgs:
                  transit_firenet_gateway_name: pulumi.Input[str]):
         """
         The set of arguments for constructing a AviatrixTransitFirenetPolicy resource.
-        :param pulumi.Input[str] inspected_resource_name: Name of the resource to be added to transit firenet policy.
-        :param pulumi.Input[str] transit_firenet_gateway_name: Name of the transit firenet gateway.
+        :param pulumi.Input[str] inspected_resource_name: The name of the resource which will be inspected.
+        :param pulumi.Input[str] transit_firenet_gateway_name: Name of the Transit FireNet-enabled transit gateway. Currently supports AWS and Azure.
         """
         pulumi.set(__self__, "inspected_resource_name", inspected_resource_name)
         pulumi.set(__self__, "transit_firenet_gateway_name", transit_firenet_gateway_name)
@@ -28,7 +28,7 @@ class AviatrixTransitFirenetPolicyArgs:
     @pulumi.getter(name="inspectedResourceName")
     def inspected_resource_name(self) -> pulumi.Input[str]:
         """
-        Name of the resource to be added to transit firenet policy.
+        The name of the resource which will be inspected.
         """
         return pulumi.get(self, "inspected_resource_name")
 
@@ -40,7 +40,7 @@ class AviatrixTransitFirenetPolicyArgs:
     @pulumi.getter(name="transitFirenetGatewayName")
     def transit_firenet_gateway_name(self) -> pulumi.Input[str]:
         """
-        Name of the transit firenet gateway.
+        Name of the Transit FireNet-enabled transit gateway. Currently supports AWS and Azure.
         """
         return pulumi.get(self, "transit_firenet_gateway_name")
 
@@ -56,8 +56,8 @@ class _AviatrixTransitFirenetPolicyState:
                  transit_firenet_gateway_name: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixTransitFirenetPolicy resources.
-        :param pulumi.Input[str] inspected_resource_name: Name of the resource to be added to transit firenet policy.
-        :param pulumi.Input[str] transit_firenet_gateway_name: Name of the transit firenet gateway.
+        :param pulumi.Input[str] inspected_resource_name: The name of the resource which will be inspected.
+        :param pulumi.Input[str] transit_firenet_gateway_name: Name of the Transit FireNet-enabled transit gateway. Currently supports AWS and Azure.
         """
         if inspected_resource_name is not None:
             pulumi.set(__self__, "inspected_resource_name", inspected_resource_name)
@@ -68,7 +68,7 @@ class _AviatrixTransitFirenetPolicyState:
     @pulumi.getter(name="inspectedResourceName")
     def inspected_resource_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the resource to be added to transit firenet policy.
+        The name of the resource which will be inspected.
         """
         return pulumi.get(self, "inspected_resource_name")
 
@@ -80,7 +80,7 @@ class _AviatrixTransitFirenetPolicyState:
     @pulumi.getter(name="transitFirenetGatewayName")
     def transit_firenet_gateway_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the transit firenet gateway.
+        Name of the Transit FireNet-enabled transit gateway. Currently supports AWS and Azure.
         """
         return pulumi.get(self, "transit_firenet_gateway_name")
 
@@ -98,11 +98,32 @@ class AviatrixTransitFirenetPolicy(pulumi.CustomResource):
                  transit_firenet_gateway_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixTransitFirenetPolicy resource with the given unique name, props, and options.
+        The **aviatrix_transit_firenet_policy** resource allows the creation and management of Aviatrix Transit FireNet policies that determine which resources should be inspected in the Transit FireNet solution.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Transit FireNet Policy
+        test_transit_firenet_policy = aviatrix.AviatrixTransitFirenetPolicy("testTransitFirenetPolicy",
+            inspected_resource_name="SPOKE:spokeGw1",
+            transit_firenet_gateway_name="transitGw1")
+        ```
+
+        ## Import
+
+        **transit_firenet_policy** can be imported using the `transit_firenet_gateway_name` and `inspected_resource_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixTransitFirenetPolicy:AviatrixTransitFirenetPolicy test transit_firenet_gateway_name~inspected_resource_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] inspected_resource_name: Name of the resource to be added to transit firenet policy.
-        :param pulumi.Input[str] transit_firenet_gateway_name: Name of the transit firenet gateway.
+        :param pulumi.Input[str] inspected_resource_name: The name of the resource which will be inspected.
+        :param pulumi.Input[str] transit_firenet_gateway_name: Name of the Transit FireNet-enabled transit gateway. Currently supports AWS and Azure.
         """
         ...
     @overload
@@ -111,7 +132,28 @@ class AviatrixTransitFirenetPolicy(pulumi.CustomResource):
                  args: AviatrixTransitFirenetPolicyArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixTransitFirenetPolicy resource with the given unique name, props, and options.
+        The **aviatrix_transit_firenet_policy** resource allows the creation and management of Aviatrix Transit FireNet policies that determine which resources should be inspected in the Transit FireNet solution.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Transit FireNet Policy
+        test_transit_firenet_policy = aviatrix.AviatrixTransitFirenetPolicy("testTransitFirenetPolicy",
+            inspected_resource_name="SPOKE:spokeGw1",
+            transit_firenet_gateway_name="transitGw1")
+        ```
+
+        ## Import
+
+        **transit_firenet_policy** can be imported using the `transit_firenet_gateway_name` and `inspected_resource_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixTransitFirenetPolicy:AviatrixTransitFirenetPolicy test transit_firenet_gateway_name~inspected_resource_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixTransitFirenetPolicyArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -163,8 +205,8 @@ class AviatrixTransitFirenetPolicy(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] inspected_resource_name: Name of the resource to be added to transit firenet policy.
-        :param pulumi.Input[str] transit_firenet_gateway_name: Name of the transit firenet gateway.
+        :param pulumi.Input[str] inspected_resource_name: The name of the resource which will be inspected.
+        :param pulumi.Input[str] transit_firenet_gateway_name: Name of the Transit FireNet-enabled transit gateway. Currently supports AWS and Azure.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -178,7 +220,7 @@ class AviatrixTransitFirenetPolicy(pulumi.CustomResource):
     @pulumi.getter(name="inspectedResourceName")
     def inspected_resource_name(self) -> pulumi.Output[str]:
         """
-        Name of the resource to be added to transit firenet policy.
+        The name of the resource which will be inspected.
         """
         return pulumi.get(self, "inspected_resource_name")
 
@@ -186,7 +228,7 @@ class AviatrixTransitFirenetPolicy(pulumi.CustomResource):
     @pulumi.getter(name="transitFirenetGatewayName")
     def transit_firenet_gateway_name(self) -> pulumi.Output[str]:
         """
-        Name of the transit firenet gateway.
+        Name of the Transit FireNet-enabled transit gateway. Currently supports AWS and Azure.
         """
         return pulumi.get(self, "transit_firenet_gateway_name")
 

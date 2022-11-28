@@ -11,11 +11,63 @@ namespace Pulumi.Aviatrix
 {
     public static class GetAviatrixFirenet
     {
+        /// <summary>
+        /// The **aviatrix_firenet** data source provides details about a specific FireNet created by the Aviatrix Controller.
+        /// 
+        /// This data source can prove useful when a module accepts a FireNet's detail as an input variable.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using Pulumi;
+        /// using Aviatrix = Pulumi.Aviatrix;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var foo = Aviatrix.GetAviatrixFirenet.Invoke(new()
+        ///     {
+        ///         VpcId = "vpc-abcdef",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
         public static Task<GetAviatrixFirenetResult> InvokeAsync(GetAviatrixFirenetArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAviatrixFirenetResult>("aviatrix:index/getAviatrixFirenet:getAviatrixFirenet", args ?? new GetAviatrixFirenetArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAviatrixFirenetResult>("aviatrix:index/getAviatrixFirenet:getAviatrixFirenet", args ?? new GetAviatrixFirenetArgs(), options.WithDefaults());
 
+        /// <summary>
+        /// The **aviatrix_firenet** data source provides details about a specific FireNet created by the Aviatrix Controller.
+        /// 
+        /// This data source can prove useful when a module accepts a FireNet's detail as an input variable.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using Pulumi;
+        /// using Aviatrix = Pulumi.Aviatrix;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var foo = Aviatrix.GetAviatrixFirenet.Invoke(new()
+        ///     {
+        ///         VpcId = "vpc-abcdef",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
         public static Output<GetAviatrixFirenetResult> Invoke(GetAviatrixFirenetInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAviatrixFirenetResult>("aviatrix:index/getAviatrixFirenet:getAviatrixFirenet", args ?? new GetAviatrixFirenetInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAviatrixFirenetResult>("aviatrix:index/getAviatrixFirenet:getAviatrixFirenet", args ?? new GetAviatrixFirenetInvokeArgs(), options.WithDefaults());
     }
 
 
@@ -23,12 +75,19 @@ namespace Pulumi.Aviatrix
     {
         [Input("firewallInstanceAssociations")]
         private List<Inputs.GetAviatrixFirenetFirewallInstanceAssociationArgs>? _firewallInstanceAssociations;
+
+        /// <summary>
+        /// List of firewall instances associated with fireNet.
+        /// </summary>
         public List<Inputs.GetAviatrixFirenetFirewallInstanceAssociationArgs> FirewallInstanceAssociations
         {
             get => _firewallInstanceAssociations ?? (_firewallInstanceAssociations = new List<Inputs.GetAviatrixFirenetFirewallInstanceAssociationArgs>());
             set => _firewallInstanceAssociations = value;
         }
 
+        /// <summary>
+        /// ID of the Security VPC.
+        /// </summary>
         [Input("vpcId", required: true)]
         public string VpcId { get; set; } = null!;
 
@@ -42,12 +101,19 @@ namespace Pulumi.Aviatrix
     {
         [Input("firewallInstanceAssociations")]
         private InputList<Inputs.GetAviatrixFirenetFirewallInstanceAssociationInputArgs>? _firewallInstanceAssociations;
+
+        /// <summary>
+        /// List of firewall instances associated with fireNet.
+        /// </summary>
         public InputList<Inputs.GetAviatrixFirenetFirewallInstanceAssociationInputArgs> FirewallInstanceAssociations
         {
             get => _firewallInstanceAssociations ?? (_firewallInstanceAssociations = new InputList<Inputs.GetAviatrixFirenetFirewallInstanceAssociationInputArgs>());
             set => _firewallInstanceAssociations = value;
         }
 
+        /// <summary>
+        /// ID of the Security VPC.
+        /// </summary>
         [Input("vpcId", required: true)]
         public Input<string> VpcId { get; set; } = null!;
 
@@ -61,17 +127,41 @@ namespace Pulumi.Aviatrix
     [OutputType]
     public sealed class GetAviatrixFirenetResult
     {
+        /// <summary>
+        /// Enable/Disable egress through firewall.
+        /// </summary>
         public readonly bool EgressEnabled;
+        /// <summary>
+        /// List of egress static CIDRs.
+        /// </summary>
         public readonly ImmutableArray<string> EgressStaticCidrs;
+        /// <summary>
+        /// List of firewall instances associated with fireNet.
+        /// </summary>
         public readonly ImmutableArray<Outputs.GetAviatrixFirenetFirewallInstanceAssociationResult> FirewallInstanceAssociations;
+        /// <summary>
+        /// (Optional) Hashing algorithm to load balance traffic across the firewall.
+        /// </summary>
         public readonly string HashingAlgorithm;
         /// <summary>
         /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// Enable/Disable traffic inspection.
+        /// </summary>
         public readonly bool InspectionEnabled;
+        /// <summary>
+        /// (Optional) Enable Keep Alive via Firewall LAN Interface.
+        /// </summary>
         public readonly bool KeepAliveViaLanInterfaceEnabled;
+        /// <summary>
+        /// Enable TGW segmentation for egress.
+        /// </summary>
         public readonly bool TgwSegmentationForEgressEnabled;
+        /// <summary>
+        /// ID of the Security VPC.
+        /// </summary>
         public readonly string VpcId;
 
         [OutputConstructor]

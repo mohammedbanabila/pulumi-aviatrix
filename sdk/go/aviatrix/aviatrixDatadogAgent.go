@@ -11,18 +11,60 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_datadog_agent** resource allows the enabling and disabling of datadog agent.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixDatadogAgent(ctx, "testDatadogAgent", &aviatrix.AviatrixDatadogAgentArgs{
+//				ApiKey: pulumi.String("your_api_key"),
+//				ExcludedGateways: pulumi.StringArray{
+//					pulumi.String("a"),
+//					pulumi.String("b"),
+//				},
+//				Site: pulumi.String("datadoghq.com"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **datadog_agent** can be imported using "datadog_agent", e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixDatadogAgent:AviatrixDatadogAgent test datadog_agent
+//
+// ```
 type AviatrixDatadogAgent struct {
 	pulumi.CustomResourceState
 
 	// API key.
 	ApiKey pulumi.StringOutput `pulumi:"apiKey"`
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways pulumi.StringArrayOutput `pulumi:"excludedGateways"`
-	// Only export metrics without exporting logs.
+	// Only export metrics without exporting logs. False by default.
 	MetricsOnly pulumi.BoolPtrOutput `pulumi:"metricsOnly"`
-	// Site preference.
+	// Site preference ("datadoghq.com" or" datadoghq.eu"). "datadoghq.com" by default.
 	Site pulumi.StringPtrOutput `pulumi:"site"`
-	// Enabled or not.
+	// The status of datadog agent.
 	Status pulumi.StringOutput `pulumi:"status"`
 }
 
@@ -36,6 +78,13 @@ func NewAviatrixDatadogAgent(ctx *pulumi.Context,
 	if args.ApiKey == nil {
 		return nil, errors.New("invalid value for required argument 'ApiKey'")
 	}
+	if args.ApiKey != nil {
+		args.ApiKey = pulumi.ToSecret(args.ApiKey).(pulumi.StringOutput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"apiKey",
+	})
+	opts = append(opts, secrets)
 	opts = pkgResourceDefaultOpts(opts)
 	var resource AviatrixDatadogAgent
 	err := ctx.RegisterResource("aviatrix:index/aviatrixDatadogAgent:AviatrixDatadogAgent", name, args, &resource, opts...)
@@ -61,26 +110,26 @@ func GetAviatrixDatadogAgent(ctx *pulumi.Context,
 type aviatrixDatadogAgentState struct {
 	// API key.
 	ApiKey *string `pulumi:"apiKey"`
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways []string `pulumi:"excludedGateways"`
-	// Only export metrics without exporting logs.
+	// Only export metrics without exporting logs. False by default.
 	MetricsOnly *bool `pulumi:"metricsOnly"`
-	// Site preference.
+	// Site preference ("datadoghq.com" or" datadoghq.eu"). "datadoghq.com" by default.
 	Site *string `pulumi:"site"`
-	// Enabled or not.
+	// The status of datadog agent.
 	Status *string `pulumi:"status"`
 }
 
 type AviatrixDatadogAgentState struct {
 	// API key.
 	ApiKey pulumi.StringPtrInput
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways pulumi.StringArrayInput
-	// Only export metrics without exporting logs.
+	// Only export metrics without exporting logs. False by default.
 	MetricsOnly pulumi.BoolPtrInput
-	// Site preference.
+	// Site preference ("datadoghq.com" or" datadoghq.eu"). "datadoghq.com" by default.
 	Site pulumi.StringPtrInput
-	// Enabled or not.
+	// The status of datadog agent.
 	Status pulumi.StringPtrInput
 }
 
@@ -91,11 +140,11 @@ func (AviatrixDatadogAgentState) ElementType() reflect.Type {
 type aviatrixDatadogAgentArgs struct {
 	// API key.
 	ApiKey string `pulumi:"apiKey"`
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways []string `pulumi:"excludedGateways"`
-	// Only export metrics without exporting logs.
+	// Only export metrics without exporting logs. False by default.
 	MetricsOnly *bool `pulumi:"metricsOnly"`
-	// Site preference.
+	// Site preference ("datadoghq.com" or" datadoghq.eu"). "datadoghq.com" by default.
 	Site *string `pulumi:"site"`
 }
 
@@ -103,11 +152,11 @@ type aviatrixDatadogAgentArgs struct {
 type AviatrixDatadogAgentArgs struct {
 	// API key.
 	ApiKey pulumi.StringInput
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways pulumi.StringArrayInput
-	// Only export metrics without exporting logs.
+	// Only export metrics without exporting logs. False by default.
 	MetricsOnly pulumi.BoolPtrInput
-	// Site preference.
+	// Site preference ("datadoghq.com" or" datadoghq.eu"). "datadoghq.com" by default.
 	Site pulumi.StringPtrInput
 }
 
@@ -203,22 +252,22 @@ func (o AviatrixDatadogAgentOutput) ApiKey() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixDatadogAgent) pulumi.StringOutput { return v.ApiKey }).(pulumi.StringOutput)
 }
 
-// List of excluded gateways.
+// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 func (o AviatrixDatadogAgentOutput) ExcludedGateways() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixDatadogAgent) pulumi.StringArrayOutput { return v.ExcludedGateways }).(pulumi.StringArrayOutput)
 }
 
-// Only export metrics without exporting logs.
+// Only export metrics without exporting logs. False by default.
 func (o AviatrixDatadogAgentOutput) MetricsOnly() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixDatadogAgent) pulumi.BoolPtrOutput { return v.MetricsOnly }).(pulumi.BoolPtrOutput)
 }
 
-// Site preference.
+// Site preference ("datadoghq.com" or" datadoghq.eu"). "datadoghq.com" by default.
 func (o AviatrixDatadogAgentOutput) Site() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixDatadogAgent) pulumi.StringPtrOutput { return v.Site }).(pulumi.StringPtrOutput)
 }
 
-// Enabled or not.
+// The status of datadog agent.
 func (o AviatrixDatadogAgentOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixDatadogAgent) pulumi.StringOutput { return v.Status }).(pulumi.StringOutput)
 }

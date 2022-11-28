@@ -4,6 +4,32 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_private_mode_multicloud_endpoint** resource allows management of a Private Mode multicloud endpoint. This resource is available as of provider version R2.23+.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Controller Private Mode config
+ * const test = new aviatrix.AviatrixPrivateModeMulticloudEndpoint("test", {
+ *     accountName: "devops",
+ *     controllerLbVpcId: "vpc-abcdefg",
+ *     region: "us-east-1",
+ *     vpcId: "vpc-abcdef",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **aviatrix_private_mode_multicloud_endpoint** can be imported using the `vpc_id`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixPrivateModeMulticloudEndpoint:AviatrixPrivateModeMulticloudEndpoint test vpc-1234567
+ * ```
+ */
 export class AviatrixPrivateModeMulticloudEndpoint extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixPrivateModeMulticloudEndpoint resource's state with the given name, ID, and optional extra
@@ -37,19 +63,19 @@ export class AviatrixPrivateModeMulticloudEndpoint extends pulumi.CustomResource
      */
     public readonly accountName!: pulumi.Output<string>;
     /**
-     * ID of the VPC with the Controller load balancer.
+     * ID of the VPC containing a Private Mode controller load balancer.
      */
     public readonly controllerLbVpcId!: pulumi.Output<string>;
     /**
-     * DNS entry of this endpoint.
+     * DNS entry of the endpoint.
      */
     public /*out*/ readonly dnsEntry!: pulumi.Output<string>;
     /**
-     * Name of the VPC region.
+     * Region of the VPC.
      */
     public readonly region!: pulumi.Output<string>;
     /**
-     * VPC ID.
+     * ID of the VPC to create the endpoint in.
      */
     public readonly vpcId!: pulumi.Output<string>;
 
@@ -105,19 +131,19 @@ export interface AviatrixPrivateModeMulticloudEndpointState {
      */
     accountName?: pulumi.Input<string>;
     /**
-     * ID of the VPC with the Controller load balancer.
+     * ID of the VPC containing a Private Mode controller load balancer.
      */
     controllerLbVpcId?: pulumi.Input<string>;
     /**
-     * DNS entry of this endpoint.
+     * DNS entry of the endpoint.
      */
     dnsEntry?: pulumi.Input<string>;
     /**
-     * Name of the VPC region.
+     * Region of the VPC.
      */
     region?: pulumi.Input<string>;
     /**
-     * VPC ID.
+     * ID of the VPC to create the endpoint in.
      */
     vpcId?: pulumi.Input<string>;
 }
@@ -131,15 +157,15 @@ export interface AviatrixPrivateModeMulticloudEndpointArgs {
      */
     accountName: pulumi.Input<string>;
     /**
-     * ID of the VPC with the Controller load balancer.
+     * ID of the VPC containing a Private Mode controller load balancer.
      */
     controllerLbVpcId: pulumi.Input<string>;
     /**
-     * Name of the VPC region.
+     * Region of the VPC.
      */
     region: pulumi.Input<string>;
     /**
-     * VPC ID.
+     * ID of the VPC to create the endpoint in.
      */
     vpcId: pulumi.Input<string>;
 }

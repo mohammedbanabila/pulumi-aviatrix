@@ -10,6 +10,35 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_account** data source provides details about a specific cloud account created by the Aviatrix Controller.
+//
+// This data source can prove useful when a module accepts an account's detail as an input variable.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err = aviatrix.LookupAviatrixAccount(ctx, &GetAviatrixAccountArgs{
+//				AccountName: "username",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 func LookupAviatrixAccount(ctx *pulumi.Context, args *LookupAviatrixAccountArgs, opts ...pulumi.InvokeOption) (*LookupAviatrixAccountResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)
 	var rv LookupAviatrixAccountResult
@@ -22,46 +51,81 @@ func LookupAviatrixAccount(ctx *pulumi.Context, args *LookupAviatrixAccountArgs,
 
 // A collection of arguments for invoking getAviatrixAccount.
 type LookupAviatrixAccountArgs struct {
+	// Account name. This can be used for logging in to CloudN console or UserConnect controller.
 	AccountName string `pulumi:"accountName"`
 }
 
 // A collection of values returned by getAviatrixAccount.
 type LookupAviatrixAccountResult struct {
-	AccountName              string `pulumi:"accountName"`
-	AlicloudAccountId        string `pulumi:"alicloudAccountId"`
-	ArmSubscriptionId        string `pulumi:"armSubscriptionId"`
-	AwsAccountNumber         string `pulumi:"awsAccountNumber"`
-	AwsCaCertPath            string `pulumi:"awsCaCertPath"`
-	AwsGatewayRoleApp        string `pulumi:"awsGatewayRoleApp"`
-	AwsGatewayRoleEc2        string `pulumi:"awsGatewayRoleEc2"`
-	AwsRoleArn               string `pulumi:"awsRoleArn"`
-	AwsRoleEc2               string `pulumi:"awsRoleEc2"`
-	AwschinaAccountNumber    string `pulumi:"awschinaAccountNumber"`
-	AwschinaIam              bool   `pulumi:"awschinaIam"`
-	AwschinaRoleApp          string `pulumi:"awschinaRoleApp"`
-	AwschinaRoleEc2          string `pulumi:"awschinaRoleEc2"`
-	AwsgovAccountNumber      string `pulumi:"awsgovAccountNumber"`
-	AwsgovIam                bool   `pulumi:"awsgovIam"`
-	AwsgovRoleApp            string `pulumi:"awsgovRoleApp"`
-	AwsgovRoleEc2            string `pulumi:"awsgovRoleEc2"`
-	AwssAccountNumber        string `pulumi:"awssAccountNumber"`
-	AwssCapAccountName       string `pulumi:"awssCapAccountName"`
-	AwssCapAgency            string `pulumi:"awssCapAgency"`
-	AwssCapCertKeyPath       string `pulumi:"awssCapCertKeyPath"`
-	AwssCapCertPath          string `pulumi:"awssCapCertPath"`
-	AwssCapRoleName          string `pulumi:"awssCapRoleName"`
-	AwssCapUrl               string `pulumi:"awssCapUrl"`
-	AwstsAccountNumber       string `pulumi:"awstsAccountNumber"`
-	AwstsCapAgency           string `pulumi:"awstsCapAgency"`
-	AwstsCapCertKeyPath      string `pulumi:"awstsCapCertKeyPath"`
-	AwstsCapCertPath         string `pulumi:"awstsCapCertPath"`
-	AwstsCapMission          string `pulumi:"awstsCapMission"`
-	AwstsCapRoleName         string `pulumi:"awstsCapRoleName"`
-	AwstsCapUrl              string `pulumi:"awstsCapUrl"`
+	AccountName string `pulumi:"accountName"`
+	// Alibaba Cloud Account ID.
+	AlicloudAccountId string `pulumi:"alicloudAccountId"`
+	// Azure ARM Subscription ID.
+	ArmSubscriptionId string `pulumi:"armSubscriptionId"`
+	// AWS Account number.
+	AwsAccountNumber string `pulumi:"awsAccountNumber"`
+	// AWS Top Secret Region or Secret Region Custom Certificate Authority file name on the controller. Available as of provider R2.19.5+.
+	AwsCaCertPath string `pulumi:"awsCaCertPath"`
+	// A separate AWS App role ARN to assign to gateways created by the controller. Available as of provider version R2.19+.
+	AwsGatewayRoleApp string `pulumi:"awsGatewayRoleApp"`
+	// A separate AWS EC2 role ARN to assign to gateways created by the controller. Available as of provider version R2.19+.
+	AwsGatewayRoleEc2 string `pulumi:"awsGatewayRoleEc2"`
+	// AWS App role ARN.
+	AwsRoleArn string `pulumi:"awsRoleArn"`
+	// AWS EC2 role ARN.
+	AwsRoleEc2 string `pulumi:"awsRoleEc2"`
+	// AWSChina Account number. Available as of provider version R2.19+.
+	AwschinaAccountNumber string `pulumi:"awschinaAccountNumber"`
+	// If enabled, `awschinaRoleApp` and `awschinaRoleEc2` will be set. Available as of provider version R2.19+.
+	AwschinaIam bool `pulumi:"awschinaIam"`
+	// AWSChina App role ARN. Available as of provider version R2.19+.
+	AwschinaRoleApp string `pulumi:"awschinaRoleApp"`
+	// AWSChina EC2 role ARN. Available as of provider version R2.19+.
+	AwschinaRoleEc2 string `pulumi:"awschinaRoleEc2"`
+	// AWSGov Account number.
+	AwsgovAccountNumber string `pulumi:"awsgovAccountNumber"`
+	// If enabled, `awsgovRoleApp` and `awschinaRoleEc2` will be set. Available as of provider version R2.19+.
+	AwsgovIam bool `pulumi:"awsgovIam"`
+	// AWSGov App role ARN. Available as of provider version R2.19+.
+	AwsgovRoleApp string `pulumi:"awsgovRoleApp"`
+	// AWSGov EC2 role ARN. Available as of provider version R2.19+.
+	AwsgovRoleEc2 string `pulumi:"awsgovRoleEc2"`
+	// AWS Secret Region Account Number. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+	AwssAccountNumber string `pulumi:"awssAccountNumber"`
+	// AWS Secret Region Account Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+	AwssCapAccountName string `pulumi:"awssCapAccountName"`
+	// AWS Secret Region CAP Agency. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+	AwssCapAgency string `pulumi:"awssCapAgency"`
+	// AWS Secret Region CAP Certificate Key file name on the controller. Available as of provider R2.19.5+.
+	AwssCapCertKeyPath string `pulumi:"awssCapCertKeyPath"`
+	// AWS Secret Region CAP Certificate file name on the controller. Available as of provider R2.19.5+.
+	AwssCapCertPath string `pulumi:"awssCapCertPath"`
+	// AWS Secret Region Role Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+	AwssCapRoleName string `pulumi:"awssCapRoleName"`
+	// AWS Secret Region CAP Url. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+	AwssCapUrl string `pulumi:"awssCapUrl"`
+	// AWS Top Secret Region Account Number. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+	AwstsAccountNumber string `pulumi:"awstsAccountNumber"`
+	// AWS Top Secret Region CAP Agency. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+	AwstsCapAgency string `pulumi:"awstsCapAgency"`
+	// AWS Top Secret Region CAP Certificate Key file name on the controller. Available as of provider R2.19.5+.
+	AwstsCapCertKeyPath string `pulumi:"awstsCapCertKeyPath"`
+	AwstsCapCertPath    string `pulumi:"awstsCapCertPath"`
+	// AWS Top Secret Region Mission. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+	AwstsCapMission string `pulumi:"awstsCapMission"`
+	// AWS Top Secret Region Role Name. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+	// `awstsCapCertPath` - AWS Top Secret Region CAP Certificate file name on the controller. Available as of provider R2.19.5+.
+	AwstsCapRoleName string `pulumi:"awstsCapRoleName"`
+	// AWS Top Secret Region CAP Url. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+	AwstsCapUrl string `pulumi:"awstsCapUrl"`
+	// AzureChina ARM Subscription ID. Available as of provider version R2.19+.
 	AzurechinaSubscriptionId string `pulumi:"azurechinaSubscriptionId"`
-	AzuregovSubscriptionId   string `pulumi:"azuregovSubscriptionId"`
-	CloudType                int    `pulumi:"cloudType"`
-	GcloudProjectId          string `pulumi:"gcloudProjectId"`
+	// AzureGov ARM Subscription ID.
+	AzuregovSubscriptionId string `pulumi:"azuregovSubscriptionId"`
+	// Type of cloud service provider.
+	CloudType int `pulumi:"cloudType"`
+	// GCloud Project ID.
+	GcloudProjectId string `pulumi:"gcloudProjectId"`
 	// The provider-assigned unique ID for this managed resource.
 	Id string `pulumi:"id"`
 }
@@ -81,6 +145,7 @@ func LookupAviatrixAccountOutput(ctx *pulumi.Context, args LookupAviatrixAccount
 
 // A collection of arguments for invoking getAviatrixAccount.
 type LookupAviatrixAccountOutputArgs struct {
+	// Account name. This can be used for logging in to CloudN console or UserConnect controller.
 	AccountName pulumi.StringInput `pulumi:"accountName"`
 }
 
@@ -107,106 +172,132 @@ func (o LookupAviatrixAccountResultOutput) AccountName() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.AccountName }).(pulumi.StringOutput)
 }
 
+// Alibaba Cloud Account ID.
 func (o LookupAviatrixAccountResultOutput) AlicloudAccountId() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.AlicloudAccountId }).(pulumi.StringOutput)
 }
 
+// Azure ARM Subscription ID.
 func (o LookupAviatrixAccountResultOutput) ArmSubscriptionId() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.ArmSubscriptionId }).(pulumi.StringOutput)
 }
 
+// AWS Account number.
 func (o LookupAviatrixAccountResultOutput) AwsAccountNumber() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.AwsAccountNumber }).(pulumi.StringOutput)
 }
 
+// AWS Top Secret Region or Secret Region Custom Certificate Authority file name on the controller. Available as of provider R2.19.5+.
 func (o LookupAviatrixAccountResultOutput) AwsCaCertPath() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.AwsCaCertPath }).(pulumi.StringOutput)
 }
 
+// A separate AWS App role ARN to assign to gateways created by the controller. Available as of provider version R2.19+.
 func (o LookupAviatrixAccountResultOutput) AwsGatewayRoleApp() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.AwsGatewayRoleApp }).(pulumi.StringOutput)
 }
 
+// A separate AWS EC2 role ARN to assign to gateways created by the controller. Available as of provider version R2.19+.
 func (o LookupAviatrixAccountResultOutput) AwsGatewayRoleEc2() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.AwsGatewayRoleEc2 }).(pulumi.StringOutput)
 }
 
+// AWS App role ARN.
 func (o LookupAviatrixAccountResultOutput) AwsRoleArn() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.AwsRoleArn }).(pulumi.StringOutput)
 }
 
+// AWS EC2 role ARN.
 func (o LookupAviatrixAccountResultOutput) AwsRoleEc2() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.AwsRoleEc2 }).(pulumi.StringOutput)
 }
 
+// AWSChina Account number. Available as of provider version R2.19+.
 func (o LookupAviatrixAccountResultOutput) AwschinaAccountNumber() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.AwschinaAccountNumber }).(pulumi.StringOutput)
 }
 
+// If enabled, `awschinaRoleApp` and `awschinaRoleEc2` will be set. Available as of provider version R2.19+.
 func (o LookupAviatrixAccountResultOutput) AwschinaIam() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) bool { return v.AwschinaIam }).(pulumi.BoolOutput)
 }
 
+// AWSChina App role ARN. Available as of provider version R2.19+.
 func (o LookupAviatrixAccountResultOutput) AwschinaRoleApp() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.AwschinaRoleApp }).(pulumi.StringOutput)
 }
 
+// AWSChina EC2 role ARN. Available as of provider version R2.19+.
 func (o LookupAviatrixAccountResultOutput) AwschinaRoleEc2() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.AwschinaRoleEc2 }).(pulumi.StringOutput)
 }
 
+// AWSGov Account number.
 func (o LookupAviatrixAccountResultOutput) AwsgovAccountNumber() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.AwsgovAccountNumber }).(pulumi.StringOutput)
 }
 
+// If enabled, `awsgovRoleApp` and `awschinaRoleEc2` will be set. Available as of provider version R2.19+.
 func (o LookupAviatrixAccountResultOutput) AwsgovIam() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) bool { return v.AwsgovIam }).(pulumi.BoolOutput)
 }
 
+// AWSGov App role ARN. Available as of provider version R2.19+.
 func (o LookupAviatrixAccountResultOutput) AwsgovRoleApp() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.AwsgovRoleApp }).(pulumi.StringOutput)
 }
 
+// AWSGov EC2 role ARN. Available as of provider version R2.19+.
 func (o LookupAviatrixAccountResultOutput) AwsgovRoleEc2() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.AwsgovRoleEc2 }).(pulumi.StringOutput)
 }
 
+// AWS Secret Region Account Number. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
 func (o LookupAviatrixAccountResultOutput) AwssAccountNumber() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.AwssAccountNumber }).(pulumi.StringOutput)
 }
 
+// AWS Secret Region Account Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
 func (o LookupAviatrixAccountResultOutput) AwssCapAccountName() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.AwssCapAccountName }).(pulumi.StringOutput)
 }
 
+// AWS Secret Region CAP Agency. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
 func (o LookupAviatrixAccountResultOutput) AwssCapAgency() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.AwssCapAgency }).(pulumi.StringOutput)
 }
 
+// AWS Secret Region CAP Certificate Key file name on the controller. Available as of provider R2.19.5+.
 func (o LookupAviatrixAccountResultOutput) AwssCapCertKeyPath() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.AwssCapCertKeyPath }).(pulumi.StringOutput)
 }
 
+// AWS Secret Region CAP Certificate file name on the controller. Available as of provider R2.19.5+.
 func (o LookupAviatrixAccountResultOutput) AwssCapCertPath() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.AwssCapCertPath }).(pulumi.StringOutput)
 }
 
+// AWS Secret Region Role Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
 func (o LookupAviatrixAccountResultOutput) AwssCapRoleName() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.AwssCapRoleName }).(pulumi.StringOutput)
 }
 
+// AWS Secret Region CAP Url. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
 func (o LookupAviatrixAccountResultOutput) AwssCapUrl() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.AwssCapUrl }).(pulumi.StringOutput)
 }
 
+// AWS Top Secret Region Account Number. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
 func (o LookupAviatrixAccountResultOutput) AwstsAccountNumber() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.AwstsAccountNumber }).(pulumi.StringOutput)
 }
 
+// AWS Top Secret Region CAP Agency. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
 func (o LookupAviatrixAccountResultOutput) AwstsCapAgency() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.AwstsCapAgency }).(pulumi.StringOutput)
 }
 
+// AWS Top Secret Region CAP Certificate Key file name on the controller. Available as of provider R2.19.5+.
 func (o LookupAviatrixAccountResultOutput) AwstsCapCertKeyPath() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.AwstsCapCertKeyPath }).(pulumi.StringOutput)
 }
@@ -215,30 +306,38 @@ func (o LookupAviatrixAccountResultOutput) AwstsCapCertPath() pulumi.StringOutpu
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.AwstsCapCertPath }).(pulumi.StringOutput)
 }
 
+// AWS Top Secret Region Mission. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
 func (o LookupAviatrixAccountResultOutput) AwstsCapMission() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.AwstsCapMission }).(pulumi.StringOutput)
 }
 
+// AWS Top Secret Region Role Name. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+// `awstsCapCertPath` - AWS Top Secret Region CAP Certificate file name on the controller. Available as of provider R2.19.5+.
 func (o LookupAviatrixAccountResultOutput) AwstsCapRoleName() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.AwstsCapRoleName }).(pulumi.StringOutput)
 }
 
+// AWS Top Secret Region CAP Url. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
 func (o LookupAviatrixAccountResultOutput) AwstsCapUrl() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.AwstsCapUrl }).(pulumi.StringOutput)
 }
 
+// AzureChina ARM Subscription ID. Available as of provider version R2.19+.
 func (o LookupAviatrixAccountResultOutput) AzurechinaSubscriptionId() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.AzurechinaSubscriptionId }).(pulumi.StringOutput)
 }
 
+// AzureGov ARM Subscription ID.
 func (o LookupAviatrixAccountResultOutput) AzuregovSubscriptionId() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.AzuregovSubscriptionId }).(pulumi.StringOutput)
 }
 
+// Type of cloud service provider.
 func (o LookupAviatrixAccountResultOutput) CloudType() pulumi.IntOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) int { return v.CloudType }).(pulumi.IntOutput)
 }
 
+// GCloud Project ID.
 func (o LookupAviatrixAccountResultOutput) GcloudProjectId() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixAccountResult) string { return v.GcloudProjectId }).(pulumi.StringOutput)
 }

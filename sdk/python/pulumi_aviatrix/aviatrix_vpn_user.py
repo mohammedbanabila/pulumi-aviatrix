@@ -24,13 +24,14 @@ class AviatrixVpnUserArgs:
                  vpc_id: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a AviatrixVpnUser resource.
-        :param pulumi.Input[str] user_name: VPN user name.
-        :param pulumi.Input[str] dns_name: FQDN of a DNS based VPN service such as GeoVPN or UDP load balancer.
-        :param pulumi.Input[str] gw_name: If ELB is enabled, this will be the name of the ELB, else it will be the name of the Aviatrix VPN gateway.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] profiles: List of profiles for user to attach to.
-        :param pulumi.Input[str] saml_endpoint: This is the name of the SAML endpoint to which the user will be associated.
-        :param pulumi.Input[str] user_email: VPN User's email.
-        :param pulumi.Input[str] vpc_id: VPC Id of Aviatrix VPN gateway.
+        :param pulumi.Input[str] user_name: VPN user name. Example: "user".
+        :param pulumi.Input[str] dns_name: FQDN of a DNS based VPN service such as GeoVPN or UDP load balancer. Example: "vpn.testuser.com".
+        :param pulumi.Input[str] gw_name: If ELB is enabled, this will be the name of the ELB, else it will be the name of the Aviatrix VPN gateway. Used together with `vpc_id`. Example: "gw1".
+        :param pulumi.Input[bool] manage_user_attachment: This parameter is a switch to determine whether or not to manage VPN user attachments to the VPN profile using this resource. If this is set to false, attachment must be managed using the **aviatrix_vpn_profile** resource. Valid values: true, false. Default value: false.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] profiles: List of VPN profiles for user to attach to. This should be set to null if `manage_user_attachment` is set to false.
+        :param pulumi.Input[str] saml_endpoint: This is the name of the SAML endpoint to which the user is to be associated. This is required if adding user to a SAML gateway/LB.
+        :param pulumi.Input[str] user_email: VPN user's email. Example: "abc@xyz.com".
+        :param pulumi.Input[str] vpc_id: VPC ID of Aviatrix VPN gateway. Used together with `gw_name`. Example: "vpc-abcd1234".
         """
         pulumi.set(__self__, "user_name", user_name)
         if dns_name is not None:
@@ -52,7 +53,7 @@ class AviatrixVpnUserArgs:
     @pulumi.getter(name="userName")
     def user_name(self) -> pulumi.Input[str]:
         """
-        VPN user name.
+        VPN user name. Example: "user".
         """
         return pulumi.get(self, "user_name")
 
@@ -64,7 +65,7 @@ class AviatrixVpnUserArgs:
     @pulumi.getter(name="dnsName")
     def dns_name(self) -> Optional[pulumi.Input[str]]:
         """
-        FQDN of a DNS based VPN service such as GeoVPN or UDP load balancer.
+        FQDN of a DNS based VPN service such as GeoVPN or UDP load balancer. Example: "vpn.testuser.com".
         """
         return pulumi.get(self, "dns_name")
 
@@ -76,7 +77,7 @@ class AviatrixVpnUserArgs:
     @pulumi.getter(name="gwName")
     def gw_name(self) -> Optional[pulumi.Input[str]]:
         """
-        If ELB is enabled, this will be the name of the ELB, else it will be the name of the Aviatrix VPN gateway.
+        If ELB is enabled, this will be the name of the ELB, else it will be the name of the Aviatrix VPN gateway. Used together with `vpc_id`. Example: "gw1".
         """
         return pulumi.get(self, "gw_name")
 
@@ -87,6 +88,9 @@ class AviatrixVpnUserArgs:
     @property
     @pulumi.getter(name="manageUserAttachment")
     def manage_user_attachment(self) -> Optional[pulumi.Input[bool]]:
+        """
+        This parameter is a switch to determine whether or not to manage VPN user attachments to the VPN profile using this resource. If this is set to false, attachment must be managed using the **aviatrix_vpn_profile** resource. Valid values: true, false. Default value: false.
+        """
         return pulumi.get(self, "manage_user_attachment")
 
     @manage_user_attachment.setter
@@ -97,7 +101,7 @@ class AviatrixVpnUserArgs:
     @pulumi.getter
     def profiles(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of profiles for user to attach to.
+        List of VPN profiles for user to attach to. This should be set to null if `manage_user_attachment` is set to false.
         """
         return pulumi.get(self, "profiles")
 
@@ -109,7 +113,7 @@ class AviatrixVpnUserArgs:
     @pulumi.getter(name="samlEndpoint")
     def saml_endpoint(self) -> Optional[pulumi.Input[str]]:
         """
-        This is the name of the SAML endpoint to which the user will be associated.
+        This is the name of the SAML endpoint to which the user is to be associated. This is required if adding user to a SAML gateway/LB.
         """
         return pulumi.get(self, "saml_endpoint")
 
@@ -121,7 +125,7 @@ class AviatrixVpnUserArgs:
     @pulumi.getter(name="userEmail")
     def user_email(self) -> Optional[pulumi.Input[str]]:
         """
-        VPN User's email.
+        VPN user's email. Example: "abc@xyz.com".
         """
         return pulumi.get(self, "user_email")
 
@@ -133,7 +137,7 @@ class AviatrixVpnUserArgs:
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
-        VPC Id of Aviatrix VPN gateway.
+        VPC ID of Aviatrix VPN gateway. Used together with `gw_name`. Example: "vpc-abcd1234".
         """
         return pulumi.get(self, "vpc_id")
 
@@ -155,13 +159,14 @@ class _AviatrixVpnUserState:
                  vpc_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixVpnUser resources.
-        :param pulumi.Input[str] dns_name: FQDN of a DNS based VPN service such as GeoVPN or UDP load balancer.
-        :param pulumi.Input[str] gw_name: If ELB is enabled, this will be the name of the ELB, else it will be the name of the Aviatrix VPN gateway.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] profiles: List of profiles for user to attach to.
-        :param pulumi.Input[str] saml_endpoint: This is the name of the SAML endpoint to which the user will be associated.
-        :param pulumi.Input[str] user_email: VPN User's email.
-        :param pulumi.Input[str] user_name: VPN user name.
-        :param pulumi.Input[str] vpc_id: VPC Id of Aviatrix VPN gateway.
+        :param pulumi.Input[str] dns_name: FQDN of a DNS based VPN service such as GeoVPN or UDP load balancer. Example: "vpn.testuser.com".
+        :param pulumi.Input[str] gw_name: If ELB is enabled, this will be the name of the ELB, else it will be the name of the Aviatrix VPN gateway. Used together with `vpc_id`. Example: "gw1".
+        :param pulumi.Input[bool] manage_user_attachment: This parameter is a switch to determine whether or not to manage VPN user attachments to the VPN profile using this resource. If this is set to false, attachment must be managed using the **aviatrix_vpn_profile** resource. Valid values: true, false. Default value: false.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] profiles: List of VPN profiles for user to attach to. This should be set to null if `manage_user_attachment` is set to false.
+        :param pulumi.Input[str] saml_endpoint: This is the name of the SAML endpoint to which the user is to be associated. This is required if adding user to a SAML gateway/LB.
+        :param pulumi.Input[str] user_email: VPN user's email. Example: "abc@xyz.com".
+        :param pulumi.Input[str] user_name: VPN user name. Example: "user".
+        :param pulumi.Input[str] vpc_id: VPC ID of Aviatrix VPN gateway. Used together with `gw_name`. Example: "vpc-abcd1234".
         """
         if dns_name is not None:
             pulumi.set(__self__, "dns_name", dns_name)
@@ -184,7 +189,7 @@ class _AviatrixVpnUserState:
     @pulumi.getter(name="dnsName")
     def dns_name(self) -> Optional[pulumi.Input[str]]:
         """
-        FQDN of a DNS based VPN service such as GeoVPN or UDP load balancer.
+        FQDN of a DNS based VPN service such as GeoVPN or UDP load balancer. Example: "vpn.testuser.com".
         """
         return pulumi.get(self, "dns_name")
 
@@ -196,7 +201,7 @@ class _AviatrixVpnUserState:
     @pulumi.getter(name="gwName")
     def gw_name(self) -> Optional[pulumi.Input[str]]:
         """
-        If ELB is enabled, this will be the name of the ELB, else it will be the name of the Aviatrix VPN gateway.
+        If ELB is enabled, this will be the name of the ELB, else it will be the name of the Aviatrix VPN gateway. Used together with `vpc_id`. Example: "gw1".
         """
         return pulumi.get(self, "gw_name")
 
@@ -207,6 +212,9 @@ class _AviatrixVpnUserState:
     @property
     @pulumi.getter(name="manageUserAttachment")
     def manage_user_attachment(self) -> Optional[pulumi.Input[bool]]:
+        """
+        This parameter is a switch to determine whether or not to manage VPN user attachments to the VPN profile using this resource. If this is set to false, attachment must be managed using the **aviatrix_vpn_profile** resource. Valid values: true, false. Default value: false.
+        """
         return pulumi.get(self, "manage_user_attachment")
 
     @manage_user_attachment.setter
@@ -217,7 +225,7 @@ class _AviatrixVpnUserState:
     @pulumi.getter
     def profiles(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of profiles for user to attach to.
+        List of VPN profiles for user to attach to. This should be set to null if `manage_user_attachment` is set to false.
         """
         return pulumi.get(self, "profiles")
 
@@ -229,7 +237,7 @@ class _AviatrixVpnUserState:
     @pulumi.getter(name="samlEndpoint")
     def saml_endpoint(self) -> Optional[pulumi.Input[str]]:
         """
-        This is the name of the SAML endpoint to which the user will be associated.
+        This is the name of the SAML endpoint to which the user is to be associated. This is required if adding user to a SAML gateway/LB.
         """
         return pulumi.get(self, "saml_endpoint")
 
@@ -241,7 +249,7 @@ class _AviatrixVpnUserState:
     @pulumi.getter(name="userEmail")
     def user_email(self) -> Optional[pulumi.Input[str]]:
         """
-        VPN User's email.
+        VPN user's email. Example: "abc@xyz.com".
         """
         return pulumi.get(self, "user_email")
 
@@ -253,7 +261,7 @@ class _AviatrixVpnUserState:
     @pulumi.getter(name="userName")
     def user_name(self) -> Optional[pulumi.Input[str]]:
         """
-        VPN user name.
+        VPN user name. Example: "user".
         """
         return pulumi.get(self, "user_name")
 
@@ -265,7 +273,7 @@ class _AviatrixVpnUserState:
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
-        VPC Id of Aviatrix VPN gateway.
+        VPC ID of Aviatrix VPN gateway. Used together with `gw_name`. Example: "vpc-abcd1234".
         """
         return pulumi.get(self, "vpc_id")
 
@@ -289,16 +297,64 @@ class AviatrixVpnUser(pulumi.CustomResource):
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixVpnUser resource with the given unique name, props, and options.
+        The **aviatrix_vpn_user** resource creates and manages Aviatrix VPN users.
+
+        > **NOTE:** As of R2.15, management of user/profile attachment can be set using `manage_user_attachment`. This argument must be to *true* in either **aviatrix_vpn_user** or **aviatrix_vpn_profile**. If attachment is managed in the **aviatrix_vpn_user** (set to *true*), it must be set to *false* in the **aviatrix_vpn_profile** resource and vice versa.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix VPN User
+        test_vpn_user = aviatrix.AviatrixVpnUser("testVpnUser",
+            gw_name="gw1",
+            user_email="user@aviatrix.com",
+            user_name="username1",
+            vpc_id="vpc-abcd1234")
+        ```
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix VPN User under Geo VPN
+        test_vpn_user = aviatrix.AviatrixVpnUser("testVpnUser",
+            dns_name="vpn.testuser.com",
+            user_email="user@aviatrix.com",
+            user_name="username1")
+        ```
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix VPN User on GCP
+        # See note below about vpc_id formatting for GCP
+        test_vpn_user = aviatrix.AviatrixVpnUser("testVpnUser",
+            gw_name="gw1",
+            user_email="user@aviatrix.com",
+            user_name="username1",
+            vpc_id=f"{aviatrix_vpc['test_vpc']['vpc_id']}~-~{aviatrix_account['test_account']['gcloud_project_id']}")
+        ```
+
+        ## Import
+
+        **vpn_user** can be imported using the `user_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixVpnUser:AviatrixVpnUser test user_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] dns_name: FQDN of a DNS based VPN service such as GeoVPN or UDP load balancer.
-        :param pulumi.Input[str] gw_name: If ELB is enabled, this will be the name of the ELB, else it will be the name of the Aviatrix VPN gateway.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] profiles: List of profiles for user to attach to.
-        :param pulumi.Input[str] saml_endpoint: This is the name of the SAML endpoint to which the user will be associated.
-        :param pulumi.Input[str] user_email: VPN User's email.
-        :param pulumi.Input[str] user_name: VPN user name.
-        :param pulumi.Input[str] vpc_id: VPC Id of Aviatrix VPN gateway.
+        :param pulumi.Input[str] dns_name: FQDN of a DNS based VPN service such as GeoVPN or UDP load balancer. Example: "vpn.testuser.com".
+        :param pulumi.Input[str] gw_name: If ELB is enabled, this will be the name of the ELB, else it will be the name of the Aviatrix VPN gateway. Used together with `vpc_id`. Example: "gw1".
+        :param pulumi.Input[bool] manage_user_attachment: This parameter is a switch to determine whether or not to manage VPN user attachments to the VPN profile using this resource. If this is set to false, attachment must be managed using the **aviatrix_vpn_profile** resource. Valid values: true, false. Default value: false.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] profiles: List of VPN profiles for user to attach to. This should be set to null if `manage_user_attachment` is set to false.
+        :param pulumi.Input[str] saml_endpoint: This is the name of the SAML endpoint to which the user is to be associated. This is required if adding user to a SAML gateway/LB.
+        :param pulumi.Input[str] user_email: VPN user's email. Example: "abc@xyz.com".
+        :param pulumi.Input[str] user_name: VPN user name. Example: "user".
+        :param pulumi.Input[str] vpc_id: VPC ID of Aviatrix VPN gateway. Used together with `gw_name`. Example: "vpc-abcd1234".
         """
         ...
     @overload
@@ -307,7 +363,54 @@ class AviatrixVpnUser(pulumi.CustomResource):
                  args: AviatrixVpnUserArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixVpnUser resource with the given unique name, props, and options.
+        The **aviatrix_vpn_user** resource creates and manages Aviatrix VPN users.
+
+        > **NOTE:** As of R2.15, management of user/profile attachment can be set using `manage_user_attachment`. This argument must be to *true* in either **aviatrix_vpn_user** or **aviatrix_vpn_profile**. If attachment is managed in the **aviatrix_vpn_user** (set to *true*), it must be set to *false* in the **aviatrix_vpn_profile** resource and vice versa.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix VPN User
+        test_vpn_user = aviatrix.AviatrixVpnUser("testVpnUser",
+            gw_name="gw1",
+            user_email="user@aviatrix.com",
+            user_name="username1",
+            vpc_id="vpc-abcd1234")
+        ```
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix VPN User under Geo VPN
+        test_vpn_user = aviatrix.AviatrixVpnUser("testVpnUser",
+            dns_name="vpn.testuser.com",
+            user_email="user@aviatrix.com",
+            user_name="username1")
+        ```
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix VPN User on GCP
+        # See note below about vpc_id formatting for GCP
+        test_vpn_user = aviatrix.AviatrixVpnUser("testVpnUser",
+            gw_name="gw1",
+            user_email="user@aviatrix.com",
+            user_name="username1",
+            vpc_id=f"{aviatrix_vpc['test_vpc']['vpc_id']}~-~{aviatrix_account['test_account']['gcloud_project_id']}")
+        ```
+
+        ## Import
+
+        **vpn_user** can be imported using the `user_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixVpnUser:AviatrixVpnUser test user_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixVpnUserArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -375,13 +478,14 @@ class AviatrixVpnUser(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] dns_name: FQDN of a DNS based VPN service such as GeoVPN or UDP load balancer.
-        :param pulumi.Input[str] gw_name: If ELB is enabled, this will be the name of the ELB, else it will be the name of the Aviatrix VPN gateway.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] profiles: List of profiles for user to attach to.
-        :param pulumi.Input[str] saml_endpoint: This is the name of the SAML endpoint to which the user will be associated.
-        :param pulumi.Input[str] user_email: VPN User's email.
-        :param pulumi.Input[str] user_name: VPN user name.
-        :param pulumi.Input[str] vpc_id: VPC Id of Aviatrix VPN gateway.
+        :param pulumi.Input[str] dns_name: FQDN of a DNS based VPN service such as GeoVPN or UDP load balancer. Example: "vpn.testuser.com".
+        :param pulumi.Input[str] gw_name: If ELB is enabled, this will be the name of the ELB, else it will be the name of the Aviatrix VPN gateway. Used together with `vpc_id`. Example: "gw1".
+        :param pulumi.Input[bool] manage_user_attachment: This parameter is a switch to determine whether or not to manage VPN user attachments to the VPN profile using this resource. If this is set to false, attachment must be managed using the **aviatrix_vpn_profile** resource. Valid values: true, false. Default value: false.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] profiles: List of VPN profiles for user to attach to. This should be set to null if `manage_user_attachment` is set to false.
+        :param pulumi.Input[str] saml_endpoint: This is the name of the SAML endpoint to which the user is to be associated. This is required if adding user to a SAML gateway/LB.
+        :param pulumi.Input[str] user_email: VPN user's email. Example: "abc@xyz.com".
+        :param pulumi.Input[str] user_name: VPN user name. Example: "user".
+        :param pulumi.Input[str] vpc_id: VPC ID of Aviatrix VPN gateway. Used together with `gw_name`. Example: "vpc-abcd1234".
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -401,7 +505,7 @@ class AviatrixVpnUser(pulumi.CustomResource):
     @pulumi.getter(name="dnsName")
     def dns_name(self) -> pulumi.Output[Optional[str]]:
         """
-        FQDN of a DNS based VPN service such as GeoVPN or UDP load balancer.
+        FQDN of a DNS based VPN service such as GeoVPN or UDP load balancer. Example: "vpn.testuser.com".
         """
         return pulumi.get(self, "dns_name")
 
@@ -409,20 +513,23 @@ class AviatrixVpnUser(pulumi.CustomResource):
     @pulumi.getter(name="gwName")
     def gw_name(self) -> pulumi.Output[Optional[str]]:
         """
-        If ELB is enabled, this will be the name of the ELB, else it will be the name of the Aviatrix VPN gateway.
+        If ELB is enabled, this will be the name of the ELB, else it will be the name of the Aviatrix VPN gateway. Used together with `vpc_id`. Example: "gw1".
         """
         return pulumi.get(self, "gw_name")
 
     @property
     @pulumi.getter(name="manageUserAttachment")
     def manage_user_attachment(self) -> pulumi.Output[Optional[bool]]:
+        """
+        This parameter is a switch to determine whether or not to manage VPN user attachments to the VPN profile using this resource. If this is set to false, attachment must be managed using the **aviatrix_vpn_profile** resource. Valid values: true, false. Default value: false.
+        """
         return pulumi.get(self, "manage_user_attachment")
 
     @property
     @pulumi.getter
     def profiles(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        List of profiles for user to attach to.
+        List of VPN profiles for user to attach to. This should be set to null if `manage_user_attachment` is set to false.
         """
         return pulumi.get(self, "profiles")
 
@@ -430,7 +537,7 @@ class AviatrixVpnUser(pulumi.CustomResource):
     @pulumi.getter(name="samlEndpoint")
     def saml_endpoint(self) -> pulumi.Output[Optional[str]]:
         """
-        This is the name of the SAML endpoint to which the user will be associated.
+        This is the name of the SAML endpoint to which the user is to be associated. This is required if adding user to a SAML gateway/LB.
         """
         return pulumi.get(self, "saml_endpoint")
 
@@ -438,7 +545,7 @@ class AviatrixVpnUser(pulumi.CustomResource):
     @pulumi.getter(name="userEmail")
     def user_email(self) -> pulumi.Output[Optional[str]]:
         """
-        VPN User's email.
+        VPN user's email. Example: "abc@xyz.com".
         """
         return pulumi.get(self, "user_email")
 
@@ -446,7 +553,7 @@ class AviatrixVpnUser(pulumi.CustomResource):
     @pulumi.getter(name="userName")
     def user_name(self) -> pulumi.Output[str]:
         """
-        VPN user name.
+        VPN user name. Example: "user".
         """
         return pulumi.get(self, "user_name")
 
@@ -454,7 +561,7 @@ class AviatrixVpnUser(pulumi.CustomResource):
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> pulumi.Output[Optional[str]]:
         """
-        VPC Id of Aviatrix VPN gateway.
+        VPC ID of Aviatrix VPN gateway. Used together with `gw_name`. Example: "vpc-abcd1234".
         """
         return pulumi.get(self, "vpc_id")
 

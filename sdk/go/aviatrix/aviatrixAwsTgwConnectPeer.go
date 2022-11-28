@@ -11,18 +11,65 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_aws_tgw_connect_peer** resource allows the creation and management of AWS TGW Connect peers. This
+// resource is available as of provider version R2.18.1+.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixAwsTgwConnectPeer(ctx, "test", &aviatrix.AviatrixAwsTgwConnectPeerArgs{
+//				TgwName:             pulumi.Any(aviatrix_aws_tgw.Test_aws_tgw.Tgw_name),
+//				ConnectionName:      pulumi.Any(aviatrix_aws_tgw_connect.Test_aws_tgw_connect.Connection_name),
+//				ConnectPeerName:     pulumi.String("connect-peer-test"),
+//				ConnectAttachmentId: pulumi.Any(aviatrix_aws_tgw_connect.Test_aws_tgw_connect.Connect_attachment_id),
+//				PeerAsNumber:        pulumi.String("65001"),
+//				PeerGreAddress:      pulumi.String("172.31.1.11"),
+//				BgpInsideCidrs: pulumi.StringArray{
+//					pulumi.String("169.254.6.0/29"),
+//				},
+//				TgwGreAddress: pulumi.String("10.0.0.32"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **aws_tgw_connect_peer** can be imported using the `tgw_name`, `connection_name` and `connect_peer_name`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixAwsTgwConnectPeer:AviatrixAwsTgwConnectPeer test tgw_name~~connection_name~~connect_peer_name
+//
+// ```
 type AviatrixAwsTgwConnectPeer struct {
 	pulumi.CustomResourceState
 
-	// Set of BGP Inside CIDR Blocks.
+	// Set of BGP Inside CIDR Block(s).
 	BgpInsideCidrs pulumi.StringArrayOutput `pulumi:"bgpInsideCidrs"`
 	// Connect Attachment ID.
 	ConnectAttachmentId pulumi.StringOutput `pulumi:"connectAttachmentId"`
 	// Connect Peer ID.
 	ConnectPeerId pulumi.StringOutput `pulumi:"connectPeerId"`
-	// Connect Peer Name.
+	// TGW Connect peer name.
 	ConnectPeerName pulumi.StringOutput `pulumi:"connectPeerName"`
-	// AWS TGW Connect connection name.
+	// TGW Connect connection name.
 	ConnectionName pulumi.StringOutput `pulumi:"connectionName"`
 	// Peer AS Number.
 	PeerAsNumber pulumi.StringOutput `pulumi:"peerAsNumber"`
@@ -30,7 +77,7 @@ type AviatrixAwsTgwConnectPeer struct {
 	PeerGreAddress pulumi.StringOutput `pulumi:"peerGreAddress"`
 	// AWS TGW GRE IP Address.
 	TgwGreAddress pulumi.StringPtrOutput `pulumi:"tgwGreAddress"`
-	// AWS TGW Name.
+	// AWS TGW name.
 	TgwName pulumi.StringOutput `pulumi:"tgwName"`
 }
 
@@ -85,15 +132,15 @@ func GetAviatrixAwsTgwConnectPeer(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixAwsTgwConnectPeer resources.
 type aviatrixAwsTgwConnectPeerState struct {
-	// Set of BGP Inside CIDR Blocks.
+	// Set of BGP Inside CIDR Block(s).
 	BgpInsideCidrs []string `pulumi:"bgpInsideCidrs"`
 	// Connect Attachment ID.
 	ConnectAttachmentId *string `pulumi:"connectAttachmentId"`
 	// Connect Peer ID.
 	ConnectPeerId *string `pulumi:"connectPeerId"`
-	// Connect Peer Name.
+	// TGW Connect peer name.
 	ConnectPeerName *string `pulumi:"connectPeerName"`
-	// AWS TGW Connect connection name.
+	// TGW Connect connection name.
 	ConnectionName *string `pulumi:"connectionName"`
 	// Peer AS Number.
 	PeerAsNumber *string `pulumi:"peerAsNumber"`
@@ -101,20 +148,20 @@ type aviatrixAwsTgwConnectPeerState struct {
 	PeerGreAddress *string `pulumi:"peerGreAddress"`
 	// AWS TGW GRE IP Address.
 	TgwGreAddress *string `pulumi:"tgwGreAddress"`
-	// AWS TGW Name.
+	// AWS TGW name.
 	TgwName *string `pulumi:"tgwName"`
 }
 
 type AviatrixAwsTgwConnectPeerState struct {
-	// Set of BGP Inside CIDR Blocks.
+	// Set of BGP Inside CIDR Block(s).
 	BgpInsideCidrs pulumi.StringArrayInput
 	// Connect Attachment ID.
 	ConnectAttachmentId pulumi.StringPtrInput
 	// Connect Peer ID.
 	ConnectPeerId pulumi.StringPtrInput
-	// Connect Peer Name.
+	// TGW Connect peer name.
 	ConnectPeerName pulumi.StringPtrInput
-	// AWS TGW Connect connection name.
+	// TGW Connect connection name.
 	ConnectionName pulumi.StringPtrInput
 	// Peer AS Number.
 	PeerAsNumber pulumi.StringPtrInput
@@ -122,7 +169,7 @@ type AviatrixAwsTgwConnectPeerState struct {
 	PeerGreAddress pulumi.StringPtrInput
 	// AWS TGW GRE IP Address.
 	TgwGreAddress pulumi.StringPtrInput
-	// AWS TGW Name.
+	// AWS TGW name.
 	TgwName pulumi.StringPtrInput
 }
 
@@ -131,13 +178,13 @@ func (AviatrixAwsTgwConnectPeerState) ElementType() reflect.Type {
 }
 
 type aviatrixAwsTgwConnectPeerArgs struct {
-	// Set of BGP Inside CIDR Blocks.
+	// Set of BGP Inside CIDR Block(s).
 	BgpInsideCidrs []string `pulumi:"bgpInsideCidrs"`
 	// Connect Attachment ID.
 	ConnectAttachmentId string `pulumi:"connectAttachmentId"`
-	// Connect Peer Name.
+	// TGW Connect peer name.
 	ConnectPeerName string `pulumi:"connectPeerName"`
-	// AWS TGW Connect connection name.
+	// TGW Connect connection name.
 	ConnectionName string `pulumi:"connectionName"`
 	// Peer AS Number.
 	PeerAsNumber string `pulumi:"peerAsNumber"`
@@ -145,19 +192,19 @@ type aviatrixAwsTgwConnectPeerArgs struct {
 	PeerGreAddress string `pulumi:"peerGreAddress"`
 	// AWS TGW GRE IP Address.
 	TgwGreAddress *string `pulumi:"tgwGreAddress"`
-	// AWS TGW Name.
+	// AWS TGW name.
 	TgwName string `pulumi:"tgwName"`
 }
 
 // The set of arguments for constructing a AviatrixAwsTgwConnectPeer resource.
 type AviatrixAwsTgwConnectPeerArgs struct {
-	// Set of BGP Inside CIDR Blocks.
+	// Set of BGP Inside CIDR Block(s).
 	BgpInsideCidrs pulumi.StringArrayInput
 	// Connect Attachment ID.
 	ConnectAttachmentId pulumi.StringInput
-	// Connect Peer Name.
+	// TGW Connect peer name.
 	ConnectPeerName pulumi.StringInput
-	// AWS TGW Connect connection name.
+	// TGW Connect connection name.
 	ConnectionName pulumi.StringInput
 	// Peer AS Number.
 	PeerAsNumber pulumi.StringInput
@@ -165,7 +212,7 @@ type AviatrixAwsTgwConnectPeerArgs struct {
 	PeerGreAddress pulumi.StringInput
 	// AWS TGW GRE IP Address.
 	TgwGreAddress pulumi.StringPtrInput
-	// AWS TGW Name.
+	// AWS TGW name.
 	TgwName pulumi.StringInput
 }
 
@@ -256,7 +303,7 @@ func (o AviatrixAwsTgwConnectPeerOutput) ToAviatrixAwsTgwConnectPeerOutputWithCo
 	return o
 }
 
-// Set of BGP Inside CIDR Blocks.
+// Set of BGP Inside CIDR Block(s).
 func (o AviatrixAwsTgwConnectPeerOutput) BgpInsideCidrs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwConnectPeer) pulumi.StringArrayOutput { return v.BgpInsideCidrs }).(pulumi.StringArrayOutput)
 }
@@ -271,12 +318,12 @@ func (o AviatrixAwsTgwConnectPeerOutput) ConnectPeerId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwConnectPeer) pulumi.StringOutput { return v.ConnectPeerId }).(pulumi.StringOutput)
 }
 
-// Connect Peer Name.
+// TGW Connect peer name.
 func (o AviatrixAwsTgwConnectPeerOutput) ConnectPeerName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwConnectPeer) pulumi.StringOutput { return v.ConnectPeerName }).(pulumi.StringOutput)
 }
 
-// AWS TGW Connect connection name.
+// TGW Connect connection name.
 func (o AviatrixAwsTgwConnectPeerOutput) ConnectionName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwConnectPeer) pulumi.StringOutput { return v.ConnectionName }).(pulumi.StringOutput)
 }
@@ -296,7 +343,7 @@ func (o AviatrixAwsTgwConnectPeerOutput) TgwGreAddress() pulumi.StringPtrOutput 
 	return o.ApplyT(func(v *AviatrixAwsTgwConnectPeer) pulumi.StringPtrOutput { return v.TgwGreAddress }).(pulumi.StringPtrOutput)
 }
 
-// AWS TGW Name.
+// AWS TGW name.
 func (o AviatrixAwsTgwConnectPeerOutput) TgwName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwConnectPeer) pulumi.StringOutput { return v.TgwName }).(pulumi.StringOutput)
 }

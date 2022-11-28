@@ -9,11 +9,40 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_controller_gateway_keepalive_config** resource allows management of an Aviatrix Controller's gateway keepalive template configuration. This resource is available as of provider version R2.19.2+.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Controller Gateway Keepalive config
+    ///     var testGatewayKeepalive = new Aviatrix.AviatrixControllerGatewayKeepaliveConfig("testGatewayKeepalive", new()
+    ///     {
+    ///         KeepaliveSpeed = "medium",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **aviatrix_controller_gateway_keepalive_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixControllerGatewayKeepaliveConfig:AviatrixControllerGatewayKeepaliveConfig test_gateway_keepalive 10-11-12-13
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixControllerGatewayKeepaliveConfig:AviatrixControllerGatewayKeepaliveConfig")]
     public partial class AviatrixControllerGatewayKeepaliveConfig : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Gateway keepalive speed.
+        /// The gateway keepalive template name. Must be one of "slow", "medium" or "fast". Visit [here](https://docs.aviatrix.com/HowTos/gateway.html#gateway-keepalives) for the complete documentation about the gateway keepalive configuration.
         /// </summary>
         [Output("keepaliveSpeed")]
         public Output<string> KeepaliveSpeed { get; private set; } = null!;
@@ -66,7 +95,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixControllerGatewayKeepaliveConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Gateway keepalive speed.
+        /// The gateway keepalive template name. Must be one of "slow", "medium" or "fast". Visit [here](https://docs.aviatrix.com/HowTos/gateway.html#gateway-keepalives) for the complete documentation about the gateway keepalive configuration.
         /// </summary>
         [Input("keepaliveSpeed", required: true)]
         public Input<string> KeepaliveSpeed { get; set; } = null!;
@@ -80,7 +109,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixControllerGatewayKeepaliveConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Gateway keepalive speed.
+        /// The gateway keepalive template name. Must be one of "slow", "medium" or "fast". Visit [here](https://docs.aviatrix.com/HowTos/gateway.html#gateway-keepalives) for the complete documentation about the gateway keepalive configuration.
         /// </summary>
         [Input("keepaliveSpeed")]
         public Input<string>? KeepaliveSpeed { get; set; }

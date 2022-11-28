@@ -11,32 +11,112 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_remote_syslog** resource allows the enabling and disabling of remote syslog.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixRemoteSyslog(ctx, "testRemoteSyslog", &aviatrix.AviatrixRemoteSyslogArgs{
+//				Index:    pulumi.Int(0),
+//				Port:     pulumi.Int(10),
+//				Protocol: pulumi.String("TCP"),
+//				Server:   pulumi.String("1.2.3.4"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"io/ioutil"
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func readFileOrPanic(path string) pulumi.StringPtrInput {
+//		data, err := ioutil.ReadFile(path)
+//		if err != nil {
+//			panic(err.Error())
+//		}
+//		return pulumi.String(string(data))
+//	}
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixRemoteSyslog(ctx, "testRemoteSyslog", &aviatrix.AviatrixRemoteSyslogArgs{
+//				Index:                 pulumi.Int(0),
+//				Server:                pulumi.String("1.2.3.4"),
+//				Port:                  pulumi.Int(10),
+//				Protocol:              pulumi.String("TCP"),
+//				CaCertificateFile:     readFileOrPanic("/path/to/ca.pem"),
+//				PublicCertificateFile: readFileOrPanic("/path/to/server.pem"),
+//				PrivateKeyFile:        readFileOrPanic("/path/to/client.pem"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **remote_syslog** can be imported using "remote_syslog_" + `index`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixRemoteSyslog:AviatrixRemoteSyslog test remote_syslog_0
+//
+// ```
 type AviatrixRemoteSyslog struct {
 	pulumi.CustomResourceState
 
-	// CA certificate file.
+	// The Certificate Authority (CA) certificate. Use the `file` function to read from a file.
 	CaCertificateFile pulumi.StringPtrOutput `pulumi:"caCertificateFile"`
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways pulumi.StringArrayOutput `pulumi:"excludedGateways"`
-	// A total of 10 profiles from index 0 to 9 are supported for remote syslog, while index 9 is reserved for CoPilot.
+	// Profile index. An index from 0 to 9 is supported. 0 by default.
 	Index pulumi.IntPtrOutput `pulumi:"index"`
 	// Profile name.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// True if not protected by TLS.
+	// This attribute is true if the remote syslog is not protected by TLS.
 	Notls pulumi.BoolOutput `pulumi:"notls"`
-	// Listening port of the remote syslog server.
+	// Port number.
 	Port pulumi.IntOutput `pulumi:"port"`
-	// Private key of the controller that pairs with the public certificate.
+	// The private key of the controller that pairs with the public certificate. Use the `file` function to read from a file.
 	PrivateKeyFile pulumi.StringPtrOutput `pulumi:"privateKeyFile"`
-	// TCP or UDP (TCP by default).
+	// TCP or UDP. TCP by default.
 	Protocol pulumi.StringPtrOutput `pulumi:"protocol"`
-	// Public certificate of the controller signed by the same CA.
+	// The public certificate of the controller signed by the same CA. Use the `file` function to read from a file.
 	PublicCertificateFile pulumi.StringPtrOutput `pulumi:"publicCertificateFile"`
-	// FQDN or IP address of the remote syslog server.
+	// Server IP.
 	Server pulumi.StringOutput `pulumi:"server"`
-	// Enabled or not.
+	// The status of remote syslog.
 	Status pulumi.StringOutput `pulumi:"status"`
-	// Useful when forwarding to 3rd party servers like Datadog or Sumo
+	// Optional custom template.
 	Template pulumi.StringPtrOutput `pulumi:"template"`
 }
 
@@ -76,56 +156,56 @@ func GetAviatrixRemoteSyslog(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixRemoteSyslog resources.
 type aviatrixRemoteSyslogState struct {
-	// CA certificate file.
+	// The Certificate Authority (CA) certificate. Use the `file` function to read from a file.
 	CaCertificateFile *string `pulumi:"caCertificateFile"`
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways []string `pulumi:"excludedGateways"`
-	// A total of 10 profiles from index 0 to 9 are supported for remote syslog, while index 9 is reserved for CoPilot.
+	// Profile index. An index from 0 to 9 is supported. 0 by default.
 	Index *int `pulumi:"index"`
 	// Profile name.
 	Name *string `pulumi:"name"`
-	// True if not protected by TLS.
+	// This attribute is true if the remote syslog is not protected by TLS.
 	Notls *bool `pulumi:"notls"`
-	// Listening port of the remote syslog server.
+	// Port number.
 	Port *int `pulumi:"port"`
-	// Private key of the controller that pairs with the public certificate.
+	// The private key of the controller that pairs with the public certificate. Use the `file` function to read from a file.
 	PrivateKeyFile *string `pulumi:"privateKeyFile"`
-	// TCP or UDP (TCP by default).
+	// TCP or UDP. TCP by default.
 	Protocol *string `pulumi:"protocol"`
-	// Public certificate of the controller signed by the same CA.
+	// The public certificate of the controller signed by the same CA. Use the `file` function to read from a file.
 	PublicCertificateFile *string `pulumi:"publicCertificateFile"`
-	// FQDN or IP address of the remote syslog server.
+	// Server IP.
 	Server *string `pulumi:"server"`
-	// Enabled or not.
+	// The status of remote syslog.
 	Status *string `pulumi:"status"`
-	// Useful when forwarding to 3rd party servers like Datadog or Sumo
+	// Optional custom template.
 	Template *string `pulumi:"template"`
 }
 
 type AviatrixRemoteSyslogState struct {
-	// CA certificate file.
+	// The Certificate Authority (CA) certificate. Use the `file` function to read from a file.
 	CaCertificateFile pulumi.StringPtrInput
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways pulumi.StringArrayInput
-	// A total of 10 profiles from index 0 to 9 are supported for remote syslog, while index 9 is reserved for CoPilot.
+	// Profile index. An index from 0 to 9 is supported. 0 by default.
 	Index pulumi.IntPtrInput
 	// Profile name.
 	Name pulumi.StringPtrInput
-	// True if not protected by TLS.
+	// This attribute is true if the remote syslog is not protected by TLS.
 	Notls pulumi.BoolPtrInput
-	// Listening port of the remote syslog server.
+	// Port number.
 	Port pulumi.IntPtrInput
-	// Private key of the controller that pairs with the public certificate.
+	// The private key of the controller that pairs with the public certificate. Use the `file` function to read from a file.
 	PrivateKeyFile pulumi.StringPtrInput
-	// TCP or UDP (TCP by default).
+	// TCP or UDP. TCP by default.
 	Protocol pulumi.StringPtrInput
-	// Public certificate of the controller signed by the same CA.
+	// The public certificate of the controller signed by the same CA. Use the `file` function to read from a file.
 	PublicCertificateFile pulumi.StringPtrInput
-	// FQDN or IP address of the remote syslog server.
+	// Server IP.
 	Server pulumi.StringPtrInput
-	// Enabled or not.
+	// The status of remote syslog.
 	Status pulumi.StringPtrInput
-	// Useful when forwarding to 3rd party servers like Datadog or Sumo
+	// Optional custom template.
 	Template pulumi.StringPtrInput
 }
 
@@ -134,49 +214,49 @@ func (AviatrixRemoteSyslogState) ElementType() reflect.Type {
 }
 
 type aviatrixRemoteSyslogArgs struct {
-	// CA certificate file.
+	// The Certificate Authority (CA) certificate. Use the `file` function to read from a file.
 	CaCertificateFile *string `pulumi:"caCertificateFile"`
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways []string `pulumi:"excludedGateways"`
-	// A total of 10 profiles from index 0 to 9 are supported for remote syslog, while index 9 is reserved for CoPilot.
+	// Profile index. An index from 0 to 9 is supported. 0 by default.
 	Index *int `pulumi:"index"`
 	// Profile name.
 	Name *string `pulumi:"name"`
-	// Listening port of the remote syslog server.
+	// Port number.
 	Port int `pulumi:"port"`
-	// Private key of the controller that pairs with the public certificate.
+	// The private key of the controller that pairs with the public certificate. Use the `file` function to read from a file.
 	PrivateKeyFile *string `pulumi:"privateKeyFile"`
-	// TCP or UDP (TCP by default).
+	// TCP or UDP. TCP by default.
 	Protocol *string `pulumi:"protocol"`
-	// Public certificate of the controller signed by the same CA.
+	// The public certificate of the controller signed by the same CA. Use the `file` function to read from a file.
 	PublicCertificateFile *string `pulumi:"publicCertificateFile"`
-	// FQDN or IP address of the remote syslog server.
+	// Server IP.
 	Server string `pulumi:"server"`
-	// Useful when forwarding to 3rd party servers like Datadog or Sumo
+	// Optional custom template.
 	Template *string `pulumi:"template"`
 }
 
 // The set of arguments for constructing a AviatrixRemoteSyslog resource.
 type AviatrixRemoteSyslogArgs struct {
-	// CA certificate file.
+	// The Certificate Authority (CA) certificate. Use the `file` function to read from a file.
 	CaCertificateFile pulumi.StringPtrInput
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways pulumi.StringArrayInput
-	// A total of 10 profiles from index 0 to 9 are supported for remote syslog, while index 9 is reserved for CoPilot.
+	// Profile index. An index from 0 to 9 is supported. 0 by default.
 	Index pulumi.IntPtrInput
 	// Profile name.
 	Name pulumi.StringPtrInput
-	// Listening port of the remote syslog server.
+	// Port number.
 	Port pulumi.IntInput
-	// Private key of the controller that pairs with the public certificate.
+	// The private key of the controller that pairs with the public certificate. Use the `file` function to read from a file.
 	PrivateKeyFile pulumi.StringPtrInput
-	// TCP or UDP (TCP by default).
+	// TCP or UDP. TCP by default.
 	Protocol pulumi.StringPtrInput
-	// Public certificate of the controller signed by the same CA.
+	// The public certificate of the controller signed by the same CA. Use the `file` function to read from a file.
 	PublicCertificateFile pulumi.StringPtrInput
-	// FQDN or IP address of the remote syslog server.
+	// Server IP.
 	Server pulumi.StringInput
-	// Useful when forwarding to 3rd party servers like Datadog or Sumo
+	// Optional custom template.
 	Template pulumi.StringPtrInput
 }
 
@@ -267,17 +347,17 @@ func (o AviatrixRemoteSyslogOutput) ToAviatrixRemoteSyslogOutputWithContext(ctx 
 	return o
 }
 
-// CA certificate file.
+// The Certificate Authority (CA) certificate. Use the `file` function to read from a file.
 func (o AviatrixRemoteSyslogOutput) CaCertificateFile() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixRemoteSyslog) pulumi.StringPtrOutput { return v.CaCertificateFile }).(pulumi.StringPtrOutput)
 }
 
-// List of excluded gateways.
+// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 func (o AviatrixRemoteSyslogOutput) ExcludedGateways() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixRemoteSyslog) pulumi.StringArrayOutput { return v.ExcludedGateways }).(pulumi.StringArrayOutput)
 }
 
-// A total of 10 profiles from index 0 to 9 are supported for remote syslog, while index 9 is reserved for CoPilot.
+// Profile index. An index from 0 to 9 is supported. 0 by default.
 func (o AviatrixRemoteSyslogOutput) Index() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *AviatrixRemoteSyslog) pulumi.IntPtrOutput { return v.Index }).(pulumi.IntPtrOutput)
 }
@@ -287,42 +367,42 @@ func (o AviatrixRemoteSyslogOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixRemoteSyslog) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// True if not protected by TLS.
+// This attribute is true if the remote syslog is not protected by TLS.
 func (o AviatrixRemoteSyslogOutput) Notls() pulumi.BoolOutput {
 	return o.ApplyT(func(v *AviatrixRemoteSyslog) pulumi.BoolOutput { return v.Notls }).(pulumi.BoolOutput)
 }
 
-// Listening port of the remote syslog server.
+// Port number.
 func (o AviatrixRemoteSyslogOutput) Port() pulumi.IntOutput {
 	return o.ApplyT(func(v *AviatrixRemoteSyslog) pulumi.IntOutput { return v.Port }).(pulumi.IntOutput)
 }
 
-// Private key of the controller that pairs with the public certificate.
+// The private key of the controller that pairs with the public certificate. Use the `file` function to read from a file.
 func (o AviatrixRemoteSyslogOutput) PrivateKeyFile() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixRemoteSyslog) pulumi.StringPtrOutput { return v.PrivateKeyFile }).(pulumi.StringPtrOutput)
 }
 
-// TCP or UDP (TCP by default).
+// TCP or UDP. TCP by default.
 func (o AviatrixRemoteSyslogOutput) Protocol() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixRemoteSyslog) pulumi.StringPtrOutput { return v.Protocol }).(pulumi.StringPtrOutput)
 }
 
-// Public certificate of the controller signed by the same CA.
+// The public certificate of the controller signed by the same CA. Use the `file` function to read from a file.
 func (o AviatrixRemoteSyslogOutput) PublicCertificateFile() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixRemoteSyslog) pulumi.StringPtrOutput { return v.PublicCertificateFile }).(pulumi.StringPtrOutput)
 }
 
-// FQDN or IP address of the remote syslog server.
+// Server IP.
 func (o AviatrixRemoteSyslogOutput) Server() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixRemoteSyslog) pulumi.StringOutput { return v.Server }).(pulumi.StringOutput)
 }
 
-// Enabled or not.
+// The status of remote syslog.
 func (o AviatrixRemoteSyslogOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixRemoteSyslog) pulumi.StringOutput { return v.Status }).(pulumi.StringOutput)
 }
 
-// Useful when forwarding to 3rd party servers like Datadog or Sumo
+// Optional custom template.
 func (o AviatrixRemoteSyslogOutput) Template() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixRemoteSyslog) pulumi.StringPtrOutput { return v.Template }).(pulumi.StringPtrOutput)
 }

@@ -9,23 +9,39 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_spoke_external_device_conn** resource creates and manages the connection between the Aviatrix BGP enabled spoke gateway and an External Device for purposes of Transit Network.
+    /// 
+    /// ## Notes
+    /// 
+    /// ### custom_algorithms
+    /// If set to true, the six algorithm arguments cannot all be default value. If set to false, default values will be used for all six algorithm arguments.
+    /// 
+    /// ## Import
+    /// 
+    /// **spoke_external_device_conn** can be imported using the `connection_name` and `vpc_id`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrix_spoke_external_device_conn:aviatrix_spoke_external_device_conn test connection_name~vpc_id
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrix_spoke_external_device_conn:aviatrix_spoke_external_device_conn")]
     public partial class Aviatrix_spoke_external_device_conn : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
+        /// Set of approved CIDRs. Requires `enable_learned_cidrs_approval` to be true. Type: Set(String).
         /// </summary>
         [Output("approvedCidrs")]
         public Output<ImmutableArray<string>> ApprovedCidrs { get; private set; } = null!;
 
         /// <summary>
-        /// Backup BGP MD5 authentication key.
+        /// Backup BGP MD5 Authentication Key. Valid with HA enabled for connection. Example: 'avx03,avx04'.
         /// </summary>
         [Output("backupBgpMd5Key")]
         public Output<string?> BackupBgpMd5Key { get; private set; } = null!;
 
         /// <summary>
-        /// Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+        /// Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required if HA enabled for 'bgp' connection.
         /// </summary>
         [Output("backupBgpRemoteAsNum")]
         public Output<string?> BackupBgpRemoteAsNum { get; private set; } = null!;
@@ -43,7 +59,7 @@ namespace Pulumi.Aviatrix
         public Output<string> BackupLocalTunnelCidr { get; private set; } = null!;
 
         /// <summary>
-        /// Backup pre shared key.
+        /// Backup Pre-Shared Key.
         /// </summary>
         [Output("backupPreSharedKey")]
         public Output<string?> BackupPreSharedKey { get; private set; } = null!;
@@ -61,25 +77,25 @@ namespace Pulumi.Aviatrix
         public Output<string> BackupRemoteTunnelCidr { get; private set; } = null!;
 
         /// <summary>
-        /// BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+        /// BGP local ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
         /// </summary>
         [Output("bgpLocalAsNum")]
         public Output<string?> BgpLocalAsNum { get; private set; } = null!;
 
         /// <summary>
-        /// BGP MD5 authentication key.
+        /// BGP MD5 Authentication Key. Example: 'avx01,avx02'.
         /// </summary>
         [Output("bgpMd5Key")]
         public Output<string?> BgpMd5Key { get; private set; } = null!;
 
         /// <summary>
-        /// BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+        /// BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
         /// </summary>
         [Output("bgpRemoteAsNum")]
         public Output<string?> BgpRemoteAsNum { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the spoke external device connection which is going to be created.
+        /// Spoke external device connection name.
         /// </summary>
         [Output("connectionName")]
         public Output<string> ConnectionName { get; private set; } = null!;
@@ -91,7 +107,7 @@ namespace Pulumi.Aviatrix
         public Output<string?> ConnectionType { get; private set; } = null!;
 
         /// <summary>
-        /// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption.
+        /// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption. Valid values: true, false. **NOTE: Please see notes here for more information.**
         /// </summary>
         [Output("customAlgorithms")]
         public Output<bool?> CustomAlgorithms { get; private set; } = null!;
@@ -103,32 +119,32 @@ namespace Pulumi.Aviatrix
         public Output<bool?> DirectConnect { get; private set; } = null!;
 
         /// <summary>
-        /// Enable Event Triggered HA.
+        /// Enable Event Triggered HA. Default value: false. Valid values: true or false.
         /// </summary>
         [Output("enableEventTriggeredHa")]
         public Output<bool?> EnableEventTriggeredHa { get; private set; } = null!;
 
         /// <summary>
-        /// Set as true if use IKEv2.
+        /// Set as true to enable IKEv2 protocol.
         /// </summary>
         [Output("enableIkev2")]
         public Output<bool?> EnableIkev2 { get; private set; } = null!;
 
         /// <summary>
-        /// Enable learned CIDR approval for the connection. Only valid with 'connection_type' = 'bgp'. Requires the spoke_gateway's
-        /// 'learned_cidrs_approval_mode' attribute be set to 'connection'. Valid values: true, false. Default value: false.
+        /// Enable learned CIDRs approval for the connection. Only valid with `connection_type` = 'bgp'. Requires the spoke_gateway's `learned_cidrs_approval_mode` attribute be set to 'connection'. Valid values: true, false. Default value: false.
         /// </summary>
         [Output("enableLearnedCidrsApproval")]
         public Output<bool?> EnableLearnedCidrsApproval { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the BGP Spoke Gateway.
+        /// Aviatrix spoke gateway name.
         /// </summary>
         [Output("gwName")]
         public Output<string> GwName { get; private set; } = null!;
 
         /// <summary>
         /// Set as true if there are two external devices.
+        /// * `backup_remote_gateway_ip ` - (Optional) Backup remote gateway IP. Required if HA enabled.
         /// </summary>
         [Output("haEnabled")]
         public Output<bool?> HaEnabled { get; private set; } = null!;
@@ -140,57 +156,55 @@ namespace Pulumi.Aviatrix
         public Output<string> LocalTunnelCidr { get; private set; } = null!;
 
         /// <summary>
-        /// Configure manual BGP advertised CIDRs for this connection. Only valid with 'connection_type' = 'bgp'.
+        /// Configure manual BGP advertised CIDRs for this connection. Only valid with `connection_type`= 'bgp'.
         /// </summary>
         [Output("manualBgpAdvertisedCidrs")]
         public Output<ImmutableArray<string>> ManualBgpAdvertisedCidrs { get; private set; } = null!;
 
         /// <summary>
-        /// Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'.
+        /// Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'. Default value: 'SHA-256'.
         /// </summary>
         [Output("phase1Authentication")]
         public Output<string?> Phase1Authentication { get; private set; } = null!;
 
         /// <summary>
-        /// Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+        /// Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
         /// </summary>
         [Output("phase1DhGroups")]
         public Output<string?> Phase1DhGroups { get; private set; } = null!;
 
         /// <summary>
-        /// Phase one Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC' and 'AES-256-CBC', 'AES-128-GCM-64',
-        /// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', and 'AES-256-GCM-128'.
+        /// Phase one Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", and "AES-256-GCM-128". Default value: "AES-256-CBC".
         /// </summary>
         [Output("phase1Encryption")]
         public Output<string?> Phase1Encryption { get; private set; } = null!;
 
         /// <summary>
-        /// Phase 1 remote identifier of the IPsec tunnel.
+        /// Phase 1 remote identifier of the IPsec tunnel. This can be configured to be either the public IP address or the private IP address of the peer terminating the IPsec tunnel. Example: ["1.2.3.4"] when HA is disabled, ["1.2.3.4", "5.6.7.8"] when HA is enabled.
         /// </summary>
         [Output("phase1RemoteIdentifiers")]
         public Output<ImmutableArray<string>> Phase1RemoteIdentifiers { get; private set; } = null!;
 
         /// <summary>
-        /// Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'.
+        /// Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'. Default value: 'HMAC-SHA-256'.
         /// </summary>
         [Output("phase2Authentication")]
         public Output<string?> Phase2Authentication { get; private set; } = null!;
 
         /// <summary>
-        /// Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+        /// Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
         /// </summary>
         [Output("phase2DhGroups")]
         public Output<string?> Phase2DhGroups { get; private set; } = null!;
 
         /// <summary>
-        /// Phase two Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'AES-128-GCM-64',
-        /// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', 'AES-256-GCM-128', and 'NULL-ENCR'.
+        /// Phase two Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", "AES-256-GCM-128" and "NULL-ENCR". Default value: "AES-256-CBC".
         /// </summary>
         [Output("phase2Encryption")]
         public Output<string?> Phase2Encryption { get; private set; } = null!;
 
         /// <summary>
-        /// If left blank, the pre-shared key will be auto generated.
+        /// Pre-Shared Key.
         /// </summary>
         [Output("preSharedKey")]
         public Output<string?> PreSharedKey { get; private set; } = null!;
@@ -202,7 +216,7 @@ namespace Pulumi.Aviatrix
         public Output<ImmutableArray<string>> PrependAsPaths { get; private set; } = null!;
 
         /// <summary>
-        /// Remote Gateway IP.
+        /// Remote gateway IP.
         /// </summary>
         [Output("remoteGatewayIp")]
         public Output<string> RemoteGatewayIp { get; private set; } = null!;
@@ -220,13 +234,13 @@ namespace Pulumi.Aviatrix
         public Output<string> RemoteTunnelCidr { get; private set; } = null!;
 
         /// <summary>
-        /// Tunnel Protocol. Valid value: 'IPsec'. Default value: 'IPsec'. Case insensitive.
+        /// Tunnel protocol, only valid with `connection_type` = 'bgp'. Valid values: 'IPsec'. Default value: 'IPsec'. Case insensitive.
         /// </summary>
         [Output("tunnelProtocol")]
         public Output<string?> TunnelProtocol { get; private set; } = null!;
 
         /// <summary>
-        /// ID of the VPC where the BGP Spoke Gateway is located.
+        /// VPC ID of the Aviatrix spoke gateway.
         /// </summary>
         [Output("vpcId")]
         public Output<string> VpcId { get; private set; } = null!;
@@ -255,6 +269,13 @@ namespace Pulumi.Aviatrix
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/astipkovits",
+                AdditionalSecretOutputs =
+                {
+                    "backupBgpMd5Key",
+                    "backupPreSharedKey",
+                    "bgpMd5Key",
+                    "preSharedKey",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -282,7 +303,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _approvedCidrs;
 
         /// <summary>
-        /// Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
+        /// Set of approved CIDRs. Requires `enable_learned_cidrs_approval` to be true. Type: Set(String).
         /// </summary>
         public InputList<string> ApprovedCidrs
         {
@@ -290,14 +311,24 @@ namespace Pulumi.Aviatrix
             set => _approvedCidrs = value;
         }
 
-        /// <summary>
-        /// Backup BGP MD5 authentication key.
-        /// </summary>
         [Input("backupBgpMd5Key")]
-        public Input<string>? BackupBgpMd5Key { get; set; }
+        private Input<string>? _backupBgpMd5Key;
 
         /// <summary>
-        /// Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+        /// Backup BGP MD5 Authentication Key. Valid with HA enabled for connection. Example: 'avx03,avx04'.
+        /// </summary>
+        public Input<string>? BackupBgpMd5Key
+        {
+            get => _backupBgpMd5Key;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _backupBgpMd5Key = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required if HA enabled for 'bgp' connection.
         /// </summary>
         [Input("backupBgpRemoteAsNum")]
         public Input<string>? BackupBgpRemoteAsNum { get; set; }
@@ -314,11 +345,21 @@ namespace Pulumi.Aviatrix
         [Input("backupLocalTunnelCidr")]
         public Input<string>? BackupLocalTunnelCidr { get; set; }
 
-        /// <summary>
-        /// Backup pre shared key.
-        /// </summary>
         [Input("backupPreSharedKey")]
-        public Input<string>? BackupPreSharedKey { get; set; }
+        private Input<string>? _backupPreSharedKey;
+
+        /// <summary>
+        /// Backup Pre-Shared Key.
+        /// </summary>
+        public Input<string>? BackupPreSharedKey
+        {
+            get => _backupPreSharedKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _backupPreSharedKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Backup remote gateway IP.
@@ -333,25 +374,35 @@ namespace Pulumi.Aviatrix
         public Input<string>? BackupRemoteTunnelCidr { get; set; }
 
         /// <summary>
-        /// BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+        /// BGP local ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
         /// </summary>
         [Input("bgpLocalAsNum")]
         public Input<string>? BgpLocalAsNum { get; set; }
 
-        /// <summary>
-        /// BGP MD5 authentication key.
-        /// </summary>
         [Input("bgpMd5Key")]
-        public Input<string>? BgpMd5Key { get; set; }
+        private Input<string>? _bgpMd5Key;
 
         /// <summary>
-        /// BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+        /// BGP MD5 Authentication Key. Example: 'avx01,avx02'.
+        /// </summary>
+        public Input<string>? BgpMd5Key
+        {
+            get => _bgpMd5Key;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _bgpMd5Key = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
         /// </summary>
         [Input("bgpRemoteAsNum")]
         public Input<string>? BgpRemoteAsNum { get; set; }
 
         /// <summary>
-        /// The name of the spoke external device connection which is going to be created.
+        /// Spoke external device connection name.
         /// </summary>
         [Input("connectionName", required: true)]
         public Input<string> ConnectionName { get; set; } = null!;
@@ -363,7 +414,7 @@ namespace Pulumi.Aviatrix
         public Input<string>? ConnectionType { get; set; }
 
         /// <summary>
-        /// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption.
+        /// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption. Valid values: true, false. **NOTE: Please see notes here for more information.**
         /// </summary>
         [Input("customAlgorithms")]
         public Input<bool>? CustomAlgorithms { get; set; }
@@ -375,32 +426,32 @@ namespace Pulumi.Aviatrix
         public Input<bool>? DirectConnect { get; set; }
 
         /// <summary>
-        /// Enable Event Triggered HA.
+        /// Enable Event Triggered HA. Default value: false. Valid values: true or false.
         /// </summary>
         [Input("enableEventTriggeredHa")]
         public Input<bool>? EnableEventTriggeredHa { get; set; }
 
         /// <summary>
-        /// Set as true if use IKEv2.
+        /// Set as true to enable IKEv2 protocol.
         /// </summary>
         [Input("enableIkev2")]
         public Input<bool>? EnableIkev2 { get; set; }
 
         /// <summary>
-        /// Enable learned CIDR approval for the connection. Only valid with 'connection_type' = 'bgp'. Requires the spoke_gateway's
-        /// 'learned_cidrs_approval_mode' attribute be set to 'connection'. Valid values: true, false. Default value: false.
+        /// Enable learned CIDRs approval for the connection. Only valid with `connection_type` = 'bgp'. Requires the spoke_gateway's `learned_cidrs_approval_mode` attribute be set to 'connection'. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableLearnedCidrsApproval")]
         public Input<bool>? EnableLearnedCidrsApproval { get; set; }
 
         /// <summary>
-        /// Name of the BGP Spoke Gateway.
+        /// Aviatrix spoke gateway name.
         /// </summary>
         [Input("gwName", required: true)]
         public Input<string> GwName { get; set; } = null!;
 
         /// <summary>
         /// Set as true if there are two external devices.
+        /// * `backup_remote_gateway_ip ` - (Optional) Backup remote gateway IP. Required if HA enabled.
         /// </summary>
         [Input("haEnabled")]
         public Input<bool>? HaEnabled { get; set; }
@@ -415,7 +466,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _manualBgpAdvertisedCidrs;
 
         /// <summary>
-        /// Configure manual BGP advertised CIDRs for this connection. Only valid with 'connection_type' = 'bgp'.
+        /// Configure manual BGP advertised CIDRs for this connection. Only valid with `connection_type`= 'bgp'.
         /// </summary>
         public InputList<string> ManualBgpAdvertisedCidrs
         {
@@ -424,20 +475,19 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'.
+        /// Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'. Default value: 'SHA-256'.
         /// </summary>
         [Input("phase1Authentication")]
         public Input<string>? Phase1Authentication { get; set; }
 
         /// <summary>
-        /// Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+        /// Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
         /// </summary>
         [Input("phase1DhGroups")]
         public Input<string>? Phase1DhGroups { get; set; }
 
         /// <summary>
-        /// Phase one Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC' and 'AES-256-CBC', 'AES-128-GCM-64',
-        /// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', and 'AES-256-GCM-128'.
+        /// Phase one Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", and "AES-256-GCM-128". Default value: "AES-256-CBC".
         /// </summary>
         [Input("phase1Encryption")]
         public Input<string>? Phase1Encryption { get; set; }
@@ -446,7 +496,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _phase1RemoteIdentifiers;
 
         /// <summary>
-        /// Phase 1 remote identifier of the IPsec tunnel.
+        /// Phase 1 remote identifier of the IPsec tunnel. This can be configured to be either the public IP address or the private IP address of the peer terminating the IPsec tunnel. Example: ["1.2.3.4"] when HA is disabled, ["1.2.3.4", "5.6.7.8"] when HA is enabled.
         /// </summary>
         public InputList<string> Phase1RemoteIdentifiers
         {
@@ -455,29 +505,38 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'.
+        /// Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'. Default value: 'HMAC-SHA-256'.
         /// </summary>
         [Input("phase2Authentication")]
         public Input<string>? Phase2Authentication { get; set; }
 
         /// <summary>
-        /// Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+        /// Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
         /// </summary>
         [Input("phase2DhGroups")]
         public Input<string>? Phase2DhGroups { get; set; }
 
         /// <summary>
-        /// Phase two Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'AES-128-GCM-64',
-        /// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', 'AES-256-GCM-128', and 'NULL-ENCR'.
+        /// Phase two Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", "AES-256-GCM-128" and "NULL-ENCR". Default value: "AES-256-CBC".
         /// </summary>
         [Input("phase2Encryption")]
         public Input<string>? Phase2Encryption { get; set; }
 
-        /// <summary>
-        /// If left blank, the pre-shared key will be auto generated.
-        /// </summary>
         [Input("preSharedKey")]
-        public Input<string>? PreSharedKey { get; set; }
+        private Input<string>? _preSharedKey;
+
+        /// <summary>
+        /// Pre-Shared Key.
+        /// </summary>
+        public Input<string>? PreSharedKey
+        {
+            get => _preSharedKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _preSharedKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         [Input("prependAsPaths")]
         private InputList<string>? _prependAsPaths;
@@ -492,7 +551,7 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Remote Gateway IP.
+        /// Remote gateway IP.
         /// </summary>
         [Input("remoteGatewayIp", required: true)]
         public Input<string> RemoteGatewayIp { get; set; } = null!;
@@ -510,13 +569,13 @@ namespace Pulumi.Aviatrix
         public Input<string>? RemoteTunnelCidr { get; set; }
 
         /// <summary>
-        /// Tunnel Protocol. Valid value: 'IPsec'. Default value: 'IPsec'. Case insensitive.
+        /// Tunnel protocol, only valid with `connection_type` = 'bgp'. Valid values: 'IPsec'. Default value: 'IPsec'. Case insensitive.
         /// </summary>
         [Input("tunnelProtocol")]
         public Input<string>? TunnelProtocol { get; set; }
 
         /// <summary>
-        /// ID of the VPC where the BGP Spoke Gateway is located.
+        /// VPC ID of the Aviatrix spoke gateway.
         /// </summary>
         [Input("vpcId", required: true)]
         public Input<string> VpcId { get; set; } = null!;
@@ -533,7 +592,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _approvedCidrs;
 
         /// <summary>
-        /// Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
+        /// Set of approved CIDRs. Requires `enable_learned_cidrs_approval` to be true. Type: Set(String).
         /// </summary>
         public InputList<string> ApprovedCidrs
         {
@@ -541,14 +600,24 @@ namespace Pulumi.Aviatrix
             set => _approvedCidrs = value;
         }
 
-        /// <summary>
-        /// Backup BGP MD5 authentication key.
-        /// </summary>
         [Input("backupBgpMd5Key")]
-        public Input<string>? BackupBgpMd5Key { get; set; }
+        private Input<string>? _backupBgpMd5Key;
 
         /// <summary>
-        /// Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+        /// Backup BGP MD5 Authentication Key. Valid with HA enabled for connection. Example: 'avx03,avx04'.
+        /// </summary>
+        public Input<string>? BackupBgpMd5Key
+        {
+            get => _backupBgpMd5Key;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _backupBgpMd5Key = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required if HA enabled for 'bgp' connection.
         /// </summary>
         [Input("backupBgpRemoteAsNum")]
         public Input<string>? BackupBgpRemoteAsNum { get; set; }
@@ -565,11 +634,21 @@ namespace Pulumi.Aviatrix
         [Input("backupLocalTunnelCidr")]
         public Input<string>? BackupLocalTunnelCidr { get; set; }
 
-        /// <summary>
-        /// Backup pre shared key.
-        /// </summary>
         [Input("backupPreSharedKey")]
-        public Input<string>? BackupPreSharedKey { get; set; }
+        private Input<string>? _backupPreSharedKey;
+
+        /// <summary>
+        /// Backup Pre-Shared Key.
+        /// </summary>
+        public Input<string>? BackupPreSharedKey
+        {
+            get => _backupPreSharedKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _backupPreSharedKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Backup remote gateway IP.
@@ -584,25 +663,35 @@ namespace Pulumi.Aviatrix
         public Input<string>? BackupRemoteTunnelCidr { get; set; }
 
         /// <summary>
-        /// BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+        /// BGP local ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
         /// </summary>
         [Input("bgpLocalAsNum")]
         public Input<string>? BgpLocalAsNum { get; set; }
 
-        /// <summary>
-        /// BGP MD5 authentication key.
-        /// </summary>
         [Input("bgpMd5Key")]
-        public Input<string>? BgpMd5Key { get; set; }
+        private Input<string>? _bgpMd5Key;
 
         /// <summary>
-        /// BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+        /// BGP MD5 Authentication Key. Example: 'avx01,avx02'.
+        /// </summary>
+        public Input<string>? BgpMd5Key
+        {
+            get => _bgpMd5Key;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _bgpMd5Key = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
         /// </summary>
         [Input("bgpRemoteAsNum")]
         public Input<string>? BgpRemoteAsNum { get; set; }
 
         /// <summary>
-        /// The name of the spoke external device connection which is going to be created.
+        /// Spoke external device connection name.
         /// </summary>
         [Input("connectionName")]
         public Input<string>? ConnectionName { get; set; }
@@ -614,7 +703,7 @@ namespace Pulumi.Aviatrix
         public Input<string>? ConnectionType { get; set; }
 
         /// <summary>
-        /// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption.
+        /// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption. Valid values: true, false. **NOTE: Please see notes here for more information.**
         /// </summary>
         [Input("customAlgorithms")]
         public Input<bool>? CustomAlgorithms { get; set; }
@@ -626,32 +715,32 @@ namespace Pulumi.Aviatrix
         public Input<bool>? DirectConnect { get; set; }
 
         /// <summary>
-        /// Enable Event Triggered HA.
+        /// Enable Event Triggered HA. Default value: false. Valid values: true or false.
         /// </summary>
         [Input("enableEventTriggeredHa")]
         public Input<bool>? EnableEventTriggeredHa { get; set; }
 
         /// <summary>
-        /// Set as true if use IKEv2.
+        /// Set as true to enable IKEv2 protocol.
         /// </summary>
         [Input("enableIkev2")]
         public Input<bool>? EnableIkev2 { get; set; }
 
         /// <summary>
-        /// Enable learned CIDR approval for the connection. Only valid with 'connection_type' = 'bgp'. Requires the spoke_gateway's
-        /// 'learned_cidrs_approval_mode' attribute be set to 'connection'. Valid values: true, false. Default value: false.
+        /// Enable learned CIDRs approval for the connection. Only valid with `connection_type` = 'bgp'. Requires the spoke_gateway's `learned_cidrs_approval_mode` attribute be set to 'connection'. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableLearnedCidrsApproval")]
         public Input<bool>? EnableLearnedCidrsApproval { get; set; }
 
         /// <summary>
-        /// Name of the BGP Spoke Gateway.
+        /// Aviatrix spoke gateway name.
         /// </summary>
         [Input("gwName")]
         public Input<string>? GwName { get; set; }
 
         /// <summary>
         /// Set as true if there are two external devices.
+        /// * `backup_remote_gateway_ip ` - (Optional) Backup remote gateway IP. Required if HA enabled.
         /// </summary>
         [Input("haEnabled")]
         public Input<bool>? HaEnabled { get; set; }
@@ -666,7 +755,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _manualBgpAdvertisedCidrs;
 
         /// <summary>
-        /// Configure manual BGP advertised CIDRs for this connection. Only valid with 'connection_type' = 'bgp'.
+        /// Configure manual BGP advertised CIDRs for this connection. Only valid with `connection_type`= 'bgp'.
         /// </summary>
         public InputList<string> ManualBgpAdvertisedCidrs
         {
@@ -675,20 +764,19 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'.
+        /// Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'. Default value: 'SHA-256'.
         /// </summary>
         [Input("phase1Authentication")]
         public Input<string>? Phase1Authentication { get; set; }
 
         /// <summary>
-        /// Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+        /// Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
         /// </summary>
         [Input("phase1DhGroups")]
         public Input<string>? Phase1DhGroups { get; set; }
 
         /// <summary>
-        /// Phase one Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC' and 'AES-256-CBC', 'AES-128-GCM-64',
-        /// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', and 'AES-256-GCM-128'.
+        /// Phase one Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", and "AES-256-GCM-128". Default value: "AES-256-CBC".
         /// </summary>
         [Input("phase1Encryption")]
         public Input<string>? Phase1Encryption { get; set; }
@@ -697,7 +785,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _phase1RemoteIdentifiers;
 
         /// <summary>
-        /// Phase 1 remote identifier of the IPsec tunnel.
+        /// Phase 1 remote identifier of the IPsec tunnel. This can be configured to be either the public IP address or the private IP address of the peer terminating the IPsec tunnel. Example: ["1.2.3.4"] when HA is disabled, ["1.2.3.4", "5.6.7.8"] when HA is enabled.
         /// </summary>
         public InputList<string> Phase1RemoteIdentifiers
         {
@@ -706,29 +794,38 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'.
+        /// Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'. Default value: 'HMAC-SHA-256'.
         /// </summary>
         [Input("phase2Authentication")]
         public Input<string>? Phase2Authentication { get; set; }
 
         /// <summary>
-        /// Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+        /// Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
         /// </summary>
         [Input("phase2DhGroups")]
         public Input<string>? Phase2DhGroups { get; set; }
 
         /// <summary>
-        /// Phase two Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'AES-128-GCM-64',
-        /// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', 'AES-256-GCM-128', and 'NULL-ENCR'.
+        /// Phase two Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", "AES-256-GCM-128" and "NULL-ENCR". Default value: "AES-256-CBC".
         /// </summary>
         [Input("phase2Encryption")]
         public Input<string>? Phase2Encryption { get; set; }
 
-        /// <summary>
-        /// If left blank, the pre-shared key will be auto generated.
-        /// </summary>
         [Input("preSharedKey")]
-        public Input<string>? PreSharedKey { get; set; }
+        private Input<string>? _preSharedKey;
+
+        /// <summary>
+        /// Pre-Shared Key.
+        /// </summary>
+        public Input<string>? PreSharedKey
+        {
+            get => _preSharedKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _preSharedKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         [Input("prependAsPaths")]
         private InputList<string>? _prependAsPaths;
@@ -743,7 +840,7 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Remote Gateway IP.
+        /// Remote gateway IP.
         /// </summary>
         [Input("remoteGatewayIp")]
         public Input<string>? RemoteGatewayIp { get; set; }
@@ -761,13 +858,13 @@ namespace Pulumi.Aviatrix
         public Input<string>? RemoteTunnelCidr { get; set; }
 
         /// <summary>
-        /// Tunnel Protocol. Valid value: 'IPsec'. Default value: 'IPsec'. Case insensitive.
+        /// Tunnel protocol, only valid with `connection_type` = 'bgp'. Valid values: 'IPsec'. Default value: 'IPsec'. Case insensitive.
         /// </summary>
         [Input("tunnelProtocol")]
         public Input<string>? TunnelProtocol { get; set; }
 
         /// <summary>
-        /// ID of the VPC where the BGP Spoke Gateway is located.
+        /// VPC ID of the Aviatrix spoke gateway.
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }

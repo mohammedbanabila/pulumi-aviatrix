@@ -13,6 +13,9 @@ namespace Pulumi.Aviatrix.Outputs
     [OutputType]
     public sealed class AviatrixAppDomainSelector
     {
+        /// <summary>
+        /// List of match expressions. The App Domain will be a union of all resources matched by each `match_expressions`.`match_expressions` blocks cannot be empty.
+        /// </summary>
         public readonly ImmutableArray<Outputs.AviatrixAppDomainSelectorMatchExpression> MatchExpressions;
 
         [OutputConstructor]

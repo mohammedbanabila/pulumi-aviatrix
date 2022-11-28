@@ -9,11 +9,84 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// !&gt; **WARNING** **aviatrix_microseg_policy_list** is part of the Micro-segmentation private preview feature for R2.22.0. If you wish to enable a private preview mode feature, please contact your sales representative or Aviatrix Support.
+    /// 
+    /// The **aviatrix_microseg_policy_list** resource handles the creation and management of Micro-segmentation Policies. Available as of Provider R2.22.0+.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Microseg Policy
+    ///     var test = new Aviatrix.AviatrixMicrosegPolicyList("test", new()
+    ///     {
+    ///         Policies = new[]
+    ///         {
+    ///             new Aviatrix.Inputs.AviatrixMicrosegPolicyListPolicyArgs
+    ///             {
+    ///                 Action = "DENY",
+    ///                 DstAppDomains = new[]
+    ///                 {
+    ///                     "82e50c85-82bf-4b3b-b9da-aaed34a3aa53",
+    ///                 },
+    ///                 Logging = false,
+    ///                 Name = "microseg-policy-1",
+    ///                 Priority = 1,
+    ///                 Protocol = "ICMP",
+    ///                 SrcAppDomains = new[]
+    ///                 {
+    ///                     "f15c9890-c8c4-4c1a-a2b5-ef0ab34d2e30",
+    ///                 },
+    ///                 Watch = false,
+    ///             },
+    ///             new Aviatrix.Inputs.AviatrixMicrosegPolicyListPolicyArgs
+    ///             {
+    ///                 Action = "PERMIT",
+    ///                 DstAppDomains = new[]
+    ///                 {
+    ///                     "f05b0ad7-d2d7-4d16-b2f6-48492319414c",
+    ///                 },
+    ///                 Name = "microseg-policy",
+    ///                 PortRanges = new[]
+    ///                 {
+    ///                     new Aviatrix.Inputs.AviatrixMicrosegPolicyListPolicyPortRangeArgs
+    ///                     {
+    ///                         Hi = 50000,
+    ///                         Lo = 49000,
+    ///                     },
+    ///                 },
+    ///                 Priority = 0,
+    ///                 Protocol = "TCP",
+    ///                 SrcAppDomains = new[]
+    ///                 {
+    ///                     "7e7d1573-7a7a-4a53-bcb5-1ad5041961e0",
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **aviatrix_microseg_policy_list** can be imported using the controller IP, e.g. controller IP is 10.11.12.13
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixMicrosegPolicyList:AviatrixMicrosegPolicyList test 10-11-12-13
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixMicrosegPolicyList:AviatrixMicrosegPolicyList")]
     public partial class AviatrixMicrosegPolicyList : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// List of micro-segmentation policies.
+        /// List of policies.
         /// </summary>
         [Output("policies")]
         public Output<ImmutableArray<Outputs.AviatrixMicrosegPolicyListPolicy>> Policies { get; private set; } = null!;
@@ -69,7 +142,7 @@ namespace Pulumi.Aviatrix
         private InputList<Inputs.AviatrixMicrosegPolicyListPolicyArgs>? _policies;
 
         /// <summary>
-        /// List of micro-segmentation policies.
+        /// List of policies.
         /// </summary>
         public InputList<Inputs.AviatrixMicrosegPolicyListPolicyArgs> Policies
         {
@@ -89,7 +162,7 @@ namespace Pulumi.Aviatrix
         private InputList<Inputs.AviatrixMicrosegPolicyListPolicyGetArgs>? _policies;
 
         /// <summary>
-        /// List of micro-segmentation policies.
+        /// List of policies.
         /// </summary>
         public InputList<Inputs.AviatrixMicrosegPolicyListPolicyGetArgs> Policies
         {

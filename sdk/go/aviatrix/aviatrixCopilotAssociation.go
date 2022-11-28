@@ -11,10 +11,47 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_copilot_association** resource allows management of controller CoPilot Association. This resource is available as of provider version R2.19+.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixCopilotAssociation(ctx, "testCopilotAssociation", &aviatrix.AviatrixCopilotAssociationArgs{
+//				CopilotAddress: pulumi.String("copilot.aviatrix.com"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **aviatrix_copilot_association** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixCopilotAssociation:AviatrixCopilotAssociation test_copilot_association 10-11-12-13
+//
+// ```
 type AviatrixCopilotAssociation struct {
 	pulumi.CustomResourceState
 
-	// CoPilot IP Address or Hostname.
+	// CoPilot instance IP Address or Hostname.
 	CopilotAddress pulumi.StringOutput `pulumi:"copilotAddress"`
 }
 
@@ -51,12 +88,12 @@ func GetAviatrixCopilotAssociation(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixCopilotAssociation resources.
 type aviatrixCopilotAssociationState struct {
-	// CoPilot IP Address or Hostname.
+	// CoPilot instance IP Address or Hostname.
 	CopilotAddress *string `pulumi:"copilotAddress"`
 }
 
 type AviatrixCopilotAssociationState struct {
-	// CoPilot IP Address or Hostname.
+	// CoPilot instance IP Address or Hostname.
 	CopilotAddress pulumi.StringPtrInput
 }
 
@@ -65,13 +102,13 @@ func (AviatrixCopilotAssociationState) ElementType() reflect.Type {
 }
 
 type aviatrixCopilotAssociationArgs struct {
-	// CoPilot IP Address or Hostname.
+	// CoPilot instance IP Address or Hostname.
 	CopilotAddress string `pulumi:"copilotAddress"`
 }
 
 // The set of arguments for constructing a AviatrixCopilotAssociation resource.
 type AviatrixCopilotAssociationArgs struct {
-	// CoPilot IP Address or Hostname.
+	// CoPilot instance IP Address or Hostname.
 	CopilotAddress pulumi.StringInput
 }
 
@@ -162,7 +199,7 @@ func (o AviatrixCopilotAssociationOutput) ToAviatrixCopilotAssociationOutputWith
 	return o
 }
 
-// CoPilot IP Address or Hostname.
+// CoPilot instance IP Address or Hostname.
 func (o AviatrixCopilotAssociationOutput) CopilotAddress() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixCopilotAssociation) pulumi.StringOutput { return v.CopilotAddress }).(pulumi.StringOutput)
 }

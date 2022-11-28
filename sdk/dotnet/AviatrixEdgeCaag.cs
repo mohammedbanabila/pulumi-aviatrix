@@ -9,53 +9,123 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_edge_caag** resource creates the Aviatrix Edge as a CaaG. This resource is available as of provider version R2.22+.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create a DHCP Edge as a CaaG
+    ///     var test = new Aviatrix.AviatrixEdgeCaag("test", new()
+    ///     {
+    ///         LanInterfaceIpPrefix = "10.60.0.0/24",
+    ///         LocalAsNumber = "65000",
+    ///         ManagementInterfaceConfig = "DHCP",
+    ///         PrependAsPaths = new[]
+    ///         {
+    ///             "65000",
+    ///             "65000",
+    ///         },
+    ///         WanDefaultGatewayIp = "10.60.0.0",
+    ///         WanInterfaceIpPrefix = "10.60.0.0/24",
+    ///         ZtpFileDownloadPath = "/image/download/path",
+    ///         ZtpFileType = "iso",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create a Static Edge as a CaaG
+    ///     var test = new Aviatrix.AviatrixEdgeCaag("test", new()
+    ///     {
+    ///         DnsServerIp = "10.60.0.0",
+    ///         LanInterfaceIpPrefix = "10.60.0.0/24",
+    ///         LocalAsNumber = "65000",
+    ///         ManagementDefaultGatewayIp = "10.60.0.0",
+    ///         ManagementInterfaceConfig = "Static",
+    ///         ManagementInterfaceIpPrefix = "10.60.0.0/24",
+    ///         PrependAsPaths = new[]
+    ///         {
+    ///             "65000",
+    ///             "65000",
+    ///         },
+    ///         SecondaryDnsServerIp = "10.60.0.0",
+    ///         WanDefaultGatewayIp = "10.60.0.0",
+    ///         WanInterfaceIpPrefix = "10.60.0.0/24",
+    ///         ZtpFileDownloadPath = "/image/download/path",
+    ///         ZtpFileType = "iso",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **edge_caag** can be imported using the `name`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixEdgeCaag:AviatrixEdgeCaag test name
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixEdgeCaag:AviatrixEdgeCaag")]
     public partial class AviatrixEdgeCaag : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// DNS server IP.
+        /// DNS server IP. Required and valid when `management_interface_config` is "Static".
         /// </summary>
         [Output("dnsServerIp")]
         public Output<string?> DnsServerIp { get; private set; } = null!;
 
         /// <summary>
-        /// Enable management over private network.
+        /// Indicates whether it is public or private connection between controller and gateway. Valid values: true, false. Default value: false.
         /// </summary>
         [Output("enableOverPrivateNetwork")]
         public Output<bool?> EnableOverPrivateNetwork { get; private set; } = null!;
 
         /// <summary>
-        /// LAN interface IP / prefix.
+        /// LAN interface IP and subnet prefix.
         /// </summary>
         [Output("lanInterfaceIpPrefix")]
         public Output<string> LanInterfaceIpPrefix { get; private set; } = null!;
 
         /// <summary>
-        /// Local AS number.
+        /// BGP AS Number to assign to Edge as a CaaG.
         /// </summary>
         [Output("localAsNumber")]
         public Output<string> LocalAsNumber { get; private set; } = null!;
 
         /// <summary>
-        /// Management default gateway IP.
+        /// Management default gateway IP. Required and valid when `management_interface_config` is "Static".
         /// </summary>
         [Output("managementDefaultGatewayIp")]
         public Output<string?> ManagementDefaultGatewayIp { get; private set; } = null!;
 
         /// <summary>
-        /// Management egress gateway IP / prefix.
+        /// Management egress gateway IP and subnet prefix.
         /// </summary>
         [Output("managementEgressIpPrefix")]
         public Output<string?> ManagementEgressIpPrefix { get; private set; } = null!;
 
         /// <summary>
-        /// Management interface configuration. Valid values: 'DHCP' and 'Static'.
+        /// Management interface configuration. Valid values: "DHCP", "Static".
         /// </summary>
         [Output("managementInterfaceConfig")]
         public Output<string> ManagementInterfaceConfig { get; private set; } = null!;
 
         /// <summary>
-        /// Management interface IP / prefix.
+        /// Management interface IP and subnet prefix. Required and valid when `management_interface_config` is "Static".
         /// </summary>
         [Output("managementInterfaceIpPrefix")]
         public Output<string?> ManagementInterfaceIpPrefix { get; private set; } = null!;
@@ -67,13 +137,13 @@ namespace Pulumi.Aviatrix
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// AS path prepend.
+        /// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires local_as_number to be set. Type: List.
         /// </summary>
         [Output("prependAsPaths")]
         public Output<ImmutableArray<string>> PrependAsPaths { get; private set; } = null!;
 
         /// <summary>
-        /// Secondary DNS server IP.
+        /// Secondary DNS server IP. Required and valid when `management_interface_config` is "Static".
         /// </summary>
         [Output("secondaryDnsServerIp")]
         public Output<string?> SecondaryDnsServerIp { get; private set; } = null!;
@@ -91,19 +161,19 @@ namespace Pulumi.Aviatrix
         public Output<string> WanDefaultGatewayIp { get; private set; } = null!;
 
         /// <summary>
-        /// WAN interface IP / prefix.
+        /// WAN interface IP and subnet prefix.
         /// </summary>
         [Output("wanInterfaceIpPrefix")]
         public Output<string> WanInterfaceIpPrefix { get; private set; } = null!;
 
         /// <summary>
-        /// The location where the Edge as a CaaG ZTP file will be stored.
+        /// The folder path where the ZTP file will be downloaded.
         /// </summary>
         [Output("ztpFileDownloadPath")]
         public Output<string> ZtpFileDownloadPath { get; private set; } = null!;
 
         /// <summary>
-        /// ZTP file type.
+        /// ZTP file type. Valid values: "iso", "cloud-init".
         /// </summary>
         [Output("ztpFileType")]
         public Output<string> ZtpFileType { get; private set; } = null!;
@@ -156,49 +226,49 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixEdgeCaagArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// DNS server IP.
+        /// DNS server IP. Required and valid when `management_interface_config` is "Static".
         /// </summary>
         [Input("dnsServerIp")]
         public Input<string>? DnsServerIp { get; set; }
 
         /// <summary>
-        /// Enable management over private network.
+        /// Indicates whether it is public or private connection between controller and gateway. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableOverPrivateNetwork")]
         public Input<bool>? EnableOverPrivateNetwork { get; set; }
 
         /// <summary>
-        /// LAN interface IP / prefix.
+        /// LAN interface IP and subnet prefix.
         /// </summary>
         [Input("lanInterfaceIpPrefix", required: true)]
         public Input<string> LanInterfaceIpPrefix { get; set; } = null!;
 
         /// <summary>
-        /// Local AS number.
+        /// BGP AS Number to assign to Edge as a CaaG.
         /// </summary>
         [Input("localAsNumber")]
         public Input<string>? LocalAsNumber { get; set; }
 
         /// <summary>
-        /// Management default gateway IP.
+        /// Management default gateway IP. Required and valid when `management_interface_config` is "Static".
         /// </summary>
         [Input("managementDefaultGatewayIp")]
         public Input<string>? ManagementDefaultGatewayIp { get; set; }
 
         /// <summary>
-        /// Management egress gateway IP / prefix.
+        /// Management egress gateway IP and subnet prefix.
         /// </summary>
         [Input("managementEgressIpPrefix")]
         public Input<string>? ManagementEgressIpPrefix { get; set; }
 
         /// <summary>
-        /// Management interface configuration. Valid values: 'DHCP' and 'Static'.
+        /// Management interface configuration. Valid values: "DHCP", "Static".
         /// </summary>
         [Input("managementInterfaceConfig", required: true)]
         public Input<string> ManagementInterfaceConfig { get; set; } = null!;
 
         /// <summary>
-        /// Management interface IP / prefix.
+        /// Management interface IP and subnet prefix. Required and valid when `management_interface_config` is "Static".
         /// </summary>
         [Input("managementInterfaceIpPrefix")]
         public Input<string>? ManagementInterfaceIpPrefix { get; set; }
@@ -213,7 +283,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _prependAsPaths;
 
         /// <summary>
-        /// AS path prepend.
+        /// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires local_as_number to be set. Type: List.
         /// </summary>
         public InputList<string> PrependAsPaths
         {
@@ -222,7 +292,7 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Secondary DNS server IP.
+        /// Secondary DNS server IP. Required and valid when `management_interface_config` is "Static".
         /// </summary>
         [Input("secondaryDnsServerIp")]
         public Input<string>? SecondaryDnsServerIp { get; set; }
@@ -234,19 +304,19 @@ namespace Pulumi.Aviatrix
         public Input<string> WanDefaultGatewayIp { get; set; } = null!;
 
         /// <summary>
-        /// WAN interface IP / prefix.
+        /// WAN interface IP and subnet prefix.
         /// </summary>
         [Input("wanInterfaceIpPrefix", required: true)]
         public Input<string> WanInterfaceIpPrefix { get; set; } = null!;
 
         /// <summary>
-        /// The location where the Edge as a CaaG ZTP file will be stored.
+        /// The folder path where the ZTP file will be downloaded.
         /// </summary>
         [Input("ztpFileDownloadPath", required: true)]
         public Input<string> ZtpFileDownloadPath { get; set; } = null!;
 
         /// <summary>
-        /// ZTP file type.
+        /// ZTP file type. Valid values: "iso", "cloud-init".
         /// </summary>
         [Input("ztpFileType", required: true)]
         public Input<string> ZtpFileType { get; set; } = null!;
@@ -260,49 +330,49 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixEdgeCaagState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// DNS server IP.
+        /// DNS server IP. Required and valid when `management_interface_config` is "Static".
         /// </summary>
         [Input("dnsServerIp")]
         public Input<string>? DnsServerIp { get; set; }
 
         /// <summary>
-        /// Enable management over private network.
+        /// Indicates whether it is public or private connection between controller and gateway. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableOverPrivateNetwork")]
         public Input<bool>? EnableOverPrivateNetwork { get; set; }
 
         /// <summary>
-        /// LAN interface IP / prefix.
+        /// LAN interface IP and subnet prefix.
         /// </summary>
         [Input("lanInterfaceIpPrefix")]
         public Input<string>? LanInterfaceIpPrefix { get; set; }
 
         /// <summary>
-        /// Local AS number.
+        /// BGP AS Number to assign to Edge as a CaaG.
         /// </summary>
         [Input("localAsNumber")]
         public Input<string>? LocalAsNumber { get; set; }
 
         /// <summary>
-        /// Management default gateway IP.
+        /// Management default gateway IP. Required and valid when `management_interface_config` is "Static".
         /// </summary>
         [Input("managementDefaultGatewayIp")]
         public Input<string>? ManagementDefaultGatewayIp { get; set; }
 
         /// <summary>
-        /// Management egress gateway IP / prefix.
+        /// Management egress gateway IP and subnet prefix.
         /// </summary>
         [Input("managementEgressIpPrefix")]
         public Input<string>? ManagementEgressIpPrefix { get; set; }
 
         /// <summary>
-        /// Management interface configuration. Valid values: 'DHCP' and 'Static'.
+        /// Management interface configuration. Valid values: "DHCP", "Static".
         /// </summary>
         [Input("managementInterfaceConfig")]
         public Input<string>? ManagementInterfaceConfig { get; set; }
 
         /// <summary>
-        /// Management interface IP / prefix.
+        /// Management interface IP and subnet prefix. Required and valid when `management_interface_config` is "Static".
         /// </summary>
         [Input("managementInterfaceIpPrefix")]
         public Input<string>? ManagementInterfaceIpPrefix { get; set; }
@@ -317,7 +387,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _prependAsPaths;
 
         /// <summary>
-        /// AS path prepend.
+        /// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires local_as_number to be set. Type: List.
         /// </summary>
         public InputList<string> PrependAsPaths
         {
@@ -326,7 +396,7 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Secondary DNS server IP.
+        /// Secondary DNS server IP. Required and valid when `management_interface_config` is "Static".
         /// </summary>
         [Input("secondaryDnsServerIp")]
         public Input<string>? SecondaryDnsServerIp { get; set; }
@@ -344,19 +414,19 @@ namespace Pulumi.Aviatrix
         public Input<string>? WanDefaultGatewayIp { get; set; }
 
         /// <summary>
-        /// WAN interface IP / prefix.
+        /// WAN interface IP and subnet prefix.
         /// </summary>
         [Input("wanInterfaceIpPrefix")]
         public Input<string>? WanInterfaceIpPrefix { get; set; }
 
         /// <summary>
-        /// The location where the Edge as a CaaG ZTP file will be stored.
+        /// The folder path where the ZTP file will be downloaded.
         /// </summary>
         [Input("ztpFileDownloadPath")]
         public Input<string>? ZtpFileDownloadPath { get; set; }
 
         /// <summary>
-        /// ZTP file type.
+        /// ZTP file type. Valid values: "iso", "cloud-init".
         /// </summary>
         [Input("ztpFileType")]
         public Input<string>? ZtpFileType { get; set; }

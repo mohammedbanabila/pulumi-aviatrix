@@ -19,9 +19,9 @@ class AviatrixSegmentationNetworkDomainAssociationArgs:
                  transit_gateway_name: pulumi.Input[str]):
         """
         The set of arguments for constructing a AviatrixSegmentationNetworkDomainAssociation resource.
-        :param pulumi.Input[str] attachment_name: Attachment name, either Spoke or Edge.
-        :param pulumi.Input[str] network_domain_name: Network Domain name.
-        :param pulumi.Input[str] transit_gateway_name: Transit Gateway name.
+        :param pulumi.Input[str] attachment_name: Name of the transit gateway attachment, Spoke or Edge, to associate with the network domain.
+        :param pulumi.Input[str] network_domain_name: Name of the Segmentation Network Domain.
+        :param pulumi.Input[str] transit_gateway_name: Name of the Transit Gateway.
         """
         pulumi.set(__self__, "attachment_name", attachment_name)
         pulumi.set(__self__, "network_domain_name", network_domain_name)
@@ -31,7 +31,7 @@ class AviatrixSegmentationNetworkDomainAssociationArgs:
     @pulumi.getter(name="attachmentName")
     def attachment_name(self) -> pulumi.Input[str]:
         """
-        Attachment name, either Spoke or Edge.
+        Name of the transit gateway attachment, Spoke or Edge, to associate with the network domain.
         """
         return pulumi.get(self, "attachment_name")
 
@@ -43,7 +43,7 @@ class AviatrixSegmentationNetworkDomainAssociationArgs:
     @pulumi.getter(name="networkDomainName")
     def network_domain_name(self) -> pulumi.Input[str]:
         """
-        Network Domain name.
+        Name of the Segmentation Network Domain.
         """
         return pulumi.get(self, "network_domain_name")
 
@@ -55,7 +55,7 @@ class AviatrixSegmentationNetworkDomainAssociationArgs:
     @pulumi.getter(name="transitGatewayName")
     def transit_gateway_name(self) -> pulumi.Input[str]:
         """
-        Transit Gateway name.
+        Name of the Transit Gateway.
         """
         return pulumi.get(self, "transit_gateway_name")
 
@@ -72,9 +72,9 @@ class _AviatrixSegmentationNetworkDomainAssociationState:
                  transit_gateway_name: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixSegmentationNetworkDomainAssociation resources.
-        :param pulumi.Input[str] attachment_name: Attachment name, either Spoke or Edge.
-        :param pulumi.Input[str] network_domain_name: Network Domain name.
-        :param pulumi.Input[str] transit_gateway_name: Transit Gateway name.
+        :param pulumi.Input[str] attachment_name: Name of the transit gateway attachment, Spoke or Edge, to associate with the network domain.
+        :param pulumi.Input[str] network_domain_name: Name of the Segmentation Network Domain.
+        :param pulumi.Input[str] transit_gateway_name: Name of the Transit Gateway.
         """
         if attachment_name is not None:
             pulumi.set(__self__, "attachment_name", attachment_name)
@@ -87,7 +87,7 @@ class _AviatrixSegmentationNetworkDomainAssociationState:
     @pulumi.getter(name="attachmentName")
     def attachment_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Attachment name, either Spoke or Edge.
+        Name of the transit gateway attachment, Spoke or Edge, to associate with the network domain.
         """
         return pulumi.get(self, "attachment_name")
 
@@ -99,7 +99,7 @@ class _AviatrixSegmentationNetworkDomainAssociationState:
     @pulumi.getter(name="networkDomainName")
     def network_domain_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Network Domain name.
+        Name of the Segmentation Network Domain.
         """
         return pulumi.get(self, "network_domain_name")
 
@@ -111,7 +111,7 @@ class _AviatrixSegmentationNetworkDomainAssociationState:
     @pulumi.getter(name="transitGatewayName")
     def transit_gateway_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Transit Gateway name.
+        Name of the Transit Gateway.
         """
         return pulumi.get(self, "transit_gateway_name")
 
@@ -130,12 +130,34 @@ class AviatrixSegmentationNetworkDomainAssociation(pulumi.CustomResource):
                  transit_gateway_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixSegmentationNetworkDomainAssociation resource with the given unique name, props, and options.
+        The **aviatrix_segmentation_network_domain_association** resource handles creation of [Transit Segmentation](https://docs.aviatrix.com/HowTos/transit_segmentation_faq.html) Network Domain and Transit Gateway Attachment Associations.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Segmentation Network Domain Association
+        test_segmentation_network_domain_association = aviatrix.AviatrixSegmentationNetworkDomainAssociation("testSegmentationNetworkDomainAssociation",
+            attachment_name="attachment-name",
+            network_domain_name="network-domain-name",
+            transit_gateway_name="transit-gw-name")
+        ```
+
+        ## Import
+
+        **aviatrix_segmentation_network_domain_association** can be imported using `transit_gateway_name`, `network_domain_name` and `attachment_name` separated by a `~` e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixSegmentationNetworkDomainAssociation:AviatrixSegmentationNetworkDomainAssociation test transit_gateway_name~network_domain_name~attachment_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] attachment_name: Attachment name, either Spoke or Edge.
-        :param pulumi.Input[str] network_domain_name: Network Domain name.
-        :param pulumi.Input[str] transit_gateway_name: Transit Gateway name.
+        :param pulumi.Input[str] attachment_name: Name of the transit gateway attachment, Spoke or Edge, to associate with the network domain.
+        :param pulumi.Input[str] network_domain_name: Name of the Segmentation Network Domain.
+        :param pulumi.Input[str] transit_gateway_name: Name of the Transit Gateway.
         """
         ...
     @overload
@@ -144,7 +166,29 @@ class AviatrixSegmentationNetworkDomainAssociation(pulumi.CustomResource):
                  args: AviatrixSegmentationNetworkDomainAssociationArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixSegmentationNetworkDomainAssociation resource with the given unique name, props, and options.
+        The **aviatrix_segmentation_network_domain_association** resource handles creation of [Transit Segmentation](https://docs.aviatrix.com/HowTos/transit_segmentation_faq.html) Network Domain and Transit Gateway Attachment Associations.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Segmentation Network Domain Association
+        test_segmentation_network_domain_association = aviatrix.AviatrixSegmentationNetworkDomainAssociation("testSegmentationNetworkDomainAssociation",
+            attachment_name="attachment-name",
+            network_domain_name="network-domain-name",
+            transit_gateway_name="transit-gw-name")
+        ```
+
+        ## Import
+
+        **aviatrix_segmentation_network_domain_association** can be imported using `transit_gateway_name`, `network_domain_name` and `attachment_name` separated by a `~` e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixSegmentationNetworkDomainAssociation:AviatrixSegmentationNetworkDomainAssociation test transit_gateway_name~network_domain_name~attachment_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixSegmentationNetworkDomainAssociationArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -201,9 +245,9 @@ class AviatrixSegmentationNetworkDomainAssociation(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] attachment_name: Attachment name, either Spoke or Edge.
-        :param pulumi.Input[str] network_domain_name: Network Domain name.
-        :param pulumi.Input[str] transit_gateway_name: Transit Gateway name.
+        :param pulumi.Input[str] attachment_name: Name of the transit gateway attachment, Spoke or Edge, to associate with the network domain.
+        :param pulumi.Input[str] network_domain_name: Name of the Segmentation Network Domain.
+        :param pulumi.Input[str] transit_gateway_name: Name of the Transit Gateway.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -218,7 +262,7 @@ class AviatrixSegmentationNetworkDomainAssociation(pulumi.CustomResource):
     @pulumi.getter(name="attachmentName")
     def attachment_name(self) -> pulumi.Output[str]:
         """
-        Attachment name, either Spoke or Edge.
+        Name of the transit gateway attachment, Spoke or Edge, to associate with the network domain.
         """
         return pulumi.get(self, "attachment_name")
 
@@ -226,7 +270,7 @@ class AviatrixSegmentationNetworkDomainAssociation(pulumi.CustomResource):
     @pulumi.getter(name="networkDomainName")
     def network_domain_name(self) -> pulumi.Output[str]:
         """
-        Network Domain name.
+        Name of the Segmentation Network Domain.
         """
         return pulumi.get(self, "network_domain_name")
 
@@ -234,7 +278,7 @@ class AviatrixSegmentationNetworkDomainAssociation(pulumi.CustomResource):
     @pulumi.getter(name="transitGatewayName")
     def transit_gateway_name(self) -> pulumi.Output[str]:
         """
-        Transit Gateway name.
+        Name of the Transit Gateway.
         """
         return pulumi.get(self, "transit_gateway_name")
 

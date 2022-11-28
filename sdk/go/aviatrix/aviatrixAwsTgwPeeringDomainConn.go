@@ -11,6 +11,46 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_aws_tgw_peering_domain_conn** resource allows the creation and management of Aviatrix domain connections between peered AWS TGWs.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixAwsTgwPeeringDomainConn(ctx, "test", &aviatrix.AviatrixAwsTgwPeeringDomainConnArgs{
+//				DomainName1: pulumi.String("Default_Domain"),
+//				DomainName2: pulumi.String("Default_Domain"),
+//				TgwName1:    pulumi.String("tgw1"),
+//				TgwName2:    pulumi.String("tgw2"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **aws_tgw_peering_domain_conn** can be imported using the `tgw_name1`, `domain_name1`, `tgw_name2` and `domain_name2`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixAwsTgwPeeringDomainConn:AviatrixAwsTgwPeeringDomainConn test tgw_name1:domain_name1~tgw_name2:domain_name2
+//
+// ```
 type AviatrixAwsTgwPeeringDomainConn struct {
 	pulumi.CustomResourceState
 
@@ -18,9 +58,9 @@ type AviatrixAwsTgwPeeringDomainConn struct {
 	DomainName1 pulumi.StringOutput `pulumi:"domainName1"`
 	// The name of the destination domain to make a connection.
 	DomainName2 pulumi.StringOutput `pulumi:"domainName2"`
-	// The AWS tgw name of the source domain to make a connection.
+	// The AWS TGW name of the source domain to make a connection.
 	TgwName1 pulumi.StringOutput `pulumi:"tgwName1"`
-	// The AWS tgw name of the destination domain to make a connection.
+	// The AWS TGW name of the destination domain to make a connection.
 	TgwName2 pulumi.StringOutput `pulumi:"tgwName2"`
 }
 
@@ -70,9 +110,9 @@ type aviatrixAwsTgwPeeringDomainConnState struct {
 	DomainName1 *string `pulumi:"domainName1"`
 	// The name of the destination domain to make a connection.
 	DomainName2 *string `pulumi:"domainName2"`
-	// The AWS tgw name of the source domain to make a connection.
+	// The AWS TGW name of the source domain to make a connection.
 	TgwName1 *string `pulumi:"tgwName1"`
-	// The AWS tgw name of the destination domain to make a connection.
+	// The AWS TGW name of the destination domain to make a connection.
 	TgwName2 *string `pulumi:"tgwName2"`
 }
 
@@ -81,9 +121,9 @@ type AviatrixAwsTgwPeeringDomainConnState struct {
 	DomainName1 pulumi.StringPtrInput
 	// The name of the destination domain to make a connection.
 	DomainName2 pulumi.StringPtrInput
-	// The AWS tgw name of the source domain to make a connection.
+	// The AWS TGW name of the source domain to make a connection.
 	TgwName1 pulumi.StringPtrInput
-	// The AWS tgw name of the destination domain to make a connection.
+	// The AWS TGW name of the destination domain to make a connection.
 	TgwName2 pulumi.StringPtrInput
 }
 
@@ -96,9 +136,9 @@ type aviatrixAwsTgwPeeringDomainConnArgs struct {
 	DomainName1 string `pulumi:"domainName1"`
 	// The name of the destination domain to make a connection.
 	DomainName2 string `pulumi:"domainName2"`
-	// The AWS tgw name of the source domain to make a connection.
+	// The AWS TGW name of the source domain to make a connection.
 	TgwName1 string `pulumi:"tgwName1"`
-	// The AWS tgw name of the destination domain to make a connection.
+	// The AWS TGW name of the destination domain to make a connection.
 	TgwName2 string `pulumi:"tgwName2"`
 }
 
@@ -108,9 +148,9 @@ type AviatrixAwsTgwPeeringDomainConnArgs struct {
 	DomainName1 pulumi.StringInput
 	// The name of the destination domain to make a connection.
 	DomainName2 pulumi.StringInput
-	// The AWS tgw name of the source domain to make a connection.
+	// The AWS TGW name of the source domain to make a connection.
 	TgwName1 pulumi.StringInput
-	// The AWS tgw name of the destination domain to make a connection.
+	// The AWS TGW name of the destination domain to make a connection.
 	TgwName2 pulumi.StringInput
 }
 
@@ -211,12 +251,12 @@ func (o AviatrixAwsTgwPeeringDomainConnOutput) DomainName2() pulumi.StringOutput
 	return o.ApplyT(func(v *AviatrixAwsTgwPeeringDomainConn) pulumi.StringOutput { return v.DomainName2 }).(pulumi.StringOutput)
 }
 
-// The AWS tgw name of the source domain to make a connection.
+// The AWS TGW name of the source domain to make a connection.
 func (o AviatrixAwsTgwPeeringDomainConnOutput) TgwName1() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwPeeringDomainConn) pulumi.StringOutput { return v.TgwName1 }).(pulumi.StringOutput)
 }
 
-// The AWS tgw name of the destination domain to make a connection.
+// The AWS TGW name of the destination domain to make a connection.
 func (o AviatrixAwsTgwPeeringDomainConnOutput) TgwName2() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwPeeringDomainConn) pulumi.StringOutput { return v.TgwName2 }).(pulumi.StringOutput)
 }

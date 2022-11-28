@@ -11,14 +11,57 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_spoke_gateway_subnet_group** resource creates and manages the spoke gateway subnet groups.
+//
+// > **NOTE:** This feature is only valid for Azure.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixSpokeGatewaySubnetGroup(ctx, "test", &aviatrix.AviatrixSpokeGatewaySubnetGroupArgs{
+//				GwName: pulumi.String("spoke"),
+//				Subnets: pulumi.StringArray{
+//					pulumi.String("10.2.48.0/20~~subnet1"),
+//					pulumi.String("10.2.64.0/20~~subnet2"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **spoke_gateway_subnet_group** can be imported using the `gw_name` and `name`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixSpokeGatewaySubnetGroup:AviatrixSpokeGatewaySubnetGroup test gw_name~name
+//
+// ```
 type AviatrixSpokeGatewaySubnetGroup struct {
 	pulumi.CustomResourceState
 
-	// Spoke gateway name.
+	// Aviatrix spoke gateway name.
 	GwName pulumi.StringOutput `pulumi:"gwName"`
-	// Subnet group name.
+	// Name of spoke gateway subnet group.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// A set of subnets in the subnet group.
+	// A set of subnets in the subnet group. The format of each subnet must be "CIDR~~subnet name". Example: `["10.2.48.0/20~~subnet1", "10.2.64.0/20~~subnet2"]`
 	Subnets pulumi.StringArrayOutput `pulumi:"subnets"`
 }
 
@@ -55,20 +98,20 @@ func GetAviatrixSpokeGatewaySubnetGroup(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixSpokeGatewaySubnetGroup resources.
 type aviatrixSpokeGatewaySubnetGroupState struct {
-	// Spoke gateway name.
+	// Aviatrix spoke gateway name.
 	GwName *string `pulumi:"gwName"`
-	// Subnet group name.
+	// Name of spoke gateway subnet group.
 	Name *string `pulumi:"name"`
-	// A set of subnets in the subnet group.
+	// A set of subnets in the subnet group. The format of each subnet must be "CIDR~~subnet name". Example: `["10.2.48.0/20~~subnet1", "10.2.64.0/20~~subnet2"]`
 	Subnets []string `pulumi:"subnets"`
 }
 
 type AviatrixSpokeGatewaySubnetGroupState struct {
-	// Spoke gateway name.
+	// Aviatrix spoke gateway name.
 	GwName pulumi.StringPtrInput
-	// Subnet group name.
+	// Name of spoke gateway subnet group.
 	Name pulumi.StringPtrInput
-	// A set of subnets in the subnet group.
+	// A set of subnets in the subnet group. The format of each subnet must be "CIDR~~subnet name". Example: `["10.2.48.0/20~~subnet1", "10.2.64.0/20~~subnet2"]`
 	Subnets pulumi.StringArrayInput
 }
 
@@ -77,21 +120,21 @@ func (AviatrixSpokeGatewaySubnetGroupState) ElementType() reflect.Type {
 }
 
 type aviatrixSpokeGatewaySubnetGroupArgs struct {
-	// Spoke gateway name.
+	// Aviatrix spoke gateway name.
 	GwName string `pulumi:"gwName"`
-	// Subnet group name.
+	// Name of spoke gateway subnet group.
 	Name *string `pulumi:"name"`
-	// A set of subnets in the subnet group.
+	// A set of subnets in the subnet group. The format of each subnet must be "CIDR~~subnet name". Example: `["10.2.48.0/20~~subnet1", "10.2.64.0/20~~subnet2"]`
 	Subnets []string `pulumi:"subnets"`
 }
 
 // The set of arguments for constructing a AviatrixSpokeGatewaySubnetGroup resource.
 type AviatrixSpokeGatewaySubnetGroupArgs struct {
-	// Spoke gateway name.
+	// Aviatrix spoke gateway name.
 	GwName pulumi.StringInput
-	// Subnet group name.
+	// Name of spoke gateway subnet group.
 	Name pulumi.StringPtrInput
-	// A set of subnets in the subnet group.
+	// A set of subnets in the subnet group. The format of each subnet must be "CIDR~~subnet name". Example: `["10.2.48.0/20~~subnet1", "10.2.64.0/20~~subnet2"]`
 	Subnets pulumi.StringArrayInput
 }
 
@@ -182,17 +225,17 @@ func (o AviatrixSpokeGatewaySubnetGroupOutput) ToAviatrixSpokeGatewaySubnetGroup
 	return o
 }
 
-// Spoke gateway name.
+// Aviatrix spoke gateway name.
 func (o AviatrixSpokeGatewaySubnetGroupOutput) GwName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGatewaySubnetGroup) pulumi.StringOutput { return v.GwName }).(pulumi.StringOutput)
 }
 
-// Subnet group name.
+// Name of spoke gateway subnet group.
 func (o AviatrixSpokeGatewaySubnetGroupOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGatewaySubnetGroup) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// A set of subnets in the subnet group.
+// A set of subnets in the subnet group. The format of each subnet must be "CIDR~~subnet name". Example: `["10.2.48.0/20~~subnet1", "10.2.64.0/20~~subnet2"]`
 func (o AviatrixSpokeGatewaySubnetGroupOutput) Subnets() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGatewaySubnetGroup) pulumi.StringArrayOutput { return v.Subnets }).(pulumi.StringArrayOutput)
 }

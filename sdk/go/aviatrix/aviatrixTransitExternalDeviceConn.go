@@ -11,107 +11,108 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// ## Import
+//
+// **transit_external_device_conn** can be imported using the `connection_name` and `vpc_id`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixTransitExternalDeviceConn:AviatrixTransitExternalDeviceConn test connection_name~vpc_id
+//
+// ```
 type AviatrixTransitExternalDeviceConn struct {
 	pulumi.CustomResourceState
 
-	// Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
+	// Set of approved CIDRs. Requires `enableLearnedCidrsApproval` to be true. Type: Set(String).
 	ApprovedCidrs pulumi.StringArrayOutput `pulumi:"approvedCidrs"`
-	// Backup BGP MD5 authentication key.
+	// Backup BGP MD5 Authentication Key. Valid with HA enabled for connection. Example: 'avx03,avx04'. For BGP LAN ActiveMesh mode disabled, example: 'avx03'.
 	BackupBgpMd5Key pulumi.StringPtrOutput `pulumi:"backupBgpMd5Key"`
-	// Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+	// Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required if HA enabled for 'bgp' connection.
 	BackupBgpRemoteAsNum pulumi.StringPtrOutput `pulumi:"backupBgpRemoteAsNum"`
 	// Backup direct connect for backup external device.
 	BackupDirectConnect pulumi.BoolPtrOutput `pulumi:"backupDirectConnect"`
-	// Backup Local LAN IP. Required for GCP BGP over LAN Connection with HA enabled.
+	// Backup Local LAN IP. Required for GCP HA BGP over LAN connection.
 	BackupLocalLanIp pulumi.StringOutput `pulumi:"backupLocalLanIp"`
 	// Source CIDR for the tunnel from the backup Aviatrix transit gateway.
 	BackupLocalTunnelCidr pulumi.StringOutput `pulumi:"backupLocalTunnelCidr"`
-	// Backup pre shared key.
+	// Backup Pre-Shared Key.
 	BackupPreSharedKey pulumi.StringPtrOutput `pulumi:"backupPreSharedKey"`
 	// Backup remote gateway IP.
 	BackupRemoteGatewayIp pulumi.StringPtrOutput `pulumi:"backupRemoteGatewayIp"`
-	// Backup Remote LAN IP.
+	// Backup Remote LAN IP. Required for HA BGP over LAN connection.
 	BackupRemoteLanIp pulumi.StringPtrOutput `pulumi:"backupRemoteLanIp"`
 	// Destination CIDR for the tunnel to the backup external device.
 	BackupRemoteTunnelCidr pulumi.StringOutput `pulumi:"backupRemoteTunnelCidr"`
-	// BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+	// BGP local ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
 	BgpLocalAsNum pulumi.StringPtrOutput `pulumi:"bgpLocalAsNum"`
-	// BGP MD5 authentication key.
+	// BGP MD5 Authentication Key. Example: 'avx01,avx02'. For BGP LAN ActiveMesh mode disabled, example: 'avx01'.
 	BgpMd5Key pulumi.StringPtrOutput `pulumi:"bgpMd5Key"`
-	// BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+	// BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
 	BgpRemoteAsNum pulumi.StringPtrOutput `pulumi:"bgpRemoteAsNum"`
-	// The name of the transit external device connection which is going to be created.
+	// Transit external device connection name.
 	ConnectionName pulumi.StringOutput `pulumi:"connectionName"`
 	// Connection type. Valid values: 'bgp', 'static'. Default value: 'bgp'.
 	ConnectionType pulumi.StringPtrOutput `pulumi:"connectionType"`
-	// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption.
+	// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption. Valid values: true, false. **NOTE: Please see notes here for more information.**
 	CustomAlgorithms pulumi.BoolPtrOutput `pulumi:"customAlgorithms"`
 	// Set true for private network infrastructure.
 	DirectConnect pulumi.BoolPtrOutput `pulumi:"directConnect"`
-	// Switch to enable BGP LAN ActiveMesh. Only valid for GCP with Remote Gateway HA enabled. Default: false. Available as of
-	// provider version R2.21+.
+	// Switch to enable BGP LAN ActiveMesh mode. Only valid for GCP with Remote Gateway HA enabled. Default: false. Available as of provider version R2.21+.
 	EnableBgpLanActivemesh pulumi.BoolPtrOutput `pulumi:"enableBgpLanActivemesh"`
 	// Switch to allow this connection to communicate with a Network Domain via Connection Policy.
 	EnableEdgeSegmentation pulumi.BoolPtrOutput `pulumi:"enableEdgeSegmentation"`
-	// Enable Event Triggered HA.
+	// Enable Event Triggered HA. Default value: false. Valid values: true or false. Available as of provider version R2.19+.
 	EnableEventTriggeredHa pulumi.BoolPtrOutput `pulumi:"enableEventTriggeredHa"`
-	// Set as true if use IKEv2.
+	// Set as true to enable IKEv2 protocol.
 	EnableIkev2 pulumi.BoolPtrOutput `pulumi:"enableIkev2"`
-	// Enable Jumbo Frame for the transit external device connection. Valid values: true, false.
+	// Enable Jumbo Frame for the transit external device connection. Only valid with 'GRE' tunnels under 'bgp' connection. Requires transit to be jumbo frame and insane mode enabled. Valid values: true, false. Default value: false. Available as of provider version R2.22.2+.
 	EnableJumboFrame pulumi.BoolPtrOutput `pulumi:"enableJumboFrame"`
-	// Enable learned CIDR approval for the connection. Only valid with 'connection_type' = 'bgp'. Requires the
-	// transit_gateway's 'learned_cidrs_approval_mode' attribute be set to 'connection'. Valid values: true, false. Default
-	// value: false. Available as of provider version R2.18+.
+	// Enable learned CIDRs approval for the connection. Only valid with `connectionType` = 'bgp'. Requires the transit_gateway's `learnedCidrsApprovalMode` attribute be set to 'connection'. Valid values: true, false. Default value: false. Available as of provider version R2.18+.
 	EnableLearnedCidrsApproval pulumi.BoolPtrOutput `pulumi:"enableLearnedCidrsApproval"`
-	// Name of the Transit Gateway.
+	// Aviatrix transit gateway name.
 	GwName pulumi.StringOutput `pulumi:"gwName"`
 	// Set as true if there are two external devices.
+	// * ` backupRemoteGatewayIp  ` - (Optional) Backup remote gateway IP. Required if HA enabled.
 	HaEnabled pulumi.BoolPtrOutput `pulumi:"haEnabled"`
-	// Local LAN IP. Required for GCP BGP over LAN Connection.
+	// Local LAN IP. Required for GCP BGP over LAN connection.
 	LocalLanIp pulumi.StringOutput `pulumi:"localLanIp"`
 	// Source CIDR for the tunnel from the Aviatrix transit gateway.
 	LocalTunnelCidr pulumi.StringOutput `pulumi:"localTunnelCidr"`
-	// Configure manual BGP advertised CIDRs for this connection. Only valid with 'connection_type' = 'bgp'. Available as of
-	// provider version R2.18+.
+	// Configure manual BGP advertised CIDRs for this connection. Only valid with `connectionType`= 'bgp'. Available as of provider version R2.18+.
 	ManualBgpAdvertisedCidrs pulumi.StringArrayOutput `pulumi:"manualBgpAdvertisedCidrs"`
-	// Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'.
+	// Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'. Default value: 'SHA-256'.
 	Phase1Authentication pulumi.StringPtrOutput `pulumi:"phase1Authentication"`
-	// Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+	// Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
 	Phase1DhGroups pulumi.StringPtrOutput `pulumi:"phase1DhGroups"`
-	// Phase one Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC' and 'AES-256-CBC', 'AES-128-GCM-64',
-	// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', and 'AES-256-GCM-128'.
+	// Phase one Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", and "AES-256-GCM-128". Default value: "AES-256-CBC".
 	Phase1Encryption pulumi.StringPtrOutput `pulumi:"phase1Encryption"`
-	// Phase 1 remote identifier of the IPsec tunnel.
+	// Phase 1 remote identifier of the IPsec tunnel. This can be configured to be either the public IP address or the private IP address of the peer terminating the IPsec tunnel. Example: ["1.2.3.4"] when HA is disabled, ["1.2.3.4", "5.6.7.8"] when HA is enabled. Available as of provider version R2.19+.
 	Phase1RemoteIdentifiers pulumi.StringArrayOutput `pulumi:"phase1RemoteIdentifiers"`
-	// Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'.
+	// Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'. Default value: 'HMAC-SHA-256'.
 	Phase2Authentication pulumi.StringPtrOutput `pulumi:"phase2Authentication"`
-	// Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+	// Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
 	Phase2DhGroups pulumi.StringPtrOutput `pulumi:"phase2DhGroups"`
-	// Phase two Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'AES-128-GCM-64',
-	// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', 'AES-256-GCM-128', and 'NULL-ENCR'.
+	// Phase two Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", "AES-256-GCM-128" and "NULL-ENCR". Default value: "AES-256-CBC".
 	Phase2Encryption pulumi.StringPtrOutput `pulumi:"phase2Encryption"`
-	// If left blank, the pre-shared key will be auto generated.
+	// Pre-Shared Key.
 	PreSharedKey pulumi.StringPtrOutput `pulumi:"preSharedKey"`
-	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection.
+	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Available as of provider version R2.19.2.
 	PrependAsPaths pulumi.StringArrayOutput `pulumi:"prependAsPaths"`
-	// Remote Gateway IP.
+	// Remote gateway IP. Required when `tunnelProtocol` != 'LAN'.
 	RemoteGatewayIp pulumi.StringPtrOutput `pulumi:"remoteGatewayIp"`
-	// Remote LAN IP.
+	// Remote LAN IP. Required for BGP over LAN connection.
 	RemoteLanIp pulumi.StringPtrOutput `pulumi:"remoteLanIp"`
 	// Remote CIDRs joined as a string with ','. Required for a 'static' type connection.
 	RemoteSubnet pulumi.StringPtrOutput `pulumi:"remoteSubnet"`
 	// Destination CIDR for the tunnel to the external device.
 	RemoteTunnelCidr pulumi.StringOutput `pulumi:"remoteTunnelCidr"`
-	// Name of the remote VPC for a LAN BGP connection. Only valid when 'connection_type' = 'bgp' and tunnel_protocol' = 'LAN'
-	// with an Azure transit gateway. Must be in the form "<VNET-name>:<resource-group-name>". Available as of provider version
-	// R2.18+.
+	// Name of the remote VPC for a LAN BGP connection with an Azure Transit Gateway. Required when `connectionType` = 'bgp' and `tunnelProtocol` = 'LAN' with an Azure transit gateway. Must be in the format "<vnet-name>:<resource-group-name>:<subscription-id>". Available as of provider version R2.18+.
 	RemoteVpcName pulumi.StringPtrOutput `pulumi:"remoteVpcName"`
-	// Only valid for Transit Gateway's with Active-Standby Mode enabled. Valid values: true, false. Default: false.
+	// Switch to HA Standby Transit Gateway connection. Only valid with Transit Gateway that has [Active-Standby Mode](https://docs.aviatrix.com/HowTos/transit_advanced.html#active-standby) enabled and for non-HA external device. Valid values: true, false. Default: false. Available in provider version R2.17.1+.
 	SwitchToHaStandbyGateway pulumi.BoolPtrOutput `pulumi:"switchToHaStandbyGateway"`
-	// Tunnel Protocol. Valid values: 'IPsec', 'GRE' or 'LAN'. Default value: 'IPsec'. Case insensitive.
+	// Tunnel protocol, only valid with `connectionType` = 'bgp'. Valid values: 'IPsec', 'GRE' or 'LAN'. Default value: 'IPsec'. Case insensitive. Available as of provider version R2.18+.
 	TunnelProtocol pulumi.StringPtrOutput `pulumi:"tunnelProtocol"`
-	// ID of the VPC where the Transit Gateway is located. For GCP BGP over LAN connection, it is in the format of
-	// 'vpc_name~-~account_name'.
+	// VPC ID of the Aviatrix transit gateway. For GCP BGP over LAN connection, it is in the format of "vpc_name~-~project_name".
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
 }
 
@@ -131,6 +132,25 @@ func NewAviatrixTransitExternalDeviceConn(ctx *pulumi.Context,
 	if args.VpcId == nil {
 		return nil, errors.New("invalid value for required argument 'VpcId'")
 	}
+	if args.BackupBgpMd5Key != nil {
+		args.BackupBgpMd5Key = pulumi.ToSecret(args.BackupBgpMd5Key).(pulumi.StringPtrOutput)
+	}
+	if args.BackupPreSharedKey != nil {
+		args.BackupPreSharedKey = pulumi.ToSecret(args.BackupPreSharedKey).(pulumi.StringPtrOutput)
+	}
+	if args.BgpMd5Key != nil {
+		args.BgpMd5Key = pulumi.ToSecret(args.BgpMd5Key).(pulumi.StringPtrOutput)
+	}
+	if args.PreSharedKey != nil {
+		args.PreSharedKey = pulumi.ToSecret(args.PreSharedKey).(pulumi.StringPtrOutput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"backupBgpMd5Key",
+		"backupPreSharedKey",
+		"bgpMd5Key",
+		"preSharedKey",
+	})
+	opts = append(opts, secrets)
 	opts = pkgResourceDefaultOpts(opts)
 	var resource AviatrixTransitExternalDeviceConn
 	err := ctx.RegisterResource("aviatrix:index/aviatrixTransitExternalDeviceConn:AviatrixTransitExternalDeviceConn", name, args, &resource, opts...)
@@ -154,206 +174,190 @@ func GetAviatrixTransitExternalDeviceConn(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixTransitExternalDeviceConn resources.
 type aviatrixTransitExternalDeviceConnState struct {
-	// Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
+	// Set of approved CIDRs. Requires `enableLearnedCidrsApproval` to be true. Type: Set(String).
 	ApprovedCidrs []string `pulumi:"approvedCidrs"`
-	// Backup BGP MD5 authentication key.
+	// Backup BGP MD5 Authentication Key. Valid with HA enabled for connection. Example: 'avx03,avx04'. For BGP LAN ActiveMesh mode disabled, example: 'avx03'.
 	BackupBgpMd5Key *string `pulumi:"backupBgpMd5Key"`
-	// Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+	// Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required if HA enabled for 'bgp' connection.
 	BackupBgpRemoteAsNum *string `pulumi:"backupBgpRemoteAsNum"`
 	// Backup direct connect for backup external device.
 	BackupDirectConnect *bool `pulumi:"backupDirectConnect"`
-	// Backup Local LAN IP. Required for GCP BGP over LAN Connection with HA enabled.
+	// Backup Local LAN IP. Required for GCP HA BGP over LAN connection.
 	BackupLocalLanIp *string `pulumi:"backupLocalLanIp"`
 	// Source CIDR for the tunnel from the backup Aviatrix transit gateway.
 	BackupLocalTunnelCidr *string `pulumi:"backupLocalTunnelCidr"`
-	// Backup pre shared key.
+	// Backup Pre-Shared Key.
 	BackupPreSharedKey *string `pulumi:"backupPreSharedKey"`
 	// Backup remote gateway IP.
 	BackupRemoteGatewayIp *string `pulumi:"backupRemoteGatewayIp"`
-	// Backup Remote LAN IP.
+	// Backup Remote LAN IP. Required for HA BGP over LAN connection.
 	BackupRemoteLanIp *string `pulumi:"backupRemoteLanIp"`
 	// Destination CIDR for the tunnel to the backup external device.
 	BackupRemoteTunnelCidr *string `pulumi:"backupRemoteTunnelCidr"`
-	// BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+	// BGP local ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
 	BgpLocalAsNum *string `pulumi:"bgpLocalAsNum"`
-	// BGP MD5 authentication key.
+	// BGP MD5 Authentication Key. Example: 'avx01,avx02'. For BGP LAN ActiveMesh mode disabled, example: 'avx01'.
 	BgpMd5Key *string `pulumi:"bgpMd5Key"`
-	// BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+	// BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
 	BgpRemoteAsNum *string `pulumi:"bgpRemoteAsNum"`
-	// The name of the transit external device connection which is going to be created.
+	// Transit external device connection name.
 	ConnectionName *string `pulumi:"connectionName"`
 	// Connection type. Valid values: 'bgp', 'static'. Default value: 'bgp'.
 	ConnectionType *string `pulumi:"connectionType"`
-	// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption.
+	// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption. Valid values: true, false. **NOTE: Please see notes here for more information.**
 	CustomAlgorithms *bool `pulumi:"customAlgorithms"`
 	// Set true for private network infrastructure.
 	DirectConnect *bool `pulumi:"directConnect"`
-	// Switch to enable BGP LAN ActiveMesh. Only valid for GCP with Remote Gateway HA enabled. Default: false. Available as of
-	// provider version R2.21+.
+	// Switch to enable BGP LAN ActiveMesh mode. Only valid for GCP with Remote Gateway HA enabled. Default: false. Available as of provider version R2.21+.
 	EnableBgpLanActivemesh *bool `pulumi:"enableBgpLanActivemesh"`
 	// Switch to allow this connection to communicate with a Network Domain via Connection Policy.
 	EnableEdgeSegmentation *bool `pulumi:"enableEdgeSegmentation"`
-	// Enable Event Triggered HA.
+	// Enable Event Triggered HA. Default value: false. Valid values: true or false. Available as of provider version R2.19+.
 	EnableEventTriggeredHa *bool `pulumi:"enableEventTriggeredHa"`
-	// Set as true if use IKEv2.
+	// Set as true to enable IKEv2 protocol.
 	EnableIkev2 *bool `pulumi:"enableIkev2"`
-	// Enable Jumbo Frame for the transit external device connection. Valid values: true, false.
+	// Enable Jumbo Frame for the transit external device connection. Only valid with 'GRE' tunnels under 'bgp' connection. Requires transit to be jumbo frame and insane mode enabled. Valid values: true, false. Default value: false. Available as of provider version R2.22.2+.
 	EnableJumboFrame *bool `pulumi:"enableJumboFrame"`
-	// Enable learned CIDR approval for the connection. Only valid with 'connection_type' = 'bgp'. Requires the
-	// transit_gateway's 'learned_cidrs_approval_mode' attribute be set to 'connection'. Valid values: true, false. Default
-	// value: false. Available as of provider version R2.18+.
+	// Enable learned CIDRs approval for the connection. Only valid with `connectionType` = 'bgp'. Requires the transit_gateway's `learnedCidrsApprovalMode` attribute be set to 'connection'. Valid values: true, false. Default value: false. Available as of provider version R2.18+.
 	EnableLearnedCidrsApproval *bool `pulumi:"enableLearnedCidrsApproval"`
-	// Name of the Transit Gateway.
+	// Aviatrix transit gateway name.
 	GwName *string `pulumi:"gwName"`
 	// Set as true if there are two external devices.
+	// * ` backupRemoteGatewayIp  ` - (Optional) Backup remote gateway IP. Required if HA enabled.
 	HaEnabled *bool `pulumi:"haEnabled"`
-	// Local LAN IP. Required for GCP BGP over LAN Connection.
+	// Local LAN IP. Required for GCP BGP over LAN connection.
 	LocalLanIp *string `pulumi:"localLanIp"`
 	// Source CIDR for the tunnel from the Aviatrix transit gateway.
 	LocalTunnelCidr *string `pulumi:"localTunnelCidr"`
-	// Configure manual BGP advertised CIDRs for this connection. Only valid with 'connection_type' = 'bgp'. Available as of
-	// provider version R2.18+.
+	// Configure manual BGP advertised CIDRs for this connection. Only valid with `connectionType`= 'bgp'. Available as of provider version R2.18+.
 	ManualBgpAdvertisedCidrs []string `pulumi:"manualBgpAdvertisedCidrs"`
-	// Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'.
+	// Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'. Default value: 'SHA-256'.
 	Phase1Authentication *string `pulumi:"phase1Authentication"`
-	// Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+	// Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
 	Phase1DhGroups *string `pulumi:"phase1DhGroups"`
-	// Phase one Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC' and 'AES-256-CBC', 'AES-128-GCM-64',
-	// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', and 'AES-256-GCM-128'.
+	// Phase one Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", and "AES-256-GCM-128". Default value: "AES-256-CBC".
 	Phase1Encryption *string `pulumi:"phase1Encryption"`
-	// Phase 1 remote identifier of the IPsec tunnel.
+	// Phase 1 remote identifier of the IPsec tunnel. This can be configured to be either the public IP address or the private IP address of the peer terminating the IPsec tunnel. Example: ["1.2.3.4"] when HA is disabled, ["1.2.3.4", "5.6.7.8"] when HA is enabled. Available as of provider version R2.19+.
 	Phase1RemoteIdentifiers []string `pulumi:"phase1RemoteIdentifiers"`
-	// Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'.
+	// Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'. Default value: 'HMAC-SHA-256'.
 	Phase2Authentication *string `pulumi:"phase2Authentication"`
-	// Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+	// Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
 	Phase2DhGroups *string `pulumi:"phase2DhGroups"`
-	// Phase two Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'AES-128-GCM-64',
-	// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', 'AES-256-GCM-128', and 'NULL-ENCR'.
+	// Phase two Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", "AES-256-GCM-128" and "NULL-ENCR". Default value: "AES-256-CBC".
 	Phase2Encryption *string `pulumi:"phase2Encryption"`
-	// If left blank, the pre-shared key will be auto generated.
+	// Pre-Shared Key.
 	PreSharedKey *string `pulumi:"preSharedKey"`
-	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection.
+	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Available as of provider version R2.19.2.
 	PrependAsPaths []string `pulumi:"prependAsPaths"`
-	// Remote Gateway IP.
+	// Remote gateway IP. Required when `tunnelProtocol` != 'LAN'.
 	RemoteGatewayIp *string `pulumi:"remoteGatewayIp"`
-	// Remote LAN IP.
+	// Remote LAN IP. Required for BGP over LAN connection.
 	RemoteLanIp *string `pulumi:"remoteLanIp"`
 	// Remote CIDRs joined as a string with ','. Required for a 'static' type connection.
 	RemoteSubnet *string `pulumi:"remoteSubnet"`
 	// Destination CIDR for the tunnel to the external device.
 	RemoteTunnelCidr *string `pulumi:"remoteTunnelCidr"`
-	// Name of the remote VPC for a LAN BGP connection. Only valid when 'connection_type' = 'bgp' and tunnel_protocol' = 'LAN'
-	// with an Azure transit gateway. Must be in the form "<VNET-name>:<resource-group-name>". Available as of provider version
-	// R2.18+.
+	// Name of the remote VPC for a LAN BGP connection with an Azure Transit Gateway. Required when `connectionType` = 'bgp' and `tunnelProtocol` = 'LAN' with an Azure transit gateway. Must be in the format "<vnet-name>:<resource-group-name>:<subscription-id>". Available as of provider version R2.18+.
 	RemoteVpcName *string `pulumi:"remoteVpcName"`
-	// Only valid for Transit Gateway's with Active-Standby Mode enabled. Valid values: true, false. Default: false.
+	// Switch to HA Standby Transit Gateway connection. Only valid with Transit Gateway that has [Active-Standby Mode](https://docs.aviatrix.com/HowTos/transit_advanced.html#active-standby) enabled and for non-HA external device. Valid values: true, false. Default: false. Available in provider version R2.17.1+.
 	SwitchToHaStandbyGateway *bool `pulumi:"switchToHaStandbyGateway"`
-	// Tunnel Protocol. Valid values: 'IPsec', 'GRE' or 'LAN'. Default value: 'IPsec'. Case insensitive.
+	// Tunnel protocol, only valid with `connectionType` = 'bgp'. Valid values: 'IPsec', 'GRE' or 'LAN'. Default value: 'IPsec'. Case insensitive. Available as of provider version R2.18+.
 	TunnelProtocol *string `pulumi:"tunnelProtocol"`
-	// ID of the VPC where the Transit Gateway is located. For GCP BGP over LAN connection, it is in the format of
-	// 'vpc_name~-~account_name'.
+	// VPC ID of the Aviatrix transit gateway. For GCP BGP over LAN connection, it is in the format of "vpc_name~-~project_name".
 	VpcId *string `pulumi:"vpcId"`
 }
 
 type AviatrixTransitExternalDeviceConnState struct {
-	// Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
+	// Set of approved CIDRs. Requires `enableLearnedCidrsApproval` to be true. Type: Set(String).
 	ApprovedCidrs pulumi.StringArrayInput
-	// Backup BGP MD5 authentication key.
+	// Backup BGP MD5 Authentication Key. Valid with HA enabled for connection. Example: 'avx03,avx04'. For BGP LAN ActiveMesh mode disabled, example: 'avx03'.
 	BackupBgpMd5Key pulumi.StringPtrInput
-	// Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+	// Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required if HA enabled for 'bgp' connection.
 	BackupBgpRemoteAsNum pulumi.StringPtrInput
 	// Backup direct connect for backup external device.
 	BackupDirectConnect pulumi.BoolPtrInput
-	// Backup Local LAN IP. Required for GCP BGP over LAN Connection with HA enabled.
+	// Backup Local LAN IP. Required for GCP HA BGP over LAN connection.
 	BackupLocalLanIp pulumi.StringPtrInput
 	// Source CIDR for the tunnel from the backup Aviatrix transit gateway.
 	BackupLocalTunnelCidr pulumi.StringPtrInput
-	// Backup pre shared key.
+	// Backup Pre-Shared Key.
 	BackupPreSharedKey pulumi.StringPtrInput
 	// Backup remote gateway IP.
 	BackupRemoteGatewayIp pulumi.StringPtrInput
-	// Backup Remote LAN IP.
+	// Backup Remote LAN IP. Required for HA BGP over LAN connection.
 	BackupRemoteLanIp pulumi.StringPtrInput
 	// Destination CIDR for the tunnel to the backup external device.
 	BackupRemoteTunnelCidr pulumi.StringPtrInput
-	// BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+	// BGP local ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
 	BgpLocalAsNum pulumi.StringPtrInput
-	// BGP MD5 authentication key.
+	// BGP MD5 Authentication Key. Example: 'avx01,avx02'. For BGP LAN ActiveMesh mode disabled, example: 'avx01'.
 	BgpMd5Key pulumi.StringPtrInput
-	// BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+	// BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
 	BgpRemoteAsNum pulumi.StringPtrInput
-	// The name of the transit external device connection which is going to be created.
+	// Transit external device connection name.
 	ConnectionName pulumi.StringPtrInput
 	// Connection type. Valid values: 'bgp', 'static'. Default value: 'bgp'.
 	ConnectionType pulumi.StringPtrInput
-	// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption.
+	// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption. Valid values: true, false. **NOTE: Please see notes here for more information.**
 	CustomAlgorithms pulumi.BoolPtrInput
 	// Set true for private network infrastructure.
 	DirectConnect pulumi.BoolPtrInput
-	// Switch to enable BGP LAN ActiveMesh. Only valid for GCP with Remote Gateway HA enabled. Default: false. Available as of
-	// provider version R2.21+.
+	// Switch to enable BGP LAN ActiveMesh mode. Only valid for GCP with Remote Gateway HA enabled. Default: false. Available as of provider version R2.21+.
 	EnableBgpLanActivemesh pulumi.BoolPtrInput
 	// Switch to allow this connection to communicate with a Network Domain via Connection Policy.
 	EnableEdgeSegmentation pulumi.BoolPtrInput
-	// Enable Event Triggered HA.
+	// Enable Event Triggered HA. Default value: false. Valid values: true or false. Available as of provider version R2.19+.
 	EnableEventTriggeredHa pulumi.BoolPtrInput
-	// Set as true if use IKEv2.
+	// Set as true to enable IKEv2 protocol.
 	EnableIkev2 pulumi.BoolPtrInput
-	// Enable Jumbo Frame for the transit external device connection. Valid values: true, false.
+	// Enable Jumbo Frame for the transit external device connection. Only valid with 'GRE' tunnels under 'bgp' connection. Requires transit to be jumbo frame and insane mode enabled. Valid values: true, false. Default value: false. Available as of provider version R2.22.2+.
 	EnableJumboFrame pulumi.BoolPtrInput
-	// Enable learned CIDR approval for the connection. Only valid with 'connection_type' = 'bgp'. Requires the
-	// transit_gateway's 'learned_cidrs_approval_mode' attribute be set to 'connection'. Valid values: true, false. Default
-	// value: false. Available as of provider version R2.18+.
+	// Enable learned CIDRs approval for the connection. Only valid with `connectionType` = 'bgp'. Requires the transit_gateway's `learnedCidrsApprovalMode` attribute be set to 'connection'. Valid values: true, false. Default value: false. Available as of provider version R2.18+.
 	EnableLearnedCidrsApproval pulumi.BoolPtrInput
-	// Name of the Transit Gateway.
+	// Aviatrix transit gateway name.
 	GwName pulumi.StringPtrInput
 	// Set as true if there are two external devices.
+	// * ` backupRemoteGatewayIp  ` - (Optional) Backup remote gateway IP. Required if HA enabled.
 	HaEnabled pulumi.BoolPtrInput
-	// Local LAN IP. Required for GCP BGP over LAN Connection.
+	// Local LAN IP. Required for GCP BGP over LAN connection.
 	LocalLanIp pulumi.StringPtrInput
 	// Source CIDR for the tunnel from the Aviatrix transit gateway.
 	LocalTunnelCidr pulumi.StringPtrInput
-	// Configure manual BGP advertised CIDRs for this connection. Only valid with 'connection_type' = 'bgp'. Available as of
-	// provider version R2.18+.
+	// Configure manual BGP advertised CIDRs for this connection. Only valid with `connectionType`= 'bgp'. Available as of provider version R2.18+.
 	ManualBgpAdvertisedCidrs pulumi.StringArrayInput
-	// Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'.
+	// Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'. Default value: 'SHA-256'.
 	Phase1Authentication pulumi.StringPtrInput
-	// Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+	// Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
 	Phase1DhGroups pulumi.StringPtrInput
-	// Phase one Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC' and 'AES-256-CBC', 'AES-128-GCM-64',
-	// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', and 'AES-256-GCM-128'.
+	// Phase one Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", and "AES-256-GCM-128". Default value: "AES-256-CBC".
 	Phase1Encryption pulumi.StringPtrInput
-	// Phase 1 remote identifier of the IPsec tunnel.
+	// Phase 1 remote identifier of the IPsec tunnel. This can be configured to be either the public IP address or the private IP address of the peer terminating the IPsec tunnel. Example: ["1.2.3.4"] when HA is disabled, ["1.2.3.4", "5.6.7.8"] when HA is enabled. Available as of provider version R2.19+.
 	Phase1RemoteIdentifiers pulumi.StringArrayInput
-	// Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'.
+	// Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'. Default value: 'HMAC-SHA-256'.
 	Phase2Authentication pulumi.StringPtrInput
-	// Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+	// Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
 	Phase2DhGroups pulumi.StringPtrInput
-	// Phase two Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'AES-128-GCM-64',
-	// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', 'AES-256-GCM-128', and 'NULL-ENCR'.
+	// Phase two Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", "AES-256-GCM-128" and "NULL-ENCR". Default value: "AES-256-CBC".
 	Phase2Encryption pulumi.StringPtrInput
-	// If left blank, the pre-shared key will be auto generated.
+	// Pre-Shared Key.
 	PreSharedKey pulumi.StringPtrInput
-	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection.
+	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Available as of provider version R2.19.2.
 	PrependAsPaths pulumi.StringArrayInput
-	// Remote Gateway IP.
+	// Remote gateway IP. Required when `tunnelProtocol` != 'LAN'.
 	RemoteGatewayIp pulumi.StringPtrInput
-	// Remote LAN IP.
+	// Remote LAN IP. Required for BGP over LAN connection.
 	RemoteLanIp pulumi.StringPtrInput
 	// Remote CIDRs joined as a string with ','. Required for a 'static' type connection.
 	RemoteSubnet pulumi.StringPtrInput
 	// Destination CIDR for the tunnel to the external device.
 	RemoteTunnelCidr pulumi.StringPtrInput
-	// Name of the remote VPC for a LAN BGP connection. Only valid when 'connection_type' = 'bgp' and tunnel_protocol' = 'LAN'
-	// with an Azure transit gateway. Must be in the form "<VNET-name>:<resource-group-name>". Available as of provider version
-	// R2.18+.
+	// Name of the remote VPC for a LAN BGP connection with an Azure Transit Gateway. Required when `connectionType` = 'bgp' and `tunnelProtocol` = 'LAN' with an Azure transit gateway. Must be in the format "<vnet-name>:<resource-group-name>:<subscription-id>". Available as of provider version R2.18+.
 	RemoteVpcName pulumi.StringPtrInput
-	// Only valid for Transit Gateway's with Active-Standby Mode enabled. Valid values: true, false. Default: false.
+	// Switch to HA Standby Transit Gateway connection. Only valid with Transit Gateway that has [Active-Standby Mode](https://docs.aviatrix.com/HowTos/transit_advanced.html#active-standby) enabled and for non-HA external device. Valid values: true, false. Default: false. Available in provider version R2.17.1+.
 	SwitchToHaStandbyGateway pulumi.BoolPtrInput
-	// Tunnel Protocol. Valid values: 'IPsec', 'GRE' or 'LAN'. Default value: 'IPsec'. Case insensitive.
+	// Tunnel protocol, only valid with `connectionType` = 'bgp'. Valid values: 'IPsec', 'GRE' or 'LAN'. Default value: 'IPsec'. Case insensitive. Available as of provider version R2.18+.
 	TunnelProtocol pulumi.StringPtrInput
-	// ID of the VPC where the Transit Gateway is located. For GCP BGP over LAN connection, it is in the format of
-	// 'vpc_name~-~account_name'.
+	// VPC ID of the Aviatrix transit gateway. For GCP BGP over LAN connection, it is in the format of "vpc_name~-~project_name".
 	VpcId pulumi.StringPtrInput
 }
 
@@ -362,207 +366,191 @@ func (AviatrixTransitExternalDeviceConnState) ElementType() reflect.Type {
 }
 
 type aviatrixTransitExternalDeviceConnArgs struct {
-	// Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
+	// Set of approved CIDRs. Requires `enableLearnedCidrsApproval` to be true. Type: Set(String).
 	ApprovedCidrs []string `pulumi:"approvedCidrs"`
-	// Backup BGP MD5 authentication key.
+	// Backup BGP MD5 Authentication Key. Valid with HA enabled for connection. Example: 'avx03,avx04'. For BGP LAN ActiveMesh mode disabled, example: 'avx03'.
 	BackupBgpMd5Key *string `pulumi:"backupBgpMd5Key"`
-	// Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+	// Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required if HA enabled for 'bgp' connection.
 	BackupBgpRemoteAsNum *string `pulumi:"backupBgpRemoteAsNum"`
 	// Backup direct connect for backup external device.
 	BackupDirectConnect *bool `pulumi:"backupDirectConnect"`
-	// Backup Local LAN IP. Required for GCP BGP over LAN Connection with HA enabled.
+	// Backup Local LAN IP. Required for GCP HA BGP over LAN connection.
 	BackupLocalLanIp *string `pulumi:"backupLocalLanIp"`
 	// Source CIDR for the tunnel from the backup Aviatrix transit gateway.
 	BackupLocalTunnelCidr *string `pulumi:"backupLocalTunnelCidr"`
-	// Backup pre shared key.
+	// Backup Pre-Shared Key.
 	BackupPreSharedKey *string `pulumi:"backupPreSharedKey"`
 	// Backup remote gateway IP.
 	BackupRemoteGatewayIp *string `pulumi:"backupRemoteGatewayIp"`
-	// Backup Remote LAN IP.
+	// Backup Remote LAN IP. Required for HA BGP over LAN connection.
 	BackupRemoteLanIp *string `pulumi:"backupRemoteLanIp"`
 	// Destination CIDR for the tunnel to the backup external device.
 	BackupRemoteTunnelCidr *string `pulumi:"backupRemoteTunnelCidr"`
-	// BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+	// BGP local ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
 	BgpLocalAsNum *string `pulumi:"bgpLocalAsNum"`
-	// BGP MD5 authentication key.
+	// BGP MD5 Authentication Key. Example: 'avx01,avx02'. For BGP LAN ActiveMesh mode disabled, example: 'avx01'.
 	BgpMd5Key *string `pulumi:"bgpMd5Key"`
-	// BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+	// BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
 	BgpRemoteAsNum *string `pulumi:"bgpRemoteAsNum"`
-	// The name of the transit external device connection which is going to be created.
+	// Transit external device connection name.
 	ConnectionName string `pulumi:"connectionName"`
 	// Connection type. Valid values: 'bgp', 'static'. Default value: 'bgp'.
 	ConnectionType *string `pulumi:"connectionType"`
-	// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption.
+	// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption. Valid values: true, false. **NOTE: Please see notes here for more information.**
 	CustomAlgorithms *bool `pulumi:"customAlgorithms"`
 	// Set true for private network infrastructure.
 	DirectConnect *bool `pulumi:"directConnect"`
-	// Switch to enable BGP LAN ActiveMesh. Only valid for GCP with Remote Gateway HA enabled. Default: false. Available as of
-	// provider version R2.21+.
+	// Switch to enable BGP LAN ActiveMesh mode. Only valid for GCP with Remote Gateway HA enabled. Default: false. Available as of provider version R2.21+.
 	EnableBgpLanActivemesh *bool `pulumi:"enableBgpLanActivemesh"`
 	// Switch to allow this connection to communicate with a Network Domain via Connection Policy.
 	EnableEdgeSegmentation *bool `pulumi:"enableEdgeSegmentation"`
-	// Enable Event Triggered HA.
+	// Enable Event Triggered HA. Default value: false. Valid values: true or false. Available as of provider version R2.19+.
 	EnableEventTriggeredHa *bool `pulumi:"enableEventTriggeredHa"`
-	// Set as true if use IKEv2.
+	// Set as true to enable IKEv2 protocol.
 	EnableIkev2 *bool `pulumi:"enableIkev2"`
-	// Enable Jumbo Frame for the transit external device connection. Valid values: true, false.
+	// Enable Jumbo Frame for the transit external device connection. Only valid with 'GRE' tunnels under 'bgp' connection. Requires transit to be jumbo frame and insane mode enabled. Valid values: true, false. Default value: false. Available as of provider version R2.22.2+.
 	EnableJumboFrame *bool `pulumi:"enableJumboFrame"`
-	// Enable learned CIDR approval for the connection. Only valid with 'connection_type' = 'bgp'. Requires the
-	// transit_gateway's 'learned_cidrs_approval_mode' attribute be set to 'connection'. Valid values: true, false. Default
-	// value: false. Available as of provider version R2.18+.
+	// Enable learned CIDRs approval for the connection. Only valid with `connectionType` = 'bgp'. Requires the transit_gateway's `learnedCidrsApprovalMode` attribute be set to 'connection'. Valid values: true, false. Default value: false. Available as of provider version R2.18+.
 	EnableLearnedCidrsApproval *bool `pulumi:"enableLearnedCidrsApproval"`
-	// Name of the Transit Gateway.
+	// Aviatrix transit gateway name.
 	GwName string `pulumi:"gwName"`
 	// Set as true if there are two external devices.
+	// * ` backupRemoteGatewayIp  ` - (Optional) Backup remote gateway IP. Required if HA enabled.
 	HaEnabled *bool `pulumi:"haEnabled"`
-	// Local LAN IP. Required for GCP BGP over LAN Connection.
+	// Local LAN IP. Required for GCP BGP over LAN connection.
 	LocalLanIp *string `pulumi:"localLanIp"`
 	// Source CIDR for the tunnel from the Aviatrix transit gateway.
 	LocalTunnelCidr *string `pulumi:"localTunnelCidr"`
-	// Configure manual BGP advertised CIDRs for this connection. Only valid with 'connection_type' = 'bgp'. Available as of
-	// provider version R2.18+.
+	// Configure manual BGP advertised CIDRs for this connection. Only valid with `connectionType`= 'bgp'. Available as of provider version R2.18+.
 	ManualBgpAdvertisedCidrs []string `pulumi:"manualBgpAdvertisedCidrs"`
-	// Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'.
+	// Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'. Default value: 'SHA-256'.
 	Phase1Authentication *string `pulumi:"phase1Authentication"`
-	// Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+	// Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
 	Phase1DhGroups *string `pulumi:"phase1DhGroups"`
-	// Phase one Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC' and 'AES-256-CBC', 'AES-128-GCM-64',
-	// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', and 'AES-256-GCM-128'.
+	// Phase one Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", and "AES-256-GCM-128". Default value: "AES-256-CBC".
 	Phase1Encryption *string `pulumi:"phase1Encryption"`
-	// Phase 1 remote identifier of the IPsec tunnel.
+	// Phase 1 remote identifier of the IPsec tunnel. This can be configured to be either the public IP address or the private IP address of the peer terminating the IPsec tunnel. Example: ["1.2.3.4"] when HA is disabled, ["1.2.3.4", "5.6.7.8"] when HA is enabled. Available as of provider version R2.19+.
 	Phase1RemoteIdentifiers []string `pulumi:"phase1RemoteIdentifiers"`
-	// Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'.
+	// Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'. Default value: 'HMAC-SHA-256'.
 	Phase2Authentication *string `pulumi:"phase2Authentication"`
-	// Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+	// Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
 	Phase2DhGroups *string `pulumi:"phase2DhGroups"`
-	// Phase two Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'AES-128-GCM-64',
-	// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', 'AES-256-GCM-128', and 'NULL-ENCR'.
+	// Phase two Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", "AES-256-GCM-128" and "NULL-ENCR". Default value: "AES-256-CBC".
 	Phase2Encryption *string `pulumi:"phase2Encryption"`
-	// If left blank, the pre-shared key will be auto generated.
+	// Pre-Shared Key.
 	PreSharedKey *string `pulumi:"preSharedKey"`
-	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection.
+	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Available as of provider version R2.19.2.
 	PrependAsPaths []string `pulumi:"prependAsPaths"`
-	// Remote Gateway IP.
+	// Remote gateway IP. Required when `tunnelProtocol` != 'LAN'.
 	RemoteGatewayIp *string `pulumi:"remoteGatewayIp"`
-	// Remote LAN IP.
+	// Remote LAN IP. Required for BGP over LAN connection.
 	RemoteLanIp *string `pulumi:"remoteLanIp"`
 	// Remote CIDRs joined as a string with ','. Required for a 'static' type connection.
 	RemoteSubnet *string `pulumi:"remoteSubnet"`
 	// Destination CIDR for the tunnel to the external device.
 	RemoteTunnelCidr *string `pulumi:"remoteTunnelCidr"`
-	// Name of the remote VPC for a LAN BGP connection. Only valid when 'connection_type' = 'bgp' and tunnel_protocol' = 'LAN'
-	// with an Azure transit gateway. Must be in the form "<VNET-name>:<resource-group-name>". Available as of provider version
-	// R2.18+.
+	// Name of the remote VPC for a LAN BGP connection with an Azure Transit Gateway. Required when `connectionType` = 'bgp' and `tunnelProtocol` = 'LAN' with an Azure transit gateway. Must be in the format "<vnet-name>:<resource-group-name>:<subscription-id>". Available as of provider version R2.18+.
 	RemoteVpcName *string `pulumi:"remoteVpcName"`
-	// Only valid for Transit Gateway's with Active-Standby Mode enabled. Valid values: true, false. Default: false.
+	// Switch to HA Standby Transit Gateway connection. Only valid with Transit Gateway that has [Active-Standby Mode](https://docs.aviatrix.com/HowTos/transit_advanced.html#active-standby) enabled and for non-HA external device. Valid values: true, false. Default: false. Available in provider version R2.17.1+.
 	SwitchToHaStandbyGateway *bool `pulumi:"switchToHaStandbyGateway"`
-	// Tunnel Protocol. Valid values: 'IPsec', 'GRE' or 'LAN'. Default value: 'IPsec'. Case insensitive.
+	// Tunnel protocol, only valid with `connectionType` = 'bgp'. Valid values: 'IPsec', 'GRE' or 'LAN'. Default value: 'IPsec'. Case insensitive. Available as of provider version R2.18+.
 	TunnelProtocol *string `pulumi:"tunnelProtocol"`
-	// ID of the VPC where the Transit Gateway is located. For GCP BGP over LAN connection, it is in the format of
-	// 'vpc_name~-~account_name'.
+	// VPC ID of the Aviatrix transit gateway. For GCP BGP over LAN connection, it is in the format of "vpc_name~-~project_name".
 	VpcId string `pulumi:"vpcId"`
 }
 
 // The set of arguments for constructing a AviatrixTransitExternalDeviceConn resource.
 type AviatrixTransitExternalDeviceConnArgs struct {
-	// Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
+	// Set of approved CIDRs. Requires `enableLearnedCidrsApproval` to be true. Type: Set(String).
 	ApprovedCidrs pulumi.StringArrayInput
-	// Backup BGP MD5 authentication key.
+	// Backup BGP MD5 Authentication Key. Valid with HA enabled for connection. Example: 'avx03,avx04'. For BGP LAN ActiveMesh mode disabled, example: 'avx03'.
 	BackupBgpMd5Key pulumi.StringPtrInput
-	// Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+	// Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required if HA enabled for 'bgp' connection.
 	BackupBgpRemoteAsNum pulumi.StringPtrInput
 	// Backup direct connect for backup external device.
 	BackupDirectConnect pulumi.BoolPtrInput
-	// Backup Local LAN IP. Required for GCP BGP over LAN Connection with HA enabled.
+	// Backup Local LAN IP. Required for GCP HA BGP over LAN connection.
 	BackupLocalLanIp pulumi.StringPtrInput
 	// Source CIDR for the tunnel from the backup Aviatrix transit gateway.
 	BackupLocalTunnelCidr pulumi.StringPtrInput
-	// Backup pre shared key.
+	// Backup Pre-Shared Key.
 	BackupPreSharedKey pulumi.StringPtrInput
 	// Backup remote gateway IP.
 	BackupRemoteGatewayIp pulumi.StringPtrInput
-	// Backup Remote LAN IP.
+	// Backup Remote LAN IP. Required for HA BGP over LAN connection.
 	BackupRemoteLanIp pulumi.StringPtrInput
 	// Destination CIDR for the tunnel to the backup external device.
 	BackupRemoteTunnelCidr pulumi.StringPtrInput
-	// BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+	// BGP local ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
 	BgpLocalAsNum pulumi.StringPtrInput
-	// BGP MD5 authentication key.
+	// BGP MD5 Authentication Key. Example: 'avx01,avx02'. For BGP LAN ActiveMesh mode disabled, example: 'avx01'.
 	BgpMd5Key pulumi.StringPtrInput
-	// BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+	// BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
 	BgpRemoteAsNum pulumi.StringPtrInput
-	// The name of the transit external device connection which is going to be created.
+	// Transit external device connection name.
 	ConnectionName pulumi.StringInput
 	// Connection type. Valid values: 'bgp', 'static'. Default value: 'bgp'.
 	ConnectionType pulumi.StringPtrInput
-	// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption.
+	// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption. Valid values: true, false. **NOTE: Please see notes here for more information.**
 	CustomAlgorithms pulumi.BoolPtrInput
 	// Set true for private network infrastructure.
 	DirectConnect pulumi.BoolPtrInput
-	// Switch to enable BGP LAN ActiveMesh. Only valid for GCP with Remote Gateway HA enabled. Default: false. Available as of
-	// provider version R2.21+.
+	// Switch to enable BGP LAN ActiveMesh mode. Only valid for GCP with Remote Gateway HA enabled. Default: false. Available as of provider version R2.21+.
 	EnableBgpLanActivemesh pulumi.BoolPtrInput
 	// Switch to allow this connection to communicate with a Network Domain via Connection Policy.
 	EnableEdgeSegmentation pulumi.BoolPtrInput
-	// Enable Event Triggered HA.
+	// Enable Event Triggered HA. Default value: false. Valid values: true or false. Available as of provider version R2.19+.
 	EnableEventTriggeredHa pulumi.BoolPtrInput
-	// Set as true if use IKEv2.
+	// Set as true to enable IKEv2 protocol.
 	EnableIkev2 pulumi.BoolPtrInput
-	// Enable Jumbo Frame for the transit external device connection. Valid values: true, false.
+	// Enable Jumbo Frame for the transit external device connection. Only valid with 'GRE' tunnels under 'bgp' connection. Requires transit to be jumbo frame and insane mode enabled. Valid values: true, false. Default value: false. Available as of provider version R2.22.2+.
 	EnableJumboFrame pulumi.BoolPtrInput
-	// Enable learned CIDR approval for the connection. Only valid with 'connection_type' = 'bgp'. Requires the
-	// transit_gateway's 'learned_cidrs_approval_mode' attribute be set to 'connection'. Valid values: true, false. Default
-	// value: false. Available as of provider version R2.18+.
+	// Enable learned CIDRs approval for the connection. Only valid with `connectionType` = 'bgp'. Requires the transit_gateway's `learnedCidrsApprovalMode` attribute be set to 'connection'. Valid values: true, false. Default value: false. Available as of provider version R2.18+.
 	EnableLearnedCidrsApproval pulumi.BoolPtrInput
-	// Name of the Transit Gateway.
+	// Aviatrix transit gateway name.
 	GwName pulumi.StringInput
 	// Set as true if there are two external devices.
+	// * ` backupRemoteGatewayIp  ` - (Optional) Backup remote gateway IP. Required if HA enabled.
 	HaEnabled pulumi.BoolPtrInput
-	// Local LAN IP. Required for GCP BGP over LAN Connection.
+	// Local LAN IP. Required for GCP BGP over LAN connection.
 	LocalLanIp pulumi.StringPtrInput
 	// Source CIDR for the tunnel from the Aviatrix transit gateway.
 	LocalTunnelCidr pulumi.StringPtrInput
-	// Configure manual BGP advertised CIDRs for this connection. Only valid with 'connection_type' = 'bgp'. Available as of
-	// provider version R2.18+.
+	// Configure manual BGP advertised CIDRs for this connection. Only valid with `connectionType`= 'bgp'. Available as of provider version R2.18+.
 	ManualBgpAdvertisedCidrs pulumi.StringArrayInput
-	// Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'.
+	// Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'. Default value: 'SHA-256'.
 	Phase1Authentication pulumi.StringPtrInput
-	// Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+	// Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
 	Phase1DhGroups pulumi.StringPtrInput
-	// Phase one Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC' and 'AES-256-CBC', 'AES-128-GCM-64',
-	// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', and 'AES-256-GCM-128'.
+	// Phase one Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", and "AES-256-GCM-128". Default value: "AES-256-CBC".
 	Phase1Encryption pulumi.StringPtrInput
-	// Phase 1 remote identifier of the IPsec tunnel.
+	// Phase 1 remote identifier of the IPsec tunnel. This can be configured to be either the public IP address or the private IP address of the peer terminating the IPsec tunnel. Example: ["1.2.3.4"] when HA is disabled, ["1.2.3.4", "5.6.7.8"] when HA is enabled. Available as of provider version R2.19+.
 	Phase1RemoteIdentifiers pulumi.StringArrayInput
-	// Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'.
+	// Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'. Default value: 'HMAC-SHA-256'.
 	Phase2Authentication pulumi.StringPtrInput
-	// Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+	// Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
 	Phase2DhGroups pulumi.StringPtrInput
-	// Phase two Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'AES-128-GCM-64',
-	// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', 'AES-256-GCM-128', and 'NULL-ENCR'.
+	// Phase two Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", "AES-256-GCM-128" and "NULL-ENCR". Default value: "AES-256-CBC".
 	Phase2Encryption pulumi.StringPtrInput
-	// If left blank, the pre-shared key will be auto generated.
+	// Pre-Shared Key.
 	PreSharedKey pulumi.StringPtrInput
-	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection.
+	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Available as of provider version R2.19.2.
 	PrependAsPaths pulumi.StringArrayInput
-	// Remote Gateway IP.
+	// Remote gateway IP. Required when `tunnelProtocol` != 'LAN'.
 	RemoteGatewayIp pulumi.StringPtrInput
-	// Remote LAN IP.
+	// Remote LAN IP. Required for BGP over LAN connection.
 	RemoteLanIp pulumi.StringPtrInput
 	// Remote CIDRs joined as a string with ','. Required for a 'static' type connection.
 	RemoteSubnet pulumi.StringPtrInput
 	// Destination CIDR for the tunnel to the external device.
 	RemoteTunnelCidr pulumi.StringPtrInput
-	// Name of the remote VPC for a LAN BGP connection. Only valid when 'connection_type' = 'bgp' and tunnel_protocol' = 'LAN'
-	// with an Azure transit gateway. Must be in the form "<VNET-name>:<resource-group-name>". Available as of provider version
-	// R2.18+.
+	// Name of the remote VPC for a LAN BGP connection with an Azure Transit Gateway. Required when `connectionType` = 'bgp' and `tunnelProtocol` = 'LAN' with an Azure transit gateway. Must be in the format "<vnet-name>:<resource-group-name>:<subscription-id>". Available as of provider version R2.18+.
 	RemoteVpcName pulumi.StringPtrInput
-	// Only valid for Transit Gateway's with Active-Standby Mode enabled. Valid values: true, false. Default: false.
+	// Switch to HA Standby Transit Gateway connection. Only valid with Transit Gateway that has [Active-Standby Mode](https://docs.aviatrix.com/HowTos/transit_advanced.html#active-standby) enabled and for non-HA external device. Valid values: true, false. Default: false. Available in provider version R2.17.1+.
 	SwitchToHaStandbyGateway pulumi.BoolPtrInput
-	// Tunnel Protocol. Valid values: 'IPsec', 'GRE' or 'LAN'. Default value: 'IPsec'. Case insensitive.
+	// Tunnel protocol, only valid with `connectionType` = 'bgp'. Valid values: 'IPsec', 'GRE' or 'LAN'. Default value: 'IPsec'. Case insensitive. Available as of provider version R2.18+.
 	TunnelProtocol pulumi.StringPtrInput
-	// ID of the VPC where the Transit Gateway is located. For GCP BGP over LAN connection, it is in the format of
-	// 'vpc_name~-~account_name'.
+	// VPC ID of the Aviatrix transit gateway. For GCP BGP over LAN connection, it is in the format of "vpc_name~-~project_name".
 	VpcId pulumi.StringInput
 }
 
@@ -653,17 +641,17 @@ func (o AviatrixTransitExternalDeviceConnOutput) ToAviatrixTransitExternalDevice
 	return o
 }
 
-// Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
+// Set of approved CIDRs. Requires `enableLearnedCidrsApproval` to be true. Type: Set(String).
 func (o AviatrixTransitExternalDeviceConnOutput) ApprovedCidrs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringArrayOutput { return v.ApprovedCidrs }).(pulumi.StringArrayOutput)
 }
 
-// Backup BGP MD5 authentication key.
+// Backup BGP MD5 Authentication Key. Valid with HA enabled for connection. Example: 'avx03,avx04'. For BGP LAN ActiveMesh mode disabled, example: 'avx03'.
 func (o AviatrixTransitExternalDeviceConnOutput) BackupBgpMd5Key() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringPtrOutput { return v.BackupBgpMd5Key }).(pulumi.StringPtrOutput)
 }
 
-// Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+// Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required if HA enabled for 'bgp' connection.
 func (o AviatrixTransitExternalDeviceConnOutput) BackupBgpRemoteAsNum() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringPtrOutput { return v.BackupBgpRemoteAsNum }).(pulumi.StringPtrOutput)
 }
@@ -673,7 +661,7 @@ func (o AviatrixTransitExternalDeviceConnOutput) BackupDirectConnect() pulumi.Bo
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.BoolPtrOutput { return v.BackupDirectConnect }).(pulumi.BoolPtrOutput)
 }
 
-// Backup Local LAN IP. Required for GCP BGP over LAN Connection with HA enabled.
+// Backup Local LAN IP. Required for GCP HA BGP over LAN connection.
 func (o AviatrixTransitExternalDeviceConnOutput) BackupLocalLanIp() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringOutput { return v.BackupLocalLanIp }).(pulumi.StringOutput)
 }
@@ -683,7 +671,7 @@ func (o AviatrixTransitExternalDeviceConnOutput) BackupLocalTunnelCidr() pulumi.
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringOutput { return v.BackupLocalTunnelCidr }).(pulumi.StringOutput)
 }
 
-// Backup pre shared key.
+// Backup Pre-Shared Key.
 func (o AviatrixTransitExternalDeviceConnOutput) BackupPreSharedKey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringPtrOutput { return v.BackupPreSharedKey }).(pulumi.StringPtrOutput)
 }
@@ -693,7 +681,7 @@ func (o AviatrixTransitExternalDeviceConnOutput) BackupRemoteGatewayIp() pulumi.
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringPtrOutput { return v.BackupRemoteGatewayIp }).(pulumi.StringPtrOutput)
 }
 
-// Backup Remote LAN IP.
+// Backup Remote LAN IP. Required for HA BGP over LAN connection.
 func (o AviatrixTransitExternalDeviceConnOutput) BackupRemoteLanIp() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringPtrOutput { return v.BackupRemoteLanIp }).(pulumi.StringPtrOutput)
 }
@@ -703,22 +691,22 @@ func (o AviatrixTransitExternalDeviceConnOutput) BackupRemoteTunnelCidr() pulumi
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringOutput { return v.BackupRemoteTunnelCidr }).(pulumi.StringOutput)
 }
 
-// BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+// BGP local ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
 func (o AviatrixTransitExternalDeviceConnOutput) BgpLocalAsNum() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringPtrOutput { return v.BgpLocalAsNum }).(pulumi.StringPtrOutput)
 }
 
-// BGP MD5 authentication key.
+// BGP MD5 Authentication Key. Example: 'avx01,avx02'. For BGP LAN ActiveMesh mode disabled, example: 'avx01'.
 func (o AviatrixTransitExternalDeviceConnOutput) BgpMd5Key() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringPtrOutput { return v.BgpMd5Key }).(pulumi.StringPtrOutput)
 }
 
-// BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+// BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
 func (o AviatrixTransitExternalDeviceConnOutput) BgpRemoteAsNum() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringPtrOutput { return v.BgpRemoteAsNum }).(pulumi.StringPtrOutput)
 }
 
-// The name of the transit external device connection which is going to be created.
+// Transit external device connection name.
 func (o AviatrixTransitExternalDeviceConnOutput) ConnectionName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringOutput { return v.ConnectionName }).(pulumi.StringOutput)
 }
@@ -728,7 +716,7 @@ func (o AviatrixTransitExternalDeviceConnOutput) ConnectionType() pulumi.StringP
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringPtrOutput { return v.ConnectionType }).(pulumi.StringPtrOutput)
 }
 
-// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption.
+// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption. Valid values: true, false. **NOTE: Please see notes here for more information.**
 func (o AviatrixTransitExternalDeviceConnOutput) CustomAlgorithms() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.BoolPtrOutput { return v.CustomAlgorithms }).(pulumi.BoolPtrOutput)
 }
@@ -738,8 +726,7 @@ func (o AviatrixTransitExternalDeviceConnOutput) DirectConnect() pulumi.BoolPtrO
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.BoolPtrOutput { return v.DirectConnect }).(pulumi.BoolPtrOutput)
 }
 
-// Switch to enable BGP LAN ActiveMesh. Only valid for GCP with Remote Gateway HA enabled. Default: false. Available as of
-// provider version R2.21+.
+// Switch to enable BGP LAN ActiveMesh mode. Only valid for GCP with Remote Gateway HA enabled. Default: false. Available as of provider version R2.21+.
 func (o AviatrixTransitExternalDeviceConnOutput) EnableBgpLanActivemesh() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.BoolPtrOutput { return v.EnableBgpLanActivemesh }).(pulumi.BoolPtrOutput)
 }
@@ -749,39 +736,38 @@ func (o AviatrixTransitExternalDeviceConnOutput) EnableEdgeSegmentation() pulumi
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.BoolPtrOutput { return v.EnableEdgeSegmentation }).(pulumi.BoolPtrOutput)
 }
 
-// Enable Event Triggered HA.
+// Enable Event Triggered HA. Default value: false. Valid values: true or false. Available as of provider version R2.19+.
 func (o AviatrixTransitExternalDeviceConnOutput) EnableEventTriggeredHa() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.BoolPtrOutput { return v.EnableEventTriggeredHa }).(pulumi.BoolPtrOutput)
 }
 
-// Set as true if use IKEv2.
+// Set as true to enable IKEv2 protocol.
 func (o AviatrixTransitExternalDeviceConnOutput) EnableIkev2() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.BoolPtrOutput { return v.EnableIkev2 }).(pulumi.BoolPtrOutput)
 }
 
-// Enable Jumbo Frame for the transit external device connection. Valid values: true, false.
+// Enable Jumbo Frame for the transit external device connection. Only valid with 'GRE' tunnels under 'bgp' connection. Requires transit to be jumbo frame and insane mode enabled. Valid values: true, false. Default value: false. Available as of provider version R2.22.2+.
 func (o AviatrixTransitExternalDeviceConnOutput) EnableJumboFrame() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.BoolPtrOutput { return v.EnableJumboFrame }).(pulumi.BoolPtrOutput)
 }
 
-// Enable learned CIDR approval for the connection. Only valid with 'connection_type' = 'bgp'. Requires the
-// transit_gateway's 'learned_cidrs_approval_mode' attribute be set to 'connection'. Valid values: true, false. Default
-// value: false. Available as of provider version R2.18+.
+// Enable learned CIDRs approval for the connection. Only valid with `connectionType` = 'bgp'. Requires the transit_gateway's `learnedCidrsApprovalMode` attribute be set to 'connection'. Valid values: true, false. Default value: false. Available as of provider version R2.18+.
 func (o AviatrixTransitExternalDeviceConnOutput) EnableLearnedCidrsApproval() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.BoolPtrOutput { return v.EnableLearnedCidrsApproval }).(pulumi.BoolPtrOutput)
 }
 
-// Name of the Transit Gateway.
+// Aviatrix transit gateway name.
 func (o AviatrixTransitExternalDeviceConnOutput) GwName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringOutput { return v.GwName }).(pulumi.StringOutput)
 }
 
 // Set as true if there are two external devices.
+// * ` backupRemoteGatewayIp  ` - (Optional) Backup remote gateway IP. Required if HA enabled.
 func (o AviatrixTransitExternalDeviceConnOutput) HaEnabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.BoolPtrOutput { return v.HaEnabled }).(pulumi.BoolPtrOutput)
 }
 
-// Local LAN IP. Required for GCP BGP over LAN Connection.
+// Local LAN IP. Required for GCP BGP over LAN connection.
 func (o AviatrixTransitExternalDeviceConnOutput) LocalLanIp() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringOutput { return v.LocalLanIp }).(pulumi.StringOutput)
 }
@@ -791,65 +777,62 @@ func (o AviatrixTransitExternalDeviceConnOutput) LocalTunnelCidr() pulumi.String
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringOutput { return v.LocalTunnelCidr }).(pulumi.StringOutput)
 }
 
-// Configure manual BGP advertised CIDRs for this connection. Only valid with 'connection_type' = 'bgp'. Available as of
-// provider version R2.18+.
+// Configure manual BGP advertised CIDRs for this connection. Only valid with `connectionType`= 'bgp'. Available as of provider version R2.18+.
 func (o AviatrixTransitExternalDeviceConnOutput) ManualBgpAdvertisedCidrs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringArrayOutput { return v.ManualBgpAdvertisedCidrs }).(pulumi.StringArrayOutput)
 }
 
-// Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'.
+// Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'. Default value: 'SHA-256'.
 func (o AviatrixTransitExternalDeviceConnOutput) Phase1Authentication() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringPtrOutput { return v.Phase1Authentication }).(pulumi.StringPtrOutput)
 }
 
-// Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+// Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
 func (o AviatrixTransitExternalDeviceConnOutput) Phase1DhGroups() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringPtrOutput { return v.Phase1DhGroups }).(pulumi.StringPtrOutput)
 }
 
-// Phase one Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC' and 'AES-256-CBC', 'AES-128-GCM-64',
-// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', and 'AES-256-GCM-128'.
+// Phase one Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", and "AES-256-GCM-128". Default value: "AES-256-CBC".
 func (o AviatrixTransitExternalDeviceConnOutput) Phase1Encryption() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringPtrOutput { return v.Phase1Encryption }).(pulumi.StringPtrOutput)
 }
 
-// Phase 1 remote identifier of the IPsec tunnel.
+// Phase 1 remote identifier of the IPsec tunnel. This can be configured to be either the public IP address or the private IP address of the peer terminating the IPsec tunnel. Example: ["1.2.3.4"] when HA is disabled, ["1.2.3.4", "5.6.7.8"] when HA is enabled. Available as of provider version R2.19+.
 func (o AviatrixTransitExternalDeviceConnOutput) Phase1RemoteIdentifiers() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringArrayOutput { return v.Phase1RemoteIdentifiers }).(pulumi.StringArrayOutput)
 }
 
-// Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'.
+// Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'. Default value: 'HMAC-SHA-256'.
 func (o AviatrixTransitExternalDeviceConnOutput) Phase2Authentication() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringPtrOutput { return v.Phase2Authentication }).(pulumi.StringPtrOutput)
 }
 
-// Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+// Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
 func (o AviatrixTransitExternalDeviceConnOutput) Phase2DhGroups() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringPtrOutput { return v.Phase2DhGroups }).(pulumi.StringPtrOutput)
 }
 
-// Phase two Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'AES-128-GCM-64',
-// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', 'AES-256-GCM-128', and 'NULL-ENCR'.
+// Phase two Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", "AES-256-GCM-128" and "NULL-ENCR". Default value: "AES-256-CBC".
 func (o AviatrixTransitExternalDeviceConnOutput) Phase2Encryption() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringPtrOutput { return v.Phase2Encryption }).(pulumi.StringPtrOutput)
 }
 
-// If left blank, the pre-shared key will be auto generated.
+// Pre-Shared Key.
 func (o AviatrixTransitExternalDeviceConnOutput) PreSharedKey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringPtrOutput { return v.PreSharedKey }).(pulumi.StringPtrOutput)
 }
 
-// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection.
+// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Available as of provider version R2.19.2.
 func (o AviatrixTransitExternalDeviceConnOutput) PrependAsPaths() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringArrayOutput { return v.PrependAsPaths }).(pulumi.StringArrayOutput)
 }
 
-// Remote Gateway IP.
+// Remote gateway IP. Required when `tunnelProtocol` != 'LAN'.
 func (o AviatrixTransitExternalDeviceConnOutput) RemoteGatewayIp() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringPtrOutput { return v.RemoteGatewayIp }).(pulumi.StringPtrOutput)
 }
 
-// Remote LAN IP.
+// Remote LAN IP. Required for BGP over LAN connection.
 func (o AviatrixTransitExternalDeviceConnOutput) RemoteLanIp() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringPtrOutput { return v.RemoteLanIp }).(pulumi.StringPtrOutput)
 }
@@ -864,25 +847,22 @@ func (o AviatrixTransitExternalDeviceConnOutput) RemoteTunnelCidr() pulumi.Strin
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringOutput { return v.RemoteTunnelCidr }).(pulumi.StringOutput)
 }
 
-// Name of the remote VPC for a LAN BGP connection. Only valid when 'connection_type' = 'bgp' and tunnel_protocol' = 'LAN'
-// with an Azure transit gateway. Must be in the form "<VNET-name>:<resource-group-name>". Available as of provider version
-// R2.18+.
+// Name of the remote VPC for a LAN BGP connection with an Azure Transit Gateway. Required when `connectionType` = 'bgp' and `tunnelProtocol` = 'LAN' with an Azure transit gateway. Must be in the format "<vnet-name>:<resource-group-name>:<subscription-id>". Available as of provider version R2.18+.
 func (o AviatrixTransitExternalDeviceConnOutput) RemoteVpcName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringPtrOutput { return v.RemoteVpcName }).(pulumi.StringPtrOutput)
 }
 
-// Only valid for Transit Gateway's with Active-Standby Mode enabled. Valid values: true, false. Default: false.
+// Switch to HA Standby Transit Gateway connection. Only valid with Transit Gateway that has [Active-Standby Mode](https://docs.aviatrix.com/HowTos/transit_advanced.html#active-standby) enabled and for non-HA external device. Valid values: true, false. Default: false. Available in provider version R2.17.1+.
 func (o AviatrixTransitExternalDeviceConnOutput) SwitchToHaStandbyGateway() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.BoolPtrOutput { return v.SwitchToHaStandbyGateway }).(pulumi.BoolPtrOutput)
 }
 
-// Tunnel Protocol. Valid values: 'IPsec', 'GRE' or 'LAN'. Default value: 'IPsec'. Case insensitive.
+// Tunnel protocol, only valid with `connectionType` = 'bgp'. Valid values: 'IPsec', 'GRE' or 'LAN'. Default value: 'IPsec'. Case insensitive. Available as of provider version R2.18+.
 func (o AviatrixTransitExternalDeviceConnOutput) TunnelProtocol() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringPtrOutput { return v.TunnelProtocol }).(pulumi.StringPtrOutput)
 }
 
-// ID of the VPC where the Transit Gateway is located. For GCP BGP over LAN connection, it is in the format of
-// 'vpc_name~-~account_name'.
+// VPC ID of the Aviatrix transit gateway. For GCP BGP over LAN connection, it is in the format of "vpc_name~-~project_name".
 func (o AviatrixTransitExternalDeviceConnOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixTransitExternalDeviceConn) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
 }

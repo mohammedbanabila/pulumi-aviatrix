@@ -10,6 +10,35 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_spoke_gateway** data source provides details about a specific spoke gateway created by the Aviatrix Controller.
+//
+// This data source can prove useful when a module accepts a spoke gateway's detail as an input variable.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err = aviatrix.LookupAviatrixSpokeGateway(ctx, &GetAviatrixSpokeGatewayArgs{
+//				GwName: "gatewayname",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 func LookupAviatrixSpokeGateway(ctx *pulumi.Context, args *LookupAviatrixSpokeGatewayArgs, opts ...pulumi.InvokeOption) (*LookupAviatrixSpokeGatewayResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)
 	var rv LookupAviatrixSpokeGatewayResult
@@ -22,86 +51,133 @@ func LookupAviatrixSpokeGateway(ctx *pulumi.Context, args *LookupAviatrixSpokeGa
 
 // A collection of arguments for invoking getAviatrixSpokeGateway.
 type LookupAviatrixSpokeGatewayArgs struct {
+	// Spoke gateway name. It can be used for getting spoke gateway.
 	GwName string `pulumi:"gwName"`
 }
 
 // A collection of values returned by getAviatrixSpokeGateway.
 type LookupAviatrixSpokeGatewayResult struct {
-	AccountName                      string   `pulumi:"accountName"`
-	AllocateNewEip                   bool     `pulumi:"allocateNewEip"`
-	ApprovedLearnedCidrs             []string `pulumi:"approvedLearnedCidrs"`
-	AvailabilityDomain               string   `pulumi:"availabilityDomain"`
-	AzureEipNameResourceGroup        string   `pulumi:"azureEipNameResourceGroup"`
-	BgpEcmp                          bool     `pulumi:"bgpEcmp"`
-	BgpHoldTime                      int      `pulumi:"bgpHoldTime"`
-	BgpPollingTime                   int      `pulumi:"bgpPollingTime"`
-	CloudInstanceId                  string   `pulumi:"cloudInstanceId"`
-	CloudType                        int      `pulumi:"cloudType"`
-	CustomizedSpokeVpcRoutes         string   `pulumi:"customizedSpokeVpcRoutes"`
-	DisableRoutePropagation          bool     `pulumi:"disableRoutePropagation"`
-	Eip                              string   `pulumi:"eip"`
-	EnableActiveStandby              bool     `pulumi:"enableActiveStandby"`
-	EnableActiveStandbyPreemptive    bool     `pulumi:"enableActiveStandbyPreemptive"`
-	EnableAutoAdvertiseS2cCidrs      bool     `pulumi:"enableAutoAdvertiseS2cCidrs"`
-	EnableBgp                        bool     `pulumi:"enableBgp"`
-	EnableEncryptVolume              bool     `pulumi:"enableEncryptVolume"`
-	EnableJumboFrame                 bool     `pulumi:"enableJumboFrame"`
-	EnableLearnedCidrsApproval       bool     `pulumi:"enableLearnedCidrsApproval"`
-	EnableMonitorGatewaySubnets      bool     `pulumi:"enableMonitorGatewaySubnets"`
-	EnablePrivateOob                 bool     `pulumi:"enablePrivateOob"`
-	EnablePrivateVpcDefaultRoute     bool     `pulumi:"enablePrivateVpcDefaultRoute"`
-	EnableSkipPublicRouteTableUpdate bool     `pulumi:"enableSkipPublicRouteTableUpdate"`
-	EnableSpotInstance               bool     `pulumi:"enableSpotInstance"`
-	EnableVpcDnsServer               bool     `pulumi:"enableVpcDnsServer"`
-	FaultDomain                      string   `pulumi:"faultDomain"`
-	FilteredSpokeVpcRoutes           string   `pulumi:"filteredSpokeVpcRoutes"`
-	GwName                           string   `pulumi:"gwName"`
-	GwSize                           string   `pulumi:"gwSize"`
-	HaAvailabilityDomain             string   `pulumi:"haAvailabilityDomain"`
-	HaAzureEipNameResourceGroup      string   `pulumi:"haAzureEipNameResourceGroup"`
-	HaCloudInstanceId                string   `pulumi:"haCloudInstanceId"`
-	HaEip                            string   `pulumi:"haEip"`
-	HaFaultDomain                    string   `pulumi:"haFaultDomain"`
-	HaGwName                         string   `pulumi:"haGwName"`
-	HaGwSize                         string   `pulumi:"haGwSize"`
-	HaImageVersion                   string   `pulumi:"haImageVersion"`
-	HaInsaneModeAz                   string   `pulumi:"haInsaneModeAz"`
-	HaOobAvailabilityZone            string   `pulumi:"haOobAvailabilityZone"`
-	HaOobManagementSubnet            string   `pulumi:"haOobManagementSubnet"`
-	HaPrivateIp                      string   `pulumi:"haPrivateIp"`
-	HaPublicIp                       string   `pulumi:"haPublicIp"`
-	HaSecurityGroupId                string   `pulumi:"haSecurityGroupId"`
-	HaSoftwareVersion                string   `pulumi:"haSoftwareVersion"`
-	HaSubnet                         string   `pulumi:"haSubnet"`
-	HaZone                           string   `pulumi:"haZone"`
+	// Aviatrix account name.
+	AccountName string `pulumi:"accountName"`
+	// When value is false, an idle address in Elastic IP pool is reused for this gateway. Otherwise, a new Elastic IP is allocated and used for this gateway.
+	AllocateNewEip       bool     `pulumi:"allocateNewEip"`
+	ApprovedLearnedCidrs []string `pulumi:"approvedLearnedCidrs"`
+	// Availability domain for OCI.
+	AvailabilityDomain        string `pulumi:"availabilityDomain"`
+	AzureEipNameResourceGroup string `pulumi:"azureEipNameResourceGroup"`
+	BgpEcmp                   bool   `pulumi:"bgpEcmp"`
+	BgpHoldTime               int    `pulumi:"bgpHoldTime"`
+	BgpPollingTime            int    `pulumi:"bgpPollingTime"`
+	// Cloud instance ID.
+	CloudInstanceId string `pulumi:"cloudInstanceId"`
+	// Type of cloud service provider.
+	CloudType int `pulumi:"cloudType"`
+	// A list of comma separated CIDRs to be customized for the spoke VPC routes.
+	CustomizedSpokeVpcRoutes string `pulumi:"customizedSpokeVpcRoutes"`
+	DisableRoutePropagation  bool   `pulumi:"disableRoutePropagation"`
+	// The EIP address of the Spoke Gateway.
+	Eip                           string `pulumi:"eip"`
+	EnableActiveStandby           bool   `pulumi:"enableActiveStandby"`
+	EnableActiveStandbyPreemptive bool   `pulumi:"enableActiveStandbyPreemptive"`
+	EnableAutoAdvertiseS2cCidrs   bool   `pulumi:"enableAutoAdvertiseS2cCidrs"`
+	EnableBgp                     bool   `pulumi:"enableBgp"`
+	// Status of Encrypt Volume of spoke gateway.
+	EnableEncryptVolume         bool `pulumi:"enableEncryptVolume"`
+	EnableJumboFrame            bool `pulumi:"enableJumboFrame"`
+	EnableLearnedCidrsApproval  bool `pulumi:"enableLearnedCidrsApproval"`
+	EnableMonitorGatewaySubnets bool `pulumi:"enableMonitorGatewaySubnets"`
+	// Status of private OOB for the spoke gateway.
+	EnablePrivateOob                 bool `pulumi:"enablePrivateOob"`
+	EnablePrivateVpcDefaultRoute     bool `pulumi:"enablePrivateVpcDefaultRoute"`
+	EnableSkipPublicRouteTableUpdate bool `pulumi:"enableSkipPublicRouteTableUpdate"`
+	EnableSpotInstance               bool `pulumi:"enableSpotInstance"`
+	// Status of VPC Dns Server of spoke gateway.
+	EnableVpcDnsServer bool `pulumi:"enableVpcDnsServer"`
+	// Fault domain for OCI.
+	FaultDomain string `pulumi:"faultDomain"`
+	// A list of comma separated CIDRs to be filtered from the spoke VPC route table.
+	FilteredSpokeVpcRoutes string `pulumi:"filteredSpokeVpcRoutes"`
+	// Aviatrix spoke gateway name.
+	GwName string `pulumi:"gwName"`
+	// Size of spoke gateway instance.
+	GwSize string `pulumi:"gwSize"`
+	// HA gateway availability domain for OCI.
+	HaAvailabilityDomain        string `pulumi:"haAvailabilityDomain"`
+	HaAzureEipNameResourceGroup string `pulumi:"haAzureEipNameResourceGroup"`
+	// Cloud instance ID of HA spoke gateway.
+	HaCloudInstanceId string `pulumi:"haCloudInstanceId"`
+	// The EIP address of the HA Spoke Gateway.
+	HaEip string `pulumi:"haEip"`
+	// HA gateway fault domain for OCI.
+	HaFaultDomain string `pulumi:"haFaultDomain"`
+	// Aviatrix spoke gateway unique name of HA spoke gateway.
+	HaGwName string `pulumi:"haGwName"`
+	// HA Gateway Size.
+	HaGwSize string `pulumi:"haGwSize"`
+	// The image version of the HA gateway.
+	HaImageVersion string `pulumi:"haImageVersion"`
+	// AZ of subnet being created for Insane Mode Spoke HA Gateway.
+	HaInsaneModeAz string `pulumi:"haInsaneModeAz"`
+	// HA OOB availability zone.
+	HaOobAvailabilityZone string `pulumi:"haOobAvailabilityZone"`
+	// HA OOB management subnet.
+	HaOobManagementSubnet string `pulumi:"haOobManagementSubnet"`
+	// Private IP address of HA spoke gateway.
+	HaPrivateIp string `pulumi:"haPrivateIp"`
+	// Public IP address of the HA spoke gateway.
+	HaPublicIp        string `pulumi:"haPublicIp"`
+	HaSecurityGroupId string `pulumi:"haSecurityGroupId"`
+	// The software version of the HA gateway.
+	HaSoftwareVersion string `pulumi:"haSoftwareVersion"`
+	// HA Subnet.
+	HaSubnet string `pulumi:"haSubnet"`
+	// HA Zone.
+	HaZone string `pulumi:"haZone"`
 	// The provider-assigned unique ID for this managed resource.
-	Id                            string            `pulumi:"id"`
-	ImageVersion                  string            `pulumi:"imageVersion"`
-	IncludedAdvertisedSpokeRoutes string            `pulumi:"includedAdvertisedSpokeRoutes"`
-	InsaneMode                    bool              `pulumi:"insaneMode"`
-	InsaneModeAz                  string            `pulumi:"insaneModeAz"`
-	LearnedCidrsApprovalMode      string            `pulumi:"learnedCidrsApprovalMode"`
-	LocalAsNumber                 string            `pulumi:"localAsNumber"`
-	MonitorExcludeLists           []string          `pulumi:"monitorExcludeLists"`
-	OobAvailabilityZone           string            `pulumi:"oobAvailabilityZone"`
-	OobManagementSubnet           string            `pulumi:"oobManagementSubnet"`
-	PrependAsPaths                []string          `pulumi:"prependAsPaths"`
-	PrivateIp                     string            `pulumi:"privateIp"`
-	PublicIp                      string            `pulumi:"publicIp"`
-	SecurityGroupId               string            `pulumi:"securityGroupId"`
-	SingleAzHa                    bool              `pulumi:"singleAzHa"`
-	SingleIpSnat                  bool              `pulumi:"singleIpSnat"`
-	SoftwareVersion               string            `pulumi:"softwareVersion"`
-	SpokeBgpManualAdvertiseCidrs  []string          `pulumi:"spokeBgpManualAdvertiseCidrs"`
-	SpotPrice                     string            `pulumi:"spotPrice"`
-	Subnet                        string            `pulumi:"subnet"`
-	TagLists                      []string          `pulumi:"tagLists"`
-	Tags                          map[string]string `pulumi:"tags"`
-	TransitGw                     string            `pulumi:"transitGw"`
-	TunnelDetectionTime           int               `pulumi:"tunnelDetectionTime"`
-	VpcId                         string            `pulumi:"vpcId"`
-	VpcReg                        string            `pulumi:"vpcReg"`
-	Zone                          string            `pulumi:"zone"`
+	Id string `pulumi:"id"`
+	// The image version of the gateway.
+	ImageVersion string `pulumi:"imageVersion"`
+	// A list of comma separated CIDRs to be advertised to on-prem as "Included CIDR List".
+	IncludedAdvertisedSpokeRoutes string `pulumi:"includedAdvertisedSpokeRoutes"`
+	// Status of Insane Mode for Spoke Gateway.
+	InsaneMode bool `pulumi:"insaneMode"`
+	// AZ of subnet being created for Insane Mode spoke gateway.
+	InsaneModeAz             string   `pulumi:"insaneModeAz"`
+	LearnedCidrsApprovalMode string   `pulumi:"learnedCidrsApprovalMode"`
+	LocalAsNumber            string   `pulumi:"localAsNumber"`
+	MonitorExcludeLists      []string `pulumi:"monitorExcludeLists"`
+	// OOB availability zone.
+	OobAvailabilityZone string `pulumi:"oobAvailabilityZone"`
+	// OOB management subnet.
+	OobManagementSubnet string   `pulumi:"oobManagementSubnet"`
+	PrependAsPaths      []string `pulumi:"prependAsPaths"`
+	// Private IP address of the spoke gateway.
+	PrivateIp string `pulumi:"privateIp"`
+	// Public IP of spoke gateway.
+	PublicIp string `pulumi:"publicIp"`
+	// Security group used of the spoke gateway.
+	SecurityGroupId string `pulumi:"securityGroupId"`
+	// Status of Single AZ HA of spoke gateway.
+	SingleAzHa bool `pulumi:"singleAzHa"`
+	// Status of Single IP Source NAT mode of the spoke gateway.
+	SingleIpSnat bool `pulumi:"singleIpSnat"`
+	// The software version of the gateway.
+	SoftwareVersion              string   `pulumi:"softwareVersion"`
+	SpokeBgpManualAdvertiseCidrs []string `pulumi:"spokeBgpManualAdvertiseCidrs"`
+	SpotPrice                    string   `pulumi:"spotPrice"`
+	// A VPC Network address range selected from one of the available network ranges.
+	Subnet string `pulumi:"subnet"`
+	// Instance tag of cloud provider.
+	TagLists []string          `pulumi:"tagLists"`
+	Tags     map[string]string `pulumi:"tags"`
+	// Transit gateways attached to this spoke gateway.
+	TransitGw           string `pulumi:"transitGw"`
+	TunnelDetectionTime int    `pulumi:"tunnelDetectionTime"`
+	// VPC-ID/VNet-Name of cloud provider.
+	VpcId string `pulumi:"vpcId"`
+	// Region of cloud provider.
+	VpcReg string `pulumi:"vpcReg"`
+	Zone   string `pulumi:"zone"`
 }
 
 func LookupAviatrixSpokeGatewayOutput(ctx *pulumi.Context, args LookupAviatrixSpokeGatewayOutputArgs, opts ...pulumi.InvokeOption) LookupAviatrixSpokeGatewayResultOutput {
@@ -119,6 +195,7 @@ func LookupAviatrixSpokeGatewayOutput(ctx *pulumi.Context, args LookupAviatrixSp
 
 // A collection of arguments for invoking getAviatrixSpokeGateway.
 type LookupAviatrixSpokeGatewayOutputArgs struct {
+	// Spoke gateway name. It can be used for getting spoke gateway.
 	GwName pulumi.StringInput `pulumi:"gwName"`
 }
 
@@ -141,10 +218,12 @@ func (o LookupAviatrixSpokeGatewayResultOutput) ToLookupAviatrixSpokeGatewayResu
 	return o
 }
 
+// Aviatrix account name.
 func (o LookupAviatrixSpokeGatewayResultOutput) AccountName() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.AccountName }).(pulumi.StringOutput)
 }
 
+// When value is false, an idle address in Elastic IP pool is reused for this gateway. Otherwise, a new Elastic IP is allocated and used for this gateway.
 func (o LookupAviatrixSpokeGatewayResultOutput) AllocateNewEip() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) bool { return v.AllocateNewEip }).(pulumi.BoolOutput)
 }
@@ -153,6 +232,7 @@ func (o LookupAviatrixSpokeGatewayResultOutput) ApprovedLearnedCidrs() pulumi.St
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) []string { return v.ApprovedLearnedCidrs }).(pulumi.StringArrayOutput)
 }
 
+// Availability domain for OCI.
 func (o LookupAviatrixSpokeGatewayResultOutput) AvailabilityDomain() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.AvailabilityDomain }).(pulumi.StringOutput)
 }
@@ -173,14 +253,17 @@ func (o LookupAviatrixSpokeGatewayResultOutput) BgpPollingTime() pulumi.IntOutpu
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) int { return v.BgpPollingTime }).(pulumi.IntOutput)
 }
 
+// Cloud instance ID.
 func (o LookupAviatrixSpokeGatewayResultOutput) CloudInstanceId() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.CloudInstanceId }).(pulumi.StringOutput)
 }
 
+// Type of cloud service provider.
 func (o LookupAviatrixSpokeGatewayResultOutput) CloudType() pulumi.IntOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) int { return v.CloudType }).(pulumi.IntOutput)
 }
 
+// A list of comma separated CIDRs to be customized for the spoke VPC routes.
 func (o LookupAviatrixSpokeGatewayResultOutput) CustomizedSpokeVpcRoutes() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.CustomizedSpokeVpcRoutes }).(pulumi.StringOutput)
 }
@@ -189,6 +272,7 @@ func (o LookupAviatrixSpokeGatewayResultOutput) DisableRoutePropagation() pulumi
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) bool { return v.DisableRoutePropagation }).(pulumi.BoolOutput)
 }
 
+// The EIP address of the Spoke Gateway.
 func (o LookupAviatrixSpokeGatewayResultOutput) Eip() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.Eip }).(pulumi.StringOutput)
 }
@@ -209,6 +293,7 @@ func (o LookupAviatrixSpokeGatewayResultOutput) EnableBgp() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) bool { return v.EnableBgp }).(pulumi.BoolOutput)
 }
 
+// Status of Encrypt Volume of spoke gateway.
 func (o LookupAviatrixSpokeGatewayResultOutput) EnableEncryptVolume() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) bool { return v.EnableEncryptVolume }).(pulumi.BoolOutput)
 }
@@ -225,6 +310,7 @@ func (o LookupAviatrixSpokeGatewayResultOutput) EnableMonitorGatewaySubnets() pu
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) bool { return v.EnableMonitorGatewaySubnets }).(pulumi.BoolOutput)
 }
 
+// Status of private OOB for the spoke gateway.
 func (o LookupAviatrixSpokeGatewayResultOutput) EnablePrivateOob() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) bool { return v.EnablePrivateOob }).(pulumi.BoolOutput)
 }
@@ -241,26 +327,32 @@ func (o LookupAviatrixSpokeGatewayResultOutput) EnableSpotInstance() pulumi.Bool
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) bool { return v.EnableSpotInstance }).(pulumi.BoolOutput)
 }
 
+// Status of VPC Dns Server of spoke gateway.
 func (o LookupAviatrixSpokeGatewayResultOutput) EnableVpcDnsServer() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) bool { return v.EnableVpcDnsServer }).(pulumi.BoolOutput)
 }
 
+// Fault domain for OCI.
 func (o LookupAviatrixSpokeGatewayResultOutput) FaultDomain() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.FaultDomain }).(pulumi.StringOutput)
 }
 
+// A list of comma separated CIDRs to be filtered from the spoke VPC route table.
 func (o LookupAviatrixSpokeGatewayResultOutput) FilteredSpokeVpcRoutes() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.FilteredSpokeVpcRoutes }).(pulumi.StringOutput)
 }
 
+// Aviatrix spoke gateway name.
 func (o LookupAviatrixSpokeGatewayResultOutput) GwName() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.GwName }).(pulumi.StringOutput)
 }
 
+// Size of spoke gateway instance.
 func (o LookupAviatrixSpokeGatewayResultOutput) GwSize() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.GwSize }).(pulumi.StringOutput)
 }
 
+// HA gateway availability domain for OCI.
 func (o LookupAviatrixSpokeGatewayResultOutput) HaAvailabilityDomain() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.HaAvailabilityDomain }).(pulumi.StringOutput)
 }
@@ -269,46 +361,57 @@ func (o LookupAviatrixSpokeGatewayResultOutput) HaAzureEipNameResourceGroup() pu
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.HaAzureEipNameResourceGroup }).(pulumi.StringOutput)
 }
 
+// Cloud instance ID of HA spoke gateway.
 func (o LookupAviatrixSpokeGatewayResultOutput) HaCloudInstanceId() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.HaCloudInstanceId }).(pulumi.StringOutput)
 }
 
+// The EIP address of the HA Spoke Gateway.
 func (o LookupAviatrixSpokeGatewayResultOutput) HaEip() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.HaEip }).(pulumi.StringOutput)
 }
 
+// HA gateway fault domain for OCI.
 func (o LookupAviatrixSpokeGatewayResultOutput) HaFaultDomain() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.HaFaultDomain }).(pulumi.StringOutput)
 }
 
+// Aviatrix spoke gateway unique name of HA spoke gateway.
 func (o LookupAviatrixSpokeGatewayResultOutput) HaGwName() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.HaGwName }).(pulumi.StringOutput)
 }
 
+// HA Gateway Size.
 func (o LookupAviatrixSpokeGatewayResultOutput) HaGwSize() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.HaGwSize }).(pulumi.StringOutput)
 }
 
+// The image version of the HA gateway.
 func (o LookupAviatrixSpokeGatewayResultOutput) HaImageVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.HaImageVersion }).(pulumi.StringOutput)
 }
 
+// AZ of subnet being created for Insane Mode Spoke HA Gateway.
 func (o LookupAviatrixSpokeGatewayResultOutput) HaInsaneModeAz() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.HaInsaneModeAz }).(pulumi.StringOutput)
 }
 
+// HA OOB availability zone.
 func (o LookupAviatrixSpokeGatewayResultOutput) HaOobAvailabilityZone() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.HaOobAvailabilityZone }).(pulumi.StringOutput)
 }
 
+// HA OOB management subnet.
 func (o LookupAviatrixSpokeGatewayResultOutput) HaOobManagementSubnet() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.HaOobManagementSubnet }).(pulumi.StringOutput)
 }
 
+// Private IP address of HA spoke gateway.
 func (o LookupAviatrixSpokeGatewayResultOutput) HaPrivateIp() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.HaPrivateIp }).(pulumi.StringOutput)
 }
 
+// Public IP address of the HA spoke gateway.
 func (o LookupAviatrixSpokeGatewayResultOutput) HaPublicIp() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.HaPublicIp }).(pulumi.StringOutput)
 }
@@ -317,14 +420,17 @@ func (o LookupAviatrixSpokeGatewayResultOutput) HaSecurityGroupId() pulumi.Strin
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.HaSecurityGroupId }).(pulumi.StringOutput)
 }
 
+// The software version of the HA gateway.
 func (o LookupAviatrixSpokeGatewayResultOutput) HaSoftwareVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.HaSoftwareVersion }).(pulumi.StringOutput)
 }
 
+// HA Subnet.
 func (o LookupAviatrixSpokeGatewayResultOutput) HaSubnet() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.HaSubnet }).(pulumi.StringOutput)
 }
 
+// HA Zone.
 func (o LookupAviatrixSpokeGatewayResultOutput) HaZone() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.HaZone }).(pulumi.StringOutput)
 }
@@ -334,18 +440,22 @@ func (o LookupAviatrixSpokeGatewayResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
+// The image version of the gateway.
 func (o LookupAviatrixSpokeGatewayResultOutput) ImageVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.ImageVersion }).(pulumi.StringOutput)
 }
 
+// A list of comma separated CIDRs to be advertised to on-prem as "Included CIDR List".
 func (o LookupAviatrixSpokeGatewayResultOutput) IncludedAdvertisedSpokeRoutes() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.IncludedAdvertisedSpokeRoutes }).(pulumi.StringOutput)
 }
 
+// Status of Insane Mode for Spoke Gateway.
 func (o LookupAviatrixSpokeGatewayResultOutput) InsaneMode() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) bool { return v.InsaneMode }).(pulumi.BoolOutput)
 }
 
+// AZ of subnet being created for Insane Mode spoke gateway.
 func (o LookupAviatrixSpokeGatewayResultOutput) InsaneModeAz() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.InsaneModeAz }).(pulumi.StringOutput)
 }
@@ -362,10 +472,12 @@ func (o LookupAviatrixSpokeGatewayResultOutput) MonitorExcludeLists() pulumi.Str
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) []string { return v.MonitorExcludeLists }).(pulumi.StringArrayOutput)
 }
 
+// OOB availability zone.
 func (o LookupAviatrixSpokeGatewayResultOutput) OobAvailabilityZone() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.OobAvailabilityZone }).(pulumi.StringOutput)
 }
 
+// OOB management subnet.
 func (o LookupAviatrixSpokeGatewayResultOutput) OobManagementSubnet() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.OobManagementSubnet }).(pulumi.StringOutput)
 }
@@ -374,26 +486,32 @@ func (o LookupAviatrixSpokeGatewayResultOutput) PrependAsPaths() pulumi.StringAr
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) []string { return v.PrependAsPaths }).(pulumi.StringArrayOutput)
 }
 
+// Private IP address of the spoke gateway.
 func (o LookupAviatrixSpokeGatewayResultOutput) PrivateIp() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.PrivateIp }).(pulumi.StringOutput)
 }
 
+// Public IP of spoke gateway.
 func (o LookupAviatrixSpokeGatewayResultOutput) PublicIp() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.PublicIp }).(pulumi.StringOutput)
 }
 
+// Security group used of the spoke gateway.
 func (o LookupAviatrixSpokeGatewayResultOutput) SecurityGroupId() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.SecurityGroupId }).(pulumi.StringOutput)
 }
 
+// Status of Single AZ HA of spoke gateway.
 func (o LookupAviatrixSpokeGatewayResultOutput) SingleAzHa() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) bool { return v.SingleAzHa }).(pulumi.BoolOutput)
 }
 
+// Status of Single IP Source NAT mode of the spoke gateway.
 func (o LookupAviatrixSpokeGatewayResultOutput) SingleIpSnat() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) bool { return v.SingleIpSnat }).(pulumi.BoolOutput)
 }
 
+// The software version of the gateway.
 func (o LookupAviatrixSpokeGatewayResultOutput) SoftwareVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.SoftwareVersion }).(pulumi.StringOutput)
 }
@@ -406,10 +524,12 @@ func (o LookupAviatrixSpokeGatewayResultOutput) SpotPrice() pulumi.StringOutput 
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.SpotPrice }).(pulumi.StringOutput)
 }
 
+// A VPC Network address range selected from one of the available network ranges.
 func (o LookupAviatrixSpokeGatewayResultOutput) Subnet() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.Subnet }).(pulumi.StringOutput)
 }
 
+// Instance tag of cloud provider.
 func (o LookupAviatrixSpokeGatewayResultOutput) TagLists() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) []string { return v.TagLists }).(pulumi.StringArrayOutput)
 }
@@ -418,6 +538,7 @@ func (o LookupAviatrixSpokeGatewayResultOutput) Tags() pulumi.StringMapOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) map[string]string { return v.Tags }).(pulumi.StringMapOutput)
 }
 
+// Transit gateways attached to this spoke gateway.
 func (o LookupAviatrixSpokeGatewayResultOutput) TransitGw() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.TransitGw }).(pulumi.StringOutput)
 }
@@ -426,10 +547,12 @@ func (o LookupAviatrixSpokeGatewayResultOutput) TunnelDetectionTime() pulumi.Int
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) int { return v.TunnelDetectionTime }).(pulumi.IntOutput)
 }
 
+// VPC-ID/VNet-Name of cloud provider.
 func (o LookupAviatrixSpokeGatewayResultOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.VpcId }).(pulumi.StringOutput)
 }
 
+// Region of cloud provider.
 func (o LookupAviatrixSpokeGatewayResultOutput) VpcReg() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixSpokeGatewayResult) string { return v.VpcReg }).(pulumi.StringOutput)
 }

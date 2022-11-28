@@ -11,23 +11,119 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_vpn_user** resource creates and manages Aviatrix VPN users.
+//
+// > **NOTE:** As of R2.15, management of user/profile attachment can be set using `manageUserAttachment`. This argument must be to *true* in either **aviatrix_vpn_user** or **aviatrix_vpn_profile**. If attachment is managed in the **aviatrix_vpn_user** (set to *true*), it must be set to *false* in the **aviatrix_vpn_profile** resource and vice versa.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixVpnUser(ctx, "testVpnUser", &aviatrix.AviatrixVpnUserArgs{
+//				GwName:    pulumi.String("gw1"),
+//				UserEmail: pulumi.String("user@aviatrix.com"),
+//				UserName:  pulumi.String("username1"),
+//				VpcId:     pulumi.String("vpc-abcd1234"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixVpnUser(ctx, "testVpnUser", &aviatrix.AviatrixVpnUserArgs{
+//				DnsName:   pulumi.String("vpn.testuser.com"),
+//				UserEmail: pulumi.String("user@aviatrix.com"),
+//				UserName:  pulumi.String("username1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// ```go
+// package main
+//
+// import (
+//
+//	"fmt"
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixVpnUser(ctx, "testVpnUser", &aviatrix.AviatrixVpnUserArgs{
+//				GwName:    pulumi.String("gw1"),
+//				UserEmail: pulumi.String("user@aviatrix.com"),
+//				UserName:  pulumi.String("username1"),
+//				VpcId:     pulumi.String(fmt.Sprintf("%v~-~%v", aviatrix_vpc.Test_vpc.Vpc_id, aviatrix_account.Test_account.Gcloud_project_id)),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **vpn_user** can be imported using the `user_name`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixVpnUser:AviatrixVpnUser test user_name
+//
+// ```
 type AviatrixVpnUser struct {
 	pulumi.CustomResourceState
 
-	// FQDN of a DNS based VPN service such as GeoVPN or UDP load balancer.
+	// FQDN of a DNS based VPN service such as GeoVPN or UDP load balancer. Example: "vpn.testuser.com".
 	DnsName pulumi.StringPtrOutput `pulumi:"dnsName"`
-	// If ELB is enabled, this will be the name of the ELB, else it will be the name of the Aviatrix VPN gateway.
-	GwName               pulumi.StringPtrOutput `pulumi:"gwName"`
-	ManageUserAttachment pulumi.BoolPtrOutput   `pulumi:"manageUserAttachment"`
-	// List of profiles for user to attach to.
+	// If ELB is enabled, this will be the name of the ELB, else it will be the name of the Aviatrix VPN gateway. Used together with `vpcId`. Example: "gw1".
+	GwName pulumi.StringPtrOutput `pulumi:"gwName"`
+	// This parameter is a switch to determine whether or not to manage VPN user attachments to the VPN profile using this resource. If this is set to false, attachment must be managed using the **aviatrix_vpn_profile** resource. Valid values: true, false. Default value: false.
+	ManageUserAttachment pulumi.BoolPtrOutput `pulumi:"manageUserAttachment"`
+	// List of VPN profiles for user to attach to. This should be set to null if `manageUserAttachment` is set to false.
 	Profiles pulumi.StringArrayOutput `pulumi:"profiles"`
-	// This is the name of the SAML endpoint to which the user will be associated.
+	// This is the name of the SAML endpoint to which the user is to be associated. This is required if adding user to a SAML gateway/LB.
 	SamlEndpoint pulumi.StringPtrOutput `pulumi:"samlEndpoint"`
-	// VPN User's email.
+	// VPN user's email. Example: "abc@xyz.com".
 	UserEmail pulumi.StringPtrOutput `pulumi:"userEmail"`
-	// VPN user name.
+	// VPN user name. Example: "user".
 	UserName pulumi.StringOutput `pulumi:"userName"`
-	// VPC Id of Aviatrix VPN gateway.
+	// VPC ID of Aviatrix VPN gateway. Used together with `gwName`. Example: "vpc-abcd1234".
 	VpcId pulumi.StringPtrOutput `pulumi:"vpcId"`
 }
 
@@ -64,38 +160,40 @@ func GetAviatrixVpnUser(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixVpnUser resources.
 type aviatrixVpnUserState struct {
-	// FQDN of a DNS based VPN service such as GeoVPN or UDP load balancer.
+	// FQDN of a DNS based VPN service such as GeoVPN or UDP load balancer. Example: "vpn.testuser.com".
 	DnsName *string `pulumi:"dnsName"`
-	// If ELB is enabled, this will be the name of the ELB, else it will be the name of the Aviatrix VPN gateway.
-	GwName               *string `pulumi:"gwName"`
-	ManageUserAttachment *bool   `pulumi:"manageUserAttachment"`
-	// List of profiles for user to attach to.
+	// If ELB is enabled, this will be the name of the ELB, else it will be the name of the Aviatrix VPN gateway. Used together with `vpcId`. Example: "gw1".
+	GwName *string `pulumi:"gwName"`
+	// This parameter is a switch to determine whether or not to manage VPN user attachments to the VPN profile using this resource. If this is set to false, attachment must be managed using the **aviatrix_vpn_profile** resource. Valid values: true, false. Default value: false.
+	ManageUserAttachment *bool `pulumi:"manageUserAttachment"`
+	// List of VPN profiles for user to attach to. This should be set to null if `manageUserAttachment` is set to false.
 	Profiles []string `pulumi:"profiles"`
-	// This is the name of the SAML endpoint to which the user will be associated.
+	// This is the name of the SAML endpoint to which the user is to be associated. This is required if adding user to a SAML gateway/LB.
 	SamlEndpoint *string `pulumi:"samlEndpoint"`
-	// VPN User's email.
+	// VPN user's email. Example: "abc@xyz.com".
 	UserEmail *string `pulumi:"userEmail"`
-	// VPN user name.
+	// VPN user name. Example: "user".
 	UserName *string `pulumi:"userName"`
-	// VPC Id of Aviatrix VPN gateway.
+	// VPC ID of Aviatrix VPN gateway. Used together with `gwName`. Example: "vpc-abcd1234".
 	VpcId *string `pulumi:"vpcId"`
 }
 
 type AviatrixVpnUserState struct {
-	// FQDN of a DNS based VPN service such as GeoVPN or UDP load balancer.
+	// FQDN of a DNS based VPN service such as GeoVPN or UDP load balancer. Example: "vpn.testuser.com".
 	DnsName pulumi.StringPtrInput
-	// If ELB is enabled, this will be the name of the ELB, else it will be the name of the Aviatrix VPN gateway.
-	GwName               pulumi.StringPtrInput
+	// If ELB is enabled, this will be the name of the ELB, else it will be the name of the Aviatrix VPN gateway. Used together with `vpcId`. Example: "gw1".
+	GwName pulumi.StringPtrInput
+	// This parameter is a switch to determine whether or not to manage VPN user attachments to the VPN profile using this resource. If this is set to false, attachment must be managed using the **aviatrix_vpn_profile** resource. Valid values: true, false. Default value: false.
 	ManageUserAttachment pulumi.BoolPtrInput
-	// List of profiles for user to attach to.
+	// List of VPN profiles for user to attach to. This should be set to null if `manageUserAttachment` is set to false.
 	Profiles pulumi.StringArrayInput
-	// This is the name of the SAML endpoint to which the user will be associated.
+	// This is the name of the SAML endpoint to which the user is to be associated. This is required if adding user to a SAML gateway/LB.
 	SamlEndpoint pulumi.StringPtrInput
-	// VPN User's email.
+	// VPN user's email. Example: "abc@xyz.com".
 	UserEmail pulumi.StringPtrInput
-	// VPN user name.
+	// VPN user name. Example: "user".
 	UserName pulumi.StringPtrInput
-	// VPC Id of Aviatrix VPN gateway.
+	// VPC ID of Aviatrix VPN gateway. Used together with `gwName`. Example: "vpc-abcd1234".
 	VpcId pulumi.StringPtrInput
 }
 
@@ -104,39 +202,41 @@ func (AviatrixVpnUserState) ElementType() reflect.Type {
 }
 
 type aviatrixVpnUserArgs struct {
-	// FQDN of a DNS based VPN service such as GeoVPN or UDP load balancer.
+	// FQDN of a DNS based VPN service such as GeoVPN or UDP load balancer. Example: "vpn.testuser.com".
 	DnsName *string `pulumi:"dnsName"`
-	// If ELB is enabled, this will be the name of the ELB, else it will be the name of the Aviatrix VPN gateway.
-	GwName               *string `pulumi:"gwName"`
-	ManageUserAttachment *bool   `pulumi:"manageUserAttachment"`
-	// List of profiles for user to attach to.
+	// If ELB is enabled, this will be the name of the ELB, else it will be the name of the Aviatrix VPN gateway. Used together with `vpcId`. Example: "gw1".
+	GwName *string `pulumi:"gwName"`
+	// This parameter is a switch to determine whether or not to manage VPN user attachments to the VPN profile using this resource. If this is set to false, attachment must be managed using the **aviatrix_vpn_profile** resource. Valid values: true, false. Default value: false.
+	ManageUserAttachment *bool `pulumi:"manageUserAttachment"`
+	// List of VPN profiles for user to attach to. This should be set to null if `manageUserAttachment` is set to false.
 	Profiles []string `pulumi:"profiles"`
-	// This is the name of the SAML endpoint to which the user will be associated.
+	// This is the name of the SAML endpoint to which the user is to be associated. This is required if adding user to a SAML gateway/LB.
 	SamlEndpoint *string `pulumi:"samlEndpoint"`
-	// VPN User's email.
+	// VPN user's email. Example: "abc@xyz.com".
 	UserEmail *string `pulumi:"userEmail"`
-	// VPN user name.
+	// VPN user name. Example: "user".
 	UserName string `pulumi:"userName"`
-	// VPC Id of Aviatrix VPN gateway.
+	// VPC ID of Aviatrix VPN gateway. Used together with `gwName`. Example: "vpc-abcd1234".
 	VpcId *string `pulumi:"vpcId"`
 }
 
 // The set of arguments for constructing a AviatrixVpnUser resource.
 type AviatrixVpnUserArgs struct {
-	// FQDN of a DNS based VPN service such as GeoVPN or UDP load balancer.
+	// FQDN of a DNS based VPN service such as GeoVPN or UDP load balancer. Example: "vpn.testuser.com".
 	DnsName pulumi.StringPtrInput
-	// If ELB is enabled, this will be the name of the ELB, else it will be the name of the Aviatrix VPN gateway.
-	GwName               pulumi.StringPtrInput
+	// If ELB is enabled, this will be the name of the ELB, else it will be the name of the Aviatrix VPN gateway. Used together with `vpcId`. Example: "gw1".
+	GwName pulumi.StringPtrInput
+	// This parameter is a switch to determine whether or not to manage VPN user attachments to the VPN profile using this resource. If this is set to false, attachment must be managed using the **aviatrix_vpn_profile** resource. Valid values: true, false. Default value: false.
 	ManageUserAttachment pulumi.BoolPtrInput
-	// List of profiles for user to attach to.
+	// List of VPN profiles for user to attach to. This should be set to null if `manageUserAttachment` is set to false.
 	Profiles pulumi.StringArrayInput
-	// This is the name of the SAML endpoint to which the user will be associated.
+	// This is the name of the SAML endpoint to which the user is to be associated. This is required if adding user to a SAML gateway/LB.
 	SamlEndpoint pulumi.StringPtrInput
-	// VPN User's email.
+	// VPN user's email. Example: "abc@xyz.com".
 	UserEmail pulumi.StringPtrInput
-	// VPN user name.
+	// VPN user name. Example: "user".
 	UserName pulumi.StringInput
-	// VPC Id of Aviatrix VPN gateway.
+	// VPC ID of Aviatrix VPN gateway. Used together with `gwName`. Example: "vpc-abcd1234".
 	VpcId pulumi.StringPtrInput
 }
 
@@ -227,41 +327,42 @@ func (o AviatrixVpnUserOutput) ToAviatrixVpnUserOutputWithContext(ctx context.Co
 	return o
 }
 
-// FQDN of a DNS based VPN service such as GeoVPN or UDP load balancer.
+// FQDN of a DNS based VPN service such as GeoVPN or UDP load balancer. Example: "vpn.testuser.com".
 func (o AviatrixVpnUserOutput) DnsName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixVpnUser) pulumi.StringPtrOutput { return v.DnsName }).(pulumi.StringPtrOutput)
 }
 
-// If ELB is enabled, this will be the name of the ELB, else it will be the name of the Aviatrix VPN gateway.
+// If ELB is enabled, this will be the name of the ELB, else it will be the name of the Aviatrix VPN gateway. Used together with `vpcId`. Example: "gw1".
 func (o AviatrixVpnUserOutput) GwName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixVpnUser) pulumi.StringPtrOutput { return v.GwName }).(pulumi.StringPtrOutput)
 }
 
+// This parameter is a switch to determine whether or not to manage VPN user attachments to the VPN profile using this resource. If this is set to false, attachment must be managed using the **aviatrix_vpn_profile** resource. Valid values: true, false. Default value: false.
 func (o AviatrixVpnUserOutput) ManageUserAttachment() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixVpnUser) pulumi.BoolPtrOutput { return v.ManageUserAttachment }).(pulumi.BoolPtrOutput)
 }
 
-// List of profiles for user to attach to.
+// List of VPN profiles for user to attach to. This should be set to null if `manageUserAttachment` is set to false.
 func (o AviatrixVpnUserOutput) Profiles() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixVpnUser) pulumi.StringArrayOutput { return v.Profiles }).(pulumi.StringArrayOutput)
 }
 
-// This is the name of the SAML endpoint to which the user will be associated.
+// This is the name of the SAML endpoint to which the user is to be associated. This is required if adding user to a SAML gateway/LB.
 func (o AviatrixVpnUserOutput) SamlEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixVpnUser) pulumi.StringPtrOutput { return v.SamlEndpoint }).(pulumi.StringPtrOutput)
 }
 
-// VPN User's email.
+// VPN user's email. Example: "abc@xyz.com".
 func (o AviatrixVpnUserOutput) UserEmail() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixVpnUser) pulumi.StringPtrOutput { return v.UserEmail }).(pulumi.StringPtrOutput)
 }
 
-// VPN user name.
+// VPN user name. Example: "user".
 func (o AviatrixVpnUserOutput) UserName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixVpnUser) pulumi.StringOutput { return v.UserName }).(pulumi.StringOutput)
 }
 
-// VPC Id of Aviatrix VPN gateway.
+// VPC ID of Aviatrix VPN gateway. Used together with `gwName`. Example: "vpc-abcd1234".
 func (o AviatrixVpnUserOutput) VpcId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixVpnUser) pulumi.StringPtrOutput { return v.VpcId }).(pulumi.StringPtrOutput)
 }

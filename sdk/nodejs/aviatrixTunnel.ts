@@ -4,6 +4,30 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_tunnel** resource allows the creation and management of Aviatrix Encrypted Peering tunnels.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix AWS Tunnel
+ * const testTunnel = new aviatrix.AviatrixTunnel("test_tunnel", {
+ *     gwName1: "avtx-gw1",
+ *     gwName2: "avtx-gw2",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **tunnel** can be imported using the `gw_name1` and `gw_name2`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixTunnel:AviatrixTunnel test gw_name1~gw_name2
+ * ```
+ */
 export class AviatrixTunnel extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixTunnel resource's state with the given name, ID, and optional extra
@@ -33,7 +57,7 @@ export class AviatrixTunnel extends pulumi.CustomResource {
     }
 
     /**
-     * Whether Peering HA is enabled. Valid inputs: true or false.
+     * Enable this attribute if peering-HA is enabled on the gateways. Valid values: true, false. Default value: false.
      */
     public readonly enableHa!: pulumi.Output<boolean | undefined>;
     /**
@@ -45,15 +69,15 @@ export class AviatrixTunnel extends pulumi.CustomResource {
      */
     public readonly gwName2!: pulumi.Output<string>;
     /**
-     * Status of the HA tunnel.
+     * (Computed) Status of the HA tunnel.
      */
     public /*out*/ readonly peeringHastatus!: pulumi.Output<string>;
     /**
-     * Name of the peering link.
+     * (Computed) Name of the peering link.
      */
     public /*out*/ readonly peeringLink!: pulumi.Output<string>;
     /**
-     * Status of the tunnel.
+     * (Computed) Status of the tunnel.
      */
     public /*out*/ readonly peeringState!: pulumi.Output<string>;
 
@@ -101,7 +125,7 @@ export class AviatrixTunnel extends pulumi.CustomResource {
  */
 export interface AviatrixTunnelState {
     /**
-     * Whether Peering HA is enabled. Valid inputs: true or false.
+     * Enable this attribute if peering-HA is enabled on the gateways. Valid values: true, false. Default value: false.
      */
     enableHa?: pulumi.Input<boolean>;
     /**
@@ -113,15 +137,15 @@ export interface AviatrixTunnelState {
      */
     gwName2?: pulumi.Input<string>;
     /**
-     * Status of the HA tunnel.
+     * (Computed) Status of the HA tunnel.
      */
     peeringHastatus?: pulumi.Input<string>;
     /**
-     * Name of the peering link.
+     * (Computed) Name of the peering link.
      */
     peeringLink?: pulumi.Input<string>;
     /**
-     * Status of the tunnel.
+     * (Computed) Status of the tunnel.
      */
     peeringState?: pulumi.Input<string>;
 }
@@ -131,7 +155,7 @@ export interface AviatrixTunnelState {
  */
 export interface AviatrixTunnelArgs {
     /**
-     * Whether Peering HA is enabled. Valid inputs: true or false.
+     * Enable this attribute if peering-HA is enabled on the gateways. Valid values: true, false. Default value: false.
      */
     enableHa?: pulumi.Input<boolean>;
     /**

@@ -11,12 +11,50 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_segmentation_network_domain_connection_policy** resource handles creation of [Transit Segmentation](https://docs.aviatrix.com/HowTos/transit_segmentation_faq.html) Network Domain Connection Policies.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixSegmentationNetworkDomainConnectionPolicy(ctx, "testSegmentationNetworkDomainConnectionPolicy", &aviatrix.AviatrixSegmentationNetworkDomainConnectionPolicyArgs{
+//				DomainName1: pulumi.String("domain-a"),
+//				DomainName2: pulumi.String("domain-b"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **aviatrix_segmentation_network_domain_connection_policy** can be imported using `domain_name_1` and `domain_name_2` separated by a `~`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixSegmentationNetworkDomainConnectionPolicy:AviatrixSegmentationNetworkDomainConnectionPolicy test domain_name_1~domain_name_2
+//
+// ```
 type AviatrixSegmentationNetworkDomainConnectionPolicy struct {
 	pulumi.CustomResourceState
 
-	// Name of network domain that will be connected to domain 2.
+	// Name of the Network Domain to connect to Domain 2.
 	DomainName1 pulumi.StringOutput `pulumi:"domainName1"`
-	// Name of network domain that will be connected to domain 1.
+	// Name of the Network Domain to connect to Domain 1.
 	DomainName2 pulumi.StringOutput `pulumi:"domainName2"`
 }
 
@@ -56,16 +94,16 @@ func GetAviatrixSegmentationNetworkDomainConnectionPolicy(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixSegmentationNetworkDomainConnectionPolicy resources.
 type aviatrixSegmentationNetworkDomainConnectionPolicyState struct {
-	// Name of network domain that will be connected to domain 2.
+	// Name of the Network Domain to connect to Domain 2.
 	DomainName1 *string `pulumi:"domainName1"`
-	// Name of network domain that will be connected to domain 1.
+	// Name of the Network Domain to connect to Domain 1.
 	DomainName2 *string `pulumi:"domainName2"`
 }
 
 type AviatrixSegmentationNetworkDomainConnectionPolicyState struct {
-	// Name of network domain that will be connected to domain 2.
+	// Name of the Network Domain to connect to Domain 2.
 	DomainName1 pulumi.StringPtrInput
-	// Name of network domain that will be connected to domain 1.
+	// Name of the Network Domain to connect to Domain 1.
 	DomainName2 pulumi.StringPtrInput
 }
 
@@ -74,17 +112,17 @@ func (AviatrixSegmentationNetworkDomainConnectionPolicyState) ElementType() refl
 }
 
 type aviatrixSegmentationNetworkDomainConnectionPolicyArgs struct {
-	// Name of network domain that will be connected to domain 2.
+	// Name of the Network Domain to connect to Domain 2.
 	DomainName1 string `pulumi:"domainName1"`
-	// Name of network domain that will be connected to domain 1.
+	// Name of the Network Domain to connect to Domain 1.
 	DomainName2 string `pulumi:"domainName2"`
 }
 
 // The set of arguments for constructing a AviatrixSegmentationNetworkDomainConnectionPolicy resource.
 type AviatrixSegmentationNetworkDomainConnectionPolicyArgs struct {
-	// Name of network domain that will be connected to domain 2.
+	// Name of the Network Domain to connect to Domain 2.
 	DomainName1 pulumi.StringInput
-	// Name of network domain that will be connected to domain 1.
+	// Name of the Network Domain to connect to Domain 1.
 	DomainName2 pulumi.StringInput
 }
 
@@ -175,12 +213,12 @@ func (o AviatrixSegmentationNetworkDomainConnectionPolicyOutput) ToAviatrixSegme
 	return o
 }
 
-// Name of network domain that will be connected to domain 2.
+// Name of the Network Domain to connect to Domain 2.
 func (o AviatrixSegmentationNetworkDomainConnectionPolicyOutput) DomainName1() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSegmentationNetworkDomainConnectionPolicy) pulumi.StringOutput { return v.DomainName1 }).(pulumi.StringOutput)
 }
 
-// Name of network domain that will be connected to domain 1.
+// Name of the Network Domain to connect to Domain 1.
 func (o AviatrixSegmentationNetworkDomainConnectionPolicyOutput) DomainName2() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSegmentationNetworkDomainConnectionPolicy) pulumi.StringOutput { return v.DomainName2 }).(pulumi.StringOutput)
 }

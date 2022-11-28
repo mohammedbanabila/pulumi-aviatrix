@@ -13,7 +13,13 @@ namespace Pulumi.Aviatrix.Outputs
     [OutputType]
     public sealed class AviatrixTransitGatewayBgpLanInterface
     {
+        /// <summary>
+        /// A VPC Network address range selected from one of the available network ranges.
+        /// </summary>
         public readonly string Subnet;
+        /// <summary>
+        /// VPC-ID/VNet-Name of cloud provider.
+        /// </summary>
         public readonly string VpcId;
 
         [OutputConstructor]

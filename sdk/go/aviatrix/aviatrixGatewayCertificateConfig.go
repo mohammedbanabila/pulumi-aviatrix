@@ -11,12 +11,60 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_gateway_certificate_config** resource allows the management of Aviatrix [gateway certificate](https://docs.aviatrix.com/HowTos/controller_certificate.html#gateway-certificate-management) configuration. Available as of provider version R2.18.1+.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"io/ioutil"
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func readFileOrPanic(path string) pulumi.StringPtrInput {
+//		data, err := ioutil.ReadFile(path)
+//		if err != nil {
+//			panic(err.Error())
+//		}
+//		return pulumi.String(string(data))
+//	}
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixGatewayCertificateConfig(ctx, "testGatewayCert", &aviatrix.AviatrixGatewayCertificateConfigArgs{
+//				CaCertificate: readFileOrPanic("path/to/CA_cert.pem"),
+//				CaPrivateKey:  readFileOrPanic("path/to/CA_private.key"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// !> **WARNING:** When importing, the provider cannot read your private key or certificate into the state file. After importing, if you do not want to change the values of the CA private key or certificate you must set the attributes `ca_certificate` and `ca_private_key` to the empty string (""). Otherwise, Terraform will see a diff and force replacement. `aviatrix_gateway_certificate_config` can be imported using controller IP with the dots(.) replaces with dashes(-), e.g. controller IP is 10.11.12.13
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixGatewayCertificateConfig:AviatrixGatewayCertificateConfig test 10-11-12-13
+//
+// ```
 type AviatrixGatewayCertificateConfig struct {
 	pulumi.CustomResourceState
 
-	// CA Certificate.
+	// CA Certificate in PEM format. To read certificate from a file please use the built-in `file` function.
 	CaCertificate pulumi.StringOutput `pulumi:"caCertificate"`
-	// CA Private Key.
+	// CA Private Key. To read the private key from a file please use the built-in `file` function.
 	CaPrivateKey pulumi.StringOutput `pulumi:"caPrivateKey"`
 }
 
@@ -33,6 +81,13 @@ func NewAviatrixGatewayCertificateConfig(ctx *pulumi.Context,
 	if args.CaPrivateKey == nil {
 		return nil, errors.New("invalid value for required argument 'CaPrivateKey'")
 	}
+	if args.CaPrivateKey != nil {
+		args.CaPrivateKey = pulumi.ToSecret(args.CaPrivateKey).(pulumi.StringOutput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"caPrivateKey",
+	})
+	opts = append(opts, secrets)
 	opts = pkgResourceDefaultOpts(opts)
 	var resource AviatrixGatewayCertificateConfig
 	err := ctx.RegisterResource("aviatrix:index/aviatrixGatewayCertificateConfig:AviatrixGatewayCertificateConfig", name, args, &resource, opts...)
@@ -56,16 +111,16 @@ func GetAviatrixGatewayCertificateConfig(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixGatewayCertificateConfig resources.
 type aviatrixGatewayCertificateConfigState struct {
-	// CA Certificate.
+	// CA Certificate in PEM format. To read certificate from a file please use the built-in `file` function.
 	CaCertificate *string `pulumi:"caCertificate"`
-	// CA Private Key.
+	// CA Private Key. To read the private key from a file please use the built-in `file` function.
 	CaPrivateKey *string `pulumi:"caPrivateKey"`
 }
 
 type AviatrixGatewayCertificateConfigState struct {
-	// CA Certificate.
+	// CA Certificate in PEM format. To read certificate from a file please use the built-in `file` function.
 	CaCertificate pulumi.StringPtrInput
-	// CA Private Key.
+	// CA Private Key. To read the private key from a file please use the built-in `file` function.
 	CaPrivateKey pulumi.StringPtrInput
 }
 
@@ -74,17 +129,17 @@ func (AviatrixGatewayCertificateConfigState) ElementType() reflect.Type {
 }
 
 type aviatrixGatewayCertificateConfigArgs struct {
-	// CA Certificate.
+	// CA Certificate in PEM format. To read certificate from a file please use the built-in `file` function.
 	CaCertificate string `pulumi:"caCertificate"`
-	// CA Private Key.
+	// CA Private Key. To read the private key from a file please use the built-in `file` function.
 	CaPrivateKey string `pulumi:"caPrivateKey"`
 }
 
 // The set of arguments for constructing a AviatrixGatewayCertificateConfig resource.
 type AviatrixGatewayCertificateConfigArgs struct {
-	// CA Certificate.
+	// CA Certificate in PEM format. To read certificate from a file please use the built-in `file` function.
 	CaCertificate pulumi.StringInput
-	// CA Private Key.
+	// CA Private Key. To read the private key from a file please use the built-in `file` function.
 	CaPrivateKey pulumi.StringInput
 }
 
@@ -175,12 +230,12 @@ func (o AviatrixGatewayCertificateConfigOutput) ToAviatrixGatewayCertificateConf
 	return o
 }
 
-// CA Certificate.
+// CA Certificate in PEM format. To read certificate from a file please use the built-in `file` function.
 func (o AviatrixGatewayCertificateConfigOutput) CaCertificate() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixGatewayCertificateConfig) pulumi.StringOutput { return v.CaCertificate }).(pulumi.StringOutput)
 }
 
-// CA Private Key.
+// CA Private Key. To read the private key from a file please use the built-in `file` function.
 func (o AviatrixGatewayCertificateConfigOutput) CaPrivateKey() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixGatewayCertificateConfig) pulumi.StringOutput { return v.CaPrivateKey }).(pulumi.StringOutput)
 }

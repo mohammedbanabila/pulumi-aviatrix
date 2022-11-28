@@ -19,9 +19,9 @@ class AviatrixSegmentationSecurityDomainAssociationArgs:
                  transit_gateway_name: pulumi.Input[str]):
         """
         The set of arguments for constructing a AviatrixSegmentationSecurityDomainAssociation resource.
-        :param pulumi.Input[str] attachment_name: Attachment name, either Spoke or Edge.
-        :param pulumi.Input[str] security_domain_name: Security Domain name.
-        :param pulumi.Input[str] transit_gateway_name: Transit Gateway name.
+        :param pulumi.Input[str] attachment_name: Name of the transit gateway attachment, Spoke or Edge, to associate with the security domain.
+        :param pulumi.Input[str] security_domain_name: Name of the Segmentation Security Domain.
+        :param pulumi.Input[str] transit_gateway_name: Name of the Transit Gateway.
         """
         pulumi.set(__self__, "attachment_name", attachment_name)
         pulumi.set(__self__, "security_domain_name", security_domain_name)
@@ -31,7 +31,7 @@ class AviatrixSegmentationSecurityDomainAssociationArgs:
     @pulumi.getter(name="attachmentName")
     def attachment_name(self) -> pulumi.Input[str]:
         """
-        Attachment name, either Spoke or Edge.
+        Name of the transit gateway attachment, Spoke or Edge, to associate with the security domain.
         """
         return pulumi.get(self, "attachment_name")
 
@@ -43,7 +43,7 @@ class AviatrixSegmentationSecurityDomainAssociationArgs:
     @pulumi.getter(name="securityDomainName")
     def security_domain_name(self) -> pulumi.Input[str]:
         """
-        Security Domain name.
+        Name of the Segmentation Security Domain.
         """
         return pulumi.get(self, "security_domain_name")
 
@@ -55,7 +55,7 @@ class AviatrixSegmentationSecurityDomainAssociationArgs:
     @pulumi.getter(name="transitGatewayName")
     def transit_gateway_name(self) -> pulumi.Input[str]:
         """
-        Transit Gateway name.
+        Name of the Transit Gateway.
         """
         return pulumi.get(self, "transit_gateway_name")
 
@@ -72,9 +72,9 @@ class _AviatrixSegmentationSecurityDomainAssociationState:
                  transit_gateway_name: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixSegmentationSecurityDomainAssociation resources.
-        :param pulumi.Input[str] attachment_name: Attachment name, either Spoke or Edge.
-        :param pulumi.Input[str] security_domain_name: Security Domain name.
-        :param pulumi.Input[str] transit_gateway_name: Transit Gateway name.
+        :param pulumi.Input[str] attachment_name: Name of the transit gateway attachment, Spoke or Edge, to associate with the security domain.
+        :param pulumi.Input[str] security_domain_name: Name of the Segmentation Security Domain.
+        :param pulumi.Input[str] transit_gateway_name: Name of the Transit Gateway.
         """
         if attachment_name is not None:
             pulumi.set(__self__, "attachment_name", attachment_name)
@@ -87,7 +87,7 @@ class _AviatrixSegmentationSecurityDomainAssociationState:
     @pulumi.getter(name="attachmentName")
     def attachment_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Attachment name, either Spoke or Edge.
+        Name of the transit gateway attachment, Spoke or Edge, to associate with the security domain.
         """
         return pulumi.get(self, "attachment_name")
 
@@ -99,7 +99,7 @@ class _AviatrixSegmentationSecurityDomainAssociationState:
     @pulumi.getter(name="securityDomainName")
     def security_domain_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Security Domain name.
+        Name of the Segmentation Security Domain.
         """
         return pulumi.get(self, "security_domain_name")
 
@@ -111,7 +111,7 @@ class _AviatrixSegmentationSecurityDomainAssociationState:
     @pulumi.getter(name="transitGatewayName")
     def transit_gateway_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Transit Gateway name.
+        Name of the Transit Gateway.
         """
         return pulumi.get(self, "transit_gateway_name")
 
@@ -130,12 +130,34 @@ class AviatrixSegmentationSecurityDomainAssociation(pulumi.CustomResource):
                  transit_gateway_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixSegmentationSecurityDomainAssociation resource with the given unique name, props, and options.
+        The **aviatrix_segmentation_security_domain_association** resource handles creation of [Transit Segmentation](https://docs.aviatrix.com/HowTos/transit_segmentation_faq.html) Security Domain and Transit Gateway Attachment Associations.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Segmentation Security Domain Association
+        test_segmentation_security_domain_association = aviatrix.AviatrixSegmentationSecurityDomainAssociation("testSegmentationSecurityDomainAssociation",
+            attachment_name="attachment-name",
+            security_domain_name="security-domain-name",
+            transit_gateway_name="transit-gw-name")
+        ```
+
+        ## Import
+
+        **aviatrix_segmentation_security_domain_association** can be imported using `transit_gateway_name`, `security_domain_name` and `attachment_name` separated by a `~` e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixSegmentationSecurityDomainAssociation:AviatrixSegmentationSecurityDomainAssociation test transit_gateway_name~security_domain_name~attachment_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] attachment_name: Attachment name, either Spoke or Edge.
-        :param pulumi.Input[str] security_domain_name: Security Domain name.
-        :param pulumi.Input[str] transit_gateway_name: Transit Gateway name.
+        :param pulumi.Input[str] attachment_name: Name of the transit gateway attachment, Spoke or Edge, to associate with the security domain.
+        :param pulumi.Input[str] security_domain_name: Name of the Segmentation Security Domain.
+        :param pulumi.Input[str] transit_gateway_name: Name of the Transit Gateway.
         """
         ...
     @overload
@@ -144,7 +166,29 @@ class AviatrixSegmentationSecurityDomainAssociation(pulumi.CustomResource):
                  args: AviatrixSegmentationSecurityDomainAssociationArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixSegmentationSecurityDomainAssociation resource with the given unique name, props, and options.
+        The **aviatrix_segmentation_security_domain_association** resource handles creation of [Transit Segmentation](https://docs.aviatrix.com/HowTos/transit_segmentation_faq.html) Security Domain and Transit Gateway Attachment Associations.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Segmentation Security Domain Association
+        test_segmentation_security_domain_association = aviatrix.AviatrixSegmentationSecurityDomainAssociation("testSegmentationSecurityDomainAssociation",
+            attachment_name="attachment-name",
+            security_domain_name="security-domain-name",
+            transit_gateway_name="transit-gw-name")
+        ```
+
+        ## Import
+
+        **aviatrix_segmentation_security_domain_association** can be imported using `transit_gateway_name`, `security_domain_name` and `attachment_name` separated by a `~` e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixSegmentationSecurityDomainAssociation:AviatrixSegmentationSecurityDomainAssociation test transit_gateway_name~security_domain_name~attachment_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixSegmentationSecurityDomainAssociationArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -201,9 +245,9 @@ class AviatrixSegmentationSecurityDomainAssociation(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] attachment_name: Attachment name, either Spoke or Edge.
-        :param pulumi.Input[str] security_domain_name: Security Domain name.
-        :param pulumi.Input[str] transit_gateway_name: Transit Gateway name.
+        :param pulumi.Input[str] attachment_name: Name of the transit gateway attachment, Spoke or Edge, to associate with the security domain.
+        :param pulumi.Input[str] security_domain_name: Name of the Segmentation Security Domain.
+        :param pulumi.Input[str] transit_gateway_name: Name of the Transit Gateway.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -218,7 +262,7 @@ class AviatrixSegmentationSecurityDomainAssociation(pulumi.CustomResource):
     @pulumi.getter(name="attachmentName")
     def attachment_name(self) -> pulumi.Output[str]:
         """
-        Attachment name, either Spoke or Edge.
+        Name of the transit gateway attachment, Spoke or Edge, to associate with the security domain.
         """
         return pulumi.get(self, "attachment_name")
 
@@ -226,7 +270,7 @@ class AviatrixSegmentationSecurityDomainAssociation(pulumi.CustomResource):
     @pulumi.getter(name="securityDomainName")
     def security_domain_name(self) -> pulumi.Output[str]:
         """
-        Security Domain name.
+        Name of the Segmentation Security Domain.
         """
         return pulumi.get(self, "security_domain_name")
 
@@ -234,7 +278,7 @@ class AviatrixSegmentationSecurityDomainAssociation(pulumi.CustomResource):
     @pulumi.getter(name="transitGatewayName")
     def transit_gateway_name(self) -> pulumi.Output[str]:
         """
-        Transit Gateway name.
+        Name of the Transit Gateway.
         """
         return pulumi.get(self, "transit_gateway_name")
 

@@ -9,47 +9,81 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_copilot_security_group_management_config** resource allows management of controller CoPilot security group management configuration. This resource is available as of provider version R2.23+.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Enable the CoPilot Security Group Management
+    ///     var test = new Aviatrix.AviatrixCopilotSecurityGroupManagementConfig("test", new()
+    ///     {
+    ///         AccountName = "aws-account",
+    ///         CloudType = 1,
+    ///         EnableCopilotSecurityGroupManagement = true,
+    ///         InstanceId = "i-1234567890",
+    ///         Region = "us-east-1",
+    ///         VpcId = "vpc-1234567890",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **aviatrix_copilot_security_group_management_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixCopilotSecurityGroupManagementConfig:AviatrixCopilotSecurityGroupManagementConfig test 10-11-12-13
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixCopilotSecurityGroupManagementConfig:AviatrixCopilotSecurityGroupManagementConfig")]
     public partial class AviatrixCopilotSecurityGroupManagementConfig : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Access account name.
+        /// Aviatrix access account name. Required to enable copilot security group management.
         /// </summary>
         [Output("accountName")]
         public Output<string?> AccountName { get; private set; } = null!;
 
         /// <summary>
-        /// Cloud type.
+        /// Cloud type. The type of this attribute is Integer. Only support AWS, Azure and OCI. Required to enable copilot security group management.
         /// </summary>
         [Output("cloudType")]
         public Output<int?> CloudType { get; private set; } = null!;
 
         /// <summary>
-        /// Switch to enable copilot security group management.
+        /// Switch to enable copilot security group management. Valid values: true, false.
         /// </summary>
         [Output("enableCopilotSecurityGroupManagement")]
         public Output<bool> EnableCopilotSecurityGroupManagement { get; private set; } = null!;
 
         /// <summary>
-        /// Copilot instance ID.
+        /// CoPilot instance ID. Required to enable copilot security group management.
         /// </summary>
         [Output("instanceId")]
         public Output<string?> InstanceId { get; private set; } = null!;
 
         /// <summary>
-        /// Copilot region. Valid for AWS and Azure.
+        /// Region where CoPilot is deployed. Required and valid for AWS and Azure.
         /// </summary>
         [Output("region")]
         public Output<string?> Region { get; private set; } = null!;
 
         /// <summary>
-        /// VPC ID.
+        /// VPC ID. Required to enable copilot security group management.
         /// </summary>
         [Output("vpcId")]
         public Output<string?> VpcId { get; private set; } = null!;
 
         /// <summary>
-        /// Copilot zone. Valid for GCP.
+        /// Zone where CoPilot is deployed. Required and valid for GCP.
         /// </summary>
         [Output("zone")]
         public Output<string?> Zone { get; private set; } = null!;
@@ -102,43 +136,43 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixCopilotSecurityGroupManagementConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Access account name.
+        /// Aviatrix access account name. Required to enable copilot security group management.
         /// </summary>
         [Input("accountName")]
         public Input<string>? AccountName { get; set; }
 
         /// <summary>
-        /// Cloud type.
+        /// Cloud type. The type of this attribute is Integer. Only support AWS, Azure and OCI. Required to enable copilot security group management.
         /// </summary>
         [Input("cloudType")]
         public Input<int>? CloudType { get; set; }
 
         /// <summary>
-        /// Switch to enable copilot security group management.
+        /// Switch to enable copilot security group management. Valid values: true, false.
         /// </summary>
         [Input("enableCopilotSecurityGroupManagement", required: true)]
         public Input<bool> EnableCopilotSecurityGroupManagement { get; set; } = null!;
 
         /// <summary>
-        /// Copilot instance ID.
+        /// CoPilot instance ID. Required to enable copilot security group management.
         /// </summary>
         [Input("instanceId")]
         public Input<string>? InstanceId { get; set; }
 
         /// <summary>
-        /// Copilot region. Valid for AWS and Azure.
+        /// Region where CoPilot is deployed. Required and valid for AWS and Azure.
         /// </summary>
         [Input("region")]
         public Input<string>? Region { get; set; }
 
         /// <summary>
-        /// VPC ID.
+        /// VPC ID. Required to enable copilot security group management.
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }
 
         /// <summary>
-        /// Copilot zone. Valid for GCP.
+        /// Zone where CoPilot is deployed. Required and valid for GCP.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -152,43 +186,43 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixCopilotSecurityGroupManagementConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Access account name.
+        /// Aviatrix access account name. Required to enable copilot security group management.
         /// </summary>
         [Input("accountName")]
         public Input<string>? AccountName { get; set; }
 
         /// <summary>
-        /// Cloud type.
+        /// Cloud type. The type of this attribute is Integer. Only support AWS, Azure and OCI. Required to enable copilot security group management.
         /// </summary>
         [Input("cloudType")]
         public Input<int>? CloudType { get; set; }
 
         /// <summary>
-        /// Switch to enable copilot security group management.
+        /// Switch to enable copilot security group management. Valid values: true, false.
         /// </summary>
         [Input("enableCopilotSecurityGroupManagement")]
         public Input<bool>? EnableCopilotSecurityGroupManagement { get; set; }
 
         /// <summary>
-        /// Copilot instance ID.
+        /// CoPilot instance ID. Required to enable copilot security group management.
         /// </summary>
         [Input("instanceId")]
         public Input<string>? InstanceId { get; set; }
 
         /// <summary>
-        /// Copilot region. Valid for AWS and Azure.
+        /// Region where CoPilot is deployed. Required and valid for AWS and Azure.
         /// </summary>
         [Input("region")]
         public Input<string>? Region { get; set; }
 
         /// <summary>
-        /// VPC ID.
+        /// VPC ID. Required to enable copilot security group management.
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }
 
         /// <summary>
-        /// Copilot zone. Valid for GCP.
+        /// Zone where CoPilot is deployed. Required and valid for GCP.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }

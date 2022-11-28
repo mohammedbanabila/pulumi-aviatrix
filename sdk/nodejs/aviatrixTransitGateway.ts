@@ -2,9 +2,19 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * ## Import
+ *
+ * **transit_gateway** can be imported using the `gw_name`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixTransitGateway:AviatrixTransitGateway test gw_name
+ * ```
+ */
 export class AviatrixTransitGateway extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixTransitGateway resource's state with the given name, ID, and optional extra
@@ -38,62 +48,59 @@ export class AviatrixTransitGateway extends pulumi.CustomResource {
      */
     public readonly accountName!: pulumi.Output<string>;
     /**
-     * If false, reuse an idle address in Elastic IP pool for this gateway. Otherwise, allocate a new Elastic IP and use it for
-     * this gateway.
+     * When value is false, reuse an idle address in Elastic IP pool for this gateway. Otherwise, allocate a new Elastic IP and use it for this gateway. Available in Controller 4.7+. Valid values: true, false. Default: true.
      */
     public readonly allocateNewEip!: pulumi.Output<boolean | undefined>;
     /**
-     * Approved learned CIDRs. Available as of provider version R2.21+.
+     * A set of approved learned CIDRs. Only valid when `enableLearnedCidrsApproval` is set to true. Example: ["10.250.0.0/16", "10.251.0.0/16"]. Available as of provider version R2.21+.
      */
     public readonly approvedLearnedCidrs!: pulumi.Output<string[] | undefined>;
     /**
-     * Availability domain for OCI.
+     * Availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
      */
     public readonly availabilityDomain!: pulumi.Output<string>;
     /**
-     * The name of the public IP address and its resource group in Azure to assign to this Transit Gateway.
+     * Name of public IP Address resource and its resource group in Azure to be assigned to the Transit Gateway instance. Example: "IP_Name:Resource_Group_Name". Required if `allocateNewEip` is false and `cloudType` is Azure, AzureGov or AzureChina. Available as of provider version 2.20+.
      */
     public readonly azureEipNameResourceGroup!: pulumi.Output<string>;
     /**
-     * Enable Equal Cost Multi Path (ECMP) routing for the next hop.
+     * Enable Equal Cost Multi Path (ECMP) routing for the next hop. Default value: false.
      */
     public readonly bgpEcmp!: pulumi.Output<boolean | undefined>;
     /**
-     * BGP Hold Time.
+     * BGP hold time. Unit is in seconds. Valid values are between 12 and 360. Default value: 180.
      */
     public readonly bgpHoldTime!: pulumi.Output<number | undefined>;
     /**
-     * Interfaces to run BGP protocol on top of the ethernet interface, to connect to the onprem/remote peer. Only available
-     * for GCP Transit.
+     * Interfaces to run BGP protocol on top of the ethernet interface, to connect to the onprem/remote peer. Only available for GCP Transit. Each interface has the following attributes:
      */
     public readonly bgpLanInterfaces!: pulumi.Output<outputs.AviatrixTransitGatewayBgpLanInterface[] | undefined>;
     /**
-     * Number of interfaces that will be created for BGP over LAN enabled Azure transit.
+     * Number of interfaces that will be created for BGP over LAN enabled Azure transit. Valid value: 1~5 for FireNet case, 1~7 for Non-FireNet case. Default value: 1. Available as of provider version R2.22+.
      */
     public readonly bgpLanInterfacesCount!: pulumi.Output<number | undefined>;
     /**
-     * List of available BGP LAN interface IPs for transit external device connection creation. Only supports GCP and Azure.
-     * Available as of provider version R2.21.0+.
+     * List of available BGP LAN interface IPs for transit external device connection creation. Only supports GCP and Azure. Available as of provider version R2.21.0+.
      */
     public /*out*/ readonly bgpLanIpLists!: pulumi.Output<string[]>;
     /**
-     * Intended CIDR list to be advertised to external bgp router.
+     * Intended CIDR list to be advertised to external BGP router. Example: "10.2.0.0/16,10.4.0.0/16". Available as of R2.6. **NOTE: If previously enabled through vgwConn resource prior to provider version R2.6, please see notes here.**
      */
     public readonly bgpManualSpokeAdvertiseCidrs!: pulumi.Output<string | undefined>;
     /**
-     * BGP route polling time. Unit is in seconds. Valid values are between 10 and 50.
+     * BGP route polling time. Unit is in seconds. Valid values are between 10 and 50. Default value: "50".
      */
     public readonly bgpPollingTime!: pulumi.Output<string | undefined>;
     /**
-     * Instance ID of the transit gateway.
+     * Cloud instance ID of the transit gateway.
      */
     public /*out*/ readonly cloudInstanceId!: pulumi.Output<string>;
     /**
-     * Type of cloud service provider, requires an integer value. Use 1 for AWS.
+     * Type of cloud service provider, requires an integer value. Currently only AWS(1), GCP(4), Azure(8), OCI(16), AzureGov(32), AWSGov(256), AWSChina(1024), AzureChina(2048), Alibaba Cloud(8192), AWS Top Secret(16384) and AWS Secret (32768) are supported.
      */
     public readonly cloudType!: pulumi.Output<number>;
     /**
-     * Specify Connected Transit status.
+     * Specify Connected Transit status. If enabled, it allows spokes to run traffics to other spokes via transit gateway. Valid values: true, false. Default value: false.
      */
     public readonly connectedTransit!: pulumi.Output<boolean | undefined>;
     /**
@@ -101,92 +108,84 @@ export class AviatrixTransitGateway extends pulumi.CustomResource {
      */
     public readonly customerManagedKeys!: pulumi.Output<string | undefined>;
     /**
-     * A list of comma separated CIDRs to be customized for the spoke VPC routes. When configured, it will replace all learned
-     * routes in VPC routing tables, including RFC1918 and non-RFC1918 CIDRs. It applies to all spoke gateways attached to this
-     * transit gateway.
+     * A list of comma-separated CIDRs to be customized for the spoke VPC routes. When configured, it will replace all learned routes in VPC routing tables, including RFC1918 and non-RFC1918 CIDRs. It applies to all spoke gateways attached to this transit gateway. Example: "10.0.0.0/16,10.2.0.0/16".
      */
     public readonly customizedSpokeVpcRoutes!: pulumi.Output<string | undefined>;
     /**
-     * A list of CIDRs to be customized for the transit VPC routes. When configured, it will replace all learned routes in VPC
-     * routing tables, including RFC1918 and non-RFC1918 CIDRs.To be effective, `enable_advertise_transit_cidr` or firewall
-     * management access for a transit firenet gateway must be enabled.
+     * A list of CIDRs to be customized for the transit VPC routes. When configured, it will replace all learned routes in VPC routing tables, including RFC1918 and non-RFC1918 CIDRs. To be effective, `enableAdvertiseTransitCidr` or firewall management access for a Transit FireNet gateway must be enabled. Example: ["10.0.0.0/16", "10.2.0.0/16"].
      */
     public readonly customizedTransitVpcRoutes!: pulumi.Output<string[] | undefined>;
     /**
-     * Required when allocate_new_eip is false. It uses specified EIP for this gateway.
+     * Required when `allocateNewEip` is false. It uses the specified EIP for this gateway. Available in Controller version 4.7+. Only available for AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret.
      */
     public readonly eip!: pulumi.Output<string>;
     /**
-     * Enables Active-Standby Mode, available only with HA enabled.
+     * Enables [Active-Standby Mode](https://docs.aviatrix.com/HowTos/transit_advanced.html#active-standby). Available only with HA enabled. Valid values: true, false. Default value: false. Available in provider version R2.17.1+.
      */
     public readonly enableActiveStandby!: pulumi.Output<boolean | undefined>;
     /**
-     * Enables Preemptive Mode for Active-Standby, available only with Active-Standby enabled.
+     * Enables Preemptive Mode for Active-Standby. Available only with BGP enabled, HA enabled and Active-Standby enabled. Valid values: true, false. Default value: false.
      */
     public readonly enableActiveStandbyPreemptive!: pulumi.Output<boolean | undefined>;
     /**
-     * Switch to Enable/Disable advertise transit VPC network CIDR.
+     * Switch to enable/disable advertise transit VPC network CIDR for a VGW connection. Available as of R2.6. **NOTE: If previously enabled through vgwConn resource prior to provider version R2.6, please see notes here.**
      */
     public readonly enableAdvertiseTransitCidr!: pulumi.Output<boolean | undefined>;
     /**
-     * Pre-allocate a network interface(eth4) for "BGP over LAN" functionality. Only valid for cloud_type = 4 (GCP) and 8
-     * (Azure). Valid values: true or false. Default value: false. Available as of provider version R2.18+
+     * Pre-allocate a network interface(eth4) for "BGP over LAN" functionality. Must be enabled to create a BGP over LAN `aviatrix.AviatrixTransitExternalDeviceConn` resource with this Transit Gateway. Only valid for GCP (4), Azure (8), AzureGov (32) or AzureChina (2048). Valid values: true or false. Default value: false. Available as of provider version R2.18+.
      */
     public readonly enableBgpOverLan!: pulumi.Output<boolean | undefined>;
     /**
-     * Specify whether to enable egress transit firenet interfaces or not.
+     * Enable [Egress Transit FireNet](https://docs.aviatrix.com/HowTos/transit_firenet_workflow.html#b-enable-transit-firenet-on-aviatrix-egress-transit-gateway). Valid values: true, false. Default value: false. Available in provider version R2.16.3+.
      */
     public readonly enableEgressTransitFirenet!: pulumi.Output<boolean | undefined>;
     /**
-     * Enable encrypt gateway EBS volume. Only supported for AWS and AWSGov providers. Valid values: true, false. Default
-     * value: false.
+     * Enable EBS volume encryption for Gateway. Only supports AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret. Valid values: true, false. Default value: false.
      */
     public readonly enableEncryptVolume!: pulumi.Output<boolean | undefined>;
     /**
-     * Specify whether to enable firenet interfaces or not.
+     * Set to true to use gateway for legacy [AWS TGW-based FireNet](https://docs.aviatrix.com/HowTos/firewall_network_faq.html) connection. Valid values: true, false. Default value: false. **NOTE: If previously using an older provider version R2.5 where attribute name was `enableFirenetInterfaces`, please see notes here.**
      */
     public readonly enableFirenet!: pulumi.Output<boolean | undefined>;
     /**
-     * Enable firenet interfaces with AWS Gateway Load Balancer. Only valid when `enable_firenet` or `enable_transit_firenet`
-     * are set to true and `cloud_type` = 1 (AWS). Currently AWS Gateway Load Balancer is only supported in AWS regions
-     * us-west-2 and us-east-1. Valid values: true or false. Default value: false.
+     * Enable FireNet interfaces with AWS Gateway Load Balancer. Only valid when `enableFirenet` or `enableTransitFirenet` are set to true and `cloudType` = 1 (AWS). Currently, AWS Gateway Load Balancer is only supported in AWS regions: us-west-2, us-east-1, eu-west-1, ap-southeast-2 and sa-east-1. Valid values: true or false. Default value: false. Available as of provider version R2.18+.
      */
     public readonly enableGatewayLoadBalancer!: pulumi.Output<boolean | undefined>;
     /**
-     * Sign of readiness for TGW connection.
+     * Sign of readiness for AWS TGW connection. Only supported for AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret. Example: false.
      */
     public readonly enableHybridConnection!: pulumi.Output<boolean | undefined>;
     /**
-     * Enable jumbo frame support for transit gateway. Valid values: true or false. Default value: true.
+     * Enable jumbo frames for this transit gateway. Default value is true.
      */
     public readonly enableJumboFrame!: pulumi.Output<boolean | undefined>;
     /**
-     * Switch to enable/disable encrypted transit approval for transit Gateway. Valid values: true, false.
+     * Switch to enable/disable encrypted transit approval for transit gateway. Valid values: true, false. Default value: false.
      */
     public readonly enableLearnedCidrsApproval!: pulumi.Output<boolean | undefined>;
     /**
-     * Enable [monitor gateway subnets](https://docs.aviatrix.com/HowTos/gateway.html#monitor-gateway-subnet). Only valid for
-     * cloud_type = 1 (AWS) or 256 (AWSGov). Valid values: true, false. Default value: false.
+     * If set to true, the [Monitor Gateway Subnets](https://docs.aviatrix.com/HowTos/gateway.html#monitor-gateway-subnet) feature is enabled. Default value is false. Available in provider version R2.18+.
      */
     public readonly enableMonitorGatewaySubnets!: pulumi.Output<boolean | undefined>;
     /**
-     * Enable Multi-tier Transit mode on transit gateway.
+     * Enable Multi-tier Transit mode on transit gateway. When enabled, transit gateway will propagate routes it receives from its transit peering peer to other transit peering peers. `localAsNumber` is required. Default value: false. Available as of provider version R2.19+.
      */
     public readonly enableMultiTierTransit!: pulumi.Output<boolean | undefined>;
     /**
-     * Enable preserve as_path when advertising manual summary cidrs on transit gateway.
+     * Enable preserve asPath when advertising manual summary cidrs on transit gateway. Valid values: true, false. Default value: false. Available as of provider version R.2.22.1+
+     * },
      */
     public readonly enablePreserveAsPath!: pulumi.Output<boolean | undefined>;
     /**
-     * Enable private OOB.
+     * Enable Private OOB feature. Only available for AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret. Valid values: true, false. Default value: false.
      */
     public readonly enablePrivateOob!: pulumi.Output<boolean | undefined>;
     /**
-     * Enable S2C receive packet CPU re-balancing on transit gateway.
+     * Enable S2C receive packet CPU re-balancing on transit gateway. Valid values: true, false. Default value: false. Available in provider version R2.21.2+.
      */
     public readonly enableS2cRxBalancing!: pulumi.Output<boolean | undefined>;
     /**
-     * Enable segmentation to allow association of transit gateway to security domains.
+     * Enable transit gateway for segmentation. Valid values: true, false. Default: false.
      */
     public readonly enableSegmentation!: pulumi.Output<boolean | undefined>;
     /**
@@ -194,30 +193,27 @@ export class AviatrixTransitGateway extends pulumi.CustomResource {
      */
     public readonly enableSpotInstance!: pulumi.Output<boolean | undefined>;
     /**
-     * Specify whether to enable transit firenet interfaces or not.
+     * Set to true to use gateway for [Transit FireNet](https://docs.aviatrix.com/HowTos/transit_firenet_faq.html) connection. Valid values: true, false. Default value: false. Available in provider version R2.12+.
      */
     public readonly enableTransitFirenet!: pulumi.Output<boolean | undefined>;
     /**
-     * Enable summarize CIDR to TGW.
+     * Enable summarize CIDR to TGW. Valid values: true, false. Default value: false.
      */
     public readonly enableTransitSummarizeCidrToTgw!: pulumi.Output<boolean | undefined>;
     /**
-     * Enable vpc_dns_server for Gateway. Valid values: true, false.
+     * Enable VPC DNS Server for Gateway. Currently only supported for AWS, Azure, AzureGov, AWSGov, AWSChina, AzureChina, Alibaba Cloud, AWS Top Secret and AWS Secret gateways. Valid values: true, false. Default value: false.
      */
     public readonly enableVpcDnsServer!: pulumi.Output<boolean | undefined>;
     /**
-     * A list of comma separated CIDRs to be advertised to on-prem as 'Excluded CIDR List'. When configured, it inspects all
-     * the advertised CIDRs from its spoke gateways and remove those included in the 'Excluded CIDR List'.
+     * A list of comma-separated CIDRs to be advertised to on-prem as 'Excluded CIDR List'. When configured, it inspects all the advertised CIDRs from its spoke gateways and remove those included in the 'Excluded CIDR List'. Example: "10.4.0.0/16,10.5.0.0/16".
      */
     public readonly excludedAdvertisedSpokeRoutes!: pulumi.Output<string | undefined>;
     /**
-     * Fault domain for OCI.
+     * Fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
      */
     public readonly faultDomain!: pulumi.Output<string>;
     /**
-     * A list of comma separated CIDRs to be filtered from the spoke VPC route table. When configured, filtering CIDR(s) or
-     * it’s subnet will be deleted from VPC routing tables as well as from spoke gateway’s routing table. It applies to all
-     * spoke gateways attached to this transit gateway.
+     * A list of comma-separated CIDRs to be filtered from the spoke VPC route table. When configured, filtering CIDR(s) or it’s subnet will be deleted from VPC routing tables as well as from spoke gateway’s routing table. It applies to all spoke gateways attached to this transit gateway. Example: "10.2.0.0/16,10.3.0.0/16".
      */
     public readonly filteredSpokeVpcRoutes!: pulumi.Output<string | undefined>;
     /**
@@ -225,37 +221,35 @@ export class AviatrixTransitGateway extends pulumi.CustomResource {
      */
     public readonly gwName!: pulumi.Output<string>;
     /**
-     * Size of the gateway instance.
+     * Size of the gateway instance. Example: AWS: "t2.large", Azure/AzureGov: "Standard_B1s", OCI: "VM.Standard2.2", GCP: "n1-standard-1", AWSGov: "t2.large", AWSChina: "t2.large", AzureChina: "Standard_A0".
      */
     public readonly gwSize!: pulumi.Output<string>;
     /**
-     * HA availability domain for OCI.
+     * HA gateway availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
      */
     public readonly haAvailabilityDomain!: pulumi.Output<string>;
     /**
-     * The name of the public IP address and its resource group in Azure to assign to the HA Transit Gateway.
+     * Name of public IP Address resource and its resource group in Azure to be assigned to the HA Transit Gateway instance. Example: "IP_Name:Resource_Group_Name". Required if `haEip` is set and `cloudType` is Azure, AzureGov or AzureChina. Available as of provider version 2.20+.
      */
     public readonly haAzureEipNameResourceGroup!: pulumi.Output<string>;
     /**
-     * Interfaces to run BGP protocol on top of the ethernet interface, to connect to the onprem/remote peer. Only available
-     * for GCP HA Transit.
+     * Interfaces to run BGP protocol on top of the ethernet interface, to connect to the onprem/remote peer. Only available for GCP Transit HA. Each interface has the following attributes:
      */
     public readonly haBgpLanInterfaces!: pulumi.Output<outputs.AviatrixTransitGatewayHaBgpLanInterface[] | undefined>;
     /**
-     * List of available BGP LAN interface IPs for transit external device HA connection creation. Only supports GCP and Azure.
-     * Available as of provider version R2.21.0+.
+     * List of available BGP LAN interface IPs for transit external device HA connection creation. Only supports GCP and Azure. Available as of provider version R2.21.0+.
      */
     public /*out*/ readonly haBgpLanIpLists!: pulumi.Output<string[]>;
     /**
-     * Cloud instance ID of HA transit gateway.
+     * Cloud instance ID of the HA transit gateway.
      */
     public /*out*/ readonly haCloudInstanceId!: pulumi.Output<string>;
     /**
-     * Public IP address that you want assigned to the HA Transit Gateway.
+     * Public IP address that you want to assign to the HA peering instance. If no value is given, a new EIP will automatically be allocated. Only available for AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret.
      */
     public readonly haEip!: pulumi.Output<string>;
     /**
-     * HA fault domain for OCI.
+     * HA gateway fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
      */
     public readonly haFaultDomain!: pulumi.Output<string>;
     /**
@@ -263,37 +257,35 @@ export class AviatrixTransitGateway extends pulumi.CustomResource {
      */
     public /*out*/ readonly haGwName!: pulumi.Output<string>;
     /**
-     * HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set).
+     * HA Gateway Size. Mandatory if enabling HA. Example: "t2.micro".
      */
     public readonly haGwSize!: pulumi.Output<string | undefined>;
     /**
-     * ha_image_version can be used to set the desired image version of the HA gateway. If set, we will attempt to update the
-     * gateway to the specified version.
+     * The image version of the HA gateway. Use `aviatrix.getAviatrixGatewayImage` data source to programmatically retrieve this value for the desired `haSoftwareVersion`. If set, we will attempt to update the HA gateway to the specified version if current version is different. If left blank, the gateway upgrades can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "hvm-cloudx-aws-022021". Available as of provider version R2.20.0.
      */
     public readonly haImageVersion!: pulumi.Output<string>;
     /**
-     * AZ of subnet being created for Insane Mode Transit HA Gateway. Required for AWS if insane_mode is enabled and ha_subnet
-     * is set.
+     * AZ of subnet being created for Insane Mode Transit HA Gateway. Required for AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret if `insaneMode` is enabled and `haSubnet` is set. Example: AWS: "us-west-1a".
      */
     public readonly haInsaneModeAz!: pulumi.Output<string | undefined>;
     /**
-     * Transit gateway lan interface cidr for the HA gateway.
+     * LAN interface CIDR of the HA transit gateway created (will be used when enabling FQDN Firenet in Azure). Available in provider version R2.18+.
      */
     public /*out*/ readonly haLanInterfaceCidr!: pulumi.Output<string>;
     /**
-     * OOB HA availability zone.
+     * HA OOB availability zone. Required if enabling Private OOB and HA. Example: "us-west-1b".
      */
     public readonly haOobAvailabilityZone!: pulumi.Output<string | undefined>;
     /**
-     * OOB HA management subnet.
+     * HA OOB management subnet. Required if enabling Private OOB and HA. Example: "11.0.0.48/28".
      */
     public readonly haOobManagementSubnet!: pulumi.Output<string | undefined>;
     /**
-     * Private IP address of HA transit gateway.
+     * Private IP address of the HA transit gateway created.
      */
     public /*out*/ readonly haPrivateIp!: pulumi.Output<string>;
     /**
-     * Private Mode HA subnet availability zone.
+     * Availability Zone of the HA subnet. Required when Private Mode is enabled on the Controller and `cloudType` is AWS or AWSGov with HA. Available in Provider version R2.23+.
      */
     public readonly haPrivateModeSubnetZone!: pulumi.Output<string | undefined>;
     /**
@@ -305,51 +297,43 @@ export class AviatrixTransitGateway extends pulumi.CustomResource {
      */
     public /*out*/ readonly haSecurityGroupId!: pulumi.Output<string>;
     /**
-     * ha_software_version can be used to set the desired software version of the HA gateway. If set, we will attempt to update
-     * the gateway to the specified version. If left blank, the gateway software version will continue to be managed through
-     * the aviatrix_controller_config resource.
+     * The software version of the HA gateway. If set, we will attempt to update the HA gateway to the specified version if current version is different. If left blank, the HA gateway upgrade can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "6.5.821". Available as of provider version R2.20.0.
      */
     public readonly haSoftwareVersion!: pulumi.Output<string>;
     /**
-     * HA Subnet. Required for enabling HA for AWS/AWSGov/AWSChina/Azure/OCI/Alibaba Cloud. Optional for enabling HA for GCP
-     * gateway.
+     * HA Subnet CIDR. Required only if enabling HA for AWS, Azure, AzureGov, AWSGov, AWSChina, AzureChina, OCI, Alibaba Cloud, AWS Top Secret or AWS Secret gateways. Optional for GCP. Setting to empty/unsetting will disable HA. Setting to a valid subnet CIDR will create an HA gateway on the subnet. Example: "10.12.0.0/24".
      */
     public readonly haSubnet!: pulumi.Output<string | undefined>;
     /**
-     * HA Zone. Required if enabling HA for GCP. Optional for Azure.
+     * HA Zone. Required if enabling HA for GCP gateway. Optional if enabling HA for Azure gateway. For GCP, setting to empty/unsetting will disable HA and setting to a valid zone will create an HA gateway in the zone. Example: "us-west1-c". For Azure, this is an optional parameter to place the HA gateway in a specific availability zone. Valid values for Azure gateways are in the form "az-n". Example: "az-2". Available for Azure as of provider version R2.17+.
      */
     public readonly haZone!: pulumi.Output<string | undefined>;
     /**
-     * image_version can be used to set the desired image version of the gateway. If set, we will attempt to update the gateway
-     * to the specified version.
+     * The image version of the gateway. Use `aviatrix.getAviatrixGatewayImage` data source to programmatically retrieve this value for the desired `softwareVersion`. If set, we will attempt to update the gateway to the specified version if current version is different. If left blank, the gateway upgrades can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "hvm-cloudx-aws-022021". Available as of provider version R2.20.0.
      */
     public readonly imageVersion!: pulumi.Output<string>;
     /**
-     * Enable Insane Mode for Transit. Valid values: true, false. Supported for AWS/AWSGov, GCP, Azure and OCI. If insane mode
-     * is enabled, gateway size has to at least be c5 size for AWS and Standard_D3_v2 size for Azure.
+     * Specify true for [Insane Mode](https://docs.aviatrix.com/HowTos/insane_mode.html) high performance gateway. Insane Mode gateway size must be at least c5 size (AWS, AWSGov, AWS China, AWS Top Secret and AWS Secret) or Standard_D3_v2 (Azure and AzureGov); for GCP only four size are supported: "n1-highcpu-4", "n1-highcpu-8", "n1-highcpu-16" and "n1-highcpu-32". If enabled, you must specify a valid /26 CIDR segment of the VPC to create a new subnet for AWS, Azure, AzureGov, AWSGov, AWS Top Secret and AWS Secret. Only available for AWS, GCP/OCI, Azure, AzureGov, AzureChina, AWSGov, AWS Top Secret and AWS Secret. Valid values: true, false. Default value: false.
      */
     public readonly insaneMode!: pulumi.Output<boolean | undefined>;
     /**
-     * AZ of subnet being created for Insane Mode Transit Gateway. Required for AWS if insane_mode is enabled.
+     * AZ of subnet being created for Insane Mode Transit Gateway. Required for AWS, AWSGov, AWS China, AWS Top Secret or AWS Secret if `insaneMode` is enabled. Example: AWS: "us-west-1a".
      */
     public readonly insaneModeAz!: pulumi.Output<string | undefined>;
     /**
-     * Transit gateway lan interface cidr.
+     * LAN interface CIDR of the transit gateway created (will be used when enabling FQDN Firenet in Azure). Available in provider version R2.17.1+.
      */
     public /*out*/ readonly lanInterfaceCidr!: pulumi.Output<string>;
     /**
-     * LAN Private Subnet. Only used for GCP Transit FireNet.
+     * LAN Private Subnet. Only valid when enabling Transit FireNet on GCP. Available as of provider version R2.18.1+.
      */
     public readonly lanPrivateSubnet!: pulumi.Output<string | undefined>;
     /**
-     * LAN VPC ID. Only used for GCP Transit FireNet.
+     * LAN VPC ID. Only valid when enabling Transit FireNet on GCP. Available as of provider version R2.18.1+.
      */
     public readonly lanVpcId!: pulumi.Output<string | undefined>;
     /**
-     * Set the learned CIDRs approval mode. Only valid when 'enable_learned_cidrs_approval' is set to true. If set to
-     * 'gateway', learned CIDR approval applies to ALL connections. If set to 'connection', learned CIDR approval is configured
-     * on a per connection basis. When configuring per connection, use the enable_learned_cidrs_approval attribute within the
-     * connection resource to toggle learned CIDR approval. Valid values: 'gateway' or 'connection'. Default value: 'gateway'.
+     * Learned CIDRs approval mode. Either "gateway" (approval on a per gateway basis) or "connection" (approval on a per connection basis). Default value: "gateway". Available as of provider version R2.18+.
      */
     public readonly learnedCidrsApprovalMode!: pulumi.Output<string | undefined>;
     /**
@@ -357,15 +341,15 @@ export class AviatrixTransitGateway extends pulumi.CustomResource {
      */
     public readonly localAsNumber!: pulumi.Output<string>;
     /**
-     * A set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true.
+     * Set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true. Available in provider version R2.18+.
      */
     public readonly monitorExcludeLists!: pulumi.Output<string[] | undefined>;
     /**
-     * OOB subnet availability zone.
+     * OOB availability zone. Required if enabling Private OOB. Example: "us-west-1a".
      */
     public readonly oobAvailabilityZone!: pulumi.Output<string | undefined>;
     /**
-     * OOB management subnet.
+     * OOB management subnet. Required if enabling Private OOB. Example: "11.0.2.0/24".
      */
     public readonly oobManagementSubnet!: pulumi.Output<string | undefined>;
     /**
@@ -377,11 +361,11 @@ export class AviatrixTransitGateway extends pulumi.CustomResource {
      */
     public /*out*/ readonly privateIp!: pulumi.Output<string>;
     /**
-     * Private Mode Controller load balancer VPC ID. Required when private mode is enabled for the Controller.
+     * VPC ID of Private Mode load balancer. Required when Private Mode is enabled on the Controller. Available in Provider version R2.23+.
      */
     public readonly privateModeLbVpcId!: pulumi.Output<string | undefined>;
     /**
-     * Private Mode subnet availability zone.
+     * Availability Zone of the subnet. Required when Private Mode is enabled on the Controller and `cloudType` is AWS or AWSGov. Available in Provider version R2.23+.
      */
     public readonly privateModeSubnetZone!: pulumi.Output<string | undefined>;
     /**
@@ -389,7 +373,7 @@ export class AviatrixTransitGateway extends pulumi.CustomResource {
      */
     public /*out*/ readonly publicIp!: pulumi.Output<string>;
     /**
-     * Gateway ethernet interface RX queue size. Supported for AWS related clouds only.
+     * Gateway ethernet interface RX queue size. Once set, can't be deleted or disabled. Available for AWS as of provider version R2.22+.
      */
     public readonly rxQueueSize!: pulumi.Output<string | undefined>;
     /**
@@ -397,17 +381,15 @@ export class AviatrixTransitGateway extends pulumi.CustomResource {
      */
     public /*out*/ readonly securityGroupId!: pulumi.Output<string>;
     /**
-     * Set to 'enabled' if this feature is desired.
+     * Set to true if this [feature](https://docs.aviatrix.com/Solutions/gateway_ha.html#single-az-gateway) is desired. Valid values: true, false.
      */
     public readonly singleAzHa!: pulumi.Output<boolean | undefined>;
     /**
-     * Enable or disable Source NAT feature in 'single_ip' mode for this container.
+     * Enable "singleIp" mode Source NAT for this container. Valid values: true, false. **NOTE: Please see notes here in regards to changes to this argument in R2.10.**
      */
     public readonly singleIpSnat!: pulumi.Output<boolean | undefined>;
     /**
-     * software_version can be used to set the desired software version of the gateway. If set, we will attempt to update the
-     * gateway to the specified version. If left blank, the gateway software version will continue to be managed through the
-     * aviatrix_controller_config resource.
+     * The software version of the gateway. If set, we will attempt to update the gateway to the specified version if current version is different. If left blank, the gateway upgrade can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "6.5.821". Available as of provider version R2.20.0.
      */
     public readonly softwareVersion!: pulumi.Output<string>;
     /**
@@ -415,17 +397,17 @@ export class AviatrixTransitGateway extends pulumi.CustomResource {
      */
     public readonly spotPrice!: pulumi.Output<string | undefined>;
     /**
-     * Public Subnet Name.
+     * A VPC Network address range selected from one of the available network ranges.
      */
     public readonly subnet!: pulumi.Output<string>;
     /**
-     * Instance tag of cloud provider.
+     * (Optional) Instance tag of cloud provider. Only supported for AWS, Azure, AzureGov, AWSGov, AWSChina, AzureChina. Example: ["key1:value1","key2:value2"].
      *
      * @deprecated Use tags instead.
      */
     public readonly tagLists!: pulumi.Output<string[] | undefined>;
     /**
-     * A map of tags to assign to the transit gateway.
+     * Map of tags to assign to the gateway. Only available for AWS, Azure, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret gateways. Allowed characters vary by cloud type but always include: letters, spaces, and numbers. AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret allow the use of any character.  Azure, AzureGov and AzureChina allows the following special characters: + - = . _ : @. Example: {"key1" = "value1", "key2" = "value2"}.
      */
     public readonly tags!: pulumi.Output<{[key: string]: string} | undefined>;
     /**
@@ -437,11 +419,11 @@ export class AviatrixTransitGateway extends pulumi.CustomResource {
      */
     public readonly vpcId!: pulumi.Output<string>;
     /**
-     * Region of cloud provider.
+     * Region of cloud provider. Example: AWS: "us-east-1", GCP: "us-west2-a", Azure: "East US 2", OCI: "us-ashburn-1", AzureGov: "USGov Arizona", AWSGov: "us-gov-west-1", AWSChina: "cn-north-1", AzureChina: "China North", AWS Top Secret: "us-iso-east-1", AWS Secret: "us-isob-east-1".
      */
     public readonly vpcReg!: pulumi.Output<string>;
     /**
-     * Availability Zone. Only available for cloud_type = 8 (Azure). Must be in the form 'az-n', for example, 'az-2'.
+     * Availability Zone. Only available for cloudType = 8 (Azure). Must be in the form 'az-n', for example, 'az-2'. Available in provider version R2.17+.
      */
     public readonly zone!: pulumi.Output<string | undefined>;
 
@@ -589,7 +571,7 @@ export class AviatrixTransitGateway extends pulumi.CustomResource {
             resourceInputs["bgpPollingTime"] = args ? args.bgpPollingTime : undefined;
             resourceInputs["cloudType"] = args ? args.cloudType : undefined;
             resourceInputs["connectedTransit"] = args ? args.connectedTransit : undefined;
-            resourceInputs["customerManagedKeys"] = args ? args.customerManagedKeys : undefined;
+            resourceInputs["customerManagedKeys"] = args?.customerManagedKeys ? pulumi.secret(args.customerManagedKeys) : undefined;
             resourceInputs["customizedSpokeVpcRoutes"] = args ? args.customizedSpokeVpcRoutes : undefined;
             resourceInputs["customizedTransitVpcRoutes"] = args ? args.customizedTransitVpcRoutes : undefined;
             resourceInputs["eip"] = args ? args.eip : undefined;
@@ -673,6 +655,8 @@ export class AviatrixTransitGateway extends pulumi.CustomResource {
             resourceInputs["securityGroupId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["customerManagedKeys"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(AviatrixTransitGateway.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -686,62 +670,59 @@ export interface AviatrixTransitGatewayState {
      */
     accountName?: pulumi.Input<string>;
     /**
-     * If false, reuse an idle address in Elastic IP pool for this gateway. Otherwise, allocate a new Elastic IP and use it for
-     * this gateway.
+     * When value is false, reuse an idle address in Elastic IP pool for this gateway. Otherwise, allocate a new Elastic IP and use it for this gateway. Available in Controller 4.7+. Valid values: true, false. Default: true.
      */
     allocateNewEip?: pulumi.Input<boolean>;
     /**
-     * Approved learned CIDRs. Available as of provider version R2.21+.
+     * A set of approved learned CIDRs. Only valid when `enableLearnedCidrsApproval` is set to true. Example: ["10.250.0.0/16", "10.251.0.0/16"]. Available as of provider version R2.21+.
      */
     approvedLearnedCidrs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Availability domain for OCI.
+     * Availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
      */
     availabilityDomain?: pulumi.Input<string>;
     /**
-     * The name of the public IP address and its resource group in Azure to assign to this Transit Gateway.
+     * Name of public IP Address resource and its resource group in Azure to be assigned to the Transit Gateway instance. Example: "IP_Name:Resource_Group_Name". Required if `allocateNewEip` is false and `cloudType` is Azure, AzureGov or AzureChina. Available as of provider version 2.20+.
      */
     azureEipNameResourceGroup?: pulumi.Input<string>;
     /**
-     * Enable Equal Cost Multi Path (ECMP) routing for the next hop.
+     * Enable Equal Cost Multi Path (ECMP) routing for the next hop. Default value: false.
      */
     bgpEcmp?: pulumi.Input<boolean>;
     /**
-     * BGP Hold Time.
+     * BGP hold time. Unit is in seconds. Valid values are between 12 and 360. Default value: 180.
      */
     bgpHoldTime?: pulumi.Input<number>;
     /**
-     * Interfaces to run BGP protocol on top of the ethernet interface, to connect to the onprem/remote peer. Only available
-     * for GCP Transit.
+     * Interfaces to run BGP protocol on top of the ethernet interface, to connect to the onprem/remote peer. Only available for GCP Transit. Each interface has the following attributes:
      */
     bgpLanInterfaces?: pulumi.Input<pulumi.Input<inputs.AviatrixTransitGatewayBgpLanInterface>[]>;
     /**
-     * Number of interfaces that will be created for BGP over LAN enabled Azure transit.
+     * Number of interfaces that will be created for BGP over LAN enabled Azure transit. Valid value: 1~5 for FireNet case, 1~7 for Non-FireNet case. Default value: 1. Available as of provider version R2.22+.
      */
     bgpLanInterfacesCount?: pulumi.Input<number>;
     /**
-     * List of available BGP LAN interface IPs for transit external device connection creation. Only supports GCP and Azure.
-     * Available as of provider version R2.21.0+.
+     * List of available BGP LAN interface IPs for transit external device connection creation. Only supports GCP and Azure. Available as of provider version R2.21.0+.
      */
     bgpLanIpLists?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Intended CIDR list to be advertised to external bgp router.
+     * Intended CIDR list to be advertised to external BGP router. Example: "10.2.0.0/16,10.4.0.0/16". Available as of R2.6. **NOTE: If previously enabled through vgwConn resource prior to provider version R2.6, please see notes here.**
      */
     bgpManualSpokeAdvertiseCidrs?: pulumi.Input<string>;
     /**
-     * BGP route polling time. Unit is in seconds. Valid values are between 10 and 50.
+     * BGP route polling time. Unit is in seconds. Valid values are between 10 and 50. Default value: "50".
      */
     bgpPollingTime?: pulumi.Input<string>;
     /**
-     * Instance ID of the transit gateway.
+     * Cloud instance ID of the transit gateway.
      */
     cloudInstanceId?: pulumi.Input<string>;
     /**
-     * Type of cloud service provider, requires an integer value. Use 1 for AWS.
+     * Type of cloud service provider, requires an integer value. Currently only AWS(1), GCP(4), Azure(8), OCI(16), AzureGov(32), AWSGov(256), AWSChina(1024), AzureChina(2048), Alibaba Cloud(8192), AWS Top Secret(16384) and AWS Secret (32768) are supported.
      */
     cloudType?: pulumi.Input<number>;
     /**
-     * Specify Connected Transit status.
+     * Specify Connected Transit status. If enabled, it allows spokes to run traffics to other spokes via transit gateway. Valid values: true, false. Default value: false.
      */
     connectedTransit?: pulumi.Input<boolean>;
     /**
@@ -749,92 +730,84 @@ export interface AviatrixTransitGatewayState {
      */
     customerManagedKeys?: pulumi.Input<string>;
     /**
-     * A list of comma separated CIDRs to be customized for the spoke VPC routes. When configured, it will replace all learned
-     * routes in VPC routing tables, including RFC1918 and non-RFC1918 CIDRs. It applies to all spoke gateways attached to this
-     * transit gateway.
+     * A list of comma-separated CIDRs to be customized for the spoke VPC routes. When configured, it will replace all learned routes in VPC routing tables, including RFC1918 and non-RFC1918 CIDRs. It applies to all spoke gateways attached to this transit gateway. Example: "10.0.0.0/16,10.2.0.0/16".
      */
     customizedSpokeVpcRoutes?: pulumi.Input<string>;
     /**
-     * A list of CIDRs to be customized for the transit VPC routes. When configured, it will replace all learned routes in VPC
-     * routing tables, including RFC1918 and non-RFC1918 CIDRs.To be effective, `enable_advertise_transit_cidr` or firewall
-     * management access for a transit firenet gateway must be enabled.
+     * A list of CIDRs to be customized for the transit VPC routes. When configured, it will replace all learned routes in VPC routing tables, including RFC1918 and non-RFC1918 CIDRs. To be effective, `enableAdvertiseTransitCidr` or firewall management access for a Transit FireNet gateway must be enabled. Example: ["10.0.0.0/16", "10.2.0.0/16"].
      */
     customizedTransitVpcRoutes?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Required when allocate_new_eip is false. It uses specified EIP for this gateway.
+     * Required when `allocateNewEip` is false. It uses the specified EIP for this gateway. Available in Controller version 4.7+. Only available for AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret.
      */
     eip?: pulumi.Input<string>;
     /**
-     * Enables Active-Standby Mode, available only with HA enabled.
+     * Enables [Active-Standby Mode](https://docs.aviatrix.com/HowTos/transit_advanced.html#active-standby). Available only with HA enabled. Valid values: true, false. Default value: false. Available in provider version R2.17.1+.
      */
     enableActiveStandby?: pulumi.Input<boolean>;
     /**
-     * Enables Preemptive Mode for Active-Standby, available only with Active-Standby enabled.
+     * Enables Preemptive Mode for Active-Standby. Available only with BGP enabled, HA enabled and Active-Standby enabled. Valid values: true, false. Default value: false.
      */
     enableActiveStandbyPreemptive?: pulumi.Input<boolean>;
     /**
-     * Switch to Enable/Disable advertise transit VPC network CIDR.
+     * Switch to enable/disable advertise transit VPC network CIDR for a VGW connection. Available as of R2.6. **NOTE: If previously enabled through vgwConn resource prior to provider version R2.6, please see notes here.**
      */
     enableAdvertiseTransitCidr?: pulumi.Input<boolean>;
     /**
-     * Pre-allocate a network interface(eth4) for "BGP over LAN" functionality. Only valid for cloud_type = 4 (GCP) and 8
-     * (Azure). Valid values: true or false. Default value: false. Available as of provider version R2.18+
+     * Pre-allocate a network interface(eth4) for "BGP over LAN" functionality. Must be enabled to create a BGP over LAN `aviatrix.AviatrixTransitExternalDeviceConn` resource with this Transit Gateway. Only valid for GCP (4), Azure (8), AzureGov (32) or AzureChina (2048). Valid values: true or false. Default value: false. Available as of provider version R2.18+.
      */
     enableBgpOverLan?: pulumi.Input<boolean>;
     /**
-     * Specify whether to enable egress transit firenet interfaces or not.
+     * Enable [Egress Transit FireNet](https://docs.aviatrix.com/HowTos/transit_firenet_workflow.html#b-enable-transit-firenet-on-aviatrix-egress-transit-gateway). Valid values: true, false. Default value: false. Available in provider version R2.16.3+.
      */
     enableEgressTransitFirenet?: pulumi.Input<boolean>;
     /**
-     * Enable encrypt gateway EBS volume. Only supported for AWS and AWSGov providers. Valid values: true, false. Default
-     * value: false.
+     * Enable EBS volume encryption for Gateway. Only supports AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret. Valid values: true, false. Default value: false.
      */
     enableEncryptVolume?: pulumi.Input<boolean>;
     /**
-     * Specify whether to enable firenet interfaces or not.
+     * Set to true to use gateway for legacy [AWS TGW-based FireNet](https://docs.aviatrix.com/HowTos/firewall_network_faq.html) connection. Valid values: true, false. Default value: false. **NOTE: If previously using an older provider version R2.5 where attribute name was `enableFirenetInterfaces`, please see notes here.**
      */
     enableFirenet?: pulumi.Input<boolean>;
     /**
-     * Enable firenet interfaces with AWS Gateway Load Balancer. Only valid when `enable_firenet` or `enable_transit_firenet`
-     * are set to true and `cloud_type` = 1 (AWS). Currently AWS Gateway Load Balancer is only supported in AWS regions
-     * us-west-2 and us-east-1. Valid values: true or false. Default value: false.
+     * Enable FireNet interfaces with AWS Gateway Load Balancer. Only valid when `enableFirenet` or `enableTransitFirenet` are set to true and `cloudType` = 1 (AWS). Currently, AWS Gateway Load Balancer is only supported in AWS regions: us-west-2, us-east-1, eu-west-1, ap-southeast-2 and sa-east-1. Valid values: true or false. Default value: false. Available as of provider version R2.18+.
      */
     enableGatewayLoadBalancer?: pulumi.Input<boolean>;
     /**
-     * Sign of readiness for TGW connection.
+     * Sign of readiness for AWS TGW connection. Only supported for AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret. Example: false.
      */
     enableHybridConnection?: pulumi.Input<boolean>;
     /**
-     * Enable jumbo frame support for transit gateway. Valid values: true or false. Default value: true.
+     * Enable jumbo frames for this transit gateway. Default value is true.
      */
     enableJumboFrame?: pulumi.Input<boolean>;
     /**
-     * Switch to enable/disable encrypted transit approval for transit Gateway. Valid values: true, false.
+     * Switch to enable/disable encrypted transit approval for transit gateway. Valid values: true, false. Default value: false.
      */
     enableLearnedCidrsApproval?: pulumi.Input<boolean>;
     /**
-     * Enable [monitor gateway subnets](https://docs.aviatrix.com/HowTos/gateway.html#monitor-gateway-subnet). Only valid for
-     * cloud_type = 1 (AWS) or 256 (AWSGov). Valid values: true, false. Default value: false.
+     * If set to true, the [Monitor Gateway Subnets](https://docs.aviatrix.com/HowTos/gateway.html#monitor-gateway-subnet) feature is enabled. Default value is false. Available in provider version R2.18+.
      */
     enableMonitorGatewaySubnets?: pulumi.Input<boolean>;
     /**
-     * Enable Multi-tier Transit mode on transit gateway.
+     * Enable Multi-tier Transit mode on transit gateway. When enabled, transit gateway will propagate routes it receives from its transit peering peer to other transit peering peers. `localAsNumber` is required. Default value: false. Available as of provider version R2.19+.
      */
     enableMultiTierTransit?: pulumi.Input<boolean>;
     /**
-     * Enable preserve as_path when advertising manual summary cidrs on transit gateway.
+     * Enable preserve asPath when advertising manual summary cidrs on transit gateway. Valid values: true, false. Default value: false. Available as of provider version R.2.22.1+
+     * },
      */
     enablePreserveAsPath?: pulumi.Input<boolean>;
     /**
-     * Enable private OOB.
+     * Enable Private OOB feature. Only available for AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret. Valid values: true, false. Default value: false.
      */
     enablePrivateOob?: pulumi.Input<boolean>;
     /**
-     * Enable S2C receive packet CPU re-balancing on transit gateway.
+     * Enable S2C receive packet CPU re-balancing on transit gateway. Valid values: true, false. Default value: false. Available in provider version R2.21.2+.
      */
     enableS2cRxBalancing?: pulumi.Input<boolean>;
     /**
-     * Enable segmentation to allow association of transit gateway to security domains.
+     * Enable transit gateway for segmentation. Valid values: true, false. Default: false.
      */
     enableSegmentation?: pulumi.Input<boolean>;
     /**
@@ -842,30 +815,27 @@ export interface AviatrixTransitGatewayState {
      */
     enableSpotInstance?: pulumi.Input<boolean>;
     /**
-     * Specify whether to enable transit firenet interfaces or not.
+     * Set to true to use gateway for [Transit FireNet](https://docs.aviatrix.com/HowTos/transit_firenet_faq.html) connection. Valid values: true, false. Default value: false. Available in provider version R2.12+.
      */
     enableTransitFirenet?: pulumi.Input<boolean>;
     /**
-     * Enable summarize CIDR to TGW.
+     * Enable summarize CIDR to TGW. Valid values: true, false. Default value: false.
      */
     enableTransitSummarizeCidrToTgw?: pulumi.Input<boolean>;
     /**
-     * Enable vpc_dns_server for Gateway. Valid values: true, false.
+     * Enable VPC DNS Server for Gateway. Currently only supported for AWS, Azure, AzureGov, AWSGov, AWSChina, AzureChina, Alibaba Cloud, AWS Top Secret and AWS Secret gateways. Valid values: true, false. Default value: false.
      */
     enableVpcDnsServer?: pulumi.Input<boolean>;
     /**
-     * A list of comma separated CIDRs to be advertised to on-prem as 'Excluded CIDR List'. When configured, it inspects all
-     * the advertised CIDRs from its spoke gateways and remove those included in the 'Excluded CIDR List'.
+     * A list of comma-separated CIDRs to be advertised to on-prem as 'Excluded CIDR List'. When configured, it inspects all the advertised CIDRs from its spoke gateways and remove those included in the 'Excluded CIDR List'. Example: "10.4.0.0/16,10.5.0.0/16".
      */
     excludedAdvertisedSpokeRoutes?: pulumi.Input<string>;
     /**
-     * Fault domain for OCI.
+     * Fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
      */
     faultDomain?: pulumi.Input<string>;
     /**
-     * A list of comma separated CIDRs to be filtered from the spoke VPC route table. When configured, filtering CIDR(s) or
-     * it’s subnet will be deleted from VPC routing tables as well as from spoke gateway’s routing table. It applies to all
-     * spoke gateways attached to this transit gateway.
+     * A list of comma-separated CIDRs to be filtered from the spoke VPC route table. When configured, filtering CIDR(s) or it’s subnet will be deleted from VPC routing tables as well as from spoke gateway’s routing table. It applies to all spoke gateways attached to this transit gateway. Example: "10.2.0.0/16,10.3.0.0/16".
      */
     filteredSpokeVpcRoutes?: pulumi.Input<string>;
     /**
@@ -873,37 +843,35 @@ export interface AviatrixTransitGatewayState {
      */
     gwName?: pulumi.Input<string>;
     /**
-     * Size of the gateway instance.
+     * Size of the gateway instance. Example: AWS: "t2.large", Azure/AzureGov: "Standard_B1s", OCI: "VM.Standard2.2", GCP: "n1-standard-1", AWSGov: "t2.large", AWSChina: "t2.large", AzureChina: "Standard_A0".
      */
     gwSize?: pulumi.Input<string>;
     /**
-     * HA availability domain for OCI.
+     * HA gateway availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
      */
     haAvailabilityDomain?: pulumi.Input<string>;
     /**
-     * The name of the public IP address and its resource group in Azure to assign to the HA Transit Gateway.
+     * Name of public IP Address resource and its resource group in Azure to be assigned to the HA Transit Gateway instance. Example: "IP_Name:Resource_Group_Name". Required if `haEip` is set and `cloudType` is Azure, AzureGov or AzureChina. Available as of provider version 2.20+.
      */
     haAzureEipNameResourceGroup?: pulumi.Input<string>;
     /**
-     * Interfaces to run BGP protocol on top of the ethernet interface, to connect to the onprem/remote peer. Only available
-     * for GCP HA Transit.
+     * Interfaces to run BGP protocol on top of the ethernet interface, to connect to the onprem/remote peer. Only available for GCP Transit HA. Each interface has the following attributes:
      */
     haBgpLanInterfaces?: pulumi.Input<pulumi.Input<inputs.AviatrixTransitGatewayHaBgpLanInterface>[]>;
     /**
-     * List of available BGP LAN interface IPs for transit external device HA connection creation. Only supports GCP and Azure.
-     * Available as of provider version R2.21.0+.
+     * List of available BGP LAN interface IPs for transit external device HA connection creation. Only supports GCP and Azure. Available as of provider version R2.21.0+.
      */
     haBgpLanIpLists?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Cloud instance ID of HA transit gateway.
+     * Cloud instance ID of the HA transit gateway.
      */
     haCloudInstanceId?: pulumi.Input<string>;
     /**
-     * Public IP address that you want assigned to the HA Transit Gateway.
+     * Public IP address that you want to assign to the HA peering instance. If no value is given, a new EIP will automatically be allocated. Only available for AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret.
      */
     haEip?: pulumi.Input<string>;
     /**
-     * HA fault domain for OCI.
+     * HA gateway fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
      */
     haFaultDomain?: pulumi.Input<string>;
     /**
@@ -911,37 +879,35 @@ export interface AviatrixTransitGatewayState {
      */
     haGwName?: pulumi.Input<string>;
     /**
-     * HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set).
+     * HA Gateway Size. Mandatory if enabling HA. Example: "t2.micro".
      */
     haGwSize?: pulumi.Input<string>;
     /**
-     * ha_image_version can be used to set the desired image version of the HA gateway. If set, we will attempt to update the
-     * gateway to the specified version.
+     * The image version of the HA gateway. Use `aviatrix.getAviatrixGatewayImage` data source to programmatically retrieve this value for the desired `haSoftwareVersion`. If set, we will attempt to update the HA gateway to the specified version if current version is different. If left blank, the gateway upgrades can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "hvm-cloudx-aws-022021". Available as of provider version R2.20.0.
      */
     haImageVersion?: pulumi.Input<string>;
     /**
-     * AZ of subnet being created for Insane Mode Transit HA Gateway. Required for AWS if insane_mode is enabled and ha_subnet
-     * is set.
+     * AZ of subnet being created for Insane Mode Transit HA Gateway. Required for AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret if `insaneMode` is enabled and `haSubnet` is set. Example: AWS: "us-west-1a".
      */
     haInsaneModeAz?: pulumi.Input<string>;
     /**
-     * Transit gateway lan interface cidr for the HA gateway.
+     * LAN interface CIDR of the HA transit gateway created (will be used when enabling FQDN Firenet in Azure). Available in provider version R2.18+.
      */
     haLanInterfaceCidr?: pulumi.Input<string>;
     /**
-     * OOB HA availability zone.
+     * HA OOB availability zone. Required if enabling Private OOB and HA. Example: "us-west-1b".
      */
     haOobAvailabilityZone?: pulumi.Input<string>;
     /**
-     * OOB HA management subnet.
+     * HA OOB management subnet. Required if enabling Private OOB and HA. Example: "11.0.0.48/28".
      */
     haOobManagementSubnet?: pulumi.Input<string>;
     /**
-     * Private IP address of HA transit gateway.
+     * Private IP address of the HA transit gateway created.
      */
     haPrivateIp?: pulumi.Input<string>;
     /**
-     * Private Mode HA subnet availability zone.
+     * Availability Zone of the HA subnet. Required when Private Mode is enabled on the Controller and `cloudType` is AWS or AWSGov with HA. Available in Provider version R2.23+.
      */
     haPrivateModeSubnetZone?: pulumi.Input<string>;
     /**
@@ -953,51 +919,43 @@ export interface AviatrixTransitGatewayState {
      */
     haSecurityGroupId?: pulumi.Input<string>;
     /**
-     * ha_software_version can be used to set the desired software version of the HA gateway. If set, we will attempt to update
-     * the gateway to the specified version. If left blank, the gateway software version will continue to be managed through
-     * the aviatrix_controller_config resource.
+     * The software version of the HA gateway. If set, we will attempt to update the HA gateway to the specified version if current version is different. If left blank, the HA gateway upgrade can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "6.5.821". Available as of provider version R2.20.0.
      */
     haSoftwareVersion?: pulumi.Input<string>;
     /**
-     * HA Subnet. Required for enabling HA for AWS/AWSGov/AWSChina/Azure/OCI/Alibaba Cloud. Optional for enabling HA for GCP
-     * gateway.
+     * HA Subnet CIDR. Required only if enabling HA for AWS, Azure, AzureGov, AWSGov, AWSChina, AzureChina, OCI, Alibaba Cloud, AWS Top Secret or AWS Secret gateways. Optional for GCP. Setting to empty/unsetting will disable HA. Setting to a valid subnet CIDR will create an HA gateway on the subnet. Example: "10.12.0.0/24".
      */
     haSubnet?: pulumi.Input<string>;
     /**
-     * HA Zone. Required if enabling HA for GCP. Optional for Azure.
+     * HA Zone. Required if enabling HA for GCP gateway. Optional if enabling HA for Azure gateway. For GCP, setting to empty/unsetting will disable HA and setting to a valid zone will create an HA gateway in the zone. Example: "us-west1-c". For Azure, this is an optional parameter to place the HA gateway in a specific availability zone. Valid values for Azure gateways are in the form "az-n". Example: "az-2". Available for Azure as of provider version R2.17+.
      */
     haZone?: pulumi.Input<string>;
     /**
-     * image_version can be used to set the desired image version of the gateway. If set, we will attempt to update the gateway
-     * to the specified version.
+     * The image version of the gateway. Use `aviatrix.getAviatrixGatewayImage` data source to programmatically retrieve this value for the desired `softwareVersion`. If set, we will attempt to update the gateway to the specified version if current version is different. If left blank, the gateway upgrades can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "hvm-cloudx-aws-022021". Available as of provider version R2.20.0.
      */
     imageVersion?: pulumi.Input<string>;
     /**
-     * Enable Insane Mode for Transit. Valid values: true, false. Supported for AWS/AWSGov, GCP, Azure and OCI. If insane mode
-     * is enabled, gateway size has to at least be c5 size for AWS and Standard_D3_v2 size for Azure.
+     * Specify true for [Insane Mode](https://docs.aviatrix.com/HowTos/insane_mode.html) high performance gateway. Insane Mode gateway size must be at least c5 size (AWS, AWSGov, AWS China, AWS Top Secret and AWS Secret) or Standard_D3_v2 (Azure and AzureGov); for GCP only four size are supported: "n1-highcpu-4", "n1-highcpu-8", "n1-highcpu-16" and "n1-highcpu-32". If enabled, you must specify a valid /26 CIDR segment of the VPC to create a new subnet for AWS, Azure, AzureGov, AWSGov, AWS Top Secret and AWS Secret. Only available for AWS, GCP/OCI, Azure, AzureGov, AzureChina, AWSGov, AWS Top Secret and AWS Secret. Valid values: true, false. Default value: false.
      */
     insaneMode?: pulumi.Input<boolean>;
     /**
-     * AZ of subnet being created for Insane Mode Transit Gateway. Required for AWS if insane_mode is enabled.
+     * AZ of subnet being created for Insane Mode Transit Gateway. Required for AWS, AWSGov, AWS China, AWS Top Secret or AWS Secret if `insaneMode` is enabled. Example: AWS: "us-west-1a".
      */
     insaneModeAz?: pulumi.Input<string>;
     /**
-     * Transit gateway lan interface cidr.
+     * LAN interface CIDR of the transit gateway created (will be used when enabling FQDN Firenet in Azure). Available in provider version R2.17.1+.
      */
     lanInterfaceCidr?: pulumi.Input<string>;
     /**
-     * LAN Private Subnet. Only used for GCP Transit FireNet.
+     * LAN Private Subnet. Only valid when enabling Transit FireNet on GCP. Available as of provider version R2.18.1+.
      */
     lanPrivateSubnet?: pulumi.Input<string>;
     /**
-     * LAN VPC ID. Only used for GCP Transit FireNet.
+     * LAN VPC ID. Only valid when enabling Transit FireNet on GCP. Available as of provider version R2.18.1+.
      */
     lanVpcId?: pulumi.Input<string>;
     /**
-     * Set the learned CIDRs approval mode. Only valid when 'enable_learned_cidrs_approval' is set to true. If set to
-     * 'gateway', learned CIDR approval applies to ALL connections. If set to 'connection', learned CIDR approval is configured
-     * on a per connection basis. When configuring per connection, use the enable_learned_cidrs_approval attribute within the
-     * connection resource to toggle learned CIDR approval. Valid values: 'gateway' or 'connection'. Default value: 'gateway'.
+     * Learned CIDRs approval mode. Either "gateway" (approval on a per gateway basis) or "connection" (approval on a per connection basis). Default value: "gateway". Available as of provider version R2.18+.
      */
     learnedCidrsApprovalMode?: pulumi.Input<string>;
     /**
@@ -1005,15 +963,15 @@ export interface AviatrixTransitGatewayState {
      */
     localAsNumber?: pulumi.Input<string>;
     /**
-     * A set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true.
+     * Set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true. Available in provider version R2.18+.
      */
     monitorExcludeLists?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * OOB subnet availability zone.
+     * OOB availability zone. Required if enabling Private OOB. Example: "us-west-1a".
      */
     oobAvailabilityZone?: pulumi.Input<string>;
     /**
-     * OOB management subnet.
+     * OOB management subnet. Required if enabling Private OOB. Example: "11.0.2.0/24".
      */
     oobManagementSubnet?: pulumi.Input<string>;
     /**
@@ -1025,11 +983,11 @@ export interface AviatrixTransitGatewayState {
      */
     privateIp?: pulumi.Input<string>;
     /**
-     * Private Mode Controller load balancer VPC ID. Required when private mode is enabled for the Controller.
+     * VPC ID of Private Mode load balancer. Required when Private Mode is enabled on the Controller. Available in Provider version R2.23+.
      */
     privateModeLbVpcId?: pulumi.Input<string>;
     /**
-     * Private Mode subnet availability zone.
+     * Availability Zone of the subnet. Required when Private Mode is enabled on the Controller and `cloudType` is AWS or AWSGov. Available in Provider version R2.23+.
      */
     privateModeSubnetZone?: pulumi.Input<string>;
     /**
@@ -1037,7 +995,7 @@ export interface AviatrixTransitGatewayState {
      */
     publicIp?: pulumi.Input<string>;
     /**
-     * Gateway ethernet interface RX queue size. Supported for AWS related clouds only.
+     * Gateway ethernet interface RX queue size. Once set, can't be deleted or disabled. Available for AWS as of provider version R2.22+.
      */
     rxQueueSize?: pulumi.Input<string>;
     /**
@@ -1045,17 +1003,15 @@ export interface AviatrixTransitGatewayState {
      */
     securityGroupId?: pulumi.Input<string>;
     /**
-     * Set to 'enabled' if this feature is desired.
+     * Set to true if this [feature](https://docs.aviatrix.com/Solutions/gateway_ha.html#single-az-gateway) is desired. Valid values: true, false.
      */
     singleAzHa?: pulumi.Input<boolean>;
     /**
-     * Enable or disable Source NAT feature in 'single_ip' mode for this container.
+     * Enable "singleIp" mode Source NAT for this container. Valid values: true, false. **NOTE: Please see notes here in regards to changes to this argument in R2.10.**
      */
     singleIpSnat?: pulumi.Input<boolean>;
     /**
-     * software_version can be used to set the desired software version of the gateway. If set, we will attempt to update the
-     * gateway to the specified version. If left blank, the gateway software version will continue to be managed through the
-     * aviatrix_controller_config resource.
+     * The software version of the gateway. If set, we will attempt to update the gateway to the specified version if current version is different. If left blank, the gateway upgrade can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "6.5.821". Available as of provider version R2.20.0.
      */
     softwareVersion?: pulumi.Input<string>;
     /**
@@ -1063,17 +1019,17 @@ export interface AviatrixTransitGatewayState {
      */
     spotPrice?: pulumi.Input<string>;
     /**
-     * Public Subnet Name.
+     * A VPC Network address range selected from one of the available network ranges.
      */
     subnet?: pulumi.Input<string>;
     /**
-     * Instance tag of cloud provider.
+     * (Optional) Instance tag of cloud provider. Only supported for AWS, Azure, AzureGov, AWSGov, AWSChina, AzureChina. Example: ["key1:value1","key2:value2"].
      *
      * @deprecated Use tags instead.
      */
     tagLists?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * A map of tags to assign to the transit gateway.
+     * Map of tags to assign to the gateway. Only available for AWS, Azure, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret gateways. Allowed characters vary by cloud type but always include: letters, spaces, and numbers. AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret allow the use of any character.  Azure, AzureGov and AzureChina allows the following special characters: + - = . _ : @. Example: {"key1" = "value1", "key2" = "value2"}.
      */
     tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
@@ -1085,11 +1041,11 @@ export interface AviatrixTransitGatewayState {
      */
     vpcId?: pulumi.Input<string>;
     /**
-     * Region of cloud provider.
+     * Region of cloud provider. Example: AWS: "us-east-1", GCP: "us-west2-a", Azure: "East US 2", OCI: "us-ashburn-1", AzureGov: "USGov Arizona", AWSGov: "us-gov-west-1", AWSChina: "cn-north-1", AzureChina: "China North", AWS Top Secret: "us-iso-east-1", AWS Secret: "us-isob-east-1".
      */
     vpcReg?: pulumi.Input<string>;
     /**
-     * Availability Zone. Only available for cloud_type = 8 (Azure). Must be in the form 'az-n', for example, 'az-2'.
+     * Availability Zone. Only available for cloudType = 8 (Azure). Must be in the form 'az-n', for example, 'az-2'. Available in provider version R2.17+.
      */
     zone?: pulumi.Input<string>;
 }
@@ -1103,53 +1059,51 @@ export interface AviatrixTransitGatewayArgs {
      */
     accountName: pulumi.Input<string>;
     /**
-     * If false, reuse an idle address in Elastic IP pool for this gateway. Otherwise, allocate a new Elastic IP and use it for
-     * this gateway.
+     * When value is false, reuse an idle address in Elastic IP pool for this gateway. Otherwise, allocate a new Elastic IP and use it for this gateway. Available in Controller 4.7+. Valid values: true, false. Default: true.
      */
     allocateNewEip?: pulumi.Input<boolean>;
     /**
-     * Approved learned CIDRs. Available as of provider version R2.21+.
+     * A set of approved learned CIDRs. Only valid when `enableLearnedCidrsApproval` is set to true. Example: ["10.250.0.0/16", "10.251.0.0/16"]. Available as of provider version R2.21+.
      */
     approvedLearnedCidrs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Availability domain for OCI.
+     * Availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
      */
     availabilityDomain?: pulumi.Input<string>;
     /**
-     * The name of the public IP address and its resource group in Azure to assign to this Transit Gateway.
+     * Name of public IP Address resource and its resource group in Azure to be assigned to the Transit Gateway instance. Example: "IP_Name:Resource_Group_Name". Required if `allocateNewEip` is false and `cloudType` is Azure, AzureGov or AzureChina. Available as of provider version 2.20+.
      */
     azureEipNameResourceGroup?: pulumi.Input<string>;
     /**
-     * Enable Equal Cost Multi Path (ECMP) routing for the next hop.
+     * Enable Equal Cost Multi Path (ECMP) routing for the next hop. Default value: false.
      */
     bgpEcmp?: pulumi.Input<boolean>;
     /**
-     * BGP Hold Time.
+     * BGP hold time. Unit is in seconds. Valid values are between 12 and 360. Default value: 180.
      */
     bgpHoldTime?: pulumi.Input<number>;
     /**
-     * Interfaces to run BGP protocol on top of the ethernet interface, to connect to the onprem/remote peer. Only available
-     * for GCP Transit.
+     * Interfaces to run BGP protocol on top of the ethernet interface, to connect to the onprem/remote peer. Only available for GCP Transit. Each interface has the following attributes:
      */
     bgpLanInterfaces?: pulumi.Input<pulumi.Input<inputs.AviatrixTransitGatewayBgpLanInterface>[]>;
     /**
-     * Number of interfaces that will be created for BGP over LAN enabled Azure transit.
+     * Number of interfaces that will be created for BGP over LAN enabled Azure transit. Valid value: 1~5 for FireNet case, 1~7 for Non-FireNet case. Default value: 1. Available as of provider version R2.22+.
      */
     bgpLanInterfacesCount?: pulumi.Input<number>;
     /**
-     * Intended CIDR list to be advertised to external bgp router.
+     * Intended CIDR list to be advertised to external BGP router. Example: "10.2.0.0/16,10.4.0.0/16". Available as of R2.6. **NOTE: If previously enabled through vgwConn resource prior to provider version R2.6, please see notes here.**
      */
     bgpManualSpokeAdvertiseCidrs?: pulumi.Input<string>;
     /**
-     * BGP route polling time. Unit is in seconds. Valid values are between 10 and 50.
+     * BGP route polling time. Unit is in seconds. Valid values are between 10 and 50. Default value: "50".
      */
     bgpPollingTime?: pulumi.Input<string>;
     /**
-     * Type of cloud service provider, requires an integer value. Use 1 for AWS.
+     * Type of cloud service provider, requires an integer value. Currently only AWS(1), GCP(4), Azure(8), OCI(16), AzureGov(32), AWSGov(256), AWSChina(1024), AzureChina(2048), Alibaba Cloud(8192), AWS Top Secret(16384) and AWS Secret (32768) are supported.
      */
     cloudType: pulumi.Input<number>;
     /**
-     * Specify Connected Transit status.
+     * Specify Connected Transit status. If enabled, it allows spokes to run traffics to other spokes via transit gateway. Valid values: true, false. Default value: false.
      */
     connectedTransit?: pulumi.Input<boolean>;
     /**
@@ -1157,92 +1111,84 @@ export interface AviatrixTransitGatewayArgs {
      */
     customerManagedKeys?: pulumi.Input<string>;
     /**
-     * A list of comma separated CIDRs to be customized for the spoke VPC routes. When configured, it will replace all learned
-     * routes in VPC routing tables, including RFC1918 and non-RFC1918 CIDRs. It applies to all spoke gateways attached to this
-     * transit gateway.
+     * A list of comma-separated CIDRs to be customized for the spoke VPC routes. When configured, it will replace all learned routes in VPC routing tables, including RFC1918 and non-RFC1918 CIDRs. It applies to all spoke gateways attached to this transit gateway. Example: "10.0.0.0/16,10.2.0.0/16".
      */
     customizedSpokeVpcRoutes?: pulumi.Input<string>;
     /**
-     * A list of CIDRs to be customized for the transit VPC routes. When configured, it will replace all learned routes in VPC
-     * routing tables, including RFC1918 and non-RFC1918 CIDRs.To be effective, `enable_advertise_transit_cidr` or firewall
-     * management access for a transit firenet gateway must be enabled.
+     * A list of CIDRs to be customized for the transit VPC routes. When configured, it will replace all learned routes in VPC routing tables, including RFC1918 and non-RFC1918 CIDRs. To be effective, `enableAdvertiseTransitCidr` or firewall management access for a Transit FireNet gateway must be enabled. Example: ["10.0.0.0/16", "10.2.0.0/16"].
      */
     customizedTransitVpcRoutes?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Required when allocate_new_eip is false. It uses specified EIP for this gateway.
+     * Required when `allocateNewEip` is false. It uses the specified EIP for this gateway. Available in Controller version 4.7+. Only available for AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret.
      */
     eip?: pulumi.Input<string>;
     /**
-     * Enables Active-Standby Mode, available only with HA enabled.
+     * Enables [Active-Standby Mode](https://docs.aviatrix.com/HowTos/transit_advanced.html#active-standby). Available only with HA enabled. Valid values: true, false. Default value: false. Available in provider version R2.17.1+.
      */
     enableActiveStandby?: pulumi.Input<boolean>;
     /**
-     * Enables Preemptive Mode for Active-Standby, available only with Active-Standby enabled.
+     * Enables Preemptive Mode for Active-Standby. Available only with BGP enabled, HA enabled and Active-Standby enabled. Valid values: true, false. Default value: false.
      */
     enableActiveStandbyPreemptive?: pulumi.Input<boolean>;
     /**
-     * Switch to Enable/Disable advertise transit VPC network CIDR.
+     * Switch to enable/disable advertise transit VPC network CIDR for a VGW connection. Available as of R2.6. **NOTE: If previously enabled through vgwConn resource prior to provider version R2.6, please see notes here.**
      */
     enableAdvertiseTransitCidr?: pulumi.Input<boolean>;
     /**
-     * Pre-allocate a network interface(eth4) for "BGP over LAN" functionality. Only valid for cloud_type = 4 (GCP) and 8
-     * (Azure). Valid values: true or false. Default value: false. Available as of provider version R2.18+
+     * Pre-allocate a network interface(eth4) for "BGP over LAN" functionality. Must be enabled to create a BGP over LAN `aviatrix.AviatrixTransitExternalDeviceConn` resource with this Transit Gateway. Only valid for GCP (4), Azure (8), AzureGov (32) or AzureChina (2048). Valid values: true or false. Default value: false. Available as of provider version R2.18+.
      */
     enableBgpOverLan?: pulumi.Input<boolean>;
     /**
-     * Specify whether to enable egress transit firenet interfaces or not.
+     * Enable [Egress Transit FireNet](https://docs.aviatrix.com/HowTos/transit_firenet_workflow.html#b-enable-transit-firenet-on-aviatrix-egress-transit-gateway). Valid values: true, false. Default value: false. Available in provider version R2.16.3+.
      */
     enableEgressTransitFirenet?: pulumi.Input<boolean>;
     /**
-     * Enable encrypt gateway EBS volume. Only supported for AWS and AWSGov providers. Valid values: true, false. Default
-     * value: false.
+     * Enable EBS volume encryption for Gateway. Only supports AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret. Valid values: true, false. Default value: false.
      */
     enableEncryptVolume?: pulumi.Input<boolean>;
     /**
-     * Specify whether to enable firenet interfaces or not.
+     * Set to true to use gateway for legacy [AWS TGW-based FireNet](https://docs.aviatrix.com/HowTos/firewall_network_faq.html) connection. Valid values: true, false. Default value: false. **NOTE: If previously using an older provider version R2.5 where attribute name was `enableFirenetInterfaces`, please see notes here.**
      */
     enableFirenet?: pulumi.Input<boolean>;
     /**
-     * Enable firenet interfaces with AWS Gateway Load Balancer. Only valid when `enable_firenet` or `enable_transit_firenet`
-     * are set to true and `cloud_type` = 1 (AWS). Currently AWS Gateway Load Balancer is only supported in AWS regions
-     * us-west-2 and us-east-1. Valid values: true or false. Default value: false.
+     * Enable FireNet interfaces with AWS Gateway Load Balancer. Only valid when `enableFirenet` or `enableTransitFirenet` are set to true and `cloudType` = 1 (AWS). Currently, AWS Gateway Load Balancer is only supported in AWS regions: us-west-2, us-east-1, eu-west-1, ap-southeast-2 and sa-east-1. Valid values: true or false. Default value: false. Available as of provider version R2.18+.
      */
     enableGatewayLoadBalancer?: pulumi.Input<boolean>;
     /**
-     * Sign of readiness for TGW connection.
+     * Sign of readiness for AWS TGW connection. Only supported for AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret. Example: false.
      */
     enableHybridConnection?: pulumi.Input<boolean>;
     /**
-     * Enable jumbo frame support for transit gateway. Valid values: true or false. Default value: true.
+     * Enable jumbo frames for this transit gateway. Default value is true.
      */
     enableJumboFrame?: pulumi.Input<boolean>;
     /**
-     * Switch to enable/disable encrypted transit approval for transit Gateway. Valid values: true, false.
+     * Switch to enable/disable encrypted transit approval for transit gateway. Valid values: true, false. Default value: false.
      */
     enableLearnedCidrsApproval?: pulumi.Input<boolean>;
     /**
-     * Enable [monitor gateway subnets](https://docs.aviatrix.com/HowTos/gateway.html#monitor-gateway-subnet). Only valid for
-     * cloud_type = 1 (AWS) or 256 (AWSGov). Valid values: true, false. Default value: false.
+     * If set to true, the [Monitor Gateway Subnets](https://docs.aviatrix.com/HowTos/gateway.html#monitor-gateway-subnet) feature is enabled. Default value is false. Available in provider version R2.18+.
      */
     enableMonitorGatewaySubnets?: pulumi.Input<boolean>;
     /**
-     * Enable Multi-tier Transit mode on transit gateway.
+     * Enable Multi-tier Transit mode on transit gateway. When enabled, transit gateway will propagate routes it receives from its transit peering peer to other transit peering peers. `localAsNumber` is required. Default value: false. Available as of provider version R2.19+.
      */
     enableMultiTierTransit?: pulumi.Input<boolean>;
     /**
-     * Enable preserve as_path when advertising manual summary cidrs on transit gateway.
+     * Enable preserve asPath when advertising manual summary cidrs on transit gateway. Valid values: true, false. Default value: false. Available as of provider version R.2.22.1+
+     * },
      */
     enablePreserveAsPath?: pulumi.Input<boolean>;
     /**
-     * Enable private OOB.
+     * Enable Private OOB feature. Only available for AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret. Valid values: true, false. Default value: false.
      */
     enablePrivateOob?: pulumi.Input<boolean>;
     /**
-     * Enable S2C receive packet CPU re-balancing on transit gateway.
+     * Enable S2C receive packet CPU re-balancing on transit gateway. Valid values: true, false. Default value: false. Available in provider version R2.21.2+.
      */
     enableS2cRxBalancing?: pulumi.Input<boolean>;
     /**
-     * Enable segmentation to allow association of transit gateway to security domains.
+     * Enable transit gateway for segmentation. Valid values: true, false. Default: false.
      */
     enableSegmentation?: pulumi.Input<boolean>;
     /**
@@ -1250,30 +1196,27 @@ export interface AviatrixTransitGatewayArgs {
      */
     enableSpotInstance?: pulumi.Input<boolean>;
     /**
-     * Specify whether to enable transit firenet interfaces or not.
+     * Set to true to use gateway for [Transit FireNet](https://docs.aviatrix.com/HowTos/transit_firenet_faq.html) connection. Valid values: true, false. Default value: false. Available in provider version R2.12+.
      */
     enableTransitFirenet?: pulumi.Input<boolean>;
     /**
-     * Enable summarize CIDR to TGW.
+     * Enable summarize CIDR to TGW. Valid values: true, false. Default value: false.
      */
     enableTransitSummarizeCidrToTgw?: pulumi.Input<boolean>;
     /**
-     * Enable vpc_dns_server for Gateway. Valid values: true, false.
+     * Enable VPC DNS Server for Gateway. Currently only supported for AWS, Azure, AzureGov, AWSGov, AWSChina, AzureChina, Alibaba Cloud, AWS Top Secret and AWS Secret gateways. Valid values: true, false. Default value: false.
      */
     enableVpcDnsServer?: pulumi.Input<boolean>;
     /**
-     * A list of comma separated CIDRs to be advertised to on-prem as 'Excluded CIDR List'. When configured, it inspects all
-     * the advertised CIDRs from its spoke gateways and remove those included in the 'Excluded CIDR List'.
+     * A list of comma-separated CIDRs to be advertised to on-prem as 'Excluded CIDR List'. When configured, it inspects all the advertised CIDRs from its spoke gateways and remove those included in the 'Excluded CIDR List'. Example: "10.4.0.0/16,10.5.0.0/16".
      */
     excludedAdvertisedSpokeRoutes?: pulumi.Input<string>;
     /**
-     * Fault domain for OCI.
+     * Fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
      */
     faultDomain?: pulumi.Input<string>;
     /**
-     * A list of comma separated CIDRs to be filtered from the spoke VPC route table. When configured, filtering CIDR(s) or
-     * it’s subnet will be deleted from VPC routing tables as well as from spoke gateway’s routing table. It applies to all
-     * spoke gateways attached to this transit gateway.
+     * A list of comma-separated CIDRs to be filtered from the spoke VPC route table. When configured, filtering CIDR(s) or it’s subnet will be deleted from VPC routing tables as well as from spoke gateway’s routing table. It applies to all spoke gateways attached to this transit gateway. Example: "10.2.0.0/16,10.3.0.0/16".
      */
     filteredSpokeVpcRoutes?: pulumi.Input<string>;
     /**
@@ -1281,98 +1224,87 @@ export interface AviatrixTransitGatewayArgs {
      */
     gwName: pulumi.Input<string>;
     /**
-     * Size of the gateway instance.
+     * Size of the gateway instance. Example: AWS: "t2.large", Azure/AzureGov: "Standard_B1s", OCI: "VM.Standard2.2", GCP: "n1-standard-1", AWSGov: "t2.large", AWSChina: "t2.large", AzureChina: "Standard_A0".
      */
     gwSize: pulumi.Input<string>;
     /**
-     * HA availability domain for OCI.
+     * HA gateway availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
      */
     haAvailabilityDomain?: pulumi.Input<string>;
     /**
-     * The name of the public IP address and its resource group in Azure to assign to the HA Transit Gateway.
+     * Name of public IP Address resource and its resource group in Azure to be assigned to the HA Transit Gateway instance. Example: "IP_Name:Resource_Group_Name". Required if `haEip` is set and `cloudType` is Azure, AzureGov or AzureChina. Available as of provider version 2.20+.
      */
     haAzureEipNameResourceGroup?: pulumi.Input<string>;
     /**
-     * Interfaces to run BGP protocol on top of the ethernet interface, to connect to the onprem/remote peer. Only available
-     * for GCP HA Transit.
+     * Interfaces to run BGP protocol on top of the ethernet interface, to connect to the onprem/remote peer. Only available for GCP Transit HA. Each interface has the following attributes:
      */
     haBgpLanInterfaces?: pulumi.Input<pulumi.Input<inputs.AviatrixTransitGatewayHaBgpLanInterface>[]>;
     /**
-     * Public IP address that you want assigned to the HA Transit Gateway.
+     * Public IP address that you want to assign to the HA peering instance. If no value is given, a new EIP will automatically be allocated. Only available for AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret.
      */
     haEip?: pulumi.Input<string>;
     /**
-     * HA fault domain for OCI.
+     * HA gateway fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
      */
     haFaultDomain?: pulumi.Input<string>;
     /**
-     * HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set).
+     * HA Gateway Size. Mandatory if enabling HA. Example: "t2.micro".
      */
     haGwSize?: pulumi.Input<string>;
     /**
-     * ha_image_version can be used to set the desired image version of the HA gateway. If set, we will attempt to update the
-     * gateway to the specified version.
+     * The image version of the HA gateway. Use `aviatrix.getAviatrixGatewayImage` data source to programmatically retrieve this value for the desired `haSoftwareVersion`. If set, we will attempt to update the HA gateway to the specified version if current version is different. If left blank, the gateway upgrades can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "hvm-cloudx-aws-022021". Available as of provider version R2.20.0.
      */
     haImageVersion?: pulumi.Input<string>;
     /**
-     * AZ of subnet being created for Insane Mode Transit HA Gateway. Required for AWS if insane_mode is enabled and ha_subnet
-     * is set.
+     * AZ of subnet being created for Insane Mode Transit HA Gateway. Required for AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret if `insaneMode` is enabled and `haSubnet` is set. Example: AWS: "us-west-1a".
      */
     haInsaneModeAz?: pulumi.Input<string>;
     /**
-     * OOB HA availability zone.
+     * HA OOB availability zone. Required if enabling Private OOB and HA. Example: "us-west-1b".
      */
     haOobAvailabilityZone?: pulumi.Input<string>;
     /**
-     * OOB HA management subnet.
+     * HA OOB management subnet. Required if enabling Private OOB and HA. Example: "11.0.0.48/28".
      */
     haOobManagementSubnet?: pulumi.Input<string>;
     /**
-     * Private Mode HA subnet availability zone.
+     * Availability Zone of the HA subnet. Required when Private Mode is enabled on the Controller and `cloudType` is AWS or AWSGov with HA. Available in Provider version R2.23+.
      */
     haPrivateModeSubnetZone?: pulumi.Input<string>;
     /**
-     * ha_software_version can be used to set the desired software version of the HA gateway. If set, we will attempt to update
-     * the gateway to the specified version. If left blank, the gateway software version will continue to be managed through
-     * the aviatrix_controller_config resource.
+     * The software version of the HA gateway. If set, we will attempt to update the HA gateway to the specified version if current version is different. If left blank, the HA gateway upgrade can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "6.5.821". Available as of provider version R2.20.0.
      */
     haSoftwareVersion?: pulumi.Input<string>;
     /**
-     * HA Subnet. Required for enabling HA for AWS/AWSGov/AWSChina/Azure/OCI/Alibaba Cloud. Optional for enabling HA for GCP
-     * gateway.
+     * HA Subnet CIDR. Required only if enabling HA for AWS, Azure, AzureGov, AWSGov, AWSChina, AzureChina, OCI, Alibaba Cloud, AWS Top Secret or AWS Secret gateways. Optional for GCP. Setting to empty/unsetting will disable HA. Setting to a valid subnet CIDR will create an HA gateway on the subnet. Example: "10.12.0.0/24".
      */
     haSubnet?: pulumi.Input<string>;
     /**
-     * HA Zone. Required if enabling HA for GCP. Optional for Azure.
+     * HA Zone. Required if enabling HA for GCP gateway. Optional if enabling HA for Azure gateway. For GCP, setting to empty/unsetting will disable HA and setting to a valid zone will create an HA gateway in the zone. Example: "us-west1-c". For Azure, this is an optional parameter to place the HA gateway in a specific availability zone. Valid values for Azure gateways are in the form "az-n". Example: "az-2". Available for Azure as of provider version R2.17+.
      */
     haZone?: pulumi.Input<string>;
     /**
-     * image_version can be used to set the desired image version of the gateway. If set, we will attempt to update the gateway
-     * to the specified version.
+     * The image version of the gateway. Use `aviatrix.getAviatrixGatewayImage` data source to programmatically retrieve this value for the desired `softwareVersion`. If set, we will attempt to update the gateway to the specified version if current version is different. If left blank, the gateway upgrades can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "hvm-cloudx-aws-022021". Available as of provider version R2.20.0.
      */
     imageVersion?: pulumi.Input<string>;
     /**
-     * Enable Insane Mode for Transit. Valid values: true, false. Supported for AWS/AWSGov, GCP, Azure and OCI. If insane mode
-     * is enabled, gateway size has to at least be c5 size for AWS and Standard_D3_v2 size for Azure.
+     * Specify true for [Insane Mode](https://docs.aviatrix.com/HowTos/insane_mode.html) high performance gateway. Insane Mode gateway size must be at least c5 size (AWS, AWSGov, AWS China, AWS Top Secret and AWS Secret) or Standard_D3_v2 (Azure and AzureGov); for GCP only four size are supported: "n1-highcpu-4", "n1-highcpu-8", "n1-highcpu-16" and "n1-highcpu-32". If enabled, you must specify a valid /26 CIDR segment of the VPC to create a new subnet for AWS, Azure, AzureGov, AWSGov, AWS Top Secret and AWS Secret. Only available for AWS, GCP/OCI, Azure, AzureGov, AzureChina, AWSGov, AWS Top Secret and AWS Secret. Valid values: true, false. Default value: false.
      */
     insaneMode?: pulumi.Input<boolean>;
     /**
-     * AZ of subnet being created for Insane Mode Transit Gateway. Required for AWS if insane_mode is enabled.
+     * AZ of subnet being created for Insane Mode Transit Gateway. Required for AWS, AWSGov, AWS China, AWS Top Secret or AWS Secret if `insaneMode` is enabled. Example: AWS: "us-west-1a".
      */
     insaneModeAz?: pulumi.Input<string>;
     /**
-     * LAN Private Subnet. Only used for GCP Transit FireNet.
+     * LAN Private Subnet. Only valid when enabling Transit FireNet on GCP. Available as of provider version R2.18.1+.
      */
     lanPrivateSubnet?: pulumi.Input<string>;
     /**
-     * LAN VPC ID. Only used for GCP Transit FireNet.
+     * LAN VPC ID. Only valid when enabling Transit FireNet on GCP. Available as of provider version R2.18.1+.
      */
     lanVpcId?: pulumi.Input<string>;
     /**
-     * Set the learned CIDRs approval mode. Only valid when 'enable_learned_cidrs_approval' is set to true. If set to
-     * 'gateway', learned CIDR approval applies to ALL connections. If set to 'connection', learned CIDR approval is configured
-     * on a per connection basis. When configuring per connection, use the enable_learned_cidrs_approval attribute within the
-     * connection resource to toggle learned CIDR approval. Valid values: 'gateway' or 'connection'. Default value: 'gateway'.
+     * Learned CIDRs approval mode. Either "gateway" (approval on a per gateway basis) or "connection" (approval on a per connection basis). Default value: "gateway". Available as of provider version R2.18+.
      */
     learnedCidrsApprovalMode?: pulumi.Input<string>;
     /**
@@ -1380,15 +1312,15 @@ export interface AviatrixTransitGatewayArgs {
      */
     localAsNumber?: pulumi.Input<string>;
     /**
-     * A set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true.
+     * Set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true. Available in provider version R2.18+.
      */
     monitorExcludeLists?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * OOB subnet availability zone.
+     * OOB availability zone. Required if enabling Private OOB. Example: "us-west-1a".
      */
     oobAvailabilityZone?: pulumi.Input<string>;
     /**
-     * OOB management subnet.
+     * OOB management subnet. Required if enabling Private OOB. Example: "11.0.2.0/24".
      */
     oobManagementSubnet?: pulumi.Input<string>;
     /**
@@ -1396,29 +1328,27 @@ export interface AviatrixTransitGatewayArgs {
      */
     prependAsPaths?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Private Mode Controller load balancer VPC ID. Required when private mode is enabled for the Controller.
+     * VPC ID of Private Mode load balancer. Required when Private Mode is enabled on the Controller. Available in Provider version R2.23+.
      */
     privateModeLbVpcId?: pulumi.Input<string>;
     /**
-     * Private Mode subnet availability zone.
+     * Availability Zone of the subnet. Required when Private Mode is enabled on the Controller and `cloudType` is AWS or AWSGov. Available in Provider version R2.23+.
      */
     privateModeSubnetZone?: pulumi.Input<string>;
     /**
-     * Gateway ethernet interface RX queue size. Supported for AWS related clouds only.
+     * Gateway ethernet interface RX queue size. Once set, can't be deleted or disabled. Available for AWS as of provider version R2.22+.
      */
     rxQueueSize?: pulumi.Input<string>;
     /**
-     * Set to 'enabled' if this feature is desired.
+     * Set to true if this [feature](https://docs.aviatrix.com/Solutions/gateway_ha.html#single-az-gateway) is desired. Valid values: true, false.
      */
     singleAzHa?: pulumi.Input<boolean>;
     /**
-     * Enable or disable Source NAT feature in 'single_ip' mode for this container.
+     * Enable "singleIp" mode Source NAT for this container. Valid values: true, false. **NOTE: Please see notes here in regards to changes to this argument in R2.10.**
      */
     singleIpSnat?: pulumi.Input<boolean>;
     /**
-     * software_version can be used to set the desired software version of the gateway. If set, we will attempt to update the
-     * gateway to the specified version. If left blank, the gateway software version will continue to be managed through the
-     * aviatrix_controller_config resource.
+     * The software version of the gateway. If set, we will attempt to update the gateway to the specified version if current version is different. If left blank, the gateway upgrade can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "6.5.821". Available as of provider version R2.20.0.
      */
     softwareVersion?: pulumi.Input<string>;
     /**
@@ -1426,17 +1356,17 @@ export interface AviatrixTransitGatewayArgs {
      */
     spotPrice?: pulumi.Input<string>;
     /**
-     * Public Subnet Name.
+     * A VPC Network address range selected from one of the available network ranges.
      */
     subnet: pulumi.Input<string>;
     /**
-     * Instance tag of cloud provider.
+     * (Optional) Instance tag of cloud provider. Only supported for AWS, Azure, AzureGov, AWSGov, AWSChina, AzureChina. Example: ["key1:value1","key2:value2"].
      *
      * @deprecated Use tags instead.
      */
     tagLists?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * A map of tags to assign to the transit gateway.
+     * Map of tags to assign to the gateway. Only available for AWS, Azure, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret gateways. Allowed characters vary by cloud type but always include: letters, spaces, and numbers. AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret allow the use of any character.  Azure, AzureGov and AzureChina allows the following special characters: + - = . _ : @. Example: {"key1" = "value1", "key2" = "value2"}.
      */
     tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
@@ -1448,11 +1378,11 @@ export interface AviatrixTransitGatewayArgs {
      */
     vpcId: pulumi.Input<string>;
     /**
-     * Region of cloud provider.
+     * Region of cloud provider. Example: AWS: "us-east-1", GCP: "us-west2-a", Azure: "East US 2", OCI: "us-ashburn-1", AzureGov: "USGov Arizona", AWSGov: "us-gov-west-1", AWSChina: "cn-north-1", AzureChina: "China North", AWS Top Secret: "us-iso-east-1", AWS Secret: "us-isob-east-1".
      */
     vpcReg: pulumi.Input<string>;
     /**
-     * Availability Zone. Only available for cloud_type = 8 (Azure). Must be in the form 'az-n', for example, 'az-2'.
+     * Availability Zone. Only available for cloudType = 8 (Azure). Must be in the form 'az-n', for example, 'az-2'. Available in provider version R2.17+.
      */
     zone?: pulumi.Input<string>;
 }

@@ -17,7 +17,7 @@ class AviatrixSegmentationNetworkDomainArgs:
                  domain_name: pulumi.Input[str]):
         """
         The set of arguments for constructing a AviatrixSegmentationNetworkDomain resource.
-        :param pulumi.Input[str] domain_name: Network domain name.
+        :param pulumi.Input[str] domain_name: Name of the Network Domain.
         """
         pulumi.set(__self__, "domain_name", domain_name)
 
@@ -25,7 +25,7 @@ class AviatrixSegmentationNetworkDomainArgs:
     @pulumi.getter(name="domainName")
     def domain_name(self) -> pulumi.Input[str]:
         """
-        Network domain name.
+        Name of the Network Domain.
         """
         return pulumi.get(self, "domain_name")
 
@@ -40,7 +40,7 @@ class _AviatrixSegmentationNetworkDomainState:
                  domain_name: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixSegmentationNetworkDomain resources.
-        :param pulumi.Input[str] domain_name: Network domain name.
+        :param pulumi.Input[str] domain_name: Name of the Network Domain.
         """
         if domain_name is not None:
             pulumi.set(__self__, "domain_name", domain_name)
@@ -49,7 +49,7 @@ class _AviatrixSegmentationNetworkDomainState:
     @pulumi.getter(name="domainName")
     def domain_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Network domain name.
+        Name of the Network Domain.
         """
         return pulumi.get(self, "domain_name")
 
@@ -66,10 +66,29 @@ class AviatrixSegmentationNetworkDomain(pulumi.CustomResource):
                  domain_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixSegmentationNetworkDomain resource with the given unique name, props, and options.
+        The **aviatrix_segmentation_network_domain** resource handles creation of [Transit Segmentation](https://docs.aviatrix.com/HowTos/transit_segmentation_faq.html) Network Domains.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Segmentation Network Domain
+        test_segmentation_network_domain = aviatrix.AviatrixSegmentationNetworkDomain("testSegmentationNetworkDomain", domain_name="domain-a")
+        ```
+
+        ## Import
+
+        **aviatrix_segmentation_network_domain** can be imported using the `domain_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixSegmentationNetworkDomain:AviatrixSegmentationNetworkDomain test domain_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] domain_name: Network domain name.
+        :param pulumi.Input[str] domain_name: Name of the Network Domain.
         """
         ...
     @overload
@@ -78,7 +97,26 @@ class AviatrixSegmentationNetworkDomain(pulumi.CustomResource):
                  args: AviatrixSegmentationNetworkDomainArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixSegmentationNetworkDomain resource with the given unique name, props, and options.
+        The **aviatrix_segmentation_network_domain** resource handles creation of [Transit Segmentation](https://docs.aviatrix.com/HowTos/transit_segmentation_faq.html) Network Domains.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Segmentation Network Domain
+        test_segmentation_network_domain = aviatrix.AviatrixSegmentationNetworkDomain("testSegmentationNetworkDomain", domain_name="domain-a")
+        ```
+
+        ## Import
+
+        **aviatrix_segmentation_network_domain** can be imported using the `domain_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixSegmentationNetworkDomain:AviatrixSegmentationNetworkDomain test domain_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixSegmentationNetworkDomainArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -125,7 +163,7 @@ class AviatrixSegmentationNetworkDomain(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] domain_name: Network domain name.
+        :param pulumi.Input[str] domain_name: Name of the Network Domain.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -138,7 +176,7 @@ class AviatrixSegmentationNetworkDomain(pulumi.CustomResource):
     @pulumi.getter(name="domainName")
     def domain_name(self) -> pulumi.Output[str]:
         """
-        Network domain name.
+        Name of the Network Domain.
         """
         return pulumi.get(self, "domain_name")
 

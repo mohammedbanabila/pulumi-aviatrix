@@ -9,36 +9,67 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Gateway FQDN Tag Rule filter rule
+    ///     var testFqdn = new Aviatrix.AviatrixFqdnTagRule("testFqdn", new()
+    ///     {
+    ///         Fqdn = "reddit.com",
+    ///         FqdnTagName = "my_tag",
+    ///         Port = "443",
+    ///         Protocol = "tcp",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **fqdn_tag_rule** can be imported using the `fqdn_tag_name`, `fqdn`, `protocol`, `port` and `action` separated by `~`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixFqdnTagRule:AviatrixFqdnTagRule test "fqdn_tag_name~fqdn~protocol~port~action"
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixFqdnTagRule:AviatrixFqdnTagRule")]
     public partial class AviatrixFqdnTagRule : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base
-        /// Policy' if no value is provided.
+        /// What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base Policy' if no value provided.
+        /// * For protocol "all", port must be set to "all".
+        /// * For protocol “icmp”, port must be set to “ping”.
         /// </summary>
         [Output("action")]
         public Output<string?> Action { get; private set; } = null!;
 
         /// <summary>
-        /// FQDN.
+        /// FQDN. Example: "facebook.com".
         /// </summary>
         [Output("fqdn")]
         public Output<string> Fqdn { get; private set; } = null!;
 
         /// <summary>
-        /// FQDN Filter Tag Name to attach this domain.
+        /// FQDN Filter tag name.
         /// </summary>
         [Output("fqdnTagName")]
         public Output<string> FqdnTagName { get; private set; } = null!;
 
         /// <summary>
-        /// Port.
+        /// Port. Example "25".
         /// </summary>
         [Output("port")]
         public Output<string> Port { get; private set; } = null!;
 
         /// <summary>
-        /// Protocol.
+        /// Protocol. Valid values: "all", "tcp", "udp", "icmp".
         /// </summary>
         [Output("protocol")]
         public Output<string> Protocol { get; private set; } = null!;
@@ -91,32 +122,33 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixFqdnTagRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base
-        /// Policy' if no value is provided.
+        /// What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base Policy' if no value provided.
+        /// * For protocol "all", port must be set to "all".
+        /// * For protocol “icmp”, port must be set to “ping”.
         /// </summary>
         [Input("action")]
         public Input<string>? Action { get; set; }
 
         /// <summary>
-        /// FQDN.
+        /// FQDN. Example: "facebook.com".
         /// </summary>
         [Input("fqdn", required: true)]
         public Input<string> Fqdn { get; set; } = null!;
 
         /// <summary>
-        /// FQDN Filter Tag Name to attach this domain.
+        /// FQDN Filter tag name.
         /// </summary>
         [Input("fqdnTagName", required: true)]
         public Input<string> FqdnTagName { get; set; } = null!;
 
         /// <summary>
-        /// Port.
+        /// Port. Example "25".
         /// </summary>
         [Input("port", required: true)]
         public Input<string> Port { get; set; } = null!;
 
         /// <summary>
-        /// Protocol.
+        /// Protocol. Valid values: "all", "tcp", "udp", "icmp".
         /// </summary>
         [Input("protocol", required: true)]
         public Input<string> Protocol { get; set; } = null!;
@@ -130,32 +162,33 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixFqdnTagRuleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base
-        /// Policy' if no value is provided.
+        /// What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base Policy' if no value provided.
+        /// * For protocol "all", port must be set to "all".
+        /// * For protocol “icmp”, port must be set to “ping”.
         /// </summary>
         [Input("action")]
         public Input<string>? Action { get; set; }
 
         /// <summary>
-        /// FQDN.
+        /// FQDN. Example: "facebook.com".
         /// </summary>
         [Input("fqdn")]
         public Input<string>? Fqdn { get; set; }
 
         /// <summary>
-        /// FQDN Filter Tag Name to attach this domain.
+        /// FQDN Filter tag name.
         /// </summary>
         [Input("fqdnTagName")]
         public Input<string>? FqdnTagName { get; set; }
 
         /// <summary>
-        /// Port.
+        /// Port. Example "25".
         /// </summary>
         [Input("port")]
         public Input<string>? Port { get; set; }
 
         /// <summary>
-        /// Protocol.
+        /// Protocol. Valid values: "all", "tcp", "udp", "icmp".
         /// </summary>
         [Input("protocol")]
         public Input<string>? Protocol { get; set; }

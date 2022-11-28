@@ -11,12 +11,64 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// !> **WARNING** **aviatrix_app_domain** is part of the Micro-segmentation private preview feature for R2.22.0. If you wish to enable a private preview mode feature, please contact your sales representative or Aviatrix Support.
+// The **aviatrix_app_domain** resource handles the creation and management of App Domains. Available as of Provider R2.22.0+.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixAppDomain(ctx, "testAppDomainIp", &aviatrix.AviatrixAppDomainArgs{
+//				Selector: &AviatrixAppDomainSelectorArgs{
+//					MatchExpressions: AviatrixAppDomainSelectorMatchExpressionArray{
+//						&AviatrixAppDomainSelectorMatchExpressionArgs{
+//							AccountName: pulumi.String("devops"),
+//							Region:      pulumi.String("us-west-2"),
+//							Tags: pulumi.StringMap{
+//								"k3": pulumi.String("v3"),
+//							},
+//							Type: pulumi.String("vm"),
+//						},
+//						&AviatrixAppDomainSelectorMatchExpressionArgs{
+//							Cidr: pulumi.String("10.0.0.0/16"),
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **aviatrix_app_domain** can be imported using the `uuid`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixAppDomain:AviatrixAppDomain test 41984f8b-5a37-4272-89b3-57c79e9ff77c
+//
+// ```
 type AviatrixAppDomain struct {
 	pulumi.CustomResourceState
 
 	// Name of the App Domain.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// List of match expressions for the App Domain.
+	// Block containing match expressions to filter the App Domain.
 	Selector AviatrixAppDomainSelectorOutput `pulumi:"selector"`
 	// UUID of the App Domain.
 	Uuid pulumi.StringOutput `pulumi:"uuid"`
@@ -57,7 +109,7 @@ func GetAviatrixAppDomain(ctx *pulumi.Context,
 type aviatrixAppDomainState struct {
 	// Name of the App Domain.
 	Name *string `pulumi:"name"`
-	// List of match expressions for the App Domain.
+	// Block containing match expressions to filter the App Domain.
 	Selector *AviatrixAppDomainSelector `pulumi:"selector"`
 	// UUID of the App Domain.
 	Uuid *string `pulumi:"uuid"`
@@ -66,7 +118,7 @@ type aviatrixAppDomainState struct {
 type AviatrixAppDomainState struct {
 	// Name of the App Domain.
 	Name pulumi.StringPtrInput
-	// List of match expressions for the App Domain.
+	// Block containing match expressions to filter the App Domain.
 	Selector AviatrixAppDomainSelectorPtrInput
 	// UUID of the App Domain.
 	Uuid pulumi.StringPtrInput
@@ -79,7 +131,7 @@ func (AviatrixAppDomainState) ElementType() reflect.Type {
 type aviatrixAppDomainArgs struct {
 	// Name of the App Domain.
 	Name *string `pulumi:"name"`
-	// List of match expressions for the App Domain.
+	// Block containing match expressions to filter the App Domain.
 	Selector AviatrixAppDomainSelector `pulumi:"selector"`
 }
 
@@ -87,7 +139,7 @@ type aviatrixAppDomainArgs struct {
 type AviatrixAppDomainArgs struct {
 	// Name of the App Domain.
 	Name pulumi.StringPtrInput
-	// List of match expressions for the App Domain.
+	// Block containing match expressions to filter the App Domain.
 	Selector AviatrixAppDomainSelectorInput
 }
 
@@ -183,7 +235,7 @@ func (o AviatrixAppDomainOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAppDomain) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// List of match expressions for the App Domain.
+// Block containing match expressions to filter the App Domain.
 func (o AviatrixAppDomainOutput) Selector() AviatrixAppDomainSelectorOutput {
 	return o.ApplyT(func(v *AviatrixAppDomain) AviatrixAppDomainSelectorOutput { return v.Selector }).(AviatrixAppDomainSelectorOutput)
 }

@@ -9,23 +9,52 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_controller_private_mode_config** resource allows management of an Aviatrix Controller's Private Mode configuration. This resource is available as of provider version R2.23+.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Controller Private Mode config
+    ///     var test = new Aviatrix.AviatrixControllerPrivateModeConfig("test", new()
+    ///     {
+    ///         EnablePrivateMode = true,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **aviatrix_controller_private_mode_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixControllerPrivateModeConfig:AviatrixControllerPrivateModeConfig test 10-11-12-13
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixControllerPrivateModeConfig:AviatrixControllerPrivateModeConfig")]
     public partial class AviatrixControllerPrivateModeConfig : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Copilot instance ID to associate with the Controller for Private Mode.
+        /// Instance ID of a copilot instance to associate with an Aviatrix Controller in Private Mode. The copilot instance must be in the same VPC as the Aviatrix Controller.
         /// </summary>
         [Output("copilotInstanceId")]
         public Output<string?> CopilotInstanceId { get; private set; } = null!;
 
         /// <summary>
-        /// Whether to enable Private Mode on the Controller.
+        /// Whether to enable Private Mode on an Aviatrix Controller.
         /// </summary>
         [Output("enablePrivateMode")]
         public Output<bool> EnablePrivateMode { get; private set; } = null!;
 
         /// <summary>
-        /// Set of proxies.
+        /// Set of Controller proxies for Private Mode.
         /// </summary>
         [Output("proxies")]
         public Output<ImmutableArray<string>> Proxies { get; private set; } = null!;
@@ -78,13 +107,13 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixControllerPrivateModeConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Copilot instance ID to associate with the Controller for Private Mode.
+        /// Instance ID of a copilot instance to associate with an Aviatrix Controller in Private Mode. The copilot instance must be in the same VPC as the Aviatrix Controller.
         /// </summary>
         [Input("copilotInstanceId")]
         public Input<string>? CopilotInstanceId { get; set; }
 
         /// <summary>
-        /// Whether to enable Private Mode on the Controller.
+        /// Whether to enable Private Mode on an Aviatrix Controller.
         /// </summary>
         [Input("enablePrivateMode", required: true)]
         public Input<bool> EnablePrivateMode { get; set; } = null!;
@@ -93,7 +122,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _proxies;
 
         /// <summary>
-        /// Set of proxies.
+        /// Set of Controller proxies for Private Mode.
         /// </summary>
         public InputList<string> Proxies
         {
@@ -110,13 +139,13 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixControllerPrivateModeConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Copilot instance ID to associate with the Controller for Private Mode.
+        /// Instance ID of a copilot instance to associate with an Aviatrix Controller in Private Mode. The copilot instance must be in the same VPC as the Aviatrix Controller.
         /// </summary>
         [Input("copilotInstanceId")]
         public Input<string>? CopilotInstanceId { get; set; }
 
         /// <summary>
-        /// Whether to enable Private Mode on the Controller.
+        /// Whether to enable Private Mode on an Aviatrix Controller.
         /// </summary>
         [Input("enablePrivateMode")]
         public Input<bool>? EnablePrivateMode { get; set; }
@@ -125,7 +154,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _proxies;
 
         /// <summary>
-        /// Set of proxies.
+        /// Set of Controller proxies for Private Mode.
         /// </summary>
         public InputList<string> Proxies
         {

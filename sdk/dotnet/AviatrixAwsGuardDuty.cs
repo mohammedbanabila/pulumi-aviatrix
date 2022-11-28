@@ -9,17 +9,50 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Configure AWS GuardDuty 
+    ///     var testAwsGuardDuty = new Aviatrix.AviatrixAwsGuardDuty("testAwsGuardDuty", new()
+    ///     {
+    ///         AccountName = aviatrix_account.Account_1.Account_name,
+    ///         Region = "us-west-1",
+    ///         ExcludedIps = new[]
+    ///         {
+    ///             "127.0.0.1",
+    ///             "10.0.0.1",
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **aws_guard_duty** resource can be imported with the `account_name` and `region` in the form "account_name~~region", e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixAwsGuardDuty:AviatrixAwsGuardDuty test_aws_guard_duty devops-acc~~us-west-1
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixAwsGuardDuty:AviatrixAwsGuardDuty")]
     public partial class AviatrixAwsGuardDuty : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Account name
+        /// Account name.
         /// </summary>
         [Output("accountName")]
         public Output<string> AccountName { get; private set; } = null!;
 
         /// <summary>
-        /// Excluded IPs.
+        /// Set of excluded IPs.
         /// </summary>
         [Output("excludedIps")]
         public Output<ImmutableArray<string>> ExcludedIps { get; private set; } = null!;
@@ -78,7 +111,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixAwsGuardDutyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Account name
+        /// Account name.
         /// </summary>
         [Input("accountName", required: true)]
         public Input<string> AccountName { get; set; } = null!;
@@ -87,7 +120,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _excludedIps;
 
         /// <summary>
-        /// Excluded IPs.
+        /// Set of excluded IPs.
         /// </summary>
         public InputList<string> ExcludedIps
         {
@@ -110,7 +143,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixAwsGuardDutyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Account name
+        /// Account name.
         /// </summary>
         [Input("accountName")]
         public Input<string>? AccountName { get; set; }
@@ -119,7 +152,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _excludedIps;
 
         /// <summary>
-        /// Excluded IPs.
+        /// Set of excluded IPs.
         /// </summary>
         public InputList<string> ExcludedIps
         {

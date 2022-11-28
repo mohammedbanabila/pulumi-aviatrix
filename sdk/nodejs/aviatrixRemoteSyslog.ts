@@ -4,6 +4,49 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_remote_syslog** resource allows the enabling and disabling of remote syslog.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Enable remote syslog without TLS
+ * const testRemoteSyslog = new aviatrix.AviatrixRemoteSyslog("test_remote_syslog", {
+ *     index: 0,
+ *     port: 10,
+ *     protocol: "TCP",
+ *     server: "1.2.3.4",
+ * });
+ * ```
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@astipkovits/aviatrix";
+ * import * as fs from "fs";
+ *
+ * // Enable remote syslog with TLS
+ * const testRemoteSyslog = new aviatrix.AviatrixRemoteSyslog("testRemoteSyslog", {
+ *     index: 0,
+ *     server: "1.2.3.4",
+ *     port: 10,
+ *     protocol: "TCP",
+ *     caCertificateFile: fs.readFileSync("/path/to/ca.pem"),
+ *     publicCertificateFile: fs.readFileSync("/path/to/server.pem"),
+ *     privateKeyFile: fs.readFileSync("/path/to/client.pem"),
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **remote_syslog** can be imported using "remote_syslog_" + `index`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixRemoteSyslog:AviatrixRemoteSyslog test remote_syslog_0
+ * ```
+ */
 export class AviatrixRemoteSyslog extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixRemoteSyslog resource's state with the given name, ID, and optional extra
@@ -33,15 +76,15 @@ export class AviatrixRemoteSyslog extends pulumi.CustomResource {
     }
 
     /**
-     * CA certificate file.
+     * The Certificate Authority (CA) certificate. Use the `file` function to read from a file.
      */
     public readonly caCertificateFile!: pulumi.Output<string | undefined>;
     /**
-     * List of excluded gateways.
+     * List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
      */
     public readonly excludedGateways!: pulumi.Output<string[] | undefined>;
     /**
-     * A total of 10 profiles from index 0 to 9 are supported for remote syslog, while index 9 is reserved for CoPilot.
+     * Profile index. An index from 0 to 9 is supported. 0 by default.
      */
     public readonly index!: pulumi.Output<number | undefined>;
     /**
@@ -49,35 +92,35 @@ export class AviatrixRemoteSyslog extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * True if not protected by TLS.
+     * This attribute is true if the remote syslog is not protected by TLS.
      */
     public /*out*/ readonly notls!: pulumi.Output<boolean>;
     /**
-     * Listening port of the remote syslog server.
+     * Port number.
      */
     public readonly port!: pulumi.Output<number>;
     /**
-     * Private key of the controller that pairs with the public certificate.
+     * The private key of the controller that pairs with the public certificate. Use the `file` function to read from a file.
      */
     public readonly privateKeyFile!: pulumi.Output<string | undefined>;
     /**
-     * TCP or UDP (TCP by default).
+     * TCP or UDP. TCP by default.
      */
     public readonly protocol!: pulumi.Output<string | undefined>;
     /**
-     * Public certificate of the controller signed by the same CA.
+     * The public certificate of the controller signed by the same CA. Use the `file` function to read from a file.
      */
     public readonly publicCertificateFile!: pulumi.Output<string | undefined>;
     /**
-     * FQDN or IP address of the remote syslog server.
+     * Server IP.
      */
     public readonly server!: pulumi.Output<string>;
     /**
-     * Enabled or not.
+     * The status of remote syslog.
      */
     public /*out*/ readonly status!: pulumi.Output<string>;
     /**
-     * Useful when forwarding to 3rd party servers like Datadog or Sumo
+     * Optional custom template.
      */
     public readonly template!: pulumi.Output<string | undefined>;
 
@@ -137,15 +180,15 @@ export class AviatrixRemoteSyslog extends pulumi.CustomResource {
  */
 export interface AviatrixRemoteSyslogState {
     /**
-     * CA certificate file.
+     * The Certificate Authority (CA) certificate. Use the `file` function to read from a file.
      */
     caCertificateFile?: pulumi.Input<string>;
     /**
-     * List of excluded gateways.
+     * List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
      */
     excludedGateways?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * A total of 10 profiles from index 0 to 9 are supported for remote syslog, while index 9 is reserved for CoPilot.
+     * Profile index. An index from 0 to 9 is supported. 0 by default.
      */
     index?: pulumi.Input<number>;
     /**
@@ -153,35 +196,35 @@ export interface AviatrixRemoteSyslogState {
      */
     name?: pulumi.Input<string>;
     /**
-     * True if not protected by TLS.
+     * This attribute is true if the remote syslog is not protected by TLS.
      */
     notls?: pulumi.Input<boolean>;
     /**
-     * Listening port of the remote syslog server.
+     * Port number.
      */
     port?: pulumi.Input<number>;
     /**
-     * Private key of the controller that pairs with the public certificate.
+     * The private key of the controller that pairs with the public certificate. Use the `file` function to read from a file.
      */
     privateKeyFile?: pulumi.Input<string>;
     /**
-     * TCP or UDP (TCP by default).
+     * TCP or UDP. TCP by default.
      */
     protocol?: pulumi.Input<string>;
     /**
-     * Public certificate of the controller signed by the same CA.
+     * The public certificate of the controller signed by the same CA. Use the `file` function to read from a file.
      */
     publicCertificateFile?: pulumi.Input<string>;
     /**
-     * FQDN or IP address of the remote syslog server.
+     * Server IP.
      */
     server?: pulumi.Input<string>;
     /**
-     * Enabled or not.
+     * The status of remote syslog.
      */
     status?: pulumi.Input<string>;
     /**
-     * Useful when forwarding to 3rd party servers like Datadog or Sumo
+     * Optional custom template.
      */
     template?: pulumi.Input<string>;
 }
@@ -191,15 +234,15 @@ export interface AviatrixRemoteSyslogState {
  */
 export interface AviatrixRemoteSyslogArgs {
     /**
-     * CA certificate file.
+     * The Certificate Authority (CA) certificate. Use the `file` function to read from a file.
      */
     caCertificateFile?: pulumi.Input<string>;
     /**
-     * List of excluded gateways.
+     * List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
      */
     excludedGateways?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * A total of 10 profiles from index 0 to 9 are supported for remote syslog, while index 9 is reserved for CoPilot.
+     * Profile index. An index from 0 to 9 is supported. 0 by default.
      */
     index?: pulumi.Input<number>;
     /**
@@ -207,27 +250,27 @@ export interface AviatrixRemoteSyslogArgs {
      */
     name?: pulumi.Input<string>;
     /**
-     * Listening port of the remote syslog server.
+     * Port number.
      */
     port: pulumi.Input<number>;
     /**
-     * Private key of the controller that pairs with the public certificate.
+     * The private key of the controller that pairs with the public certificate. Use the `file` function to read from a file.
      */
     privateKeyFile?: pulumi.Input<string>;
     /**
-     * TCP or UDP (TCP by default).
+     * TCP or UDP. TCP by default.
      */
     protocol?: pulumi.Input<string>;
     /**
-     * Public certificate of the controller signed by the same CA.
+     * The public certificate of the controller signed by the same CA. Use the `file` function to read from a file.
      */
     publicCertificateFile?: pulumi.Input<string>;
     /**
-     * FQDN or IP address of the remote syslog server.
+     * Server IP.
      */
     server: pulumi.Input<string>;
     /**
-     * Useful when forwarding to 3rd party servers like Datadog or Sumo
+     * Optional custom template.
      */
     template?: pulumi.Input<string>;
 }

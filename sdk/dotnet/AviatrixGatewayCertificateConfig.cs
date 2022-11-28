@@ -9,17 +9,48 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_gateway_certificate_config** resource allows the management of Aviatrix [gateway certificate](https://docs.aviatrix.com/HowTos/controller_certificate.html#gateway-certificate-management) configuration. Available as of provider version R2.18.1+.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.IO;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Aviatrix Gateway Certificate Management
+    ///     var testGatewayCert = new Aviatrix.AviatrixGatewayCertificateConfig("testGatewayCert", new()
+    ///     {
+    ///         CaCertificate = File.ReadAllText("path/to/CA_cert.pem"),
+    ///         CaPrivateKey = File.ReadAllText("path/to/CA_private.key"),
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// !&gt; **WARNING:** When importing, the provider cannot read your private key or certificate into the state file. After importing, if you do not want to change the values of the CA private key or certificate you must set the attributes `ca_certificate` and `ca_private_key` to the empty string (""). Otherwise, Terraform will see a diff and force replacement. `aviatrix_gateway_certificate_config` can be imported using controller IP with the dots(.) replaces with dashes(-), e.g. controller IP is 10.11.12.13
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixGatewayCertificateConfig:AviatrixGatewayCertificateConfig test 10-11-12-13
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixGatewayCertificateConfig:AviatrixGatewayCertificateConfig")]
     public partial class AviatrixGatewayCertificateConfig : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// CA Certificate.
+        /// CA Certificate in PEM format. To read certificate from a file please use the built-in `file` function.
         /// </summary>
         [Output("caCertificate")]
         public Output<string> CaCertificate { get; private set; } = null!;
 
         /// <summary>
-        /// CA Private Key.
+        /// CA Private Key. To read the private key from a file please use the built-in `file` function.
         /// </summary>
         [Output("caPrivateKey")]
         public Output<string> CaPrivateKey { get; private set; } = null!;
@@ -48,6 +79,10 @@ namespace Pulumi.Aviatrix
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/astipkovits",
+                AdditionalSecretOutputs =
+                {
+                    "caPrivateKey",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -72,16 +107,26 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixGatewayCertificateConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// CA Certificate.
+        /// CA Certificate in PEM format. To read certificate from a file please use the built-in `file` function.
         /// </summary>
         [Input("caCertificate", required: true)]
         public Input<string> CaCertificate { get; set; } = null!;
 
-        /// <summary>
-        /// CA Private Key.
-        /// </summary>
         [Input("caPrivateKey", required: true)]
-        public Input<string> CaPrivateKey { get; set; } = null!;
+        private Input<string>? _caPrivateKey;
+
+        /// <summary>
+        /// CA Private Key. To read the private key from a file please use the built-in `file` function.
+        /// </summary>
+        public Input<string>? CaPrivateKey
+        {
+            get => _caPrivateKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _caPrivateKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         public AviatrixGatewayCertificateConfigArgs()
         {
@@ -92,16 +137,26 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixGatewayCertificateConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// CA Certificate.
+        /// CA Certificate in PEM format. To read certificate from a file please use the built-in `file` function.
         /// </summary>
         [Input("caCertificate")]
         public Input<string>? CaCertificate { get; set; }
 
-        /// <summary>
-        /// CA Private Key.
-        /// </summary>
         [Input("caPrivateKey")]
-        public Input<string>? CaPrivateKey { get; set; }
+        private Input<string>? _caPrivateKey;
+
+        /// <summary>
+        /// CA Private Key. To read the private key from a file please use the built-in `file` function.
+        /// </summary>
+        public Input<string>? CaPrivateKey
+        {
+            get => _caPrivateKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _caPrivateKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         public AviatrixGatewayCertificateConfigState()
         {

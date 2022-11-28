@@ -12,9 +12,15 @@ namespace Pulumi.Aviatrix.Inputs
 
     public sealed class AviatrixPrivateModeLbProxyGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Instance ID of the proxy.
+        /// </summary>
         [Input("instanceId", required: true)]
         public Input<string> InstanceId { get; set; } = null!;
 
+        /// <summary>
+        /// VPC ID of the proxy.
+        /// </summary>
         [Input("vpcId", required: true)]
         public Input<string> VpcId { get; set; } = null!;
 

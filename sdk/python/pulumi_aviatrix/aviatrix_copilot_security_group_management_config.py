@@ -23,13 +23,13 @@ class AviatrixCopilotSecurityGroupManagementConfigArgs:
                  zone: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a AviatrixCopilotSecurityGroupManagementConfig resource.
-        :param pulumi.Input[bool] enable_copilot_security_group_management: Switch to enable copilot security group management.
-        :param pulumi.Input[str] account_name: Access account name.
-        :param pulumi.Input[int] cloud_type: Cloud type.
-        :param pulumi.Input[str] instance_id: Copilot instance ID.
-        :param pulumi.Input[str] region: Copilot region. Valid for AWS and Azure.
-        :param pulumi.Input[str] vpc_id: VPC ID.
-        :param pulumi.Input[str] zone: Copilot zone. Valid for GCP.
+        :param pulumi.Input[bool] enable_copilot_security_group_management: Switch to enable copilot security group management. Valid values: true, false.
+        :param pulumi.Input[str] account_name: Aviatrix access account name. Required to enable copilot security group management.
+        :param pulumi.Input[int] cloud_type: Cloud type. The type of this attribute is Integer. Only support AWS, Azure and OCI. Required to enable copilot security group management.
+        :param pulumi.Input[str] instance_id: CoPilot instance ID. Required to enable copilot security group management.
+        :param pulumi.Input[str] region: Region where CoPilot is deployed. Required and valid for AWS and Azure.
+        :param pulumi.Input[str] vpc_id: VPC ID. Required to enable copilot security group management.
+        :param pulumi.Input[str] zone: Zone where CoPilot is deployed. Required and valid for GCP.
         """
         pulumi.set(__self__, "enable_copilot_security_group_management", enable_copilot_security_group_management)
         if account_name is not None:
@@ -49,7 +49,7 @@ class AviatrixCopilotSecurityGroupManagementConfigArgs:
     @pulumi.getter(name="enableCopilotSecurityGroupManagement")
     def enable_copilot_security_group_management(self) -> pulumi.Input[bool]:
         """
-        Switch to enable copilot security group management.
+        Switch to enable copilot security group management. Valid values: true, false.
         """
         return pulumi.get(self, "enable_copilot_security_group_management")
 
@@ -61,7 +61,7 @@ class AviatrixCopilotSecurityGroupManagementConfigArgs:
     @pulumi.getter(name="accountName")
     def account_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Access account name.
+        Aviatrix access account name. Required to enable copilot security group management.
         """
         return pulumi.get(self, "account_name")
 
@@ -73,7 +73,7 @@ class AviatrixCopilotSecurityGroupManagementConfigArgs:
     @pulumi.getter(name="cloudType")
     def cloud_type(self) -> Optional[pulumi.Input[int]]:
         """
-        Cloud type.
+        Cloud type. The type of this attribute is Integer. Only support AWS, Azure and OCI. Required to enable copilot security group management.
         """
         return pulumi.get(self, "cloud_type")
 
@@ -85,7 +85,7 @@ class AviatrixCopilotSecurityGroupManagementConfigArgs:
     @pulumi.getter(name="instanceId")
     def instance_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Copilot instance ID.
+        CoPilot instance ID. Required to enable copilot security group management.
         """
         return pulumi.get(self, "instance_id")
 
@@ -97,7 +97,7 @@ class AviatrixCopilotSecurityGroupManagementConfigArgs:
     @pulumi.getter
     def region(self) -> Optional[pulumi.Input[str]]:
         """
-        Copilot region. Valid for AWS and Azure.
+        Region where CoPilot is deployed. Required and valid for AWS and Azure.
         """
         return pulumi.get(self, "region")
 
@@ -109,7 +109,7 @@ class AviatrixCopilotSecurityGroupManagementConfigArgs:
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
-        VPC ID.
+        VPC ID. Required to enable copilot security group management.
         """
         return pulumi.get(self, "vpc_id")
 
@@ -121,7 +121,7 @@ class AviatrixCopilotSecurityGroupManagementConfigArgs:
     @pulumi.getter
     def zone(self) -> Optional[pulumi.Input[str]]:
         """
-        Copilot zone. Valid for GCP.
+        Zone where CoPilot is deployed. Required and valid for GCP.
         """
         return pulumi.get(self, "zone")
 
@@ -142,13 +142,13 @@ class _AviatrixCopilotSecurityGroupManagementConfigState:
                  zone: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixCopilotSecurityGroupManagementConfig resources.
-        :param pulumi.Input[str] account_name: Access account name.
-        :param pulumi.Input[int] cloud_type: Cloud type.
-        :param pulumi.Input[bool] enable_copilot_security_group_management: Switch to enable copilot security group management.
-        :param pulumi.Input[str] instance_id: Copilot instance ID.
-        :param pulumi.Input[str] region: Copilot region. Valid for AWS and Azure.
-        :param pulumi.Input[str] vpc_id: VPC ID.
-        :param pulumi.Input[str] zone: Copilot zone. Valid for GCP.
+        :param pulumi.Input[str] account_name: Aviatrix access account name. Required to enable copilot security group management.
+        :param pulumi.Input[int] cloud_type: Cloud type. The type of this attribute is Integer. Only support AWS, Azure and OCI. Required to enable copilot security group management.
+        :param pulumi.Input[bool] enable_copilot_security_group_management: Switch to enable copilot security group management. Valid values: true, false.
+        :param pulumi.Input[str] instance_id: CoPilot instance ID. Required to enable copilot security group management.
+        :param pulumi.Input[str] region: Region where CoPilot is deployed. Required and valid for AWS and Azure.
+        :param pulumi.Input[str] vpc_id: VPC ID. Required to enable copilot security group management.
+        :param pulumi.Input[str] zone: Zone where CoPilot is deployed. Required and valid for GCP.
         """
         if account_name is not None:
             pulumi.set(__self__, "account_name", account_name)
@@ -169,7 +169,7 @@ class _AviatrixCopilotSecurityGroupManagementConfigState:
     @pulumi.getter(name="accountName")
     def account_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Access account name.
+        Aviatrix access account name. Required to enable copilot security group management.
         """
         return pulumi.get(self, "account_name")
 
@@ -181,7 +181,7 @@ class _AviatrixCopilotSecurityGroupManagementConfigState:
     @pulumi.getter(name="cloudType")
     def cloud_type(self) -> Optional[pulumi.Input[int]]:
         """
-        Cloud type.
+        Cloud type. The type of this attribute is Integer. Only support AWS, Azure and OCI. Required to enable copilot security group management.
         """
         return pulumi.get(self, "cloud_type")
 
@@ -193,7 +193,7 @@ class _AviatrixCopilotSecurityGroupManagementConfigState:
     @pulumi.getter(name="enableCopilotSecurityGroupManagement")
     def enable_copilot_security_group_management(self) -> Optional[pulumi.Input[bool]]:
         """
-        Switch to enable copilot security group management.
+        Switch to enable copilot security group management. Valid values: true, false.
         """
         return pulumi.get(self, "enable_copilot_security_group_management")
 
@@ -205,7 +205,7 @@ class _AviatrixCopilotSecurityGroupManagementConfigState:
     @pulumi.getter(name="instanceId")
     def instance_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Copilot instance ID.
+        CoPilot instance ID. Required to enable copilot security group management.
         """
         return pulumi.get(self, "instance_id")
 
@@ -217,7 +217,7 @@ class _AviatrixCopilotSecurityGroupManagementConfigState:
     @pulumi.getter
     def region(self) -> Optional[pulumi.Input[str]]:
         """
-        Copilot region. Valid for AWS and Azure.
+        Region where CoPilot is deployed. Required and valid for AWS and Azure.
         """
         return pulumi.get(self, "region")
 
@@ -229,7 +229,7 @@ class _AviatrixCopilotSecurityGroupManagementConfigState:
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
-        VPC ID.
+        VPC ID. Required to enable copilot security group management.
         """
         return pulumi.get(self, "vpc_id")
 
@@ -241,7 +241,7 @@ class _AviatrixCopilotSecurityGroupManagementConfigState:
     @pulumi.getter
     def zone(self) -> Optional[pulumi.Input[str]]:
         """
-        Copilot zone. Valid for GCP.
+        Zone where CoPilot is deployed. Required and valid for GCP.
         """
         return pulumi.get(self, "zone")
 
@@ -264,16 +264,41 @@ class AviatrixCopilotSecurityGroupManagementConfig(pulumi.CustomResource):
                  zone: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixCopilotSecurityGroupManagementConfig resource with the given unique name, props, and options.
+        The **aviatrix_copilot_security_group_management_config** resource allows management of controller CoPilot security group management configuration. This resource is available as of provider version R2.23+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Enable the CoPilot Security Group Management
+        test = aviatrix.AviatrixCopilotSecurityGroupManagementConfig("test",
+            account_name="aws-account",
+            cloud_type=1,
+            enable_copilot_security_group_management=True,
+            instance_id="i-1234567890",
+            region="us-east-1",
+            vpc_id="vpc-1234567890")
+        ```
+
+        ## Import
+
+        **aviatrix_copilot_security_group_management_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixCopilotSecurityGroupManagementConfig:AviatrixCopilotSecurityGroupManagementConfig test 10-11-12-13
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] account_name: Access account name.
-        :param pulumi.Input[int] cloud_type: Cloud type.
-        :param pulumi.Input[bool] enable_copilot_security_group_management: Switch to enable copilot security group management.
-        :param pulumi.Input[str] instance_id: Copilot instance ID.
-        :param pulumi.Input[str] region: Copilot region. Valid for AWS and Azure.
-        :param pulumi.Input[str] vpc_id: VPC ID.
-        :param pulumi.Input[str] zone: Copilot zone. Valid for GCP.
+        :param pulumi.Input[str] account_name: Aviatrix access account name. Required to enable copilot security group management.
+        :param pulumi.Input[int] cloud_type: Cloud type. The type of this attribute is Integer. Only support AWS, Azure and OCI. Required to enable copilot security group management.
+        :param pulumi.Input[bool] enable_copilot_security_group_management: Switch to enable copilot security group management. Valid values: true, false.
+        :param pulumi.Input[str] instance_id: CoPilot instance ID. Required to enable copilot security group management.
+        :param pulumi.Input[str] region: Region where CoPilot is deployed. Required and valid for AWS and Azure.
+        :param pulumi.Input[str] vpc_id: VPC ID. Required to enable copilot security group management.
+        :param pulumi.Input[str] zone: Zone where CoPilot is deployed. Required and valid for GCP.
         """
         ...
     @overload
@@ -282,7 +307,32 @@ class AviatrixCopilotSecurityGroupManagementConfig(pulumi.CustomResource):
                  args: AviatrixCopilotSecurityGroupManagementConfigArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixCopilotSecurityGroupManagementConfig resource with the given unique name, props, and options.
+        The **aviatrix_copilot_security_group_management_config** resource allows management of controller CoPilot security group management configuration. This resource is available as of provider version R2.23+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Enable the CoPilot Security Group Management
+        test = aviatrix.AviatrixCopilotSecurityGroupManagementConfig("test",
+            account_name="aws-account",
+            cloud_type=1,
+            enable_copilot_security_group_management=True,
+            instance_id="i-1234567890",
+            region="us-east-1",
+            vpc_id="vpc-1234567890")
+        ```
+
+        ## Import
+
+        **aviatrix_copilot_security_group_management_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixCopilotSecurityGroupManagementConfig:AviatrixCopilotSecurityGroupManagementConfig test 10-11-12-13
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixCopilotSecurityGroupManagementConfigArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -347,13 +397,13 @@ class AviatrixCopilotSecurityGroupManagementConfig(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] account_name: Access account name.
-        :param pulumi.Input[int] cloud_type: Cloud type.
-        :param pulumi.Input[bool] enable_copilot_security_group_management: Switch to enable copilot security group management.
-        :param pulumi.Input[str] instance_id: Copilot instance ID.
-        :param pulumi.Input[str] region: Copilot region. Valid for AWS and Azure.
-        :param pulumi.Input[str] vpc_id: VPC ID.
-        :param pulumi.Input[str] zone: Copilot zone. Valid for GCP.
+        :param pulumi.Input[str] account_name: Aviatrix access account name. Required to enable copilot security group management.
+        :param pulumi.Input[int] cloud_type: Cloud type. The type of this attribute is Integer. Only support AWS, Azure and OCI. Required to enable copilot security group management.
+        :param pulumi.Input[bool] enable_copilot_security_group_management: Switch to enable copilot security group management. Valid values: true, false.
+        :param pulumi.Input[str] instance_id: CoPilot instance ID. Required to enable copilot security group management.
+        :param pulumi.Input[str] region: Region where CoPilot is deployed. Required and valid for AWS and Azure.
+        :param pulumi.Input[str] vpc_id: VPC ID. Required to enable copilot security group management.
+        :param pulumi.Input[str] zone: Zone where CoPilot is deployed. Required and valid for GCP.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -372,7 +422,7 @@ class AviatrixCopilotSecurityGroupManagementConfig(pulumi.CustomResource):
     @pulumi.getter(name="accountName")
     def account_name(self) -> pulumi.Output[Optional[str]]:
         """
-        Access account name.
+        Aviatrix access account name. Required to enable copilot security group management.
         """
         return pulumi.get(self, "account_name")
 
@@ -380,7 +430,7 @@ class AviatrixCopilotSecurityGroupManagementConfig(pulumi.CustomResource):
     @pulumi.getter(name="cloudType")
     def cloud_type(self) -> pulumi.Output[Optional[int]]:
         """
-        Cloud type.
+        Cloud type. The type of this attribute is Integer. Only support AWS, Azure and OCI. Required to enable copilot security group management.
         """
         return pulumi.get(self, "cloud_type")
 
@@ -388,7 +438,7 @@ class AviatrixCopilotSecurityGroupManagementConfig(pulumi.CustomResource):
     @pulumi.getter(name="enableCopilotSecurityGroupManagement")
     def enable_copilot_security_group_management(self) -> pulumi.Output[bool]:
         """
-        Switch to enable copilot security group management.
+        Switch to enable copilot security group management. Valid values: true, false.
         """
         return pulumi.get(self, "enable_copilot_security_group_management")
 
@@ -396,7 +446,7 @@ class AviatrixCopilotSecurityGroupManagementConfig(pulumi.CustomResource):
     @pulumi.getter(name="instanceId")
     def instance_id(self) -> pulumi.Output[Optional[str]]:
         """
-        Copilot instance ID.
+        CoPilot instance ID. Required to enable copilot security group management.
         """
         return pulumi.get(self, "instance_id")
 
@@ -404,7 +454,7 @@ class AviatrixCopilotSecurityGroupManagementConfig(pulumi.CustomResource):
     @pulumi.getter
     def region(self) -> pulumi.Output[Optional[str]]:
         """
-        Copilot region. Valid for AWS and Azure.
+        Region where CoPilot is deployed. Required and valid for AWS and Azure.
         """
         return pulumi.get(self, "region")
 
@@ -412,7 +462,7 @@ class AviatrixCopilotSecurityGroupManagementConfig(pulumi.CustomResource):
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> pulumi.Output[Optional[str]]:
         """
-        VPC ID.
+        VPC ID. Required to enable copilot security group management.
         """
         return pulumi.get(self, "vpc_id")
 
@@ -420,7 +470,7 @@ class AviatrixCopilotSecurityGroupManagementConfig(pulumi.CustomResource):
     @pulumi.getter
     def zone(self) -> pulumi.Output[Optional[str]]:
         """
-        Copilot zone. Valid for GCP.
+        Zone where CoPilot is deployed. Required and valid for GCP.
         """
         return pulumi.get(self, "zone")
 

@@ -18,9 +18,8 @@ class AviatrixVpnCertDownloadArgs:
                  saml_endpoints: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a AviatrixVpnCertDownload resource.
-        :param pulumi.Input[bool] download_enabled: Whether the VPN Certificate download is enabled. Supported Values: "true", "false"
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] saml_endpoints: List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is
-               supported. Example: ["saml_endpoint_1"].
+        :param pulumi.Input[bool] download_enabled: Whether the VPN Certificate download is enabled. Supported Values: "true", "false".
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] saml_endpoints: List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is supported. Example: ["saml_endpoint_1"].
         """
         if download_enabled is not None:
             pulumi.set(__self__, "download_enabled", download_enabled)
@@ -31,7 +30,7 @@ class AviatrixVpnCertDownloadArgs:
     @pulumi.getter(name="downloadEnabled")
     def download_enabled(self) -> Optional[pulumi.Input[bool]]:
         """
-        Whether the VPN Certificate download is enabled. Supported Values: "true", "false"
+        Whether the VPN Certificate download is enabled. Supported Values: "true", "false".
         """
         return pulumi.get(self, "download_enabled")
 
@@ -43,8 +42,7 @@ class AviatrixVpnCertDownloadArgs:
     @pulumi.getter(name="samlEndpoints")
     def saml_endpoints(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is
-        supported. Example: ["saml_endpoint_1"].
+        List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is supported. Example: ["saml_endpoint_1"].
         """
         return pulumi.get(self, "saml_endpoints")
 
@@ -60,9 +58,8 @@ class _AviatrixVpnCertDownloadState:
                  saml_endpoints: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering AviatrixVpnCertDownload resources.
-        :param pulumi.Input[bool] download_enabled: Whether the VPN Certificate download is enabled. Supported Values: "true", "false"
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] saml_endpoints: List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is
-               supported. Example: ["saml_endpoint_1"].
+        :param pulumi.Input[bool] download_enabled: Whether the VPN Certificate download is enabled. Supported Values: "true", "false".
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] saml_endpoints: List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is supported. Example: ["saml_endpoint_1"].
         """
         if download_enabled is not None:
             pulumi.set(__self__, "download_enabled", download_enabled)
@@ -73,7 +70,7 @@ class _AviatrixVpnCertDownloadState:
     @pulumi.getter(name="downloadEnabled")
     def download_enabled(self) -> Optional[pulumi.Input[bool]]:
         """
-        Whether the VPN Certificate download is enabled. Supported Values: "true", "false"
+        Whether the VPN Certificate download is enabled. Supported Values: "true", "false".
         """
         return pulumi.get(self, "download_enabled")
 
@@ -85,8 +82,7 @@ class _AviatrixVpnCertDownloadState:
     @pulumi.getter(name="samlEndpoints")
     def saml_endpoints(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is
-        supported. Example: ["saml_endpoint_1"].
+        List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is supported. Example: ["saml_endpoint_1"].
         """
         return pulumi.get(self, "saml_endpoints")
 
@@ -104,12 +100,32 @@ class AviatrixVpnCertDownload(pulumi.CustomResource):
                  saml_endpoints: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
-        Create a AviatrixVpnCertDownload resource with the given unique name, props, and options.
+        The **aviatrix_vpn_cert_download** resource manages the VPN Certificate Download configuration for SAML Authentication
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Set up the Aviatrix VPN Certificate Download configuration
+        test_vpn_cert_download = aviatrix.AviatrixVpnCertDownload("testVpnCertDownload",
+            download_enabled=True,
+            saml_endpoints=["saml_endpoint_name"])
+        ```
+
+        ## Import
+
+        **vpn_cert_download** can be imported using the default id `vpn_cert_download`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixVpnCertDownload:AviatrixVpnCertDownload test_vpn_cert_download vpn_cert_download
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[bool] download_enabled: Whether the VPN Certificate download is enabled. Supported Values: "true", "false"
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] saml_endpoints: List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is
-               supported. Example: ["saml_endpoint_1"].
+        :param pulumi.Input[bool] download_enabled: Whether the VPN Certificate download is enabled. Supported Values: "true", "false".
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] saml_endpoints: List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is supported. Example: ["saml_endpoint_1"].
         """
         ...
     @overload
@@ -118,7 +134,28 @@ class AviatrixVpnCertDownload(pulumi.CustomResource):
                  args: Optional[AviatrixVpnCertDownloadArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixVpnCertDownload resource with the given unique name, props, and options.
+        The **aviatrix_vpn_cert_download** resource manages the VPN Certificate Download configuration for SAML Authentication
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Set up the Aviatrix VPN Certificate Download configuration
+        test_vpn_cert_download = aviatrix.AviatrixVpnCertDownload("testVpnCertDownload",
+            download_enabled=True,
+            saml_endpoints=["saml_endpoint_name"])
+        ```
+
+        ## Import
+
+        **vpn_cert_download** can be imported using the default id `vpn_cert_download`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixVpnCertDownload:AviatrixVpnCertDownload test_vpn_cert_download vpn_cert_download
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixVpnCertDownloadArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -166,9 +203,8 @@ class AviatrixVpnCertDownload(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[bool] download_enabled: Whether the VPN Certificate download is enabled. Supported Values: "true", "false"
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] saml_endpoints: List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is
-               supported. Example: ["saml_endpoint_1"].
+        :param pulumi.Input[bool] download_enabled: Whether the VPN Certificate download is enabled. Supported Values: "true", "false".
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] saml_endpoints: List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is supported. Example: ["saml_endpoint_1"].
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -182,7 +218,7 @@ class AviatrixVpnCertDownload(pulumi.CustomResource):
     @pulumi.getter(name="downloadEnabled")
     def download_enabled(self) -> pulumi.Output[Optional[bool]]:
         """
-        Whether the VPN Certificate download is enabled. Supported Values: "true", "false"
+        Whether the VPN Certificate download is enabled. Supported Values: "true", "false".
         """
         return pulumi.get(self, "download_enabled")
 
@@ -190,8 +226,7 @@ class AviatrixVpnCertDownload(pulumi.CustomResource):
     @pulumi.getter(name="samlEndpoints")
     def saml_endpoints(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is
-        supported. Example: ["saml_endpoint_1"].
+        List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is supported. Example: ["saml_endpoint_1"].
         """
         return pulumi.get(self, "saml_endpoints")
 

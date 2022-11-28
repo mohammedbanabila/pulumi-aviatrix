@@ -130,7 +130,29 @@ class AviatrixTransPeer(pulumi.CustomResource):
                  source: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixTransPeer resource with the given unique name, props, and options.
+        The **aviatrix_trans_peer** resource allows the creation and management of Aviatrix [Encrypted Transitive Peering](https://docs.aviatrix.com/HowTos/TransPeering.html).
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS Transitive Peering
+        test_trans_peer = aviatrix.AviatrixTransPeer("testTransPeer",
+            nexthop="avtx-us-east-gw2",
+            reachable_cidr="10.152.0.0/16",
+            source="avtx-us-east-gw1")
+        ```
+
+        ## Import
+
+        **trans_peer** can be imported using the `source`, `nexthop` and `reachable_cidr`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixTransPeer:AviatrixTransPeer test source~nexthop~reachable_cidr
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] nexthop: Name of nexthop gateway.
@@ -144,7 +166,29 @@ class AviatrixTransPeer(pulumi.CustomResource):
                  args: AviatrixTransPeerArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixTransPeer resource with the given unique name, props, and options.
+        The **aviatrix_trans_peer** resource allows the creation and management of Aviatrix [Encrypted Transitive Peering](https://docs.aviatrix.com/HowTos/TransPeering.html).
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS Transitive Peering
+        test_trans_peer = aviatrix.AviatrixTransPeer("testTransPeer",
+            nexthop="avtx-us-east-gw2",
+            reachable_cidr="10.152.0.0/16",
+            source="avtx-us-east-gw1")
+        ```
+
+        ## Import
+
+        **trans_peer** can be imported using the `source`, `nexthop` and `reachable_cidr`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixTransPeer:AviatrixTransPeer test source~nexthop~reachable_cidr
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixTransPeerArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

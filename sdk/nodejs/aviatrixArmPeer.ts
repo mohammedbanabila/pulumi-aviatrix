@@ -4,6 +4,36 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_arm_peer** resource allows the creation and management of Aviatrix ARM peerings.
+ *
+ * !> **WARNING:** The `aviatrix.AviatrixArmPeer` resource is deprecated as of **Release 2.12**. It is currently kept for backward-compatibility and will be removed in the future. Please use the Azure peer resource instead. If this is already in the state, please remove it from the state file and import as `aviatrix.AviatrixAzurePeer`.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix ARM Peering
+ * const testArmpeer = new aviatrix.AviatrixArmPeer("test_armpeer", {
+ *     accountName1: "test1-account",
+ *     accountName2: "test2-account",
+ *     vnetNameResourceGroup1: "vpc-abcd1234",
+ *     vnetNameResourceGroup2: "vpc-rdef3333",
+ *     vnetReg1: "us-east-1",
+ *     vnetReg2: "us-west-1",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **arm_peer** can be imported using the `vnet_name_resource_group1` and `vnet_name_resource_group2`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixArmPeer:AviatrixArmPeer test vnet_name_resource_group1~vnet_name_resource_group2
+ * ```
+ */
 export class AviatrixArmPeer extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixArmPeer resource's state with the given name, ID, and optional extra
@@ -49,19 +79,19 @@ export class AviatrixArmPeer extends pulumi.CustomResource {
      */
     public /*out*/ readonly vnetCidr2s!: pulumi.Output<string[]>;
     /**
-     * VNet-Name of Azure cloud.
+     * VNet-Name of Azure cloud. Example: "VNet_Name:Resource_Group_Name".
      */
     public readonly vnetNameResourceGroup1!: pulumi.Output<string>;
     /**
-     * VNet-Name of Azure cloud.
+     * VNet-Name of Azure cloud. Example: "VNet_Name:Resource_Group_Name".
      */
     public readonly vnetNameResourceGroup2!: pulumi.Output<string>;
     /**
-     * Region of Azure cloud.
+     * Region of Azure cloud. Example: "East US 2".
      */
     public readonly vnetReg1!: pulumi.Output<string>;
     /**
-     * Region of Azure cloud.
+     * Region of Azure cloud. Example: "East US 2".
      */
     public readonly vnetReg2!: pulumi.Output<string>;
 
@@ -141,19 +171,19 @@ export interface AviatrixArmPeerState {
      */
     vnetCidr2s?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * VNet-Name of Azure cloud.
+     * VNet-Name of Azure cloud. Example: "VNet_Name:Resource_Group_Name".
      */
     vnetNameResourceGroup1?: pulumi.Input<string>;
     /**
-     * VNet-Name of Azure cloud.
+     * VNet-Name of Azure cloud. Example: "VNet_Name:Resource_Group_Name".
      */
     vnetNameResourceGroup2?: pulumi.Input<string>;
     /**
-     * Region of Azure cloud.
+     * Region of Azure cloud. Example: "East US 2".
      */
     vnetReg1?: pulumi.Input<string>;
     /**
-     * Region of Azure cloud.
+     * Region of Azure cloud. Example: "East US 2".
      */
     vnetReg2?: pulumi.Input<string>;
 }
@@ -171,19 +201,19 @@ export interface AviatrixArmPeerArgs {
      */
     accountName2: pulumi.Input<string>;
     /**
-     * VNet-Name of Azure cloud.
+     * VNet-Name of Azure cloud. Example: "VNet_Name:Resource_Group_Name".
      */
     vnetNameResourceGroup1: pulumi.Input<string>;
     /**
-     * VNet-Name of Azure cloud.
+     * VNet-Name of Azure cloud. Example: "VNet_Name:Resource_Group_Name".
      */
     vnetNameResourceGroup2: pulumi.Input<string>;
     /**
-     * Region of Azure cloud.
+     * Region of Azure cloud. Example: "East US 2".
      */
     vnetReg1: pulumi.Input<string>;
     /**
-     * Region of Azure cloud.
+     * Region of Azure cloud. Example: "East US 2".
      */
     vnetReg2: pulumi.Input<string>;
 }

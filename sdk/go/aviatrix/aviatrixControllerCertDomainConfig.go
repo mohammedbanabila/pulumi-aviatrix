@@ -10,10 +10,49 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_controller_cert_domain_config** resource allows management of an Aviatrix Controller's cert domain config. This resource is available as of provider version R2.19+.
+//
+// !> **WARNING:** Changing the Controller's cert domain config causes all other API calls to the controller to fail. If multiple other resources are created with the **aviatrix_controller_cert_domain_config** resource, a dependency on the **aviatrix_controller_cert_domain_config** resource must be added.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixControllerCertDomainConfig(ctx, "test", &aviatrix.AviatrixControllerCertDomainConfigArgs{
+//				CertDomain: pulumi.String("abc.com"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **aviatrix_controller_cert_domain_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixControllerCertDomainConfig:AviatrixControllerCertDomainConfig test 10-11-12-13
+//
+// ```
 type AviatrixControllerCertDomainConfig struct {
 	pulumi.CustomResourceState
 
-	// Domain name that is used in FQDN for generating cert.
+	// Domain name that is used in FQDN for generating cert. Default value: "aviatrixnetwork.com".
 	CertDomain pulumi.StringPtrOutput `pulumi:"certDomain"`
 }
 
@@ -47,12 +86,12 @@ func GetAviatrixControllerCertDomainConfig(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixControllerCertDomainConfig resources.
 type aviatrixControllerCertDomainConfigState struct {
-	// Domain name that is used in FQDN for generating cert.
+	// Domain name that is used in FQDN for generating cert. Default value: "aviatrixnetwork.com".
 	CertDomain *string `pulumi:"certDomain"`
 }
 
 type AviatrixControllerCertDomainConfigState struct {
-	// Domain name that is used in FQDN for generating cert.
+	// Domain name that is used in FQDN for generating cert. Default value: "aviatrixnetwork.com".
 	CertDomain pulumi.StringPtrInput
 }
 
@@ -61,13 +100,13 @@ func (AviatrixControllerCertDomainConfigState) ElementType() reflect.Type {
 }
 
 type aviatrixControllerCertDomainConfigArgs struct {
-	// Domain name that is used in FQDN for generating cert.
+	// Domain name that is used in FQDN for generating cert. Default value: "aviatrixnetwork.com".
 	CertDomain *string `pulumi:"certDomain"`
 }
 
 // The set of arguments for constructing a AviatrixControllerCertDomainConfig resource.
 type AviatrixControllerCertDomainConfigArgs struct {
-	// Domain name that is used in FQDN for generating cert.
+	// Domain name that is used in FQDN for generating cert. Default value: "aviatrixnetwork.com".
 	CertDomain pulumi.StringPtrInput
 }
 
@@ -158,7 +197,7 @@ func (o AviatrixControllerCertDomainConfigOutput) ToAviatrixControllerCertDomain
 	return o
 }
 
-// Domain name that is used in FQDN for generating cert.
+// Domain name that is used in FQDN for generating cert. Default value: "aviatrixnetwork.com".
 func (o AviatrixControllerCertDomainConfigOutput) CertDomain() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixControllerCertDomainConfig) pulumi.StringPtrOutput { return v.CertDomain }).(pulumi.StringPtrOutput)
 }

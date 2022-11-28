@@ -4,6 +4,34 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_datadog_agent** resource allows the enabling and disabling of datadog agent.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Enable datadog agent
+ * const testDatadogAgent = new aviatrix.AviatrixDatadogAgent("test_datadog_agent", {
+ *     apiKey: "your_api_key",
+ *     excludedGateways: [
+ *         "a",
+ *         "b",
+ *     ],
+ *     site: "datadoghq.com",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **datadog_agent** can be imported using "datadog_agent", e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixDatadogAgent:AviatrixDatadogAgent test datadog_agent
+ * ```
+ */
 export class AviatrixDatadogAgent extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixDatadogAgent resource's state with the given name, ID, and optional extra
@@ -37,19 +65,19 @@ export class AviatrixDatadogAgent extends pulumi.CustomResource {
      */
     public readonly apiKey!: pulumi.Output<string>;
     /**
-     * List of excluded gateways.
+     * List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
      */
     public readonly excludedGateways!: pulumi.Output<string[] | undefined>;
     /**
-     * Only export metrics without exporting logs.
+     * Only export metrics without exporting logs. False by default.
      */
     public readonly metricsOnly!: pulumi.Output<boolean | undefined>;
     /**
-     * Site preference.
+     * Site preference ("datadoghq.com" or" datadoghq.eu"). "datadoghq.com" by default.
      */
     public readonly site!: pulumi.Output<string | undefined>;
     /**
-     * Enabled or not.
+     * The status of datadog agent.
      */
     public /*out*/ readonly status!: pulumi.Output<string>;
 
@@ -76,13 +104,15 @@ export class AviatrixDatadogAgent extends pulumi.CustomResource {
             if ((!args || args.apiKey === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'apiKey'");
             }
-            resourceInputs["apiKey"] = args ? args.apiKey : undefined;
+            resourceInputs["apiKey"] = args?.apiKey ? pulumi.secret(args.apiKey) : undefined;
             resourceInputs["excludedGateways"] = args ? args.excludedGateways : undefined;
             resourceInputs["metricsOnly"] = args ? args.metricsOnly : undefined;
             resourceInputs["site"] = args ? args.site : undefined;
             resourceInputs["status"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["apiKey"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(AviatrixDatadogAgent.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -96,19 +126,19 @@ export interface AviatrixDatadogAgentState {
      */
     apiKey?: pulumi.Input<string>;
     /**
-     * List of excluded gateways.
+     * List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
      */
     excludedGateways?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Only export metrics without exporting logs.
+     * Only export metrics without exporting logs. False by default.
      */
     metricsOnly?: pulumi.Input<boolean>;
     /**
-     * Site preference.
+     * Site preference ("datadoghq.com" or" datadoghq.eu"). "datadoghq.com" by default.
      */
     site?: pulumi.Input<string>;
     /**
-     * Enabled or not.
+     * The status of datadog agent.
      */
     status?: pulumi.Input<string>;
 }
@@ -122,15 +152,15 @@ export interface AviatrixDatadogAgentArgs {
      */
     apiKey: pulumi.Input<string>;
     /**
-     * List of excluded gateways.
+     * List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
      */
     excludedGateways?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Only export metrics without exporting logs.
+     * Only export metrics without exporting logs. False by default.
      */
     metricsOnly?: pulumi.Input<boolean>;
     /**
-     * Site preference.
+     * Site preference ("datadoghq.com" or" datadoghq.eu"). "datadoghq.com" by default.
      */
     site?: pulumi.Input<string>;
 }

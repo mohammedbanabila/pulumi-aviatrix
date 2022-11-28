@@ -21,7 +21,7 @@ class AviatrixTunnelArgs:
         The set of arguments for constructing a AviatrixTunnel resource.
         :param pulumi.Input[str] gw_name1: The first VPC Container name to make a peer pair.
         :param pulumi.Input[str] gw_name2: The second VPC Container name to make a peer pair.
-        :param pulumi.Input[bool] enable_ha: Whether Peering HA is enabled. Valid inputs: true or false.
+        :param pulumi.Input[bool] enable_ha: Enable this attribute if peering-HA is enabled on the gateways. Valid values: true, false. Default value: false.
         """
         pulumi.set(__self__, "gw_name1", gw_name1)
         pulumi.set(__self__, "gw_name2", gw_name2)
@@ -56,7 +56,7 @@ class AviatrixTunnelArgs:
     @pulumi.getter(name="enableHa")
     def enable_ha(self) -> Optional[pulumi.Input[bool]]:
         """
-        Whether Peering HA is enabled. Valid inputs: true or false.
+        Enable this attribute if peering-HA is enabled on the gateways. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_ha")
 
@@ -76,12 +76,12 @@ class _AviatrixTunnelState:
                  peering_state: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixTunnel resources.
-        :param pulumi.Input[bool] enable_ha: Whether Peering HA is enabled. Valid inputs: true or false.
+        :param pulumi.Input[bool] enable_ha: Enable this attribute if peering-HA is enabled on the gateways. Valid values: true, false. Default value: false.
         :param pulumi.Input[str] gw_name1: The first VPC Container name to make a peer pair.
         :param pulumi.Input[str] gw_name2: The second VPC Container name to make a peer pair.
-        :param pulumi.Input[str] peering_hastatus: Status of the HA tunnel.
-        :param pulumi.Input[str] peering_link: Name of the peering link.
-        :param pulumi.Input[str] peering_state: Status of the tunnel.
+        :param pulumi.Input[str] peering_hastatus: (Computed) Status of the HA tunnel.
+        :param pulumi.Input[str] peering_link: (Computed) Name of the peering link.
+        :param pulumi.Input[str] peering_state: (Computed) Status of the tunnel.
         """
         if enable_ha is not None:
             pulumi.set(__self__, "enable_ha", enable_ha)
@@ -100,7 +100,7 @@ class _AviatrixTunnelState:
     @pulumi.getter(name="enableHa")
     def enable_ha(self) -> Optional[pulumi.Input[bool]]:
         """
-        Whether Peering HA is enabled. Valid inputs: true or false.
+        Enable this attribute if peering-HA is enabled on the gateways. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_ha")
 
@@ -136,7 +136,7 @@ class _AviatrixTunnelState:
     @pulumi.getter(name="peeringHastatus")
     def peering_hastatus(self) -> Optional[pulumi.Input[str]]:
         """
-        Status of the HA tunnel.
+        (Computed) Status of the HA tunnel.
         """
         return pulumi.get(self, "peering_hastatus")
 
@@ -148,7 +148,7 @@ class _AviatrixTunnelState:
     @pulumi.getter(name="peeringLink")
     def peering_link(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the peering link.
+        (Computed) Name of the peering link.
         """
         return pulumi.get(self, "peering_link")
 
@@ -160,7 +160,7 @@ class _AviatrixTunnelState:
     @pulumi.getter(name="peeringState")
     def peering_state(self) -> Optional[pulumi.Input[str]]:
         """
-        Status of the tunnel.
+        (Computed) Status of the tunnel.
         """
         return pulumi.get(self, "peering_state")
 
@@ -179,10 +179,31 @@ class AviatrixTunnel(pulumi.CustomResource):
                  gw_name2: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixTunnel resource with the given unique name, props, and options.
+        The **aviatrix_tunnel** resource allows the creation and management of Aviatrix Encrypted Peering tunnels.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS Tunnel
+        test_tunnel = aviatrix.AviatrixTunnel("testTunnel",
+            gw_name1="avtx-gw1",
+            gw_name2="avtx-gw2")
+        ```
+
+        ## Import
+
+        **tunnel** can be imported using the `gw_name1` and `gw_name2`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixTunnel:AviatrixTunnel test gw_name1~gw_name2
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[bool] enable_ha: Whether Peering HA is enabled. Valid inputs: true or false.
+        :param pulumi.Input[bool] enable_ha: Enable this attribute if peering-HA is enabled on the gateways. Valid values: true, false. Default value: false.
         :param pulumi.Input[str] gw_name1: The first VPC Container name to make a peer pair.
         :param pulumi.Input[str] gw_name2: The second VPC Container name to make a peer pair.
         """
@@ -193,7 +214,28 @@ class AviatrixTunnel(pulumi.CustomResource):
                  args: AviatrixTunnelArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixTunnel resource with the given unique name, props, and options.
+        The **aviatrix_tunnel** resource allows the creation and management of Aviatrix Encrypted Peering tunnels.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS Tunnel
+        test_tunnel = aviatrix.AviatrixTunnel("testTunnel",
+            gw_name1="avtx-gw1",
+            gw_name2="avtx-gw2")
+        ```
+
+        ## Import
+
+        **tunnel** can be imported using the `gw_name1` and `gw_name2`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixTunnel:AviatrixTunnel test gw_name1~gw_name2
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixTunnelArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -254,12 +296,12 @@ class AviatrixTunnel(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[bool] enable_ha: Whether Peering HA is enabled. Valid inputs: true or false.
+        :param pulumi.Input[bool] enable_ha: Enable this attribute if peering-HA is enabled on the gateways. Valid values: true, false. Default value: false.
         :param pulumi.Input[str] gw_name1: The first VPC Container name to make a peer pair.
         :param pulumi.Input[str] gw_name2: The second VPC Container name to make a peer pair.
-        :param pulumi.Input[str] peering_hastatus: Status of the HA tunnel.
-        :param pulumi.Input[str] peering_link: Name of the peering link.
-        :param pulumi.Input[str] peering_state: Status of the tunnel.
+        :param pulumi.Input[str] peering_hastatus: (Computed) Status of the HA tunnel.
+        :param pulumi.Input[str] peering_link: (Computed) Name of the peering link.
+        :param pulumi.Input[str] peering_state: (Computed) Status of the tunnel.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -277,7 +319,7 @@ class AviatrixTunnel(pulumi.CustomResource):
     @pulumi.getter(name="enableHa")
     def enable_ha(self) -> pulumi.Output[Optional[bool]]:
         """
-        Whether Peering HA is enabled. Valid inputs: true or false.
+        Enable this attribute if peering-HA is enabled on the gateways. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_ha")
 
@@ -301,7 +343,7 @@ class AviatrixTunnel(pulumi.CustomResource):
     @pulumi.getter(name="peeringHastatus")
     def peering_hastatus(self) -> pulumi.Output[str]:
         """
-        Status of the HA tunnel.
+        (Computed) Status of the HA tunnel.
         """
         return pulumi.get(self, "peering_hastatus")
 
@@ -309,7 +351,7 @@ class AviatrixTunnel(pulumi.CustomResource):
     @pulumi.getter(name="peeringLink")
     def peering_link(self) -> pulumi.Output[str]:
         """
-        Name of the peering link.
+        (Computed) Name of the peering link.
         """
         return pulumi.get(self, "peering_link")
 
@@ -317,7 +359,7 @@ class AviatrixTunnel(pulumi.CustomResource):
     @pulumi.getter(name="peeringState")
     def peering_state(self) -> pulumi.Output[str]:
         """
-        Status of the tunnel.
+        (Computed) Status of the tunnel.
         """
         return pulumi.get(self, "peering_state")
 

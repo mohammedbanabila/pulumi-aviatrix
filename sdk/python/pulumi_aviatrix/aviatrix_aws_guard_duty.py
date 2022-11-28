@@ -19,9 +19,9 @@ class AviatrixAwsGuardDutyArgs:
                  excluded_ips: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a AviatrixAwsGuardDuty resource.
-        :param pulumi.Input[str] account_name: Account name
+        :param pulumi.Input[str] account_name: Account name.
         :param pulumi.Input[str] region: Region.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_ips: Excluded IPs.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_ips: Set of excluded IPs.
         """
         pulumi.set(__self__, "account_name", account_name)
         pulumi.set(__self__, "region", region)
@@ -32,7 +32,7 @@ class AviatrixAwsGuardDutyArgs:
     @pulumi.getter(name="accountName")
     def account_name(self) -> pulumi.Input[str]:
         """
-        Account name
+        Account name.
         """
         return pulumi.get(self, "account_name")
 
@@ -56,7 +56,7 @@ class AviatrixAwsGuardDutyArgs:
     @pulumi.getter(name="excludedIps")
     def excluded_ips(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Excluded IPs.
+        Set of excluded IPs.
         """
         return pulumi.get(self, "excluded_ips")
 
@@ -73,8 +73,8 @@ class _AviatrixAwsGuardDutyState:
                  region: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixAwsGuardDuty resources.
-        :param pulumi.Input[str] account_name: Account name
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_ips: Excluded IPs.
+        :param pulumi.Input[str] account_name: Account name.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_ips: Set of excluded IPs.
         :param pulumi.Input[str] region: Region.
         """
         if account_name is not None:
@@ -88,7 +88,7 @@ class _AviatrixAwsGuardDutyState:
     @pulumi.getter(name="accountName")
     def account_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Account name
+        Account name.
         """
         return pulumi.get(self, "account_name")
 
@@ -100,7 +100,7 @@ class _AviatrixAwsGuardDutyState:
     @pulumi.getter(name="excludedIps")
     def excluded_ips(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Excluded IPs.
+        Set of excluded IPs.
         """
         return pulumi.get(self, "excluded_ips")
 
@@ -131,11 +131,34 @@ class AviatrixAwsGuardDuty(pulumi.CustomResource):
                  region: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixAwsGuardDuty resource with the given unique name, props, and options.
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Configure AWS GuardDuty 
+        test_aws_guard_duty = aviatrix.AviatrixAwsGuardDuty("testAwsGuardDuty",
+            account_name=aviatrix_account["account_1"]["account_name"],
+            region="us-west-1",
+            excluded_ips=[
+                "127.0.0.1",
+                "10.0.0.1",
+            ])
+        ```
+
+        ## Import
+
+        **aws_guard_duty** resource can be imported with the `account_name` and `region` in the form "account_name~~region", e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAwsGuardDuty:AviatrixAwsGuardDuty test_aws_guard_duty devops-acc~~us-west-1
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] account_name: Account name
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_ips: Excluded IPs.
+        :param pulumi.Input[str] account_name: Account name.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_ips: Set of excluded IPs.
         :param pulumi.Input[str] region: Region.
         """
         ...
@@ -145,7 +168,30 @@ class AviatrixAwsGuardDuty(pulumi.CustomResource):
                  args: AviatrixAwsGuardDutyArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixAwsGuardDuty resource with the given unique name, props, and options.
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Configure AWS GuardDuty 
+        test_aws_guard_duty = aviatrix.AviatrixAwsGuardDuty("testAwsGuardDuty",
+            account_name=aviatrix_account["account_1"]["account_name"],
+            region="us-west-1",
+            excluded_ips=[
+                "127.0.0.1",
+                "10.0.0.1",
+            ])
+        ```
+
+        ## Import
+
+        **aws_guard_duty** resource can be imported with the `account_name` and `region` in the form "account_name~~region", e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAwsGuardDuty:AviatrixAwsGuardDuty test_aws_guard_duty devops-acc~~us-west-1
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixAwsGuardDutyArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -200,8 +246,8 @@ class AviatrixAwsGuardDuty(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] account_name: Account name
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_ips: Excluded IPs.
+        :param pulumi.Input[str] account_name: Account name.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_ips: Set of excluded IPs.
         :param pulumi.Input[str] region: Region.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -217,7 +263,7 @@ class AviatrixAwsGuardDuty(pulumi.CustomResource):
     @pulumi.getter(name="accountName")
     def account_name(self) -> pulumi.Output[str]:
         """
-        Account name
+        Account name.
         """
         return pulumi.get(self, "account_name")
 
@@ -225,7 +271,7 @@ class AviatrixAwsGuardDuty(pulumi.CustomResource):
     @pulumi.getter(name="excludedIps")
     def excluded_ips(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        Excluded IPs.
+        Set of excluded IPs.
         """
         return pulumi.get(self, "excluded_ips")
 

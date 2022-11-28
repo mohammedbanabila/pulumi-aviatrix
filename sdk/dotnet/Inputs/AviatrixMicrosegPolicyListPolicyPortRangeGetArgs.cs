@@ -12,9 +12,15 @@ namespace Pulumi.Aviatrix.Inputs
 
     public sealed class AviatrixMicrosegPolicyListPolicyPortRangeGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Upper bound for the range of ports. When not set, `lo` is the only port that matches the policy.
+        /// </summary>
         [Input("hi")]
         public Input<int>? Hi { get; set; }
 
+        /// <summary>
+        /// Lower bound for the range of ports.
+        /// </summary>
         [Input("lo", required: true)]
         public Input<int> Lo { get; set; } = null!;
 

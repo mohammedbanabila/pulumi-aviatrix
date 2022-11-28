@@ -4,6 +4,31 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_device_interface_config** resource allows the configuration of the WAN primary interface and IP for a device, for use in CloudN.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Configure the primary WAN interface and IP for a device.
+ * const testDeviceInterfaceConfig = new aviatrix.AviatrixDeviceInterfaceConfig("test_device_interface_config", {
+ *     deviceName: "test-device",
+ *     wanPrimaryInterface: "eth0",
+ *     wanPrimaryInterfacePublicIp: "181.12.43.21",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **device_interface_config** can be imported using the `device_name`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixDeviceInterfaceConfig:AviatrixDeviceInterfaceConfig test device_name
+ * ```
+ */
 export class AviatrixDeviceInterfaceConfig extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixDeviceInterfaceConfig resource's state with the given name, ID, and optional extra
@@ -33,15 +58,15 @@ export class AviatrixDeviceInterfaceConfig extends pulumi.CustomResource {
     }
 
     /**
-     * Name of device.
+     * Name of the device.
      */
     public readonly deviceName!: pulumi.Output<string>;
     /**
-     * WAN primary interface of the device.
+     * Name of the WAN primary interface.
      */
     public readonly wanPrimaryInterface!: pulumi.Output<string>;
     /**
-     * WAN primary interface public IP address.
+     * The WAN Primary interface public IP.
      */
     public readonly wanPrimaryInterfacePublicIp!: pulumi.Output<string>;
 
@@ -86,15 +111,15 @@ export class AviatrixDeviceInterfaceConfig extends pulumi.CustomResource {
  */
 export interface AviatrixDeviceInterfaceConfigState {
     /**
-     * Name of device.
+     * Name of the device.
      */
     deviceName?: pulumi.Input<string>;
     /**
-     * WAN primary interface of the device.
+     * Name of the WAN primary interface.
      */
     wanPrimaryInterface?: pulumi.Input<string>;
     /**
-     * WAN primary interface public IP address.
+     * The WAN Primary interface public IP.
      */
     wanPrimaryInterfacePublicIp?: pulumi.Input<string>;
 }
@@ -104,15 +129,15 @@ export interface AviatrixDeviceInterfaceConfigState {
  */
 export interface AviatrixDeviceInterfaceConfigArgs {
     /**
-     * Name of device.
+     * Name of the device.
      */
     deviceName: pulumi.Input<string>;
     /**
-     * WAN primary interface of the device.
+     * Name of the WAN primary interface.
      */
     wanPrimaryInterface: pulumi.Input<string>;
     /**
-     * WAN primary interface public IP address.
+     * The WAN Primary interface public IP.
      */
     wanPrimaryInterfacePublicIp: pulumi.Input<string>;
 }

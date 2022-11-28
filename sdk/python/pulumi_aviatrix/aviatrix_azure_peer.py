@@ -22,12 +22,12 @@ class AviatrixAzurePeerArgs:
                  vnet_reg2: pulumi.Input[str]):
         """
         The set of arguments for constructing a AviatrixAzurePeer resource.
-        :param pulumi.Input[str] account_name1: This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.
-        :param pulumi.Input[str] account_name2: This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.
-        :param pulumi.Input[str] vnet_name_resource_group1: VNet-Name of Azure cloud.
-        :param pulumi.Input[str] vnet_name_resource_group2: VNet-Name of Azure cloud.
-        :param pulumi.Input[str] vnet_reg1: Region of Azure cloud.
-        :param pulumi.Input[str] vnet_reg2: Region of Azure cloud.
+        :param pulumi.Input[str] account_name1: Name of the Azure cloud account in the Aviatrix controller for VNet 1.
+        :param pulumi.Input[str] account_name2: Name of the Azure cloud account in the Aviatrix controller for VNet 2.
+        :param pulumi.Input[str] vnet_name_resource_group1: Azure VNet 1's name. Example: "VNet_Name1:Resource_Group_Name1:GUID1".
+        :param pulumi.Input[str] vnet_name_resource_group2: Azure VNet 2's name. Example: "VNet_Name2:Resource_Group_Name2:GUID2".
+        :param pulumi.Input[str] vnet_reg1: Region of Azure VNet 1. Example: "East US 2".
+        :param pulumi.Input[str] vnet_reg2: Region of Azure VNet 2. Example: "East US 2".
         """
         pulumi.set(__self__, "account_name1", account_name1)
         pulumi.set(__self__, "account_name2", account_name2)
@@ -40,7 +40,7 @@ class AviatrixAzurePeerArgs:
     @pulumi.getter(name="accountName1")
     def account_name1(self) -> pulumi.Input[str]:
         """
-        This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.
+        Name of the Azure cloud account in the Aviatrix controller for VNet 1.
         """
         return pulumi.get(self, "account_name1")
 
@@ -52,7 +52,7 @@ class AviatrixAzurePeerArgs:
     @pulumi.getter(name="accountName2")
     def account_name2(self) -> pulumi.Input[str]:
         """
-        This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.
+        Name of the Azure cloud account in the Aviatrix controller for VNet 2.
         """
         return pulumi.get(self, "account_name2")
 
@@ -64,7 +64,7 @@ class AviatrixAzurePeerArgs:
     @pulumi.getter(name="vnetNameResourceGroup1")
     def vnet_name_resource_group1(self) -> pulumi.Input[str]:
         """
-        VNet-Name of Azure cloud.
+        Azure VNet 1's name. Example: "VNet_Name1:Resource_Group_Name1:GUID1".
         """
         return pulumi.get(self, "vnet_name_resource_group1")
 
@@ -76,7 +76,7 @@ class AviatrixAzurePeerArgs:
     @pulumi.getter(name="vnetNameResourceGroup2")
     def vnet_name_resource_group2(self) -> pulumi.Input[str]:
         """
-        VNet-Name of Azure cloud.
+        Azure VNet 2's name. Example: "VNet_Name2:Resource_Group_Name2:GUID2".
         """
         return pulumi.get(self, "vnet_name_resource_group2")
 
@@ -88,7 +88,7 @@ class AviatrixAzurePeerArgs:
     @pulumi.getter(name="vnetReg1")
     def vnet_reg1(self) -> pulumi.Input[str]:
         """
-        Region of Azure cloud.
+        Region of Azure VNet 1. Example: "East US 2".
         """
         return pulumi.get(self, "vnet_reg1")
 
@@ -100,7 +100,7 @@ class AviatrixAzurePeerArgs:
     @pulumi.getter(name="vnetReg2")
     def vnet_reg2(self) -> pulumi.Input[str]:
         """
-        Region of Azure cloud.
+        Region of Azure VNet 2. Example: "East US 2".
         """
         return pulumi.get(self, "vnet_reg2")
 
@@ -122,14 +122,14 @@ class _AviatrixAzurePeerState:
                  vnet_reg2: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixAzurePeer resources.
-        :param pulumi.Input[str] account_name1: This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.
-        :param pulumi.Input[str] account_name2: This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.
+        :param pulumi.Input[str] account_name1: Name of the Azure cloud account in the Aviatrix controller for VNet 1.
+        :param pulumi.Input[str] account_name2: Name of the Azure cloud account in the Aviatrix controller for VNet 2.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] vnet_cidr1s: List of VNet CIDR of vnet_name_resource_group1.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] vnet_cidr2s: List of VNet CIDR of vnet_name_resource_group2.
-        :param pulumi.Input[str] vnet_name_resource_group1: VNet-Name of Azure cloud.
-        :param pulumi.Input[str] vnet_name_resource_group2: VNet-Name of Azure cloud.
-        :param pulumi.Input[str] vnet_reg1: Region of Azure cloud.
-        :param pulumi.Input[str] vnet_reg2: Region of Azure cloud.
+        :param pulumi.Input[str] vnet_name_resource_group1: Azure VNet 1's name. Example: "VNet_Name1:Resource_Group_Name1:GUID1".
+        :param pulumi.Input[str] vnet_name_resource_group2: Azure VNet 2's name. Example: "VNet_Name2:Resource_Group_Name2:GUID2".
+        :param pulumi.Input[str] vnet_reg1: Region of Azure VNet 1. Example: "East US 2".
+        :param pulumi.Input[str] vnet_reg2: Region of Azure VNet 2. Example: "East US 2".
         """
         if account_name1 is not None:
             pulumi.set(__self__, "account_name1", account_name1)
@@ -152,7 +152,7 @@ class _AviatrixAzurePeerState:
     @pulumi.getter(name="accountName1")
     def account_name1(self) -> Optional[pulumi.Input[str]]:
         """
-        This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.
+        Name of the Azure cloud account in the Aviatrix controller for VNet 1.
         """
         return pulumi.get(self, "account_name1")
 
@@ -164,7 +164,7 @@ class _AviatrixAzurePeerState:
     @pulumi.getter(name="accountName2")
     def account_name2(self) -> Optional[pulumi.Input[str]]:
         """
-        This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.
+        Name of the Azure cloud account in the Aviatrix controller for VNet 2.
         """
         return pulumi.get(self, "account_name2")
 
@@ -200,7 +200,7 @@ class _AviatrixAzurePeerState:
     @pulumi.getter(name="vnetNameResourceGroup1")
     def vnet_name_resource_group1(self) -> Optional[pulumi.Input[str]]:
         """
-        VNet-Name of Azure cloud.
+        Azure VNet 1's name. Example: "VNet_Name1:Resource_Group_Name1:GUID1".
         """
         return pulumi.get(self, "vnet_name_resource_group1")
 
@@ -212,7 +212,7 @@ class _AviatrixAzurePeerState:
     @pulumi.getter(name="vnetNameResourceGroup2")
     def vnet_name_resource_group2(self) -> Optional[pulumi.Input[str]]:
         """
-        VNet-Name of Azure cloud.
+        Azure VNet 2's name. Example: "VNet_Name2:Resource_Group_Name2:GUID2".
         """
         return pulumi.get(self, "vnet_name_resource_group2")
 
@@ -224,7 +224,7 @@ class _AviatrixAzurePeerState:
     @pulumi.getter(name="vnetReg1")
     def vnet_reg1(self) -> Optional[pulumi.Input[str]]:
         """
-        Region of Azure cloud.
+        Region of Azure VNet 1. Example: "East US 2".
         """
         return pulumi.get(self, "vnet_reg1")
 
@@ -236,7 +236,7 @@ class _AviatrixAzurePeerState:
     @pulumi.getter(name="vnetReg2")
     def vnet_reg2(self) -> Optional[pulumi.Input[str]]:
         """
-        Region of Azure cloud.
+        Region of Azure VNet 2. Example: "East US 2".
         """
         return pulumi.get(self, "vnet_reg2")
 
@@ -258,15 +258,40 @@ class AviatrixAzurePeer(pulumi.CustomResource):
                  vnet_reg2: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixAzurePeer resource with the given unique name, props, and options.
+        The **aviatrix_azure_peer** resource allows the creation and management of the Aviatrix-created peerings between Azure VNets.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Azure Peering
+        test_azurepeer = aviatrix.AviatrixAzurePeer("testAzurepeer",
+            account_name1="test1-account",
+            account_name2="test2-account",
+            vnet_name_resource_group1="Foo_VNet1:Bar_RG1:GUID1",
+            vnet_name_resource_group2="Foo_VNet2:Bar_RG2:GUID2",
+            vnet_reg1="Central US",
+            vnet_reg2="East US")
+        ```
+
+        ## Import
+
+        **azure_peer** can be imported using the `vnet_name_resource_group1` and `vnet_name_resource_group2`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAzurePeer:AviatrixAzurePeer test vnet_name_resource_group1~vnet_name_resource_group2
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] account_name1: This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.
-        :param pulumi.Input[str] account_name2: This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.
-        :param pulumi.Input[str] vnet_name_resource_group1: VNet-Name of Azure cloud.
-        :param pulumi.Input[str] vnet_name_resource_group2: VNet-Name of Azure cloud.
-        :param pulumi.Input[str] vnet_reg1: Region of Azure cloud.
-        :param pulumi.Input[str] vnet_reg2: Region of Azure cloud.
+        :param pulumi.Input[str] account_name1: Name of the Azure cloud account in the Aviatrix controller for VNet 1.
+        :param pulumi.Input[str] account_name2: Name of the Azure cloud account in the Aviatrix controller for VNet 2.
+        :param pulumi.Input[str] vnet_name_resource_group1: Azure VNet 1's name. Example: "VNet_Name1:Resource_Group_Name1:GUID1".
+        :param pulumi.Input[str] vnet_name_resource_group2: Azure VNet 2's name. Example: "VNet_Name2:Resource_Group_Name2:GUID2".
+        :param pulumi.Input[str] vnet_reg1: Region of Azure VNet 1. Example: "East US 2".
+        :param pulumi.Input[str] vnet_reg2: Region of Azure VNet 2. Example: "East US 2".
         """
         ...
     @overload
@@ -275,7 +300,32 @@ class AviatrixAzurePeer(pulumi.CustomResource):
                  args: AviatrixAzurePeerArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixAzurePeer resource with the given unique name, props, and options.
+        The **aviatrix_azure_peer** resource allows the creation and management of the Aviatrix-created peerings between Azure VNets.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Azure Peering
+        test_azurepeer = aviatrix.AviatrixAzurePeer("testAzurepeer",
+            account_name1="test1-account",
+            account_name2="test2-account",
+            vnet_name_resource_group1="Foo_VNet1:Bar_RG1:GUID1",
+            vnet_name_resource_group2="Foo_VNet2:Bar_RG2:GUID2",
+            vnet_reg1="Central US",
+            vnet_reg2="East US")
+        ```
+
+        ## Import
+
+        **azure_peer** can be imported using the `vnet_name_resource_group1` and `vnet_name_resource_group2`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAzurePeer:AviatrixAzurePeer test vnet_name_resource_group1~vnet_name_resource_group2
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixAzurePeerArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -351,14 +401,14 @@ class AviatrixAzurePeer(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] account_name1: This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.
-        :param pulumi.Input[str] account_name2: This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.
+        :param pulumi.Input[str] account_name1: Name of the Azure cloud account in the Aviatrix controller for VNet 1.
+        :param pulumi.Input[str] account_name2: Name of the Azure cloud account in the Aviatrix controller for VNet 2.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] vnet_cidr1s: List of VNet CIDR of vnet_name_resource_group1.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] vnet_cidr2s: List of VNet CIDR of vnet_name_resource_group2.
-        :param pulumi.Input[str] vnet_name_resource_group1: VNet-Name of Azure cloud.
-        :param pulumi.Input[str] vnet_name_resource_group2: VNet-Name of Azure cloud.
-        :param pulumi.Input[str] vnet_reg1: Region of Azure cloud.
-        :param pulumi.Input[str] vnet_reg2: Region of Azure cloud.
+        :param pulumi.Input[str] vnet_name_resource_group1: Azure VNet 1's name. Example: "VNet_Name1:Resource_Group_Name1:GUID1".
+        :param pulumi.Input[str] vnet_name_resource_group2: Azure VNet 2's name. Example: "VNet_Name2:Resource_Group_Name2:GUID2".
+        :param pulumi.Input[str] vnet_reg1: Region of Azure VNet 1. Example: "East US 2".
+        :param pulumi.Input[str] vnet_reg2: Region of Azure VNet 2. Example: "East US 2".
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -378,7 +428,7 @@ class AviatrixAzurePeer(pulumi.CustomResource):
     @pulumi.getter(name="accountName1")
     def account_name1(self) -> pulumi.Output[str]:
         """
-        This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.
+        Name of the Azure cloud account in the Aviatrix controller for VNet 1.
         """
         return pulumi.get(self, "account_name1")
 
@@ -386,7 +436,7 @@ class AviatrixAzurePeer(pulumi.CustomResource):
     @pulumi.getter(name="accountName2")
     def account_name2(self) -> pulumi.Output[str]:
         """
-        This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.
+        Name of the Azure cloud account in the Aviatrix controller for VNet 2.
         """
         return pulumi.get(self, "account_name2")
 
@@ -410,7 +460,7 @@ class AviatrixAzurePeer(pulumi.CustomResource):
     @pulumi.getter(name="vnetNameResourceGroup1")
     def vnet_name_resource_group1(self) -> pulumi.Output[str]:
         """
-        VNet-Name of Azure cloud.
+        Azure VNet 1's name. Example: "VNet_Name1:Resource_Group_Name1:GUID1".
         """
         return pulumi.get(self, "vnet_name_resource_group1")
 
@@ -418,7 +468,7 @@ class AviatrixAzurePeer(pulumi.CustomResource):
     @pulumi.getter(name="vnetNameResourceGroup2")
     def vnet_name_resource_group2(self) -> pulumi.Output[str]:
         """
-        VNet-Name of Azure cloud.
+        Azure VNet 2's name. Example: "VNet_Name2:Resource_Group_Name2:GUID2".
         """
         return pulumi.get(self, "vnet_name_resource_group2")
 
@@ -426,7 +476,7 @@ class AviatrixAzurePeer(pulumi.CustomResource):
     @pulumi.getter(name="vnetReg1")
     def vnet_reg1(self) -> pulumi.Output[str]:
         """
-        Region of Azure cloud.
+        Region of Azure VNet 1. Example: "East US 2".
         """
         return pulumi.get(self, "vnet_reg1")
 
@@ -434,7 +484,7 @@ class AviatrixAzurePeer(pulumi.CustomResource):
     @pulumi.getter(name="vnetReg2")
     def vnet_reg2(self) -> pulumi.Output[str]:
         """
-        Region of Azure cloud.
+        Region of Azure VNet 2. Example: "East US 2".
         """
         return pulumi.get(self, "vnet_reg2")
 

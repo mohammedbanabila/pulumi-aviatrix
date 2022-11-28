@@ -12,48 +12,81 @@ namespace Pulumi.Aviatrix.Inputs
 
     public sealed class AviatrixMicrosegPolicyListPolicyGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Action for the policy. Must be one of PERMIT or DENY.
+        /// </summary>
         [Input("action", required: true)]
         public Input<string> Action { get; set; } = null!;
 
         [Input("dstAppDomains", required: true)]
         private InputList<string>? _dstAppDomains;
+
+        /// <summary>
+        /// List of App Domain UUIDs for the destination for the policy.
+        /// </summary>
         public InputList<string> DstAppDomains
         {
             get => _dstAppDomains ?? (_dstAppDomains = new InputList<string>());
             set => _dstAppDomains = value;
         }
 
+        /// <summary>
+        /// Whether to enable logging for packets that match the policy. Type: Boolean.
+        /// </summary>
         [Input("logging")]
         public Input<bool>? Logging { get; set; }
 
+        /// <summary>
+        /// Name of the policy.
+        /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
         [Input("portRanges")]
         private InputList<Inputs.AviatrixMicrosegPolicyListPolicyPortRangeGetArgs>? _portRanges;
+
+        /// <summary>
+        /// List of port ranges for the policy. Cannot be used when `protocol` is "ICMP".
+        /// </summary>
         public InputList<Inputs.AviatrixMicrosegPolicyListPolicyPortRangeGetArgs> PortRanges
         {
             get => _portRanges ?? (_portRanges = new InputList<Inputs.AviatrixMicrosegPolicyListPolicyPortRangeGetArgs>());
             set => _portRanges = value;
         }
 
+        /// <summary>
+        /// Priority for the policy. Default: 0. Type: Integer.
+        /// </summary>
         [Input("priority")]
         public Input<int>? Priority { get; set; }
 
+        /// <summary>
+        /// Protocol for the policy. Must be one of TCP, UDP, ICMP or ANY.
+        /// </summary>
         [Input("protocol", required: true)]
         public Input<string> Protocol { get; set; } = null!;
 
         [Input("srcAppDomains", required: true)]
         private InputList<string>? _srcAppDomains;
+
+        /// <summary>
+        /// List of App Domain UUIDs for the source for the policy.
+        /// </summary>
         public InputList<string> SrcAppDomains
         {
             get => _srcAppDomains ?? (_srcAppDomains = new InputList<string>());
             set => _srcAppDomains = value;
         }
 
+        /// <summary>
+        /// UUID for the Policy.
+        /// </summary>
         [Input("uuid")]
         public Input<string>? Uuid { get; set; }
 
+        /// <summary>
+        /// Whether to enforce the policy or only watch packets. If "true" packets are only watched. This allows you to observe if the traffic impacted by this rule causes any inadvertent issues (such as traffic being dropped). Type: Boolean.
+        /// </summary>
         [Input("watch")]
         public Input<bool>? Watch { get; set; }
 

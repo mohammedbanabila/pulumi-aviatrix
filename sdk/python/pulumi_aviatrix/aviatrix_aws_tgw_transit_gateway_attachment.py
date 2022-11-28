@@ -21,11 +21,11 @@ class AviatrixAwsTgwTransitGatewayAttachmentArgs:
                  vpc_id: pulumi.Input[str]):
         """
         The set of arguments for constructing a AviatrixAwsTgwTransitGatewayAttachment resource.
-        :param pulumi.Input[str] region: Region of cloud provider.
+        :param pulumi.Input[str] region: AWS Region of the TGW.
         :param pulumi.Input[str] tgw_name: Name of the AWS TGW.
-        :param pulumi.Input[str] transit_gateway_name: Name of the transit gateway to be attached to tgw.
-        :param pulumi.Input[str] vpc_account_name: This parameter represents the name of a Cloud-Account in Aviatrix controller.
-        :param pulumi.Input[str] vpc_id: This parameter represents the ID of the VPC.
+        :param pulumi.Input[str] transit_gateway_name: Name of the transit gateway to be attached to the AWS TGW.
+        :param pulumi.Input[str] vpc_account_name: The name of the cloud account in the Aviatrix controller, which is associated with the VPC.
+        :param pulumi.Input[str] vpc_id: VPC ID of the VPC, where transit gateway is launched.
         """
         pulumi.set(__self__, "region", region)
         pulumi.set(__self__, "tgw_name", tgw_name)
@@ -37,7 +37,7 @@ class AviatrixAwsTgwTransitGatewayAttachmentArgs:
     @pulumi.getter
     def region(self) -> pulumi.Input[str]:
         """
-        Region of cloud provider.
+        AWS Region of the TGW.
         """
         return pulumi.get(self, "region")
 
@@ -61,7 +61,7 @@ class AviatrixAwsTgwTransitGatewayAttachmentArgs:
     @pulumi.getter(name="transitGatewayName")
     def transit_gateway_name(self) -> pulumi.Input[str]:
         """
-        Name of the transit gateway to be attached to tgw.
+        Name of the transit gateway to be attached to the AWS TGW.
         """
         return pulumi.get(self, "transit_gateway_name")
 
@@ -73,7 +73,7 @@ class AviatrixAwsTgwTransitGatewayAttachmentArgs:
     @pulumi.getter(name="vpcAccountName")
     def vpc_account_name(self) -> pulumi.Input[str]:
         """
-        This parameter represents the name of a Cloud-Account in Aviatrix controller.
+        The name of the cloud account in the Aviatrix controller, which is associated with the VPC.
         """
         return pulumi.get(self, "vpc_account_name")
 
@@ -85,7 +85,7 @@ class AviatrixAwsTgwTransitGatewayAttachmentArgs:
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> pulumi.Input[str]:
         """
-        This parameter represents the ID of the VPC.
+        VPC ID of the VPC, where transit gateway is launched.
         """
         return pulumi.get(self, "vpc_id")
 
@@ -104,11 +104,11 @@ class _AviatrixAwsTgwTransitGatewayAttachmentState:
                  vpc_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixAwsTgwTransitGatewayAttachment resources.
-        :param pulumi.Input[str] region: Region of cloud provider.
+        :param pulumi.Input[str] region: AWS Region of the TGW.
         :param pulumi.Input[str] tgw_name: Name of the AWS TGW.
-        :param pulumi.Input[str] transit_gateway_name: Name of the transit gateway to be attached to tgw.
-        :param pulumi.Input[str] vpc_account_name: This parameter represents the name of a Cloud-Account in Aviatrix controller.
-        :param pulumi.Input[str] vpc_id: This parameter represents the ID of the VPC.
+        :param pulumi.Input[str] transit_gateway_name: Name of the transit gateway to be attached to the AWS TGW.
+        :param pulumi.Input[str] vpc_account_name: The name of the cloud account in the Aviatrix controller, which is associated with the VPC.
+        :param pulumi.Input[str] vpc_id: VPC ID of the VPC, where transit gateway is launched.
         """
         if region is not None:
             pulumi.set(__self__, "region", region)
@@ -125,7 +125,7 @@ class _AviatrixAwsTgwTransitGatewayAttachmentState:
     @pulumi.getter
     def region(self) -> Optional[pulumi.Input[str]]:
         """
-        Region of cloud provider.
+        AWS Region of the TGW.
         """
         return pulumi.get(self, "region")
 
@@ -149,7 +149,7 @@ class _AviatrixAwsTgwTransitGatewayAttachmentState:
     @pulumi.getter(name="transitGatewayName")
     def transit_gateway_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the transit gateway to be attached to tgw.
+        Name of the transit gateway to be attached to the AWS TGW.
         """
         return pulumi.get(self, "transit_gateway_name")
 
@@ -161,7 +161,7 @@ class _AviatrixAwsTgwTransitGatewayAttachmentState:
     @pulumi.getter(name="vpcAccountName")
     def vpc_account_name(self) -> Optional[pulumi.Input[str]]:
         """
-        This parameter represents the name of a Cloud-Account in Aviatrix controller.
+        The name of the cloud account in the Aviatrix controller, which is associated with the VPC.
         """
         return pulumi.get(self, "vpc_account_name")
 
@@ -173,7 +173,7 @@ class _AviatrixAwsTgwTransitGatewayAttachmentState:
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
-        This parameter represents the ID of the VPC.
+        VPC ID of the VPC, where transit gateway is launched.
         """
         return pulumi.get(self, "vpc_id")
 
@@ -194,14 +194,38 @@ class AviatrixAwsTgwTransitGatewayAttachment(pulumi.CustomResource):
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixAwsTgwTransitGatewayAttachment resource with the given unique name, props, and options.
+        The **aviatrix_aws_tgw_transit_gateway_attachment** resource manages the attachment of the Aviatrix transit gateway to the AWS TGW.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS TGW Transit Gateway Attachment
+        test_transit_gateway_attachment = aviatrix.AviatrixAwsTgwTransitGatewayAttachment("testTransitGatewayAttachment",
+            region="us-east-1",
+            tgw_name="test-tgw",
+            transit_gateway_name="transit-gw-1",
+            vpc_account_name="test-account",
+            vpc_id="vpc-0e2fac2b91c6697b3")
+        ```
+
+        ## Import
+
+        **aws_tgw_transit_gateway_attachment** can be imported using the `tgw_name` and `vpc_id`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAwsTgwTransitGatewayAttachment:AviatrixAwsTgwTransitGatewayAttachment test tgw_name~vpc_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] region: Region of cloud provider.
+        :param pulumi.Input[str] region: AWS Region of the TGW.
         :param pulumi.Input[str] tgw_name: Name of the AWS TGW.
-        :param pulumi.Input[str] transit_gateway_name: Name of the transit gateway to be attached to tgw.
-        :param pulumi.Input[str] vpc_account_name: This parameter represents the name of a Cloud-Account in Aviatrix controller.
-        :param pulumi.Input[str] vpc_id: This parameter represents the ID of the VPC.
+        :param pulumi.Input[str] transit_gateway_name: Name of the transit gateway to be attached to the AWS TGW.
+        :param pulumi.Input[str] vpc_account_name: The name of the cloud account in the Aviatrix controller, which is associated with the VPC.
+        :param pulumi.Input[str] vpc_id: VPC ID of the VPC, where transit gateway is launched.
         """
         ...
     @overload
@@ -210,7 +234,31 @@ class AviatrixAwsTgwTransitGatewayAttachment(pulumi.CustomResource):
                  args: AviatrixAwsTgwTransitGatewayAttachmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixAwsTgwTransitGatewayAttachment resource with the given unique name, props, and options.
+        The **aviatrix_aws_tgw_transit_gateway_attachment** resource manages the attachment of the Aviatrix transit gateway to the AWS TGW.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS TGW Transit Gateway Attachment
+        test_transit_gateway_attachment = aviatrix.AviatrixAwsTgwTransitGatewayAttachment("testTransitGatewayAttachment",
+            region="us-east-1",
+            tgw_name="test-tgw",
+            transit_gateway_name="transit-gw-1",
+            vpc_account_name="test-account",
+            vpc_id="vpc-0e2fac2b91c6697b3")
+        ```
+
+        ## Import
+
+        **aws_tgw_transit_gateway_attachment** can be imported using the `tgw_name` and `vpc_id`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAwsTgwTransitGatewayAttachment:AviatrixAwsTgwTransitGatewayAttachment test tgw_name~vpc_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixAwsTgwTransitGatewayAttachmentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -277,11 +325,11 @@ class AviatrixAwsTgwTransitGatewayAttachment(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] region: Region of cloud provider.
+        :param pulumi.Input[str] region: AWS Region of the TGW.
         :param pulumi.Input[str] tgw_name: Name of the AWS TGW.
-        :param pulumi.Input[str] transit_gateway_name: Name of the transit gateway to be attached to tgw.
-        :param pulumi.Input[str] vpc_account_name: This parameter represents the name of a Cloud-Account in Aviatrix controller.
-        :param pulumi.Input[str] vpc_id: This parameter represents the ID of the VPC.
+        :param pulumi.Input[str] transit_gateway_name: Name of the transit gateway to be attached to the AWS TGW.
+        :param pulumi.Input[str] vpc_account_name: The name of the cloud account in the Aviatrix controller, which is associated with the VPC.
+        :param pulumi.Input[str] vpc_id: VPC ID of the VPC, where transit gateway is launched.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -298,7 +346,7 @@ class AviatrixAwsTgwTransitGatewayAttachment(pulumi.CustomResource):
     @pulumi.getter
     def region(self) -> pulumi.Output[str]:
         """
-        Region of cloud provider.
+        AWS Region of the TGW.
         """
         return pulumi.get(self, "region")
 
@@ -314,7 +362,7 @@ class AviatrixAwsTgwTransitGatewayAttachment(pulumi.CustomResource):
     @pulumi.getter(name="transitGatewayName")
     def transit_gateway_name(self) -> pulumi.Output[str]:
         """
-        Name of the transit gateway to be attached to tgw.
+        Name of the transit gateway to be attached to the AWS TGW.
         """
         return pulumi.get(self, "transit_gateway_name")
 
@@ -322,7 +370,7 @@ class AviatrixAwsTgwTransitGatewayAttachment(pulumi.CustomResource):
     @pulumi.getter(name="vpcAccountName")
     def vpc_account_name(self) -> pulumi.Output[str]:
         """
-        This parameter represents the name of a Cloud-Account in Aviatrix controller.
+        The name of the cloud account in the Aviatrix controller, which is associated with the VPC.
         """
         return pulumi.get(self, "vpc_account_name")
 
@@ -330,7 +378,7 @@ class AviatrixAwsTgwTransitGatewayAttachment(pulumi.CustomResource):
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> pulumi.Output[str]:
         """
-        This parameter represents the ID of the VPC.
+        VPC ID of the VPC, where transit gateway is launched.
         """
         return pulumi.get(self, "vpc_id")
 

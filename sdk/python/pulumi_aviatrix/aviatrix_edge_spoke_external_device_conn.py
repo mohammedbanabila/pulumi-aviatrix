@@ -27,13 +27,13 @@ class AviatrixEdgeSpokeExternalDeviceConnArgs:
         The set of arguments for constructing a AviatrixEdgeSpokeExternalDeviceConn resource.
         :param pulumi.Input[str] bgp_local_as_num: BGP local AS number.
         :param pulumi.Input[str] bgp_remote_as_num: BGP remote AS number.
-        :param pulumi.Input[str] connection_name: The name of the spoke external device connection which is going to be created.
-        :param pulumi.Input[str] gw_name: Name of the BGP Spoke Gateway.
+        :param pulumi.Input[str] connection_name: Connection name.
+        :param pulumi.Input[str] gw_name: Edge as a Spoke name.
         :param pulumi.Input[str] local_lan_ip: Local LAN IP.
         :param pulumi.Input[str] remote_lan_ip: Remote LAN IP.
-        :param pulumi.Input[str] site_id: ID of the VPC where the BGP Spoke Gateway is located.
-        :param pulumi.Input[str] connection_type: Connection type. Valid values: 'bgp'. Default value: 'bgp'.
-        :param pulumi.Input[str] tunnel_protocol: Tunnel Protocol. Valid value: 'LAN'. Default value: 'LAN'. Case insensitive.
+        :param pulumi.Input[str] site_id: Edge as a Spoke site iD.
+        :param pulumi.Input[str] connection_type: Connection type. Valid value: 'bgp'. Default value: 'bgp'.
+        :param pulumi.Input[str] tunnel_protocol: Tunnel protocol. Valid value: 'LAN'. Default value: 'LAN'. Case insensitive.
         """
         pulumi.set(__self__, "bgp_local_as_num", bgp_local_as_num)
         pulumi.set(__self__, "bgp_remote_as_num", bgp_remote_as_num)
@@ -75,7 +75,7 @@ class AviatrixEdgeSpokeExternalDeviceConnArgs:
     @pulumi.getter(name="connectionName")
     def connection_name(self) -> pulumi.Input[str]:
         """
-        The name of the spoke external device connection which is going to be created.
+        Connection name.
         """
         return pulumi.get(self, "connection_name")
 
@@ -87,7 +87,7 @@ class AviatrixEdgeSpokeExternalDeviceConnArgs:
     @pulumi.getter(name="gwName")
     def gw_name(self) -> pulumi.Input[str]:
         """
-        Name of the BGP Spoke Gateway.
+        Edge as a Spoke name.
         """
         return pulumi.get(self, "gw_name")
 
@@ -123,7 +123,7 @@ class AviatrixEdgeSpokeExternalDeviceConnArgs:
     @pulumi.getter(name="siteId")
     def site_id(self) -> pulumi.Input[str]:
         """
-        ID of the VPC where the BGP Spoke Gateway is located.
+        Edge as a Spoke site iD.
         """
         return pulumi.get(self, "site_id")
 
@@ -135,7 +135,7 @@ class AviatrixEdgeSpokeExternalDeviceConnArgs:
     @pulumi.getter(name="connectionType")
     def connection_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Connection type. Valid values: 'bgp'. Default value: 'bgp'.
+        Connection type. Valid value: 'bgp'. Default value: 'bgp'.
         """
         return pulumi.get(self, "connection_type")
 
@@ -147,7 +147,7 @@ class AviatrixEdgeSpokeExternalDeviceConnArgs:
     @pulumi.getter(name="tunnelProtocol")
     def tunnel_protocol(self) -> Optional[pulumi.Input[str]]:
         """
-        Tunnel Protocol. Valid value: 'LAN'. Default value: 'LAN'. Case insensitive.
+        Tunnel protocol. Valid value: 'LAN'. Default value: 'LAN'. Case insensitive.
         """
         return pulumi.get(self, "tunnel_protocol")
 
@@ -172,13 +172,13 @@ class _AviatrixEdgeSpokeExternalDeviceConnState:
         Input properties used for looking up and filtering AviatrixEdgeSpokeExternalDeviceConn resources.
         :param pulumi.Input[str] bgp_local_as_num: BGP local AS number.
         :param pulumi.Input[str] bgp_remote_as_num: BGP remote AS number.
-        :param pulumi.Input[str] connection_name: The name of the spoke external device connection which is going to be created.
-        :param pulumi.Input[str] connection_type: Connection type. Valid values: 'bgp'. Default value: 'bgp'.
-        :param pulumi.Input[str] gw_name: Name of the BGP Spoke Gateway.
+        :param pulumi.Input[str] connection_name: Connection name.
+        :param pulumi.Input[str] connection_type: Connection type. Valid value: 'bgp'. Default value: 'bgp'.
+        :param pulumi.Input[str] gw_name: Edge as a Spoke name.
         :param pulumi.Input[str] local_lan_ip: Local LAN IP.
         :param pulumi.Input[str] remote_lan_ip: Remote LAN IP.
-        :param pulumi.Input[str] site_id: ID of the VPC where the BGP Spoke Gateway is located.
-        :param pulumi.Input[str] tunnel_protocol: Tunnel Protocol. Valid value: 'LAN'. Default value: 'LAN'. Case insensitive.
+        :param pulumi.Input[str] site_id: Edge as a Spoke site iD.
+        :param pulumi.Input[str] tunnel_protocol: Tunnel protocol. Valid value: 'LAN'. Default value: 'LAN'. Case insensitive.
         """
         if bgp_local_as_num is not None:
             pulumi.set(__self__, "bgp_local_as_num", bgp_local_as_num)
@@ -227,7 +227,7 @@ class _AviatrixEdgeSpokeExternalDeviceConnState:
     @pulumi.getter(name="connectionName")
     def connection_name(self) -> Optional[pulumi.Input[str]]:
         """
-        The name of the spoke external device connection which is going to be created.
+        Connection name.
         """
         return pulumi.get(self, "connection_name")
 
@@ -239,7 +239,7 @@ class _AviatrixEdgeSpokeExternalDeviceConnState:
     @pulumi.getter(name="connectionType")
     def connection_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Connection type. Valid values: 'bgp'. Default value: 'bgp'.
+        Connection type. Valid value: 'bgp'. Default value: 'bgp'.
         """
         return pulumi.get(self, "connection_type")
 
@@ -251,7 +251,7 @@ class _AviatrixEdgeSpokeExternalDeviceConnState:
     @pulumi.getter(name="gwName")
     def gw_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the BGP Spoke Gateway.
+        Edge as a Spoke name.
         """
         return pulumi.get(self, "gw_name")
 
@@ -287,7 +287,7 @@ class _AviatrixEdgeSpokeExternalDeviceConnState:
     @pulumi.getter(name="siteId")
     def site_id(self) -> Optional[pulumi.Input[str]]:
         """
-        ID of the VPC where the BGP Spoke Gateway is located.
+        Edge as a Spoke site iD.
         """
         return pulumi.get(self, "site_id")
 
@@ -299,7 +299,7 @@ class _AviatrixEdgeSpokeExternalDeviceConnState:
     @pulumi.getter(name="tunnelProtocol")
     def tunnel_protocol(self) -> Optional[pulumi.Input[str]]:
         """
-        Tunnel Protocol. Valid value: 'LAN'. Default value: 'LAN'. Case insensitive.
+        Tunnel protocol. Valid value: 'LAN'. Default value: 'LAN'. Case insensitive.
         """
         return pulumi.get(self, "tunnel_protocol")
 
@@ -324,18 +324,44 @@ class AviatrixEdgeSpokeExternalDeviceConn(pulumi.CustomResource):
                  tunnel_protocol: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixEdgeSpokeExternalDeviceConn resource with the given unique name, props, and options.
+        The **aviatrix_edge_spoke_external_device_conn** resource creates and manages the connection between Edge as a Spoke and an External Device. This resource is available as of provider version R2.23+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Edge as a Spoke External Device Connection
+        test = aviatrix.AviatrixEdgeSpokeExternalDeviceConn("test",
+            bgp_local_as_num="123",
+            bgp_remote_as_num="345",
+            connection_name="conn",
+            gw_name="eaas",
+            local_lan_ip="10.230.3.23",
+            remote_lan_ip="10.0.60.1",
+            site_id="site-abcd1234")
+        ```
+
+        ## Import
+
+        **edge_spoke_external_device_conn** can be imported using the `connection_name` and `site_id`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixEdgeSpokeExternalDeviceConn:AviatrixEdgeSpokeExternalDeviceConn test connection_name~site_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] bgp_local_as_num: BGP local AS number.
         :param pulumi.Input[str] bgp_remote_as_num: BGP remote AS number.
-        :param pulumi.Input[str] connection_name: The name of the spoke external device connection which is going to be created.
-        :param pulumi.Input[str] connection_type: Connection type. Valid values: 'bgp'. Default value: 'bgp'.
-        :param pulumi.Input[str] gw_name: Name of the BGP Spoke Gateway.
+        :param pulumi.Input[str] connection_name: Connection name.
+        :param pulumi.Input[str] connection_type: Connection type. Valid value: 'bgp'. Default value: 'bgp'.
+        :param pulumi.Input[str] gw_name: Edge as a Spoke name.
         :param pulumi.Input[str] local_lan_ip: Local LAN IP.
         :param pulumi.Input[str] remote_lan_ip: Remote LAN IP.
-        :param pulumi.Input[str] site_id: ID of the VPC where the BGP Spoke Gateway is located.
-        :param pulumi.Input[str] tunnel_protocol: Tunnel Protocol. Valid value: 'LAN'. Default value: 'LAN'. Case insensitive.
+        :param pulumi.Input[str] site_id: Edge as a Spoke site iD.
+        :param pulumi.Input[str] tunnel_protocol: Tunnel protocol. Valid value: 'LAN'. Default value: 'LAN'. Case insensitive.
         """
         ...
     @overload
@@ -344,7 +370,33 @@ class AviatrixEdgeSpokeExternalDeviceConn(pulumi.CustomResource):
                  args: AviatrixEdgeSpokeExternalDeviceConnArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixEdgeSpokeExternalDeviceConn resource with the given unique name, props, and options.
+        The **aviatrix_edge_spoke_external_device_conn** resource creates and manages the connection between Edge as a Spoke and an External Device. This resource is available as of provider version R2.23+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Edge as a Spoke External Device Connection
+        test = aviatrix.AviatrixEdgeSpokeExternalDeviceConn("test",
+            bgp_local_as_num="123",
+            bgp_remote_as_num="345",
+            connection_name="conn",
+            gw_name="eaas",
+            local_lan_ip="10.230.3.23",
+            remote_lan_ip="10.0.60.1",
+            site_id="site-abcd1234")
+        ```
+
+        ## Import
+
+        **edge_spoke_external_device_conn** can be imported using the `connection_name` and `site_id`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixEdgeSpokeExternalDeviceConn:AviatrixEdgeSpokeExternalDeviceConn test connection_name~site_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixEdgeSpokeExternalDeviceConnArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -429,13 +481,13 @@ class AviatrixEdgeSpokeExternalDeviceConn(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] bgp_local_as_num: BGP local AS number.
         :param pulumi.Input[str] bgp_remote_as_num: BGP remote AS number.
-        :param pulumi.Input[str] connection_name: The name of the spoke external device connection which is going to be created.
-        :param pulumi.Input[str] connection_type: Connection type. Valid values: 'bgp'. Default value: 'bgp'.
-        :param pulumi.Input[str] gw_name: Name of the BGP Spoke Gateway.
+        :param pulumi.Input[str] connection_name: Connection name.
+        :param pulumi.Input[str] connection_type: Connection type. Valid value: 'bgp'. Default value: 'bgp'.
+        :param pulumi.Input[str] gw_name: Edge as a Spoke name.
         :param pulumi.Input[str] local_lan_ip: Local LAN IP.
         :param pulumi.Input[str] remote_lan_ip: Remote LAN IP.
-        :param pulumi.Input[str] site_id: ID of the VPC where the BGP Spoke Gateway is located.
-        :param pulumi.Input[str] tunnel_protocol: Tunnel Protocol. Valid value: 'LAN'. Default value: 'LAN'. Case insensitive.
+        :param pulumi.Input[str] site_id: Edge as a Spoke site iD.
+        :param pulumi.Input[str] tunnel_protocol: Tunnel protocol. Valid value: 'LAN'. Default value: 'LAN'. Case insensitive.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -472,7 +524,7 @@ class AviatrixEdgeSpokeExternalDeviceConn(pulumi.CustomResource):
     @pulumi.getter(name="connectionName")
     def connection_name(self) -> pulumi.Output[str]:
         """
-        The name of the spoke external device connection which is going to be created.
+        Connection name.
         """
         return pulumi.get(self, "connection_name")
 
@@ -480,7 +532,7 @@ class AviatrixEdgeSpokeExternalDeviceConn(pulumi.CustomResource):
     @pulumi.getter(name="connectionType")
     def connection_type(self) -> pulumi.Output[Optional[str]]:
         """
-        Connection type. Valid values: 'bgp'. Default value: 'bgp'.
+        Connection type. Valid value: 'bgp'. Default value: 'bgp'.
         """
         return pulumi.get(self, "connection_type")
 
@@ -488,7 +540,7 @@ class AviatrixEdgeSpokeExternalDeviceConn(pulumi.CustomResource):
     @pulumi.getter(name="gwName")
     def gw_name(self) -> pulumi.Output[str]:
         """
-        Name of the BGP Spoke Gateway.
+        Edge as a Spoke name.
         """
         return pulumi.get(self, "gw_name")
 
@@ -512,7 +564,7 @@ class AviatrixEdgeSpokeExternalDeviceConn(pulumi.CustomResource):
     @pulumi.getter(name="siteId")
     def site_id(self) -> pulumi.Output[str]:
         """
-        ID of the VPC where the BGP Spoke Gateway is located.
+        Edge as a Spoke site iD.
         """
         return pulumi.get(self, "site_id")
 
@@ -520,7 +572,7 @@ class AviatrixEdgeSpokeExternalDeviceConn(pulumi.CustomResource):
     @pulumi.getter(name="tunnelProtocol")
     def tunnel_protocol(self) -> pulumi.Output[Optional[str]]:
         """
-        Tunnel Protocol. Valid value: 'LAN'. Default value: 'LAN'. Case insensitive.
+        Tunnel protocol. Valid value: 'LAN'. Default value: 'LAN'. Case insensitive.
         """
         return pulumi.get(self, "tunnel_protocol")
 

@@ -4,6 +4,32 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Spoke Transit Attachment
+ * const testAttachment = new aviatrix.AviatrixSpokeTransitAttachment("test_attachment", {
+ *     routeTables: [
+ *         "rtb-737d540c",
+ *         "rtb-626d045c",
+ *     ],
+ *     spokeGwName: "spoke-gw",
+ *     transitGwName: "transit-gw",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **spoke_transit_attachment** can be imported using the `spoke_gw_name` and `transit_gw_name`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixSpokeTransitAttachment:AviatrixSpokeTransitAttachment test spoke_gw_name~transit_gw_name
+ * ```
+ */
 export class AviatrixSpokeTransitAttachment extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixSpokeTransitAttachment resource's state with the given name, ID, and optional extra
@@ -33,12 +59,11 @@ export class AviatrixSpokeTransitAttachment extends pulumi.CustomResource {
     }
 
     /**
-     * Indicates whether the maximum amount of HPE tunnels will be created. Only valid when transit and spoke gateways are each
-     * launched in Insane Mode and in the same cloud type. Available as of provider version R2.22.2+.
+     * Indicates whether the maximum amount of HPE tunnels will be created. Only valid when transit and spoke gateways are each launched in Insane Mode and in the same cloud type. Default value: true. Available as of provider version R2.22.2+.
      */
     public readonly enableMaxPerformance!: pulumi.Output<boolean | undefined>;
     /**
-     * Learned routes will be propagated to these route tables.
+     * Learned routes will be propagated to these route tables. Example: ["rtb-212ff547","rtb-04539787"].
      */
     public readonly routeTables!: pulumi.Output<string[] | undefined>;
     /**
@@ -50,7 +75,7 @@ export class AviatrixSpokeTransitAttachment extends pulumi.CustomResource {
      */
     public readonly spokeGwName!: pulumi.Output<string>;
     /**
-     * AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on spoke gateway.
+     * Connection based AS Path Prepend. Valid only for BGP connection. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on spoke_gateway_name. Available as of provider version R2.23+.
      */
     public readonly spokePrependAsPaths!: pulumi.Output<string[] | undefined>;
     /**
@@ -58,7 +83,7 @@ export class AviatrixSpokeTransitAttachment extends pulumi.CustomResource {
      */
     public readonly transitGwName!: pulumi.Output<string>;
     /**
-     * AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit gateway.
+     * Connection based AS Path Prepend. Valid only for BGP connection. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on transit_gateway_name. Available as of provider version R2.23+.
      */
     public readonly transitPrependAsPaths!: pulumi.Output<string[] | undefined>;
 
@@ -108,12 +133,11 @@ export class AviatrixSpokeTransitAttachment extends pulumi.CustomResource {
  */
 export interface AviatrixSpokeTransitAttachmentState {
     /**
-     * Indicates whether the maximum amount of HPE tunnels will be created. Only valid when transit and spoke gateways are each
-     * launched in Insane Mode and in the same cloud type. Available as of provider version R2.22.2+.
+     * Indicates whether the maximum amount of HPE tunnels will be created. Only valid when transit and spoke gateways are each launched in Insane Mode and in the same cloud type. Default value: true. Available as of provider version R2.22.2+.
      */
     enableMaxPerformance?: pulumi.Input<boolean>;
     /**
-     * Learned routes will be propagated to these route tables.
+     * Learned routes will be propagated to these route tables. Example: ["rtb-212ff547","rtb-04539787"].
      */
     routeTables?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -125,7 +149,7 @@ export interface AviatrixSpokeTransitAttachmentState {
      */
     spokeGwName?: pulumi.Input<string>;
     /**
-     * AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on spoke gateway.
+     * Connection based AS Path Prepend. Valid only for BGP connection. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on spoke_gateway_name. Available as of provider version R2.23+.
      */
     spokePrependAsPaths?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -133,7 +157,7 @@ export interface AviatrixSpokeTransitAttachmentState {
      */
     transitGwName?: pulumi.Input<string>;
     /**
-     * AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit gateway.
+     * Connection based AS Path Prepend. Valid only for BGP connection. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on transit_gateway_name. Available as of provider version R2.23+.
      */
     transitPrependAsPaths?: pulumi.Input<pulumi.Input<string>[]>;
 }
@@ -143,12 +167,11 @@ export interface AviatrixSpokeTransitAttachmentState {
  */
 export interface AviatrixSpokeTransitAttachmentArgs {
     /**
-     * Indicates whether the maximum amount of HPE tunnels will be created. Only valid when transit and spoke gateways are each
-     * launched in Insane Mode and in the same cloud type. Available as of provider version R2.22.2+.
+     * Indicates whether the maximum amount of HPE tunnels will be created. Only valid when transit and spoke gateways are each launched in Insane Mode and in the same cloud type. Default value: true. Available as of provider version R2.22.2+.
      */
     enableMaxPerformance?: pulumi.Input<boolean>;
     /**
-     * Learned routes will be propagated to these route tables.
+     * Learned routes will be propagated to these route tables. Example: ["rtb-212ff547","rtb-04539787"].
      */
     routeTables?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -156,7 +179,7 @@ export interface AviatrixSpokeTransitAttachmentArgs {
      */
     spokeGwName: pulumi.Input<string>;
     /**
-     * AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on spoke gateway.
+     * Connection based AS Path Prepend. Valid only for BGP connection. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on spoke_gateway_name. Available as of provider version R2.23+.
      */
     spokePrependAsPaths?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -164,7 +187,7 @@ export interface AviatrixSpokeTransitAttachmentArgs {
      */
     transitGwName: pulumi.Input<string>;
     /**
-     * AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit gateway.
+     * Connection based AS Path Prepend. Valid only for BGP connection. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on transit_gateway_name. Available as of provider version R2.23+.
      */
     transitPrependAsPaths?: pulumi.Input<pulumi.Input<string>[]>;
 }

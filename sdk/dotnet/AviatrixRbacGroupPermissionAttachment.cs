@@ -9,17 +9,47 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_rbac_group_permission_attachment** resource allows the creation and management of permission attachments to Aviatrix (Role-Based Access Control) RBAC groups.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Rbac Group Permission Attachment
+    ///     var testAttachment = new Aviatrix.AviatrixRbacGroupPermissionAttachment("testAttachment", new()
+    ///     {
+    ///         GroupName = "write_only",
+    ///         PermissionName = "all_write",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **rbac_group_permission_attachment** can be imported using the `group_name` and `permission_name`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixRbacGroupPermissionAttachment:AviatrixRbacGroupPermissionAttachment test group_name~permission_name
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixRbacGroupPermissionAttachment:AviatrixRbacGroupPermissionAttachment")]
     public partial class AviatrixRbacGroupPermissionAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// RBAC permission group name.
+        /// This parameter represents the name of a RBAC group.
         /// </summary>
         [Output("groupName")]
         public Output<string> GroupName { get; private set; } = null!;
 
         /// <summary>
-        /// Permission name.
+        /// This parameter represents the permission to attach to the RBAC group.
         /// </summary>
         [Output("permissionName")]
         public Output<string> PermissionName { get; private set; } = null!;
@@ -72,13 +102,13 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixRbacGroupPermissionAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// RBAC permission group name.
+        /// This parameter represents the name of a RBAC group.
         /// </summary>
         [Input("groupName", required: true)]
         public Input<string> GroupName { get; set; } = null!;
 
         /// <summary>
-        /// Permission name.
+        /// This parameter represents the permission to attach to the RBAC group.
         /// </summary>
         [Input("permissionName", required: true)]
         public Input<string> PermissionName { get; set; } = null!;
@@ -92,13 +122,13 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixRbacGroupPermissionAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// RBAC permission group name.
+        /// This parameter represents the name of a RBAC group.
         /// </summary>
         [Input("groupName")]
         public Input<string>? GroupName { get; set; }
 
         /// <summary>
-        /// Permission name.
+        /// This parameter represents the permission to attach to the RBAC group.
         /// </summary>
         [Input("permissionName")]
         public Input<string>? PermissionName { get; set; }

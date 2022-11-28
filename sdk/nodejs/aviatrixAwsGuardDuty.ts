@@ -4,6 +4,32 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@astipkovits/aviatrix";
+ *
+ * // Configure AWS GuardDuty 
+ * const testAwsGuardDuty = new aviatrix.AviatrixAwsGuardDuty("testAwsGuardDuty", {
+ *     accountName: aviatrix_account.account_1.account_name,
+ *     region: "us-west-1",
+ *     excludedIps: [
+ *         "127.0.0.1",
+ *         "10.0.0.1",
+ *     ],
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **aws_guard_duty** resource can be imported with the `account_name` and `region` in the form "account_name~~region", e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixAwsGuardDuty:AviatrixAwsGuardDuty test_aws_guard_duty devops-acc~~us-west-1
+ * ```
+ */
 export class AviatrixAwsGuardDuty extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixAwsGuardDuty resource's state with the given name, ID, and optional extra
@@ -33,11 +59,11 @@ export class AviatrixAwsGuardDuty extends pulumi.CustomResource {
     }
 
     /**
-     * Account name
+     * Account name.
      */
     public readonly accountName!: pulumi.Output<string>;
     /**
-     * Excluded IPs.
+     * Set of excluded IPs.
      */
     public readonly excludedIps!: pulumi.Output<string[] | undefined>;
     /**
@@ -83,11 +109,11 @@ export class AviatrixAwsGuardDuty extends pulumi.CustomResource {
  */
 export interface AviatrixAwsGuardDutyState {
     /**
-     * Account name
+     * Account name.
      */
     accountName?: pulumi.Input<string>;
     /**
-     * Excluded IPs.
+     * Set of excluded IPs.
      */
     excludedIps?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -101,11 +127,11 @@ export interface AviatrixAwsGuardDutyState {
  */
 export interface AviatrixAwsGuardDutyArgs {
     /**
-     * Account name
+     * Account name.
      */
     accountName: pulumi.Input<string>;
     /**
-     * Excluded IPs.
+     * Set of excluded IPs.
      */
     excludedIps?: pulumi.Input<pulumi.Input<string>[]>;
     /**

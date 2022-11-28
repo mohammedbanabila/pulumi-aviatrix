@@ -9,65 +9,101 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_cloudn_transit_gateway_attachment** resource allows the creation and management of CloudN Transit Gateway Attachments. This resource is available as of provider version R2.19+.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create a CloudN Transit Gateway Attachment
+    ///     var test = new Aviatrix.AviatrixCloudnTransitGatewayAttachment("test", new()
+    ///     {
+    ///         DeviceName = aviatrix_device_registration.Test_device.Name,
+    ///         TransitGatewayName = aviatrix_transit_gateway.Aws_transit.Gw_name,
+    ///         ConnectionName = "cloudn-transit-attachment-test",
+    ///         TransitGatewayBgpAsn = "65000",
+    ///         CloudnBgpAsn = "65046",
+    ///         CloudnLanInterfaceNeighborIp = "10.210.38.100",
+    ///         CloudnLanInterfaceNeighborBgpAsn = "65219",
+    ///         EnableOverPrivateNetwork = false,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **aviatrix_cloudn_transit_gateway_attachment** can be imported using the `connection_name`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixCloudnTransitGatewayAttachment:AviatrixCloudnTransitGatewayAttachment test connection_name
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixCloudnTransitGatewayAttachment:AviatrixCloudnTransitGatewayAttachment")]
     public partial class AviatrixCloudnTransitGatewayAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// CloudN BGP AS Number.
+        /// CloudN BGP AS Number. Type: String.
         /// </summary>
         [Output("cloudnBgpAsn")]
         public Output<string> CloudnBgpAsn { get; private set; } = null!;
 
         /// <summary>
-        /// CloudN LAN Interface Neighbor's BGP AS Number.
+        /// CloudN LAN Interface Neighbor's AS Number. Type: String.
         /// </summary>
         [Output("cloudnLanInterfaceNeighborBgpAsn")]
         public Output<string> CloudnLanInterfaceNeighborBgpAsn { get; private set; } = null!;
 
         /// <summary>
-        /// CloudN LAN Interface Neighbor's IP.
+        /// CloudN LAN Interface Neighbor's IP Address. Type: String.
         /// </summary>
         [Output("cloudnLanInterfaceNeighborIp")]
         public Output<string> CloudnLanInterfaceNeighborIp { get; private set; } = null!;
 
         /// <summary>
-        /// Connection name.
+        /// Connection Name. Type: String.
         /// </summary>
         [Output("connectionName")]
         public Output<string> ConnectionName { get; private set; } = null!;
 
         /// <summary>
-        /// Device name.
+        /// CloudN device name. Type: String.
         /// </summary>
         [Output("deviceName")]
         public Output<string> DeviceName { get; private set; } = null!;
 
         /// <summary>
-        /// Enable jumbo frame.
+        /// Enable Jumbo Frame support for the connection. Type: Boolean. Default: false.
         /// </summary>
         [Output("enableJumboFrame")]
         public Output<bool?> EnableJumboFrame { get; private set; } = null!;
 
         /// <summary>
-        /// Enable over private network.
+        /// Enable connection over private network. Type: Boolean. Default: true.
         /// </summary>
         [Output("enableOverPrivateNetwork")]
         public Output<bool?> EnableOverPrivateNetwork { get; private set; } = null!;
 
         /// <summary>
-        /// AS path prepend.
+        /// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires transit_gateway_bgp_asn to be set. Type: List. Available as of provider version R2.21.0+.
         /// </summary>
         [Output("prependAsPaths")]
         public Output<ImmutableArray<string>> PrependAsPaths { get; private set; } = null!;
 
         /// <summary>
-        /// Transit Gateway BGP AS Number.
+        /// Transit Gateway BGP AS Number. Type: String.
         /// </summary>
         [Output("transitGatewayBgpAsn")]
         public Output<string> TransitGatewayBgpAsn { get; private set; } = null!;
 
         /// <summary>
-        /// Transit Gateway name.
+        /// Transit Gateway Name. Type: String.
         /// </summary>
         [Output("transitGatewayName")]
         public Output<string> TransitGatewayName { get; private set; } = null!;
@@ -120,43 +156,43 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixCloudnTransitGatewayAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// CloudN BGP AS Number.
+        /// CloudN BGP AS Number. Type: String.
         /// </summary>
         [Input("cloudnBgpAsn", required: true)]
         public Input<string> CloudnBgpAsn { get; set; } = null!;
 
         /// <summary>
-        /// CloudN LAN Interface Neighbor's BGP AS Number.
+        /// CloudN LAN Interface Neighbor's AS Number. Type: String.
         /// </summary>
         [Input("cloudnLanInterfaceNeighborBgpAsn", required: true)]
         public Input<string> CloudnLanInterfaceNeighborBgpAsn { get; set; } = null!;
 
         /// <summary>
-        /// CloudN LAN Interface Neighbor's IP.
+        /// CloudN LAN Interface Neighbor's IP Address. Type: String.
         /// </summary>
         [Input("cloudnLanInterfaceNeighborIp", required: true)]
         public Input<string> CloudnLanInterfaceNeighborIp { get; set; } = null!;
 
         /// <summary>
-        /// Connection name.
+        /// Connection Name. Type: String.
         /// </summary>
         [Input("connectionName", required: true)]
         public Input<string> ConnectionName { get; set; } = null!;
 
         /// <summary>
-        /// Device name.
+        /// CloudN device name. Type: String.
         /// </summary>
         [Input("deviceName", required: true)]
         public Input<string> DeviceName { get; set; } = null!;
 
         /// <summary>
-        /// Enable jumbo frame.
+        /// Enable Jumbo Frame support for the connection. Type: Boolean. Default: false.
         /// </summary>
         [Input("enableJumboFrame")]
         public Input<bool>? EnableJumboFrame { get; set; }
 
         /// <summary>
-        /// Enable over private network.
+        /// Enable connection over private network. Type: Boolean. Default: true.
         /// </summary>
         [Input("enableOverPrivateNetwork")]
         public Input<bool>? EnableOverPrivateNetwork { get; set; }
@@ -165,7 +201,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _prependAsPaths;
 
         /// <summary>
-        /// AS path prepend.
+        /// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires transit_gateway_bgp_asn to be set. Type: List. Available as of provider version R2.21.0+.
         /// </summary>
         public InputList<string> PrependAsPaths
         {
@@ -174,13 +210,13 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Transit Gateway BGP AS Number.
+        /// Transit Gateway BGP AS Number. Type: String.
         /// </summary>
         [Input("transitGatewayBgpAsn", required: true)]
         public Input<string> TransitGatewayBgpAsn { get; set; } = null!;
 
         /// <summary>
-        /// Transit Gateway name.
+        /// Transit Gateway Name. Type: String.
         /// </summary>
         [Input("transitGatewayName", required: true)]
         public Input<string> TransitGatewayName { get; set; } = null!;
@@ -194,43 +230,43 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixCloudnTransitGatewayAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// CloudN BGP AS Number.
+        /// CloudN BGP AS Number. Type: String.
         /// </summary>
         [Input("cloudnBgpAsn")]
         public Input<string>? CloudnBgpAsn { get; set; }
 
         /// <summary>
-        /// CloudN LAN Interface Neighbor's BGP AS Number.
+        /// CloudN LAN Interface Neighbor's AS Number. Type: String.
         /// </summary>
         [Input("cloudnLanInterfaceNeighborBgpAsn")]
         public Input<string>? CloudnLanInterfaceNeighborBgpAsn { get; set; }
 
         /// <summary>
-        /// CloudN LAN Interface Neighbor's IP.
+        /// CloudN LAN Interface Neighbor's IP Address. Type: String.
         /// </summary>
         [Input("cloudnLanInterfaceNeighborIp")]
         public Input<string>? CloudnLanInterfaceNeighborIp { get; set; }
 
         /// <summary>
-        /// Connection name.
+        /// Connection Name. Type: String.
         /// </summary>
         [Input("connectionName")]
         public Input<string>? ConnectionName { get; set; }
 
         /// <summary>
-        /// Device name.
+        /// CloudN device name. Type: String.
         /// </summary>
         [Input("deviceName")]
         public Input<string>? DeviceName { get; set; }
 
         /// <summary>
-        /// Enable jumbo frame.
+        /// Enable Jumbo Frame support for the connection. Type: Boolean. Default: false.
         /// </summary>
         [Input("enableJumboFrame")]
         public Input<bool>? EnableJumboFrame { get; set; }
 
         /// <summary>
-        /// Enable over private network.
+        /// Enable connection over private network. Type: Boolean. Default: true.
         /// </summary>
         [Input("enableOverPrivateNetwork")]
         public Input<bool>? EnableOverPrivateNetwork { get; set; }
@@ -239,7 +275,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _prependAsPaths;
 
         /// <summary>
-        /// AS path prepend.
+        /// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires transit_gateway_bgp_asn to be set. Type: List. Available as of provider version R2.21.0+.
         /// </summary>
         public InputList<string> PrependAsPaths
         {
@@ -248,13 +284,13 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Transit Gateway BGP AS Number.
+        /// Transit Gateway BGP AS Number. Type: String.
         /// </summary>
         [Input("transitGatewayBgpAsn")]
         public Input<string>? TransitGatewayBgpAsn { get; set; }
 
         /// <summary>
-        /// Transit Gateway name.
+        /// Transit Gateway Name. Type: String.
         /// </summary>
         [Input("transitGatewayName")]
         public Input<string>? TransitGatewayName { get; set; }

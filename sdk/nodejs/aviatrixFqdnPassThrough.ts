@@ -4,6 +4,34 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@astipkovits/aviatrix";
+ *
+ * // Create an Aviatrix Gateway FQDN filter pass-through
+ * const testFqdnPassThrough = new aviatrix.AviatrixFqdnPassThrough("testFqdnPassThrough", {
+ *     gwName: aviatrix_gateway.test_gw_aws.gw_name,
+ *     passThroughCidrs: [
+ *         "10.0.0.0/24",
+ *         "10.0.1.0/24",
+ *         "10.0.2.0/24",
+ *     ],
+ * }, {
+ *     dependsOn: [aviatrix_fqdn.test_fqdn],
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **fqdn_pass_through** can be imported using the `gw_name`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixFqdnPassThrough:AviatrixFqdnPassThrough test gw_name
+ * ```
+ */
 export class AviatrixFqdnPassThrough extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixFqdnPassThrough resource's state with the given name, ID, and optional extra
@@ -33,11 +61,11 @@ export class AviatrixFqdnPassThrough extends pulumi.CustomResource {
     }
 
     /**
-     * Gateway to apply FQDN pass-through rules to.
+     * Gateway name to apply pass-through rules to.
      */
     public readonly gwName!: pulumi.Output<string>;
     /**
-     * CIDRs to allow originating requests to ignore FQDN filtering rules.
+     * List of origin CIDR's to allow to pass-through FQDN filtering rules. Minimum list length: 1.
      */
     public readonly passThroughCidrs!: pulumi.Output<string[]>;
 
@@ -77,11 +105,11 @@ export class AviatrixFqdnPassThrough extends pulumi.CustomResource {
  */
 export interface AviatrixFqdnPassThroughState {
     /**
-     * Gateway to apply FQDN pass-through rules to.
+     * Gateway name to apply pass-through rules to.
      */
     gwName?: pulumi.Input<string>;
     /**
-     * CIDRs to allow originating requests to ignore FQDN filtering rules.
+     * List of origin CIDR's to allow to pass-through FQDN filtering rules. Minimum list length: 1.
      */
     passThroughCidrs?: pulumi.Input<pulumi.Input<string>[]>;
 }
@@ -91,11 +119,11 @@ export interface AviatrixFqdnPassThroughState {
  */
 export interface AviatrixFqdnPassThroughArgs {
     /**
-     * Gateway to apply FQDN pass-through rules to.
+     * Gateway name to apply pass-through rules to.
      */
     gwName: pulumi.Input<string>;
     /**
-     * CIDRs to allow originating requests to ignore FQDN filtering rules.
+     * List of origin CIDR's to allow to pass-through FQDN filtering rules. Minimum list length: 1.
      */
     passThroughCidrs: pulumi.Input<pulumi.Input<string>[]>;
 }

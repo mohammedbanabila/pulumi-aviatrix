@@ -13,7 +13,13 @@ namespace Pulumi.Aviatrix.Outputs
     [OutputType]
     public sealed class AviatrixFirewallTagCidrList
     {
+        /// <summary>
+        /// CIDR address to filter. Example: "10.88.88.88/32".
+        /// </summary>
         public readonly string Cidr;
+        /// <summary>
+        /// A name to identify the CIDR. Example: "policy1".
+        /// </summary>
         public readonly string CidrTagName;
 
         [OutputConstructor]

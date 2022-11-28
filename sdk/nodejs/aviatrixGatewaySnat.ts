@@ -2,9 +2,19 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * ## Import
+ *
+ * **gateway_snat** can be imported using the `gw_name`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixGatewaySnat:AviatrixGatewaySnat test gw_name
+ * ```
+ */
 export class AviatrixGatewaySnat extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixGatewaySnat resource's state with the given name, ID, and optional extra
@@ -38,7 +48,7 @@ export class AviatrixGatewaySnat extends pulumi.CustomResource {
      */
     public /*out*/ readonly connectionPolicies!: pulumi.Output<outputs.AviatrixGatewaySnatConnectionPolicy[]>;
     /**
-     * Name of the gateway.
+     * Name of the Aviatrix gateway the custom SNAT will be configured for.
      */
     public readonly gwName!: pulumi.Output<string>;
     /**
@@ -46,15 +56,15 @@ export class AviatrixGatewaySnat extends pulumi.CustomResource {
      */
     public /*out*/ readonly interfacePolicies!: pulumi.Output<outputs.AviatrixGatewaySnatInterfacePolicy[]>;
     /**
-     * Nat mode. Currently only supports 'customized_snat'.
+     * NAT mode. Valid values: "customizedSnat". Default value: "customizedSnat".
      */
     public readonly snatMode!: pulumi.Output<string | undefined>;
     /**
-     * Policy rules applied for 'snat_mode'' of 'customized_snat'.'
+     * Policy rule applied for enabling source NAT (mode: "customizedSnat"). Currently only supports AWS(1) and Azure(8).
      */
     public readonly snatPolicies!: pulumi.Output<outputs.AviatrixGatewaySnatSnatPolicy[] | undefined>;
     /**
-     * Whether to sync the policies to the HA gateway.
+     * Sync the policies to the HA gateway. Valid values: true, false. Default: false.
      */
     public readonly syncToHa!: pulumi.Output<boolean | undefined>;
 
@@ -103,7 +113,7 @@ export interface AviatrixGatewaySnatState {
      */
     connectionPolicies?: pulumi.Input<pulumi.Input<inputs.AviatrixGatewaySnatConnectionPolicy>[]>;
     /**
-     * Name of the gateway.
+     * Name of the Aviatrix gateway the custom SNAT will be configured for.
      */
     gwName?: pulumi.Input<string>;
     /**
@@ -111,15 +121,15 @@ export interface AviatrixGatewaySnatState {
      */
     interfacePolicies?: pulumi.Input<pulumi.Input<inputs.AviatrixGatewaySnatInterfacePolicy>[]>;
     /**
-     * Nat mode. Currently only supports 'customized_snat'.
+     * NAT mode. Valid values: "customizedSnat". Default value: "customizedSnat".
      */
     snatMode?: pulumi.Input<string>;
     /**
-     * Policy rules applied for 'snat_mode'' of 'customized_snat'.'
+     * Policy rule applied for enabling source NAT (mode: "customizedSnat"). Currently only supports AWS(1) and Azure(8).
      */
     snatPolicies?: pulumi.Input<pulumi.Input<inputs.AviatrixGatewaySnatSnatPolicy>[]>;
     /**
-     * Whether to sync the policies to the HA gateway.
+     * Sync the policies to the HA gateway. Valid values: true, false. Default: false.
      */
     syncToHa?: pulumi.Input<boolean>;
 }
@@ -129,19 +139,19 @@ export interface AviatrixGatewaySnatState {
  */
 export interface AviatrixGatewaySnatArgs {
     /**
-     * Name of the gateway.
+     * Name of the Aviatrix gateway the custom SNAT will be configured for.
      */
     gwName: pulumi.Input<string>;
     /**
-     * Nat mode. Currently only supports 'customized_snat'.
+     * NAT mode. Valid values: "customizedSnat". Default value: "customizedSnat".
      */
     snatMode?: pulumi.Input<string>;
     /**
-     * Policy rules applied for 'snat_mode'' of 'customized_snat'.'
+     * Policy rule applied for enabling source NAT (mode: "customizedSnat"). Currently only supports AWS(1) and Azure(8).
      */
     snatPolicies?: pulumi.Input<pulumi.Input<inputs.AviatrixGatewaySnatSnatPolicy>[]>;
     /**
-     * Whether to sync the policies to the HA gateway.
+     * Sync the policies to the HA gateway. Valid values: true, false. Default: false.
      */
     syncToHa?: pulumi.Input<boolean>;
 }

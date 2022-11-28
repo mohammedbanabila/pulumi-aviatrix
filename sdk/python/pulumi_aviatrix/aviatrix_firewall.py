@@ -23,12 +23,11 @@ class AviatrixFirewallArgs:
                  policies: Optional[pulumi.Input[Sequence[pulumi.Input['AviatrixFirewallPolicyArgs']]]] = None):
         """
         The set of arguments for constructing a AviatrixFirewall resource.
-        :param pulumi.Input[str] gw_name: The name of gateway.
-        :param pulumi.Input[bool] base_log_enabled: Indicates whether enable logging or not. Valid values: true, false. Default value: false.
-        :param pulumi.Input[str] base_policy: New base policy.
-        :param pulumi.Input[bool] manage_firewall_policies: Enable to manage firewall policies via in-line rules. If false, policies must be managed using
-               `aviatrix_firewall_policy` resources.
-        :param pulumi.Input[Sequence[pulumi.Input['AviatrixFirewallPolicyArgs']]] policies: New access policy for the gateway.
+        :param pulumi.Input[str] gw_name: Gateway name to attach firewall policy to.
+        :param pulumi.Input[bool] base_log_enabled: Indicates whether enable logging or not. Valid Values: true, false. Default value: false.
+        :param pulumi.Input[str] base_policy: New base policy. Valid Values: "allow-all", "deny-all". Default value: "deny-all"
+        :param pulumi.Input[bool] manage_firewall_policies: Enable to manage firewall policies via in-line rules. If false, policies must be managed using `AviatrixFirewallPolicy` resources. Default: true. Valid values: true, false. Available in provider version R2.17+.
+        :param pulumi.Input[Sequence[pulumi.Input['AviatrixFirewallPolicyArgs']]] policies: New access policy for the gateway. Seven fields are required for each policy item: `src_ip`, `dst_ip`, `protocol`, `port`, `action`, `log_enabled` and `description`. No duplicate rules (with same `src_ip`, `dst_ip`, `protocol` and `port`) are allowed.
         """
         pulumi.set(__self__, "gw_name", gw_name)
         if base_log_enabled is not None:
@@ -44,7 +43,7 @@ class AviatrixFirewallArgs:
     @pulumi.getter(name="gwName")
     def gw_name(self) -> pulumi.Input[str]:
         """
-        The name of gateway.
+        Gateway name to attach firewall policy to.
         """
         return pulumi.get(self, "gw_name")
 
@@ -56,7 +55,7 @@ class AviatrixFirewallArgs:
     @pulumi.getter(name="baseLogEnabled")
     def base_log_enabled(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicates whether enable logging or not. Valid values: true, false. Default value: false.
+        Indicates whether enable logging or not. Valid Values: true, false. Default value: false.
         """
         return pulumi.get(self, "base_log_enabled")
 
@@ -68,7 +67,7 @@ class AviatrixFirewallArgs:
     @pulumi.getter(name="basePolicy")
     def base_policy(self) -> Optional[pulumi.Input[str]]:
         """
-        New base policy.
+        New base policy. Valid Values: "allow-all", "deny-all". Default value: "deny-all"
         """
         return pulumi.get(self, "base_policy")
 
@@ -80,8 +79,7 @@ class AviatrixFirewallArgs:
     @pulumi.getter(name="manageFirewallPolicies")
     def manage_firewall_policies(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable to manage firewall policies via in-line rules. If false, policies must be managed using
-        `aviatrix_firewall_policy` resources.
+        Enable to manage firewall policies via in-line rules. If false, policies must be managed using `AviatrixFirewallPolicy` resources. Default: true. Valid values: true, false. Available in provider version R2.17+.
         """
         return pulumi.get(self, "manage_firewall_policies")
 
@@ -93,7 +91,7 @@ class AviatrixFirewallArgs:
     @pulumi.getter
     def policies(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['AviatrixFirewallPolicyArgs']]]]:
         """
-        New access policy for the gateway.
+        New access policy for the gateway. Seven fields are required for each policy item: `src_ip`, `dst_ip`, `protocol`, `port`, `action`, `log_enabled` and `description`. No duplicate rules (with same `src_ip`, `dst_ip`, `protocol` and `port`) are allowed.
         """
         return pulumi.get(self, "policies")
 
@@ -112,12 +110,11 @@ class _AviatrixFirewallState:
                  policies: Optional[pulumi.Input[Sequence[pulumi.Input['AviatrixFirewallPolicyArgs']]]] = None):
         """
         Input properties used for looking up and filtering AviatrixFirewall resources.
-        :param pulumi.Input[bool] base_log_enabled: Indicates whether enable logging or not. Valid values: true, false. Default value: false.
-        :param pulumi.Input[str] base_policy: New base policy.
-        :param pulumi.Input[str] gw_name: The name of gateway.
-        :param pulumi.Input[bool] manage_firewall_policies: Enable to manage firewall policies via in-line rules. If false, policies must be managed using
-               `aviatrix_firewall_policy` resources.
-        :param pulumi.Input[Sequence[pulumi.Input['AviatrixFirewallPolicyArgs']]] policies: New access policy for the gateway.
+        :param pulumi.Input[bool] base_log_enabled: Indicates whether enable logging or not. Valid Values: true, false. Default value: false.
+        :param pulumi.Input[str] base_policy: New base policy. Valid Values: "allow-all", "deny-all". Default value: "deny-all"
+        :param pulumi.Input[str] gw_name: Gateway name to attach firewall policy to.
+        :param pulumi.Input[bool] manage_firewall_policies: Enable to manage firewall policies via in-line rules. If false, policies must be managed using `AviatrixFirewallPolicy` resources. Default: true. Valid values: true, false. Available in provider version R2.17+.
+        :param pulumi.Input[Sequence[pulumi.Input['AviatrixFirewallPolicyArgs']]] policies: New access policy for the gateway. Seven fields are required for each policy item: `src_ip`, `dst_ip`, `protocol`, `port`, `action`, `log_enabled` and `description`. No duplicate rules (with same `src_ip`, `dst_ip`, `protocol` and `port`) are allowed.
         """
         if base_log_enabled is not None:
             pulumi.set(__self__, "base_log_enabled", base_log_enabled)
@@ -134,7 +131,7 @@ class _AviatrixFirewallState:
     @pulumi.getter(name="baseLogEnabled")
     def base_log_enabled(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicates whether enable logging or not. Valid values: true, false. Default value: false.
+        Indicates whether enable logging or not. Valid Values: true, false. Default value: false.
         """
         return pulumi.get(self, "base_log_enabled")
 
@@ -146,7 +143,7 @@ class _AviatrixFirewallState:
     @pulumi.getter(name="basePolicy")
     def base_policy(self) -> Optional[pulumi.Input[str]]:
         """
-        New base policy.
+        New base policy. Valid Values: "allow-all", "deny-all". Default value: "deny-all"
         """
         return pulumi.get(self, "base_policy")
 
@@ -158,7 +155,7 @@ class _AviatrixFirewallState:
     @pulumi.getter(name="gwName")
     def gw_name(self) -> Optional[pulumi.Input[str]]:
         """
-        The name of gateway.
+        Gateway name to attach firewall policy to.
         """
         return pulumi.get(self, "gw_name")
 
@@ -170,8 +167,7 @@ class _AviatrixFirewallState:
     @pulumi.getter(name="manageFirewallPolicies")
     def manage_firewall_policies(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable to manage firewall policies via in-line rules. If false, policies must be managed using
-        `aviatrix_firewall_policy` resources.
+        Enable to manage firewall policies via in-line rules. If false, policies must be managed using `AviatrixFirewallPolicy` resources. Default: true. Valid values: true, false. Available in provider version R2.17+.
         """
         return pulumi.get(self, "manage_firewall_policies")
 
@@ -183,7 +179,7 @@ class _AviatrixFirewallState:
     @pulumi.getter
     def policies(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['AviatrixFirewallPolicyArgs']]]]:
         """
-        New access policy for the gateway.
+        New access policy for the gateway. Seven fields are required for each policy item: `src_ip`, `dst_ip`, `protocol`, `port`, `action`, `log_enabled` and `description`. No duplicate rules (with same `src_ip`, `dst_ip`, `protocol` and `port`) are allowed.
         """
         return pulumi.get(self, "policies")
 
@@ -204,15 +200,84 @@ class AviatrixFirewall(pulumi.CustomResource):
                  policies: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixFirewallPolicyArgs']]]]] = None,
                  __props__=None):
         """
-        Create a AviatrixFirewall resource with the given unique name, props, and options.
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Firewall
+        stateful_firewall1 = aviatrix.AviatrixFirewall("statefulFirewall1",
+            base_log_enabled=True,
+            base_policy="allow-all",
+            gw_name="gateway-1",
+            manage_firewall_policies=False)
+        ```
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Firewall with in-line rules
+        stateful_firewall1 = aviatrix.AviatrixFirewall("statefulFirewall1",
+            gw_name="gateway-1",
+            base_policy="allow-all",
+            base_log_enabled=True,
+            policies=[
+                aviatrix.AviatrixFirewallPolicyArgs(
+                    protocol="all",
+                    src_ip="10.17.0.224/32",
+                    log_enabled=True,
+                    dst_ip="10.12.0.172/32",
+                    action="force-drop",
+                    port="0:65535",
+                    description="first_policy",
+                ),
+                aviatrix.AviatrixFirewallPolicyArgs(
+                    protocol="tcp",
+                    src_ip="10.16.0.224/32",
+                    log_enabled=False,
+                    dst_ip="10.12.1.172/32",
+                    action="force-drop",
+                    port="325",
+                    description="second_policy",
+                ),
+                aviatrix.AviatrixFirewallPolicyArgs(
+                    protocol="udp",
+                    src_ip="10.14.0.225/32",
+                    log_enabled=False,
+                    dst_ip="10.13.1.173/32",
+                    action="deny",
+                    port="325",
+                    description="third_policy",
+                ),
+                aviatrix.AviatrixFirewallPolicyArgs(
+                    protocol="tcp",
+                    src_ip=aviatrix_firewall_tag["test"]["firewall_tag"],
+                    log_enabled=False,
+                    dst_ip="10.13.1.173/32",
+                    action="deny",
+                    port="325",
+                    description="fourth_policy",
+                ),
+            ])
+        ```
+
+        ## Import
+
+        **firewall** can be imported using the `gw_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixFirewall:AviatrixFirewall test gw_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[bool] base_log_enabled: Indicates whether enable logging or not. Valid values: true, false. Default value: false.
-        :param pulumi.Input[str] base_policy: New base policy.
-        :param pulumi.Input[str] gw_name: The name of gateway.
-        :param pulumi.Input[bool] manage_firewall_policies: Enable to manage firewall policies via in-line rules. If false, policies must be managed using
-               `aviatrix_firewall_policy` resources.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixFirewallPolicyArgs']]]] policies: New access policy for the gateway.
+        :param pulumi.Input[bool] base_log_enabled: Indicates whether enable logging or not. Valid Values: true, false. Default value: false.
+        :param pulumi.Input[str] base_policy: New base policy. Valid Values: "allow-all", "deny-all". Default value: "deny-all"
+        :param pulumi.Input[str] gw_name: Gateway name to attach firewall policy to.
+        :param pulumi.Input[bool] manage_firewall_policies: Enable to manage firewall policies via in-line rules. If false, policies must be managed using `AviatrixFirewallPolicy` resources. Default: true. Valid values: true, false. Available in provider version R2.17+.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixFirewallPolicyArgs']]]] policies: New access policy for the gateway. Seven fields are required for each policy item: `src_ip`, `dst_ip`, `protocol`, `port`, `action`, `log_enabled` and `description`. No duplicate rules (with same `src_ip`, `dst_ip`, `protocol` and `port`) are allowed.
         """
         ...
     @overload
@@ -221,7 +286,77 @@ class AviatrixFirewall(pulumi.CustomResource):
                  args: AviatrixFirewallArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixFirewall resource with the given unique name, props, and options.
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Firewall
+        stateful_firewall1 = aviatrix.AviatrixFirewall("statefulFirewall1",
+            base_log_enabled=True,
+            base_policy="allow-all",
+            gw_name="gateway-1",
+            manage_firewall_policies=False)
+        ```
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Firewall with in-line rules
+        stateful_firewall1 = aviatrix.AviatrixFirewall("statefulFirewall1",
+            gw_name="gateway-1",
+            base_policy="allow-all",
+            base_log_enabled=True,
+            policies=[
+                aviatrix.AviatrixFirewallPolicyArgs(
+                    protocol="all",
+                    src_ip="10.17.0.224/32",
+                    log_enabled=True,
+                    dst_ip="10.12.0.172/32",
+                    action="force-drop",
+                    port="0:65535",
+                    description="first_policy",
+                ),
+                aviatrix.AviatrixFirewallPolicyArgs(
+                    protocol="tcp",
+                    src_ip="10.16.0.224/32",
+                    log_enabled=False,
+                    dst_ip="10.12.1.172/32",
+                    action="force-drop",
+                    port="325",
+                    description="second_policy",
+                ),
+                aviatrix.AviatrixFirewallPolicyArgs(
+                    protocol="udp",
+                    src_ip="10.14.0.225/32",
+                    log_enabled=False,
+                    dst_ip="10.13.1.173/32",
+                    action="deny",
+                    port="325",
+                    description="third_policy",
+                ),
+                aviatrix.AviatrixFirewallPolicyArgs(
+                    protocol="tcp",
+                    src_ip=aviatrix_firewall_tag["test"]["firewall_tag"],
+                    log_enabled=False,
+                    dst_ip="10.13.1.173/32",
+                    action="deny",
+                    port="325",
+                    description="fourth_policy",
+                ),
+            ])
+        ```
+
+        ## Import
+
+        **firewall** can be imported using the `gw_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixFirewall:AviatrixFirewall test gw_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixFirewallArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -280,12 +415,11 @@ class AviatrixFirewall(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[bool] base_log_enabled: Indicates whether enable logging or not. Valid values: true, false. Default value: false.
-        :param pulumi.Input[str] base_policy: New base policy.
-        :param pulumi.Input[str] gw_name: The name of gateway.
-        :param pulumi.Input[bool] manage_firewall_policies: Enable to manage firewall policies via in-line rules. If false, policies must be managed using
-               `aviatrix_firewall_policy` resources.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixFirewallPolicyArgs']]]] policies: New access policy for the gateway.
+        :param pulumi.Input[bool] base_log_enabled: Indicates whether enable logging or not. Valid Values: true, false. Default value: false.
+        :param pulumi.Input[str] base_policy: New base policy. Valid Values: "allow-all", "deny-all". Default value: "deny-all"
+        :param pulumi.Input[str] gw_name: Gateway name to attach firewall policy to.
+        :param pulumi.Input[bool] manage_firewall_policies: Enable to manage firewall policies via in-line rules. If false, policies must be managed using `AviatrixFirewallPolicy` resources. Default: true. Valid values: true, false. Available in provider version R2.17+.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixFirewallPolicyArgs']]]] policies: New access policy for the gateway. Seven fields are required for each policy item: `src_ip`, `dst_ip`, `protocol`, `port`, `action`, `log_enabled` and `description`. No duplicate rules (with same `src_ip`, `dst_ip`, `protocol` and `port`) are allowed.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -302,7 +436,7 @@ class AviatrixFirewall(pulumi.CustomResource):
     @pulumi.getter(name="baseLogEnabled")
     def base_log_enabled(self) -> pulumi.Output[Optional[bool]]:
         """
-        Indicates whether enable logging or not. Valid values: true, false. Default value: false.
+        Indicates whether enable logging or not. Valid Values: true, false. Default value: false.
         """
         return pulumi.get(self, "base_log_enabled")
 
@@ -310,7 +444,7 @@ class AviatrixFirewall(pulumi.CustomResource):
     @pulumi.getter(name="basePolicy")
     def base_policy(self) -> pulumi.Output[Optional[str]]:
         """
-        New base policy.
+        New base policy. Valid Values: "allow-all", "deny-all". Default value: "deny-all"
         """
         return pulumi.get(self, "base_policy")
 
@@ -318,7 +452,7 @@ class AviatrixFirewall(pulumi.CustomResource):
     @pulumi.getter(name="gwName")
     def gw_name(self) -> pulumi.Output[str]:
         """
-        The name of gateway.
+        Gateway name to attach firewall policy to.
         """
         return pulumi.get(self, "gw_name")
 
@@ -326,8 +460,7 @@ class AviatrixFirewall(pulumi.CustomResource):
     @pulumi.getter(name="manageFirewallPolicies")
     def manage_firewall_policies(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enable to manage firewall policies via in-line rules. If false, policies must be managed using
-        `aviatrix_firewall_policy` resources.
+        Enable to manage firewall policies via in-line rules. If false, policies must be managed using `AviatrixFirewallPolicy` resources. Default: true. Valid values: true, false. Available in provider version R2.17+.
         """
         return pulumi.get(self, "manage_firewall_policies")
 
@@ -335,7 +468,7 @@ class AviatrixFirewall(pulumi.CustomResource):
     @pulumi.getter
     def policies(self) -> pulumi.Output[Optional[Sequence['outputs.AviatrixFirewallPolicy']]]:
         """
-        New access policy for the gateway.
+        New access policy for the gateway. Seven fields are required for each policy item: `src_ip`, `dst_ip`, `protocol`, `port`, `action`, `log_enabled` and `description`. No duplicate rules (with same `src_ip`, `dst_ip`, `protocol` and `port`) are allowed.
         """
         return pulumi.get(self, "policies")
 

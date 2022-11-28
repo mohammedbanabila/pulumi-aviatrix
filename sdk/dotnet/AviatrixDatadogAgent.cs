@@ -9,6 +9,41 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_datadog_agent** resource allows the enabling and disabling of datadog agent.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Enable datadog agent
+    ///     var testDatadogAgent = new Aviatrix.AviatrixDatadogAgent("testDatadogAgent", new()
+    ///     {
+    ///         ApiKey = "your_api_key",
+    ///         ExcludedGateways = new[]
+    ///         {
+    ///             "a",
+    ///             "b",
+    ///         },
+    ///         Site = "datadoghq.com",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **datadog_agent** can be imported using "datadog_agent", e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixDatadogAgent:AviatrixDatadogAgent test datadog_agent
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixDatadogAgent:AviatrixDatadogAgent")]
     public partial class AviatrixDatadogAgent : global::Pulumi.CustomResource
     {
@@ -19,25 +54,25 @@ namespace Pulumi.Aviatrix
         public Output<string> ApiKey { get; private set; } = null!;
 
         /// <summary>
-        /// List of excluded gateways.
+        /// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         /// </summary>
         [Output("excludedGateways")]
         public Output<ImmutableArray<string>> ExcludedGateways { get; private set; } = null!;
 
         /// <summary>
-        /// Only export metrics without exporting logs.
+        /// Only export metrics without exporting logs. False by default.
         /// </summary>
         [Output("metricsOnly")]
         public Output<bool?> MetricsOnly { get; private set; } = null!;
 
         /// <summary>
-        /// Site preference.
+        /// Site preference ("datadoghq.com" or" datadoghq.eu"). "datadoghq.com" by default.
         /// </summary>
         [Output("site")]
         public Output<string?> Site { get; private set; } = null!;
 
         /// <summary>
-        /// Enabled or not.
+        /// The status of datadog agent.
         /// </summary>
         [Output("status")]
         public Output<string> Status { get; private set; } = null!;
@@ -66,6 +101,10 @@ namespace Pulumi.Aviatrix
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/astipkovits",
+                AdditionalSecretOutputs =
+                {
+                    "apiKey",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -89,17 +128,27 @@ namespace Pulumi.Aviatrix
 
     public sealed class AviatrixDatadogAgentArgs : global::Pulumi.ResourceArgs
     {
+        [Input("apiKey", required: true)]
+        private Input<string>? _apiKey;
+
         /// <summary>
         /// API key.
         /// </summary>
-        [Input("apiKey", required: true)]
-        public Input<string> ApiKey { get; set; } = null!;
+        public Input<string>? ApiKey
+        {
+            get => _apiKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _apiKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         [Input("excludedGateways")]
         private InputList<string>? _excludedGateways;
 
         /// <summary>
-        /// List of excluded gateways.
+        /// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         /// </summary>
         public InputList<string> ExcludedGateways
         {
@@ -108,13 +157,13 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Only export metrics without exporting logs.
+        /// Only export metrics without exporting logs. False by default.
         /// </summary>
         [Input("metricsOnly")]
         public Input<bool>? MetricsOnly { get; set; }
 
         /// <summary>
-        /// Site preference.
+        /// Site preference ("datadoghq.com" or" datadoghq.eu"). "datadoghq.com" by default.
         /// </summary>
         [Input("site")]
         public Input<string>? Site { get; set; }
@@ -127,17 +176,27 @@ namespace Pulumi.Aviatrix
 
     public sealed class AviatrixDatadogAgentState : global::Pulumi.ResourceArgs
     {
+        [Input("apiKey")]
+        private Input<string>? _apiKey;
+
         /// <summary>
         /// API key.
         /// </summary>
-        [Input("apiKey")]
-        public Input<string>? ApiKey { get; set; }
+        public Input<string>? ApiKey
+        {
+            get => _apiKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _apiKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         [Input("excludedGateways")]
         private InputList<string>? _excludedGateways;
 
         /// <summary>
-        /// List of excluded gateways.
+        /// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         /// </summary>
         public InputList<string> ExcludedGateways
         {
@@ -146,19 +205,19 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Only export metrics without exporting logs.
+        /// Only export metrics without exporting logs. False by default.
         /// </summary>
         [Input("metricsOnly")]
         public Input<bool>? MetricsOnly { get; set; }
 
         /// <summary>
-        /// Site preference.
+        /// Site preference ("datadoghq.com" or" datadoghq.eu"). "datadoghq.com" by default.
         /// </summary>
         [Input("site")]
         public Input<string>? Site { get; set; }
 
         /// <summary>
-        /// Enabled or not.
+        /// The status of datadog agent.
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }

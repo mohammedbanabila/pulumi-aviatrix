@@ -11,18 +11,115 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// !> **WARNING:** Resource **aviatrix_aws_tgw_security_domain** will be deprecated in future releases. Please use resource **aviatrix_aws_tgw_network_domain** instead.
+//
+// The **aviatrix_aws_tgw_security_domain** resource allows the creation and management of Aviatrix security domains.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			testAwsTgw, err := aviatrix.NewAviatrixAwsTgw(ctx, "testAwsTgw", &aviatrix.AviatrixAwsTgwArgs{
+//				AccountName:                    pulumi.String("devops"),
+//				AwsSideAsNumber:                pulumi.String("64512"),
+//				Region:                         pulumi.String("us-east-1"),
+//				TgwName:                        pulumi.String("test-AWS-TGW"),
+//				ManageSecurityDomain:           pulumi.Bool(false),
+//				ManageVpcAttachment:            pulumi.Bool(false),
+//				ManageTransitGatewayAttachment: pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			defaultDomain, err := aviatrix.NewAviatrixAwsTgwSecurityDomain(ctx, "defaultDomain", &aviatrix.AviatrixAwsTgwSecurityDomainArgs{
+//				TgwName: testAwsTgw.TgwName,
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			sharedServiceDomain, err := aviatrix.NewAviatrixAwsTgwSecurityDomain(ctx, "sharedServiceDomain", &aviatrix.AviatrixAwsTgwSecurityDomainArgs{
+//				TgwName: testAwsTgw.TgwName,
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			aviatrixEdgeDomain, err := aviatrix.NewAviatrixAwsTgwSecurityDomain(ctx, "aviatrixEdgeDomain", &aviatrix.AviatrixAwsTgwSecurityDomainArgs{
+//				TgwName: testAwsTgw.TgwName,
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = aviatrix.NewAviatrixAwsTgwSecurityDomainConn(ctx, "defaultSdConn1", &aviatrix.AviatrixAwsTgwSecurityDomainConnArgs{
+//				TgwName:     testAwsTgw.TgwName,
+//				DomainName1: aviatrixEdgeDomain.Name,
+//				DomainName2: defaultDomain.Name,
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = aviatrix.NewAviatrixAwsTgwSecurityDomainConn(ctx, "defaultSdConn2", &aviatrix.AviatrixAwsTgwSecurityDomainConnArgs{
+//				TgwName:     testAwsTgw.TgwName,
+//				DomainName1: aviatrixEdgeDomain.Name,
+//				DomainName2: sharedServiceDomain.Name,
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = aviatrix.NewAviatrixAwsTgwSecurityDomainConn(ctx, "defaultSdConn3", &aviatrix.AviatrixAwsTgwSecurityDomainConnArgs{
+//				TgwName:     testAwsTgw.TgwName,
+//				DomainName1: defaultDomain.Name,
+//				DomainName2: sharedServiceDomain.Name,
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = aviatrix.NewAviatrixAwsTgwSecurityDomain(ctx, "test", &aviatrix.AviatrixAwsTgwSecurityDomainArgs{
+//				TgwName: testAwsTgw.TgwName,
+//			}, pulumi.DependsOn([]pulumi.Resource{
+//				defaultDomain,
+//				sharedServiceDomain,
+//				aviatrixEdgeDomain,
+//			}))
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **aws_tgw_security_domain** can be imported using the `name` and `tgw_name`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixAwsTgwSecurityDomain:AviatrixAwsTgwSecurityDomain test tgw_name~name
+//
+// ```
 type AviatrixAwsTgwSecurityDomain struct {
 	pulumi.CustomResourceState
 
-	// Set to true if the security domain is an aviatrix firewall domain.
+	// Set to true if the security domain is to be used as an Aviatrix Firewall Domain for the Aviatrix Firewall Network. Valid values: true, false. Default value: false.
 	AviatrixFirewall pulumi.BoolPtrOutput `pulumi:"aviatrixFirewall"`
-	// Security domain name.
+	// The name of the security domain.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// Set to true if the security domain is a native egress domain.
+	// Set to true if the security domain is to be used as a native egress domain (for non-Aviatrix Firewall Network-based central Internet bound traffic). Valid values: true, false. Default value: false.
 	NativeEgress pulumi.BoolPtrOutput `pulumi:"nativeEgress"`
-	// Set to true if the security domain is a native firewall domain.
+	// Set to true if the security domain is to be used as a native firewall domain (for non-Aviatrix Firewall Network-based firewall traffic inspection). Valid values: true, false. Default value: false.
 	NativeFirewall pulumi.BoolPtrOutput `pulumi:"nativeFirewall"`
-	// AWS TGW name.
+	// The AWS TGW name of the security domain.
 	TgwName pulumi.StringOutput `pulumi:"tgwName"`
 }
 
@@ -59,28 +156,28 @@ func GetAviatrixAwsTgwSecurityDomain(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixAwsTgwSecurityDomain resources.
 type aviatrixAwsTgwSecurityDomainState struct {
-	// Set to true if the security domain is an aviatrix firewall domain.
+	// Set to true if the security domain is to be used as an Aviatrix Firewall Domain for the Aviatrix Firewall Network. Valid values: true, false. Default value: false.
 	AviatrixFirewall *bool `pulumi:"aviatrixFirewall"`
-	// Security domain name.
+	// The name of the security domain.
 	Name *string `pulumi:"name"`
-	// Set to true if the security domain is a native egress domain.
+	// Set to true if the security domain is to be used as a native egress domain (for non-Aviatrix Firewall Network-based central Internet bound traffic). Valid values: true, false. Default value: false.
 	NativeEgress *bool `pulumi:"nativeEgress"`
-	// Set to true if the security domain is a native firewall domain.
+	// Set to true if the security domain is to be used as a native firewall domain (for non-Aviatrix Firewall Network-based firewall traffic inspection). Valid values: true, false. Default value: false.
 	NativeFirewall *bool `pulumi:"nativeFirewall"`
-	// AWS TGW name.
+	// The AWS TGW name of the security domain.
 	TgwName *string `pulumi:"tgwName"`
 }
 
 type AviatrixAwsTgwSecurityDomainState struct {
-	// Set to true if the security domain is an aviatrix firewall domain.
+	// Set to true if the security domain is to be used as an Aviatrix Firewall Domain for the Aviatrix Firewall Network. Valid values: true, false. Default value: false.
 	AviatrixFirewall pulumi.BoolPtrInput
-	// Security domain name.
+	// The name of the security domain.
 	Name pulumi.StringPtrInput
-	// Set to true if the security domain is a native egress domain.
+	// Set to true if the security domain is to be used as a native egress domain (for non-Aviatrix Firewall Network-based central Internet bound traffic). Valid values: true, false. Default value: false.
 	NativeEgress pulumi.BoolPtrInput
-	// Set to true if the security domain is a native firewall domain.
+	// Set to true if the security domain is to be used as a native firewall domain (for non-Aviatrix Firewall Network-based firewall traffic inspection). Valid values: true, false. Default value: false.
 	NativeFirewall pulumi.BoolPtrInput
-	// AWS TGW name.
+	// The AWS TGW name of the security domain.
 	TgwName pulumi.StringPtrInput
 }
 
@@ -89,29 +186,29 @@ func (AviatrixAwsTgwSecurityDomainState) ElementType() reflect.Type {
 }
 
 type aviatrixAwsTgwSecurityDomainArgs struct {
-	// Set to true if the security domain is an aviatrix firewall domain.
+	// Set to true if the security domain is to be used as an Aviatrix Firewall Domain for the Aviatrix Firewall Network. Valid values: true, false. Default value: false.
 	AviatrixFirewall *bool `pulumi:"aviatrixFirewall"`
-	// Security domain name.
+	// The name of the security domain.
 	Name *string `pulumi:"name"`
-	// Set to true if the security domain is a native egress domain.
+	// Set to true if the security domain is to be used as a native egress domain (for non-Aviatrix Firewall Network-based central Internet bound traffic). Valid values: true, false. Default value: false.
 	NativeEgress *bool `pulumi:"nativeEgress"`
-	// Set to true if the security domain is a native firewall domain.
+	// Set to true if the security domain is to be used as a native firewall domain (for non-Aviatrix Firewall Network-based firewall traffic inspection). Valid values: true, false. Default value: false.
 	NativeFirewall *bool `pulumi:"nativeFirewall"`
-	// AWS TGW name.
+	// The AWS TGW name of the security domain.
 	TgwName string `pulumi:"tgwName"`
 }
 
 // The set of arguments for constructing a AviatrixAwsTgwSecurityDomain resource.
 type AviatrixAwsTgwSecurityDomainArgs struct {
-	// Set to true if the security domain is an aviatrix firewall domain.
+	// Set to true if the security domain is to be used as an Aviatrix Firewall Domain for the Aviatrix Firewall Network. Valid values: true, false. Default value: false.
 	AviatrixFirewall pulumi.BoolPtrInput
-	// Security domain name.
+	// The name of the security domain.
 	Name pulumi.StringPtrInput
-	// Set to true if the security domain is a native egress domain.
+	// Set to true if the security domain is to be used as a native egress domain (for non-Aviatrix Firewall Network-based central Internet bound traffic). Valid values: true, false. Default value: false.
 	NativeEgress pulumi.BoolPtrInput
-	// Set to true if the security domain is a native firewall domain.
+	// Set to true if the security domain is to be used as a native firewall domain (for non-Aviatrix Firewall Network-based firewall traffic inspection). Valid values: true, false. Default value: false.
 	NativeFirewall pulumi.BoolPtrInput
-	// AWS TGW name.
+	// The AWS TGW name of the security domain.
 	TgwName pulumi.StringInput
 }
 
@@ -202,27 +299,27 @@ func (o AviatrixAwsTgwSecurityDomainOutput) ToAviatrixAwsTgwSecurityDomainOutput
 	return o
 }
 
-// Set to true if the security domain is an aviatrix firewall domain.
+// Set to true if the security domain is to be used as an Aviatrix Firewall Domain for the Aviatrix Firewall Network. Valid values: true, false. Default value: false.
 func (o AviatrixAwsTgwSecurityDomainOutput) AviatrixFirewall() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwSecurityDomain) pulumi.BoolPtrOutput { return v.AviatrixFirewall }).(pulumi.BoolPtrOutput)
 }
 
-// Security domain name.
+// The name of the security domain.
 func (o AviatrixAwsTgwSecurityDomainOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwSecurityDomain) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// Set to true if the security domain is a native egress domain.
+// Set to true if the security domain is to be used as a native egress domain (for non-Aviatrix Firewall Network-based central Internet bound traffic). Valid values: true, false. Default value: false.
 func (o AviatrixAwsTgwSecurityDomainOutput) NativeEgress() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwSecurityDomain) pulumi.BoolPtrOutput { return v.NativeEgress }).(pulumi.BoolPtrOutput)
 }
 
-// Set to true if the security domain is a native firewall domain.
+// Set to true if the security domain is to be used as a native firewall domain (for non-Aviatrix Firewall Network-based firewall traffic inspection). Valid values: true, false. Default value: false.
 func (o AviatrixAwsTgwSecurityDomainOutput) NativeFirewall() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwSecurityDomain) pulumi.BoolPtrOutput { return v.NativeFirewall }).(pulumi.BoolPtrOutput)
 }
 
-// AWS TGW name.
+// The AWS TGW name of the security domain.
 func (o AviatrixAwsTgwSecurityDomainOutput) TgwName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwSecurityDomain) pulumi.StringOutput { return v.TgwName }).(pulumi.StringOutput)
 }

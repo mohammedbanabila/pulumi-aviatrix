@@ -9,18 +9,50 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_vpn_cert_download** resource manages the VPN Certificate Download configuration for SAML Authentication
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Set up the Aviatrix VPN Certificate Download configuration
+    ///     var testVpnCertDownload = new Aviatrix.AviatrixVpnCertDownload("testVpnCertDownload", new()
+    ///     {
+    ///         DownloadEnabled = true,
+    ///         SamlEndpoints = new[]
+    ///         {
+    ///             "saml_endpoint_name",
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **vpn_cert_download** can be imported using the default id `vpn_cert_download`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixVpnCertDownload:AviatrixVpnCertDownload test_vpn_cert_download vpn_cert_download
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixVpnCertDownload:AviatrixVpnCertDownload")]
     public partial class AviatrixVpnCertDownload : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Whether the VPN Certificate download is enabled. Supported Values: "true", "false"
+        /// Whether the VPN Certificate download is enabled. Supported Values: "true", "false".
         /// </summary>
         [Output("downloadEnabled")]
         public Output<bool?> DownloadEnabled { get; private set; } = null!;
 
         /// <summary>
-        /// List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is
-        /// supported. Example: ["saml_endpoint_1"].
+        /// List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is supported. Example: ["saml_endpoint_1"].
         /// </summary>
         [Output("samlEndpoints")]
         public Output<ImmutableArray<string>> SamlEndpoints { get; private set; } = null!;
@@ -73,7 +105,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixVpnCertDownloadArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Whether the VPN Certificate download is enabled. Supported Values: "true", "false"
+        /// Whether the VPN Certificate download is enabled. Supported Values: "true", "false".
         /// </summary>
         [Input("downloadEnabled")]
         public Input<bool>? DownloadEnabled { get; set; }
@@ -82,8 +114,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _samlEndpoints;
 
         /// <summary>
-        /// List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is
-        /// supported. Example: ["saml_endpoint_1"].
+        /// List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is supported. Example: ["saml_endpoint_1"].
         /// </summary>
         public InputList<string> SamlEndpoints
         {
@@ -100,7 +131,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixVpnCertDownloadState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Whether the VPN Certificate download is enabled. Supported Values: "true", "false"
+        /// Whether the VPN Certificate download is enabled. Supported Values: "true", "false".
         /// </summary>
         [Input("downloadEnabled")]
         public Input<bool>? DownloadEnabled { get; set; }
@@ -109,8 +140,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _samlEndpoints;
 
         /// <summary>
-        /// List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is
-        /// supported. Example: ["saml_endpoint_1"].
+        /// List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is supported. Example: ["saml_endpoint_1"].
         /// </summary>
         public InputList<string> SamlEndpoints
         {

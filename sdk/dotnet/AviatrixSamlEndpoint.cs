@@ -9,59 +9,130 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.IO;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix AWS SAML Endpoint
+    ///     var testSamlEndpoint = new Aviatrix.AviatrixSamlEndpoint("testSamlEndpoint", new()
+    ///     {
+    ///         EndpointName = "saml-test",
+    ///         IdpMetadataType = "Text",
+    ///         IdpMetadata = File.ReadAllText("idp_metadata.xml"),
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix AWS SAML Endpoint using Metadata UDL
+    ///     var testSamlEndpoint = new Aviatrix.AviatrixSamlEndpoint("testSamlEndpoint", new()
+    ///     {
+    ///         EndpointName = "saml-test",
+    ///         IdpMetadataType = "URL",
+    ///         IdpMetadataUrl = "https://dev-xyzz.okta.com/app/asdfasdfwfwf/sso/saml/metadata",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix AWS SAML Endpoint for Controller Login
+    ///     var testSamlEndpoint = new Aviatrix.AviatrixSamlEndpoint("testSamlEndpoint", new()
+    ///     {
+    ///         AccessSetBy = "controller",
+    ///         ControllerLogin = true,
+    ///         EndpointName = "saml-test",
+    ///         IdpMetadata = @var.Idp_metadata,
+    ///         IdpMetadataType = "Text",
+    ///         RbacGroups = new[]
+    ///         {
+    ///             "admin",
+    ///             "read_only",
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **saml_endpoint** can be imported using the SAML `endpoint_name`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixSamlEndpoint:AviatrixSamlEndpoint test saml-test
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixSamlEndpoint:AviatrixSamlEndpoint")]
     public partial class AviatrixSamlEndpoint : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Access type.
+        /// Access type. Valid values: "controller", "profile_attribute". Default value: "controller".
         /// </summary>
         [Output("accessSetBy")]
         public Output<string?> AccessSetBy { get; private set; } = null!;
 
         /// <summary>
-        /// Switch to differentiate if it is for controller login.
+        /// Valid values: true, false. Default value: false. Set true for creating a saml endpoint for controller login.
         /// </summary>
         [Output("controllerLogin")]
         public Output<bool?> ControllerLogin { get; private set; } = null!;
 
         /// <summary>
-        /// Custom Entity ID. Required to be non-empty for 'Custom' Entity ID type, empty for 'Hostname'.
+        /// Custom Entity ID. Required to be non-empty for 'Custom' Entity ID type, empty for 'Hostname' Entity ID type.
         /// </summary>
         [Output("customEntityId")]
         public Output<string?> CustomEntityId { get; private set; } = null!;
 
         /// <summary>
-        /// Custom SAML Request Template.
+        /// Custom SAML Request Template in string.
         /// </summary>
         [Output("customSamlRequestTemplate")]
         public Output<string?> CustomSamlRequestTemplate { get; private set; } = null!;
 
         /// <summary>
-        /// SAML Endpoint Name.
+        /// The SAML endpoint name.
         /// </summary>
         [Output("endpointName")]
         public Output<string> EndpointName { get; private set; } = null!;
 
         /// <summary>
-        /// IDP Metadata.
+        /// The IDP Metadata from SAML provider. Required if `idp_metadata_type` is "Text" and should be unset if type is "URL". Normally the metadata is in XML format which may contain special characters. Best practice is to use the file function to read from a local Metadata XML file.
         /// </summary>
         [Output("idpMetadata")]
         public Output<string?> IdpMetadata { get; private set; } = null!;
 
         /// <summary>
-        /// Type of IDP Metadata.
+        /// The IDP Metadata type. Can be either "Text" or "URL".
         /// </summary>
         [Output("idpMetadataType")]
         public Output<string> IdpMetadataType { get; private set; } = null!;
 
         /// <summary>
-        /// IDP Metadata.
+        /// The IDP Metadata URL from SAML provider. Required if `idp_metadata_type` is "URL" and should be unset if type is "Text".
         /// </summary>
         [Output("idpMetadataUrl")]
         public Output<string?> IdpMetadataUrl { get; private set; } = null!;
 
         /// <summary>
-        /// List of RBAC groups.
+        /// List of rbac groups. Required for controller login and "access_set_by" of "controller".
         /// </summary>
         [Output("rbacGroups")]
         public Output<ImmutableArray<string>> RbacGroups { get; private set; } = null!;
@@ -120,49 +191,49 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixSamlEndpointArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Access type.
+        /// Access type. Valid values: "controller", "profile_attribute". Default value: "controller".
         /// </summary>
         [Input("accessSetBy")]
         public Input<string>? AccessSetBy { get; set; }
 
         /// <summary>
-        /// Switch to differentiate if it is for controller login.
+        /// Valid values: true, false. Default value: false. Set true for creating a saml endpoint for controller login.
         /// </summary>
         [Input("controllerLogin")]
         public Input<bool>? ControllerLogin { get; set; }
 
         /// <summary>
-        /// Custom Entity ID. Required to be non-empty for 'Custom' Entity ID type, empty for 'Hostname'.
+        /// Custom Entity ID. Required to be non-empty for 'Custom' Entity ID type, empty for 'Hostname' Entity ID type.
         /// </summary>
         [Input("customEntityId")]
         public Input<string>? CustomEntityId { get; set; }
 
         /// <summary>
-        /// Custom SAML Request Template.
+        /// Custom SAML Request Template in string.
         /// </summary>
         [Input("customSamlRequestTemplate")]
         public Input<string>? CustomSamlRequestTemplate { get; set; }
 
         /// <summary>
-        /// SAML Endpoint Name.
+        /// The SAML endpoint name.
         /// </summary>
         [Input("endpointName", required: true)]
         public Input<string> EndpointName { get; set; } = null!;
 
         /// <summary>
-        /// IDP Metadata.
+        /// The IDP Metadata from SAML provider. Required if `idp_metadata_type` is "Text" and should be unset if type is "URL". Normally the metadata is in XML format which may contain special characters. Best practice is to use the file function to read from a local Metadata XML file.
         /// </summary>
         [Input("idpMetadata")]
         public Input<string>? IdpMetadata { get; set; }
 
         /// <summary>
-        /// Type of IDP Metadata.
+        /// The IDP Metadata type. Can be either "Text" or "URL".
         /// </summary>
         [Input("idpMetadataType", required: true)]
         public Input<string> IdpMetadataType { get; set; } = null!;
 
         /// <summary>
-        /// IDP Metadata.
+        /// The IDP Metadata URL from SAML provider. Required if `idp_metadata_type` is "URL" and should be unset if type is "Text".
         /// </summary>
         [Input("idpMetadataUrl")]
         public Input<string>? IdpMetadataUrl { get; set; }
@@ -171,7 +242,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _rbacGroups;
 
         /// <summary>
-        /// List of RBAC groups.
+        /// List of rbac groups. Required for controller login and "access_set_by" of "controller".
         /// </summary>
         public InputList<string> RbacGroups
         {
@@ -194,49 +265,49 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixSamlEndpointState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Access type.
+        /// Access type. Valid values: "controller", "profile_attribute". Default value: "controller".
         /// </summary>
         [Input("accessSetBy")]
         public Input<string>? AccessSetBy { get; set; }
 
         /// <summary>
-        /// Switch to differentiate if it is for controller login.
+        /// Valid values: true, false. Default value: false. Set true for creating a saml endpoint for controller login.
         /// </summary>
         [Input("controllerLogin")]
         public Input<bool>? ControllerLogin { get; set; }
 
         /// <summary>
-        /// Custom Entity ID. Required to be non-empty for 'Custom' Entity ID type, empty for 'Hostname'.
+        /// Custom Entity ID. Required to be non-empty for 'Custom' Entity ID type, empty for 'Hostname' Entity ID type.
         /// </summary>
         [Input("customEntityId")]
         public Input<string>? CustomEntityId { get; set; }
 
         /// <summary>
-        /// Custom SAML Request Template.
+        /// Custom SAML Request Template in string.
         /// </summary>
         [Input("customSamlRequestTemplate")]
         public Input<string>? CustomSamlRequestTemplate { get; set; }
 
         /// <summary>
-        /// SAML Endpoint Name.
+        /// The SAML endpoint name.
         /// </summary>
         [Input("endpointName")]
         public Input<string>? EndpointName { get; set; }
 
         /// <summary>
-        /// IDP Metadata.
+        /// The IDP Metadata from SAML provider. Required if `idp_metadata_type` is "Text" and should be unset if type is "URL". Normally the metadata is in XML format which may contain special characters. Best practice is to use the file function to read from a local Metadata XML file.
         /// </summary>
         [Input("idpMetadata")]
         public Input<string>? IdpMetadata { get; set; }
 
         /// <summary>
-        /// Type of IDP Metadata.
+        /// The IDP Metadata type. Can be either "Text" or "URL".
         /// </summary>
         [Input("idpMetadataType")]
         public Input<string>? IdpMetadataType { get; set; }
 
         /// <summary>
-        /// IDP Metadata.
+        /// The IDP Metadata URL from SAML provider. Required if `idp_metadata_type` is "URL" and should be unset if type is "Text".
         /// </summary>
         [Input("idpMetadataUrl")]
         public Input<string>? IdpMetadataUrl { get; set; }
@@ -245,7 +316,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _rbacGroups;
 
         /// <summary>
-        /// List of RBAC groups.
+        /// List of rbac groups. Required for controller login and "access_set_by" of "controller".
         /// </summary>
         public InputList<string> RbacGroups
         {

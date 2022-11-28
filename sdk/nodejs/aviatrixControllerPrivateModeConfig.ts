@@ -4,6 +4,29 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_controller_private_mode_config** resource allows management of an Aviatrix Controller's Private Mode configuration. This resource is available as of provider version R2.23+.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Controller Private Mode config
+ * const test = new aviatrix.AviatrixControllerPrivateModeConfig("test", {
+ *     enablePrivateMode: true,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **aviatrix_controller_private_mode_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixControllerPrivateModeConfig:AviatrixControllerPrivateModeConfig test 10-11-12-13
+ * ```
+ */
 export class AviatrixControllerPrivateModeConfig extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixControllerPrivateModeConfig resource's state with the given name, ID, and optional extra
@@ -33,15 +56,15 @@ export class AviatrixControllerPrivateModeConfig extends pulumi.CustomResource {
     }
 
     /**
-     * Copilot instance ID to associate with the Controller for Private Mode.
+     * Instance ID of a copilot instance to associate with an Aviatrix Controller in Private Mode. The copilot instance must be in the same VPC as the Aviatrix Controller.
      */
     public readonly copilotInstanceId!: pulumi.Output<string | undefined>;
     /**
-     * Whether to enable Private Mode on the Controller.
+     * Whether to enable Private Mode on an Aviatrix Controller.
      */
     public readonly enablePrivateMode!: pulumi.Output<boolean>;
     /**
-     * Set of proxies.
+     * Set of Controller proxies for Private Mode.
      */
     public readonly proxies!: pulumi.Output<string[] | undefined>;
 
@@ -80,15 +103,15 @@ export class AviatrixControllerPrivateModeConfig extends pulumi.CustomResource {
  */
 export interface AviatrixControllerPrivateModeConfigState {
     /**
-     * Copilot instance ID to associate with the Controller for Private Mode.
+     * Instance ID of a copilot instance to associate with an Aviatrix Controller in Private Mode. The copilot instance must be in the same VPC as the Aviatrix Controller.
      */
     copilotInstanceId?: pulumi.Input<string>;
     /**
-     * Whether to enable Private Mode on the Controller.
+     * Whether to enable Private Mode on an Aviatrix Controller.
      */
     enablePrivateMode?: pulumi.Input<boolean>;
     /**
-     * Set of proxies.
+     * Set of Controller proxies for Private Mode.
      */
     proxies?: pulumi.Input<pulumi.Input<string>[]>;
 }
@@ -98,15 +121,15 @@ export interface AviatrixControllerPrivateModeConfigState {
  */
 export interface AviatrixControllerPrivateModeConfigArgs {
     /**
-     * Copilot instance ID to associate with the Controller for Private Mode.
+     * Instance ID of a copilot instance to associate with an Aviatrix Controller in Private Mode. The copilot instance must be in the same VPC as the Aviatrix Controller.
      */
     copilotInstanceId?: pulumi.Input<string>;
     /**
-     * Whether to enable Private Mode on the Controller.
+     * Whether to enable Private Mode on an Aviatrix Controller.
      */
     enablePrivateMode: pulumi.Input<boolean>;
     /**
-     * Set of proxies.
+     * Set of Controller proxies for Private Mode.
      */
     proxies?: pulumi.Input<pulumi.Input<string>[]>;
 }

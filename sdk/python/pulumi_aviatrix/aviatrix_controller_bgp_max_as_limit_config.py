@@ -17,7 +17,7 @@ class AviatrixControllerBgpMaxAsLimitConfigArgs:
                  max_as_limit: pulumi.Input[int]):
         """
         The set of arguments for constructing a AviatrixControllerBgpMaxAsLimitConfig resource.
-        :param pulumi.Input[int] max_as_limit: The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation.
+        :param pulumi.Input[int] max_as_limit: The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation. Must be a number in the range [1-254].
         """
         pulumi.set(__self__, "max_as_limit", max_as_limit)
 
@@ -25,7 +25,7 @@ class AviatrixControllerBgpMaxAsLimitConfigArgs:
     @pulumi.getter(name="maxAsLimit")
     def max_as_limit(self) -> pulumi.Input[int]:
         """
-        The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation.
+        The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation. Must be a number in the range [1-254].
         """
         return pulumi.get(self, "max_as_limit")
 
@@ -40,7 +40,7 @@ class _AviatrixControllerBgpMaxAsLimitConfigState:
                  max_as_limit: Optional[pulumi.Input[int]] = None):
         """
         Input properties used for looking up and filtering AviatrixControllerBgpMaxAsLimitConfig resources.
-        :param pulumi.Input[int] max_as_limit: The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation.
+        :param pulumi.Input[int] max_as_limit: The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation. Must be a number in the range [1-254].
         """
         if max_as_limit is not None:
             pulumi.set(__self__, "max_as_limit", max_as_limit)
@@ -49,7 +49,7 @@ class _AviatrixControllerBgpMaxAsLimitConfigState:
     @pulumi.getter(name="maxAsLimit")
     def max_as_limit(self) -> Optional[pulumi.Input[int]]:
         """
-        The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation.
+        The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation. Must be a number in the range [1-254].
         """
         return pulumi.get(self, "max_as_limit")
 
@@ -66,10 +66,29 @@ class AviatrixControllerBgpMaxAsLimitConfig(pulumi.CustomResource):
                  max_as_limit: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
-        Create a AviatrixControllerBgpMaxAsLimitConfig resource with the given unique name, props, and options.
+        The **aviatrix_controller_bgp_max_as_limit_config** resource allows management of an Aviatrix Controller's BGP max AS limit for transit gateways. This resource is available as of provider version R2.18.1+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Controller BGP max AS limit config
+        test_max_as_limit = aviatrix.AviatrixControllerBgpMaxAsLimitConfig("testMaxAsLimit", max_as_limit=1)
+        ```
+
+        ## Import
+
+        **aviatrix_controller_bgp_max_as_limit_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixControllerBgpMaxAsLimitConfig:AviatrixControllerBgpMaxAsLimitConfig test_max_as_limit 10-11-12-13
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[int] max_as_limit: The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation.
+        :param pulumi.Input[int] max_as_limit: The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation. Must be a number in the range [1-254].
         """
         ...
     @overload
@@ -78,7 +97,26 @@ class AviatrixControllerBgpMaxAsLimitConfig(pulumi.CustomResource):
                  args: AviatrixControllerBgpMaxAsLimitConfigArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixControllerBgpMaxAsLimitConfig resource with the given unique name, props, and options.
+        The **aviatrix_controller_bgp_max_as_limit_config** resource allows management of an Aviatrix Controller's BGP max AS limit for transit gateways. This resource is available as of provider version R2.18.1+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Controller BGP max AS limit config
+        test_max_as_limit = aviatrix.AviatrixControllerBgpMaxAsLimitConfig("testMaxAsLimit", max_as_limit=1)
+        ```
+
+        ## Import
+
+        **aviatrix_controller_bgp_max_as_limit_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixControllerBgpMaxAsLimitConfig:AviatrixControllerBgpMaxAsLimitConfig test_max_as_limit 10-11-12-13
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixControllerBgpMaxAsLimitConfigArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -125,7 +163,7 @@ class AviatrixControllerBgpMaxAsLimitConfig(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[int] max_as_limit: The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation.
+        :param pulumi.Input[int] max_as_limit: The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation. Must be a number in the range [1-254].
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -138,7 +176,7 @@ class AviatrixControllerBgpMaxAsLimitConfig(pulumi.CustomResource):
     @pulumi.getter(name="maxAsLimit")
     def max_as_limit(self) -> pulumi.Output[int]:
         """
-        The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation.
+        The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation. Must be a number in the range [1-254].
         """
         return pulumi.get(self, "max_as_limit")
 

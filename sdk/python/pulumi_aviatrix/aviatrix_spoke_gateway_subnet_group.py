@@ -19,9 +19,9 @@ class AviatrixSpokeGatewaySubnetGroupArgs:
                  subnets: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a AviatrixSpokeGatewaySubnetGroup resource.
-        :param pulumi.Input[str] gw_name: Spoke gateway name.
-        :param pulumi.Input[str] name: Subnet group name.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] subnets: A set of subnets in the subnet group.
+        :param pulumi.Input[str] gw_name: Aviatrix spoke gateway name.
+        :param pulumi.Input[str] name: Name of spoke gateway subnet group.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] subnets: A set of subnets in the subnet group. The format of each subnet must be "CIDR~~subnet name". Example: `["10.2.48.0/20~~subnet1", "10.2.64.0/20~~subnet2"]`
         """
         pulumi.set(__self__, "gw_name", gw_name)
         if name is not None:
@@ -33,7 +33,7 @@ class AviatrixSpokeGatewaySubnetGroupArgs:
     @pulumi.getter(name="gwName")
     def gw_name(self) -> pulumi.Input[str]:
         """
-        Spoke gateway name.
+        Aviatrix spoke gateway name.
         """
         return pulumi.get(self, "gw_name")
 
@@ -45,7 +45,7 @@ class AviatrixSpokeGatewaySubnetGroupArgs:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        Subnet group name.
+        Name of spoke gateway subnet group.
         """
         return pulumi.get(self, "name")
 
@@ -57,7 +57,7 @@ class AviatrixSpokeGatewaySubnetGroupArgs:
     @pulumi.getter
     def subnets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        A set of subnets in the subnet group.
+        A set of subnets in the subnet group. The format of each subnet must be "CIDR~~subnet name". Example: `["10.2.48.0/20~~subnet1", "10.2.64.0/20~~subnet2"]`
         """
         return pulumi.get(self, "subnets")
 
@@ -74,9 +74,9 @@ class _AviatrixSpokeGatewaySubnetGroupState:
                  subnets: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering AviatrixSpokeGatewaySubnetGroup resources.
-        :param pulumi.Input[str] gw_name: Spoke gateway name.
-        :param pulumi.Input[str] name: Subnet group name.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] subnets: A set of subnets in the subnet group.
+        :param pulumi.Input[str] gw_name: Aviatrix spoke gateway name.
+        :param pulumi.Input[str] name: Name of spoke gateway subnet group.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] subnets: A set of subnets in the subnet group. The format of each subnet must be "CIDR~~subnet name". Example: `["10.2.48.0/20~~subnet1", "10.2.64.0/20~~subnet2"]`
         """
         if gw_name is not None:
             pulumi.set(__self__, "gw_name", gw_name)
@@ -89,7 +89,7 @@ class _AviatrixSpokeGatewaySubnetGroupState:
     @pulumi.getter(name="gwName")
     def gw_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Spoke gateway name.
+        Aviatrix spoke gateway name.
         """
         return pulumi.get(self, "gw_name")
 
@@ -101,7 +101,7 @@ class _AviatrixSpokeGatewaySubnetGroupState:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        Subnet group name.
+        Name of spoke gateway subnet group.
         """
         return pulumi.get(self, "name")
 
@@ -113,7 +113,7 @@ class _AviatrixSpokeGatewaySubnetGroupState:
     @pulumi.getter
     def subnets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        A set of subnets in the subnet group.
+        A set of subnets in the subnet group. The format of each subnet must be "CIDR~~subnet name". Example: `["10.2.48.0/20~~subnet1", "10.2.64.0/20~~subnet2"]`
         """
         return pulumi.get(self, "subnets")
 
@@ -132,12 +132,38 @@ class AviatrixSpokeGatewaySubnetGroup(pulumi.CustomResource):
                  subnets: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
-        Create a AviatrixSpokeGatewaySubnetGroup resource with the given unique name, props, and options.
+        The **aviatrix_spoke_gateway_subnet_group** resource creates and manages the spoke gateway subnet groups.
+
+        > **NOTE:** This feature is only valid for Azure.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Spoke Inspection Subnet Group
+        test = aviatrix.AviatrixSpokeGatewaySubnetGroup("test",
+            gw_name="spoke",
+            subnets=[
+                "10.2.48.0/20~~subnet1",
+                "10.2.64.0/20~~subnet2",
+            ])
+        ```
+
+        ## Import
+
+        **spoke_gateway_subnet_group** can be imported using the `gw_name` and `name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixSpokeGatewaySubnetGroup:AviatrixSpokeGatewaySubnetGroup test gw_name~name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] gw_name: Spoke gateway name.
-        :param pulumi.Input[str] name: Subnet group name.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] subnets: A set of subnets in the subnet group.
+        :param pulumi.Input[str] gw_name: Aviatrix spoke gateway name.
+        :param pulumi.Input[str] name: Name of spoke gateway subnet group.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] subnets: A set of subnets in the subnet group. The format of each subnet must be "CIDR~~subnet name". Example: `["10.2.48.0/20~~subnet1", "10.2.64.0/20~~subnet2"]`
         """
         ...
     @overload
@@ -146,7 +172,33 @@ class AviatrixSpokeGatewaySubnetGroup(pulumi.CustomResource):
                  args: AviatrixSpokeGatewaySubnetGroupArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixSpokeGatewaySubnetGroup resource with the given unique name, props, and options.
+        The **aviatrix_spoke_gateway_subnet_group** resource creates and manages the spoke gateway subnet groups.
+
+        > **NOTE:** This feature is only valid for Azure.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Spoke Inspection Subnet Group
+        test = aviatrix.AviatrixSpokeGatewaySubnetGroup("test",
+            gw_name="spoke",
+            subnets=[
+                "10.2.48.0/20~~subnet1",
+                "10.2.64.0/20~~subnet2",
+            ])
+        ```
+
+        ## Import
+
+        **spoke_gateway_subnet_group** can be imported using the `gw_name` and `name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixSpokeGatewaySubnetGroup:AviatrixSpokeGatewaySubnetGroup test gw_name~name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixSpokeGatewaySubnetGroupArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -199,9 +251,9 @@ class AviatrixSpokeGatewaySubnetGroup(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] gw_name: Spoke gateway name.
-        :param pulumi.Input[str] name: Subnet group name.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] subnets: A set of subnets in the subnet group.
+        :param pulumi.Input[str] gw_name: Aviatrix spoke gateway name.
+        :param pulumi.Input[str] name: Name of spoke gateway subnet group.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] subnets: A set of subnets in the subnet group. The format of each subnet must be "CIDR~~subnet name". Example: `["10.2.48.0/20~~subnet1", "10.2.64.0/20~~subnet2"]`
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -216,7 +268,7 @@ class AviatrixSpokeGatewaySubnetGroup(pulumi.CustomResource):
     @pulumi.getter(name="gwName")
     def gw_name(self) -> pulumi.Output[str]:
         """
-        Spoke gateway name.
+        Aviatrix spoke gateway name.
         """
         return pulumi.get(self, "gw_name")
 
@@ -224,7 +276,7 @@ class AviatrixSpokeGatewaySubnetGroup(pulumi.CustomResource):
     @pulumi.getter
     def name(self) -> pulumi.Output[str]:
         """
-        Subnet group name.
+        Name of spoke gateway subnet group.
         """
         return pulumi.get(self, "name")
 
@@ -232,7 +284,7 @@ class AviatrixSpokeGatewaySubnetGroup(pulumi.CustomResource):
     @pulumi.getter
     def subnets(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        A set of subnets in the subnet group.
+        A set of subnets in the subnet group. The format of each subnet must be "CIDR~~subnet name". Example: `["10.2.48.0/20~~subnet1", "10.2.64.0/20~~subnet2"]`
         """
         return pulumi.get(self, "subnets")
 

@@ -11,12 +11,49 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_rbac_group** resource allows the creation and management of [Aviatrix (Role-Based Access Control) RBAC groups](https://docs.aviatrix.com/HowTos/rbac_faq.html).
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixRbacGroup(ctx, "testGroup", &aviatrix.AviatrixRbacGroupArgs{
+//				GroupName: pulumi.String("write_only"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **rbac_group** can be imported using the `group_name`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixRbacGroup:AviatrixRbacGroup test group_name
+//
+// ```
 type AviatrixRbacGroup struct {
 	pulumi.CustomResourceState
 
-	// RBAC permission group name.
+	// This parameter represents the name of a RBAC group to be created.
 	GroupName pulumi.StringOutput `pulumi:"groupName"`
-	// Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login
+	// Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login . Supported values: true, false. Default value: false. Available in provider version R2.17.1+.
 	LocalLogin pulumi.BoolPtrOutput `pulumi:"localLogin"`
 }
 
@@ -53,16 +90,16 @@ func GetAviatrixRbacGroup(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixRbacGroup resources.
 type aviatrixRbacGroupState struct {
-	// RBAC permission group name.
+	// This parameter represents the name of a RBAC group to be created.
 	GroupName *string `pulumi:"groupName"`
-	// Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login
+	// Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login . Supported values: true, false. Default value: false. Available in provider version R2.17.1+.
 	LocalLogin *bool `pulumi:"localLogin"`
 }
 
 type AviatrixRbacGroupState struct {
-	// RBAC permission group name.
+	// This parameter represents the name of a RBAC group to be created.
 	GroupName pulumi.StringPtrInput
-	// Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login
+	// Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login . Supported values: true, false. Default value: false. Available in provider version R2.17.1+.
 	LocalLogin pulumi.BoolPtrInput
 }
 
@@ -71,17 +108,17 @@ func (AviatrixRbacGroupState) ElementType() reflect.Type {
 }
 
 type aviatrixRbacGroupArgs struct {
-	// RBAC permission group name.
+	// This parameter represents the name of a RBAC group to be created.
 	GroupName string `pulumi:"groupName"`
-	// Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login
+	// Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login . Supported values: true, false. Default value: false. Available in provider version R2.17.1+.
 	LocalLogin *bool `pulumi:"localLogin"`
 }
 
 // The set of arguments for constructing a AviatrixRbacGroup resource.
 type AviatrixRbacGroupArgs struct {
-	// RBAC permission group name.
+	// This parameter represents the name of a RBAC group to be created.
 	GroupName pulumi.StringInput
-	// Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login
+	// Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login . Supported values: true, false. Default value: false. Available in provider version R2.17.1+.
 	LocalLogin pulumi.BoolPtrInput
 }
 
@@ -172,12 +209,12 @@ func (o AviatrixRbacGroupOutput) ToAviatrixRbacGroupOutputWithContext(ctx contex
 	return o
 }
 
-// RBAC permission group name.
+// This parameter represents the name of a RBAC group to be created.
 func (o AviatrixRbacGroupOutput) GroupName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixRbacGroup) pulumi.StringOutput { return v.GroupName }).(pulumi.StringOutput)
 }
 
-// Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login
+// Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login . Supported values: true, false. Default value: false. Available in provider version R2.17.1+.
 func (o AviatrixRbacGroupOutput) LocalLogin() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixRbacGroup) pulumi.BoolPtrOutput { return v.LocalLogin }).(pulumi.BoolPtrOutput)
 }

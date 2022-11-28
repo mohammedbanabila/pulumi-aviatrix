@@ -13,9 +13,21 @@ namespace Pulumi.Aviatrix.Outputs
     [OutputType]
     public sealed class GetAviatrixVpcTrackerVpcListSubnetResult
     {
+        /// <summary>
+        /// Filters VPC list by CIDR (AWS/Azure only).
+        /// </summary>
         public readonly string Cidr;
+        /// <summary>
+        /// Subnet gateway ip.
+        /// </summary>
         public readonly string GwIp;
+        /// <summary>
+        /// Subnet name.
+        /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// Filters VPC list by region (AWS/Azure only).
+        /// </summary>
         public readonly string Region;
 
         [OutputConstructor]

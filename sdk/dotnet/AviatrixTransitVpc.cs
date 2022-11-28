@@ -9,6 +9,68 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The aviatrix.AviatrixTransitVpc resource creates and manages the Aviatrix Transit Network Gateways.
+    /// 
+    /// !&gt; **WARNING:** The `aviatrix.AviatrixTransitVpc` resource is deprecated as of **Release 2.0**. It is currently kept for backward-compatibility and will be removed in the future. Please use the transit gateway resource instead. If this is already in the state, please remove it from state file and import as `aviatrix.AviatrixTransitGateway`.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Manage Aviatrix Transit Network Gateways in aws
+    ///     var testTransitGwAws = new Aviatrix.AviatrixTransitVpc("testTransitGwAws", new()
+    ///     {
+    ///         AccountName = "devops_aws",
+    ///         CloudType = 1,
+    ///         ConnectedTransit = "yes",
+    ///         EnableHybridConnection = true,
+    ///         GwName = "transit",
+    ///         HaGwSize = "t2.micro",
+    ///         HaSubnet = "10.1.0.0/24",
+    ///         Subnet = "10.1.0.0/24",
+    ///         TagLists = new[]
+    ///         {
+    ///             "name:value",
+    ///             "name1:value1",
+    ///             "name2:value2",
+    ///         },
+    ///         VpcId = "vpc-abcd1234",
+    ///         VpcReg = "us-east-1",
+    ///         VpcSize = "t2.micro",
+    ///     });
+    /// 
+    ///     // Manage Aviatrix Transit Network Gateways in azure
+    ///     var testTransitGwAzure = new Aviatrix.AviatrixTransitVpc("testTransitGwAzure", new()
+    ///     {
+    ///         AccountName = "devops_azure",
+    ///         CloudType = 8,
+    ///         ConnectedTransit = "yes",
+    ///         GwName = "transit",
+    ///         HaGwSize = "Standard_B1s",
+    ///         HaSubnet = "10.30.0.0/24",
+    ///         Subnet = "10.30.0.0/24",
+    ///         VpcId = "vnet1:hello",
+    ///         VpcReg = "West US",
+    ///         VpcSize = "Standard_B1s",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Instance transit_vpc can be imported using the gw_name, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixTransitVpc:AviatrixTransitVpc test gw_name
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixTransitVpc:AviatrixTransitVpc")]
     public partial class AviatrixTransitVpc : global::Pulumi.CustomResource
     {
@@ -25,19 +87,19 @@ namespace Pulumi.Aviatrix
         public Output<int> CloudType { get; private set; } = null!;
 
         /// <summary>
-        /// Specify Connected Transit status.
+        /// Specify Connected Transit status. Supported values: true, false.
         /// </summary>
         [Output("connectedTransit")]
         public Output<string?> ConnectedTransit { get; private set; } = null!;
 
         /// <summary>
-        /// Specify whether to enable firenet interfaces or not.
+        /// Sign of readiness for FireNet connection. Valid values: true and false. Default: false.
         /// </summary>
         [Output("enableFirenetInterfaces")]
         public Output<bool?> EnableFirenetInterfaces { get; private set; } = null!;
 
         /// <summary>
-        /// Sign of readiness for TGW connection.
+        /// Sign of readiness for TGW connection. Only supported for aws. Example: false.
         /// </summary>
         [Output("enableHybridConnection")]
         public Output<bool?> EnableHybridConnection { get; private set; } = null!;
@@ -55,7 +117,7 @@ namespace Pulumi.Aviatrix
         public Output<string> GwName { get; private set; } = null!;
 
         /// <summary>
-        /// HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set).
+        /// HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set). Example: "t2.micro".
         /// </summary>
         [Output("haGwSize")]
         public Output<string?> HaGwSize { get; private set; } = null!;
@@ -67,14 +129,13 @@ namespace Pulumi.Aviatrix
         public Output<string?> HaInsaneModeAz { get; private set; } = null!;
 
         /// <summary>
-        /// HA Subnet.
+        /// HA Subnet CIDR. Example: "10.12.0.0/24".Setting to empty/unset will disable HA. Setting to a valid subnet CIDR will create an HA gateway on the subnet.
         /// </summary>
         [Output("haSubnet")]
         public Output<string?> HaSubnet { get; private set; } = null!;
 
         /// <summary>
-        /// Enable Insane Mode for Transit. Valid values: true, false. If insane mode is enabled, gateway size has to at least be c5
-        /// size.
+        /// Specify Insane Mode high performance gateway. Insane Mode gateway size must be at least c5 size. If enabled, will look for spare /26 segment to create a new subnet. Only available for AWS. Supported values: true, false.
         /// </summary>
         [Output("insaneMode")]
         public Output<bool?> InsaneMode { get; private set; } = null!;
@@ -86,31 +147,31 @@ namespace Pulumi.Aviatrix
         public Output<string?> InsaneModeAz { get; private set; } = null!;
 
         /// <summary>
-        /// Public Subnet Name.
+        /// Public Subnet CIDR. Example: AWS: "10.0.0.0/24". Copy/paste from AWS Console to get the right subnet CIDR.
         /// </summary>
         [Output("subnet")]
         public Output<string> Subnet { get; private set; } = null!;
 
         /// <summary>
-        /// Instance tag of cloud provider.
+        /// Instance tag of cloud provider. Only supported for aws. Example: ["key1:value1","key002:value002"]
         /// </summary>
         [Output("tagLists")]
         public Output<ImmutableArray<string>> TagLists { get; private set; } = null!;
 
         /// <summary>
-        /// VPC-ID/VNet-Name of cloud provider.
+        /// VPC-ID/VNet-Name of cloud provider. Required if for aws. Example: AWS: "vpc-abcd1234", GCP: "mygooglecloudvpcname", etc...
         /// </summary>
         [Output("vpcId")]
         public Output<string> VpcId { get; private set; } = null!;
 
         /// <summary>
-        /// Region of cloud provider.
+        /// Region of cloud provider. Example: AWS: "us-east-1", ARM: "East US 2", etc...
         /// </summary>
         [Output("vpcReg")]
         public Output<string> VpcReg { get; private set; } = null!;
 
         /// <summary>
-        /// Size of the gateway instance.
+        /// Size of the gateway instance. Example: AWS: "t2.large", etc...
         /// </summary>
         [Output("vpcSize")]
         public Output<string> VpcSize { get; private set; } = null!;
@@ -175,19 +236,19 @@ namespace Pulumi.Aviatrix
         public Input<int> CloudType { get; set; } = null!;
 
         /// <summary>
-        /// Specify Connected Transit status.
+        /// Specify Connected Transit status. Supported values: true, false.
         /// </summary>
         [Input("connectedTransit")]
         public Input<string>? ConnectedTransit { get; set; }
 
         /// <summary>
-        /// Specify whether to enable firenet interfaces or not.
+        /// Sign of readiness for FireNet connection. Valid values: true and false. Default: false.
         /// </summary>
         [Input("enableFirenetInterfaces")]
         public Input<bool>? EnableFirenetInterfaces { get; set; }
 
         /// <summary>
-        /// Sign of readiness for TGW connection.
+        /// Sign of readiness for TGW connection. Only supported for aws. Example: false.
         /// </summary>
         [Input("enableHybridConnection")]
         public Input<bool>? EnableHybridConnection { get; set; }
@@ -205,7 +266,7 @@ namespace Pulumi.Aviatrix
         public Input<string> GwName { get; set; } = null!;
 
         /// <summary>
-        /// HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set).
+        /// HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set). Example: "t2.micro".
         /// </summary>
         [Input("haGwSize")]
         public Input<string>? HaGwSize { get; set; }
@@ -217,14 +278,13 @@ namespace Pulumi.Aviatrix
         public Input<string>? HaInsaneModeAz { get; set; }
 
         /// <summary>
-        /// HA Subnet.
+        /// HA Subnet CIDR. Example: "10.12.0.0/24".Setting to empty/unset will disable HA. Setting to a valid subnet CIDR will create an HA gateway on the subnet.
         /// </summary>
         [Input("haSubnet")]
         public Input<string>? HaSubnet { get; set; }
 
         /// <summary>
-        /// Enable Insane Mode for Transit. Valid values: true, false. If insane mode is enabled, gateway size has to at least be c5
-        /// size.
+        /// Specify Insane Mode high performance gateway. Insane Mode gateway size must be at least c5 size. If enabled, will look for spare /26 segment to create a new subnet. Only available for AWS. Supported values: true, false.
         /// </summary>
         [Input("insaneMode")]
         public Input<bool>? InsaneMode { get; set; }
@@ -236,7 +296,7 @@ namespace Pulumi.Aviatrix
         public Input<string>? InsaneModeAz { get; set; }
 
         /// <summary>
-        /// Public Subnet Name.
+        /// Public Subnet CIDR. Example: AWS: "10.0.0.0/24". Copy/paste from AWS Console to get the right subnet CIDR.
         /// </summary>
         [Input("subnet", required: true)]
         public Input<string> Subnet { get; set; } = null!;
@@ -245,7 +305,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _tagLists;
 
         /// <summary>
-        /// Instance tag of cloud provider.
+        /// Instance tag of cloud provider. Only supported for aws. Example: ["key1:value1","key002:value002"]
         /// </summary>
         public InputList<string> TagLists
         {
@@ -254,19 +314,19 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// VPC-ID/VNet-Name of cloud provider.
+        /// VPC-ID/VNet-Name of cloud provider. Required if for aws. Example: AWS: "vpc-abcd1234", GCP: "mygooglecloudvpcname", etc...
         /// </summary>
         [Input("vpcId", required: true)]
         public Input<string> VpcId { get; set; } = null!;
 
         /// <summary>
-        /// Region of cloud provider.
+        /// Region of cloud provider. Example: AWS: "us-east-1", ARM: "East US 2", etc...
         /// </summary>
         [Input("vpcReg", required: true)]
         public Input<string> VpcReg { get; set; } = null!;
 
         /// <summary>
-        /// Size of the gateway instance.
+        /// Size of the gateway instance. Example: AWS: "t2.large", etc...
         /// </summary>
         [Input("vpcSize", required: true)]
         public Input<string> VpcSize { get; set; } = null!;
@@ -292,19 +352,19 @@ namespace Pulumi.Aviatrix
         public Input<int>? CloudType { get; set; }
 
         /// <summary>
-        /// Specify Connected Transit status.
+        /// Specify Connected Transit status. Supported values: true, false.
         /// </summary>
         [Input("connectedTransit")]
         public Input<string>? ConnectedTransit { get; set; }
 
         /// <summary>
-        /// Specify whether to enable firenet interfaces or not.
+        /// Sign of readiness for FireNet connection. Valid values: true and false. Default: false.
         /// </summary>
         [Input("enableFirenetInterfaces")]
         public Input<bool>? EnableFirenetInterfaces { get; set; }
 
         /// <summary>
-        /// Sign of readiness for TGW connection.
+        /// Sign of readiness for TGW connection. Only supported for aws. Example: false.
         /// </summary>
         [Input("enableHybridConnection")]
         public Input<bool>? EnableHybridConnection { get; set; }
@@ -322,7 +382,7 @@ namespace Pulumi.Aviatrix
         public Input<string>? GwName { get; set; }
 
         /// <summary>
-        /// HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set).
+        /// HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set). Example: "t2.micro".
         /// </summary>
         [Input("haGwSize")]
         public Input<string>? HaGwSize { get; set; }
@@ -334,14 +394,13 @@ namespace Pulumi.Aviatrix
         public Input<string>? HaInsaneModeAz { get; set; }
 
         /// <summary>
-        /// HA Subnet.
+        /// HA Subnet CIDR. Example: "10.12.0.0/24".Setting to empty/unset will disable HA. Setting to a valid subnet CIDR will create an HA gateway on the subnet.
         /// </summary>
         [Input("haSubnet")]
         public Input<string>? HaSubnet { get; set; }
 
         /// <summary>
-        /// Enable Insane Mode for Transit. Valid values: true, false. If insane mode is enabled, gateway size has to at least be c5
-        /// size.
+        /// Specify Insane Mode high performance gateway. Insane Mode gateway size must be at least c5 size. If enabled, will look for spare /26 segment to create a new subnet. Only available for AWS. Supported values: true, false.
         /// </summary>
         [Input("insaneMode")]
         public Input<bool>? InsaneMode { get; set; }
@@ -353,7 +412,7 @@ namespace Pulumi.Aviatrix
         public Input<string>? InsaneModeAz { get; set; }
 
         /// <summary>
-        /// Public Subnet Name.
+        /// Public Subnet CIDR. Example: AWS: "10.0.0.0/24". Copy/paste from AWS Console to get the right subnet CIDR.
         /// </summary>
         [Input("subnet")]
         public Input<string>? Subnet { get; set; }
@@ -362,7 +421,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _tagLists;
 
         /// <summary>
-        /// Instance tag of cloud provider.
+        /// Instance tag of cloud provider. Only supported for aws. Example: ["key1:value1","key002:value002"]
         /// </summary>
         public InputList<string> TagLists
         {
@@ -371,19 +430,19 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// VPC-ID/VNet-Name of cloud provider.
+        /// VPC-ID/VNet-Name of cloud provider. Required if for aws. Example: AWS: "vpc-abcd1234", GCP: "mygooglecloudvpcname", etc...
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }
 
         /// <summary>
-        /// Region of cloud provider.
+        /// Region of cloud provider. Example: AWS: "us-east-1", ARM: "East US 2", etc...
         /// </summary>
         [Input("vpcReg")]
         public Input<string>? VpcReg { get; set; }
 
         /// <summary>
-        /// Size of the gateway instance.
+        /// Size of the gateway instance. Example: AWS: "t2.large", etc...
         /// </summary>
         [Input("vpcSize")]
         public Input<string>? VpcSize { get; set; }

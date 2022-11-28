@@ -13,7 +13,13 @@ namespace Pulumi.Aviatrix.Outputs
     [OutputType]
     public sealed class AviatrixFqdnGwFilterTagList
     {
+        /// <summary>
+        /// Name of the gateway to attach to the specific tag.
+        /// </summary>
         public readonly string GwName;
+        /// <summary>
+        /// List of source IPs in the VPC qualified for a specific tag.
+        /// </summary>
         public readonly ImmutableArray<string> SourceIpLists;
 
         [OutputConstructor]

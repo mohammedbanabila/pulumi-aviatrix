@@ -18,8 +18,8 @@ class AviatrixRbacGroupPermissionAttachmentArgs:
                  permission_name: pulumi.Input[str]):
         """
         The set of arguments for constructing a AviatrixRbacGroupPermissionAttachment resource.
-        :param pulumi.Input[str] group_name: RBAC permission group name.
-        :param pulumi.Input[str] permission_name: Permission name.
+        :param pulumi.Input[str] group_name: This parameter represents the name of a RBAC group.
+        :param pulumi.Input[str] permission_name: This parameter represents the permission to attach to the RBAC group.
         """
         pulumi.set(__self__, "group_name", group_name)
         pulumi.set(__self__, "permission_name", permission_name)
@@ -28,7 +28,7 @@ class AviatrixRbacGroupPermissionAttachmentArgs:
     @pulumi.getter(name="groupName")
     def group_name(self) -> pulumi.Input[str]:
         """
-        RBAC permission group name.
+        This parameter represents the name of a RBAC group.
         """
         return pulumi.get(self, "group_name")
 
@@ -40,7 +40,7 @@ class AviatrixRbacGroupPermissionAttachmentArgs:
     @pulumi.getter(name="permissionName")
     def permission_name(self) -> pulumi.Input[str]:
         """
-        Permission name.
+        This parameter represents the permission to attach to the RBAC group.
         """
         return pulumi.get(self, "permission_name")
 
@@ -56,8 +56,8 @@ class _AviatrixRbacGroupPermissionAttachmentState:
                  permission_name: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixRbacGroupPermissionAttachment resources.
-        :param pulumi.Input[str] group_name: RBAC permission group name.
-        :param pulumi.Input[str] permission_name: Permission name.
+        :param pulumi.Input[str] group_name: This parameter represents the name of a RBAC group.
+        :param pulumi.Input[str] permission_name: This parameter represents the permission to attach to the RBAC group.
         """
         if group_name is not None:
             pulumi.set(__self__, "group_name", group_name)
@@ -68,7 +68,7 @@ class _AviatrixRbacGroupPermissionAttachmentState:
     @pulumi.getter(name="groupName")
     def group_name(self) -> Optional[pulumi.Input[str]]:
         """
-        RBAC permission group name.
+        This parameter represents the name of a RBAC group.
         """
         return pulumi.get(self, "group_name")
 
@@ -80,7 +80,7 @@ class _AviatrixRbacGroupPermissionAttachmentState:
     @pulumi.getter(name="permissionName")
     def permission_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Permission name.
+        This parameter represents the permission to attach to the RBAC group.
         """
         return pulumi.get(self, "permission_name")
 
@@ -98,11 +98,32 @@ class AviatrixRbacGroupPermissionAttachment(pulumi.CustomResource):
                  permission_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixRbacGroupPermissionAttachment resource with the given unique name, props, and options.
+        The **aviatrix_rbac_group_permission_attachment** resource allows the creation and management of permission attachments to Aviatrix (Role-Based Access Control) RBAC groups.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Rbac Group Permission Attachment
+        test_attachment = aviatrix.AviatrixRbacGroupPermissionAttachment("testAttachment",
+            group_name="write_only",
+            permission_name="all_write")
+        ```
+
+        ## Import
+
+        **rbac_group_permission_attachment** can be imported using the `group_name` and `permission_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixRbacGroupPermissionAttachment:AviatrixRbacGroupPermissionAttachment test group_name~permission_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] group_name: RBAC permission group name.
-        :param pulumi.Input[str] permission_name: Permission name.
+        :param pulumi.Input[str] group_name: This parameter represents the name of a RBAC group.
+        :param pulumi.Input[str] permission_name: This parameter represents the permission to attach to the RBAC group.
         """
         ...
     @overload
@@ -111,7 +132,28 @@ class AviatrixRbacGroupPermissionAttachment(pulumi.CustomResource):
                  args: AviatrixRbacGroupPermissionAttachmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixRbacGroupPermissionAttachment resource with the given unique name, props, and options.
+        The **aviatrix_rbac_group_permission_attachment** resource allows the creation and management of permission attachments to Aviatrix (Role-Based Access Control) RBAC groups.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Rbac Group Permission Attachment
+        test_attachment = aviatrix.AviatrixRbacGroupPermissionAttachment("testAttachment",
+            group_name="write_only",
+            permission_name="all_write")
+        ```
+
+        ## Import
+
+        **rbac_group_permission_attachment** can be imported using the `group_name` and `permission_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixRbacGroupPermissionAttachment:AviatrixRbacGroupPermissionAttachment test group_name~permission_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixRbacGroupPermissionAttachmentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -163,8 +205,8 @@ class AviatrixRbacGroupPermissionAttachment(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] group_name: RBAC permission group name.
-        :param pulumi.Input[str] permission_name: Permission name.
+        :param pulumi.Input[str] group_name: This parameter represents the name of a RBAC group.
+        :param pulumi.Input[str] permission_name: This parameter represents the permission to attach to the RBAC group.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -178,7 +220,7 @@ class AviatrixRbacGroupPermissionAttachment(pulumi.CustomResource):
     @pulumi.getter(name="groupName")
     def group_name(self) -> pulumi.Output[str]:
         """
-        RBAC permission group name.
+        This parameter represents the name of a RBAC group.
         """
         return pulumi.get(self, "group_name")
 
@@ -186,7 +228,7 @@ class AviatrixRbacGroupPermissionAttachment(pulumi.CustomResource):
     @pulumi.getter(name="permissionName")
     def permission_name(self) -> pulumi.Output[str]:
         """
-        Permission name.
+        This parameter represents the permission to attach to the RBAC group.
         """
         return pulumi.get(self, "permission_name")
 

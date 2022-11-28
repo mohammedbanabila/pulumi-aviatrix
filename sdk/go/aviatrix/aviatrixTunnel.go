@@ -11,20 +11,58 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_tunnel** resource allows the creation and management of Aviatrix Encrypted Peering tunnels.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixTunnel(ctx, "testTunnel", &aviatrix.AviatrixTunnelArgs{
+//				GwName1: pulumi.String("avtx-gw1"),
+//				GwName2: pulumi.String("avtx-gw2"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **tunnel** can be imported using the `gw_name1` and `gw_name2`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixTunnel:AviatrixTunnel test gw_name1~gw_name2
+//
+// ```
 type AviatrixTunnel struct {
 	pulumi.CustomResourceState
 
-	// Whether Peering HA is enabled. Valid inputs: true or false.
+	// Enable this attribute if peering-HA is enabled on the gateways. Valid values: true, false. Default value: false.
 	EnableHa pulumi.BoolPtrOutput `pulumi:"enableHa"`
 	// The first VPC Container name to make a peer pair.
 	GwName1 pulumi.StringOutput `pulumi:"gwName1"`
 	// The second VPC Container name to make a peer pair.
 	GwName2 pulumi.StringOutput `pulumi:"gwName2"`
-	// Status of the HA tunnel.
+	// (Computed) Status of the HA tunnel.
 	PeeringHastatus pulumi.StringOutput `pulumi:"peeringHastatus"`
-	// Name of the peering link.
+	// (Computed) Name of the peering link.
 	PeeringLink pulumi.StringOutput `pulumi:"peeringLink"`
-	// Status of the tunnel.
+	// (Computed) Status of the tunnel.
 	PeeringState pulumi.StringOutput `pulumi:"peeringState"`
 }
 
@@ -64,32 +102,32 @@ func GetAviatrixTunnel(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixTunnel resources.
 type aviatrixTunnelState struct {
-	// Whether Peering HA is enabled. Valid inputs: true or false.
+	// Enable this attribute if peering-HA is enabled on the gateways. Valid values: true, false. Default value: false.
 	EnableHa *bool `pulumi:"enableHa"`
 	// The first VPC Container name to make a peer pair.
 	GwName1 *string `pulumi:"gwName1"`
 	// The second VPC Container name to make a peer pair.
 	GwName2 *string `pulumi:"gwName2"`
-	// Status of the HA tunnel.
+	// (Computed) Status of the HA tunnel.
 	PeeringHastatus *string `pulumi:"peeringHastatus"`
-	// Name of the peering link.
+	// (Computed) Name of the peering link.
 	PeeringLink *string `pulumi:"peeringLink"`
-	// Status of the tunnel.
+	// (Computed) Status of the tunnel.
 	PeeringState *string `pulumi:"peeringState"`
 }
 
 type AviatrixTunnelState struct {
-	// Whether Peering HA is enabled. Valid inputs: true or false.
+	// Enable this attribute if peering-HA is enabled on the gateways. Valid values: true, false. Default value: false.
 	EnableHa pulumi.BoolPtrInput
 	// The first VPC Container name to make a peer pair.
 	GwName1 pulumi.StringPtrInput
 	// The second VPC Container name to make a peer pair.
 	GwName2 pulumi.StringPtrInput
-	// Status of the HA tunnel.
+	// (Computed) Status of the HA tunnel.
 	PeeringHastatus pulumi.StringPtrInput
-	// Name of the peering link.
+	// (Computed) Name of the peering link.
 	PeeringLink pulumi.StringPtrInput
-	// Status of the tunnel.
+	// (Computed) Status of the tunnel.
 	PeeringState pulumi.StringPtrInput
 }
 
@@ -98,7 +136,7 @@ func (AviatrixTunnelState) ElementType() reflect.Type {
 }
 
 type aviatrixTunnelArgs struct {
-	// Whether Peering HA is enabled. Valid inputs: true or false.
+	// Enable this attribute if peering-HA is enabled on the gateways. Valid values: true, false. Default value: false.
 	EnableHa *bool `pulumi:"enableHa"`
 	// The first VPC Container name to make a peer pair.
 	GwName1 string `pulumi:"gwName1"`
@@ -108,7 +146,7 @@ type aviatrixTunnelArgs struct {
 
 // The set of arguments for constructing a AviatrixTunnel resource.
 type AviatrixTunnelArgs struct {
-	// Whether Peering HA is enabled. Valid inputs: true or false.
+	// Enable this attribute if peering-HA is enabled on the gateways. Valid values: true, false. Default value: false.
 	EnableHa pulumi.BoolPtrInput
 	// The first VPC Container name to make a peer pair.
 	GwName1 pulumi.StringInput
@@ -203,7 +241,7 @@ func (o AviatrixTunnelOutput) ToAviatrixTunnelOutputWithContext(ctx context.Cont
 	return o
 }
 
-// Whether Peering HA is enabled. Valid inputs: true or false.
+// Enable this attribute if peering-HA is enabled on the gateways. Valid values: true, false. Default value: false.
 func (o AviatrixTunnelOutput) EnableHa() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixTunnel) pulumi.BoolPtrOutput { return v.EnableHa }).(pulumi.BoolPtrOutput)
 }
@@ -218,17 +256,17 @@ func (o AviatrixTunnelOutput) GwName2() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixTunnel) pulumi.StringOutput { return v.GwName2 }).(pulumi.StringOutput)
 }
 
-// Status of the HA tunnel.
+// (Computed) Status of the HA tunnel.
 func (o AviatrixTunnelOutput) PeeringHastatus() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixTunnel) pulumi.StringOutput { return v.PeeringHastatus }).(pulumi.StringOutput)
 }
 
-// Name of the peering link.
+// (Computed) Name of the peering link.
 func (o AviatrixTunnelOutput) PeeringLink() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixTunnel) pulumi.StringOutput { return v.PeeringLink }).(pulumi.StringOutput)
 }
 
-// Status of the tunnel.
+// (Computed) Status of the tunnel.
 func (o AviatrixTunnelOutput) PeeringState() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixTunnel) pulumi.StringOutput { return v.PeeringState }).(pulumi.StringOutput)
 }

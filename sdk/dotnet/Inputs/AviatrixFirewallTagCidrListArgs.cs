@@ -12,9 +12,15 @@ namespace Pulumi.Aviatrix.Inputs
 
     public sealed class AviatrixFirewallTagCidrListArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// CIDR address to filter. Example: "10.88.88.88/32".
+        /// </summary>
         [Input("cidr", required: true)]
         public Input<string> Cidr { get; set; } = null!;
 
+        /// <summary>
+        /// A name to identify the CIDR. Example: "policy1".
+        /// </summary>
         [Input("cidrTagName", required: true)]
         public Input<string> CidrTagName { get; set; } = null!;
 

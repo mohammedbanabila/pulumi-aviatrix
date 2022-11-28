@@ -9,23 +9,54 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_segmentation_network_domain_association** resource handles creation of [Transit Segmentation](https://docs.aviatrix.com/HowTos/transit_segmentation_faq.html) Network Domain and Transit Gateway Attachment Associations.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Segmentation Network Domain Association
+    ///     var testSegmentationNetworkDomainAssociation = new Aviatrix.AviatrixSegmentationNetworkDomainAssociation("testSegmentationNetworkDomainAssociation", new()
+    ///     {
+    ///         AttachmentName = "attachment-name",
+    ///         NetworkDomainName = "network-domain-name",
+    ///         TransitGatewayName = "transit-gw-name",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **aviatrix_segmentation_network_domain_association** can be imported using `transit_gateway_name`, `network_domain_name` and `attachment_name` separated by a `~` e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixSegmentationNetworkDomainAssociation:AviatrixSegmentationNetworkDomainAssociation test transit_gateway_name~network_domain_name~attachment_name
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixSegmentationNetworkDomainAssociation:AviatrixSegmentationNetworkDomainAssociation")]
     public partial class AviatrixSegmentationNetworkDomainAssociation : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Attachment name, either Spoke or Edge.
+        /// Name of the transit gateway attachment, Spoke or Edge, to associate with the network domain.
         /// </summary>
         [Output("attachmentName")]
         public Output<string> AttachmentName { get; private set; } = null!;
 
         /// <summary>
-        /// Network Domain name.
+        /// Name of the Segmentation Network Domain.
         /// </summary>
         [Output("networkDomainName")]
         public Output<string> NetworkDomainName { get; private set; } = null!;
 
         /// <summary>
-        /// Transit Gateway name.
+        /// Name of the Transit Gateway.
         /// </summary>
         [Output("transitGatewayName")]
         public Output<string> TransitGatewayName { get; private set; } = null!;
@@ -78,19 +109,19 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixSegmentationNetworkDomainAssociationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Attachment name, either Spoke or Edge.
+        /// Name of the transit gateway attachment, Spoke or Edge, to associate with the network domain.
         /// </summary>
         [Input("attachmentName", required: true)]
         public Input<string> AttachmentName { get; set; } = null!;
 
         /// <summary>
-        /// Network Domain name.
+        /// Name of the Segmentation Network Domain.
         /// </summary>
         [Input("networkDomainName", required: true)]
         public Input<string> NetworkDomainName { get; set; } = null!;
 
         /// <summary>
-        /// Transit Gateway name.
+        /// Name of the Transit Gateway.
         /// </summary>
         [Input("transitGatewayName", required: true)]
         public Input<string> TransitGatewayName { get; set; } = null!;
@@ -104,19 +135,19 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixSegmentationNetworkDomainAssociationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Attachment name, either Spoke or Edge.
+        /// Name of the transit gateway attachment, Spoke or Edge, to associate with the network domain.
         /// </summary>
         [Input("attachmentName")]
         public Input<string>? AttachmentName { get; set; }
 
         /// <summary>
-        /// Network Domain name.
+        /// Name of the Segmentation Network Domain.
         /// </summary>
         [Input("networkDomainName")]
         public Input<string>? NetworkDomainName { get; set; }
 
         /// <summary>
-        /// Transit Gateway name.
+        /// Name of the Transit Gateway.
         /// </summary>
         [Input("transitGatewayName")]
         public Input<string>? TransitGatewayName { get; set; }

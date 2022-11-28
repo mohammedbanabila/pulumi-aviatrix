@@ -248,11 +248,17 @@ class GetAviatrixSpokeGatewayResult:
     @property
     @pulumi.getter(name="accountName")
     def account_name(self) -> str:
+        """
+        Aviatrix account name.
+        """
         return pulumi.get(self, "account_name")
 
     @property
     @pulumi.getter(name="allocateNewEip")
     def allocate_new_eip(self) -> bool:
+        """
+        When value is false, an idle address in Elastic IP pool is reused for this gateway. Otherwise, a new Elastic IP is allocated and used for this gateway.
+        """
         return pulumi.get(self, "allocate_new_eip")
 
     @property
@@ -263,6 +269,9 @@ class GetAviatrixSpokeGatewayResult:
     @property
     @pulumi.getter(name="availabilityDomain")
     def availability_domain(self) -> str:
+        """
+        Availability domain for OCI.
+        """
         return pulumi.get(self, "availability_domain")
 
     @property
@@ -288,16 +297,25 @@ class GetAviatrixSpokeGatewayResult:
     @property
     @pulumi.getter(name="cloudInstanceId")
     def cloud_instance_id(self) -> str:
+        """
+        Cloud instance ID.
+        """
         return pulumi.get(self, "cloud_instance_id")
 
     @property
     @pulumi.getter(name="cloudType")
     def cloud_type(self) -> int:
+        """
+        Type of cloud service provider.
+        """
         return pulumi.get(self, "cloud_type")
 
     @property
     @pulumi.getter(name="customizedSpokeVpcRoutes")
     def customized_spoke_vpc_routes(self) -> str:
+        """
+        A list of comma separated CIDRs to be customized for the spoke VPC routes.
+        """
         return pulumi.get(self, "customized_spoke_vpc_routes")
 
     @property
@@ -308,6 +326,9 @@ class GetAviatrixSpokeGatewayResult:
     @property
     @pulumi.getter
     def eip(self) -> str:
+        """
+        The EIP address of the Spoke Gateway.
+        """
         return pulumi.get(self, "eip")
 
     @property
@@ -333,6 +354,9 @@ class GetAviatrixSpokeGatewayResult:
     @property
     @pulumi.getter(name="enableEncryptVolume")
     def enable_encrypt_volume(self) -> bool:
+        """
+        Status of Encrypt Volume of spoke gateway.
+        """
         return pulumi.get(self, "enable_encrypt_volume")
 
     @property
@@ -353,6 +377,9 @@ class GetAviatrixSpokeGatewayResult:
     @property
     @pulumi.getter(name="enablePrivateOob")
     def enable_private_oob(self) -> bool:
+        """
+        Status of private OOB for the spoke gateway.
+        """
         return pulumi.get(self, "enable_private_oob")
 
     @property
@@ -373,31 +400,49 @@ class GetAviatrixSpokeGatewayResult:
     @property
     @pulumi.getter(name="enableVpcDnsServer")
     def enable_vpc_dns_server(self) -> bool:
+        """
+        Status of VPC Dns Server of spoke gateway.
+        """
         return pulumi.get(self, "enable_vpc_dns_server")
 
     @property
     @pulumi.getter(name="faultDomain")
     def fault_domain(self) -> str:
+        """
+        Fault domain for OCI.
+        """
         return pulumi.get(self, "fault_domain")
 
     @property
     @pulumi.getter(name="filteredSpokeVpcRoutes")
     def filtered_spoke_vpc_routes(self) -> str:
+        """
+        A list of comma separated CIDRs to be filtered from the spoke VPC route table.
+        """
         return pulumi.get(self, "filtered_spoke_vpc_routes")
 
     @property
     @pulumi.getter(name="gwName")
     def gw_name(self) -> str:
+        """
+        Aviatrix spoke gateway name.
+        """
         return pulumi.get(self, "gw_name")
 
     @property
     @pulumi.getter(name="gwSize")
     def gw_size(self) -> str:
+        """
+        Size of spoke gateway instance.
+        """
         return pulumi.get(self, "gw_size")
 
     @property
     @pulumi.getter(name="haAvailabilityDomain")
     def ha_availability_domain(self) -> str:
+        """
+        HA gateway availability domain for OCI.
+        """
         return pulumi.get(self, "ha_availability_domain")
 
     @property
@@ -408,56 +453,89 @@ class GetAviatrixSpokeGatewayResult:
     @property
     @pulumi.getter(name="haCloudInstanceId")
     def ha_cloud_instance_id(self) -> str:
+        """
+        Cloud instance ID of HA spoke gateway.
+        """
         return pulumi.get(self, "ha_cloud_instance_id")
 
     @property
     @pulumi.getter(name="haEip")
     def ha_eip(self) -> str:
+        """
+        The EIP address of the HA Spoke Gateway.
+        """
         return pulumi.get(self, "ha_eip")
 
     @property
     @pulumi.getter(name="haFaultDomain")
     def ha_fault_domain(self) -> str:
+        """
+        HA gateway fault domain for OCI.
+        """
         return pulumi.get(self, "ha_fault_domain")
 
     @property
     @pulumi.getter(name="haGwName")
     def ha_gw_name(self) -> str:
+        """
+        Aviatrix spoke gateway unique name of HA spoke gateway.
+        """
         return pulumi.get(self, "ha_gw_name")
 
     @property
     @pulumi.getter(name="haGwSize")
     def ha_gw_size(self) -> str:
+        """
+        HA Gateway Size.
+        """
         return pulumi.get(self, "ha_gw_size")
 
     @property
     @pulumi.getter(name="haImageVersion")
     def ha_image_version(self) -> str:
+        """
+        The image version of the HA gateway.
+        """
         return pulumi.get(self, "ha_image_version")
 
     @property
     @pulumi.getter(name="haInsaneModeAz")
     def ha_insane_mode_az(self) -> str:
+        """
+        AZ of subnet being created for Insane Mode Spoke HA Gateway.
+        """
         return pulumi.get(self, "ha_insane_mode_az")
 
     @property
     @pulumi.getter(name="haOobAvailabilityZone")
     def ha_oob_availability_zone(self) -> str:
+        """
+        HA OOB availability zone.
+        """
         return pulumi.get(self, "ha_oob_availability_zone")
 
     @property
     @pulumi.getter(name="haOobManagementSubnet")
     def ha_oob_management_subnet(self) -> str:
+        """
+        HA OOB management subnet.
+        """
         return pulumi.get(self, "ha_oob_management_subnet")
 
     @property
     @pulumi.getter(name="haPrivateIp")
     def ha_private_ip(self) -> str:
+        """
+        Private IP address of HA spoke gateway.
+        """
         return pulumi.get(self, "ha_private_ip")
 
     @property
     @pulumi.getter(name="haPublicIp")
     def ha_public_ip(self) -> str:
+        """
+        Public IP address of the HA spoke gateway.
+        """
         return pulumi.get(self, "ha_public_ip")
 
     @property
@@ -468,16 +546,25 @@ class GetAviatrixSpokeGatewayResult:
     @property
     @pulumi.getter(name="haSoftwareVersion")
     def ha_software_version(self) -> str:
+        """
+        The software version of the HA gateway.
+        """
         return pulumi.get(self, "ha_software_version")
 
     @property
     @pulumi.getter(name="haSubnet")
     def ha_subnet(self) -> str:
+        """
+        HA Subnet.
+        """
         return pulumi.get(self, "ha_subnet")
 
     @property
     @pulumi.getter(name="haZone")
     def ha_zone(self) -> str:
+        """
+        HA Zone.
+        """
         return pulumi.get(self, "ha_zone")
 
     @property
@@ -491,21 +578,33 @@ class GetAviatrixSpokeGatewayResult:
     @property
     @pulumi.getter(name="imageVersion")
     def image_version(self) -> str:
+        """
+        The image version of the gateway.
+        """
         return pulumi.get(self, "image_version")
 
     @property
     @pulumi.getter(name="includedAdvertisedSpokeRoutes")
     def included_advertised_spoke_routes(self) -> str:
+        """
+        A list of comma separated CIDRs to be advertised to on-prem as "Included CIDR List".
+        """
         return pulumi.get(self, "included_advertised_spoke_routes")
 
     @property
     @pulumi.getter(name="insaneMode")
     def insane_mode(self) -> bool:
+        """
+        Status of Insane Mode for Spoke Gateway.
+        """
         return pulumi.get(self, "insane_mode")
 
     @property
     @pulumi.getter(name="insaneModeAz")
     def insane_mode_az(self) -> str:
+        """
+        AZ of subnet being created for Insane Mode spoke gateway.
+        """
         return pulumi.get(self, "insane_mode_az")
 
     @property
@@ -526,11 +625,17 @@ class GetAviatrixSpokeGatewayResult:
     @property
     @pulumi.getter(name="oobAvailabilityZone")
     def oob_availability_zone(self) -> str:
+        """
+        OOB availability zone.
+        """
         return pulumi.get(self, "oob_availability_zone")
 
     @property
     @pulumi.getter(name="oobManagementSubnet")
     def oob_management_subnet(self) -> str:
+        """
+        OOB management subnet.
+        """
         return pulumi.get(self, "oob_management_subnet")
 
     @property
@@ -541,31 +646,49 @@ class GetAviatrixSpokeGatewayResult:
     @property
     @pulumi.getter(name="privateIp")
     def private_ip(self) -> str:
+        """
+        Private IP address of the spoke gateway.
+        """
         return pulumi.get(self, "private_ip")
 
     @property
     @pulumi.getter(name="publicIp")
     def public_ip(self) -> str:
+        """
+        Public IP of spoke gateway.
+        """
         return pulumi.get(self, "public_ip")
 
     @property
     @pulumi.getter(name="securityGroupId")
     def security_group_id(self) -> str:
+        """
+        Security group used of the spoke gateway.
+        """
         return pulumi.get(self, "security_group_id")
 
     @property
     @pulumi.getter(name="singleAzHa")
     def single_az_ha(self) -> bool:
+        """
+        Status of Single AZ HA of spoke gateway.
+        """
         return pulumi.get(self, "single_az_ha")
 
     @property
     @pulumi.getter(name="singleIpSnat")
     def single_ip_snat(self) -> bool:
+        """
+        Status of Single IP Source NAT mode of the spoke gateway.
+        """
         return pulumi.get(self, "single_ip_snat")
 
     @property
     @pulumi.getter(name="softwareVersion")
     def software_version(self) -> str:
+        """
+        The software version of the gateway.
+        """
         return pulumi.get(self, "software_version")
 
     @property
@@ -581,11 +704,17 @@ class GetAviatrixSpokeGatewayResult:
     @property
     @pulumi.getter
     def subnet(self) -> str:
+        """
+        A VPC Network address range selected from one of the available network ranges.
+        """
         return pulumi.get(self, "subnet")
 
     @property
     @pulumi.getter(name="tagLists")
     def tag_lists(self) -> Sequence[str]:
+        """
+        Instance tag of cloud provider.
+        """
         return pulumi.get(self, "tag_lists")
 
     @property
@@ -596,6 +725,9 @@ class GetAviatrixSpokeGatewayResult:
     @property
     @pulumi.getter(name="transitGw")
     def transit_gw(self) -> str:
+        """
+        Transit gateways attached to this spoke gateway.
+        """
         return pulumi.get(self, "transit_gw")
 
     @property
@@ -606,11 +738,17 @@ class GetAviatrixSpokeGatewayResult:
     @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> str:
+        """
+        VPC-ID/VNet-Name of cloud provider.
+        """
         return pulumi.get(self, "vpc_id")
 
     @property
     @pulumi.getter(name="vpcReg")
     def vpc_reg(self) -> str:
+        """
+        Region of cloud provider.
+        """
         return pulumi.get(self, "vpc_reg")
 
     @property
@@ -704,7 +842,21 @@ class AwaitableGetAviatrixSpokeGatewayResult(GetAviatrixSpokeGatewayResult):
 def get_aviatrix_spoke_gateway(gw_name: Optional[str] = None,
                                opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetAviatrixSpokeGatewayResult:
     """
-    Use this data source to access information about an existing resource.
+    The **aviatrix_spoke_gateway** data source provides details about a specific spoke gateway created by the Aviatrix Controller.
+
+    This data source can prove useful when a module accepts a spoke gateway's detail as an input variable.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_aviatrix as aviatrix
+
+    foo = aviatrix.get_aviatrix_spoke_gateway(gw_name="gatewayname")
+    ```
+
+
+    :param str gw_name: Spoke gateway name. It can be used for getting spoke gateway.
     """
     __args__ = dict()
     __args__['gwName'] = gw_name
@@ -792,6 +944,20 @@ def get_aviatrix_spoke_gateway(gw_name: Optional[str] = None,
 def get_aviatrix_spoke_gateway_output(gw_name: Optional[pulumi.Input[str]] = None,
                                       opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetAviatrixSpokeGatewayResult]:
     """
-    Use this data source to access information about an existing resource.
+    The **aviatrix_spoke_gateway** data source provides details about a specific spoke gateway created by the Aviatrix Controller.
+
+    This data source can prove useful when a module accepts a spoke gateway's detail as an input variable.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_aviatrix as aviatrix
+
+    foo = aviatrix.get_aviatrix_spoke_gateway(gw_name="gatewayname")
+    ```
+
+
+    :param str gw_name: Spoke gateway name. It can be used for getting spoke gateway.
     """
     ...

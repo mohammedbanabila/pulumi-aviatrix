@@ -4,6 +4,51 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@astipkovits/aviatrix";
+ *
+ * // Create an Aviatrix Stateful Firewall Policy
+ * const testFirewallPolicy = new aviatrix.AviatrixFirewallPolicy("testFirewallPolicy", {
+ *     gwName: aviatrix_firewall.test_firewall.gw_name,
+ *     srcIp: "10.15.0.224/32",
+ *     dstIp: "10.12.0.172/32",
+ *     protocol: "tcp",
+ *     port: "0:65535",
+ *     action: "allow",
+ *     logEnabled: true,
+ *     description: "Test policy.",
+ * });
+ * ```
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@astipkovits/aviatrix";
+ *
+ * // Create an Aviatrix Stateful Firewall Policy and insert it to a specific position
+ * const testFirewallPolicy = new aviatrix.AviatrixFirewallPolicy("testFirewallPolicy", {
+ *     gwName: aviatrix_firewall.test_firewall.gw_name,
+ *     srcIp: "10.15.0.225/32",
+ *     dstIp: "10.12.0.173/32",
+ *     protocol: "tcp",
+ *     port: "0:65535",
+ *     action: "allow",
+ *     logEnabled: true,
+ *     description: "Test policy.",
+ *     position: 2,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **firewall_policy** can be imported using the `gw_name`, `src_ip`, `dst_ip`, `protocol`, `port` and `action` separated by `~`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixFirewallPolicy:AviatrixFirewallPolicy test "gw_name~src_ip~dst_ip~protocol~port~action"
+ * ```
+ */
 export class AviatrixFirewallPolicy extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixFirewallPolicy resource's state with the given name, ID, and optional extra
@@ -33,40 +78,39 @@ export class AviatrixFirewallPolicy extends pulumi.CustomResource {
     }
 
     /**
-     * Valid values: 'allow', 'deny' or 'force-drop'(in stateful firewall rule to allow immediate packet dropping on
-     * established sessions).
+     * Valid values: "allow", "deny" and "force-drop" (in stateful firewall rule to allow immediate packet dropping on established sessions).
      */
     public readonly action!: pulumi.Output<string>;
     /**
-     * Description of this firewall policy.
+     * Description of the policy. Example: "This is policy no.1".
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * CIDRs separated by comma or tag names such 'HR' or 'marketing' etc.
+     * CIDRs separated by comma or tag names such "HR" or "marketing" etc. Example: "10.30.0.0/16,10.45.0.0/20". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
      */
     public readonly dstIp!: pulumi.Output<string>;
     /**
-     * The name of gateway.
+     * Gateway name to attach firewall policy to.
      */
     public readonly gwName!: pulumi.Output<string>;
     /**
-     * Valid values: true or false.
+     * Valid values: true, false. Default value: false.
      */
     public readonly logEnabled!: pulumi.Output<boolean | undefined>;
     /**
-     * A single port or a range of port numbers.
+     * A single port or a range of port numbers. Example: "25", "25:1024".
      */
     public readonly port!: pulumi.Output<string>;
     /**
-     * Position in the policy list, where the firewall policy will be inserted to.
+     * Position in the policy list, where the firewall policy will be inserted to. Valid values: any positive integer. Example: 2. If it is larger than the size of policy list, the policy will be inserted to the end.
      */
     public readonly position!: pulumi.Output<number>;
     /**
-     * 'all', 'tcp', 'udp', 'icmp', 'sctp', 'rdp', 'dccp'.
+     * : "all", "tcp", "udp", "icmp", "sctp", "rdp", "dccp".
      */
     public readonly protocol!: pulumi.Output<string | undefined>;
     /**
-     * CIDRs separated by comma or tag names such 'HR' or 'marketing' etc.
+     * CIDRs separated by comma or tag names such "HR" or "marketing" etc. Example: "10.30.0.0/16,10.45.0.0/20". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
      */
     public readonly srcIp!: pulumi.Output<string>;
 
@@ -129,40 +173,39 @@ export class AviatrixFirewallPolicy extends pulumi.CustomResource {
  */
 export interface AviatrixFirewallPolicyState {
     /**
-     * Valid values: 'allow', 'deny' or 'force-drop'(in stateful firewall rule to allow immediate packet dropping on
-     * established sessions).
+     * Valid values: "allow", "deny" and "force-drop" (in stateful firewall rule to allow immediate packet dropping on established sessions).
      */
     action?: pulumi.Input<string>;
     /**
-     * Description of this firewall policy.
+     * Description of the policy. Example: "This is policy no.1".
      */
     description?: pulumi.Input<string>;
     /**
-     * CIDRs separated by comma or tag names such 'HR' or 'marketing' etc.
+     * CIDRs separated by comma or tag names such "HR" or "marketing" etc. Example: "10.30.0.0/16,10.45.0.0/20". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
      */
     dstIp?: pulumi.Input<string>;
     /**
-     * The name of gateway.
+     * Gateway name to attach firewall policy to.
      */
     gwName?: pulumi.Input<string>;
     /**
-     * Valid values: true or false.
+     * Valid values: true, false. Default value: false.
      */
     logEnabled?: pulumi.Input<boolean>;
     /**
-     * A single port or a range of port numbers.
+     * A single port or a range of port numbers. Example: "25", "25:1024".
      */
     port?: pulumi.Input<string>;
     /**
-     * Position in the policy list, where the firewall policy will be inserted to.
+     * Position in the policy list, where the firewall policy will be inserted to. Valid values: any positive integer. Example: 2. If it is larger than the size of policy list, the policy will be inserted to the end.
      */
     position?: pulumi.Input<number>;
     /**
-     * 'all', 'tcp', 'udp', 'icmp', 'sctp', 'rdp', 'dccp'.
+     * : "all", "tcp", "udp", "icmp", "sctp", "rdp", "dccp".
      */
     protocol?: pulumi.Input<string>;
     /**
-     * CIDRs separated by comma or tag names such 'HR' or 'marketing' etc.
+     * CIDRs separated by comma or tag names such "HR" or "marketing" etc. Example: "10.30.0.0/16,10.45.0.0/20". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
      */
     srcIp?: pulumi.Input<string>;
 }
@@ -172,40 +215,39 @@ export interface AviatrixFirewallPolicyState {
  */
 export interface AviatrixFirewallPolicyArgs {
     /**
-     * Valid values: 'allow', 'deny' or 'force-drop'(in stateful firewall rule to allow immediate packet dropping on
-     * established sessions).
+     * Valid values: "allow", "deny" and "force-drop" (in stateful firewall rule to allow immediate packet dropping on established sessions).
      */
     action: pulumi.Input<string>;
     /**
-     * Description of this firewall policy.
+     * Description of the policy. Example: "This is policy no.1".
      */
     description?: pulumi.Input<string>;
     /**
-     * CIDRs separated by comma or tag names such 'HR' or 'marketing' etc.
+     * CIDRs separated by comma or tag names such "HR" or "marketing" etc. Example: "10.30.0.0/16,10.45.0.0/20". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
      */
     dstIp: pulumi.Input<string>;
     /**
-     * The name of gateway.
+     * Gateway name to attach firewall policy to.
      */
     gwName: pulumi.Input<string>;
     /**
-     * Valid values: true or false.
+     * Valid values: true, false. Default value: false.
      */
     logEnabled?: pulumi.Input<boolean>;
     /**
-     * A single port or a range of port numbers.
+     * A single port or a range of port numbers. Example: "25", "25:1024".
      */
     port: pulumi.Input<string>;
     /**
-     * Position in the policy list, where the firewall policy will be inserted to.
+     * Position in the policy list, where the firewall policy will be inserted to. Valid values: any positive integer. Example: 2. If it is larger than the size of policy list, the policy will be inserted to the end.
      */
     position?: pulumi.Input<number>;
     /**
-     * 'all', 'tcp', 'udp', 'icmp', 'sctp', 'rdp', 'dccp'.
+     * : "all", "tcp", "udp", "icmp", "sctp", "rdp", "dccp".
      */
     protocol?: pulumi.Input<string>;
     /**
-     * CIDRs separated by comma or tag names such 'HR' or 'marketing' etc.
+     * CIDRs separated by comma or tag names such "HR" or "marketing" etc. Example: "10.30.0.0/16,10.45.0.0/20". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
      */
     srcIp: pulumi.Input<string>;
 }

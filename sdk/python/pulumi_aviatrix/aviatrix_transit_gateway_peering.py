@@ -31,29 +31,17 @@ class AviatrixTransitGatewayPeeringArgs:
         The set of arguments for constructing a AviatrixTransitGatewayPeering resource.
         :param pulumi.Input[str] transit_gateway_name1: The first transit gateway name to make a peer pair.
         :param pulumi.Input[str] transit_gateway_name2: The second transit gateway name to make a peer pair.
-        :param pulumi.Input[bool] enable_insane_mode_encryption_over_internet: (Optional) Advanced option. Enable Insane Mode Encryption over Internet. Transit gateways must be in Insane Mode.
-               Currently, only inter-cloud connections between AWS and Azure are supported. Required with valid `tunnel_count`.
-               Conflicts with `enable_peering_over_private_network` and `enable_single_tunnel_mode`. Type: Boolean. Default: false.
-               Available as of provider version R2.19+.
-        :param pulumi.Input[bool] enable_max_performance: Indicates whether the maximum amount of HPE tunnels will be created. Only valid when the two transit gateways are each
-               launched in Insane Mode and in the same cloud type. Available as of provider version R2.22.2+.
-        :param pulumi.Input[bool] enable_peering_over_private_network: (Optional) Advanced option. Enable peering over private network. Only appears and applies to when the two Multi-cloud
-               Transit Gateways are each launched in Insane Mode and in a different cloud type. Conflicts with
-               `enable_insane_mode_encryption_over_internet` and `tunnel_count`. Type: Boolean. Default: false. Available in provider
-               version R2.17.1+
-        :param pulumi.Input[bool] enable_single_tunnel_mode: (Optional) Advanced option. Enable peering with Single-Tunnel mode. Only appears and applies to when the two Multi-cloud
-               Transit Gateways are each launched in Insane Mode and in a different cloud type. Required with
-               `enable_peering_over_private_network`. Conflicts with `enable_insane_mode_encryption_over_internet` and `tunnel_count`.
-               Type: Boolean. Default: false. Available as of provider version R2.18+.
+        :param pulumi.Input[bool] enable_insane_mode_encryption_over_internet: Advanced option. Enable Insane Mode Encryption over Internet. Transit gateways must be in Insane Mode. Currently, only inter-cloud connections between AWS and Azure are supported. Required with valid `tunnel_count`. Conflicts with `enable_peering_over_private_network` and `enable_single_tunnel_mode`. Type: Boolean. Default: false. Available as of provider version R2.19+.
+        :param pulumi.Input[bool] enable_max_performance: Indicates whether the maximum amount of HPE tunnels will be created. Only valid when the two transit gateways are each launched in Insane Mode and in the same cloud type. Default value: true. Available as of provider version R2.22.2+.
+        :param pulumi.Input[bool] enable_peering_over_private_network: Advanced option. Enable peering over private network. Only appears and applies to when the two Multi-cloud Transit Gateways are each launched in Insane Mode and in a different cloud type. Conflicts with `enable_insane_mode_encryption_over_internet` and `tunnel_count`. Type: Boolean. Default: false. Available in provider version R2.17.1+.
+        :param pulumi.Input[bool] enable_single_tunnel_mode: Advanced option. Enable peering with Single-Tunnel mode. Only appears and applies to when the two Multi-cloud Transit Gateways are each launched in Insane Mode and in a different cloud type. Required with `enable_peering_over_private_network`. Conflicts with `enable_insane_mode_encryption_over_internet` and `tunnel_count`. Type: Boolean. Default: false. Available as of provider version R2.18+.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] gateway1_excluded_network_cidrs: List of excluded network CIDRs for the first transit gateway.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] gateway1_excluded_tgw_connections: List of excluded TGW connections for the first transit gateway.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] gateway2_excluded_network_cidrs: List of excluded network CIDRs for the second transit gateway.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] gateway2_excluded_tgw_connections: List of excluded TGW connections for the second transit gateway.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_path1s: AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit_gateway_name1.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_path2s: AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit_gateway_name2.
-        :param pulumi.Input[int] tunnel_count: (Optional) Advanced option. Number of public tunnels. Required with `enable_insane_mode_encryption_over_internet`.
-               Conflicts with `enable_peering_over_private_network` and `enable_single_tunnel_mode`. Type: Integer. Valid Range: 2-20.
-               Available as of provider version R2.19+.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_path1s: AS Path Prepend for BGP connection. Can only use the transit's own local AS number, repeated up to 25 times. Applies on transit_gateway_name1. Available in provider version R2.17.2+.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_path2s: AS Path Prepend for BGP connection. Can only use the transit's own local AS number, repeated up to 25 times. Applies on transit_gateway_name2. Available in provider version R2.17.2+.
+        :param pulumi.Input[int] tunnel_count: Advanced option. Number of public tunnels. Required with `enable_insane_mode_encryption_over_internet`. Conflicts with `enable_peering_over_private_network` and `enable_single_tunnel_mode`. Type: Integer. Valid Range: 2-20. Available as of provider version R2.19+.
         """
         pulumi.set(__self__, "transit_gateway_name1", transit_gateway_name1)
         pulumi.set(__self__, "transit_gateway_name2", transit_gateway_name2)
@@ -108,10 +96,7 @@ class AviatrixTransitGatewayPeeringArgs:
     @pulumi.getter(name="enableInsaneModeEncryptionOverInternet")
     def enable_insane_mode_encryption_over_internet(self) -> Optional[pulumi.Input[bool]]:
         """
-        (Optional) Advanced option. Enable Insane Mode Encryption over Internet. Transit gateways must be in Insane Mode.
-        Currently, only inter-cloud connections between AWS and Azure are supported. Required with valid `tunnel_count`.
-        Conflicts with `enable_peering_over_private_network` and `enable_single_tunnel_mode`. Type: Boolean. Default: false.
-        Available as of provider version R2.19+.
+        Advanced option. Enable Insane Mode Encryption over Internet. Transit gateways must be in Insane Mode. Currently, only inter-cloud connections between AWS and Azure are supported. Required with valid `tunnel_count`. Conflicts with `enable_peering_over_private_network` and `enable_single_tunnel_mode`. Type: Boolean. Default: false. Available as of provider version R2.19+.
         """
         return pulumi.get(self, "enable_insane_mode_encryption_over_internet")
 
@@ -123,8 +108,7 @@ class AviatrixTransitGatewayPeeringArgs:
     @pulumi.getter(name="enableMaxPerformance")
     def enable_max_performance(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicates whether the maximum amount of HPE tunnels will be created. Only valid when the two transit gateways are each
-        launched in Insane Mode and in the same cloud type. Available as of provider version R2.22.2+.
+        Indicates whether the maximum amount of HPE tunnels will be created. Only valid when the two transit gateways are each launched in Insane Mode and in the same cloud type. Default value: true. Available as of provider version R2.22.2+.
         """
         return pulumi.get(self, "enable_max_performance")
 
@@ -136,10 +120,7 @@ class AviatrixTransitGatewayPeeringArgs:
     @pulumi.getter(name="enablePeeringOverPrivateNetwork")
     def enable_peering_over_private_network(self) -> Optional[pulumi.Input[bool]]:
         """
-        (Optional) Advanced option. Enable peering over private network. Only appears and applies to when the two Multi-cloud
-        Transit Gateways are each launched in Insane Mode and in a different cloud type. Conflicts with
-        `enable_insane_mode_encryption_over_internet` and `tunnel_count`. Type: Boolean. Default: false. Available in provider
-        version R2.17.1+
+        Advanced option. Enable peering over private network. Only appears and applies to when the two Multi-cloud Transit Gateways are each launched in Insane Mode and in a different cloud type. Conflicts with `enable_insane_mode_encryption_over_internet` and `tunnel_count`. Type: Boolean. Default: false. Available in provider version R2.17.1+.
         """
         return pulumi.get(self, "enable_peering_over_private_network")
 
@@ -151,10 +132,7 @@ class AviatrixTransitGatewayPeeringArgs:
     @pulumi.getter(name="enableSingleTunnelMode")
     def enable_single_tunnel_mode(self) -> Optional[pulumi.Input[bool]]:
         """
-        (Optional) Advanced option. Enable peering with Single-Tunnel mode. Only appears and applies to when the two Multi-cloud
-        Transit Gateways are each launched in Insane Mode and in a different cloud type. Required with
-        `enable_peering_over_private_network`. Conflicts with `enable_insane_mode_encryption_over_internet` and `tunnel_count`.
-        Type: Boolean. Default: false. Available as of provider version R2.18+.
+        Advanced option. Enable peering with Single-Tunnel mode. Only appears and applies to when the two Multi-cloud Transit Gateways are each launched in Insane Mode and in a different cloud type. Required with `enable_peering_over_private_network`. Conflicts with `enable_insane_mode_encryption_over_internet` and `tunnel_count`. Type: Boolean. Default: false. Available as of provider version R2.18+.
         """
         return pulumi.get(self, "enable_single_tunnel_mode")
 
@@ -214,7 +192,7 @@ class AviatrixTransitGatewayPeeringArgs:
     @pulumi.getter(name="prependAsPath1s")
     def prepend_as_path1s(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit_gateway_name1.
+        AS Path Prepend for BGP connection. Can only use the transit's own local AS number, repeated up to 25 times. Applies on transit_gateway_name1. Available in provider version R2.17.2+.
         """
         return pulumi.get(self, "prepend_as_path1s")
 
@@ -226,7 +204,7 @@ class AviatrixTransitGatewayPeeringArgs:
     @pulumi.getter(name="prependAsPath2s")
     def prepend_as_path2s(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit_gateway_name2.
+        AS Path Prepend for BGP connection. Can only use the transit's own local AS number, repeated up to 25 times. Applies on transit_gateway_name2. Available in provider version R2.17.2+.
         """
         return pulumi.get(self, "prepend_as_path2s")
 
@@ -238,9 +216,7 @@ class AviatrixTransitGatewayPeeringArgs:
     @pulumi.getter(name="tunnelCount")
     def tunnel_count(self) -> Optional[pulumi.Input[int]]:
         """
-        (Optional) Advanced option. Number of public tunnels. Required with `enable_insane_mode_encryption_over_internet`.
-        Conflicts with `enable_peering_over_private_network` and `enable_single_tunnel_mode`. Type: Integer. Valid Range: 2-20.
-        Available as of provider version R2.19+.
+        Advanced option. Number of public tunnels. Required with `enable_insane_mode_encryption_over_internet`. Conflicts with `enable_peering_over_private_network` and `enable_single_tunnel_mode`. Type: Integer. Valid Range: 2-20. Available as of provider version R2.19+.
         """
         return pulumi.get(self, "tunnel_count")
 
@@ -267,31 +243,19 @@ class _AviatrixTransitGatewayPeeringState:
                  tunnel_count: Optional[pulumi.Input[int]] = None):
         """
         Input properties used for looking up and filtering AviatrixTransitGatewayPeering resources.
-        :param pulumi.Input[bool] enable_insane_mode_encryption_over_internet: (Optional) Advanced option. Enable Insane Mode Encryption over Internet. Transit gateways must be in Insane Mode.
-               Currently, only inter-cloud connections between AWS and Azure are supported. Required with valid `tunnel_count`.
-               Conflicts with `enable_peering_over_private_network` and `enable_single_tunnel_mode`. Type: Boolean. Default: false.
-               Available as of provider version R2.19+.
-        :param pulumi.Input[bool] enable_max_performance: Indicates whether the maximum amount of HPE tunnels will be created. Only valid when the two transit gateways are each
-               launched in Insane Mode and in the same cloud type. Available as of provider version R2.22.2+.
-        :param pulumi.Input[bool] enable_peering_over_private_network: (Optional) Advanced option. Enable peering over private network. Only appears and applies to when the two Multi-cloud
-               Transit Gateways are each launched in Insane Mode and in a different cloud type. Conflicts with
-               `enable_insane_mode_encryption_over_internet` and `tunnel_count`. Type: Boolean. Default: false. Available in provider
-               version R2.17.1+
-        :param pulumi.Input[bool] enable_single_tunnel_mode: (Optional) Advanced option. Enable peering with Single-Tunnel mode. Only appears and applies to when the two Multi-cloud
-               Transit Gateways are each launched in Insane Mode and in a different cloud type. Required with
-               `enable_peering_over_private_network`. Conflicts with `enable_insane_mode_encryption_over_internet` and `tunnel_count`.
-               Type: Boolean. Default: false. Available as of provider version R2.18+.
+        :param pulumi.Input[bool] enable_insane_mode_encryption_over_internet: Advanced option. Enable Insane Mode Encryption over Internet. Transit gateways must be in Insane Mode. Currently, only inter-cloud connections between AWS and Azure are supported. Required with valid `tunnel_count`. Conflicts with `enable_peering_over_private_network` and `enable_single_tunnel_mode`. Type: Boolean. Default: false. Available as of provider version R2.19+.
+        :param pulumi.Input[bool] enable_max_performance: Indicates whether the maximum amount of HPE tunnels will be created. Only valid when the two transit gateways are each launched in Insane Mode and in the same cloud type. Default value: true. Available as of provider version R2.22.2+.
+        :param pulumi.Input[bool] enable_peering_over_private_network: Advanced option. Enable peering over private network. Only appears and applies to when the two Multi-cloud Transit Gateways are each launched in Insane Mode and in a different cloud type. Conflicts with `enable_insane_mode_encryption_over_internet` and `tunnel_count`. Type: Boolean. Default: false. Available in provider version R2.17.1+.
+        :param pulumi.Input[bool] enable_single_tunnel_mode: Advanced option. Enable peering with Single-Tunnel mode. Only appears and applies to when the two Multi-cloud Transit Gateways are each launched in Insane Mode and in a different cloud type. Required with `enable_peering_over_private_network`. Conflicts with `enable_insane_mode_encryption_over_internet` and `tunnel_count`. Type: Boolean. Default: false. Available as of provider version R2.18+.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] gateway1_excluded_network_cidrs: List of excluded network CIDRs for the first transit gateway.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] gateway1_excluded_tgw_connections: List of excluded TGW connections for the first transit gateway.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] gateway2_excluded_network_cidrs: List of excluded network CIDRs for the second transit gateway.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] gateway2_excluded_tgw_connections: List of excluded TGW connections for the second transit gateway.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_path1s: AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit_gateway_name1.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_path2s: AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit_gateway_name2.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_path1s: AS Path Prepend for BGP connection. Can only use the transit's own local AS number, repeated up to 25 times. Applies on transit_gateway_name1. Available in provider version R2.17.2+.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_path2s: AS Path Prepend for BGP connection. Can only use the transit's own local AS number, repeated up to 25 times. Applies on transit_gateway_name2. Available in provider version R2.17.2+.
         :param pulumi.Input[str] transit_gateway_name1: The first transit gateway name to make a peer pair.
         :param pulumi.Input[str] transit_gateway_name2: The second transit gateway name to make a peer pair.
-        :param pulumi.Input[int] tunnel_count: (Optional) Advanced option. Number of public tunnels. Required with `enable_insane_mode_encryption_over_internet`.
-               Conflicts with `enable_peering_over_private_network` and `enable_single_tunnel_mode`. Type: Integer. Valid Range: 2-20.
-               Available as of provider version R2.19+.
+        :param pulumi.Input[int] tunnel_count: Advanced option. Number of public tunnels. Required with `enable_insane_mode_encryption_over_internet`. Conflicts with `enable_peering_over_private_network` and `enable_single_tunnel_mode`. Type: Integer. Valid Range: 2-20. Available as of provider version R2.19+.
         """
         if enable_insane_mode_encryption_over_internet is not None:
             pulumi.set(__self__, "enable_insane_mode_encryption_over_internet", enable_insane_mode_encryption_over_internet)
@@ -324,10 +288,7 @@ class _AviatrixTransitGatewayPeeringState:
     @pulumi.getter(name="enableInsaneModeEncryptionOverInternet")
     def enable_insane_mode_encryption_over_internet(self) -> Optional[pulumi.Input[bool]]:
         """
-        (Optional) Advanced option. Enable Insane Mode Encryption over Internet. Transit gateways must be in Insane Mode.
-        Currently, only inter-cloud connections between AWS and Azure are supported. Required with valid `tunnel_count`.
-        Conflicts with `enable_peering_over_private_network` and `enable_single_tunnel_mode`. Type: Boolean. Default: false.
-        Available as of provider version R2.19+.
+        Advanced option. Enable Insane Mode Encryption over Internet. Transit gateways must be in Insane Mode. Currently, only inter-cloud connections between AWS and Azure are supported. Required with valid `tunnel_count`. Conflicts with `enable_peering_over_private_network` and `enable_single_tunnel_mode`. Type: Boolean. Default: false. Available as of provider version R2.19+.
         """
         return pulumi.get(self, "enable_insane_mode_encryption_over_internet")
 
@@ -339,8 +300,7 @@ class _AviatrixTransitGatewayPeeringState:
     @pulumi.getter(name="enableMaxPerformance")
     def enable_max_performance(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicates whether the maximum amount of HPE tunnels will be created. Only valid when the two transit gateways are each
-        launched in Insane Mode and in the same cloud type. Available as of provider version R2.22.2+.
+        Indicates whether the maximum amount of HPE tunnels will be created. Only valid when the two transit gateways are each launched in Insane Mode and in the same cloud type. Default value: true. Available as of provider version R2.22.2+.
         """
         return pulumi.get(self, "enable_max_performance")
 
@@ -352,10 +312,7 @@ class _AviatrixTransitGatewayPeeringState:
     @pulumi.getter(name="enablePeeringOverPrivateNetwork")
     def enable_peering_over_private_network(self) -> Optional[pulumi.Input[bool]]:
         """
-        (Optional) Advanced option. Enable peering over private network. Only appears and applies to when the two Multi-cloud
-        Transit Gateways are each launched in Insane Mode and in a different cloud type. Conflicts with
-        `enable_insane_mode_encryption_over_internet` and `tunnel_count`. Type: Boolean. Default: false. Available in provider
-        version R2.17.1+
+        Advanced option. Enable peering over private network. Only appears and applies to when the two Multi-cloud Transit Gateways are each launched in Insane Mode and in a different cloud type. Conflicts with `enable_insane_mode_encryption_over_internet` and `tunnel_count`. Type: Boolean. Default: false. Available in provider version R2.17.1+.
         """
         return pulumi.get(self, "enable_peering_over_private_network")
 
@@ -367,10 +324,7 @@ class _AviatrixTransitGatewayPeeringState:
     @pulumi.getter(name="enableSingleTunnelMode")
     def enable_single_tunnel_mode(self) -> Optional[pulumi.Input[bool]]:
         """
-        (Optional) Advanced option. Enable peering with Single-Tunnel mode. Only appears and applies to when the two Multi-cloud
-        Transit Gateways are each launched in Insane Mode and in a different cloud type. Required with
-        `enable_peering_over_private_network`. Conflicts with `enable_insane_mode_encryption_over_internet` and `tunnel_count`.
-        Type: Boolean. Default: false. Available as of provider version R2.18+.
+        Advanced option. Enable peering with Single-Tunnel mode. Only appears and applies to when the two Multi-cloud Transit Gateways are each launched in Insane Mode and in a different cloud type. Required with `enable_peering_over_private_network`. Conflicts with `enable_insane_mode_encryption_over_internet` and `tunnel_count`. Type: Boolean. Default: false. Available as of provider version R2.18+.
         """
         return pulumi.get(self, "enable_single_tunnel_mode")
 
@@ -430,7 +384,7 @@ class _AviatrixTransitGatewayPeeringState:
     @pulumi.getter(name="prependAsPath1s")
     def prepend_as_path1s(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit_gateway_name1.
+        AS Path Prepend for BGP connection. Can only use the transit's own local AS number, repeated up to 25 times. Applies on transit_gateway_name1. Available in provider version R2.17.2+.
         """
         return pulumi.get(self, "prepend_as_path1s")
 
@@ -442,7 +396,7 @@ class _AviatrixTransitGatewayPeeringState:
     @pulumi.getter(name="prependAsPath2s")
     def prepend_as_path2s(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit_gateway_name2.
+        AS Path Prepend for BGP connection. Can only use the transit's own local AS number, repeated up to 25 times. Applies on transit_gateway_name2. Available in provider version R2.17.2+.
         """
         return pulumi.get(self, "prepend_as_path2s")
 
@@ -478,9 +432,7 @@ class _AviatrixTransitGatewayPeeringState:
     @pulumi.getter(name="tunnelCount")
     def tunnel_count(self) -> Optional[pulumi.Input[int]]:
         """
-        (Optional) Advanced option. Number of public tunnels. Required with `enable_insane_mode_encryption_over_internet`.
-        Conflicts with `enable_peering_over_private_network` and `enable_single_tunnel_mode`. Type: Integer. Valid Range: 2-20.
-        Available as of provider version R2.19+.
+        Advanced option. Number of public tunnels. Required with `enable_insane_mode_encryption_over_internet`. Conflicts with `enable_peering_over_private_network` and `enable_single_tunnel_mode`. Type: Integer. Valid Range: 2-20. Available as of provider version R2.19+.
         """
         return pulumi.get(self, "tunnel_count")
 
@@ -509,34 +461,55 @@ class AviatrixTransitGatewayPeering(pulumi.CustomResource):
                  tunnel_count: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
-        Create a AviatrixTransitGatewayPeering resource with the given unique name, props, and options.
+        The **aviatrix_transit_gateway_peering** resource allows the creation and management of peerings between Aviatrix transit gateways.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Transit Gateway Peering
+        test_transit_gateway_peering = aviatrix.AviatrixTransitGatewayPeering("testTransitGatewayPeering",
+            enable_insane_mode_encryption_over_internet=False,
+            enable_peering_over_private_network=False,
+            gateway1_excluded_network_cidrs=["10.0.0.48/28"],
+            gateway1_excluded_tgw_connections=["vpn_connection_a"],
+            gateway2_excluded_network_cidrs=["10.0.0.48/28"],
+            gateway2_excluded_tgw_connections=["vpn_connection_b"],
+            prepend_as_path1s=[
+                "65001",
+                "65001",
+                "65001",
+            ],
+            prepend_as_path2s=["65002"],
+            transit_gateway_name1="transit-Gw1",
+            transit_gateway_name2="transit-Gw2")
+        ```
+
+        ## Import
+
+        **transit_gateway_peering** can be imported using the `transit_gateway_name1` and `transit_gateway_name2`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixTransitGatewayPeering:AviatrixTransitGatewayPeering test transit_gateway_name1~transit_gateway_name2
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[bool] enable_insane_mode_encryption_over_internet: (Optional) Advanced option. Enable Insane Mode Encryption over Internet. Transit gateways must be in Insane Mode.
-               Currently, only inter-cloud connections between AWS and Azure are supported. Required with valid `tunnel_count`.
-               Conflicts with `enable_peering_over_private_network` and `enable_single_tunnel_mode`. Type: Boolean. Default: false.
-               Available as of provider version R2.19+.
-        :param pulumi.Input[bool] enable_max_performance: Indicates whether the maximum amount of HPE tunnels will be created. Only valid when the two transit gateways are each
-               launched in Insane Mode and in the same cloud type. Available as of provider version R2.22.2+.
-        :param pulumi.Input[bool] enable_peering_over_private_network: (Optional) Advanced option. Enable peering over private network. Only appears and applies to when the two Multi-cloud
-               Transit Gateways are each launched in Insane Mode and in a different cloud type. Conflicts with
-               `enable_insane_mode_encryption_over_internet` and `tunnel_count`. Type: Boolean. Default: false. Available in provider
-               version R2.17.1+
-        :param pulumi.Input[bool] enable_single_tunnel_mode: (Optional) Advanced option. Enable peering with Single-Tunnel mode. Only appears and applies to when the two Multi-cloud
-               Transit Gateways are each launched in Insane Mode and in a different cloud type. Required with
-               `enable_peering_over_private_network`. Conflicts with `enable_insane_mode_encryption_over_internet` and `tunnel_count`.
-               Type: Boolean. Default: false. Available as of provider version R2.18+.
+        :param pulumi.Input[bool] enable_insane_mode_encryption_over_internet: Advanced option. Enable Insane Mode Encryption over Internet. Transit gateways must be in Insane Mode. Currently, only inter-cloud connections between AWS and Azure are supported. Required with valid `tunnel_count`. Conflicts with `enable_peering_over_private_network` and `enable_single_tunnel_mode`. Type: Boolean. Default: false. Available as of provider version R2.19+.
+        :param pulumi.Input[bool] enable_max_performance: Indicates whether the maximum amount of HPE tunnels will be created. Only valid when the two transit gateways are each launched in Insane Mode and in the same cloud type. Default value: true. Available as of provider version R2.22.2+.
+        :param pulumi.Input[bool] enable_peering_over_private_network: Advanced option. Enable peering over private network. Only appears and applies to when the two Multi-cloud Transit Gateways are each launched in Insane Mode and in a different cloud type. Conflicts with `enable_insane_mode_encryption_over_internet` and `tunnel_count`. Type: Boolean. Default: false. Available in provider version R2.17.1+.
+        :param pulumi.Input[bool] enable_single_tunnel_mode: Advanced option. Enable peering with Single-Tunnel mode. Only appears and applies to when the two Multi-cloud Transit Gateways are each launched in Insane Mode and in a different cloud type. Required with `enable_peering_over_private_network`. Conflicts with `enable_insane_mode_encryption_over_internet` and `tunnel_count`. Type: Boolean. Default: false. Available as of provider version R2.18+.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] gateway1_excluded_network_cidrs: List of excluded network CIDRs for the first transit gateway.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] gateway1_excluded_tgw_connections: List of excluded TGW connections for the first transit gateway.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] gateway2_excluded_network_cidrs: List of excluded network CIDRs for the second transit gateway.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] gateway2_excluded_tgw_connections: List of excluded TGW connections for the second transit gateway.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_path1s: AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit_gateway_name1.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_path2s: AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit_gateway_name2.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_path1s: AS Path Prepend for BGP connection. Can only use the transit's own local AS number, repeated up to 25 times. Applies on transit_gateway_name1. Available in provider version R2.17.2+.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_path2s: AS Path Prepend for BGP connection. Can only use the transit's own local AS number, repeated up to 25 times. Applies on transit_gateway_name2. Available in provider version R2.17.2+.
         :param pulumi.Input[str] transit_gateway_name1: The first transit gateway name to make a peer pair.
         :param pulumi.Input[str] transit_gateway_name2: The second transit gateway name to make a peer pair.
-        :param pulumi.Input[int] tunnel_count: (Optional) Advanced option. Number of public tunnels. Required with `enable_insane_mode_encryption_over_internet`.
-               Conflicts with `enable_peering_over_private_network` and `enable_single_tunnel_mode`. Type: Integer. Valid Range: 2-20.
-               Available as of provider version R2.19+.
+        :param pulumi.Input[int] tunnel_count: Advanced option. Number of public tunnels. Required with `enable_insane_mode_encryption_over_internet`. Conflicts with `enable_peering_over_private_network` and `enable_single_tunnel_mode`. Type: Integer. Valid Range: 2-20. Available as of provider version R2.19+.
         """
         ...
     @overload
@@ -545,7 +518,40 @@ class AviatrixTransitGatewayPeering(pulumi.CustomResource):
                  args: AviatrixTransitGatewayPeeringArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixTransitGatewayPeering resource with the given unique name, props, and options.
+        The **aviatrix_transit_gateway_peering** resource allows the creation and management of peerings between Aviatrix transit gateways.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Transit Gateway Peering
+        test_transit_gateway_peering = aviatrix.AviatrixTransitGatewayPeering("testTransitGatewayPeering",
+            enable_insane_mode_encryption_over_internet=False,
+            enable_peering_over_private_network=False,
+            gateway1_excluded_network_cidrs=["10.0.0.48/28"],
+            gateway1_excluded_tgw_connections=["vpn_connection_a"],
+            gateway2_excluded_network_cidrs=["10.0.0.48/28"],
+            gateway2_excluded_tgw_connections=["vpn_connection_b"],
+            prepend_as_path1s=[
+                "65001",
+                "65001",
+                "65001",
+            ],
+            prepend_as_path2s=["65002"],
+            transit_gateway_name1="transit-Gw1",
+            transit_gateway_name2="transit-Gw2")
+        ```
+
+        ## Import
+
+        **transit_gateway_peering** can be imported using the `transit_gateway_name1` and `transit_gateway_name2`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixTransitGatewayPeering:AviatrixTransitGatewayPeering test transit_gateway_name1~transit_gateway_name2
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixTransitGatewayPeeringArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -630,31 +636,19 @@ class AviatrixTransitGatewayPeering(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[bool] enable_insane_mode_encryption_over_internet: (Optional) Advanced option. Enable Insane Mode Encryption over Internet. Transit gateways must be in Insane Mode.
-               Currently, only inter-cloud connections between AWS and Azure are supported. Required with valid `tunnel_count`.
-               Conflicts with `enable_peering_over_private_network` and `enable_single_tunnel_mode`. Type: Boolean. Default: false.
-               Available as of provider version R2.19+.
-        :param pulumi.Input[bool] enable_max_performance: Indicates whether the maximum amount of HPE tunnels will be created. Only valid when the two transit gateways are each
-               launched in Insane Mode and in the same cloud type. Available as of provider version R2.22.2+.
-        :param pulumi.Input[bool] enable_peering_over_private_network: (Optional) Advanced option. Enable peering over private network. Only appears and applies to when the two Multi-cloud
-               Transit Gateways are each launched in Insane Mode and in a different cloud type. Conflicts with
-               `enable_insane_mode_encryption_over_internet` and `tunnel_count`. Type: Boolean. Default: false. Available in provider
-               version R2.17.1+
-        :param pulumi.Input[bool] enable_single_tunnel_mode: (Optional) Advanced option. Enable peering with Single-Tunnel mode. Only appears and applies to when the two Multi-cloud
-               Transit Gateways are each launched in Insane Mode and in a different cloud type. Required with
-               `enable_peering_over_private_network`. Conflicts with `enable_insane_mode_encryption_over_internet` and `tunnel_count`.
-               Type: Boolean. Default: false. Available as of provider version R2.18+.
+        :param pulumi.Input[bool] enable_insane_mode_encryption_over_internet: Advanced option. Enable Insane Mode Encryption over Internet. Transit gateways must be in Insane Mode. Currently, only inter-cloud connections between AWS and Azure are supported. Required with valid `tunnel_count`. Conflicts with `enable_peering_over_private_network` and `enable_single_tunnel_mode`. Type: Boolean. Default: false. Available as of provider version R2.19+.
+        :param pulumi.Input[bool] enable_max_performance: Indicates whether the maximum amount of HPE tunnels will be created. Only valid when the two transit gateways are each launched in Insane Mode and in the same cloud type. Default value: true. Available as of provider version R2.22.2+.
+        :param pulumi.Input[bool] enable_peering_over_private_network: Advanced option. Enable peering over private network. Only appears and applies to when the two Multi-cloud Transit Gateways are each launched in Insane Mode and in a different cloud type. Conflicts with `enable_insane_mode_encryption_over_internet` and `tunnel_count`. Type: Boolean. Default: false. Available in provider version R2.17.1+.
+        :param pulumi.Input[bool] enable_single_tunnel_mode: Advanced option. Enable peering with Single-Tunnel mode. Only appears and applies to when the two Multi-cloud Transit Gateways are each launched in Insane Mode and in a different cloud type. Required with `enable_peering_over_private_network`. Conflicts with `enable_insane_mode_encryption_over_internet` and `tunnel_count`. Type: Boolean. Default: false. Available as of provider version R2.18+.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] gateway1_excluded_network_cidrs: List of excluded network CIDRs for the first transit gateway.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] gateway1_excluded_tgw_connections: List of excluded TGW connections for the first transit gateway.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] gateway2_excluded_network_cidrs: List of excluded network CIDRs for the second transit gateway.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] gateway2_excluded_tgw_connections: List of excluded TGW connections for the second transit gateway.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_path1s: AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit_gateway_name1.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_path2s: AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit_gateway_name2.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_path1s: AS Path Prepend for BGP connection. Can only use the transit's own local AS number, repeated up to 25 times. Applies on transit_gateway_name1. Available in provider version R2.17.2+.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_path2s: AS Path Prepend for BGP connection. Can only use the transit's own local AS number, repeated up to 25 times. Applies on transit_gateway_name2. Available in provider version R2.17.2+.
         :param pulumi.Input[str] transit_gateway_name1: The first transit gateway name to make a peer pair.
         :param pulumi.Input[str] transit_gateway_name2: The second transit gateway name to make a peer pair.
-        :param pulumi.Input[int] tunnel_count: (Optional) Advanced option. Number of public tunnels. Required with `enable_insane_mode_encryption_over_internet`.
-               Conflicts with `enable_peering_over_private_network` and `enable_single_tunnel_mode`. Type: Integer. Valid Range: 2-20.
-               Available as of provider version R2.19+.
+        :param pulumi.Input[int] tunnel_count: Advanced option. Number of public tunnels. Required with `enable_insane_mode_encryption_over_internet`. Conflicts with `enable_peering_over_private_network` and `enable_single_tunnel_mode`. Type: Integer. Valid Range: 2-20. Available as of provider version R2.19+.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -679,10 +673,7 @@ class AviatrixTransitGatewayPeering(pulumi.CustomResource):
     @pulumi.getter(name="enableInsaneModeEncryptionOverInternet")
     def enable_insane_mode_encryption_over_internet(self) -> pulumi.Output[Optional[bool]]:
         """
-        (Optional) Advanced option. Enable Insane Mode Encryption over Internet. Transit gateways must be in Insane Mode.
-        Currently, only inter-cloud connections between AWS and Azure are supported. Required with valid `tunnel_count`.
-        Conflicts with `enable_peering_over_private_network` and `enable_single_tunnel_mode`. Type: Boolean. Default: false.
-        Available as of provider version R2.19+.
+        Advanced option. Enable Insane Mode Encryption over Internet. Transit gateways must be in Insane Mode. Currently, only inter-cloud connections between AWS and Azure are supported. Required with valid `tunnel_count`. Conflicts with `enable_peering_over_private_network` and `enable_single_tunnel_mode`. Type: Boolean. Default: false. Available as of provider version R2.19+.
         """
         return pulumi.get(self, "enable_insane_mode_encryption_over_internet")
 
@@ -690,8 +681,7 @@ class AviatrixTransitGatewayPeering(pulumi.CustomResource):
     @pulumi.getter(name="enableMaxPerformance")
     def enable_max_performance(self) -> pulumi.Output[Optional[bool]]:
         """
-        Indicates whether the maximum amount of HPE tunnels will be created. Only valid when the two transit gateways are each
-        launched in Insane Mode and in the same cloud type. Available as of provider version R2.22.2+.
+        Indicates whether the maximum amount of HPE tunnels will be created. Only valid when the two transit gateways are each launched in Insane Mode and in the same cloud type. Default value: true. Available as of provider version R2.22.2+.
         """
         return pulumi.get(self, "enable_max_performance")
 
@@ -699,10 +689,7 @@ class AviatrixTransitGatewayPeering(pulumi.CustomResource):
     @pulumi.getter(name="enablePeeringOverPrivateNetwork")
     def enable_peering_over_private_network(self) -> pulumi.Output[Optional[bool]]:
         """
-        (Optional) Advanced option. Enable peering over private network. Only appears and applies to when the two Multi-cloud
-        Transit Gateways are each launched in Insane Mode and in a different cloud type. Conflicts with
-        `enable_insane_mode_encryption_over_internet` and `tunnel_count`. Type: Boolean. Default: false. Available in provider
-        version R2.17.1+
+        Advanced option. Enable peering over private network. Only appears and applies to when the two Multi-cloud Transit Gateways are each launched in Insane Mode and in a different cloud type. Conflicts with `enable_insane_mode_encryption_over_internet` and `tunnel_count`. Type: Boolean. Default: false. Available in provider version R2.17.1+.
         """
         return pulumi.get(self, "enable_peering_over_private_network")
 
@@ -710,10 +697,7 @@ class AviatrixTransitGatewayPeering(pulumi.CustomResource):
     @pulumi.getter(name="enableSingleTunnelMode")
     def enable_single_tunnel_mode(self) -> pulumi.Output[Optional[bool]]:
         """
-        (Optional) Advanced option. Enable peering with Single-Tunnel mode. Only appears and applies to when the two Multi-cloud
-        Transit Gateways are each launched in Insane Mode and in a different cloud type. Required with
-        `enable_peering_over_private_network`. Conflicts with `enable_insane_mode_encryption_over_internet` and `tunnel_count`.
-        Type: Boolean. Default: false. Available as of provider version R2.18+.
+        Advanced option. Enable peering with Single-Tunnel mode. Only appears and applies to when the two Multi-cloud Transit Gateways are each launched in Insane Mode and in a different cloud type. Required with `enable_peering_over_private_network`. Conflicts with `enable_insane_mode_encryption_over_internet` and `tunnel_count`. Type: Boolean. Default: false. Available as of provider version R2.18+.
         """
         return pulumi.get(self, "enable_single_tunnel_mode")
 
@@ -753,7 +737,7 @@ class AviatrixTransitGatewayPeering(pulumi.CustomResource):
     @pulumi.getter(name="prependAsPath1s")
     def prepend_as_path1s(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit_gateway_name1.
+        AS Path Prepend for BGP connection. Can only use the transit's own local AS number, repeated up to 25 times. Applies on transit_gateway_name1. Available in provider version R2.17.2+.
         """
         return pulumi.get(self, "prepend_as_path1s")
 
@@ -761,7 +745,7 @@ class AviatrixTransitGatewayPeering(pulumi.CustomResource):
     @pulumi.getter(name="prependAsPath2s")
     def prepend_as_path2s(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit_gateway_name2.
+        AS Path Prepend for BGP connection. Can only use the transit's own local AS number, repeated up to 25 times. Applies on transit_gateway_name2. Available in provider version R2.17.2+.
         """
         return pulumi.get(self, "prepend_as_path2s")
 
@@ -785,9 +769,7 @@ class AviatrixTransitGatewayPeering(pulumi.CustomResource):
     @pulumi.getter(name="tunnelCount")
     def tunnel_count(self) -> pulumi.Output[Optional[int]]:
         """
-        (Optional) Advanced option. Number of public tunnels. Required with `enable_insane_mode_encryption_over_internet`.
-        Conflicts with `enable_peering_over_private_network` and `enable_single_tunnel_mode`. Type: Integer. Valid Range: 2-20.
-        Available as of provider version R2.19+.
+        Advanced option. Number of public tunnels. Required with `enable_insane_mode_encryption_over_internet`. Conflicts with `enable_peering_over_private_network` and `enable_single_tunnel_mode`. Type: Integer. Valid Range: 2-20. Available as of provider version R2.19+.
         """
         return pulumi.get(self, "tunnel_count")
 

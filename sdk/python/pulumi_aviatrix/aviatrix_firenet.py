@@ -28,18 +28,16 @@ class AviatrixFirenetArgs:
                  tgw_segmentation_for_egress_enabled: Optional[pulumi.Input[bool]] = None):
         """
         The set of arguments for constructing a AviatrixFirenet resource.
-        :param pulumi.Input[str] vpc_id: VPC ID.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] east_west_inspection_excluded_cidrs: Network List Excluded From East-West Inspection. CIDRs to be excluded from inspection. Type: Set(String). Available as
-               of provider version R2.19.2+.
-        :param pulumi.Input[bool] egress_enabled: Enable/Disable egress through firewall.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] egress_static_cidrs: List of egress static cidrs.
-        :param pulumi.Input[Sequence[pulumi.Input['AviatrixFirenetFirewallInstanceAssociationArgs']]] firewall_instance_associations: List of firewall instances to be associated with fireNet.
-        :param pulumi.Input[str] hashing_algorithm: Hashing algorithm to load balance traffic across the firewall.
-        :param pulumi.Input[bool] inspection_enabled: Enable/Disable traffic inspection.
-        :param pulumi.Input[bool] keep_alive_via_lan_interface_enabled: Enable Keep Alive via Firewall LAN Interface.
-        :param pulumi.Input[bool] manage_firewall_instance_association: Enable this to manage firewall_instance_associations in-line. If this is false, associations must be managed via
-               standalone aviatrix_firewall_instance_association resources. Type: boolean, Default: true, Valid values: true/false.
-        :param pulumi.Input[bool] tgw_segmentation_for_egress_enabled: Enable TGW segmentation for egress.
+        :param pulumi.Input[str] vpc_id: VPC ID of the Security VPC.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] east_west_inspection_excluded_cidrs: Network List Excluded From East-West Inspection. CIDRs to be excluded from inspection. Type: Set(String). Available as of provider version R2.19.5+.
+        :param pulumi.Input[bool] egress_enabled: Enable/disable egress through firewall. Valid values: true, false. Default value: false.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] egress_static_cidrs: List of egress static CIDRs. Egress is required to be enabled. Example: ["1.171.15.184/32", "1.171.15.185/32"]. Available as of provider version R2.19+.
+        :param pulumi.Input[Sequence[pulumi.Input['AviatrixFirenetFirewallInstanceAssociationArgs']]] firewall_instance_associations: Dynamic block of firewall instance(s) to be associated with the FireNet.
+        :param pulumi.Input[str] hashing_algorithm: Hashing algorithm to load balance traffic across the firewall. Valid values: "2-Tuple", "5-Tuple". Default value: "5-Tuple".
+        :param pulumi.Input[bool] inspection_enabled: Enable/disable traffic inspection. Valid values: true, false. Default value: true.
+        :param pulumi.Input[bool] keep_alive_via_lan_interface_enabled: Enable Keep Alive via Firewall LAN Interface. Valid values: true or false. Default value: false. Available as of provider version R2.18.1+.
+        :param pulumi.Input[bool] manage_firewall_instance_association: Enable this attribute to manage firewall associations in-line. If set to true, in-line `firewall_instance_association` blocks can be used. If set to false, all firewall associations must be managed via standalone `AviatrixFirewallInstanceAssociation` resources. Default value: true. Valid values: true or false. Available in provider version R2.17.1+.
+        :param pulumi.Input[bool] tgw_segmentation_for_egress_enabled: Enable TGW segmentation for egress. Valid values: true or false. Default value: false. Available as of provider version R2.19+.
         """
         pulumi.set(__self__, "vpc_id", vpc_id)
         if east_west_inspection_excluded_cidrs is not None:
@@ -68,7 +66,7 @@ class AviatrixFirenetArgs:
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> pulumi.Input[str]:
         """
-        VPC ID.
+        VPC ID of the Security VPC.
         """
         return pulumi.get(self, "vpc_id")
 
@@ -80,8 +78,7 @@ class AviatrixFirenetArgs:
     @pulumi.getter(name="eastWestInspectionExcludedCidrs")
     def east_west_inspection_excluded_cidrs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Network List Excluded From East-West Inspection. CIDRs to be excluded from inspection. Type: Set(String). Available as
-        of provider version R2.19.2+.
+        Network List Excluded From East-West Inspection. CIDRs to be excluded from inspection. Type: Set(String). Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "east_west_inspection_excluded_cidrs")
 
@@ -93,7 +90,7 @@ class AviatrixFirenetArgs:
     @pulumi.getter(name="egressEnabled")
     def egress_enabled(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable/Disable egress through firewall.
+        Enable/disable egress through firewall. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "egress_enabled")
 
@@ -105,7 +102,7 @@ class AviatrixFirenetArgs:
     @pulumi.getter(name="egressStaticCidrs")
     def egress_static_cidrs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of egress static cidrs.
+        List of egress static CIDRs. Egress is required to be enabled. Example: ["1.171.15.184/32", "1.171.15.185/32"]. Available as of provider version R2.19+.
         """
         return pulumi.get(self, "egress_static_cidrs")
 
@@ -117,7 +114,7 @@ class AviatrixFirenetArgs:
     @pulumi.getter(name="firewallInstanceAssociations")
     def firewall_instance_associations(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['AviatrixFirenetFirewallInstanceAssociationArgs']]]]:
         """
-        List of firewall instances to be associated with fireNet.
+        Dynamic block of firewall instance(s) to be associated with the FireNet.
         """
         return pulumi.get(self, "firewall_instance_associations")
 
@@ -129,7 +126,7 @@ class AviatrixFirenetArgs:
     @pulumi.getter(name="hashingAlgorithm")
     def hashing_algorithm(self) -> Optional[pulumi.Input[str]]:
         """
-        Hashing algorithm to load balance traffic across the firewall.
+        Hashing algorithm to load balance traffic across the firewall. Valid values: "2-Tuple", "5-Tuple". Default value: "5-Tuple".
         """
         return pulumi.get(self, "hashing_algorithm")
 
@@ -141,7 +138,7 @@ class AviatrixFirenetArgs:
     @pulumi.getter(name="inspectionEnabled")
     def inspection_enabled(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable/Disable traffic inspection.
+        Enable/disable traffic inspection. Valid values: true, false. Default value: true.
         """
         return pulumi.get(self, "inspection_enabled")
 
@@ -153,7 +150,7 @@ class AviatrixFirenetArgs:
     @pulumi.getter(name="keepAliveViaLanInterfaceEnabled")
     def keep_alive_via_lan_interface_enabled(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable Keep Alive via Firewall LAN Interface.
+        Enable Keep Alive via Firewall LAN Interface. Valid values: true or false. Default value: false. Available as of provider version R2.18.1+.
         """
         return pulumi.get(self, "keep_alive_via_lan_interface_enabled")
 
@@ -165,8 +162,7 @@ class AviatrixFirenetArgs:
     @pulumi.getter(name="manageFirewallInstanceAssociation")
     def manage_firewall_instance_association(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable this to manage firewall_instance_associations in-line. If this is false, associations must be managed via
-        standalone aviatrix_firewall_instance_association resources. Type: boolean, Default: true, Valid values: true/false.
+        Enable this attribute to manage firewall associations in-line. If set to true, in-line `firewall_instance_association` blocks can be used. If set to false, all firewall associations must be managed via standalone `AviatrixFirewallInstanceAssociation` resources. Default value: true. Valid values: true or false. Available in provider version R2.17.1+.
         """
         return pulumi.get(self, "manage_firewall_instance_association")
 
@@ -178,7 +174,7 @@ class AviatrixFirenetArgs:
     @pulumi.getter(name="tgwSegmentationForEgressEnabled")
     def tgw_segmentation_for_egress_enabled(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable TGW segmentation for egress.
+        Enable TGW segmentation for egress. Valid values: true or false. Default value: false. Available as of provider version R2.19+.
         """
         return pulumi.get(self, "tgw_segmentation_for_egress_enabled")
 
@@ -202,18 +198,16 @@ class _AviatrixFirenetState:
                  vpc_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixFirenet resources.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] east_west_inspection_excluded_cidrs: Network List Excluded From East-West Inspection. CIDRs to be excluded from inspection. Type: Set(String). Available as
-               of provider version R2.19.2+.
-        :param pulumi.Input[bool] egress_enabled: Enable/Disable egress through firewall.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] egress_static_cidrs: List of egress static cidrs.
-        :param pulumi.Input[Sequence[pulumi.Input['AviatrixFirenetFirewallInstanceAssociationArgs']]] firewall_instance_associations: List of firewall instances to be associated with fireNet.
-        :param pulumi.Input[str] hashing_algorithm: Hashing algorithm to load balance traffic across the firewall.
-        :param pulumi.Input[bool] inspection_enabled: Enable/Disable traffic inspection.
-        :param pulumi.Input[bool] keep_alive_via_lan_interface_enabled: Enable Keep Alive via Firewall LAN Interface.
-        :param pulumi.Input[bool] manage_firewall_instance_association: Enable this to manage firewall_instance_associations in-line. If this is false, associations must be managed via
-               standalone aviatrix_firewall_instance_association resources. Type: boolean, Default: true, Valid values: true/false.
-        :param pulumi.Input[bool] tgw_segmentation_for_egress_enabled: Enable TGW segmentation for egress.
-        :param pulumi.Input[str] vpc_id: VPC ID.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] east_west_inspection_excluded_cidrs: Network List Excluded From East-West Inspection. CIDRs to be excluded from inspection. Type: Set(String). Available as of provider version R2.19.5+.
+        :param pulumi.Input[bool] egress_enabled: Enable/disable egress through firewall. Valid values: true, false. Default value: false.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] egress_static_cidrs: List of egress static CIDRs. Egress is required to be enabled. Example: ["1.171.15.184/32", "1.171.15.185/32"]. Available as of provider version R2.19+.
+        :param pulumi.Input[Sequence[pulumi.Input['AviatrixFirenetFirewallInstanceAssociationArgs']]] firewall_instance_associations: Dynamic block of firewall instance(s) to be associated with the FireNet.
+        :param pulumi.Input[str] hashing_algorithm: Hashing algorithm to load balance traffic across the firewall. Valid values: "2-Tuple", "5-Tuple". Default value: "5-Tuple".
+        :param pulumi.Input[bool] inspection_enabled: Enable/disable traffic inspection. Valid values: true, false. Default value: true.
+        :param pulumi.Input[bool] keep_alive_via_lan_interface_enabled: Enable Keep Alive via Firewall LAN Interface. Valid values: true or false. Default value: false. Available as of provider version R2.18.1+.
+        :param pulumi.Input[bool] manage_firewall_instance_association: Enable this attribute to manage firewall associations in-line. If set to true, in-line `firewall_instance_association` blocks can be used. If set to false, all firewall associations must be managed via standalone `AviatrixFirewallInstanceAssociation` resources. Default value: true. Valid values: true or false. Available in provider version R2.17.1+.
+        :param pulumi.Input[bool] tgw_segmentation_for_egress_enabled: Enable TGW segmentation for egress. Valid values: true or false. Default value: false. Available as of provider version R2.19+.
+        :param pulumi.Input[str] vpc_id: VPC ID of the Security VPC.
         """
         if east_west_inspection_excluded_cidrs is not None:
             pulumi.set(__self__, "east_west_inspection_excluded_cidrs", east_west_inspection_excluded_cidrs)
@@ -243,8 +237,7 @@ class _AviatrixFirenetState:
     @pulumi.getter(name="eastWestInspectionExcludedCidrs")
     def east_west_inspection_excluded_cidrs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Network List Excluded From East-West Inspection. CIDRs to be excluded from inspection. Type: Set(String). Available as
-        of provider version R2.19.2+.
+        Network List Excluded From East-West Inspection. CIDRs to be excluded from inspection. Type: Set(String). Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "east_west_inspection_excluded_cidrs")
 
@@ -256,7 +249,7 @@ class _AviatrixFirenetState:
     @pulumi.getter(name="egressEnabled")
     def egress_enabled(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable/Disable egress through firewall.
+        Enable/disable egress through firewall. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "egress_enabled")
 
@@ -268,7 +261,7 @@ class _AviatrixFirenetState:
     @pulumi.getter(name="egressStaticCidrs")
     def egress_static_cidrs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of egress static cidrs.
+        List of egress static CIDRs. Egress is required to be enabled. Example: ["1.171.15.184/32", "1.171.15.185/32"]. Available as of provider version R2.19+.
         """
         return pulumi.get(self, "egress_static_cidrs")
 
@@ -280,7 +273,7 @@ class _AviatrixFirenetState:
     @pulumi.getter(name="firewallInstanceAssociations")
     def firewall_instance_associations(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['AviatrixFirenetFirewallInstanceAssociationArgs']]]]:
         """
-        List of firewall instances to be associated with fireNet.
+        Dynamic block of firewall instance(s) to be associated with the FireNet.
         """
         return pulumi.get(self, "firewall_instance_associations")
 
@@ -292,7 +285,7 @@ class _AviatrixFirenetState:
     @pulumi.getter(name="hashingAlgorithm")
     def hashing_algorithm(self) -> Optional[pulumi.Input[str]]:
         """
-        Hashing algorithm to load balance traffic across the firewall.
+        Hashing algorithm to load balance traffic across the firewall. Valid values: "2-Tuple", "5-Tuple". Default value: "5-Tuple".
         """
         return pulumi.get(self, "hashing_algorithm")
 
@@ -304,7 +297,7 @@ class _AviatrixFirenetState:
     @pulumi.getter(name="inspectionEnabled")
     def inspection_enabled(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable/Disable traffic inspection.
+        Enable/disable traffic inspection. Valid values: true, false. Default value: true.
         """
         return pulumi.get(self, "inspection_enabled")
 
@@ -316,7 +309,7 @@ class _AviatrixFirenetState:
     @pulumi.getter(name="keepAliveViaLanInterfaceEnabled")
     def keep_alive_via_lan_interface_enabled(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable Keep Alive via Firewall LAN Interface.
+        Enable Keep Alive via Firewall LAN Interface. Valid values: true or false. Default value: false. Available as of provider version R2.18.1+.
         """
         return pulumi.get(self, "keep_alive_via_lan_interface_enabled")
 
@@ -328,8 +321,7 @@ class _AviatrixFirenetState:
     @pulumi.getter(name="manageFirewallInstanceAssociation")
     def manage_firewall_instance_association(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable this to manage firewall_instance_associations in-line. If this is false, associations must be managed via
-        standalone aviatrix_firewall_instance_association resources. Type: boolean, Default: true, Valid values: true/false.
+        Enable this attribute to manage firewall associations in-line. If set to true, in-line `firewall_instance_association` blocks can be used. If set to false, all firewall associations must be managed via standalone `AviatrixFirewallInstanceAssociation` resources. Default value: true. Valid values: true or false. Available in provider version R2.17.1+.
         """
         return pulumi.get(self, "manage_firewall_instance_association")
 
@@ -341,7 +333,7 @@ class _AviatrixFirenetState:
     @pulumi.getter(name="tgwSegmentationForEgressEnabled")
     def tgw_segmentation_for_egress_enabled(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable TGW segmentation for egress.
+        Enable TGW segmentation for egress. Valid values: true or false. Default value: false. Available as of provider version R2.19+.
         """
         return pulumi.get(self, "tgw_segmentation_for_egress_enabled")
 
@@ -353,7 +345,7 @@ class _AviatrixFirenetState:
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
-        VPC ID.
+        VPC ID of the Security VPC.
         """
         return pulumi.get(self, "vpc_id")
 
@@ -379,21 +371,30 @@ class AviatrixFirenet(pulumi.CustomResource):
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixFirenet resource with the given unique name, props, and options.
+        The **aviatrix_firenet** resource allows the creation and management of [Aviatrix Firewall Networks](https://docs.aviatrix.com/HowTos/firewall_network_faq.html).
+
+        > **NOTE:** This resource is used in conjunction with multiple other resources that may include, and are not limited to: **firewall_instance**, **firewall_instance_association**, **aws_tgw**, and **transit_gateway** resources or even **aviatrix_fqdn**, under the Aviatrix FireNet solution. Explicit dependencies may be set using `depends_on`. For more information on proper FireNet configuration, please see the workflow [here](https://docs.aviatrix.com/HowTos/firewall_network_workflow.html).
+
+        ## Import
+
+        **firenet** can be imported using the `vpc_id`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixFirenet:AviatrixFirenet test vpc_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] east_west_inspection_excluded_cidrs: Network List Excluded From East-West Inspection. CIDRs to be excluded from inspection. Type: Set(String). Available as
-               of provider version R2.19.2+.
-        :param pulumi.Input[bool] egress_enabled: Enable/Disable egress through firewall.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] egress_static_cidrs: List of egress static cidrs.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixFirenetFirewallInstanceAssociationArgs']]]] firewall_instance_associations: List of firewall instances to be associated with fireNet.
-        :param pulumi.Input[str] hashing_algorithm: Hashing algorithm to load balance traffic across the firewall.
-        :param pulumi.Input[bool] inspection_enabled: Enable/Disable traffic inspection.
-        :param pulumi.Input[bool] keep_alive_via_lan_interface_enabled: Enable Keep Alive via Firewall LAN Interface.
-        :param pulumi.Input[bool] manage_firewall_instance_association: Enable this to manage firewall_instance_associations in-line. If this is false, associations must be managed via
-               standalone aviatrix_firewall_instance_association resources. Type: boolean, Default: true, Valid values: true/false.
-        :param pulumi.Input[bool] tgw_segmentation_for_egress_enabled: Enable TGW segmentation for egress.
-        :param pulumi.Input[str] vpc_id: VPC ID.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] east_west_inspection_excluded_cidrs: Network List Excluded From East-West Inspection. CIDRs to be excluded from inspection. Type: Set(String). Available as of provider version R2.19.5+.
+        :param pulumi.Input[bool] egress_enabled: Enable/disable egress through firewall. Valid values: true, false. Default value: false.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] egress_static_cidrs: List of egress static CIDRs. Egress is required to be enabled. Example: ["1.171.15.184/32", "1.171.15.185/32"]. Available as of provider version R2.19+.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixFirenetFirewallInstanceAssociationArgs']]]] firewall_instance_associations: Dynamic block of firewall instance(s) to be associated with the FireNet.
+        :param pulumi.Input[str] hashing_algorithm: Hashing algorithm to load balance traffic across the firewall. Valid values: "2-Tuple", "5-Tuple". Default value: "5-Tuple".
+        :param pulumi.Input[bool] inspection_enabled: Enable/disable traffic inspection. Valid values: true, false. Default value: true.
+        :param pulumi.Input[bool] keep_alive_via_lan_interface_enabled: Enable Keep Alive via Firewall LAN Interface. Valid values: true or false. Default value: false. Available as of provider version R2.18.1+.
+        :param pulumi.Input[bool] manage_firewall_instance_association: Enable this attribute to manage firewall associations in-line. If set to true, in-line `firewall_instance_association` blocks can be used. If set to false, all firewall associations must be managed via standalone `AviatrixFirewallInstanceAssociation` resources. Default value: true. Valid values: true or false. Available in provider version R2.17.1+.
+        :param pulumi.Input[bool] tgw_segmentation_for_egress_enabled: Enable TGW segmentation for egress. Valid values: true or false. Default value: false. Available as of provider version R2.19+.
+        :param pulumi.Input[str] vpc_id: VPC ID of the Security VPC.
         """
         ...
     @overload
@@ -402,7 +403,18 @@ class AviatrixFirenet(pulumi.CustomResource):
                  args: AviatrixFirenetArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixFirenet resource with the given unique name, props, and options.
+        The **aviatrix_firenet** resource allows the creation and management of [Aviatrix Firewall Networks](https://docs.aviatrix.com/HowTos/firewall_network_faq.html).
+
+        > **NOTE:** This resource is used in conjunction with multiple other resources that may include, and are not limited to: **firewall_instance**, **firewall_instance_association**, **aws_tgw**, and **transit_gateway** resources or even **aviatrix_fqdn**, under the Aviatrix FireNet solution. Explicit dependencies may be set using `depends_on`. For more information on proper FireNet configuration, please see the workflow [here](https://docs.aviatrix.com/HowTos/firewall_network_workflow.html).
+
+        ## Import
+
+        **firenet** can be imported using the `vpc_id`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixFirenet:AviatrixFirenet test vpc_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixFirenetArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -479,18 +491,16 @@ class AviatrixFirenet(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] east_west_inspection_excluded_cidrs: Network List Excluded From East-West Inspection. CIDRs to be excluded from inspection. Type: Set(String). Available as
-               of provider version R2.19.2+.
-        :param pulumi.Input[bool] egress_enabled: Enable/Disable egress through firewall.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] egress_static_cidrs: List of egress static cidrs.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixFirenetFirewallInstanceAssociationArgs']]]] firewall_instance_associations: List of firewall instances to be associated with fireNet.
-        :param pulumi.Input[str] hashing_algorithm: Hashing algorithm to load balance traffic across the firewall.
-        :param pulumi.Input[bool] inspection_enabled: Enable/Disable traffic inspection.
-        :param pulumi.Input[bool] keep_alive_via_lan_interface_enabled: Enable Keep Alive via Firewall LAN Interface.
-        :param pulumi.Input[bool] manage_firewall_instance_association: Enable this to manage firewall_instance_associations in-line. If this is false, associations must be managed via
-               standalone aviatrix_firewall_instance_association resources. Type: boolean, Default: true, Valid values: true/false.
-        :param pulumi.Input[bool] tgw_segmentation_for_egress_enabled: Enable TGW segmentation for egress.
-        :param pulumi.Input[str] vpc_id: VPC ID.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] east_west_inspection_excluded_cidrs: Network List Excluded From East-West Inspection. CIDRs to be excluded from inspection. Type: Set(String). Available as of provider version R2.19.5+.
+        :param pulumi.Input[bool] egress_enabled: Enable/disable egress through firewall. Valid values: true, false. Default value: false.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] egress_static_cidrs: List of egress static CIDRs. Egress is required to be enabled. Example: ["1.171.15.184/32", "1.171.15.185/32"]. Available as of provider version R2.19+.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixFirenetFirewallInstanceAssociationArgs']]]] firewall_instance_associations: Dynamic block of firewall instance(s) to be associated with the FireNet.
+        :param pulumi.Input[str] hashing_algorithm: Hashing algorithm to load balance traffic across the firewall. Valid values: "2-Tuple", "5-Tuple". Default value: "5-Tuple".
+        :param pulumi.Input[bool] inspection_enabled: Enable/disable traffic inspection. Valid values: true, false. Default value: true.
+        :param pulumi.Input[bool] keep_alive_via_lan_interface_enabled: Enable Keep Alive via Firewall LAN Interface. Valid values: true or false. Default value: false. Available as of provider version R2.18.1+.
+        :param pulumi.Input[bool] manage_firewall_instance_association: Enable this attribute to manage firewall associations in-line. If set to true, in-line `firewall_instance_association` blocks can be used. If set to false, all firewall associations must be managed via standalone `AviatrixFirewallInstanceAssociation` resources. Default value: true. Valid values: true or false. Available in provider version R2.17.1+.
+        :param pulumi.Input[bool] tgw_segmentation_for_egress_enabled: Enable TGW segmentation for egress. Valid values: true or false. Default value: false. Available as of provider version R2.19+.
+        :param pulumi.Input[str] vpc_id: VPC ID of the Security VPC.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -512,8 +522,7 @@ class AviatrixFirenet(pulumi.CustomResource):
     @pulumi.getter(name="eastWestInspectionExcludedCidrs")
     def east_west_inspection_excluded_cidrs(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        Network List Excluded From East-West Inspection. CIDRs to be excluded from inspection. Type: Set(String). Available as
-        of provider version R2.19.2+.
+        Network List Excluded From East-West Inspection. CIDRs to be excluded from inspection. Type: Set(String). Available as of provider version R2.19.5+.
         """
         return pulumi.get(self, "east_west_inspection_excluded_cidrs")
 
@@ -521,7 +530,7 @@ class AviatrixFirenet(pulumi.CustomResource):
     @pulumi.getter(name="egressEnabled")
     def egress_enabled(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enable/Disable egress through firewall.
+        Enable/disable egress through firewall. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "egress_enabled")
 
@@ -529,7 +538,7 @@ class AviatrixFirenet(pulumi.CustomResource):
     @pulumi.getter(name="egressStaticCidrs")
     def egress_static_cidrs(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        List of egress static cidrs.
+        List of egress static CIDRs. Egress is required to be enabled. Example: ["1.171.15.184/32", "1.171.15.185/32"]. Available as of provider version R2.19+.
         """
         return pulumi.get(self, "egress_static_cidrs")
 
@@ -537,7 +546,7 @@ class AviatrixFirenet(pulumi.CustomResource):
     @pulumi.getter(name="firewallInstanceAssociations")
     def firewall_instance_associations(self) -> pulumi.Output[Optional[Sequence['outputs.AviatrixFirenetFirewallInstanceAssociation']]]:
         """
-        List of firewall instances to be associated with fireNet.
+        Dynamic block of firewall instance(s) to be associated with the FireNet.
         """
         return pulumi.get(self, "firewall_instance_associations")
 
@@ -545,7 +554,7 @@ class AviatrixFirenet(pulumi.CustomResource):
     @pulumi.getter(name="hashingAlgorithm")
     def hashing_algorithm(self) -> pulumi.Output[Optional[str]]:
         """
-        Hashing algorithm to load balance traffic across the firewall.
+        Hashing algorithm to load balance traffic across the firewall. Valid values: "2-Tuple", "5-Tuple". Default value: "5-Tuple".
         """
         return pulumi.get(self, "hashing_algorithm")
 
@@ -553,7 +562,7 @@ class AviatrixFirenet(pulumi.CustomResource):
     @pulumi.getter(name="inspectionEnabled")
     def inspection_enabled(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enable/Disable traffic inspection.
+        Enable/disable traffic inspection. Valid values: true, false. Default value: true.
         """
         return pulumi.get(self, "inspection_enabled")
 
@@ -561,7 +570,7 @@ class AviatrixFirenet(pulumi.CustomResource):
     @pulumi.getter(name="keepAliveViaLanInterfaceEnabled")
     def keep_alive_via_lan_interface_enabled(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enable Keep Alive via Firewall LAN Interface.
+        Enable Keep Alive via Firewall LAN Interface. Valid values: true or false. Default value: false. Available as of provider version R2.18.1+.
         """
         return pulumi.get(self, "keep_alive_via_lan_interface_enabled")
 
@@ -569,8 +578,7 @@ class AviatrixFirenet(pulumi.CustomResource):
     @pulumi.getter(name="manageFirewallInstanceAssociation")
     def manage_firewall_instance_association(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enable this to manage firewall_instance_associations in-line. If this is false, associations must be managed via
-        standalone aviatrix_firewall_instance_association resources. Type: boolean, Default: true, Valid values: true/false.
+        Enable this attribute to manage firewall associations in-line. If set to true, in-line `firewall_instance_association` blocks can be used. If set to false, all firewall associations must be managed via standalone `AviatrixFirewallInstanceAssociation` resources. Default value: true. Valid values: true or false. Available in provider version R2.17.1+.
         """
         return pulumi.get(self, "manage_firewall_instance_association")
 
@@ -578,7 +586,7 @@ class AviatrixFirenet(pulumi.CustomResource):
     @pulumi.getter(name="tgwSegmentationForEgressEnabled")
     def tgw_segmentation_for_egress_enabled(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enable TGW segmentation for egress.
+        Enable TGW segmentation for egress. Valid values: true or false. Default value: false. Available as of provider version R2.19+.
         """
         return pulumi.get(self, "tgw_segmentation_for_egress_enabled")
 
@@ -586,7 +594,7 @@ class AviatrixFirenet(pulumi.CustomResource):
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> pulumi.Output[str]:
         """
-        VPC ID.
+        VPC ID of the Security VPC.
         """
         return pulumi.get(self, "vpc_id")
 

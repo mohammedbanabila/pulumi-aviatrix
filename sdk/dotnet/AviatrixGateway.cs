@@ -9,6 +9,15 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// ## Import
+    /// 
+    /// **gateway** can be imported using the `gw_name`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixGateway:AviatrixGateway test gw_name
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixGateway:AviatrixGateway")]
     public partial class AviatrixGateway : global::Pulumi.CustomResource
     {
@@ -25,122 +34,121 @@ namespace Pulumi.Aviatrix
         public Output<string?> AdditionalCidrs { get; private set; } = null!;
 
         /// <summary>
-        /// A list of CIDR ranges separated by comma to configure when 'designated_gateway' feature is enabled.
+        /// A list of CIDR ranges separated by comma to configure when "Designated Gateway" feature is enabled. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
         /// </summary>
         [Output("additionalCidrsDesignatedGateway")]
         public Output<string?> AdditionalCidrsDesignatedGateway { get; private set; } = null!;
 
         /// <summary>
-        /// When value is false, reuse an idle address in Elastic IP pool for this gateway. Otherwise, allocate a new Elastic IP and
-        /// use it for this gateway.
+        /// If set to false, use an available address in Elastic IP pool for this gateway. Otherwise, allocate a new Elastic IP and use it for this gateway. Available in Controller 2.7+. Valid values: true, false. Default: true.
         /// </summary>
         [Output("allocateNewEip")]
         public Output<bool?> AllocateNewEip { get; private set; } = null!;
 
         /// <summary>
-        /// Availability domain for OCI.
+        /// Availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
         /// </summary>
         [Output("availabilityDomain")]
         public Output<string> AvailabilityDomain { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the public IP address and its resource group in Azure to assign to this Gateway.
+        /// Name of public IP Address resource and its resource group in Azure to be assigned to the gateway instance. Example: "IP_Name:Resource_Group_Name". Required when `allocate_new_eip` is false and `cloud_type` is Azure, AzureGov or AzureChina. Available as of provider version 2.20+.
         /// </summary>
         [Output("azureEipNameResourceGroup")]
         public Output<string> AzureEipNameResourceGroup { get; private set; } = null!;
 
         /// <summary>
-        /// Instance ID of the gateway.
+        /// Cloud instance ID of the gateway.
         /// </summary>
         [Output("cloudInstanceId")]
         public Output<string> CloudInstanceId { get; private set; } = null!;
 
         /// <summary>
-        /// Type of cloud service provider.
+        /// Cloud service provider to use to launch the gateway. Requires an integer value. Currently supports AWS(1), GCP(4), Azure(8), OCI(16), AzureGov(32), AWSGov(256), AWSChina(1024), AzureChina(2048), Alibaba Cloud (8192), AWS Top Secret (16384) and AWS Secret (32768).
         /// </summary>
         [Output("cloudType")]
         public Output<int> CloudType { get; private set; } = null!;
 
         /// <summary>
-        /// Customer managed key ID.
+        /// Customer-managed key ID.
         /// </summary>
         [Output("customerManagedKeys")]
         public Output<string?> CustomerManagedKeys { get; private set; } = null!;
 
         /// <summary>
-        /// API hostname for DUO auth mode.
+        /// API hostname for DUO auth mode. Required: Yes if `otp_mode` is "2".
         /// </summary>
         [Output("duoApiHostname")]
         public Output<string?> DuoApiHostname { get; private set; } = null!;
 
         /// <summary>
-        /// Integration key for DUO auth mode.
+        /// Integration key for DUO auth mode. Required if `otp_mode` is "2".
         /// </summary>
         [Output("duoIntegrationKey")]
         public Output<string?> DuoIntegrationKey { get; private set; } = null!;
 
         /// <summary>
-        /// Push mode for DUO auth.
+        /// Push mode for DUO auth. Required if `otp_mode` is "2". Valid values: "auto", "selective" and "token".
         /// </summary>
         [Output("duoPushMode")]
         public Output<string?> DuoPushMode { get; private set; } = null!;
 
         /// <summary>
-        /// Secret key for DUO auth mode.
+        /// Secret key for DUO auth mode. Required if `otp_mode` is "2".
         /// </summary>
         [Output("duoSecretKey")]
         public Output<string?> DuoSecretKey { get; private set; } = null!;
 
         /// <summary>
-        /// Required when allocate_new_eip is false. It uses specified EIP for this gateway.
+        /// Specified EIP to use for gateway creation. Required when `allocate_new_eip` is false.  Available in Controller version 3.5+. Only available for AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret.
         /// </summary>
         [Output("eip")]
         public Output<string> Eip { get; private set; } = null!;
 
         /// <summary>
-        /// ELB DNS Name.
+        /// ELB DNS name.
         /// </summary>
         [Output("elbDnsName")]
         public Output<string> ElbDnsName { get; private set; } = null!;
 
         /// <summary>
-        /// A name for the ELB that is created.
+        /// A name for the ELB that is created. If it is not specified, a name is generated automatically.
         /// </summary>
         [Output("elbName")]
         public Output<string> ElbName { get; private set; } = null!;
 
         /// <summary>
-        /// Enable 'designated_gateway' feature for Gateway. Valid values: true, false.
+        /// Enable Designated Gateway feature for Gateway. Only supported for AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret gateways. Valid values: true, false. Default value: false. Please view documentation [here](https://docs.aviatrix.com/HowTos/gateway.html#designated-gateway) for more information on this feature.
         /// </summary>
         [Output("enableDesignatedGateway")]
         public Output<bool?> EnableDesignatedGateway { get; private set; } = null!;
 
         /// <summary>
-        /// Specify whether to enable ELB or not.
+        /// Specify whether to enable ELB or not. Not supported for OCI gateways. Valid values: true, false.
         /// </summary>
         [Output("enableElb")]
         public Output<bool?> EnableElb { get; private set; } = null!;
 
         /// <summary>
-        /// Enable encrypt gateway EBS volume. Only supported for AWS provider. Valid values: true, false. Default value: false.
+        /// Enable EBS volume encryption for the gateway. Only supported for AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret gateways. Valid values: true, false. Default value: false.
         /// </summary>
         [Output("enableEncryptVolume")]
         public Output<bool?> EnableEncryptVolume { get; private set; } = null!;
 
         /// <summary>
-        /// Enable jumbo frame support for Gateway. Valid values: true or false. Default value: true.
+        /// Enable jumbo frames for this gateway. Default value is true.
         /// </summary>
         [Output("enableJumboFrame")]
         public Output<bool?> EnableJumboFrame { get; private set; } = null!;
 
         /// <summary>
-        /// Specify whether to enable LDAP or not. Supported values: 'yes' and 'no'.
+        /// Enable/disable LDAP. Valid values: true, false. Default value: false.
         /// </summary>
         [Output("enableLdap")]
         public Output<bool?> EnableLdap { get; private set; } = null!;
 
         /// <summary>
-        /// Enable monitor gateway subnets. Valid values: true, false. Default value: false.
+        /// If set to true, the [Monitor Gateway Subnets](https://docs.aviatrix.com/HowTos/gateway.html#monitor-gateway-subnet) feature is enabled. Default value is false. Available in provider version R2.17.1+.
         /// </summary>
         [Output("enableMonitorGatewaySubnets")]
         public Output<bool?> EnableMonitorGatewaySubnets { get; private set; } = null!;
@@ -158,117 +166,115 @@ namespace Pulumi.Aviatrix
         public Output<bool?> EnableSpotInstance { get; private set; } = null!;
 
         /// <summary>
-        /// Enable vpc_dns_server for Gateway. Valid values: true, false.
+        /// Enable VPC DNS Server for gateway. Currently only supported for AWS, Azure, AzureGov, AWSGov, AWSChina, AzureChina, Alibaba Cloud, AWS Top Secret and AWS Secret gateways. Valid values: true, false. Default value: false.
         /// </summary>
         [Output("enableVpcDnsServer")]
         public Output<bool?> EnableVpcDnsServer { get; private set; } = null!;
 
         /// <summary>
-        /// This field indicates whether to enable VPN NAT or not. Only supported for VPN gateway. Valid values: true, false.
-        /// Default value: true.
+        /// Enable/disable VPN NAT. Only supported for VPN gateway. Valid values: true, false. Default value: true.
         /// </summary>
         [Output("enableVpnNat")]
         public Output<bool?> EnableVpnNat { get; private set; } = null!;
 
         /// <summary>
-        /// Fault domain for OCI.
+        /// Fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
         /// </summary>
         [Output("faultDomain")]
         public Output<string> FaultDomain { get; private set; } = null!;
 
         /// <summary>
-        /// FQDN gateway lan interface cidr.
+        /// If `fqdn_lan_cidr` is set, the FQDN gateway will be created with an additional LAN interface using the provided CIDR. This attribute is required when enabling FQDN gateway FireNet in Azure or GCP. Available in provider version R2.17.1+.
         /// </summary>
         [Output("fqdnLanCidr")]
         public Output<string?> FqdnLanCidr { get; private set; } = null!;
 
         /// <summary>
-        /// FQDN gateway lan interface id.
+        /// The lan interface id of the of FQDN gateway with additional LAN interface. This attribute will be exported when enabling FQDN gateway firenet in Azure. Available in provider version R2.17.1+.
         /// </summary>
         [Output("fqdnLanInterface")]
         public Output<string> FqdnLanInterface { get; private set; } = null!;
 
         /// <summary>
-        /// LAN VPC ID. Only used for GCP FQDN Gateway.
+        /// FQDN LAN VPC ID. This attribute is required when enabling FQDN gateway FireNet in GCP. Available as of provider version R2.18.1+.
         /// </summary>
         [Output("fqdnLanVpcId")]
         public Output<string?> FqdnLanVpcId { get; private set; } = null!;
 
         /// <summary>
-        /// Aviatrix gateway unique name.
+        /// Name of the Aviatrix gateway to be created.
         /// </summary>
         [Output("gwName")]
         public Output<string> GwName { get; private set; } = null!;
 
         /// <summary>
-        /// Size of Gateway Instance.
+        /// Size of the gateway instance. Example: AWS/AWSGov/AWSChina: "t2.large", GCP: "n1-standard-1", Azure/AzureGov/AzureChina: "Standard_B1s", OCI: "VM.Standard2.2".
         /// </summary>
         [Output("gwSize")]
         public Output<string> GwSize { get; private set; } = null!;
 
         /// <summary>
-        /// Typed value when modifying idle_timeout. If it's -1, this feature is disabled.
+        /// It sets the value (seconds) of the [idle timeout](https://docs.aviatrix.com/HowTos/openvpn_faq.html#how-do-i-fix-the-aviatrix-vpn-timing-out-too-quickly). This idle timeout feature is enable only if this attribute is set, otherwise it is disabled. The entered value must be an integer number greater than 300.  Available in provider version R2.17.1+.
         /// </summary>
         [Output("idleTimeout")]
         public Output<int?> IdleTimeout { get; private set; } = null!;
 
         /// <summary>
-        /// image_version can be used to set the desired image version of the gateway. If set, we will attempt to update the gateway
-        /// to the specified version.
+        /// The image version of the gateway. Use `aviatrix.getAviatrixGatewayImage` data source to programmatically retrieve this value for the desired `software_version`. If set, we will attempt to update the gateway to the specified version if current version is different. If left blank, the gateway upgrades can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "hvm-cloudx-aws-022021". Available as of provider version R2.20.0.
         /// </summary>
         [Output("imageVersion")]
         public Output<string> ImageVersion { get; private set; } = null!;
 
         /// <summary>
-        /// Enable Insane Mode for Gateway. Valid values: true, false.
+        /// Enable [Insane Mode](https://docs.aviatrix.com/HowTos/insane_mode.html) for Gateway. Insane Mode gateway size must be at least c5 series (AWS) or Standard_D3_v2 (Azure/AzureGov). If enabled, a valid /26 CIDR segment of the VPC must be specified to create a new subnet. Only supported for AWS, AWSGov, Azure, AzureGov, AWS China, Azure China, AWS Top Secret or AWS Secret.  Valid values: true, false.
         /// </summary>
         [Output("insaneMode")]
         public Output<bool?> InsaneMode { get; private set; } = null!;
 
         /// <summary>
-        /// AZ of subnet being created for Insane Mode Gateway. Required if insane_mode is set.
+        /// Region + Availability Zone of subnet being created for Insane Mode gateway. Required for AWS, AWSGov, AWS China, AWS Top Secret or AWS Secret if `insane_mode` is set. Example: AWS: "us-west-1a".
         /// </summary>
         [Output("insaneModeAz")]
         public Output<string?> InsaneModeAz { get; private set; } = null!;
 
         /// <summary>
-        /// LDAP base DN. Required: Yes if enable_ldap is 'yes'.
+        /// LDAP base DN. Required if `enable_ldap` is true.
         /// </summary>
         [Output("ldapBaseDn")]
         public Output<string?> LdapBaseDn { get; private set; } = null!;
 
         /// <summary>
-        /// LDAP bind DN. Required: Yes if enable_ldap is 'yes'.
+        /// LDAP bind DN. Required if `enable_ldap` is true.
         /// </summary>
         [Output("ldapBindDn")]
         public Output<string?> LdapBindDn { get; private set; } = null!;
 
         /// <summary>
-        /// LDAP password. Required: Yes if enable_ldap is 'yes'.
+        /// LDAP password. Required if `enable_ldap` is true.
         /// </summary>
         [Output("ldapPassword")]
         public Output<string?> LdapPassword { get; private set; } = null!;
 
         /// <summary>
-        /// LDAP server address. Required: Yes if enable_ldap is 'yes'.
+        /// LDAP server address. Required if `enable_ldap` is true.
         /// </summary>
         [Output("ldapServer")]
         public Output<string?> LdapServer { get; private set; } = null!;
 
         /// <summary>
-        /// LDAP user attribute. Required: Yes if enable_ldap is 'yes'.
+        /// LDAP user attribute. Required if `enable_ldap` is true.
         /// </summary>
         [Output("ldapUsernameAttribute")]
         public Output<string?> LdapUsernameAttribute { get; private set; } = null!;
 
         /// <summary>
-        /// Maximum connection of VPN access.
+        /// Maximum number of active VPN users allowed to be connected to this gateway. Required if `vpn_access` is true. Make sure the number is smaller than the VPN CIDR block. Example: 100. **NOTE: Please see notes here in regards to any deltas found in your state with the addition of this argument in R1.14.**
         /// </summary>
         [Output("maxVpnConn")]
         public Output<string?> MaxVpnConn { get; private set; } = null!;
 
         /// <summary>
-        /// A set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true.
+        /// Set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true. Available in provider version R2.17.1+.
         /// </summary>
         [Output("monitorExcludeLists")]
         public Output<ImmutableArray<string>> MonitorExcludeLists { get; private set; } = null!;
@@ -280,55 +286,55 @@ namespace Pulumi.Aviatrix
         public Output<string?> NameServers { get; private set; } = null!;
 
         /// <summary>
-        /// Token for Okta auth mode.
+        /// Token for Okta auth mode. Required if `otp_mode` is "3".
         /// </summary>
         [Output("oktaToken")]
         public Output<string?> OktaToken { get; private set; } = null!;
 
         /// <summary>
-        /// URL for Okta auth mode.
+        /// URL for Okta auth mode. Required if `otp_mode` is "3".
         /// </summary>
         [Output("oktaUrl")]
         public Output<string?> OktaUrl { get; private set; } = null!;
 
         /// <summary>
-        /// Username suffix for Okta auth mode.
+        /// Username suffix for Okta auth mode. Example: "aviatrix.com".
         /// </summary>
         [Output("oktaUsernameSuffix")]
         public Output<string?> OktaUsernameSuffix { get; private set; } = null!;
 
         /// <summary>
-        /// Two step authentication mode.
+        /// Two step authentication mode. Valid values: "2" for DUO, "3" for Okta.
         /// </summary>
         [Output("otpMode")]
         public Output<string?> OtpMode { get; private set; } = null!;
 
         /// <summary>
-        /// Peering HA availability domain for OCI.
+        /// Peering HA gateway availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
         /// </summary>
         [Output("peeringHaAvailabilityDomain")]
         public Output<string> PeeringHaAvailabilityDomain { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the public IP address and its resource group in Azure to assign to the Peering HA Gateway.
+        /// Name of public IP address resource and its resource group in Azure to be assigned to the HA peering instance. Example: "IP_Name:Resource_Group_Name". Required if `peering_ha_eip` is set and `cloud_type` is Azure, AzureGov or AzureChina. Available as of provider version 2.20+.
         /// </summary>
         [Output("peeringHaAzureEipNameResourceGroup")]
         public Output<string> PeeringHaAzureEipNameResourceGroup { get; private set; } = null!;
 
         /// <summary>
-        /// Instance ID of the peering HA gateway.
+        /// Cloud instance ID of the HA gateway.
         /// </summary>
         [Output("peeringHaCloudInstanceId")]
         public Output<string> PeeringHaCloudInstanceId { get; private set; } = null!;
 
         /// <summary>
-        /// Public IP address that you want assigned to the HA peering instance.
+        /// Public IP address to be assigned to the HA peering instance. Only available for AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret.
         /// </summary>
         [Output("peeringHaEip")]
         public Output<string> PeeringHaEip { get; private set; } = null!;
 
         /// <summary>
-        /// Peering HA fault domain for OCI.
+        /// Peering HA gateway fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
         /// </summary>
         [Output("peeringHaFaultDomain")]
         public Output<string> PeeringHaFaultDomain { get; private set; } = null!;
@@ -340,20 +346,19 @@ namespace Pulumi.Aviatrix
         public Output<string> PeeringHaGwName { get; private set; } = null!;
 
         /// <summary>
-        /// Peering HA Gateway Size.
+        /// Size of the Peering HA Gateway to be created. Required if enabling Peering HA. **NOTE: Please see notes here in regards to any deltas found in your state with the addition of this argument in R1.8.**
         /// </summary>
         [Output("peeringHaGwSize")]
         public Output<string?> PeeringHaGwSize { get; private set; } = null!;
 
         /// <summary>
-        /// peering_ha_image_version can be used to set the desired image version of the HA gateway. If set, we will attempt to
-        /// update the gateway to the specified version.
+        /// The image version of the HA gateway. Use `aviatrix.getAviatrixGatewayImage` data source to programmatically retrieve this value for the desired `ha_software_version`. If set, we will attempt to update the HA gateway to the specified version if current version is different. If left blank, the gateway upgrades can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "hvm-cloudx-aws-022021". Available as of provider version R2.20.0.
         /// </summary>
         [Output("peeringHaImageVersion")]
         public Output<string> PeeringHaImageVersion { get; private set; } = null!;
 
         /// <summary>
-        /// AZ of subnet being created for Insane Mode Peering HA Gateway. Required if insane_mode is set.
+        /// Region + Availability Zone of subnet being created for Insane Mode-enabled Peering HA Gateway. Required for AWS only if `insane_mode` is set and `peering_ha_subnet` is set. Example: AWS: "us-west-1a".
         /// </summary>
         [Output("peeringHaInsaneModeAz")]
         public Output<string?> PeeringHaInsaneModeAz { get; private set; } = null!;
@@ -365,87 +370,79 @@ namespace Pulumi.Aviatrix
         public Output<string> PeeringHaPrivateIp { get; private set; } = null!;
 
         /// <summary>
-        /// Peering HA security group used for the gateway.
+        /// HA security group used for the gateway.
         /// </summary>
         [Output("peeringHaSecurityGroupId")]
         public Output<string> PeeringHaSecurityGroupId { get; private set; } = null!;
 
         /// <summary>
-        /// peering_ha_software_version can be used to set the desired software version of the HA gateway. If set, we will attempt
-        /// to update the gateway to the specified version. If left blank, the gateway software version will continue to be managed
-        /// through the aviatrix_controller_config resource.
+        /// The software version of the HA gateway. If set, we will attempt to update the HA gateway to the specified version if current version is different. If left blank, the HA gateway upgrade can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "6.5.821". Available as of provider version R2.20.0.
         /// </summary>
         [Output("peeringHaSoftwareVersion")]
         public Output<string> PeeringHaSoftwareVersion { get; private set; } = null!;
 
         /// <summary>
-        /// Public Subnet Information while creating Peering HA Gateway, only subnet is accepted. Required to create peering ha
-        /// gateway if cloud_type = 1 or 8 (AWS or Azure). Optional if cloud_type = 4 (GCP)
+        /// Public subnet CIDR to create Peering HA Gateway in. Required if enabling Peering HA for AWS/AWSGov/AWS Top Secret/AWS Secret/Azure/AzureGov/Alibaba Cloud. Optional if enabling Peering HA for GCP. Example: AWS: "10.0.0.0/16".
         /// </summary>
         [Output("peeringHaSubnet")]
         public Output<string?> PeeringHaSubnet { get; private set; } = null!;
 
         /// <summary>
-        /// Zone information for creating Peering HA Gateway. Required to create peering ha gateway if cloud_type = 4 (GCP).
-        /// Optional for cloud_type = 8 (Azure).
+        /// Zone to create Peering HA Gateway in. Required if enabling Peering HA for GCP. Example: GCP: "us-west1-c". Optional for Azure. Valid values for Azure gateways are in the form "az-n". Example: "az-2". Available for Azure as of provider version R2.17+.
         /// </summary>
         [Output("peeringHaZone")]
         public Output<string?> PeeringHaZone { get; private set; } = null!;
 
         /// <summary>
-        /// Private IP address of the Gateway created.
+        /// Private IP address of the gateway created.
         /// </summary>
         [Output("privateIp")]
         public Output<string> PrivateIp { get; private set; } = null!;
 
         /// <summary>
-        /// NS server used by the gateway.
+        /// DNS server used by the gateway. Default is "8.8.8.8", can be overridden with the VPC's setting.
         /// </summary>
         [Output("publicDnsServer")]
         public Output<string> PublicDnsServer { get; private set; } = null!;
 
         /// <summary>
-        /// Whether to enforce Guard Duty IP blocking. Required when `enable_public_subnet_filtering` attribute is true. Valid
-        /// values: true or false. Default value: true.
+        /// Whether to enforce Guard Duty IP blocking.  Only valid when `enable_public_subnet_filtering` attribute is true. Valid values: true or false. Default value: true. Available as of provider version R2.18+.
         /// </summary>
         [Output("publicSubnetFilteringGuardDutyEnforced")]
         public Output<bool?> PublicSubnetFilteringGuardDutyEnforced { get; private set; } = null!;
 
         /// <summary>
-        /// Route tables whose associated public subnets are protected for the HA PSF gateway. Required when
-        /// enable_public_subnet_filtering and peering_ha_subnet are set.
+        /// Route tables whose associated public subnets are protected for the HA PSF gateway. Required when `enable_public_subnet_filtering` and `peering_ha_subnet` are set. Available as of provider version R2.18+.
         /// </summary>
         [Output("publicSubnetFilteringHaRouteTables")]
         public Output<ImmutableArray<string>> PublicSubnetFilteringHaRouteTables { get; private set; } = null!;
 
         /// <summary>
-        /// Route tables whose associated public subnets are protected. Required when `enable_public_subnet_filtering` attribute is
-        /// true.
+        /// Route tables whose associated public subnets are protected. Only valid when `enable_public_subnet_filtering` attribute is true. Available as of provider version R2.18+.
         /// </summary>
         [Output("publicSubnetFilteringRouteTables")]
         public Output<ImmutableArray<string>> PublicSubnetFilteringRouteTables { get; private set; } = null!;
 
         /// <summary>
-        /// Typed value when modifying renegotiation_interval. If it's -1, this feature is disabled.
+        /// It sets the value (seconds) of the [renegotiation interval](https://docs.aviatrix.com/HowTos/openvpn_faq.html#how-do-i-fix-the-aviatrix-vpn-timing-out-too-quickly). This renegotiation interval feature is enable only if this attribute is set, otherwise it is disabled. The entered value must be an integer number greater than 300. Available in provider version R2.17.1+.
         /// </summary>
         [Output("renegotiationInterval")]
         public Output<int?> RenegotiationInterval { get; private set; } = null!;
 
         /// <summary>
-        /// Gateway ethernet interface RX queue size. Supported for AWS related clouds only.
+        /// Gateway ethernet interface RX queue size. Once set, can't be deleted or disabled. Available for AWS as of provider version R2.22+.
         /// </summary>
         [Output("rxQueueSize")]
         public Output<string?> RxQueueSize { get; private set; } = null!;
 
         /// <summary>
-        /// This field indicates whether to enable SAML or not.
+        /// Enable/disable SAML. This field is available in Controller version 3.3 or later release. Valid values: true, false. Default value: false.
         /// </summary>
         [Output("samlEnabled")]
         public Output<bool?> SamlEnabled { get; private set; } = null!;
 
         /// <summary>
-        /// A list of domain names that will use the NameServer when a specific name is not in the destination when Split Tunnel
-        /// Mode is enabled.
+        /// A list of domain names that will use the NameServer when a specific name is not in the destination when Split Tunnel Mode is enabled.
         /// </summary>
         [Output("searchDomains")]
         public Output<string?> SearchDomains { get; private set; } = null!;
@@ -457,27 +454,25 @@ namespace Pulumi.Aviatrix
         public Output<string> SecurityGroupId { get; private set; } = null!;
 
         /// <summary>
-        /// Set to true if this feature is desired.
+        /// If enabled, Controller monitors the health of the gateway and restarts the gateway if it becomes unreachable. Valid values: true, false. Default value: false.
         /// </summary>
         [Output("singleAzHa")]
         public Output<bool?> SingleAzHa { get; private set; } = null!;
 
         /// <summary>
-        /// Enable Source NAT for this container.
+        /// Enable Source NAT in "single ip" mode for this gateway. Valid values: true, false. Default value: false. **NOTE: If using SNAT for FQDN use-case, please see notes here.**
         /// </summary>
         [Output("singleIpSnat")]
         public Output<bool?> SingleIpSnat { get; private set; } = null!;
 
         /// <summary>
-        /// software_version can be used to set the desired software version of the gateway. If set, we will attempt to update the
-        /// gateway to the specified version. If left blank, the gateway software version will continue to be managed through the
-        /// aviatrix_controller_config resource.
+        /// The software version of the gateway. If set, we will attempt to update the gateway to the specified version if current version is different. If left blank, the gateway upgrade can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "6.5.821". Available as of provider version R2.20.0.
         /// </summary>
         [Output("softwareVersion")]
         public Output<string> SoftwareVersion { get; private set; } = null!;
 
         /// <summary>
-        /// Specify split tunnel mode.
+        /// Enable/disable Split Tunnel Mode. Valid values: true, false. Default value: true. Please see [here](https://docs.aviatrix.com/HowTos/gateway.html#split-tunnel-mode) for more information on split tunnel.
         /// </summary>
         [Output("splitTunnel")]
         public Output<bool?> SplitTunnel { get; private set; } = null!;
@@ -489,19 +484,20 @@ namespace Pulumi.Aviatrix
         public Output<string?> SpotPrice { get; private set; } = null!;
 
         /// <summary>
-        /// A VPC Network address range selected from one of the available network ranges.
+        /// A VPC network address range selected from one of the available network ranges. Example: "172.31.0.0/20". **NOTE: If using `insane_mode`, please see notes here.**
         /// </summary>
         [Output("subnet")]
         public Output<string> Subnet { get; private set; } = null!;
 
         /// <summary>
-        /// Instance tag of cloud provider.
+        /// (Optional) Tag list of the gateway instance. Only available for AWS, AWSGov, AWSChina, Azure, AzureGov and AzureChina gateways. Example: ["key1:value1", "key2:value2"].
+        /// * `storage_name` (Optional) Specify a storage account. Required if `cloud_type` is 2048 (AzureChina). Removed in Provider version 2.21.0+.
         /// </summary>
         [Output("tagLists")]
         public Output<ImmutableArray<string>> TagLists { get; private set; } = null!;
 
         /// <summary>
-        /// A map of tags to assign to the gateway.
+        /// Map of tags to assign to the gateway. Only available for AWS, AWSGov, AWSChina, Azure, AzureGov, AzureChina, AWS Top Secret and AWS Secret gateways. Allowed characters vary by cloud type but always include: letters, spaces, and numbers. AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret allow the use of any character.  Azure, AzureGov and AzureChina allows the following special characters: + - = . _ : @. Example: {"key1" = "value1", "key2" = "value2"}.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableDictionary<string, string>?> Tags { get; private set; } = null!;
@@ -513,38 +509,37 @@ namespace Pulumi.Aviatrix
         public Output<int> TunnelDetectionTime { get; private set; } = null!;
 
         /// <summary>
-        /// ID of legacy VPC/Vnet to be connected.
+        /// VPC ID/VNet name of cloud provider. Example: AWS/AWSGov/AWSChina: "vpc-abcd1234", GCP: "vpc-gcp-test~-~project-id", Azure/AzureGov/AzureChina: "vnet_name:rg_name:resource_guid", OCI: "ocid1.vcn.oc1.iad.aaaaaaaaba3pv6wkcr4jqae5f44n2b2m2yt2j6rx32uzr4h25vqstifsfdsq".
         /// </summary>
         [Output("vpcId")]
         public Output<string> VpcId { get; private set; } = null!;
 
         /// <summary>
-        /// Region where this gateway will be launched.
+        /// VPC region the gateway will be created in. Example: AWS: "us-east-1", GCP: "us-west2-a", Azure: "East US 2", OCI: "us-ashburn-1", AzureGov: "USGov Arizona", AWSGov: "us-gov-west-1", AWSChina: "cn-north-1", AzureChina: "China North", AWS Top Secret: "us-iso-east-1", AWS Secret: "us-isob-east-1".
         /// </summary>
         [Output("vpcReg")]
         public Output<string> VpcReg { get; private set; } = null!;
 
         /// <summary>
-        /// Enable user access through VPN to this container.
+        /// Enable [user access through VPN](https://docs.aviatrix.com/HowTos/gateway.html#vpn-access) to this gateway. Valid values: true, false.
         /// </summary>
         [Output("vpnAccess")]
         public Output<bool?> VpnAccess { get; private set; } = null!;
 
         /// <summary>
-        /// VPN CIDR block for the container.
+        /// VPN CIDR block for the gateway. Required if `vpn_access` is true. Example: "192.168.43.0/24".
         /// </summary>
         [Output("vpnCidr")]
         public Output<string?> VpnCidr { get; private set; } = null!;
 
         /// <summary>
-        /// Elb protocol for VPN gateway with elb enabled. Only supports AWS provider. Valid values: 'TCP', 'UDP'. If not specified,
-        /// 'TCP'' will be used.
+        /// Transport mode for VPN connection. All `cloud_types` support TCP with ELB, and UDP without ELB. AWS(1) additionally supports UDP with ELB. Valid values: "TCP", "UDP". If not specified, "TCP" will be used.
         /// </summary>
         [Output("vpnProtocol")]
         public Output<string> VpnProtocol { get; private set; } = null!;
 
         /// <summary>
-        /// Availability Zone. Only available for Azure and Public Subnet Filtering gateway
+        /// Availability Zone. Only available for Azure and Public Subnet Filtering gateway. Available for Azure as of provider version R2.17+.
         /// </summary>
         [Output("zone")]
         public Output<string?> Zone { get; private set; } = null!;
@@ -573,6 +568,13 @@ namespace Pulumi.Aviatrix
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/astipkovits",
+                AdditionalSecretOutputs =
+                {
+                    "customerManagedKeys",
+                    "duoSecretKey",
+                    "ldapPassword",
+                    "oktaToken",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -609,110 +611,129 @@ namespace Pulumi.Aviatrix
         public Input<string>? AdditionalCidrs { get; set; }
 
         /// <summary>
-        /// A list of CIDR ranges separated by comma to configure when 'designated_gateway' feature is enabled.
+        /// A list of CIDR ranges separated by comma to configure when "Designated Gateway" feature is enabled. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
         /// </summary>
         [Input("additionalCidrsDesignatedGateway")]
         public Input<string>? AdditionalCidrsDesignatedGateway { get; set; }
 
         /// <summary>
-        /// When value is false, reuse an idle address in Elastic IP pool for this gateway. Otherwise, allocate a new Elastic IP and
-        /// use it for this gateway.
+        /// If set to false, use an available address in Elastic IP pool for this gateway. Otherwise, allocate a new Elastic IP and use it for this gateway. Available in Controller 2.7+. Valid values: true, false. Default: true.
         /// </summary>
         [Input("allocateNewEip")]
         public Input<bool>? AllocateNewEip { get; set; }
 
         /// <summary>
-        /// Availability domain for OCI.
+        /// Availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
         /// </summary>
         [Input("availabilityDomain")]
         public Input<string>? AvailabilityDomain { get; set; }
 
         /// <summary>
-        /// The name of the public IP address and its resource group in Azure to assign to this Gateway.
+        /// Name of public IP Address resource and its resource group in Azure to be assigned to the gateway instance. Example: "IP_Name:Resource_Group_Name". Required when `allocate_new_eip` is false and `cloud_type` is Azure, AzureGov or AzureChina. Available as of provider version 2.20+.
         /// </summary>
         [Input("azureEipNameResourceGroup")]
         public Input<string>? AzureEipNameResourceGroup { get; set; }
 
         /// <summary>
-        /// Type of cloud service provider.
+        /// Cloud service provider to use to launch the gateway. Requires an integer value. Currently supports AWS(1), GCP(4), Azure(8), OCI(16), AzureGov(32), AWSGov(256), AWSChina(1024), AzureChina(2048), Alibaba Cloud (8192), AWS Top Secret (16384) and AWS Secret (32768).
         /// </summary>
         [Input("cloudType", required: true)]
         public Input<int> CloudType { get; set; } = null!;
 
-        /// <summary>
-        /// Customer managed key ID.
-        /// </summary>
         [Input("customerManagedKeys")]
-        public Input<string>? CustomerManagedKeys { get; set; }
+        private Input<string>? _customerManagedKeys;
 
         /// <summary>
-        /// API hostname for DUO auth mode.
+        /// Customer-managed key ID.
+        /// </summary>
+        public Input<string>? CustomerManagedKeys
+        {
+            get => _customerManagedKeys;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _customerManagedKeys = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// API hostname for DUO auth mode. Required: Yes if `otp_mode` is "2".
         /// </summary>
         [Input("duoApiHostname")]
         public Input<string>? DuoApiHostname { get; set; }
 
         /// <summary>
-        /// Integration key for DUO auth mode.
+        /// Integration key for DUO auth mode. Required if `otp_mode` is "2".
         /// </summary>
         [Input("duoIntegrationKey")]
         public Input<string>? DuoIntegrationKey { get; set; }
 
         /// <summary>
-        /// Push mode for DUO auth.
+        /// Push mode for DUO auth. Required if `otp_mode` is "2". Valid values: "auto", "selective" and "token".
         /// </summary>
         [Input("duoPushMode")]
         public Input<string>? DuoPushMode { get; set; }
 
-        /// <summary>
-        /// Secret key for DUO auth mode.
-        /// </summary>
         [Input("duoSecretKey")]
-        public Input<string>? DuoSecretKey { get; set; }
+        private Input<string>? _duoSecretKey;
 
         /// <summary>
-        /// Required when allocate_new_eip is false. It uses specified EIP for this gateway.
+        /// Secret key for DUO auth mode. Required if `otp_mode` is "2".
+        /// </summary>
+        public Input<string>? DuoSecretKey
+        {
+            get => _duoSecretKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _duoSecretKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// Specified EIP to use for gateway creation. Required when `allocate_new_eip` is false.  Available in Controller version 3.5+. Only available for AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret.
         /// </summary>
         [Input("eip")]
         public Input<string>? Eip { get; set; }
 
         /// <summary>
-        /// A name for the ELB that is created.
+        /// A name for the ELB that is created. If it is not specified, a name is generated automatically.
         /// </summary>
         [Input("elbName")]
         public Input<string>? ElbName { get; set; }
 
         /// <summary>
-        /// Enable 'designated_gateway' feature for Gateway. Valid values: true, false.
+        /// Enable Designated Gateway feature for Gateway. Only supported for AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret gateways. Valid values: true, false. Default value: false. Please view documentation [here](https://docs.aviatrix.com/HowTos/gateway.html#designated-gateway) for more information on this feature.
         /// </summary>
         [Input("enableDesignatedGateway")]
         public Input<bool>? EnableDesignatedGateway { get; set; }
 
         /// <summary>
-        /// Specify whether to enable ELB or not.
+        /// Specify whether to enable ELB or not. Not supported for OCI gateways. Valid values: true, false.
         /// </summary>
         [Input("enableElb")]
         public Input<bool>? EnableElb { get; set; }
 
         /// <summary>
-        /// Enable encrypt gateway EBS volume. Only supported for AWS provider. Valid values: true, false. Default value: false.
+        /// Enable EBS volume encryption for the gateway. Only supported for AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret gateways. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableEncryptVolume")]
         public Input<bool>? EnableEncryptVolume { get; set; }
 
         /// <summary>
-        /// Enable jumbo frame support for Gateway. Valid values: true or false. Default value: true.
+        /// Enable jumbo frames for this gateway. Default value is true.
         /// </summary>
         [Input("enableJumboFrame")]
         public Input<bool>? EnableJumboFrame { get; set; }
 
         /// <summary>
-        /// Specify whether to enable LDAP or not. Supported values: 'yes' and 'no'.
+        /// Enable/disable LDAP. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableLdap")]
         public Input<bool>? EnableLdap { get; set; }
 
         /// <summary>
-        /// Enable monitor gateway subnets. Valid values: true, false. Default value: false.
+        /// If set to true, the [Monitor Gateway Subnets](https://docs.aviatrix.com/HowTos/gateway.html#monitor-gateway-subnet) feature is enabled. Default value is false. Available in provider version R2.17.1+.
         /// </summary>
         [Input("enableMonitorGatewaySubnets")]
         public Input<bool>? EnableMonitorGatewaySubnets { get; set; }
@@ -730,105 +751,113 @@ namespace Pulumi.Aviatrix
         public Input<bool>? EnableSpotInstance { get; set; }
 
         /// <summary>
-        /// Enable vpc_dns_server for Gateway. Valid values: true, false.
+        /// Enable VPC DNS Server for gateway. Currently only supported for AWS, Azure, AzureGov, AWSGov, AWSChina, AzureChina, Alibaba Cloud, AWS Top Secret and AWS Secret gateways. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableVpcDnsServer")]
         public Input<bool>? EnableVpcDnsServer { get; set; }
 
         /// <summary>
-        /// This field indicates whether to enable VPN NAT or not. Only supported for VPN gateway. Valid values: true, false.
-        /// Default value: true.
+        /// Enable/disable VPN NAT. Only supported for VPN gateway. Valid values: true, false. Default value: true.
         /// </summary>
         [Input("enableVpnNat")]
         public Input<bool>? EnableVpnNat { get; set; }
 
         /// <summary>
-        /// Fault domain for OCI.
+        /// Fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
         /// </summary>
         [Input("faultDomain")]
         public Input<string>? FaultDomain { get; set; }
 
         /// <summary>
-        /// FQDN gateway lan interface cidr.
+        /// If `fqdn_lan_cidr` is set, the FQDN gateway will be created with an additional LAN interface using the provided CIDR. This attribute is required when enabling FQDN gateway FireNet in Azure or GCP. Available in provider version R2.17.1+.
         /// </summary>
         [Input("fqdnLanCidr")]
         public Input<string>? FqdnLanCidr { get; set; }
 
         /// <summary>
-        /// LAN VPC ID. Only used for GCP FQDN Gateway.
+        /// FQDN LAN VPC ID. This attribute is required when enabling FQDN gateway FireNet in GCP. Available as of provider version R2.18.1+.
         /// </summary>
         [Input("fqdnLanVpcId")]
         public Input<string>? FqdnLanVpcId { get; set; }
 
         /// <summary>
-        /// Aviatrix gateway unique name.
+        /// Name of the Aviatrix gateway to be created.
         /// </summary>
         [Input("gwName", required: true)]
         public Input<string> GwName { get; set; } = null!;
 
         /// <summary>
-        /// Size of Gateway Instance.
+        /// Size of the gateway instance. Example: AWS/AWSGov/AWSChina: "t2.large", GCP: "n1-standard-1", Azure/AzureGov/AzureChina: "Standard_B1s", OCI: "VM.Standard2.2".
         /// </summary>
         [Input("gwSize", required: true)]
         public Input<string> GwSize { get; set; } = null!;
 
         /// <summary>
-        /// Typed value when modifying idle_timeout. If it's -1, this feature is disabled.
+        /// It sets the value (seconds) of the [idle timeout](https://docs.aviatrix.com/HowTos/openvpn_faq.html#how-do-i-fix-the-aviatrix-vpn-timing-out-too-quickly). This idle timeout feature is enable only if this attribute is set, otherwise it is disabled. The entered value must be an integer number greater than 300.  Available in provider version R2.17.1+.
         /// </summary>
         [Input("idleTimeout")]
         public Input<int>? IdleTimeout { get; set; }
 
         /// <summary>
-        /// image_version can be used to set the desired image version of the gateway. If set, we will attempt to update the gateway
-        /// to the specified version.
+        /// The image version of the gateway. Use `aviatrix.getAviatrixGatewayImage` data source to programmatically retrieve this value for the desired `software_version`. If set, we will attempt to update the gateway to the specified version if current version is different. If left blank, the gateway upgrades can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "hvm-cloudx-aws-022021". Available as of provider version R2.20.0.
         /// </summary>
         [Input("imageVersion")]
         public Input<string>? ImageVersion { get; set; }
 
         /// <summary>
-        /// Enable Insane Mode for Gateway. Valid values: true, false.
+        /// Enable [Insane Mode](https://docs.aviatrix.com/HowTos/insane_mode.html) for Gateway. Insane Mode gateway size must be at least c5 series (AWS) or Standard_D3_v2 (Azure/AzureGov). If enabled, a valid /26 CIDR segment of the VPC must be specified to create a new subnet. Only supported for AWS, AWSGov, Azure, AzureGov, AWS China, Azure China, AWS Top Secret or AWS Secret.  Valid values: true, false.
         /// </summary>
         [Input("insaneMode")]
         public Input<bool>? InsaneMode { get; set; }
 
         /// <summary>
-        /// AZ of subnet being created for Insane Mode Gateway. Required if insane_mode is set.
+        /// Region + Availability Zone of subnet being created for Insane Mode gateway. Required for AWS, AWSGov, AWS China, AWS Top Secret or AWS Secret if `insane_mode` is set. Example: AWS: "us-west-1a".
         /// </summary>
         [Input("insaneModeAz")]
         public Input<string>? InsaneModeAz { get; set; }
 
         /// <summary>
-        /// LDAP base DN. Required: Yes if enable_ldap is 'yes'.
+        /// LDAP base DN. Required if `enable_ldap` is true.
         /// </summary>
         [Input("ldapBaseDn")]
         public Input<string>? LdapBaseDn { get; set; }
 
         /// <summary>
-        /// LDAP bind DN. Required: Yes if enable_ldap is 'yes'.
+        /// LDAP bind DN. Required if `enable_ldap` is true.
         /// </summary>
         [Input("ldapBindDn")]
         public Input<string>? LdapBindDn { get; set; }
 
-        /// <summary>
-        /// LDAP password. Required: Yes if enable_ldap is 'yes'.
-        /// </summary>
         [Input("ldapPassword")]
-        public Input<string>? LdapPassword { get; set; }
+        private Input<string>? _ldapPassword;
 
         /// <summary>
-        /// LDAP server address. Required: Yes if enable_ldap is 'yes'.
+        /// LDAP password. Required if `enable_ldap` is true.
+        /// </summary>
+        public Input<string>? LdapPassword
+        {
+            get => _ldapPassword;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _ldapPassword = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// LDAP server address. Required if `enable_ldap` is true.
         /// </summary>
         [Input("ldapServer")]
         public Input<string>? LdapServer { get; set; }
 
         /// <summary>
-        /// LDAP user attribute. Required: Yes if enable_ldap is 'yes'.
+        /// LDAP user attribute. Required if `enable_ldap` is true.
         /// </summary>
         [Input("ldapUsernameAttribute")]
         public Input<string>? LdapUsernameAttribute { get; set; }
 
         /// <summary>
-        /// Maximum connection of VPN access.
+        /// Maximum number of active VPN users allowed to be connected to this gateway. Required if `vpn_access` is true. Make sure the number is smaller than the VPN CIDR block. Example: 100. **NOTE: Please see notes here in regards to any deltas found in your state with the addition of this argument in R1.14.**
         /// </summary>
         [Input("maxVpnConn")]
         public Input<string>? MaxVpnConn { get; set; }
@@ -837,7 +866,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _monitorExcludeLists;
 
         /// <summary>
-        /// A set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true.
+        /// Set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true. Available in provider version R2.17.1+.
         /// </summary>
         public InputList<string> MonitorExcludeLists
         {
@@ -851,98 +880,102 @@ namespace Pulumi.Aviatrix
         [Input("nameServers")]
         public Input<string>? NameServers { get; set; }
 
-        /// <summary>
-        /// Token for Okta auth mode.
-        /// </summary>
         [Input("oktaToken")]
-        public Input<string>? OktaToken { get; set; }
+        private Input<string>? _oktaToken;
 
         /// <summary>
-        /// URL for Okta auth mode.
+        /// Token for Okta auth mode. Required if `otp_mode` is "3".
+        /// </summary>
+        public Input<string>? OktaToken
+        {
+            get => _oktaToken;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _oktaToken = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// URL for Okta auth mode. Required if `otp_mode` is "3".
         /// </summary>
         [Input("oktaUrl")]
         public Input<string>? OktaUrl { get; set; }
 
         /// <summary>
-        /// Username suffix for Okta auth mode.
+        /// Username suffix for Okta auth mode. Example: "aviatrix.com".
         /// </summary>
         [Input("oktaUsernameSuffix")]
         public Input<string>? OktaUsernameSuffix { get; set; }
 
         /// <summary>
-        /// Two step authentication mode.
+        /// Two step authentication mode. Valid values: "2" for DUO, "3" for Okta.
         /// </summary>
         [Input("otpMode")]
         public Input<string>? OtpMode { get; set; }
 
         /// <summary>
-        /// Peering HA availability domain for OCI.
+        /// Peering HA gateway availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
         /// </summary>
         [Input("peeringHaAvailabilityDomain")]
         public Input<string>? PeeringHaAvailabilityDomain { get; set; }
 
         /// <summary>
-        /// The name of the public IP address and its resource group in Azure to assign to the Peering HA Gateway.
+        /// Name of public IP address resource and its resource group in Azure to be assigned to the HA peering instance. Example: "IP_Name:Resource_Group_Name". Required if `peering_ha_eip` is set and `cloud_type` is Azure, AzureGov or AzureChina. Available as of provider version 2.20+.
         /// </summary>
         [Input("peeringHaAzureEipNameResourceGroup")]
         public Input<string>? PeeringHaAzureEipNameResourceGroup { get; set; }
 
         /// <summary>
-        /// Public IP address that you want assigned to the HA peering instance.
+        /// Public IP address to be assigned to the HA peering instance. Only available for AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret.
         /// </summary>
         [Input("peeringHaEip")]
         public Input<string>? PeeringHaEip { get; set; }
 
         /// <summary>
-        /// Peering HA fault domain for OCI.
+        /// Peering HA gateway fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
         /// </summary>
         [Input("peeringHaFaultDomain")]
         public Input<string>? PeeringHaFaultDomain { get; set; }
 
         /// <summary>
-        /// Peering HA Gateway Size.
+        /// Size of the Peering HA Gateway to be created. Required if enabling Peering HA. **NOTE: Please see notes here in regards to any deltas found in your state with the addition of this argument in R1.8.**
         /// </summary>
         [Input("peeringHaGwSize")]
         public Input<string>? PeeringHaGwSize { get; set; }
 
         /// <summary>
-        /// peering_ha_image_version can be used to set the desired image version of the HA gateway. If set, we will attempt to
-        /// update the gateway to the specified version.
+        /// The image version of the HA gateway. Use `aviatrix.getAviatrixGatewayImage` data source to programmatically retrieve this value for the desired `ha_software_version`. If set, we will attempt to update the HA gateway to the specified version if current version is different. If left blank, the gateway upgrades can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "hvm-cloudx-aws-022021". Available as of provider version R2.20.0.
         /// </summary>
         [Input("peeringHaImageVersion")]
         public Input<string>? PeeringHaImageVersion { get; set; }
 
         /// <summary>
-        /// AZ of subnet being created for Insane Mode Peering HA Gateway. Required if insane_mode is set.
+        /// Region + Availability Zone of subnet being created for Insane Mode-enabled Peering HA Gateway. Required for AWS only if `insane_mode` is set and `peering_ha_subnet` is set. Example: AWS: "us-west-1a".
         /// </summary>
         [Input("peeringHaInsaneModeAz")]
         public Input<string>? PeeringHaInsaneModeAz { get; set; }
 
         /// <summary>
-        /// peering_ha_software_version can be used to set the desired software version of the HA gateway. If set, we will attempt
-        /// to update the gateway to the specified version. If left blank, the gateway software version will continue to be managed
-        /// through the aviatrix_controller_config resource.
+        /// The software version of the HA gateway. If set, we will attempt to update the HA gateway to the specified version if current version is different. If left blank, the HA gateway upgrade can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "6.5.821". Available as of provider version R2.20.0.
         /// </summary>
         [Input("peeringHaSoftwareVersion")]
         public Input<string>? PeeringHaSoftwareVersion { get; set; }
 
         /// <summary>
-        /// Public Subnet Information while creating Peering HA Gateway, only subnet is accepted. Required to create peering ha
-        /// gateway if cloud_type = 1 or 8 (AWS or Azure). Optional if cloud_type = 4 (GCP)
+        /// Public subnet CIDR to create Peering HA Gateway in. Required if enabling Peering HA for AWS/AWSGov/AWS Top Secret/AWS Secret/Azure/AzureGov/Alibaba Cloud. Optional if enabling Peering HA for GCP. Example: AWS: "10.0.0.0/16".
         /// </summary>
         [Input("peeringHaSubnet")]
         public Input<string>? PeeringHaSubnet { get; set; }
 
         /// <summary>
-        /// Zone information for creating Peering HA Gateway. Required to create peering ha gateway if cloud_type = 4 (GCP).
-        /// Optional for cloud_type = 8 (Azure).
+        /// Zone to create Peering HA Gateway in. Required if enabling Peering HA for GCP. Example: GCP: "us-west1-c". Optional for Azure. Valid values for Azure gateways are in the form "az-n". Example: "az-2". Available for Azure as of provider version R2.17+.
         /// </summary>
         [Input("peeringHaZone")]
         public Input<string>? PeeringHaZone { get; set; }
 
         /// <summary>
-        /// Whether to enforce Guard Duty IP blocking. Required when `enable_public_subnet_filtering` attribute is true. Valid
-        /// values: true or false. Default value: true.
+        /// Whether to enforce Guard Duty IP blocking.  Only valid when `enable_public_subnet_filtering` attribute is true. Valid values: true or false. Default value: true. Available as of provider version R2.18+.
         /// </summary>
         [Input("publicSubnetFilteringGuardDutyEnforced")]
         public Input<bool>? PublicSubnetFilteringGuardDutyEnforced { get; set; }
@@ -951,8 +984,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _publicSubnetFilteringHaRouteTables;
 
         /// <summary>
-        /// Route tables whose associated public subnets are protected for the HA PSF gateway. Required when
-        /// enable_public_subnet_filtering and peering_ha_subnet are set.
+        /// Route tables whose associated public subnets are protected for the HA PSF gateway. Required when `enable_public_subnet_filtering` and `peering_ha_subnet` are set. Available as of provider version R2.18+.
         /// </summary>
         public InputList<string> PublicSubnetFilteringHaRouteTables
         {
@@ -964,8 +996,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _publicSubnetFilteringRouteTables;
 
         /// <summary>
-        /// Route tables whose associated public subnets are protected. Required when `enable_public_subnet_filtering` attribute is
-        /// true.
+        /// Route tables whose associated public subnets are protected. Only valid when `enable_public_subnet_filtering` attribute is true. Available as of provider version R2.18+.
         /// </summary>
         public InputList<string> PublicSubnetFilteringRouteTables
         {
@@ -974,52 +1005,49 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Typed value when modifying renegotiation_interval. If it's -1, this feature is disabled.
+        /// It sets the value (seconds) of the [renegotiation interval](https://docs.aviatrix.com/HowTos/openvpn_faq.html#how-do-i-fix-the-aviatrix-vpn-timing-out-too-quickly). This renegotiation interval feature is enable only if this attribute is set, otherwise it is disabled. The entered value must be an integer number greater than 300. Available in provider version R2.17.1+.
         /// </summary>
         [Input("renegotiationInterval")]
         public Input<int>? RenegotiationInterval { get; set; }
 
         /// <summary>
-        /// Gateway ethernet interface RX queue size. Supported for AWS related clouds only.
+        /// Gateway ethernet interface RX queue size. Once set, can't be deleted or disabled. Available for AWS as of provider version R2.22+.
         /// </summary>
         [Input("rxQueueSize")]
         public Input<string>? RxQueueSize { get; set; }
 
         /// <summary>
-        /// This field indicates whether to enable SAML or not.
+        /// Enable/disable SAML. This field is available in Controller version 3.3 or later release. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("samlEnabled")]
         public Input<bool>? SamlEnabled { get; set; }
 
         /// <summary>
-        /// A list of domain names that will use the NameServer when a specific name is not in the destination when Split Tunnel
-        /// Mode is enabled.
+        /// A list of domain names that will use the NameServer when a specific name is not in the destination when Split Tunnel Mode is enabled.
         /// </summary>
         [Input("searchDomains")]
         public Input<string>? SearchDomains { get; set; }
 
         /// <summary>
-        /// Set to true if this feature is desired.
+        /// If enabled, Controller monitors the health of the gateway and restarts the gateway if it becomes unreachable. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("singleAzHa")]
         public Input<bool>? SingleAzHa { get; set; }
 
         /// <summary>
-        /// Enable Source NAT for this container.
+        /// Enable Source NAT in "single ip" mode for this gateway. Valid values: true, false. Default value: false. **NOTE: If using SNAT for FQDN use-case, please see notes here.**
         /// </summary>
         [Input("singleIpSnat")]
         public Input<bool>? SingleIpSnat { get; set; }
 
         /// <summary>
-        /// software_version can be used to set the desired software version of the gateway. If set, we will attempt to update the
-        /// gateway to the specified version. If left blank, the gateway software version will continue to be managed through the
-        /// aviatrix_controller_config resource.
+        /// The software version of the gateway. If set, we will attempt to update the gateway to the specified version if current version is different. If left blank, the gateway upgrade can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "6.5.821". Available as of provider version R2.20.0.
         /// </summary>
         [Input("softwareVersion")]
         public Input<string>? SoftwareVersion { get; set; }
 
         /// <summary>
-        /// Specify split tunnel mode.
+        /// Enable/disable Split Tunnel Mode. Valid values: true, false. Default value: true. Please see [here](https://docs.aviatrix.com/HowTos/gateway.html#split-tunnel-mode) for more information on split tunnel.
         /// </summary>
         [Input("splitTunnel")]
         public Input<bool>? SplitTunnel { get; set; }
@@ -1031,7 +1059,7 @@ namespace Pulumi.Aviatrix
         public Input<string>? SpotPrice { get; set; }
 
         /// <summary>
-        /// A VPC Network address range selected from one of the available network ranges.
+        /// A VPC network address range selected from one of the available network ranges. Example: "172.31.0.0/20". **NOTE: If using `insane_mode`, please see notes here.**
         /// </summary>
         [Input("subnet", required: true)]
         public Input<string> Subnet { get; set; } = null!;
@@ -1040,7 +1068,8 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _tagLists;
 
         /// <summary>
-        /// Instance tag of cloud provider.
+        /// (Optional) Tag list of the gateway instance. Only available for AWS, AWSGov, AWSChina, Azure, AzureGov and AzureChina gateways. Example: ["key1:value1", "key2:value2"].
+        /// * `storage_name` (Optional) Specify a storage account. Required if `cloud_type` is 2048 (AzureChina). Removed in Provider version 2.21.0+.
         /// </summary>
         [Obsolete(@"Use tags instead.")]
         public InputList<string> TagLists
@@ -1053,7 +1082,7 @@ namespace Pulumi.Aviatrix
         private InputMap<string>? _tags;
 
         /// <summary>
-        /// A map of tags to assign to the gateway.
+        /// Map of tags to assign to the gateway. Only available for AWS, AWSGov, AWSChina, Azure, AzureGov, AzureChina, AWS Top Secret and AWS Secret gateways. Allowed characters vary by cloud type but always include: letters, spaces, and numbers. AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret allow the use of any character.  Azure, AzureGov and AzureChina allows the following special characters: + - = . _ : @. Example: {"key1" = "value1", "key2" = "value2"}.
         /// </summary>
         public InputMap<string> Tags
         {
@@ -1068,38 +1097,37 @@ namespace Pulumi.Aviatrix
         public Input<int>? TunnelDetectionTime { get; set; }
 
         /// <summary>
-        /// ID of legacy VPC/Vnet to be connected.
+        /// VPC ID/VNet name of cloud provider. Example: AWS/AWSGov/AWSChina: "vpc-abcd1234", GCP: "vpc-gcp-test~-~project-id", Azure/AzureGov/AzureChina: "vnet_name:rg_name:resource_guid", OCI: "ocid1.vcn.oc1.iad.aaaaaaaaba3pv6wkcr4jqae5f44n2b2m2yt2j6rx32uzr4h25vqstifsfdsq".
         /// </summary>
         [Input("vpcId", required: true)]
         public Input<string> VpcId { get; set; } = null!;
 
         /// <summary>
-        /// Region where this gateway will be launched.
+        /// VPC region the gateway will be created in. Example: AWS: "us-east-1", GCP: "us-west2-a", Azure: "East US 2", OCI: "us-ashburn-1", AzureGov: "USGov Arizona", AWSGov: "us-gov-west-1", AWSChina: "cn-north-1", AzureChina: "China North", AWS Top Secret: "us-iso-east-1", AWS Secret: "us-isob-east-1".
         /// </summary>
         [Input("vpcReg", required: true)]
         public Input<string> VpcReg { get; set; } = null!;
 
         /// <summary>
-        /// Enable user access through VPN to this container.
+        /// Enable [user access through VPN](https://docs.aviatrix.com/HowTos/gateway.html#vpn-access) to this gateway. Valid values: true, false.
         /// </summary>
         [Input("vpnAccess")]
         public Input<bool>? VpnAccess { get; set; }
 
         /// <summary>
-        /// VPN CIDR block for the container.
+        /// VPN CIDR block for the gateway. Required if `vpn_access` is true. Example: "192.168.43.0/24".
         /// </summary>
         [Input("vpnCidr")]
         public Input<string>? VpnCidr { get; set; }
 
         /// <summary>
-        /// Elb protocol for VPN gateway with elb enabled. Only supports AWS provider. Valid values: 'TCP', 'UDP'. If not specified,
-        /// 'TCP'' will be used.
+        /// Transport mode for VPN connection. All `cloud_types` support TCP with ELB, and UDP without ELB. AWS(1) additionally supports UDP with ELB. Valid values: "TCP", "UDP". If not specified, "TCP" will be used.
         /// </summary>
         [Input("vpnProtocol")]
         public Input<string>? VpnProtocol { get; set; }
 
         /// <summary>
-        /// Availability Zone. Only available for Azure and Public Subnet Filtering gateway
+        /// Availability Zone. Only available for Azure and Public Subnet Filtering gateway. Available for Azure as of provider version R2.17+.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -1125,122 +1153,141 @@ namespace Pulumi.Aviatrix
         public Input<string>? AdditionalCidrs { get; set; }
 
         /// <summary>
-        /// A list of CIDR ranges separated by comma to configure when 'designated_gateway' feature is enabled.
+        /// A list of CIDR ranges separated by comma to configure when "Designated Gateway" feature is enabled. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
         /// </summary>
         [Input("additionalCidrsDesignatedGateway")]
         public Input<string>? AdditionalCidrsDesignatedGateway { get; set; }
 
         /// <summary>
-        /// When value is false, reuse an idle address in Elastic IP pool for this gateway. Otherwise, allocate a new Elastic IP and
-        /// use it for this gateway.
+        /// If set to false, use an available address in Elastic IP pool for this gateway. Otherwise, allocate a new Elastic IP and use it for this gateway. Available in Controller 2.7+. Valid values: true, false. Default: true.
         /// </summary>
         [Input("allocateNewEip")]
         public Input<bool>? AllocateNewEip { get; set; }
 
         /// <summary>
-        /// Availability domain for OCI.
+        /// Availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
         /// </summary>
         [Input("availabilityDomain")]
         public Input<string>? AvailabilityDomain { get; set; }
 
         /// <summary>
-        /// The name of the public IP address and its resource group in Azure to assign to this Gateway.
+        /// Name of public IP Address resource and its resource group in Azure to be assigned to the gateway instance. Example: "IP_Name:Resource_Group_Name". Required when `allocate_new_eip` is false and `cloud_type` is Azure, AzureGov or AzureChina. Available as of provider version 2.20+.
         /// </summary>
         [Input("azureEipNameResourceGroup")]
         public Input<string>? AzureEipNameResourceGroup { get; set; }
 
         /// <summary>
-        /// Instance ID of the gateway.
+        /// Cloud instance ID of the gateway.
         /// </summary>
         [Input("cloudInstanceId")]
         public Input<string>? CloudInstanceId { get; set; }
 
         /// <summary>
-        /// Type of cloud service provider.
+        /// Cloud service provider to use to launch the gateway. Requires an integer value. Currently supports AWS(1), GCP(4), Azure(8), OCI(16), AzureGov(32), AWSGov(256), AWSChina(1024), AzureChina(2048), Alibaba Cloud (8192), AWS Top Secret (16384) and AWS Secret (32768).
         /// </summary>
         [Input("cloudType")]
         public Input<int>? CloudType { get; set; }
 
-        /// <summary>
-        /// Customer managed key ID.
-        /// </summary>
         [Input("customerManagedKeys")]
-        public Input<string>? CustomerManagedKeys { get; set; }
+        private Input<string>? _customerManagedKeys;
 
         /// <summary>
-        /// API hostname for DUO auth mode.
+        /// Customer-managed key ID.
+        /// </summary>
+        public Input<string>? CustomerManagedKeys
+        {
+            get => _customerManagedKeys;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _customerManagedKeys = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// API hostname for DUO auth mode. Required: Yes if `otp_mode` is "2".
         /// </summary>
         [Input("duoApiHostname")]
         public Input<string>? DuoApiHostname { get; set; }
 
         /// <summary>
-        /// Integration key for DUO auth mode.
+        /// Integration key for DUO auth mode. Required if `otp_mode` is "2".
         /// </summary>
         [Input("duoIntegrationKey")]
         public Input<string>? DuoIntegrationKey { get; set; }
 
         /// <summary>
-        /// Push mode for DUO auth.
+        /// Push mode for DUO auth. Required if `otp_mode` is "2". Valid values: "auto", "selective" and "token".
         /// </summary>
         [Input("duoPushMode")]
         public Input<string>? DuoPushMode { get; set; }
 
-        /// <summary>
-        /// Secret key for DUO auth mode.
-        /// </summary>
         [Input("duoSecretKey")]
-        public Input<string>? DuoSecretKey { get; set; }
+        private Input<string>? _duoSecretKey;
 
         /// <summary>
-        /// Required when allocate_new_eip is false. It uses specified EIP for this gateway.
+        /// Secret key for DUO auth mode. Required if `otp_mode` is "2".
+        /// </summary>
+        public Input<string>? DuoSecretKey
+        {
+            get => _duoSecretKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _duoSecretKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// Specified EIP to use for gateway creation. Required when `allocate_new_eip` is false.  Available in Controller version 3.5+. Only available for AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret.
         /// </summary>
         [Input("eip")]
         public Input<string>? Eip { get; set; }
 
         /// <summary>
-        /// ELB DNS Name.
+        /// ELB DNS name.
         /// </summary>
         [Input("elbDnsName")]
         public Input<string>? ElbDnsName { get; set; }
 
         /// <summary>
-        /// A name for the ELB that is created.
+        /// A name for the ELB that is created. If it is not specified, a name is generated automatically.
         /// </summary>
         [Input("elbName")]
         public Input<string>? ElbName { get; set; }
 
         /// <summary>
-        /// Enable 'designated_gateway' feature for Gateway. Valid values: true, false.
+        /// Enable Designated Gateway feature for Gateway. Only supported for AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret gateways. Valid values: true, false. Default value: false. Please view documentation [here](https://docs.aviatrix.com/HowTos/gateway.html#designated-gateway) for more information on this feature.
         /// </summary>
         [Input("enableDesignatedGateway")]
         public Input<bool>? EnableDesignatedGateway { get; set; }
 
         /// <summary>
-        /// Specify whether to enable ELB or not.
+        /// Specify whether to enable ELB or not. Not supported for OCI gateways. Valid values: true, false.
         /// </summary>
         [Input("enableElb")]
         public Input<bool>? EnableElb { get; set; }
 
         /// <summary>
-        /// Enable encrypt gateway EBS volume. Only supported for AWS provider. Valid values: true, false. Default value: false.
+        /// Enable EBS volume encryption for the gateway. Only supported for AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret gateways. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableEncryptVolume")]
         public Input<bool>? EnableEncryptVolume { get; set; }
 
         /// <summary>
-        /// Enable jumbo frame support for Gateway. Valid values: true or false. Default value: true.
+        /// Enable jumbo frames for this gateway. Default value is true.
         /// </summary>
         [Input("enableJumboFrame")]
         public Input<bool>? EnableJumboFrame { get; set; }
 
         /// <summary>
-        /// Specify whether to enable LDAP or not. Supported values: 'yes' and 'no'.
+        /// Enable/disable LDAP. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableLdap")]
         public Input<bool>? EnableLdap { get; set; }
 
         /// <summary>
-        /// Enable monitor gateway subnets. Valid values: true, false. Default value: false.
+        /// If set to true, the [Monitor Gateway Subnets](https://docs.aviatrix.com/HowTos/gateway.html#monitor-gateway-subnet) feature is enabled. Default value is false. Available in provider version R2.17.1+.
         /// </summary>
         [Input("enableMonitorGatewaySubnets")]
         public Input<bool>? EnableMonitorGatewaySubnets { get; set; }
@@ -1258,111 +1305,119 @@ namespace Pulumi.Aviatrix
         public Input<bool>? EnableSpotInstance { get; set; }
 
         /// <summary>
-        /// Enable vpc_dns_server for Gateway. Valid values: true, false.
+        /// Enable VPC DNS Server for gateway. Currently only supported for AWS, Azure, AzureGov, AWSGov, AWSChina, AzureChina, Alibaba Cloud, AWS Top Secret and AWS Secret gateways. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableVpcDnsServer")]
         public Input<bool>? EnableVpcDnsServer { get; set; }
 
         /// <summary>
-        /// This field indicates whether to enable VPN NAT or not. Only supported for VPN gateway. Valid values: true, false.
-        /// Default value: true.
+        /// Enable/disable VPN NAT. Only supported for VPN gateway. Valid values: true, false. Default value: true.
         /// </summary>
         [Input("enableVpnNat")]
         public Input<bool>? EnableVpnNat { get; set; }
 
         /// <summary>
-        /// Fault domain for OCI.
+        /// Fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
         /// </summary>
         [Input("faultDomain")]
         public Input<string>? FaultDomain { get; set; }
 
         /// <summary>
-        /// FQDN gateway lan interface cidr.
+        /// If `fqdn_lan_cidr` is set, the FQDN gateway will be created with an additional LAN interface using the provided CIDR. This attribute is required when enabling FQDN gateway FireNet in Azure or GCP. Available in provider version R2.17.1+.
         /// </summary>
         [Input("fqdnLanCidr")]
         public Input<string>? FqdnLanCidr { get; set; }
 
         /// <summary>
-        /// FQDN gateway lan interface id.
+        /// The lan interface id of the of FQDN gateway with additional LAN interface. This attribute will be exported when enabling FQDN gateway firenet in Azure. Available in provider version R2.17.1+.
         /// </summary>
         [Input("fqdnLanInterface")]
         public Input<string>? FqdnLanInterface { get; set; }
 
         /// <summary>
-        /// LAN VPC ID. Only used for GCP FQDN Gateway.
+        /// FQDN LAN VPC ID. This attribute is required when enabling FQDN gateway FireNet in GCP. Available as of provider version R2.18.1+.
         /// </summary>
         [Input("fqdnLanVpcId")]
         public Input<string>? FqdnLanVpcId { get; set; }
 
         /// <summary>
-        /// Aviatrix gateway unique name.
+        /// Name of the Aviatrix gateway to be created.
         /// </summary>
         [Input("gwName")]
         public Input<string>? GwName { get; set; }
 
         /// <summary>
-        /// Size of Gateway Instance.
+        /// Size of the gateway instance. Example: AWS/AWSGov/AWSChina: "t2.large", GCP: "n1-standard-1", Azure/AzureGov/AzureChina: "Standard_B1s", OCI: "VM.Standard2.2".
         /// </summary>
         [Input("gwSize")]
         public Input<string>? GwSize { get; set; }
 
         /// <summary>
-        /// Typed value when modifying idle_timeout. If it's -1, this feature is disabled.
+        /// It sets the value (seconds) of the [idle timeout](https://docs.aviatrix.com/HowTos/openvpn_faq.html#how-do-i-fix-the-aviatrix-vpn-timing-out-too-quickly). This idle timeout feature is enable only if this attribute is set, otherwise it is disabled. The entered value must be an integer number greater than 300.  Available in provider version R2.17.1+.
         /// </summary>
         [Input("idleTimeout")]
         public Input<int>? IdleTimeout { get; set; }
 
         /// <summary>
-        /// image_version can be used to set the desired image version of the gateway. If set, we will attempt to update the gateway
-        /// to the specified version.
+        /// The image version of the gateway. Use `aviatrix.getAviatrixGatewayImage` data source to programmatically retrieve this value for the desired `software_version`. If set, we will attempt to update the gateway to the specified version if current version is different. If left blank, the gateway upgrades can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "hvm-cloudx-aws-022021". Available as of provider version R2.20.0.
         /// </summary>
         [Input("imageVersion")]
         public Input<string>? ImageVersion { get; set; }
 
         /// <summary>
-        /// Enable Insane Mode for Gateway. Valid values: true, false.
+        /// Enable [Insane Mode](https://docs.aviatrix.com/HowTos/insane_mode.html) for Gateway. Insane Mode gateway size must be at least c5 series (AWS) or Standard_D3_v2 (Azure/AzureGov). If enabled, a valid /26 CIDR segment of the VPC must be specified to create a new subnet. Only supported for AWS, AWSGov, Azure, AzureGov, AWS China, Azure China, AWS Top Secret or AWS Secret.  Valid values: true, false.
         /// </summary>
         [Input("insaneMode")]
         public Input<bool>? InsaneMode { get; set; }
 
         /// <summary>
-        /// AZ of subnet being created for Insane Mode Gateway. Required if insane_mode is set.
+        /// Region + Availability Zone of subnet being created for Insane Mode gateway. Required for AWS, AWSGov, AWS China, AWS Top Secret or AWS Secret if `insane_mode` is set. Example: AWS: "us-west-1a".
         /// </summary>
         [Input("insaneModeAz")]
         public Input<string>? InsaneModeAz { get; set; }
 
         /// <summary>
-        /// LDAP base DN. Required: Yes if enable_ldap is 'yes'.
+        /// LDAP base DN. Required if `enable_ldap` is true.
         /// </summary>
         [Input("ldapBaseDn")]
         public Input<string>? LdapBaseDn { get; set; }
 
         /// <summary>
-        /// LDAP bind DN. Required: Yes if enable_ldap is 'yes'.
+        /// LDAP bind DN. Required if `enable_ldap` is true.
         /// </summary>
         [Input("ldapBindDn")]
         public Input<string>? LdapBindDn { get; set; }
 
-        /// <summary>
-        /// LDAP password. Required: Yes if enable_ldap is 'yes'.
-        /// </summary>
         [Input("ldapPassword")]
-        public Input<string>? LdapPassword { get; set; }
+        private Input<string>? _ldapPassword;
 
         /// <summary>
-        /// LDAP server address. Required: Yes if enable_ldap is 'yes'.
+        /// LDAP password. Required if `enable_ldap` is true.
+        /// </summary>
+        public Input<string>? LdapPassword
+        {
+            get => _ldapPassword;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _ldapPassword = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// LDAP server address. Required if `enable_ldap` is true.
         /// </summary>
         [Input("ldapServer")]
         public Input<string>? LdapServer { get; set; }
 
         /// <summary>
-        /// LDAP user attribute. Required: Yes if enable_ldap is 'yes'.
+        /// LDAP user attribute. Required if `enable_ldap` is true.
         /// </summary>
         [Input("ldapUsernameAttribute")]
         public Input<string>? LdapUsernameAttribute { get; set; }
 
         /// <summary>
-        /// Maximum connection of VPN access.
+        /// Maximum number of active VPN users allowed to be connected to this gateway. Required if `vpn_access` is true. Make sure the number is smaller than the VPN CIDR block. Example: 100. **NOTE: Please see notes here in regards to any deltas found in your state with the addition of this argument in R1.14.**
         /// </summary>
         [Input("maxVpnConn")]
         public Input<string>? MaxVpnConn { get; set; }
@@ -1371,7 +1426,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _monitorExcludeLists;
 
         /// <summary>
-        /// A set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true.
+        /// Set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true. Available in provider version R2.17.1+.
         /// </summary>
         public InputList<string> MonitorExcludeLists
         {
@@ -1385,56 +1440,66 @@ namespace Pulumi.Aviatrix
         [Input("nameServers")]
         public Input<string>? NameServers { get; set; }
 
-        /// <summary>
-        /// Token for Okta auth mode.
-        /// </summary>
         [Input("oktaToken")]
-        public Input<string>? OktaToken { get; set; }
+        private Input<string>? _oktaToken;
 
         /// <summary>
-        /// URL for Okta auth mode.
+        /// Token for Okta auth mode. Required if `otp_mode` is "3".
+        /// </summary>
+        public Input<string>? OktaToken
+        {
+            get => _oktaToken;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _oktaToken = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// URL for Okta auth mode. Required if `otp_mode` is "3".
         /// </summary>
         [Input("oktaUrl")]
         public Input<string>? OktaUrl { get; set; }
 
         /// <summary>
-        /// Username suffix for Okta auth mode.
+        /// Username suffix for Okta auth mode. Example: "aviatrix.com".
         /// </summary>
         [Input("oktaUsernameSuffix")]
         public Input<string>? OktaUsernameSuffix { get; set; }
 
         /// <summary>
-        /// Two step authentication mode.
+        /// Two step authentication mode. Valid values: "2" for DUO, "3" for Okta.
         /// </summary>
         [Input("otpMode")]
         public Input<string>? OtpMode { get; set; }
 
         /// <summary>
-        /// Peering HA availability domain for OCI.
+        /// Peering HA gateway availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
         /// </summary>
         [Input("peeringHaAvailabilityDomain")]
         public Input<string>? PeeringHaAvailabilityDomain { get; set; }
 
         /// <summary>
-        /// The name of the public IP address and its resource group in Azure to assign to the Peering HA Gateway.
+        /// Name of public IP address resource and its resource group in Azure to be assigned to the HA peering instance. Example: "IP_Name:Resource_Group_Name". Required if `peering_ha_eip` is set and `cloud_type` is Azure, AzureGov or AzureChina. Available as of provider version 2.20+.
         /// </summary>
         [Input("peeringHaAzureEipNameResourceGroup")]
         public Input<string>? PeeringHaAzureEipNameResourceGroup { get; set; }
 
         /// <summary>
-        /// Instance ID of the peering HA gateway.
+        /// Cloud instance ID of the HA gateway.
         /// </summary>
         [Input("peeringHaCloudInstanceId")]
         public Input<string>? PeeringHaCloudInstanceId { get; set; }
 
         /// <summary>
-        /// Public IP address that you want assigned to the HA peering instance.
+        /// Public IP address to be assigned to the HA peering instance. Only available for AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret.
         /// </summary>
         [Input("peeringHaEip")]
         public Input<string>? PeeringHaEip { get; set; }
 
         /// <summary>
-        /// Peering HA fault domain for OCI.
+        /// Peering HA gateway fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
         /// </summary>
         [Input("peeringHaFaultDomain")]
         public Input<string>? PeeringHaFaultDomain { get; set; }
@@ -1446,20 +1511,19 @@ namespace Pulumi.Aviatrix
         public Input<string>? PeeringHaGwName { get; set; }
 
         /// <summary>
-        /// Peering HA Gateway Size.
+        /// Size of the Peering HA Gateway to be created. Required if enabling Peering HA. **NOTE: Please see notes here in regards to any deltas found in your state with the addition of this argument in R1.8.**
         /// </summary>
         [Input("peeringHaGwSize")]
         public Input<string>? PeeringHaGwSize { get; set; }
 
         /// <summary>
-        /// peering_ha_image_version can be used to set the desired image version of the HA gateway. If set, we will attempt to
-        /// update the gateway to the specified version.
+        /// The image version of the HA gateway. Use `aviatrix.getAviatrixGatewayImage` data source to programmatically retrieve this value for the desired `ha_software_version`. If set, we will attempt to update the HA gateway to the specified version if current version is different. If left blank, the gateway upgrades can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "hvm-cloudx-aws-022021". Available as of provider version R2.20.0.
         /// </summary>
         [Input("peeringHaImageVersion")]
         public Input<string>? PeeringHaImageVersion { get; set; }
 
         /// <summary>
-        /// AZ of subnet being created for Insane Mode Peering HA Gateway. Required if insane_mode is set.
+        /// Region + Availability Zone of subnet being created for Insane Mode-enabled Peering HA Gateway. Required for AWS only if `insane_mode` is set and `peering_ha_subnet` is set. Example: AWS: "us-west-1a".
         /// </summary>
         [Input("peeringHaInsaneModeAz")]
         public Input<string>? PeeringHaInsaneModeAz { get; set; }
@@ -1471,48 +1535,43 @@ namespace Pulumi.Aviatrix
         public Input<string>? PeeringHaPrivateIp { get; set; }
 
         /// <summary>
-        /// Peering HA security group used for the gateway.
+        /// HA security group used for the gateway.
         /// </summary>
         [Input("peeringHaSecurityGroupId")]
         public Input<string>? PeeringHaSecurityGroupId { get; set; }
 
         /// <summary>
-        /// peering_ha_software_version can be used to set the desired software version of the HA gateway. If set, we will attempt
-        /// to update the gateway to the specified version. If left blank, the gateway software version will continue to be managed
-        /// through the aviatrix_controller_config resource.
+        /// The software version of the HA gateway. If set, we will attempt to update the HA gateway to the specified version if current version is different. If left blank, the HA gateway upgrade can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "6.5.821". Available as of provider version R2.20.0.
         /// </summary>
         [Input("peeringHaSoftwareVersion")]
         public Input<string>? PeeringHaSoftwareVersion { get; set; }
 
         /// <summary>
-        /// Public Subnet Information while creating Peering HA Gateway, only subnet is accepted. Required to create peering ha
-        /// gateway if cloud_type = 1 or 8 (AWS or Azure). Optional if cloud_type = 4 (GCP)
+        /// Public subnet CIDR to create Peering HA Gateway in. Required if enabling Peering HA for AWS/AWSGov/AWS Top Secret/AWS Secret/Azure/AzureGov/Alibaba Cloud. Optional if enabling Peering HA for GCP. Example: AWS: "10.0.0.0/16".
         /// </summary>
         [Input("peeringHaSubnet")]
         public Input<string>? PeeringHaSubnet { get; set; }
 
         /// <summary>
-        /// Zone information for creating Peering HA Gateway. Required to create peering ha gateway if cloud_type = 4 (GCP).
-        /// Optional for cloud_type = 8 (Azure).
+        /// Zone to create Peering HA Gateway in. Required if enabling Peering HA for GCP. Example: GCP: "us-west1-c". Optional for Azure. Valid values for Azure gateways are in the form "az-n". Example: "az-2". Available for Azure as of provider version R2.17+.
         /// </summary>
         [Input("peeringHaZone")]
         public Input<string>? PeeringHaZone { get; set; }
 
         /// <summary>
-        /// Private IP address of the Gateway created.
+        /// Private IP address of the gateway created.
         /// </summary>
         [Input("privateIp")]
         public Input<string>? PrivateIp { get; set; }
 
         /// <summary>
-        /// NS server used by the gateway.
+        /// DNS server used by the gateway. Default is "8.8.8.8", can be overridden with the VPC's setting.
         /// </summary>
         [Input("publicDnsServer")]
         public Input<string>? PublicDnsServer { get; set; }
 
         /// <summary>
-        /// Whether to enforce Guard Duty IP blocking. Required when `enable_public_subnet_filtering` attribute is true. Valid
-        /// values: true or false. Default value: true.
+        /// Whether to enforce Guard Duty IP blocking.  Only valid when `enable_public_subnet_filtering` attribute is true. Valid values: true or false. Default value: true. Available as of provider version R2.18+.
         /// </summary>
         [Input("publicSubnetFilteringGuardDutyEnforced")]
         public Input<bool>? PublicSubnetFilteringGuardDutyEnforced { get; set; }
@@ -1521,8 +1580,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _publicSubnetFilteringHaRouteTables;
 
         /// <summary>
-        /// Route tables whose associated public subnets are protected for the HA PSF gateway. Required when
-        /// enable_public_subnet_filtering and peering_ha_subnet are set.
+        /// Route tables whose associated public subnets are protected for the HA PSF gateway. Required when `enable_public_subnet_filtering` and `peering_ha_subnet` are set. Available as of provider version R2.18+.
         /// </summary>
         public InputList<string> PublicSubnetFilteringHaRouteTables
         {
@@ -1534,8 +1592,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _publicSubnetFilteringRouteTables;
 
         /// <summary>
-        /// Route tables whose associated public subnets are protected. Required when `enable_public_subnet_filtering` attribute is
-        /// true.
+        /// Route tables whose associated public subnets are protected. Only valid when `enable_public_subnet_filtering` attribute is true. Available as of provider version R2.18+.
         /// </summary>
         public InputList<string> PublicSubnetFilteringRouteTables
         {
@@ -1544,26 +1601,25 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Typed value when modifying renegotiation_interval. If it's -1, this feature is disabled.
+        /// It sets the value (seconds) of the [renegotiation interval](https://docs.aviatrix.com/HowTos/openvpn_faq.html#how-do-i-fix-the-aviatrix-vpn-timing-out-too-quickly). This renegotiation interval feature is enable only if this attribute is set, otherwise it is disabled. The entered value must be an integer number greater than 300. Available in provider version R2.17.1+.
         /// </summary>
         [Input("renegotiationInterval")]
         public Input<int>? RenegotiationInterval { get; set; }
 
         /// <summary>
-        /// Gateway ethernet interface RX queue size. Supported for AWS related clouds only.
+        /// Gateway ethernet interface RX queue size. Once set, can't be deleted or disabled. Available for AWS as of provider version R2.22+.
         /// </summary>
         [Input("rxQueueSize")]
         public Input<string>? RxQueueSize { get; set; }
 
         /// <summary>
-        /// This field indicates whether to enable SAML or not.
+        /// Enable/disable SAML. This field is available in Controller version 3.3 or later release. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("samlEnabled")]
         public Input<bool>? SamlEnabled { get; set; }
 
         /// <summary>
-        /// A list of domain names that will use the NameServer when a specific name is not in the destination when Split Tunnel
-        /// Mode is enabled.
+        /// A list of domain names that will use the NameServer when a specific name is not in the destination when Split Tunnel Mode is enabled.
         /// </summary>
         [Input("searchDomains")]
         public Input<string>? SearchDomains { get; set; }
@@ -1575,27 +1631,25 @@ namespace Pulumi.Aviatrix
         public Input<string>? SecurityGroupId { get; set; }
 
         /// <summary>
-        /// Set to true if this feature is desired.
+        /// If enabled, Controller monitors the health of the gateway and restarts the gateway if it becomes unreachable. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("singleAzHa")]
         public Input<bool>? SingleAzHa { get; set; }
 
         /// <summary>
-        /// Enable Source NAT for this container.
+        /// Enable Source NAT in "single ip" mode for this gateway. Valid values: true, false. Default value: false. **NOTE: If using SNAT for FQDN use-case, please see notes here.**
         /// </summary>
         [Input("singleIpSnat")]
         public Input<bool>? SingleIpSnat { get; set; }
 
         /// <summary>
-        /// software_version can be used to set the desired software version of the gateway. If set, we will attempt to update the
-        /// gateway to the specified version. If left blank, the gateway software version will continue to be managed through the
-        /// aviatrix_controller_config resource.
+        /// The software version of the gateway. If set, we will attempt to update the gateway to the specified version if current version is different. If left blank, the gateway upgrade can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "6.5.821". Available as of provider version R2.20.0.
         /// </summary>
         [Input("softwareVersion")]
         public Input<string>? SoftwareVersion { get; set; }
 
         /// <summary>
-        /// Specify split tunnel mode.
+        /// Enable/disable Split Tunnel Mode. Valid values: true, false. Default value: true. Please see [here](https://docs.aviatrix.com/HowTos/gateway.html#split-tunnel-mode) for more information on split tunnel.
         /// </summary>
         [Input("splitTunnel")]
         public Input<bool>? SplitTunnel { get; set; }
@@ -1607,7 +1661,7 @@ namespace Pulumi.Aviatrix
         public Input<string>? SpotPrice { get; set; }
 
         /// <summary>
-        /// A VPC Network address range selected from one of the available network ranges.
+        /// A VPC network address range selected from one of the available network ranges. Example: "172.31.0.0/20". **NOTE: If using `insane_mode`, please see notes here.**
         /// </summary>
         [Input("subnet")]
         public Input<string>? Subnet { get; set; }
@@ -1616,7 +1670,8 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _tagLists;
 
         /// <summary>
-        /// Instance tag of cloud provider.
+        /// (Optional) Tag list of the gateway instance. Only available for AWS, AWSGov, AWSChina, Azure, AzureGov and AzureChina gateways. Example: ["key1:value1", "key2:value2"].
+        /// * `storage_name` (Optional) Specify a storage account. Required if `cloud_type` is 2048 (AzureChina). Removed in Provider version 2.21.0+.
         /// </summary>
         [Obsolete(@"Use tags instead.")]
         public InputList<string> TagLists
@@ -1629,7 +1684,7 @@ namespace Pulumi.Aviatrix
         private InputMap<string>? _tags;
 
         /// <summary>
-        /// A map of tags to assign to the gateway.
+        /// Map of tags to assign to the gateway. Only available for AWS, AWSGov, AWSChina, Azure, AzureGov, AzureChina, AWS Top Secret and AWS Secret gateways. Allowed characters vary by cloud type but always include: letters, spaces, and numbers. AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret allow the use of any character.  Azure, AzureGov and AzureChina allows the following special characters: + - = . _ : @. Example: {"key1" = "value1", "key2" = "value2"}.
         /// </summary>
         public InputMap<string> Tags
         {
@@ -1644,38 +1699,37 @@ namespace Pulumi.Aviatrix
         public Input<int>? TunnelDetectionTime { get; set; }
 
         /// <summary>
-        /// ID of legacy VPC/Vnet to be connected.
+        /// VPC ID/VNet name of cloud provider. Example: AWS/AWSGov/AWSChina: "vpc-abcd1234", GCP: "vpc-gcp-test~-~project-id", Azure/AzureGov/AzureChina: "vnet_name:rg_name:resource_guid", OCI: "ocid1.vcn.oc1.iad.aaaaaaaaba3pv6wkcr4jqae5f44n2b2m2yt2j6rx32uzr4h25vqstifsfdsq".
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }
 
         /// <summary>
-        /// Region where this gateway will be launched.
+        /// VPC region the gateway will be created in. Example: AWS: "us-east-1", GCP: "us-west2-a", Azure: "East US 2", OCI: "us-ashburn-1", AzureGov: "USGov Arizona", AWSGov: "us-gov-west-1", AWSChina: "cn-north-1", AzureChina: "China North", AWS Top Secret: "us-iso-east-1", AWS Secret: "us-isob-east-1".
         /// </summary>
         [Input("vpcReg")]
         public Input<string>? VpcReg { get; set; }
 
         /// <summary>
-        /// Enable user access through VPN to this container.
+        /// Enable [user access through VPN](https://docs.aviatrix.com/HowTos/gateway.html#vpn-access) to this gateway. Valid values: true, false.
         /// </summary>
         [Input("vpnAccess")]
         public Input<bool>? VpnAccess { get; set; }
 
         /// <summary>
-        /// VPN CIDR block for the container.
+        /// VPN CIDR block for the gateway. Required if `vpn_access` is true. Example: "192.168.43.0/24".
         /// </summary>
         [Input("vpnCidr")]
         public Input<string>? VpnCidr { get; set; }
 
         /// <summary>
-        /// Elb protocol for VPN gateway with elb enabled. Only supports AWS provider. Valid values: 'TCP', 'UDP'. If not specified,
-        /// 'TCP'' will be used.
+        /// Transport mode for VPN connection. All `cloud_types` support TCP with ELB, and UDP without ELB. AWS(1) additionally supports UDP with ELB. Valid values: "TCP", "UDP". If not specified, "TCP" will be used.
         /// </summary>
         [Input("vpnProtocol")]
         public Input<string>? VpnProtocol { get; set; }
 
         /// <summary>
-        /// Availability Zone. Only available for Azure and Public Subnet Filtering gateway
+        /// Availability Zone. Only available for Azure and Public Subnet Filtering gateway. Available for Azure as of provider version R2.17+.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }

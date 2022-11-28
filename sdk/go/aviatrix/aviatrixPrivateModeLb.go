@@ -11,6 +11,17 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_private_mode_lb** resource allows management of a Private Mode load balancer. This resource is available as of provider version R2.23+.
+//
+// ## Import
+//
+// **aviatrix_private_mode_lb** can be imported using the `vpc_id`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixPrivateModeLb:AviatrixPrivateModeLb test vpc-1234567
+//
+// ```
 type AviatrixPrivateModeLb struct {
 	pulumi.CustomResourceState
 
@@ -18,13 +29,13 @@ type AviatrixPrivateModeLb struct {
 	AccountName pulumi.StringOutput `pulumi:"accountName"`
 	// Type of load balancer to create. Must be one of controller or multicloud.
 	LbType pulumi.StringOutput `pulumi:"lbType"`
-	// VPC ID of multicloud access VPC to connect to. Required when lb_type is multicloud.
+	// ID of the VPC with a multicloud endpoint. Required when `lbType` is multicloud.
 	MulticloudAccessVpcId pulumi.StringPtrOutput `pulumi:"multicloudAccessVpcId"`
-	// List of multicloud proxies.
+	// List of multicloud proxies. Only valid when `lbType` is multicloud.
 	Proxies AviatrixPrivateModeLbProxyArrayOutput `pulumi:"proxies"`
-	// Name of the VPC region.
+	// Name of the region containing the VPC.
 	Region pulumi.StringOutput `pulumi:"region"`
-	// ID of the VPC for the load balancer.
+	// VPC ID of the proxy.
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
 }
 
@@ -74,13 +85,13 @@ type aviatrixPrivateModeLbState struct {
 	AccountName *string `pulumi:"accountName"`
 	// Type of load balancer to create. Must be one of controller or multicloud.
 	LbType *string `pulumi:"lbType"`
-	// VPC ID of multicloud access VPC to connect to. Required when lb_type is multicloud.
+	// ID of the VPC with a multicloud endpoint. Required when `lbType` is multicloud.
 	MulticloudAccessVpcId *string `pulumi:"multicloudAccessVpcId"`
-	// List of multicloud proxies.
+	// List of multicloud proxies. Only valid when `lbType` is multicloud.
 	Proxies []AviatrixPrivateModeLbProxy `pulumi:"proxies"`
-	// Name of the VPC region.
+	// Name of the region containing the VPC.
 	Region *string `pulumi:"region"`
-	// ID of the VPC for the load balancer.
+	// VPC ID of the proxy.
 	VpcId *string `pulumi:"vpcId"`
 }
 
@@ -89,13 +100,13 @@ type AviatrixPrivateModeLbState struct {
 	AccountName pulumi.StringPtrInput
 	// Type of load balancer to create. Must be one of controller or multicloud.
 	LbType pulumi.StringPtrInput
-	// VPC ID of multicloud access VPC to connect to. Required when lb_type is multicloud.
+	// ID of the VPC with a multicloud endpoint. Required when `lbType` is multicloud.
 	MulticloudAccessVpcId pulumi.StringPtrInput
-	// List of multicloud proxies.
+	// List of multicloud proxies. Only valid when `lbType` is multicloud.
 	Proxies AviatrixPrivateModeLbProxyArrayInput
-	// Name of the VPC region.
+	// Name of the region containing the VPC.
 	Region pulumi.StringPtrInput
-	// ID of the VPC for the load balancer.
+	// VPC ID of the proxy.
 	VpcId pulumi.StringPtrInput
 }
 
@@ -108,13 +119,13 @@ type aviatrixPrivateModeLbArgs struct {
 	AccountName string `pulumi:"accountName"`
 	// Type of load balancer to create. Must be one of controller or multicloud.
 	LbType string `pulumi:"lbType"`
-	// VPC ID of multicloud access VPC to connect to. Required when lb_type is multicloud.
+	// ID of the VPC with a multicloud endpoint. Required when `lbType` is multicloud.
 	MulticloudAccessVpcId *string `pulumi:"multicloudAccessVpcId"`
-	// List of multicloud proxies.
+	// List of multicloud proxies. Only valid when `lbType` is multicloud.
 	Proxies []AviatrixPrivateModeLbProxy `pulumi:"proxies"`
-	// Name of the VPC region.
+	// Name of the region containing the VPC.
 	Region string `pulumi:"region"`
-	// ID of the VPC for the load balancer.
+	// VPC ID of the proxy.
 	VpcId string `pulumi:"vpcId"`
 }
 
@@ -124,13 +135,13 @@ type AviatrixPrivateModeLbArgs struct {
 	AccountName pulumi.StringInput
 	// Type of load balancer to create. Must be one of controller or multicloud.
 	LbType pulumi.StringInput
-	// VPC ID of multicloud access VPC to connect to. Required when lb_type is multicloud.
+	// ID of the VPC with a multicloud endpoint. Required when `lbType` is multicloud.
 	MulticloudAccessVpcId pulumi.StringPtrInput
-	// List of multicloud proxies.
+	// List of multicloud proxies. Only valid when `lbType` is multicloud.
 	Proxies AviatrixPrivateModeLbProxyArrayInput
-	// Name of the VPC region.
+	// Name of the region containing the VPC.
 	Region pulumi.StringInput
-	// ID of the VPC for the load balancer.
+	// VPC ID of the proxy.
 	VpcId pulumi.StringInput
 }
 
@@ -231,22 +242,22 @@ func (o AviatrixPrivateModeLbOutput) LbType() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixPrivateModeLb) pulumi.StringOutput { return v.LbType }).(pulumi.StringOutput)
 }
 
-// VPC ID of multicloud access VPC to connect to. Required when lb_type is multicloud.
+// ID of the VPC with a multicloud endpoint. Required when `lbType` is multicloud.
 func (o AviatrixPrivateModeLbOutput) MulticloudAccessVpcId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixPrivateModeLb) pulumi.StringPtrOutput { return v.MulticloudAccessVpcId }).(pulumi.StringPtrOutput)
 }
 
-// List of multicloud proxies.
+// List of multicloud proxies. Only valid when `lbType` is multicloud.
 func (o AviatrixPrivateModeLbOutput) Proxies() AviatrixPrivateModeLbProxyArrayOutput {
 	return o.ApplyT(func(v *AviatrixPrivateModeLb) AviatrixPrivateModeLbProxyArrayOutput { return v.Proxies }).(AviatrixPrivateModeLbProxyArrayOutput)
 }
 
-// Name of the VPC region.
+// Name of the region containing the VPC.
 func (o AviatrixPrivateModeLbOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixPrivateModeLb) pulumi.StringOutput { return v.Region }).(pulumi.StringOutput)
 }
 
-// ID of the VPC for the load balancer.
+// VPC ID of the proxy.
 func (o AviatrixPrivateModeLbOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixPrivateModeLb) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
 }

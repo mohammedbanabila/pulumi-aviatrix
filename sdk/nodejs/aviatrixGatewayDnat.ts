@@ -2,9 +2,19 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * ## Import
+ *
+ * **gateway_dnat** can be imported using the `gw_name`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixGatewayDnat:AviatrixGatewayDnat test gw_name
+ * ```
+ */
 export class AviatrixGatewayDnat extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixGatewayDnat resource's state with the given name, ID, and optional extra
@@ -38,11 +48,11 @@ export class AviatrixGatewayDnat extends pulumi.CustomResource {
      */
     public /*out*/ readonly connectionPolicies!: pulumi.Output<outputs.AviatrixGatewayDnatConnectionPolicy[]>;
     /**
-     * Policy rule to be applied to gateway.
+     * Policy rule applied for enabling Destination NAT (DNAT), which allows you to change the destination to a virtual address range. Currently only supports AWS(1) and Azure(8).
      */
     public readonly dnatPolicies!: pulumi.Output<outputs.AviatrixGatewayDnatDnatPolicy[]>;
     /**
-     * Name of the gateway.
+     * Name of the Aviatrix gateway the custom DNAT will be configured for.
      */
     public readonly gwName!: pulumi.Output<string>;
     /**
@@ -50,7 +60,7 @@ export class AviatrixGatewayDnat extends pulumi.CustomResource {
      */
     public /*out*/ readonly interfacePolicies!: pulumi.Output<outputs.AviatrixGatewayDnatInterfacePolicy[]>;
     /**
-     * Whether to sync the policies to the HA gateway.
+     * Sync the policies to the HA gateway. Valid values: true, false. Default: true.
      */
     public readonly syncToHa!: pulumi.Output<boolean | undefined>;
 
@@ -100,11 +110,11 @@ export interface AviatrixGatewayDnatState {
      */
     connectionPolicies?: pulumi.Input<pulumi.Input<inputs.AviatrixGatewayDnatConnectionPolicy>[]>;
     /**
-     * Policy rule to be applied to gateway.
+     * Policy rule applied for enabling Destination NAT (DNAT), which allows you to change the destination to a virtual address range. Currently only supports AWS(1) and Azure(8).
      */
     dnatPolicies?: pulumi.Input<pulumi.Input<inputs.AviatrixGatewayDnatDnatPolicy>[]>;
     /**
-     * Name of the gateway.
+     * Name of the Aviatrix gateway the custom DNAT will be configured for.
      */
     gwName?: pulumi.Input<string>;
     /**
@@ -112,7 +122,7 @@ export interface AviatrixGatewayDnatState {
      */
     interfacePolicies?: pulumi.Input<pulumi.Input<inputs.AviatrixGatewayDnatInterfacePolicy>[]>;
     /**
-     * Whether to sync the policies to the HA gateway.
+     * Sync the policies to the HA gateway. Valid values: true, false. Default: true.
      */
     syncToHa?: pulumi.Input<boolean>;
 }
@@ -122,15 +132,15 @@ export interface AviatrixGatewayDnatState {
  */
 export interface AviatrixGatewayDnatArgs {
     /**
-     * Policy rule to be applied to gateway.
+     * Policy rule applied for enabling Destination NAT (DNAT), which allows you to change the destination to a virtual address range. Currently only supports AWS(1) and Azure(8).
      */
     dnatPolicies: pulumi.Input<pulumi.Input<inputs.AviatrixGatewayDnatDnatPolicy>[]>;
     /**
-     * Name of the gateway.
+     * Name of the Aviatrix gateway the custom DNAT will be configured for.
      */
     gwName: pulumi.Input<string>;
     /**
-     * Whether to sync the policies to the HA gateway.
+     * Sync the policies to the HA gateway. Valid values: true, false. Default: true.
      */
     syncToHa?: pulumi.Input<boolean>;
 }

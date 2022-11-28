@@ -2,9 +2,54 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_private_mode_lb** resource allows management of a Private Mode load balancer. This resource is available as of provider version R2.23+.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create a Private Mode Controller load balancer
+ * const test = new aviatrix.AviatrixPrivateModeLb("test", {
+ *     accountName: "devops",
+ *     lbType: "controller",
+ *     region: "us-east-1",
+ *     vpcId: "vpc-abcdef",
+ * });
+ * ```
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create a Private Mode multicloud load balancer
+ * const test2 = new aviatrix.AviatrixPrivateModeLb("test2", {
+ *     accountName: "devops",
+ *     lbType: "multicloud",
+ *     multicloudAccessVpcId: "vpc-abcdef",
+ *     proxies: [{
+ *         instanceId: "i-123456",
+ *         proxyType: "multicloud",
+ *         vpcId: "vpc-abcdef",
+ *     }],
+ *     region: "us-east-1",
+ *     vpcId: "vpc-abcdef",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **aviatrix_private_mode_lb** can be imported using the `vpc_id`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixPrivateModeLb:AviatrixPrivateModeLb test vpc-1234567
+ * ```
+ */
 export class AviatrixPrivateModeLb extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixPrivateModeLb resource's state with the given name, ID, and optional extra
@@ -42,19 +87,19 @@ export class AviatrixPrivateModeLb extends pulumi.CustomResource {
      */
     public readonly lbType!: pulumi.Output<string>;
     /**
-     * VPC ID of multicloud access VPC to connect to. Required when lb_type is multicloud.
+     * ID of the VPC with a multicloud endpoint. Required when `lbType` is multicloud.
      */
     public readonly multicloudAccessVpcId!: pulumi.Output<string | undefined>;
     /**
-     * List of multicloud proxies.
+     * List of multicloud proxies. Only valid when `lbType` is multicloud.
      */
     public readonly proxies!: pulumi.Output<outputs.AviatrixPrivateModeLbProxy[] | undefined>;
     /**
-     * Name of the VPC region.
+     * Name of the region containing the VPC.
      */
     public readonly region!: pulumi.Output<string>;
     /**
-     * ID of the VPC for the load balancer.
+     * VPC ID of the proxy.
      */
     public readonly vpcId!: pulumi.Output<string>;
 
@@ -116,19 +161,19 @@ export interface AviatrixPrivateModeLbState {
      */
     lbType?: pulumi.Input<string>;
     /**
-     * VPC ID of multicloud access VPC to connect to. Required when lb_type is multicloud.
+     * ID of the VPC with a multicloud endpoint. Required when `lbType` is multicloud.
      */
     multicloudAccessVpcId?: pulumi.Input<string>;
     /**
-     * List of multicloud proxies.
+     * List of multicloud proxies. Only valid when `lbType` is multicloud.
      */
     proxies?: pulumi.Input<pulumi.Input<inputs.AviatrixPrivateModeLbProxy>[]>;
     /**
-     * Name of the VPC region.
+     * Name of the region containing the VPC.
      */
     region?: pulumi.Input<string>;
     /**
-     * ID of the VPC for the load balancer.
+     * VPC ID of the proxy.
      */
     vpcId?: pulumi.Input<string>;
 }
@@ -146,19 +191,19 @@ export interface AviatrixPrivateModeLbArgs {
      */
     lbType: pulumi.Input<string>;
     /**
-     * VPC ID of multicloud access VPC to connect to. Required when lb_type is multicloud.
+     * ID of the VPC with a multicloud endpoint. Required when `lbType` is multicloud.
      */
     multicloudAccessVpcId?: pulumi.Input<string>;
     /**
-     * List of multicloud proxies.
+     * List of multicloud proxies. Only valid when `lbType` is multicloud.
      */
     proxies?: pulumi.Input<pulumi.Input<inputs.AviatrixPrivateModeLbProxy>[]>;
     /**
-     * Name of the VPC region.
+     * Name of the region containing the VPC.
      */
     region: pulumi.Input<string>;
     /**
-     * ID of the VPC for the load balancer.
+     * VPC ID of the proxy.
      */
     vpcId: pulumi.Input<string>;
 }

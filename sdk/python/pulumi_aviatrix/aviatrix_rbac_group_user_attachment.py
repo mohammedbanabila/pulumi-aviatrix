@@ -18,8 +18,8 @@ class AviatrixRbacGroupUserAttachmentArgs:
                  user_name: pulumi.Input[str]):
         """
         The set of arguments for constructing a AviatrixRbacGroupUserAttachment resource.
-        :param pulumi.Input[str] group_name: RBAC permission group name.
-        :param pulumi.Input[str] user_name: Account user name.
+        :param pulumi.Input[str] group_name: This parameter represents the name of a RBAC group.
+        :param pulumi.Input[str] user_name: Username of the account user.
         """
         pulumi.set(__self__, "group_name", group_name)
         pulumi.set(__self__, "user_name", user_name)
@@ -28,7 +28,7 @@ class AviatrixRbacGroupUserAttachmentArgs:
     @pulumi.getter(name="groupName")
     def group_name(self) -> pulumi.Input[str]:
         """
-        RBAC permission group name.
+        This parameter represents the name of a RBAC group.
         """
         return pulumi.get(self, "group_name")
 
@@ -40,7 +40,7 @@ class AviatrixRbacGroupUserAttachmentArgs:
     @pulumi.getter(name="userName")
     def user_name(self) -> pulumi.Input[str]:
         """
-        Account user name.
+        Username of the account user.
         """
         return pulumi.get(self, "user_name")
 
@@ -56,8 +56,8 @@ class _AviatrixRbacGroupUserAttachmentState:
                  user_name: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixRbacGroupUserAttachment resources.
-        :param pulumi.Input[str] group_name: RBAC permission group name.
-        :param pulumi.Input[str] user_name: Account user name.
+        :param pulumi.Input[str] group_name: This parameter represents the name of a RBAC group.
+        :param pulumi.Input[str] user_name: Username of the account user.
         """
         if group_name is not None:
             pulumi.set(__self__, "group_name", group_name)
@@ -68,7 +68,7 @@ class _AviatrixRbacGroupUserAttachmentState:
     @pulumi.getter(name="groupName")
     def group_name(self) -> Optional[pulumi.Input[str]]:
         """
-        RBAC permission group name.
+        This parameter represents the name of a RBAC group.
         """
         return pulumi.get(self, "group_name")
 
@@ -80,7 +80,7 @@ class _AviatrixRbacGroupUserAttachmentState:
     @pulumi.getter(name="userName")
     def user_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Account user name.
+        Username of the account user.
         """
         return pulumi.get(self, "user_name")
 
@@ -98,11 +98,32 @@ class AviatrixRbacGroupUserAttachment(pulumi.CustomResource):
                  user_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixRbacGroupUserAttachment resource with the given unique name, props, and options.
+        The **aviatrix_rbac_group_user_attachment** resource allows the creation and management of user attachments to Aviatrix (Role-Based Access Control) RBAC groups.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix RBAC Group User Attachment
+        test_attachment = aviatrix.AviatrixRbacGroupUserAttachment("testAttachment",
+            group_name="write_only",
+            user_name="user_name")
+        ```
+
+        ## Import
+
+        **rbac_group_user_attachment** can be imported using the `group_name` and `user_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixRbacGroupUserAttachment:AviatrixRbacGroupUserAttachment test group_name~user_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] group_name: RBAC permission group name.
-        :param pulumi.Input[str] user_name: Account user name.
+        :param pulumi.Input[str] group_name: This parameter represents the name of a RBAC group.
+        :param pulumi.Input[str] user_name: Username of the account user.
         """
         ...
     @overload
@@ -111,7 +132,28 @@ class AviatrixRbacGroupUserAttachment(pulumi.CustomResource):
                  args: AviatrixRbacGroupUserAttachmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixRbacGroupUserAttachment resource with the given unique name, props, and options.
+        The **aviatrix_rbac_group_user_attachment** resource allows the creation and management of user attachments to Aviatrix (Role-Based Access Control) RBAC groups.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix RBAC Group User Attachment
+        test_attachment = aviatrix.AviatrixRbacGroupUserAttachment("testAttachment",
+            group_name="write_only",
+            user_name="user_name")
+        ```
+
+        ## Import
+
+        **rbac_group_user_attachment** can be imported using the `group_name` and `user_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixRbacGroupUserAttachment:AviatrixRbacGroupUserAttachment test group_name~user_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixRbacGroupUserAttachmentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -163,8 +205,8 @@ class AviatrixRbacGroupUserAttachment(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] group_name: RBAC permission group name.
-        :param pulumi.Input[str] user_name: Account user name.
+        :param pulumi.Input[str] group_name: This parameter represents the name of a RBAC group.
+        :param pulumi.Input[str] user_name: Username of the account user.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -178,7 +220,7 @@ class AviatrixRbacGroupUserAttachment(pulumi.CustomResource):
     @pulumi.getter(name="groupName")
     def group_name(self) -> pulumi.Output[str]:
         """
-        RBAC permission group name.
+        This parameter represents the name of a RBAC group.
         """
         return pulumi.get(self, "group_name")
 
@@ -186,7 +228,7 @@ class AviatrixRbacGroupUserAttachment(pulumi.CustomResource):
     @pulumi.getter(name="userName")
     def user_name(self) -> pulumi.Output[str]:
         """
-        Account user name.
+        Username of the account user.
         """
         return pulumi.get(self, "user_name")
 

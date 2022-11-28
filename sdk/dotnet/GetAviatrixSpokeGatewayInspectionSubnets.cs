@@ -11,16 +11,67 @@ namespace Pulumi.Aviatrix
 {
     public static class GetAviatrixSpokeGatewayInspectionSubnets
     {
+        /// <summary>
+        /// The **aviatrix_spoke_gateway_inspection_subnets** data source provides all subnets available for the subnet inspection feature.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using Pulumi;
+        /// using Aviatrix = Pulumi.Aviatrix;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var foo = Aviatrix.GetAviatrixSpokeGatewayInspectionSubnets.Invoke(new()
+        ///     {
+        ///         GwName = "gatewayname",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
         public static Task<GetAviatrixSpokeGatewayInspectionSubnetsResult> InvokeAsync(GetAviatrixSpokeGatewayInspectionSubnetsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAviatrixSpokeGatewayInspectionSubnetsResult>("aviatrix:index/getAviatrixSpokeGatewayInspectionSubnets:getAviatrixSpokeGatewayInspectionSubnets", args ?? new GetAviatrixSpokeGatewayInspectionSubnetsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAviatrixSpokeGatewayInspectionSubnetsResult>("aviatrix:index/getAviatrixSpokeGatewayInspectionSubnets:getAviatrixSpokeGatewayInspectionSubnets", args ?? new GetAviatrixSpokeGatewayInspectionSubnetsArgs(), options.WithDefaults());
 
+        /// <summary>
+        /// The **aviatrix_spoke_gateway_inspection_subnets** data source provides all subnets available for the subnet inspection feature.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using Pulumi;
+        /// using Aviatrix = Pulumi.Aviatrix;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var foo = Aviatrix.GetAviatrixSpokeGatewayInspectionSubnets.Invoke(new()
+        ///     {
+        ///         GwName = "gatewayname",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
         public static Output<GetAviatrixSpokeGatewayInspectionSubnetsResult> Invoke(GetAviatrixSpokeGatewayInspectionSubnetsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAviatrixSpokeGatewayInspectionSubnetsResult>("aviatrix:index/getAviatrixSpokeGatewayInspectionSubnets:getAviatrixSpokeGatewayInspectionSubnets", args ?? new GetAviatrixSpokeGatewayInspectionSubnetsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAviatrixSpokeGatewayInspectionSubnetsResult>("aviatrix:index/getAviatrixSpokeGatewayInspectionSubnets:getAviatrixSpokeGatewayInspectionSubnets", args ?? new GetAviatrixSpokeGatewayInspectionSubnetsInvokeArgs(), options.WithDefaults());
     }
 
 
     public sealed class GetAviatrixSpokeGatewayInspectionSubnetsArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// Spoke gateway name.
+        /// </summary>
         [Input("gwName", required: true)]
         public string GwName { get; set; } = null!;
 
@@ -32,6 +83,9 @@ namespace Pulumi.Aviatrix
 
     public sealed class GetAviatrixSpokeGatewayInspectionSubnetsInvokeArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// Spoke gateway name.
+        /// </summary>
         [Input("gwName", required: true)]
         public Input<string> GwName { get; set; } = null!;
 
@@ -50,6 +104,9 @@ namespace Pulumi.Aviatrix
         /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// The list of all subnets available for the subnet inspection feature. This attribute is only supported for Azure.
+        /// </summary>
         public readonly ImmutableArray<string> SubnetsForInspections;
 
         [OutputConstructor]

@@ -13,15 +13,45 @@ namespace Pulumi.Aviatrix.Outputs
     [OutputType]
     public sealed class AviatrixMicrosegPolicyListPolicy
     {
+        /// <summary>
+        /// Action for the policy. Must be one of PERMIT or DENY.
+        /// </summary>
         public readonly string Action;
+        /// <summary>
+        /// List of App Domain UUIDs for the destination for the policy.
+        /// </summary>
         public readonly ImmutableArray<string> DstAppDomains;
+        /// <summary>
+        /// Whether to enable logging for packets that match the policy. Type: Boolean.
+        /// </summary>
         public readonly bool? Logging;
+        /// <summary>
+        /// Name of the policy.
+        /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// List of port ranges for the policy. Cannot be used when `protocol` is "ICMP".
+        /// </summary>
         public readonly ImmutableArray<Outputs.AviatrixMicrosegPolicyListPolicyPortRange> PortRanges;
+        /// <summary>
+        /// Priority for the policy. Default: 0. Type: Integer.
+        /// </summary>
         public readonly int? Priority;
+        /// <summary>
+        /// Protocol for the policy. Must be one of TCP, UDP, ICMP or ANY.
+        /// </summary>
         public readonly string Protocol;
+        /// <summary>
+        /// List of App Domain UUIDs for the source for the policy.
+        /// </summary>
         public readonly ImmutableArray<string> SrcAppDomains;
+        /// <summary>
+        /// UUID for the Policy.
+        /// </summary>
         public readonly string? Uuid;
+        /// <summary>
+        /// Whether to enforce the policy or only watch packets. If "true" packets are only watched. This allows you to observe if the traffic impacted by this rule causes any inadvertent issues (such as traffic being dropped). Type: Boolean.
+        /// </summary>
         public readonly bool? Watch;
 
         [OutputConstructor]

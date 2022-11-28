@@ -11,12 +11,50 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_firewall_management_access** resource allows the management of which resource to permit visibility into the Transit (FireNet) VPC.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixFirewallManagementAccess(ctx, "testFirewallManagementAccess", &aviatrix.AviatrixFirewallManagementAccessArgs{
+//				ManagementAccessResourceName: pulumi.String("SPOKE:spoke-gw"),
+//				TransitFirenetGatewayName:    pulumi.String("transit-gw"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **firewall_management_access** can be imported using the `transit_firenet_gateway_name`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixFirewallManagementAccess:AviatrixFirewallManagementAccess test transit_firenet_gateway_name
+//
+// ```
 type AviatrixFirewallManagementAccess struct {
 	pulumi.CustomResourceState
 
-	// Name of the resource to be enabled firewall management access.
+	// Name of the resource to enable Firewall Management Access.
 	ManagementAccessResourceName pulumi.StringOutput `pulumi:"managementAccessResourceName"`
-	// Name of the transit firenet gateway.
+	// Name of the Transit FireNet-enabled transit gateway. Currently supports AWS(1) and Azure(8) providers.
 	TransitFirenetGatewayName pulumi.StringOutput `pulumi:"transitFirenetGatewayName"`
 }
 
@@ -56,16 +94,16 @@ func GetAviatrixFirewallManagementAccess(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixFirewallManagementAccess resources.
 type aviatrixFirewallManagementAccessState struct {
-	// Name of the resource to be enabled firewall management access.
+	// Name of the resource to enable Firewall Management Access.
 	ManagementAccessResourceName *string `pulumi:"managementAccessResourceName"`
-	// Name of the transit firenet gateway.
+	// Name of the Transit FireNet-enabled transit gateway. Currently supports AWS(1) and Azure(8) providers.
 	TransitFirenetGatewayName *string `pulumi:"transitFirenetGatewayName"`
 }
 
 type AviatrixFirewallManagementAccessState struct {
-	// Name of the resource to be enabled firewall management access.
+	// Name of the resource to enable Firewall Management Access.
 	ManagementAccessResourceName pulumi.StringPtrInput
-	// Name of the transit firenet gateway.
+	// Name of the Transit FireNet-enabled transit gateway. Currently supports AWS(1) and Azure(8) providers.
 	TransitFirenetGatewayName pulumi.StringPtrInput
 }
 
@@ -74,17 +112,17 @@ func (AviatrixFirewallManagementAccessState) ElementType() reflect.Type {
 }
 
 type aviatrixFirewallManagementAccessArgs struct {
-	// Name of the resource to be enabled firewall management access.
+	// Name of the resource to enable Firewall Management Access.
 	ManagementAccessResourceName string `pulumi:"managementAccessResourceName"`
-	// Name of the transit firenet gateway.
+	// Name of the Transit FireNet-enabled transit gateway. Currently supports AWS(1) and Azure(8) providers.
 	TransitFirenetGatewayName string `pulumi:"transitFirenetGatewayName"`
 }
 
 // The set of arguments for constructing a AviatrixFirewallManagementAccess resource.
 type AviatrixFirewallManagementAccessArgs struct {
-	// Name of the resource to be enabled firewall management access.
+	// Name of the resource to enable Firewall Management Access.
 	ManagementAccessResourceName pulumi.StringInput
-	// Name of the transit firenet gateway.
+	// Name of the Transit FireNet-enabled transit gateway. Currently supports AWS(1) and Azure(8) providers.
 	TransitFirenetGatewayName pulumi.StringInput
 }
 
@@ -175,12 +213,12 @@ func (o AviatrixFirewallManagementAccessOutput) ToAviatrixFirewallManagementAcce
 	return o
 }
 
-// Name of the resource to be enabled firewall management access.
+// Name of the resource to enable Firewall Management Access.
 func (o AviatrixFirewallManagementAccessOutput) ManagementAccessResourceName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixFirewallManagementAccess) pulumi.StringOutput { return v.ManagementAccessResourceName }).(pulumi.StringOutput)
 }
 
-// Name of the transit firenet gateway.
+// Name of the Transit FireNet-enabled transit gateway. Currently supports AWS(1) and Azure(8) providers.
 func (o AviatrixFirewallManagementAccessOutput) TransitFirenetGatewayName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixFirewallManagementAccess) pulumi.StringOutput { return v.TransitFirenetGatewayName }).(pulumi.StringOutput)
 }

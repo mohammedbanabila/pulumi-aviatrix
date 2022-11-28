@@ -12,15 +12,27 @@ namespace Pulumi.Aviatrix.Inputs
 
     public sealed class AviatrixVpcSubnetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// CIDR block.
+        /// </summary>
         [Input("cidr")]
         public Input<string>? Cidr { get; set; }
 
+        /// <summary>
+        /// Name of this subnet.
+        /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// Region of this subnet.
+        /// </summary>
         [Input("region")]
         public Input<string>? Region { get; set; }
 
+        /// <summary>
+        /// ID of this subnet.
+        /// </summary>
         [Input("subnetId")]
         public Input<string>? SubnetId { get; set; }
 

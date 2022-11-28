@@ -9,11 +9,42 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_controller_cert_domain_config** resource allows management of an Aviatrix Controller's cert domain config. This resource is available as of provider version R2.19+.
+    /// 
+    /// !&gt; **WARNING:** Changing the Controller's cert domain config causes all other API calls to the controller to fail. If multiple other resources are created with the **aviatrix_controller_cert_domain_config** resource, a dependency on the **aviatrix_controller_cert_domain_config** resource must be added.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix controller cert domain config
+    ///     var test = new Aviatrix.AviatrixControllerCertDomainConfig("test", new()
+    ///     {
+    ///         CertDomain = "abc.com",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **aviatrix_controller_cert_domain_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixControllerCertDomainConfig:AviatrixControllerCertDomainConfig test 10-11-12-13
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixControllerCertDomainConfig:AviatrixControllerCertDomainConfig")]
     public partial class AviatrixControllerCertDomainConfig : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Domain name that is used in FQDN for generating cert.
+        /// Domain name that is used in FQDN for generating cert. Default value: "aviatrixnetwork.com".
         /// </summary>
         [Output("certDomain")]
         public Output<string?> CertDomain { get; private set; } = null!;
@@ -66,7 +97,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixControllerCertDomainConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Domain name that is used in FQDN for generating cert.
+        /// Domain name that is used in FQDN for generating cert. Default value: "aviatrixnetwork.com".
         /// </summary>
         [Input("certDomain")]
         public Input<string>? CertDomain { get; set; }
@@ -80,7 +111,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixControllerCertDomainConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Domain name that is used in FQDN for generating cert.
+        /// Domain name that is used in FQDN for generating cert. Default value: "aviatrixnetwork.com".
         /// </summary>
         [Input("certDomain")]
         public Input<string>? CertDomain { get; set; }

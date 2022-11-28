@@ -26,16 +26,16 @@ class AviatrixCloudnTransitGatewayAttachmentArgs:
                  prepend_as_paths: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a AviatrixCloudnTransitGatewayAttachment resource.
-        :param pulumi.Input[str] cloudn_bgp_asn: CloudN BGP AS Number.
-        :param pulumi.Input[str] cloudn_lan_interface_neighbor_bgp_asn: CloudN LAN Interface Neighbor's BGP AS Number.
-        :param pulumi.Input[str] cloudn_lan_interface_neighbor_ip: CloudN LAN Interface Neighbor's IP.
-        :param pulumi.Input[str] connection_name: Connection name.
-        :param pulumi.Input[str] device_name: Device name.
-        :param pulumi.Input[str] transit_gateway_bgp_asn: Transit Gateway BGP AS Number.
-        :param pulumi.Input[str] transit_gateway_name: Transit Gateway name.
-        :param pulumi.Input[bool] enable_jumbo_frame: Enable jumbo frame.
-        :param pulumi.Input[bool] enable_over_private_network: Enable over private network.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: AS path prepend.
+        :param pulumi.Input[str] cloudn_bgp_asn: CloudN BGP AS Number. Type: String.
+        :param pulumi.Input[str] cloudn_lan_interface_neighbor_bgp_asn: CloudN LAN Interface Neighbor's AS Number. Type: String.
+        :param pulumi.Input[str] cloudn_lan_interface_neighbor_ip: CloudN LAN Interface Neighbor's IP Address. Type: String.
+        :param pulumi.Input[str] connection_name: Connection Name. Type: String.
+        :param pulumi.Input[str] device_name: CloudN device name. Type: String.
+        :param pulumi.Input[str] transit_gateway_bgp_asn: Transit Gateway BGP AS Number. Type: String.
+        :param pulumi.Input[str] transit_gateway_name: Transit Gateway Name. Type: String.
+        :param pulumi.Input[bool] enable_jumbo_frame: Enable Jumbo Frame support for the connection. Type: Boolean. Default: false.
+        :param pulumi.Input[bool] enable_over_private_network: Enable connection over private network. Type: Boolean. Default: true.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires transit_gateway_bgp_asn to be set. Type: List. Available as of provider version R2.21.0+.
         """
         pulumi.set(__self__, "cloudn_bgp_asn", cloudn_bgp_asn)
         pulumi.set(__self__, "cloudn_lan_interface_neighbor_bgp_asn", cloudn_lan_interface_neighbor_bgp_asn)
@@ -55,7 +55,7 @@ class AviatrixCloudnTransitGatewayAttachmentArgs:
     @pulumi.getter(name="cloudnBgpAsn")
     def cloudn_bgp_asn(self) -> pulumi.Input[str]:
         """
-        CloudN BGP AS Number.
+        CloudN BGP AS Number. Type: String.
         """
         return pulumi.get(self, "cloudn_bgp_asn")
 
@@ -67,7 +67,7 @@ class AviatrixCloudnTransitGatewayAttachmentArgs:
     @pulumi.getter(name="cloudnLanInterfaceNeighborBgpAsn")
     def cloudn_lan_interface_neighbor_bgp_asn(self) -> pulumi.Input[str]:
         """
-        CloudN LAN Interface Neighbor's BGP AS Number.
+        CloudN LAN Interface Neighbor's AS Number. Type: String.
         """
         return pulumi.get(self, "cloudn_lan_interface_neighbor_bgp_asn")
 
@@ -79,7 +79,7 @@ class AviatrixCloudnTransitGatewayAttachmentArgs:
     @pulumi.getter(name="cloudnLanInterfaceNeighborIp")
     def cloudn_lan_interface_neighbor_ip(self) -> pulumi.Input[str]:
         """
-        CloudN LAN Interface Neighbor's IP.
+        CloudN LAN Interface Neighbor's IP Address. Type: String.
         """
         return pulumi.get(self, "cloudn_lan_interface_neighbor_ip")
 
@@ -91,7 +91,7 @@ class AviatrixCloudnTransitGatewayAttachmentArgs:
     @pulumi.getter(name="connectionName")
     def connection_name(self) -> pulumi.Input[str]:
         """
-        Connection name.
+        Connection Name. Type: String.
         """
         return pulumi.get(self, "connection_name")
 
@@ -103,7 +103,7 @@ class AviatrixCloudnTransitGatewayAttachmentArgs:
     @pulumi.getter(name="deviceName")
     def device_name(self) -> pulumi.Input[str]:
         """
-        Device name.
+        CloudN device name. Type: String.
         """
         return pulumi.get(self, "device_name")
 
@@ -115,7 +115,7 @@ class AviatrixCloudnTransitGatewayAttachmentArgs:
     @pulumi.getter(name="transitGatewayBgpAsn")
     def transit_gateway_bgp_asn(self) -> pulumi.Input[str]:
         """
-        Transit Gateway BGP AS Number.
+        Transit Gateway BGP AS Number. Type: String.
         """
         return pulumi.get(self, "transit_gateway_bgp_asn")
 
@@ -127,7 +127,7 @@ class AviatrixCloudnTransitGatewayAttachmentArgs:
     @pulumi.getter(name="transitGatewayName")
     def transit_gateway_name(self) -> pulumi.Input[str]:
         """
-        Transit Gateway name.
+        Transit Gateway Name. Type: String.
         """
         return pulumi.get(self, "transit_gateway_name")
 
@@ -139,7 +139,7 @@ class AviatrixCloudnTransitGatewayAttachmentArgs:
     @pulumi.getter(name="enableJumboFrame")
     def enable_jumbo_frame(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable jumbo frame.
+        Enable Jumbo Frame support for the connection. Type: Boolean. Default: false.
         """
         return pulumi.get(self, "enable_jumbo_frame")
 
@@ -151,7 +151,7 @@ class AviatrixCloudnTransitGatewayAttachmentArgs:
     @pulumi.getter(name="enableOverPrivateNetwork")
     def enable_over_private_network(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable over private network.
+        Enable connection over private network. Type: Boolean. Default: true.
         """
         return pulumi.get(self, "enable_over_private_network")
 
@@ -163,7 +163,7 @@ class AviatrixCloudnTransitGatewayAttachmentArgs:
     @pulumi.getter(name="prependAsPaths")
     def prepend_as_paths(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        AS path prepend.
+        Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires transit_gateway_bgp_asn to be set. Type: List. Available as of provider version R2.21.0+.
         """
         return pulumi.get(self, "prepend_as_paths")
 
@@ -187,16 +187,16 @@ class _AviatrixCloudnTransitGatewayAttachmentState:
                  transit_gateway_name: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixCloudnTransitGatewayAttachment resources.
-        :param pulumi.Input[str] cloudn_bgp_asn: CloudN BGP AS Number.
-        :param pulumi.Input[str] cloudn_lan_interface_neighbor_bgp_asn: CloudN LAN Interface Neighbor's BGP AS Number.
-        :param pulumi.Input[str] cloudn_lan_interface_neighbor_ip: CloudN LAN Interface Neighbor's IP.
-        :param pulumi.Input[str] connection_name: Connection name.
-        :param pulumi.Input[str] device_name: Device name.
-        :param pulumi.Input[bool] enable_jumbo_frame: Enable jumbo frame.
-        :param pulumi.Input[bool] enable_over_private_network: Enable over private network.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: AS path prepend.
-        :param pulumi.Input[str] transit_gateway_bgp_asn: Transit Gateway BGP AS Number.
-        :param pulumi.Input[str] transit_gateway_name: Transit Gateway name.
+        :param pulumi.Input[str] cloudn_bgp_asn: CloudN BGP AS Number. Type: String.
+        :param pulumi.Input[str] cloudn_lan_interface_neighbor_bgp_asn: CloudN LAN Interface Neighbor's AS Number. Type: String.
+        :param pulumi.Input[str] cloudn_lan_interface_neighbor_ip: CloudN LAN Interface Neighbor's IP Address. Type: String.
+        :param pulumi.Input[str] connection_name: Connection Name. Type: String.
+        :param pulumi.Input[str] device_name: CloudN device name. Type: String.
+        :param pulumi.Input[bool] enable_jumbo_frame: Enable Jumbo Frame support for the connection. Type: Boolean. Default: false.
+        :param pulumi.Input[bool] enable_over_private_network: Enable connection over private network. Type: Boolean. Default: true.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires transit_gateway_bgp_asn to be set. Type: List. Available as of provider version R2.21.0+.
+        :param pulumi.Input[str] transit_gateway_bgp_asn: Transit Gateway BGP AS Number. Type: String.
+        :param pulumi.Input[str] transit_gateway_name: Transit Gateway Name. Type: String.
         """
         if cloudn_bgp_asn is not None:
             pulumi.set(__self__, "cloudn_bgp_asn", cloudn_bgp_asn)
@@ -223,7 +223,7 @@ class _AviatrixCloudnTransitGatewayAttachmentState:
     @pulumi.getter(name="cloudnBgpAsn")
     def cloudn_bgp_asn(self) -> Optional[pulumi.Input[str]]:
         """
-        CloudN BGP AS Number.
+        CloudN BGP AS Number. Type: String.
         """
         return pulumi.get(self, "cloudn_bgp_asn")
 
@@ -235,7 +235,7 @@ class _AviatrixCloudnTransitGatewayAttachmentState:
     @pulumi.getter(name="cloudnLanInterfaceNeighborBgpAsn")
     def cloudn_lan_interface_neighbor_bgp_asn(self) -> Optional[pulumi.Input[str]]:
         """
-        CloudN LAN Interface Neighbor's BGP AS Number.
+        CloudN LAN Interface Neighbor's AS Number. Type: String.
         """
         return pulumi.get(self, "cloudn_lan_interface_neighbor_bgp_asn")
 
@@ -247,7 +247,7 @@ class _AviatrixCloudnTransitGatewayAttachmentState:
     @pulumi.getter(name="cloudnLanInterfaceNeighborIp")
     def cloudn_lan_interface_neighbor_ip(self) -> Optional[pulumi.Input[str]]:
         """
-        CloudN LAN Interface Neighbor's IP.
+        CloudN LAN Interface Neighbor's IP Address. Type: String.
         """
         return pulumi.get(self, "cloudn_lan_interface_neighbor_ip")
 
@@ -259,7 +259,7 @@ class _AviatrixCloudnTransitGatewayAttachmentState:
     @pulumi.getter(name="connectionName")
     def connection_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Connection name.
+        Connection Name. Type: String.
         """
         return pulumi.get(self, "connection_name")
 
@@ -271,7 +271,7 @@ class _AviatrixCloudnTransitGatewayAttachmentState:
     @pulumi.getter(name="deviceName")
     def device_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Device name.
+        CloudN device name. Type: String.
         """
         return pulumi.get(self, "device_name")
 
@@ -283,7 +283,7 @@ class _AviatrixCloudnTransitGatewayAttachmentState:
     @pulumi.getter(name="enableJumboFrame")
     def enable_jumbo_frame(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable jumbo frame.
+        Enable Jumbo Frame support for the connection. Type: Boolean. Default: false.
         """
         return pulumi.get(self, "enable_jumbo_frame")
 
@@ -295,7 +295,7 @@ class _AviatrixCloudnTransitGatewayAttachmentState:
     @pulumi.getter(name="enableOverPrivateNetwork")
     def enable_over_private_network(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable over private network.
+        Enable connection over private network. Type: Boolean. Default: true.
         """
         return pulumi.get(self, "enable_over_private_network")
 
@@ -307,7 +307,7 @@ class _AviatrixCloudnTransitGatewayAttachmentState:
     @pulumi.getter(name="prependAsPaths")
     def prepend_as_paths(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        AS path prepend.
+        Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires transit_gateway_bgp_asn to be set. Type: List. Available as of provider version R2.21.0+.
         """
         return pulumi.get(self, "prepend_as_paths")
 
@@ -319,7 +319,7 @@ class _AviatrixCloudnTransitGatewayAttachmentState:
     @pulumi.getter(name="transitGatewayBgpAsn")
     def transit_gateway_bgp_asn(self) -> Optional[pulumi.Input[str]]:
         """
-        Transit Gateway BGP AS Number.
+        Transit Gateway BGP AS Number. Type: String.
         """
         return pulumi.get(self, "transit_gateway_bgp_asn")
 
@@ -331,7 +331,7 @@ class _AviatrixCloudnTransitGatewayAttachmentState:
     @pulumi.getter(name="transitGatewayName")
     def transit_gateway_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Transit Gateway name.
+        Transit Gateway Name. Type: String.
         """
         return pulumi.get(self, "transit_gateway_name")
 
@@ -357,19 +357,46 @@ class AviatrixCloudnTransitGatewayAttachment(pulumi.CustomResource):
                  transit_gateway_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixCloudnTransitGatewayAttachment resource with the given unique name, props, and options.
+        The **aviatrix_cloudn_transit_gateway_attachment** resource allows the creation and management of CloudN Transit Gateway Attachments. This resource is available as of provider version R2.19+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create a CloudN Transit Gateway Attachment
+        test = aviatrix.AviatrixCloudnTransitGatewayAttachment("test",
+            device_name=aviatrix_device_registration["test_device"]["name"],
+            transit_gateway_name=aviatrix_transit_gateway["aws_transit"]["gw_name"],
+            connection_name="cloudn-transit-attachment-test",
+            transit_gateway_bgp_asn="65000",
+            cloudn_bgp_asn="65046",
+            cloudn_lan_interface_neighbor_ip="10.210.38.100",
+            cloudn_lan_interface_neighbor_bgp_asn="65219",
+            enable_over_private_network=False)
+        ```
+
+        ## Import
+
+        **aviatrix_cloudn_transit_gateway_attachment** can be imported using the `connection_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixCloudnTransitGatewayAttachment:AviatrixCloudnTransitGatewayAttachment test connection_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] cloudn_bgp_asn: CloudN BGP AS Number.
-        :param pulumi.Input[str] cloudn_lan_interface_neighbor_bgp_asn: CloudN LAN Interface Neighbor's BGP AS Number.
-        :param pulumi.Input[str] cloudn_lan_interface_neighbor_ip: CloudN LAN Interface Neighbor's IP.
-        :param pulumi.Input[str] connection_name: Connection name.
-        :param pulumi.Input[str] device_name: Device name.
-        :param pulumi.Input[bool] enable_jumbo_frame: Enable jumbo frame.
-        :param pulumi.Input[bool] enable_over_private_network: Enable over private network.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: AS path prepend.
-        :param pulumi.Input[str] transit_gateway_bgp_asn: Transit Gateway BGP AS Number.
-        :param pulumi.Input[str] transit_gateway_name: Transit Gateway name.
+        :param pulumi.Input[str] cloudn_bgp_asn: CloudN BGP AS Number. Type: String.
+        :param pulumi.Input[str] cloudn_lan_interface_neighbor_bgp_asn: CloudN LAN Interface Neighbor's AS Number. Type: String.
+        :param pulumi.Input[str] cloudn_lan_interface_neighbor_ip: CloudN LAN Interface Neighbor's IP Address. Type: String.
+        :param pulumi.Input[str] connection_name: Connection Name. Type: String.
+        :param pulumi.Input[str] device_name: CloudN device name. Type: String.
+        :param pulumi.Input[bool] enable_jumbo_frame: Enable Jumbo Frame support for the connection. Type: Boolean. Default: false.
+        :param pulumi.Input[bool] enable_over_private_network: Enable connection over private network. Type: Boolean. Default: true.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires transit_gateway_bgp_asn to be set. Type: List. Available as of provider version R2.21.0+.
+        :param pulumi.Input[str] transit_gateway_bgp_asn: Transit Gateway BGP AS Number. Type: String.
+        :param pulumi.Input[str] transit_gateway_name: Transit Gateway Name. Type: String.
         """
         ...
     @overload
@@ -378,7 +405,34 @@ class AviatrixCloudnTransitGatewayAttachment(pulumi.CustomResource):
                  args: AviatrixCloudnTransitGatewayAttachmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixCloudnTransitGatewayAttachment resource with the given unique name, props, and options.
+        The **aviatrix_cloudn_transit_gateway_attachment** resource allows the creation and management of CloudN Transit Gateway Attachments. This resource is available as of provider version R2.19+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create a CloudN Transit Gateway Attachment
+        test = aviatrix.AviatrixCloudnTransitGatewayAttachment("test",
+            device_name=aviatrix_device_registration["test_device"]["name"],
+            transit_gateway_name=aviatrix_transit_gateway["aws_transit"]["gw_name"],
+            connection_name="cloudn-transit-attachment-test",
+            transit_gateway_bgp_asn="65000",
+            cloudn_bgp_asn="65046",
+            cloudn_lan_interface_neighbor_ip="10.210.38.100",
+            cloudn_lan_interface_neighbor_bgp_asn="65219",
+            enable_over_private_network=False)
+        ```
+
+        ## Import
+
+        **aviatrix_cloudn_transit_gateway_attachment** can be imported using the `connection_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixCloudnTransitGatewayAttachment:AviatrixCloudnTransitGatewayAttachment test connection_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixCloudnTransitGatewayAttachmentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -464,16 +518,16 @@ class AviatrixCloudnTransitGatewayAttachment(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] cloudn_bgp_asn: CloudN BGP AS Number.
-        :param pulumi.Input[str] cloudn_lan_interface_neighbor_bgp_asn: CloudN LAN Interface Neighbor's BGP AS Number.
-        :param pulumi.Input[str] cloudn_lan_interface_neighbor_ip: CloudN LAN Interface Neighbor's IP.
-        :param pulumi.Input[str] connection_name: Connection name.
-        :param pulumi.Input[str] device_name: Device name.
-        :param pulumi.Input[bool] enable_jumbo_frame: Enable jumbo frame.
-        :param pulumi.Input[bool] enable_over_private_network: Enable over private network.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: AS path prepend.
-        :param pulumi.Input[str] transit_gateway_bgp_asn: Transit Gateway BGP AS Number.
-        :param pulumi.Input[str] transit_gateway_name: Transit Gateway name.
+        :param pulumi.Input[str] cloudn_bgp_asn: CloudN BGP AS Number. Type: String.
+        :param pulumi.Input[str] cloudn_lan_interface_neighbor_bgp_asn: CloudN LAN Interface Neighbor's AS Number. Type: String.
+        :param pulumi.Input[str] cloudn_lan_interface_neighbor_ip: CloudN LAN Interface Neighbor's IP Address. Type: String.
+        :param pulumi.Input[str] connection_name: Connection Name. Type: String.
+        :param pulumi.Input[str] device_name: CloudN device name. Type: String.
+        :param pulumi.Input[bool] enable_jumbo_frame: Enable Jumbo Frame support for the connection. Type: Boolean. Default: false.
+        :param pulumi.Input[bool] enable_over_private_network: Enable connection over private network. Type: Boolean. Default: true.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires transit_gateway_bgp_asn to be set. Type: List. Available as of provider version R2.21.0+.
+        :param pulumi.Input[str] transit_gateway_bgp_asn: Transit Gateway BGP AS Number. Type: String.
+        :param pulumi.Input[str] transit_gateway_name: Transit Gateway Name. Type: String.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -495,7 +549,7 @@ class AviatrixCloudnTransitGatewayAttachment(pulumi.CustomResource):
     @pulumi.getter(name="cloudnBgpAsn")
     def cloudn_bgp_asn(self) -> pulumi.Output[str]:
         """
-        CloudN BGP AS Number.
+        CloudN BGP AS Number. Type: String.
         """
         return pulumi.get(self, "cloudn_bgp_asn")
 
@@ -503,7 +557,7 @@ class AviatrixCloudnTransitGatewayAttachment(pulumi.CustomResource):
     @pulumi.getter(name="cloudnLanInterfaceNeighborBgpAsn")
     def cloudn_lan_interface_neighbor_bgp_asn(self) -> pulumi.Output[str]:
         """
-        CloudN LAN Interface Neighbor's BGP AS Number.
+        CloudN LAN Interface Neighbor's AS Number. Type: String.
         """
         return pulumi.get(self, "cloudn_lan_interface_neighbor_bgp_asn")
 
@@ -511,7 +565,7 @@ class AviatrixCloudnTransitGatewayAttachment(pulumi.CustomResource):
     @pulumi.getter(name="cloudnLanInterfaceNeighborIp")
     def cloudn_lan_interface_neighbor_ip(self) -> pulumi.Output[str]:
         """
-        CloudN LAN Interface Neighbor's IP.
+        CloudN LAN Interface Neighbor's IP Address. Type: String.
         """
         return pulumi.get(self, "cloudn_lan_interface_neighbor_ip")
 
@@ -519,7 +573,7 @@ class AviatrixCloudnTransitGatewayAttachment(pulumi.CustomResource):
     @pulumi.getter(name="connectionName")
     def connection_name(self) -> pulumi.Output[str]:
         """
-        Connection name.
+        Connection Name. Type: String.
         """
         return pulumi.get(self, "connection_name")
 
@@ -527,7 +581,7 @@ class AviatrixCloudnTransitGatewayAttachment(pulumi.CustomResource):
     @pulumi.getter(name="deviceName")
     def device_name(self) -> pulumi.Output[str]:
         """
-        Device name.
+        CloudN device name. Type: String.
         """
         return pulumi.get(self, "device_name")
 
@@ -535,7 +589,7 @@ class AviatrixCloudnTransitGatewayAttachment(pulumi.CustomResource):
     @pulumi.getter(name="enableJumboFrame")
     def enable_jumbo_frame(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enable jumbo frame.
+        Enable Jumbo Frame support for the connection. Type: Boolean. Default: false.
         """
         return pulumi.get(self, "enable_jumbo_frame")
 
@@ -543,7 +597,7 @@ class AviatrixCloudnTransitGatewayAttachment(pulumi.CustomResource):
     @pulumi.getter(name="enableOverPrivateNetwork")
     def enable_over_private_network(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enable over private network.
+        Enable connection over private network. Type: Boolean. Default: true.
         """
         return pulumi.get(self, "enable_over_private_network")
 
@@ -551,7 +605,7 @@ class AviatrixCloudnTransitGatewayAttachment(pulumi.CustomResource):
     @pulumi.getter(name="prependAsPaths")
     def prepend_as_paths(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        AS path prepend.
+        Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires transit_gateway_bgp_asn to be set. Type: List. Available as of provider version R2.21.0+.
         """
         return pulumi.get(self, "prepend_as_paths")
 
@@ -559,7 +613,7 @@ class AviatrixCloudnTransitGatewayAttachment(pulumi.CustomResource):
     @pulumi.getter(name="transitGatewayBgpAsn")
     def transit_gateway_bgp_asn(self) -> pulumi.Output[str]:
         """
-        Transit Gateway BGP AS Number.
+        Transit Gateway BGP AS Number. Type: String.
         """
         return pulumi.get(self, "transit_gateway_bgp_asn")
 
@@ -567,7 +621,7 @@ class AviatrixCloudnTransitGatewayAttachment(pulumi.CustomResource):
     @pulumi.getter(name="transitGatewayName")
     def transit_gateway_name(self) -> pulumi.Output[str]:
         """
-        Transit Gateway name.
+        Transit Gateway Name. Type: String.
         """
         return pulumi.get(self, "transit_gateway_name")
 

@@ -21,9 +21,9 @@ class AviatrixGatewayDnatArgs:
                  sync_to_ha: Optional[pulumi.Input[bool]] = None):
         """
         The set of arguments for constructing a AviatrixGatewayDnat resource.
-        :param pulumi.Input[Sequence[pulumi.Input['AviatrixGatewayDnatDnatPolicyArgs']]] dnat_policies: Policy rule to be applied to gateway.
-        :param pulumi.Input[str] gw_name: Name of the gateway.
-        :param pulumi.Input[bool] sync_to_ha: Whether to sync the policies to the HA gateway.
+        :param pulumi.Input[Sequence[pulumi.Input['AviatrixGatewayDnatDnatPolicyArgs']]] dnat_policies: Policy rule applied for enabling Destination NAT (DNAT), which allows you to change the destination to a virtual address range. Currently only supports AWS(1) and Azure(8).
+        :param pulumi.Input[str] gw_name: Name of the Aviatrix gateway the custom DNAT will be configured for.
+        :param pulumi.Input[bool] sync_to_ha: Sync the policies to the HA gateway. Valid values: true, false. Default: true.
         """
         pulumi.set(__self__, "dnat_policies", dnat_policies)
         pulumi.set(__self__, "gw_name", gw_name)
@@ -34,7 +34,7 @@ class AviatrixGatewayDnatArgs:
     @pulumi.getter(name="dnatPolicies")
     def dnat_policies(self) -> pulumi.Input[Sequence[pulumi.Input['AviatrixGatewayDnatDnatPolicyArgs']]]:
         """
-        Policy rule to be applied to gateway.
+        Policy rule applied for enabling Destination NAT (DNAT), which allows you to change the destination to a virtual address range. Currently only supports AWS(1) and Azure(8).
         """
         return pulumi.get(self, "dnat_policies")
 
@@ -46,7 +46,7 @@ class AviatrixGatewayDnatArgs:
     @pulumi.getter(name="gwName")
     def gw_name(self) -> pulumi.Input[str]:
         """
-        Name of the gateway.
+        Name of the Aviatrix gateway the custom DNAT will be configured for.
         """
         return pulumi.get(self, "gw_name")
 
@@ -58,7 +58,7 @@ class AviatrixGatewayDnatArgs:
     @pulumi.getter(name="syncToHa")
     def sync_to_ha(self) -> Optional[pulumi.Input[bool]]:
         """
-        Whether to sync the policies to the HA gateway.
+        Sync the policies to the HA gateway. Valid values: true, false. Default: true.
         """
         return pulumi.get(self, "sync_to_ha")
 
@@ -78,10 +78,10 @@ class _AviatrixGatewayDnatState:
         """
         Input properties used for looking up and filtering AviatrixGatewayDnat resources.
         :param pulumi.Input[Sequence[pulumi.Input['AviatrixGatewayDnatConnectionPolicyArgs']]] connection_policies: Computed attribute to store the previous connection policy.
-        :param pulumi.Input[Sequence[pulumi.Input['AviatrixGatewayDnatDnatPolicyArgs']]] dnat_policies: Policy rule to be applied to gateway.
-        :param pulumi.Input[str] gw_name: Name of the gateway.
+        :param pulumi.Input[Sequence[pulumi.Input['AviatrixGatewayDnatDnatPolicyArgs']]] dnat_policies: Policy rule applied for enabling Destination NAT (DNAT), which allows you to change the destination to a virtual address range. Currently only supports AWS(1) and Azure(8).
+        :param pulumi.Input[str] gw_name: Name of the Aviatrix gateway the custom DNAT will be configured for.
         :param pulumi.Input[Sequence[pulumi.Input['AviatrixGatewayDnatInterfacePolicyArgs']]] interface_policies: Computed attribute to store the previous interface policy.
-        :param pulumi.Input[bool] sync_to_ha: Whether to sync the policies to the HA gateway.
+        :param pulumi.Input[bool] sync_to_ha: Sync the policies to the HA gateway. Valid values: true, false. Default: true.
         """
         if connection_policies is not None:
             pulumi.set(__self__, "connection_policies", connection_policies)
@@ -110,7 +110,7 @@ class _AviatrixGatewayDnatState:
     @pulumi.getter(name="dnatPolicies")
     def dnat_policies(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['AviatrixGatewayDnatDnatPolicyArgs']]]]:
         """
-        Policy rule to be applied to gateway.
+        Policy rule applied for enabling Destination NAT (DNAT), which allows you to change the destination to a virtual address range. Currently only supports AWS(1) and Azure(8).
         """
         return pulumi.get(self, "dnat_policies")
 
@@ -122,7 +122,7 @@ class _AviatrixGatewayDnatState:
     @pulumi.getter(name="gwName")
     def gw_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the gateway.
+        Name of the Aviatrix gateway the custom DNAT will be configured for.
         """
         return pulumi.get(self, "gw_name")
 
@@ -146,7 +146,7 @@ class _AviatrixGatewayDnatState:
     @pulumi.getter(name="syncToHa")
     def sync_to_ha(self) -> Optional[pulumi.Input[bool]]:
         """
-        Whether to sync the policies to the HA gateway.
+        Sync the policies to the HA gateway. Valid values: true, false. Default: true.
         """
         return pulumi.get(self, "sync_to_ha")
 
@@ -165,12 +165,19 @@ class AviatrixGatewayDnat(pulumi.CustomResource):
                  sync_to_ha: Optional[pulumi.Input[bool]] = None,
                  __props__=None):
         """
-        Create a AviatrixGatewayDnat resource with the given unique name, props, and options.
+        ## Import
+
+        **gateway_dnat** can be imported using the `gw_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixGatewayDnat:AviatrixGatewayDnat test gw_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixGatewayDnatDnatPolicyArgs']]]] dnat_policies: Policy rule to be applied to gateway.
-        :param pulumi.Input[str] gw_name: Name of the gateway.
-        :param pulumi.Input[bool] sync_to_ha: Whether to sync the policies to the HA gateway.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixGatewayDnatDnatPolicyArgs']]]] dnat_policies: Policy rule applied for enabling Destination NAT (DNAT), which allows you to change the destination to a virtual address range. Currently only supports AWS(1) and Azure(8).
+        :param pulumi.Input[str] gw_name: Name of the Aviatrix gateway the custom DNAT will be configured for.
+        :param pulumi.Input[bool] sync_to_ha: Sync the policies to the HA gateway. Valid values: true, false. Default: true.
         """
         ...
     @overload
@@ -179,7 +186,14 @@ class AviatrixGatewayDnat(pulumi.CustomResource):
                  args: AviatrixGatewayDnatArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixGatewayDnat resource with the given unique name, props, and options.
+        ## Import
+
+        **gateway_dnat** can be imported using the `gw_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixGatewayDnat:AviatrixGatewayDnat test gw_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixGatewayDnatArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -239,10 +253,10 @@ class AviatrixGatewayDnat(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixGatewayDnatConnectionPolicyArgs']]]] connection_policies: Computed attribute to store the previous connection policy.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixGatewayDnatDnatPolicyArgs']]]] dnat_policies: Policy rule to be applied to gateway.
-        :param pulumi.Input[str] gw_name: Name of the gateway.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixGatewayDnatDnatPolicyArgs']]]] dnat_policies: Policy rule applied for enabling Destination NAT (DNAT), which allows you to change the destination to a virtual address range. Currently only supports AWS(1) and Azure(8).
+        :param pulumi.Input[str] gw_name: Name of the Aviatrix gateway the custom DNAT will be configured for.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixGatewayDnatInterfacePolicyArgs']]]] interface_policies: Computed attribute to store the previous interface policy.
-        :param pulumi.Input[bool] sync_to_ha: Whether to sync the policies to the HA gateway.
+        :param pulumi.Input[bool] sync_to_ha: Sync the policies to the HA gateway. Valid values: true, false. Default: true.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -267,7 +281,7 @@ class AviatrixGatewayDnat(pulumi.CustomResource):
     @pulumi.getter(name="dnatPolicies")
     def dnat_policies(self) -> pulumi.Output[Sequence['outputs.AviatrixGatewayDnatDnatPolicy']]:
         """
-        Policy rule to be applied to gateway.
+        Policy rule applied for enabling Destination NAT (DNAT), which allows you to change the destination to a virtual address range. Currently only supports AWS(1) and Azure(8).
         """
         return pulumi.get(self, "dnat_policies")
 
@@ -275,7 +289,7 @@ class AviatrixGatewayDnat(pulumi.CustomResource):
     @pulumi.getter(name="gwName")
     def gw_name(self) -> pulumi.Output[str]:
         """
-        Name of the gateway.
+        Name of the Aviatrix gateway the custom DNAT will be configured for.
         """
         return pulumi.get(self, "gw_name")
 
@@ -291,7 +305,7 @@ class AviatrixGatewayDnat(pulumi.CustomResource):
     @pulumi.getter(name="syncToHa")
     def sync_to_ha(self) -> pulumi.Output[Optional[bool]]:
         """
-        Whether to sync the policies to the HA gateway.
+        Sync the policies to the HA gateway. Valid values: true, false. Default: true.
         """
         return pulumi.get(self, "sync_to_ha")
 

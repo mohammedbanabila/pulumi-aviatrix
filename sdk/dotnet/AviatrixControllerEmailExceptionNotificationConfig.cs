@@ -9,11 +9,40 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_controller_email_exception_notification_config** resource allows management of an Aviatrix Controller's email exception notification config. This resource is available as of provider version R2.19+.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix controller email exception notification config
+    ///     var test = new Aviatrix.AviatrixControllerEmailExceptionNotificationConfig("test", new()
+    ///     {
+    ///         EnableEmailExceptionNotification = false,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **aviatrix_controller_email_exception_notification_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixControllerEmailExceptionNotificationConfig:AviatrixControllerEmailExceptionNotificationConfig test 10-11-12-13
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixControllerEmailExceptionNotificationConfig:AviatrixControllerEmailExceptionNotificationConfig")]
     public partial class AviatrixControllerEmailExceptionNotificationConfig : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Enable email exception notification.
+        /// Enable exception email notification. When set to true, exception email will be sent to "exception@aviatrix.com", when set to false, exception email will be sent to controller's admin email. Valid values: true, false. Default value: true.
         /// </summary>
         [Output("enableEmailExceptionNotification")]
         public Output<bool?> EnableEmailExceptionNotification { get; private set; } = null!;
@@ -66,7 +95,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixControllerEmailExceptionNotificationConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Enable email exception notification.
+        /// Enable exception email notification. When set to true, exception email will be sent to "exception@aviatrix.com", when set to false, exception email will be sent to controller's admin email. Valid values: true, false. Default value: true.
         /// </summary>
         [Input("enableEmailExceptionNotification")]
         public Input<bool>? EnableEmailExceptionNotification { get; set; }
@@ -80,7 +109,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixControllerEmailExceptionNotificationConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Enable email exception notification.
+        /// Enable exception email notification. When set to true, exception email will be sent to "exception@aviatrix.com", when set to false, exception email will be sent to controller's admin email. Valid values: true, false. Default value: true.
         /// </summary>
         [Input("enableEmailExceptionNotification")]
         public Input<bool>? EnableEmailExceptionNotification { get; set; }

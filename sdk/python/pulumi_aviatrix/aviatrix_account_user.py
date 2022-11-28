@@ -20,9 +20,8 @@ class AviatrixAccountUserArgs:
         """
         The set of arguments for constructing a AviatrixAccountUser resource.
         :param pulumi.Input[str] email: Email of address of account user to be created.
-        :param pulumi.Input[str] password: Login password for the account user to be created.
-        :param pulumi.Input[str] username: Name of account user to be created. It can only include alphanumeric characters(lower case only), hyphens, dots or
-               underscores. 1 to 80 in length. No spaces are allowed.
+        :param pulumi.Input[str] password: Login password for the account user to be created. If password is changed, current account will be destroyed and a new account will be created.
+        :param pulumi.Input[str] username: Name of account user to be created. It can only include alphanumeric characters(lower case only), hyphens, dots or underscores. 1 to 80 in length. No spaces are allowed.
         """
         pulumi.set(__self__, "email", email)
         pulumi.set(__self__, "password", password)
@@ -44,7 +43,7 @@ class AviatrixAccountUserArgs:
     @pulumi.getter
     def password(self) -> pulumi.Input[str]:
         """
-        Login password for the account user to be created.
+        Login password for the account user to be created. If password is changed, current account will be destroyed and a new account will be created.
         """
         return pulumi.get(self, "password")
 
@@ -56,8 +55,7 @@ class AviatrixAccountUserArgs:
     @pulumi.getter
     def username(self) -> pulumi.Input[str]:
         """
-        Name of account user to be created. It can only include alphanumeric characters(lower case only), hyphens, dots or
-        underscores. 1 to 80 in length. No spaces are allowed.
+        Name of account user to be created. It can only include alphanumeric characters(lower case only), hyphens, dots or underscores. 1 to 80 in length. No spaces are allowed.
         """
         return pulumi.get(self, "username")
 
@@ -75,9 +73,8 @@ class _AviatrixAccountUserState:
         """
         Input properties used for looking up and filtering AviatrixAccountUser resources.
         :param pulumi.Input[str] email: Email of address of account user to be created.
-        :param pulumi.Input[str] password: Login password for the account user to be created.
-        :param pulumi.Input[str] username: Name of account user to be created. It can only include alphanumeric characters(lower case only), hyphens, dots or
-               underscores. 1 to 80 in length. No spaces are allowed.
+        :param pulumi.Input[str] password: Login password for the account user to be created. If password is changed, current account will be destroyed and a new account will be created.
+        :param pulumi.Input[str] username: Name of account user to be created. It can only include alphanumeric characters(lower case only), hyphens, dots or underscores. 1 to 80 in length. No spaces are allowed.
         """
         if email is not None:
             pulumi.set(__self__, "email", email)
@@ -102,7 +99,7 @@ class _AviatrixAccountUserState:
     @pulumi.getter
     def password(self) -> Optional[pulumi.Input[str]]:
         """
-        Login password for the account user to be created.
+        Login password for the account user to be created. If password is changed, current account will be destroyed and a new account will be created.
         """
         return pulumi.get(self, "password")
 
@@ -114,8 +111,7 @@ class _AviatrixAccountUserState:
     @pulumi.getter
     def username(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of account user to be created. It can only include alphanumeric characters(lower case only), hyphens, dots or
-        underscores. 1 to 80 in length. No spaces are allowed.
+        Name of account user to be created. It can only include alphanumeric characters(lower case only), hyphens, dots or underscores. 1 to 80 in length. No spaces are allowed.
         """
         return pulumi.get(self, "username")
 
@@ -134,13 +130,36 @@ class AviatrixAccountUser(pulumi.CustomResource):
                  username: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixAccountUser resource with the given unique name, props, and options.
+        The **aviatrix_account_user** resource allows the creation and management of Aviatrix user accounts.
+
+        > **NOTE:** With the release of Controller 5.4 (compatible with Aviatrix provider R2.13), Role-Based Access Control (RBAC) is now integrated into the Accounts workflow. Any **aviatrix_account_user** created in 5.3 by default will have admin privileges (attached to the 'admin' RBAC permission group). In 5.4, any new account users created will no longer have the option to specify an `account_name`, but rather have the option to attach the user to specific RBAC groups through the **aviatrix_rbac_group_user_attachment** resource for more granular security control. Account users created in 5.4 will have minimal access (read_only) unless otherwise specified in the RBAC group permissions that the users are attached to.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix User Account
+        test_accountuser = aviatrix.AviatrixAccountUser("testAccountuser",
+            email="username1@testdomain.com",
+            password="passwordforuser1-1234",
+            username="username1")
+        ```
+
+        ## Import
+
+        **account_user** can be imported using the `username` (when doing import, need to leave `password` argument blank), e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAccountUser:AviatrixAccountUser test username
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] email: Email of address of account user to be created.
-        :param pulumi.Input[str] password: Login password for the account user to be created.
-        :param pulumi.Input[str] username: Name of account user to be created. It can only include alphanumeric characters(lower case only), hyphens, dots or
-               underscores. 1 to 80 in length. No spaces are allowed.
+        :param pulumi.Input[str] password: Login password for the account user to be created. If password is changed, current account will be destroyed and a new account will be created.
+        :param pulumi.Input[str] username: Name of account user to be created. It can only include alphanumeric characters(lower case only), hyphens, dots or underscores. 1 to 80 in length. No spaces are allowed.
         """
         ...
     @overload
@@ -149,7 +168,31 @@ class AviatrixAccountUser(pulumi.CustomResource):
                  args: AviatrixAccountUserArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixAccountUser resource with the given unique name, props, and options.
+        The **aviatrix_account_user** resource allows the creation and management of Aviatrix user accounts.
+
+        > **NOTE:** With the release of Controller 5.4 (compatible with Aviatrix provider R2.13), Role-Based Access Control (RBAC) is now integrated into the Accounts workflow. Any **aviatrix_account_user** created in 5.3 by default will have admin privileges (attached to the 'admin' RBAC permission group). In 5.4, any new account users created will no longer have the option to specify an `account_name`, but rather have the option to attach the user to specific RBAC groups through the **aviatrix_rbac_group_user_attachment** resource for more granular security control. Account users created in 5.4 will have minimal access (read_only) unless otherwise specified in the RBAC group permissions that the users are attached to.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix User Account
+        test_accountuser = aviatrix.AviatrixAccountUser("testAccountuser",
+            email="username1@testdomain.com",
+            password="passwordforuser1-1234",
+            username="username1")
+        ```
+
+        ## Import
+
+        **account_user** can be imported using the `username` (when doing import, need to leave `password` argument blank), e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAccountUser:AviatrixAccountUser test username
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixAccountUserArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -182,10 +225,12 @@ class AviatrixAccountUser(pulumi.CustomResource):
             __props__.__dict__["email"] = email
             if password is None and not opts.urn:
                 raise TypeError("Missing required property 'password'")
-            __props__.__dict__["password"] = password
+            __props__.__dict__["password"] = None if password is None else pulumi.Output.secret(password)
             if username is None and not opts.urn:
                 raise TypeError("Missing required property 'username'")
             __props__.__dict__["username"] = username
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["password"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(AviatrixAccountUser, __self__).__init__(
             'aviatrix:index/aviatrixAccountUser:AviatrixAccountUser',
             resource_name,
@@ -207,9 +252,8 @@ class AviatrixAccountUser(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] email: Email of address of account user to be created.
-        :param pulumi.Input[str] password: Login password for the account user to be created.
-        :param pulumi.Input[str] username: Name of account user to be created. It can only include alphanumeric characters(lower case only), hyphens, dots or
-               underscores. 1 to 80 in length. No spaces are allowed.
+        :param pulumi.Input[str] password: Login password for the account user to be created. If password is changed, current account will be destroyed and a new account will be created.
+        :param pulumi.Input[str] username: Name of account user to be created. It can only include alphanumeric characters(lower case only), hyphens, dots or underscores. 1 to 80 in length. No spaces are allowed.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -232,7 +276,7 @@ class AviatrixAccountUser(pulumi.CustomResource):
     @pulumi.getter
     def password(self) -> pulumi.Output[str]:
         """
-        Login password for the account user to be created.
+        Login password for the account user to be created. If password is changed, current account will be destroyed and a new account will be created.
         """
         return pulumi.get(self, "password")
 
@@ -240,8 +284,7 @@ class AviatrixAccountUser(pulumi.CustomResource):
     @pulumi.getter
     def username(self) -> pulumi.Output[str]:
         """
-        Name of account user to be created. It can only include alphanumeric characters(lower case only), hyphens, dots or
-        underscores. 1 to 80 in length. No spaces are allowed.
+        Name of account user to be created. It can only include alphanumeric characters(lower case only), hyphens, dots or underscores. 1 to 80 in length. No spaces are allowed.
         """
         return pulumi.get(self, "username")
 

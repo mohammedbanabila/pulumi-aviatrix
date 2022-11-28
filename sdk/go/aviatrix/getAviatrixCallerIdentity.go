@@ -7,6 +7,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_caller_identity** data source provides the Aviatrix CID for use in other resources.
 func GetAviatrixCallerIdentity(ctx *pulumi.Context, opts ...pulumi.InvokeOption) (*GetAviatrixCallerIdentityResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetAviatrixCallerIdentityResult
@@ -19,6 +20,7 @@ func GetAviatrixCallerIdentity(ctx *pulumi.Context, opts ...pulumi.InvokeOption)
 
 // A collection of values returned by getAviatrixCallerIdentity.
 type GetAviatrixCallerIdentityResult struct {
+	// Aviatrix caller identity.
 	Cid string `pulumi:"cid"`
 	// The provider-assigned unique ID for this managed resource.
 	Id string `pulumi:"id"`

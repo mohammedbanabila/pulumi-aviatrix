@@ -4,6 +4,31 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_aws_tgw_intra_domain_inspection** resource allows the creation and management of intra domain inspection of security domains in an AWS TGW.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Intra Domain Inspection
+ * const test = new aviatrix.AviatrixAwsTgwIntraDomainInspection("test", {
+ *     firewallDomainName: "firewall-domain",
+ *     routeDomainName: "mysd",
+ *     tgwName: "test-AWS-TGW",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **aviatrix_aws_tgw_intra_domain_inspection** can be imported using the `tgw_name` and `route_domain_name`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixAwsTgwIntraDomainInspection:AviatrixAwsTgwIntraDomainInspection test tgw_name~route_domain_name
+ * ```
+ */
 export class AviatrixAwsTgwIntraDomainInspection extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixAwsTgwIntraDomainInspection resource's state with the given name, ID, and optional extra
@@ -33,15 +58,15 @@ export class AviatrixAwsTgwIntraDomainInspection extends pulumi.CustomResource {
     }
 
     /**
-     * Firewall domain name.
+     * The name of a firewall security domain.
      */
     public readonly firewallDomainName!: pulumi.Output<string>;
     /**
-     * Route domain name.
+     * The name of a security domain.
      */
     public readonly routeDomainName!: pulumi.Output<string>;
     /**
-     * AWS TGW name.
+     * The AWS TGW name.
      */
     public readonly tgwName!: pulumi.Output<string>;
 
@@ -86,15 +111,15 @@ export class AviatrixAwsTgwIntraDomainInspection extends pulumi.CustomResource {
  */
 export interface AviatrixAwsTgwIntraDomainInspectionState {
     /**
-     * Firewall domain name.
+     * The name of a firewall security domain.
      */
     firewallDomainName?: pulumi.Input<string>;
     /**
-     * Route domain name.
+     * The name of a security domain.
      */
     routeDomainName?: pulumi.Input<string>;
     /**
-     * AWS TGW name.
+     * The AWS TGW name.
      */
     tgwName?: pulumi.Input<string>;
 }
@@ -104,15 +129,15 @@ export interface AviatrixAwsTgwIntraDomainInspectionState {
  */
 export interface AviatrixAwsTgwIntraDomainInspectionArgs {
     /**
-     * Firewall domain name.
+     * The name of a firewall security domain.
      */
     firewallDomainName: pulumi.Input<string>;
     /**
-     * Route domain name.
+     * The name of a security domain.
      */
     routeDomainName: pulumi.Input<string>;
     /**
-     * AWS TGW name.
+     * The AWS TGW name.
      */
     tgwName: pulumi.Input<string>;
 }

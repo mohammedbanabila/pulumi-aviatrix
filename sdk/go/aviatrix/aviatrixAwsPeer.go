@@ -11,6 +11,54 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_aws_peer** resource allows the creation and management of Aviatrix-created native AWS intra and inter-region VPC peerings.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixAwsPeer(ctx, "testAwspeer", &aviatrix.AviatrixAwsPeerArgs{
+//				AccountName1: pulumi.String("test1-account"),
+//				AccountName2: pulumi.String("test2-account"),
+//				RtbList1s: pulumi.StringArray{
+//					pulumi.String("rtb-abcd1234"),
+//				},
+//				RtbList2s: pulumi.StringArray{
+//					pulumi.String("rtb-wxyz5678"),
+//				},
+//				VpcId1:  pulumi.String("vpc-abcd1234"),
+//				VpcId2:  pulumi.String("vpc-rdef3333"),
+//				VpcReg1: pulumi.String("us-east-1"),
+//				VpcReg2: pulumi.String("us-west-1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **aws_peer** can be imported using the `vpc_id1` and `vpc_id2`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixAwsPeer:AviatrixAwsPeer test vpc_id1~vpc_id2
+//
+// ```
 type AviatrixAwsPeer struct {
 	pulumi.CustomResourceState
 
@@ -20,19 +68,19 @@ type AviatrixAwsPeer struct {
 	AccountName2 pulumi.StringOutput `pulumi:"accountName2"`
 	// List of route table ID of vpc_id1.
 	RtbList1Outputs pulumi.StringArrayOutput `pulumi:"rtbList1Outputs"`
-	// List of Route table ID.
+	// List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
 	RtbList1s pulumi.StringArrayOutput `pulumi:"rtbList1s"`
 	// List of route table ID of vpc_id2.
 	RtbList2Outputs pulumi.StringArrayOutput `pulumi:"rtbList2Outputs"`
-	// List of Route table ID.
+	// List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
 	RtbList2s pulumi.StringArrayOutput `pulumi:"rtbList2s"`
-	// VPC-ID of AWS cloud.
+	// VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
 	VpcId1 pulumi.StringOutput `pulumi:"vpcId1"`
-	// VPC-ID of AWS cloud.
+	// VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
 	VpcId2 pulumi.StringOutput `pulumi:"vpcId2"`
-	// Region of AWS cloud.
+	// Region of AWS cloud. Example: AWS: "us-east-1".
 	VpcReg1 pulumi.StringOutput `pulumi:"vpcReg1"`
-	// Region of AWS cloud.
+	// Region of AWS cloud. Example: AWS: "us-east-1".
 	VpcReg2 pulumi.StringOutput `pulumi:"vpcReg2"`
 }
 
@@ -90,19 +138,19 @@ type aviatrixAwsPeerState struct {
 	AccountName2 *string `pulumi:"accountName2"`
 	// List of route table ID of vpc_id1.
 	RtbList1Outputs []string `pulumi:"rtbList1Outputs"`
-	// List of Route table ID.
+	// List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
 	RtbList1s []string `pulumi:"rtbList1s"`
 	// List of route table ID of vpc_id2.
 	RtbList2Outputs []string `pulumi:"rtbList2Outputs"`
-	// List of Route table ID.
+	// List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
 	RtbList2s []string `pulumi:"rtbList2s"`
-	// VPC-ID of AWS cloud.
+	// VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
 	VpcId1 *string `pulumi:"vpcId1"`
-	// VPC-ID of AWS cloud.
+	// VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
 	VpcId2 *string `pulumi:"vpcId2"`
-	// Region of AWS cloud.
+	// Region of AWS cloud. Example: AWS: "us-east-1".
 	VpcReg1 *string `pulumi:"vpcReg1"`
-	// Region of AWS cloud.
+	// Region of AWS cloud. Example: AWS: "us-east-1".
 	VpcReg2 *string `pulumi:"vpcReg2"`
 }
 
@@ -113,19 +161,19 @@ type AviatrixAwsPeerState struct {
 	AccountName2 pulumi.StringPtrInput
 	// List of route table ID of vpc_id1.
 	RtbList1Outputs pulumi.StringArrayInput
-	// List of Route table ID.
+	// List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
 	RtbList1s pulumi.StringArrayInput
 	// List of route table ID of vpc_id2.
 	RtbList2Outputs pulumi.StringArrayInput
-	// List of Route table ID.
+	// List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
 	RtbList2s pulumi.StringArrayInput
-	// VPC-ID of AWS cloud.
+	// VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
 	VpcId1 pulumi.StringPtrInput
-	// VPC-ID of AWS cloud.
+	// VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
 	VpcId2 pulumi.StringPtrInput
-	// Region of AWS cloud.
+	// Region of AWS cloud. Example: AWS: "us-east-1".
 	VpcReg1 pulumi.StringPtrInput
-	// Region of AWS cloud.
+	// Region of AWS cloud. Example: AWS: "us-east-1".
 	VpcReg2 pulumi.StringPtrInput
 }
 
@@ -138,17 +186,17 @@ type aviatrixAwsPeerArgs struct {
 	AccountName1 string `pulumi:"accountName1"`
 	// This parameter represents the name of an AWS Cloud-Account in Aviatrix controller.
 	AccountName2 string `pulumi:"accountName2"`
-	// List of Route table ID.
+	// List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
 	RtbList1s []string `pulumi:"rtbList1s"`
-	// List of Route table ID.
+	// List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
 	RtbList2s []string `pulumi:"rtbList2s"`
-	// VPC-ID of AWS cloud.
+	// VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
 	VpcId1 string `pulumi:"vpcId1"`
-	// VPC-ID of AWS cloud.
+	// VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
 	VpcId2 string `pulumi:"vpcId2"`
-	// Region of AWS cloud.
+	// Region of AWS cloud. Example: AWS: "us-east-1".
 	VpcReg1 string `pulumi:"vpcReg1"`
-	// Region of AWS cloud.
+	// Region of AWS cloud. Example: AWS: "us-east-1".
 	VpcReg2 string `pulumi:"vpcReg2"`
 }
 
@@ -158,17 +206,17 @@ type AviatrixAwsPeerArgs struct {
 	AccountName1 pulumi.StringInput
 	// This parameter represents the name of an AWS Cloud-Account in Aviatrix controller.
 	AccountName2 pulumi.StringInput
-	// List of Route table ID.
+	// List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
 	RtbList1s pulumi.StringArrayInput
-	// List of Route table ID.
+	// List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
 	RtbList2s pulumi.StringArrayInput
-	// VPC-ID of AWS cloud.
+	// VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
 	VpcId1 pulumi.StringInput
-	// VPC-ID of AWS cloud.
+	// VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
 	VpcId2 pulumi.StringInput
-	// Region of AWS cloud.
+	// Region of AWS cloud. Example: AWS: "us-east-1".
 	VpcReg1 pulumi.StringInput
-	// Region of AWS cloud.
+	// Region of AWS cloud. Example: AWS: "us-east-1".
 	VpcReg2 pulumi.StringInput
 }
 
@@ -274,7 +322,7 @@ func (o AviatrixAwsPeerOutput) RtbList1Outputs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixAwsPeer) pulumi.StringArrayOutput { return v.RtbList1Outputs }).(pulumi.StringArrayOutput)
 }
 
-// List of Route table ID.
+// List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
 func (o AviatrixAwsPeerOutput) RtbList1s() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixAwsPeer) pulumi.StringArrayOutput { return v.RtbList1s }).(pulumi.StringArrayOutput)
 }
@@ -284,27 +332,27 @@ func (o AviatrixAwsPeerOutput) RtbList2Outputs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixAwsPeer) pulumi.StringArrayOutput { return v.RtbList2Outputs }).(pulumi.StringArrayOutput)
 }
 
-// List of Route table ID.
+// List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
 func (o AviatrixAwsPeerOutput) RtbList2s() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixAwsPeer) pulumi.StringArrayOutput { return v.RtbList2s }).(pulumi.StringArrayOutput)
 }
 
-// VPC-ID of AWS cloud.
+// VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
 func (o AviatrixAwsPeerOutput) VpcId1() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAwsPeer) pulumi.StringOutput { return v.VpcId1 }).(pulumi.StringOutput)
 }
 
-// VPC-ID of AWS cloud.
+// VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
 func (o AviatrixAwsPeerOutput) VpcId2() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAwsPeer) pulumi.StringOutput { return v.VpcId2 }).(pulumi.StringOutput)
 }
 
-// Region of AWS cloud.
+// Region of AWS cloud. Example: AWS: "us-east-1".
 func (o AviatrixAwsPeerOutput) VpcReg1() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAwsPeer) pulumi.StringOutput { return v.VpcReg1 }).(pulumi.StringOutput)
 }
 
-// Region of AWS cloud.
+// Region of AWS cloud. Example: AWS: "us-east-1".
 func (o AviatrixAwsPeerOutput) VpcReg2() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAwsPeer) pulumi.StringOutput { return v.VpcReg2 }).(pulumi.StringOutput)
 }

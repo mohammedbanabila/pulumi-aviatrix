@@ -13,62 +13,231 @@ namespace Pulumi.Aviatrix.Outputs
     [OutputType]
     public sealed class GetAviatrixTransitGatewaysGatewayListResult
     {
+        /// <summary>
+        /// Aviatrix account name.
+        /// </summary>
         public readonly string AccountName;
+        /// <summary>
+        /// When value is false, an idle address in Elastic IP pool is reused for this gateway. Otherwise, a new Elastic IP is allocated and used for this gateway.
+        /// </summary>
         public readonly bool AllocateNewEip;
+        /// <summary>
+        /// Availability domain for OCI.
+        /// </summary>
         public readonly string AvailabilityDomain;
+        /// <summary>
+        /// The name of the public IP address and its resource group in Azure to assign to this Transit Gateway.
+        /// </summary>
         public readonly string AzureEipNameResourceGroup;
+        /// <summary>
+        /// Enable Equal Cost Multi Path (ECMP) routing for the next hop.
+        /// </summary>
         public readonly bool BgpEcmp;
+        /// <summary>
+        /// BGP Hold Time.
+        /// </summary>
         public readonly int BgpHoldTime;
+        /// <summary>
+        /// Interfaces to run BGP protocol on top of the ethernet interface, to connect to the onprem/remote peer. Only available for GCP Transit.
+        /// </summary>
         public readonly ImmutableArray<Outputs.GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceResult> BgpLanInterfaces;
+        /// <summary>
+        /// List of available BGP LAN interface IPs for transit external device connection creation. Only supports GCP. Available as of provider version R2.21.0+.
+        /// </summary>
         public readonly ImmutableArray<string> BgpLanIpLists;
+        /// <summary>
+        /// BGP route polling time. Unit is in seconds.
+        /// </summary>
         public readonly string BgpPollingTime;
+        /// <summary>
+        /// Instance ID of the transit gateway.
+        /// </summary>
         public readonly string CloudInstanceId;
+        /// <summary>
+        /// Type of cloud service provider.
+        /// * `connected_transit"` -  Status of Connected Transit of transit gateway.
+        /// </summary>
         public readonly int CloudType;
         public readonly bool ConnectedTransit;
+        /// <summary>
+        /// A list of comma separated CIDRs to be customized for the spoke VPC routes.
+        /// </summary>
         public readonly string CustomizedSpokeVpcRoutes;
+        /// <summary>
+        /// Enables Active-Standby Mode, available only with HA enabled.
+        /// </summary>
         public readonly bool EnableActiveStandby;
+        /// <summary>
+        /// Enables Preemptive Mode for Active-Standby, available only with Active-Standby enabled.
+        /// </summary>
         public readonly bool EnableActiveStandbyPreemptive;
+        /// <summary>
+        /// Pre-allocate a network interface(eth4) for \"BGP over LAN\" functionality. Only valid for cloud_type = 4 (GCP) and 8 (Azure). Available as of provider version R2.18+
+        /// </summary>
         public readonly bool EnableBgpOverLan;
+        /// <summary>
+        /// Status of Encrypt Gateway EBS Volume of the transit gateway.
+        /// </summary>
         public readonly bool EnableEncryptVolume;
+        /// <summary>
+        /// Enable firenet interfaces with AWS Gateway Load Balancer.
+        /// </summary>
         public readonly bool EnableGatewayLoadBalancer;
+        /// <summary>
+        /// Sign of readiness for TGW connection.
+        /// </summary>
         public readonly bool EnableHybridConnection;
+        /// <summary>
+        /// Enable jumbo frame support for transit gateway.
+        /// </summary>
         public readonly bool EnableJumboFrame;
+        /// <summary>
+        /// Enable [monitor gateway subnets](https://docs.aviatrix.com/HowTos/gateway.html#monitor-gateway-subnet). Only valid for cloud_type = 1 (AWS) or 256 (AWSGov).
+        /// </summary>
         public readonly bool EnableMonitorGatewaySubnets;
+        /// <summary>
+        /// Status of multi-tier transit mode on transit gateway.
+        /// </summary>
         public readonly bool EnableMultiTierTransit;
+        /// <summary>
+        /// Status of private OOB for the transit gateway.
+        /// </summary>
         public readonly bool EnablePrivateOob;
+        /// <summary>
+        /// Enable segmentation to allow association of transit gateway to security domains.
+        /// </summary>
         public readonly bool EnableSegmentation;
+        /// <summary>
+        /// Enable spot instance. NOT supported for production deployment.
+        /// </summary>
         public readonly bool EnableSpotInstance;
+        /// <summary>
+        /// Enable summarize CIDR to TGW.
+        /// </summary>
         public readonly bool EnableTransitSummarizeCidrToTgw;
+        /// <summary>
+        /// Status of Vpc Dns Server of the transit Gateway.
+        /// </summary>
         public readonly bool EnableVpcDnsServer;
+        /// <summary>
+        /// A list of comma separated CIDRs to be advertised to on-prem as "Excluded CIDR List".
+        /// </summary>
         public readonly string ExcludedAdvertisedSpokeRoutes;
+        /// <summary>
+        /// Fault domain for OCI.
+        /// </summary>
         public readonly string FaultDomain;
+        /// <summary>
+        /// A list of comma separated CIDRs to be filtered from the spoke VPC route table.
+        /// </summary>
         public readonly string FilteredSpokeVpcRoutes;
+        /// <summary>
+        /// Aviatrix transit gateway name.
+        /// </summary>
         public readonly string GwName;
+        /// <summary>
+        /// Size of transit gateway instance.
+        /// </summary>
         public readonly string GwSize;
+        /// <summary>
+        /// Interfaces to run BGP protocol on top of the ethernet interface, to connect to the onprem/remote peer. Only available for GCP HA Transit.
+        /// </summary>
         public readonly ImmutableArray<Outputs.GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceResult> HaBgpLanInterfaces;
+        /// <summary>
+        /// List of available BGP LAN interface IPs for transit external device HA connection creation. Only supports GCP. Available as of provider version R2.21.0+.
+        /// </summary>
         public readonly ImmutableArray<string> HaBgpLanIpLists;
+        /// <summary>
+        /// The image version of the gateway.
+        /// </summary>
         public readonly string ImageVersion;
+        /// <summary>
+        /// Status of Insane Mode of the transit gateway.
+        /// </summary>
         public readonly bool InsaneMode;
+        /// <summary>
+        /// AZ of subnet being created for Insane Mode transit gateway.
+        /// </summary>
         public readonly string InsaneModeAz;
+        /// <summary>
+        /// LAN Private Subnet. Only used for GCP Transit FireNet.
+        /// </summary>
         public readonly string LanPrivateSubnet;
+        /// <summary>
+        /// LAN VPC ID. Only used for GCP Transit FireNet.
+        /// </summary>
         public readonly string LanVpcId;
+        /// <summary>
+        /// Set the learned CIDRs approval mode.
+        /// </summary>
         public readonly string LearnedCidrsApprovalMode;
+        /// <summary>
+        /// Changes the Aviatrix Transit Gateway ASN number before you setup Aviatrix Transit Gateway connection configurations.
+        /// </summary>
         public readonly string LocalAsNumber;
+        /// <summary>
+        /// A set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true.
+        /// </summary>
         public readonly ImmutableArray<string> MonitorExcludeLists;
+        /// <summary>
+        /// OOB availability zone.
+        /// </summary>
         public readonly string OobAvailabilityZone;
+        /// <summary>
+        /// OOB management subnet.
+        /// </summary>
         public readonly string OobManagementSubnet;
+        /// <summary>
+        /// List of AS numbers to populate BGP AP_PATH field when it advertises to VGW or peer devices.
+        /// </summary>
         public readonly ImmutableArray<string> PrependAsPaths;
+        /// <summary>
+        /// Private IP address of the transit gateway created.
+        /// </summary>
         public readonly string PrivateIp;
+        /// <summary>
+        /// Public IP address of the Transit Gateway created.
+        /// </summary>
         public readonly string PublicIp;
+        /// <summary>
+        /// Security group used for the transit gateway.
+        /// </summary>
         public readonly string SecurityGroupId;
+        /// <summary>
+        /// Status of Single AZ HA of transit gateway.
+        /// </summary>
         public readonly bool SingleAzHa;
+        /// <summary>
+        /// Status of Single IP Source Nat mode of the transit gateway.
+        /// </summary>
         public readonly bool SingleIpSnat;
+        /// <summary>
+        /// The software version of the gateway.
+        /// </summary>
         public readonly string SoftwareVersion;
+        /// <summary>
+        /// Price for spot instance. NOT supported for production deployment.
+        /// </summary>
         public readonly string SpotPrice;
+        /// <summary>
+        /// A VPC Network address range selected from one of the available network ranges.
+        /// </summary>
         public readonly string Subnet;
+        /// <summary>
+        /// The IPSec tunnel down detection time for the transit gateway.
+        /// </summary>
         public readonly int TunnelDetectionTime;
+        /// <summary>
+        /// VPC-ID/VNet-Name of cloud provider.
+        /// </summary>
         public readonly string VpcId;
+        /// <summary>
+        /// Region of cloud provider.
+        /// </summary>
         public readonly string VpcReg;
+        /// <summary>
+        /// Availability Zone. Only available for cloud_type = 8 (Azure). Must be in the form 'az-n', for example, 'az-2'.
+        /// </summary>
         public readonly string Zone;
 
         [OutputConstructor]

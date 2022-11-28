@@ -9,35 +9,121 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// !&gt; **WARNING:** Resource **aviatrix_aws_tgw_security_domain** will be deprecated in future releases. Please use resource **aviatrix_aws_tgw_network_domain** instead.
+    /// 
+    /// The **aviatrix_aws_tgw_security_domain** resource allows the creation and management of Aviatrix security domains.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix AWS TGW security domain
+    ///     var testAwsTgw = new Aviatrix.AviatrixAwsTgw("testAwsTgw", new()
+    ///     {
+    ///         AccountName = "devops",
+    ///         AwsSideAsNumber = "64512",
+    ///         Region = "us-east-1",
+    ///         TgwName = "test-AWS-TGW",
+    ///         ManageSecurityDomain = false,
+    ///         ManageVpcAttachment = false,
+    ///         ManageTransitGatewayAttachment = false,
+    ///     });
+    /// 
+    ///     var defaultDomain = new Aviatrix.AviatrixAwsTgwSecurityDomain("defaultDomain", new()
+    ///     {
+    ///         TgwName = testAwsTgw.TgwName,
+    ///     });
+    /// 
+    ///     var sharedServiceDomain = new Aviatrix.AviatrixAwsTgwSecurityDomain("sharedServiceDomain", new()
+    ///     {
+    ///         TgwName = testAwsTgw.TgwName,
+    ///     });
+    /// 
+    ///     var aviatrixEdgeDomain = new Aviatrix.AviatrixAwsTgwSecurityDomain("aviatrixEdgeDomain", new()
+    ///     {
+    ///         TgwName = testAwsTgw.TgwName,
+    ///     });
+    /// 
+    ///     var defaultSdConn1 = new Aviatrix.AviatrixAwsTgwSecurityDomainConn("defaultSdConn1", new()
+    ///     {
+    ///         TgwName = testAwsTgw.TgwName,
+    ///         DomainName1 = aviatrixEdgeDomain.Name,
+    ///         DomainName2 = defaultDomain.Name,
+    ///     });
+    /// 
+    ///     var defaultSdConn2 = new Aviatrix.AviatrixAwsTgwSecurityDomainConn("defaultSdConn2", new()
+    ///     {
+    ///         TgwName = testAwsTgw.TgwName,
+    ///         DomainName1 = aviatrixEdgeDomain.Name,
+    ///         DomainName2 = sharedServiceDomain.Name,
+    ///     });
+    /// 
+    ///     var defaultSdConn3 = new Aviatrix.AviatrixAwsTgwSecurityDomainConn("defaultSdConn3", new()
+    ///     {
+    ///         TgwName = testAwsTgw.TgwName,
+    ///         DomainName1 = defaultDomain.Name,
+    ///         DomainName2 = sharedServiceDomain.Name,
+    ///     });
+    /// 
+    ///     var test = new Aviatrix.AviatrixAwsTgwSecurityDomain("test", new()
+    ///     {
+    ///         TgwName = testAwsTgw.TgwName,
+    ///     }, new CustomResourceOptions
+    ///     {
+    ///         DependsOn = new[]
+    ///         {
+    ///             defaultDomain,
+    ///             sharedServiceDomain,
+    ///             aviatrixEdgeDomain,
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **aws_tgw_security_domain** can be imported using the `name` and `tgw_name`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixAwsTgwSecurityDomain:AviatrixAwsTgwSecurityDomain test tgw_name~name
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixAwsTgwSecurityDomain:AviatrixAwsTgwSecurityDomain")]
     public partial class AviatrixAwsTgwSecurityDomain : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Set to true if the security domain is an aviatrix firewall domain.
+        /// Set to true if the security domain is to be used as an Aviatrix Firewall Domain for the Aviatrix Firewall Network. Valid values: true, false. Default value: false.
         /// </summary>
         [Output("aviatrixFirewall")]
         public Output<bool?> AviatrixFirewall { get; private set; } = null!;
 
         /// <summary>
-        /// Security domain name.
+        /// The name of the security domain.
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Set to true if the security domain is a native egress domain.
+        /// Set to true if the security domain is to be used as a native egress domain (for non-Aviatrix Firewall Network-based central Internet bound traffic). Valid values: true, false. Default value: false.
         /// </summary>
         [Output("nativeEgress")]
         public Output<bool?> NativeEgress { get; private set; } = null!;
 
         /// <summary>
-        /// Set to true if the security domain is a native firewall domain.
+        /// Set to true if the security domain is to be used as a native firewall domain (for non-Aviatrix Firewall Network-based firewall traffic inspection). Valid values: true, false. Default value: false.
         /// </summary>
         [Output("nativeFirewall")]
         public Output<bool?> NativeFirewall { get; private set; } = null!;
 
         /// <summary>
-        /// AWS TGW name.
+        /// The AWS TGW name of the security domain.
         /// </summary>
         [Output("tgwName")]
         public Output<string> TgwName { get; private set; } = null!;
@@ -90,31 +176,31 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixAwsTgwSecurityDomainArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Set to true if the security domain is an aviatrix firewall domain.
+        /// Set to true if the security domain is to be used as an Aviatrix Firewall Domain for the Aviatrix Firewall Network. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("aviatrixFirewall")]
         public Input<bool>? AviatrixFirewall { get; set; }
 
         /// <summary>
-        /// Security domain name.
+        /// The name of the security domain.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Set to true if the security domain is a native egress domain.
+        /// Set to true if the security domain is to be used as a native egress domain (for non-Aviatrix Firewall Network-based central Internet bound traffic). Valid values: true, false. Default value: false.
         /// </summary>
         [Input("nativeEgress")]
         public Input<bool>? NativeEgress { get; set; }
 
         /// <summary>
-        /// Set to true if the security domain is a native firewall domain.
+        /// Set to true if the security domain is to be used as a native firewall domain (for non-Aviatrix Firewall Network-based firewall traffic inspection). Valid values: true, false. Default value: false.
         /// </summary>
         [Input("nativeFirewall")]
         public Input<bool>? NativeFirewall { get; set; }
 
         /// <summary>
-        /// AWS TGW name.
+        /// The AWS TGW name of the security domain.
         /// </summary>
         [Input("tgwName", required: true)]
         public Input<string> TgwName { get; set; } = null!;
@@ -128,31 +214,31 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixAwsTgwSecurityDomainState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Set to true if the security domain is an aviatrix firewall domain.
+        /// Set to true if the security domain is to be used as an Aviatrix Firewall Domain for the Aviatrix Firewall Network. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("aviatrixFirewall")]
         public Input<bool>? AviatrixFirewall { get; set; }
 
         /// <summary>
-        /// Security domain name.
+        /// The name of the security domain.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Set to true if the security domain is a native egress domain.
+        /// Set to true if the security domain is to be used as a native egress domain (for non-Aviatrix Firewall Network-based central Internet bound traffic). Valid values: true, false. Default value: false.
         /// </summary>
         [Input("nativeEgress")]
         public Input<bool>? NativeEgress { get; set; }
 
         /// <summary>
-        /// Set to true if the security domain is a native firewall domain.
+        /// Set to true if the security domain is to be used as a native firewall domain (for non-Aviatrix Firewall Network-based firewall traffic inspection). Valid values: true, false. Default value: false.
         /// </summary>
         [Input("nativeFirewall")]
         public Input<bool>? NativeFirewall { get; set; }
 
         /// <summary>
-        /// AWS TGW name.
+        /// The AWS TGW name of the security domain.
         /// </summary>
         [Input("tgwName")]
         public Input<string>? TgwName { get; set; }

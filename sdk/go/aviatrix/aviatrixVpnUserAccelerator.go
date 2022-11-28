@@ -11,10 +11,47 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_vpn_user_accelerator** resource manages the [Aviatrix VPN User Accelerator](https://docs.aviatrix.com/HowTos/user_accelerator.html).
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixVpnUserAccelerator(ctx, "testVpcAccelerator", &aviatrix.AviatrixVpnUserAcceleratorArgs{
+//				ElbName: pulumi.String("Aviatrix-vpc-abcd2134"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **vpn_user_accelerator** can be imported using the `elb_name`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixVpnUserAccelerator:AviatrixVpnUserAccelerator test Aviatrix-vpc-abcd1234
+//
+// ```
 type AviatrixVpnUserAccelerator struct {
 	pulumi.CustomResourceState
 
-	// ELB to include into the VPN User Accelerator.
+	// Name of ELB to be added to VPN User Accelerator. Example: "Aviatrix-vpc-abcd2134".
 	ElbName pulumi.StringOutput `pulumi:"elbName"`
 }
 
@@ -51,12 +88,12 @@ func GetAviatrixVpnUserAccelerator(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixVpnUserAccelerator resources.
 type aviatrixVpnUserAcceleratorState struct {
-	// ELB to include into the VPN User Accelerator.
+	// Name of ELB to be added to VPN User Accelerator. Example: "Aviatrix-vpc-abcd2134".
 	ElbName *string `pulumi:"elbName"`
 }
 
 type AviatrixVpnUserAcceleratorState struct {
-	// ELB to include into the VPN User Accelerator.
+	// Name of ELB to be added to VPN User Accelerator. Example: "Aviatrix-vpc-abcd2134".
 	ElbName pulumi.StringPtrInput
 }
 
@@ -65,13 +102,13 @@ func (AviatrixVpnUserAcceleratorState) ElementType() reflect.Type {
 }
 
 type aviatrixVpnUserAcceleratorArgs struct {
-	// ELB to include into the VPN User Accelerator.
+	// Name of ELB to be added to VPN User Accelerator. Example: "Aviatrix-vpc-abcd2134".
 	ElbName string `pulumi:"elbName"`
 }
 
 // The set of arguments for constructing a AviatrixVpnUserAccelerator resource.
 type AviatrixVpnUserAcceleratorArgs struct {
-	// ELB to include into the VPN User Accelerator.
+	// Name of ELB to be added to VPN User Accelerator. Example: "Aviatrix-vpc-abcd2134".
 	ElbName pulumi.StringInput
 }
 
@@ -162,7 +199,7 @@ func (o AviatrixVpnUserAcceleratorOutput) ToAviatrixVpnUserAcceleratorOutputWith
 	return o
 }
 
-// ELB to include into the VPN User Accelerator.
+// Name of ELB to be added to VPN User Accelerator. Example: "Aviatrix-vpc-abcd2134".
 func (o AviatrixVpnUserAcceleratorOutput) ElbName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixVpnUserAccelerator) pulumi.StringOutput { return v.ElbName }).(pulumi.StringOutput)
 }

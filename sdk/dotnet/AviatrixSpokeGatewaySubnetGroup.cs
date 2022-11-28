@@ -9,23 +9,59 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_spoke_gateway_subnet_group** resource creates and manages the spoke gateway subnet groups.
+    /// 
+    /// &gt; **NOTE:** This feature is only valid for Azure.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Spoke Inspection Subnet Group
+    ///     var test = new Aviatrix.AviatrixSpokeGatewaySubnetGroup("test", new()
+    ///     {
+    ///         GwName = "spoke",
+    ///         Subnets = new[]
+    ///         {
+    ///             "10.2.48.0/20~~subnet1",
+    ///             "10.2.64.0/20~~subnet2",
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **spoke_gateway_subnet_group** can be imported using the `gw_name` and `name`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixSpokeGatewaySubnetGroup:AviatrixSpokeGatewaySubnetGroup test gw_name~name
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixSpokeGatewaySubnetGroup:AviatrixSpokeGatewaySubnetGroup")]
     public partial class AviatrixSpokeGatewaySubnetGroup : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Spoke gateway name.
+        /// Aviatrix spoke gateway name.
         /// </summary>
         [Output("gwName")]
         public Output<string> GwName { get; private set; } = null!;
 
         /// <summary>
-        /// Subnet group name.
+        /// Name of spoke gateway subnet group.
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// A set of subnets in the subnet group.
+        /// A set of subnets in the subnet group. The format of each subnet must be "CIDR~~subnet name". Example: `["10.2.48.0/20~~subnet1", "10.2.64.0/20~~subnet2"]`
         /// </summary>
         [Output("subnets")]
         public Output<ImmutableArray<string>> Subnets { get; private set; } = null!;
@@ -78,13 +114,13 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixSpokeGatewaySubnetGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Spoke gateway name.
+        /// Aviatrix spoke gateway name.
         /// </summary>
         [Input("gwName", required: true)]
         public Input<string> GwName { get; set; } = null!;
 
         /// <summary>
-        /// Subnet group name.
+        /// Name of spoke gateway subnet group.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
@@ -93,7 +129,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _subnets;
 
         /// <summary>
-        /// A set of subnets in the subnet group.
+        /// A set of subnets in the subnet group. The format of each subnet must be "CIDR~~subnet name". Example: `["10.2.48.0/20~~subnet1", "10.2.64.0/20~~subnet2"]`
         /// </summary>
         public InputList<string> Subnets
         {
@@ -110,13 +146,13 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixSpokeGatewaySubnetGroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Spoke gateway name.
+        /// Aviatrix spoke gateway name.
         /// </summary>
         [Input("gwName")]
         public Input<string>? GwName { get; set; }
 
         /// <summary>
-        /// Subnet group name.
+        /// Name of spoke gateway subnet group.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
@@ -125,7 +161,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _subnets;
 
         /// <summary>
-        /// A set of subnets in the subnet group.
+        /// A set of subnets in the subnet group. The format of each subnet must be "CIDR~~subnet name". Example: `["10.2.48.0/20~~subnet1", "10.2.64.0/20~~subnet2"]`
         /// </summary>
         public InputList<string> Subnets
         {

@@ -11,20 +11,66 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_aws_tgw_connect** resource allows the creation and management of AWS TGW Connect connections. To create
+// and manage TGW Connect peers, please use `AviatrixAwsTgwConnectPeer` resources. This resource is available as of
+// provider version R2.18.1+.
+//
+// > **NOTE:** Before creating an AWS TGW Connect, the AWS TGW must have an attached VPC via
+// the `AviatrixAwsTgwVpcAttachment` resource. Also, the AWS TGW must have configured CIDRs via
+// the `AviatrixAwsTgw` `cidrs` attribute.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixAwsTgwConnect(ctx, "testAwsTgwConnect", &aviatrix.AviatrixAwsTgwConnectArgs{
+//				TgwName:           pulumi.Any(aviatrix_aws_tgw.Test_aws_tgw.Tgw_name),
+//				ConnectionName:    pulumi.String("aws-tgw-connect"),
+//				TransportVpcId:    pulumi.Any(aviatrix_aws_tgw_vpc_attachment.Test_aws_tgw_vpc_attachment.Vpc_id),
+//				NetworkDomainName: pulumi.Any(aviatrix_aws_tgw_vpc_attachment.Test_aws_tgw_vpc_attachment.Network_domain_name),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **aws_tgw_connect** can be imported using the `tgw_name` and `connection_name`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixAwsTgwConnect:AviatrixAwsTgwConnect test tgw_name~~connection_name
+//
+// ```
 type AviatrixAwsTgwConnect struct {
 	pulumi.CustomResourceState
 
 	// Connect Attachment ID.
 	ConnectAttachmentId pulumi.StringOutput `pulumi:"connectAttachmentId"`
-	// Connection Name.
+	// Connection name.
 	ConnectionName pulumi.StringOutput `pulumi:"connectionName"`
-	// Network Domain Name.
+	// Network Domain name.
 	NetworkDomainName pulumi.StringPtrOutput `pulumi:"networkDomainName"`
-	// Security Domain Name.
+	// Security Domain name.
 	//
 	// Deprecated: Please use network_domain_name instead.
 	SecurityDomainName pulumi.StringPtrOutput `pulumi:"securityDomainName"`
-	// AWS TGW Name.
+	// AWS TGW name.
 	TgwName pulumi.StringOutput `pulumi:"tgwName"`
 	// Transport Attachment ID.
 	TransportAttachmentId pulumi.StringOutput `pulumi:"transportAttachmentId"`
@@ -73,15 +119,15 @@ func GetAviatrixAwsTgwConnect(ctx *pulumi.Context,
 type aviatrixAwsTgwConnectState struct {
 	// Connect Attachment ID.
 	ConnectAttachmentId *string `pulumi:"connectAttachmentId"`
-	// Connection Name.
+	// Connection name.
 	ConnectionName *string `pulumi:"connectionName"`
-	// Network Domain Name.
+	// Network Domain name.
 	NetworkDomainName *string `pulumi:"networkDomainName"`
-	// Security Domain Name.
+	// Security Domain name.
 	//
 	// Deprecated: Please use network_domain_name instead.
 	SecurityDomainName *string `pulumi:"securityDomainName"`
-	// AWS TGW Name.
+	// AWS TGW name.
 	TgwName *string `pulumi:"tgwName"`
 	// Transport Attachment ID.
 	TransportAttachmentId *string `pulumi:"transportAttachmentId"`
@@ -92,15 +138,15 @@ type aviatrixAwsTgwConnectState struct {
 type AviatrixAwsTgwConnectState struct {
 	// Connect Attachment ID.
 	ConnectAttachmentId pulumi.StringPtrInput
-	// Connection Name.
+	// Connection name.
 	ConnectionName pulumi.StringPtrInput
-	// Network Domain Name.
+	// Network Domain name.
 	NetworkDomainName pulumi.StringPtrInput
-	// Security Domain Name.
+	// Security Domain name.
 	//
 	// Deprecated: Please use network_domain_name instead.
 	SecurityDomainName pulumi.StringPtrInput
-	// AWS TGW Name.
+	// AWS TGW name.
 	TgwName pulumi.StringPtrInput
 	// Transport Attachment ID.
 	TransportAttachmentId pulumi.StringPtrInput
@@ -113,15 +159,15 @@ func (AviatrixAwsTgwConnectState) ElementType() reflect.Type {
 }
 
 type aviatrixAwsTgwConnectArgs struct {
-	// Connection Name.
+	// Connection name.
 	ConnectionName string `pulumi:"connectionName"`
-	// Network Domain Name.
+	// Network Domain name.
 	NetworkDomainName *string `pulumi:"networkDomainName"`
-	// Security Domain Name.
+	// Security Domain name.
 	//
 	// Deprecated: Please use network_domain_name instead.
 	SecurityDomainName *string `pulumi:"securityDomainName"`
-	// AWS TGW Name.
+	// AWS TGW name.
 	TgwName string `pulumi:"tgwName"`
 	// Transport Attachment VPC ID.
 	TransportVpcId string `pulumi:"transportVpcId"`
@@ -129,15 +175,15 @@ type aviatrixAwsTgwConnectArgs struct {
 
 // The set of arguments for constructing a AviatrixAwsTgwConnect resource.
 type AviatrixAwsTgwConnectArgs struct {
-	// Connection Name.
+	// Connection name.
 	ConnectionName pulumi.StringInput
-	// Network Domain Name.
+	// Network Domain name.
 	NetworkDomainName pulumi.StringPtrInput
-	// Security Domain Name.
+	// Security Domain name.
 	//
 	// Deprecated: Please use network_domain_name instead.
 	SecurityDomainName pulumi.StringPtrInput
-	// AWS TGW Name.
+	// AWS TGW name.
 	TgwName pulumi.StringInput
 	// Transport Attachment VPC ID.
 	TransportVpcId pulumi.StringInput
@@ -235,24 +281,24 @@ func (o AviatrixAwsTgwConnectOutput) ConnectAttachmentId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwConnect) pulumi.StringOutput { return v.ConnectAttachmentId }).(pulumi.StringOutput)
 }
 
-// Connection Name.
+// Connection name.
 func (o AviatrixAwsTgwConnectOutput) ConnectionName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwConnect) pulumi.StringOutput { return v.ConnectionName }).(pulumi.StringOutput)
 }
 
-// Network Domain Name.
+// Network Domain name.
 func (o AviatrixAwsTgwConnectOutput) NetworkDomainName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwConnect) pulumi.StringPtrOutput { return v.NetworkDomainName }).(pulumi.StringPtrOutput)
 }
 
-// Security Domain Name.
+// Security Domain name.
 //
 // Deprecated: Please use network_domain_name instead.
 func (o AviatrixAwsTgwConnectOutput) SecurityDomainName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwConnect) pulumi.StringPtrOutput { return v.SecurityDomainName }).(pulumi.StringPtrOutput)
 }
 
-// AWS TGW Name.
+// AWS TGW name.
 func (o AviatrixAwsTgwConnectOutput) TgwName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwConnect) pulumi.StringOutput { return v.TgwName }).(pulumi.StringOutput)
 }

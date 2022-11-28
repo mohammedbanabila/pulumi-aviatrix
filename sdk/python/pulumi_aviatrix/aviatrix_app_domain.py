@@ -20,7 +20,7 @@ class AviatrixAppDomainArgs:
                  name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a AviatrixAppDomain resource.
-        :param pulumi.Input['AviatrixAppDomainSelectorArgs'] selector: List of match expressions for the App Domain.
+        :param pulumi.Input['AviatrixAppDomainSelectorArgs'] selector: Block containing match expressions to filter the App Domain.
         :param pulumi.Input[str] name: Name of the App Domain.
         """
         pulumi.set(__self__, "selector", selector)
@@ -31,7 +31,7 @@ class AviatrixAppDomainArgs:
     @pulumi.getter
     def selector(self) -> pulumi.Input['AviatrixAppDomainSelectorArgs']:
         """
-        List of match expressions for the App Domain.
+        Block containing match expressions to filter the App Domain.
         """
         return pulumi.get(self, "selector")
 
@@ -61,7 +61,7 @@ class _AviatrixAppDomainState:
         """
         Input properties used for looking up and filtering AviatrixAppDomain resources.
         :param pulumi.Input[str] name: Name of the App Domain.
-        :param pulumi.Input['AviatrixAppDomainSelectorArgs'] selector: List of match expressions for the App Domain.
+        :param pulumi.Input['AviatrixAppDomainSelectorArgs'] selector: Block containing match expressions to filter the App Domain.
         :param pulumi.Input[str] uuid: UUID of the App Domain.
         """
         if name is not None:
@@ -87,7 +87,7 @@ class _AviatrixAppDomainState:
     @pulumi.getter
     def selector(self) -> Optional[pulumi.Input['AviatrixAppDomainSelectorArgs']]:
         """
-        List of match expressions for the App Domain.
+        Block containing match expressions to filter the App Domain.
         """
         return pulumi.get(self, "selector")
 
@@ -117,11 +117,45 @@ class AviatrixAppDomain(pulumi.CustomResource):
                  selector: Optional[pulumi.Input[pulumi.InputType['AviatrixAppDomainSelectorArgs']]] = None,
                  __props__=None):
         """
-        Create a AviatrixAppDomain resource with the given unique name, props, and options.
+        !> **WARNING** **aviatrix_app_domain** is part of the Micro-segmentation private preview feature for R2.22.0. If you wish to enable a private preview mode feature, please contact your sales representative or Aviatrix Support.
+        The **aviatrix_app_domain** resource handles the creation and management of App Domains. Available as of Provider R2.22.0+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix App Domain
+        test_app_domain_ip = aviatrix.AviatrixAppDomain("testAppDomainIp", selector=aviatrix.AviatrixAppDomainSelectorArgs(
+            match_expressions=[
+                aviatrix.AviatrixAppDomainSelectorMatchExpressionArgs(
+                    account_name="devops",
+                    region="us-west-2",
+                    tags={
+                        "k3": "v3",
+                    },
+                    type="vm",
+                ),
+                aviatrix.AviatrixAppDomainSelectorMatchExpressionArgs(
+                    cidr="10.0.0.0/16",
+                ),
+            ],
+        ))
+        ```
+
+        ## Import
+
+        **aviatrix_app_domain** can be imported using the `uuid`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAppDomain:AviatrixAppDomain test 41984f8b-5a37-4272-89b3-57c79e9ff77c
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] name: Name of the App Domain.
-        :param pulumi.Input[pulumi.InputType['AviatrixAppDomainSelectorArgs']] selector: List of match expressions for the App Domain.
+        :param pulumi.Input[pulumi.InputType['AviatrixAppDomainSelectorArgs']] selector: Block containing match expressions to filter the App Domain.
         """
         ...
     @overload
@@ -130,7 +164,41 @@ class AviatrixAppDomain(pulumi.CustomResource):
                  args: AviatrixAppDomainArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixAppDomain resource with the given unique name, props, and options.
+        !> **WARNING** **aviatrix_app_domain** is part of the Micro-segmentation private preview feature for R2.22.0. If you wish to enable a private preview mode feature, please contact your sales representative or Aviatrix Support.
+        The **aviatrix_app_domain** resource handles the creation and management of App Domains. Available as of Provider R2.22.0+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix App Domain
+        test_app_domain_ip = aviatrix.AviatrixAppDomain("testAppDomainIp", selector=aviatrix.AviatrixAppDomainSelectorArgs(
+            match_expressions=[
+                aviatrix.AviatrixAppDomainSelectorMatchExpressionArgs(
+                    account_name="devops",
+                    region="us-west-2",
+                    tags={
+                        "k3": "v3",
+                    },
+                    type="vm",
+                ),
+                aviatrix.AviatrixAppDomainSelectorMatchExpressionArgs(
+                    cidr="10.0.0.0/16",
+                ),
+            ],
+        ))
+        ```
+
+        ## Import
+
+        **aviatrix_app_domain** can be imported using the `uuid`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAppDomain:AviatrixAppDomain test 41984f8b-5a37-4272-89b3-57c79e9ff77c
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixAppDomainArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -183,7 +251,7 @@ class AviatrixAppDomain(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] name: Name of the App Domain.
-        :param pulumi.Input[pulumi.InputType['AviatrixAppDomainSelectorArgs']] selector: List of match expressions for the App Domain.
+        :param pulumi.Input[pulumi.InputType['AviatrixAppDomainSelectorArgs']] selector: Block containing match expressions to filter the App Domain.
         :param pulumi.Input[str] uuid: UUID of the App Domain.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -207,7 +275,7 @@ class AviatrixAppDomain(pulumi.CustomResource):
     @pulumi.getter
     def selector(self) -> pulumi.Output['outputs.AviatrixAppDomainSelector']:
         """
-        List of match expressions for the App Domain.
+        Block containing match expressions to filter the App Domain.
         """
         return pulumi.get(self, "selector")
 

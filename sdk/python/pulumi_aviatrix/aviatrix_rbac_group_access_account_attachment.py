@@ -18,8 +18,8 @@ class AviatrixRbacGroupAccessAccountAttachmentArgs:
                  group_name: pulumi.Input[str]):
         """
         The set of arguments for constructing a AviatrixRbacGroupAccessAccountAttachment resource.
-        :param pulumi.Input[str] access_account_name: Access account name.
-        :param pulumi.Input[str] group_name: RBAC permission group name.
+        :param pulumi.Input[str] access_account_name: Account name. This can be used for logging in to CloudN console or UserConnect controller.
+        :param pulumi.Input[str] group_name: This parameter represents the name of a RBAC group.
         """
         pulumi.set(__self__, "access_account_name", access_account_name)
         pulumi.set(__self__, "group_name", group_name)
@@ -28,7 +28,7 @@ class AviatrixRbacGroupAccessAccountAttachmentArgs:
     @pulumi.getter(name="accessAccountName")
     def access_account_name(self) -> pulumi.Input[str]:
         """
-        Access account name.
+        Account name. This can be used for logging in to CloudN console or UserConnect controller.
         """
         return pulumi.get(self, "access_account_name")
 
@@ -40,7 +40,7 @@ class AviatrixRbacGroupAccessAccountAttachmentArgs:
     @pulumi.getter(name="groupName")
     def group_name(self) -> pulumi.Input[str]:
         """
-        RBAC permission group name.
+        This parameter represents the name of a RBAC group.
         """
         return pulumi.get(self, "group_name")
 
@@ -56,8 +56,8 @@ class _AviatrixRbacGroupAccessAccountAttachmentState:
                  group_name: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixRbacGroupAccessAccountAttachment resources.
-        :param pulumi.Input[str] access_account_name: Access account name.
-        :param pulumi.Input[str] group_name: RBAC permission group name.
+        :param pulumi.Input[str] access_account_name: Account name. This can be used for logging in to CloudN console or UserConnect controller.
+        :param pulumi.Input[str] group_name: This parameter represents the name of a RBAC group.
         """
         if access_account_name is not None:
             pulumi.set(__self__, "access_account_name", access_account_name)
@@ -68,7 +68,7 @@ class _AviatrixRbacGroupAccessAccountAttachmentState:
     @pulumi.getter(name="accessAccountName")
     def access_account_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Access account name.
+        Account name. This can be used for logging in to CloudN console or UserConnect controller.
         """
         return pulumi.get(self, "access_account_name")
 
@@ -80,7 +80,7 @@ class _AviatrixRbacGroupAccessAccountAttachmentState:
     @pulumi.getter(name="groupName")
     def group_name(self) -> Optional[pulumi.Input[str]]:
         """
-        RBAC permission group name.
+        This parameter represents the name of a RBAC group.
         """
         return pulumi.get(self, "group_name")
 
@@ -98,11 +98,32 @@ class AviatrixRbacGroupAccessAccountAttachment(pulumi.CustomResource):
                  group_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixRbacGroupAccessAccountAttachment resource with the given unique name, props, and options.
+        The **aviatrix_rbac_group_access_account_attachment** resource allows the creation and management of access account attachments to Aviatrix (Role-Based Access Control) RBAC groups.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix RBAC Group Access Account Attachment
+        test_attachment = aviatrix.AviatrixRbacGroupAccessAccountAttachment("testAttachment",
+            access_account_name="account_name",
+            group_name="write_only")
+        ```
+
+        ## Import
+
+        **rbac_group_access_account_attachment** can be imported using the `group_name` and `access_account_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixRbacGroupAccessAccountAttachment:AviatrixRbacGroupAccessAccountAttachment test group_name~access_account_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] access_account_name: Access account name.
-        :param pulumi.Input[str] group_name: RBAC permission group name.
+        :param pulumi.Input[str] access_account_name: Account name. This can be used for logging in to CloudN console or UserConnect controller.
+        :param pulumi.Input[str] group_name: This parameter represents the name of a RBAC group.
         """
         ...
     @overload
@@ -111,7 +132,28 @@ class AviatrixRbacGroupAccessAccountAttachment(pulumi.CustomResource):
                  args: AviatrixRbacGroupAccessAccountAttachmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixRbacGroupAccessAccountAttachment resource with the given unique name, props, and options.
+        The **aviatrix_rbac_group_access_account_attachment** resource allows the creation and management of access account attachments to Aviatrix (Role-Based Access Control) RBAC groups.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix RBAC Group Access Account Attachment
+        test_attachment = aviatrix.AviatrixRbacGroupAccessAccountAttachment("testAttachment",
+            access_account_name="account_name",
+            group_name="write_only")
+        ```
+
+        ## Import
+
+        **rbac_group_access_account_attachment** can be imported using the `group_name` and `access_account_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixRbacGroupAccessAccountAttachment:AviatrixRbacGroupAccessAccountAttachment test group_name~access_account_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixRbacGroupAccessAccountAttachmentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -163,8 +205,8 @@ class AviatrixRbacGroupAccessAccountAttachment(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] access_account_name: Access account name.
-        :param pulumi.Input[str] group_name: RBAC permission group name.
+        :param pulumi.Input[str] access_account_name: Account name. This can be used for logging in to CloudN console or UserConnect controller.
+        :param pulumi.Input[str] group_name: This parameter represents the name of a RBAC group.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -178,7 +220,7 @@ class AviatrixRbacGroupAccessAccountAttachment(pulumi.CustomResource):
     @pulumi.getter(name="accessAccountName")
     def access_account_name(self) -> pulumi.Output[str]:
         """
-        Access account name.
+        Account name. This can be used for logging in to CloudN console or UserConnect controller.
         """
         return pulumi.get(self, "access_account_name")
 
@@ -186,7 +228,7 @@ class AviatrixRbacGroupAccessAccountAttachment(pulumi.CustomResource):
     @pulumi.getter(name="groupName")
     def group_name(self) -> pulumi.Output[str]:
         """
-        RBAC permission group name.
+        This parameter represents the name of a RBAC group.
         """
         return pulumi.get(self, "group_name")
 

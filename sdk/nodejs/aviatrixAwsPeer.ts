@@ -4,6 +4,36 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_aws_peer** resource allows the creation and management of Aviatrix-created native AWS intra and inter-region VPC peerings.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix AWS Peering
+ * const testAwspeer = new aviatrix.AviatrixAwsPeer("test_awspeer", {
+ *     accountName1: "test1-account",
+ *     accountName2: "test2-account",
+ *     rtbList1s: ["rtb-abcd1234"],
+ *     rtbList2s: ["rtb-wxyz5678"],
+ *     vpcId1: "vpc-abcd1234",
+ *     vpcId2: "vpc-rdef3333",
+ *     vpcReg1: "us-east-1",
+ *     vpcReg2: "us-west-1",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **aws_peer** can be imported using the `vpc_id1` and `vpc_id2`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixAwsPeer:AviatrixAwsPeer test vpc_id1~vpc_id2
+ * ```
+ */
 export class AviatrixAwsPeer extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixAwsPeer resource's state with the given name, ID, and optional extra
@@ -45,7 +75,7 @@ export class AviatrixAwsPeer extends pulumi.CustomResource {
      */
     public /*out*/ readonly rtbList1Outputs!: pulumi.Output<string[]>;
     /**
-     * List of Route table ID.
+     * List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
      */
     public readonly rtbList1s!: pulumi.Output<string[] | undefined>;
     /**
@@ -53,23 +83,23 @@ export class AviatrixAwsPeer extends pulumi.CustomResource {
      */
     public /*out*/ readonly rtbList2Outputs!: pulumi.Output<string[]>;
     /**
-     * List of Route table ID.
+     * List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
      */
     public readonly rtbList2s!: pulumi.Output<string[] | undefined>;
     /**
-     * VPC-ID of AWS cloud.
+     * VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
      */
     public readonly vpcId1!: pulumi.Output<string>;
     /**
-     * VPC-ID of AWS cloud.
+     * VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
      */
     public readonly vpcId2!: pulumi.Output<string>;
     /**
-     * Region of AWS cloud.
+     * Region of AWS cloud. Example: AWS: "us-east-1".
      */
     public readonly vpcReg1!: pulumi.Output<string>;
     /**
-     * Region of AWS cloud.
+     * Region of AWS cloud. Example: AWS: "us-east-1".
      */
     public readonly vpcReg2!: pulumi.Output<string>;
 
@@ -149,7 +179,7 @@ export interface AviatrixAwsPeerState {
      */
     rtbList1Outputs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * List of Route table ID.
+     * List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
      */
     rtbList1s?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -157,23 +187,23 @@ export interface AviatrixAwsPeerState {
      */
     rtbList2Outputs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * List of Route table ID.
+     * List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
      */
     rtbList2s?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * VPC-ID of AWS cloud.
+     * VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
      */
     vpcId1?: pulumi.Input<string>;
     /**
-     * VPC-ID of AWS cloud.
+     * VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
      */
     vpcId2?: pulumi.Input<string>;
     /**
-     * Region of AWS cloud.
+     * Region of AWS cloud. Example: AWS: "us-east-1".
      */
     vpcReg1?: pulumi.Input<string>;
     /**
-     * Region of AWS cloud.
+     * Region of AWS cloud. Example: AWS: "us-east-1".
      */
     vpcReg2?: pulumi.Input<string>;
 }
@@ -191,27 +221,27 @@ export interface AviatrixAwsPeerArgs {
      */
     accountName2: pulumi.Input<string>;
     /**
-     * List of Route table ID.
+     * List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
      */
     rtbList1s?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * List of Route table ID.
+     * List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
      */
     rtbList2s?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * VPC-ID of AWS cloud.
+     * VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
      */
     vpcId1: pulumi.Input<string>;
     /**
-     * VPC-ID of AWS cloud.
+     * VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
      */
     vpcId2: pulumi.Input<string>;
     /**
-     * Region of AWS cloud.
+     * Region of AWS cloud. Example: AWS: "us-east-1".
      */
     vpcReg1: pulumi.Input<string>;
     /**
-     * Region of AWS cloud.
+     * Region of AWS cloud. Example: AWS: "us-east-1".
      */
     vpcReg2: pulumi.Input<string>;
 }

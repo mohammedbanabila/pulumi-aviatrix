@@ -22,10 +22,10 @@ class AviatrixSumologicForwarderArgs:
         """
         The set of arguments for constructing a AviatrixSumologicForwarder resource.
         :param pulumi.Input[str] access_id: Access ID.
-        :param pulumi.Input[str] access_key: Access key.
-        :param pulumi.Input[str] custom_configuration: Custom configuration.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of excluded gateways.
-        :param pulumi.Input[str] source_category: Source category.
+        :param pulumi.Input[str] access_key: Access Key.
+        :param pulumi.Input[str] custom_configuration: Custom configuration. The format should be key=value pairs.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
+        :param pulumi.Input[str] source_category: Source category. "Aviatrix_syslog" by default.
         """
         pulumi.set(__self__, "access_id", access_id)
         pulumi.set(__self__, "access_key", access_key)
@@ -52,7 +52,7 @@ class AviatrixSumologicForwarderArgs:
     @pulumi.getter(name="accessKey")
     def access_key(self) -> pulumi.Input[str]:
         """
-        Access key.
+        Access Key.
         """
         return pulumi.get(self, "access_key")
 
@@ -64,7 +64,7 @@ class AviatrixSumologicForwarderArgs:
     @pulumi.getter(name="customConfiguration")
     def custom_configuration(self) -> Optional[pulumi.Input[str]]:
         """
-        Custom configuration.
+        Custom configuration. The format should be key=value pairs.
         """
         return pulumi.get(self, "custom_configuration")
 
@@ -76,7 +76,7 @@ class AviatrixSumologicForwarderArgs:
     @pulumi.getter(name="excludedGateways")
     def excluded_gateways(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of excluded gateways.
+        List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         """
         return pulumi.get(self, "excluded_gateways")
 
@@ -88,7 +88,7 @@ class AviatrixSumologicForwarderArgs:
     @pulumi.getter(name="sourceCategory")
     def source_category(self) -> Optional[pulumi.Input[str]]:
         """
-        Source category.
+        Source category. "Aviatrix_syslog" by default.
         """
         return pulumi.get(self, "source_category")
 
@@ -109,11 +109,11 @@ class _AviatrixSumologicForwarderState:
         """
         Input properties used for looking up and filtering AviatrixSumologicForwarder resources.
         :param pulumi.Input[str] access_id: Access ID.
-        :param pulumi.Input[str] access_key: Access key.
-        :param pulumi.Input[str] custom_configuration: Custom configuration.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of excluded gateways.
-        :param pulumi.Input[str] source_category: Source category.
-        :param pulumi.Input[str] status: Enabled or not.
+        :param pulumi.Input[str] access_key: Access Key.
+        :param pulumi.Input[str] custom_configuration: Custom configuration. The format should be key=value pairs.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
+        :param pulumi.Input[str] source_category: Source category. "Aviatrix_syslog" by default.
+        :param pulumi.Input[str] status: The status of sumologic forwarder.
         """
         if access_id is not None:
             pulumi.set(__self__, "access_id", access_id)
@@ -144,7 +144,7 @@ class _AviatrixSumologicForwarderState:
     @pulumi.getter(name="accessKey")
     def access_key(self) -> Optional[pulumi.Input[str]]:
         """
-        Access key.
+        Access Key.
         """
         return pulumi.get(self, "access_key")
 
@@ -156,7 +156,7 @@ class _AviatrixSumologicForwarderState:
     @pulumi.getter(name="customConfiguration")
     def custom_configuration(self) -> Optional[pulumi.Input[str]]:
         """
-        Custom configuration.
+        Custom configuration. The format should be key=value pairs.
         """
         return pulumi.get(self, "custom_configuration")
 
@@ -168,7 +168,7 @@ class _AviatrixSumologicForwarderState:
     @pulumi.getter(name="excludedGateways")
     def excluded_gateways(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of excluded gateways.
+        List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         """
         return pulumi.get(self, "excluded_gateways")
 
@@ -180,7 +180,7 @@ class _AviatrixSumologicForwarderState:
     @pulumi.getter(name="sourceCategory")
     def source_category(self) -> Optional[pulumi.Input[str]]:
         """
-        Source category.
+        Source category. "Aviatrix_syslog" by default.
         """
         return pulumi.get(self, "source_category")
 
@@ -192,7 +192,7 @@ class _AviatrixSumologicForwarderState:
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[str]]:
         """
-        Enabled or not.
+        The status of sumologic forwarder.
         """
         return pulumi.get(self, "status")
 
@@ -213,14 +213,35 @@ class AviatrixSumologicForwarder(pulumi.CustomResource):
                  source_category: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixSumologicForwarder resource with the given unique name, props, and options.
+        The **aviatrix_sumologic_forwarder** resource allows the enabling and disabling of sumologic forwarder.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Enable sumologic forwarder
+        test_sumologic_forwarder = aviatrix.AviatrixSumologicForwarder("testSumologicForwarder",
+            access_id="0",
+            access_key="1.2.3.4")
+        ```
+
+        ## Import
+
+        **sumologic_forwarder** can be imported using "sumologic_forwarder", e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixSumologicForwarder:AviatrixSumologicForwarder test sumologic_forwarder
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] access_id: Access ID.
-        :param pulumi.Input[str] access_key: Access key.
-        :param pulumi.Input[str] custom_configuration: Custom configuration.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of excluded gateways.
-        :param pulumi.Input[str] source_category: Source category.
+        :param pulumi.Input[str] access_key: Access Key.
+        :param pulumi.Input[str] custom_configuration: Custom configuration. The format should be key=value pairs.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
+        :param pulumi.Input[str] source_category: Source category. "Aviatrix_syslog" by default.
         """
         ...
     @overload
@@ -229,7 +250,28 @@ class AviatrixSumologicForwarder(pulumi.CustomResource):
                  args: AviatrixSumologicForwarderArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixSumologicForwarder resource with the given unique name, props, and options.
+        The **aviatrix_sumologic_forwarder** resource allows the enabling and disabling of sumologic forwarder.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Enable sumologic forwarder
+        test_sumologic_forwarder = aviatrix.AviatrixSumologicForwarder("testSumologicForwarder",
+            access_id="0",
+            access_key="1.2.3.4")
+        ```
+
+        ## Import
+
+        **sumologic_forwarder** can be imported using "sumologic_forwarder", e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixSumologicForwarder:AviatrixSumologicForwarder test sumologic_forwarder
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixSumologicForwarderArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -264,11 +306,13 @@ class AviatrixSumologicForwarder(pulumi.CustomResource):
             __props__.__dict__["access_id"] = access_id
             if access_key is None and not opts.urn:
                 raise TypeError("Missing required property 'access_key'")
-            __props__.__dict__["access_key"] = access_key
+            __props__.__dict__["access_key"] = None if access_key is None else pulumi.Output.secret(access_key)
             __props__.__dict__["custom_configuration"] = custom_configuration
             __props__.__dict__["excluded_gateways"] = excluded_gateways
             __props__.__dict__["source_category"] = source_category
             __props__.__dict__["status"] = None
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["accessKey"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(AviatrixSumologicForwarder, __self__).__init__(
             'aviatrix:index/aviatrixSumologicForwarder:AviatrixSumologicForwarder',
             resource_name,
@@ -293,11 +337,11 @@ class AviatrixSumologicForwarder(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] access_id: Access ID.
-        :param pulumi.Input[str] access_key: Access key.
-        :param pulumi.Input[str] custom_configuration: Custom configuration.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of excluded gateways.
-        :param pulumi.Input[str] source_category: Source category.
-        :param pulumi.Input[str] status: Enabled or not.
+        :param pulumi.Input[str] access_key: Access Key.
+        :param pulumi.Input[str] custom_configuration: Custom configuration. The format should be key=value pairs.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
+        :param pulumi.Input[str] source_category: Source category. "Aviatrix_syslog" by default.
+        :param pulumi.Input[str] status: The status of sumologic forwarder.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -323,7 +367,7 @@ class AviatrixSumologicForwarder(pulumi.CustomResource):
     @pulumi.getter(name="accessKey")
     def access_key(self) -> pulumi.Output[str]:
         """
-        Access key.
+        Access Key.
         """
         return pulumi.get(self, "access_key")
 
@@ -331,7 +375,7 @@ class AviatrixSumologicForwarder(pulumi.CustomResource):
     @pulumi.getter(name="customConfiguration")
     def custom_configuration(self) -> pulumi.Output[Optional[str]]:
         """
-        Custom configuration.
+        Custom configuration. The format should be key=value pairs.
         """
         return pulumi.get(self, "custom_configuration")
 
@@ -339,7 +383,7 @@ class AviatrixSumologicForwarder(pulumi.CustomResource):
     @pulumi.getter(name="excludedGateways")
     def excluded_gateways(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        List of excluded gateways.
+        List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         """
         return pulumi.get(self, "excluded_gateways")
 
@@ -347,7 +391,7 @@ class AviatrixSumologicForwarder(pulumi.CustomResource):
     @pulumi.getter(name="sourceCategory")
     def source_category(self) -> pulumi.Output[Optional[str]]:
         """
-        Source category.
+        Source category. "Aviatrix_syslog" by default.
         """
         return pulumi.get(self, "source_category")
 
@@ -355,7 +399,7 @@ class AviatrixSumologicForwarder(pulumi.CustomResource):
     @pulumi.getter
     def status(self) -> pulumi.Output[str]:
         """
-        Enabled or not.
+        The status of sumologic forwarder.
         """
         return pulumi.get(self, "status")
 

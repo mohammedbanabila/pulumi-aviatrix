@@ -2,43 +2,112 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 
 export interface AviatrixAppDomainSelector {
+    /**
+     * List of match expressions. The App Domain will be a union of all resources matched by each `matchExpressions`.`matchExpressions` blocks cannot be empty.
+     */
     matchExpressions: outputs.AviatrixAppDomainSelectorMatchExpression[];
 }
 
 export interface AviatrixAppDomainSelectorMatchExpression {
+    /**
+     * - Account ID this expression matches.
+     */
     accountId?: string;
+    /**
+     * - Account name this expression matches.
+     */
     accountName?: string;
+    /**
+     * - CIDR block or IP Address this expression matches. `cidr` cannot be used with any other filters in the same `matchExpressions` block.
+     */
     cidr?: string;
+    /**
+     * - Region this expression matches.
+     */
     region?: string;
+    /**
+     * - Resource ID this expression matches.
+     */
     resId?: string;
+    /**
+     * - Map of tags this expression matches.
+     */
     tags?: {[key: string]: string};
+    /**
+     * - Type of resource this expression matches. Must be one of "vm", "vpc" or "subnet". `type` is required when `cidr` is not used.
+     */
     type?: string;
+    /**
+     * - Zone this expression matches.
+     */
     zone?: string;
 }
 
 export interface AviatrixAwsTgwSecurityDomain {
     /**
+     * A list of VPCs attached to the domain (name: `securityDomainName`) together with its creation. This list needs to be null for "Aviatrix_Edge_Domain".
+     *
      * @deprecated Please set `manage_vpc_attachment` to false, and use the standalone aviatrix_aws_tgw_vpc_attachment resource instead.
      */
     attachedVpcs?: outputs.AviatrixAwsTgwSecurityDomainAttachedVpc[];
+    /**
+     * Set to true if the security domain is to be used as an Aviatrix Firewall Domain for the Aviatrix Firewall Network. Valid values: true, false. Default value: false.
+     */
     aviatrixFirewall?: boolean;
+    /**
+     * A list of domains connected to the domain (name: `securityDomainName`) together with its creation.
+     */
     connectedDomains?: string[];
+    /**
+     * Set to true if the security domain is to be used as a native egress domain (for non-Aviatrix Firewall Network-based central Internet bound traffic). Valid values: true, false. Default value: false.
+     */
     nativeEgress?: boolean;
+    /**
+     * Set to true if the security domain is to be used as a native firewall domain (for non-Aviatrix Firewall Network-based firewall traffic inspection). Valid values: true, false. Default value: false.
+     */
     nativeFirewall?: boolean;
+    /**
+     * Three default domains ("Aviatrix_Edge_Domain", "Default_Domain" and "Shared_Service_Domain") are required with AWS TGW's creation.
+     */
     securityDomainName: string;
 }
 
 export interface AviatrixAwsTgwSecurityDomainAttachedVpc {
+    /**
+     * Advanced option. Customized route(s) to be advertised to other VPCs that are connected to the same TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
+     */
     customizedRouteAdvertisement?: string;
+    /**
+     * Advanced option. Customized Spoke VPC Routes. It allows the admin to enter non-RFC1918 routes in the VPC route table targeting the TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
+     */
     customizedRoutes?: string;
+    /**
+     * Advanced option. If set to true, it disables automatic route propagation of this VPC to other VPCs within the same security domain. Valid values: true, false. Default value: false.
+     */
     disableLocalRoutePropagation?: boolean;
+    /**
+     * Advanced option. Route tables separated by ',' to participate in TGW Orchestrator, i.e., learned routes will be propagated to these route tables. Example: "rtb-212ff547,rtb-045397874c170c745".
+     */
     routeTables?: string;
+    /**
+     * Advanced option. VPC subnets separated by ',' to attach to the VPC. If left blank, the Aviatrix Controller automatically selects a subnet representing each AZ for the VPC attachment. Example: "subnet-214f5646,subnet-085e8c81a89d70846".
+     */
     subnets?: string;
+    /**
+     * Cloud account name of the VPC in the Aviatrix controller.
+     */
     vpcAccountName: string;
+    /**
+     * VPC ID of the VPC to be attached to the security domain
+     */
     vpcId: string;
+    /**
+     * Region of the VPC, needs to be consistent with AWS TGW's region.
+     */
     vpcRegion: string;
 }
 
@@ -54,361 +123,1104 @@ export interface AviatrixAwsTgwVpnConnVpnTunnelData {
 }
 
 export interface AviatrixFirenetFirewallInstanceAssociation {
+    /**
+     * Switch to attach/detach firewall instance to/from FireNet. Valid values: true, false. Default value: false.
+     */
     attached?: boolean;
+    /**
+     * Egress interface ID. **Required if it is a firewall instance.**
+     */
     egressInterface?: string;
+    /**
+     * Name of the primary FireNet gateway.
+     */
     firenetGwName: string;
+    /**
+     * Firewall instance name. **Required if it is a firewall instance.**
+     */
     firewallName?: string;
+    /**
+     * ID of Firewall instance.
+     */
     instanceId: string;
+    /**
+     * Lan interface ID. **Required if it is a firewall instance or FQDN gateway in Azure.**
+     */
     lanInterface?: string;
+    /**
+     * Management interface ID. **Required if it is a firewall instance.**
+     */
     managementInterface?: string;
+    /**
+     * Type of firewall. Valid values: "Generic", "fqdnGateway". Default value: "Generic". Value "fqdnGateway" is required for FQDN gateway.
+     */
     vendorType?: string;
 }
 
 export interface AviatrixFirewallPolicy {
+    /**
+     * Valid values: "allow", "deny" and "force-drop" (in stateful firewall rule to allow immediate packet dropping on established sessions).
+     */
     action: string;
+    /**
+     * Description of the policy. Example: "This is policy no.1".
+     */
     description?: string;
+    /**
+     * Destination address, a valid IPv4 address or tag name such "HR" or "marketing" etc. Example: "10.30.0.0/16". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
+     */
     dstIp: string;
+    /**
+     * Valid values: true, false. Default value: false.
+     */
     logEnabled?: boolean;
+    /**
+     * A single port or a range of port numbers. Example: "25", "25:1024".
+     */
     port: string;
+    /**
+     * : Valid values: "all", "tcp", "udp", "icmp", "sctp", "rdp", "dccp". Default value: "all".
+     */
     protocol?: string;
+    /**
+     * Source address, a valid IPv4 address or tag name such "HR" or "marketing" etc. Example: "10.30.0.0/16". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
+     */
     srcIp: string;
 }
 
 export interface AviatrixFirewallTagCidrList {
+    /**
+     * CIDR address to filter. Example: "10.88.88.88/32".
+     */
     cidr: string;
+    /**
+     * A name to identify the CIDR. Example: "policy1".
+     */
     cidrTagName: string;
 }
 
 export interface AviatrixFqdnDomainName {
+    /**
+     * What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base Policy' if no value provided.
+     * * For protocol "all", port must be set to "all".
+     * * For protocol “icmp”, port must be set to “ping”.
+     */
     action?: string;
+    /**
+     * FQDN. Example: "facebook.com".
+     */
     fqdn: string;
+    /**
+     * Port. Example "25".
+     */
     port: string;
+    /**
+     * Protocol. Valid values: "all", "tcp", "udp", "icmp".
+     */
     proto: string;
 }
 
 export interface AviatrixFqdnGwFilterTagList {
+    /**
+     * Name of the gateway to attach to the specific tag.
+     */
     gwName: string;
+    /**
+     * List of source IPs in the VPC qualified for a specific tag.
+     */
     sourceIpLists?: string[];
 }
 
 export interface AviatrixGatewayDnatConnectionPolicy {
+    /**
+     * This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.19.2+.
+     */
     applyRouteEntry: boolean;
+    /**
+     * This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+     */
     connection: string;
+    /**
+     * This is a rule field that specifies the translated destination IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+     */
     dnatIps: string;
+    /**
+     * This is a rule field that specifies the translated destination port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+     */
     dnatPort: string;
+    /**
+     * This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+     */
     dstCidr: string;
+    /**
+     * This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+     */
     dstPort: string;
+    /**
+     * This field specifies which VPC private route table will not be programmed with the default route entry.
+     */
     excludeRtb: string;
+    /**
+     * This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+     */
     interface: string;
+    /**
+     * This is a rule field that specifies a tag or mark of a TCP session when all qualifier conditions meet. When not specified, this field is not used.
+     */
     mark: string;
+    /**
+     * This is a qualifier condition that specifies a destination port protocol where the rule applies. When not specified, this field is not used.
+     */
     protocol: string;
+    /**
+     * This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+     */
     srcCidr: string;
+    /**
+     * This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+     */
     srcPort: string;
 }
 
 export interface AviatrixGatewayDnatDnatPolicy {
+    /**
+     * This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.19.2+.
+     */
     applyRouteEntry?: boolean;
+    /**
+     * This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+     */
     connection?: string;
+    /**
+     * This is a rule field that specifies the translated destination IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+     */
     dnatIps?: string;
+    /**
+     * This is a rule field that specifies the translated destination port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+     */
     dnatPort?: string;
+    /**
+     * This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+     */
     dstCidr?: string;
+    /**
+     * This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+     */
     dstPort?: string;
+    /**
+     * This field specifies which VPC private route table will not be programmed with the default route entry.
+     */
     excludeRtb?: string;
+    /**
+     * This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+     */
     interface?: string;
+    /**
+     * This is a rule field that specifies a tag or mark of a TCP session when all qualifier conditions meet. When not specified, this field is not used.
+     */
     mark?: string;
+    /**
+     * This is a qualifier condition that specifies a destination port protocol where the rule applies. When not specified, this field is not used.
+     */
     protocol?: string;
+    /**
+     * This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+     */
     srcCidr?: string;
+    /**
+     * This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+     */
     srcPort?: string;
 }
 
 export interface AviatrixGatewayDnatInterfacePolicy {
+    /**
+     * This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.19.2+.
+     */
     applyRouteEntry: boolean;
+    /**
+     * This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+     */
     connection: string;
+    /**
+     * This is a rule field that specifies the translated destination IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+     */
     dnatIps: string;
+    /**
+     * This is a rule field that specifies the translated destination port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+     */
     dnatPort: string;
+    /**
+     * This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+     */
     dstCidr: string;
+    /**
+     * This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+     */
     dstPort: string;
+    /**
+     * This field specifies which VPC private route table will not be programmed with the default route entry.
+     */
     excludeRtb: string;
+    /**
+     * This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+     */
     interface: string;
+    /**
+     * This is a rule field that specifies a tag or mark of a TCP session when all qualifier conditions meet. When not specified, this field is not used.
+     */
     mark: string;
+    /**
+     * This is a qualifier condition that specifies a destination port protocol where the rule applies. When not specified, this field is not used.
+     */
     protocol: string;
+    /**
+     * This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+     */
     srcCidr: string;
+    /**
+     * This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+     */
     srcPort: string;
 }
 
 export interface AviatrixGatewaySnatConnectionPolicy {
+    /**
+     * This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.21.0+.
+     */
     applyRouteEntry: boolean;
+    /**
+     * This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+     */
     connection: string;
+    /**
+     * This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+     */
     dstCidr: string;
+    /**
+     * This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+     */
     dstPort: string;
+    /**
+     * This field specifies which VPC private route table will not be programmed with the default route entry.
+     */
     excludeRtb: string;
+    /**
+     * This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+     */
     interface: string;
+    /**
+     * This is a qualifier condition that specifies a tag or mark of a TCP session where the rule applies. When not specified, this field is not used.
+     */
     mark: string;
+    /**
+     * This is a qualifier condition that specifies a destination port protocol where the rule applies. Valid values: 'all', 'tcp', 'udp', 'icmp'. 'Default: 'all'.
+     */
     protocol: string;
+    /**
+     * This is a rule field that specifies the changed source IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+     */
     snatIps: string;
+    /**
+     * This is a rule field that specifies the changed source port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+     */
     snatPort: string;
+    /**
+     * This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+     */
     srcCidr: string;
+    /**
+     * This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+     */
     srcPort: string;
 }
 
 export interface AviatrixGatewaySnatInterfacePolicy {
+    /**
+     * This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.21.0+.
+     */
     applyRouteEntry: boolean;
+    /**
+     * This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+     */
     connection: string;
+    /**
+     * This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+     */
     dstCidr: string;
+    /**
+     * This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+     */
     dstPort: string;
+    /**
+     * This field specifies which VPC private route table will not be programmed with the default route entry.
+     */
     excludeRtb: string;
+    /**
+     * This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+     */
     interface: string;
+    /**
+     * This is a qualifier condition that specifies a tag or mark of a TCP session where the rule applies. When not specified, this field is not used.
+     */
     mark: string;
+    /**
+     * This is a qualifier condition that specifies a destination port protocol where the rule applies. Valid values: 'all', 'tcp', 'udp', 'icmp'. 'Default: 'all'.
+     */
     protocol: string;
+    /**
+     * This is a rule field that specifies the changed source IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+     */
     snatIps: string;
+    /**
+     * This is a rule field that specifies the changed source port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+     */
     snatPort: string;
+    /**
+     * This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+     */
     srcCidr: string;
+    /**
+     * This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+     */
     srcPort: string;
 }
 
 export interface AviatrixGatewaySnatSnatPolicy {
+    /**
+     * This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.21.0+.
+     */
     applyRouteEntry?: boolean;
+    /**
+     * This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+     */
     connection?: string;
+    /**
+     * This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+     */
     dstCidr?: string;
+    /**
+     * This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+     */
     dstPort?: string;
+    /**
+     * This field specifies which VPC private route table will not be programmed with the default route entry.
+     */
     excludeRtb?: string;
+    /**
+     * This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+     */
     interface?: string;
+    /**
+     * This is a qualifier condition that specifies a tag or mark of a TCP session where the rule applies. When not specified, this field is not used.
+     */
     mark?: string;
+    /**
+     * This is a qualifier condition that specifies a destination port protocol where the rule applies. Valid values: 'all', 'tcp', 'udp', 'icmp'. 'Default: 'all'.
+     */
     protocol?: string;
+    /**
+     * This is a rule field that specifies the changed source IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+     */
     snatIps?: string;
+    /**
+     * This is a rule field that specifies the changed source port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+     */
     snatPort?: string;
+    /**
+     * This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+     */
     srcCidr?: string;
+    /**
+     * This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+     */
     srcPort?: string;
 }
 
 export interface AviatrixMicrosegPolicyListPolicy {
+    /**
+     * Action for the policy. Must be one of PERMIT or DENY.
+     */
     action: string;
+    /**
+     * List of App Domain UUIDs for the destination for the policy.
+     */
     dstAppDomains: string[];
+    /**
+     * Whether to enable logging for packets that match the policy. Type: Boolean.
+     */
     logging?: boolean;
+    /**
+     * Name of the policy.
+     */
     name: string;
+    /**
+     * List of port ranges for the policy. Cannot be used when `protocol` is "ICMP".
+     */
     portRanges?: outputs.AviatrixMicrosegPolicyListPolicyPortRange[];
+    /**
+     * Priority for the policy. Default: 0. Type: Integer.
+     */
     priority?: number;
+    /**
+     * Protocol for the policy. Must be one of TCP, UDP, ICMP or ANY.
+     */
     protocol: string;
+    /**
+     * List of App Domain UUIDs for the source for the policy.
+     */
     srcAppDomains: string[];
+    /**
+     * UUID for the Policy.
+     */
     uuid: string;
+    /**
+     * Whether to enforce the policy or only watch packets. If "true" packets are only watched. This allows you to observe if the traffic impacted by this rule causes any inadvertent issues (such as traffic being dropped). Type: Boolean.
+     */
     watch?: boolean;
 }
 
 export interface AviatrixMicrosegPolicyListPolicyPortRange {
+    /**
+     * Upper bound for the range of ports. When not set, `lo` is the only port that matches the policy.
+     */
     hi?: number;
+    /**
+     * Lower bound for the range of ports.
+     */
     lo: number;
 }
 
 export interface AviatrixPrivateModeLbProxy {
+    /**
+     * Instance ID of the proxy.
+     */
     instanceId: string;
+    /**
+     * VPC ID of the proxy.
+     */
     vpcId: string;
 }
 
 export interface AviatrixSite2CloudCaCertTagCaCertificate {
+    /**
+     * Content of cert certificate to create only one cert. One CA cert only per file.
+     */
     certContent: string;
+    /**
+     * Common name of created cert.
+     */
     commonName: string;
+    /**
+     * Expiration time of created cert.
+     */
     expirationTime: string;
+    /**
+     * Unique id of created cert.
+     */
     id: string;
+    /**
+     * Issuer name of created cert.
+     */
     issuerName: string;
+    /**
+     * Unique serial of created cert.
+     */
     uniqueSerial: string;
 }
 
 export interface AviatrixTransitGatewayBgpLanInterface {
+    /**
+     * A VPC Network address range selected from one of the available network ranges.
+     */
     subnet: string;
+    /**
+     * VPC-ID/VNet-Name of cloud provider.
+     */
     vpcId: string;
 }
 
 export interface AviatrixTransitGatewayHaBgpLanInterface {
+    /**
+     * A VPC Network address range selected from one of the available network ranges.
+     */
     subnet: string;
+    /**
+     * VPC-ID/VNet-Name of cloud provider.
+     */
     vpcId: string;
 }
 
 export interface AviatrixVpcPrivateSubnet {
+    /**
+     * CIDR block.
+     */
     cidr: string;
+    /**
+     * Name of this subnet.
+     */
     name: string;
+    /**
+     * ID of this subnet.
+     */
     subnetId: string;
 }
 
 export interface AviatrixVpcPublicSubnet {
+    /**
+     * CIDR block.
+     */
     cidr: string;
+    /**
+     * Name of this subnet.
+     */
     name: string;
+    /**
+     * ID of this subnet.
+     */
     subnetId: string;
 }
 
 export interface AviatrixVpcSubnet {
+    /**
+     * CIDR block.
+     */
     cidr?: string;
+    /**
+     * Name of this subnet.
+     */
     name?: string;
+    /**
+     * Region of this subnet.
+     */
     region?: string;
+    /**
+     * ID of this subnet.
+     */
     subnetId: string;
 }
 
 export interface AviatrixVpnProfilePolicy {
+    /**
+     * Should be the opposite of the base rule for correct behavior. Valid values for action: "allow", "deny".
+     */
     action: string;
+    /**
+     * Port to be allowed or denied. Valid values for port: a single port or a range of port numbers e.g.: "25", "25:1024". For "all" and "icmp", port should only be "0:65535".
+     */
     port: string;
+    /**
+     * Protocol to allow or deny. Valid values for protocol: "all", "tcp", "udp", "icmp", "sctp", "rdp", "dccp".
+     */
     proto: string;
+    /**
+     * CIDR to be allowed or denied. Valid values for target: IPv4 CIDRs. Example: "10.30.0.0/16".
+     */
     target: string;
 }
 
 export interface GetAviatrixDeviceInterfacesWanInterface {
+    /**
+     * Name of the WAN primary interface.
+     */
     wanPrimaryInterface: string;
+    /**
+     * The WAN Primary interface public IP.
+     */
     wanPrimaryInterfacePublicIp: string;
 }
 
 export interface GetAviatrixFirenetFirewallInstanceAssociation {
     attached: boolean;
     egressInterface: string;
+    /**
+     * Name of the primary FireNet gateway.
+     */
     firenetGwName: string;
+    /**
+     * Firewall instance name.
+     * * `lanInterface`- Lan interface ID.
+     */
     firewallName: string;
+    /**
+     * ID of Firewall instance.
+     */
     instanceId: string;
     lanInterface: string;
+    /**
+     * Management interface ID.
+     * * `egressInterface`- Egress interface ID.
+     * * `attached`- Switch to attach/detach firewall instance to/from fireNet.
+     */
     managementInterface: string;
+    /**
+     * Type of the firewall.
+     */
     vendorType: string;
 }
 
 export interface GetAviatrixFirewallInstanceImagesFirewallImage {
+    /**
+     * Name of the firewall image.
+     */
     firewallImage: string;
+    /**
+     * List of firewall image versions.
+     */
     firewallImageVersions: string[];
+    /**
+     * List of firewall instance sizes.
+     */
     firewallSizes: string[];
 }
 
 export interface GetAviatrixFirewallPolicy {
     action: string;
     description: string;
+    /**
+     * CIDRs separated by a comma or tag names such 'HR' or 'marketing' etc.
+     */
     dstIp: string;
+    /**
+     * Indicates whether logging is enabled or not.
+     * * `description`- Policy description.
+     */
     logEnabled: boolean;
+    /**
+     * A single port or a range of port numbers.
+     * * `action`- `allow`, `deny` or `force-drop`(allow immediate packet dropping on established sessions).
+     */
     port: string;
+    /**
+     * `all`, `tcp`, `udp`, `icmp`, `sctp`, `rdp` or `dccp`.
+     */
     protocol: string;
+    /**
+     * CIDRs separated by a comma or tag names such 'HR' or 'marketing' etc.
+     */
     srcIp: string;
 }
 
 export interface GetAviatrixNetworkDomainsNetworkDomain {
+    /**
+     * Access Account name.
+     */
     account: string;
+    /**
+     * Type of cloud service provider.
+     */
     cloudType: string;
+    /**
+     * Egress inspection is enable or not.
+     */
     egressInspection: boolean;
+    /**
+     * Egress inspection name.
+     */
     egressInspectionName: string;
+    /**
+     * Inspection policy name.
+     */
     inspectionPolicy: string;
+    /**
+     * Firewall inspection for traffic within one Security Domain.
+     */
     intraDomainInspection: boolean;
+    /**
+     * Intra domain inspection name.
+     */
     intraDomainInspectionName: string;
+    /**
+     * Network Domain name.
+     */
     name: string;
+    /**
+     * Region of cloud provider.
+     */
     region: string;
+    /**
+     * Route table's id.
+     */
     routeTableId: string;
+    /**
+     * AWS TGW name.
+     */
     tgwName: string;
+    /**
+     * Type of network domain.
+     */
     type: string;
 }
 
 export interface GetAviatrixTransitGatewayBgpLanInterface {
+    /**
+     * Subnet Info.
+     */
     subnet: string;
+    /**
+     * VPC-ID of GCP cloud provider.
+     */
     vpcId: string;
 }
 
 export interface GetAviatrixTransitGatewayHaBgpLanInterface {
+    /**
+     * Subnet Info.
+     */
     subnet: string;
+    /**
+     * VPC-ID of GCP cloud provider.
+     */
     vpcId: string;
 }
 
 export interface GetAviatrixTransitGatewaysGatewayList {
+    /**
+     * Aviatrix account name.
+     */
     accountName: string;
+    /**
+     * When value is false, an idle address in Elastic IP pool is reused for this gateway. Otherwise, a new Elastic IP is allocated and used for this gateway.
+     */
     allocateNewEip: boolean;
+    /**
+     * Availability domain for OCI.
+     */
     availabilityDomain: string;
+    /**
+     * The name of the public IP address and its resource group in Azure to assign to this Transit Gateway.
+     */
     azureEipNameResourceGroup: string;
+    /**
+     * Enable Equal Cost Multi Path (ECMP) routing for the next hop.
+     */
     bgpEcmp: boolean;
+    /**
+     * BGP Hold Time.
+     */
     bgpHoldTime: number;
+    /**
+     * Interfaces to run BGP protocol on top of the ethernet interface, to connect to the onprem/remote peer. Only available for GCP Transit.
+     */
     bgpLanInterfaces: outputs.GetAviatrixTransitGatewaysGatewayListBgpLanInterface[];
+    /**
+     * List of available BGP LAN interface IPs for transit external device connection creation. Only supports GCP. Available as of provider version R2.21.0+.
+     */
     bgpLanIpLists: string[];
+    /**
+     * BGP route polling time. Unit is in seconds.
+     */
     bgpPollingTime: string;
+    /**
+     * Instance ID of the transit gateway.
+     */
     cloudInstanceId: string;
+    /**
+     * Type of cloud service provider.
+     * * `connectedTransit"` -  Status of Connected Transit of transit gateway.
+     */
     cloudType: number;
     connectedTransit: boolean;
+    /**
+     * A list of comma separated CIDRs to be customized for the spoke VPC routes.
+     */
     customizedSpokeVpcRoutes: string;
+    /**
+     * Enables Active-Standby Mode, available only with HA enabled.
+     */
     enableActiveStandby: boolean;
+    /**
+     * Enables Preemptive Mode for Active-Standby, available only with Active-Standby enabled.
+     */
     enableActiveStandbyPreemptive: boolean;
+    /**
+     * Pre-allocate a network interface(eth4) for \"BGP over LAN\" functionality. Only valid for cloudType = 4 (GCP) and 8 (Azure). Available as of provider version R2.18+
+     */
     enableBgpOverLan: boolean;
+    /**
+     * Status of Encrypt Gateway EBS Volume of the transit gateway.
+     */
     enableEncryptVolume: boolean;
+    /**
+     * Enable firenet interfaces with AWS Gateway Load Balancer.
+     */
     enableGatewayLoadBalancer: boolean;
+    /**
+     * Sign of readiness for TGW connection.
+     */
     enableHybridConnection: boolean;
+    /**
+     * Enable jumbo frame support for transit gateway.
+     */
     enableJumboFrame: boolean;
+    /**
+     * Enable [monitor gateway subnets](https://docs.aviatrix.com/HowTos/gateway.html#monitor-gateway-subnet). Only valid for cloudType = 1 (AWS) or 256 (AWSGov).
+     */
     enableMonitorGatewaySubnets: boolean;
+    /**
+     * Status of multi-tier transit mode on transit gateway.
+     */
     enableMultiTierTransit: boolean;
+    /**
+     * Status of private OOB for the transit gateway.
+     */
     enablePrivateOob: boolean;
+    /**
+     * Enable segmentation to allow association of transit gateway to security domains.
+     */
     enableSegmentation: boolean;
+    /**
+     * Enable spot instance. NOT supported for production deployment.
+     */
     enableSpotInstance: boolean;
+    /**
+     * Enable summarize CIDR to TGW.
+     */
     enableTransitSummarizeCidrToTgw: boolean;
+    /**
+     * Status of Vpc Dns Server of the transit Gateway.
+     */
     enableVpcDnsServer: boolean;
+    /**
+     * A list of comma separated CIDRs to be advertised to on-prem as "Excluded CIDR List".
+     */
     excludedAdvertisedSpokeRoutes: string;
+    /**
+     * Fault domain for OCI.
+     */
     faultDomain: string;
+    /**
+     * A list of comma separated CIDRs to be filtered from the spoke VPC route table.
+     */
     filteredSpokeVpcRoutes: string;
+    /**
+     * Aviatrix transit gateway name.
+     */
     gwName: string;
+    /**
+     * Size of transit gateway instance.
+     */
     gwSize: string;
+    /**
+     * Interfaces to run BGP protocol on top of the ethernet interface, to connect to the onprem/remote peer. Only available for GCP HA Transit.
+     */
     haBgpLanInterfaces: outputs.GetAviatrixTransitGatewaysGatewayListHaBgpLanInterface[];
+    /**
+     * List of available BGP LAN interface IPs for transit external device HA connection creation. Only supports GCP. Available as of provider version R2.21.0+.
+     */
     haBgpLanIpLists: string[];
+    /**
+     * The image version of the gateway.
+     */
     imageVersion: string;
+    /**
+     * Status of Insane Mode of the transit gateway.
+     */
     insaneMode: boolean;
+    /**
+     * AZ of subnet being created for Insane Mode transit gateway.
+     */
     insaneModeAz: string;
+    /**
+     * LAN Private Subnet. Only used for GCP Transit FireNet.
+     */
     lanPrivateSubnet: string;
+    /**
+     * LAN VPC ID. Only used for GCP Transit FireNet.
+     */
     lanVpcId: string;
+    /**
+     * Set the learned CIDRs approval mode.
+     */
     learnedCidrsApprovalMode: string;
+    /**
+     * Changes the Aviatrix Transit Gateway ASN number before you setup Aviatrix Transit Gateway connection configurations.
+     */
     localAsNumber: string;
+    /**
+     * A set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true.
+     */
     monitorExcludeLists: string[];
+    /**
+     * OOB availability zone.
+     */
     oobAvailabilityZone: string;
+    /**
+     * OOB management subnet.
+     */
     oobManagementSubnet: string;
+    /**
+     * List of AS numbers to populate BGP AP_PATH field when it advertises to VGW or peer devices.
+     */
     prependAsPaths: string[];
+    /**
+     * Private IP address of the transit gateway created.
+     */
     privateIp: string;
+    /**
+     * Public IP address of the Transit Gateway created.
+     */
     publicIp: string;
+    /**
+     * Security group used for the transit gateway.
+     */
     securityGroupId: string;
+    /**
+     * Status of Single AZ HA of transit gateway.
+     */
     singleAzHa: boolean;
+    /**
+     * Status of Single IP Source Nat mode of the transit gateway.
+     */
     singleIpSnat: boolean;
+    /**
+     * The software version of the gateway.
+     */
     softwareVersion: string;
+    /**
+     * Price for spot instance. NOT supported for production deployment.
+     */
     spotPrice: string;
+    /**
+     * A VPC Network address range selected from one of the available network ranges.
+     */
     subnet: string;
+    /**
+     * The IPSec tunnel down detection time for the transit gateway.
+     */
     tunnelDetectionTime: number;
+    /**
+     * VPC-ID/VNet-Name of cloud provider.
+     */
     vpcId: string;
+    /**
+     * Region of cloud provider.
+     */
     vpcReg: string;
+    /**
+     * Availability Zone. Only available for cloudType = 8 (Azure). Must be in the form 'az-n', for example, 'az-2'.
+     */
     zone: string;
 }
 
 export interface GetAviatrixTransitGatewaysGatewayListBgpLanInterface {
+    /**
+     * A VPC Network address range selected from one of the available network ranges.
+     */
     subnet: string;
+    /**
+     * VPC-ID/VNet-Name of cloud provider.
+     */
     vpcId: string;
 }
 
 export interface GetAviatrixTransitGatewaysGatewayListHaBgpLanInterface {
+    /**
+     * A VPC Network address range selected from one of the available network ranges.
+     */
     subnet: string;
+    /**
+     * VPC-ID/VNet-Name of cloud provider.
+     */
     vpcId: string;
 }
 
 export interface GetAviatrixVpcPrivateSubnet {
+    /**
+     * Private subnet CIDR.
+     */
     cidr: string;
+    /**
+     * Name of the Aviatrix VPC.
+     */
     name: string;
+    /**
+     * Private subnet ID.
+     */
     subnetId: string;
 }
 
 export interface GetAviatrixVpcPublicSubnet {
+    /**
+     * Private subnet CIDR.
+     */
     cidr: string;
+    /**
+     * Name of the Aviatrix VPC.
+     */
     name: string;
+    /**
+     * Private subnet ID.
+     */
     subnetId: string;
 }
 
 export interface GetAviatrixVpcSubnet {
+    /**
+     * Private subnet CIDR.
+     */
     cidr: string;
+    /**
+     * Name of the Aviatrix VPC.
+     */
     name: string;
+    /**
+     * Private subnet ID.
+     */
     subnetId: string;
 }
 
 export interface GetAviatrixVpcTrackerVpcList {
+    /**
+     * Filters VPC list by access account name.
+     */
     accountName: string;
+    /**
+     * Filters VPC list by CIDR (AWS/Azure only).
+     */
     cidr: string;
+    /**
+     * Filters VPC list by cloud provider id. For example, cloudType = 1 will give all AWS VPCs.
+     */
     cloudType: number;
+    /**
+     * Number of running instances in the VPC.
+     */
     instanceCount: number;
+    /**
+     * Subnet name.
+     */
     name: string;
+    /**
+     * Filters VPC list by region (AWS/Azure only).
+     */
     region: string;
+    /**
+     * List of subnets within this VPC (GCP only).
+     */
     subnets: outputs.GetAviatrixVpcTrackerVpcListSubnet[];
+    /**
+     * VPC id.
+     */
     vpcId: string;
 }
 
 export interface GetAviatrixVpcTrackerVpcListSubnet {
+    /**
+     * Filters VPC list by CIDR (AWS/Azure only).
+     */
     cidr: string;
+    /**
+     * Subnet gateway ip.
+     */
     gwIp: string;
+    /**
+     * Subnet name.
+     */
     name: string;
+    /**
+     * Filters VPC list by region (AWS/Azure only).
+     */
     region: string;
 }
 

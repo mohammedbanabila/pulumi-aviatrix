@@ -13,8 +13,17 @@ namespace Pulumi.Aviatrix.Outputs
     [OutputType]
     public sealed class GetAviatrixFirewallInstanceImagesFirewallImageResult
     {
+        /// <summary>
+        /// Name of the firewall image.
+        /// </summary>
         public readonly string FirewallImage;
+        /// <summary>
+        /// List of firewall image versions.
+        /// </summary>
         public readonly ImmutableArray<string> FirewallImageVersions;
+        /// <summary>
+        /// List of firewall instance sizes.
+        /// </summary>
         public readonly ImmutableArray<string> FirewallSizes;
 
         [OutputConstructor]

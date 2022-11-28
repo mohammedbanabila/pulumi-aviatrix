@@ -10,6 +10,33 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Use this data source to get the Aviatrix stateful firewall for use in other resources.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err = aviatrix.LookupAviatrixFirewall(ctx, &GetAviatrixFirewallArgs{
+//				GwName: "gw-abcd",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 func LookupAviatrixFirewall(ctx *pulumi.Context, args *LookupAviatrixFirewallArgs, opts ...pulumi.InvokeOption) (*LookupAviatrixFirewallResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)
 	var rv LookupAviatrixFirewallResult
@@ -22,16 +49,20 @@ func LookupAviatrixFirewall(ctx *pulumi.Context, args *LookupAviatrixFirewallArg
 
 // A collection of arguments for invoking getAviatrixFirewall.
 type LookupAviatrixFirewallArgs struct {
+	// Name of the gateway associated with the firewall.
 	GwName string `pulumi:"gwName"`
 }
 
 // A collection of values returned by getAviatrixFirewall.
 type LookupAviatrixFirewallResult struct {
-	BaseLogEnabled bool   `pulumi:"baseLogEnabled"`
-	BasePolicy     string `pulumi:"basePolicy"`
-	GwName         string `pulumi:"gwName"`
+	// Indicates whether logging is enabled or not.
+	BaseLogEnabled bool `pulumi:"baseLogEnabled"`
+	// The firewall's base policy.
+	BasePolicy string `pulumi:"basePolicy"`
+	GwName     string `pulumi:"gwName"`
 	// The provider-assigned unique ID for this managed resource.
-	Id       string                          `pulumi:"id"`
+	Id string `pulumi:"id"`
+	// List of policies associated with the firewall.
 	Policies []GetAviatrixFirewallPolicyType `pulumi:"policies"`
 }
 
@@ -50,6 +81,7 @@ func LookupAviatrixFirewallOutput(ctx *pulumi.Context, args LookupAviatrixFirewa
 
 // A collection of arguments for invoking getAviatrixFirewall.
 type LookupAviatrixFirewallOutputArgs struct {
+	// Name of the gateway associated with the firewall.
 	GwName pulumi.StringInput `pulumi:"gwName"`
 }
 
@@ -72,10 +104,12 @@ func (o LookupAviatrixFirewallResultOutput) ToLookupAviatrixFirewallResultOutput
 	return o
 }
 
+// Indicates whether logging is enabled or not.
 func (o LookupAviatrixFirewallResultOutput) BaseLogEnabled() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupAviatrixFirewallResult) bool { return v.BaseLogEnabled }).(pulumi.BoolOutput)
 }
 
+// The firewall's base policy.
 func (o LookupAviatrixFirewallResultOutput) BasePolicy() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixFirewallResult) string { return v.BasePolicy }).(pulumi.StringOutput)
 }
@@ -89,6 +123,7 @@ func (o LookupAviatrixFirewallResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixFirewallResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
+// List of policies associated with the firewall.
 func (o LookupAviatrixFirewallResultOutput) Policies() GetAviatrixFirewallPolicyTypeArrayOutput {
 	return o.ApplyT(func(v LookupAviatrixFirewallResult) []GetAviatrixFirewallPolicyType { return v.Policies }).(GetAviatrixFirewallPolicyTypeArrayOutput)
 }

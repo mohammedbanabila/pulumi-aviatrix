@@ -139,131 +139,209 @@ class GetAviatrixAccountResult:
     @property
     @pulumi.getter(name="alicloudAccountId")
     def alicloud_account_id(self) -> str:
+        """
+        Alibaba Cloud Account ID.
+        """
         return pulumi.get(self, "alicloud_account_id")
 
     @property
     @pulumi.getter(name="armSubscriptionId")
     def arm_subscription_id(self) -> str:
+        """
+        Azure ARM Subscription ID.
+        """
         return pulumi.get(self, "arm_subscription_id")
 
     @property
     @pulumi.getter(name="awsAccountNumber")
     def aws_account_number(self) -> str:
+        """
+        AWS Account number.
+        """
         return pulumi.get(self, "aws_account_number")
 
     @property
     @pulumi.getter(name="awsCaCertPath")
     def aws_ca_cert_path(self) -> str:
+        """
+        AWS Top Secret Region or Secret Region Custom Certificate Authority file name on the controller. Available as of provider R2.19.5+.
+        """
         return pulumi.get(self, "aws_ca_cert_path")
 
     @property
     @pulumi.getter(name="awsGatewayRoleApp")
     def aws_gateway_role_app(self) -> str:
+        """
+        A separate AWS App role ARN to assign to gateways created by the controller. Available as of provider version R2.19+.
+        """
         return pulumi.get(self, "aws_gateway_role_app")
 
     @property
     @pulumi.getter(name="awsGatewayRoleEc2")
     def aws_gateway_role_ec2(self) -> str:
+        """
+        A separate AWS EC2 role ARN to assign to gateways created by the controller. Available as of provider version R2.19+.
+        """
         return pulumi.get(self, "aws_gateway_role_ec2")
 
     @property
     @pulumi.getter(name="awsRoleArn")
     def aws_role_arn(self) -> str:
+        """
+        AWS App role ARN.
+        """
         return pulumi.get(self, "aws_role_arn")
 
     @property
     @pulumi.getter(name="awsRoleEc2")
     def aws_role_ec2(self) -> str:
+        """
+        AWS EC2 role ARN.
+        """
         return pulumi.get(self, "aws_role_ec2")
 
     @property
     @pulumi.getter(name="awschinaAccountNumber")
     def awschina_account_number(self) -> str:
+        """
+        AWSChina Account number. Available as of provider version R2.19+.
+        """
         return pulumi.get(self, "awschina_account_number")
 
     @property
     @pulumi.getter(name="awschinaIam")
     def awschina_iam(self) -> bool:
+        """
+        If enabled, `awschina_role_app` and `awschina_role_ec2` will be set. Available as of provider version R2.19+.
+        """
         return pulumi.get(self, "awschina_iam")
 
     @property
     @pulumi.getter(name="awschinaRoleApp")
     def awschina_role_app(self) -> str:
+        """
+        AWSChina App role ARN. Available as of provider version R2.19+.
+        """
         return pulumi.get(self, "awschina_role_app")
 
     @property
     @pulumi.getter(name="awschinaRoleEc2")
     def awschina_role_ec2(self) -> str:
+        """
+        AWSChina EC2 role ARN. Available as of provider version R2.19+.
+        """
         return pulumi.get(self, "awschina_role_ec2")
 
     @property
     @pulumi.getter(name="awsgovAccountNumber")
     def awsgov_account_number(self) -> str:
+        """
+        AWSGov Account number.
+        """
         return pulumi.get(self, "awsgov_account_number")
 
     @property
     @pulumi.getter(name="awsgovIam")
     def awsgov_iam(self) -> bool:
+        """
+        If enabled, `awsgov_role_app` and `awschina_role_ec2` will be set. Available as of provider version R2.19+.
+        """
         return pulumi.get(self, "awsgov_iam")
 
     @property
     @pulumi.getter(name="awsgovRoleApp")
     def awsgov_role_app(self) -> str:
+        """
+        AWSGov App role ARN. Available as of provider version R2.19+.
+        """
         return pulumi.get(self, "awsgov_role_app")
 
     @property
     @pulumi.getter(name="awsgovRoleEc2")
     def awsgov_role_ec2(self) -> str:
+        """
+        AWSGov EC2 role ARN. Available as of provider version R2.19+.
+        """
         return pulumi.get(self, "awsgov_role_ec2")
 
     @property
     @pulumi.getter(name="awssAccountNumber")
     def awss_account_number(self) -> str:
+        """
+        AWS Secret Region Account Number. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        """
         return pulumi.get(self, "awss_account_number")
 
     @property
     @pulumi.getter(name="awssCapAccountName")
     def awss_cap_account_name(self) -> str:
+        """
+        AWS Secret Region Account Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        """
         return pulumi.get(self, "awss_cap_account_name")
 
     @property
     @pulumi.getter(name="awssCapAgency")
     def awss_cap_agency(self) -> str:
+        """
+        AWS Secret Region CAP Agency. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        """
         return pulumi.get(self, "awss_cap_agency")
 
     @property
     @pulumi.getter(name="awssCapCertKeyPath")
     def awss_cap_cert_key_path(self) -> str:
+        """
+        AWS Secret Region CAP Certificate Key file name on the controller. Available as of provider R2.19.5+.
+        """
         return pulumi.get(self, "awss_cap_cert_key_path")
 
     @property
     @pulumi.getter(name="awssCapCertPath")
     def awss_cap_cert_path(self) -> str:
+        """
+        AWS Secret Region CAP Certificate file name on the controller. Available as of provider R2.19.5+.
+        """
         return pulumi.get(self, "awss_cap_cert_path")
 
     @property
     @pulumi.getter(name="awssCapRoleName")
     def awss_cap_role_name(self) -> str:
+        """
+        AWS Secret Region Role Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        """
         return pulumi.get(self, "awss_cap_role_name")
 
     @property
     @pulumi.getter(name="awssCapUrl")
     def awss_cap_url(self) -> str:
+        """
+        AWS Secret Region CAP Url. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        """
         return pulumi.get(self, "awss_cap_url")
 
     @property
     @pulumi.getter(name="awstsAccountNumber")
     def awsts_account_number(self) -> str:
+        """
+        AWS Top Secret Region Account Number. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        """
         return pulumi.get(self, "awsts_account_number")
 
     @property
     @pulumi.getter(name="awstsCapAgency")
     def awsts_cap_agency(self) -> str:
+        """
+        AWS Top Secret Region CAP Agency. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        """
         return pulumi.get(self, "awsts_cap_agency")
 
     @property
     @pulumi.getter(name="awstsCapCertKeyPath")
     def awsts_cap_cert_key_path(self) -> str:
+        """
+        AWS Top Secret Region CAP Certificate Key file name on the controller. Available as of provider R2.19.5+.
+        """
         return pulumi.get(self, "awsts_cap_cert_key_path")
 
     @property
@@ -274,36 +352,58 @@ class GetAviatrixAccountResult:
     @property
     @pulumi.getter(name="awstsCapMission")
     def awsts_cap_mission(self) -> str:
+        """
+        AWS Top Secret Region Mission. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        """
         return pulumi.get(self, "awsts_cap_mission")
 
     @property
     @pulumi.getter(name="awstsCapRoleName")
     def awsts_cap_role_name(self) -> str:
+        """
+        AWS Top Secret Region Role Name. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        `awsts_cap_cert_path` - AWS Top Secret Region CAP Certificate file name on the controller. Available as of provider R2.19.5+.
+        """
         return pulumi.get(self, "awsts_cap_role_name")
 
     @property
     @pulumi.getter(name="awstsCapUrl")
     def awsts_cap_url(self) -> str:
+        """
+        AWS Top Secret Region CAP Url. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        """
         return pulumi.get(self, "awsts_cap_url")
 
     @property
     @pulumi.getter(name="azurechinaSubscriptionId")
     def azurechina_subscription_id(self) -> str:
+        """
+        AzureChina ARM Subscription ID. Available as of provider version R2.19+.
+        """
         return pulumi.get(self, "azurechina_subscription_id")
 
     @property
     @pulumi.getter(name="azuregovSubscriptionId")
     def azuregov_subscription_id(self) -> str:
+        """
+        AzureGov ARM Subscription ID.
+        """
         return pulumi.get(self, "azuregov_subscription_id")
 
     @property
     @pulumi.getter(name="cloudType")
     def cloud_type(self) -> int:
+        """
+        Type of cloud service provider.
+        """
         return pulumi.get(self, "cloud_type")
 
     @property
     @pulumi.getter(name="gcloudProjectId")
     def gcloud_project_id(self) -> str:
+        """
+        GCloud Project ID.
+        """
         return pulumi.get(self, "gcloud_project_id")
 
     @property
@@ -362,7 +462,21 @@ class AwaitableGetAviatrixAccountResult(GetAviatrixAccountResult):
 def get_aviatrix_account(account_name: Optional[str] = None,
                          opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetAviatrixAccountResult:
     """
-    Use this data source to access information about an existing resource.
+    The **aviatrix_account** data source provides details about a specific cloud account created by the Aviatrix Controller.
+
+    This data source can prove useful when a module accepts an account's detail as an input variable.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_aviatrix as aviatrix
+
+    foo = aviatrix.get_aviatrix_account(account_name="username")
+    ```
+
+
+    :param str account_name: Account name. This can be used for logging in to CloudN console or UserConnect controller.
     """
     __args__ = dict()
     __args__['accountName'] = account_name
@@ -412,6 +526,20 @@ def get_aviatrix_account(account_name: Optional[str] = None,
 def get_aviatrix_account_output(account_name: Optional[pulumi.Input[str]] = None,
                                 opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetAviatrixAccountResult]:
     """
-    Use this data source to access information about an existing resource.
+    The **aviatrix_account** data source provides details about a specific cloud account created by the Aviatrix Controller.
+
+    This data source can prove useful when a module accepts an account's detail as an input variable.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_aviatrix as aviatrix
+
+    foo = aviatrix.get_aviatrix_account(account_name="username")
+    ```
+
+
+    :param str account_name: Account name. This can be used for logging in to CloudN console or UserConnect controller.
     """
     ...

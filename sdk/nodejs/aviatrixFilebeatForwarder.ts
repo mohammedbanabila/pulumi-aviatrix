@@ -4,6 +4,37 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_filebeat_forwarder** resource allows the enabling and disabling of filebeat forwarder.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@astipkovits/aviatrix";
+ * import * as fs from "fs";
+ *
+ * // Enable filebeat forwarder
+ * const testFilebeatForwarder = new aviatrix.AviatrixFilebeatForwarder("testFilebeatForwarder", {
+ *     server: "1.2.3.4",
+ *     port: 10,
+ *     trustedCaFile: fs.readFileSync("/path/to/ca.pem"),
+ *     configFile: fs.readFileSync("/path/to/config.txt"),
+ *     excludedGateways: [
+ *         "a",
+ *         "b",
+ *     ],
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **filebeat_forwarder** can be imported using "filebeat_forwarder", e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixFilebeatForwarder:AviatrixFilebeatForwarder test filebeat_forwarder
+ * ```
+ */
 export class AviatrixFilebeatForwarder extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixFilebeatForwarder resource's state with the given name, ID, and optional extra
@@ -33,11 +64,11 @@ export class AviatrixFilebeatForwarder extends pulumi.CustomResource {
     }
 
     /**
-     * Configuration file.
+     * The config file. Use the `file` function to read from a file.
      */
     public readonly configFile!: pulumi.Output<string | undefined>;
     /**
-     * List of excluded gateways.
+     * List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
      */
     public readonly excludedGateways!: pulumi.Output<string[] | undefined>;
     /**
@@ -49,11 +80,11 @@ export class AviatrixFilebeatForwarder extends pulumi.CustomResource {
      */
     public readonly server!: pulumi.Output<string>;
     /**
-     * Enabled or not.
+     * The status of filebeat forwarder.
      */
     public /*out*/ readonly status!: pulumi.Output<string>;
     /**
-     * Trusted CA file.
+     * The trusted CA file. Use the `file` function to read from a file.
      */
     public readonly trustedCaFile!: pulumi.Output<string | undefined>;
 
@@ -101,11 +132,11 @@ export class AviatrixFilebeatForwarder extends pulumi.CustomResource {
  */
 export interface AviatrixFilebeatForwarderState {
     /**
-     * Configuration file.
+     * The config file. Use the `file` function to read from a file.
      */
     configFile?: pulumi.Input<string>;
     /**
-     * List of excluded gateways.
+     * List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
      */
     excludedGateways?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -117,11 +148,11 @@ export interface AviatrixFilebeatForwarderState {
      */
     server?: pulumi.Input<string>;
     /**
-     * Enabled or not.
+     * The status of filebeat forwarder.
      */
     status?: pulumi.Input<string>;
     /**
-     * Trusted CA file.
+     * The trusted CA file. Use the `file` function to read from a file.
      */
     trustedCaFile?: pulumi.Input<string>;
 }
@@ -131,11 +162,11 @@ export interface AviatrixFilebeatForwarderState {
  */
 export interface AviatrixFilebeatForwarderArgs {
     /**
-     * Configuration file.
+     * The config file. Use the `file` function to read from a file.
      */
     configFile?: pulumi.Input<string>;
     /**
-     * List of excluded gateways.
+     * List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
      */
     excludedGateways?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -147,7 +178,7 @@ export interface AviatrixFilebeatForwarderArgs {
      */
     server: pulumi.Input<string>;
     /**
-     * Trusted CA file.
+     * The trusted CA file. Use the `file` function to read from a file.
      */
     trustedCaFile?: pulumi.Input<string>;
 }

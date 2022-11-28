@@ -4,6 +4,30 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_sumologic_forwarder** resource allows the enabling and disabling of sumologic forwarder.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Enable sumologic forwarder
+ * const testSumologicForwarder = new aviatrix.AviatrixSumologicForwarder("test_sumologic_forwarder", {
+ *     accessId: "0",
+ *     accessKey: "1.2.3.4",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **sumologic_forwarder** can be imported using "sumologic_forwarder", e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixSumologicForwarder:AviatrixSumologicForwarder test sumologic_forwarder
+ * ```
+ */
 export class AviatrixSumologicForwarder extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixSumologicForwarder resource's state with the given name, ID, and optional extra
@@ -37,23 +61,23 @@ export class AviatrixSumologicForwarder extends pulumi.CustomResource {
      */
     public readonly accessId!: pulumi.Output<string>;
     /**
-     * Access key.
+     * Access Key.
      */
     public readonly accessKey!: pulumi.Output<string>;
     /**
-     * Custom configuration.
+     * Custom configuration. The format should be key=value pairs.
      */
     public readonly customConfiguration!: pulumi.Output<string | undefined>;
     /**
-     * List of excluded gateways.
+     * List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
      */
     public readonly excludedGateways!: pulumi.Output<string[] | undefined>;
     /**
-     * Source category.
+     * Source category. "Aviatrix_syslog" by default.
      */
     public readonly sourceCategory!: pulumi.Output<string | undefined>;
     /**
-     * Enabled or not.
+     * The status of sumologic forwarder.
      */
     public /*out*/ readonly status!: pulumi.Output<string>;
 
@@ -85,13 +109,15 @@ export class AviatrixSumologicForwarder extends pulumi.CustomResource {
                 throw new Error("Missing required property 'accessKey'");
             }
             resourceInputs["accessId"] = args ? args.accessId : undefined;
-            resourceInputs["accessKey"] = args ? args.accessKey : undefined;
+            resourceInputs["accessKey"] = args?.accessKey ? pulumi.secret(args.accessKey) : undefined;
             resourceInputs["customConfiguration"] = args ? args.customConfiguration : undefined;
             resourceInputs["excludedGateways"] = args ? args.excludedGateways : undefined;
             resourceInputs["sourceCategory"] = args ? args.sourceCategory : undefined;
             resourceInputs["status"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["accessKey"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(AviatrixSumologicForwarder.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -105,23 +131,23 @@ export interface AviatrixSumologicForwarderState {
      */
     accessId?: pulumi.Input<string>;
     /**
-     * Access key.
+     * Access Key.
      */
     accessKey?: pulumi.Input<string>;
     /**
-     * Custom configuration.
+     * Custom configuration. The format should be key=value pairs.
      */
     customConfiguration?: pulumi.Input<string>;
     /**
-     * List of excluded gateways.
+     * List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
      */
     excludedGateways?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Source category.
+     * Source category. "Aviatrix_syslog" by default.
      */
     sourceCategory?: pulumi.Input<string>;
     /**
-     * Enabled or not.
+     * The status of sumologic forwarder.
      */
     status?: pulumi.Input<string>;
 }
@@ -135,19 +161,19 @@ export interface AviatrixSumologicForwarderArgs {
      */
     accessId: pulumi.Input<string>;
     /**
-     * Access key.
+     * Access Key.
      */
     accessKey: pulumi.Input<string>;
     /**
-     * Custom configuration.
+     * Custom configuration. The format should be key=value pairs.
      */
     customConfiguration?: pulumi.Input<string>;
     /**
-     * List of excluded gateways.
+     * List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
      */
     excludedGateways?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Source category.
+     * Source category. "Aviatrix_syslog" by default.
      */
     sourceCategory?: pulumi.Input<string>;
 }

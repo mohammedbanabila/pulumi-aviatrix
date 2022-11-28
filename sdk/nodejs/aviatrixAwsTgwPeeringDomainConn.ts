@@ -4,6 +4,32 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_aws_tgw_peering_domain_conn** resource allows the creation and management of Aviatrix domain connections between peered AWS TGWs.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Domian Connection between Peered AWS Tgws
+ * const test = new aviatrix.AviatrixAwsTgwPeeringDomainConn("test", {
+ *     domainName1: "Default_Domain",
+ *     domainName2: "Default_Domain",
+ *     tgwName1: "tgw1",
+ *     tgwName2: "tgw2",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **aws_tgw_peering_domain_conn** can be imported using the `tgw_name1`, `domain_name1`, `tgw_name2` and `domain_name2`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixAwsTgwPeeringDomainConn:AviatrixAwsTgwPeeringDomainConn test tgw_name1:domain_name1~tgw_name2:domain_name2
+ * ```
+ */
 export class AviatrixAwsTgwPeeringDomainConn extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixAwsTgwPeeringDomainConn resource's state with the given name, ID, and optional extra
@@ -41,11 +67,11 @@ export class AviatrixAwsTgwPeeringDomainConn extends pulumi.CustomResource {
      */
     public readonly domainName2!: pulumi.Output<string>;
     /**
-     * The AWS tgw name of the source domain to make a connection.
+     * The AWS TGW name of the source domain to make a connection.
      */
     public readonly tgwName1!: pulumi.Output<string>;
     /**
-     * The AWS tgw name of the destination domain to make a connection.
+     * The AWS TGW name of the destination domain to make a connection.
      */
     public readonly tgwName2!: pulumi.Output<string>;
 
@@ -103,11 +129,11 @@ export interface AviatrixAwsTgwPeeringDomainConnState {
      */
     domainName2?: pulumi.Input<string>;
     /**
-     * The AWS tgw name of the source domain to make a connection.
+     * The AWS TGW name of the source domain to make a connection.
      */
     tgwName1?: pulumi.Input<string>;
     /**
-     * The AWS tgw name of the destination domain to make a connection.
+     * The AWS TGW name of the destination domain to make a connection.
      */
     tgwName2?: pulumi.Input<string>;
 }
@@ -125,11 +151,11 @@ export interface AviatrixAwsTgwPeeringDomainConnArgs {
      */
     domainName2: pulumi.Input<string>;
     /**
-     * The AWS tgw name of the source domain to make a connection.
+     * The AWS TGW name of the source domain to make a connection.
      */
     tgwName1: pulumi.Input<string>;
     /**
-     * The AWS tgw name of the destination domain to make a connection.
+     * The AWS TGW name of the destination domain to make a connection.
      */
     tgwName2: pulumi.Input<string>;
 }

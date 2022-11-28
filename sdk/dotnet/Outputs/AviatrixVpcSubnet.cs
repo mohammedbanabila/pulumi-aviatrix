@@ -13,9 +13,21 @@ namespace Pulumi.Aviatrix.Outputs
     [OutputType]
     public sealed class AviatrixVpcSubnet
     {
+        /// <summary>
+        /// CIDR block.
+        /// </summary>
         public readonly string? Cidr;
+        /// <summary>
+        /// Name of this subnet.
+        /// </summary>
         public readonly string? Name;
+        /// <summary>
+        /// Region of this subnet.
+        /// </summary>
         public readonly string? Region;
+        /// <summary>
+        /// ID of this subnet.
+        /// </summary>
         public readonly string? SubnetId;
 
         [OutputConstructor]

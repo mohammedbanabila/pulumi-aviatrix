@@ -11,20 +11,64 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_cloudn_registration** resource allows the registration and deregistration of Aviatrix CloudN as a Gateway. This resource is available as of provider version R2.21+.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixCloudnRegistration(ctx, "testCloudnRegistration", &aviatrix.AviatrixCloudnRegistrationArgs{
+//				Address:       pulumi.String("10.210.38.100"),
+//				LocalAsNumber: pulumi.String("65000"),
+//				Password:      pulumi.String("password"),
+//				PrependAsPaths: pulumi.StringArray{
+//					pulumi.String("65000"),
+//					pulumi.String("65000"),
+//				},
+//				Username: pulumi.String("admin"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **cloudn_registration** can be imported using the `name`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixCloudnRegistration:AviatrixCloudnRegistration test_cloudn_registration name
+//
+// ```
 type AviatrixCloudnRegistration struct {
 	pulumi.CustomResourceState
 
-	// CloudN IP Address or FQDN.
+	// Aviatrix CloudN's public or private IP. Type: String.
 	Address pulumi.StringOutput `pulumi:"address"`
-	// Changes the Aviatrix CloudN ASN number before you setup Aviatrix Transit Gateway connection configurations.
+	// BGP AS Number to assign to the Transit Gateway. Type: String.
 	LocalAsNumber pulumi.StringOutput `pulumi:"localAsNumber"`
-	// CloudN name to register on controller.
+	// Gateway name to assign to the CloudN device. Type: String.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// CloudN password.
+	// Aviatrix account password corresponding to above username. Type: String.
 	Password pulumi.StringOutput `pulumi:"password"`
-	// AS path prepend.
+	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires localAsNumber to be set. Type: List.
 	PrependAsPaths pulumi.StringArrayOutput `pulumi:"prependAsPaths"`
-	// CloudN username.
+	// Aviatrix account username which will be used to log in to Aviatrix CloudN. Type: String.
 	Username pulumi.StringOutput `pulumi:"username"`
 }
 
@@ -44,6 +88,13 @@ func NewAviatrixCloudnRegistration(ctx *pulumi.Context,
 	if args.Username == nil {
 		return nil, errors.New("invalid value for required argument 'Username'")
 	}
+	if args.Password != nil {
+		args.Password = pulumi.ToSecret(args.Password).(pulumi.StringOutput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"password",
+	})
+	opts = append(opts, secrets)
 	opts = pkgResourceDefaultOpts(opts)
 	var resource AviatrixCloudnRegistration
 	err := ctx.RegisterResource("aviatrix:index/aviatrixCloudnRegistration:AviatrixCloudnRegistration", name, args, &resource, opts...)
@@ -67,32 +118,32 @@ func GetAviatrixCloudnRegistration(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixCloudnRegistration resources.
 type aviatrixCloudnRegistrationState struct {
-	// CloudN IP Address or FQDN.
+	// Aviatrix CloudN's public or private IP. Type: String.
 	Address *string `pulumi:"address"`
-	// Changes the Aviatrix CloudN ASN number before you setup Aviatrix Transit Gateway connection configurations.
+	// BGP AS Number to assign to the Transit Gateway. Type: String.
 	LocalAsNumber *string `pulumi:"localAsNumber"`
-	// CloudN name to register on controller.
+	// Gateway name to assign to the CloudN device. Type: String.
 	Name *string `pulumi:"name"`
-	// CloudN password.
+	// Aviatrix account password corresponding to above username. Type: String.
 	Password *string `pulumi:"password"`
-	// AS path prepend.
+	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires localAsNumber to be set. Type: List.
 	PrependAsPaths []string `pulumi:"prependAsPaths"`
-	// CloudN username.
+	// Aviatrix account username which will be used to log in to Aviatrix CloudN. Type: String.
 	Username *string `pulumi:"username"`
 }
 
 type AviatrixCloudnRegistrationState struct {
-	// CloudN IP Address or FQDN.
+	// Aviatrix CloudN's public or private IP. Type: String.
 	Address pulumi.StringPtrInput
-	// Changes the Aviatrix CloudN ASN number before you setup Aviatrix Transit Gateway connection configurations.
+	// BGP AS Number to assign to the Transit Gateway. Type: String.
 	LocalAsNumber pulumi.StringPtrInput
-	// CloudN name to register on controller.
+	// Gateway name to assign to the CloudN device. Type: String.
 	Name pulumi.StringPtrInput
-	// CloudN password.
+	// Aviatrix account password corresponding to above username. Type: String.
 	Password pulumi.StringPtrInput
-	// AS path prepend.
+	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires localAsNumber to be set. Type: List.
 	PrependAsPaths pulumi.StringArrayInput
-	// CloudN username.
+	// Aviatrix account username which will be used to log in to Aviatrix CloudN. Type: String.
 	Username pulumi.StringPtrInput
 }
 
@@ -101,33 +152,33 @@ func (AviatrixCloudnRegistrationState) ElementType() reflect.Type {
 }
 
 type aviatrixCloudnRegistrationArgs struct {
-	// CloudN IP Address or FQDN.
+	// Aviatrix CloudN's public or private IP. Type: String.
 	Address string `pulumi:"address"`
-	// Changes the Aviatrix CloudN ASN number before you setup Aviatrix Transit Gateway connection configurations.
+	// BGP AS Number to assign to the Transit Gateway. Type: String.
 	LocalAsNumber *string `pulumi:"localAsNumber"`
-	// CloudN name to register on controller.
+	// Gateway name to assign to the CloudN device. Type: String.
 	Name *string `pulumi:"name"`
-	// CloudN password.
+	// Aviatrix account password corresponding to above username. Type: String.
 	Password string `pulumi:"password"`
-	// AS path prepend.
+	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires localAsNumber to be set. Type: List.
 	PrependAsPaths []string `pulumi:"prependAsPaths"`
-	// CloudN username.
+	// Aviatrix account username which will be used to log in to Aviatrix CloudN. Type: String.
 	Username string `pulumi:"username"`
 }
 
 // The set of arguments for constructing a AviatrixCloudnRegistration resource.
 type AviatrixCloudnRegistrationArgs struct {
-	// CloudN IP Address or FQDN.
+	// Aviatrix CloudN's public or private IP. Type: String.
 	Address pulumi.StringInput
-	// Changes the Aviatrix CloudN ASN number before you setup Aviatrix Transit Gateway connection configurations.
+	// BGP AS Number to assign to the Transit Gateway. Type: String.
 	LocalAsNumber pulumi.StringPtrInput
-	// CloudN name to register on controller.
+	// Gateway name to assign to the CloudN device. Type: String.
 	Name pulumi.StringPtrInput
-	// CloudN password.
+	// Aviatrix account password corresponding to above username. Type: String.
 	Password pulumi.StringInput
-	// AS path prepend.
+	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires localAsNumber to be set. Type: List.
 	PrependAsPaths pulumi.StringArrayInput
-	// CloudN username.
+	// Aviatrix account username which will be used to log in to Aviatrix CloudN. Type: String.
 	Username pulumi.StringInput
 }
 
@@ -218,32 +269,32 @@ func (o AviatrixCloudnRegistrationOutput) ToAviatrixCloudnRegistrationOutputWith
 	return o
 }
 
-// CloudN IP Address or FQDN.
+// Aviatrix CloudN's public or private IP. Type: String.
 func (o AviatrixCloudnRegistrationOutput) Address() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixCloudnRegistration) pulumi.StringOutput { return v.Address }).(pulumi.StringOutput)
 }
 
-// Changes the Aviatrix CloudN ASN number before you setup Aviatrix Transit Gateway connection configurations.
+// BGP AS Number to assign to the Transit Gateway. Type: String.
 func (o AviatrixCloudnRegistrationOutput) LocalAsNumber() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixCloudnRegistration) pulumi.StringOutput { return v.LocalAsNumber }).(pulumi.StringOutput)
 }
 
-// CloudN name to register on controller.
+// Gateway name to assign to the CloudN device. Type: String.
 func (o AviatrixCloudnRegistrationOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixCloudnRegistration) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// CloudN password.
+// Aviatrix account password corresponding to above username. Type: String.
 func (o AviatrixCloudnRegistrationOutput) Password() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixCloudnRegistration) pulumi.StringOutput { return v.Password }).(pulumi.StringOutput)
 }
 
-// AS path prepend.
+// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires localAsNumber to be set. Type: List.
 func (o AviatrixCloudnRegistrationOutput) PrependAsPaths() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixCloudnRegistration) pulumi.StringArrayOutput { return v.PrependAsPaths }).(pulumi.StringArrayOutput)
 }
 
-// CloudN username.
+// Aviatrix account username which will be used to log in to Aviatrix CloudN. Type: String.
 func (o AviatrixCloudnRegistrationOutput) Username() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixCloudnRegistration) pulumi.StringOutput { return v.Username }).(pulumi.StringOutput)
 }

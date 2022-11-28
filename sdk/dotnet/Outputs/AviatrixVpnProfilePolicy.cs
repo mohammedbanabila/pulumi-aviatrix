@@ -13,9 +13,21 @@ namespace Pulumi.Aviatrix.Outputs
     [OutputType]
     public sealed class AviatrixVpnProfilePolicy
     {
+        /// <summary>
+        /// Should be the opposite of the base rule for correct behavior. Valid values for action: "allow", "deny".
+        /// </summary>
         public readonly string Action;
+        /// <summary>
+        /// Port to be allowed or denied. Valid values for port: a single port or a range of port numbers e.g.: "25", "25:1024". For "all" and "icmp", port should only be "0:65535".
+        /// </summary>
         public readonly string Port;
+        /// <summary>
+        /// Protocol to allow or deny. Valid values for protocol: "all", "tcp", "udp", "icmp", "sctp", "rdp", "dccp".
+        /// </summary>
         public readonly string Proto;
+        /// <summary>
+        /// CIDR to be allowed or denied. Valid values for target: IPv4 CIDRs. Example: "10.30.0.0/16".
+        /// </summary>
         public readonly string Target;
 
         [OutputConstructor]

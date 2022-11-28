@@ -9,11 +9,40 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_controller_private_oob** resource allows management of an Aviatrix Controller's private OOB configurations.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Controller Private OOB
+    ///     var testPrivateOob = new Aviatrix.AviatrixControllerPrivateOob("testPrivateOob", new()
+    ///     {
+    ///         EnablePrivateOob = true,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **controller_private_oob** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixControllerPrivateOob:AviatrixControllerPrivateOob test 10-11-12-13
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixControllerPrivateOob:AviatrixControllerPrivateOob")]
     public partial class AviatrixControllerPrivateOob : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Switch to enable/disable Aviatrix controller private OOB.
+        /// Switch to enable/disable Aviatrix controller private OOB. Valid values: true, false. Default value: false.
         /// </summary>
         [Output("enablePrivateOob")]
         public Output<bool?> EnablePrivateOob { get; private set; } = null!;
@@ -66,7 +95,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixControllerPrivateOobArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Switch to enable/disable Aviatrix controller private OOB.
+        /// Switch to enable/disable Aviatrix controller private OOB. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enablePrivateOob")]
         public Input<bool>? EnablePrivateOob { get; set; }
@@ -80,7 +109,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixControllerPrivateOobState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Switch to enable/disable Aviatrix controller private OOB.
+        /// Switch to enable/disable Aviatrix controller private OOB. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enablePrivateOob")]
         public Input<bool>? EnablePrivateOob { get; set; }

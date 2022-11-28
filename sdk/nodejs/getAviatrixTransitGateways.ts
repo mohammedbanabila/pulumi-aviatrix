@@ -2,9 +2,23 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_transit_gateways** data source provides details about all transit gateways created by the Aviatrix Controller.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Aviatrix All Transit Gateways Data Source
+ * const foo = pulumi.output(aviatrix.getAviatrixTransitGateways());
+ * ```
+ */
 export function getAviatrixTransitGateways(opts?: pulumi.InvokeOptions): Promise<GetAviatrixTransitGatewaysResult> {
     if (!opts) {
         opts = {}
@@ -19,6 +33,9 @@ export function getAviatrixTransitGateways(opts?: pulumi.InvokeOptions): Promise
  * A collection of values returned by getAviatrixTransitGateways.
  */
 export interface GetAviatrixTransitGatewaysResult {
+    /**
+     * The list of all transit gateways
+     */
     readonly gatewayLists: outputs.GetAviatrixTransitGatewaysGatewayList[];
     /**
      * The provider-assigned unique ID for this managed resource.

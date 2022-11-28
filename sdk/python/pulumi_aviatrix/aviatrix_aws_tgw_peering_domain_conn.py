@@ -22,8 +22,8 @@ class AviatrixAwsTgwPeeringDomainConnArgs:
         The set of arguments for constructing a AviatrixAwsTgwPeeringDomainConn resource.
         :param pulumi.Input[str] domain_name1: The name of the source domain to make a connection.
         :param pulumi.Input[str] domain_name2: The name of the destination domain to make a connection.
-        :param pulumi.Input[str] tgw_name1: The AWS tgw name of the source domain to make a connection.
-        :param pulumi.Input[str] tgw_name2: The AWS tgw name of the destination domain to make a connection.
+        :param pulumi.Input[str] tgw_name1: The AWS TGW name of the source domain to make a connection.
+        :param pulumi.Input[str] tgw_name2: The AWS TGW name of the destination domain to make a connection.
         """
         pulumi.set(__self__, "domain_name1", domain_name1)
         pulumi.set(__self__, "domain_name2", domain_name2)
@@ -58,7 +58,7 @@ class AviatrixAwsTgwPeeringDomainConnArgs:
     @pulumi.getter(name="tgwName1")
     def tgw_name1(self) -> pulumi.Input[str]:
         """
-        The AWS tgw name of the source domain to make a connection.
+        The AWS TGW name of the source domain to make a connection.
         """
         return pulumi.get(self, "tgw_name1")
 
@@ -70,7 +70,7 @@ class AviatrixAwsTgwPeeringDomainConnArgs:
     @pulumi.getter(name="tgwName2")
     def tgw_name2(self) -> pulumi.Input[str]:
         """
-        The AWS tgw name of the destination domain to make a connection.
+        The AWS TGW name of the destination domain to make a connection.
         """
         return pulumi.get(self, "tgw_name2")
 
@@ -90,8 +90,8 @@ class _AviatrixAwsTgwPeeringDomainConnState:
         Input properties used for looking up and filtering AviatrixAwsTgwPeeringDomainConn resources.
         :param pulumi.Input[str] domain_name1: The name of the source domain to make a connection.
         :param pulumi.Input[str] domain_name2: The name of the destination domain to make a connection.
-        :param pulumi.Input[str] tgw_name1: The AWS tgw name of the source domain to make a connection.
-        :param pulumi.Input[str] tgw_name2: The AWS tgw name of the destination domain to make a connection.
+        :param pulumi.Input[str] tgw_name1: The AWS TGW name of the source domain to make a connection.
+        :param pulumi.Input[str] tgw_name2: The AWS TGW name of the destination domain to make a connection.
         """
         if domain_name1 is not None:
             pulumi.set(__self__, "domain_name1", domain_name1)
@@ -130,7 +130,7 @@ class _AviatrixAwsTgwPeeringDomainConnState:
     @pulumi.getter(name="tgwName1")
     def tgw_name1(self) -> Optional[pulumi.Input[str]]:
         """
-        The AWS tgw name of the source domain to make a connection.
+        The AWS TGW name of the source domain to make a connection.
         """
         return pulumi.get(self, "tgw_name1")
 
@@ -142,7 +142,7 @@ class _AviatrixAwsTgwPeeringDomainConnState:
     @pulumi.getter(name="tgwName2")
     def tgw_name2(self) -> Optional[pulumi.Input[str]]:
         """
-        The AWS tgw name of the destination domain to make a connection.
+        The AWS TGW name of the destination domain to make a connection.
         """
         return pulumi.get(self, "tgw_name2")
 
@@ -162,13 +162,36 @@ class AviatrixAwsTgwPeeringDomainConn(pulumi.CustomResource):
                  tgw_name2: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixAwsTgwPeeringDomainConn resource with the given unique name, props, and options.
+        The **aviatrix_aws_tgw_peering_domain_conn** resource allows the creation and management of Aviatrix domain connections between peered AWS TGWs.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Domian Connection between Peered AWS Tgws
+        test = aviatrix.AviatrixAwsTgwPeeringDomainConn("test",
+            domain_name1="Default_Domain",
+            domain_name2="Default_Domain",
+            tgw_name1="tgw1",
+            tgw_name2="tgw2")
+        ```
+
+        ## Import
+
+        **aws_tgw_peering_domain_conn** can be imported using the `tgw_name1`, `domain_name1`, `tgw_name2` and `domain_name2`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAwsTgwPeeringDomainConn:AviatrixAwsTgwPeeringDomainConn test tgw_name1:domain_name1~tgw_name2:domain_name2
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] domain_name1: The name of the source domain to make a connection.
         :param pulumi.Input[str] domain_name2: The name of the destination domain to make a connection.
-        :param pulumi.Input[str] tgw_name1: The AWS tgw name of the source domain to make a connection.
-        :param pulumi.Input[str] tgw_name2: The AWS tgw name of the destination domain to make a connection.
+        :param pulumi.Input[str] tgw_name1: The AWS TGW name of the source domain to make a connection.
+        :param pulumi.Input[str] tgw_name2: The AWS TGW name of the destination domain to make a connection.
         """
         ...
     @overload
@@ -177,7 +200,30 @@ class AviatrixAwsTgwPeeringDomainConn(pulumi.CustomResource):
                  args: AviatrixAwsTgwPeeringDomainConnArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixAwsTgwPeeringDomainConn resource with the given unique name, props, and options.
+        The **aviatrix_aws_tgw_peering_domain_conn** resource allows the creation and management of Aviatrix domain connections between peered AWS TGWs.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Domian Connection between Peered AWS Tgws
+        test = aviatrix.AviatrixAwsTgwPeeringDomainConn("test",
+            domain_name1="Default_Domain",
+            domain_name2="Default_Domain",
+            tgw_name1="tgw1",
+            tgw_name2="tgw2")
+        ```
+
+        ## Import
+
+        **aws_tgw_peering_domain_conn** can be imported using the `tgw_name1`, `domain_name1`, `tgw_name2` and `domain_name2`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAwsTgwPeeringDomainConn:AviatrixAwsTgwPeeringDomainConn test tgw_name1:domain_name1~tgw_name2:domain_name2
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixAwsTgwPeeringDomainConnArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -241,8 +287,8 @@ class AviatrixAwsTgwPeeringDomainConn(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] domain_name1: The name of the source domain to make a connection.
         :param pulumi.Input[str] domain_name2: The name of the destination domain to make a connection.
-        :param pulumi.Input[str] tgw_name1: The AWS tgw name of the source domain to make a connection.
-        :param pulumi.Input[str] tgw_name2: The AWS tgw name of the destination domain to make a connection.
+        :param pulumi.Input[str] tgw_name1: The AWS TGW name of the source domain to make a connection.
+        :param pulumi.Input[str] tgw_name2: The AWS TGW name of the destination domain to make a connection.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -274,7 +320,7 @@ class AviatrixAwsTgwPeeringDomainConn(pulumi.CustomResource):
     @pulumi.getter(name="tgwName1")
     def tgw_name1(self) -> pulumi.Output[str]:
         """
-        The AWS tgw name of the source domain to make a connection.
+        The AWS TGW name of the source domain to make a connection.
         """
         return pulumi.get(self, "tgw_name1")
 
@@ -282,7 +328,7 @@ class AviatrixAwsTgwPeeringDomainConn(pulumi.CustomResource):
     @pulumi.getter(name="tgwName2")
     def tgw_name2(self) -> pulumi.Output[str]:
         """
-        The AWS tgw name of the destination domain to make a connection.
+        The AWS TGW name of the destination domain to make a connection.
         """
         return pulumi.get(self, "tgw_name2")
 

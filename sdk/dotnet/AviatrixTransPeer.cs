@@ -9,6 +9,37 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_trans_peer** resource allows the creation and management of Aviatrix [Encrypted Transitive Peering](https://docs.aviatrix.com/HowTos/TransPeering.html).
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix AWS Transitive Peering
+    ///     var testTransPeer = new Aviatrix.AviatrixTransPeer("testTransPeer", new()
+    ///     {
+    ///         Nexthop = "avtx-us-east-gw2",
+    ///         ReachableCidr = "10.152.0.0/16",
+    ///         Source = "avtx-us-east-gw1",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **trans_peer** can be imported using the `source`, `nexthop` and `reachable_cidr`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixTransPeer:AviatrixTransPeer test source~nexthop~reachable_cidr
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixTransPeer:AviatrixTransPeer")]
     public partial class AviatrixTransPeer : global::Pulumi.CustomResource
     {

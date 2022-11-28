@@ -4,6 +4,31 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_controller_cert_domain_config** resource allows management of an Aviatrix Controller's cert domain config. This resource is available as of provider version R2.19+.
+ *
+ * !> **WARNING:** Changing the Controller's cert domain config causes all other API calls to the controller to fail. If multiple other resources are created with the **aviatrix_controller_cert_domain_config** resource, a dependency on the **aviatrix_controller_cert_domain_config** resource must be added.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix controller cert domain config
+ * const test = new aviatrix.AviatrixControllerCertDomainConfig("test", {
+ *     certDomain: "abc.com",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **aviatrix_controller_cert_domain_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixControllerCertDomainConfig:AviatrixControllerCertDomainConfig test 10-11-12-13
+ * ```
+ */
 export class AviatrixControllerCertDomainConfig extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixControllerCertDomainConfig resource's state with the given name, ID, and optional extra
@@ -33,7 +58,7 @@ export class AviatrixControllerCertDomainConfig extends pulumi.CustomResource {
     }
 
     /**
-     * Domain name that is used in FQDN for generating cert.
+     * Domain name that is used in FQDN for generating cert. Default value: "aviatrixnetwork.com".
      */
     public readonly certDomain!: pulumi.Output<string | undefined>;
 
@@ -65,7 +90,7 @@ export class AviatrixControllerCertDomainConfig extends pulumi.CustomResource {
  */
 export interface AviatrixControllerCertDomainConfigState {
     /**
-     * Domain name that is used in FQDN for generating cert.
+     * Domain name that is used in FQDN for generating cert. Default value: "aviatrixnetwork.com".
      */
     certDomain?: pulumi.Input<string>;
 }
@@ -75,7 +100,7 @@ export interface AviatrixControllerCertDomainConfigState {
  */
 export interface AviatrixControllerCertDomainConfigArgs {
     /**
-     * Domain name that is used in FQDN for generating cert.
+     * Domain name that is used in FQDN for generating cert. Default value: "aviatrixnetwork.com".
      */
     certDomain?: pulumi.Input<string>;
 }

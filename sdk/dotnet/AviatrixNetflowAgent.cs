@@ -9,11 +9,47 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_netflow_agent** resource allows the enabling and disabling of netflow agent.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Enable netflow agent
+    ///     var testNetflowAgent = new Aviatrix.AviatrixNetflowAgent("testNetflowAgent", new()
+    ///     {
+    ///         ExcludedGateways = new[]
+    ///         {
+    ///             "a",
+    ///             "b",
+    ///         },
+    ///         Port = 10,
+    ///         ServerIp = "1.2.3.4",
+    ///         Version = 5,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **netflow_agent** can be imported using "netflow_agent", e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixNetflowAgent:AviatrixNetflowAgent test netflow_agent
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixNetflowAgent:AviatrixNetflowAgent")]
     public partial class AviatrixNetflowAgent : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// List of excluded gateways.
+        /// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         /// </summary>
         [Output("excludedGateways")]
         public Output<ImmutableArray<string>> ExcludedGateways { get; private set; } = null!;
@@ -31,13 +67,13 @@ namespace Pulumi.Aviatrix
         public Output<string> ServerIp { get; private set; } = null!;
 
         /// <summary>
-        /// Enabled or not.
+        /// The status of netflow agent.
         /// </summary>
         [Output("status")]
         public Output<string> Status { get; private set; } = null!;
 
         /// <summary>
-        /// Netflow version.
+        /// Netflow version (5 or 9). 5 by default.
         /// </summary>
         [Output("version")]
         public Output<int?> Version { get; private set; } = null!;
@@ -93,7 +129,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _excludedGateways;
 
         /// <summary>
-        /// List of excluded gateways.
+        /// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         /// </summary>
         public InputList<string> ExcludedGateways
         {
@@ -114,7 +150,7 @@ namespace Pulumi.Aviatrix
         public Input<string> ServerIp { get; set; } = null!;
 
         /// <summary>
-        /// Netflow version.
+        /// Netflow version (5 or 9). 5 by default.
         /// </summary>
         [Input("version")]
         public Input<int>? Version { get; set; }
@@ -131,7 +167,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _excludedGateways;
 
         /// <summary>
-        /// List of excluded gateways.
+        /// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         /// </summary>
         public InputList<string> ExcludedGateways
         {
@@ -152,13 +188,13 @@ namespace Pulumi.Aviatrix
         public Input<string>? ServerIp { get; set; }
 
         /// <summary>
-        /// Enabled or not.
+        /// The status of netflow agent.
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }
 
         /// <summary>
-        /// Netflow version.
+        /// Netflow version (5 or 9). 5 by default.
         /// </summary>
         [Input("version")]
         public Input<int>? Version { get; set; }

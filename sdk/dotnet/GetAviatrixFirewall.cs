@@ -11,16 +11,67 @@ namespace Pulumi.Aviatrix
 {
     public static class GetAviatrixFirewall
     {
+        /// <summary>
+        /// Use this data source to get the Aviatrix stateful firewall for use in other resources.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using Pulumi;
+        /// using Aviatrix = Pulumi.Aviatrix;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var foo = Aviatrix.GetAviatrixFirewall.Invoke(new()
+        ///     {
+        ///         GwName = "gw-abcd",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
         public static Task<GetAviatrixFirewallResult> InvokeAsync(GetAviatrixFirewallArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAviatrixFirewallResult>("aviatrix:index/getAviatrixFirewall:getAviatrixFirewall", args ?? new GetAviatrixFirewallArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAviatrixFirewallResult>("aviatrix:index/getAviatrixFirewall:getAviatrixFirewall", args ?? new GetAviatrixFirewallArgs(), options.WithDefaults());
 
+        /// <summary>
+        /// Use this data source to get the Aviatrix stateful firewall for use in other resources.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using Pulumi;
+        /// using Aviatrix = Pulumi.Aviatrix;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var foo = Aviatrix.GetAviatrixFirewall.Invoke(new()
+        ///     {
+        ///         GwName = "gw-abcd",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
         public static Output<GetAviatrixFirewallResult> Invoke(GetAviatrixFirewallInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAviatrixFirewallResult>("aviatrix:index/getAviatrixFirewall:getAviatrixFirewall", args ?? new GetAviatrixFirewallInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAviatrixFirewallResult>("aviatrix:index/getAviatrixFirewall:getAviatrixFirewall", args ?? new GetAviatrixFirewallInvokeArgs(), options.WithDefaults());
     }
 
 
     public sealed class GetAviatrixFirewallArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// Name of the gateway associated with the firewall.
+        /// </summary>
         [Input("gwName", required: true)]
         public string GwName { get; set; } = null!;
 
@@ -32,6 +83,9 @@ namespace Pulumi.Aviatrix
 
     public sealed class GetAviatrixFirewallInvokeArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// Name of the gateway associated with the firewall.
+        /// </summary>
         [Input("gwName", required: true)]
         public Input<string> GwName { get; set; } = null!;
 
@@ -45,13 +99,22 @@ namespace Pulumi.Aviatrix
     [OutputType]
     public sealed class GetAviatrixFirewallResult
     {
+        /// <summary>
+        /// Indicates whether logging is enabled or not.
+        /// </summary>
         public readonly bool BaseLogEnabled;
+        /// <summary>
+        /// The firewall's base policy.
+        /// </summary>
         public readonly string BasePolicy;
         public readonly string GwName;
         /// <summary>
         /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// List of policies associated with the firewall.
+        /// </summary>
         public readonly ImmutableArray<Outputs.GetAviatrixFirewallPolicyResult> Policies;
 
         [OutputConstructor]

@@ -4,6 +4,32 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_proxy_config** resource allows management of an Aviatrix Controller's proxy configurations.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@astipkovits/aviatrix";
+ * import * as fs from "fs";
+ *
+ * // Create an Aviatrix Controller Proxy Config
+ * const testProxyConfig = new aviatrix.AviatrixProxyConfig("testProxyConfig", {
+ *     httpProxy: "172.31.52.145:3127",
+ *     httpsProxy: "172.31.52.145:3129",
+ *     proxyCaCertificate: fs.readFileSync("/path/to/ca.pem"),
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **controller_proxy_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixProxyConfig:AviatrixProxyConfig test 10-11-12-13
+ * ```
+ */
 export class AviatrixProxyConfig extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixProxyConfig resource's state with the given name, ID, and optional extra
@@ -33,15 +59,15 @@ export class AviatrixProxyConfig extends pulumi.CustomResource {
     }
 
     /**
-     * http proxy URL.
+     * Http proxy URL.
      */
     public readonly httpProxy!: pulumi.Output<string>;
     /**
-     * https proxy URL.
+     * Https proxy URL.
      */
     public readonly httpsProxy!: pulumi.Output<string>;
     /**
-     * Server CA Certificate file.
+     * Server CA Certificate file. Use the `file` function to read from a file.
      */
     public readonly proxyCaCertificate!: pulumi.Output<string | undefined>;
 
@@ -83,15 +109,15 @@ export class AviatrixProxyConfig extends pulumi.CustomResource {
  */
 export interface AviatrixProxyConfigState {
     /**
-     * http proxy URL.
+     * Http proxy URL.
      */
     httpProxy?: pulumi.Input<string>;
     /**
-     * https proxy URL.
+     * Https proxy URL.
      */
     httpsProxy?: pulumi.Input<string>;
     /**
-     * Server CA Certificate file.
+     * Server CA Certificate file. Use the `file` function to read from a file.
      */
     proxyCaCertificate?: pulumi.Input<string>;
 }
@@ -101,15 +127,15 @@ export interface AviatrixProxyConfigState {
  */
 export interface AviatrixProxyConfigArgs {
     /**
-     * http proxy URL.
+     * Http proxy URL.
      */
     httpProxy: pulumi.Input<string>;
     /**
-     * https proxy URL.
+     * Https proxy URL.
      */
     httpsProxy: pulumi.Input<string>;
     /**
-     * Server CA Certificate file.
+     * Server CA Certificate file. Use the `file` function to read from a file.
      */
     proxyCaCertificate?: pulumi.Input<string>;
 }

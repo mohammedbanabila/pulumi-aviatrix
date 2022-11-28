@@ -4,6 +4,30 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Use this data source to do 'save' or 'sync' for Aviatrix FireNet firewall manager.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Aviatrix FireNet Firewall Manager Data Source
+ * const foo = pulumi.output(aviatrix.getAviatrixFirenetFirewallManager({
+ *     gatewayName: "transit",
+ *     password: "password",
+ *     publicIp: "1.2.3.4",
+ *     routeTable: "router",
+ *     save: true,
+ *     template: "template",
+ *     templateStack: "templatestack",
+ *     username: "admin-api",
+ *     vendorType: "Palo Alto Networks Panorama",
+ *     vpcId: "vpc-abcd123",
+ * }));
+ * ```
+ */
 export function getAviatrixFirenetFirewallManager(args: GetAviatrixFirenetFirewallManagerArgs, opts?: pulumi.InvokeOptions): Promise<GetAviatrixFirenetFirewallManagerResult> {
     if (!opts) {
         opts = {}
@@ -31,18 +55,57 @@ export function getAviatrixFirenetFirewallManager(args: GetAviatrixFirenetFirewa
  * A collection of arguments for invoking getAviatrixFirenetFirewallManager.
  */
 export interface GetAviatrixFirenetFirewallManagerArgs {
+    /**
+     * The FireNet gateway name.
+     */
     gatewayName: string;
+    /**
+     * Number of retries for `save` or `synchronize`. Example: 1. Default value: 0.
+     */
     numberOfRetries?: number;
+    /**
+     * Panorama login password for API calls. Required for vendor type "Palo Alto Networks Panorama".
+     */
     password?: string;
+    /**
+     * The public IP address of the Panorama instance. Required for vendor type "Palo Alto Networks Panorama".
+     */
     publicIp?: string;
+    /**
+     * Retry interval in seconds for `save` or `synchronize`. Example: 120. Default value: 300.
+     */
     retryInterval?: number;
+    /**
+     * The name of firewall virtual router to program. If left unspecified, the Controller programs the Panorama template’s first router.
+     */
     routeTable?: string;
+    /**
+     * Switch to save or not.
+     */
     save?: boolean;
+    /**
+     * Switch to sync or not.
+     */
     synchronize?: boolean;
+    /**
+     * Panorama template for each FireNet gateway. Required for vendor type "Palo Alto Networks Panorama".
+     */
     template?: string;
+    /**
+     * Panorama template stack for each FireNet gateway. Required for vendor type "Palo Alto Networks Panorama".
+     */
     templateStack?: string;
+    /**
+     * Panorama login name for API calls from the Controller. Required for vendor type "Palo Alto Networks Panorama".
+     */
     username?: string;
+    /**
+     * Vendor type. Valid values: "Generic" and "Palo Alto Networks Panorama".
+     */
     vendorType: string;
+    /**
+     * VPC ID.
+     */
     vpcId: string;
 }
 
@@ -77,17 +140,56 @@ export function getAviatrixFirenetFirewallManagerOutput(args: GetAviatrixFirenet
  * A collection of arguments for invoking getAviatrixFirenetFirewallManager.
  */
 export interface GetAviatrixFirenetFirewallManagerOutputArgs {
+    /**
+     * The FireNet gateway name.
+     */
     gatewayName: pulumi.Input<string>;
+    /**
+     * Number of retries for `save` or `synchronize`. Example: 1. Default value: 0.
+     */
     numberOfRetries?: pulumi.Input<number>;
+    /**
+     * Panorama login password for API calls. Required for vendor type "Palo Alto Networks Panorama".
+     */
     password?: pulumi.Input<string>;
+    /**
+     * The public IP address of the Panorama instance. Required for vendor type "Palo Alto Networks Panorama".
+     */
     publicIp?: pulumi.Input<string>;
+    /**
+     * Retry interval in seconds for `save` or `synchronize`. Example: 120. Default value: 300.
+     */
     retryInterval?: pulumi.Input<number>;
+    /**
+     * The name of firewall virtual router to program. If left unspecified, the Controller programs the Panorama template’s first router.
+     */
     routeTable?: pulumi.Input<string>;
+    /**
+     * Switch to save or not.
+     */
     save?: pulumi.Input<boolean>;
+    /**
+     * Switch to sync or not.
+     */
     synchronize?: pulumi.Input<boolean>;
+    /**
+     * Panorama template for each FireNet gateway. Required for vendor type "Palo Alto Networks Panorama".
+     */
     template?: pulumi.Input<string>;
+    /**
+     * Panorama template stack for each FireNet gateway. Required for vendor type "Palo Alto Networks Panorama".
+     */
     templateStack?: pulumi.Input<string>;
+    /**
+     * Panorama login name for API calls from the Controller. Required for vendor type "Palo Alto Networks Panorama".
+     */
     username?: pulumi.Input<string>;
+    /**
+     * Vendor type. Valid values: "Generic" and "Palo Alto Networks Panorama".
+     */
     vendorType: pulumi.Input<string>;
+    /**
+     * VPC ID.
+     */
     vpcId: pulumi.Input<string>;
 }

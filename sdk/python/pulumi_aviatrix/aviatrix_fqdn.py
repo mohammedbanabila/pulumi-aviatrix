@@ -24,13 +24,12 @@ class AviatrixFqdnArgs:
                  manage_domain_names: Optional[pulumi.Input[bool]] = None):
         """
         The set of arguments for constructing a AviatrixFqdn resource.
-        :param pulumi.Input[str] fqdn_tag: FQDN Filter Tag Name.
-        :param pulumi.Input[Sequence[pulumi.Input['AviatrixFqdnDomainNameArgs']]] domain_names: A list of one or more domain names/tag rules.
-        :param pulumi.Input[bool] fqdn_enabled: FQDN Filter Tag Status. Valid values: true or false.
-        :param pulumi.Input[str] fqdn_mode: Specify the tag color to be a white-list tag or black-list tag. 'white' or 'black'
+        :param pulumi.Input[str] fqdn_tag: FQDN Filter tag name.
+        :param pulumi.Input[Sequence[pulumi.Input['AviatrixFqdnDomainNameArgs']]] domain_names: One or more domain names in a list with details as listed below:
+        :param pulumi.Input[bool] fqdn_enabled: FQDN Filter tag status. Valid values: true, false.
+        :param pulumi.Input[str] fqdn_mode: Specify FQDN mode: whitelist or blacklist. Valid values: "white", "black".
         :param pulumi.Input[Sequence[pulumi.Input['AviatrixFqdnGwFilterTagListArgs']]] gw_filter_tag_lists: A list of gateways to attach to the specific tag.
-        :param pulumi.Input[bool] manage_domain_names: Enable to manage domain name rules in-line. If false, domain name rules must be managed using `aviatrix_fqdn_tag_rule`
-               resources.
+        :param pulumi.Input[bool] manage_domain_names: Enable to manage domain name rules in-line. If false, domain name rules must be managed using `AviatrixFqdnTagRule` resources. Default: true. Valid values: true, false. Available in provider version R2.17+.
         """
         pulumi.set(__self__, "fqdn_tag", fqdn_tag)
         if domain_names is not None:
@@ -48,7 +47,7 @@ class AviatrixFqdnArgs:
     @pulumi.getter(name="fqdnTag")
     def fqdn_tag(self) -> pulumi.Input[str]:
         """
-        FQDN Filter Tag Name.
+        FQDN Filter tag name.
         """
         return pulumi.get(self, "fqdn_tag")
 
@@ -60,7 +59,7 @@ class AviatrixFqdnArgs:
     @pulumi.getter(name="domainNames")
     def domain_names(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['AviatrixFqdnDomainNameArgs']]]]:
         """
-        A list of one or more domain names/tag rules.
+        One or more domain names in a list with details as listed below:
         """
         return pulumi.get(self, "domain_names")
 
@@ -72,7 +71,7 @@ class AviatrixFqdnArgs:
     @pulumi.getter(name="fqdnEnabled")
     def fqdn_enabled(self) -> Optional[pulumi.Input[bool]]:
         """
-        FQDN Filter Tag Status. Valid values: true or false.
+        FQDN Filter tag status. Valid values: true, false.
         """
         return pulumi.get(self, "fqdn_enabled")
 
@@ -84,7 +83,7 @@ class AviatrixFqdnArgs:
     @pulumi.getter(name="fqdnMode")
     def fqdn_mode(self) -> Optional[pulumi.Input[str]]:
         """
-        Specify the tag color to be a white-list tag or black-list tag. 'white' or 'black'
+        Specify FQDN mode: whitelist or blacklist. Valid values: "white", "black".
         """
         return pulumi.get(self, "fqdn_mode")
 
@@ -108,8 +107,7 @@ class AviatrixFqdnArgs:
     @pulumi.getter(name="manageDomainNames")
     def manage_domain_names(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable to manage domain name rules in-line. If false, domain name rules must be managed using `aviatrix_fqdn_tag_rule`
-        resources.
+        Enable to manage domain name rules in-line. If false, domain name rules must be managed using `AviatrixFqdnTagRule` resources. Default: true. Valid values: true, false. Available in provider version R2.17+.
         """
         return pulumi.get(self, "manage_domain_names")
 
@@ -129,13 +127,12 @@ class _AviatrixFqdnState:
                  manage_domain_names: Optional[pulumi.Input[bool]] = None):
         """
         Input properties used for looking up and filtering AviatrixFqdn resources.
-        :param pulumi.Input[Sequence[pulumi.Input['AviatrixFqdnDomainNameArgs']]] domain_names: A list of one or more domain names/tag rules.
-        :param pulumi.Input[bool] fqdn_enabled: FQDN Filter Tag Status. Valid values: true or false.
-        :param pulumi.Input[str] fqdn_mode: Specify the tag color to be a white-list tag or black-list tag. 'white' or 'black'
-        :param pulumi.Input[str] fqdn_tag: FQDN Filter Tag Name.
+        :param pulumi.Input[Sequence[pulumi.Input['AviatrixFqdnDomainNameArgs']]] domain_names: One or more domain names in a list with details as listed below:
+        :param pulumi.Input[bool] fqdn_enabled: FQDN Filter tag status. Valid values: true, false.
+        :param pulumi.Input[str] fqdn_mode: Specify FQDN mode: whitelist or blacklist. Valid values: "white", "black".
+        :param pulumi.Input[str] fqdn_tag: FQDN Filter tag name.
         :param pulumi.Input[Sequence[pulumi.Input['AviatrixFqdnGwFilterTagListArgs']]] gw_filter_tag_lists: A list of gateways to attach to the specific tag.
-        :param pulumi.Input[bool] manage_domain_names: Enable to manage domain name rules in-line. If false, domain name rules must be managed using `aviatrix_fqdn_tag_rule`
-               resources.
+        :param pulumi.Input[bool] manage_domain_names: Enable to manage domain name rules in-line. If false, domain name rules must be managed using `AviatrixFqdnTagRule` resources. Default: true. Valid values: true, false. Available in provider version R2.17+.
         """
         if domain_names is not None:
             pulumi.set(__self__, "domain_names", domain_names)
@@ -154,7 +151,7 @@ class _AviatrixFqdnState:
     @pulumi.getter(name="domainNames")
     def domain_names(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['AviatrixFqdnDomainNameArgs']]]]:
         """
-        A list of one or more domain names/tag rules.
+        One or more domain names in a list with details as listed below:
         """
         return pulumi.get(self, "domain_names")
 
@@ -166,7 +163,7 @@ class _AviatrixFqdnState:
     @pulumi.getter(name="fqdnEnabled")
     def fqdn_enabled(self) -> Optional[pulumi.Input[bool]]:
         """
-        FQDN Filter Tag Status. Valid values: true or false.
+        FQDN Filter tag status. Valid values: true, false.
         """
         return pulumi.get(self, "fqdn_enabled")
 
@@ -178,7 +175,7 @@ class _AviatrixFqdnState:
     @pulumi.getter(name="fqdnMode")
     def fqdn_mode(self) -> Optional[pulumi.Input[str]]:
         """
-        Specify the tag color to be a white-list tag or black-list tag. 'white' or 'black'
+        Specify FQDN mode: whitelist or blacklist. Valid values: "white", "black".
         """
         return pulumi.get(self, "fqdn_mode")
 
@@ -190,7 +187,7 @@ class _AviatrixFqdnState:
     @pulumi.getter(name="fqdnTag")
     def fqdn_tag(self) -> Optional[pulumi.Input[str]]:
         """
-        FQDN Filter Tag Name.
+        FQDN Filter tag name.
         """
         return pulumi.get(self, "fqdn_tag")
 
@@ -214,8 +211,7 @@ class _AviatrixFqdnState:
     @pulumi.getter(name="manageDomainNames")
     def manage_domain_names(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable to manage domain name rules in-line. If false, domain name rules must be managed using `aviatrix_fqdn_tag_rule`
-        resources.
+        Enable to manage domain name rules in-line. If false, domain name rules must be managed using `AviatrixFqdnTagRule` resources. Default: true. Valid values: true, false. Available in provider version R2.17+.
         """
         return pulumi.get(self, "manage_domain_names")
 
@@ -237,16 +233,22 @@ class AviatrixFqdn(pulumi.CustomResource):
                  manage_domain_names: Optional[pulumi.Input[bool]] = None,
                  __props__=None):
         """
-        Create a AviatrixFqdn resource with the given unique name, props, and options.
+        ## Import
+
+        **fqdn** can be imported using the `fqdn_tag`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixFqdn:AviatrixFqdn test fqdn_tag
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixFqdnDomainNameArgs']]]] domain_names: A list of one or more domain names/tag rules.
-        :param pulumi.Input[bool] fqdn_enabled: FQDN Filter Tag Status. Valid values: true or false.
-        :param pulumi.Input[str] fqdn_mode: Specify the tag color to be a white-list tag or black-list tag. 'white' or 'black'
-        :param pulumi.Input[str] fqdn_tag: FQDN Filter Tag Name.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixFqdnDomainNameArgs']]]] domain_names: One or more domain names in a list with details as listed below:
+        :param pulumi.Input[bool] fqdn_enabled: FQDN Filter tag status. Valid values: true, false.
+        :param pulumi.Input[str] fqdn_mode: Specify FQDN mode: whitelist or blacklist. Valid values: "white", "black".
+        :param pulumi.Input[str] fqdn_tag: FQDN Filter tag name.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixFqdnGwFilterTagListArgs']]]] gw_filter_tag_lists: A list of gateways to attach to the specific tag.
-        :param pulumi.Input[bool] manage_domain_names: Enable to manage domain name rules in-line. If false, domain name rules must be managed using `aviatrix_fqdn_tag_rule`
-               resources.
+        :param pulumi.Input[bool] manage_domain_names: Enable to manage domain name rules in-line. If false, domain name rules must be managed using `AviatrixFqdnTagRule` resources. Default: true. Valid values: true, false. Available in provider version R2.17+.
         """
         ...
     @overload
@@ -255,7 +257,14 @@ class AviatrixFqdn(pulumi.CustomResource):
                  args: AviatrixFqdnArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixFqdn resource with the given unique name, props, and options.
+        ## Import
+
+        **fqdn** can be imported using the `fqdn_tag`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixFqdn:AviatrixFqdn test fqdn_tag
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixFqdnArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -317,13 +326,12 @@ class AviatrixFqdn(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixFqdnDomainNameArgs']]]] domain_names: A list of one or more domain names/tag rules.
-        :param pulumi.Input[bool] fqdn_enabled: FQDN Filter Tag Status. Valid values: true or false.
-        :param pulumi.Input[str] fqdn_mode: Specify the tag color to be a white-list tag or black-list tag. 'white' or 'black'
-        :param pulumi.Input[str] fqdn_tag: FQDN Filter Tag Name.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixFqdnDomainNameArgs']]]] domain_names: One or more domain names in a list with details as listed below:
+        :param pulumi.Input[bool] fqdn_enabled: FQDN Filter tag status. Valid values: true, false.
+        :param pulumi.Input[str] fqdn_mode: Specify FQDN mode: whitelist or blacklist. Valid values: "white", "black".
+        :param pulumi.Input[str] fqdn_tag: FQDN Filter tag name.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixFqdnGwFilterTagListArgs']]]] gw_filter_tag_lists: A list of gateways to attach to the specific tag.
-        :param pulumi.Input[bool] manage_domain_names: Enable to manage domain name rules in-line. If false, domain name rules must be managed using `aviatrix_fqdn_tag_rule`
-               resources.
+        :param pulumi.Input[bool] manage_domain_names: Enable to manage domain name rules in-line. If false, domain name rules must be managed using `AviatrixFqdnTagRule` resources. Default: true. Valid values: true, false. Available in provider version R2.17+.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -341,7 +349,7 @@ class AviatrixFqdn(pulumi.CustomResource):
     @pulumi.getter(name="domainNames")
     def domain_names(self) -> pulumi.Output[Optional[Sequence['outputs.AviatrixFqdnDomainName']]]:
         """
-        A list of one or more domain names/tag rules.
+        One or more domain names in a list with details as listed below:
         """
         return pulumi.get(self, "domain_names")
 
@@ -349,7 +357,7 @@ class AviatrixFqdn(pulumi.CustomResource):
     @pulumi.getter(name="fqdnEnabled")
     def fqdn_enabled(self) -> pulumi.Output[Optional[bool]]:
         """
-        FQDN Filter Tag Status. Valid values: true or false.
+        FQDN Filter tag status. Valid values: true, false.
         """
         return pulumi.get(self, "fqdn_enabled")
 
@@ -357,7 +365,7 @@ class AviatrixFqdn(pulumi.CustomResource):
     @pulumi.getter(name="fqdnMode")
     def fqdn_mode(self) -> pulumi.Output[Optional[str]]:
         """
-        Specify the tag color to be a white-list tag or black-list tag. 'white' or 'black'
+        Specify FQDN mode: whitelist or blacklist. Valid values: "white", "black".
         """
         return pulumi.get(self, "fqdn_mode")
 
@@ -365,7 +373,7 @@ class AviatrixFqdn(pulumi.CustomResource):
     @pulumi.getter(name="fqdnTag")
     def fqdn_tag(self) -> pulumi.Output[str]:
         """
-        FQDN Filter Tag Name.
+        FQDN Filter tag name.
         """
         return pulumi.get(self, "fqdn_tag")
 
@@ -381,8 +389,7 @@ class AviatrixFqdn(pulumi.CustomResource):
     @pulumi.getter(name="manageDomainNames")
     def manage_domain_names(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enable to manage domain name rules in-line. If false, domain name rules must be managed using `aviatrix_fqdn_tag_rule`
-        resources.
+        Enable to manage domain name rules in-line. If false, domain name rules must be managed using `AviatrixFqdnTagRule` resources. Default: true. Valid values: true, false. Available in provider version R2.17+.
         """
         return pulumi.get(self, "manage_domain_names")
 

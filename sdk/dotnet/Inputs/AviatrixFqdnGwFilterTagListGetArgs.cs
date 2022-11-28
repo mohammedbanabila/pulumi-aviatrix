@@ -12,11 +12,18 @@ namespace Pulumi.Aviatrix.Inputs
 
     public sealed class AviatrixFqdnGwFilterTagListGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Name of the gateway to attach to the specific tag.
+        /// </summary>
         [Input("gwName", required: true)]
         public Input<string> GwName { get; set; } = null!;
 
         [Input("sourceIpLists")]
         private InputList<string>? _sourceIpLists;
+
+        /// <summary>
+        /// List of source IPs in the VPC qualified for a specific tag.
+        /// </summary>
         public InputList<string> SourceIpLists
         {
             get => _sourceIpLists ?? (_sourceIpLists = new InputList<string>());

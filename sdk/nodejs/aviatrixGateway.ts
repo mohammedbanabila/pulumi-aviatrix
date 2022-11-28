@@ -4,6 +4,15 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Import
+ *
+ * **gateway** can be imported using the `gw_name`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixGateway:AviatrixGateway test gw_name
+ * ```
+ */
 export class AviatrixGateway extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixGateway resource's state with the given name, ID, and optional extra
@@ -41,84 +50,83 @@ export class AviatrixGateway extends pulumi.CustomResource {
      */
     public readonly additionalCidrs!: pulumi.Output<string | undefined>;
     /**
-     * A list of CIDR ranges separated by comma to configure when 'designated_gateway' feature is enabled.
+     * A list of CIDR ranges separated by comma to configure when "Designated Gateway" feature is enabled. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
      */
     public readonly additionalCidrsDesignatedGateway!: pulumi.Output<string | undefined>;
     /**
-     * When value is false, reuse an idle address in Elastic IP pool for this gateway. Otherwise, allocate a new Elastic IP and
-     * use it for this gateway.
+     * If set to false, use an available address in Elastic IP pool for this gateway. Otherwise, allocate a new Elastic IP and use it for this gateway. Available in Controller 2.7+. Valid values: true, false. Default: true.
      */
     public readonly allocateNewEip!: pulumi.Output<boolean | undefined>;
     /**
-     * Availability domain for OCI.
+     * Availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
      */
     public readonly availabilityDomain!: pulumi.Output<string>;
     /**
-     * The name of the public IP address and its resource group in Azure to assign to this Gateway.
+     * Name of public IP Address resource and its resource group in Azure to be assigned to the gateway instance. Example: "IP_Name:Resource_Group_Name". Required when `allocateNewEip` is false and `cloudType` is Azure, AzureGov or AzureChina. Available as of provider version 2.20+.
      */
     public readonly azureEipNameResourceGroup!: pulumi.Output<string>;
     /**
-     * Instance ID of the gateway.
+     * Cloud instance ID of the gateway.
      */
     public /*out*/ readonly cloudInstanceId!: pulumi.Output<string>;
     /**
-     * Type of cloud service provider.
+     * Cloud service provider to use to launch the gateway. Requires an integer value. Currently supports AWS(1), GCP(4), Azure(8), OCI(16), AzureGov(32), AWSGov(256), AWSChina(1024), AzureChina(2048), Alibaba Cloud (8192), AWS Top Secret (16384) and AWS Secret (32768).
      */
     public readonly cloudType!: pulumi.Output<number>;
     /**
-     * Customer managed key ID.
+     * Customer-managed key ID.
      */
     public readonly customerManagedKeys!: pulumi.Output<string | undefined>;
     /**
-     * API hostname for DUO auth mode.
+     * API hostname for DUO auth mode. Required: Yes if `otpMode` is "2".
      */
     public readonly duoApiHostname!: pulumi.Output<string | undefined>;
     /**
-     * Integration key for DUO auth mode.
+     * Integration key for DUO auth mode. Required if `otpMode` is "2".
      */
     public readonly duoIntegrationKey!: pulumi.Output<string | undefined>;
     /**
-     * Push mode for DUO auth.
+     * Push mode for DUO auth. Required if `otpMode` is "2". Valid values: "auto", "selective" and "token".
      */
     public readonly duoPushMode!: pulumi.Output<string | undefined>;
     /**
-     * Secret key for DUO auth mode.
+     * Secret key for DUO auth mode. Required if `otpMode` is "2".
      */
     public readonly duoSecretKey!: pulumi.Output<string | undefined>;
     /**
-     * Required when allocate_new_eip is false. It uses specified EIP for this gateway.
+     * Specified EIP to use for gateway creation. Required when `allocateNewEip` is false.  Available in Controller version 3.5+. Only available for AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret.
      */
     public readonly eip!: pulumi.Output<string>;
     /**
-     * ELB DNS Name.
+     * ELB DNS name.
      */
     public /*out*/ readonly elbDnsName!: pulumi.Output<string>;
     /**
-     * A name for the ELB that is created.
+     * A name for the ELB that is created. If it is not specified, a name is generated automatically.
      */
     public readonly elbName!: pulumi.Output<string>;
     /**
-     * Enable 'designated_gateway' feature for Gateway. Valid values: true, false.
+     * Enable Designated Gateway feature for Gateway. Only supported for AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret gateways. Valid values: true, false. Default value: false. Please view documentation [here](https://docs.aviatrix.com/HowTos/gateway.html#designated-gateway) for more information on this feature.
      */
     public readonly enableDesignatedGateway!: pulumi.Output<boolean | undefined>;
     /**
-     * Specify whether to enable ELB or not.
+     * Specify whether to enable ELB or not. Not supported for OCI gateways. Valid values: true, false.
      */
     public readonly enableElb!: pulumi.Output<boolean | undefined>;
     /**
-     * Enable encrypt gateway EBS volume. Only supported for AWS provider. Valid values: true, false. Default value: false.
+     * Enable EBS volume encryption for the gateway. Only supported for AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret gateways. Valid values: true, false. Default value: false.
      */
     public readonly enableEncryptVolume!: pulumi.Output<boolean | undefined>;
     /**
-     * Enable jumbo frame support for Gateway. Valid values: true or false. Default value: true.
+     * Enable jumbo frames for this gateway. Default value is true.
      */
     public readonly enableJumboFrame!: pulumi.Output<boolean | undefined>;
     /**
-     * Specify whether to enable LDAP or not. Supported values: 'yes' and 'no'.
+     * Enable/disable LDAP. Valid values: true, false. Default value: false.
      */
     public readonly enableLdap!: pulumi.Output<boolean | undefined>;
     /**
-     * Enable monitor gateway subnets. Valid values: true, false. Default value: false.
+     * If set to true, the [Monitor Gateway Subnets](https://docs.aviatrix.com/HowTos/gateway.html#monitor-gateway-subnet) feature is enabled. Default value is false. Available in provider version R2.17.1+.
      */
     public readonly enableMonitorGatewaySubnets!: pulumi.Output<boolean | undefined>;
     /**
@@ -130,81 +138,79 @@ export class AviatrixGateway extends pulumi.CustomResource {
      */
     public readonly enableSpotInstance!: pulumi.Output<boolean | undefined>;
     /**
-     * Enable vpc_dns_server for Gateway. Valid values: true, false.
+     * Enable VPC DNS Server for gateway. Currently only supported for AWS, Azure, AzureGov, AWSGov, AWSChina, AzureChina, Alibaba Cloud, AWS Top Secret and AWS Secret gateways. Valid values: true, false. Default value: false.
      */
     public readonly enableVpcDnsServer!: pulumi.Output<boolean | undefined>;
     /**
-     * This field indicates whether to enable VPN NAT or not. Only supported for VPN gateway. Valid values: true, false.
-     * Default value: true.
+     * Enable/disable VPN NAT. Only supported for VPN gateway. Valid values: true, false. Default value: true.
      */
     public readonly enableVpnNat!: pulumi.Output<boolean | undefined>;
     /**
-     * Fault domain for OCI.
+     * Fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
      */
     public readonly faultDomain!: pulumi.Output<string>;
     /**
-     * FQDN gateway lan interface cidr.
+     * If `fqdnLanCidr` is set, the FQDN gateway will be created with an additional LAN interface using the provided CIDR. This attribute is required when enabling FQDN gateway FireNet in Azure or GCP. Available in provider version R2.17.1+.
      */
     public readonly fqdnLanCidr!: pulumi.Output<string | undefined>;
     /**
-     * FQDN gateway lan interface id.
+     * The lan interface id of the of FQDN gateway with additional LAN interface. This attribute will be exported when enabling FQDN gateway firenet in Azure. Available in provider version R2.17.1+.
      */
     public /*out*/ readonly fqdnLanInterface!: pulumi.Output<string>;
     /**
-     * LAN VPC ID. Only used for GCP FQDN Gateway.
+     * FQDN LAN VPC ID. This attribute is required when enabling FQDN gateway FireNet in GCP. Available as of provider version R2.18.1+.
      */
     public readonly fqdnLanVpcId!: pulumi.Output<string | undefined>;
     /**
-     * Aviatrix gateway unique name.
+     * Name of the Aviatrix gateway to be created.
      */
     public readonly gwName!: pulumi.Output<string>;
     /**
-     * Size of Gateway Instance.
+     * Size of the gateway instance. Example: AWS/AWSGov/AWSChina: "t2.large", GCP: "n1-standard-1", Azure/AzureGov/AzureChina: "Standard_B1s", OCI: "VM.Standard2.2".
      */
     public readonly gwSize!: pulumi.Output<string>;
     /**
-     * Typed value when modifying idle_timeout. If it's -1, this feature is disabled.
+     * It sets the value (seconds) of the [idle timeout](https://docs.aviatrix.com/HowTos/openvpn_faq.html#how-do-i-fix-the-aviatrix-vpn-timing-out-too-quickly). This idle timeout feature is enable only if this attribute is set, otherwise it is disabled. The entered value must be an integer number greater than 300.  Available in provider version R2.17.1+.
      */
     public readonly idleTimeout!: pulumi.Output<number | undefined>;
     /**
-     * image_version can be used to set the desired image version of the gateway. If set, we will attempt to update the gateway
-     * to the specified version.
+     * The image version of the gateway. Use `aviatrix.getAviatrixGatewayImage` data source to programmatically retrieve this value for the desired `softwareVersion`. If set, we will attempt to update the gateway to the specified version if current version is different. If left blank, the gateway upgrades can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "hvm-cloudx-aws-022021". Available as of provider version R2.20.0.
      */
     public readonly imageVersion!: pulumi.Output<string>;
     /**
-     * Enable Insane Mode for Gateway. Valid values: true, false.
+     * Enable [Insane Mode](https://docs.aviatrix.com/HowTos/insane_mode.html) for Gateway. Insane Mode gateway size must be at least c5 series (AWS) or Standard_D3_v2 (Azure/AzureGov). If enabled, a valid /26 CIDR segment of the VPC must be specified to create a new subnet. Only supported for AWS, AWSGov, Azure, AzureGov, AWS China, Azure China, AWS Top Secret or AWS Secret.  Valid values: true, false.
      */
     public readonly insaneMode!: pulumi.Output<boolean | undefined>;
     /**
-     * AZ of subnet being created for Insane Mode Gateway. Required if insane_mode is set.
+     * Region + Availability Zone of subnet being created for Insane Mode gateway. Required for AWS, AWSGov, AWS China, AWS Top Secret or AWS Secret if `insaneMode` is set. Example: AWS: "us-west-1a".
      */
     public readonly insaneModeAz!: pulumi.Output<string | undefined>;
     /**
-     * LDAP base DN. Required: Yes if enable_ldap is 'yes'.
+     * LDAP base DN. Required if `enableLdap` is true.
      */
     public readonly ldapBaseDn!: pulumi.Output<string | undefined>;
     /**
-     * LDAP bind DN. Required: Yes if enable_ldap is 'yes'.
+     * LDAP bind DN. Required if `enableLdap` is true.
      */
     public readonly ldapBindDn!: pulumi.Output<string | undefined>;
     /**
-     * LDAP password. Required: Yes if enable_ldap is 'yes'.
+     * LDAP password. Required if `enableLdap` is true.
      */
     public readonly ldapPassword!: pulumi.Output<string | undefined>;
     /**
-     * LDAP server address. Required: Yes if enable_ldap is 'yes'.
+     * LDAP server address. Required if `enableLdap` is true.
      */
     public readonly ldapServer!: pulumi.Output<string | undefined>;
     /**
-     * LDAP user attribute. Required: Yes if enable_ldap is 'yes'.
+     * LDAP user attribute. Required if `enableLdap` is true.
      */
     public readonly ldapUsernameAttribute!: pulumi.Output<string | undefined>;
     /**
-     * Maximum connection of VPN access.
+     * Maximum number of active VPN users allowed to be connected to this gateway. Required if `vpnAccess` is true. Make sure the number is smaller than the VPN CIDR block. Example: 100. **NOTE: Please see notes here in regards to any deltas found in your state with the addition of this argument in R1.14.**
      */
     public readonly maxVpnConn!: pulumi.Output<string | undefined>;
     /**
-     * A set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true.
+     * Set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true. Available in provider version R2.17.1+.
      */
     public readonly monitorExcludeLists!: pulumi.Output<string[] | undefined>;
     /**
@@ -212,39 +218,39 @@ export class AviatrixGateway extends pulumi.CustomResource {
      */
     public readonly nameServers!: pulumi.Output<string | undefined>;
     /**
-     * Token for Okta auth mode.
+     * Token for Okta auth mode. Required if `otpMode` is "3".
      */
     public readonly oktaToken!: pulumi.Output<string | undefined>;
     /**
-     * URL for Okta auth mode.
+     * URL for Okta auth mode. Required if `otpMode` is "3".
      */
     public readonly oktaUrl!: pulumi.Output<string | undefined>;
     /**
-     * Username suffix for Okta auth mode.
+     * Username suffix for Okta auth mode. Example: "aviatrix.com".
      */
     public readonly oktaUsernameSuffix!: pulumi.Output<string | undefined>;
     /**
-     * Two step authentication mode.
+     * Two step authentication mode. Valid values: "2" for DUO, "3" for Okta.
      */
     public readonly otpMode!: pulumi.Output<string | undefined>;
     /**
-     * Peering HA availability domain for OCI.
+     * Peering HA gateway availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
      */
     public readonly peeringHaAvailabilityDomain!: pulumi.Output<string>;
     /**
-     * The name of the public IP address and its resource group in Azure to assign to the Peering HA Gateway.
+     * Name of public IP address resource and its resource group in Azure to be assigned to the HA peering instance. Example: "IP_Name:Resource_Group_Name". Required if `peeringHaEip` is set and `cloudType` is Azure, AzureGov or AzureChina. Available as of provider version 2.20+.
      */
     public readonly peeringHaAzureEipNameResourceGroup!: pulumi.Output<string>;
     /**
-     * Instance ID of the peering HA gateway.
+     * Cloud instance ID of the HA gateway.
      */
     public /*out*/ readonly peeringHaCloudInstanceId!: pulumi.Output<string>;
     /**
-     * Public IP address that you want assigned to the HA peering instance.
+     * Public IP address to be assigned to the HA peering instance. Only available for AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret.
      */
     public readonly peeringHaEip!: pulumi.Output<string>;
     /**
-     * Peering HA fault domain for OCI.
+     * Peering HA gateway fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
      */
     public readonly peeringHaFaultDomain!: pulumi.Output<string>;
     /**
@@ -252,16 +258,15 @@ export class AviatrixGateway extends pulumi.CustomResource {
      */
     public /*out*/ readonly peeringHaGwName!: pulumi.Output<string>;
     /**
-     * Peering HA Gateway Size.
+     * Size of the Peering HA Gateway to be created. Required if enabling Peering HA. **NOTE: Please see notes here in regards to any deltas found in your state with the addition of this argument in R1.8.**
      */
     public readonly peeringHaGwSize!: pulumi.Output<string | undefined>;
     /**
-     * peering_ha_image_version can be used to set the desired image version of the HA gateway. If set, we will attempt to
-     * update the gateway to the specified version.
+     * The image version of the HA gateway. Use `aviatrix.getAviatrixGatewayImage` data source to programmatically retrieve this value for the desired `haSoftwareVersion`. If set, we will attempt to update the HA gateway to the specified version if current version is different. If left blank, the gateway upgrades can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "hvm-cloudx-aws-022021". Available as of provider version R2.20.0.
      */
     public readonly peeringHaImageVersion!: pulumi.Output<string>;
     /**
-     * AZ of subnet being created for Insane Mode Peering HA Gateway. Required if insane_mode is set.
+     * Region + Availability Zone of subnet being created for Insane Mode-enabled Peering HA Gateway. Required for AWS only if `insaneMode` is set and `peeringHaSubnet` is set. Example: AWS: "us-west-1a".
      */
     public readonly peeringHaInsaneModeAz!: pulumi.Output<string | undefined>;
     /**
@@ -269,63 +274,55 @@ export class AviatrixGateway extends pulumi.CustomResource {
      */
     public /*out*/ readonly peeringHaPrivateIp!: pulumi.Output<string>;
     /**
-     * Peering HA security group used for the gateway.
+     * HA security group used for the gateway.
      */
     public /*out*/ readonly peeringHaSecurityGroupId!: pulumi.Output<string>;
     /**
-     * peering_ha_software_version can be used to set the desired software version of the HA gateway. If set, we will attempt
-     * to update the gateway to the specified version. If left blank, the gateway software version will continue to be managed
-     * through the aviatrix_controller_config resource.
+     * The software version of the HA gateway. If set, we will attempt to update the HA gateway to the specified version if current version is different. If left blank, the HA gateway upgrade can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "6.5.821". Available as of provider version R2.20.0.
      */
     public readonly peeringHaSoftwareVersion!: pulumi.Output<string>;
     /**
-     * Public Subnet Information while creating Peering HA Gateway, only subnet is accepted. Required to create peering ha
-     * gateway if cloud_type = 1 or 8 (AWS or Azure). Optional if cloud_type = 4 (GCP)
+     * Public subnet CIDR to create Peering HA Gateway in. Required if enabling Peering HA for AWS/AWSGov/AWS Top Secret/AWS Secret/Azure/AzureGov/Alibaba Cloud. Optional if enabling Peering HA for GCP. Example: AWS: "10.0.0.0/16".
      */
     public readonly peeringHaSubnet!: pulumi.Output<string | undefined>;
     /**
-     * Zone information for creating Peering HA Gateway. Required to create peering ha gateway if cloud_type = 4 (GCP).
-     * Optional for cloud_type = 8 (Azure).
+     * Zone to create Peering HA Gateway in. Required if enabling Peering HA for GCP. Example: GCP: "us-west1-c". Optional for Azure. Valid values for Azure gateways are in the form "az-n". Example: "az-2". Available for Azure as of provider version R2.17+.
      */
     public readonly peeringHaZone!: pulumi.Output<string | undefined>;
     /**
-     * Private IP address of the Gateway created.
+     * Private IP address of the gateway created.
      */
     public /*out*/ readonly privateIp!: pulumi.Output<string>;
     /**
-     * NS server used by the gateway.
+     * DNS server used by the gateway. Default is "8.8.8.8", can be overridden with the VPC's setting.
      */
     public /*out*/ readonly publicDnsServer!: pulumi.Output<string>;
     /**
-     * Whether to enforce Guard Duty IP blocking. Required when `enable_public_subnet_filtering` attribute is true. Valid
-     * values: true or false. Default value: true.
+     * Whether to enforce Guard Duty IP blocking.  Only valid when `enablePublicSubnetFiltering` attribute is true. Valid values: true or false. Default value: true. Available as of provider version R2.18+.
      */
     public readonly publicSubnetFilteringGuardDutyEnforced!: pulumi.Output<boolean | undefined>;
     /**
-     * Route tables whose associated public subnets are protected for the HA PSF gateway. Required when
-     * enable_public_subnet_filtering and peering_ha_subnet are set.
+     * Route tables whose associated public subnets are protected for the HA PSF gateway. Required when `enablePublicSubnetFiltering` and `peeringHaSubnet` are set. Available as of provider version R2.18+.
      */
     public readonly publicSubnetFilteringHaRouteTables!: pulumi.Output<string[] | undefined>;
     /**
-     * Route tables whose associated public subnets are protected. Required when `enable_public_subnet_filtering` attribute is
-     * true.
+     * Route tables whose associated public subnets are protected. Only valid when `enablePublicSubnetFiltering` attribute is true. Available as of provider version R2.18+.
      */
     public readonly publicSubnetFilteringRouteTables!: pulumi.Output<string[] | undefined>;
     /**
-     * Typed value when modifying renegotiation_interval. If it's -1, this feature is disabled.
+     * It sets the value (seconds) of the [renegotiation interval](https://docs.aviatrix.com/HowTos/openvpn_faq.html#how-do-i-fix-the-aviatrix-vpn-timing-out-too-quickly). This renegotiation interval feature is enable only if this attribute is set, otherwise it is disabled. The entered value must be an integer number greater than 300. Available in provider version R2.17.1+.
      */
     public readonly renegotiationInterval!: pulumi.Output<number | undefined>;
     /**
-     * Gateway ethernet interface RX queue size. Supported for AWS related clouds only.
+     * Gateway ethernet interface RX queue size. Once set, can't be deleted or disabled. Available for AWS as of provider version R2.22+.
      */
     public readonly rxQueueSize!: pulumi.Output<string | undefined>;
     /**
-     * This field indicates whether to enable SAML or not.
+     * Enable/disable SAML. This field is available in Controller version 3.3 or later release. Valid values: true, false. Default value: false.
      */
     public readonly samlEnabled!: pulumi.Output<boolean | undefined>;
     /**
-     * A list of domain names that will use the NameServer when a specific name is not in the destination when Split Tunnel
-     * Mode is enabled.
+     * A list of domain names that will use the NameServer when a specific name is not in the destination when Split Tunnel Mode is enabled.
      */
     public readonly searchDomains!: pulumi.Output<string | undefined>;
     /**
@@ -333,21 +330,19 @@ export class AviatrixGateway extends pulumi.CustomResource {
      */
     public /*out*/ readonly securityGroupId!: pulumi.Output<string>;
     /**
-     * Set to true if this feature is desired.
+     * If enabled, Controller monitors the health of the gateway and restarts the gateway if it becomes unreachable. Valid values: true, false. Default value: false.
      */
     public readonly singleAzHa!: pulumi.Output<boolean | undefined>;
     /**
-     * Enable Source NAT for this container.
+     * Enable Source NAT in "single ip" mode for this gateway. Valid values: true, false. Default value: false. **NOTE: If using SNAT for FQDN use-case, please see notes here.**
      */
     public readonly singleIpSnat!: pulumi.Output<boolean | undefined>;
     /**
-     * software_version can be used to set the desired software version of the gateway. If set, we will attempt to update the
-     * gateway to the specified version. If left blank, the gateway software version will continue to be managed through the
-     * aviatrix_controller_config resource.
+     * The software version of the gateway. If set, we will attempt to update the gateway to the specified version if current version is different. If left blank, the gateway upgrade can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "6.5.821". Available as of provider version R2.20.0.
      */
     public readonly softwareVersion!: pulumi.Output<string>;
     /**
-     * Specify split tunnel mode.
+     * Enable/disable Split Tunnel Mode. Valid values: true, false. Default value: true. Please see [here](https://docs.aviatrix.com/HowTos/gateway.html#split-tunnel-mode) for more information on split tunnel.
      */
     public readonly splitTunnel!: pulumi.Output<boolean | undefined>;
     /**
@@ -355,17 +350,18 @@ export class AviatrixGateway extends pulumi.CustomResource {
      */
     public readonly spotPrice!: pulumi.Output<string | undefined>;
     /**
-     * A VPC Network address range selected from one of the available network ranges.
+     * A VPC network address range selected from one of the available network ranges. Example: "172.31.0.0/20". **NOTE: If using `insaneMode`, please see notes here.**
      */
     public readonly subnet!: pulumi.Output<string>;
     /**
-     * Instance tag of cloud provider.
+     * (Optional) Tag list of the gateway instance. Only available for AWS, AWSGov, AWSChina, Azure, AzureGov and AzureChina gateways. Example: ["key1:value1", "key2:value2"].
+     * * `storageName` (Optional) Specify a storage account. Required if `cloudType` is 2048 (AzureChina). Removed in Provider version 2.21.0+.
      *
      * @deprecated Use tags instead.
      */
     public readonly tagLists!: pulumi.Output<string[] | undefined>;
     /**
-     * A map of tags to assign to the gateway.
+     * Map of tags to assign to the gateway. Only available for AWS, AWSGov, AWSChina, Azure, AzureGov, AzureChina, AWS Top Secret and AWS Secret gateways. Allowed characters vary by cloud type but always include: letters, spaces, and numbers. AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret allow the use of any character.  Azure, AzureGov and AzureChina allows the following special characters: + - = . _ : @. Example: {"key1" = "value1", "key2" = "value2"}.
      */
     public readonly tags!: pulumi.Output<{[key: string]: string} | undefined>;
     /**
@@ -373,28 +369,27 @@ export class AviatrixGateway extends pulumi.CustomResource {
      */
     public readonly tunnelDetectionTime!: pulumi.Output<number>;
     /**
-     * ID of legacy VPC/Vnet to be connected.
+     * VPC ID/VNet name of cloud provider. Example: AWS/AWSGov/AWSChina: "vpc-abcd1234", GCP: "vpc-gcp-test~-~project-id", Azure/AzureGov/AzureChina: "vnet_name:rg_name:resource_guid", OCI: "ocid1.vcn.oc1.iad.aaaaaaaaba3pv6wkcr4jqae5f44n2b2m2yt2j6rx32uzr4h25vqstifsfdsq".
      */
     public readonly vpcId!: pulumi.Output<string>;
     /**
-     * Region where this gateway will be launched.
+     * VPC region the gateway will be created in. Example: AWS: "us-east-1", GCP: "us-west2-a", Azure: "East US 2", OCI: "us-ashburn-1", AzureGov: "USGov Arizona", AWSGov: "us-gov-west-1", AWSChina: "cn-north-1", AzureChina: "China North", AWS Top Secret: "us-iso-east-1", AWS Secret: "us-isob-east-1".
      */
     public readonly vpcReg!: pulumi.Output<string>;
     /**
-     * Enable user access through VPN to this container.
+     * Enable [user access through VPN](https://docs.aviatrix.com/HowTos/gateway.html#vpn-access) to this gateway. Valid values: true, false.
      */
     public readonly vpnAccess!: pulumi.Output<boolean | undefined>;
     /**
-     * VPN CIDR block for the container.
+     * VPN CIDR block for the gateway. Required if `vpnAccess` is true. Example: "192.168.43.0/24".
      */
     public readonly vpnCidr!: pulumi.Output<string | undefined>;
     /**
-     * Elb protocol for VPN gateway with elb enabled. Only supports AWS provider. Valid values: 'TCP', 'UDP'. If not specified,
-     * 'TCP'' will be used.
+     * Transport mode for VPN connection. All `cloudTypes` support TCP with ELB, and UDP without ELB. AWS(1) additionally supports UDP with ELB. Valid values: "TCP", "UDP". If not specified, "TCP" will be used.
      */
     public readonly vpnProtocol!: pulumi.Output<string>;
     /**
-     * Availability Zone. Only available for Azure and Public Subnet Filtering gateway
+     * Availability Zone. Only available for Azure and Public Subnet Filtering gateway. Available for Azure as of provider version R2.17+.
      */
     public readonly zone!: pulumi.Output<string | undefined>;
 
@@ -528,11 +523,11 @@ export class AviatrixGateway extends pulumi.CustomResource {
             resourceInputs["availabilityDomain"] = args ? args.availabilityDomain : undefined;
             resourceInputs["azureEipNameResourceGroup"] = args ? args.azureEipNameResourceGroup : undefined;
             resourceInputs["cloudType"] = args ? args.cloudType : undefined;
-            resourceInputs["customerManagedKeys"] = args ? args.customerManagedKeys : undefined;
+            resourceInputs["customerManagedKeys"] = args?.customerManagedKeys ? pulumi.secret(args.customerManagedKeys) : undefined;
             resourceInputs["duoApiHostname"] = args ? args.duoApiHostname : undefined;
             resourceInputs["duoIntegrationKey"] = args ? args.duoIntegrationKey : undefined;
             resourceInputs["duoPushMode"] = args ? args.duoPushMode : undefined;
-            resourceInputs["duoSecretKey"] = args ? args.duoSecretKey : undefined;
+            resourceInputs["duoSecretKey"] = args?.duoSecretKey ? pulumi.secret(args.duoSecretKey) : undefined;
             resourceInputs["eip"] = args ? args.eip : undefined;
             resourceInputs["elbName"] = args ? args.elbName : undefined;
             resourceInputs["enableDesignatedGateway"] = args ? args.enableDesignatedGateway : undefined;
@@ -556,13 +551,13 @@ export class AviatrixGateway extends pulumi.CustomResource {
             resourceInputs["insaneModeAz"] = args ? args.insaneModeAz : undefined;
             resourceInputs["ldapBaseDn"] = args ? args.ldapBaseDn : undefined;
             resourceInputs["ldapBindDn"] = args ? args.ldapBindDn : undefined;
-            resourceInputs["ldapPassword"] = args ? args.ldapPassword : undefined;
+            resourceInputs["ldapPassword"] = args?.ldapPassword ? pulumi.secret(args.ldapPassword) : undefined;
             resourceInputs["ldapServer"] = args ? args.ldapServer : undefined;
             resourceInputs["ldapUsernameAttribute"] = args ? args.ldapUsernameAttribute : undefined;
             resourceInputs["maxVpnConn"] = args ? args.maxVpnConn : undefined;
             resourceInputs["monitorExcludeLists"] = args ? args.monitorExcludeLists : undefined;
             resourceInputs["nameServers"] = args ? args.nameServers : undefined;
-            resourceInputs["oktaToken"] = args ? args.oktaToken : undefined;
+            resourceInputs["oktaToken"] = args?.oktaToken ? pulumi.secret(args.oktaToken) : undefined;
             resourceInputs["oktaUrl"] = args ? args.oktaUrl : undefined;
             resourceInputs["oktaUsernameSuffix"] = args ? args.oktaUsernameSuffix : undefined;
             resourceInputs["otpMode"] = args ? args.otpMode : undefined;
@@ -610,6 +605,8 @@ export class AviatrixGateway extends pulumi.CustomResource {
             resourceInputs["securityGroupId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["customerManagedKeys", "duoSecretKey", "ldapPassword", "oktaToken"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(AviatrixGateway.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -627,84 +624,83 @@ export interface AviatrixGatewayState {
      */
     additionalCidrs?: pulumi.Input<string>;
     /**
-     * A list of CIDR ranges separated by comma to configure when 'designated_gateway' feature is enabled.
+     * A list of CIDR ranges separated by comma to configure when "Designated Gateway" feature is enabled. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
      */
     additionalCidrsDesignatedGateway?: pulumi.Input<string>;
     /**
-     * When value is false, reuse an idle address in Elastic IP pool for this gateway. Otherwise, allocate a new Elastic IP and
-     * use it for this gateway.
+     * If set to false, use an available address in Elastic IP pool for this gateway. Otherwise, allocate a new Elastic IP and use it for this gateway. Available in Controller 2.7+. Valid values: true, false. Default: true.
      */
     allocateNewEip?: pulumi.Input<boolean>;
     /**
-     * Availability domain for OCI.
+     * Availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
      */
     availabilityDomain?: pulumi.Input<string>;
     /**
-     * The name of the public IP address and its resource group in Azure to assign to this Gateway.
+     * Name of public IP Address resource and its resource group in Azure to be assigned to the gateway instance. Example: "IP_Name:Resource_Group_Name". Required when `allocateNewEip` is false and `cloudType` is Azure, AzureGov or AzureChina. Available as of provider version 2.20+.
      */
     azureEipNameResourceGroup?: pulumi.Input<string>;
     /**
-     * Instance ID of the gateway.
+     * Cloud instance ID of the gateway.
      */
     cloudInstanceId?: pulumi.Input<string>;
     /**
-     * Type of cloud service provider.
+     * Cloud service provider to use to launch the gateway. Requires an integer value. Currently supports AWS(1), GCP(4), Azure(8), OCI(16), AzureGov(32), AWSGov(256), AWSChina(1024), AzureChina(2048), Alibaba Cloud (8192), AWS Top Secret (16384) and AWS Secret (32768).
      */
     cloudType?: pulumi.Input<number>;
     /**
-     * Customer managed key ID.
+     * Customer-managed key ID.
      */
     customerManagedKeys?: pulumi.Input<string>;
     /**
-     * API hostname for DUO auth mode.
+     * API hostname for DUO auth mode. Required: Yes if `otpMode` is "2".
      */
     duoApiHostname?: pulumi.Input<string>;
     /**
-     * Integration key for DUO auth mode.
+     * Integration key for DUO auth mode. Required if `otpMode` is "2".
      */
     duoIntegrationKey?: pulumi.Input<string>;
     /**
-     * Push mode for DUO auth.
+     * Push mode for DUO auth. Required if `otpMode` is "2". Valid values: "auto", "selective" and "token".
      */
     duoPushMode?: pulumi.Input<string>;
     /**
-     * Secret key for DUO auth mode.
+     * Secret key for DUO auth mode. Required if `otpMode` is "2".
      */
     duoSecretKey?: pulumi.Input<string>;
     /**
-     * Required when allocate_new_eip is false. It uses specified EIP for this gateway.
+     * Specified EIP to use for gateway creation. Required when `allocateNewEip` is false.  Available in Controller version 3.5+. Only available for AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret.
      */
     eip?: pulumi.Input<string>;
     /**
-     * ELB DNS Name.
+     * ELB DNS name.
      */
     elbDnsName?: pulumi.Input<string>;
     /**
-     * A name for the ELB that is created.
+     * A name for the ELB that is created. If it is not specified, a name is generated automatically.
      */
     elbName?: pulumi.Input<string>;
     /**
-     * Enable 'designated_gateway' feature for Gateway. Valid values: true, false.
+     * Enable Designated Gateway feature for Gateway. Only supported for AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret gateways. Valid values: true, false. Default value: false. Please view documentation [here](https://docs.aviatrix.com/HowTos/gateway.html#designated-gateway) for more information on this feature.
      */
     enableDesignatedGateway?: pulumi.Input<boolean>;
     /**
-     * Specify whether to enable ELB or not.
+     * Specify whether to enable ELB or not. Not supported for OCI gateways. Valid values: true, false.
      */
     enableElb?: pulumi.Input<boolean>;
     /**
-     * Enable encrypt gateway EBS volume. Only supported for AWS provider. Valid values: true, false. Default value: false.
+     * Enable EBS volume encryption for the gateway. Only supported for AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret gateways. Valid values: true, false. Default value: false.
      */
     enableEncryptVolume?: pulumi.Input<boolean>;
     /**
-     * Enable jumbo frame support for Gateway. Valid values: true or false. Default value: true.
+     * Enable jumbo frames for this gateway. Default value is true.
      */
     enableJumboFrame?: pulumi.Input<boolean>;
     /**
-     * Specify whether to enable LDAP or not. Supported values: 'yes' and 'no'.
+     * Enable/disable LDAP. Valid values: true, false. Default value: false.
      */
     enableLdap?: pulumi.Input<boolean>;
     /**
-     * Enable monitor gateway subnets. Valid values: true, false. Default value: false.
+     * If set to true, the [Monitor Gateway Subnets](https://docs.aviatrix.com/HowTos/gateway.html#monitor-gateway-subnet) feature is enabled. Default value is false. Available in provider version R2.17.1+.
      */
     enableMonitorGatewaySubnets?: pulumi.Input<boolean>;
     /**
@@ -716,81 +712,79 @@ export interface AviatrixGatewayState {
      */
     enableSpotInstance?: pulumi.Input<boolean>;
     /**
-     * Enable vpc_dns_server for Gateway. Valid values: true, false.
+     * Enable VPC DNS Server for gateway. Currently only supported for AWS, Azure, AzureGov, AWSGov, AWSChina, AzureChina, Alibaba Cloud, AWS Top Secret and AWS Secret gateways. Valid values: true, false. Default value: false.
      */
     enableVpcDnsServer?: pulumi.Input<boolean>;
     /**
-     * This field indicates whether to enable VPN NAT or not. Only supported for VPN gateway. Valid values: true, false.
-     * Default value: true.
+     * Enable/disable VPN NAT. Only supported for VPN gateway. Valid values: true, false. Default value: true.
      */
     enableVpnNat?: pulumi.Input<boolean>;
     /**
-     * Fault domain for OCI.
+     * Fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
      */
     faultDomain?: pulumi.Input<string>;
     /**
-     * FQDN gateway lan interface cidr.
+     * If `fqdnLanCidr` is set, the FQDN gateway will be created with an additional LAN interface using the provided CIDR. This attribute is required when enabling FQDN gateway FireNet in Azure or GCP. Available in provider version R2.17.1+.
      */
     fqdnLanCidr?: pulumi.Input<string>;
     /**
-     * FQDN gateway lan interface id.
+     * The lan interface id of the of FQDN gateway with additional LAN interface. This attribute will be exported when enabling FQDN gateway firenet in Azure. Available in provider version R2.17.1+.
      */
     fqdnLanInterface?: pulumi.Input<string>;
     /**
-     * LAN VPC ID. Only used for GCP FQDN Gateway.
+     * FQDN LAN VPC ID. This attribute is required when enabling FQDN gateway FireNet in GCP. Available as of provider version R2.18.1+.
      */
     fqdnLanVpcId?: pulumi.Input<string>;
     /**
-     * Aviatrix gateway unique name.
+     * Name of the Aviatrix gateway to be created.
      */
     gwName?: pulumi.Input<string>;
     /**
-     * Size of Gateway Instance.
+     * Size of the gateway instance. Example: AWS/AWSGov/AWSChina: "t2.large", GCP: "n1-standard-1", Azure/AzureGov/AzureChina: "Standard_B1s", OCI: "VM.Standard2.2".
      */
     gwSize?: pulumi.Input<string>;
     /**
-     * Typed value when modifying idle_timeout. If it's -1, this feature is disabled.
+     * It sets the value (seconds) of the [idle timeout](https://docs.aviatrix.com/HowTos/openvpn_faq.html#how-do-i-fix-the-aviatrix-vpn-timing-out-too-quickly). This idle timeout feature is enable only if this attribute is set, otherwise it is disabled. The entered value must be an integer number greater than 300.  Available in provider version R2.17.1+.
      */
     idleTimeout?: pulumi.Input<number>;
     /**
-     * image_version can be used to set the desired image version of the gateway. If set, we will attempt to update the gateway
-     * to the specified version.
+     * The image version of the gateway. Use `aviatrix.getAviatrixGatewayImage` data source to programmatically retrieve this value for the desired `softwareVersion`. If set, we will attempt to update the gateway to the specified version if current version is different. If left blank, the gateway upgrades can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "hvm-cloudx-aws-022021". Available as of provider version R2.20.0.
      */
     imageVersion?: pulumi.Input<string>;
     /**
-     * Enable Insane Mode for Gateway. Valid values: true, false.
+     * Enable [Insane Mode](https://docs.aviatrix.com/HowTos/insane_mode.html) for Gateway. Insane Mode gateway size must be at least c5 series (AWS) or Standard_D3_v2 (Azure/AzureGov). If enabled, a valid /26 CIDR segment of the VPC must be specified to create a new subnet. Only supported for AWS, AWSGov, Azure, AzureGov, AWS China, Azure China, AWS Top Secret or AWS Secret.  Valid values: true, false.
      */
     insaneMode?: pulumi.Input<boolean>;
     /**
-     * AZ of subnet being created for Insane Mode Gateway. Required if insane_mode is set.
+     * Region + Availability Zone of subnet being created for Insane Mode gateway. Required for AWS, AWSGov, AWS China, AWS Top Secret or AWS Secret if `insaneMode` is set. Example: AWS: "us-west-1a".
      */
     insaneModeAz?: pulumi.Input<string>;
     /**
-     * LDAP base DN. Required: Yes if enable_ldap is 'yes'.
+     * LDAP base DN. Required if `enableLdap` is true.
      */
     ldapBaseDn?: pulumi.Input<string>;
     /**
-     * LDAP bind DN. Required: Yes if enable_ldap is 'yes'.
+     * LDAP bind DN. Required if `enableLdap` is true.
      */
     ldapBindDn?: pulumi.Input<string>;
     /**
-     * LDAP password. Required: Yes if enable_ldap is 'yes'.
+     * LDAP password. Required if `enableLdap` is true.
      */
     ldapPassword?: pulumi.Input<string>;
     /**
-     * LDAP server address. Required: Yes if enable_ldap is 'yes'.
+     * LDAP server address. Required if `enableLdap` is true.
      */
     ldapServer?: pulumi.Input<string>;
     /**
-     * LDAP user attribute. Required: Yes if enable_ldap is 'yes'.
+     * LDAP user attribute. Required if `enableLdap` is true.
      */
     ldapUsernameAttribute?: pulumi.Input<string>;
     /**
-     * Maximum connection of VPN access.
+     * Maximum number of active VPN users allowed to be connected to this gateway. Required if `vpnAccess` is true. Make sure the number is smaller than the VPN CIDR block. Example: 100. **NOTE: Please see notes here in regards to any deltas found in your state with the addition of this argument in R1.14.**
      */
     maxVpnConn?: pulumi.Input<string>;
     /**
-     * A set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true.
+     * Set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true. Available in provider version R2.17.1+.
      */
     monitorExcludeLists?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -798,39 +792,39 @@ export interface AviatrixGatewayState {
      */
     nameServers?: pulumi.Input<string>;
     /**
-     * Token for Okta auth mode.
+     * Token for Okta auth mode. Required if `otpMode` is "3".
      */
     oktaToken?: pulumi.Input<string>;
     /**
-     * URL for Okta auth mode.
+     * URL for Okta auth mode. Required if `otpMode` is "3".
      */
     oktaUrl?: pulumi.Input<string>;
     /**
-     * Username suffix for Okta auth mode.
+     * Username suffix for Okta auth mode. Example: "aviatrix.com".
      */
     oktaUsernameSuffix?: pulumi.Input<string>;
     /**
-     * Two step authentication mode.
+     * Two step authentication mode. Valid values: "2" for DUO, "3" for Okta.
      */
     otpMode?: pulumi.Input<string>;
     /**
-     * Peering HA availability domain for OCI.
+     * Peering HA gateway availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
      */
     peeringHaAvailabilityDomain?: pulumi.Input<string>;
     /**
-     * The name of the public IP address and its resource group in Azure to assign to the Peering HA Gateway.
+     * Name of public IP address resource and its resource group in Azure to be assigned to the HA peering instance. Example: "IP_Name:Resource_Group_Name". Required if `peeringHaEip` is set and `cloudType` is Azure, AzureGov or AzureChina. Available as of provider version 2.20+.
      */
     peeringHaAzureEipNameResourceGroup?: pulumi.Input<string>;
     /**
-     * Instance ID of the peering HA gateway.
+     * Cloud instance ID of the HA gateway.
      */
     peeringHaCloudInstanceId?: pulumi.Input<string>;
     /**
-     * Public IP address that you want assigned to the HA peering instance.
+     * Public IP address to be assigned to the HA peering instance. Only available for AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret.
      */
     peeringHaEip?: pulumi.Input<string>;
     /**
-     * Peering HA fault domain for OCI.
+     * Peering HA gateway fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
      */
     peeringHaFaultDomain?: pulumi.Input<string>;
     /**
@@ -838,16 +832,15 @@ export interface AviatrixGatewayState {
      */
     peeringHaGwName?: pulumi.Input<string>;
     /**
-     * Peering HA Gateway Size.
+     * Size of the Peering HA Gateway to be created. Required if enabling Peering HA. **NOTE: Please see notes here in regards to any deltas found in your state with the addition of this argument in R1.8.**
      */
     peeringHaGwSize?: pulumi.Input<string>;
     /**
-     * peering_ha_image_version can be used to set the desired image version of the HA gateway. If set, we will attempt to
-     * update the gateway to the specified version.
+     * The image version of the HA gateway. Use `aviatrix.getAviatrixGatewayImage` data source to programmatically retrieve this value for the desired `haSoftwareVersion`. If set, we will attempt to update the HA gateway to the specified version if current version is different. If left blank, the gateway upgrades can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "hvm-cloudx-aws-022021". Available as of provider version R2.20.0.
      */
     peeringHaImageVersion?: pulumi.Input<string>;
     /**
-     * AZ of subnet being created for Insane Mode Peering HA Gateway. Required if insane_mode is set.
+     * Region + Availability Zone of subnet being created for Insane Mode-enabled Peering HA Gateway. Required for AWS only if `insaneMode` is set and `peeringHaSubnet` is set. Example: AWS: "us-west-1a".
      */
     peeringHaInsaneModeAz?: pulumi.Input<string>;
     /**
@@ -855,63 +848,55 @@ export interface AviatrixGatewayState {
      */
     peeringHaPrivateIp?: pulumi.Input<string>;
     /**
-     * Peering HA security group used for the gateway.
+     * HA security group used for the gateway.
      */
     peeringHaSecurityGroupId?: pulumi.Input<string>;
     /**
-     * peering_ha_software_version can be used to set the desired software version of the HA gateway. If set, we will attempt
-     * to update the gateway to the specified version. If left blank, the gateway software version will continue to be managed
-     * through the aviatrix_controller_config resource.
+     * The software version of the HA gateway. If set, we will attempt to update the HA gateway to the specified version if current version is different. If left blank, the HA gateway upgrade can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "6.5.821". Available as of provider version R2.20.0.
      */
     peeringHaSoftwareVersion?: pulumi.Input<string>;
     /**
-     * Public Subnet Information while creating Peering HA Gateway, only subnet is accepted. Required to create peering ha
-     * gateway if cloud_type = 1 or 8 (AWS or Azure). Optional if cloud_type = 4 (GCP)
+     * Public subnet CIDR to create Peering HA Gateway in. Required if enabling Peering HA for AWS/AWSGov/AWS Top Secret/AWS Secret/Azure/AzureGov/Alibaba Cloud. Optional if enabling Peering HA for GCP. Example: AWS: "10.0.0.0/16".
      */
     peeringHaSubnet?: pulumi.Input<string>;
     /**
-     * Zone information for creating Peering HA Gateway. Required to create peering ha gateway if cloud_type = 4 (GCP).
-     * Optional for cloud_type = 8 (Azure).
+     * Zone to create Peering HA Gateway in. Required if enabling Peering HA for GCP. Example: GCP: "us-west1-c". Optional for Azure. Valid values for Azure gateways are in the form "az-n". Example: "az-2". Available for Azure as of provider version R2.17+.
      */
     peeringHaZone?: pulumi.Input<string>;
     /**
-     * Private IP address of the Gateway created.
+     * Private IP address of the gateway created.
      */
     privateIp?: pulumi.Input<string>;
     /**
-     * NS server used by the gateway.
+     * DNS server used by the gateway. Default is "8.8.8.8", can be overridden with the VPC's setting.
      */
     publicDnsServer?: pulumi.Input<string>;
     /**
-     * Whether to enforce Guard Duty IP blocking. Required when `enable_public_subnet_filtering` attribute is true. Valid
-     * values: true or false. Default value: true.
+     * Whether to enforce Guard Duty IP blocking.  Only valid when `enablePublicSubnetFiltering` attribute is true. Valid values: true or false. Default value: true. Available as of provider version R2.18+.
      */
     publicSubnetFilteringGuardDutyEnforced?: pulumi.Input<boolean>;
     /**
-     * Route tables whose associated public subnets are protected for the HA PSF gateway. Required when
-     * enable_public_subnet_filtering and peering_ha_subnet are set.
+     * Route tables whose associated public subnets are protected for the HA PSF gateway. Required when `enablePublicSubnetFiltering` and `peeringHaSubnet` are set. Available as of provider version R2.18+.
      */
     publicSubnetFilteringHaRouteTables?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Route tables whose associated public subnets are protected. Required when `enable_public_subnet_filtering` attribute is
-     * true.
+     * Route tables whose associated public subnets are protected. Only valid when `enablePublicSubnetFiltering` attribute is true. Available as of provider version R2.18+.
      */
     publicSubnetFilteringRouteTables?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Typed value when modifying renegotiation_interval. If it's -1, this feature is disabled.
+     * It sets the value (seconds) of the [renegotiation interval](https://docs.aviatrix.com/HowTos/openvpn_faq.html#how-do-i-fix-the-aviatrix-vpn-timing-out-too-quickly). This renegotiation interval feature is enable only if this attribute is set, otherwise it is disabled. The entered value must be an integer number greater than 300. Available in provider version R2.17.1+.
      */
     renegotiationInterval?: pulumi.Input<number>;
     /**
-     * Gateway ethernet interface RX queue size. Supported for AWS related clouds only.
+     * Gateway ethernet interface RX queue size. Once set, can't be deleted or disabled. Available for AWS as of provider version R2.22+.
      */
     rxQueueSize?: pulumi.Input<string>;
     /**
-     * This field indicates whether to enable SAML or not.
+     * Enable/disable SAML. This field is available in Controller version 3.3 or later release. Valid values: true, false. Default value: false.
      */
     samlEnabled?: pulumi.Input<boolean>;
     /**
-     * A list of domain names that will use the NameServer when a specific name is not in the destination when Split Tunnel
-     * Mode is enabled.
+     * A list of domain names that will use the NameServer when a specific name is not in the destination when Split Tunnel Mode is enabled.
      */
     searchDomains?: pulumi.Input<string>;
     /**
@@ -919,21 +904,19 @@ export interface AviatrixGatewayState {
      */
     securityGroupId?: pulumi.Input<string>;
     /**
-     * Set to true if this feature is desired.
+     * If enabled, Controller monitors the health of the gateway and restarts the gateway if it becomes unreachable. Valid values: true, false. Default value: false.
      */
     singleAzHa?: pulumi.Input<boolean>;
     /**
-     * Enable Source NAT for this container.
+     * Enable Source NAT in "single ip" mode for this gateway. Valid values: true, false. Default value: false. **NOTE: If using SNAT for FQDN use-case, please see notes here.**
      */
     singleIpSnat?: pulumi.Input<boolean>;
     /**
-     * software_version can be used to set the desired software version of the gateway. If set, we will attempt to update the
-     * gateway to the specified version. If left blank, the gateway software version will continue to be managed through the
-     * aviatrix_controller_config resource.
+     * The software version of the gateway. If set, we will attempt to update the gateway to the specified version if current version is different. If left blank, the gateway upgrade can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "6.5.821". Available as of provider version R2.20.0.
      */
     softwareVersion?: pulumi.Input<string>;
     /**
-     * Specify split tunnel mode.
+     * Enable/disable Split Tunnel Mode. Valid values: true, false. Default value: true. Please see [here](https://docs.aviatrix.com/HowTos/gateway.html#split-tunnel-mode) for more information on split tunnel.
      */
     splitTunnel?: pulumi.Input<boolean>;
     /**
@@ -941,17 +924,18 @@ export interface AviatrixGatewayState {
      */
     spotPrice?: pulumi.Input<string>;
     /**
-     * A VPC Network address range selected from one of the available network ranges.
+     * A VPC network address range selected from one of the available network ranges. Example: "172.31.0.0/20". **NOTE: If using `insaneMode`, please see notes here.**
      */
     subnet?: pulumi.Input<string>;
     /**
-     * Instance tag of cloud provider.
+     * (Optional) Tag list of the gateway instance. Only available for AWS, AWSGov, AWSChina, Azure, AzureGov and AzureChina gateways. Example: ["key1:value1", "key2:value2"].
+     * * `storageName` (Optional) Specify a storage account. Required if `cloudType` is 2048 (AzureChina). Removed in Provider version 2.21.0+.
      *
      * @deprecated Use tags instead.
      */
     tagLists?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * A map of tags to assign to the gateway.
+     * Map of tags to assign to the gateway. Only available for AWS, AWSGov, AWSChina, Azure, AzureGov, AzureChina, AWS Top Secret and AWS Secret gateways. Allowed characters vary by cloud type but always include: letters, spaces, and numbers. AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret allow the use of any character.  Azure, AzureGov and AzureChina allows the following special characters: + - = . _ : @. Example: {"key1" = "value1", "key2" = "value2"}.
      */
     tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
@@ -959,28 +943,27 @@ export interface AviatrixGatewayState {
      */
     tunnelDetectionTime?: pulumi.Input<number>;
     /**
-     * ID of legacy VPC/Vnet to be connected.
+     * VPC ID/VNet name of cloud provider. Example: AWS/AWSGov/AWSChina: "vpc-abcd1234", GCP: "vpc-gcp-test~-~project-id", Azure/AzureGov/AzureChina: "vnet_name:rg_name:resource_guid", OCI: "ocid1.vcn.oc1.iad.aaaaaaaaba3pv6wkcr4jqae5f44n2b2m2yt2j6rx32uzr4h25vqstifsfdsq".
      */
     vpcId?: pulumi.Input<string>;
     /**
-     * Region where this gateway will be launched.
+     * VPC region the gateway will be created in. Example: AWS: "us-east-1", GCP: "us-west2-a", Azure: "East US 2", OCI: "us-ashburn-1", AzureGov: "USGov Arizona", AWSGov: "us-gov-west-1", AWSChina: "cn-north-1", AzureChina: "China North", AWS Top Secret: "us-iso-east-1", AWS Secret: "us-isob-east-1".
      */
     vpcReg?: pulumi.Input<string>;
     /**
-     * Enable user access through VPN to this container.
+     * Enable [user access through VPN](https://docs.aviatrix.com/HowTos/gateway.html#vpn-access) to this gateway. Valid values: true, false.
      */
     vpnAccess?: pulumi.Input<boolean>;
     /**
-     * VPN CIDR block for the container.
+     * VPN CIDR block for the gateway. Required if `vpnAccess` is true. Example: "192.168.43.0/24".
      */
     vpnCidr?: pulumi.Input<string>;
     /**
-     * Elb protocol for VPN gateway with elb enabled. Only supports AWS provider. Valid values: 'TCP', 'UDP'. If not specified,
-     * 'TCP'' will be used.
+     * Transport mode for VPN connection. All `cloudTypes` support TCP with ELB, and UDP without ELB. AWS(1) additionally supports UDP with ELB. Valid values: "TCP", "UDP". If not specified, "TCP" will be used.
      */
     vpnProtocol?: pulumi.Input<string>;
     /**
-     * Availability Zone. Only available for Azure and Public Subnet Filtering gateway
+     * Availability Zone. Only available for Azure and Public Subnet Filtering gateway. Available for Azure as of provider version R2.17+.
      */
     zone?: pulumi.Input<string>;
 }
@@ -998,76 +981,75 @@ export interface AviatrixGatewayArgs {
      */
     additionalCidrs?: pulumi.Input<string>;
     /**
-     * A list of CIDR ranges separated by comma to configure when 'designated_gateway' feature is enabled.
+     * A list of CIDR ranges separated by comma to configure when "Designated Gateway" feature is enabled. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
      */
     additionalCidrsDesignatedGateway?: pulumi.Input<string>;
     /**
-     * When value is false, reuse an idle address in Elastic IP pool for this gateway. Otherwise, allocate a new Elastic IP and
-     * use it for this gateway.
+     * If set to false, use an available address in Elastic IP pool for this gateway. Otherwise, allocate a new Elastic IP and use it for this gateway. Available in Controller 2.7+. Valid values: true, false. Default: true.
      */
     allocateNewEip?: pulumi.Input<boolean>;
     /**
-     * Availability domain for OCI.
+     * Availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
      */
     availabilityDomain?: pulumi.Input<string>;
     /**
-     * The name of the public IP address and its resource group in Azure to assign to this Gateway.
+     * Name of public IP Address resource and its resource group in Azure to be assigned to the gateway instance. Example: "IP_Name:Resource_Group_Name". Required when `allocateNewEip` is false and `cloudType` is Azure, AzureGov or AzureChina. Available as of provider version 2.20+.
      */
     azureEipNameResourceGroup?: pulumi.Input<string>;
     /**
-     * Type of cloud service provider.
+     * Cloud service provider to use to launch the gateway. Requires an integer value. Currently supports AWS(1), GCP(4), Azure(8), OCI(16), AzureGov(32), AWSGov(256), AWSChina(1024), AzureChina(2048), Alibaba Cloud (8192), AWS Top Secret (16384) and AWS Secret (32768).
      */
     cloudType: pulumi.Input<number>;
     /**
-     * Customer managed key ID.
+     * Customer-managed key ID.
      */
     customerManagedKeys?: pulumi.Input<string>;
     /**
-     * API hostname for DUO auth mode.
+     * API hostname for DUO auth mode. Required: Yes if `otpMode` is "2".
      */
     duoApiHostname?: pulumi.Input<string>;
     /**
-     * Integration key for DUO auth mode.
+     * Integration key for DUO auth mode. Required if `otpMode` is "2".
      */
     duoIntegrationKey?: pulumi.Input<string>;
     /**
-     * Push mode for DUO auth.
+     * Push mode for DUO auth. Required if `otpMode` is "2". Valid values: "auto", "selective" and "token".
      */
     duoPushMode?: pulumi.Input<string>;
     /**
-     * Secret key for DUO auth mode.
+     * Secret key for DUO auth mode. Required if `otpMode` is "2".
      */
     duoSecretKey?: pulumi.Input<string>;
     /**
-     * Required when allocate_new_eip is false. It uses specified EIP for this gateway.
+     * Specified EIP to use for gateway creation. Required when `allocateNewEip` is false.  Available in Controller version 3.5+. Only available for AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret.
      */
     eip?: pulumi.Input<string>;
     /**
-     * A name for the ELB that is created.
+     * A name for the ELB that is created. If it is not specified, a name is generated automatically.
      */
     elbName?: pulumi.Input<string>;
     /**
-     * Enable 'designated_gateway' feature for Gateway. Valid values: true, false.
+     * Enable Designated Gateway feature for Gateway. Only supported for AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret gateways. Valid values: true, false. Default value: false. Please view documentation [here](https://docs.aviatrix.com/HowTos/gateway.html#designated-gateway) for more information on this feature.
      */
     enableDesignatedGateway?: pulumi.Input<boolean>;
     /**
-     * Specify whether to enable ELB or not.
+     * Specify whether to enable ELB or not. Not supported for OCI gateways. Valid values: true, false.
      */
     enableElb?: pulumi.Input<boolean>;
     /**
-     * Enable encrypt gateway EBS volume. Only supported for AWS provider. Valid values: true, false. Default value: false.
+     * Enable EBS volume encryption for the gateway. Only supported for AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret gateways. Valid values: true, false. Default value: false.
      */
     enableEncryptVolume?: pulumi.Input<boolean>;
     /**
-     * Enable jumbo frame support for Gateway. Valid values: true or false. Default value: true.
+     * Enable jumbo frames for this gateway. Default value is true.
      */
     enableJumboFrame?: pulumi.Input<boolean>;
     /**
-     * Specify whether to enable LDAP or not. Supported values: 'yes' and 'no'.
+     * Enable/disable LDAP. Valid values: true, false. Default value: false.
      */
     enableLdap?: pulumi.Input<boolean>;
     /**
-     * Enable monitor gateway subnets. Valid values: true, false. Default value: false.
+     * If set to true, the [Monitor Gateway Subnets](https://docs.aviatrix.com/HowTos/gateway.html#monitor-gateway-subnet) feature is enabled. Default value is false. Available in provider version R2.17.1+.
      */
     enableMonitorGatewaySubnets?: pulumi.Input<boolean>;
     /**
@@ -1079,77 +1061,75 @@ export interface AviatrixGatewayArgs {
      */
     enableSpotInstance?: pulumi.Input<boolean>;
     /**
-     * Enable vpc_dns_server for Gateway. Valid values: true, false.
+     * Enable VPC DNS Server for gateway. Currently only supported for AWS, Azure, AzureGov, AWSGov, AWSChina, AzureChina, Alibaba Cloud, AWS Top Secret and AWS Secret gateways. Valid values: true, false. Default value: false.
      */
     enableVpcDnsServer?: pulumi.Input<boolean>;
     /**
-     * This field indicates whether to enable VPN NAT or not. Only supported for VPN gateway. Valid values: true, false.
-     * Default value: true.
+     * Enable/disable VPN NAT. Only supported for VPN gateway. Valid values: true, false. Default value: true.
      */
     enableVpnNat?: pulumi.Input<boolean>;
     /**
-     * Fault domain for OCI.
+     * Fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
      */
     faultDomain?: pulumi.Input<string>;
     /**
-     * FQDN gateway lan interface cidr.
+     * If `fqdnLanCidr` is set, the FQDN gateway will be created with an additional LAN interface using the provided CIDR. This attribute is required when enabling FQDN gateway FireNet in Azure or GCP. Available in provider version R2.17.1+.
      */
     fqdnLanCidr?: pulumi.Input<string>;
     /**
-     * LAN VPC ID. Only used for GCP FQDN Gateway.
+     * FQDN LAN VPC ID. This attribute is required when enabling FQDN gateway FireNet in GCP. Available as of provider version R2.18.1+.
      */
     fqdnLanVpcId?: pulumi.Input<string>;
     /**
-     * Aviatrix gateway unique name.
+     * Name of the Aviatrix gateway to be created.
      */
     gwName: pulumi.Input<string>;
     /**
-     * Size of Gateway Instance.
+     * Size of the gateway instance. Example: AWS/AWSGov/AWSChina: "t2.large", GCP: "n1-standard-1", Azure/AzureGov/AzureChina: "Standard_B1s", OCI: "VM.Standard2.2".
      */
     gwSize: pulumi.Input<string>;
     /**
-     * Typed value when modifying idle_timeout. If it's -1, this feature is disabled.
+     * It sets the value (seconds) of the [idle timeout](https://docs.aviatrix.com/HowTos/openvpn_faq.html#how-do-i-fix-the-aviatrix-vpn-timing-out-too-quickly). This idle timeout feature is enable only if this attribute is set, otherwise it is disabled. The entered value must be an integer number greater than 300.  Available in provider version R2.17.1+.
      */
     idleTimeout?: pulumi.Input<number>;
     /**
-     * image_version can be used to set the desired image version of the gateway. If set, we will attempt to update the gateway
-     * to the specified version.
+     * The image version of the gateway. Use `aviatrix.getAviatrixGatewayImage` data source to programmatically retrieve this value for the desired `softwareVersion`. If set, we will attempt to update the gateway to the specified version if current version is different. If left blank, the gateway upgrades can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "hvm-cloudx-aws-022021". Available as of provider version R2.20.0.
      */
     imageVersion?: pulumi.Input<string>;
     /**
-     * Enable Insane Mode for Gateway. Valid values: true, false.
+     * Enable [Insane Mode](https://docs.aviatrix.com/HowTos/insane_mode.html) for Gateway. Insane Mode gateway size must be at least c5 series (AWS) or Standard_D3_v2 (Azure/AzureGov). If enabled, a valid /26 CIDR segment of the VPC must be specified to create a new subnet. Only supported for AWS, AWSGov, Azure, AzureGov, AWS China, Azure China, AWS Top Secret or AWS Secret.  Valid values: true, false.
      */
     insaneMode?: pulumi.Input<boolean>;
     /**
-     * AZ of subnet being created for Insane Mode Gateway. Required if insane_mode is set.
+     * Region + Availability Zone of subnet being created for Insane Mode gateway. Required for AWS, AWSGov, AWS China, AWS Top Secret or AWS Secret if `insaneMode` is set. Example: AWS: "us-west-1a".
      */
     insaneModeAz?: pulumi.Input<string>;
     /**
-     * LDAP base DN. Required: Yes if enable_ldap is 'yes'.
+     * LDAP base DN. Required if `enableLdap` is true.
      */
     ldapBaseDn?: pulumi.Input<string>;
     /**
-     * LDAP bind DN. Required: Yes if enable_ldap is 'yes'.
+     * LDAP bind DN. Required if `enableLdap` is true.
      */
     ldapBindDn?: pulumi.Input<string>;
     /**
-     * LDAP password. Required: Yes if enable_ldap is 'yes'.
+     * LDAP password. Required if `enableLdap` is true.
      */
     ldapPassword?: pulumi.Input<string>;
     /**
-     * LDAP server address. Required: Yes if enable_ldap is 'yes'.
+     * LDAP server address. Required if `enableLdap` is true.
      */
     ldapServer?: pulumi.Input<string>;
     /**
-     * LDAP user attribute. Required: Yes if enable_ldap is 'yes'.
+     * LDAP user attribute. Required if `enableLdap` is true.
      */
     ldapUsernameAttribute?: pulumi.Input<string>;
     /**
-     * Maximum connection of VPN access.
+     * Maximum number of active VPN users allowed to be connected to this gateway. Required if `vpnAccess` is true. Make sure the number is smaller than the VPN CIDR block. Example: 100. **NOTE: Please see notes here in regards to any deltas found in your state with the addition of this argument in R1.14.**
      */
     maxVpnConn?: pulumi.Input<string>;
     /**
-     * A set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true.
+     * Set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true. Available in provider version R2.17.1+.
      */
     monitorExcludeLists?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -1157,114 +1137,103 @@ export interface AviatrixGatewayArgs {
      */
     nameServers?: pulumi.Input<string>;
     /**
-     * Token for Okta auth mode.
+     * Token for Okta auth mode. Required if `otpMode` is "3".
      */
     oktaToken?: pulumi.Input<string>;
     /**
-     * URL for Okta auth mode.
+     * URL for Okta auth mode. Required if `otpMode` is "3".
      */
     oktaUrl?: pulumi.Input<string>;
     /**
-     * Username suffix for Okta auth mode.
+     * Username suffix for Okta auth mode. Example: "aviatrix.com".
      */
     oktaUsernameSuffix?: pulumi.Input<string>;
     /**
-     * Two step authentication mode.
+     * Two step authentication mode. Valid values: "2" for DUO, "3" for Okta.
      */
     otpMode?: pulumi.Input<string>;
     /**
-     * Peering HA availability domain for OCI.
+     * Peering HA gateway availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
      */
     peeringHaAvailabilityDomain?: pulumi.Input<string>;
     /**
-     * The name of the public IP address and its resource group in Azure to assign to the Peering HA Gateway.
+     * Name of public IP address resource and its resource group in Azure to be assigned to the HA peering instance. Example: "IP_Name:Resource_Group_Name". Required if `peeringHaEip` is set and `cloudType` is Azure, AzureGov or AzureChina. Available as of provider version 2.20+.
      */
     peeringHaAzureEipNameResourceGroup?: pulumi.Input<string>;
     /**
-     * Public IP address that you want assigned to the HA peering instance.
+     * Public IP address to be assigned to the HA peering instance. Only available for AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret.
      */
     peeringHaEip?: pulumi.Input<string>;
     /**
-     * Peering HA fault domain for OCI.
+     * Peering HA gateway fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
      */
     peeringHaFaultDomain?: pulumi.Input<string>;
     /**
-     * Peering HA Gateway Size.
+     * Size of the Peering HA Gateway to be created. Required if enabling Peering HA. **NOTE: Please see notes here in regards to any deltas found in your state with the addition of this argument in R1.8.**
      */
     peeringHaGwSize?: pulumi.Input<string>;
     /**
-     * peering_ha_image_version can be used to set the desired image version of the HA gateway. If set, we will attempt to
-     * update the gateway to the specified version.
+     * The image version of the HA gateway. Use `aviatrix.getAviatrixGatewayImage` data source to programmatically retrieve this value for the desired `haSoftwareVersion`. If set, we will attempt to update the HA gateway to the specified version if current version is different. If left blank, the gateway upgrades can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "hvm-cloudx-aws-022021". Available as of provider version R2.20.0.
      */
     peeringHaImageVersion?: pulumi.Input<string>;
     /**
-     * AZ of subnet being created for Insane Mode Peering HA Gateway. Required if insane_mode is set.
+     * Region + Availability Zone of subnet being created for Insane Mode-enabled Peering HA Gateway. Required for AWS only if `insaneMode` is set and `peeringHaSubnet` is set. Example: AWS: "us-west-1a".
      */
     peeringHaInsaneModeAz?: pulumi.Input<string>;
     /**
-     * peering_ha_software_version can be used to set the desired software version of the HA gateway. If set, we will attempt
-     * to update the gateway to the specified version. If left blank, the gateway software version will continue to be managed
-     * through the aviatrix_controller_config resource.
+     * The software version of the HA gateway. If set, we will attempt to update the HA gateway to the specified version if current version is different. If left blank, the HA gateway upgrade can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "6.5.821". Available as of provider version R2.20.0.
      */
     peeringHaSoftwareVersion?: pulumi.Input<string>;
     /**
-     * Public Subnet Information while creating Peering HA Gateway, only subnet is accepted. Required to create peering ha
-     * gateway if cloud_type = 1 or 8 (AWS or Azure). Optional if cloud_type = 4 (GCP)
+     * Public subnet CIDR to create Peering HA Gateway in. Required if enabling Peering HA for AWS/AWSGov/AWS Top Secret/AWS Secret/Azure/AzureGov/Alibaba Cloud. Optional if enabling Peering HA for GCP. Example: AWS: "10.0.0.0/16".
      */
     peeringHaSubnet?: pulumi.Input<string>;
     /**
-     * Zone information for creating Peering HA Gateway. Required to create peering ha gateway if cloud_type = 4 (GCP).
-     * Optional for cloud_type = 8 (Azure).
+     * Zone to create Peering HA Gateway in. Required if enabling Peering HA for GCP. Example: GCP: "us-west1-c". Optional for Azure. Valid values for Azure gateways are in the form "az-n". Example: "az-2". Available for Azure as of provider version R2.17+.
      */
     peeringHaZone?: pulumi.Input<string>;
     /**
-     * Whether to enforce Guard Duty IP blocking. Required when `enable_public_subnet_filtering` attribute is true. Valid
-     * values: true or false. Default value: true.
+     * Whether to enforce Guard Duty IP blocking.  Only valid when `enablePublicSubnetFiltering` attribute is true. Valid values: true or false. Default value: true. Available as of provider version R2.18+.
      */
     publicSubnetFilteringGuardDutyEnforced?: pulumi.Input<boolean>;
     /**
-     * Route tables whose associated public subnets are protected for the HA PSF gateway. Required when
-     * enable_public_subnet_filtering and peering_ha_subnet are set.
+     * Route tables whose associated public subnets are protected for the HA PSF gateway. Required when `enablePublicSubnetFiltering` and `peeringHaSubnet` are set. Available as of provider version R2.18+.
      */
     publicSubnetFilteringHaRouteTables?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Route tables whose associated public subnets are protected. Required when `enable_public_subnet_filtering` attribute is
-     * true.
+     * Route tables whose associated public subnets are protected. Only valid when `enablePublicSubnetFiltering` attribute is true. Available as of provider version R2.18+.
      */
     publicSubnetFilteringRouteTables?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Typed value when modifying renegotiation_interval. If it's -1, this feature is disabled.
+     * It sets the value (seconds) of the [renegotiation interval](https://docs.aviatrix.com/HowTos/openvpn_faq.html#how-do-i-fix-the-aviatrix-vpn-timing-out-too-quickly). This renegotiation interval feature is enable only if this attribute is set, otherwise it is disabled. The entered value must be an integer number greater than 300. Available in provider version R2.17.1+.
      */
     renegotiationInterval?: pulumi.Input<number>;
     /**
-     * Gateway ethernet interface RX queue size. Supported for AWS related clouds only.
+     * Gateway ethernet interface RX queue size. Once set, can't be deleted or disabled. Available for AWS as of provider version R2.22+.
      */
     rxQueueSize?: pulumi.Input<string>;
     /**
-     * This field indicates whether to enable SAML or not.
+     * Enable/disable SAML. This field is available in Controller version 3.3 or later release. Valid values: true, false. Default value: false.
      */
     samlEnabled?: pulumi.Input<boolean>;
     /**
-     * A list of domain names that will use the NameServer when a specific name is not in the destination when Split Tunnel
-     * Mode is enabled.
+     * A list of domain names that will use the NameServer when a specific name is not in the destination when Split Tunnel Mode is enabled.
      */
     searchDomains?: pulumi.Input<string>;
     /**
-     * Set to true if this feature is desired.
+     * If enabled, Controller monitors the health of the gateway and restarts the gateway if it becomes unreachable. Valid values: true, false. Default value: false.
      */
     singleAzHa?: pulumi.Input<boolean>;
     /**
-     * Enable Source NAT for this container.
+     * Enable Source NAT in "single ip" mode for this gateway. Valid values: true, false. Default value: false. **NOTE: If using SNAT for FQDN use-case, please see notes here.**
      */
     singleIpSnat?: pulumi.Input<boolean>;
     /**
-     * software_version can be used to set the desired software version of the gateway. If set, we will attempt to update the
-     * gateway to the specified version. If left blank, the gateway software version will continue to be managed through the
-     * aviatrix_controller_config resource.
+     * The software version of the gateway. If set, we will attempt to update the gateway to the specified version if current version is different. If left blank, the gateway upgrade can be managed with the `aviatrix.AviatrixControllerConfig` resource. Type: String. Example: "6.5.821". Available as of provider version R2.20.0.
      */
     softwareVersion?: pulumi.Input<string>;
     /**
-     * Specify split tunnel mode.
+     * Enable/disable Split Tunnel Mode. Valid values: true, false. Default value: true. Please see [here](https://docs.aviatrix.com/HowTos/gateway.html#split-tunnel-mode) for more information on split tunnel.
      */
     splitTunnel?: pulumi.Input<boolean>;
     /**
@@ -1272,17 +1241,18 @@ export interface AviatrixGatewayArgs {
      */
     spotPrice?: pulumi.Input<string>;
     /**
-     * A VPC Network address range selected from one of the available network ranges.
+     * A VPC network address range selected from one of the available network ranges. Example: "172.31.0.0/20". **NOTE: If using `insaneMode`, please see notes here.**
      */
     subnet: pulumi.Input<string>;
     /**
-     * Instance tag of cloud provider.
+     * (Optional) Tag list of the gateway instance. Only available for AWS, AWSGov, AWSChina, Azure, AzureGov and AzureChina gateways. Example: ["key1:value1", "key2:value2"].
+     * * `storageName` (Optional) Specify a storage account. Required if `cloudType` is 2048 (AzureChina). Removed in Provider version 2.21.0+.
      *
      * @deprecated Use tags instead.
      */
     tagLists?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * A map of tags to assign to the gateway.
+     * Map of tags to assign to the gateway. Only available for AWS, AWSGov, AWSChina, Azure, AzureGov, AzureChina, AWS Top Secret and AWS Secret gateways. Allowed characters vary by cloud type but always include: letters, spaces, and numbers. AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret allow the use of any character.  Azure, AzureGov and AzureChina allows the following special characters: + - = . _ : @. Example: {"key1" = "value1", "key2" = "value2"}.
      */
     tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
@@ -1290,28 +1260,27 @@ export interface AviatrixGatewayArgs {
      */
     tunnelDetectionTime?: pulumi.Input<number>;
     /**
-     * ID of legacy VPC/Vnet to be connected.
+     * VPC ID/VNet name of cloud provider. Example: AWS/AWSGov/AWSChina: "vpc-abcd1234", GCP: "vpc-gcp-test~-~project-id", Azure/AzureGov/AzureChina: "vnet_name:rg_name:resource_guid", OCI: "ocid1.vcn.oc1.iad.aaaaaaaaba3pv6wkcr4jqae5f44n2b2m2yt2j6rx32uzr4h25vqstifsfdsq".
      */
     vpcId: pulumi.Input<string>;
     /**
-     * Region where this gateway will be launched.
+     * VPC region the gateway will be created in. Example: AWS: "us-east-1", GCP: "us-west2-a", Azure: "East US 2", OCI: "us-ashburn-1", AzureGov: "USGov Arizona", AWSGov: "us-gov-west-1", AWSChina: "cn-north-1", AzureChina: "China North", AWS Top Secret: "us-iso-east-1", AWS Secret: "us-isob-east-1".
      */
     vpcReg: pulumi.Input<string>;
     /**
-     * Enable user access through VPN to this container.
+     * Enable [user access through VPN](https://docs.aviatrix.com/HowTos/gateway.html#vpn-access) to this gateway. Valid values: true, false.
      */
     vpnAccess?: pulumi.Input<boolean>;
     /**
-     * VPN CIDR block for the container.
+     * VPN CIDR block for the gateway. Required if `vpnAccess` is true. Example: "192.168.43.0/24".
      */
     vpnCidr?: pulumi.Input<string>;
     /**
-     * Elb protocol for VPN gateway with elb enabled. Only supports AWS provider. Valid values: 'TCP', 'UDP'. If not specified,
-     * 'TCP'' will be used.
+     * Transport mode for VPN connection. All `cloudTypes` support TCP with ELB, and UDP without ELB. AWS(1) additionally supports UDP with ELB. Valid values: "TCP", "UDP". If not specified, "TCP" will be used.
      */
     vpnProtocol?: pulumi.Input<string>;
     /**
-     * Availability Zone. Only available for Azure and Public Subnet Filtering gateway
+     * Availability Zone. Only available for Azure and Public Subnet Filtering gateway. Available for Azure as of provider version R2.17+.
      */
     zone?: pulumi.Input<string>;
 }

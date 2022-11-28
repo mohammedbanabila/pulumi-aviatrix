@@ -25,17 +25,15 @@ class AviatrixFirewallInstanceAssociationArgs:
                  vendor_type: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a AviatrixFirewallInstanceAssociation resource.
-        :param pulumi.Input[str] instance_id: ID of Firewall instance, or FQDN Gateway's gw_name.
-        :param pulumi.Input[str] vpc_id: VPC ID.
-        :param pulumi.Input[bool] attached: Switch to attach/detach firewall instance to/from fireNet.
-        :param pulumi.Input[str] egress_interface: Egress interface ID, required if it is a firewall instance.
-        :param pulumi.Input[str] firenet_gw_name: Name of the gateway to launch the firewall instance.
-        :param pulumi.Input[str] firewall_name: Firewall instance name, or FQDN Gateway's gw_name, required if it is a AWS or Azure firewall instance. Not allowed for
-               GCP
-        :param pulumi.Input[str] lan_interface: Lan interface ID, required if it is a firewall instance.
-        :param pulumi.Input[str] management_interface: Management interface ID, required if it is a firewall instance.
-        :param pulumi.Input[str] vendor_type: Indication it is a firewall instance or FQDN gateway to be associated to fireNet. Valid values: 'Generic',
-               'fqdn_gateway'. Value 'fqdn_gateway' is required for FQDN gateway.
+        :param pulumi.Input[str] instance_id: ID of Firewall instance.
+        :param pulumi.Input[str] vpc_id: VPC ID of the Security VPC.
+        :param pulumi.Input[bool] attached: Switch to attach/detach firewall instance to/from FireNet. Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] egress_interface: Egress interface ID. **Required if it is a firewall instance.**
+        :param pulumi.Input[str] firenet_gw_name: Name of the primary FireNet gateway. Required for FireNet without Native GWLB VPC.
+        :param pulumi.Input[str] firewall_name: Firewall instance name. **Required for non-GCP firewall instance. For GCP, this field should not be set.**
+        :param pulumi.Input[str] lan_interface: Lan interface ID. **Required if it is a firewall instance.**
+        :param pulumi.Input[str] management_interface: Management interface ID. **Required if it is a firewall instance.**
+        :param pulumi.Input[str] vendor_type: Type of firewall. Valid values: "Generic", "fqdn_gateway". Default value: "Generic". Value "fqdn_gateway" is required for FQDN gateway.
         """
         pulumi.set(__self__, "instance_id", instance_id)
         pulumi.set(__self__, "vpc_id", vpc_id)
@@ -58,7 +56,7 @@ class AviatrixFirewallInstanceAssociationArgs:
     @pulumi.getter(name="instanceId")
     def instance_id(self) -> pulumi.Input[str]:
         """
-        ID of Firewall instance, or FQDN Gateway's gw_name.
+        ID of Firewall instance.
         """
         return pulumi.get(self, "instance_id")
 
@@ -70,7 +68,7 @@ class AviatrixFirewallInstanceAssociationArgs:
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> pulumi.Input[str]:
         """
-        VPC ID.
+        VPC ID of the Security VPC.
         """
         return pulumi.get(self, "vpc_id")
 
@@ -82,7 +80,7 @@ class AviatrixFirewallInstanceAssociationArgs:
     @pulumi.getter
     def attached(self) -> Optional[pulumi.Input[bool]]:
         """
-        Switch to attach/detach firewall instance to/from fireNet.
+        Switch to attach/detach firewall instance to/from FireNet. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "attached")
 
@@ -94,7 +92,7 @@ class AviatrixFirewallInstanceAssociationArgs:
     @pulumi.getter(name="egressInterface")
     def egress_interface(self) -> Optional[pulumi.Input[str]]:
         """
-        Egress interface ID, required if it is a firewall instance.
+        Egress interface ID. **Required if it is a firewall instance.**
         """
         return pulumi.get(self, "egress_interface")
 
@@ -106,7 +104,7 @@ class AviatrixFirewallInstanceAssociationArgs:
     @pulumi.getter(name="firenetGwName")
     def firenet_gw_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the gateway to launch the firewall instance.
+        Name of the primary FireNet gateway. Required for FireNet without Native GWLB VPC.
         """
         return pulumi.get(self, "firenet_gw_name")
 
@@ -118,8 +116,7 @@ class AviatrixFirewallInstanceAssociationArgs:
     @pulumi.getter(name="firewallName")
     def firewall_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Firewall instance name, or FQDN Gateway's gw_name, required if it is a AWS or Azure firewall instance. Not allowed for
-        GCP
+        Firewall instance name. **Required for non-GCP firewall instance. For GCP, this field should not be set.**
         """
         return pulumi.get(self, "firewall_name")
 
@@ -131,7 +128,7 @@ class AviatrixFirewallInstanceAssociationArgs:
     @pulumi.getter(name="lanInterface")
     def lan_interface(self) -> Optional[pulumi.Input[str]]:
         """
-        Lan interface ID, required if it is a firewall instance.
+        Lan interface ID. **Required if it is a firewall instance.**
         """
         return pulumi.get(self, "lan_interface")
 
@@ -143,7 +140,7 @@ class AviatrixFirewallInstanceAssociationArgs:
     @pulumi.getter(name="managementInterface")
     def management_interface(self) -> Optional[pulumi.Input[str]]:
         """
-        Management interface ID, required if it is a firewall instance.
+        Management interface ID. **Required if it is a firewall instance.**
         """
         return pulumi.get(self, "management_interface")
 
@@ -155,8 +152,7 @@ class AviatrixFirewallInstanceAssociationArgs:
     @pulumi.getter(name="vendorType")
     def vendor_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Indication it is a firewall instance or FQDN gateway to be associated to fireNet. Valid values: 'Generic',
-        'fqdn_gateway'. Value 'fqdn_gateway' is required for FQDN gateway.
+        Type of firewall. Valid values: "Generic", "fqdn_gateway". Default value: "Generic". Value "fqdn_gateway" is required for FQDN gateway.
         """
         return pulumi.get(self, "vendor_type")
 
@@ -179,17 +175,15 @@ class _AviatrixFirewallInstanceAssociationState:
                  vpc_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixFirewallInstanceAssociation resources.
-        :param pulumi.Input[bool] attached: Switch to attach/detach firewall instance to/from fireNet.
-        :param pulumi.Input[str] egress_interface: Egress interface ID, required if it is a firewall instance.
-        :param pulumi.Input[str] firenet_gw_name: Name of the gateway to launch the firewall instance.
-        :param pulumi.Input[str] firewall_name: Firewall instance name, or FQDN Gateway's gw_name, required if it is a AWS or Azure firewall instance. Not allowed for
-               GCP
-        :param pulumi.Input[str] instance_id: ID of Firewall instance, or FQDN Gateway's gw_name.
-        :param pulumi.Input[str] lan_interface: Lan interface ID, required if it is a firewall instance.
-        :param pulumi.Input[str] management_interface: Management interface ID, required if it is a firewall instance.
-        :param pulumi.Input[str] vendor_type: Indication it is a firewall instance or FQDN gateway to be associated to fireNet. Valid values: 'Generic',
-               'fqdn_gateway'. Value 'fqdn_gateway' is required for FQDN gateway.
-        :param pulumi.Input[str] vpc_id: VPC ID.
+        :param pulumi.Input[bool] attached: Switch to attach/detach firewall instance to/from FireNet. Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] egress_interface: Egress interface ID. **Required if it is a firewall instance.**
+        :param pulumi.Input[str] firenet_gw_name: Name of the primary FireNet gateway. Required for FireNet without Native GWLB VPC.
+        :param pulumi.Input[str] firewall_name: Firewall instance name. **Required for non-GCP firewall instance. For GCP, this field should not be set.**
+        :param pulumi.Input[str] instance_id: ID of Firewall instance.
+        :param pulumi.Input[str] lan_interface: Lan interface ID. **Required if it is a firewall instance.**
+        :param pulumi.Input[str] management_interface: Management interface ID. **Required if it is a firewall instance.**
+        :param pulumi.Input[str] vendor_type: Type of firewall. Valid values: "Generic", "fqdn_gateway". Default value: "Generic". Value "fqdn_gateway" is required for FQDN gateway.
+        :param pulumi.Input[str] vpc_id: VPC ID of the Security VPC.
         """
         if attached is not None:
             pulumi.set(__self__, "attached", attached)
@@ -214,7 +208,7 @@ class _AviatrixFirewallInstanceAssociationState:
     @pulumi.getter
     def attached(self) -> Optional[pulumi.Input[bool]]:
         """
-        Switch to attach/detach firewall instance to/from fireNet.
+        Switch to attach/detach firewall instance to/from FireNet. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "attached")
 
@@ -226,7 +220,7 @@ class _AviatrixFirewallInstanceAssociationState:
     @pulumi.getter(name="egressInterface")
     def egress_interface(self) -> Optional[pulumi.Input[str]]:
         """
-        Egress interface ID, required if it is a firewall instance.
+        Egress interface ID. **Required if it is a firewall instance.**
         """
         return pulumi.get(self, "egress_interface")
 
@@ -238,7 +232,7 @@ class _AviatrixFirewallInstanceAssociationState:
     @pulumi.getter(name="firenetGwName")
     def firenet_gw_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the gateway to launch the firewall instance.
+        Name of the primary FireNet gateway. Required for FireNet without Native GWLB VPC.
         """
         return pulumi.get(self, "firenet_gw_name")
 
@@ -250,8 +244,7 @@ class _AviatrixFirewallInstanceAssociationState:
     @pulumi.getter(name="firewallName")
     def firewall_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Firewall instance name, or FQDN Gateway's gw_name, required if it is a AWS or Azure firewall instance. Not allowed for
-        GCP
+        Firewall instance name. **Required for non-GCP firewall instance. For GCP, this field should not be set.**
         """
         return pulumi.get(self, "firewall_name")
 
@@ -263,7 +256,7 @@ class _AviatrixFirewallInstanceAssociationState:
     @pulumi.getter(name="instanceId")
     def instance_id(self) -> Optional[pulumi.Input[str]]:
         """
-        ID of Firewall instance, or FQDN Gateway's gw_name.
+        ID of Firewall instance.
         """
         return pulumi.get(self, "instance_id")
 
@@ -275,7 +268,7 @@ class _AviatrixFirewallInstanceAssociationState:
     @pulumi.getter(name="lanInterface")
     def lan_interface(self) -> Optional[pulumi.Input[str]]:
         """
-        Lan interface ID, required if it is a firewall instance.
+        Lan interface ID. **Required if it is a firewall instance.**
         """
         return pulumi.get(self, "lan_interface")
 
@@ -287,7 +280,7 @@ class _AviatrixFirewallInstanceAssociationState:
     @pulumi.getter(name="managementInterface")
     def management_interface(self) -> Optional[pulumi.Input[str]]:
         """
-        Management interface ID, required if it is a firewall instance.
+        Management interface ID. **Required if it is a firewall instance.**
         """
         return pulumi.get(self, "management_interface")
 
@@ -299,8 +292,7 @@ class _AviatrixFirewallInstanceAssociationState:
     @pulumi.getter(name="vendorType")
     def vendor_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Indication it is a firewall instance or FQDN gateway to be associated to fireNet. Valid values: 'Generic',
-        'fqdn_gateway'. Value 'fqdn_gateway' is required for FQDN gateway.
+        Type of firewall. Valid values: "Generic", "fqdn_gateway". Default value: "Generic". Value "fqdn_gateway" is required for FQDN gateway.
         """
         return pulumi.get(self, "vendor_type")
 
@@ -312,7 +304,7 @@ class _AviatrixFirewallInstanceAssociationState:
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
-        VPC ID.
+        VPC ID of the Security VPC.
         """
         return pulumi.get(self, "vpc_id")
 
@@ -337,20 +329,67 @@ class AviatrixFirewallInstanceAssociation(pulumi.CustomResource):
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixFirewallInstanceAssociation resource with the given unique name, props, and options.
+        The **aviatrix_firewall_instance_association** resource allows for the creation and management of a firewall instance association. To use this resource you must also have an `AviatrixFirenet` resource with it's `manage_firewall_instance_association` attribute set to false.
+
+        Available in provider version R2.17.1+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Associate an Aviatrix FireNet Gateway with a Firewall Instance
+        firewall_instance_association1 = aviatrix.AviatrixFirewallInstanceAssociation("firewallInstanceAssociation1",
+            vpc_id=aviatrix_firewall_instance["firewall_instance_1"]["vpc_id"],
+            firenet_gw_name=aviatrix_transit_gateway["transit_gateway_1"]["gw_name"],
+            instance_id=aviatrix_firewall_instance["firewall_instance_1"]["instance_id"],
+            firewall_name=aviatrix_firewall_instance["firewall_instance_1"]["firewall_name"],
+            lan_interface=aviatrix_firewall_instance["firewall_instance_1"]["lan_interface"],
+            management_interface=aviatrix_firewall_instance["firewall_instance_1"]["management_interface"],
+            egress_interface=aviatrix_firewall_instance["firewall_instance_1"]["egress_interface"],
+            attached=True)
+        ```
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Associate an GCP Aviatrix FireNet Gateway with a Firewall Instance
+        firewall_instance_association1 = aviatrix.AviatrixFirewallInstanceAssociation("firewallInstanceAssociation1",
+            vpc_id=aviatrix_firewall_instance["firewall_instance_1"]["vpc_id"],
+            firenet_gw_name=aviatrix_transit_gateway["transit_gateway_1"]["gw_name"],
+            instance_id=aviatrix_firewall_instance["firewall_instance_1"]["instance_id"],
+            lan_interface=aviatrix_firewall_instance["firewall_instance_1"]["lan_interface"],
+            management_interface=aviatrix_firewall_instance["firewall_instance_1"]["management_interface"],
+            egress_interface=aviatrix_firewall_instance["firewall_instance_1"]["egress_interface"],
+            attached=True)
+        ```
+
+        ## Import
+
+        **firewall_instance_association** can be imported using the `vpc_id`, `firenet_gw_name` and `instance_id` in the form `vpc_id~~firenet_gw_name~~instance_id` e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixFirewallInstanceAssociation:AviatrixFirewallInstanceAssociation test vpc_id~~firenet_gw_name~~instance_id
+        ```
+
+         When using a Native GWLB VPC where there is no `firenet_gw_name` but the ID is in the same form e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixFirewallInstanceAssociation:AviatrixFirewallInstanceAssociation test vpc_id~~~~instance_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[bool] attached: Switch to attach/detach firewall instance to/from fireNet.
-        :param pulumi.Input[str] egress_interface: Egress interface ID, required if it is a firewall instance.
-        :param pulumi.Input[str] firenet_gw_name: Name of the gateway to launch the firewall instance.
-        :param pulumi.Input[str] firewall_name: Firewall instance name, or FQDN Gateway's gw_name, required if it is a AWS or Azure firewall instance. Not allowed for
-               GCP
-        :param pulumi.Input[str] instance_id: ID of Firewall instance, or FQDN Gateway's gw_name.
-        :param pulumi.Input[str] lan_interface: Lan interface ID, required if it is a firewall instance.
-        :param pulumi.Input[str] management_interface: Management interface ID, required if it is a firewall instance.
-        :param pulumi.Input[str] vendor_type: Indication it is a firewall instance or FQDN gateway to be associated to fireNet. Valid values: 'Generic',
-               'fqdn_gateway'. Value 'fqdn_gateway' is required for FQDN gateway.
-        :param pulumi.Input[str] vpc_id: VPC ID.
+        :param pulumi.Input[bool] attached: Switch to attach/detach firewall instance to/from FireNet. Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] egress_interface: Egress interface ID. **Required if it is a firewall instance.**
+        :param pulumi.Input[str] firenet_gw_name: Name of the primary FireNet gateway. Required for FireNet without Native GWLB VPC.
+        :param pulumi.Input[str] firewall_name: Firewall instance name. **Required for non-GCP firewall instance. For GCP, this field should not be set.**
+        :param pulumi.Input[str] instance_id: ID of Firewall instance.
+        :param pulumi.Input[str] lan_interface: Lan interface ID. **Required if it is a firewall instance.**
+        :param pulumi.Input[str] management_interface: Management interface ID. **Required if it is a firewall instance.**
+        :param pulumi.Input[str] vendor_type: Type of firewall. Valid values: "Generic", "fqdn_gateway". Default value: "Generic". Value "fqdn_gateway" is required for FQDN gateway.
+        :param pulumi.Input[str] vpc_id: VPC ID of the Security VPC.
         """
         ...
     @overload
@@ -359,7 +398,56 @@ class AviatrixFirewallInstanceAssociation(pulumi.CustomResource):
                  args: AviatrixFirewallInstanceAssociationArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixFirewallInstanceAssociation resource with the given unique name, props, and options.
+        The **aviatrix_firewall_instance_association** resource allows for the creation and management of a firewall instance association. To use this resource you must also have an `AviatrixFirenet` resource with it's `manage_firewall_instance_association` attribute set to false.
+
+        Available in provider version R2.17.1+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Associate an Aviatrix FireNet Gateway with a Firewall Instance
+        firewall_instance_association1 = aviatrix.AviatrixFirewallInstanceAssociation("firewallInstanceAssociation1",
+            vpc_id=aviatrix_firewall_instance["firewall_instance_1"]["vpc_id"],
+            firenet_gw_name=aviatrix_transit_gateway["transit_gateway_1"]["gw_name"],
+            instance_id=aviatrix_firewall_instance["firewall_instance_1"]["instance_id"],
+            firewall_name=aviatrix_firewall_instance["firewall_instance_1"]["firewall_name"],
+            lan_interface=aviatrix_firewall_instance["firewall_instance_1"]["lan_interface"],
+            management_interface=aviatrix_firewall_instance["firewall_instance_1"]["management_interface"],
+            egress_interface=aviatrix_firewall_instance["firewall_instance_1"]["egress_interface"],
+            attached=True)
+        ```
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Associate an GCP Aviatrix FireNet Gateway with a Firewall Instance
+        firewall_instance_association1 = aviatrix.AviatrixFirewallInstanceAssociation("firewallInstanceAssociation1",
+            vpc_id=aviatrix_firewall_instance["firewall_instance_1"]["vpc_id"],
+            firenet_gw_name=aviatrix_transit_gateway["transit_gateway_1"]["gw_name"],
+            instance_id=aviatrix_firewall_instance["firewall_instance_1"]["instance_id"],
+            lan_interface=aviatrix_firewall_instance["firewall_instance_1"]["lan_interface"],
+            management_interface=aviatrix_firewall_instance["firewall_instance_1"]["management_interface"],
+            egress_interface=aviatrix_firewall_instance["firewall_instance_1"]["egress_interface"],
+            attached=True)
+        ```
+
+        ## Import
+
+        **firewall_instance_association** can be imported using the `vpc_id`, `firenet_gw_name` and `instance_id` in the form `vpc_id~~firenet_gw_name~~instance_id` e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixFirewallInstanceAssociation:AviatrixFirewallInstanceAssociation test vpc_id~~firenet_gw_name~~instance_id
+        ```
+
+         When using a Native GWLB VPC where there is no `firenet_gw_name` but the ID is in the same form e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixFirewallInstanceAssociation:AviatrixFirewallInstanceAssociation test vpc_id~~~~instance_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixFirewallInstanceAssociationArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -432,17 +520,15 @@ class AviatrixFirewallInstanceAssociation(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[bool] attached: Switch to attach/detach firewall instance to/from fireNet.
-        :param pulumi.Input[str] egress_interface: Egress interface ID, required if it is a firewall instance.
-        :param pulumi.Input[str] firenet_gw_name: Name of the gateway to launch the firewall instance.
-        :param pulumi.Input[str] firewall_name: Firewall instance name, or FQDN Gateway's gw_name, required if it is a AWS or Azure firewall instance. Not allowed for
-               GCP
-        :param pulumi.Input[str] instance_id: ID of Firewall instance, or FQDN Gateway's gw_name.
-        :param pulumi.Input[str] lan_interface: Lan interface ID, required if it is a firewall instance.
-        :param pulumi.Input[str] management_interface: Management interface ID, required if it is a firewall instance.
-        :param pulumi.Input[str] vendor_type: Indication it is a firewall instance or FQDN gateway to be associated to fireNet. Valid values: 'Generic',
-               'fqdn_gateway'. Value 'fqdn_gateway' is required for FQDN gateway.
-        :param pulumi.Input[str] vpc_id: VPC ID.
+        :param pulumi.Input[bool] attached: Switch to attach/detach firewall instance to/from FireNet. Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] egress_interface: Egress interface ID. **Required if it is a firewall instance.**
+        :param pulumi.Input[str] firenet_gw_name: Name of the primary FireNet gateway. Required for FireNet without Native GWLB VPC.
+        :param pulumi.Input[str] firewall_name: Firewall instance name. **Required for non-GCP firewall instance. For GCP, this field should not be set.**
+        :param pulumi.Input[str] instance_id: ID of Firewall instance.
+        :param pulumi.Input[str] lan_interface: Lan interface ID. **Required if it is a firewall instance.**
+        :param pulumi.Input[str] management_interface: Management interface ID. **Required if it is a firewall instance.**
+        :param pulumi.Input[str] vendor_type: Type of firewall. Valid values: "Generic", "fqdn_gateway". Default value: "Generic". Value "fqdn_gateway" is required for FQDN gateway.
+        :param pulumi.Input[str] vpc_id: VPC ID of the Security VPC.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -463,7 +549,7 @@ class AviatrixFirewallInstanceAssociation(pulumi.CustomResource):
     @pulumi.getter
     def attached(self) -> pulumi.Output[Optional[bool]]:
         """
-        Switch to attach/detach firewall instance to/from fireNet.
+        Switch to attach/detach firewall instance to/from FireNet. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "attached")
 
@@ -471,7 +557,7 @@ class AviatrixFirewallInstanceAssociation(pulumi.CustomResource):
     @pulumi.getter(name="egressInterface")
     def egress_interface(self) -> pulumi.Output[Optional[str]]:
         """
-        Egress interface ID, required if it is a firewall instance.
+        Egress interface ID. **Required if it is a firewall instance.**
         """
         return pulumi.get(self, "egress_interface")
 
@@ -479,7 +565,7 @@ class AviatrixFirewallInstanceAssociation(pulumi.CustomResource):
     @pulumi.getter(name="firenetGwName")
     def firenet_gw_name(self) -> pulumi.Output[Optional[str]]:
         """
-        Name of the gateway to launch the firewall instance.
+        Name of the primary FireNet gateway. Required for FireNet without Native GWLB VPC.
         """
         return pulumi.get(self, "firenet_gw_name")
 
@@ -487,8 +573,7 @@ class AviatrixFirewallInstanceAssociation(pulumi.CustomResource):
     @pulumi.getter(name="firewallName")
     def firewall_name(self) -> pulumi.Output[Optional[str]]:
         """
-        Firewall instance name, or FQDN Gateway's gw_name, required if it is a AWS or Azure firewall instance. Not allowed for
-        GCP
+        Firewall instance name. **Required for non-GCP firewall instance. For GCP, this field should not be set.**
         """
         return pulumi.get(self, "firewall_name")
 
@@ -496,7 +581,7 @@ class AviatrixFirewallInstanceAssociation(pulumi.CustomResource):
     @pulumi.getter(name="instanceId")
     def instance_id(self) -> pulumi.Output[str]:
         """
-        ID of Firewall instance, or FQDN Gateway's gw_name.
+        ID of Firewall instance.
         """
         return pulumi.get(self, "instance_id")
 
@@ -504,7 +589,7 @@ class AviatrixFirewallInstanceAssociation(pulumi.CustomResource):
     @pulumi.getter(name="lanInterface")
     def lan_interface(self) -> pulumi.Output[Optional[str]]:
         """
-        Lan interface ID, required if it is a firewall instance.
+        Lan interface ID. **Required if it is a firewall instance.**
         """
         return pulumi.get(self, "lan_interface")
 
@@ -512,7 +597,7 @@ class AviatrixFirewallInstanceAssociation(pulumi.CustomResource):
     @pulumi.getter(name="managementInterface")
     def management_interface(self) -> pulumi.Output[Optional[str]]:
         """
-        Management interface ID, required if it is a firewall instance.
+        Management interface ID. **Required if it is a firewall instance.**
         """
         return pulumi.get(self, "management_interface")
 
@@ -520,8 +605,7 @@ class AviatrixFirewallInstanceAssociation(pulumi.CustomResource):
     @pulumi.getter(name="vendorType")
     def vendor_type(self) -> pulumi.Output[Optional[str]]:
         """
-        Indication it is a firewall instance or FQDN gateway to be associated to fireNet. Valid values: 'Generic',
-        'fqdn_gateway'. Value 'fqdn_gateway' is required for FQDN gateway.
+        Type of firewall. Valid values: "Generic", "fqdn_gateway". Default value: "Generic". Value "fqdn_gateway" is required for FQDN gateway.
         """
         return pulumi.get(self, "vendor_type")
 
@@ -529,7 +613,7 @@ class AviatrixFirewallInstanceAssociation(pulumi.CustomResource):
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> pulumi.Output[str]:
         """
-        VPC ID.
+        VPC ID of the Security VPC.
         """
         return pulumi.get(self, "vpc_id")
 

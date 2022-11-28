@@ -11,12 +11,50 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_rbac_group_permission_attachment** resource allows the creation and management of permission attachments to Aviatrix (Role-Based Access Control) RBAC groups.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixRbacGroupPermissionAttachment(ctx, "testAttachment", &aviatrix.AviatrixRbacGroupPermissionAttachmentArgs{
+//				GroupName:      pulumi.String("write_only"),
+//				PermissionName: pulumi.String("all_write"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **rbac_group_permission_attachment** can be imported using the `group_name` and `permission_name`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixRbacGroupPermissionAttachment:AviatrixRbacGroupPermissionAttachment test group_name~permission_name
+//
+// ```
 type AviatrixRbacGroupPermissionAttachment struct {
 	pulumi.CustomResourceState
 
-	// RBAC permission group name.
+	// This parameter represents the name of a RBAC group.
 	GroupName pulumi.StringOutput `pulumi:"groupName"`
-	// Permission name.
+	// This parameter represents the permission to attach to the RBAC group.
 	PermissionName pulumi.StringOutput `pulumi:"permissionName"`
 }
 
@@ -56,16 +94,16 @@ func GetAviatrixRbacGroupPermissionAttachment(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixRbacGroupPermissionAttachment resources.
 type aviatrixRbacGroupPermissionAttachmentState struct {
-	// RBAC permission group name.
+	// This parameter represents the name of a RBAC group.
 	GroupName *string `pulumi:"groupName"`
-	// Permission name.
+	// This parameter represents the permission to attach to the RBAC group.
 	PermissionName *string `pulumi:"permissionName"`
 }
 
 type AviatrixRbacGroupPermissionAttachmentState struct {
-	// RBAC permission group name.
+	// This parameter represents the name of a RBAC group.
 	GroupName pulumi.StringPtrInput
-	// Permission name.
+	// This parameter represents the permission to attach to the RBAC group.
 	PermissionName pulumi.StringPtrInput
 }
 
@@ -74,17 +112,17 @@ func (AviatrixRbacGroupPermissionAttachmentState) ElementType() reflect.Type {
 }
 
 type aviatrixRbacGroupPermissionAttachmentArgs struct {
-	// RBAC permission group name.
+	// This parameter represents the name of a RBAC group.
 	GroupName string `pulumi:"groupName"`
-	// Permission name.
+	// This parameter represents the permission to attach to the RBAC group.
 	PermissionName string `pulumi:"permissionName"`
 }
 
 // The set of arguments for constructing a AviatrixRbacGroupPermissionAttachment resource.
 type AviatrixRbacGroupPermissionAttachmentArgs struct {
-	// RBAC permission group name.
+	// This parameter represents the name of a RBAC group.
 	GroupName pulumi.StringInput
-	// Permission name.
+	// This parameter represents the permission to attach to the RBAC group.
 	PermissionName pulumi.StringInput
 }
 
@@ -175,12 +213,12 @@ func (o AviatrixRbacGroupPermissionAttachmentOutput) ToAviatrixRbacGroupPermissi
 	return o
 }
 
-// RBAC permission group name.
+// This parameter represents the name of a RBAC group.
 func (o AviatrixRbacGroupPermissionAttachmentOutput) GroupName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixRbacGroupPermissionAttachment) pulumi.StringOutput { return v.GroupName }).(pulumi.StringOutput)
 }
 
-// Permission name.
+// This parameter represents the permission to attach to the RBAC group.
 func (o AviatrixRbacGroupPermissionAttachmentOutput) PermissionName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixRbacGroupPermissionAttachment) pulumi.StringOutput { return v.PermissionName }).(pulumi.StringOutput)
 }

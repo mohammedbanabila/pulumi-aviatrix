@@ -24,13 +24,13 @@ class AviatrixAwsTgwConnectPeerArgs:
                  tgw_gre_address: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a AviatrixAwsTgwConnectPeer resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] bgp_inside_cidrs: Set of BGP Inside CIDR Blocks.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] bgp_inside_cidrs: Set of BGP Inside CIDR Block(s).
         :param pulumi.Input[str] connect_attachment_id: Connect Attachment ID.
-        :param pulumi.Input[str] connect_peer_name: Connect Peer Name.
-        :param pulumi.Input[str] connection_name: AWS TGW Connect connection name.
+        :param pulumi.Input[str] connect_peer_name: TGW Connect peer name.
+        :param pulumi.Input[str] connection_name: TGW Connect connection name.
         :param pulumi.Input[str] peer_as_number: Peer AS Number.
         :param pulumi.Input[str] peer_gre_address: Peer GRE IP Address.
-        :param pulumi.Input[str] tgw_name: AWS TGW Name.
+        :param pulumi.Input[str] tgw_name: AWS TGW name.
         :param pulumi.Input[str] tgw_gre_address: AWS TGW GRE IP Address.
         """
         pulumi.set(__self__, "bgp_inside_cidrs", bgp_inside_cidrs)
@@ -47,7 +47,7 @@ class AviatrixAwsTgwConnectPeerArgs:
     @pulumi.getter(name="bgpInsideCidrs")
     def bgp_inside_cidrs(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
         """
-        Set of BGP Inside CIDR Blocks.
+        Set of BGP Inside CIDR Block(s).
         """
         return pulumi.get(self, "bgp_inside_cidrs")
 
@@ -71,7 +71,7 @@ class AviatrixAwsTgwConnectPeerArgs:
     @pulumi.getter(name="connectPeerName")
     def connect_peer_name(self) -> pulumi.Input[str]:
         """
-        Connect Peer Name.
+        TGW Connect peer name.
         """
         return pulumi.get(self, "connect_peer_name")
 
@@ -83,7 +83,7 @@ class AviatrixAwsTgwConnectPeerArgs:
     @pulumi.getter(name="connectionName")
     def connection_name(self) -> pulumi.Input[str]:
         """
-        AWS TGW Connect connection name.
+        TGW Connect connection name.
         """
         return pulumi.get(self, "connection_name")
 
@@ -119,7 +119,7 @@ class AviatrixAwsTgwConnectPeerArgs:
     @pulumi.getter(name="tgwName")
     def tgw_name(self) -> pulumi.Input[str]:
         """
-        AWS TGW Name.
+        AWS TGW name.
         """
         return pulumi.get(self, "tgw_name")
 
@@ -154,15 +154,15 @@ class _AviatrixAwsTgwConnectPeerState:
                  tgw_name: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixAwsTgwConnectPeer resources.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] bgp_inside_cidrs: Set of BGP Inside CIDR Blocks.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] bgp_inside_cidrs: Set of BGP Inside CIDR Block(s).
         :param pulumi.Input[str] connect_attachment_id: Connect Attachment ID.
         :param pulumi.Input[str] connect_peer_id: Connect Peer ID.
-        :param pulumi.Input[str] connect_peer_name: Connect Peer Name.
-        :param pulumi.Input[str] connection_name: AWS TGW Connect connection name.
+        :param pulumi.Input[str] connect_peer_name: TGW Connect peer name.
+        :param pulumi.Input[str] connection_name: TGW Connect connection name.
         :param pulumi.Input[str] peer_as_number: Peer AS Number.
         :param pulumi.Input[str] peer_gre_address: Peer GRE IP Address.
         :param pulumi.Input[str] tgw_gre_address: AWS TGW GRE IP Address.
-        :param pulumi.Input[str] tgw_name: AWS TGW Name.
+        :param pulumi.Input[str] tgw_name: AWS TGW name.
         """
         if bgp_inside_cidrs is not None:
             pulumi.set(__self__, "bgp_inside_cidrs", bgp_inside_cidrs)
@@ -187,7 +187,7 @@ class _AviatrixAwsTgwConnectPeerState:
     @pulumi.getter(name="bgpInsideCidrs")
     def bgp_inside_cidrs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Set of BGP Inside CIDR Blocks.
+        Set of BGP Inside CIDR Block(s).
         """
         return pulumi.get(self, "bgp_inside_cidrs")
 
@@ -223,7 +223,7 @@ class _AviatrixAwsTgwConnectPeerState:
     @pulumi.getter(name="connectPeerName")
     def connect_peer_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Connect Peer Name.
+        TGW Connect peer name.
         """
         return pulumi.get(self, "connect_peer_name")
 
@@ -235,7 +235,7 @@ class _AviatrixAwsTgwConnectPeerState:
     @pulumi.getter(name="connectionName")
     def connection_name(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS TGW Connect connection name.
+        TGW Connect connection name.
         """
         return pulumi.get(self, "connection_name")
 
@@ -283,7 +283,7 @@ class _AviatrixAwsTgwConnectPeerState:
     @pulumi.getter(name="tgwName")
     def tgw_name(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS TGW Name.
+        AWS TGW name.
         """
         return pulumi.get(self, "tgw_name")
 
@@ -307,17 +307,45 @@ class AviatrixAwsTgwConnectPeer(pulumi.CustomResource):
                  tgw_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixAwsTgwConnectPeer resource with the given unique name, props, and options.
+        The **aviatrix_aws_tgw_connect_peer** resource allows the creation and management of AWS TGW Connect peers. This
+        resource is available as of provider version R2.18.1+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS TGW Connect Peer
+        test = aviatrix.AviatrixAwsTgwConnectPeer("test",
+            tgw_name=aviatrix_aws_tgw["test_aws_tgw"]["tgw_name"],
+            connection_name=aviatrix_aws_tgw_connect["test_aws_tgw_connect"]["connection_name"],
+            connect_peer_name="connect-peer-test",
+            connect_attachment_id=aviatrix_aws_tgw_connect["test_aws_tgw_connect"]["connect_attachment_id"],
+            peer_as_number="65001",
+            peer_gre_address="172.31.1.11",
+            bgp_inside_cidrs=["169.254.6.0/29"],
+            tgw_gre_address="10.0.0.32")
+        ```
+
+        ## Import
+
+        **aws_tgw_connect_peer** can be imported using the `tgw_name`, `connection_name` and `connect_peer_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAwsTgwConnectPeer:AviatrixAwsTgwConnectPeer test tgw_name~~connection_name~~connect_peer_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] bgp_inside_cidrs: Set of BGP Inside CIDR Blocks.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] bgp_inside_cidrs: Set of BGP Inside CIDR Block(s).
         :param pulumi.Input[str] connect_attachment_id: Connect Attachment ID.
-        :param pulumi.Input[str] connect_peer_name: Connect Peer Name.
-        :param pulumi.Input[str] connection_name: AWS TGW Connect connection name.
+        :param pulumi.Input[str] connect_peer_name: TGW Connect peer name.
+        :param pulumi.Input[str] connection_name: TGW Connect connection name.
         :param pulumi.Input[str] peer_as_number: Peer AS Number.
         :param pulumi.Input[str] peer_gre_address: Peer GRE IP Address.
         :param pulumi.Input[str] tgw_gre_address: AWS TGW GRE IP Address.
-        :param pulumi.Input[str] tgw_name: AWS TGW Name.
+        :param pulumi.Input[str] tgw_name: AWS TGW name.
         """
         ...
     @overload
@@ -326,7 +354,35 @@ class AviatrixAwsTgwConnectPeer(pulumi.CustomResource):
                  args: AviatrixAwsTgwConnectPeerArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixAwsTgwConnectPeer resource with the given unique name, props, and options.
+        The **aviatrix_aws_tgw_connect_peer** resource allows the creation and management of AWS TGW Connect peers. This
+        resource is available as of provider version R2.18.1+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS TGW Connect Peer
+        test = aviatrix.AviatrixAwsTgwConnectPeer("test",
+            tgw_name=aviatrix_aws_tgw["test_aws_tgw"]["tgw_name"],
+            connection_name=aviatrix_aws_tgw_connect["test_aws_tgw_connect"]["connection_name"],
+            connect_peer_name="connect-peer-test",
+            connect_attachment_id=aviatrix_aws_tgw_connect["test_aws_tgw_connect"]["connect_attachment_id"],
+            peer_as_number="65001",
+            peer_gre_address="172.31.1.11",
+            bgp_inside_cidrs=["169.254.6.0/29"],
+            tgw_gre_address="10.0.0.32")
+        ```
+
+        ## Import
+
+        **aws_tgw_connect_peer** can be imported using the `tgw_name`, `connection_name` and `connect_peer_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAwsTgwConnectPeer:AviatrixAwsTgwConnectPeer test tgw_name~~connection_name~~connect_peer_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixAwsTgwConnectPeerArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -408,15 +464,15 @@ class AviatrixAwsTgwConnectPeer(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] bgp_inside_cidrs: Set of BGP Inside CIDR Blocks.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] bgp_inside_cidrs: Set of BGP Inside CIDR Block(s).
         :param pulumi.Input[str] connect_attachment_id: Connect Attachment ID.
         :param pulumi.Input[str] connect_peer_id: Connect Peer ID.
-        :param pulumi.Input[str] connect_peer_name: Connect Peer Name.
-        :param pulumi.Input[str] connection_name: AWS TGW Connect connection name.
+        :param pulumi.Input[str] connect_peer_name: TGW Connect peer name.
+        :param pulumi.Input[str] connection_name: TGW Connect connection name.
         :param pulumi.Input[str] peer_as_number: Peer AS Number.
         :param pulumi.Input[str] peer_gre_address: Peer GRE IP Address.
         :param pulumi.Input[str] tgw_gre_address: AWS TGW GRE IP Address.
-        :param pulumi.Input[str] tgw_name: AWS TGW Name.
+        :param pulumi.Input[str] tgw_name: AWS TGW name.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -437,7 +493,7 @@ class AviatrixAwsTgwConnectPeer(pulumi.CustomResource):
     @pulumi.getter(name="bgpInsideCidrs")
     def bgp_inside_cidrs(self) -> pulumi.Output[Sequence[str]]:
         """
-        Set of BGP Inside CIDR Blocks.
+        Set of BGP Inside CIDR Block(s).
         """
         return pulumi.get(self, "bgp_inside_cidrs")
 
@@ -461,7 +517,7 @@ class AviatrixAwsTgwConnectPeer(pulumi.CustomResource):
     @pulumi.getter(name="connectPeerName")
     def connect_peer_name(self) -> pulumi.Output[str]:
         """
-        Connect Peer Name.
+        TGW Connect peer name.
         """
         return pulumi.get(self, "connect_peer_name")
 
@@ -469,7 +525,7 @@ class AviatrixAwsTgwConnectPeer(pulumi.CustomResource):
     @pulumi.getter(name="connectionName")
     def connection_name(self) -> pulumi.Output[str]:
         """
-        AWS TGW Connect connection name.
+        TGW Connect connection name.
         """
         return pulumi.get(self, "connection_name")
 
@@ -501,7 +557,7 @@ class AviatrixAwsTgwConnectPeer(pulumi.CustomResource):
     @pulumi.getter(name="tgwName")
     def tgw_name(self) -> pulumi.Output[str]:
         """
-        AWS TGW Name.
+        AWS TGW name.
         """
         return pulumi.get(self, "tgw_name")
 

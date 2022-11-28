@@ -11,14 +11,53 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_segmentation_security_domain_association** resource handles creation of [Transit Segmentation](https://docs.aviatrix.com/HowTos/transit_segmentation_faq.html) Security Domain and Transit Gateway Attachment Associations.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixSegmentationSecurityDomainAssociation(ctx, "testSegmentationSecurityDomainAssociation", &aviatrix.AviatrixSegmentationSecurityDomainAssociationArgs{
+//				AttachmentName:     pulumi.String("attachment-name"),
+//				SecurityDomainName: pulumi.String("security-domain-name"),
+//				TransitGatewayName: pulumi.String("transit-gw-name"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **aviatrix_segmentation_security_domain_association** can be imported using `transit_gateway_name`, `security_domain_name` and `attachment_name` separated by a `~` e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixSegmentationSecurityDomainAssociation:AviatrixSegmentationSecurityDomainAssociation test transit_gateway_name~security_domain_name~attachment_name
+//
+// ```
 type AviatrixSegmentationSecurityDomainAssociation struct {
 	pulumi.CustomResourceState
 
-	// Attachment name, either Spoke or Edge.
+	// Name of the transit gateway attachment, Spoke or Edge, to associate with the security domain.
 	AttachmentName pulumi.StringOutput `pulumi:"attachmentName"`
-	// Security Domain name.
+	// Name of the Segmentation Security Domain.
 	SecurityDomainName pulumi.StringOutput `pulumi:"securityDomainName"`
-	// Transit Gateway name.
+	// Name of the Transit Gateway.
 	TransitGatewayName pulumi.StringOutput `pulumi:"transitGatewayName"`
 }
 
@@ -61,20 +100,20 @@ func GetAviatrixSegmentationSecurityDomainAssociation(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixSegmentationSecurityDomainAssociation resources.
 type aviatrixSegmentationSecurityDomainAssociationState struct {
-	// Attachment name, either Spoke or Edge.
+	// Name of the transit gateway attachment, Spoke or Edge, to associate with the security domain.
 	AttachmentName *string `pulumi:"attachmentName"`
-	// Security Domain name.
+	// Name of the Segmentation Security Domain.
 	SecurityDomainName *string `pulumi:"securityDomainName"`
-	// Transit Gateway name.
+	// Name of the Transit Gateway.
 	TransitGatewayName *string `pulumi:"transitGatewayName"`
 }
 
 type AviatrixSegmentationSecurityDomainAssociationState struct {
-	// Attachment name, either Spoke or Edge.
+	// Name of the transit gateway attachment, Spoke or Edge, to associate with the security domain.
 	AttachmentName pulumi.StringPtrInput
-	// Security Domain name.
+	// Name of the Segmentation Security Domain.
 	SecurityDomainName pulumi.StringPtrInput
-	// Transit Gateway name.
+	// Name of the Transit Gateway.
 	TransitGatewayName pulumi.StringPtrInput
 }
 
@@ -83,21 +122,21 @@ func (AviatrixSegmentationSecurityDomainAssociationState) ElementType() reflect.
 }
 
 type aviatrixSegmentationSecurityDomainAssociationArgs struct {
-	// Attachment name, either Spoke or Edge.
+	// Name of the transit gateway attachment, Spoke or Edge, to associate with the security domain.
 	AttachmentName string `pulumi:"attachmentName"`
-	// Security Domain name.
+	// Name of the Segmentation Security Domain.
 	SecurityDomainName string `pulumi:"securityDomainName"`
-	// Transit Gateway name.
+	// Name of the Transit Gateway.
 	TransitGatewayName string `pulumi:"transitGatewayName"`
 }
 
 // The set of arguments for constructing a AviatrixSegmentationSecurityDomainAssociation resource.
 type AviatrixSegmentationSecurityDomainAssociationArgs struct {
-	// Attachment name, either Spoke or Edge.
+	// Name of the transit gateway attachment, Spoke or Edge, to associate with the security domain.
 	AttachmentName pulumi.StringInput
-	// Security Domain name.
+	// Name of the Segmentation Security Domain.
 	SecurityDomainName pulumi.StringInput
-	// Transit Gateway name.
+	// Name of the Transit Gateway.
 	TransitGatewayName pulumi.StringInput
 }
 
@@ -188,19 +227,19 @@ func (o AviatrixSegmentationSecurityDomainAssociationOutput) ToAviatrixSegmentat
 	return o
 }
 
-// Attachment name, either Spoke or Edge.
+// Name of the transit gateway attachment, Spoke or Edge, to associate with the security domain.
 func (o AviatrixSegmentationSecurityDomainAssociationOutput) AttachmentName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSegmentationSecurityDomainAssociation) pulumi.StringOutput { return v.AttachmentName }).(pulumi.StringOutput)
 }
 
-// Security Domain name.
+// Name of the Segmentation Security Domain.
 func (o AviatrixSegmentationSecurityDomainAssociationOutput) SecurityDomainName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSegmentationSecurityDomainAssociation) pulumi.StringOutput {
 		return v.SecurityDomainName
 	}).(pulumi.StringOutput)
 }
 
-// Transit Gateway name.
+// Name of the Transit Gateway.
 func (o AviatrixSegmentationSecurityDomainAssociationOutput) TransitGatewayName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSegmentationSecurityDomainAssociation) pulumi.StringOutput {
 		return v.TransitGatewayName

@@ -9,6 +9,39 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_account_user** resource allows the creation and management of Aviatrix user accounts.
+    /// 
+    /// &gt; **NOTE:** With the release of Controller 5.4 (compatible with Aviatrix provider R2.13), Role-Based Access Control (RBAC) is now integrated into the Accounts workflow. Any **aviatrix_account_user** created in 5.3 by default will have admin privileges (attached to the 'admin' RBAC permission group). In 5.4, any new account users created will no longer have the option to specify an `account_name`, but rather have the option to attach the user to specific RBAC groups through the **aviatrix_rbac_group_user_attachment** resource for more granular security control. Account users created in 5.4 will have minimal access (read_only) unless otherwise specified in the RBAC group permissions that the users are attached to.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix User Account
+    ///     var testAccountuser = new Aviatrix.AviatrixAccountUser("testAccountuser", new()
+    ///     {
+    ///         Email = "username1@testdomain.com",
+    ///         Password = "passwordforuser1-1234",
+    ///         Username = "username1",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **account_user** can be imported using the `username` (when doing import, need to leave `password` argument blank), e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixAccountUser:AviatrixAccountUser test username
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixAccountUser:AviatrixAccountUser")]
     public partial class AviatrixAccountUser : global::Pulumi.CustomResource
     {
@@ -19,14 +52,13 @@ namespace Pulumi.Aviatrix
         public Output<string> Email { get; private set; } = null!;
 
         /// <summary>
-        /// Login password for the account user to be created.
+        /// Login password for the account user to be created. If password is changed, current account will be destroyed and a new account will be created.
         /// </summary>
         [Output("password")]
         public Output<string> Password { get; private set; } = null!;
 
         /// <summary>
-        /// Name of account user to be created. It can only include alphanumeric characters(lower case only), hyphens, dots or
-        /// underscores. 1 to 80 in length. No spaces are allowed.
+        /// Name of account user to be created. It can only include alphanumeric characters(lower case only), hyphens, dots or underscores. 1 to 80 in length. No spaces are allowed.
         /// </summary>
         [Output("username")]
         public Output<string> Username { get; private set; } = null!;
@@ -55,6 +87,10 @@ namespace Pulumi.Aviatrix
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/astipkovits",
+                AdditionalSecretOutputs =
+                {
+                    "password",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -84,15 +120,24 @@ namespace Pulumi.Aviatrix
         [Input("email", required: true)]
         public Input<string> Email { get; set; } = null!;
 
-        /// <summary>
-        /// Login password for the account user to be created.
-        /// </summary>
         [Input("password", required: true)]
-        public Input<string> Password { get; set; } = null!;
+        private Input<string>? _password;
 
         /// <summary>
-        /// Name of account user to be created. It can only include alphanumeric characters(lower case only), hyphens, dots or
-        /// underscores. 1 to 80 in length. No spaces are allowed.
+        /// Login password for the account user to be created. If password is changed, current account will be destroyed and a new account will be created.
+        /// </summary>
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// Name of account user to be created. It can only include alphanumeric characters(lower case only), hyphens, dots or underscores. 1 to 80 in length. No spaces are allowed.
         /// </summary>
         [Input("username", required: true)]
         public Input<string> Username { get; set; } = null!;
@@ -111,15 +156,24 @@ namespace Pulumi.Aviatrix
         [Input("email")]
         public Input<string>? Email { get; set; }
 
-        /// <summary>
-        /// Login password for the account user to be created.
-        /// </summary>
         [Input("password")]
-        public Input<string>? Password { get; set; }
+        private Input<string>? _password;
 
         /// <summary>
-        /// Name of account user to be created. It can only include alphanumeric characters(lower case only), hyphens, dots or
-        /// underscores. 1 to 80 in length. No spaces are allowed.
+        /// Login password for the account user to be created. If password is changed, current account will be destroyed and a new account will be created.
+        /// </summary>
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// Name of account user to be created. It can only include alphanumeric characters(lower case only), hyphens, dots or underscores. 1 to 80 in length. No spaces are allowed.
         /// </summary>
         [Input("username")]
         public Input<string>? Username { get; set; }

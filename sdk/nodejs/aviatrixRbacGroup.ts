@@ -4,6 +4,29 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_rbac_group** resource allows the creation and management of [Aviatrix (Role-Based Access Control) RBAC groups](https://docs.aviatrix.com/HowTos/rbac_faq.html).
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix RBAC Group
+ * const testGroup = new aviatrix.AviatrixRbacGroup("test_group", {
+ *     groupName: "write_only",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **rbac_group** can be imported using the `group_name`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixRbacGroup:AviatrixRbacGroup test group_name
+ * ```
+ */
 export class AviatrixRbacGroup extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixRbacGroup resource's state with the given name, ID, and optional extra
@@ -33,11 +56,11 @@ export class AviatrixRbacGroup extends pulumi.CustomResource {
     }
 
     /**
-     * RBAC permission group name.
+     * This parameter represents the name of a RBAC group to be created.
      */
     public readonly groupName!: pulumi.Output<string>;
     /**
-     * Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login
+     * Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login . Supported values: true, false. Default value: false. Available in provider version R2.17.1+.
      */
     public readonly localLogin!: pulumi.Output<boolean | undefined>;
 
@@ -74,11 +97,11 @@ export class AviatrixRbacGroup extends pulumi.CustomResource {
  */
 export interface AviatrixRbacGroupState {
     /**
-     * RBAC permission group name.
+     * This parameter represents the name of a RBAC group to be created.
      */
     groupName?: pulumi.Input<string>;
     /**
-     * Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login
+     * Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login . Supported values: true, false. Default value: false. Available in provider version R2.17.1+.
      */
     localLogin?: pulumi.Input<boolean>;
 }
@@ -88,11 +111,11 @@ export interface AviatrixRbacGroupState {
  */
 export interface AviatrixRbacGroupArgs {
     /**
-     * RBAC permission group name.
+     * This parameter represents the name of a RBAC group to be created.
      */
     groupName: pulumi.Input<string>;
     /**
-     * Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login
+     * Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login . Supported values: true, false. Default value: false. Available in provider version R2.17.1+.
      */
     localLogin?: pulumi.Input<boolean>;
 }

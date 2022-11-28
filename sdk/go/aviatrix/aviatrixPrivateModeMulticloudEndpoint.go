@@ -11,18 +11,58 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_private_mode_multicloud_endpoint** resource allows management of a Private Mode multicloud endpoint. This resource is available as of provider version R2.23+.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixPrivateModeMulticloudEndpoint(ctx, "test", &aviatrix.AviatrixPrivateModeMulticloudEndpointArgs{
+//				AccountName:       pulumi.String("devops"),
+//				ControllerLbVpcId: pulumi.String("vpc-abcdefg"),
+//				Region:            pulumi.String("us-east-1"),
+//				VpcId:             pulumi.String("vpc-abcdef"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **aviatrix_private_mode_multicloud_endpoint** can be imported using the `vpc_id`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixPrivateModeMulticloudEndpoint:AviatrixPrivateModeMulticloudEndpoint test vpc-1234567
+//
+// ```
 type AviatrixPrivateModeMulticloudEndpoint struct {
 	pulumi.CustomResourceState
 
 	// Name of the access account.
 	AccountName pulumi.StringOutput `pulumi:"accountName"`
-	// ID of the VPC with the Controller load balancer.
+	// ID of the VPC containing a Private Mode controller load balancer.
 	ControllerLbVpcId pulumi.StringOutput `pulumi:"controllerLbVpcId"`
-	// DNS entry of this endpoint.
+	// DNS entry of the endpoint.
 	DnsEntry pulumi.StringOutput `pulumi:"dnsEntry"`
-	// Name of the VPC region.
+	// Region of the VPC.
 	Region pulumi.StringOutput `pulumi:"region"`
-	// VPC ID.
+	// ID of the VPC to create the endpoint in.
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
 }
 
@@ -70,26 +110,26 @@ func GetAviatrixPrivateModeMulticloudEndpoint(ctx *pulumi.Context,
 type aviatrixPrivateModeMulticloudEndpointState struct {
 	// Name of the access account.
 	AccountName *string `pulumi:"accountName"`
-	// ID of the VPC with the Controller load balancer.
+	// ID of the VPC containing a Private Mode controller load balancer.
 	ControllerLbVpcId *string `pulumi:"controllerLbVpcId"`
-	// DNS entry of this endpoint.
+	// DNS entry of the endpoint.
 	DnsEntry *string `pulumi:"dnsEntry"`
-	// Name of the VPC region.
+	// Region of the VPC.
 	Region *string `pulumi:"region"`
-	// VPC ID.
+	// ID of the VPC to create the endpoint in.
 	VpcId *string `pulumi:"vpcId"`
 }
 
 type AviatrixPrivateModeMulticloudEndpointState struct {
 	// Name of the access account.
 	AccountName pulumi.StringPtrInput
-	// ID of the VPC with the Controller load balancer.
+	// ID of the VPC containing a Private Mode controller load balancer.
 	ControllerLbVpcId pulumi.StringPtrInput
-	// DNS entry of this endpoint.
+	// DNS entry of the endpoint.
 	DnsEntry pulumi.StringPtrInput
-	// Name of the VPC region.
+	// Region of the VPC.
 	Region pulumi.StringPtrInput
-	// VPC ID.
+	// ID of the VPC to create the endpoint in.
 	VpcId pulumi.StringPtrInput
 }
 
@@ -100,11 +140,11 @@ func (AviatrixPrivateModeMulticloudEndpointState) ElementType() reflect.Type {
 type aviatrixPrivateModeMulticloudEndpointArgs struct {
 	// Name of the access account.
 	AccountName string `pulumi:"accountName"`
-	// ID of the VPC with the Controller load balancer.
+	// ID of the VPC containing a Private Mode controller load balancer.
 	ControllerLbVpcId string `pulumi:"controllerLbVpcId"`
-	// Name of the VPC region.
+	// Region of the VPC.
 	Region string `pulumi:"region"`
-	// VPC ID.
+	// ID of the VPC to create the endpoint in.
 	VpcId string `pulumi:"vpcId"`
 }
 
@@ -112,11 +152,11 @@ type aviatrixPrivateModeMulticloudEndpointArgs struct {
 type AviatrixPrivateModeMulticloudEndpointArgs struct {
 	// Name of the access account.
 	AccountName pulumi.StringInput
-	// ID of the VPC with the Controller load balancer.
+	// ID of the VPC containing a Private Mode controller load balancer.
 	ControllerLbVpcId pulumi.StringInput
-	// Name of the VPC region.
+	// Region of the VPC.
 	Region pulumi.StringInput
-	// VPC ID.
+	// ID of the VPC to create the endpoint in.
 	VpcId pulumi.StringInput
 }
 
@@ -212,22 +252,22 @@ func (o AviatrixPrivateModeMulticloudEndpointOutput) AccountName() pulumi.String
 	return o.ApplyT(func(v *AviatrixPrivateModeMulticloudEndpoint) pulumi.StringOutput { return v.AccountName }).(pulumi.StringOutput)
 }
 
-// ID of the VPC with the Controller load balancer.
+// ID of the VPC containing a Private Mode controller load balancer.
 func (o AviatrixPrivateModeMulticloudEndpointOutput) ControllerLbVpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixPrivateModeMulticloudEndpoint) pulumi.StringOutput { return v.ControllerLbVpcId }).(pulumi.StringOutput)
 }
 
-// DNS entry of this endpoint.
+// DNS entry of the endpoint.
 func (o AviatrixPrivateModeMulticloudEndpointOutput) DnsEntry() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixPrivateModeMulticloudEndpoint) pulumi.StringOutput { return v.DnsEntry }).(pulumi.StringOutput)
 }
 
-// Name of the VPC region.
+// Region of the VPC.
 func (o AviatrixPrivateModeMulticloudEndpointOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixPrivateModeMulticloudEndpoint) pulumi.StringOutput { return v.Region }).(pulumi.StringOutput)
 }
 
-// VPC ID.
+// ID of the VPC to create the endpoint in.
 func (o AviatrixPrivateModeMulticloudEndpointOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixPrivateModeMulticloudEndpoint) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
 }

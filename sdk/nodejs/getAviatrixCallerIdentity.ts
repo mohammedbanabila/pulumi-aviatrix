@@ -4,6 +4,19 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_caller_identity** data source provides the Aviatrix CID for use in other resources.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Aviatrix Caller Identity Data Source
+ * const foo = pulumi.output(aviatrix.getAviatrixCallerIdentity());
+ * ```
+ */
 export function getAviatrixCallerIdentity(opts?: pulumi.InvokeOptions): Promise<GetAviatrixCallerIdentityResult> {
     if (!opts) {
         opts = {}
@@ -18,6 +31,9 @@ export function getAviatrixCallerIdentity(opts?: pulumi.InvokeOptions): Promise<
  * A collection of values returned by getAviatrixCallerIdentity.
  */
 export interface GetAviatrixCallerIdentityResult {
+    /**
+     * Aviatrix caller identity.
+     */
     readonly cid: string;
     /**
      * The provider-assigned unique ID for this managed resource.

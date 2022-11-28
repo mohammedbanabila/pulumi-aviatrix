@@ -4,6 +4,85 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_controller_config** resource allows management of an Aviatrix Controller's configurations.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Controller Config
+ * const testControllerConfig = new aviatrix.AviatrixControllerConfig("test_controller_config", {
+ *     fqdnExceptionRule: false,
+ *     httpAccess: true,
+ * });
+ * ```
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Controller Config with Controller Upgrade Without Upgrading Gateways
+ * const testControllerConfig = new aviatrix.AviatrixControllerConfig("test_controller_config", {
+ *     fqdnExceptionRule: false,
+ *     httpAccess: true,
+ *     manageGatewayUpgrades: false,
+ *     targetVersion: "latest",
+ * });
+ * ```
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Controller Config with Controller Upgrade + Upgrade All Gateways
+ * const testControllerConfig = new aviatrix.AviatrixControllerConfig("test_controller_config", {
+ *     fqdnExceptionRule: false,
+ *     httpAccess: true,
+ *     targetVersion: "latest",
+ * });
+ * ```
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Controller Config with Cloudn Backup Configuration Enabled
+ * const testControllerConfig = new aviatrix.AviatrixControllerConfig("test_controller_config", {
+ *     backupAccountName: "account_example",
+ *     backupBucketName: "bucket_example",
+ *     backupCloudType: 1,
+ *     backupConfiguration: true,
+ * });
+ * ```
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Controller Config and import HTTPS certificates
+ * const testControllerConfig = new aviatrix.AviatrixControllerConfig("test_controller_config", {
+ *     caCertificateFilePath: "/path/to/ca_certificate.pem",
+ *     serverPrivateKeyFilePath: "/path/to/server.key",
+ *     serverPublicCertificateFilePath: "/path/to/server.crt",
+ * });
+ * ```
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Controller Config and configure the AWS Guard Duty Scanning Interval
+ * const testControllerConfig = new aviatrix.AviatrixControllerConfig("test_controller_config", {
+ *     awsGuardDutyScanningInterval: 10,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Instance controller_config can be imported using controller IP, e.g. controller IP is 10.11.12.13
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixControllerConfig:AviatrixControllerConfig test 10-11-12-13
+ * ```
+ */
 export class AviatrixControllerConfig extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixControllerConfig resource's state with the given name, ID, and optional extra
@@ -33,97 +112,95 @@ export class AviatrixControllerConfig extends pulumi.CustomResource {
     }
 
     /**
-     * Scanning Interval for AWS Guard Duty.
+     * Configure the AWS Guard Duty scanning interval. Valid values: 5, 10, 15, 30 or 60. Default value: 60. Available as of provider version R2.18+.
      */
     public readonly awsGuardDutyScanningInterval!: pulumi.Output<number | undefined>;
     /**
-     * This parameter represents the name of a Cloud-Account in Aviatrix controller.
+     * Name of the cloud account in the Aviatrix controller.
      */
     public readonly backupAccountName!: pulumi.Output<string | undefined>;
     /**
-     * Bucket name. Required for AWS, AWSGov, GCP and OCI.
+     * Bucket Name. Required to enable configuration backup for AWS, AWSGov, GCP and OCI.
      */
     public readonly backupBucketName!: pulumi.Output<string | undefined>;
     /**
-     * Type of cloud service provider, requires an integer value. Use 1 for AWS.
+     * Type of cloud service provider, requires an integer value. Use 1 for AWS, 4 for GCP, 8 for Azure, 16 for OCI, and 256 for AWSGov.
      */
     public readonly backupCloudType!: pulumi.Output<number | undefined>;
     /**
-     * Switch to enable/disable controller cloudn backup config.
+     * Switch to enable/disable controller CloudN backup config. Valid values: true, false. Default value: false.
      */
     public readonly backupConfiguration!: pulumi.Output<boolean | undefined>;
     /**
-     * Container name. Required for Azure.
+     * Container name. Required to enable configuration backup for Azure.
      */
     public readonly backupContainerName!: pulumi.Output<string | undefined>;
     /**
-     * Name of region. Required for Azure and OCI.
+     * Name of region. Required to enable configuration backup for Azure and OCI.
      */
     public readonly backupRegion!: pulumi.Output<string | undefined>;
     /**
-     * Storage name. Required for Azure.
+     * Storage name. Required to enable configuration backup for Azure.
      */
     public readonly backupStorageName!: pulumi.Output<string | undefined>;
     /**
-     * CA certificate file.
+     * CA certificate. To read certificate file from a file, please use the built-in `file` function. Available as of provider version R2.21.2+.
      */
     public readonly caCertificateFile!: pulumi.Output<string | undefined>;
     /**
-     * File path to the CA certificate.
+     * File path to CA certificate. Available as of provider version R2.18+.
      */
     public readonly caCertificateFilePath!: pulumi.Output<string | undefined>;
     /**
-     * Current version of the controller.
+     * Current version of the controller including the build number. Example: "6.5.123". Available as of provider version R2.20.0+.
      */
     public /*out*/ readonly currentVersion!: pulumi.Output<string>;
     /**
-     * Enable VPC/VNET DNS Server.
+     * Enable VPC/VNET DNS Server for the controller. Valid values: true, false. Default value: false.
      */
     public readonly enableVpcDnsServer!: pulumi.Output<boolean | undefined>;
     /**
-     * A system-wide mode. Default: true.
+     * Enable/disable packets without an SNI field to pass through gateway(s). Valid values: true, false. Default value: true. For more information on this setting, please see [here](https://docs.aviatrix.com/HowTos/FQDN_Whitelists_Ref_Design.html#exception-rule)
      */
     public readonly fqdnExceptionRule!: pulumi.Output<boolean | undefined>;
     /**
-     * Switch for http access. Default: false.
+     * Switch for HTTP access. Valid values: true, false. Default value: false.
      */
     public readonly httpAccess!: pulumi.Output<boolean | undefined>;
     /**
-     * If true, aviatrix_controller_config will upgrade all gateways when target_version is set. If false, only the controller
-     * will be upgraded when target_version is set. In that case gateway upgrades should be handled in each gateway resource
-     * individually using the software_version and image_version attributes.
+     * If true, aviatrix.AviatrixControllerConfig will upgrade all gateways when targetVersion is set. If false, only the controller will be upgraded when targetVersion is set. In that case gateway upgrades should be handled in each gateway resource individually using the softwareVersion and imageVersion attributes. Type: boolean. Default: true. Available as of provider version R2.20.0+.
      */
     public readonly manageGatewayUpgrades!: pulumi.Output<boolean | undefined>;
     /**
-     * Switch to enable the controller to backup up to a maximum of 3 rotating backups.
+     * Switch to enable the Controller to backup up to a maximum of 3 rotating backups. Valid values: true, false. Default value: false.
      */
     public readonly multipleBackups!: pulumi.Output<boolean | undefined>;
     /**
-     * Previous version of the controller.
+     * Previous version of the controller including the build number. Example: "6.5.123". Available as of provider version R2.20.0+.
      */
     public /*out*/ readonly previousVersion!: pulumi.Output<string>;
     /**
-     * Server private key file.
+     * Server private key. To read the private key from a file, please use the built-in `file` function. Available as of provider version R2.21.2+.
      */
     public readonly serverPrivateKeyFile!: pulumi.Output<string | undefined>;
     /**
-     * File path to the server private key.
+     * File path to server private key. Available as of provider version R2.18+.
      */
     public readonly serverPrivateKeyFilePath!: pulumi.Output<string | undefined>;
     /**
-     * Server public certificate file.
+     * Server public certificate. To read certificate file from a file, please use the built-in `file` function. Available as of provider version R2.21.2+.
      */
     public readonly serverPublicCertificateFile!: pulumi.Output<string | undefined>;
     /**
-     * File path to the server public certificate.
+     * File path to the server public certificate. Available as of provider version R2.18+.
      */
     public readonly serverPublicCertificateFilePath!: pulumi.Output<string | undefined>;
     /**
-     * The release version number to which the controller will be upgraded to.
+     * The release version number to which the controller will be upgraded to. If not specified, controller will not be upgraded. If set to "latest", controller will be upgraded to the latest release. Please see the [Controller upgrade guide](https://docs.aviatrix.com/HowTos/inline_upgrade.html) for more information.
      */
     public readonly targetVersion!: pulumi.Output<string | undefined>;
     /**
-     * Current version of the controller without the build number.
+     * Current version of the controller without build number. Example: "6.5"
      */
     public /*out*/ readonly version!: pulumi.Output<string>;
 
@@ -173,16 +250,16 @@ export class AviatrixControllerConfig extends pulumi.CustomResource {
             resourceInputs["backupContainerName"] = args ? args.backupContainerName : undefined;
             resourceInputs["backupRegion"] = args ? args.backupRegion : undefined;
             resourceInputs["backupStorageName"] = args ? args.backupStorageName : undefined;
-            resourceInputs["caCertificateFile"] = args ? args.caCertificateFile : undefined;
+            resourceInputs["caCertificateFile"] = args?.caCertificateFile ? pulumi.secret(args.caCertificateFile) : undefined;
             resourceInputs["caCertificateFilePath"] = args ? args.caCertificateFilePath : undefined;
             resourceInputs["enableVpcDnsServer"] = args ? args.enableVpcDnsServer : undefined;
             resourceInputs["fqdnExceptionRule"] = args ? args.fqdnExceptionRule : undefined;
             resourceInputs["httpAccess"] = args ? args.httpAccess : undefined;
             resourceInputs["manageGatewayUpgrades"] = args ? args.manageGatewayUpgrades : undefined;
             resourceInputs["multipleBackups"] = args ? args.multipleBackups : undefined;
-            resourceInputs["serverPrivateKeyFile"] = args ? args.serverPrivateKeyFile : undefined;
+            resourceInputs["serverPrivateKeyFile"] = args?.serverPrivateKeyFile ? pulumi.secret(args.serverPrivateKeyFile) : undefined;
             resourceInputs["serverPrivateKeyFilePath"] = args ? args.serverPrivateKeyFilePath : undefined;
-            resourceInputs["serverPublicCertificateFile"] = args ? args.serverPublicCertificateFile : undefined;
+            resourceInputs["serverPublicCertificateFile"] = args?.serverPublicCertificateFile ? pulumi.secret(args.serverPublicCertificateFile) : undefined;
             resourceInputs["serverPublicCertificateFilePath"] = args ? args.serverPublicCertificateFilePath : undefined;
             resourceInputs["targetVersion"] = args ? args.targetVersion : undefined;
             resourceInputs["currentVersion"] = undefined /*out*/;
@@ -190,6 +267,8 @@ export class AviatrixControllerConfig extends pulumi.CustomResource {
             resourceInputs["version"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["caCertificateFile", "serverPrivateKeyFile", "serverPublicCertificateFile"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(AviatrixControllerConfig.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -199,97 +278,95 @@ export class AviatrixControllerConfig extends pulumi.CustomResource {
  */
 export interface AviatrixControllerConfigState {
     /**
-     * Scanning Interval for AWS Guard Duty.
+     * Configure the AWS Guard Duty scanning interval. Valid values: 5, 10, 15, 30 or 60. Default value: 60. Available as of provider version R2.18+.
      */
     awsGuardDutyScanningInterval?: pulumi.Input<number>;
     /**
-     * This parameter represents the name of a Cloud-Account in Aviatrix controller.
+     * Name of the cloud account in the Aviatrix controller.
      */
     backupAccountName?: pulumi.Input<string>;
     /**
-     * Bucket name. Required for AWS, AWSGov, GCP and OCI.
+     * Bucket Name. Required to enable configuration backup for AWS, AWSGov, GCP and OCI.
      */
     backupBucketName?: pulumi.Input<string>;
     /**
-     * Type of cloud service provider, requires an integer value. Use 1 for AWS.
+     * Type of cloud service provider, requires an integer value. Use 1 for AWS, 4 for GCP, 8 for Azure, 16 for OCI, and 256 for AWSGov.
      */
     backupCloudType?: pulumi.Input<number>;
     /**
-     * Switch to enable/disable controller cloudn backup config.
+     * Switch to enable/disable controller CloudN backup config. Valid values: true, false. Default value: false.
      */
     backupConfiguration?: pulumi.Input<boolean>;
     /**
-     * Container name. Required for Azure.
+     * Container name. Required to enable configuration backup for Azure.
      */
     backupContainerName?: pulumi.Input<string>;
     /**
-     * Name of region. Required for Azure and OCI.
+     * Name of region. Required to enable configuration backup for Azure and OCI.
      */
     backupRegion?: pulumi.Input<string>;
     /**
-     * Storage name. Required for Azure.
+     * Storage name. Required to enable configuration backup for Azure.
      */
     backupStorageName?: pulumi.Input<string>;
     /**
-     * CA certificate file.
+     * CA certificate. To read certificate file from a file, please use the built-in `file` function. Available as of provider version R2.21.2+.
      */
     caCertificateFile?: pulumi.Input<string>;
     /**
-     * File path to the CA certificate.
+     * File path to CA certificate. Available as of provider version R2.18+.
      */
     caCertificateFilePath?: pulumi.Input<string>;
     /**
-     * Current version of the controller.
+     * Current version of the controller including the build number. Example: "6.5.123". Available as of provider version R2.20.0+.
      */
     currentVersion?: pulumi.Input<string>;
     /**
-     * Enable VPC/VNET DNS Server.
+     * Enable VPC/VNET DNS Server for the controller. Valid values: true, false. Default value: false.
      */
     enableVpcDnsServer?: pulumi.Input<boolean>;
     /**
-     * A system-wide mode. Default: true.
+     * Enable/disable packets without an SNI field to pass through gateway(s). Valid values: true, false. Default value: true. For more information on this setting, please see [here](https://docs.aviatrix.com/HowTos/FQDN_Whitelists_Ref_Design.html#exception-rule)
      */
     fqdnExceptionRule?: pulumi.Input<boolean>;
     /**
-     * Switch for http access. Default: false.
+     * Switch for HTTP access. Valid values: true, false. Default value: false.
      */
     httpAccess?: pulumi.Input<boolean>;
     /**
-     * If true, aviatrix_controller_config will upgrade all gateways when target_version is set. If false, only the controller
-     * will be upgraded when target_version is set. In that case gateway upgrades should be handled in each gateway resource
-     * individually using the software_version and image_version attributes.
+     * If true, aviatrix.AviatrixControllerConfig will upgrade all gateways when targetVersion is set. If false, only the controller will be upgraded when targetVersion is set. In that case gateway upgrades should be handled in each gateway resource individually using the softwareVersion and imageVersion attributes. Type: boolean. Default: true. Available as of provider version R2.20.0+.
      */
     manageGatewayUpgrades?: pulumi.Input<boolean>;
     /**
-     * Switch to enable the controller to backup up to a maximum of 3 rotating backups.
+     * Switch to enable the Controller to backup up to a maximum of 3 rotating backups. Valid values: true, false. Default value: false.
      */
     multipleBackups?: pulumi.Input<boolean>;
     /**
-     * Previous version of the controller.
+     * Previous version of the controller including the build number. Example: "6.5.123". Available as of provider version R2.20.0+.
      */
     previousVersion?: pulumi.Input<string>;
     /**
-     * Server private key file.
+     * Server private key. To read the private key from a file, please use the built-in `file` function. Available as of provider version R2.21.2+.
      */
     serverPrivateKeyFile?: pulumi.Input<string>;
     /**
-     * File path to the server private key.
+     * File path to server private key. Available as of provider version R2.18+.
      */
     serverPrivateKeyFilePath?: pulumi.Input<string>;
     /**
-     * Server public certificate file.
+     * Server public certificate. To read certificate file from a file, please use the built-in `file` function. Available as of provider version R2.21.2+.
      */
     serverPublicCertificateFile?: pulumi.Input<string>;
     /**
-     * File path to the server public certificate.
+     * File path to the server public certificate. Available as of provider version R2.18+.
      */
     serverPublicCertificateFilePath?: pulumi.Input<string>;
     /**
-     * The release version number to which the controller will be upgraded to.
+     * The release version number to which the controller will be upgraded to. If not specified, controller will not be upgraded. If set to "latest", controller will be upgraded to the latest release. Please see the [Controller upgrade guide](https://docs.aviatrix.com/HowTos/inline_upgrade.html) for more information.
      */
     targetVersion?: pulumi.Input<string>;
     /**
-     * Current version of the controller without the build number.
+     * Current version of the controller without build number. Example: "6.5"
      */
     version?: pulumi.Input<string>;
 }
@@ -299,85 +376,83 @@ export interface AviatrixControllerConfigState {
  */
 export interface AviatrixControllerConfigArgs {
     /**
-     * Scanning Interval for AWS Guard Duty.
+     * Configure the AWS Guard Duty scanning interval. Valid values: 5, 10, 15, 30 or 60. Default value: 60. Available as of provider version R2.18+.
      */
     awsGuardDutyScanningInterval?: pulumi.Input<number>;
     /**
-     * This parameter represents the name of a Cloud-Account in Aviatrix controller.
+     * Name of the cloud account in the Aviatrix controller.
      */
     backupAccountName?: pulumi.Input<string>;
     /**
-     * Bucket name. Required for AWS, AWSGov, GCP and OCI.
+     * Bucket Name. Required to enable configuration backup for AWS, AWSGov, GCP and OCI.
      */
     backupBucketName?: pulumi.Input<string>;
     /**
-     * Type of cloud service provider, requires an integer value. Use 1 for AWS.
+     * Type of cloud service provider, requires an integer value. Use 1 for AWS, 4 for GCP, 8 for Azure, 16 for OCI, and 256 for AWSGov.
      */
     backupCloudType?: pulumi.Input<number>;
     /**
-     * Switch to enable/disable controller cloudn backup config.
+     * Switch to enable/disable controller CloudN backup config. Valid values: true, false. Default value: false.
      */
     backupConfiguration?: pulumi.Input<boolean>;
     /**
-     * Container name. Required for Azure.
+     * Container name. Required to enable configuration backup for Azure.
      */
     backupContainerName?: pulumi.Input<string>;
     /**
-     * Name of region. Required for Azure and OCI.
+     * Name of region. Required to enable configuration backup for Azure and OCI.
      */
     backupRegion?: pulumi.Input<string>;
     /**
-     * Storage name. Required for Azure.
+     * Storage name. Required to enable configuration backup for Azure.
      */
     backupStorageName?: pulumi.Input<string>;
     /**
-     * CA certificate file.
+     * CA certificate. To read certificate file from a file, please use the built-in `file` function. Available as of provider version R2.21.2+.
      */
     caCertificateFile?: pulumi.Input<string>;
     /**
-     * File path to the CA certificate.
+     * File path to CA certificate. Available as of provider version R2.18+.
      */
     caCertificateFilePath?: pulumi.Input<string>;
     /**
-     * Enable VPC/VNET DNS Server.
+     * Enable VPC/VNET DNS Server for the controller. Valid values: true, false. Default value: false.
      */
     enableVpcDnsServer?: pulumi.Input<boolean>;
     /**
-     * A system-wide mode. Default: true.
+     * Enable/disable packets without an SNI field to pass through gateway(s). Valid values: true, false. Default value: true. For more information on this setting, please see [here](https://docs.aviatrix.com/HowTos/FQDN_Whitelists_Ref_Design.html#exception-rule)
      */
     fqdnExceptionRule?: pulumi.Input<boolean>;
     /**
-     * Switch for http access. Default: false.
+     * Switch for HTTP access. Valid values: true, false. Default value: false.
      */
     httpAccess?: pulumi.Input<boolean>;
     /**
-     * If true, aviatrix_controller_config will upgrade all gateways when target_version is set. If false, only the controller
-     * will be upgraded when target_version is set. In that case gateway upgrades should be handled in each gateway resource
-     * individually using the software_version and image_version attributes.
+     * If true, aviatrix.AviatrixControllerConfig will upgrade all gateways when targetVersion is set. If false, only the controller will be upgraded when targetVersion is set. In that case gateway upgrades should be handled in each gateway resource individually using the softwareVersion and imageVersion attributes. Type: boolean. Default: true. Available as of provider version R2.20.0+.
      */
     manageGatewayUpgrades?: pulumi.Input<boolean>;
     /**
-     * Switch to enable the controller to backup up to a maximum of 3 rotating backups.
+     * Switch to enable the Controller to backup up to a maximum of 3 rotating backups. Valid values: true, false. Default value: false.
      */
     multipleBackups?: pulumi.Input<boolean>;
     /**
-     * Server private key file.
+     * Server private key. To read the private key from a file, please use the built-in `file` function. Available as of provider version R2.21.2+.
      */
     serverPrivateKeyFile?: pulumi.Input<string>;
     /**
-     * File path to the server private key.
+     * File path to server private key. Available as of provider version R2.18+.
      */
     serverPrivateKeyFilePath?: pulumi.Input<string>;
     /**
-     * Server public certificate file.
+     * Server public certificate. To read certificate file from a file, please use the built-in `file` function. Available as of provider version R2.21.2+.
      */
     serverPublicCertificateFile?: pulumi.Input<string>;
     /**
-     * File path to the server public certificate.
+     * File path to the server public certificate. Available as of provider version R2.18+.
      */
     serverPublicCertificateFilePath?: pulumi.Input<string>;
     /**
-     * The release version number to which the controller will be upgraded to.
+     * The release version number to which the controller will be upgraded to. If not specified, controller will not be upgraded. If set to "latest", controller will be upgraded to the latest release. Please see the [Controller upgrade guide](https://docs.aviatrix.com/HowTos/inline_upgrade.html) for more information.
      */
     targetVersion?: pulumi.Input<string>;
 }

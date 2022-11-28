@@ -9,17 +9,47 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_rbac_group_user_attachment** resource allows the creation and management of user attachments to Aviatrix (Role-Based Access Control) RBAC groups.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix RBAC Group User Attachment
+    ///     var testAttachment = new Aviatrix.AviatrixRbacGroupUserAttachment("testAttachment", new()
+    ///     {
+    ///         GroupName = "write_only",
+    ///         UserName = "user_name",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **rbac_group_user_attachment** can be imported using the `group_name` and `user_name`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixRbacGroupUserAttachment:AviatrixRbacGroupUserAttachment test group_name~user_name
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixRbacGroupUserAttachment:AviatrixRbacGroupUserAttachment")]
     public partial class AviatrixRbacGroupUserAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// RBAC permission group name.
+        /// This parameter represents the name of a RBAC group.
         /// </summary>
         [Output("groupName")]
         public Output<string> GroupName { get; private set; } = null!;
 
         /// <summary>
-        /// Account user name.
+        /// Username of the account user.
         /// </summary>
         [Output("userName")]
         public Output<string> UserName { get; private set; } = null!;
@@ -72,13 +102,13 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixRbacGroupUserAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// RBAC permission group name.
+        /// This parameter represents the name of a RBAC group.
         /// </summary>
         [Input("groupName", required: true)]
         public Input<string> GroupName { get; set; } = null!;
 
         /// <summary>
-        /// Account user name.
+        /// Username of the account user.
         /// </summary>
         [Input("userName", required: true)]
         public Input<string> UserName { get; set; } = null!;
@@ -92,13 +122,13 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixRbacGroupUserAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// RBAC permission group name.
+        /// This parameter represents the name of a RBAC group.
         /// </summary>
         [Input("groupName")]
         public Input<string>? GroupName { get; set; }
 
         /// <summary>
-        /// Account user name.
+        /// Username of the account user.
         /// </summary>
         [Input("userName")]
         public Input<string>? UserName { get; set; }

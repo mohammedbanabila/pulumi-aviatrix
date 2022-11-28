@@ -9,36 +9,126 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Firewall
+    ///     var statefulFirewall1 = new Aviatrix.AviatrixFirewall("statefulFirewall1", new()
+    ///     {
+    ///         BaseLogEnabled = true,
+    ///         BasePolicy = "allow-all",
+    ///         GwName = "gateway-1",
+    ///         ManageFirewallPolicies = false,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Firewall with in-line rules
+    ///     var statefulFirewall1 = new Aviatrix.AviatrixFirewall("statefulFirewall1", new()
+    ///     {
+    ///         GwName = "gateway-1",
+    ///         BasePolicy = "allow-all",
+    ///         BaseLogEnabled = true,
+    ///         Policies = new[]
+    ///         {
+    ///             new Aviatrix.Inputs.AviatrixFirewallPolicyArgs
+    ///             {
+    ///                 Protocol = "all",
+    ///                 SrcIp = "10.17.0.224/32",
+    ///                 LogEnabled = true,
+    ///                 DstIp = "10.12.0.172/32",
+    ///                 Action = "force-drop",
+    ///                 Port = "0:65535",
+    ///                 Description = "first_policy",
+    ///             },
+    ///             new Aviatrix.Inputs.AviatrixFirewallPolicyArgs
+    ///             {
+    ///                 Protocol = "tcp",
+    ///                 SrcIp = "10.16.0.224/32",
+    ///                 LogEnabled = false,
+    ///                 DstIp = "10.12.1.172/32",
+    ///                 Action = "force-drop",
+    ///                 Port = "325",
+    ///                 Description = "second_policy",
+    ///             },
+    ///             new Aviatrix.Inputs.AviatrixFirewallPolicyArgs
+    ///             {
+    ///                 Protocol = "udp",
+    ///                 SrcIp = "10.14.0.225/32",
+    ///                 LogEnabled = false,
+    ///                 DstIp = "10.13.1.173/32",
+    ///                 Action = "deny",
+    ///                 Port = "325",
+    ///                 Description = "third_policy",
+    ///             },
+    ///             new Aviatrix.Inputs.AviatrixFirewallPolicyArgs
+    ///             {
+    ///                 Protocol = "tcp",
+    ///                 SrcIp = aviatrix_firewall_tag.Test.Firewall_tag,
+    ///                 LogEnabled = false,
+    ///                 DstIp = "10.13.1.173/32",
+    ///                 Action = "deny",
+    ///                 Port = "325",
+    ///                 Description = "fourth_policy",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **firewall** can be imported using the `gw_name`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixFirewall:AviatrixFirewall test gw_name
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixFirewall:AviatrixFirewall")]
     public partial class AviatrixFirewall : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Indicates whether enable logging or not. Valid values: true, false. Default value: false.
+        /// Indicates whether enable logging or not. Valid Values: true, false. Default value: false.
         /// </summary>
         [Output("baseLogEnabled")]
         public Output<bool?> BaseLogEnabled { get; private set; } = null!;
 
         /// <summary>
-        /// New base policy.
+        /// New base policy. Valid Values: "allow-all", "deny-all". Default value: "deny-all"
         /// </summary>
         [Output("basePolicy")]
         public Output<string?> BasePolicy { get; private set; } = null!;
 
         /// <summary>
-        /// The name of gateway.
+        /// Gateway name to attach firewall policy to.
         /// </summary>
         [Output("gwName")]
         public Output<string> GwName { get; private set; } = null!;
 
         /// <summary>
-        /// Enable to manage firewall policies via in-line rules. If false, policies must be managed using
-        /// `aviatrix_firewall_policy` resources.
+        /// Enable to manage firewall policies via in-line rules. If false, policies must be managed using `aviatrix.AviatrixFirewallPolicy` resources. Default: true. Valid values: true, false. Available in provider version R2.17+.
         /// </summary>
         [Output("manageFirewallPolicies")]
         public Output<bool?> ManageFirewallPolicies { get; private set; } = null!;
 
         /// <summary>
-        /// New access policy for the gateway.
+        /// New access policy for the gateway. Seven fields are required for each policy item: `src_ip`, `dst_ip`, `protocol`, `port`, `action`, `log_enabled` and `description`. No duplicate rules (with same `src_ip`, `dst_ip`, `protocol` and `port`) are allowed.
         /// </summary>
         [Output("policies")]
         public Output<ImmutableArray<Outputs.AviatrixFirewallPolicy>> Policies { get; private set; } = null!;
@@ -91,26 +181,25 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixFirewallArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Indicates whether enable logging or not. Valid values: true, false. Default value: false.
+        /// Indicates whether enable logging or not. Valid Values: true, false. Default value: false.
         /// </summary>
         [Input("baseLogEnabled")]
         public Input<bool>? BaseLogEnabled { get; set; }
 
         /// <summary>
-        /// New base policy.
+        /// New base policy. Valid Values: "allow-all", "deny-all". Default value: "deny-all"
         /// </summary>
         [Input("basePolicy")]
         public Input<string>? BasePolicy { get; set; }
 
         /// <summary>
-        /// The name of gateway.
+        /// Gateway name to attach firewall policy to.
         /// </summary>
         [Input("gwName", required: true)]
         public Input<string> GwName { get; set; } = null!;
 
         /// <summary>
-        /// Enable to manage firewall policies via in-line rules. If false, policies must be managed using
-        /// `aviatrix_firewall_policy` resources.
+        /// Enable to manage firewall policies via in-line rules. If false, policies must be managed using `aviatrix.AviatrixFirewallPolicy` resources. Default: true. Valid values: true, false. Available in provider version R2.17+.
         /// </summary>
         [Input("manageFirewallPolicies")]
         public Input<bool>? ManageFirewallPolicies { get; set; }
@@ -119,7 +208,7 @@ namespace Pulumi.Aviatrix
         private InputList<Inputs.AviatrixFirewallPolicyArgs>? _policies;
 
         /// <summary>
-        /// New access policy for the gateway.
+        /// New access policy for the gateway. Seven fields are required for each policy item: `src_ip`, `dst_ip`, `protocol`, `port`, `action`, `log_enabled` and `description`. No duplicate rules (with same `src_ip`, `dst_ip`, `protocol` and `port`) are allowed.
         /// </summary>
         public InputList<Inputs.AviatrixFirewallPolicyArgs> Policies
         {
@@ -136,26 +225,25 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixFirewallState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Indicates whether enable logging or not. Valid values: true, false. Default value: false.
+        /// Indicates whether enable logging or not. Valid Values: true, false. Default value: false.
         /// </summary>
         [Input("baseLogEnabled")]
         public Input<bool>? BaseLogEnabled { get; set; }
 
         /// <summary>
-        /// New base policy.
+        /// New base policy. Valid Values: "allow-all", "deny-all". Default value: "deny-all"
         /// </summary>
         [Input("basePolicy")]
         public Input<string>? BasePolicy { get; set; }
 
         /// <summary>
-        /// The name of gateway.
+        /// Gateway name to attach firewall policy to.
         /// </summary>
         [Input("gwName")]
         public Input<string>? GwName { get; set; }
 
         /// <summary>
-        /// Enable to manage firewall policies via in-line rules. If false, policies must be managed using
-        /// `aviatrix_firewall_policy` resources.
+        /// Enable to manage firewall policies via in-line rules. If false, policies must be managed using `aviatrix.AviatrixFirewallPolicy` resources. Default: true. Valid values: true, false. Available in provider version R2.17+.
         /// </summary>
         [Input("manageFirewallPolicies")]
         public Input<bool>? ManageFirewallPolicies { get; set; }
@@ -164,7 +252,7 @@ namespace Pulumi.Aviatrix
         private InputList<Inputs.AviatrixFirewallPolicyGetArgs>? _policies;
 
         /// <summary>
-        /// New access policy for the gateway.
+        /// New access policy for the gateway. Seven fields are required for each policy item: `src_ip`, `dst_ip`, `protocol`, `port`, `action`, `log_enabled` and `description`. No duplicate rules (with same `src_ip`, `dst_ip`, `protocol` and `port`) are allowed.
         /// </summary>
         public InputList<Inputs.AviatrixFirewallPolicyGetArgs> Policies
         {

@@ -4,6 +4,35 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_netflow_agent** resource allows the enabling and disabling of netflow agent.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Enable netflow agent
+ * const testNetflowAgent = new aviatrix.AviatrixNetflowAgent("test_netflow_agent", {
+ *     excludedGateways: [
+ *         "a",
+ *         "b",
+ *     ],
+ *     port: 10,
+ *     serverIp: "1.2.3.4",
+ *     version: 5,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **netflow_agent** can be imported using "netflow_agent", e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixNetflowAgent:AviatrixNetflowAgent test netflow_agent
+ * ```
+ */
 export class AviatrixNetflowAgent extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixNetflowAgent resource's state with the given name, ID, and optional extra
@@ -33,7 +62,7 @@ export class AviatrixNetflowAgent extends pulumi.CustomResource {
     }
 
     /**
-     * List of excluded gateways.
+     * List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
      */
     public readonly excludedGateways!: pulumi.Output<string[] | undefined>;
     /**
@@ -45,11 +74,11 @@ export class AviatrixNetflowAgent extends pulumi.CustomResource {
      */
     public readonly serverIp!: pulumi.Output<string>;
     /**
-     * Enabled or not.
+     * The status of netflow agent.
      */
     public /*out*/ readonly status!: pulumi.Output<string>;
     /**
-     * Netflow version.
+     * Netflow version (5 or 9). 5 by default.
      */
     public readonly version!: pulumi.Output<number | undefined>;
 
@@ -95,7 +124,7 @@ export class AviatrixNetflowAgent extends pulumi.CustomResource {
  */
 export interface AviatrixNetflowAgentState {
     /**
-     * List of excluded gateways.
+     * List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
      */
     excludedGateways?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -107,11 +136,11 @@ export interface AviatrixNetflowAgentState {
      */
     serverIp?: pulumi.Input<string>;
     /**
-     * Enabled or not.
+     * The status of netflow agent.
      */
     status?: pulumi.Input<string>;
     /**
-     * Netflow version.
+     * Netflow version (5 or 9). 5 by default.
      */
     version?: pulumi.Input<number>;
 }
@@ -121,7 +150,7 @@ export interface AviatrixNetflowAgentState {
  */
 export interface AviatrixNetflowAgentArgs {
     /**
-     * List of excluded gateways.
+     * List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
      */
     excludedGateways?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -133,7 +162,7 @@ export interface AviatrixNetflowAgentArgs {
      */
     serverIp: pulumi.Input<string>;
     /**
-     * Netflow version.
+     * Netflow version (5 or 9). 5 by default.
      */
     version?: pulumi.Input<number>;
 }

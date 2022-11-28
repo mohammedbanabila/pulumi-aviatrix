@@ -9,36 +9,48 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_firewall_instance** resource allows the creation and management of Aviatrix Firewall Instances.
+    /// 
+    /// This resource is used in [Aviatrix FireNet](https://docs.aviatrix.com/HowTos/firewall_network_faq.html) and [Aviatrix Transit FireNet](https://docs.aviatrix.com/HowTos/transit_firenet_faq.html) solutions, in conjunction with other resources that may include, and are not limited to: **firenet**, **firewall_instance_association**, **aws_tgw** and **transit_gateway** resources.
+    /// 
+    /// ## Import
+    /// 
+    /// **firewall_instance** can be imported using the `instance_id`. For Azure or AzureGov FireNet instances, the value will be the `firewall_name` concatenated with a ":" and the Resource Group of the `vpc_id` set for that instance. e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixFirewallInstance:AviatrixFirewallInstance test instance_id
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixFirewallInstance:AviatrixFirewallInstance")]
     public partial class AviatrixFirewallInstance : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Availability domain for OCI.
+        /// Availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
         /// </summary>
         [Output("availabilityDomain")]
         public Output<string> AvailabilityDomain { get; private set; } = null!;
 
         /// <summary>
-        /// Advanced option. Bootstrap bucket name. Only available for AWS and GCP.
+        /// Only available for AWS and GCP. For GCP, only Palo Alto Networks VM-Series deployment can use this attribute. In advanced mode, specify a bootstrap bucket name where the initial configuration and policy file is stored.
         /// </summary>
         [Output("bootstrapBucketName")]
         public Output<string?> BootstrapBucketName { get; private set; } = null!;
 
         /// <summary>
-        /// Advanced option. Bootstrap storage name. Applicable to Azure and Palo Alto Networks VM-Series/Fortinet Series deployment
-        /// only.
+        /// Advanced option. Bootstrap storage name. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series/Fortinet Series deployment only. Available as of provider version R2.17.1+.
         /// </summary>
         [Output("bootstrapStorageName")]
         public Output<string?> BootstrapStorageName { get; private set; } = null!;
 
         /// <summary>
-        /// Cloud Type
+        /// Cloud Type.
         /// </summary>
         [Output("cloudType")]
         public Output<int> CloudType { get; private set; } = null!;
 
         /// <summary>
-        /// Advanced option. Bootstrap storage name. Applicable to Azure and Fortinet Series deployment only.
+        /// Advanced option. Container folder. Applicable to Azure or AzureGov and Fortinet Series deployment only.
         /// </summary>
         [Output("containerFolder")]
         public Output<string?> ContainerFolder { get; private set; } = null!;
@@ -50,49 +62,49 @@ namespace Pulumi.Aviatrix
         public Output<string> EgressInterface { get; private set; } = null!;
 
         /// <summary>
-        /// Egress Interface Subnet.
+        /// Egress Interface Subnet. Select the subnet whose name contains “FW-ingress-egress”. For GCP, `egress_subnet` must be in the form `cidr~~region~~name`.
         /// </summary>
         [Output("egressSubnet")]
         public Output<string> EgressSubnet { get; private set; } = null!;
 
         /// <summary>
-        /// Egress VPC ID. Required for GCP.
+        /// Egress VPC ID. Required for GCP. Available as of provider version R2.18.1+.
         /// </summary>
         [Output("egressVpcId")]
         public Output<string?> EgressVpcId { get; private set; } = null!;
 
         /// <summary>
-        /// Fault domain for OCI.
+        /// Fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
         /// </summary>
         [Output("faultDomain")]
         public Output<string> FaultDomain { get; private set; } = null!;
 
         /// <summary>
-        /// Advanced option. File share folder. Applicable to Azure and Palo Alto Networks VM-Series deployment only.
+        /// Advanced option. File share folder. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series deployment only. Available as of provider version R2.17.1+.
         /// </summary>
         [Output("fileShareFolder")]
         public Output<string?> FileShareFolder { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the primary FireNet gateway.
+        /// Name of the primary FireNet gateway. **Required for all FireNet deployments that do not utilize the TGW-Integrated FireNet with AWS Native GWLB VPC.**
         /// </summary>
         [Output("firenetGwName")]
         public Output<string?> FirenetGwName { get; private set; } = null!;
 
         /// <summary>
-        /// One of the AWS AMIs from Palo Alto Networks.
+        /// One of the AWS/Azure/GCP AMIs from various vendors such as Palo Alto Networks.
         /// </summary>
         [Output("firewallImage")]
         public Output<string> FirewallImage { get; private set; } = null!;
 
         /// <summary>
-        /// Firewall image ID.
+        /// Firewall image ID. Applicable to AWS and Azure only. For AWS, please use AMI ID. For Azure, the format is “Publisher:Offer:Plan:Version”. Available as of provider version R2.19+.
         /// </summary>
         [Output("firewallImageId")]
         public Output<string> FirewallImageId { get; private set; } = null!;
 
         /// <summary>
-        /// Version of firewall image.
+        /// Version of firewall image. If not specified, Controller will automatically select the latest version available.
         /// </summary>
         [Output("firewallImageVersion")]
         public Output<string> FirewallImageVersion { get; private set; } = null!;
@@ -104,19 +116,19 @@ namespace Pulumi.Aviatrix
         public Output<string> FirewallName { get; private set; } = null!;
 
         /// <summary>
-        /// Instance size of the firewall.
+        /// Instance size of the firewall. Example: "m5.xlarge".
         /// </summary>
         [Output("firewallSize")]
         public Output<string> FirewallSize { get; private set; } = null!;
 
         /// <summary>
-        /// GCP VPC ID
+        /// GCP Only. The current VPC ID.
         /// </summary>
         [Output("gcpVpcId")]
         public Output<string> GcpVpcId { get; private set; } = null!;
 
         /// <summary>
-        /// Advanced option. IAM role. Only available for AWS.
+        /// Only available for AWS. In advanced mode, create an IAM Role on the AWS account that launched the FireNet gateway. Create a policy to attach to the role. The policy is to allow access to "Bootstrap Bucket".
         /// </summary>
         [Output("iamRole")]
         public Output<string?> IamRole { get; private set; } = null!;
@@ -128,7 +140,7 @@ namespace Pulumi.Aviatrix
         public Output<string> InstanceId { get; private set; } = null!;
 
         /// <summary>
-        /// Applicable to AWS deployment only. AWS Key Pair name. If not provided, a Key Pair will be generated.
+        /// Applicable to AWS deployment only. AWS Key Pair name. If not provided a Key Pair will be generated.
         /// </summary>
         [Output("keyName")]
         public Output<string?> KeyName { get; private set; } = null!;
@@ -146,21 +158,19 @@ namespace Pulumi.Aviatrix
         public Output<string> ManagementInterface { get; private set; } = null!;
 
         /// <summary>
-        /// Management Interface Subnet. Required for Palo Alto Networks VM-Series, and required to be empty for Check Point or
-        /// Fortinet series.
+        /// Management Interface Subnet. Select the subnet whose name contains “gateway and firewall management”. For GCP, `management_subnet` must be in the form `cidr~~region~~name`. Required for Palo Alto Networks VM-Series and OCI Check Point firewalls. Otherwise, it must be empty.
         /// </summary>
         [Output("managementSubnet")]
         public Output<string?> ManagementSubnet { get; private set; } = null!;
 
         /// <summary>
-        /// Management VPC ID. Required for GCP Palo Alto Networks VM-Series. Required to be empty for GCP Check Point or Fortinet
-        /// series.
+        /// Management VPC ID. Only used for GCP firewall. Required for Palo Alto Networks VM-Series, and required to be empty for Check Point or Fortinet series. Available as of provider version R2.18.1+.
         /// </summary>
         [Output("managementVpcId")]
         public Output<string?> ManagementVpcId { get; private set; } = null!;
 
         /// <summary>
-        /// Authentication method. Applicable to Azure deployment only.
+        /// Applicable to Azure or AzureGov deployment only.
         /// </summary>
         [Output("password")]
         public Output<string?> Password { get; private set; } = null!;
@@ -172,67 +182,67 @@ namespace Pulumi.Aviatrix
         public Output<string> PublicIp { get; private set; } = null!;
 
         /// <summary>
-        /// Advanced option. Bootstrap storage name. Applicable to Azure and Fortinet Series deployment only.
+        /// Advanced option. SAS URL Config. Applicable to Azure or AzureGov and Fortinet Series deployment only.
         /// </summary>
         [Output("sasUrlConfig")]
         public Output<string?> SasUrlConfig { get; private set; } = null!;
 
         /// <summary>
-        /// Advanced option. Bootstrap storage name. Applicable to Azure and Fortinet Series deployment only.
+        /// Advanced option. SAS URL License. Applicable to Azure or AzureGov and Fortinet Series deployment only.
         /// </summary>
         [Output("sasUrlLicense")]
         public Output<string?> SasUrlLicense { get; private set; } = null!;
 
         /// <summary>
-        /// Advanced option. Share directory. Applicable to Azure and Palo Alto Networks VM-Series deployment only.
+        /// Advanced option. Share directory. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series deployment only. Available as of provider version R2.17.1+.
         /// </summary>
         [Output("shareDirectory")]
         public Output<string?> ShareDirectory { get; private set; } = null!;
 
         /// <summary>
-        /// Advanced option. Bic key. Applicable to Azure and Check Point Series deployment only.
+        /// Advanced option. Sic key. Applicable to Check Point Series deployment only.
         /// </summary>
         [Output("sicKey")]
         public Output<string?> SicKey { get; private set; } = null!;
 
         /// <summary>
-        /// Authentication method. Applicable to Azure deployment only.
+        /// Applicable to Azure or AzureGov deployment only.
         /// </summary>
         [Output("sshPublicKey")]
         public Output<string?> SshPublicKey { get; private set; } = null!;
 
         /// <summary>
-        /// Advanced option. Storage access key. Applicable to Azure and Palo Alto Networks VM-Series deployment only.
+        /// Advanced option. Storage access key. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series deployment only. Available as of provider version R2.17.1+.
         /// </summary>
         [Output("storageAccessKey")]
         public Output<string?> StorageAccessKey { get; private set; } = null!;
 
         /// <summary>
-        /// A map of tags to assign to the firewall instance.
+        /// Mapping of key value pairs of tags for a firewall instance. Only available for AWS, AWSGov, GCP and Azure firewall instances. For AWS, AWSGov and Azure allowed characters are: letters, spaces, and numbers plus the following special characters: + - = . _ : @. For GCP allowed characters are: lowercase letters, numbers, "-" and "_". Example: {"key1" = "value1", "key2" = "value2"}.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableDictionary<string, string>?> Tags { get; private set; } = null!;
 
         /// <summary>
-        /// Advanced option. Bootstrap storage name. Applicable to Check Point Series and Fortinet Series deployment only.
+        /// Advanced option. User Data. Applicable to Check Point Series and Fortinet Series deployment only. Type: String.
         /// </summary>
         [Output("userData")]
         public Output<string?> UserData { get; private set; } = null!;
 
         /// <summary>
-        /// Applicable to Azure deployment only. 'admin' as a username is not accepted.
+        /// Applicable to Azure or AzureGov deployment only. "admin" as a username is not accepted.
         /// </summary>
         [Output("username")]
         public Output<string?> Username { get; private set; } = null!;
 
         /// <summary>
-        /// ID of the Security VPC.
+        /// VPC ID of the Security VPC. For GCP, `vpc_id` must be in the form vpc_id~-~gcloud_project_id.
         /// </summary>
         [Output("vpcId")]
         public Output<string> VpcId { get; private set; } = null!;
 
         /// <summary>
-        /// Availability Zone. Only available for AWS, GCP and Azure.
+        /// Availability Zone. Required if creating a Firewall Instance with a Native AWS GWLB-enabled VPC. Applicable to AWS, Azure, and GCP only. Available as of provider version R2.17+.
         /// </summary>
         [Output("zone")]
         public Output<string> Zone { get; private set; } = null!;
@@ -261,6 +271,14 @@ namespace Pulumi.Aviatrix
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/astipkovits",
+                AdditionalSecretOutputs =
+                {
+                    "keyName",
+                    "password",
+                    "sicKey",
+                    "sshPublicKey",
+                    "storageAccessKey",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -285,74 +303,73 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixFirewallInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Availability domain for OCI.
+        /// Availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
         /// </summary>
         [Input("availabilityDomain")]
         public Input<string>? AvailabilityDomain { get; set; }
 
         /// <summary>
-        /// Advanced option. Bootstrap bucket name. Only available for AWS and GCP.
+        /// Only available for AWS and GCP. For GCP, only Palo Alto Networks VM-Series deployment can use this attribute. In advanced mode, specify a bootstrap bucket name where the initial configuration and policy file is stored.
         /// </summary>
         [Input("bootstrapBucketName")]
         public Input<string>? BootstrapBucketName { get; set; }
 
         /// <summary>
-        /// Advanced option. Bootstrap storage name. Applicable to Azure and Palo Alto Networks VM-Series/Fortinet Series deployment
-        /// only.
+        /// Advanced option. Bootstrap storage name. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series/Fortinet Series deployment only. Available as of provider version R2.17.1+.
         /// </summary>
         [Input("bootstrapStorageName")]
         public Input<string>? BootstrapStorageName { get; set; }
 
         /// <summary>
-        /// Advanced option. Bootstrap storage name. Applicable to Azure and Fortinet Series deployment only.
+        /// Advanced option. Container folder. Applicable to Azure or AzureGov and Fortinet Series deployment only.
         /// </summary>
         [Input("containerFolder")]
         public Input<string>? ContainerFolder { get; set; }
 
         /// <summary>
-        /// Egress Interface Subnet.
+        /// Egress Interface Subnet. Select the subnet whose name contains “FW-ingress-egress”. For GCP, `egress_subnet` must be in the form `cidr~~region~~name`.
         /// </summary>
         [Input("egressSubnet", required: true)]
         public Input<string> EgressSubnet { get; set; } = null!;
 
         /// <summary>
-        /// Egress VPC ID. Required for GCP.
+        /// Egress VPC ID. Required for GCP. Available as of provider version R2.18.1+.
         /// </summary>
         [Input("egressVpcId")]
         public Input<string>? EgressVpcId { get; set; }
 
         /// <summary>
-        /// Fault domain for OCI.
+        /// Fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
         /// </summary>
         [Input("faultDomain")]
         public Input<string>? FaultDomain { get; set; }
 
         /// <summary>
-        /// Advanced option. File share folder. Applicable to Azure and Palo Alto Networks VM-Series deployment only.
+        /// Advanced option. File share folder. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series deployment only. Available as of provider version R2.17.1+.
         /// </summary>
         [Input("fileShareFolder")]
         public Input<string>? FileShareFolder { get; set; }
 
         /// <summary>
-        /// Name of the primary FireNet gateway.
+        /// Name of the primary FireNet gateway. **Required for all FireNet deployments that do not utilize the TGW-Integrated FireNet with AWS Native GWLB VPC.**
         /// </summary>
         [Input("firenetGwName")]
         public Input<string>? FirenetGwName { get; set; }
 
         /// <summary>
-        /// One of the AWS AMIs from Palo Alto Networks.
+        /// One of the AWS/Azure/GCP AMIs from various vendors such as Palo Alto Networks.
         /// </summary>
         [Input("firewallImage", required: true)]
         public Input<string> FirewallImage { get; set; } = null!;
 
         /// <summary>
-        /// Firewall image ID.
+        /// Firewall image ID. Applicable to AWS and Azure only. For AWS, please use AMI ID. For Azure, the format is “Publisher:Offer:Plan:Version”. Available as of provider version R2.19+.
         /// </summary>
         [Input("firewallImageId")]
         public Input<string>? FirewallImageId { get; set; }
 
         /// <summary>
-        /// Version of firewall image.
+        /// Version of firewall image. If not specified, Controller will automatically select the latest version available.
         /// </summary>
         [Input("firewallImageVersion")]
         public Input<string>? FirewallImageVersion { get; set; }
@@ -364,84 +381,132 @@ namespace Pulumi.Aviatrix
         public Input<string> FirewallName { get; set; } = null!;
 
         /// <summary>
-        /// Instance size of the firewall.
+        /// Instance size of the firewall. Example: "m5.xlarge".
         /// </summary>
         [Input("firewallSize", required: true)]
         public Input<string> FirewallSize { get; set; } = null!;
 
         /// <summary>
-        /// Advanced option. IAM role. Only available for AWS.
+        /// Only available for AWS. In advanced mode, create an IAM Role on the AWS account that launched the FireNet gateway. Create a policy to attach to the role. The policy is to allow access to "Bootstrap Bucket".
         /// </summary>
         [Input("iamRole")]
         public Input<string>? IamRole { get; set; }
 
-        /// <summary>
-        /// Applicable to AWS deployment only. AWS Key Pair name. If not provided, a Key Pair will be generated.
-        /// </summary>
         [Input("keyName")]
-        public Input<string>? KeyName { get; set; }
+        private Input<string>? _keyName;
 
         /// <summary>
-        /// Management Interface Subnet. Required for Palo Alto Networks VM-Series, and required to be empty for Check Point or
-        /// Fortinet series.
+        /// Applicable to AWS deployment only. AWS Key Pair name. If not provided a Key Pair will be generated.
+        /// </summary>
+        public Input<string>? KeyName
+        {
+            get => _keyName;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _keyName = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// Management Interface Subnet. Select the subnet whose name contains “gateway and firewall management”. For GCP, `management_subnet` must be in the form `cidr~~region~~name`. Required for Palo Alto Networks VM-Series and OCI Check Point firewalls. Otherwise, it must be empty.
         /// </summary>
         [Input("managementSubnet")]
         public Input<string>? ManagementSubnet { get; set; }
 
         /// <summary>
-        /// Management VPC ID. Required for GCP Palo Alto Networks VM-Series. Required to be empty for GCP Check Point or Fortinet
-        /// series.
+        /// Management VPC ID. Only used for GCP firewall. Required for Palo Alto Networks VM-Series, and required to be empty for Check Point or Fortinet series. Available as of provider version R2.18.1+.
         /// </summary>
         [Input("managementVpcId")]
         public Input<string>? ManagementVpcId { get; set; }
 
-        /// <summary>
-        /// Authentication method. Applicable to Azure deployment only.
-        /// </summary>
         [Input("password")]
-        public Input<string>? Password { get; set; }
+        private Input<string>? _password;
 
         /// <summary>
-        /// Advanced option. Bootstrap storage name. Applicable to Azure and Fortinet Series deployment only.
+        /// Applicable to Azure or AzureGov deployment only.
+        /// </summary>
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// Advanced option. SAS URL Config. Applicable to Azure or AzureGov and Fortinet Series deployment only.
         /// </summary>
         [Input("sasUrlConfig")]
         public Input<string>? SasUrlConfig { get; set; }
 
         /// <summary>
-        /// Advanced option. Bootstrap storage name. Applicable to Azure and Fortinet Series deployment only.
+        /// Advanced option. SAS URL License. Applicable to Azure or AzureGov and Fortinet Series deployment only.
         /// </summary>
         [Input("sasUrlLicense")]
         public Input<string>? SasUrlLicense { get; set; }
 
         /// <summary>
-        /// Advanced option. Share directory. Applicable to Azure and Palo Alto Networks VM-Series deployment only.
+        /// Advanced option. Share directory. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series deployment only. Available as of provider version R2.17.1+.
         /// </summary>
         [Input("shareDirectory")]
         public Input<string>? ShareDirectory { get; set; }
 
-        /// <summary>
-        /// Advanced option. Bic key. Applicable to Azure and Check Point Series deployment only.
-        /// </summary>
         [Input("sicKey")]
-        public Input<string>? SicKey { get; set; }
+        private Input<string>? _sicKey;
 
         /// <summary>
-        /// Authentication method. Applicable to Azure deployment only.
+        /// Advanced option. Sic key. Applicable to Check Point Series deployment only.
         /// </summary>
+        public Input<string>? SicKey
+        {
+            get => _sicKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _sicKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("sshPublicKey")]
-        public Input<string>? SshPublicKey { get; set; }
+        private Input<string>? _sshPublicKey;
 
         /// <summary>
-        /// Advanced option. Storage access key. Applicable to Azure and Palo Alto Networks VM-Series deployment only.
+        /// Applicable to Azure or AzureGov deployment only.
         /// </summary>
+        public Input<string>? SshPublicKey
+        {
+            get => _sshPublicKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _sshPublicKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("storageAccessKey")]
-        public Input<string>? StorageAccessKey { get; set; }
+        private Input<string>? _storageAccessKey;
+
+        /// <summary>
+        /// Advanced option. Storage access key. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series deployment only. Available as of provider version R2.17.1+.
+        /// </summary>
+        public Input<string>? StorageAccessKey
+        {
+            get => _storageAccessKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _storageAccessKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         [Input("tags")]
         private InputMap<string>? _tags;
 
         /// <summary>
-        /// A map of tags to assign to the firewall instance.
+        /// Mapping of key value pairs of tags for a firewall instance. Only available for AWS, AWSGov, GCP and Azure firewall instances. For AWS, AWSGov and Azure allowed characters are: letters, spaces, and numbers plus the following special characters: + - = . _ : @. For GCP allowed characters are: lowercase letters, numbers, "-" and "_". Example: {"key1" = "value1", "key2" = "value2"}.
         /// </summary>
         public InputMap<string> Tags
         {
@@ -450,25 +515,25 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Advanced option. Bootstrap storage name. Applicable to Check Point Series and Fortinet Series deployment only.
+        /// Advanced option. User Data. Applicable to Check Point Series and Fortinet Series deployment only. Type: String.
         /// </summary>
         [Input("userData")]
         public Input<string>? UserData { get; set; }
 
         /// <summary>
-        /// Applicable to Azure deployment only. 'admin' as a username is not accepted.
+        /// Applicable to Azure or AzureGov deployment only. "admin" as a username is not accepted.
         /// </summary>
         [Input("username")]
         public Input<string>? Username { get; set; }
 
         /// <summary>
-        /// ID of the Security VPC.
+        /// VPC ID of the Security VPC. For GCP, `vpc_id` must be in the form vpc_id~-~gcloud_project_id.
         /// </summary>
         [Input("vpcId", required: true)]
         public Input<string> VpcId { get; set; } = null!;
 
         /// <summary>
-        /// Availability Zone. Only available for AWS, GCP and Azure.
+        /// Availability Zone. Required if creating a Firewall Instance with a Native AWS GWLB-enabled VPC. Applicable to AWS, Azure, and GCP only. Available as of provider version R2.17+.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -482,32 +547,31 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixFirewallInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Availability domain for OCI.
+        /// Availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
         /// </summary>
         [Input("availabilityDomain")]
         public Input<string>? AvailabilityDomain { get; set; }
 
         /// <summary>
-        /// Advanced option. Bootstrap bucket name. Only available for AWS and GCP.
+        /// Only available for AWS and GCP. For GCP, only Palo Alto Networks VM-Series deployment can use this attribute. In advanced mode, specify a bootstrap bucket name where the initial configuration and policy file is stored.
         /// </summary>
         [Input("bootstrapBucketName")]
         public Input<string>? BootstrapBucketName { get; set; }
 
         /// <summary>
-        /// Advanced option. Bootstrap storage name. Applicable to Azure and Palo Alto Networks VM-Series/Fortinet Series deployment
-        /// only.
+        /// Advanced option. Bootstrap storage name. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series/Fortinet Series deployment only. Available as of provider version R2.17.1+.
         /// </summary>
         [Input("bootstrapStorageName")]
         public Input<string>? BootstrapStorageName { get; set; }
 
         /// <summary>
-        /// Cloud Type
+        /// Cloud Type.
         /// </summary>
         [Input("cloudType")]
         public Input<int>? CloudType { get; set; }
 
         /// <summary>
-        /// Advanced option. Bootstrap storage name. Applicable to Azure and Fortinet Series deployment only.
+        /// Advanced option. Container folder. Applicable to Azure or AzureGov and Fortinet Series deployment only.
         /// </summary>
         [Input("containerFolder")]
         public Input<string>? ContainerFolder { get; set; }
@@ -519,49 +583,49 @@ namespace Pulumi.Aviatrix
         public Input<string>? EgressInterface { get; set; }
 
         /// <summary>
-        /// Egress Interface Subnet.
+        /// Egress Interface Subnet. Select the subnet whose name contains “FW-ingress-egress”. For GCP, `egress_subnet` must be in the form `cidr~~region~~name`.
         /// </summary>
         [Input("egressSubnet")]
         public Input<string>? EgressSubnet { get; set; }
 
         /// <summary>
-        /// Egress VPC ID. Required for GCP.
+        /// Egress VPC ID. Required for GCP. Available as of provider version R2.18.1+.
         /// </summary>
         [Input("egressVpcId")]
         public Input<string>? EgressVpcId { get; set; }
 
         /// <summary>
-        /// Fault domain for OCI.
+        /// Fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
         /// </summary>
         [Input("faultDomain")]
         public Input<string>? FaultDomain { get; set; }
 
         /// <summary>
-        /// Advanced option. File share folder. Applicable to Azure and Palo Alto Networks VM-Series deployment only.
+        /// Advanced option. File share folder. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series deployment only. Available as of provider version R2.17.1+.
         /// </summary>
         [Input("fileShareFolder")]
         public Input<string>? FileShareFolder { get; set; }
 
         /// <summary>
-        /// Name of the primary FireNet gateway.
+        /// Name of the primary FireNet gateway. **Required for all FireNet deployments that do not utilize the TGW-Integrated FireNet with AWS Native GWLB VPC.**
         /// </summary>
         [Input("firenetGwName")]
         public Input<string>? FirenetGwName { get; set; }
 
         /// <summary>
-        /// One of the AWS AMIs from Palo Alto Networks.
+        /// One of the AWS/Azure/GCP AMIs from various vendors such as Palo Alto Networks.
         /// </summary>
         [Input("firewallImage")]
         public Input<string>? FirewallImage { get; set; }
 
         /// <summary>
-        /// Firewall image ID.
+        /// Firewall image ID. Applicable to AWS and Azure only. For AWS, please use AMI ID. For Azure, the format is “Publisher:Offer:Plan:Version”. Available as of provider version R2.19+.
         /// </summary>
         [Input("firewallImageId")]
         public Input<string>? FirewallImageId { get; set; }
 
         /// <summary>
-        /// Version of firewall image.
+        /// Version of firewall image. If not specified, Controller will automatically select the latest version available.
         /// </summary>
         [Input("firewallImageVersion")]
         public Input<string>? FirewallImageVersion { get; set; }
@@ -573,19 +637,19 @@ namespace Pulumi.Aviatrix
         public Input<string>? FirewallName { get; set; }
 
         /// <summary>
-        /// Instance size of the firewall.
+        /// Instance size of the firewall. Example: "m5.xlarge".
         /// </summary>
         [Input("firewallSize")]
         public Input<string>? FirewallSize { get; set; }
 
         /// <summary>
-        /// GCP VPC ID
+        /// GCP Only. The current VPC ID.
         /// </summary>
         [Input("gcpVpcId")]
         public Input<string>? GcpVpcId { get; set; }
 
         /// <summary>
-        /// Advanced option. IAM role. Only available for AWS.
+        /// Only available for AWS. In advanced mode, create an IAM Role on the AWS account that launched the FireNet gateway. Create a policy to attach to the role. The policy is to allow access to "Bootstrap Bucket".
         /// </summary>
         [Input("iamRole")]
         public Input<string>? IamRole { get; set; }
@@ -596,11 +660,21 @@ namespace Pulumi.Aviatrix
         [Input("instanceId")]
         public Input<string>? InstanceId { get; set; }
 
-        /// <summary>
-        /// Applicable to AWS deployment only. AWS Key Pair name. If not provided, a Key Pair will be generated.
-        /// </summary>
         [Input("keyName")]
-        public Input<string>? KeyName { get; set; }
+        private Input<string>? _keyName;
+
+        /// <summary>
+        /// Applicable to AWS deployment only. AWS Key Pair name. If not provided a Key Pair will be generated.
+        /// </summary>
+        public Input<string>? KeyName
+        {
+            get => _keyName;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _keyName = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// ID of Lan Interface created.
@@ -615,24 +689,32 @@ namespace Pulumi.Aviatrix
         public Input<string>? ManagementInterface { get; set; }
 
         /// <summary>
-        /// Management Interface Subnet. Required for Palo Alto Networks VM-Series, and required to be empty for Check Point or
-        /// Fortinet series.
+        /// Management Interface Subnet. Select the subnet whose name contains “gateway and firewall management”. For GCP, `management_subnet` must be in the form `cidr~~region~~name`. Required for Palo Alto Networks VM-Series and OCI Check Point firewalls. Otherwise, it must be empty.
         /// </summary>
         [Input("managementSubnet")]
         public Input<string>? ManagementSubnet { get; set; }
 
         /// <summary>
-        /// Management VPC ID. Required for GCP Palo Alto Networks VM-Series. Required to be empty for GCP Check Point or Fortinet
-        /// series.
+        /// Management VPC ID. Only used for GCP firewall. Required for Palo Alto Networks VM-Series, and required to be empty for Check Point or Fortinet series. Available as of provider version R2.18.1+.
         /// </summary>
         [Input("managementVpcId")]
         public Input<string>? ManagementVpcId { get; set; }
 
-        /// <summary>
-        /// Authentication method. Applicable to Azure deployment only.
-        /// </summary>
         [Input("password")]
-        public Input<string>? Password { get; set; }
+        private Input<string>? _password;
+
+        /// <summary>
+        /// Applicable to Azure or AzureGov deployment only.
+        /// </summary>
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Management Public IP.
@@ -641,46 +723,76 @@ namespace Pulumi.Aviatrix
         public Input<string>? PublicIp { get; set; }
 
         /// <summary>
-        /// Advanced option. Bootstrap storage name. Applicable to Azure and Fortinet Series deployment only.
+        /// Advanced option. SAS URL Config. Applicable to Azure or AzureGov and Fortinet Series deployment only.
         /// </summary>
         [Input("sasUrlConfig")]
         public Input<string>? SasUrlConfig { get; set; }
 
         /// <summary>
-        /// Advanced option. Bootstrap storage name. Applicable to Azure and Fortinet Series deployment only.
+        /// Advanced option. SAS URL License. Applicable to Azure or AzureGov and Fortinet Series deployment only.
         /// </summary>
         [Input("sasUrlLicense")]
         public Input<string>? SasUrlLicense { get; set; }
 
         /// <summary>
-        /// Advanced option. Share directory. Applicable to Azure and Palo Alto Networks VM-Series deployment only.
+        /// Advanced option. Share directory. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series deployment only. Available as of provider version R2.17.1+.
         /// </summary>
         [Input("shareDirectory")]
         public Input<string>? ShareDirectory { get; set; }
 
-        /// <summary>
-        /// Advanced option. Bic key. Applicable to Azure and Check Point Series deployment only.
-        /// </summary>
         [Input("sicKey")]
-        public Input<string>? SicKey { get; set; }
+        private Input<string>? _sicKey;
 
         /// <summary>
-        /// Authentication method. Applicable to Azure deployment only.
+        /// Advanced option. Sic key. Applicable to Check Point Series deployment only.
         /// </summary>
+        public Input<string>? SicKey
+        {
+            get => _sicKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _sicKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("sshPublicKey")]
-        public Input<string>? SshPublicKey { get; set; }
+        private Input<string>? _sshPublicKey;
 
         /// <summary>
-        /// Advanced option. Storage access key. Applicable to Azure and Palo Alto Networks VM-Series deployment only.
+        /// Applicable to Azure or AzureGov deployment only.
         /// </summary>
+        public Input<string>? SshPublicKey
+        {
+            get => _sshPublicKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _sshPublicKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("storageAccessKey")]
-        public Input<string>? StorageAccessKey { get; set; }
+        private Input<string>? _storageAccessKey;
+
+        /// <summary>
+        /// Advanced option. Storage access key. Applicable to Azure or AzureGov and Palo Alto Networks VM-Series deployment only. Available as of provider version R2.17.1+.
+        /// </summary>
+        public Input<string>? StorageAccessKey
+        {
+            get => _storageAccessKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _storageAccessKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         [Input("tags")]
         private InputMap<string>? _tags;
 
         /// <summary>
-        /// A map of tags to assign to the firewall instance.
+        /// Mapping of key value pairs of tags for a firewall instance. Only available for AWS, AWSGov, GCP and Azure firewall instances. For AWS, AWSGov and Azure allowed characters are: letters, spaces, and numbers plus the following special characters: + - = . _ : @. For GCP allowed characters are: lowercase letters, numbers, "-" and "_". Example: {"key1" = "value1", "key2" = "value2"}.
         /// </summary>
         public InputMap<string> Tags
         {
@@ -689,25 +801,25 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Advanced option. Bootstrap storage name. Applicable to Check Point Series and Fortinet Series deployment only.
+        /// Advanced option. User Data. Applicable to Check Point Series and Fortinet Series deployment only. Type: String.
         /// </summary>
         [Input("userData")]
         public Input<string>? UserData { get; set; }
 
         /// <summary>
-        /// Applicable to Azure deployment only. 'admin' as a username is not accepted.
+        /// Applicable to Azure or AzureGov deployment only. "admin" as a username is not accepted.
         /// </summary>
         [Input("username")]
         public Input<string>? Username { get; set; }
 
         /// <summary>
-        /// ID of the Security VPC.
+        /// VPC ID of the Security VPC. For GCP, `vpc_id` must be in the form vpc_id~-~gcloud_project_id.
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }
 
         /// <summary>
-        /// Availability Zone. Only available for AWS, GCP and Azure.
+        /// Availability Zone. Required if creating a Firewall Instance with a Native AWS GWLB-enabled VPC. Applicable to AWS, Azure, and GCP only. Available as of provider version R2.17+.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }

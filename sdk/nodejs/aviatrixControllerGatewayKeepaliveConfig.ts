@@ -4,6 +4,29 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_controller_gateway_keepalive_config** resource allows management of an Aviatrix Controller's gateway keepalive template configuration. This resource is available as of provider version R2.19.2+.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Controller Gateway Keepalive config
+ * const testGatewayKeepalive = new aviatrix.AviatrixControllerGatewayKeepaliveConfig("test_gateway_keepalive", {
+ *     keepaliveSpeed: "medium",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **aviatrix_controller_gateway_keepalive_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixControllerGatewayKeepaliveConfig:AviatrixControllerGatewayKeepaliveConfig test_gateway_keepalive 10-11-12-13
+ * ```
+ */
 export class AviatrixControllerGatewayKeepaliveConfig extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixControllerGatewayKeepaliveConfig resource's state with the given name, ID, and optional extra
@@ -33,7 +56,7 @@ export class AviatrixControllerGatewayKeepaliveConfig extends pulumi.CustomResou
     }
 
     /**
-     * Gateway keepalive speed.
+     * The gateway keepalive template name. Must be one of "slow", "medium" or "fast". Visit [here](https://docs.aviatrix.com/HowTos/gateway.html#gateway-keepalives) for the complete documentation about the gateway keepalive configuration.
      */
     public readonly keepaliveSpeed!: pulumi.Output<string>;
 
@@ -68,7 +91,7 @@ export class AviatrixControllerGatewayKeepaliveConfig extends pulumi.CustomResou
  */
 export interface AviatrixControllerGatewayKeepaliveConfigState {
     /**
-     * Gateway keepalive speed.
+     * The gateway keepalive template name. Must be one of "slow", "medium" or "fast". Visit [here](https://docs.aviatrix.com/HowTos/gateway.html#gateway-keepalives) for the complete documentation about the gateway keepalive configuration.
      */
     keepaliveSpeed?: pulumi.Input<string>;
 }
@@ -78,7 +101,7 @@ export interface AviatrixControllerGatewayKeepaliveConfigState {
  */
 export interface AviatrixControllerGatewayKeepaliveConfigArgs {
     /**
-     * Gateway keepalive speed.
+     * The gateway keepalive template name. Must be one of "slow", "medium" or "fast". Visit [here](https://docs.aviatrix.com/HowTos/gateway.html#gateway-keepalives) for the complete documentation about the gateway keepalive configuration.
      */
     keepaliveSpeed: pulumi.Input<string>;
 }

@@ -12,39 +12,75 @@ namespace Pulumi.Aviatrix.Inputs
 
     public sealed class AviatrixGatewayDnatConnectionPolicyArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.19.2+.
+        /// </summary>
         [Input("applyRouteEntry")]
         public Input<bool>? ApplyRouteEntry { get; set; }
 
+        /// <summary>
+        /// This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+        /// </summary>
         [Input("connection")]
         public Input<string>? Connection { get; set; }
 
+        /// <summary>
+        /// This is a rule field that specifies the translated destination IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+        /// </summary>
         [Input("dnatIps")]
         public Input<string>? DnatIps { get; set; }
 
+        /// <summary>
+        /// This is a rule field that specifies the translated destination port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+        /// </summary>
         [Input("dnatPort")]
         public Input<string>? DnatPort { get; set; }
 
+        /// <summary>
+        /// This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+        /// </summary>
         [Input("dstCidr")]
         public Input<string>? DstCidr { get; set; }
 
+        /// <summary>
+        /// This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+        /// </summary>
         [Input("dstPort")]
         public Input<string>? DstPort { get; set; }
 
+        /// <summary>
+        /// This field specifies which VPC private route table will not be programmed with the default route entry.
+        /// </summary>
         [Input("excludeRtb")]
         public Input<string>? ExcludeRtb { get; set; }
 
+        /// <summary>
+        /// This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+        /// </summary>
         [Input("interface")]
         public Input<string>? Interface { get; set; }
 
+        /// <summary>
+        /// This is a rule field that specifies a tag or mark of a TCP session when all qualifier conditions meet. When not specified, this field is not used.
+        /// </summary>
         [Input("mark")]
         public Input<string>? Mark { get; set; }
 
+        /// <summary>
+        /// This is a qualifier condition that specifies a destination port protocol where the rule applies. When not specified, this field is not used.
+        /// </summary>
         [Input("protocol")]
         public Input<string>? Protocol { get; set; }
 
+        /// <summary>
+        /// This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+        /// </summary>
         [Input("srcCidr")]
         public Input<string>? SrcCidr { get; set; }
 
+        /// <summary>
+        /// This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+        /// </summary>
         [Input("srcPort")]
         public Input<string>? SrcPort { get; set; }
 

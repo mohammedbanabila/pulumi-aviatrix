@@ -85,6 +85,9 @@ func Provider() tfbridge.ProviderInfo {
 		// The GitHub Org for the provider - defaults to `terraform-providers`. Note that this
 		// should match the TF provider module's require directive, not any replace directives.
 		GitHubOrg: "AviatrixSystems",
+		//Version: "",
+		TFProviderVersion: "2.24.1",
+		TFProviderModuleVersion: "v2",
 		Config:    map[string]*tfbridge.SchemaInfo{
 			// Add any required configuration here, or remove the example below if
 			// no additional points are required.
@@ -109,7 +112,7 @@ func Provider() tfbridge.ProviderInfo {
 			// 		"tags": {Type: tfbridge.MakeType(mainPkg, "Tags")},
 			// 	},
 			// },
-			"aviatrix_vpc":                                            {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixVpc"), Docs: &tfbridge.DocInfo{Source: "github.com/AviatrixSystems/terraform-provider-aviatrix/docs/resources/aviatrix_vpc.md"}},
+			"aviatrix_vpc":                                            {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixVpc")},//, Docs: &tfbridge.DocInfo{Source: "github.com/AviatrixSystems/terraform-provider-aviatrix/docs/resources/aviatrix_vpc.md"}},
 			"aviatrix_account":                                        {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAccount")},
 			"aviatrix_account_user":                                   {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAccountUser")},
 			"aviatrix_app_domain":                                     {Tok: tfbridge.MakeResource(mainPkg, mainMod, "AviatrixAppDomain")},

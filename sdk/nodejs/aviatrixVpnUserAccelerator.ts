@@ -4,6 +4,29 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_vpn_user_accelerator** resource manages the [Aviatrix VPN User Accelerator](https://docs.aviatrix.com/HowTos/user_accelerator.html).
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Vpn User Accelerator
+ * const testVpcAccelerator = new aviatrix.AviatrixVpnUserAccelerator("test_vpc_accelerator", {
+ *     elbName: "Aviatrix-vpc-abcd2134",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **vpn_user_accelerator** can be imported using the `elb_name`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixVpnUserAccelerator:AviatrixVpnUserAccelerator test Aviatrix-vpc-abcd1234
+ * ```
+ */
 export class AviatrixVpnUserAccelerator extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixVpnUserAccelerator resource's state with the given name, ID, and optional extra
@@ -33,7 +56,7 @@ export class AviatrixVpnUserAccelerator extends pulumi.CustomResource {
     }
 
     /**
-     * ELB to include into the VPN User Accelerator.
+     * Name of ELB to be added to VPN User Accelerator. Example: "Aviatrix-vpc-abcd2134".
      */
     public readonly elbName!: pulumi.Output<string>;
 
@@ -68,7 +91,7 @@ export class AviatrixVpnUserAccelerator extends pulumi.CustomResource {
  */
 export interface AviatrixVpnUserAcceleratorState {
     /**
-     * ELB to include into the VPN User Accelerator.
+     * Name of ELB to be added to VPN User Accelerator. Example: "Aviatrix-vpc-abcd2134".
      */
     elbName?: pulumi.Input<string>;
 }
@@ -78,7 +101,7 @@ export interface AviatrixVpnUserAcceleratorState {
  */
 export interface AviatrixVpnUserAcceleratorArgs {
     /**
-     * ELB to include into the VPN User Accelerator.
+     * Name of ELB to be added to VPN User Accelerator. Example: "Aviatrix-vpc-abcd2134".
      */
     elbName: pulumi.Input<string>;
 }

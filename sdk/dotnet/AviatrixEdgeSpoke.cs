@@ -9,71 +9,145 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_edge_spoke** resource creates the Aviatrix Edge as a Spoke. This resource is available as of provider version R2.23+.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create a DHCP Edge as a Spoke
+    ///     var test = new Aviatrix.AviatrixEdgeSpoke("test", new()
+    ///     {
+    ///         GwName = "edge-test",
+    ///         LanInterfaceIpPrefix = "10.60.0.0/24",
+    ///         LocalAsNumber = "65000",
+    ///         ManagementInterfaceConfig = "DHCP",
+    ///         PrependAsPaths = new[]
+    ///         {
+    ///             "65000",
+    ///             "65000",
+    ///         },
+    ///         SiteId = "site-123",
+    ///         WanDefaultGatewayIp = "10.60.0.0",
+    ///         WanInterfaceIpPrefix = "10.60.0.0/24",
+    ///         ZtpFileDownloadPath = "/ztp/download/path",
+    ///         ZtpFileType = "iso",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create a Static Edge as a Spoke
+    ///     var test = new Aviatrix.AviatrixEdgeSpoke("test", new()
+    ///     {
+    ///         DnsServerIp = "10.60.0.0",
+    ///         GwName = "edge-test",
+    ///         LanInterfaceIpPrefix = "10.60.0.0/24",
+    ///         LocalAsNumber = "65000",
+    ///         ManagementDefaultGatewayIp = "10.60.0.0",
+    ///         ManagementInterfaceConfig = "Static",
+    ///         ManagementInterfaceIpPrefix = "10.60.0.0/24",
+    ///         PrependAsPaths = new[]
+    ///         {
+    ///             "65000",
+    ///             "65000",
+    ///         },
+    ///         SecondaryDnsServerIp = "10.60.0.0",
+    ///         SiteId = "site-123",
+    ///         WanDefaultGatewayIp = "10.60.0.0",
+    ///         WanInterfaceIpPrefix = "10.60.0.0/24",
+    ///         ZtpFileDownloadPath = "/ztp/download/path",
+    ///         ZtpFileType = "iso",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **edge_spoke** can be imported using the `gw_name`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixEdgeSpoke:AviatrixEdgeSpoke test gw_name
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixEdgeSpoke:AviatrixEdgeSpoke")]
     public partial class AviatrixEdgeSpoke : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Approved learned CIDRs for BGP Spoke Gateway.
+        /// Set of approved learned CIDRs. Valid only when `enable_learned_cidrs_approval` is set to true. Example: ["10.1.0.0/116", "10.2.0.0/16"].
         /// </summary>
         [Output("approvedLearnedCidrs")]
         public Output<ImmutableArray<string>> ApprovedLearnedCidrs { get; private set; } = null!;
 
         /// <summary>
-        /// BGP Hold Time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 12 and 360.
+        /// BGP hold time. Unit is in seconds. Valid values are between 12 and 360. Default value: 180.
         /// </summary>
         [Output("bgpHoldTime")]
         public Output<int?> BgpHoldTime { get; private set; } = null!;
 
         /// <summary>
-        /// BGP route polling time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 10 and 50.
+        /// BGP route polling time. Unit is in seconds. Valid values are between 10 and 50. Default value: 50.
         /// </summary>
         [Output("bgpPollingTime")]
         public Output<int?> BgpPollingTime { get; private set; } = null!;
 
         /// <summary>
-        /// DNS server IP.
+        /// DNS server IP. Required and valid when `management_interface_config` is "Static".
         /// </summary>
         [Output("dnsServerIp")]
         public Output<string?> DnsServerIp { get; private set; } = null!;
 
         /// <summary>
-        /// Enables Edge Active-Standby Mode.
+        /// Switch to enable Edge Active-Standby mode. Valid values: true, false. Default value: false.
         /// </summary>
         [Output("enableEdgeActiveStandby")]
         public Output<bool?> EnableEdgeActiveStandby { get; private set; } = null!;
 
         /// <summary>
-        /// Enables Preemptive Mode for Edge Active-Standby, available only with Active-Standby enabled.
+        /// Switch to enable Preemptive Mode for Edge Active-Standby. Valid values: true, false. Default value: false.
         /// </summary>
         [Output("enableEdgeActiveStandbyPreemptive")]
         public Output<bool?> EnableEdgeActiveStandbyPreemptive { get; private set; } = null!;
 
         /// <summary>
-        /// Enable Edge transitive routing.
+        /// Switch to enable Edge transitive routing. Valid values: true, false. Default value: false.
         /// </summary>
         [Output("enableEdgeTransitiveRouting")]
         public Output<bool?> EnableEdgeTransitiveRouting { get; private set; } = null!;
 
         /// <summary>
-        /// Enable jumbo frame.
+        /// Switch to enable jumbo frame. Valid values: true, false. Default value: false.
         /// </summary>
         [Output("enableJumboFrame")]
         public Output<bool?> EnableJumboFrame { get; private set; } = null!;
 
         /// <summary>
-        /// Switch to enable/disable learned CIDR approval for BGP Spoke Gateway. Valid values: true, false.
+        /// Switch to enable learned CIDR approval. Valid values: true, false. Default value: false.
         /// </summary>
         [Output("enableLearnedCidrsApproval")]
         public Output<bool?> EnableLearnedCidrsApproval { get; private set; } = null!;
 
         /// <summary>
-        /// Enable management over private network.
+        /// Switch to enable management over the private network. Valid values: true, false. Default value: false.
         /// </summary>
         [Output("enableManagementOverPrivateNetwork")]
         public Output<bool?> EnableManagementOverPrivateNetwork { get; private set; } = null!;
 
         /// <summary>
-        /// Enable preserve as path when advertising manual summary CIDRs on BGP spoke gateway.
+        /// Switch to enable preserve as_path when advertising manual summary CIDRs. Valid values: true, false. Default value: false.
         /// </summary>
         [Output("enablePreserveAsPath")]
         public Output<bool?> EnablePreserveAsPath { get; private set; } = null!;
@@ -85,67 +159,67 @@ namespace Pulumi.Aviatrix
         public Output<string> GwName { get; private set; } = null!;
 
         /// <summary>
-        /// LAN interface IP/prefix.
+        /// LAN interface IP and subnet prefix.
         /// </summary>
         [Output("lanInterfaceIpPrefix")]
         public Output<string> LanInterfaceIpPrefix { get; private set; } = null!;
 
         /// <summary>
-        /// The latitude of the Edge as a Spoke.
+        /// Latitude of Edge as a Spoke. Valid values are between -90 and 90. Example: "47.7511".
         /// </summary>
         [Output("latitude")]
         public Output<string> Latitude { get; private set; } = null!;
 
         /// <summary>
-        /// Local AS number.
+        /// BGP AS Number to assign to Edge as a Spoke.
         /// </summary>
         [Output("localAsNumber")]
         public Output<string> LocalAsNumber { get; private set; } = null!;
 
         /// <summary>
-        /// The longitude of the Edge as a Spoke.
+        /// Longitude of Edge as a Spoke. Valid values are between -180 and 180. Example: "120.7401".
         /// </summary>
         [Output("longitude")]
         public Output<string> Longitude { get; private set; } = null!;
 
         /// <summary>
-        /// Management default gateway IP.
+        /// Management default gateway IP. Required and valid when `management_interface_config` is "Static".
         /// </summary>
         [Output("managementDefaultGatewayIp")]
         public Output<string?> ManagementDefaultGatewayIp { get; private set; } = null!;
 
         /// <summary>
-        /// Management egress gateway IP/prefix.
+        /// Management egress gateway IP and subnet prefix.
         /// </summary>
         [Output("managementEgressIpPrefix")]
         public Output<string?> ManagementEgressIpPrefix { get; private set; } = null!;
 
         /// <summary>
-        /// Management interface configuration. Valid values: 'DHCP' and 'Static'.
+        /// Management interface configuration. Valid values: "DHCP", "Static".
         /// </summary>
         [Output("managementInterfaceConfig")]
         public Output<string> ManagementInterfaceConfig { get; private set; } = null!;
 
         /// <summary>
-        /// Management interface IP/prefix.
+        /// Management interface IP and subnet prefix. Required and valid when `management_interface_config` is "Static".
         /// </summary>
         [Output("managementInterfaceIpPrefix")]
         public Output<string?> ManagementInterfaceIpPrefix { get; private set; } = null!;
 
         /// <summary>
-        /// List of AS numbers to prepend gateway BGP AS_Path field.
+        /// List of AS numbers to prepend gateway BGP AS_Path field. Valid only when `local_as_number` is set. Example: ["65023", "65023"].
         /// </summary>
         [Output("prependAsPaths")]
         public Output<ImmutableArray<string>> PrependAsPaths { get; private set; } = null!;
 
         /// <summary>
-        /// Ethernet interface RX queue size.
+        /// Ethernet interface RX queue size. Once set, can't be deleted or disabled. Valid values: "1K", "2K", "4K".
         /// </summary>
         [Output("rxQueueSize")]
         public Output<string?> RxQueueSize { get; private set; } = null!;
 
         /// <summary>
-        /// Secondary DNS server IP.
+        /// Secondary DNS server IP. Required and valid when `management_interface_config` is "Static".
         /// </summary>
         [Output("secondaryDnsServerIp")]
         public Output<string?> SecondaryDnsServerIp { get; private set; } = null!;
@@ -157,7 +231,7 @@ namespace Pulumi.Aviatrix
         public Output<string> SiteId { get; private set; } = null!;
 
         /// <summary>
-        /// Intended CIDR list to be advertised to external BGP router.
+        /// Set of intended CIDRs to be advertised to external BGP router. Example: ["10.1.0.0/116", "10.2.0.0/16"].
         /// </summary>
         [Output("spokeBgpManualAdvertiseCidrs")]
         public Output<ImmutableArray<string>> SpokeBgpManualAdvertiseCidrs { get; private set; } = null!;
@@ -175,25 +249,25 @@ namespace Pulumi.Aviatrix
         public Output<string> WanDefaultGatewayIp { get; private set; } = null!;
 
         /// <summary>
-        /// WAN interface IP/prefix.
+        /// WAN interface IP and subnet prefix.
         /// </summary>
         [Output("wanInterfaceIpPrefix")]
         public Output<string> WanInterfaceIpPrefix { get; private set; } = null!;
 
         /// <summary>
-        /// WAN interface public IP.
+        /// WAN public IP. Required for attaching connections over the Internet.
         /// </summary>
         [Output("wanPublicIp")]
         public Output<string> WanPublicIp { get; private set; } = null!;
 
         /// <summary>
-        /// The location where the Edge as a CaaG ZTP file will be stored.
+        /// The folder path where the ZTP file will be downloaded.
         /// </summary>
         [Output("ztpFileDownloadPath")]
         public Output<string> ZtpFileDownloadPath { get; private set; } = null!;
 
         /// <summary>
-        /// ZTP file type.
+        /// ZTP file type. Valid values: "iso", "cloud-init".
         /// </summary>
         [Output("ztpFileType")]
         public Output<string> ZtpFileType { get; private set; } = null!;
@@ -249,7 +323,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _approvedLearnedCidrs;
 
         /// <summary>
-        /// Approved learned CIDRs for BGP Spoke Gateway.
+        /// Set of approved learned CIDRs. Valid only when `enable_learned_cidrs_approval` is set to true. Example: ["10.1.0.0/116", "10.2.0.0/16"].
         /// </summary>
         public InputList<string> ApprovedLearnedCidrs
         {
@@ -258,61 +332,61 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// BGP Hold Time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 12 and 360.
+        /// BGP hold time. Unit is in seconds. Valid values are between 12 and 360. Default value: 180.
         /// </summary>
         [Input("bgpHoldTime")]
         public Input<int>? BgpHoldTime { get; set; }
 
         /// <summary>
-        /// BGP route polling time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 10 and 50.
+        /// BGP route polling time. Unit is in seconds. Valid values are between 10 and 50. Default value: 50.
         /// </summary>
         [Input("bgpPollingTime")]
         public Input<int>? BgpPollingTime { get; set; }
 
         /// <summary>
-        /// DNS server IP.
+        /// DNS server IP. Required and valid when `management_interface_config` is "Static".
         /// </summary>
         [Input("dnsServerIp")]
         public Input<string>? DnsServerIp { get; set; }
 
         /// <summary>
-        /// Enables Edge Active-Standby Mode.
+        /// Switch to enable Edge Active-Standby mode. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableEdgeActiveStandby")]
         public Input<bool>? EnableEdgeActiveStandby { get; set; }
 
         /// <summary>
-        /// Enables Preemptive Mode for Edge Active-Standby, available only with Active-Standby enabled.
+        /// Switch to enable Preemptive Mode for Edge Active-Standby. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableEdgeActiveStandbyPreemptive")]
         public Input<bool>? EnableEdgeActiveStandbyPreemptive { get; set; }
 
         /// <summary>
-        /// Enable Edge transitive routing.
+        /// Switch to enable Edge transitive routing. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableEdgeTransitiveRouting")]
         public Input<bool>? EnableEdgeTransitiveRouting { get; set; }
 
         /// <summary>
-        /// Enable jumbo frame.
+        /// Switch to enable jumbo frame. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableJumboFrame")]
         public Input<bool>? EnableJumboFrame { get; set; }
 
         /// <summary>
-        /// Switch to enable/disable learned CIDR approval for BGP Spoke Gateway. Valid values: true, false.
+        /// Switch to enable learned CIDR approval. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableLearnedCidrsApproval")]
         public Input<bool>? EnableLearnedCidrsApproval { get; set; }
 
         /// <summary>
-        /// Enable management over private network.
+        /// Switch to enable management over the private network. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableManagementOverPrivateNetwork")]
         public Input<bool>? EnableManagementOverPrivateNetwork { get; set; }
 
         /// <summary>
-        /// Enable preserve as path when advertising manual summary CIDRs on BGP spoke gateway.
+        /// Switch to enable preserve as_path when advertising manual summary CIDRs. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enablePreserveAsPath")]
         public Input<bool>? EnablePreserveAsPath { get; set; }
@@ -324,49 +398,49 @@ namespace Pulumi.Aviatrix
         public Input<string> GwName { get; set; } = null!;
 
         /// <summary>
-        /// LAN interface IP/prefix.
+        /// LAN interface IP and subnet prefix.
         /// </summary>
         [Input("lanInterfaceIpPrefix", required: true)]
         public Input<string> LanInterfaceIpPrefix { get; set; } = null!;
 
         /// <summary>
-        /// The latitude of the Edge as a Spoke.
+        /// Latitude of Edge as a Spoke. Valid values are between -90 and 90. Example: "47.7511".
         /// </summary>
         [Input("latitude")]
         public Input<string>? Latitude { get; set; }
 
         /// <summary>
-        /// Local AS number.
+        /// BGP AS Number to assign to Edge as a Spoke.
         /// </summary>
         [Input("localAsNumber")]
         public Input<string>? LocalAsNumber { get; set; }
 
         /// <summary>
-        /// The longitude of the Edge as a Spoke.
+        /// Longitude of Edge as a Spoke. Valid values are between -180 and 180. Example: "120.7401".
         /// </summary>
         [Input("longitude")]
         public Input<string>? Longitude { get; set; }
 
         /// <summary>
-        /// Management default gateway IP.
+        /// Management default gateway IP. Required and valid when `management_interface_config` is "Static".
         /// </summary>
         [Input("managementDefaultGatewayIp")]
         public Input<string>? ManagementDefaultGatewayIp { get; set; }
 
         /// <summary>
-        /// Management egress gateway IP/prefix.
+        /// Management egress gateway IP and subnet prefix.
         /// </summary>
         [Input("managementEgressIpPrefix")]
         public Input<string>? ManagementEgressIpPrefix { get; set; }
 
         /// <summary>
-        /// Management interface configuration. Valid values: 'DHCP' and 'Static'.
+        /// Management interface configuration. Valid values: "DHCP", "Static".
         /// </summary>
         [Input("managementInterfaceConfig", required: true)]
         public Input<string> ManagementInterfaceConfig { get; set; } = null!;
 
         /// <summary>
-        /// Management interface IP/prefix.
+        /// Management interface IP and subnet prefix. Required and valid when `management_interface_config` is "Static".
         /// </summary>
         [Input("managementInterfaceIpPrefix")]
         public Input<string>? ManagementInterfaceIpPrefix { get; set; }
@@ -375,7 +449,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _prependAsPaths;
 
         /// <summary>
-        /// List of AS numbers to prepend gateway BGP AS_Path field.
+        /// List of AS numbers to prepend gateway BGP AS_Path field. Valid only when `local_as_number` is set. Example: ["65023", "65023"].
         /// </summary>
         public InputList<string> PrependAsPaths
         {
@@ -384,13 +458,13 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Ethernet interface RX queue size.
+        /// Ethernet interface RX queue size. Once set, can't be deleted or disabled. Valid values: "1K", "2K", "4K".
         /// </summary>
         [Input("rxQueueSize")]
         public Input<string>? RxQueueSize { get; set; }
 
         /// <summary>
-        /// Secondary DNS server IP.
+        /// Secondary DNS server IP. Required and valid when `management_interface_config` is "Static".
         /// </summary>
         [Input("secondaryDnsServerIp")]
         public Input<string>? SecondaryDnsServerIp { get; set; }
@@ -405,7 +479,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _spokeBgpManualAdvertiseCidrs;
 
         /// <summary>
-        /// Intended CIDR list to be advertised to external BGP router.
+        /// Set of intended CIDRs to be advertised to external BGP router. Example: ["10.1.0.0/116", "10.2.0.0/16"].
         /// </summary>
         public InputList<string> SpokeBgpManualAdvertiseCidrs
         {
@@ -420,25 +494,25 @@ namespace Pulumi.Aviatrix
         public Input<string> WanDefaultGatewayIp { get; set; } = null!;
 
         /// <summary>
-        /// WAN interface IP/prefix.
+        /// WAN interface IP and subnet prefix.
         /// </summary>
         [Input("wanInterfaceIpPrefix", required: true)]
         public Input<string> WanInterfaceIpPrefix { get; set; } = null!;
 
         /// <summary>
-        /// WAN interface public IP.
+        /// WAN public IP. Required for attaching connections over the Internet.
         /// </summary>
         [Input("wanPublicIp")]
         public Input<string>? WanPublicIp { get; set; }
 
         /// <summary>
-        /// The location where the Edge as a CaaG ZTP file will be stored.
+        /// The folder path where the ZTP file will be downloaded.
         /// </summary>
         [Input("ztpFileDownloadPath", required: true)]
         public Input<string> ZtpFileDownloadPath { get; set; } = null!;
 
         /// <summary>
-        /// ZTP file type.
+        /// ZTP file type. Valid values: "iso", "cloud-init".
         /// </summary>
         [Input("ztpFileType", required: true)]
         public Input<string> ZtpFileType { get; set; } = null!;
@@ -455,7 +529,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _approvedLearnedCidrs;
 
         /// <summary>
-        /// Approved learned CIDRs for BGP Spoke Gateway.
+        /// Set of approved learned CIDRs. Valid only when `enable_learned_cidrs_approval` is set to true. Example: ["10.1.0.0/116", "10.2.0.0/16"].
         /// </summary>
         public InputList<string> ApprovedLearnedCidrs
         {
@@ -464,61 +538,61 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// BGP Hold Time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 12 and 360.
+        /// BGP hold time. Unit is in seconds. Valid values are between 12 and 360. Default value: 180.
         /// </summary>
         [Input("bgpHoldTime")]
         public Input<int>? BgpHoldTime { get; set; }
 
         /// <summary>
-        /// BGP route polling time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 10 and 50.
+        /// BGP route polling time. Unit is in seconds. Valid values are between 10 and 50. Default value: 50.
         /// </summary>
         [Input("bgpPollingTime")]
         public Input<int>? BgpPollingTime { get; set; }
 
         /// <summary>
-        /// DNS server IP.
+        /// DNS server IP. Required and valid when `management_interface_config` is "Static".
         /// </summary>
         [Input("dnsServerIp")]
         public Input<string>? DnsServerIp { get; set; }
 
         /// <summary>
-        /// Enables Edge Active-Standby Mode.
+        /// Switch to enable Edge Active-Standby mode. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableEdgeActiveStandby")]
         public Input<bool>? EnableEdgeActiveStandby { get; set; }
 
         /// <summary>
-        /// Enables Preemptive Mode for Edge Active-Standby, available only with Active-Standby enabled.
+        /// Switch to enable Preemptive Mode for Edge Active-Standby. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableEdgeActiveStandbyPreemptive")]
         public Input<bool>? EnableEdgeActiveStandbyPreemptive { get; set; }
 
         /// <summary>
-        /// Enable Edge transitive routing.
+        /// Switch to enable Edge transitive routing. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableEdgeTransitiveRouting")]
         public Input<bool>? EnableEdgeTransitiveRouting { get; set; }
 
         /// <summary>
-        /// Enable jumbo frame.
+        /// Switch to enable jumbo frame. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableJumboFrame")]
         public Input<bool>? EnableJumboFrame { get; set; }
 
         /// <summary>
-        /// Switch to enable/disable learned CIDR approval for BGP Spoke Gateway. Valid values: true, false.
+        /// Switch to enable learned CIDR approval. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableLearnedCidrsApproval")]
         public Input<bool>? EnableLearnedCidrsApproval { get; set; }
 
         /// <summary>
-        /// Enable management over private network.
+        /// Switch to enable management over the private network. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableManagementOverPrivateNetwork")]
         public Input<bool>? EnableManagementOverPrivateNetwork { get; set; }
 
         /// <summary>
-        /// Enable preserve as path when advertising manual summary CIDRs on BGP spoke gateway.
+        /// Switch to enable preserve as_path when advertising manual summary CIDRs. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enablePreserveAsPath")]
         public Input<bool>? EnablePreserveAsPath { get; set; }
@@ -530,49 +604,49 @@ namespace Pulumi.Aviatrix
         public Input<string>? GwName { get; set; }
 
         /// <summary>
-        /// LAN interface IP/prefix.
+        /// LAN interface IP and subnet prefix.
         /// </summary>
         [Input("lanInterfaceIpPrefix")]
         public Input<string>? LanInterfaceIpPrefix { get; set; }
 
         /// <summary>
-        /// The latitude of the Edge as a Spoke.
+        /// Latitude of Edge as a Spoke. Valid values are between -90 and 90. Example: "47.7511".
         /// </summary>
         [Input("latitude")]
         public Input<string>? Latitude { get; set; }
 
         /// <summary>
-        /// Local AS number.
+        /// BGP AS Number to assign to Edge as a Spoke.
         /// </summary>
         [Input("localAsNumber")]
         public Input<string>? LocalAsNumber { get; set; }
 
         /// <summary>
-        /// The longitude of the Edge as a Spoke.
+        /// Longitude of Edge as a Spoke. Valid values are between -180 and 180. Example: "120.7401".
         /// </summary>
         [Input("longitude")]
         public Input<string>? Longitude { get; set; }
 
         /// <summary>
-        /// Management default gateway IP.
+        /// Management default gateway IP. Required and valid when `management_interface_config` is "Static".
         /// </summary>
         [Input("managementDefaultGatewayIp")]
         public Input<string>? ManagementDefaultGatewayIp { get; set; }
 
         /// <summary>
-        /// Management egress gateway IP/prefix.
+        /// Management egress gateway IP and subnet prefix.
         /// </summary>
         [Input("managementEgressIpPrefix")]
         public Input<string>? ManagementEgressIpPrefix { get; set; }
 
         /// <summary>
-        /// Management interface configuration. Valid values: 'DHCP' and 'Static'.
+        /// Management interface configuration. Valid values: "DHCP", "Static".
         /// </summary>
         [Input("managementInterfaceConfig")]
         public Input<string>? ManagementInterfaceConfig { get; set; }
 
         /// <summary>
-        /// Management interface IP/prefix.
+        /// Management interface IP and subnet prefix. Required and valid when `management_interface_config` is "Static".
         /// </summary>
         [Input("managementInterfaceIpPrefix")]
         public Input<string>? ManagementInterfaceIpPrefix { get; set; }
@@ -581,7 +655,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _prependAsPaths;
 
         /// <summary>
-        /// List of AS numbers to prepend gateway BGP AS_Path field.
+        /// List of AS numbers to prepend gateway BGP AS_Path field. Valid only when `local_as_number` is set. Example: ["65023", "65023"].
         /// </summary>
         public InputList<string> PrependAsPaths
         {
@@ -590,13 +664,13 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Ethernet interface RX queue size.
+        /// Ethernet interface RX queue size. Once set, can't be deleted or disabled. Valid values: "1K", "2K", "4K".
         /// </summary>
         [Input("rxQueueSize")]
         public Input<string>? RxQueueSize { get; set; }
 
         /// <summary>
-        /// Secondary DNS server IP.
+        /// Secondary DNS server IP. Required and valid when `management_interface_config` is "Static".
         /// </summary>
         [Input("secondaryDnsServerIp")]
         public Input<string>? SecondaryDnsServerIp { get; set; }
@@ -611,7 +685,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _spokeBgpManualAdvertiseCidrs;
 
         /// <summary>
-        /// Intended CIDR list to be advertised to external BGP router.
+        /// Set of intended CIDRs to be advertised to external BGP router. Example: ["10.1.0.0/116", "10.2.0.0/16"].
         /// </summary>
         public InputList<string> SpokeBgpManualAdvertiseCidrs
         {
@@ -632,25 +706,25 @@ namespace Pulumi.Aviatrix
         public Input<string>? WanDefaultGatewayIp { get; set; }
 
         /// <summary>
-        /// WAN interface IP/prefix.
+        /// WAN interface IP and subnet prefix.
         /// </summary>
         [Input("wanInterfaceIpPrefix")]
         public Input<string>? WanInterfaceIpPrefix { get; set; }
 
         /// <summary>
-        /// WAN interface public IP.
+        /// WAN public IP. Required for attaching connections over the Internet.
         /// </summary>
         [Input("wanPublicIp")]
         public Input<string>? WanPublicIp { get; set; }
 
         /// <summary>
-        /// The location where the Edge as a CaaG ZTP file will be stored.
+        /// The folder path where the ZTP file will be downloaded.
         /// </summary>
         [Input("ztpFileDownloadPath")]
         public Input<string>? ZtpFileDownloadPath { get; set; }
 
         /// <summary>
-        /// ZTP file type.
+        /// ZTP file type. Valid values: "iso", "cloud-init".
         /// </summary>
         [Input("ztpFileType")]
         public Input<string>? ZtpFileType { get; set; }

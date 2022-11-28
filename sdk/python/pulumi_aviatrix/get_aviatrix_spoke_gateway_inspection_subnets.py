@@ -48,6 +48,9 @@ class GetAviatrixSpokeGatewayInspectionSubnetsResult:
     @property
     @pulumi.getter(name="subnetsForInspections")
     def subnets_for_inspections(self) -> Sequence[str]:
+        """
+        The list of all subnets available for the subnet inspection feature. This attribute is only supported for Azure.
+        """
         return pulumi.get(self, "subnets_for_inspections")
 
 
@@ -65,7 +68,19 @@ class AwaitableGetAviatrixSpokeGatewayInspectionSubnetsResult(GetAviatrixSpokeGa
 def get_aviatrix_spoke_gateway_inspection_subnets(gw_name: Optional[str] = None,
                                                   opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetAviatrixSpokeGatewayInspectionSubnetsResult:
     """
-    Use this data source to access information about an existing resource.
+    The **aviatrix_spoke_gateway_inspection_subnets** data source provides all subnets available for the subnet inspection feature.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_aviatrix as aviatrix
+
+    foo = aviatrix.get_aviatrix_spoke_gateway_inspection_subnets(gw_name="gatewayname")
+    ```
+
+
+    :param str gw_name: Spoke gateway name.
     """
     __args__ = dict()
     __args__['gwName'] = gw_name
@@ -82,6 +97,18 @@ def get_aviatrix_spoke_gateway_inspection_subnets(gw_name: Optional[str] = None,
 def get_aviatrix_spoke_gateway_inspection_subnets_output(gw_name: Optional[pulumi.Input[str]] = None,
                                                          opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetAviatrixSpokeGatewayInspectionSubnetsResult]:
     """
-    Use this data source to access information about an existing resource.
+    The **aviatrix_spoke_gateway_inspection_subnets** data source provides all subnets available for the subnet inspection feature.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_aviatrix as aviatrix
+
+    foo = aviatrix.get_aviatrix_spoke_gateway_inspection_subnets(gw_name="gatewayname")
+    ```
+
+
+    :param str gw_name: Spoke gateway name.
     """
     ...

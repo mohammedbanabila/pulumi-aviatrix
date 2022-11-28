@@ -2,9 +2,25 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * Use this data source to get the Aviatrix stateful firewall for use in other resources.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Aviatrix Firewall Data Source
+ * const foo = pulumi.output(aviatrix.getAviatrixFirewall({
+ *     gwName: "gw-abcd",
+ * }));
+ * ```
+ */
 export function getAviatrixFirewall(args: GetAviatrixFirewallArgs, opts?: pulumi.InvokeOptions): Promise<GetAviatrixFirewallResult> {
     if (!opts) {
         opts = {}
@@ -20,6 +36,9 @@ export function getAviatrixFirewall(args: GetAviatrixFirewallArgs, opts?: pulumi
  * A collection of arguments for invoking getAviatrixFirewall.
  */
 export interface GetAviatrixFirewallArgs {
+    /**
+     * Name of the gateway associated with the firewall.
+     */
     gwName: string;
 }
 
@@ -27,13 +46,22 @@ export interface GetAviatrixFirewallArgs {
  * A collection of values returned by getAviatrixFirewall.
  */
 export interface GetAviatrixFirewallResult {
+    /**
+     * Indicates whether logging is enabled or not.
+     */
     readonly baseLogEnabled: boolean;
+    /**
+     * The firewall's base policy.
+     */
     readonly basePolicy: string;
     readonly gwName: string;
     /**
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * List of policies associated with the firewall.
+     */
     readonly policies: outputs.GetAviatrixFirewallPolicy[];
 }
 
@@ -45,5 +73,8 @@ export function getAviatrixFirewallOutput(args: GetAviatrixFirewallOutputArgs, o
  * A collection of arguments for invoking getAviatrixFirewall.
  */
 export interface GetAviatrixFirewallOutputArgs {
+    /**
+     * Name of the gateway associated with the firewall.
+     */
     gwName: pulumi.Input<string>;
 }

@@ -4,6 +4,29 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_copilot_association** resource allows management of controller CoPilot Association. This resource is available as of provider version R2.19+.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create a CoPilot Association
+ * const testCopilotAssociation = new aviatrix.AviatrixCopilotAssociation("test_copilot_association", {
+ *     copilotAddress: "copilot.aviatrix.com",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **aviatrix_copilot_association** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixCopilotAssociation:AviatrixCopilotAssociation test_copilot_association 10-11-12-13
+ * ```
+ */
 export class AviatrixCopilotAssociation extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixCopilotAssociation resource's state with the given name, ID, and optional extra
@@ -33,7 +56,7 @@ export class AviatrixCopilotAssociation extends pulumi.CustomResource {
     }
 
     /**
-     * CoPilot IP Address or Hostname.
+     * CoPilot instance IP Address or Hostname.
      */
     public readonly copilotAddress!: pulumi.Output<string>;
 
@@ -68,7 +91,7 @@ export class AviatrixCopilotAssociation extends pulumi.CustomResource {
  */
 export interface AviatrixCopilotAssociationState {
     /**
-     * CoPilot IP Address or Hostname.
+     * CoPilot instance IP Address or Hostname.
      */
     copilotAddress?: pulumi.Input<string>;
 }
@@ -78,7 +101,7 @@ export interface AviatrixCopilotAssociationState {
  */
 export interface AviatrixCopilotAssociationArgs {
     /**
-     * CoPilot IP Address or Hostname.
+     * CoPilot instance IP Address or Hostname.
      */
     copilotAddress: pulumi.Input<string>;
 }

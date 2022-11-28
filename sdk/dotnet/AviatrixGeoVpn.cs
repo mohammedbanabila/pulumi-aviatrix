@@ -9,6 +9,45 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_geo_vpn** resource enables and manages the [Aviatrix Geo VPN feature](https://docs.aviatrix.com/HowTos/GeoVPN.html).
+    /// 
+    /// &gt; **NOTE:** If ELBs/gateways are being managed by the Geo VPN, in order to update VPN configurations of the Geo VPN, all the VPN configurations of the ELBs/gateways must be updated simultaneously and share the same values. This can be achieved by managing the VPN configurations through variables and updating their values accordingly.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Geo VPN
+    ///     var testGeoVpn = new Aviatrix.AviatrixGeoVpn("testGeoVpn", new()
+    ///     {
+    ///         AccountName = "devops-aws",
+    ///         CloudType = 1,
+    ///         DomainName = "aviatrix.live",
+    ///         ElbDnsNames = new[]
+    ///         {
+    ///             "elb-test1-497f5e89.elb.us-west-1.amazonaws.com",
+    ///             "elb-test2-974f895e.elb.us-east-2.amazonaws.com",
+    ///         },
+    ///         ServiceName = "vpn",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **geo_vpn** can be imported using the `service_name` and `domain_name`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixGeoVpn:AviatrixGeoVpn test service_name~domain_name
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixGeoVpn:AviatrixGeoVpn")]
     public partial class AviatrixGeoVpn : global::Pulumi.CustomResource
     {

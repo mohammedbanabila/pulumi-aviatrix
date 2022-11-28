@@ -4,6 +4,74 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_spoke_external_device_conn** resource creates and manages the connection between the Aviatrix BGP enabled spoke gateway and an External Device for purposes of Transit Network.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Spoke External Device Connection
+ * const test = new aviatrix.aviatrix_spoke_external_device_conn("test", {
+ *     bgpLocalAsNum: "123",
+ *     bgpRemoteAsNum: "345",
+ *     connectionName: "my_conn",
+ *     connectionType: "bgp",
+ *     gwName: "spokeGw",
+ *     remoteGatewayIp: "172.12.13.14",
+ *     vpcId: "vpc-abcd1234",
+ * });
+ * ```
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Spoke External Device Connection with HA enabled
+ * const test = new aviatrix.aviatrix_spoke_external_device_conn("test", {
+ *     backupRemoteGatewayIp: "172.12.13.15",
+ *     connectionName: "my_conn",
+ *     connectionType: "static",
+ *     enableHa: true,
+ *     gwName: "spokeGw",
+ *     remoteGatewayIp: "172.12.13.14",
+ *     remoteSubnet: "12.0.0.0/24",
+ *     vpcId: "vpc-abcd1234",
+ * });
+ * ```
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Spoke External Device Connection with Connection AS Path Prepend set
+ * const test = new aviatrix.aviatrix_spoke_external_device_conn("test", {
+ *     bgpLocalAsNum: "123",
+ *     bgpRemoteAsNum: "345",
+ *     connectionName: "my_conn",
+ *     connectionType: "bgp",
+ *     gwName: "spokeGw",
+ *     prependAsPaths: [
+ *         "123",
+ *         "123",
+ *     ],
+ *     remoteGatewayIp: "172.12.13.14",
+ *     vpcId: "vpc-abcd1234",
+ * });
+ * ```
+ * ## Notes
+ *
+ * ### customAlgorithms
+ * If set to true, the six algorithm arguments cannot all be default value. If set to false, default values will be used for all six algorithm arguments.
+ *
+ * ## Import
+ *
+ * **spoke_external_device_conn** can be imported using the `connection_name` and `vpc_id`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrix_spoke_external_device_conn:aviatrix_spoke_external_device_conn test connection_name~vpc_id
+ * ```
+ */
 export class Aviatrix_spoke_external_device_conn extends pulumi.CustomResource {
     /**
      * Get an existing Aviatrix_spoke_external_device_conn resource's state with the given name, ID, and optional extra
@@ -33,15 +101,15 @@ export class Aviatrix_spoke_external_device_conn extends pulumi.CustomResource {
     }
 
     /**
-     * Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
+     * Set of approved CIDRs. Requires `enableLearnedCidrsApproval` to be true. Type: Set(String).
      */
     public readonly approvedCidrs!: pulumi.Output<string[]>;
     /**
-     * Backup BGP MD5 authentication key.
+     * Backup BGP MD5 Authentication Key. Valid with HA enabled for connection. Example: 'avx03,avx04'.
      */
     public readonly backupBgpMd5Key!: pulumi.Output<string | undefined>;
     /**
-     * Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+     * Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required if HA enabled for 'bgp' connection.
      */
     public readonly backupBgpRemoteAsNum!: pulumi.Output<string | undefined>;
     /**
@@ -53,7 +121,7 @@ export class Aviatrix_spoke_external_device_conn extends pulumi.CustomResource {
      */
     public readonly backupLocalTunnelCidr!: pulumi.Output<string>;
     /**
-     * Backup pre shared key.
+     * Backup Pre-Shared Key.
      */
     public readonly backupPreSharedKey!: pulumi.Output<string | undefined>;
     /**
@@ -65,19 +133,19 @@ export class Aviatrix_spoke_external_device_conn extends pulumi.CustomResource {
      */
     public readonly backupRemoteTunnelCidr!: pulumi.Output<string>;
     /**
-     * BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+     * BGP local ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
      */
     public readonly bgpLocalAsNum!: pulumi.Output<string | undefined>;
     /**
-     * BGP MD5 authentication key.
+     * BGP MD5 Authentication Key. Example: 'avx01,avx02'.
      */
     public readonly bgpMd5Key!: pulumi.Output<string | undefined>;
     /**
-     * BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+     * BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
      */
     public readonly bgpRemoteAsNum!: pulumi.Output<string | undefined>;
     /**
-     * The name of the spoke external device connection which is going to be created.
+     * Spoke external device connection name.
      */
     public readonly connectionName!: pulumi.Output<string>;
     /**
@@ -85,7 +153,7 @@ export class Aviatrix_spoke_external_device_conn extends pulumi.CustomResource {
      */
     public readonly connectionType!: pulumi.Output<string | undefined>;
     /**
-     * Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption.
+     * Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption. Valid values: true, false. **NOTE: Please see notes here for more information.**
      */
     public readonly customAlgorithms!: pulumi.Output<boolean | undefined>;
     /**
@@ -93,24 +161,24 @@ export class Aviatrix_spoke_external_device_conn extends pulumi.CustomResource {
      */
     public readonly directConnect!: pulumi.Output<boolean | undefined>;
     /**
-     * Enable Event Triggered HA.
+     * Enable Event Triggered HA. Default value: false. Valid values: true or false.
      */
     public readonly enableEventTriggeredHa!: pulumi.Output<boolean | undefined>;
     /**
-     * Set as true if use IKEv2.
+     * Set as true to enable IKEv2 protocol.
      */
     public readonly enableIkev2!: pulumi.Output<boolean | undefined>;
     /**
-     * Enable learned CIDR approval for the connection. Only valid with 'connection_type' = 'bgp'. Requires the spoke_gateway's
-     * 'learned_cidrs_approval_mode' attribute be set to 'connection'. Valid values: true, false. Default value: false.
+     * Enable learned CIDRs approval for the connection. Only valid with `connectionType` = 'bgp'. Requires the spoke_gateway's `learnedCidrsApprovalMode` attribute be set to 'connection'. Valid values: true, false. Default value: false.
      */
     public readonly enableLearnedCidrsApproval!: pulumi.Output<boolean | undefined>;
     /**
-     * Name of the BGP Spoke Gateway.
+     * Aviatrix spoke gateway name.
      */
     public readonly gwName!: pulumi.Output<string>;
     /**
      * Set as true if there are two external devices.
+     * * `backupRemoteGatewayIp ` - (Optional) Backup remote gateway IP. Required if HA enabled.
      */
     public readonly haEnabled!: pulumi.Output<boolean | undefined>;
     /**
@@ -118,41 +186,39 @@ export class Aviatrix_spoke_external_device_conn extends pulumi.CustomResource {
      */
     public readonly localTunnelCidr!: pulumi.Output<string>;
     /**
-     * Configure manual BGP advertised CIDRs for this connection. Only valid with 'connection_type' = 'bgp'.
+     * Configure manual BGP advertised CIDRs for this connection. Only valid with `connectionType`= 'bgp'.
      */
     public readonly manualBgpAdvertisedCidrs!: pulumi.Output<string[] | undefined>;
     /**
-     * Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'.
+     * Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'. Default value: 'SHA-256'.
      */
     public readonly phase1Authentication!: pulumi.Output<string | undefined>;
     /**
-     * Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+     * Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
      */
     public readonly phase1DhGroups!: pulumi.Output<string | undefined>;
     /**
-     * Phase one Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC' and 'AES-256-CBC', 'AES-128-GCM-64',
-     * 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', and 'AES-256-GCM-128'.
+     * Phase one Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", and "AES-256-GCM-128". Default value: "AES-256-CBC".
      */
     public readonly phase1Encryption!: pulumi.Output<string | undefined>;
     /**
-     * Phase 1 remote identifier of the IPsec tunnel.
+     * Phase 1 remote identifier of the IPsec tunnel. This can be configured to be either the public IP address or the private IP address of the peer terminating the IPsec tunnel. Example: ["1.2.3.4"] when HA is disabled, ["1.2.3.4", "5.6.7.8"] when HA is enabled.
      */
     public readonly phase1RemoteIdentifiers!: pulumi.Output<string[] | undefined>;
     /**
-     * Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'.
+     * Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'. Default value: 'HMAC-SHA-256'.
      */
     public readonly phase2Authentication!: pulumi.Output<string | undefined>;
     /**
-     * Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+     * Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
      */
     public readonly phase2DhGroups!: pulumi.Output<string | undefined>;
     /**
-     * Phase two Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'AES-128-GCM-64',
-     * 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', 'AES-256-GCM-128', and 'NULL-ENCR'.
+     * Phase two Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", "AES-256-GCM-128" and "NULL-ENCR". Default value: "AES-256-CBC".
      */
     public readonly phase2Encryption!: pulumi.Output<string | undefined>;
     /**
-     * If left blank, the pre-shared key will be auto generated.
+     * Pre-Shared Key.
      */
     public readonly preSharedKey!: pulumi.Output<string | undefined>;
     /**
@@ -160,7 +226,7 @@ export class Aviatrix_spoke_external_device_conn extends pulumi.CustomResource {
      */
     public readonly prependAsPaths!: pulumi.Output<string[] | undefined>;
     /**
-     * Remote Gateway IP.
+     * Remote gateway IP.
      */
     public readonly remoteGatewayIp!: pulumi.Output<string>;
     /**
@@ -172,11 +238,11 @@ export class Aviatrix_spoke_external_device_conn extends pulumi.CustomResource {
      */
     public readonly remoteTunnelCidr!: pulumi.Output<string>;
     /**
-     * Tunnel Protocol. Valid value: 'IPsec'. Default value: 'IPsec'. Case insensitive.
+     * Tunnel protocol, only valid with `connectionType` = 'bgp'. Valid values: 'IPsec'. Default value: 'IPsec'. Case insensitive.
      */
     public readonly tunnelProtocol!: pulumi.Output<string | undefined>;
     /**
-     * ID of the VPC where the BGP Spoke Gateway is located.
+     * VPC ID of the Aviatrix spoke gateway.
      */
     public readonly vpcId!: pulumi.Output<string>;
 
@@ -244,15 +310,15 @@ export class Aviatrix_spoke_external_device_conn extends pulumi.CustomResource {
                 throw new Error("Missing required property 'vpcId'");
             }
             resourceInputs["approvedCidrs"] = args ? args.approvedCidrs : undefined;
-            resourceInputs["backupBgpMd5Key"] = args ? args.backupBgpMd5Key : undefined;
+            resourceInputs["backupBgpMd5Key"] = args?.backupBgpMd5Key ? pulumi.secret(args.backupBgpMd5Key) : undefined;
             resourceInputs["backupBgpRemoteAsNum"] = args ? args.backupBgpRemoteAsNum : undefined;
             resourceInputs["backupDirectConnect"] = args ? args.backupDirectConnect : undefined;
             resourceInputs["backupLocalTunnelCidr"] = args ? args.backupLocalTunnelCidr : undefined;
-            resourceInputs["backupPreSharedKey"] = args ? args.backupPreSharedKey : undefined;
+            resourceInputs["backupPreSharedKey"] = args?.backupPreSharedKey ? pulumi.secret(args.backupPreSharedKey) : undefined;
             resourceInputs["backupRemoteGatewayIp"] = args ? args.backupRemoteGatewayIp : undefined;
             resourceInputs["backupRemoteTunnelCidr"] = args ? args.backupRemoteTunnelCidr : undefined;
             resourceInputs["bgpLocalAsNum"] = args ? args.bgpLocalAsNum : undefined;
-            resourceInputs["bgpMd5Key"] = args ? args.bgpMd5Key : undefined;
+            resourceInputs["bgpMd5Key"] = args?.bgpMd5Key ? pulumi.secret(args.bgpMd5Key) : undefined;
             resourceInputs["bgpRemoteAsNum"] = args ? args.bgpRemoteAsNum : undefined;
             resourceInputs["connectionName"] = args ? args.connectionName : undefined;
             resourceInputs["connectionType"] = args ? args.connectionType : undefined;
@@ -272,7 +338,7 @@ export class Aviatrix_spoke_external_device_conn extends pulumi.CustomResource {
             resourceInputs["phase2Authentication"] = args ? args.phase2Authentication : undefined;
             resourceInputs["phase2DhGroups"] = args ? args.phase2DhGroups : undefined;
             resourceInputs["phase2Encryption"] = args ? args.phase2Encryption : undefined;
-            resourceInputs["preSharedKey"] = args ? args.preSharedKey : undefined;
+            resourceInputs["preSharedKey"] = args?.preSharedKey ? pulumi.secret(args.preSharedKey) : undefined;
             resourceInputs["prependAsPaths"] = args ? args.prependAsPaths : undefined;
             resourceInputs["remoteGatewayIp"] = args ? args.remoteGatewayIp : undefined;
             resourceInputs["remoteSubnet"] = args ? args.remoteSubnet : undefined;
@@ -281,6 +347,8 @@ export class Aviatrix_spoke_external_device_conn extends pulumi.CustomResource {
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["backupBgpMd5Key", "backupPreSharedKey", "bgpMd5Key", "preSharedKey"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(Aviatrix_spoke_external_device_conn.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -290,15 +358,15 @@ export class Aviatrix_spoke_external_device_conn extends pulumi.CustomResource {
  */
 export interface Aviatrix_spoke_external_device_connState {
     /**
-     * Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
+     * Set of approved CIDRs. Requires `enableLearnedCidrsApproval` to be true. Type: Set(String).
      */
     approvedCidrs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Backup BGP MD5 authentication key.
+     * Backup BGP MD5 Authentication Key. Valid with HA enabled for connection. Example: 'avx03,avx04'.
      */
     backupBgpMd5Key?: pulumi.Input<string>;
     /**
-     * Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+     * Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required if HA enabled for 'bgp' connection.
      */
     backupBgpRemoteAsNum?: pulumi.Input<string>;
     /**
@@ -310,7 +378,7 @@ export interface Aviatrix_spoke_external_device_connState {
      */
     backupLocalTunnelCidr?: pulumi.Input<string>;
     /**
-     * Backup pre shared key.
+     * Backup Pre-Shared Key.
      */
     backupPreSharedKey?: pulumi.Input<string>;
     /**
@@ -322,19 +390,19 @@ export interface Aviatrix_spoke_external_device_connState {
      */
     backupRemoteTunnelCidr?: pulumi.Input<string>;
     /**
-     * BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+     * BGP local ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
      */
     bgpLocalAsNum?: pulumi.Input<string>;
     /**
-     * BGP MD5 authentication key.
+     * BGP MD5 Authentication Key. Example: 'avx01,avx02'.
      */
     bgpMd5Key?: pulumi.Input<string>;
     /**
-     * BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+     * BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
      */
     bgpRemoteAsNum?: pulumi.Input<string>;
     /**
-     * The name of the spoke external device connection which is going to be created.
+     * Spoke external device connection name.
      */
     connectionName?: pulumi.Input<string>;
     /**
@@ -342,7 +410,7 @@ export interface Aviatrix_spoke_external_device_connState {
      */
     connectionType?: pulumi.Input<string>;
     /**
-     * Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption.
+     * Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption. Valid values: true, false. **NOTE: Please see notes here for more information.**
      */
     customAlgorithms?: pulumi.Input<boolean>;
     /**
@@ -350,24 +418,24 @@ export interface Aviatrix_spoke_external_device_connState {
      */
     directConnect?: pulumi.Input<boolean>;
     /**
-     * Enable Event Triggered HA.
+     * Enable Event Triggered HA. Default value: false. Valid values: true or false.
      */
     enableEventTriggeredHa?: pulumi.Input<boolean>;
     /**
-     * Set as true if use IKEv2.
+     * Set as true to enable IKEv2 protocol.
      */
     enableIkev2?: pulumi.Input<boolean>;
     /**
-     * Enable learned CIDR approval for the connection. Only valid with 'connection_type' = 'bgp'. Requires the spoke_gateway's
-     * 'learned_cidrs_approval_mode' attribute be set to 'connection'. Valid values: true, false. Default value: false.
+     * Enable learned CIDRs approval for the connection. Only valid with `connectionType` = 'bgp'. Requires the spoke_gateway's `learnedCidrsApprovalMode` attribute be set to 'connection'. Valid values: true, false. Default value: false.
      */
     enableLearnedCidrsApproval?: pulumi.Input<boolean>;
     /**
-     * Name of the BGP Spoke Gateway.
+     * Aviatrix spoke gateway name.
      */
     gwName?: pulumi.Input<string>;
     /**
      * Set as true if there are two external devices.
+     * * `backupRemoteGatewayIp ` - (Optional) Backup remote gateway IP. Required if HA enabled.
      */
     haEnabled?: pulumi.Input<boolean>;
     /**
@@ -375,41 +443,39 @@ export interface Aviatrix_spoke_external_device_connState {
      */
     localTunnelCidr?: pulumi.Input<string>;
     /**
-     * Configure manual BGP advertised CIDRs for this connection. Only valid with 'connection_type' = 'bgp'.
+     * Configure manual BGP advertised CIDRs for this connection. Only valid with `connectionType`= 'bgp'.
      */
     manualBgpAdvertisedCidrs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'.
+     * Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'. Default value: 'SHA-256'.
      */
     phase1Authentication?: pulumi.Input<string>;
     /**
-     * Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+     * Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
      */
     phase1DhGroups?: pulumi.Input<string>;
     /**
-     * Phase one Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC' and 'AES-256-CBC', 'AES-128-GCM-64',
-     * 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', and 'AES-256-GCM-128'.
+     * Phase one Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", and "AES-256-GCM-128". Default value: "AES-256-CBC".
      */
     phase1Encryption?: pulumi.Input<string>;
     /**
-     * Phase 1 remote identifier of the IPsec tunnel.
+     * Phase 1 remote identifier of the IPsec tunnel. This can be configured to be either the public IP address or the private IP address of the peer terminating the IPsec tunnel. Example: ["1.2.3.4"] when HA is disabled, ["1.2.3.4", "5.6.7.8"] when HA is enabled.
      */
     phase1RemoteIdentifiers?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'.
+     * Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'. Default value: 'HMAC-SHA-256'.
      */
     phase2Authentication?: pulumi.Input<string>;
     /**
-     * Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+     * Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
      */
     phase2DhGroups?: pulumi.Input<string>;
     /**
-     * Phase two Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'AES-128-GCM-64',
-     * 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', 'AES-256-GCM-128', and 'NULL-ENCR'.
+     * Phase two Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", "AES-256-GCM-128" and "NULL-ENCR". Default value: "AES-256-CBC".
      */
     phase2Encryption?: pulumi.Input<string>;
     /**
-     * If left blank, the pre-shared key will be auto generated.
+     * Pre-Shared Key.
      */
     preSharedKey?: pulumi.Input<string>;
     /**
@@ -417,7 +483,7 @@ export interface Aviatrix_spoke_external_device_connState {
      */
     prependAsPaths?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Remote Gateway IP.
+     * Remote gateway IP.
      */
     remoteGatewayIp?: pulumi.Input<string>;
     /**
@@ -429,11 +495,11 @@ export interface Aviatrix_spoke_external_device_connState {
      */
     remoteTunnelCidr?: pulumi.Input<string>;
     /**
-     * Tunnel Protocol. Valid value: 'IPsec'. Default value: 'IPsec'. Case insensitive.
+     * Tunnel protocol, only valid with `connectionType` = 'bgp'. Valid values: 'IPsec'. Default value: 'IPsec'. Case insensitive.
      */
     tunnelProtocol?: pulumi.Input<string>;
     /**
-     * ID of the VPC where the BGP Spoke Gateway is located.
+     * VPC ID of the Aviatrix spoke gateway.
      */
     vpcId?: pulumi.Input<string>;
 }
@@ -443,15 +509,15 @@ export interface Aviatrix_spoke_external_device_connState {
  */
 export interface Aviatrix_spoke_external_device_connArgs {
     /**
-     * Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
+     * Set of approved CIDRs. Requires `enableLearnedCidrsApproval` to be true. Type: Set(String).
      */
     approvedCidrs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Backup BGP MD5 authentication key.
+     * Backup BGP MD5 Authentication Key. Valid with HA enabled for connection. Example: 'avx03,avx04'.
      */
     backupBgpMd5Key?: pulumi.Input<string>;
     /**
-     * Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+     * Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required if HA enabled for 'bgp' connection.
      */
     backupBgpRemoteAsNum?: pulumi.Input<string>;
     /**
@@ -463,7 +529,7 @@ export interface Aviatrix_spoke_external_device_connArgs {
      */
     backupLocalTunnelCidr?: pulumi.Input<string>;
     /**
-     * Backup pre shared key.
+     * Backup Pre-Shared Key.
      */
     backupPreSharedKey?: pulumi.Input<string>;
     /**
@@ -475,19 +541,19 @@ export interface Aviatrix_spoke_external_device_connArgs {
      */
     backupRemoteTunnelCidr?: pulumi.Input<string>;
     /**
-     * BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+     * BGP local ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
      */
     bgpLocalAsNum?: pulumi.Input<string>;
     /**
-     * BGP MD5 authentication key.
+     * BGP MD5 Authentication Key. Example: 'avx01,avx02'.
      */
     bgpMd5Key?: pulumi.Input<string>;
     /**
-     * BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+     * BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
      */
     bgpRemoteAsNum?: pulumi.Input<string>;
     /**
-     * The name of the spoke external device connection which is going to be created.
+     * Spoke external device connection name.
      */
     connectionName: pulumi.Input<string>;
     /**
@@ -495,7 +561,7 @@ export interface Aviatrix_spoke_external_device_connArgs {
      */
     connectionType?: pulumi.Input<string>;
     /**
-     * Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption.
+     * Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption. Valid values: true, false. **NOTE: Please see notes here for more information.**
      */
     customAlgorithms?: pulumi.Input<boolean>;
     /**
@@ -503,24 +569,24 @@ export interface Aviatrix_spoke_external_device_connArgs {
      */
     directConnect?: pulumi.Input<boolean>;
     /**
-     * Enable Event Triggered HA.
+     * Enable Event Triggered HA. Default value: false. Valid values: true or false.
      */
     enableEventTriggeredHa?: pulumi.Input<boolean>;
     /**
-     * Set as true if use IKEv2.
+     * Set as true to enable IKEv2 protocol.
      */
     enableIkev2?: pulumi.Input<boolean>;
     /**
-     * Enable learned CIDR approval for the connection. Only valid with 'connection_type' = 'bgp'. Requires the spoke_gateway's
-     * 'learned_cidrs_approval_mode' attribute be set to 'connection'. Valid values: true, false. Default value: false.
+     * Enable learned CIDRs approval for the connection. Only valid with `connectionType` = 'bgp'. Requires the spoke_gateway's `learnedCidrsApprovalMode` attribute be set to 'connection'. Valid values: true, false. Default value: false.
      */
     enableLearnedCidrsApproval?: pulumi.Input<boolean>;
     /**
-     * Name of the BGP Spoke Gateway.
+     * Aviatrix spoke gateway name.
      */
     gwName: pulumi.Input<string>;
     /**
      * Set as true if there are two external devices.
+     * * `backupRemoteGatewayIp ` - (Optional) Backup remote gateway IP. Required if HA enabled.
      */
     haEnabled?: pulumi.Input<boolean>;
     /**
@@ -528,41 +594,39 @@ export interface Aviatrix_spoke_external_device_connArgs {
      */
     localTunnelCidr?: pulumi.Input<string>;
     /**
-     * Configure manual BGP advertised CIDRs for this connection. Only valid with 'connection_type' = 'bgp'.
+     * Configure manual BGP advertised CIDRs for this connection. Only valid with `connectionType`= 'bgp'.
      */
     manualBgpAdvertisedCidrs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'.
+     * Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'. Default value: 'SHA-256'.
      */
     phase1Authentication?: pulumi.Input<string>;
     /**
-     * Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+     * Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
      */
     phase1DhGroups?: pulumi.Input<string>;
     /**
-     * Phase one Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC' and 'AES-256-CBC', 'AES-128-GCM-64',
-     * 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', and 'AES-256-GCM-128'.
+     * Phase one Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", and "AES-256-GCM-128". Default value: "AES-256-CBC".
      */
     phase1Encryption?: pulumi.Input<string>;
     /**
-     * Phase 1 remote identifier of the IPsec tunnel.
+     * Phase 1 remote identifier of the IPsec tunnel. This can be configured to be either the public IP address or the private IP address of the peer terminating the IPsec tunnel. Example: ["1.2.3.4"] when HA is disabled, ["1.2.3.4", "5.6.7.8"] when HA is enabled.
      */
     phase1RemoteIdentifiers?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'.
+     * Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'. Default value: 'HMAC-SHA-256'.
      */
     phase2Authentication?: pulumi.Input<string>;
     /**
-     * Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+     * Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
      */
     phase2DhGroups?: pulumi.Input<string>;
     /**
-     * Phase two Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'AES-128-GCM-64',
-     * 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', 'AES-256-GCM-128', and 'NULL-ENCR'.
+     * Phase two Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", "AES-256-GCM-128" and "NULL-ENCR". Default value: "AES-256-CBC".
      */
     phase2Encryption?: pulumi.Input<string>;
     /**
-     * If left blank, the pre-shared key will be auto generated.
+     * Pre-Shared Key.
      */
     preSharedKey?: pulumi.Input<string>;
     /**
@@ -570,7 +634,7 @@ export interface Aviatrix_spoke_external_device_connArgs {
      */
     prependAsPaths?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Remote Gateway IP.
+     * Remote gateway IP.
      */
     remoteGatewayIp: pulumi.Input<string>;
     /**
@@ -582,11 +646,11 @@ export interface Aviatrix_spoke_external_device_connArgs {
      */
     remoteTunnelCidr?: pulumi.Input<string>;
     /**
-     * Tunnel Protocol. Valid value: 'IPsec'. Default value: 'IPsec'. Case insensitive.
+     * Tunnel protocol, only valid with `connectionType` = 'bgp'. Valid values: 'IPsec'. Default value: 'IPsec'. Case insensitive.
      */
     tunnelProtocol?: pulumi.Input<string>;
     /**
-     * ID of the VPC where the BGP Spoke Gateway is located.
+     * VPC ID of the Aviatrix spoke gateway.
      */
     vpcId: pulumi.Input<string>;
 }

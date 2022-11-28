@@ -4,6 +4,59 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_firewall_instance_association** resource allows for the creation and management of a firewall instance association. To use this resource you must also have an `aviatrix.AviatrixFirenet` resource with it's `manageFirewallInstanceAssociation` attribute set to false.
+ *
+ * Available in provider version R2.17.1+.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@astipkovits/aviatrix";
+ *
+ * // Associate an Aviatrix FireNet Gateway with a Firewall Instance
+ * const firewallInstanceAssociation1 = new aviatrix.AviatrixFirewallInstanceAssociation("firewallInstanceAssociation1", {
+ *     vpcId: aviatrix_firewall_instance.firewall_instance_1.vpc_id,
+ *     firenetGwName: aviatrix_transit_gateway.transit_gateway_1.gw_name,
+ *     instanceId: aviatrix_firewall_instance.firewall_instance_1.instance_id,
+ *     firewallName: aviatrix_firewall_instance.firewall_instance_1.firewall_name,
+ *     lanInterface: aviatrix_firewall_instance.firewall_instance_1.lan_interface,
+ *     managementInterface: aviatrix_firewall_instance.firewall_instance_1.management_interface,
+ *     egressInterface: aviatrix_firewall_instance.firewall_instance_1.egress_interface,
+ *     attached: true,
+ * });
+ * ```
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@astipkovits/aviatrix";
+ *
+ * // Associate an GCP Aviatrix FireNet Gateway with a Firewall Instance
+ * const firewallInstanceAssociation1 = new aviatrix.AviatrixFirewallInstanceAssociation("firewallInstanceAssociation1", {
+ *     vpcId: aviatrix_firewall_instance.firewall_instance_1.vpc_id,
+ *     firenetGwName: aviatrix_transit_gateway.transit_gateway_1.gw_name,
+ *     instanceId: aviatrix_firewall_instance.firewall_instance_1.instance_id,
+ *     lanInterface: aviatrix_firewall_instance.firewall_instance_1.lan_interface,
+ *     managementInterface: aviatrix_firewall_instance.firewall_instance_1.management_interface,
+ *     egressInterface: aviatrix_firewall_instance.firewall_instance_1.egress_interface,
+ *     attached: true,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **firewall_instance_association** can be imported using the `vpc_id`, `firenet_gw_name` and `instance_id` in the form `vpc_id~~firenet_gw_name~~instance_id` e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixFirewallInstanceAssociation:AviatrixFirewallInstanceAssociation test vpc_id~~firenet_gw_name~~instance_id
+ * ```
+ *
+ *  When using a Native GWLB VPC where there is no `firenet_gw_name` but the ID is in the same form e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixFirewallInstanceAssociation:AviatrixFirewallInstanceAssociation test vpc_id~~~~instance_id
+ * ```
+ */
 export class AviatrixFirewallInstanceAssociation extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixFirewallInstanceAssociation resource's state with the given name, ID, and optional extra
@@ -33,41 +86,39 @@ export class AviatrixFirewallInstanceAssociation extends pulumi.CustomResource {
     }
 
     /**
-     * Switch to attach/detach firewall instance to/from fireNet.
+     * Switch to attach/detach firewall instance to/from FireNet. Valid values: true, false. Default value: false.
      */
     public readonly attached!: pulumi.Output<boolean | undefined>;
     /**
-     * Egress interface ID, required if it is a firewall instance.
+     * Egress interface ID. **Required if it is a firewall instance.**
      */
     public readonly egressInterface!: pulumi.Output<string | undefined>;
     /**
-     * Name of the gateway to launch the firewall instance.
+     * Name of the primary FireNet gateway. Required for FireNet without Native GWLB VPC.
      */
     public readonly firenetGwName!: pulumi.Output<string | undefined>;
     /**
-     * Firewall instance name, or FQDN Gateway's gw_name, required if it is a AWS or Azure firewall instance. Not allowed for
-     * GCP
+     * Firewall instance name. **Required for non-GCP firewall instance. For GCP, this field should not be set.**
      */
     public readonly firewallName!: pulumi.Output<string | undefined>;
     /**
-     * ID of Firewall instance, or FQDN Gateway's gw_name.
+     * ID of Firewall instance.
      */
     public readonly instanceId!: pulumi.Output<string>;
     /**
-     * Lan interface ID, required if it is a firewall instance.
+     * Lan interface ID. **Required if it is a firewall instance.**
      */
     public readonly lanInterface!: pulumi.Output<string | undefined>;
     /**
-     * Management interface ID, required if it is a firewall instance.
+     * Management interface ID. **Required if it is a firewall instance.**
      */
     public readonly managementInterface!: pulumi.Output<string | undefined>;
     /**
-     * Indication it is a firewall instance or FQDN gateway to be associated to fireNet. Valid values: 'Generic',
-     * 'fqdn_gateway'. Value 'fqdn_gateway' is required for FQDN gateway.
+     * Type of firewall. Valid values: "Generic", "fqdnGateway". Default value: "Generic". Value "fqdnGateway" is required for FQDN gateway.
      */
     public readonly vendorType!: pulumi.Output<string | undefined>;
     /**
-     * VPC ID.
+     * VPC ID of the Security VPC.
      */
     public readonly vpcId!: pulumi.Output<string>;
 
@@ -121,41 +172,39 @@ export class AviatrixFirewallInstanceAssociation extends pulumi.CustomResource {
  */
 export interface AviatrixFirewallInstanceAssociationState {
     /**
-     * Switch to attach/detach firewall instance to/from fireNet.
+     * Switch to attach/detach firewall instance to/from FireNet. Valid values: true, false. Default value: false.
      */
     attached?: pulumi.Input<boolean>;
     /**
-     * Egress interface ID, required if it is a firewall instance.
+     * Egress interface ID. **Required if it is a firewall instance.**
      */
     egressInterface?: pulumi.Input<string>;
     /**
-     * Name of the gateway to launch the firewall instance.
+     * Name of the primary FireNet gateway. Required for FireNet without Native GWLB VPC.
      */
     firenetGwName?: pulumi.Input<string>;
     /**
-     * Firewall instance name, or FQDN Gateway's gw_name, required if it is a AWS or Azure firewall instance. Not allowed for
-     * GCP
+     * Firewall instance name. **Required for non-GCP firewall instance. For GCP, this field should not be set.**
      */
     firewallName?: pulumi.Input<string>;
     /**
-     * ID of Firewall instance, or FQDN Gateway's gw_name.
+     * ID of Firewall instance.
      */
     instanceId?: pulumi.Input<string>;
     /**
-     * Lan interface ID, required if it is a firewall instance.
+     * Lan interface ID. **Required if it is a firewall instance.**
      */
     lanInterface?: pulumi.Input<string>;
     /**
-     * Management interface ID, required if it is a firewall instance.
+     * Management interface ID. **Required if it is a firewall instance.**
      */
     managementInterface?: pulumi.Input<string>;
     /**
-     * Indication it is a firewall instance or FQDN gateway to be associated to fireNet. Valid values: 'Generic',
-     * 'fqdn_gateway'. Value 'fqdn_gateway' is required for FQDN gateway.
+     * Type of firewall. Valid values: "Generic", "fqdnGateway". Default value: "Generic". Value "fqdnGateway" is required for FQDN gateway.
      */
     vendorType?: pulumi.Input<string>;
     /**
-     * VPC ID.
+     * VPC ID of the Security VPC.
      */
     vpcId?: pulumi.Input<string>;
 }
@@ -165,41 +214,39 @@ export interface AviatrixFirewallInstanceAssociationState {
  */
 export interface AviatrixFirewallInstanceAssociationArgs {
     /**
-     * Switch to attach/detach firewall instance to/from fireNet.
+     * Switch to attach/detach firewall instance to/from FireNet. Valid values: true, false. Default value: false.
      */
     attached?: pulumi.Input<boolean>;
     /**
-     * Egress interface ID, required if it is a firewall instance.
+     * Egress interface ID. **Required if it is a firewall instance.**
      */
     egressInterface?: pulumi.Input<string>;
     /**
-     * Name of the gateway to launch the firewall instance.
+     * Name of the primary FireNet gateway. Required for FireNet without Native GWLB VPC.
      */
     firenetGwName?: pulumi.Input<string>;
     /**
-     * Firewall instance name, or FQDN Gateway's gw_name, required if it is a AWS or Azure firewall instance. Not allowed for
-     * GCP
+     * Firewall instance name. **Required for non-GCP firewall instance. For GCP, this field should not be set.**
      */
     firewallName?: pulumi.Input<string>;
     /**
-     * ID of Firewall instance, or FQDN Gateway's gw_name.
+     * ID of Firewall instance.
      */
     instanceId: pulumi.Input<string>;
     /**
-     * Lan interface ID, required if it is a firewall instance.
+     * Lan interface ID. **Required if it is a firewall instance.**
      */
     lanInterface?: pulumi.Input<string>;
     /**
-     * Management interface ID, required if it is a firewall instance.
+     * Management interface ID. **Required if it is a firewall instance.**
      */
     managementInterface?: pulumi.Input<string>;
     /**
-     * Indication it is a firewall instance or FQDN gateway to be associated to fireNet. Valid values: 'Generic',
-     * 'fqdn_gateway'. Value 'fqdn_gateway' is required for FQDN gateway.
+     * Type of firewall. Valid values: "Generic", "fqdnGateway". Default value: "Generic". Value "fqdnGateway" is required for FQDN gateway.
      */
     vendorType?: pulumi.Input<string>;
     /**
-     * VPC ID.
+     * VPC ID of the Security VPC.
      */
     vpcId: pulumi.Input<string>;
 }

@@ -42,11 +42,17 @@ class GetAviatrixFirewallResult:
     @property
     @pulumi.getter(name="baseLogEnabled")
     def base_log_enabled(self) -> bool:
+        """
+        Indicates whether logging is enabled or not.
+        """
         return pulumi.get(self, "base_log_enabled")
 
     @property
     @pulumi.getter(name="basePolicy")
     def base_policy(self) -> str:
+        """
+        The firewall's base policy.
+        """
         return pulumi.get(self, "base_policy")
 
     @property
@@ -65,6 +71,9 @@ class GetAviatrixFirewallResult:
     @property
     @pulumi.getter
     def policies(self) -> Sequence['outputs.GetAviatrixFirewallPolicyResult']:
+        """
+        List of policies associated with the firewall.
+        """
         return pulumi.get(self, "policies")
 
 
@@ -84,7 +93,19 @@ class AwaitableGetAviatrixFirewallResult(GetAviatrixFirewallResult):
 def get_aviatrix_firewall(gw_name: Optional[str] = None,
                           opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetAviatrixFirewallResult:
     """
-    Use this data source to access information about an existing resource.
+    Use this data source to get the Aviatrix stateful firewall for use in other resources.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_aviatrix as aviatrix
+
+    foo = aviatrix.get_aviatrix_firewall(gw_name="gw-abcd")
+    ```
+
+
+    :param str gw_name: Name of the gateway associated with the firewall.
     """
     __args__ = dict()
     __args__['gwName'] = gw_name
@@ -103,6 +124,18 @@ def get_aviatrix_firewall(gw_name: Optional[str] = None,
 def get_aviatrix_firewall_output(gw_name: Optional[pulumi.Input[str]] = None,
                                  opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetAviatrixFirewallResult]:
     """
-    Use this data source to access information about an existing resource.
+    Use this data source to get the Aviatrix stateful firewall for use in other resources.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_aviatrix as aviatrix
+
+    foo = aviatrix.get_aviatrix_firewall(gw_name="gw-abcd")
+    ```
+
+
+    :param str gw_name: Name of the gateway associated with the firewall.
     """
     ...

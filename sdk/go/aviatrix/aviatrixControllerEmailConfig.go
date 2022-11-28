@@ -11,6 +11,73 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_controller_email_config** resource allows management of an Aviatrix Controller's notification email configurations.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixControllerEmailConfig(ctx, "testEmailConfig", &aviatrix.AviatrixControllerEmailConfigArgs{
+//				AdminAlertEmail:    pulumi.String("administrator@mycompany.com"),
+//				CriticalAlertEmail: pulumi.String("it-support@mycompany.com"),
+//				SecurityEventEmail: pulumi.String("security-admin-group@mycompany.com"),
+//				StatusChangeEmail:  pulumi.String("it-admin-group@mycompany.com"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixControllerEmailConfig(ctx, "testEmailConfig", &aviatrix.AviatrixControllerEmailConfigArgs{
+//				AdminAlertEmail:                  pulumi.String("administrator@mycompany.com"),
+//				CriticalAlertEmail:               pulumi.String("it-support@mycompany.com"),
+//				SecurityEventEmail:               pulumi.String("security-admin-group@mycompany.com"),
+//				StatusChangeEmail:                pulumi.String("it-admin-group@mycompany.com"),
+//				StatusChangeNotificationInterval: pulumi.Int(20),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// Instance controller_email_config can be imported using controller IP, e.g. controller IP is 10.11.12.13
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixControllerEmailConfig:AviatrixControllerEmailConfig test 10-11-12-13
+//
+// ```
 type AviatrixControllerEmailConfig struct {
 	pulumi.CustomResourceState
 
@@ -30,7 +97,7 @@ type AviatrixControllerEmailConfig struct {
 	StatusChangeEmail pulumi.StringOutput `pulumi:"statusChangeEmail"`
 	// Whether status change notification email is verified.
 	StatusChangeEmailVerified pulumi.BoolOutput `pulumi:"statusChangeEmailVerified"`
-	// Status change notification interval in seconds.
+	// Status change notification interval in seconds. Default value: 60.
 	StatusChangeNotificationInterval pulumi.IntPtrOutput `pulumi:"statusChangeNotificationInterval"`
 }
 
@@ -92,7 +159,7 @@ type aviatrixControllerEmailConfigState struct {
 	StatusChangeEmail *string `pulumi:"statusChangeEmail"`
 	// Whether status change notification email is verified.
 	StatusChangeEmailVerified *bool `pulumi:"statusChangeEmailVerified"`
-	// Status change notification interval in seconds.
+	// Status change notification interval in seconds. Default value: 60.
 	StatusChangeNotificationInterval *int `pulumi:"statusChangeNotificationInterval"`
 }
 
@@ -113,7 +180,7 @@ type AviatrixControllerEmailConfigState struct {
 	StatusChangeEmail pulumi.StringPtrInput
 	// Whether status change notification email is verified.
 	StatusChangeEmailVerified pulumi.BoolPtrInput
-	// Status change notification interval in seconds.
+	// Status change notification interval in seconds. Default value: 60.
 	StatusChangeNotificationInterval pulumi.IntPtrInput
 }
 
@@ -130,7 +197,7 @@ type aviatrixControllerEmailConfigArgs struct {
 	SecurityEventEmail string `pulumi:"securityEventEmail"`
 	// Email to receive system/tunnel status notification emails.
 	StatusChangeEmail string `pulumi:"statusChangeEmail"`
-	// Status change notification interval in seconds.
+	// Status change notification interval in seconds. Default value: 60.
 	StatusChangeNotificationInterval *int `pulumi:"statusChangeNotificationInterval"`
 }
 
@@ -144,7 +211,7 @@ type AviatrixControllerEmailConfigArgs struct {
 	SecurityEventEmail pulumi.StringInput
 	// Email to receive system/tunnel status notification emails.
 	StatusChangeEmail pulumi.StringInput
-	// Status change notification interval in seconds.
+	// Status change notification interval in seconds. Default value: 60.
 	StatusChangeNotificationInterval pulumi.IntPtrInput
 }
 
@@ -275,7 +342,7 @@ func (o AviatrixControllerEmailConfigOutput) StatusChangeEmailVerified() pulumi.
 	return o.ApplyT(func(v *AviatrixControllerEmailConfig) pulumi.BoolOutput { return v.StatusChangeEmailVerified }).(pulumi.BoolOutput)
 }
 
-// Status change notification interval in seconds.
+// Status change notification interval in seconds. Default value: 60.
 func (o AviatrixControllerEmailConfigOutput) StatusChangeNotificationInterval() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *AviatrixControllerEmailConfig) pulumi.IntPtrOutput { return v.StatusChangeNotificationInterval }).(pulumi.IntPtrOutput)
 }

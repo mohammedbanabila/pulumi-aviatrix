@@ -11,55 +11,181 @@ namespace Pulumi.Aviatrix
 {
     public static class GetAviatrixFirenetVendorIntegration
     {
+        /// <summary>
+        /// Use this data source to do 'save' or 'sync' for vendor integration purposes for Aviatrix FireNet.
+        /// 
+        /// &gt; **NOTE:** FireNet with Panorama should be set up using the **aviatrix_firenet_firewall_manager** data source. Do not use `save` or `sync` options listed below.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using Pulumi;
+        /// using Aviatrix = Pulumi.Aviatrix;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var foo = Aviatrix.GetAviatrixFirenetVendorIntegration.Invoke(new()
+        ///     {
+        ///         FirewallName = "Avx-Firewall-Instance",
+        ///         InstanceId = "i-09ade2592661316f8",
+        ///         Password = "Avx123456#",
+        ///         PublicIp = "10.11.12.13",
+        ///         Save = true,
+        ///         Username = "admin",
+        ///         VendorType = "Palo Alto Networks VM-Series",
+        ///         VpcId = "vpc-abcd123",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
         public static Task<GetAviatrixFirenetVendorIntegrationResult> InvokeAsync(GetAviatrixFirenetVendorIntegrationArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAviatrixFirenetVendorIntegrationResult>("aviatrix:index/getAviatrixFirenetVendorIntegration:getAviatrixFirenetVendorIntegration", args ?? new GetAviatrixFirenetVendorIntegrationArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAviatrixFirenetVendorIntegrationResult>("aviatrix:index/getAviatrixFirenetVendorIntegration:getAviatrixFirenetVendorIntegration", args ?? new GetAviatrixFirenetVendorIntegrationArgs(), options.WithDefaults());
 
+        /// <summary>
+        /// Use this data source to do 'save' or 'sync' for vendor integration purposes for Aviatrix FireNet.
+        /// 
+        /// &gt; **NOTE:** FireNet with Panorama should be set up using the **aviatrix_firenet_firewall_manager** data source. Do not use `save` or `sync` options listed below.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using Pulumi;
+        /// using Aviatrix = Pulumi.Aviatrix;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var foo = Aviatrix.GetAviatrixFirenetVendorIntegration.Invoke(new()
+        ///     {
+        ///         FirewallName = "Avx-Firewall-Instance",
+        ///         InstanceId = "i-09ade2592661316f8",
+        ///         Password = "Avx123456#",
+        ///         PublicIp = "10.11.12.13",
+        ///         Save = true,
+        ///         Username = "admin",
+        ///         VendorType = "Palo Alto Networks VM-Series",
+        ///         VpcId = "vpc-abcd123",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
         public static Output<GetAviatrixFirenetVendorIntegrationResult> Invoke(GetAviatrixFirenetVendorIntegrationInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAviatrixFirenetVendorIntegrationResult>("aviatrix:index/getAviatrixFirenetVendorIntegration:getAviatrixFirenetVendorIntegration", args ?? new GetAviatrixFirenetVendorIntegrationInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAviatrixFirenetVendorIntegrationResult>("aviatrix:index/getAviatrixFirenetVendorIntegration:getAviatrixFirenetVendorIntegration", args ?? new GetAviatrixFirenetVendorIntegrationInvokeArgs(), options.WithDefaults());
     }
 
 
     public sealed class GetAviatrixFirenetVendorIntegrationArgs : global::Pulumi.InvokeArgs
     {
         [Input("apiToken")]
-        public string? ApiToken { get; set; }
+        private string? _apiToken;
 
+        /// <summary>
+        /// API token for API calls. Required and valid only for vendor type "Fortinet FortiGate".
+        /// </summary>
+        public string? ApiToken
+        {
+            get => _apiToken;
+            set => _apiToken = value;
+        }
+
+        /// <summary>
+        /// Name of firewall instance.
+        /// </summary>
         [Input("firewallName")]
         public string? FirewallName { get; set; }
 
+        /// <summary>
+        /// ID of Firewall instance.
+        /// </summary>
         [Input("instanceId", required: true)]
         public string InstanceId { get; set; } = null!;
 
+        /// <summary>
+        /// Number of retries for `save` or `synchronize`. Example: 1. Default value: 0.
+        /// </summary>
         [Input("numberOfRetries")]
         public int? NumberOfRetries { get; set; }
 
         [Input("password")]
-        public string? Password { get; set; }
+        private string? _password;
+
+        /// <summary>
+        /// Firewall login password for API calls. Required for vendor type "Generic", "Palo Alto Networks VM-Series" and "Aviatrix FQDN Gateway".
+        /// </summary>
+        public string? Password
+        {
+            get => _password;
+            set => _password = value;
+        }
 
         [Input("privateKeyFile")]
-        public string? PrivateKeyFile { get; set; }
+        private string? _privateKeyFile;
 
+        /// <summary>
+        /// Private key file. Valid only for vendor type "Check Point Cloud Guard". Use the `file` function to read from a file.
+        /// </summary>
+        public string? PrivateKeyFile
+        {
+            get => _privateKeyFile;
+            set => _privateKeyFile = value;
+        }
+
+        /// <summary>
+        /// The IP address of the firewall management interface for API calls from the Aviatrix Controller. If not set, the public IP of the firewall instance will be used. If the private IP is provided, please make sure that the controller can access the firewall.
+        /// </summary>
         [Input("publicIp")]
         public string? PublicIp { get; set; }
 
+        /// <summary>
+        /// Retry interval in seconds for `save` or `synchronize`. Example: 120. Default value: 300.
+        /// </summary>
         [Input("retryInterval")]
         public int? RetryInterval { get; set; }
 
+        /// <summary>
+        /// Specify the firewall virtual Router name you wish the Controller to program. If left unspecified, the Controller programs the firewall’s default router.
+        /// </summary>
         [Input("routeTable")]
         public string? RouteTable { get; set; }
 
+        /// <summary>
+        /// Switch to save or not.
+        /// </summary>
         [Input("save")]
         public bool? Save { get; set; }
 
+        /// <summary>
+        /// Switch to sync or not.
+        /// </summary>
         [Input("synchronize")]
         public bool? Synchronize { get; set; }
 
+        /// <summary>
+        /// Firewall login name for API calls from the Controller. Required for vendor type "Generic", "Palo Alto Networks VM-Series" and "Aviatrix FQDN Gateway".
+        /// </summary>
         [Input("username")]
         public string? Username { get; set; }
 
+        /// <summary>
+        /// Select PAN. Valid values: "Generic", "Palo Alto Networks VM-Series", "Aviatrix FQDN Gateway" and "Fortinet FortiGate".
+        /// </summary>
         [Input("vendorType", required: true)]
         public string VendorType { get; set; } = null!;
 
+        /// <summary>
+        /// VPC ID.
+        /// </summary>
         [Input("vpcId", required: true)]
         public string VpcId { get; set; } = null!;
 
@@ -72,44 +198,116 @@ namespace Pulumi.Aviatrix
     public sealed class GetAviatrixFirenetVendorIntegrationInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("apiToken")]
-        public Input<string>? ApiToken { get; set; }
+        private Input<string>? _apiToken;
 
+        /// <summary>
+        /// API token for API calls. Required and valid only for vendor type "Fortinet FortiGate".
+        /// </summary>
+        public Input<string>? ApiToken
+        {
+            get => _apiToken;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _apiToken = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// Name of firewall instance.
+        /// </summary>
         [Input("firewallName")]
         public Input<string>? FirewallName { get; set; }
 
+        /// <summary>
+        /// ID of Firewall instance.
+        /// </summary>
         [Input("instanceId", required: true)]
         public Input<string> InstanceId { get; set; } = null!;
 
+        /// <summary>
+        /// Number of retries for `save` or `synchronize`. Example: 1. Default value: 0.
+        /// </summary>
         [Input("numberOfRetries")]
         public Input<int>? NumberOfRetries { get; set; }
 
         [Input("password")]
-        public Input<string>? Password { get; set; }
+        private Input<string>? _password;
+
+        /// <summary>
+        /// Firewall login password for API calls. Required for vendor type "Generic", "Palo Alto Networks VM-Series" and "Aviatrix FQDN Gateway".
+        /// </summary>
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         [Input("privateKeyFile")]
-        public Input<string>? PrivateKeyFile { get; set; }
+        private Input<string>? _privateKeyFile;
 
+        /// <summary>
+        /// Private key file. Valid only for vendor type "Check Point Cloud Guard". Use the `file` function to read from a file.
+        /// </summary>
+        public Input<string>? PrivateKeyFile
+        {
+            get => _privateKeyFile;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _privateKeyFile = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// The IP address of the firewall management interface for API calls from the Aviatrix Controller. If not set, the public IP of the firewall instance will be used. If the private IP is provided, please make sure that the controller can access the firewall.
+        /// </summary>
         [Input("publicIp")]
         public Input<string>? PublicIp { get; set; }
 
+        /// <summary>
+        /// Retry interval in seconds for `save` or `synchronize`. Example: 120. Default value: 300.
+        /// </summary>
         [Input("retryInterval")]
         public Input<int>? RetryInterval { get; set; }
 
+        /// <summary>
+        /// Specify the firewall virtual Router name you wish the Controller to program. If left unspecified, the Controller programs the firewall’s default router.
+        /// </summary>
         [Input("routeTable")]
         public Input<string>? RouteTable { get; set; }
 
+        /// <summary>
+        /// Switch to save or not.
+        /// </summary>
         [Input("save")]
         public Input<bool>? Save { get; set; }
 
+        /// <summary>
+        /// Switch to sync or not.
+        /// </summary>
         [Input("synchronize")]
         public Input<bool>? Synchronize { get; set; }
 
+        /// <summary>
+        /// Firewall login name for API calls from the Controller. Required for vendor type "Generic", "Palo Alto Networks VM-Series" and "Aviatrix FQDN Gateway".
+        /// </summary>
         [Input("username")]
         public Input<string>? Username { get; set; }
 
+        /// <summary>
+        /// Select PAN. Valid values: "Generic", "Palo Alto Networks VM-Series", "Aviatrix FQDN Gateway" and "Fortinet FortiGate".
+        /// </summary>
         [Input("vendorType", required: true)]
         public Input<string> VendorType { get; set; } = null!;
 
+        /// <summary>
+        /// VPC ID.
+        /// </summary>
         [Input("vpcId", required: true)]
         public Input<string> VpcId { get; set; } = null!;
 

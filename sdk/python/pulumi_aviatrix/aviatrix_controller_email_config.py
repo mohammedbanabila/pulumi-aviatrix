@@ -25,7 +25,7 @@ class AviatrixControllerEmailConfigArgs:
         :param pulumi.Input[str] critical_alert_email: Email to receive field notices and critical notices.
         :param pulumi.Input[str] security_event_email: Email to receive security and CVE (Common Vulnerabilities and Exposures) notification emails.
         :param pulumi.Input[str] status_change_email: Email to receive system/tunnel status notification emails.
-        :param pulumi.Input[int] status_change_notification_interval: Status change notification interval in seconds.
+        :param pulumi.Input[int] status_change_notification_interval: Status change notification interval in seconds. Default value: 60.
         """
         pulumi.set(__self__, "admin_alert_email", admin_alert_email)
         pulumi.set(__self__, "critical_alert_email", critical_alert_email)
@@ -86,7 +86,7 @@ class AviatrixControllerEmailConfigArgs:
     @pulumi.getter(name="statusChangeNotificationInterval")
     def status_change_notification_interval(self) -> Optional[pulumi.Input[int]]:
         """
-        Status change notification interval in seconds.
+        Status change notification interval in seconds. Default value: 60.
         """
         return pulumi.get(self, "status_change_notification_interval")
 
@@ -117,7 +117,7 @@ class _AviatrixControllerEmailConfigState:
         :param pulumi.Input[bool] security_event_email_verified: Whether security event notification email is verified.
         :param pulumi.Input[str] status_change_email: Email to receive system/tunnel status notification emails.
         :param pulumi.Input[bool] status_change_email_verified: Whether status change notification email is verified.
-        :param pulumi.Input[int] status_change_notification_interval: Status change notification interval in seconds.
+        :param pulumi.Input[int] status_change_notification_interval: Status change notification interval in seconds. Default value: 60.
         """
         if admin_alert_email is not None:
             pulumi.set(__self__, "admin_alert_email", admin_alert_email)
@@ -238,7 +238,7 @@ class _AviatrixControllerEmailConfigState:
     @pulumi.getter(name="statusChangeNotificationInterval")
     def status_change_notification_interval(self) -> Optional[pulumi.Input[int]]:
         """
-        Status change notification interval in seconds.
+        Status change notification interval in seconds. Default value: 60.
         """
         return pulumi.get(self, "status_change_notification_interval")
 
@@ -259,14 +259,49 @@ class AviatrixControllerEmailConfig(pulumi.CustomResource):
                  status_change_notification_interval: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
-        Create a AviatrixControllerEmailConfig resource with the given unique name, props, and options.
+        The **aviatrix_controller_email_config** resource allows management of an Aviatrix Controller's notification email configurations.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Controller Email Config
+        test_email_config = aviatrix.AviatrixControllerEmailConfig("testEmailConfig",
+            admin_alert_email="administrator@mycompany.com",
+            critical_alert_email="it-support@mycompany.com",
+            security_event_email="security-admin-group@mycompany.com",
+            status_change_email="it-admin-group@mycompany.com")
+        ```
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Controller Email Config and configure the Status Change Notification Interval
+        test_email_config = aviatrix.AviatrixControllerEmailConfig("testEmailConfig",
+            admin_alert_email="administrator@mycompany.com",
+            critical_alert_email="it-support@mycompany.com",
+            security_event_email="security-admin-group@mycompany.com",
+            status_change_email="it-admin-group@mycompany.com",
+            status_change_notification_interval=20)
+        ```
+
+        ## Import
+
+        Instance controller_email_config can be imported using controller IP, e.g. controller IP is 10.11.12.13
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixControllerEmailConfig:AviatrixControllerEmailConfig test 10-11-12-13
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] admin_alert_email: Email to receive important account and certification information.
         :param pulumi.Input[str] critical_alert_email: Email to receive field notices and critical notices.
         :param pulumi.Input[str] security_event_email: Email to receive security and CVE (Common Vulnerabilities and Exposures) notification emails.
         :param pulumi.Input[str] status_change_email: Email to receive system/tunnel status notification emails.
-        :param pulumi.Input[int] status_change_notification_interval: Status change notification interval in seconds.
+        :param pulumi.Input[int] status_change_notification_interval: Status change notification interval in seconds. Default value: 60.
         """
         ...
     @overload
@@ -275,7 +310,42 @@ class AviatrixControllerEmailConfig(pulumi.CustomResource):
                  args: AviatrixControllerEmailConfigArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixControllerEmailConfig resource with the given unique name, props, and options.
+        The **aviatrix_controller_email_config** resource allows management of an Aviatrix Controller's notification email configurations.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Controller Email Config
+        test_email_config = aviatrix.AviatrixControllerEmailConfig("testEmailConfig",
+            admin_alert_email="administrator@mycompany.com",
+            critical_alert_email="it-support@mycompany.com",
+            security_event_email="security-admin-group@mycompany.com",
+            status_change_email="it-admin-group@mycompany.com")
+        ```
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Controller Email Config and configure the Status Change Notification Interval
+        test_email_config = aviatrix.AviatrixControllerEmailConfig("testEmailConfig",
+            admin_alert_email="administrator@mycompany.com",
+            critical_alert_email="it-support@mycompany.com",
+            security_event_email="security-admin-group@mycompany.com",
+            status_change_email="it-admin-group@mycompany.com",
+            status_change_notification_interval=20)
+        ```
+
+        ## Import
+
+        Instance controller_email_config can be imported using controller IP, e.g. controller IP is 10.11.12.13
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixControllerEmailConfig:AviatrixControllerEmailConfig test 10-11-12-13
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixControllerEmailConfigArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -356,7 +426,7 @@ class AviatrixControllerEmailConfig(pulumi.CustomResource):
         :param pulumi.Input[bool] security_event_email_verified: Whether security event notification email is verified.
         :param pulumi.Input[str] status_change_email: Email to receive system/tunnel status notification emails.
         :param pulumi.Input[bool] status_change_email_verified: Whether status change notification email is verified.
-        :param pulumi.Input[int] status_change_notification_interval: Status change notification interval in seconds.
+        :param pulumi.Input[int] status_change_notification_interval: Status change notification interval in seconds. Default value: 60.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -441,7 +511,7 @@ class AviatrixControllerEmailConfig(pulumi.CustomResource):
     @pulumi.getter(name="statusChangeNotificationInterval")
     def status_change_notification_interval(self) -> pulumi.Output[Optional[int]]:
         """
-        Status change notification interval in seconds.
+        Status change notification interval in seconds. Default value: 60.
         """
         return pulumi.get(self, "status_change_notification_interval")
 

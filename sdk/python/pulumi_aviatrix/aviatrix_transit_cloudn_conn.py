@@ -36,26 +36,26 @@ class AviatrixTransitCloudnConnArgs:
                  insane_mode: Optional[pulumi.Input[bool]] = None):
         """
         The set of arguments for constructing a AviatrixTransitCloudnConn resource.
-        :param pulumi.Input[str] bgp_local_as_num: BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
-        :param pulumi.Input[str] cloudn_as_num: Aviatrix CloudN BGP ASN (Autonomous System Number). Integer between 1-4294967294.
-        :param pulumi.Input[str] cloudn_neighbor_as_num: CloudN LAN Interface Neighbor's BGP ASN.
-        :param pulumi.Input[str] cloudn_neighbor_ip: Aviatrix CloudN LAN Interface Neighbor's IP Address.
-        :param pulumi.Input[str] cloudn_remote_ip: Aviatrix CloudN IP Address.
-        :param pulumi.Input[str] connection_name: The name of the transit Aviatrix CloudN connection.
-        :param pulumi.Input[str] gw_name: The name of the Transit Gateway.
-        :param pulumi.Input[str] vpc_id: The ID of the VPC where the Transit Gateway is located.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] approved_cidrs: Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
-        :param pulumi.Input[str] backup_cloudn_as_num: Backup Aviatrix CloudN BGP ASN.
-        :param pulumi.Input[str] backup_cloudn_ip: Backup Aviatrix CloudN IP Address.
-        :param pulumi.Input[str] backup_cloudn_neighbor_as_num: Backup Aviatrix CloudN LAN Interface Neighbor's BGP ASN.
-        :param pulumi.Input[str] backup_cloudn_neighbor_ip: Backup Aviatrix CloudN LAN Interface Neighbor's IP Address.
-        :param pulumi.Input[bool] backup_direct_connect: Enable direct connect to Backup Aviatrix CloudN over private network.
-        :param pulumi.Input[bool] backup_insane_mode: Enable Insane Mode for connection to Backup Aviatrix CloudN.
-        :param pulumi.Input[bool] direct_connect: Enable Direct Connect for private network infrastructure.
-        :param pulumi.Input[bool] enable_ha: Enable connection to HA CloudN.
-        :param pulumi.Input[bool] enable_learned_cidrs_approval: Enable learned CIDRs approval.
-        :param pulumi.Input[bool] enable_load_balancing: Enable load balancing between Aviatrix CloudN and Backup CloudN.
-        :param pulumi.Input[bool] insane_mode: Enable Insane Mode for this connection.
+        :param pulumi.Input[str] bgp_local_as_num: BGP AS Number of the Transit Gateway. Type: String.
+        :param pulumi.Input[str] cloudn_as_num: BGP AS Number of the Aviatrix CloudN. Type: String.
+        :param pulumi.Input[str] cloudn_neighbor_as_num: BGP AS Number of the Aviatrix CloudN neighbor. Type: String.
+        :param pulumi.Input[str] cloudn_neighbor_ip: IP Address of Aviatrix CloudN neighbor. Type: String.
+        :param pulumi.Input[str] cloudn_remote_ip: IP Address of Aviatrix CloudN. Type: String.
+        :param pulumi.Input[str] connection_name: Name of the Transit Gateway to CloudN Connection. Type: String.
+        :param pulumi.Input[str] gw_name: Name of the Transit Gateway. Type: String.
+        :param pulumi.Input[str] vpc_id: VPC ID of the Aviatrix Transit Gateway. Type: String.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] approved_cidrs: Set of approved CIDRs. Requires `enable_learned_cidrs_approval` to be true. Type: Set(String).
+        :param pulumi.Input[str] backup_cloudn_as_num: BGP AS Number of HA CloudN. Type: String.
+        :param pulumi.Input[str] backup_cloudn_ip: IP Address of HA CloudN. Required when `enable_ha` is true. Type: String.
+        :param pulumi.Input[str] backup_cloudn_neighbor_as_num: BGP AS Number of HA CloudN Neighbor. Type: String.
+        :param pulumi.Input[str] backup_cloudn_neighbor_ip: IP Address of HA CloudN Neighbor. Type: String.
+        :param pulumi.Input[bool] backup_direct_connect: Flag to enable direct connect over private network to HA CloudN. Type: Boolean.
+        :param pulumi.Input[bool] backup_insane_mode: Flag to enable insane mode connection to HA CloudN. Type: Boolean.
+        :param pulumi.Input[bool] direct_connect: Enable direct connect over private network. Type: Boolean. Default: true.
+        :param pulumi.Input[bool] enable_ha: Enable connection to HA CloudN. Type: Boolean.
+        :param pulumi.Input[bool] enable_learned_cidrs_approval: Enable encrypted transit approval for connection. Type: Boolean.
+        :param pulumi.Input[bool] enable_load_balancing: Flag to enable load balancing between CloudN and HA CloudN. Type: Boolean.
+        :param pulumi.Input[bool] insane_mode: Enable insane mode connection. Type: Boolean.
         """
         pulumi.set(__self__, "bgp_local_as_num", bgp_local_as_num)
         pulumi.set(__self__, "cloudn_as_num", cloudn_as_num)
@@ -94,7 +94,7 @@ class AviatrixTransitCloudnConnArgs:
     @pulumi.getter(name="bgpLocalAsNum")
     def bgp_local_as_num(self) -> pulumi.Input[str]:
         """
-        BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+        BGP AS Number of the Transit Gateway. Type: String.
         """
         return pulumi.get(self, "bgp_local_as_num")
 
@@ -106,7 +106,7 @@ class AviatrixTransitCloudnConnArgs:
     @pulumi.getter(name="cloudnAsNum")
     def cloudn_as_num(self) -> pulumi.Input[str]:
         """
-        Aviatrix CloudN BGP ASN (Autonomous System Number). Integer between 1-4294967294.
+        BGP AS Number of the Aviatrix CloudN. Type: String.
         """
         return pulumi.get(self, "cloudn_as_num")
 
@@ -118,7 +118,7 @@ class AviatrixTransitCloudnConnArgs:
     @pulumi.getter(name="cloudnNeighborAsNum")
     def cloudn_neighbor_as_num(self) -> pulumi.Input[str]:
         """
-        CloudN LAN Interface Neighbor's BGP ASN.
+        BGP AS Number of the Aviatrix CloudN neighbor. Type: String.
         """
         return pulumi.get(self, "cloudn_neighbor_as_num")
 
@@ -130,7 +130,7 @@ class AviatrixTransitCloudnConnArgs:
     @pulumi.getter(name="cloudnNeighborIp")
     def cloudn_neighbor_ip(self) -> pulumi.Input[str]:
         """
-        Aviatrix CloudN LAN Interface Neighbor's IP Address.
+        IP Address of Aviatrix CloudN neighbor. Type: String.
         """
         return pulumi.get(self, "cloudn_neighbor_ip")
 
@@ -142,7 +142,7 @@ class AviatrixTransitCloudnConnArgs:
     @pulumi.getter(name="cloudnRemoteIp")
     def cloudn_remote_ip(self) -> pulumi.Input[str]:
         """
-        Aviatrix CloudN IP Address.
+        IP Address of Aviatrix CloudN. Type: String.
         """
         return pulumi.get(self, "cloudn_remote_ip")
 
@@ -154,7 +154,7 @@ class AviatrixTransitCloudnConnArgs:
     @pulumi.getter(name="connectionName")
     def connection_name(self) -> pulumi.Input[str]:
         """
-        The name of the transit Aviatrix CloudN connection.
+        Name of the Transit Gateway to CloudN Connection. Type: String.
         """
         return pulumi.get(self, "connection_name")
 
@@ -166,7 +166,7 @@ class AviatrixTransitCloudnConnArgs:
     @pulumi.getter(name="gwName")
     def gw_name(self) -> pulumi.Input[str]:
         """
-        The name of the Transit Gateway.
+        Name of the Transit Gateway. Type: String.
         """
         return pulumi.get(self, "gw_name")
 
@@ -178,7 +178,7 @@ class AviatrixTransitCloudnConnArgs:
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> pulumi.Input[str]:
         """
-        The ID of the VPC where the Transit Gateway is located.
+        VPC ID of the Aviatrix Transit Gateway. Type: String.
         """
         return pulumi.get(self, "vpc_id")
 
@@ -190,7 +190,7 @@ class AviatrixTransitCloudnConnArgs:
     @pulumi.getter(name="approvedCidrs")
     def approved_cidrs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
+        Set of approved CIDRs. Requires `enable_learned_cidrs_approval` to be true. Type: Set(String).
         """
         return pulumi.get(self, "approved_cidrs")
 
@@ -202,7 +202,7 @@ class AviatrixTransitCloudnConnArgs:
     @pulumi.getter(name="backupCloudnAsNum")
     def backup_cloudn_as_num(self) -> Optional[pulumi.Input[str]]:
         """
-        Backup Aviatrix CloudN BGP ASN.
+        BGP AS Number of HA CloudN. Type: String.
         """
         return pulumi.get(self, "backup_cloudn_as_num")
 
@@ -214,7 +214,7 @@ class AviatrixTransitCloudnConnArgs:
     @pulumi.getter(name="backupCloudnIp")
     def backup_cloudn_ip(self) -> Optional[pulumi.Input[str]]:
         """
-        Backup Aviatrix CloudN IP Address.
+        IP Address of HA CloudN. Required when `enable_ha` is true. Type: String.
         """
         return pulumi.get(self, "backup_cloudn_ip")
 
@@ -226,7 +226,7 @@ class AviatrixTransitCloudnConnArgs:
     @pulumi.getter(name="backupCloudnNeighborAsNum")
     def backup_cloudn_neighbor_as_num(self) -> Optional[pulumi.Input[str]]:
         """
-        Backup Aviatrix CloudN LAN Interface Neighbor's BGP ASN.
+        BGP AS Number of HA CloudN Neighbor. Type: String.
         """
         return pulumi.get(self, "backup_cloudn_neighbor_as_num")
 
@@ -238,7 +238,7 @@ class AviatrixTransitCloudnConnArgs:
     @pulumi.getter(name="backupCloudnNeighborIp")
     def backup_cloudn_neighbor_ip(self) -> Optional[pulumi.Input[str]]:
         """
-        Backup Aviatrix CloudN LAN Interface Neighbor's IP Address.
+        IP Address of HA CloudN Neighbor. Type: String.
         """
         return pulumi.get(self, "backup_cloudn_neighbor_ip")
 
@@ -250,7 +250,7 @@ class AviatrixTransitCloudnConnArgs:
     @pulumi.getter(name="backupDirectConnect")
     def backup_direct_connect(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable direct connect to Backup Aviatrix CloudN over private network.
+        Flag to enable direct connect over private network to HA CloudN. Type: Boolean.
         """
         return pulumi.get(self, "backup_direct_connect")
 
@@ -262,7 +262,7 @@ class AviatrixTransitCloudnConnArgs:
     @pulumi.getter(name="backupInsaneMode")
     def backup_insane_mode(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable Insane Mode for connection to Backup Aviatrix CloudN.
+        Flag to enable insane mode connection to HA CloudN. Type: Boolean.
         """
         return pulumi.get(self, "backup_insane_mode")
 
@@ -274,7 +274,7 @@ class AviatrixTransitCloudnConnArgs:
     @pulumi.getter(name="directConnect")
     def direct_connect(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable Direct Connect for private network infrastructure.
+        Enable direct connect over private network. Type: Boolean. Default: true.
         """
         return pulumi.get(self, "direct_connect")
 
@@ -286,7 +286,7 @@ class AviatrixTransitCloudnConnArgs:
     @pulumi.getter(name="enableHa")
     def enable_ha(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable connection to HA CloudN.
+        Enable connection to HA CloudN. Type: Boolean.
         """
         return pulumi.get(self, "enable_ha")
 
@@ -298,7 +298,7 @@ class AviatrixTransitCloudnConnArgs:
     @pulumi.getter(name="enableLearnedCidrsApproval")
     def enable_learned_cidrs_approval(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable learned CIDRs approval.
+        Enable encrypted transit approval for connection. Type: Boolean.
         """
         return pulumi.get(self, "enable_learned_cidrs_approval")
 
@@ -310,7 +310,7 @@ class AviatrixTransitCloudnConnArgs:
     @pulumi.getter(name="enableLoadBalancing")
     def enable_load_balancing(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable load balancing between Aviatrix CloudN and Backup CloudN.
+        Flag to enable load balancing between CloudN and HA CloudN. Type: Boolean.
         """
         return pulumi.get(self, "enable_load_balancing")
 
@@ -322,7 +322,7 @@ class AviatrixTransitCloudnConnArgs:
     @pulumi.getter(name="insaneMode")
     def insane_mode(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable Insane Mode for this connection.
+        Enable insane mode connection. Type: Boolean.
         """
         return pulumi.get(self, "insane_mode")
 
@@ -356,26 +356,26 @@ class _AviatrixTransitCloudnConnState:
                  vpc_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixTransitCloudnConn resources.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] approved_cidrs: Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
-        :param pulumi.Input[str] backup_cloudn_as_num: Backup Aviatrix CloudN BGP ASN.
-        :param pulumi.Input[str] backup_cloudn_ip: Backup Aviatrix CloudN IP Address.
-        :param pulumi.Input[str] backup_cloudn_neighbor_as_num: Backup Aviatrix CloudN LAN Interface Neighbor's BGP ASN.
-        :param pulumi.Input[str] backup_cloudn_neighbor_ip: Backup Aviatrix CloudN LAN Interface Neighbor's IP Address.
-        :param pulumi.Input[bool] backup_direct_connect: Enable direct connect to Backup Aviatrix CloudN over private network.
-        :param pulumi.Input[bool] backup_insane_mode: Enable Insane Mode for connection to Backup Aviatrix CloudN.
-        :param pulumi.Input[str] bgp_local_as_num: BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
-        :param pulumi.Input[str] cloudn_as_num: Aviatrix CloudN BGP ASN (Autonomous System Number). Integer between 1-4294967294.
-        :param pulumi.Input[str] cloudn_neighbor_as_num: CloudN LAN Interface Neighbor's BGP ASN.
-        :param pulumi.Input[str] cloudn_neighbor_ip: Aviatrix CloudN LAN Interface Neighbor's IP Address.
-        :param pulumi.Input[str] cloudn_remote_ip: Aviatrix CloudN IP Address.
-        :param pulumi.Input[str] connection_name: The name of the transit Aviatrix CloudN connection.
-        :param pulumi.Input[bool] direct_connect: Enable Direct Connect for private network infrastructure.
-        :param pulumi.Input[bool] enable_ha: Enable connection to HA CloudN.
-        :param pulumi.Input[bool] enable_learned_cidrs_approval: Enable learned CIDRs approval.
-        :param pulumi.Input[bool] enable_load_balancing: Enable load balancing between Aviatrix CloudN and Backup CloudN.
-        :param pulumi.Input[str] gw_name: The name of the Transit Gateway.
-        :param pulumi.Input[bool] insane_mode: Enable Insane Mode for this connection.
-        :param pulumi.Input[str] vpc_id: The ID of the VPC where the Transit Gateway is located.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] approved_cidrs: Set of approved CIDRs. Requires `enable_learned_cidrs_approval` to be true. Type: Set(String).
+        :param pulumi.Input[str] backup_cloudn_as_num: BGP AS Number of HA CloudN. Type: String.
+        :param pulumi.Input[str] backup_cloudn_ip: IP Address of HA CloudN. Required when `enable_ha` is true. Type: String.
+        :param pulumi.Input[str] backup_cloudn_neighbor_as_num: BGP AS Number of HA CloudN Neighbor. Type: String.
+        :param pulumi.Input[str] backup_cloudn_neighbor_ip: IP Address of HA CloudN Neighbor. Type: String.
+        :param pulumi.Input[bool] backup_direct_connect: Flag to enable direct connect over private network to HA CloudN. Type: Boolean.
+        :param pulumi.Input[bool] backup_insane_mode: Flag to enable insane mode connection to HA CloudN. Type: Boolean.
+        :param pulumi.Input[str] bgp_local_as_num: BGP AS Number of the Transit Gateway. Type: String.
+        :param pulumi.Input[str] cloudn_as_num: BGP AS Number of the Aviatrix CloudN. Type: String.
+        :param pulumi.Input[str] cloudn_neighbor_as_num: BGP AS Number of the Aviatrix CloudN neighbor. Type: String.
+        :param pulumi.Input[str] cloudn_neighbor_ip: IP Address of Aviatrix CloudN neighbor. Type: String.
+        :param pulumi.Input[str] cloudn_remote_ip: IP Address of Aviatrix CloudN. Type: String.
+        :param pulumi.Input[str] connection_name: Name of the Transit Gateway to CloudN Connection. Type: String.
+        :param pulumi.Input[bool] direct_connect: Enable direct connect over private network. Type: Boolean. Default: true.
+        :param pulumi.Input[bool] enable_ha: Enable connection to HA CloudN. Type: Boolean.
+        :param pulumi.Input[bool] enable_learned_cidrs_approval: Enable encrypted transit approval for connection. Type: Boolean.
+        :param pulumi.Input[bool] enable_load_balancing: Flag to enable load balancing between CloudN and HA CloudN. Type: Boolean.
+        :param pulumi.Input[str] gw_name: Name of the Transit Gateway. Type: String.
+        :param pulumi.Input[bool] insane_mode: Enable insane mode connection. Type: Boolean.
+        :param pulumi.Input[str] vpc_id: VPC ID of the Aviatrix Transit Gateway. Type: String.
         """
         if approved_cidrs is not None:
             pulumi.set(__self__, "approved_cidrs", approved_cidrs)
@@ -422,7 +422,7 @@ class _AviatrixTransitCloudnConnState:
     @pulumi.getter(name="approvedCidrs")
     def approved_cidrs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
+        Set of approved CIDRs. Requires `enable_learned_cidrs_approval` to be true. Type: Set(String).
         """
         return pulumi.get(self, "approved_cidrs")
 
@@ -434,7 +434,7 @@ class _AviatrixTransitCloudnConnState:
     @pulumi.getter(name="backupCloudnAsNum")
     def backup_cloudn_as_num(self) -> Optional[pulumi.Input[str]]:
         """
-        Backup Aviatrix CloudN BGP ASN.
+        BGP AS Number of HA CloudN. Type: String.
         """
         return pulumi.get(self, "backup_cloudn_as_num")
 
@@ -446,7 +446,7 @@ class _AviatrixTransitCloudnConnState:
     @pulumi.getter(name="backupCloudnIp")
     def backup_cloudn_ip(self) -> Optional[pulumi.Input[str]]:
         """
-        Backup Aviatrix CloudN IP Address.
+        IP Address of HA CloudN. Required when `enable_ha` is true. Type: String.
         """
         return pulumi.get(self, "backup_cloudn_ip")
 
@@ -458,7 +458,7 @@ class _AviatrixTransitCloudnConnState:
     @pulumi.getter(name="backupCloudnNeighborAsNum")
     def backup_cloudn_neighbor_as_num(self) -> Optional[pulumi.Input[str]]:
         """
-        Backup Aviatrix CloudN LAN Interface Neighbor's BGP ASN.
+        BGP AS Number of HA CloudN Neighbor. Type: String.
         """
         return pulumi.get(self, "backup_cloudn_neighbor_as_num")
 
@@ -470,7 +470,7 @@ class _AviatrixTransitCloudnConnState:
     @pulumi.getter(name="backupCloudnNeighborIp")
     def backup_cloudn_neighbor_ip(self) -> Optional[pulumi.Input[str]]:
         """
-        Backup Aviatrix CloudN LAN Interface Neighbor's IP Address.
+        IP Address of HA CloudN Neighbor. Type: String.
         """
         return pulumi.get(self, "backup_cloudn_neighbor_ip")
 
@@ -482,7 +482,7 @@ class _AviatrixTransitCloudnConnState:
     @pulumi.getter(name="backupDirectConnect")
     def backup_direct_connect(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable direct connect to Backup Aviatrix CloudN over private network.
+        Flag to enable direct connect over private network to HA CloudN. Type: Boolean.
         """
         return pulumi.get(self, "backup_direct_connect")
 
@@ -494,7 +494,7 @@ class _AviatrixTransitCloudnConnState:
     @pulumi.getter(name="backupInsaneMode")
     def backup_insane_mode(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable Insane Mode for connection to Backup Aviatrix CloudN.
+        Flag to enable insane mode connection to HA CloudN. Type: Boolean.
         """
         return pulumi.get(self, "backup_insane_mode")
 
@@ -506,7 +506,7 @@ class _AviatrixTransitCloudnConnState:
     @pulumi.getter(name="bgpLocalAsNum")
     def bgp_local_as_num(self) -> Optional[pulumi.Input[str]]:
         """
-        BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+        BGP AS Number of the Transit Gateway. Type: String.
         """
         return pulumi.get(self, "bgp_local_as_num")
 
@@ -518,7 +518,7 @@ class _AviatrixTransitCloudnConnState:
     @pulumi.getter(name="cloudnAsNum")
     def cloudn_as_num(self) -> Optional[pulumi.Input[str]]:
         """
-        Aviatrix CloudN BGP ASN (Autonomous System Number). Integer between 1-4294967294.
+        BGP AS Number of the Aviatrix CloudN. Type: String.
         """
         return pulumi.get(self, "cloudn_as_num")
 
@@ -530,7 +530,7 @@ class _AviatrixTransitCloudnConnState:
     @pulumi.getter(name="cloudnNeighborAsNum")
     def cloudn_neighbor_as_num(self) -> Optional[pulumi.Input[str]]:
         """
-        CloudN LAN Interface Neighbor's BGP ASN.
+        BGP AS Number of the Aviatrix CloudN neighbor. Type: String.
         """
         return pulumi.get(self, "cloudn_neighbor_as_num")
 
@@ -542,7 +542,7 @@ class _AviatrixTransitCloudnConnState:
     @pulumi.getter(name="cloudnNeighborIp")
     def cloudn_neighbor_ip(self) -> Optional[pulumi.Input[str]]:
         """
-        Aviatrix CloudN LAN Interface Neighbor's IP Address.
+        IP Address of Aviatrix CloudN neighbor. Type: String.
         """
         return pulumi.get(self, "cloudn_neighbor_ip")
 
@@ -554,7 +554,7 @@ class _AviatrixTransitCloudnConnState:
     @pulumi.getter(name="cloudnRemoteIp")
     def cloudn_remote_ip(self) -> Optional[pulumi.Input[str]]:
         """
-        Aviatrix CloudN IP Address.
+        IP Address of Aviatrix CloudN. Type: String.
         """
         return pulumi.get(self, "cloudn_remote_ip")
 
@@ -566,7 +566,7 @@ class _AviatrixTransitCloudnConnState:
     @pulumi.getter(name="connectionName")
     def connection_name(self) -> Optional[pulumi.Input[str]]:
         """
-        The name of the transit Aviatrix CloudN connection.
+        Name of the Transit Gateway to CloudN Connection. Type: String.
         """
         return pulumi.get(self, "connection_name")
 
@@ -578,7 +578,7 @@ class _AviatrixTransitCloudnConnState:
     @pulumi.getter(name="directConnect")
     def direct_connect(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable Direct Connect for private network infrastructure.
+        Enable direct connect over private network. Type: Boolean. Default: true.
         """
         return pulumi.get(self, "direct_connect")
 
@@ -590,7 +590,7 @@ class _AviatrixTransitCloudnConnState:
     @pulumi.getter(name="enableHa")
     def enable_ha(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable connection to HA CloudN.
+        Enable connection to HA CloudN. Type: Boolean.
         """
         return pulumi.get(self, "enable_ha")
 
@@ -602,7 +602,7 @@ class _AviatrixTransitCloudnConnState:
     @pulumi.getter(name="enableLearnedCidrsApproval")
     def enable_learned_cidrs_approval(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable learned CIDRs approval.
+        Enable encrypted transit approval for connection. Type: Boolean.
         """
         return pulumi.get(self, "enable_learned_cidrs_approval")
 
@@ -614,7 +614,7 @@ class _AviatrixTransitCloudnConnState:
     @pulumi.getter(name="enableLoadBalancing")
     def enable_load_balancing(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable load balancing between Aviatrix CloudN and Backup CloudN.
+        Flag to enable load balancing between CloudN and HA CloudN. Type: Boolean.
         """
         return pulumi.get(self, "enable_load_balancing")
 
@@ -626,7 +626,7 @@ class _AviatrixTransitCloudnConnState:
     @pulumi.getter(name="gwName")
     def gw_name(self) -> Optional[pulumi.Input[str]]:
         """
-        The name of the Transit Gateway.
+        Name of the Transit Gateway. Type: String.
         """
         return pulumi.get(self, "gw_name")
 
@@ -638,7 +638,7 @@ class _AviatrixTransitCloudnConnState:
     @pulumi.getter(name="insaneMode")
     def insane_mode(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable Insane Mode for this connection.
+        Enable insane mode connection. Type: Boolean.
         """
         return pulumi.get(self, "insane_mode")
 
@@ -650,7 +650,7 @@ class _AviatrixTransitCloudnConnState:
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
-        The ID of the VPC where the Transit Gateway is located.
+        VPC ID of the Aviatrix Transit Gateway. Type: String.
         """
         return pulumi.get(self, "vpc_id")
 
@@ -686,29 +686,76 @@ class AviatrixTransitCloudnConn(pulumi.CustomResource):
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixTransitCloudnConn resource with the given unique name, props, and options.
+        The **aviatrix_transit_cloudn_conn** resource creates and manages the connection between an Aviatrix Transit Gateway and an Aviatrix CloudN device. Available as of provider version R2.21.0+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Transit Gateway to CloudN Connection
+        test = aviatrix.AviatrixTransitCloudnConn("test",
+            bgp_local_as_num="123",
+            cloudn_as_num="345",
+            cloudn_neighbor_as_num="65005",
+            cloudn_neighbor_ip="182.1.2.3",
+            cloudn_remote_ip="172.12.13.14",
+            connection_name="my_conn",
+            gw_name="transitGw",
+            vpc_id="vpc-abcd1234")
+        ```
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Transit Gateway to CloudN Connection with HA
+        test = aviatrix.AviatrixTransitCloudnConn("test",
+            backup_cloudn_as_num="123",
+            backup_cloudn_ip="1.2.3.6",
+            backup_cloudn_neighbor_as_num="345",
+            backup_cloudn_neighbor_ip="1.2.3.7",
+            bgp_local_as_num="123",
+            cloudn_as_num="345",
+            cloudn_neighbor_as_num="65005",
+            cloudn_neighbor_ip="1.2.3.5",
+            cloudn_remote_ip="1.2.3.4",
+            connection_name="my_conn",
+            enable_ha=True,
+            gw_name="transitGw",
+            vpc_id="vpc-abcd1234")
+        ```
+
+        ## Import
+
+        **transit_cloudn_conn** can be imported using the `connection_name` and `vpc_id`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixTransitCloudnConn:AviatrixTransitCloudnConn test connection_name~vpc_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] approved_cidrs: Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
-        :param pulumi.Input[str] backup_cloudn_as_num: Backup Aviatrix CloudN BGP ASN.
-        :param pulumi.Input[str] backup_cloudn_ip: Backup Aviatrix CloudN IP Address.
-        :param pulumi.Input[str] backup_cloudn_neighbor_as_num: Backup Aviatrix CloudN LAN Interface Neighbor's BGP ASN.
-        :param pulumi.Input[str] backup_cloudn_neighbor_ip: Backup Aviatrix CloudN LAN Interface Neighbor's IP Address.
-        :param pulumi.Input[bool] backup_direct_connect: Enable direct connect to Backup Aviatrix CloudN over private network.
-        :param pulumi.Input[bool] backup_insane_mode: Enable Insane Mode for connection to Backup Aviatrix CloudN.
-        :param pulumi.Input[str] bgp_local_as_num: BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
-        :param pulumi.Input[str] cloudn_as_num: Aviatrix CloudN BGP ASN (Autonomous System Number). Integer between 1-4294967294.
-        :param pulumi.Input[str] cloudn_neighbor_as_num: CloudN LAN Interface Neighbor's BGP ASN.
-        :param pulumi.Input[str] cloudn_neighbor_ip: Aviatrix CloudN LAN Interface Neighbor's IP Address.
-        :param pulumi.Input[str] cloudn_remote_ip: Aviatrix CloudN IP Address.
-        :param pulumi.Input[str] connection_name: The name of the transit Aviatrix CloudN connection.
-        :param pulumi.Input[bool] direct_connect: Enable Direct Connect for private network infrastructure.
-        :param pulumi.Input[bool] enable_ha: Enable connection to HA CloudN.
-        :param pulumi.Input[bool] enable_learned_cidrs_approval: Enable learned CIDRs approval.
-        :param pulumi.Input[bool] enable_load_balancing: Enable load balancing between Aviatrix CloudN and Backup CloudN.
-        :param pulumi.Input[str] gw_name: The name of the Transit Gateway.
-        :param pulumi.Input[bool] insane_mode: Enable Insane Mode for this connection.
-        :param pulumi.Input[str] vpc_id: The ID of the VPC where the Transit Gateway is located.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] approved_cidrs: Set of approved CIDRs. Requires `enable_learned_cidrs_approval` to be true. Type: Set(String).
+        :param pulumi.Input[str] backup_cloudn_as_num: BGP AS Number of HA CloudN. Type: String.
+        :param pulumi.Input[str] backup_cloudn_ip: IP Address of HA CloudN. Required when `enable_ha` is true. Type: String.
+        :param pulumi.Input[str] backup_cloudn_neighbor_as_num: BGP AS Number of HA CloudN Neighbor. Type: String.
+        :param pulumi.Input[str] backup_cloudn_neighbor_ip: IP Address of HA CloudN Neighbor. Type: String.
+        :param pulumi.Input[bool] backup_direct_connect: Flag to enable direct connect over private network to HA CloudN. Type: Boolean.
+        :param pulumi.Input[bool] backup_insane_mode: Flag to enable insane mode connection to HA CloudN. Type: Boolean.
+        :param pulumi.Input[str] bgp_local_as_num: BGP AS Number of the Transit Gateway. Type: String.
+        :param pulumi.Input[str] cloudn_as_num: BGP AS Number of the Aviatrix CloudN. Type: String.
+        :param pulumi.Input[str] cloudn_neighbor_as_num: BGP AS Number of the Aviatrix CloudN neighbor. Type: String.
+        :param pulumi.Input[str] cloudn_neighbor_ip: IP Address of Aviatrix CloudN neighbor. Type: String.
+        :param pulumi.Input[str] cloudn_remote_ip: IP Address of Aviatrix CloudN. Type: String.
+        :param pulumi.Input[str] connection_name: Name of the Transit Gateway to CloudN Connection. Type: String.
+        :param pulumi.Input[bool] direct_connect: Enable direct connect over private network. Type: Boolean. Default: true.
+        :param pulumi.Input[bool] enable_ha: Enable connection to HA CloudN. Type: Boolean.
+        :param pulumi.Input[bool] enable_learned_cidrs_approval: Enable encrypted transit approval for connection. Type: Boolean.
+        :param pulumi.Input[bool] enable_load_balancing: Flag to enable load balancing between CloudN and HA CloudN. Type: Boolean.
+        :param pulumi.Input[str] gw_name: Name of the Transit Gateway. Type: String.
+        :param pulumi.Input[bool] insane_mode: Enable insane mode connection. Type: Boolean.
+        :param pulumi.Input[str] vpc_id: VPC ID of the Aviatrix Transit Gateway. Type: String.
         """
         ...
     @overload
@@ -717,7 +764,54 @@ class AviatrixTransitCloudnConn(pulumi.CustomResource):
                  args: AviatrixTransitCloudnConnArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixTransitCloudnConn resource with the given unique name, props, and options.
+        The **aviatrix_transit_cloudn_conn** resource creates and manages the connection between an Aviatrix Transit Gateway and an Aviatrix CloudN device. Available as of provider version R2.21.0+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Transit Gateway to CloudN Connection
+        test = aviatrix.AviatrixTransitCloudnConn("test",
+            bgp_local_as_num="123",
+            cloudn_as_num="345",
+            cloudn_neighbor_as_num="65005",
+            cloudn_neighbor_ip="182.1.2.3",
+            cloudn_remote_ip="172.12.13.14",
+            connection_name="my_conn",
+            gw_name="transitGw",
+            vpc_id="vpc-abcd1234")
+        ```
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Transit Gateway to CloudN Connection with HA
+        test = aviatrix.AviatrixTransitCloudnConn("test",
+            backup_cloudn_as_num="123",
+            backup_cloudn_ip="1.2.3.6",
+            backup_cloudn_neighbor_as_num="345",
+            backup_cloudn_neighbor_ip="1.2.3.7",
+            bgp_local_as_num="123",
+            cloudn_as_num="345",
+            cloudn_neighbor_as_num="65005",
+            cloudn_neighbor_ip="1.2.3.5",
+            cloudn_remote_ip="1.2.3.4",
+            connection_name="my_conn",
+            enable_ha=True,
+            gw_name="transitGw",
+            vpc_id="vpc-abcd1234")
+        ```
+
+        ## Import
+
+        **transit_cloudn_conn** can be imported using the `connection_name` and `vpc_id`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixTransitCloudnConn:AviatrixTransitCloudnConn test connection_name~vpc_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixTransitCloudnConnArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -835,26 +929,26 @@ class AviatrixTransitCloudnConn(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] approved_cidrs: Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
-        :param pulumi.Input[str] backup_cloudn_as_num: Backup Aviatrix CloudN BGP ASN.
-        :param pulumi.Input[str] backup_cloudn_ip: Backup Aviatrix CloudN IP Address.
-        :param pulumi.Input[str] backup_cloudn_neighbor_as_num: Backup Aviatrix CloudN LAN Interface Neighbor's BGP ASN.
-        :param pulumi.Input[str] backup_cloudn_neighbor_ip: Backup Aviatrix CloudN LAN Interface Neighbor's IP Address.
-        :param pulumi.Input[bool] backup_direct_connect: Enable direct connect to Backup Aviatrix CloudN over private network.
-        :param pulumi.Input[bool] backup_insane_mode: Enable Insane Mode for connection to Backup Aviatrix CloudN.
-        :param pulumi.Input[str] bgp_local_as_num: BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
-        :param pulumi.Input[str] cloudn_as_num: Aviatrix CloudN BGP ASN (Autonomous System Number). Integer between 1-4294967294.
-        :param pulumi.Input[str] cloudn_neighbor_as_num: CloudN LAN Interface Neighbor's BGP ASN.
-        :param pulumi.Input[str] cloudn_neighbor_ip: Aviatrix CloudN LAN Interface Neighbor's IP Address.
-        :param pulumi.Input[str] cloudn_remote_ip: Aviatrix CloudN IP Address.
-        :param pulumi.Input[str] connection_name: The name of the transit Aviatrix CloudN connection.
-        :param pulumi.Input[bool] direct_connect: Enable Direct Connect for private network infrastructure.
-        :param pulumi.Input[bool] enable_ha: Enable connection to HA CloudN.
-        :param pulumi.Input[bool] enable_learned_cidrs_approval: Enable learned CIDRs approval.
-        :param pulumi.Input[bool] enable_load_balancing: Enable load balancing between Aviatrix CloudN and Backup CloudN.
-        :param pulumi.Input[str] gw_name: The name of the Transit Gateway.
-        :param pulumi.Input[bool] insane_mode: Enable Insane Mode for this connection.
-        :param pulumi.Input[str] vpc_id: The ID of the VPC where the Transit Gateway is located.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] approved_cidrs: Set of approved CIDRs. Requires `enable_learned_cidrs_approval` to be true. Type: Set(String).
+        :param pulumi.Input[str] backup_cloudn_as_num: BGP AS Number of HA CloudN. Type: String.
+        :param pulumi.Input[str] backup_cloudn_ip: IP Address of HA CloudN. Required when `enable_ha` is true. Type: String.
+        :param pulumi.Input[str] backup_cloudn_neighbor_as_num: BGP AS Number of HA CloudN Neighbor. Type: String.
+        :param pulumi.Input[str] backup_cloudn_neighbor_ip: IP Address of HA CloudN Neighbor. Type: String.
+        :param pulumi.Input[bool] backup_direct_connect: Flag to enable direct connect over private network to HA CloudN. Type: Boolean.
+        :param pulumi.Input[bool] backup_insane_mode: Flag to enable insane mode connection to HA CloudN. Type: Boolean.
+        :param pulumi.Input[str] bgp_local_as_num: BGP AS Number of the Transit Gateway. Type: String.
+        :param pulumi.Input[str] cloudn_as_num: BGP AS Number of the Aviatrix CloudN. Type: String.
+        :param pulumi.Input[str] cloudn_neighbor_as_num: BGP AS Number of the Aviatrix CloudN neighbor. Type: String.
+        :param pulumi.Input[str] cloudn_neighbor_ip: IP Address of Aviatrix CloudN neighbor. Type: String.
+        :param pulumi.Input[str] cloudn_remote_ip: IP Address of Aviatrix CloudN. Type: String.
+        :param pulumi.Input[str] connection_name: Name of the Transit Gateway to CloudN Connection. Type: String.
+        :param pulumi.Input[bool] direct_connect: Enable direct connect over private network. Type: Boolean. Default: true.
+        :param pulumi.Input[bool] enable_ha: Enable connection to HA CloudN. Type: Boolean.
+        :param pulumi.Input[bool] enable_learned_cidrs_approval: Enable encrypted transit approval for connection. Type: Boolean.
+        :param pulumi.Input[bool] enable_load_balancing: Flag to enable load balancing between CloudN and HA CloudN. Type: Boolean.
+        :param pulumi.Input[str] gw_name: Name of the Transit Gateway. Type: String.
+        :param pulumi.Input[bool] insane_mode: Enable insane mode connection. Type: Boolean.
+        :param pulumi.Input[str] vpc_id: VPC ID of the Aviatrix Transit Gateway. Type: String.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -886,7 +980,7 @@ class AviatrixTransitCloudnConn(pulumi.CustomResource):
     @pulumi.getter(name="approvedCidrs")
     def approved_cidrs(self) -> pulumi.Output[Sequence[str]]:
         """
-        Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
+        Set of approved CIDRs. Requires `enable_learned_cidrs_approval` to be true. Type: Set(String).
         """
         return pulumi.get(self, "approved_cidrs")
 
@@ -894,7 +988,7 @@ class AviatrixTransitCloudnConn(pulumi.CustomResource):
     @pulumi.getter(name="backupCloudnAsNum")
     def backup_cloudn_as_num(self) -> pulumi.Output[Optional[str]]:
         """
-        Backup Aviatrix CloudN BGP ASN.
+        BGP AS Number of HA CloudN. Type: String.
         """
         return pulumi.get(self, "backup_cloudn_as_num")
 
@@ -902,7 +996,7 @@ class AviatrixTransitCloudnConn(pulumi.CustomResource):
     @pulumi.getter(name="backupCloudnIp")
     def backup_cloudn_ip(self) -> pulumi.Output[Optional[str]]:
         """
-        Backup Aviatrix CloudN IP Address.
+        IP Address of HA CloudN. Required when `enable_ha` is true. Type: String.
         """
         return pulumi.get(self, "backup_cloudn_ip")
 
@@ -910,7 +1004,7 @@ class AviatrixTransitCloudnConn(pulumi.CustomResource):
     @pulumi.getter(name="backupCloudnNeighborAsNum")
     def backup_cloudn_neighbor_as_num(self) -> pulumi.Output[Optional[str]]:
         """
-        Backup Aviatrix CloudN LAN Interface Neighbor's BGP ASN.
+        BGP AS Number of HA CloudN Neighbor. Type: String.
         """
         return pulumi.get(self, "backup_cloudn_neighbor_as_num")
 
@@ -918,7 +1012,7 @@ class AviatrixTransitCloudnConn(pulumi.CustomResource):
     @pulumi.getter(name="backupCloudnNeighborIp")
     def backup_cloudn_neighbor_ip(self) -> pulumi.Output[Optional[str]]:
         """
-        Backup Aviatrix CloudN LAN Interface Neighbor's IP Address.
+        IP Address of HA CloudN Neighbor. Type: String.
         """
         return pulumi.get(self, "backup_cloudn_neighbor_ip")
 
@@ -926,7 +1020,7 @@ class AviatrixTransitCloudnConn(pulumi.CustomResource):
     @pulumi.getter(name="backupDirectConnect")
     def backup_direct_connect(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enable direct connect to Backup Aviatrix CloudN over private network.
+        Flag to enable direct connect over private network to HA CloudN. Type: Boolean.
         """
         return pulumi.get(self, "backup_direct_connect")
 
@@ -934,7 +1028,7 @@ class AviatrixTransitCloudnConn(pulumi.CustomResource):
     @pulumi.getter(name="backupInsaneMode")
     def backup_insane_mode(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enable Insane Mode for connection to Backup Aviatrix CloudN.
+        Flag to enable insane mode connection to HA CloudN. Type: Boolean.
         """
         return pulumi.get(self, "backup_insane_mode")
 
@@ -942,7 +1036,7 @@ class AviatrixTransitCloudnConn(pulumi.CustomResource):
     @pulumi.getter(name="bgpLocalAsNum")
     def bgp_local_as_num(self) -> pulumi.Output[str]:
         """
-        BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+        BGP AS Number of the Transit Gateway. Type: String.
         """
         return pulumi.get(self, "bgp_local_as_num")
 
@@ -950,7 +1044,7 @@ class AviatrixTransitCloudnConn(pulumi.CustomResource):
     @pulumi.getter(name="cloudnAsNum")
     def cloudn_as_num(self) -> pulumi.Output[str]:
         """
-        Aviatrix CloudN BGP ASN (Autonomous System Number). Integer between 1-4294967294.
+        BGP AS Number of the Aviatrix CloudN. Type: String.
         """
         return pulumi.get(self, "cloudn_as_num")
 
@@ -958,7 +1052,7 @@ class AviatrixTransitCloudnConn(pulumi.CustomResource):
     @pulumi.getter(name="cloudnNeighborAsNum")
     def cloudn_neighbor_as_num(self) -> pulumi.Output[str]:
         """
-        CloudN LAN Interface Neighbor's BGP ASN.
+        BGP AS Number of the Aviatrix CloudN neighbor. Type: String.
         """
         return pulumi.get(self, "cloudn_neighbor_as_num")
 
@@ -966,7 +1060,7 @@ class AviatrixTransitCloudnConn(pulumi.CustomResource):
     @pulumi.getter(name="cloudnNeighborIp")
     def cloudn_neighbor_ip(self) -> pulumi.Output[str]:
         """
-        Aviatrix CloudN LAN Interface Neighbor's IP Address.
+        IP Address of Aviatrix CloudN neighbor. Type: String.
         """
         return pulumi.get(self, "cloudn_neighbor_ip")
 
@@ -974,7 +1068,7 @@ class AviatrixTransitCloudnConn(pulumi.CustomResource):
     @pulumi.getter(name="cloudnRemoteIp")
     def cloudn_remote_ip(self) -> pulumi.Output[str]:
         """
-        Aviatrix CloudN IP Address.
+        IP Address of Aviatrix CloudN. Type: String.
         """
         return pulumi.get(self, "cloudn_remote_ip")
 
@@ -982,7 +1076,7 @@ class AviatrixTransitCloudnConn(pulumi.CustomResource):
     @pulumi.getter(name="connectionName")
     def connection_name(self) -> pulumi.Output[str]:
         """
-        The name of the transit Aviatrix CloudN connection.
+        Name of the Transit Gateway to CloudN Connection. Type: String.
         """
         return pulumi.get(self, "connection_name")
 
@@ -990,7 +1084,7 @@ class AviatrixTransitCloudnConn(pulumi.CustomResource):
     @pulumi.getter(name="directConnect")
     def direct_connect(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enable Direct Connect for private network infrastructure.
+        Enable direct connect over private network. Type: Boolean. Default: true.
         """
         return pulumi.get(self, "direct_connect")
 
@@ -998,7 +1092,7 @@ class AviatrixTransitCloudnConn(pulumi.CustomResource):
     @pulumi.getter(name="enableHa")
     def enable_ha(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enable connection to HA CloudN.
+        Enable connection to HA CloudN. Type: Boolean.
         """
         return pulumi.get(self, "enable_ha")
 
@@ -1006,7 +1100,7 @@ class AviatrixTransitCloudnConn(pulumi.CustomResource):
     @pulumi.getter(name="enableLearnedCidrsApproval")
     def enable_learned_cidrs_approval(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enable learned CIDRs approval.
+        Enable encrypted transit approval for connection. Type: Boolean.
         """
         return pulumi.get(self, "enable_learned_cidrs_approval")
 
@@ -1014,7 +1108,7 @@ class AviatrixTransitCloudnConn(pulumi.CustomResource):
     @pulumi.getter(name="enableLoadBalancing")
     def enable_load_balancing(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enable load balancing between Aviatrix CloudN and Backup CloudN.
+        Flag to enable load balancing between CloudN and HA CloudN. Type: Boolean.
         """
         return pulumi.get(self, "enable_load_balancing")
 
@@ -1022,7 +1116,7 @@ class AviatrixTransitCloudnConn(pulumi.CustomResource):
     @pulumi.getter(name="gwName")
     def gw_name(self) -> pulumi.Output[str]:
         """
-        The name of the Transit Gateway.
+        Name of the Transit Gateway. Type: String.
         """
         return pulumi.get(self, "gw_name")
 
@@ -1030,7 +1124,7 @@ class AviatrixTransitCloudnConn(pulumi.CustomResource):
     @pulumi.getter(name="insaneMode")
     def insane_mode(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enable Insane Mode for this connection.
+        Enable insane mode connection. Type: Boolean.
         """
         return pulumi.get(self, "insane_mode")
 
@@ -1038,7 +1132,7 @@ class AviatrixTransitCloudnConn(pulumi.CustomResource):
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> pulumi.Output[str]:
         """
-        The ID of the VPC where the Transit Gateway is located.
+        VPC ID of the Aviatrix Transit Gateway. Type: String.
         """
         return pulumi.get(self, "vpc_id")
 

@@ -21,11 +21,11 @@ class AviatrixAwsTgwConnectArgs:
                  security_domain_name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a AviatrixAwsTgwConnect resource.
-        :param pulumi.Input[str] connection_name: Connection Name.
-        :param pulumi.Input[str] tgw_name: AWS TGW Name.
+        :param pulumi.Input[str] connection_name: Connection name.
+        :param pulumi.Input[str] tgw_name: AWS TGW name.
         :param pulumi.Input[str] transport_vpc_id: Transport Attachment VPC ID.
-        :param pulumi.Input[str] network_domain_name: Network Domain Name.
-        :param pulumi.Input[str] security_domain_name: Security Domain Name.
+        :param pulumi.Input[str] network_domain_name: Network Domain name.
+        :param pulumi.Input[str] security_domain_name: Security Domain name.
         """
         pulumi.set(__self__, "connection_name", connection_name)
         pulumi.set(__self__, "tgw_name", tgw_name)
@@ -42,7 +42,7 @@ class AviatrixAwsTgwConnectArgs:
     @pulumi.getter(name="connectionName")
     def connection_name(self) -> pulumi.Input[str]:
         """
-        Connection Name.
+        Connection name.
         """
         return pulumi.get(self, "connection_name")
 
@@ -54,7 +54,7 @@ class AviatrixAwsTgwConnectArgs:
     @pulumi.getter(name="tgwName")
     def tgw_name(self) -> pulumi.Input[str]:
         """
-        AWS TGW Name.
+        AWS TGW name.
         """
         return pulumi.get(self, "tgw_name")
 
@@ -78,7 +78,7 @@ class AviatrixAwsTgwConnectArgs:
     @pulumi.getter(name="networkDomainName")
     def network_domain_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Network Domain Name.
+        Network Domain name.
         """
         return pulumi.get(self, "network_domain_name")
 
@@ -90,7 +90,7 @@ class AviatrixAwsTgwConnectArgs:
     @pulumi.getter(name="securityDomainName")
     def security_domain_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Security Domain Name.
+        Security Domain name.
         """
         return pulumi.get(self, "security_domain_name")
 
@@ -112,10 +112,10 @@ class _AviatrixAwsTgwConnectState:
         """
         Input properties used for looking up and filtering AviatrixAwsTgwConnect resources.
         :param pulumi.Input[str] connect_attachment_id: Connect Attachment ID.
-        :param pulumi.Input[str] connection_name: Connection Name.
-        :param pulumi.Input[str] network_domain_name: Network Domain Name.
-        :param pulumi.Input[str] security_domain_name: Security Domain Name.
-        :param pulumi.Input[str] tgw_name: AWS TGW Name.
+        :param pulumi.Input[str] connection_name: Connection name.
+        :param pulumi.Input[str] network_domain_name: Network Domain name.
+        :param pulumi.Input[str] security_domain_name: Security Domain name.
+        :param pulumi.Input[str] tgw_name: AWS TGW name.
         :param pulumi.Input[str] transport_attachment_id: Transport Attachment ID.
         :param pulumi.Input[str] transport_vpc_id: Transport Attachment VPC ID.
         """
@@ -153,7 +153,7 @@ class _AviatrixAwsTgwConnectState:
     @pulumi.getter(name="connectionName")
     def connection_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Connection Name.
+        Connection name.
         """
         return pulumi.get(self, "connection_name")
 
@@ -165,7 +165,7 @@ class _AviatrixAwsTgwConnectState:
     @pulumi.getter(name="networkDomainName")
     def network_domain_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Network Domain Name.
+        Network Domain name.
         """
         return pulumi.get(self, "network_domain_name")
 
@@ -177,7 +177,7 @@ class _AviatrixAwsTgwConnectState:
     @pulumi.getter(name="securityDomainName")
     def security_domain_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Security Domain Name.
+        Security Domain name.
         """
         return pulumi.get(self, "security_domain_name")
 
@@ -189,7 +189,7 @@ class _AviatrixAwsTgwConnectState:
     @pulumi.getter(name="tgwName")
     def tgw_name(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS TGW Name.
+        AWS TGW name.
         """
         return pulumi.get(self, "tgw_name")
 
@@ -234,13 +234,42 @@ class AviatrixAwsTgwConnect(pulumi.CustomResource):
                  transport_vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixAwsTgwConnect resource with the given unique name, props, and options.
+        The **aviatrix_aws_tgw_connect** resource allows the creation and management of AWS TGW Connect connections. To create
+        and manage TGW Connect peers, please use `AviatrixAwsTgwConnectPeer` resources. This resource is available as of
+        provider version R2.18.1+.
+
+        > **NOTE:** Before creating an AWS TGW Connect, the AWS TGW must have an attached VPC via
+        the `AviatrixAwsTgwVpcAttachment` resource. Also, the AWS TGW must have configured CIDRs via
+        the `AviatrixAwsTgw` `cidrs` attribute.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS TGW Connect
+        test_aws_tgw_connect = aviatrix.AviatrixAwsTgwConnect("testAwsTgwConnect",
+            tgw_name=aviatrix_aws_tgw["test_aws_tgw"]["tgw_name"],
+            connection_name="aws-tgw-connect",
+            transport_vpc_id=aviatrix_aws_tgw_vpc_attachment["test_aws_tgw_vpc_attachment"]["vpc_id"],
+            network_domain_name=aviatrix_aws_tgw_vpc_attachment["test_aws_tgw_vpc_attachment"]["network_domain_name"])
+        ```
+
+        ## Import
+
+        **aws_tgw_connect** can be imported using the `tgw_name` and `connection_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAwsTgwConnect:AviatrixAwsTgwConnect test tgw_name~~connection_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] connection_name: Connection Name.
-        :param pulumi.Input[str] network_domain_name: Network Domain Name.
-        :param pulumi.Input[str] security_domain_name: Security Domain Name.
-        :param pulumi.Input[str] tgw_name: AWS TGW Name.
+        :param pulumi.Input[str] connection_name: Connection name.
+        :param pulumi.Input[str] network_domain_name: Network Domain name.
+        :param pulumi.Input[str] security_domain_name: Security Domain name.
+        :param pulumi.Input[str] tgw_name: AWS TGW name.
         :param pulumi.Input[str] transport_vpc_id: Transport Attachment VPC ID.
         """
         ...
@@ -250,7 +279,36 @@ class AviatrixAwsTgwConnect(pulumi.CustomResource):
                  args: AviatrixAwsTgwConnectArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixAwsTgwConnect resource with the given unique name, props, and options.
+        The **aviatrix_aws_tgw_connect** resource allows the creation and management of AWS TGW Connect connections. To create
+        and manage TGW Connect peers, please use `AviatrixAwsTgwConnectPeer` resources. This resource is available as of
+        provider version R2.18.1+.
+
+        > **NOTE:** Before creating an AWS TGW Connect, the AWS TGW must have an attached VPC via
+        the `AviatrixAwsTgwVpcAttachment` resource. Also, the AWS TGW must have configured CIDRs via
+        the `AviatrixAwsTgw` `cidrs` attribute.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS TGW Connect
+        test_aws_tgw_connect = aviatrix.AviatrixAwsTgwConnect("testAwsTgwConnect",
+            tgw_name=aviatrix_aws_tgw["test_aws_tgw"]["tgw_name"],
+            connection_name="aws-tgw-connect",
+            transport_vpc_id=aviatrix_aws_tgw_vpc_attachment["test_aws_tgw_vpc_attachment"]["vpc_id"],
+            network_domain_name=aviatrix_aws_tgw_vpc_attachment["test_aws_tgw_vpc_attachment"]["network_domain_name"])
+        ```
+
+        ## Import
+
+        **aws_tgw_connect** can be imported using the `tgw_name` and `connection_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAwsTgwConnect:AviatrixAwsTgwConnect test tgw_name~~connection_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixAwsTgwConnectArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -321,10 +379,10 @@ class AviatrixAwsTgwConnect(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] connect_attachment_id: Connect Attachment ID.
-        :param pulumi.Input[str] connection_name: Connection Name.
-        :param pulumi.Input[str] network_domain_name: Network Domain Name.
-        :param pulumi.Input[str] security_domain_name: Security Domain Name.
-        :param pulumi.Input[str] tgw_name: AWS TGW Name.
+        :param pulumi.Input[str] connection_name: Connection name.
+        :param pulumi.Input[str] network_domain_name: Network Domain name.
+        :param pulumi.Input[str] security_domain_name: Security Domain name.
+        :param pulumi.Input[str] tgw_name: AWS TGW name.
         :param pulumi.Input[str] transport_attachment_id: Transport Attachment ID.
         :param pulumi.Input[str] transport_vpc_id: Transport Attachment VPC ID.
         """
@@ -353,7 +411,7 @@ class AviatrixAwsTgwConnect(pulumi.CustomResource):
     @pulumi.getter(name="connectionName")
     def connection_name(self) -> pulumi.Output[str]:
         """
-        Connection Name.
+        Connection name.
         """
         return pulumi.get(self, "connection_name")
 
@@ -361,7 +419,7 @@ class AviatrixAwsTgwConnect(pulumi.CustomResource):
     @pulumi.getter(name="networkDomainName")
     def network_domain_name(self) -> pulumi.Output[Optional[str]]:
         """
-        Network Domain Name.
+        Network Domain name.
         """
         return pulumi.get(self, "network_domain_name")
 
@@ -369,7 +427,7 @@ class AviatrixAwsTgwConnect(pulumi.CustomResource):
     @pulumi.getter(name="securityDomainName")
     def security_domain_name(self) -> pulumi.Output[Optional[str]]:
         """
-        Security Domain Name.
+        Security Domain name.
         """
         return pulumi.get(self, "security_domain_name")
 
@@ -377,7 +435,7 @@ class AviatrixAwsTgwConnect(pulumi.CustomResource):
     @pulumi.getter(name="tgwName")
     def tgw_name(self) -> pulumi.Output[str]:
         """
-        AWS TGW Name.
+        AWS TGW name.
         """
         return pulumi.get(self, "tgw_name")
 

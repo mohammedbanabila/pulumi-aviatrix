@@ -11,193 +11,181 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// ## Import
+//
+// **spoke_gateway** can be imported using the `gw_name`, e.g. ****
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixSpokeGateway:AviatrixSpokeGateway test gw_name
+//
+// ```
 type AviatrixSpokeGateway struct {
 	pulumi.CustomResourceState
 
 	// This parameter represents the name of a Cloud-Account in Aviatrix controller.
 	AccountName pulumi.StringOutput `pulumi:"accountName"`
-	// If false, reuse an idle address in Elastic IP pool for this gateway. Otherwise, allocate a new Elastic IP and use it for
-	// this gateway.
+	// When value is false, reuse an idle address in Elastic IP pool for this gateway. Otherwise, allocate a new Elastic IP and use it for this gateway. Available in Controller 4.7+. Valid values: true, false. Default: true.
 	AllocateNewEip pulumi.BoolPtrOutput `pulumi:"allocateNewEip"`
-	// Approved learned CIDRs for BGP Spoke Gateway. Available as of provider version R2.21+.
+	// A set of approved learned CIDRs. Only valid when `enableLearnedCidrsApproval` is set to true. Example: ["10.250.0.0/16", "10.251.0.0/16"]. Available as of provider version R2.21+.
 	ApprovedLearnedCidrs pulumi.StringArrayOutput `pulumi:"approvedLearnedCidrs"`
-	// Availability domain for OCI.
+	// Availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 	AvailabilityDomain pulumi.StringOutput `pulumi:"availabilityDomain"`
-	// The name of the public IP address and its resource group in Azure to assign to this Spoke Gateway.
+	// Name of public IP Address resource and its resource group in Azure to be assigned to the Spoke Gateway instance. Example: "IP_Name:Resource_Group_Name". Required if `allocateNewEip` is false and `cloudType` is Azure, AzureGov or AzureChina. Available as of provider version 2.20+.
 	AzureEipNameResourceGroup pulumi.StringOutput `pulumi:"azureEipNameResourceGroup"`
-	// Enable Equal Cost Multi Path (ECMP) routing for the next hop for BGP Spoke Gateway.
+	// Enable Equal Cost Multi Path (ECMP) routing for the next hop. Default value: false.
 	BgpEcmp pulumi.BoolPtrOutput `pulumi:"bgpEcmp"`
-	// BGP Hold Time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 12 and 360.
+	// BGP hold time. Unit is in seconds. Valid values are between 12 and 360. Default value: 180.
 	BgpHoldTime pulumi.IntPtrOutput `pulumi:"bgpHoldTime"`
-	// BGP route polling time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 10 and 50.
+	// BGP route polling time. Unit is in seconds. Valid values are between 10 and 50. Default value: "50".
 	BgpPollingTime pulumi.IntPtrOutput `pulumi:"bgpPollingTime"`
-	// Cloud instance ID.
+	// Cloud instance ID of the spoke gateway.
 	CloudInstanceId pulumi.StringOutput `pulumi:"cloudInstanceId"`
-	// Type of cloud service provider.
+	// Type of cloud service provider, requires an integer value. Currently, only AWS(1), GCP(4), Azure(8), OCI(16), AzureGov(32), AWSGov(256), AWSChina(1024), AzureChina(2048), Alibaba Cloud(8192), AWS Top Secret(16384) and AWS Secret (32768) are supported.
 	CloudType pulumi.IntOutput `pulumi:"cloudType"`
 	// Customer managed key ID.
 	CustomerManagedKeys pulumi.StringPtrOutput `pulumi:"customerManagedKeys"`
-	// A list of comma separated CIDRs to be customized for the spoke VPC routes. When configured, it will replace all learned
-	// routes in VPC routing tables, including RFC1918 and non-RFC1918 CIDRs. It applies to this spoke gateway only.
+	// A list of comma separated CIDRs to be customized for the spoke VPC routes. When configured, it will replace all learned routes in VPC routing tables, including RFC1918 and non-RFC1918 CIDRs. It applies to this spoke gateway only. Example: "10.0.0.0/116,10.2.0.0/16".
 	CustomizedSpokeVpcRoutes pulumi.StringPtrOutput `pulumi:"customizedSpokeVpcRoutes"`
-	// Disables route propagation on BGP Spoke to attached Transit Gateway. Default: false.
+	// Disables route propagation on BGP Spoke to attached Transit Gateway. Default value: false.
 	DisableRoutePropagation pulumi.BoolPtrOutput `pulumi:"disableRoutePropagation"`
-	// Required when allocate_new_eip is false. It uses specified EIP for this gateway.
+	// Required when `allocateNewEip` is false. It uses the specified EIP for this gateway. Available in Controller 4.7+. Only available for AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret.
 	Eip pulumi.StringOutput `pulumi:"eip"`
-	// Enables Active-Standby Mode, available only with HA enabled for BGP Spoke Gateway.
+	// Enables [Active-Standby Mode](https://docs.aviatrix.com/HowTos/transit_advanced.html#active-standby). Available only with HA enabled. Valid values: true, false. Default value: false.
 	EnableActiveStandby pulumi.BoolPtrOutput `pulumi:"enableActiveStandby"`
-	// Enables Preemptive Mode for Active-Standby, available only with Active-Standby enabled.
+	// Enables Preemptive Mode for Active-Standby. Available only with BGP enabled, HA enabled and Active-Standby enabled. Valid values: true, false. Default value: false.
 	EnableActiveStandbyPreemptive pulumi.BoolPtrOutput `pulumi:"enableActiveStandbyPreemptive"`
-	// Automatically advertise remote CIDR to Aviatrix Transit Gateway when route based Site2Cloud Tunnel is created.
+	// Auto Advertise Spoke Site2Cloud CIDRs. Default: false. Valid values: true or false. Available as of provider version R2.19+.
 	EnableAutoAdvertiseS2cCidrs pulumi.BoolPtrOutput `pulumi:"enableAutoAdvertiseS2cCidrs"`
-	// Enable BGP. Default: false.
+	// Enable BGP for this spoke gateway. Only available for AWS and Azure. Valid values: true, false. Default value: false. Available in provider R2.21.0+.
 	EnableBgp pulumi.BoolPtrOutput `pulumi:"enableBgp"`
-	// Enable encrypt gateway EBS volume. Only supported for AWS provider. Valid values: true, false. Default value: false.
+	// Enable EBS volume encryption for Gateway. Only supports AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret providers. Valid values: true, false. Default value: false.
 	EnableEncryptVolume pulumi.BoolPtrOutput `pulumi:"enableEncryptVolume"`
-	// Enable jumbo frame support for spoke gateway. Valid values: true or false. Default value: true.
+	// Enable jumbo frames for this spoke gateway. Default value is true.
 	EnableJumboFrame pulumi.BoolPtrOutput `pulumi:"enableJumboFrame"`
-	// Switch to enable/disable learned CIDR approval for BGP Spoke Gateway. Valid values: true, false.
+	// Switch to enable/disable learned CIDR approval for BGP Spoke Gateway. Valid values: true, false. Default value: false.
 	EnableLearnedCidrsApproval pulumi.BoolPtrOutput `pulumi:"enableLearnedCidrsApproval"`
-	// Enable [monitor gateway subnets](https://docs.aviatrix.com/HowTos/gateway.html#monitor-gateway-subnet). Only valid for
-	// cloud_type = 1 (AWS) or 256 (AWSGov). Valid values: true, false. Default value: false.
+	// If set to true, the [Monitor Gateway Subnets](https://docs.aviatrix.com/HowTos/gateway.html#monitor-gateway-subnet) feature is enabled. Default value is false. Available in provider version R2.18+.
 	EnableMonitorGatewaySubnets pulumi.BoolPtrOutput `pulumi:"enableMonitorGatewaySubnets"`
-	// Enable preserve as_path when advertising manual summary cidrs on BGP spoke gateway.
+	// Enable preserve asPath when advertising manual summary cidrs on BGP spoke gateway. Valid values: true, false. Default value: false. Available as of provider version R.2.22.1+
 	EnablePreserveAsPath pulumi.BoolPtrOutput `pulumi:"enablePreserveAsPath"`
-	// Enable private OOB.
+	// Enable Private OOB feature. Only available for AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret. Valid values: true, false. Default value: false.
 	EnablePrivateOob pulumi.BoolPtrOutput `pulumi:"enablePrivateOob"`
-	// Config Private VPC Default Route.
+	// Program default route in VPC private route table. Default: false. Valid values: true or false. Available as of provider version R2.19+.
 	EnablePrivateVpcDefaultRoute pulumi.BoolPtrOutput `pulumi:"enablePrivateVpcDefaultRoute"`
-	// Skip Public Route Table Update.
+	// Skip programming VPC public route table. Default: false. Valid values: true or false. Available as of provider version R2.19+.
 	EnableSkipPublicRouteTableUpdate pulumi.BoolPtrOutput `pulumi:"enableSkipPublicRouteTableUpdate"`
 	// Enable spot instance. NOT supported for production deployment.
 	EnableSpotInstance pulumi.BoolPtrOutput `pulumi:"enableSpotInstance"`
-	// Enable vpc_dns_server for Gateway. Valid values: true, false.
+	// Enable VPC DNS Server for Gateway. Currently only supported for AWS, Azure, AzureGov, AWSGov, AWSChina, AzureChina, Alibaba Cloud, AWS Top Secret and AWS Secret gateways. Valid values: true, false. Default value: false.
 	EnableVpcDnsServer pulumi.BoolPtrOutput `pulumi:"enableVpcDnsServer"`
-	// Fault domain for OCI.
+	// Fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 	FaultDomain pulumi.StringOutput `pulumi:"faultDomain"`
-	// A list of comma separated CIDRs to be filtered from the spoke VPC route table. When configured, filtering CIDR(s) or
-	// it’s subnet will be deleted from VPC routing tables as well as from spoke gateway’s routing table. It applies to
-	// this spoke gateway only.
+	// A list of comma separated CIDRs to be filtered from the spoke VPC route table. When configured, filtering CIDR(s) or it’s subnet will be deleted from VPC routing tables as well as from spoke gateway’s routing table. It applies to this spoke gateway only. Example: "10.2.0.0/116,10.3.0.0/16".
 	FilteredSpokeVpcRoutes pulumi.StringPtrOutput `pulumi:"filteredSpokeVpcRoutes"`
 	// Name of the gateway which is going to be created.
 	GwName pulumi.StringOutput `pulumi:"gwName"`
-	// Size of the gateway instance.
+	// Size of the gateway instance. Example: AWS/AWSGov/AWSChina: "t2.large", Azure/AzureGov/AzureChina: "Standard_B1s", OCI: "VM.Standard2.2", GCP: "n1-standard-1".
 	GwSize pulumi.StringOutput `pulumi:"gwSize"`
-	// HA availability domain for OCI.
+	// HA gateway availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 	HaAvailabilityDomain pulumi.StringOutput `pulumi:"haAvailabilityDomain"`
-	// The name of the public IP address and its resource group in Azure to assign to the HA Spoke Gateway.
+	// Name of public IP Address resource and its resource group in Azure to be assigned to the HA Spoke Gateway instance. Example: "IP_Name:Resource_Group_Name". Required if `haEip` is set and `cloudType` is Azure, AzureGov or AzureChina. Available as of provider version 2.20+.
 	HaAzureEipNameResourceGroup pulumi.StringOutput `pulumi:"haAzureEipNameResourceGroup"`
-	// Cloud instance ID of HA spoke gateway.
+	// Cloud instance ID of the HA spoke gateway.
 	HaCloudInstanceId pulumi.StringOutput `pulumi:"haCloudInstanceId"`
-	// Public IP address that you want assigned to the HA Spoke Gateway.
+	// Public IP address that you want to assign to the HA peering instance. If no value is given, a new EIP will automatically be allocated. Only available for AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret.
 	HaEip pulumi.StringOutput `pulumi:"haEip"`
-	// HA fault domain for OCI.
+	// HA gateway fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 	HaFaultDomain pulumi.StringOutput `pulumi:"haFaultDomain"`
 	// Aviatrix spoke gateway unique name of HA spoke gateway.
 	HaGwName pulumi.StringOutput `pulumi:"haGwName"`
-	// HA Gateway Size.
+	// HA Gateway Size. Mandatory if enabling HA.
 	HaGwSize pulumi.StringPtrOutput `pulumi:"haGwSize"`
-	// ha_image_version can be used to set the desired image version of the HA gateway. If set, we will attempt to update the
-	// gateway to the specified version.
+	// The image version of the HA gateway. Use `getAviatrixGatewayImage` data source to programmatically retrieve this value for the desired `haSoftwareVersion`. If set, we will attempt to update the HA gateway to the specified version if current version is different. If left blank, the gateway upgrades can be managed with the `AviatrixControllerConfig` resource. Type: String. Example: "hvm-cloudx-aws-022021". Available as of provider version R2.20.0.
 	HaImageVersion pulumi.StringOutput `pulumi:"haImageVersion"`
-	// AZ of subnet being created for Insane Mode Spoke HA Gateway. Required for AWS if insane_mode is true and ha_subnet is
-	// set.
+	// AZ of subnet being created for Insane Mode Spoke HA Gateway. Required for AWS, AzureGov, AWSGov, AWS Top Secret and AWS Secret if `insaneMode` is enabled and `haSubnet` is set. Example: AWS: "us-west-1a".
 	HaInsaneModeAz pulumi.StringPtrOutput `pulumi:"haInsaneModeAz"`
-	// OOB HA availability zone.
+	// HA OOB availability zone. Required if enabling Private OOB and HA. Example: "us-west-1b".
 	HaOobAvailabilityZone pulumi.StringPtrOutput `pulumi:"haOobAvailabilityZone"`
-	// OOB HA management subnet.
+	// HA OOB management subnet. Required if enabling Private OOB and HA. Example: "11.0.0.48/28".
 	HaOobManagementSubnet pulumi.StringPtrOutput `pulumi:"haOobManagementSubnet"`
-	// Private IP address of the spoke gateway created.
+	// Private IP address of HA spoke gateway.
 	HaPrivateIp pulumi.StringOutput `pulumi:"haPrivateIp"`
-	// Private Mode HA subnet availability zone.
+	// Availability Zone of the HA subnet. Required when Private Mode is enabled on the Controller and `cloudType` is AWS or AWSGov with HA. Available in Provider version R2.23+.
 	HaPrivateModeSubnetZone pulumi.StringPtrOutput `pulumi:"haPrivateModeSubnetZone"`
 	// Public IP address of the HA Spoke Gateway.
 	HaPublicIp pulumi.StringOutput `pulumi:"haPublicIp"`
 	// HA security group used for the spoke gateway.
 	HaSecurityGroupId pulumi.StringOutput `pulumi:"haSecurityGroupId"`
-	// ha_software_version can be used to set the desired software version of the HA gateway. If set, we will attempt to update
-	// the gateway to the specified version. If left blank, the gateway software version will continue to be managed through
-	// the aviatrix_controller_config resource.
+	// The software version of the HA gateway. If set, we will attempt to update the HA gateway to the specified version if current version is different. If left blank, the HA gateway upgrade can be managed with the `AviatrixControllerConfig` resource. Type: String. Example: "6.5.821". Available as of provider version R2.20.0.
 	HaSoftwareVersion pulumi.StringOutput `pulumi:"haSoftwareVersion"`
-	// HA Subnet. Required if enabling HA for AWS/AWSGov/AWSChina/Azure/AzureChina/OCI/Alibaba Cloud. Optional if enabling HA
-	// for GCP.
+	// HA Subnet. Required if enabling HA for AWS, AWSGov, AWSChina, Azure, AzureGov, AzureChina, OCI, Alibaba Cloud, AWS Top Secret or AWS Secret gateways. Optional for GCP. Setting to empty/unsetting will disable HA. Setting to a valid subnet CIDR will create an HA gateway on the subnet. Example: "10.12.0.0/24"
 	HaSubnet pulumi.StringPtrOutput `pulumi:"haSubnet"`
-	// HA Zone. Required if enabling HA for GCP. Optional for Azure.
+	// HA Zone. Required if enabling HA for GCP gateway. Optional for Azure. For GCP, setting to empty/unsetting will disable HA and setting to a valid zone will create an HA gateway in the zone. Example: "us-west1-c". For Azure, this is an optional parameter to place the HA gateway in a specific availability zone. Valid values for Azure gateways are in the form "az-n". Example: "az-2". Available for Azure as of provider version R2.17+.
 	HaZone pulumi.StringPtrOutput `pulumi:"haZone"`
-	// image_version can be used to set the desired image version of the gateway. If set, we will attempt to update the gateway
-	// to the specified version.
+	// The image version of the gateway. Use `getAviatrixGatewayImage` data source to programmatically retrieve this value for the desired `softwareVersion`. If set, we will attempt to update the gateway to the specified version if current version is different. If left blank, the gateway upgrades can be managed with the `AviatrixControllerConfig` resource. Type: String. Example: "hvm-cloudx-aws-022021". Available as of provider version R2.20.0.
 	ImageVersion pulumi.StringOutput `pulumi:"imageVersion"`
-	// A list of comma separated CIDRs to be advertised to on-prem as 'Included CIDR List'. When configured, it will replace
-	// all advertised routes from this VPC.
+	// A list of comma separated CIDRs to be advertised to on-prem as 'Included CIDR List'. When configured, it will replace all advertised routes from this VPC. Example: "10.4.0.0/116,10.5.0.0/16".
 	IncludedAdvertisedSpokeRoutes pulumi.StringPtrOutput `pulumi:"includedAdvertisedSpokeRoutes"`
-	// Enable Insane Mode for Spoke Gateway. Valid values: true, false. Supported for AWS/AWSGov, GCP, Azure and OCI. If insane
-	// mode is enabled, gateway size has to at least be c5 size for AWS and Standard_D3_v2 size for Azure.
+	// Enable [Insane Mode](https://docs.aviatrix.com/HowTos/insane_mode.html) for Spoke Gateway. Insane Mode gateway size must be at least c5 size (AWS, AWSGov, AWS China, AWS Top Secret and AWS Secret) or Standard_D3_v2 (Azure and AzureGov); for GCP only four size are supported: "n1-highcpu-4", "n1-highcpu-8", "n1-highcpu-16" and "n1-highcpu-32". If enabled, you must specify a valid /26 CIDR segment of the VPC to create a new subnet for AWS, Azure, AzureGov, AWSGov, AWS Top Secret and AWS Secret. Only available for AWS, GCP/OCI, Azure, AzureGov, AzureChina, AWSGov, AWS Top Secret and AWS Secret. Valid values: true, false. Default value: false.
 	InsaneMode pulumi.BoolPtrOutput `pulumi:"insaneMode"`
-	// AZ of subnet being created for Insane Mode Spoke Gateway. Required if insane_mode is enabled for AWS cloud.
+	// AZ of subnet being created for Insane Mode Spoke Gateway. Required for AWS, AWSGov, AWS China, AWS Top Secret or AWS Secret if `insaneMode` is enabled. Example: AWS: "us-west-1a".
 	InsaneModeAz pulumi.StringPtrOutput `pulumi:"insaneModeAz"`
-	// Set the learned CIDRs approval mode for BGP Spoke Gateway. Only valid when 'enable_learned_cidrs_approval' is set to
-	// true. Currently, only 'gateway' is supported: learned CIDR approval applies to ALL connections. Default value:
-	// 'gateway'.
+	// Learned CIDRs approval mode. Either "gateway" (approval on a per-gateway basis) or "connection" (approval on a per-connection basis). Only "gateway" is supported for BGP SPOKE Gateway. Default value: "gateway". Available as of provider version R2.21+.
 	LearnedCidrsApprovalMode pulumi.StringPtrOutput `pulumi:"learnedCidrsApprovalMode"`
-	// Changes the Aviatrix BGP Spoke Gateway ASN number before you setup Aviatrix BGP Spoke Gateway connection configurations.
+	// Changes the Aviatrix Spoke Gateway ASN number before you setup Aviatrix Spoke Gateway connection configurations.
 	LocalAsNumber pulumi.StringOutput `pulumi:"localAsNumber"`
-	// This parameter is a switch used to determine whether or not to manage attaching this spoke gateway to transit gateways
-	// using the aviatrix_spoke_gateway resource. If this is set to false, attaching this spoke gateway to transit gateways
-	// must be done using the aviatrix_spoke_transit_attachment resource. Valid values: true, false. Default value: true.
+	// Enable to manage spoke-to-Aviatrix transit gateway attachments using the **aviatrix_spoke_gateway** resource with the below `transitGw` attribute. If this is set to false, attaching this spoke to transit gateways must be done using the **aviatrix_spoke_transit_attachment** resource. Valid values: true, false. Default value: true. Available in provider R2.17+.
 	ManageTransitGatewayAttachment pulumi.BoolPtrOutput `pulumi:"manageTransitGatewayAttachment"`
-	// A set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true.
+	// Set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true. Available in provider version R2.18+.
 	MonitorExcludeLists pulumi.StringArrayOutput `pulumi:"monitorExcludeLists"`
-	// OOB subnet availability zone.
+	// OOB availability zone. Required if enabling Private OOB. Example: "us-west-1a".
 	OobAvailabilityZone pulumi.StringPtrOutput `pulumi:"oobAvailabilityZone"`
-	// OOB management subnet.
+	// OOB management subnet. Required if enabling Private OOB. Example: "11.0.2.0/24".
 	OobManagementSubnet pulumi.StringPtrOutput `pulumi:"oobManagementSubnet"`
-	// List of AS numbers to populate BGP AP_PATH field when it advertises to VGW or peer devices. Only valid for BGP Spoke
-	// Gateway
+	// List of AS numbers to populate BGP AS_PATH field when it advertises to VGW or peer devices.
 	PrependAsPaths pulumi.StringArrayOutput `pulumi:"prependAsPaths"`
 	// Private IP address of the spoke gateway created.
 	PrivateIp pulumi.StringOutput `pulumi:"privateIp"`
-	// Private Mode controller load balancer vpc_id. Required when private mode is enabled for the Controller.
+	// VPC ID of Private Mode load balancer. Required when Private Mode is enabled on the Controller. Available in provider version R2.23+.
 	PrivateModeLbVpcId pulumi.StringPtrOutput `pulumi:"privateModeLbVpcId"`
-	// Subnet availability zone. Required when Private Mode is enabled on the Controller and cloud_type is AWS.
+	// Availability Zone of the subnet. Required when Private Mode is enabled on the Controller and `cloudType` is AWS or AWSGov. Available in Provider version R2.23+.
 	PrivateModeSubnetZone pulumi.StringPtrOutput `pulumi:"privateModeSubnetZone"`
 	// Public IP address of the Spoke Gateway created.
 	PublicIp pulumi.StringOutput `pulumi:"publicIp"`
-	// Gateway ethernet interface RX queue size. Supported for AWS related clouds only.
+	// Gateway ethernet interface RX queue size. Once set, can't be deleted or disabled. Available for AWS as of provider version R2.22+.
 	RxQueueSize pulumi.StringPtrOutput `pulumi:"rxQueueSize"`
 	// Security group used for the spoke gateway.
 	SecurityGroupId pulumi.StringOutput `pulumi:"securityGroupId"`
-	// Set to 'enabled' if this feature is desired.
+	// Set to true if this [feature](https://docs.aviatrix.com/Solutions/gateway_ha.html#single-az-gateway) is desired. Valid values: true, false.
 	SingleAzHa pulumi.BoolPtrOutput `pulumi:"singleAzHa"`
-	// Specify whether to enable Source NAT feature in 'single_ip' mode on the gateway or not.
+	// Specify whether to enable Source NAT feature in "singleIp" mode on the gateway or not. Please disable AWS NAT instance before enabling this feature. Currently only supports AWS(1) and Azure(8). Valid values: true, false.
 	SingleIpSnat pulumi.BoolPtrOutput `pulumi:"singleIpSnat"`
-	// software_version can be used to set the desired software version of the gateway. If set, we will attempt to update the
-	// gateway to the specified version. If left blank, the gateway software version will continue to be managed through the
-	// aviatrix_controller_config resource.
+	// The software version of the gateway. If set, we will attempt to update the gateway to the specified version if current version is different. If left blank, the gateway upgrade can be managed with the `AviatrixControllerConfig` resource. Type: String. Example: "6.5.821". Available as of provider version R2.20.0.
 	SoftwareVersion pulumi.StringOutput `pulumi:"softwareVersion"`
-	// Intended CIDR list to be advertised to external BGP router.
+	// Intended CIDR list to be advertised to external BGP router. Empty list is not valid. Example: ["10.2.0.0/16", "10.4.0.0/16"].
 	SpokeBgpManualAdvertiseCidrs pulumi.StringArrayOutput `pulumi:"spokeBgpManualAdvertiseCidrs"`
 	// Price for spot instance. NOT supported for production deployment.
 	SpotPrice pulumi.StringPtrOutput `pulumi:"spotPrice"`
-	// Public Subnet Info.
+	// A VPC Network address range selected from one of the available network ranges. Example: "172.31.0.0/20". **NOTE: If using `insaneMode`, please see notes here.**
 	Subnet pulumi.StringOutput `pulumi:"subnet"`
-	// Instance tag of cloud provider.
+	// (Optional) Instance tag of cloud provider. Only supported for AWS, Azure, AzureGov, AWSGov, AWSChina and AzureChina. Example: ["key1:value1", "key2:value2"].
 	//
 	// Deprecated: Use tags instead.
 	TagLists pulumi.StringArrayOutput `pulumi:"tagLists"`
-	// A map of tags to assign to the spoke gateway.
+	// Map of tags to assign to the gateway. Only available for AWS, Azure, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret gateways. Allowed characters vary by cloud type but always include: letters, spaces, and numbers. AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret allow the use of any character. Azure, AzureGov and AzureChina allows the following special characters: + - = . _ : @. Example: {"key1" = "value1", "key2" = "value2"}.
 	Tags pulumi.StringMapOutput `pulumi:"tags"`
-	// Specify the transit Gateways to attach to this spoke. Format is a comma-separated list of transit gateway names. For
-	// example, 'transit-gw1,transit-gw2'.
+	// Specify the Aviatrix transit gateways to attach this spoke gateway to. Format is a comma separated list of transit gateway names. For example: "transit-gw1,transit-gw2".
 	//
 	// Deprecated: Please set `manage_transit_gateway_attachment` to false, and use the standalone aviatrix_spoke_transit_attachment resource instead.
 	TransitGw pulumi.StringPtrOutput `pulumi:"transitGw"`
 	// The IPSec tunnel down detection time for the Spoke Gateway.
 	TunnelDetectionTime pulumi.IntOutput `pulumi:"tunnelDetectionTime"`
-	// VPC-ID/VNet-Name of cloud provider.
+	// VPC-ID/VNet-Name of cloud provider. Example: AWS/AWSGov/AWSChina: "vpc-abcd1234", GCP: "vpc-gcp-test~-~project-id", Azure/AzureGov/AzureChina: "vnet_name:rg_name:resource_guid", OCI: "ocid1.vcn.oc1.iad.aaaaaaaaba3pv6wkcr4jqae5f44n2b2m2yt2j6rx32uzr4h25vqstifsfdsq".
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
-	// Region of cloud provider.
+	// Region of cloud provider. Example: AWS: "us-east-1", GCP: "us-west2-a", Azure: "East US 2", OCI: "us-ashburn-1", AzureGov: "USGov Arizona", AWSGov: "us-gov-west-1, AWSChina: "cn-north-1", AzureChina: "China North", AWS Top Secret: "us-iso-east-1", AWS Secret: "us-isob-east-1".
 	VpcReg pulumi.StringOutput `pulumi:"vpcReg"`
-	// Availability Zone. Only available for cloud_type = 8 (Azure). Must be in the form 'az-n', for example, 'az-2'.
+	// Availability Zone. Only available for cloudType = 8 (Azure). Must be in the form 'az-n', for example, 'az-2'. Available in provider version R2.17+.
 	Zone pulumi.StringPtrOutput `pulumi:"zone"`
 }
 
@@ -229,6 +217,13 @@ func NewAviatrixSpokeGateway(ctx *pulumi.Context,
 	if args.VpcReg == nil {
 		return nil, errors.New("invalid value for required argument 'VpcReg'")
 	}
+	if args.CustomerManagedKeys != nil {
+		args.CustomerManagedKeys = pulumi.ToSecret(args.CustomerManagedKeys).(pulumi.StringPtrOutput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"customerManagedKeys",
+	})
+	opts = append(opts, secrets)
 	opts = pkgResourceDefaultOpts(opts)
 	var resource AviatrixSpokeGateway
 	err := ctx.RegisterResource("aviatrix:index/aviatrixSpokeGateway:AviatrixSpokeGateway", name, args, &resource, opts...)
@@ -254,376 +249,334 @@ func GetAviatrixSpokeGateway(ctx *pulumi.Context,
 type aviatrixSpokeGatewayState struct {
 	// This parameter represents the name of a Cloud-Account in Aviatrix controller.
 	AccountName *string `pulumi:"accountName"`
-	// If false, reuse an idle address in Elastic IP pool for this gateway. Otherwise, allocate a new Elastic IP and use it for
-	// this gateway.
+	// When value is false, reuse an idle address in Elastic IP pool for this gateway. Otherwise, allocate a new Elastic IP and use it for this gateway. Available in Controller 4.7+. Valid values: true, false. Default: true.
 	AllocateNewEip *bool `pulumi:"allocateNewEip"`
-	// Approved learned CIDRs for BGP Spoke Gateway. Available as of provider version R2.21+.
+	// A set of approved learned CIDRs. Only valid when `enableLearnedCidrsApproval` is set to true. Example: ["10.250.0.0/16", "10.251.0.0/16"]. Available as of provider version R2.21+.
 	ApprovedLearnedCidrs []string `pulumi:"approvedLearnedCidrs"`
-	// Availability domain for OCI.
+	// Availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 	AvailabilityDomain *string `pulumi:"availabilityDomain"`
-	// The name of the public IP address and its resource group in Azure to assign to this Spoke Gateway.
+	// Name of public IP Address resource and its resource group in Azure to be assigned to the Spoke Gateway instance. Example: "IP_Name:Resource_Group_Name". Required if `allocateNewEip` is false and `cloudType` is Azure, AzureGov or AzureChina. Available as of provider version 2.20+.
 	AzureEipNameResourceGroup *string `pulumi:"azureEipNameResourceGroup"`
-	// Enable Equal Cost Multi Path (ECMP) routing for the next hop for BGP Spoke Gateway.
+	// Enable Equal Cost Multi Path (ECMP) routing for the next hop. Default value: false.
 	BgpEcmp *bool `pulumi:"bgpEcmp"`
-	// BGP Hold Time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 12 and 360.
+	// BGP hold time. Unit is in seconds. Valid values are between 12 and 360. Default value: 180.
 	BgpHoldTime *int `pulumi:"bgpHoldTime"`
-	// BGP route polling time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 10 and 50.
+	// BGP route polling time. Unit is in seconds. Valid values are between 10 and 50. Default value: "50".
 	BgpPollingTime *int `pulumi:"bgpPollingTime"`
-	// Cloud instance ID.
+	// Cloud instance ID of the spoke gateway.
 	CloudInstanceId *string `pulumi:"cloudInstanceId"`
-	// Type of cloud service provider.
+	// Type of cloud service provider, requires an integer value. Currently, only AWS(1), GCP(4), Azure(8), OCI(16), AzureGov(32), AWSGov(256), AWSChina(1024), AzureChina(2048), Alibaba Cloud(8192), AWS Top Secret(16384) and AWS Secret (32768) are supported.
 	CloudType *int `pulumi:"cloudType"`
 	// Customer managed key ID.
 	CustomerManagedKeys *string `pulumi:"customerManagedKeys"`
-	// A list of comma separated CIDRs to be customized for the spoke VPC routes. When configured, it will replace all learned
-	// routes in VPC routing tables, including RFC1918 and non-RFC1918 CIDRs. It applies to this spoke gateway only.
+	// A list of comma separated CIDRs to be customized for the spoke VPC routes. When configured, it will replace all learned routes in VPC routing tables, including RFC1918 and non-RFC1918 CIDRs. It applies to this spoke gateway only. Example: "10.0.0.0/116,10.2.0.0/16".
 	CustomizedSpokeVpcRoutes *string `pulumi:"customizedSpokeVpcRoutes"`
-	// Disables route propagation on BGP Spoke to attached Transit Gateway. Default: false.
+	// Disables route propagation on BGP Spoke to attached Transit Gateway. Default value: false.
 	DisableRoutePropagation *bool `pulumi:"disableRoutePropagation"`
-	// Required when allocate_new_eip is false. It uses specified EIP for this gateway.
+	// Required when `allocateNewEip` is false. It uses the specified EIP for this gateway. Available in Controller 4.7+. Only available for AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret.
 	Eip *string `pulumi:"eip"`
-	// Enables Active-Standby Mode, available only with HA enabled for BGP Spoke Gateway.
+	// Enables [Active-Standby Mode](https://docs.aviatrix.com/HowTos/transit_advanced.html#active-standby). Available only with HA enabled. Valid values: true, false. Default value: false.
 	EnableActiveStandby *bool `pulumi:"enableActiveStandby"`
-	// Enables Preemptive Mode for Active-Standby, available only with Active-Standby enabled.
+	// Enables Preemptive Mode for Active-Standby. Available only with BGP enabled, HA enabled and Active-Standby enabled. Valid values: true, false. Default value: false.
 	EnableActiveStandbyPreemptive *bool `pulumi:"enableActiveStandbyPreemptive"`
-	// Automatically advertise remote CIDR to Aviatrix Transit Gateway when route based Site2Cloud Tunnel is created.
+	// Auto Advertise Spoke Site2Cloud CIDRs. Default: false. Valid values: true or false. Available as of provider version R2.19+.
 	EnableAutoAdvertiseS2cCidrs *bool `pulumi:"enableAutoAdvertiseS2cCidrs"`
-	// Enable BGP. Default: false.
+	// Enable BGP for this spoke gateway. Only available for AWS and Azure. Valid values: true, false. Default value: false. Available in provider R2.21.0+.
 	EnableBgp *bool `pulumi:"enableBgp"`
-	// Enable encrypt gateway EBS volume. Only supported for AWS provider. Valid values: true, false. Default value: false.
+	// Enable EBS volume encryption for Gateway. Only supports AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret providers. Valid values: true, false. Default value: false.
 	EnableEncryptVolume *bool `pulumi:"enableEncryptVolume"`
-	// Enable jumbo frame support for spoke gateway. Valid values: true or false. Default value: true.
+	// Enable jumbo frames for this spoke gateway. Default value is true.
 	EnableJumboFrame *bool `pulumi:"enableJumboFrame"`
-	// Switch to enable/disable learned CIDR approval for BGP Spoke Gateway. Valid values: true, false.
+	// Switch to enable/disable learned CIDR approval for BGP Spoke Gateway. Valid values: true, false. Default value: false.
 	EnableLearnedCidrsApproval *bool `pulumi:"enableLearnedCidrsApproval"`
-	// Enable [monitor gateway subnets](https://docs.aviatrix.com/HowTos/gateway.html#monitor-gateway-subnet). Only valid for
-	// cloud_type = 1 (AWS) or 256 (AWSGov). Valid values: true, false. Default value: false.
+	// If set to true, the [Monitor Gateway Subnets](https://docs.aviatrix.com/HowTos/gateway.html#monitor-gateway-subnet) feature is enabled. Default value is false. Available in provider version R2.18+.
 	EnableMonitorGatewaySubnets *bool `pulumi:"enableMonitorGatewaySubnets"`
-	// Enable preserve as_path when advertising manual summary cidrs on BGP spoke gateway.
+	// Enable preserve asPath when advertising manual summary cidrs on BGP spoke gateway. Valid values: true, false. Default value: false. Available as of provider version R.2.22.1+
 	EnablePreserveAsPath *bool `pulumi:"enablePreserveAsPath"`
-	// Enable private OOB.
+	// Enable Private OOB feature. Only available for AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret. Valid values: true, false. Default value: false.
 	EnablePrivateOob *bool `pulumi:"enablePrivateOob"`
-	// Config Private VPC Default Route.
+	// Program default route in VPC private route table. Default: false. Valid values: true or false. Available as of provider version R2.19+.
 	EnablePrivateVpcDefaultRoute *bool `pulumi:"enablePrivateVpcDefaultRoute"`
-	// Skip Public Route Table Update.
+	// Skip programming VPC public route table. Default: false. Valid values: true or false. Available as of provider version R2.19+.
 	EnableSkipPublicRouteTableUpdate *bool `pulumi:"enableSkipPublicRouteTableUpdate"`
 	// Enable spot instance. NOT supported for production deployment.
 	EnableSpotInstance *bool `pulumi:"enableSpotInstance"`
-	// Enable vpc_dns_server for Gateway. Valid values: true, false.
+	// Enable VPC DNS Server for Gateway. Currently only supported for AWS, Azure, AzureGov, AWSGov, AWSChina, AzureChina, Alibaba Cloud, AWS Top Secret and AWS Secret gateways. Valid values: true, false. Default value: false.
 	EnableVpcDnsServer *bool `pulumi:"enableVpcDnsServer"`
-	// Fault domain for OCI.
+	// Fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 	FaultDomain *string `pulumi:"faultDomain"`
-	// A list of comma separated CIDRs to be filtered from the spoke VPC route table. When configured, filtering CIDR(s) or
-	// it’s subnet will be deleted from VPC routing tables as well as from spoke gateway’s routing table. It applies to
-	// this spoke gateway only.
+	// A list of comma separated CIDRs to be filtered from the spoke VPC route table. When configured, filtering CIDR(s) or it’s subnet will be deleted from VPC routing tables as well as from spoke gateway’s routing table. It applies to this spoke gateway only. Example: "10.2.0.0/116,10.3.0.0/16".
 	FilteredSpokeVpcRoutes *string `pulumi:"filteredSpokeVpcRoutes"`
 	// Name of the gateway which is going to be created.
 	GwName *string `pulumi:"gwName"`
-	// Size of the gateway instance.
+	// Size of the gateway instance. Example: AWS/AWSGov/AWSChina: "t2.large", Azure/AzureGov/AzureChina: "Standard_B1s", OCI: "VM.Standard2.2", GCP: "n1-standard-1".
 	GwSize *string `pulumi:"gwSize"`
-	// HA availability domain for OCI.
+	// HA gateway availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 	HaAvailabilityDomain *string `pulumi:"haAvailabilityDomain"`
-	// The name of the public IP address and its resource group in Azure to assign to the HA Spoke Gateway.
+	// Name of public IP Address resource and its resource group in Azure to be assigned to the HA Spoke Gateway instance. Example: "IP_Name:Resource_Group_Name". Required if `haEip` is set and `cloudType` is Azure, AzureGov or AzureChina. Available as of provider version 2.20+.
 	HaAzureEipNameResourceGroup *string `pulumi:"haAzureEipNameResourceGroup"`
-	// Cloud instance ID of HA spoke gateway.
+	// Cloud instance ID of the HA spoke gateway.
 	HaCloudInstanceId *string `pulumi:"haCloudInstanceId"`
-	// Public IP address that you want assigned to the HA Spoke Gateway.
+	// Public IP address that you want to assign to the HA peering instance. If no value is given, a new EIP will automatically be allocated. Only available for AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret.
 	HaEip *string `pulumi:"haEip"`
-	// HA fault domain for OCI.
+	// HA gateway fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 	HaFaultDomain *string `pulumi:"haFaultDomain"`
 	// Aviatrix spoke gateway unique name of HA spoke gateway.
 	HaGwName *string `pulumi:"haGwName"`
-	// HA Gateway Size.
+	// HA Gateway Size. Mandatory if enabling HA.
 	HaGwSize *string `pulumi:"haGwSize"`
-	// ha_image_version can be used to set the desired image version of the HA gateway. If set, we will attempt to update the
-	// gateway to the specified version.
+	// The image version of the HA gateway. Use `getAviatrixGatewayImage` data source to programmatically retrieve this value for the desired `haSoftwareVersion`. If set, we will attempt to update the HA gateway to the specified version if current version is different. If left blank, the gateway upgrades can be managed with the `AviatrixControllerConfig` resource. Type: String. Example: "hvm-cloudx-aws-022021". Available as of provider version R2.20.0.
 	HaImageVersion *string `pulumi:"haImageVersion"`
-	// AZ of subnet being created for Insane Mode Spoke HA Gateway. Required for AWS if insane_mode is true and ha_subnet is
-	// set.
+	// AZ of subnet being created for Insane Mode Spoke HA Gateway. Required for AWS, AzureGov, AWSGov, AWS Top Secret and AWS Secret if `insaneMode` is enabled and `haSubnet` is set. Example: AWS: "us-west-1a".
 	HaInsaneModeAz *string `pulumi:"haInsaneModeAz"`
-	// OOB HA availability zone.
+	// HA OOB availability zone. Required if enabling Private OOB and HA. Example: "us-west-1b".
 	HaOobAvailabilityZone *string `pulumi:"haOobAvailabilityZone"`
-	// OOB HA management subnet.
+	// HA OOB management subnet. Required if enabling Private OOB and HA. Example: "11.0.0.48/28".
 	HaOobManagementSubnet *string `pulumi:"haOobManagementSubnet"`
-	// Private IP address of the spoke gateway created.
+	// Private IP address of HA spoke gateway.
 	HaPrivateIp *string `pulumi:"haPrivateIp"`
-	// Private Mode HA subnet availability zone.
+	// Availability Zone of the HA subnet. Required when Private Mode is enabled on the Controller and `cloudType` is AWS or AWSGov with HA. Available in Provider version R2.23+.
 	HaPrivateModeSubnetZone *string `pulumi:"haPrivateModeSubnetZone"`
 	// Public IP address of the HA Spoke Gateway.
 	HaPublicIp *string `pulumi:"haPublicIp"`
 	// HA security group used for the spoke gateway.
 	HaSecurityGroupId *string `pulumi:"haSecurityGroupId"`
-	// ha_software_version can be used to set the desired software version of the HA gateway. If set, we will attempt to update
-	// the gateway to the specified version. If left blank, the gateway software version will continue to be managed through
-	// the aviatrix_controller_config resource.
+	// The software version of the HA gateway. If set, we will attempt to update the HA gateway to the specified version if current version is different. If left blank, the HA gateway upgrade can be managed with the `AviatrixControllerConfig` resource. Type: String. Example: "6.5.821". Available as of provider version R2.20.0.
 	HaSoftwareVersion *string `pulumi:"haSoftwareVersion"`
-	// HA Subnet. Required if enabling HA for AWS/AWSGov/AWSChina/Azure/AzureChina/OCI/Alibaba Cloud. Optional if enabling HA
-	// for GCP.
+	// HA Subnet. Required if enabling HA for AWS, AWSGov, AWSChina, Azure, AzureGov, AzureChina, OCI, Alibaba Cloud, AWS Top Secret or AWS Secret gateways. Optional for GCP. Setting to empty/unsetting will disable HA. Setting to a valid subnet CIDR will create an HA gateway on the subnet. Example: "10.12.0.0/24"
 	HaSubnet *string `pulumi:"haSubnet"`
-	// HA Zone. Required if enabling HA for GCP. Optional for Azure.
+	// HA Zone. Required if enabling HA for GCP gateway. Optional for Azure. For GCP, setting to empty/unsetting will disable HA and setting to a valid zone will create an HA gateway in the zone. Example: "us-west1-c". For Azure, this is an optional parameter to place the HA gateway in a specific availability zone. Valid values for Azure gateways are in the form "az-n". Example: "az-2". Available for Azure as of provider version R2.17+.
 	HaZone *string `pulumi:"haZone"`
-	// image_version can be used to set the desired image version of the gateway. If set, we will attempt to update the gateway
-	// to the specified version.
+	// The image version of the gateway. Use `getAviatrixGatewayImage` data source to programmatically retrieve this value for the desired `softwareVersion`. If set, we will attempt to update the gateway to the specified version if current version is different. If left blank, the gateway upgrades can be managed with the `AviatrixControllerConfig` resource. Type: String. Example: "hvm-cloudx-aws-022021". Available as of provider version R2.20.0.
 	ImageVersion *string `pulumi:"imageVersion"`
-	// A list of comma separated CIDRs to be advertised to on-prem as 'Included CIDR List'. When configured, it will replace
-	// all advertised routes from this VPC.
+	// A list of comma separated CIDRs to be advertised to on-prem as 'Included CIDR List'. When configured, it will replace all advertised routes from this VPC. Example: "10.4.0.0/116,10.5.0.0/16".
 	IncludedAdvertisedSpokeRoutes *string `pulumi:"includedAdvertisedSpokeRoutes"`
-	// Enable Insane Mode for Spoke Gateway. Valid values: true, false. Supported for AWS/AWSGov, GCP, Azure and OCI. If insane
-	// mode is enabled, gateway size has to at least be c5 size for AWS and Standard_D3_v2 size for Azure.
+	// Enable [Insane Mode](https://docs.aviatrix.com/HowTos/insane_mode.html) for Spoke Gateway. Insane Mode gateway size must be at least c5 size (AWS, AWSGov, AWS China, AWS Top Secret and AWS Secret) or Standard_D3_v2 (Azure and AzureGov); for GCP only four size are supported: "n1-highcpu-4", "n1-highcpu-8", "n1-highcpu-16" and "n1-highcpu-32". If enabled, you must specify a valid /26 CIDR segment of the VPC to create a new subnet for AWS, Azure, AzureGov, AWSGov, AWS Top Secret and AWS Secret. Only available for AWS, GCP/OCI, Azure, AzureGov, AzureChina, AWSGov, AWS Top Secret and AWS Secret. Valid values: true, false. Default value: false.
 	InsaneMode *bool `pulumi:"insaneMode"`
-	// AZ of subnet being created for Insane Mode Spoke Gateway. Required if insane_mode is enabled for AWS cloud.
+	// AZ of subnet being created for Insane Mode Spoke Gateway. Required for AWS, AWSGov, AWS China, AWS Top Secret or AWS Secret if `insaneMode` is enabled. Example: AWS: "us-west-1a".
 	InsaneModeAz *string `pulumi:"insaneModeAz"`
-	// Set the learned CIDRs approval mode for BGP Spoke Gateway. Only valid when 'enable_learned_cidrs_approval' is set to
-	// true. Currently, only 'gateway' is supported: learned CIDR approval applies to ALL connections. Default value:
-	// 'gateway'.
+	// Learned CIDRs approval mode. Either "gateway" (approval on a per-gateway basis) or "connection" (approval on a per-connection basis). Only "gateway" is supported for BGP SPOKE Gateway. Default value: "gateway". Available as of provider version R2.21+.
 	LearnedCidrsApprovalMode *string `pulumi:"learnedCidrsApprovalMode"`
-	// Changes the Aviatrix BGP Spoke Gateway ASN number before you setup Aviatrix BGP Spoke Gateway connection configurations.
+	// Changes the Aviatrix Spoke Gateway ASN number before you setup Aviatrix Spoke Gateway connection configurations.
 	LocalAsNumber *string `pulumi:"localAsNumber"`
-	// This parameter is a switch used to determine whether or not to manage attaching this spoke gateway to transit gateways
-	// using the aviatrix_spoke_gateway resource. If this is set to false, attaching this spoke gateway to transit gateways
-	// must be done using the aviatrix_spoke_transit_attachment resource. Valid values: true, false. Default value: true.
+	// Enable to manage spoke-to-Aviatrix transit gateway attachments using the **aviatrix_spoke_gateway** resource with the below `transitGw` attribute. If this is set to false, attaching this spoke to transit gateways must be done using the **aviatrix_spoke_transit_attachment** resource. Valid values: true, false. Default value: true. Available in provider R2.17+.
 	ManageTransitGatewayAttachment *bool `pulumi:"manageTransitGatewayAttachment"`
-	// A set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true.
+	// Set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true. Available in provider version R2.18+.
 	MonitorExcludeLists []string `pulumi:"monitorExcludeLists"`
-	// OOB subnet availability zone.
+	// OOB availability zone. Required if enabling Private OOB. Example: "us-west-1a".
 	OobAvailabilityZone *string `pulumi:"oobAvailabilityZone"`
-	// OOB management subnet.
+	// OOB management subnet. Required if enabling Private OOB. Example: "11.0.2.0/24".
 	OobManagementSubnet *string `pulumi:"oobManagementSubnet"`
-	// List of AS numbers to populate BGP AP_PATH field when it advertises to VGW or peer devices. Only valid for BGP Spoke
-	// Gateway
+	// List of AS numbers to populate BGP AS_PATH field when it advertises to VGW or peer devices.
 	PrependAsPaths []string `pulumi:"prependAsPaths"`
 	// Private IP address of the spoke gateway created.
 	PrivateIp *string `pulumi:"privateIp"`
-	// Private Mode controller load balancer vpc_id. Required when private mode is enabled for the Controller.
+	// VPC ID of Private Mode load balancer. Required when Private Mode is enabled on the Controller. Available in provider version R2.23+.
 	PrivateModeLbVpcId *string `pulumi:"privateModeLbVpcId"`
-	// Subnet availability zone. Required when Private Mode is enabled on the Controller and cloud_type is AWS.
+	// Availability Zone of the subnet. Required when Private Mode is enabled on the Controller and `cloudType` is AWS or AWSGov. Available in Provider version R2.23+.
 	PrivateModeSubnetZone *string `pulumi:"privateModeSubnetZone"`
 	// Public IP address of the Spoke Gateway created.
 	PublicIp *string `pulumi:"publicIp"`
-	// Gateway ethernet interface RX queue size. Supported for AWS related clouds only.
+	// Gateway ethernet interface RX queue size. Once set, can't be deleted or disabled. Available for AWS as of provider version R2.22+.
 	RxQueueSize *string `pulumi:"rxQueueSize"`
 	// Security group used for the spoke gateway.
 	SecurityGroupId *string `pulumi:"securityGroupId"`
-	// Set to 'enabled' if this feature is desired.
+	// Set to true if this [feature](https://docs.aviatrix.com/Solutions/gateway_ha.html#single-az-gateway) is desired. Valid values: true, false.
 	SingleAzHa *bool `pulumi:"singleAzHa"`
-	// Specify whether to enable Source NAT feature in 'single_ip' mode on the gateway or not.
+	// Specify whether to enable Source NAT feature in "singleIp" mode on the gateway or not. Please disable AWS NAT instance before enabling this feature. Currently only supports AWS(1) and Azure(8). Valid values: true, false.
 	SingleIpSnat *bool `pulumi:"singleIpSnat"`
-	// software_version can be used to set the desired software version of the gateway. If set, we will attempt to update the
-	// gateway to the specified version. If left blank, the gateway software version will continue to be managed through the
-	// aviatrix_controller_config resource.
+	// The software version of the gateway. If set, we will attempt to update the gateway to the specified version if current version is different. If left blank, the gateway upgrade can be managed with the `AviatrixControllerConfig` resource. Type: String. Example: "6.5.821". Available as of provider version R2.20.0.
 	SoftwareVersion *string `pulumi:"softwareVersion"`
-	// Intended CIDR list to be advertised to external BGP router.
+	// Intended CIDR list to be advertised to external BGP router. Empty list is not valid. Example: ["10.2.0.0/16", "10.4.0.0/16"].
 	SpokeBgpManualAdvertiseCidrs []string `pulumi:"spokeBgpManualAdvertiseCidrs"`
 	// Price for spot instance. NOT supported for production deployment.
 	SpotPrice *string `pulumi:"spotPrice"`
-	// Public Subnet Info.
+	// A VPC Network address range selected from one of the available network ranges. Example: "172.31.0.0/20". **NOTE: If using `insaneMode`, please see notes here.**
 	Subnet *string `pulumi:"subnet"`
-	// Instance tag of cloud provider.
+	// (Optional) Instance tag of cloud provider. Only supported for AWS, Azure, AzureGov, AWSGov, AWSChina and AzureChina. Example: ["key1:value1", "key2:value2"].
 	//
 	// Deprecated: Use tags instead.
 	TagLists []string `pulumi:"tagLists"`
-	// A map of tags to assign to the spoke gateway.
+	// Map of tags to assign to the gateway. Only available for AWS, Azure, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret gateways. Allowed characters vary by cloud type but always include: letters, spaces, and numbers. AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret allow the use of any character. Azure, AzureGov and AzureChina allows the following special characters: + - = . _ : @. Example: {"key1" = "value1", "key2" = "value2"}.
 	Tags map[string]string `pulumi:"tags"`
-	// Specify the transit Gateways to attach to this spoke. Format is a comma-separated list of transit gateway names. For
-	// example, 'transit-gw1,transit-gw2'.
+	// Specify the Aviatrix transit gateways to attach this spoke gateway to. Format is a comma separated list of transit gateway names. For example: "transit-gw1,transit-gw2".
 	//
 	// Deprecated: Please set `manage_transit_gateway_attachment` to false, and use the standalone aviatrix_spoke_transit_attachment resource instead.
 	TransitGw *string `pulumi:"transitGw"`
 	// The IPSec tunnel down detection time for the Spoke Gateway.
 	TunnelDetectionTime *int `pulumi:"tunnelDetectionTime"`
-	// VPC-ID/VNet-Name of cloud provider.
+	// VPC-ID/VNet-Name of cloud provider. Example: AWS/AWSGov/AWSChina: "vpc-abcd1234", GCP: "vpc-gcp-test~-~project-id", Azure/AzureGov/AzureChina: "vnet_name:rg_name:resource_guid", OCI: "ocid1.vcn.oc1.iad.aaaaaaaaba3pv6wkcr4jqae5f44n2b2m2yt2j6rx32uzr4h25vqstifsfdsq".
 	VpcId *string `pulumi:"vpcId"`
-	// Region of cloud provider.
+	// Region of cloud provider. Example: AWS: "us-east-1", GCP: "us-west2-a", Azure: "East US 2", OCI: "us-ashburn-1", AzureGov: "USGov Arizona", AWSGov: "us-gov-west-1, AWSChina: "cn-north-1", AzureChina: "China North", AWS Top Secret: "us-iso-east-1", AWS Secret: "us-isob-east-1".
 	VpcReg *string `pulumi:"vpcReg"`
-	// Availability Zone. Only available for cloud_type = 8 (Azure). Must be in the form 'az-n', for example, 'az-2'.
+	// Availability Zone. Only available for cloudType = 8 (Azure). Must be in the form 'az-n', for example, 'az-2'. Available in provider version R2.17+.
 	Zone *string `pulumi:"zone"`
 }
 
 type AviatrixSpokeGatewayState struct {
 	// This parameter represents the name of a Cloud-Account in Aviatrix controller.
 	AccountName pulumi.StringPtrInput
-	// If false, reuse an idle address in Elastic IP pool for this gateway. Otherwise, allocate a new Elastic IP and use it for
-	// this gateway.
+	// When value is false, reuse an idle address in Elastic IP pool for this gateway. Otherwise, allocate a new Elastic IP and use it for this gateway. Available in Controller 4.7+. Valid values: true, false. Default: true.
 	AllocateNewEip pulumi.BoolPtrInput
-	// Approved learned CIDRs for BGP Spoke Gateway. Available as of provider version R2.21+.
+	// A set of approved learned CIDRs. Only valid when `enableLearnedCidrsApproval` is set to true. Example: ["10.250.0.0/16", "10.251.0.0/16"]. Available as of provider version R2.21+.
 	ApprovedLearnedCidrs pulumi.StringArrayInput
-	// Availability domain for OCI.
+	// Availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 	AvailabilityDomain pulumi.StringPtrInput
-	// The name of the public IP address and its resource group in Azure to assign to this Spoke Gateway.
+	// Name of public IP Address resource and its resource group in Azure to be assigned to the Spoke Gateway instance. Example: "IP_Name:Resource_Group_Name". Required if `allocateNewEip` is false and `cloudType` is Azure, AzureGov or AzureChina. Available as of provider version 2.20+.
 	AzureEipNameResourceGroup pulumi.StringPtrInput
-	// Enable Equal Cost Multi Path (ECMP) routing for the next hop for BGP Spoke Gateway.
+	// Enable Equal Cost Multi Path (ECMP) routing for the next hop. Default value: false.
 	BgpEcmp pulumi.BoolPtrInput
-	// BGP Hold Time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 12 and 360.
+	// BGP hold time. Unit is in seconds. Valid values are between 12 and 360. Default value: 180.
 	BgpHoldTime pulumi.IntPtrInput
-	// BGP route polling time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 10 and 50.
+	// BGP route polling time. Unit is in seconds. Valid values are between 10 and 50. Default value: "50".
 	BgpPollingTime pulumi.IntPtrInput
-	// Cloud instance ID.
+	// Cloud instance ID of the spoke gateway.
 	CloudInstanceId pulumi.StringPtrInput
-	// Type of cloud service provider.
+	// Type of cloud service provider, requires an integer value. Currently, only AWS(1), GCP(4), Azure(8), OCI(16), AzureGov(32), AWSGov(256), AWSChina(1024), AzureChina(2048), Alibaba Cloud(8192), AWS Top Secret(16384) and AWS Secret (32768) are supported.
 	CloudType pulumi.IntPtrInput
 	// Customer managed key ID.
 	CustomerManagedKeys pulumi.StringPtrInput
-	// A list of comma separated CIDRs to be customized for the spoke VPC routes. When configured, it will replace all learned
-	// routes in VPC routing tables, including RFC1918 and non-RFC1918 CIDRs. It applies to this spoke gateway only.
+	// A list of comma separated CIDRs to be customized for the spoke VPC routes. When configured, it will replace all learned routes in VPC routing tables, including RFC1918 and non-RFC1918 CIDRs. It applies to this spoke gateway only. Example: "10.0.0.0/116,10.2.0.0/16".
 	CustomizedSpokeVpcRoutes pulumi.StringPtrInput
-	// Disables route propagation on BGP Spoke to attached Transit Gateway. Default: false.
+	// Disables route propagation on BGP Spoke to attached Transit Gateway. Default value: false.
 	DisableRoutePropagation pulumi.BoolPtrInput
-	// Required when allocate_new_eip is false. It uses specified EIP for this gateway.
+	// Required when `allocateNewEip` is false. It uses the specified EIP for this gateway. Available in Controller 4.7+. Only available for AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret.
 	Eip pulumi.StringPtrInput
-	// Enables Active-Standby Mode, available only with HA enabled for BGP Spoke Gateway.
+	// Enables [Active-Standby Mode](https://docs.aviatrix.com/HowTos/transit_advanced.html#active-standby). Available only with HA enabled. Valid values: true, false. Default value: false.
 	EnableActiveStandby pulumi.BoolPtrInput
-	// Enables Preemptive Mode for Active-Standby, available only with Active-Standby enabled.
+	// Enables Preemptive Mode for Active-Standby. Available only with BGP enabled, HA enabled and Active-Standby enabled. Valid values: true, false. Default value: false.
 	EnableActiveStandbyPreemptive pulumi.BoolPtrInput
-	// Automatically advertise remote CIDR to Aviatrix Transit Gateway when route based Site2Cloud Tunnel is created.
+	// Auto Advertise Spoke Site2Cloud CIDRs. Default: false. Valid values: true or false. Available as of provider version R2.19+.
 	EnableAutoAdvertiseS2cCidrs pulumi.BoolPtrInput
-	// Enable BGP. Default: false.
+	// Enable BGP for this spoke gateway. Only available for AWS and Azure. Valid values: true, false. Default value: false. Available in provider R2.21.0+.
 	EnableBgp pulumi.BoolPtrInput
-	// Enable encrypt gateway EBS volume. Only supported for AWS provider. Valid values: true, false. Default value: false.
+	// Enable EBS volume encryption for Gateway. Only supports AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret providers. Valid values: true, false. Default value: false.
 	EnableEncryptVolume pulumi.BoolPtrInput
-	// Enable jumbo frame support for spoke gateway. Valid values: true or false. Default value: true.
+	// Enable jumbo frames for this spoke gateway. Default value is true.
 	EnableJumboFrame pulumi.BoolPtrInput
-	// Switch to enable/disable learned CIDR approval for BGP Spoke Gateway. Valid values: true, false.
+	// Switch to enable/disable learned CIDR approval for BGP Spoke Gateway. Valid values: true, false. Default value: false.
 	EnableLearnedCidrsApproval pulumi.BoolPtrInput
-	// Enable [monitor gateway subnets](https://docs.aviatrix.com/HowTos/gateway.html#monitor-gateway-subnet). Only valid for
-	// cloud_type = 1 (AWS) or 256 (AWSGov). Valid values: true, false. Default value: false.
+	// If set to true, the [Monitor Gateway Subnets](https://docs.aviatrix.com/HowTos/gateway.html#monitor-gateway-subnet) feature is enabled. Default value is false. Available in provider version R2.18+.
 	EnableMonitorGatewaySubnets pulumi.BoolPtrInput
-	// Enable preserve as_path when advertising manual summary cidrs on BGP spoke gateway.
+	// Enable preserve asPath when advertising manual summary cidrs on BGP spoke gateway. Valid values: true, false. Default value: false. Available as of provider version R.2.22.1+
 	EnablePreserveAsPath pulumi.BoolPtrInput
-	// Enable private OOB.
+	// Enable Private OOB feature. Only available for AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret. Valid values: true, false. Default value: false.
 	EnablePrivateOob pulumi.BoolPtrInput
-	// Config Private VPC Default Route.
+	// Program default route in VPC private route table. Default: false. Valid values: true or false. Available as of provider version R2.19+.
 	EnablePrivateVpcDefaultRoute pulumi.BoolPtrInput
-	// Skip Public Route Table Update.
+	// Skip programming VPC public route table. Default: false. Valid values: true or false. Available as of provider version R2.19+.
 	EnableSkipPublicRouteTableUpdate pulumi.BoolPtrInput
 	// Enable spot instance. NOT supported for production deployment.
 	EnableSpotInstance pulumi.BoolPtrInput
-	// Enable vpc_dns_server for Gateway. Valid values: true, false.
+	// Enable VPC DNS Server for Gateway. Currently only supported for AWS, Azure, AzureGov, AWSGov, AWSChina, AzureChina, Alibaba Cloud, AWS Top Secret and AWS Secret gateways. Valid values: true, false. Default value: false.
 	EnableVpcDnsServer pulumi.BoolPtrInput
-	// Fault domain for OCI.
+	// Fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 	FaultDomain pulumi.StringPtrInput
-	// A list of comma separated CIDRs to be filtered from the spoke VPC route table. When configured, filtering CIDR(s) or
-	// it’s subnet will be deleted from VPC routing tables as well as from spoke gateway’s routing table. It applies to
-	// this spoke gateway only.
+	// A list of comma separated CIDRs to be filtered from the spoke VPC route table. When configured, filtering CIDR(s) or it’s subnet will be deleted from VPC routing tables as well as from spoke gateway’s routing table. It applies to this spoke gateway only. Example: "10.2.0.0/116,10.3.0.0/16".
 	FilteredSpokeVpcRoutes pulumi.StringPtrInput
 	// Name of the gateway which is going to be created.
 	GwName pulumi.StringPtrInput
-	// Size of the gateway instance.
+	// Size of the gateway instance. Example: AWS/AWSGov/AWSChina: "t2.large", Azure/AzureGov/AzureChina: "Standard_B1s", OCI: "VM.Standard2.2", GCP: "n1-standard-1".
 	GwSize pulumi.StringPtrInput
-	// HA availability domain for OCI.
+	// HA gateway availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 	HaAvailabilityDomain pulumi.StringPtrInput
-	// The name of the public IP address and its resource group in Azure to assign to the HA Spoke Gateway.
+	// Name of public IP Address resource and its resource group in Azure to be assigned to the HA Spoke Gateway instance. Example: "IP_Name:Resource_Group_Name". Required if `haEip` is set and `cloudType` is Azure, AzureGov or AzureChina. Available as of provider version 2.20+.
 	HaAzureEipNameResourceGroup pulumi.StringPtrInput
-	// Cloud instance ID of HA spoke gateway.
+	// Cloud instance ID of the HA spoke gateway.
 	HaCloudInstanceId pulumi.StringPtrInput
-	// Public IP address that you want assigned to the HA Spoke Gateway.
+	// Public IP address that you want to assign to the HA peering instance. If no value is given, a new EIP will automatically be allocated. Only available for AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret.
 	HaEip pulumi.StringPtrInput
-	// HA fault domain for OCI.
+	// HA gateway fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 	HaFaultDomain pulumi.StringPtrInput
 	// Aviatrix spoke gateway unique name of HA spoke gateway.
 	HaGwName pulumi.StringPtrInput
-	// HA Gateway Size.
+	// HA Gateway Size. Mandatory if enabling HA.
 	HaGwSize pulumi.StringPtrInput
-	// ha_image_version can be used to set the desired image version of the HA gateway. If set, we will attempt to update the
-	// gateway to the specified version.
+	// The image version of the HA gateway. Use `getAviatrixGatewayImage` data source to programmatically retrieve this value for the desired `haSoftwareVersion`. If set, we will attempt to update the HA gateway to the specified version if current version is different. If left blank, the gateway upgrades can be managed with the `AviatrixControllerConfig` resource. Type: String. Example: "hvm-cloudx-aws-022021". Available as of provider version R2.20.0.
 	HaImageVersion pulumi.StringPtrInput
-	// AZ of subnet being created for Insane Mode Spoke HA Gateway. Required for AWS if insane_mode is true and ha_subnet is
-	// set.
+	// AZ of subnet being created for Insane Mode Spoke HA Gateway. Required for AWS, AzureGov, AWSGov, AWS Top Secret and AWS Secret if `insaneMode` is enabled and `haSubnet` is set. Example: AWS: "us-west-1a".
 	HaInsaneModeAz pulumi.StringPtrInput
-	// OOB HA availability zone.
+	// HA OOB availability zone. Required if enabling Private OOB and HA. Example: "us-west-1b".
 	HaOobAvailabilityZone pulumi.StringPtrInput
-	// OOB HA management subnet.
+	// HA OOB management subnet. Required if enabling Private OOB and HA. Example: "11.0.0.48/28".
 	HaOobManagementSubnet pulumi.StringPtrInput
-	// Private IP address of the spoke gateway created.
+	// Private IP address of HA spoke gateway.
 	HaPrivateIp pulumi.StringPtrInput
-	// Private Mode HA subnet availability zone.
+	// Availability Zone of the HA subnet. Required when Private Mode is enabled on the Controller and `cloudType` is AWS or AWSGov with HA. Available in Provider version R2.23+.
 	HaPrivateModeSubnetZone pulumi.StringPtrInput
 	// Public IP address of the HA Spoke Gateway.
 	HaPublicIp pulumi.StringPtrInput
 	// HA security group used for the spoke gateway.
 	HaSecurityGroupId pulumi.StringPtrInput
-	// ha_software_version can be used to set the desired software version of the HA gateway. If set, we will attempt to update
-	// the gateway to the specified version. If left blank, the gateway software version will continue to be managed through
-	// the aviatrix_controller_config resource.
+	// The software version of the HA gateway. If set, we will attempt to update the HA gateway to the specified version if current version is different. If left blank, the HA gateway upgrade can be managed with the `AviatrixControllerConfig` resource. Type: String. Example: "6.5.821". Available as of provider version R2.20.0.
 	HaSoftwareVersion pulumi.StringPtrInput
-	// HA Subnet. Required if enabling HA for AWS/AWSGov/AWSChina/Azure/AzureChina/OCI/Alibaba Cloud. Optional if enabling HA
-	// for GCP.
+	// HA Subnet. Required if enabling HA for AWS, AWSGov, AWSChina, Azure, AzureGov, AzureChina, OCI, Alibaba Cloud, AWS Top Secret or AWS Secret gateways. Optional for GCP. Setting to empty/unsetting will disable HA. Setting to a valid subnet CIDR will create an HA gateway on the subnet. Example: "10.12.0.0/24"
 	HaSubnet pulumi.StringPtrInput
-	// HA Zone. Required if enabling HA for GCP. Optional for Azure.
+	// HA Zone. Required if enabling HA for GCP gateway. Optional for Azure. For GCP, setting to empty/unsetting will disable HA and setting to a valid zone will create an HA gateway in the zone. Example: "us-west1-c". For Azure, this is an optional parameter to place the HA gateway in a specific availability zone. Valid values for Azure gateways are in the form "az-n". Example: "az-2". Available for Azure as of provider version R2.17+.
 	HaZone pulumi.StringPtrInput
-	// image_version can be used to set the desired image version of the gateway. If set, we will attempt to update the gateway
-	// to the specified version.
+	// The image version of the gateway. Use `getAviatrixGatewayImage` data source to programmatically retrieve this value for the desired `softwareVersion`. If set, we will attempt to update the gateway to the specified version if current version is different. If left blank, the gateway upgrades can be managed with the `AviatrixControllerConfig` resource. Type: String. Example: "hvm-cloudx-aws-022021". Available as of provider version R2.20.0.
 	ImageVersion pulumi.StringPtrInput
-	// A list of comma separated CIDRs to be advertised to on-prem as 'Included CIDR List'. When configured, it will replace
-	// all advertised routes from this VPC.
+	// A list of comma separated CIDRs to be advertised to on-prem as 'Included CIDR List'. When configured, it will replace all advertised routes from this VPC. Example: "10.4.0.0/116,10.5.0.0/16".
 	IncludedAdvertisedSpokeRoutes pulumi.StringPtrInput
-	// Enable Insane Mode for Spoke Gateway. Valid values: true, false. Supported for AWS/AWSGov, GCP, Azure and OCI. If insane
-	// mode is enabled, gateway size has to at least be c5 size for AWS and Standard_D3_v2 size for Azure.
+	// Enable [Insane Mode](https://docs.aviatrix.com/HowTos/insane_mode.html) for Spoke Gateway. Insane Mode gateway size must be at least c5 size (AWS, AWSGov, AWS China, AWS Top Secret and AWS Secret) or Standard_D3_v2 (Azure and AzureGov); for GCP only four size are supported: "n1-highcpu-4", "n1-highcpu-8", "n1-highcpu-16" and "n1-highcpu-32". If enabled, you must specify a valid /26 CIDR segment of the VPC to create a new subnet for AWS, Azure, AzureGov, AWSGov, AWS Top Secret and AWS Secret. Only available for AWS, GCP/OCI, Azure, AzureGov, AzureChina, AWSGov, AWS Top Secret and AWS Secret. Valid values: true, false. Default value: false.
 	InsaneMode pulumi.BoolPtrInput
-	// AZ of subnet being created for Insane Mode Spoke Gateway. Required if insane_mode is enabled for AWS cloud.
+	// AZ of subnet being created for Insane Mode Spoke Gateway. Required for AWS, AWSGov, AWS China, AWS Top Secret or AWS Secret if `insaneMode` is enabled. Example: AWS: "us-west-1a".
 	InsaneModeAz pulumi.StringPtrInput
-	// Set the learned CIDRs approval mode for BGP Spoke Gateway. Only valid when 'enable_learned_cidrs_approval' is set to
-	// true. Currently, only 'gateway' is supported: learned CIDR approval applies to ALL connections. Default value:
-	// 'gateway'.
+	// Learned CIDRs approval mode. Either "gateway" (approval on a per-gateway basis) or "connection" (approval on a per-connection basis). Only "gateway" is supported for BGP SPOKE Gateway. Default value: "gateway". Available as of provider version R2.21+.
 	LearnedCidrsApprovalMode pulumi.StringPtrInput
-	// Changes the Aviatrix BGP Spoke Gateway ASN number before you setup Aviatrix BGP Spoke Gateway connection configurations.
+	// Changes the Aviatrix Spoke Gateway ASN number before you setup Aviatrix Spoke Gateway connection configurations.
 	LocalAsNumber pulumi.StringPtrInput
-	// This parameter is a switch used to determine whether or not to manage attaching this spoke gateway to transit gateways
-	// using the aviatrix_spoke_gateway resource. If this is set to false, attaching this spoke gateway to transit gateways
-	// must be done using the aviatrix_spoke_transit_attachment resource. Valid values: true, false. Default value: true.
+	// Enable to manage spoke-to-Aviatrix transit gateway attachments using the **aviatrix_spoke_gateway** resource with the below `transitGw` attribute. If this is set to false, attaching this spoke to transit gateways must be done using the **aviatrix_spoke_transit_attachment** resource. Valid values: true, false. Default value: true. Available in provider R2.17+.
 	ManageTransitGatewayAttachment pulumi.BoolPtrInput
-	// A set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true.
+	// Set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true. Available in provider version R2.18+.
 	MonitorExcludeLists pulumi.StringArrayInput
-	// OOB subnet availability zone.
+	// OOB availability zone. Required if enabling Private OOB. Example: "us-west-1a".
 	OobAvailabilityZone pulumi.StringPtrInput
-	// OOB management subnet.
+	// OOB management subnet. Required if enabling Private OOB. Example: "11.0.2.0/24".
 	OobManagementSubnet pulumi.StringPtrInput
-	// List of AS numbers to populate BGP AP_PATH field when it advertises to VGW or peer devices. Only valid for BGP Spoke
-	// Gateway
+	// List of AS numbers to populate BGP AS_PATH field when it advertises to VGW or peer devices.
 	PrependAsPaths pulumi.StringArrayInput
 	// Private IP address of the spoke gateway created.
 	PrivateIp pulumi.StringPtrInput
-	// Private Mode controller load balancer vpc_id. Required when private mode is enabled for the Controller.
+	// VPC ID of Private Mode load balancer. Required when Private Mode is enabled on the Controller. Available in provider version R2.23+.
 	PrivateModeLbVpcId pulumi.StringPtrInput
-	// Subnet availability zone. Required when Private Mode is enabled on the Controller and cloud_type is AWS.
+	// Availability Zone of the subnet. Required when Private Mode is enabled on the Controller and `cloudType` is AWS or AWSGov. Available in Provider version R2.23+.
 	PrivateModeSubnetZone pulumi.StringPtrInput
 	// Public IP address of the Spoke Gateway created.
 	PublicIp pulumi.StringPtrInput
-	// Gateway ethernet interface RX queue size. Supported for AWS related clouds only.
+	// Gateway ethernet interface RX queue size. Once set, can't be deleted or disabled. Available for AWS as of provider version R2.22+.
 	RxQueueSize pulumi.StringPtrInput
 	// Security group used for the spoke gateway.
 	SecurityGroupId pulumi.StringPtrInput
-	// Set to 'enabled' if this feature is desired.
+	// Set to true if this [feature](https://docs.aviatrix.com/Solutions/gateway_ha.html#single-az-gateway) is desired. Valid values: true, false.
 	SingleAzHa pulumi.BoolPtrInput
-	// Specify whether to enable Source NAT feature in 'single_ip' mode on the gateway or not.
+	// Specify whether to enable Source NAT feature in "singleIp" mode on the gateway or not. Please disable AWS NAT instance before enabling this feature. Currently only supports AWS(1) and Azure(8). Valid values: true, false.
 	SingleIpSnat pulumi.BoolPtrInput
-	// software_version can be used to set the desired software version of the gateway. If set, we will attempt to update the
-	// gateway to the specified version. If left blank, the gateway software version will continue to be managed through the
-	// aviatrix_controller_config resource.
+	// The software version of the gateway. If set, we will attempt to update the gateway to the specified version if current version is different. If left blank, the gateway upgrade can be managed with the `AviatrixControllerConfig` resource. Type: String. Example: "6.5.821". Available as of provider version R2.20.0.
 	SoftwareVersion pulumi.StringPtrInput
-	// Intended CIDR list to be advertised to external BGP router.
+	// Intended CIDR list to be advertised to external BGP router. Empty list is not valid. Example: ["10.2.0.0/16", "10.4.0.0/16"].
 	SpokeBgpManualAdvertiseCidrs pulumi.StringArrayInput
 	// Price for spot instance. NOT supported for production deployment.
 	SpotPrice pulumi.StringPtrInput
-	// Public Subnet Info.
+	// A VPC Network address range selected from one of the available network ranges. Example: "172.31.0.0/20". **NOTE: If using `insaneMode`, please see notes here.**
 	Subnet pulumi.StringPtrInput
-	// Instance tag of cloud provider.
+	// (Optional) Instance tag of cloud provider. Only supported for AWS, Azure, AzureGov, AWSGov, AWSChina and AzureChina. Example: ["key1:value1", "key2:value2"].
 	//
 	// Deprecated: Use tags instead.
 	TagLists pulumi.StringArrayInput
-	// A map of tags to assign to the spoke gateway.
+	// Map of tags to assign to the gateway. Only available for AWS, Azure, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret gateways. Allowed characters vary by cloud type but always include: letters, spaces, and numbers. AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret allow the use of any character. Azure, AzureGov and AzureChina allows the following special characters: + - = . _ : @. Example: {"key1" = "value1", "key2" = "value2"}.
 	Tags pulumi.StringMapInput
-	// Specify the transit Gateways to attach to this spoke. Format is a comma-separated list of transit gateway names. For
-	// example, 'transit-gw1,transit-gw2'.
+	// Specify the Aviatrix transit gateways to attach this spoke gateway to. Format is a comma separated list of transit gateway names. For example: "transit-gw1,transit-gw2".
 	//
 	// Deprecated: Please set `manage_transit_gateway_attachment` to false, and use the standalone aviatrix_spoke_transit_attachment resource instead.
 	TransitGw pulumi.StringPtrInput
 	// The IPSec tunnel down detection time for the Spoke Gateway.
 	TunnelDetectionTime pulumi.IntPtrInput
-	// VPC-ID/VNet-Name of cloud provider.
+	// VPC-ID/VNet-Name of cloud provider. Example: AWS/AWSGov/AWSChina: "vpc-abcd1234", GCP: "vpc-gcp-test~-~project-id", Azure/AzureGov/AzureChina: "vnet_name:rg_name:resource_guid", OCI: "ocid1.vcn.oc1.iad.aaaaaaaaba3pv6wkcr4jqae5f44n2b2m2yt2j6rx32uzr4h25vqstifsfdsq".
 	VpcId pulumi.StringPtrInput
-	// Region of cloud provider.
+	// Region of cloud provider. Example: AWS: "us-east-1", GCP: "us-west2-a", Azure: "East US 2", OCI: "us-ashburn-1", AzureGov: "USGov Arizona", AWSGov: "us-gov-west-1, AWSChina: "cn-north-1", AzureChina: "China North", AWS Top Secret: "us-iso-east-1", AWS Secret: "us-isob-east-1".
 	VpcReg pulumi.StringPtrInput
-	// Availability Zone. Only available for cloud_type = 8 (Azure). Must be in the form 'az-n', for example, 'az-2'.
+	// Availability Zone. Only available for cloudType = 8 (Azure). Must be in the form 'az-n', for example, 'az-2'. Available in provider version R2.17+.
 	Zone pulumi.StringPtrInput
 }
 
@@ -634,170 +587,149 @@ func (AviatrixSpokeGatewayState) ElementType() reflect.Type {
 type aviatrixSpokeGatewayArgs struct {
 	// This parameter represents the name of a Cloud-Account in Aviatrix controller.
 	AccountName string `pulumi:"accountName"`
-	// If false, reuse an idle address in Elastic IP pool for this gateway. Otherwise, allocate a new Elastic IP and use it for
-	// this gateway.
+	// When value is false, reuse an idle address in Elastic IP pool for this gateway. Otherwise, allocate a new Elastic IP and use it for this gateway. Available in Controller 4.7+. Valid values: true, false. Default: true.
 	AllocateNewEip *bool `pulumi:"allocateNewEip"`
-	// Approved learned CIDRs for BGP Spoke Gateway. Available as of provider version R2.21+.
+	// A set of approved learned CIDRs. Only valid when `enableLearnedCidrsApproval` is set to true. Example: ["10.250.0.0/16", "10.251.0.0/16"]. Available as of provider version R2.21+.
 	ApprovedLearnedCidrs []string `pulumi:"approvedLearnedCidrs"`
-	// Availability domain for OCI.
+	// Availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 	AvailabilityDomain *string `pulumi:"availabilityDomain"`
-	// The name of the public IP address and its resource group in Azure to assign to this Spoke Gateway.
+	// Name of public IP Address resource and its resource group in Azure to be assigned to the Spoke Gateway instance. Example: "IP_Name:Resource_Group_Name". Required if `allocateNewEip` is false and `cloudType` is Azure, AzureGov or AzureChina. Available as of provider version 2.20+.
 	AzureEipNameResourceGroup *string `pulumi:"azureEipNameResourceGroup"`
-	// Enable Equal Cost Multi Path (ECMP) routing for the next hop for BGP Spoke Gateway.
+	// Enable Equal Cost Multi Path (ECMP) routing for the next hop. Default value: false.
 	BgpEcmp *bool `pulumi:"bgpEcmp"`
-	// BGP Hold Time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 12 and 360.
+	// BGP hold time. Unit is in seconds. Valid values are between 12 and 360. Default value: 180.
 	BgpHoldTime *int `pulumi:"bgpHoldTime"`
-	// BGP route polling time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 10 and 50.
+	// BGP route polling time. Unit is in seconds. Valid values are between 10 and 50. Default value: "50".
 	BgpPollingTime *int `pulumi:"bgpPollingTime"`
-	// Type of cloud service provider.
+	// Type of cloud service provider, requires an integer value. Currently, only AWS(1), GCP(4), Azure(8), OCI(16), AzureGov(32), AWSGov(256), AWSChina(1024), AzureChina(2048), Alibaba Cloud(8192), AWS Top Secret(16384) and AWS Secret (32768) are supported.
 	CloudType int `pulumi:"cloudType"`
 	// Customer managed key ID.
 	CustomerManagedKeys *string `pulumi:"customerManagedKeys"`
-	// A list of comma separated CIDRs to be customized for the spoke VPC routes. When configured, it will replace all learned
-	// routes in VPC routing tables, including RFC1918 and non-RFC1918 CIDRs. It applies to this spoke gateway only.
+	// A list of comma separated CIDRs to be customized for the spoke VPC routes. When configured, it will replace all learned routes in VPC routing tables, including RFC1918 and non-RFC1918 CIDRs. It applies to this spoke gateway only. Example: "10.0.0.0/116,10.2.0.0/16".
 	CustomizedSpokeVpcRoutes *string `pulumi:"customizedSpokeVpcRoutes"`
-	// Disables route propagation on BGP Spoke to attached Transit Gateway. Default: false.
+	// Disables route propagation on BGP Spoke to attached Transit Gateway. Default value: false.
 	DisableRoutePropagation *bool `pulumi:"disableRoutePropagation"`
-	// Required when allocate_new_eip is false. It uses specified EIP for this gateway.
+	// Required when `allocateNewEip` is false. It uses the specified EIP for this gateway. Available in Controller 4.7+. Only available for AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret.
 	Eip *string `pulumi:"eip"`
-	// Enables Active-Standby Mode, available only with HA enabled for BGP Spoke Gateway.
+	// Enables [Active-Standby Mode](https://docs.aviatrix.com/HowTos/transit_advanced.html#active-standby). Available only with HA enabled. Valid values: true, false. Default value: false.
 	EnableActiveStandby *bool `pulumi:"enableActiveStandby"`
-	// Enables Preemptive Mode for Active-Standby, available only with Active-Standby enabled.
+	// Enables Preemptive Mode for Active-Standby. Available only with BGP enabled, HA enabled and Active-Standby enabled. Valid values: true, false. Default value: false.
 	EnableActiveStandbyPreemptive *bool `pulumi:"enableActiveStandbyPreemptive"`
-	// Automatically advertise remote CIDR to Aviatrix Transit Gateway when route based Site2Cloud Tunnel is created.
+	// Auto Advertise Spoke Site2Cloud CIDRs. Default: false. Valid values: true or false. Available as of provider version R2.19+.
 	EnableAutoAdvertiseS2cCidrs *bool `pulumi:"enableAutoAdvertiseS2cCidrs"`
-	// Enable BGP. Default: false.
+	// Enable BGP for this spoke gateway. Only available for AWS and Azure. Valid values: true, false. Default value: false. Available in provider R2.21.0+.
 	EnableBgp *bool `pulumi:"enableBgp"`
-	// Enable encrypt gateway EBS volume. Only supported for AWS provider. Valid values: true, false. Default value: false.
+	// Enable EBS volume encryption for Gateway. Only supports AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret providers. Valid values: true, false. Default value: false.
 	EnableEncryptVolume *bool `pulumi:"enableEncryptVolume"`
-	// Enable jumbo frame support for spoke gateway. Valid values: true or false. Default value: true.
+	// Enable jumbo frames for this spoke gateway. Default value is true.
 	EnableJumboFrame *bool `pulumi:"enableJumboFrame"`
-	// Switch to enable/disable learned CIDR approval for BGP Spoke Gateway. Valid values: true, false.
+	// Switch to enable/disable learned CIDR approval for BGP Spoke Gateway. Valid values: true, false. Default value: false.
 	EnableLearnedCidrsApproval *bool `pulumi:"enableLearnedCidrsApproval"`
-	// Enable [monitor gateway subnets](https://docs.aviatrix.com/HowTos/gateway.html#monitor-gateway-subnet). Only valid for
-	// cloud_type = 1 (AWS) or 256 (AWSGov). Valid values: true, false. Default value: false.
+	// If set to true, the [Monitor Gateway Subnets](https://docs.aviatrix.com/HowTos/gateway.html#monitor-gateway-subnet) feature is enabled. Default value is false. Available in provider version R2.18+.
 	EnableMonitorGatewaySubnets *bool `pulumi:"enableMonitorGatewaySubnets"`
-	// Enable preserve as_path when advertising manual summary cidrs on BGP spoke gateway.
+	// Enable preserve asPath when advertising manual summary cidrs on BGP spoke gateway. Valid values: true, false. Default value: false. Available as of provider version R.2.22.1+
 	EnablePreserveAsPath *bool `pulumi:"enablePreserveAsPath"`
-	// Enable private OOB.
+	// Enable Private OOB feature. Only available for AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret. Valid values: true, false. Default value: false.
 	EnablePrivateOob *bool `pulumi:"enablePrivateOob"`
-	// Config Private VPC Default Route.
+	// Program default route in VPC private route table. Default: false. Valid values: true or false. Available as of provider version R2.19+.
 	EnablePrivateVpcDefaultRoute *bool `pulumi:"enablePrivateVpcDefaultRoute"`
-	// Skip Public Route Table Update.
+	// Skip programming VPC public route table. Default: false. Valid values: true or false. Available as of provider version R2.19+.
 	EnableSkipPublicRouteTableUpdate *bool `pulumi:"enableSkipPublicRouteTableUpdate"`
 	// Enable spot instance. NOT supported for production deployment.
 	EnableSpotInstance *bool `pulumi:"enableSpotInstance"`
-	// Enable vpc_dns_server for Gateway. Valid values: true, false.
+	// Enable VPC DNS Server for Gateway. Currently only supported for AWS, Azure, AzureGov, AWSGov, AWSChina, AzureChina, Alibaba Cloud, AWS Top Secret and AWS Secret gateways. Valid values: true, false. Default value: false.
 	EnableVpcDnsServer *bool `pulumi:"enableVpcDnsServer"`
-	// Fault domain for OCI.
+	// Fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 	FaultDomain *string `pulumi:"faultDomain"`
-	// A list of comma separated CIDRs to be filtered from the spoke VPC route table. When configured, filtering CIDR(s) or
-	// it’s subnet will be deleted from VPC routing tables as well as from spoke gateway’s routing table. It applies to
-	// this spoke gateway only.
+	// A list of comma separated CIDRs to be filtered from the spoke VPC route table. When configured, filtering CIDR(s) or it’s subnet will be deleted from VPC routing tables as well as from spoke gateway’s routing table. It applies to this spoke gateway only. Example: "10.2.0.0/116,10.3.0.0/16".
 	FilteredSpokeVpcRoutes *string `pulumi:"filteredSpokeVpcRoutes"`
 	// Name of the gateway which is going to be created.
 	GwName string `pulumi:"gwName"`
-	// Size of the gateway instance.
+	// Size of the gateway instance. Example: AWS/AWSGov/AWSChina: "t2.large", Azure/AzureGov/AzureChina: "Standard_B1s", OCI: "VM.Standard2.2", GCP: "n1-standard-1".
 	GwSize string `pulumi:"gwSize"`
-	// HA availability domain for OCI.
+	// HA gateway availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 	HaAvailabilityDomain *string `pulumi:"haAvailabilityDomain"`
-	// The name of the public IP address and its resource group in Azure to assign to the HA Spoke Gateway.
+	// Name of public IP Address resource and its resource group in Azure to be assigned to the HA Spoke Gateway instance. Example: "IP_Name:Resource_Group_Name". Required if `haEip` is set and `cloudType` is Azure, AzureGov or AzureChina. Available as of provider version 2.20+.
 	HaAzureEipNameResourceGroup *string `pulumi:"haAzureEipNameResourceGroup"`
-	// Public IP address that you want assigned to the HA Spoke Gateway.
+	// Public IP address that you want to assign to the HA peering instance. If no value is given, a new EIP will automatically be allocated. Only available for AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret.
 	HaEip *string `pulumi:"haEip"`
-	// HA fault domain for OCI.
+	// HA gateway fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 	HaFaultDomain *string `pulumi:"haFaultDomain"`
-	// HA Gateway Size.
+	// HA Gateway Size. Mandatory if enabling HA.
 	HaGwSize *string `pulumi:"haGwSize"`
-	// ha_image_version can be used to set the desired image version of the HA gateway. If set, we will attempt to update the
-	// gateway to the specified version.
+	// The image version of the HA gateway. Use `getAviatrixGatewayImage` data source to programmatically retrieve this value for the desired `haSoftwareVersion`. If set, we will attempt to update the HA gateway to the specified version if current version is different. If left blank, the gateway upgrades can be managed with the `AviatrixControllerConfig` resource. Type: String. Example: "hvm-cloudx-aws-022021". Available as of provider version R2.20.0.
 	HaImageVersion *string `pulumi:"haImageVersion"`
-	// AZ of subnet being created for Insane Mode Spoke HA Gateway. Required for AWS if insane_mode is true and ha_subnet is
-	// set.
+	// AZ of subnet being created for Insane Mode Spoke HA Gateway. Required for AWS, AzureGov, AWSGov, AWS Top Secret and AWS Secret if `insaneMode` is enabled and `haSubnet` is set. Example: AWS: "us-west-1a".
 	HaInsaneModeAz *string `pulumi:"haInsaneModeAz"`
-	// OOB HA availability zone.
+	// HA OOB availability zone. Required if enabling Private OOB and HA. Example: "us-west-1b".
 	HaOobAvailabilityZone *string `pulumi:"haOobAvailabilityZone"`
-	// OOB HA management subnet.
+	// HA OOB management subnet. Required if enabling Private OOB and HA. Example: "11.0.0.48/28".
 	HaOobManagementSubnet *string `pulumi:"haOobManagementSubnet"`
-	// Private Mode HA subnet availability zone.
+	// Availability Zone of the HA subnet. Required when Private Mode is enabled on the Controller and `cloudType` is AWS or AWSGov with HA. Available in Provider version R2.23+.
 	HaPrivateModeSubnetZone *string `pulumi:"haPrivateModeSubnetZone"`
-	// ha_software_version can be used to set the desired software version of the HA gateway. If set, we will attempt to update
-	// the gateway to the specified version. If left blank, the gateway software version will continue to be managed through
-	// the aviatrix_controller_config resource.
+	// The software version of the HA gateway. If set, we will attempt to update the HA gateway to the specified version if current version is different. If left blank, the HA gateway upgrade can be managed with the `AviatrixControllerConfig` resource. Type: String. Example: "6.5.821". Available as of provider version R2.20.0.
 	HaSoftwareVersion *string `pulumi:"haSoftwareVersion"`
-	// HA Subnet. Required if enabling HA for AWS/AWSGov/AWSChina/Azure/AzureChina/OCI/Alibaba Cloud. Optional if enabling HA
-	// for GCP.
+	// HA Subnet. Required if enabling HA for AWS, AWSGov, AWSChina, Azure, AzureGov, AzureChina, OCI, Alibaba Cloud, AWS Top Secret or AWS Secret gateways. Optional for GCP. Setting to empty/unsetting will disable HA. Setting to a valid subnet CIDR will create an HA gateway on the subnet. Example: "10.12.0.0/24"
 	HaSubnet *string `pulumi:"haSubnet"`
-	// HA Zone. Required if enabling HA for GCP. Optional for Azure.
+	// HA Zone. Required if enabling HA for GCP gateway. Optional for Azure. For GCP, setting to empty/unsetting will disable HA and setting to a valid zone will create an HA gateway in the zone. Example: "us-west1-c". For Azure, this is an optional parameter to place the HA gateway in a specific availability zone. Valid values for Azure gateways are in the form "az-n". Example: "az-2". Available for Azure as of provider version R2.17+.
 	HaZone *string `pulumi:"haZone"`
-	// image_version can be used to set the desired image version of the gateway. If set, we will attempt to update the gateway
-	// to the specified version.
+	// The image version of the gateway. Use `getAviatrixGatewayImage` data source to programmatically retrieve this value for the desired `softwareVersion`. If set, we will attempt to update the gateway to the specified version if current version is different. If left blank, the gateway upgrades can be managed with the `AviatrixControllerConfig` resource. Type: String. Example: "hvm-cloudx-aws-022021". Available as of provider version R2.20.0.
 	ImageVersion *string `pulumi:"imageVersion"`
-	// A list of comma separated CIDRs to be advertised to on-prem as 'Included CIDR List'. When configured, it will replace
-	// all advertised routes from this VPC.
+	// A list of comma separated CIDRs to be advertised to on-prem as 'Included CIDR List'. When configured, it will replace all advertised routes from this VPC. Example: "10.4.0.0/116,10.5.0.0/16".
 	IncludedAdvertisedSpokeRoutes *string `pulumi:"includedAdvertisedSpokeRoutes"`
-	// Enable Insane Mode for Spoke Gateway. Valid values: true, false. Supported for AWS/AWSGov, GCP, Azure and OCI. If insane
-	// mode is enabled, gateway size has to at least be c5 size for AWS and Standard_D3_v2 size for Azure.
+	// Enable [Insane Mode](https://docs.aviatrix.com/HowTos/insane_mode.html) for Spoke Gateway. Insane Mode gateway size must be at least c5 size (AWS, AWSGov, AWS China, AWS Top Secret and AWS Secret) or Standard_D3_v2 (Azure and AzureGov); for GCP only four size are supported: "n1-highcpu-4", "n1-highcpu-8", "n1-highcpu-16" and "n1-highcpu-32". If enabled, you must specify a valid /26 CIDR segment of the VPC to create a new subnet for AWS, Azure, AzureGov, AWSGov, AWS Top Secret and AWS Secret. Only available for AWS, GCP/OCI, Azure, AzureGov, AzureChina, AWSGov, AWS Top Secret and AWS Secret. Valid values: true, false. Default value: false.
 	InsaneMode *bool `pulumi:"insaneMode"`
-	// AZ of subnet being created for Insane Mode Spoke Gateway. Required if insane_mode is enabled for AWS cloud.
+	// AZ of subnet being created for Insane Mode Spoke Gateway. Required for AWS, AWSGov, AWS China, AWS Top Secret or AWS Secret if `insaneMode` is enabled. Example: AWS: "us-west-1a".
 	InsaneModeAz *string `pulumi:"insaneModeAz"`
-	// Set the learned CIDRs approval mode for BGP Spoke Gateway. Only valid when 'enable_learned_cidrs_approval' is set to
-	// true. Currently, only 'gateway' is supported: learned CIDR approval applies to ALL connections. Default value:
-	// 'gateway'.
+	// Learned CIDRs approval mode. Either "gateway" (approval on a per-gateway basis) or "connection" (approval on a per-connection basis). Only "gateway" is supported for BGP SPOKE Gateway. Default value: "gateway". Available as of provider version R2.21+.
 	LearnedCidrsApprovalMode *string `pulumi:"learnedCidrsApprovalMode"`
-	// Changes the Aviatrix BGP Spoke Gateway ASN number before you setup Aviatrix BGP Spoke Gateway connection configurations.
+	// Changes the Aviatrix Spoke Gateway ASN number before you setup Aviatrix Spoke Gateway connection configurations.
 	LocalAsNumber *string `pulumi:"localAsNumber"`
-	// This parameter is a switch used to determine whether or not to manage attaching this spoke gateway to transit gateways
-	// using the aviatrix_spoke_gateway resource. If this is set to false, attaching this spoke gateway to transit gateways
-	// must be done using the aviatrix_spoke_transit_attachment resource. Valid values: true, false. Default value: true.
+	// Enable to manage spoke-to-Aviatrix transit gateway attachments using the **aviatrix_spoke_gateway** resource with the below `transitGw` attribute. If this is set to false, attaching this spoke to transit gateways must be done using the **aviatrix_spoke_transit_attachment** resource. Valid values: true, false. Default value: true. Available in provider R2.17+.
 	ManageTransitGatewayAttachment *bool `pulumi:"manageTransitGatewayAttachment"`
-	// A set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true.
+	// Set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true. Available in provider version R2.18+.
 	MonitorExcludeLists []string `pulumi:"monitorExcludeLists"`
-	// OOB subnet availability zone.
+	// OOB availability zone. Required if enabling Private OOB. Example: "us-west-1a".
 	OobAvailabilityZone *string `pulumi:"oobAvailabilityZone"`
-	// OOB management subnet.
+	// OOB management subnet. Required if enabling Private OOB. Example: "11.0.2.0/24".
 	OobManagementSubnet *string `pulumi:"oobManagementSubnet"`
-	// List of AS numbers to populate BGP AP_PATH field when it advertises to VGW or peer devices. Only valid for BGP Spoke
-	// Gateway
+	// List of AS numbers to populate BGP AS_PATH field when it advertises to VGW or peer devices.
 	PrependAsPaths []string `pulumi:"prependAsPaths"`
-	// Private Mode controller load balancer vpc_id. Required when private mode is enabled for the Controller.
+	// VPC ID of Private Mode load balancer. Required when Private Mode is enabled on the Controller. Available in provider version R2.23+.
 	PrivateModeLbVpcId *string `pulumi:"privateModeLbVpcId"`
-	// Subnet availability zone. Required when Private Mode is enabled on the Controller and cloud_type is AWS.
+	// Availability Zone of the subnet. Required when Private Mode is enabled on the Controller and `cloudType` is AWS or AWSGov. Available in Provider version R2.23+.
 	PrivateModeSubnetZone *string `pulumi:"privateModeSubnetZone"`
-	// Gateway ethernet interface RX queue size. Supported for AWS related clouds only.
+	// Gateway ethernet interface RX queue size. Once set, can't be deleted or disabled. Available for AWS as of provider version R2.22+.
 	RxQueueSize *string `pulumi:"rxQueueSize"`
-	// Set to 'enabled' if this feature is desired.
+	// Set to true if this [feature](https://docs.aviatrix.com/Solutions/gateway_ha.html#single-az-gateway) is desired. Valid values: true, false.
 	SingleAzHa *bool `pulumi:"singleAzHa"`
-	// Specify whether to enable Source NAT feature in 'single_ip' mode on the gateway or not.
+	// Specify whether to enable Source NAT feature in "singleIp" mode on the gateway or not. Please disable AWS NAT instance before enabling this feature. Currently only supports AWS(1) and Azure(8). Valid values: true, false.
 	SingleIpSnat *bool `pulumi:"singleIpSnat"`
-	// software_version can be used to set the desired software version of the gateway. If set, we will attempt to update the
-	// gateway to the specified version. If left blank, the gateway software version will continue to be managed through the
-	// aviatrix_controller_config resource.
+	// The software version of the gateway. If set, we will attempt to update the gateway to the specified version if current version is different. If left blank, the gateway upgrade can be managed with the `AviatrixControllerConfig` resource. Type: String. Example: "6.5.821". Available as of provider version R2.20.0.
 	SoftwareVersion *string `pulumi:"softwareVersion"`
-	// Intended CIDR list to be advertised to external BGP router.
+	// Intended CIDR list to be advertised to external BGP router. Empty list is not valid. Example: ["10.2.0.0/16", "10.4.0.0/16"].
 	SpokeBgpManualAdvertiseCidrs []string `pulumi:"spokeBgpManualAdvertiseCidrs"`
 	// Price for spot instance. NOT supported for production deployment.
 	SpotPrice *string `pulumi:"spotPrice"`
-	// Public Subnet Info.
+	// A VPC Network address range selected from one of the available network ranges. Example: "172.31.0.0/20". **NOTE: If using `insaneMode`, please see notes here.**
 	Subnet string `pulumi:"subnet"`
-	// Instance tag of cloud provider.
+	// (Optional) Instance tag of cloud provider. Only supported for AWS, Azure, AzureGov, AWSGov, AWSChina and AzureChina. Example: ["key1:value1", "key2:value2"].
 	//
 	// Deprecated: Use tags instead.
 	TagLists []string `pulumi:"tagLists"`
-	// A map of tags to assign to the spoke gateway.
+	// Map of tags to assign to the gateway. Only available for AWS, Azure, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret gateways. Allowed characters vary by cloud type but always include: letters, spaces, and numbers. AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret allow the use of any character. Azure, AzureGov and AzureChina allows the following special characters: + - = . _ : @. Example: {"key1" = "value1", "key2" = "value2"}.
 	Tags map[string]string `pulumi:"tags"`
-	// Specify the transit Gateways to attach to this spoke. Format is a comma-separated list of transit gateway names. For
-	// example, 'transit-gw1,transit-gw2'.
+	// Specify the Aviatrix transit gateways to attach this spoke gateway to. Format is a comma separated list of transit gateway names. For example: "transit-gw1,transit-gw2".
 	//
 	// Deprecated: Please set `manage_transit_gateway_attachment` to false, and use the standalone aviatrix_spoke_transit_attachment resource instead.
 	TransitGw *string `pulumi:"transitGw"`
 	// The IPSec tunnel down detection time for the Spoke Gateway.
 	TunnelDetectionTime *int `pulumi:"tunnelDetectionTime"`
-	// VPC-ID/VNet-Name of cloud provider.
+	// VPC-ID/VNet-Name of cloud provider. Example: AWS/AWSGov/AWSChina: "vpc-abcd1234", GCP: "vpc-gcp-test~-~project-id", Azure/AzureGov/AzureChina: "vnet_name:rg_name:resource_guid", OCI: "ocid1.vcn.oc1.iad.aaaaaaaaba3pv6wkcr4jqae5f44n2b2m2yt2j6rx32uzr4h25vqstifsfdsq".
 	VpcId string `pulumi:"vpcId"`
-	// Region of cloud provider.
+	// Region of cloud provider. Example: AWS: "us-east-1", GCP: "us-west2-a", Azure: "East US 2", OCI: "us-ashburn-1", AzureGov: "USGov Arizona", AWSGov: "us-gov-west-1, AWSChina: "cn-north-1", AzureChina: "China North", AWS Top Secret: "us-iso-east-1", AWS Secret: "us-isob-east-1".
 	VpcReg string `pulumi:"vpcReg"`
-	// Availability Zone. Only available for cloud_type = 8 (Azure). Must be in the form 'az-n', for example, 'az-2'.
+	// Availability Zone. Only available for cloudType = 8 (Azure). Must be in the form 'az-n', for example, 'az-2'. Available in provider version R2.17+.
 	Zone *string `pulumi:"zone"`
 }
 
@@ -805,170 +737,149 @@ type aviatrixSpokeGatewayArgs struct {
 type AviatrixSpokeGatewayArgs struct {
 	// This parameter represents the name of a Cloud-Account in Aviatrix controller.
 	AccountName pulumi.StringInput
-	// If false, reuse an idle address in Elastic IP pool for this gateway. Otherwise, allocate a new Elastic IP and use it for
-	// this gateway.
+	// When value is false, reuse an idle address in Elastic IP pool for this gateway. Otherwise, allocate a new Elastic IP and use it for this gateway. Available in Controller 4.7+. Valid values: true, false. Default: true.
 	AllocateNewEip pulumi.BoolPtrInput
-	// Approved learned CIDRs for BGP Spoke Gateway. Available as of provider version R2.21+.
+	// A set of approved learned CIDRs. Only valid when `enableLearnedCidrsApproval` is set to true. Example: ["10.250.0.0/16", "10.251.0.0/16"]. Available as of provider version R2.21+.
 	ApprovedLearnedCidrs pulumi.StringArrayInput
-	// Availability domain for OCI.
+	// Availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 	AvailabilityDomain pulumi.StringPtrInput
-	// The name of the public IP address and its resource group in Azure to assign to this Spoke Gateway.
+	// Name of public IP Address resource and its resource group in Azure to be assigned to the Spoke Gateway instance. Example: "IP_Name:Resource_Group_Name". Required if `allocateNewEip` is false and `cloudType` is Azure, AzureGov or AzureChina. Available as of provider version 2.20+.
 	AzureEipNameResourceGroup pulumi.StringPtrInput
-	// Enable Equal Cost Multi Path (ECMP) routing for the next hop for BGP Spoke Gateway.
+	// Enable Equal Cost Multi Path (ECMP) routing for the next hop. Default value: false.
 	BgpEcmp pulumi.BoolPtrInput
-	// BGP Hold Time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 12 and 360.
+	// BGP hold time. Unit is in seconds. Valid values are between 12 and 360. Default value: 180.
 	BgpHoldTime pulumi.IntPtrInput
-	// BGP route polling time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 10 and 50.
+	// BGP route polling time. Unit is in seconds. Valid values are between 10 and 50. Default value: "50".
 	BgpPollingTime pulumi.IntPtrInput
-	// Type of cloud service provider.
+	// Type of cloud service provider, requires an integer value. Currently, only AWS(1), GCP(4), Azure(8), OCI(16), AzureGov(32), AWSGov(256), AWSChina(1024), AzureChina(2048), Alibaba Cloud(8192), AWS Top Secret(16384) and AWS Secret (32768) are supported.
 	CloudType pulumi.IntInput
 	// Customer managed key ID.
 	CustomerManagedKeys pulumi.StringPtrInput
-	// A list of comma separated CIDRs to be customized for the spoke VPC routes. When configured, it will replace all learned
-	// routes in VPC routing tables, including RFC1918 and non-RFC1918 CIDRs. It applies to this spoke gateway only.
+	// A list of comma separated CIDRs to be customized for the spoke VPC routes. When configured, it will replace all learned routes in VPC routing tables, including RFC1918 and non-RFC1918 CIDRs. It applies to this spoke gateway only. Example: "10.0.0.0/116,10.2.0.0/16".
 	CustomizedSpokeVpcRoutes pulumi.StringPtrInput
-	// Disables route propagation on BGP Spoke to attached Transit Gateway. Default: false.
+	// Disables route propagation on BGP Spoke to attached Transit Gateway. Default value: false.
 	DisableRoutePropagation pulumi.BoolPtrInput
-	// Required when allocate_new_eip is false. It uses specified EIP for this gateway.
+	// Required when `allocateNewEip` is false. It uses the specified EIP for this gateway. Available in Controller 4.7+. Only available for AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret.
 	Eip pulumi.StringPtrInput
-	// Enables Active-Standby Mode, available only with HA enabled for BGP Spoke Gateway.
+	// Enables [Active-Standby Mode](https://docs.aviatrix.com/HowTos/transit_advanced.html#active-standby). Available only with HA enabled. Valid values: true, false. Default value: false.
 	EnableActiveStandby pulumi.BoolPtrInput
-	// Enables Preemptive Mode for Active-Standby, available only with Active-Standby enabled.
+	// Enables Preemptive Mode for Active-Standby. Available only with BGP enabled, HA enabled and Active-Standby enabled. Valid values: true, false. Default value: false.
 	EnableActiveStandbyPreemptive pulumi.BoolPtrInput
-	// Automatically advertise remote CIDR to Aviatrix Transit Gateway when route based Site2Cloud Tunnel is created.
+	// Auto Advertise Spoke Site2Cloud CIDRs. Default: false. Valid values: true or false. Available as of provider version R2.19+.
 	EnableAutoAdvertiseS2cCidrs pulumi.BoolPtrInput
-	// Enable BGP. Default: false.
+	// Enable BGP for this spoke gateway. Only available for AWS and Azure. Valid values: true, false. Default value: false. Available in provider R2.21.0+.
 	EnableBgp pulumi.BoolPtrInput
-	// Enable encrypt gateway EBS volume. Only supported for AWS provider. Valid values: true, false. Default value: false.
+	// Enable EBS volume encryption for Gateway. Only supports AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret providers. Valid values: true, false. Default value: false.
 	EnableEncryptVolume pulumi.BoolPtrInput
-	// Enable jumbo frame support for spoke gateway. Valid values: true or false. Default value: true.
+	// Enable jumbo frames for this spoke gateway. Default value is true.
 	EnableJumboFrame pulumi.BoolPtrInput
-	// Switch to enable/disable learned CIDR approval for BGP Spoke Gateway. Valid values: true, false.
+	// Switch to enable/disable learned CIDR approval for BGP Spoke Gateway. Valid values: true, false. Default value: false.
 	EnableLearnedCidrsApproval pulumi.BoolPtrInput
-	// Enable [monitor gateway subnets](https://docs.aviatrix.com/HowTos/gateway.html#monitor-gateway-subnet). Only valid for
-	// cloud_type = 1 (AWS) or 256 (AWSGov). Valid values: true, false. Default value: false.
+	// If set to true, the [Monitor Gateway Subnets](https://docs.aviatrix.com/HowTos/gateway.html#monitor-gateway-subnet) feature is enabled. Default value is false. Available in provider version R2.18+.
 	EnableMonitorGatewaySubnets pulumi.BoolPtrInput
-	// Enable preserve as_path when advertising manual summary cidrs on BGP spoke gateway.
+	// Enable preserve asPath when advertising manual summary cidrs on BGP spoke gateway. Valid values: true, false. Default value: false. Available as of provider version R.2.22.1+
 	EnablePreserveAsPath pulumi.BoolPtrInput
-	// Enable private OOB.
+	// Enable Private OOB feature. Only available for AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret. Valid values: true, false. Default value: false.
 	EnablePrivateOob pulumi.BoolPtrInput
-	// Config Private VPC Default Route.
+	// Program default route in VPC private route table. Default: false. Valid values: true or false. Available as of provider version R2.19+.
 	EnablePrivateVpcDefaultRoute pulumi.BoolPtrInput
-	// Skip Public Route Table Update.
+	// Skip programming VPC public route table. Default: false. Valid values: true or false. Available as of provider version R2.19+.
 	EnableSkipPublicRouteTableUpdate pulumi.BoolPtrInput
 	// Enable spot instance. NOT supported for production deployment.
 	EnableSpotInstance pulumi.BoolPtrInput
-	// Enable vpc_dns_server for Gateway. Valid values: true, false.
+	// Enable VPC DNS Server for Gateway. Currently only supported for AWS, Azure, AzureGov, AWSGov, AWSChina, AzureChina, Alibaba Cloud, AWS Top Secret and AWS Secret gateways. Valid values: true, false. Default value: false.
 	EnableVpcDnsServer pulumi.BoolPtrInput
-	// Fault domain for OCI.
+	// Fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 	FaultDomain pulumi.StringPtrInput
-	// A list of comma separated CIDRs to be filtered from the spoke VPC route table. When configured, filtering CIDR(s) or
-	// it’s subnet will be deleted from VPC routing tables as well as from spoke gateway’s routing table. It applies to
-	// this spoke gateway only.
+	// A list of comma separated CIDRs to be filtered from the spoke VPC route table. When configured, filtering CIDR(s) or it’s subnet will be deleted from VPC routing tables as well as from spoke gateway’s routing table. It applies to this spoke gateway only. Example: "10.2.0.0/116,10.3.0.0/16".
 	FilteredSpokeVpcRoutes pulumi.StringPtrInput
 	// Name of the gateway which is going to be created.
 	GwName pulumi.StringInput
-	// Size of the gateway instance.
+	// Size of the gateway instance. Example: AWS/AWSGov/AWSChina: "t2.large", Azure/AzureGov/AzureChina: "Standard_B1s", OCI: "VM.Standard2.2", GCP: "n1-standard-1".
 	GwSize pulumi.StringInput
-	// HA availability domain for OCI.
+	// HA gateway availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 	HaAvailabilityDomain pulumi.StringPtrInput
-	// The name of the public IP address and its resource group in Azure to assign to the HA Spoke Gateway.
+	// Name of public IP Address resource and its resource group in Azure to be assigned to the HA Spoke Gateway instance. Example: "IP_Name:Resource_Group_Name". Required if `haEip` is set and `cloudType` is Azure, AzureGov or AzureChina. Available as of provider version 2.20+.
 	HaAzureEipNameResourceGroup pulumi.StringPtrInput
-	// Public IP address that you want assigned to the HA Spoke Gateway.
+	// Public IP address that you want to assign to the HA peering instance. If no value is given, a new EIP will automatically be allocated. Only available for AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret.
 	HaEip pulumi.StringPtrInput
-	// HA fault domain for OCI.
+	// HA gateway fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 	HaFaultDomain pulumi.StringPtrInput
-	// HA Gateway Size.
+	// HA Gateway Size. Mandatory if enabling HA.
 	HaGwSize pulumi.StringPtrInput
-	// ha_image_version can be used to set the desired image version of the HA gateway. If set, we will attempt to update the
-	// gateway to the specified version.
+	// The image version of the HA gateway. Use `getAviatrixGatewayImage` data source to programmatically retrieve this value for the desired `haSoftwareVersion`. If set, we will attempt to update the HA gateway to the specified version if current version is different. If left blank, the gateway upgrades can be managed with the `AviatrixControllerConfig` resource. Type: String. Example: "hvm-cloudx-aws-022021". Available as of provider version R2.20.0.
 	HaImageVersion pulumi.StringPtrInput
-	// AZ of subnet being created for Insane Mode Spoke HA Gateway. Required for AWS if insane_mode is true and ha_subnet is
-	// set.
+	// AZ of subnet being created for Insane Mode Spoke HA Gateway. Required for AWS, AzureGov, AWSGov, AWS Top Secret and AWS Secret if `insaneMode` is enabled and `haSubnet` is set. Example: AWS: "us-west-1a".
 	HaInsaneModeAz pulumi.StringPtrInput
-	// OOB HA availability zone.
+	// HA OOB availability zone. Required if enabling Private OOB and HA. Example: "us-west-1b".
 	HaOobAvailabilityZone pulumi.StringPtrInput
-	// OOB HA management subnet.
+	// HA OOB management subnet. Required if enabling Private OOB and HA. Example: "11.0.0.48/28".
 	HaOobManagementSubnet pulumi.StringPtrInput
-	// Private Mode HA subnet availability zone.
+	// Availability Zone of the HA subnet. Required when Private Mode is enabled on the Controller and `cloudType` is AWS or AWSGov with HA. Available in Provider version R2.23+.
 	HaPrivateModeSubnetZone pulumi.StringPtrInput
-	// ha_software_version can be used to set the desired software version of the HA gateway. If set, we will attempt to update
-	// the gateway to the specified version. If left blank, the gateway software version will continue to be managed through
-	// the aviatrix_controller_config resource.
+	// The software version of the HA gateway. If set, we will attempt to update the HA gateway to the specified version if current version is different. If left blank, the HA gateway upgrade can be managed with the `AviatrixControllerConfig` resource. Type: String. Example: "6.5.821". Available as of provider version R2.20.0.
 	HaSoftwareVersion pulumi.StringPtrInput
-	// HA Subnet. Required if enabling HA for AWS/AWSGov/AWSChina/Azure/AzureChina/OCI/Alibaba Cloud. Optional if enabling HA
-	// for GCP.
+	// HA Subnet. Required if enabling HA for AWS, AWSGov, AWSChina, Azure, AzureGov, AzureChina, OCI, Alibaba Cloud, AWS Top Secret or AWS Secret gateways. Optional for GCP. Setting to empty/unsetting will disable HA. Setting to a valid subnet CIDR will create an HA gateway on the subnet. Example: "10.12.0.0/24"
 	HaSubnet pulumi.StringPtrInput
-	// HA Zone. Required if enabling HA for GCP. Optional for Azure.
+	// HA Zone. Required if enabling HA for GCP gateway. Optional for Azure. For GCP, setting to empty/unsetting will disable HA and setting to a valid zone will create an HA gateway in the zone. Example: "us-west1-c". For Azure, this is an optional parameter to place the HA gateway in a specific availability zone. Valid values for Azure gateways are in the form "az-n". Example: "az-2". Available for Azure as of provider version R2.17+.
 	HaZone pulumi.StringPtrInput
-	// image_version can be used to set the desired image version of the gateway. If set, we will attempt to update the gateway
-	// to the specified version.
+	// The image version of the gateway. Use `getAviatrixGatewayImage` data source to programmatically retrieve this value for the desired `softwareVersion`. If set, we will attempt to update the gateway to the specified version if current version is different. If left blank, the gateway upgrades can be managed with the `AviatrixControllerConfig` resource. Type: String. Example: "hvm-cloudx-aws-022021". Available as of provider version R2.20.0.
 	ImageVersion pulumi.StringPtrInput
-	// A list of comma separated CIDRs to be advertised to on-prem as 'Included CIDR List'. When configured, it will replace
-	// all advertised routes from this VPC.
+	// A list of comma separated CIDRs to be advertised to on-prem as 'Included CIDR List'. When configured, it will replace all advertised routes from this VPC. Example: "10.4.0.0/116,10.5.0.0/16".
 	IncludedAdvertisedSpokeRoutes pulumi.StringPtrInput
-	// Enable Insane Mode for Spoke Gateway. Valid values: true, false. Supported for AWS/AWSGov, GCP, Azure and OCI. If insane
-	// mode is enabled, gateway size has to at least be c5 size for AWS and Standard_D3_v2 size for Azure.
+	// Enable [Insane Mode](https://docs.aviatrix.com/HowTos/insane_mode.html) for Spoke Gateway. Insane Mode gateway size must be at least c5 size (AWS, AWSGov, AWS China, AWS Top Secret and AWS Secret) or Standard_D3_v2 (Azure and AzureGov); for GCP only four size are supported: "n1-highcpu-4", "n1-highcpu-8", "n1-highcpu-16" and "n1-highcpu-32". If enabled, you must specify a valid /26 CIDR segment of the VPC to create a new subnet for AWS, Azure, AzureGov, AWSGov, AWS Top Secret and AWS Secret. Only available for AWS, GCP/OCI, Azure, AzureGov, AzureChina, AWSGov, AWS Top Secret and AWS Secret. Valid values: true, false. Default value: false.
 	InsaneMode pulumi.BoolPtrInput
-	// AZ of subnet being created for Insane Mode Spoke Gateway. Required if insane_mode is enabled for AWS cloud.
+	// AZ of subnet being created for Insane Mode Spoke Gateway. Required for AWS, AWSGov, AWS China, AWS Top Secret or AWS Secret if `insaneMode` is enabled. Example: AWS: "us-west-1a".
 	InsaneModeAz pulumi.StringPtrInput
-	// Set the learned CIDRs approval mode for BGP Spoke Gateway. Only valid when 'enable_learned_cidrs_approval' is set to
-	// true. Currently, only 'gateway' is supported: learned CIDR approval applies to ALL connections. Default value:
-	// 'gateway'.
+	// Learned CIDRs approval mode. Either "gateway" (approval on a per-gateway basis) or "connection" (approval on a per-connection basis). Only "gateway" is supported for BGP SPOKE Gateway. Default value: "gateway". Available as of provider version R2.21+.
 	LearnedCidrsApprovalMode pulumi.StringPtrInput
-	// Changes the Aviatrix BGP Spoke Gateway ASN number before you setup Aviatrix BGP Spoke Gateway connection configurations.
+	// Changes the Aviatrix Spoke Gateway ASN number before you setup Aviatrix Spoke Gateway connection configurations.
 	LocalAsNumber pulumi.StringPtrInput
-	// This parameter is a switch used to determine whether or not to manage attaching this spoke gateway to transit gateways
-	// using the aviatrix_spoke_gateway resource. If this is set to false, attaching this spoke gateway to transit gateways
-	// must be done using the aviatrix_spoke_transit_attachment resource. Valid values: true, false. Default value: true.
+	// Enable to manage spoke-to-Aviatrix transit gateway attachments using the **aviatrix_spoke_gateway** resource with the below `transitGw` attribute. If this is set to false, attaching this spoke to transit gateways must be done using the **aviatrix_spoke_transit_attachment** resource. Valid values: true, false. Default value: true. Available in provider R2.17+.
 	ManageTransitGatewayAttachment pulumi.BoolPtrInput
-	// A set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true.
+	// Set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true. Available in provider version R2.18+.
 	MonitorExcludeLists pulumi.StringArrayInput
-	// OOB subnet availability zone.
+	// OOB availability zone. Required if enabling Private OOB. Example: "us-west-1a".
 	OobAvailabilityZone pulumi.StringPtrInput
-	// OOB management subnet.
+	// OOB management subnet. Required if enabling Private OOB. Example: "11.0.2.0/24".
 	OobManagementSubnet pulumi.StringPtrInput
-	// List of AS numbers to populate BGP AP_PATH field when it advertises to VGW or peer devices. Only valid for BGP Spoke
-	// Gateway
+	// List of AS numbers to populate BGP AS_PATH field when it advertises to VGW or peer devices.
 	PrependAsPaths pulumi.StringArrayInput
-	// Private Mode controller load balancer vpc_id. Required when private mode is enabled for the Controller.
+	// VPC ID of Private Mode load balancer. Required when Private Mode is enabled on the Controller. Available in provider version R2.23+.
 	PrivateModeLbVpcId pulumi.StringPtrInput
-	// Subnet availability zone. Required when Private Mode is enabled on the Controller and cloud_type is AWS.
+	// Availability Zone of the subnet. Required when Private Mode is enabled on the Controller and `cloudType` is AWS or AWSGov. Available in Provider version R2.23+.
 	PrivateModeSubnetZone pulumi.StringPtrInput
-	// Gateway ethernet interface RX queue size. Supported for AWS related clouds only.
+	// Gateway ethernet interface RX queue size. Once set, can't be deleted or disabled. Available for AWS as of provider version R2.22+.
 	RxQueueSize pulumi.StringPtrInput
-	// Set to 'enabled' if this feature is desired.
+	// Set to true if this [feature](https://docs.aviatrix.com/Solutions/gateway_ha.html#single-az-gateway) is desired. Valid values: true, false.
 	SingleAzHa pulumi.BoolPtrInput
-	// Specify whether to enable Source NAT feature in 'single_ip' mode on the gateway or not.
+	// Specify whether to enable Source NAT feature in "singleIp" mode on the gateway or not. Please disable AWS NAT instance before enabling this feature. Currently only supports AWS(1) and Azure(8). Valid values: true, false.
 	SingleIpSnat pulumi.BoolPtrInput
-	// software_version can be used to set the desired software version of the gateway. If set, we will attempt to update the
-	// gateway to the specified version. If left blank, the gateway software version will continue to be managed through the
-	// aviatrix_controller_config resource.
+	// The software version of the gateway. If set, we will attempt to update the gateway to the specified version if current version is different. If left blank, the gateway upgrade can be managed with the `AviatrixControllerConfig` resource. Type: String. Example: "6.5.821". Available as of provider version R2.20.0.
 	SoftwareVersion pulumi.StringPtrInput
-	// Intended CIDR list to be advertised to external BGP router.
+	// Intended CIDR list to be advertised to external BGP router. Empty list is not valid. Example: ["10.2.0.0/16", "10.4.0.0/16"].
 	SpokeBgpManualAdvertiseCidrs pulumi.StringArrayInput
 	// Price for spot instance. NOT supported for production deployment.
 	SpotPrice pulumi.StringPtrInput
-	// Public Subnet Info.
+	// A VPC Network address range selected from one of the available network ranges. Example: "172.31.0.0/20". **NOTE: If using `insaneMode`, please see notes here.**
 	Subnet pulumi.StringInput
-	// Instance tag of cloud provider.
+	// (Optional) Instance tag of cloud provider. Only supported for AWS, Azure, AzureGov, AWSGov, AWSChina and AzureChina. Example: ["key1:value1", "key2:value2"].
 	//
 	// Deprecated: Use tags instead.
 	TagLists pulumi.StringArrayInput
-	// A map of tags to assign to the spoke gateway.
+	// Map of tags to assign to the gateway. Only available for AWS, Azure, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret gateways. Allowed characters vary by cloud type but always include: letters, spaces, and numbers. AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret allow the use of any character. Azure, AzureGov and AzureChina allows the following special characters: + - = . _ : @. Example: {"key1" = "value1", "key2" = "value2"}.
 	Tags pulumi.StringMapInput
-	// Specify the transit Gateways to attach to this spoke. Format is a comma-separated list of transit gateway names. For
-	// example, 'transit-gw1,transit-gw2'.
+	// Specify the Aviatrix transit gateways to attach this spoke gateway to. Format is a comma separated list of transit gateway names. For example: "transit-gw1,transit-gw2".
 	//
 	// Deprecated: Please set `manage_transit_gateway_attachment` to false, and use the standalone aviatrix_spoke_transit_attachment resource instead.
 	TransitGw pulumi.StringPtrInput
 	// The IPSec tunnel down detection time for the Spoke Gateway.
 	TunnelDetectionTime pulumi.IntPtrInput
-	// VPC-ID/VNet-Name of cloud provider.
+	// VPC-ID/VNet-Name of cloud provider. Example: AWS/AWSGov/AWSChina: "vpc-abcd1234", GCP: "vpc-gcp-test~-~project-id", Azure/AzureGov/AzureChina: "vnet_name:rg_name:resource_guid", OCI: "ocid1.vcn.oc1.iad.aaaaaaaaba3pv6wkcr4jqae5f44n2b2m2yt2j6rx32uzr4h25vqstifsfdsq".
 	VpcId pulumi.StringInput
-	// Region of cloud provider.
+	// Region of cloud provider. Example: AWS: "us-east-1", GCP: "us-west2-a", Azure: "East US 2", OCI: "us-ashburn-1", AzureGov: "USGov Arizona", AWSGov: "us-gov-west-1, AWSChina: "cn-north-1", AzureChina: "China North", AWS Top Secret: "us-iso-east-1", AWS Secret: "us-isob-east-1".
 	VpcReg pulumi.StringInput
-	// Availability Zone. Only available for cloud_type = 8 (Azure). Must be in the form 'az-n', for example, 'az-2'.
+	// Availability Zone. Only available for cloudType = 8 (Azure). Must be in the form 'az-n', for example, 'az-2'. Available in provider version R2.17+.
 	Zone pulumi.StringPtrInput
 }
 
@@ -1064,48 +975,47 @@ func (o AviatrixSpokeGatewayOutput) AccountName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringOutput { return v.AccountName }).(pulumi.StringOutput)
 }
 
-// If false, reuse an idle address in Elastic IP pool for this gateway. Otherwise, allocate a new Elastic IP and use it for
-// this gateway.
+// When value is false, reuse an idle address in Elastic IP pool for this gateway. Otherwise, allocate a new Elastic IP and use it for this gateway. Available in Controller 4.7+. Valid values: true, false. Default: true.
 func (o AviatrixSpokeGatewayOutput) AllocateNewEip() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.BoolPtrOutput { return v.AllocateNewEip }).(pulumi.BoolPtrOutput)
 }
 
-// Approved learned CIDRs for BGP Spoke Gateway. Available as of provider version R2.21+.
+// A set of approved learned CIDRs. Only valid when `enableLearnedCidrsApproval` is set to true. Example: ["10.250.0.0/16", "10.251.0.0/16"]. Available as of provider version R2.21+.
 func (o AviatrixSpokeGatewayOutput) ApprovedLearnedCidrs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringArrayOutput { return v.ApprovedLearnedCidrs }).(pulumi.StringArrayOutput)
 }
 
-// Availability domain for OCI.
+// Availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 func (o AviatrixSpokeGatewayOutput) AvailabilityDomain() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringOutput { return v.AvailabilityDomain }).(pulumi.StringOutput)
 }
 
-// The name of the public IP address and its resource group in Azure to assign to this Spoke Gateway.
+// Name of public IP Address resource and its resource group in Azure to be assigned to the Spoke Gateway instance. Example: "IP_Name:Resource_Group_Name". Required if `allocateNewEip` is false and `cloudType` is Azure, AzureGov or AzureChina. Available as of provider version 2.20+.
 func (o AviatrixSpokeGatewayOutput) AzureEipNameResourceGroup() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringOutput { return v.AzureEipNameResourceGroup }).(pulumi.StringOutput)
 }
 
-// Enable Equal Cost Multi Path (ECMP) routing for the next hop for BGP Spoke Gateway.
+// Enable Equal Cost Multi Path (ECMP) routing for the next hop. Default value: false.
 func (o AviatrixSpokeGatewayOutput) BgpEcmp() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.BoolPtrOutput { return v.BgpEcmp }).(pulumi.BoolPtrOutput)
 }
 
-// BGP Hold Time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 12 and 360.
+// BGP hold time. Unit is in seconds. Valid values are between 12 and 360. Default value: 180.
 func (o AviatrixSpokeGatewayOutput) BgpHoldTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.IntPtrOutput { return v.BgpHoldTime }).(pulumi.IntPtrOutput)
 }
 
-// BGP route polling time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 10 and 50.
+// BGP route polling time. Unit is in seconds. Valid values are between 10 and 50. Default value: "50".
 func (o AviatrixSpokeGatewayOutput) BgpPollingTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.IntPtrOutput { return v.BgpPollingTime }).(pulumi.IntPtrOutput)
 }
 
-// Cloud instance ID.
+// Cloud instance ID of the spoke gateway.
 func (o AviatrixSpokeGatewayOutput) CloudInstanceId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringOutput { return v.CloudInstanceId }).(pulumi.StringOutput)
 }
 
-// Type of cloud service provider.
+// Type of cloud service provider, requires an integer value. Currently, only AWS(1), GCP(4), Azure(8), OCI(16), AzureGov(32), AWSGov(256), AWSChina(1024), AzureChina(2048), Alibaba Cloud(8192), AWS Top Secret(16384) and AWS Secret (32768) are supported.
 func (o AviatrixSpokeGatewayOutput) CloudType() pulumi.IntOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.IntOutput { return v.CloudType }).(pulumi.IntOutput)
 }
@@ -1115,79 +1025,77 @@ func (o AviatrixSpokeGatewayOutput) CustomerManagedKeys() pulumi.StringPtrOutput
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringPtrOutput { return v.CustomerManagedKeys }).(pulumi.StringPtrOutput)
 }
 
-// A list of comma separated CIDRs to be customized for the spoke VPC routes. When configured, it will replace all learned
-// routes in VPC routing tables, including RFC1918 and non-RFC1918 CIDRs. It applies to this spoke gateway only.
+// A list of comma separated CIDRs to be customized for the spoke VPC routes. When configured, it will replace all learned routes in VPC routing tables, including RFC1918 and non-RFC1918 CIDRs. It applies to this spoke gateway only. Example: "10.0.0.0/116,10.2.0.0/16".
 func (o AviatrixSpokeGatewayOutput) CustomizedSpokeVpcRoutes() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringPtrOutput { return v.CustomizedSpokeVpcRoutes }).(pulumi.StringPtrOutput)
 }
 
-// Disables route propagation on BGP Spoke to attached Transit Gateway. Default: false.
+// Disables route propagation on BGP Spoke to attached Transit Gateway. Default value: false.
 func (o AviatrixSpokeGatewayOutput) DisableRoutePropagation() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.BoolPtrOutput { return v.DisableRoutePropagation }).(pulumi.BoolPtrOutput)
 }
 
-// Required when allocate_new_eip is false. It uses specified EIP for this gateway.
+// Required when `allocateNewEip` is false. It uses the specified EIP for this gateway. Available in Controller 4.7+. Only available for AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret.
 func (o AviatrixSpokeGatewayOutput) Eip() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringOutput { return v.Eip }).(pulumi.StringOutput)
 }
 
-// Enables Active-Standby Mode, available only with HA enabled for BGP Spoke Gateway.
+// Enables [Active-Standby Mode](https://docs.aviatrix.com/HowTos/transit_advanced.html#active-standby). Available only with HA enabled. Valid values: true, false. Default value: false.
 func (o AviatrixSpokeGatewayOutput) EnableActiveStandby() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.BoolPtrOutput { return v.EnableActiveStandby }).(pulumi.BoolPtrOutput)
 }
 
-// Enables Preemptive Mode for Active-Standby, available only with Active-Standby enabled.
+// Enables Preemptive Mode for Active-Standby. Available only with BGP enabled, HA enabled and Active-Standby enabled. Valid values: true, false. Default value: false.
 func (o AviatrixSpokeGatewayOutput) EnableActiveStandbyPreemptive() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.BoolPtrOutput { return v.EnableActiveStandbyPreemptive }).(pulumi.BoolPtrOutput)
 }
 
-// Automatically advertise remote CIDR to Aviatrix Transit Gateway when route based Site2Cloud Tunnel is created.
+// Auto Advertise Spoke Site2Cloud CIDRs. Default: false. Valid values: true or false. Available as of provider version R2.19+.
 func (o AviatrixSpokeGatewayOutput) EnableAutoAdvertiseS2cCidrs() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.BoolPtrOutput { return v.EnableAutoAdvertiseS2cCidrs }).(pulumi.BoolPtrOutput)
 }
 
-// Enable BGP. Default: false.
+// Enable BGP for this spoke gateway. Only available for AWS and Azure. Valid values: true, false. Default value: false. Available in provider R2.21.0+.
 func (o AviatrixSpokeGatewayOutput) EnableBgp() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.BoolPtrOutput { return v.EnableBgp }).(pulumi.BoolPtrOutput)
 }
 
-// Enable encrypt gateway EBS volume. Only supported for AWS provider. Valid values: true, false. Default value: false.
+// Enable EBS volume encryption for Gateway. Only supports AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret providers. Valid values: true, false. Default value: false.
 func (o AviatrixSpokeGatewayOutput) EnableEncryptVolume() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.BoolPtrOutput { return v.EnableEncryptVolume }).(pulumi.BoolPtrOutput)
 }
 
-// Enable jumbo frame support for spoke gateway. Valid values: true or false. Default value: true.
+// Enable jumbo frames for this spoke gateway. Default value is true.
 func (o AviatrixSpokeGatewayOutput) EnableJumboFrame() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.BoolPtrOutput { return v.EnableJumboFrame }).(pulumi.BoolPtrOutput)
 }
 
-// Switch to enable/disable learned CIDR approval for BGP Spoke Gateway. Valid values: true, false.
+// Switch to enable/disable learned CIDR approval for BGP Spoke Gateway. Valid values: true, false. Default value: false.
 func (o AviatrixSpokeGatewayOutput) EnableLearnedCidrsApproval() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.BoolPtrOutput { return v.EnableLearnedCidrsApproval }).(pulumi.BoolPtrOutput)
 }
 
-// Enable [monitor gateway subnets](https://docs.aviatrix.com/HowTos/gateway.html#monitor-gateway-subnet). Only valid for
-// cloud_type = 1 (AWS) or 256 (AWSGov). Valid values: true, false. Default value: false.
+// If set to true, the [Monitor Gateway Subnets](https://docs.aviatrix.com/HowTos/gateway.html#monitor-gateway-subnet) feature is enabled. Default value is false. Available in provider version R2.18+.
 func (o AviatrixSpokeGatewayOutput) EnableMonitorGatewaySubnets() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.BoolPtrOutput { return v.EnableMonitorGatewaySubnets }).(pulumi.BoolPtrOutput)
 }
 
-// Enable preserve as_path when advertising manual summary cidrs on BGP spoke gateway.
+// Enable preserve asPath when advertising manual summary cidrs on BGP spoke gateway. Valid values: true, false. Default value: false. Available as of provider version R.2.22.1+
 func (o AviatrixSpokeGatewayOutput) EnablePreserveAsPath() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.BoolPtrOutput { return v.EnablePreserveAsPath }).(pulumi.BoolPtrOutput)
 }
 
-// Enable private OOB.
+// Enable Private OOB feature. Only available for AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret. Valid values: true, false. Default value: false.
 func (o AviatrixSpokeGatewayOutput) EnablePrivateOob() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.BoolPtrOutput { return v.EnablePrivateOob }).(pulumi.BoolPtrOutput)
 }
 
-// Config Private VPC Default Route.
+// Program default route in VPC private route table. Default: false. Valid values: true or false. Available as of provider version R2.19+.
 func (o AviatrixSpokeGatewayOutput) EnablePrivateVpcDefaultRoute() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.BoolPtrOutput { return v.EnablePrivateVpcDefaultRoute }).(pulumi.BoolPtrOutput)
 }
 
-// Skip Public Route Table Update.
+// Skip programming VPC public route table. Default: false. Valid values: true or false. Available as of provider version R2.19+.
 func (o AviatrixSpokeGatewayOutput) EnableSkipPublicRouteTableUpdate() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.BoolPtrOutput { return v.EnableSkipPublicRouteTableUpdate }).(pulumi.BoolPtrOutput)
 }
@@ -1197,19 +1105,17 @@ func (o AviatrixSpokeGatewayOutput) EnableSpotInstance() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.BoolPtrOutput { return v.EnableSpotInstance }).(pulumi.BoolPtrOutput)
 }
 
-// Enable vpc_dns_server for Gateway. Valid values: true, false.
+// Enable VPC DNS Server for Gateway. Currently only supported for AWS, Azure, AzureGov, AWSGov, AWSChina, AzureChina, Alibaba Cloud, AWS Top Secret and AWS Secret gateways. Valid values: true, false. Default value: false.
 func (o AviatrixSpokeGatewayOutput) EnableVpcDnsServer() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.BoolPtrOutput { return v.EnableVpcDnsServer }).(pulumi.BoolPtrOutput)
 }
 
-// Fault domain for OCI.
+// Fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 func (o AviatrixSpokeGatewayOutput) FaultDomain() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringOutput { return v.FaultDomain }).(pulumi.StringOutput)
 }
 
-// A list of comma separated CIDRs to be filtered from the spoke VPC route table. When configured, filtering CIDR(s) or
-// it’s subnet will be deleted from VPC routing tables as well as from spoke gateway’s routing table. It applies to
-// this spoke gateway only.
+// A list of comma separated CIDRs to be filtered from the spoke VPC route table. When configured, filtering CIDR(s) or it’s subnet will be deleted from VPC routing tables as well as from spoke gateway’s routing table. It applies to this spoke gateway only. Example: "10.2.0.0/116,10.3.0.0/16".
 func (o AviatrixSpokeGatewayOutput) FilteredSpokeVpcRoutes() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringPtrOutput { return v.FilteredSpokeVpcRoutes }).(pulumi.StringPtrOutput)
 }
@@ -1219,32 +1125,32 @@ func (o AviatrixSpokeGatewayOutput) GwName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringOutput { return v.GwName }).(pulumi.StringOutput)
 }
 
-// Size of the gateway instance.
+// Size of the gateway instance. Example: AWS/AWSGov/AWSChina: "t2.large", Azure/AzureGov/AzureChina: "Standard_B1s", OCI: "VM.Standard2.2", GCP: "n1-standard-1".
 func (o AviatrixSpokeGatewayOutput) GwSize() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringOutput { return v.GwSize }).(pulumi.StringOutput)
 }
 
-// HA availability domain for OCI.
+// HA gateway availability domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 func (o AviatrixSpokeGatewayOutput) HaAvailabilityDomain() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringOutput { return v.HaAvailabilityDomain }).(pulumi.StringOutput)
 }
 
-// The name of the public IP address and its resource group in Azure to assign to the HA Spoke Gateway.
+// Name of public IP Address resource and its resource group in Azure to be assigned to the HA Spoke Gateway instance. Example: "IP_Name:Resource_Group_Name". Required if `haEip` is set and `cloudType` is Azure, AzureGov or AzureChina. Available as of provider version 2.20+.
 func (o AviatrixSpokeGatewayOutput) HaAzureEipNameResourceGroup() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringOutput { return v.HaAzureEipNameResourceGroup }).(pulumi.StringOutput)
 }
 
-// Cloud instance ID of HA spoke gateway.
+// Cloud instance ID of the HA spoke gateway.
 func (o AviatrixSpokeGatewayOutput) HaCloudInstanceId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringOutput { return v.HaCloudInstanceId }).(pulumi.StringOutput)
 }
 
-// Public IP address that you want assigned to the HA Spoke Gateway.
+// Public IP address that you want to assign to the HA peering instance. If no value is given, a new EIP will automatically be allocated. Only available for AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret.
 func (o AviatrixSpokeGatewayOutput) HaEip() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringOutput { return v.HaEip }).(pulumi.StringOutput)
 }
 
-// HA fault domain for OCI.
+// HA gateway fault domain. Required and valid only for OCI. Available as of provider version R2.19.3.
 func (o AviatrixSpokeGatewayOutput) HaFaultDomain() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringOutput { return v.HaFaultDomain }).(pulumi.StringOutput)
 }
@@ -1254,39 +1160,37 @@ func (o AviatrixSpokeGatewayOutput) HaGwName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringOutput { return v.HaGwName }).(pulumi.StringOutput)
 }
 
-// HA Gateway Size.
+// HA Gateway Size. Mandatory if enabling HA.
 func (o AviatrixSpokeGatewayOutput) HaGwSize() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringPtrOutput { return v.HaGwSize }).(pulumi.StringPtrOutput)
 }
 
-// ha_image_version can be used to set the desired image version of the HA gateway. If set, we will attempt to update the
-// gateway to the specified version.
+// The image version of the HA gateway. Use `getAviatrixGatewayImage` data source to programmatically retrieve this value for the desired `haSoftwareVersion`. If set, we will attempt to update the HA gateway to the specified version if current version is different. If left blank, the gateway upgrades can be managed with the `AviatrixControllerConfig` resource. Type: String. Example: "hvm-cloudx-aws-022021". Available as of provider version R2.20.0.
 func (o AviatrixSpokeGatewayOutput) HaImageVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringOutput { return v.HaImageVersion }).(pulumi.StringOutput)
 }
 
-// AZ of subnet being created for Insane Mode Spoke HA Gateway. Required for AWS if insane_mode is true and ha_subnet is
-// set.
+// AZ of subnet being created for Insane Mode Spoke HA Gateway. Required for AWS, AzureGov, AWSGov, AWS Top Secret and AWS Secret if `insaneMode` is enabled and `haSubnet` is set. Example: AWS: "us-west-1a".
 func (o AviatrixSpokeGatewayOutput) HaInsaneModeAz() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringPtrOutput { return v.HaInsaneModeAz }).(pulumi.StringPtrOutput)
 }
 
-// OOB HA availability zone.
+// HA OOB availability zone. Required if enabling Private OOB and HA. Example: "us-west-1b".
 func (o AviatrixSpokeGatewayOutput) HaOobAvailabilityZone() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringPtrOutput { return v.HaOobAvailabilityZone }).(pulumi.StringPtrOutput)
 }
 
-// OOB HA management subnet.
+// HA OOB management subnet. Required if enabling Private OOB and HA. Example: "11.0.0.48/28".
 func (o AviatrixSpokeGatewayOutput) HaOobManagementSubnet() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringPtrOutput { return v.HaOobManagementSubnet }).(pulumi.StringPtrOutput)
 }
 
-// Private IP address of the spoke gateway created.
+// Private IP address of HA spoke gateway.
 func (o AviatrixSpokeGatewayOutput) HaPrivateIp() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringOutput { return v.HaPrivateIp }).(pulumi.StringOutput)
 }
 
-// Private Mode HA subnet availability zone.
+// Availability Zone of the HA subnet. Required when Private Mode is enabled on the Controller and `cloudType` is AWS or AWSGov with HA. Available in Provider version R2.23+.
 func (o AviatrixSpokeGatewayOutput) HaPrivateModeSubnetZone() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringPtrOutput { return v.HaPrivateModeSubnetZone }).(pulumi.StringPtrOutput)
 }
@@ -1301,83 +1205,72 @@ func (o AviatrixSpokeGatewayOutput) HaSecurityGroupId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringOutput { return v.HaSecurityGroupId }).(pulumi.StringOutput)
 }
 
-// ha_software_version can be used to set the desired software version of the HA gateway. If set, we will attempt to update
-// the gateway to the specified version. If left blank, the gateway software version will continue to be managed through
-// the aviatrix_controller_config resource.
+// The software version of the HA gateway. If set, we will attempt to update the HA gateway to the specified version if current version is different. If left blank, the HA gateway upgrade can be managed with the `AviatrixControllerConfig` resource. Type: String. Example: "6.5.821". Available as of provider version R2.20.0.
 func (o AviatrixSpokeGatewayOutput) HaSoftwareVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringOutput { return v.HaSoftwareVersion }).(pulumi.StringOutput)
 }
 
-// HA Subnet. Required if enabling HA for AWS/AWSGov/AWSChina/Azure/AzureChina/OCI/Alibaba Cloud. Optional if enabling HA
-// for GCP.
+// HA Subnet. Required if enabling HA for AWS, AWSGov, AWSChina, Azure, AzureGov, AzureChina, OCI, Alibaba Cloud, AWS Top Secret or AWS Secret gateways. Optional for GCP. Setting to empty/unsetting will disable HA. Setting to a valid subnet CIDR will create an HA gateway on the subnet. Example: "10.12.0.0/24"
 func (o AviatrixSpokeGatewayOutput) HaSubnet() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringPtrOutput { return v.HaSubnet }).(pulumi.StringPtrOutput)
 }
 
-// HA Zone. Required if enabling HA for GCP. Optional for Azure.
+// HA Zone. Required if enabling HA for GCP gateway. Optional for Azure. For GCP, setting to empty/unsetting will disable HA and setting to a valid zone will create an HA gateway in the zone. Example: "us-west1-c". For Azure, this is an optional parameter to place the HA gateway in a specific availability zone. Valid values for Azure gateways are in the form "az-n". Example: "az-2". Available for Azure as of provider version R2.17+.
 func (o AviatrixSpokeGatewayOutput) HaZone() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringPtrOutput { return v.HaZone }).(pulumi.StringPtrOutput)
 }
 
-// image_version can be used to set the desired image version of the gateway. If set, we will attempt to update the gateway
-// to the specified version.
+// The image version of the gateway. Use `getAviatrixGatewayImage` data source to programmatically retrieve this value for the desired `softwareVersion`. If set, we will attempt to update the gateway to the specified version if current version is different. If left blank, the gateway upgrades can be managed with the `AviatrixControllerConfig` resource. Type: String. Example: "hvm-cloudx-aws-022021". Available as of provider version R2.20.0.
 func (o AviatrixSpokeGatewayOutput) ImageVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringOutput { return v.ImageVersion }).(pulumi.StringOutput)
 }
 
-// A list of comma separated CIDRs to be advertised to on-prem as 'Included CIDR List'. When configured, it will replace
-// all advertised routes from this VPC.
+// A list of comma separated CIDRs to be advertised to on-prem as 'Included CIDR List'. When configured, it will replace all advertised routes from this VPC. Example: "10.4.0.0/116,10.5.0.0/16".
 func (o AviatrixSpokeGatewayOutput) IncludedAdvertisedSpokeRoutes() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringPtrOutput { return v.IncludedAdvertisedSpokeRoutes }).(pulumi.StringPtrOutput)
 }
 
-// Enable Insane Mode for Spoke Gateway. Valid values: true, false. Supported for AWS/AWSGov, GCP, Azure and OCI. If insane
-// mode is enabled, gateway size has to at least be c5 size for AWS and Standard_D3_v2 size for Azure.
+// Enable [Insane Mode](https://docs.aviatrix.com/HowTos/insane_mode.html) for Spoke Gateway. Insane Mode gateway size must be at least c5 size (AWS, AWSGov, AWS China, AWS Top Secret and AWS Secret) or Standard_D3_v2 (Azure and AzureGov); for GCP only four size are supported: "n1-highcpu-4", "n1-highcpu-8", "n1-highcpu-16" and "n1-highcpu-32". If enabled, you must specify a valid /26 CIDR segment of the VPC to create a new subnet for AWS, Azure, AzureGov, AWSGov, AWS Top Secret and AWS Secret. Only available for AWS, GCP/OCI, Azure, AzureGov, AzureChina, AWSGov, AWS Top Secret and AWS Secret. Valid values: true, false. Default value: false.
 func (o AviatrixSpokeGatewayOutput) InsaneMode() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.BoolPtrOutput { return v.InsaneMode }).(pulumi.BoolPtrOutput)
 }
 
-// AZ of subnet being created for Insane Mode Spoke Gateway. Required if insane_mode is enabled for AWS cloud.
+// AZ of subnet being created for Insane Mode Spoke Gateway. Required for AWS, AWSGov, AWS China, AWS Top Secret or AWS Secret if `insaneMode` is enabled. Example: AWS: "us-west-1a".
 func (o AviatrixSpokeGatewayOutput) InsaneModeAz() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringPtrOutput { return v.InsaneModeAz }).(pulumi.StringPtrOutput)
 }
 
-// Set the learned CIDRs approval mode for BGP Spoke Gateway. Only valid when 'enable_learned_cidrs_approval' is set to
-// true. Currently, only 'gateway' is supported: learned CIDR approval applies to ALL connections. Default value:
-// 'gateway'.
+// Learned CIDRs approval mode. Either "gateway" (approval on a per-gateway basis) or "connection" (approval on a per-connection basis). Only "gateway" is supported for BGP SPOKE Gateway. Default value: "gateway". Available as of provider version R2.21+.
 func (o AviatrixSpokeGatewayOutput) LearnedCidrsApprovalMode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringPtrOutput { return v.LearnedCidrsApprovalMode }).(pulumi.StringPtrOutput)
 }
 
-// Changes the Aviatrix BGP Spoke Gateway ASN number before you setup Aviatrix BGP Spoke Gateway connection configurations.
+// Changes the Aviatrix Spoke Gateway ASN number before you setup Aviatrix Spoke Gateway connection configurations.
 func (o AviatrixSpokeGatewayOutput) LocalAsNumber() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringOutput { return v.LocalAsNumber }).(pulumi.StringOutput)
 }
 
-// This parameter is a switch used to determine whether or not to manage attaching this spoke gateway to transit gateways
-// using the aviatrix_spoke_gateway resource. If this is set to false, attaching this spoke gateway to transit gateways
-// must be done using the aviatrix_spoke_transit_attachment resource. Valid values: true, false. Default value: true.
+// Enable to manage spoke-to-Aviatrix transit gateway attachments using the **aviatrix_spoke_gateway** resource with the below `transitGw` attribute. If this is set to false, attaching this spoke to transit gateways must be done using the **aviatrix_spoke_transit_attachment** resource. Valid values: true, false. Default value: true. Available in provider R2.17+.
 func (o AviatrixSpokeGatewayOutput) ManageTransitGatewayAttachment() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.BoolPtrOutput { return v.ManageTransitGatewayAttachment }).(pulumi.BoolPtrOutput)
 }
 
-// A set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true.
+// Set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true. Available in provider version R2.18+.
 func (o AviatrixSpokeGatewayOutput) MonitorExcludeLists() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringArrayOutput { return v.MonitorExcludeLists }).(pulumi.StringArrayOutput)
 }
 
-// OOB subnet availability zone.
+// OOB availability zone. Required if enabling Private OOB. Example: "us-west-1a".
 func (o AviatrixSpokeGatewayOutput) OobAvailabilityZone() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringPtrOutput { return v.OobAvailabilityZone }).(pulumi.StringPtrOutput)
 }
 
-// OOB management subnet.
+// OOB management subnet. Required if enabling Private OOB. Example: "11.0.2.0/24".
 func (o AviatrixSpokeGatewayOutput) OobManagementSubnet() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringPtrOutput { return v.OobManagementSubnet }).(pulumi.StringPtrOutput)
 }
 
-// List of AS numbers to populate BGP AP_PATH field when it advertises to VGW or peer devices. Only valid for BGP Spoke
-// Gateway
+// List of AS numbers to populate BGP AS_PATH field when it advertises to VGW or peer devices.
 func (o AviatrixSpokeGatewayOutput) PrependAsPaths() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringArrayOutput { return v.PrependAsPaths }).(pulumi.StringArrayOutput)
 }
@@ -1387,12 +1280,12 @@ func (o AviatrixSpokeGatewayOutput) PrivateIp() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringOutput { return v.PrivateIp }).(pulumi.StringOutput)
 }
 
-// Private Mode controller load balancer vpc_id. Required when private mode is enabled for the Controller.
+// VPC ID of Private Mode load balancer. Required when Private Mode is enabled on the Controller. Available in provider version R2.23+.
 func (o AviatrixSpokeGatewayOutput) PrivateModeLbVpcId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringPtrOutput { return v.PrivateModeLbVpcId }).(pulumi.StringPtrOutput)
 }
 
-// Subnet availability zone. Required when Private Mode is enabled on the Controller and cloud_type is AWS.
+// Availability Zone of the subnet. Required when Private Mode is enabled on the Controller and `cloudType` is AWS or AWSGov. Available in Provider version R2.23+.
 func (o AviatrixSpokeGatewayOutput) PrivateModeSubnetZone() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringPtrOutput { return v.PrivateModeSubnetZone }).(pulumi.StringPtrOutput)
 }
@@ -1402,7 +1295,7 @@ func (o AviatrixSpokeGatewayOutput) PublicIp() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringOutput { return v.PublicIp }).(pulumi.StringOutput)
 }
 
-// Gateway ethernet interface RX queue size. Supported for AWS related clouds only.
+// Gateway ethernet interface RX queue size. Once set, can't be deleted or disabled. Available for AWS as of provider version R2.22+.
 func (o AviatrixSpokeGatewayOutput) RxQueueSize() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringPtrOutput { return v.RxQueueSize }).(pulumi.StringPtrOutput)
 }
@@ -1412,24 +1305,22 @@ func (o AviatrixSpokeGatewayOutput) SecurityGroupId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringOutput { return v.SecurityGroupId }).(pulumi.StringOutput)
 }
 
-// Set to 'enabled' if this feature is desired.
+// Set to true if this [feature](https://docs.aviatrix.com/Solutions/gateway_ha.html#single-az-gateway) is desired. Valid values: true, false.
 func (o AviatrixSpokeGatewayOutput) SingleAzHa() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.BoolPtrOutput { return v.SingleAzHa }).(pulumi.BoolPtrOutput)
 }
 
-// Specify whether to enable Source NAT feature in 'single_ip' mode on the gateway or not.
+// Specify whether to enable Source NAT feature in "singleIp" mode on the gateway or not. Please disable AWS NAT instance before enabling this feature. Currently only supports AWS(1) and Azure(8). Valid values: true, false.
 func (o AviatrixSpokeGatewayOutput) SingleIpSnat() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.BoolPtrOutput { return v.SingleIpSnat }).(pulumi.BoolPtrOutput)
 }
 
-// software_version can be used to set the desired software version of the gateway. If set, we will attempt to update the
-// gateway to the specified version. If left blank, the gateway software version will continue to be managed through the
-// aviatrix_controller_config resource.
+// The software version of the gateway. If set, we will attempt to update the gateway to the specified version if current version is different. If left blank, the gateway upgrade can be managed with the `AviatrixControllerConfig` resource. Type: String. Example: "6.5.821". Available as of provider version R2.20.0.
 func (o AviatrixSpokeGatewayOutput) SoftwareVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringOutput { return v.SoftwareVersion }).(pulumi.StringOutput)
 }
 
-// Intended CIDR list to be advertised to external BGP router.
+// Intended CIDR list to be advertised to external BGP router. Empty list is not valid. Example: ["10.2.0.0/16", "10.4.0.0/16"].
 func (o AviatrixSpokeGatewayOutput) SpokeBgpManualAdvertiseCidrs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringArrayOutput { return v.SpokeBgpManualAdvertiseCidrs }).(pulumi.StringArrayOutput)
 }
@@ -1439,25 +1330,24 @@ func (o AviatrixSpokeGatewayOutput) SpotPrice() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringPtrOutput { return v.SpotPrice }).(pulumi.StringPtrOutput)
 }
 
-// Public Subnet Info.
+// A VPC Network address range selected from one of the available network ranges. Example: "172.31.0.0/20". **NOTE: If using `insaneMode`, please see notes here.**
 func (o AviatrixSpokeGatewayOutput) Subnet() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringOutput { return v.Subnet }).(pulumi.StringOutput)
 }
 
-// Instance tag of cloud provider.
+// (Optional) Instance tag of cloud provider. Only supported for AWS, Azure, AzureGov, AWSGov, AWSChina and AzureChina. Example: ["key1:value1", "key2:value2"].
 //
 // Deprecated: Use tags instead.
 func (o AviatrixSpokeGatewayOutput) TagLists() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringArrayOutput { return v.TagLists }).(pulumi.StringArrayOutput)
 }
 
-// A map of tags to assign to the spoke gateway.
+// Map of tags to assign to the gateway. Only available for AWS, Azure, AzureGov, AWSGov, AWSChina, AzureChina, AWS Top Secret and AWS Secret gateways. Allowed characters vary by cloud type but always include: letters, spaces, and numbers. AWS, AWSGov, AWSChina, AWS Top Secret and AWS Secret allow the use of any character. Azure, AzureGov and AzureChina allows the following special characters: + - = . _ : @. Example: {"key1" = "value1", "key2" = "value2"}.
 func (o AviatrixSpokeGatewayOutput) Tags() pulumi.StringMapOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringMapOutput { return v.Tags }).(pulumi.StringMapOutput)
 }
 
-// Specify the transit Gateways to attach to this spoke. Format is a comma-separated list of transit gateway names. For
-// example, 'transit-gw1,transit-gw2'.
+// Specify the Aviatrix transit gateways to attach this spoke gateway to. Format is a comma separated list of transit gateway names. For example: "transit-gw1,transit-gw2".
 //
 // Deprecated: Please set `manage_transit_gateway_attachment` to false, and use the standalone aviatrix_spoke_transit_attachment resource instead.
 func (o AviatrixSpokeGatewayOutput) TransitGw() pulumi.StringPtrOutput {
@@ -1469,17 +1359,17 @@ func (o AviatrixSpokeGatewayOutput) TunnelDetectionTime() pulumi.IntOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.IntOutput { return v.TunnelDetectionTime }).(pulumi.IntOutput)
 }
 
-// VPC-ID/VNet-Name of cloud provider.
+// VPC-ID/VNet-Name of cloud provider. Example: AWS/AWSGov/AWSChina: "vpc-abcd1234", GCP: "vpc-gcp-test~-~project-id", Azure/AzureGov/AzureChina: "vnet_name:rg_name:resource_guid", OCI: "ocid1.vcn.oc1.iad.aaaaaaaaba3pv6wkcr4jqae5f44n2b2m2yt2j6rx32uzr4h25vqstifsfdsq".
 func (o AviatrixSpokeGatewayOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
 }
 
-// Region of cloud provider.
+// Region of cloud provider. Example: AWS: "us-east-1", GCP: "us-west2-a", Azure: "East US 2", OCI: "us-ashburn-1", AzureGov: "USGov Arizona", AWSGov: "us-gov-west-1, AWSChina: "cn-north-1", AzureChina: "China North", AWS Top Secret: "us-iso-east-1", AWS Secret: "us-isob-east-1".
 func (o AviatrixSpokeGatewayOutput) VpcReg() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringOutput { return v.VpcReg }).(pulumi.StringOutput)
 }
 
-// Availability Zone. Only available for cloud_type = 8 (Azure). Must be in the form 'az-n', for example, 'az-2'.
+// Availability Zone. Only available for cloudType = 8 (Azure). Must be in the form 'az-n', for example, 'az-2'. Available in provider version R2.17+.
 func (o AviatrixSpokeGatewayOutput) Zone() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeGateway) pulumi.StringPtrOutput { return v.Zone }).(pulumi.StringPtrOutput)
 }

@@ -19,7 +19,7 @@ class AviatrixPeriodicPingArgs:
                  ip_address: pulumi.Input[str]):
         """
         The set of arguments for constructing a AviatrixPeriodicPing resource.
-        :param pulumi.Input[str] gw_name: Name of gateway.
+        :param pulumi.Input[str] gw_name: Name of the gateway.
         :param pulumi.Input[int] interval: Interval between pings in seconds.
         :param pulumi.Input[str] ip_address: IP Address to ping.
         """
@@ -31,7 +31,7 @@ class AviatrixPeriodicPingArgs:
     @pulumi.getter(name="gwName")
     def gw_name(self) -> pulumi.Input[str]:
         """
-        Name of gateway.
+        Name of the gateway.
         """
         return pulumi.get(self, "gw_name")
 
@@ -72,7 +72,7 @@ class _AviatrixPeriodicPingState:
                  ip_address: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixPeriodicPing resources.
-        :param pulumi.Input[str] gw_name: Name of gateway.
+        :param pulumi.Input[str] gw_name: Name of the gateway.
         :param pulumi.Input[int] interval: Interval between pings in seconds.
         :param pulumi.Input[str] ip_address: IP Address to ping.
         """
@@ -87,7 +87,7 @@ class _AviatrixPeriodicPingState:
     @pulumi.getter(name="gwName")
     def gw_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of gateway.
+        Name of the gateway.
         """
         return pulumi.get(self, "gw_name")
 
@@ -130,10 +130,32 @@ class AviatrixPeriodicPing(pulumi.CustomResource):
                  ip_address: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixPeriodicPing resource with the given unique name, props, and options.
+        The **aviatrix_periodic_ping** resource manages the periodic ping feature for Aviatrix gateways.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Enable Periodic Ping for a Gateway
+        test_ping = aviatrix.AviatrixPeriodicPing("testPing",
+            gw_name="test-gw",
+            interval=600,
+            ip_address="127.0.0.1")
+        ```
+
+        ## Import
+
+        **aviatrix_periodic_ping** can be imported using the `gw_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixPeriodicPing:AviatrixPeriodicPing test gw_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] gw_name: Name of gateway.
+        :param pulumi.Input[str] gw_name: Name of the gateway.
         :param pulumi.Input[int] interval: Interval between pings in seconds.
         :param pulumi.Input[str] ip_address: IP Address to ping.
         """
@@ -144,7 +166,29 @@ class AviatrixPeriodicPing(pulumi.CustomResource):
                  args: AviatrixPeriodicPingArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixPeriodicPing resource with the given unique name, props, and options.
+        The **aviatrix_periodic_ping** resource manages the periodic ping feature for Aviatrix gateways.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Enable Periodic Ping for a Gateway
+        test_ping = aviatrix.AviatrixPeriodicPing("testPing",
+            gw_name="test-gw",
+            interval=600,
+            ip_address="127.0.0.1")
+        ```
+
+        ## Import
+
+        **aviatrix_periodic_ping** can be imported using the `gw_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixPeriodicPing:AviatrixPeriodicPing test gw_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixPeriodicPingArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -201,7 +245,7 @@ class AviatrixPeriodicPing(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] gw_name: Name of gateway.
+        :param pulumi.Input[str] gw_name: Name of the gateway.
         :param pulumi.Input[int] interval: Interval between pings in seconds.
         :param pulumi.Input[str] ip_address: IP Address to ping.
         """
@@ -218,7 +262,7 @@ class AviatrixPeriodicPing(pulumi.CustomResource):
     @pulumi.getter(name="gwName")
     def gw_name(self) -> pulumi.Output[str]:
         """
-        Name of gateway.
+        Name of the gateway.
         """
         return pulumi.get(self, "gw_name")
 

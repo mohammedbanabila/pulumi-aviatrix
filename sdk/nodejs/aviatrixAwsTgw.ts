@@ -2,9 +2,125 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_aws_tgw** resource allows the creation and management of Aviatrix-created AWS TGWs.
+ *
+ * > **NOTE:** If you are planning to attach VPCs to the **aviatrix_aws_tgw** resource and anticipate updating it often and/or using advanced options such as customized route advertisement, we highly recommend managing those VPCs outside this resource by setting `manageVpcAttachment` to false and using the **aviatrix_aws_tgw_vpc_attachment** resource instead of the in-line `attachedVpc {}` block.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix AWS TGW
+ * const testAwsTgw = new aviatrix.AviatrixAwsTgw("test_aws_tgw", {
+ *     accountName: "devops",
+ *     awsSideAsNumber: "64512",
+ *     manageTransitGatewayAttachment: false,
+ *     manageVpcAttachment: false,
+ *     region: "us-east-1",
+ *     securityDomains: [
+ *         {
+ *             connectedDomains: [
+ *                 "Default_Domain",
+ *                 "Shared_Service_Domain",
+ *                 "mysdn1",
+ *             ],
+ *             securityDomainName: "Aviatrix_Edge_Domain",
+ *         },
+ *         {
+ *             connectedDomains: [
+ *                 "Aviatrix_Edge_Domain",
+ *                 "Shared_Service_Domain",
+ *             ],
+ *             securityDomainName: "Default_Domain",
+ *         },
+ *         {
+ *             connectedDomains: [
+ *                 "Aviatrix_Edge_Domain",
+ *                 "Default_Domain",
+ *             ],
+ *             securityDomainName: "Shared_Service_Domain",
+ *         },
+ *         {
+ *             connectedDomains: ["Aviatrix_Edge_Domain"],
+ *             securityDomainName: "SDN1",
+ *         },
+ *         {
+ *             securityDomainName: "mysdn2",
+ *         },
+ *         {
+ *             aviatrixFirewall: true,
+ *             securityDomainName: "firewall-domain",
+ *         },
+ *     ],
+ *     tgwName: "test-AWS-TGW",
+ * });
+ * ```
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix AWSGov TGW
+ * const testAwsGovTgw = new aviatrix.AviatrixAwsTgw("test_aws_gov_tgw", {
+ *     accountName: "devops",
+ *     awsSideAsNumber: "64512",
+ *     cloudType: 256,
+ *     manageTransitGatewayAttachment: false,
+ *     manageVpcAttachment: false,
+ *     region: "us-gov-east-1",
+ *     securityDomains: [
+ *         {
+ *             connectedDomains: [
+ *                 "Default_Domain",
+ *                 "Shared_Service_Domain",
+ *                 "mysdn1",
+ *             ],
+ *             securityDomainName: "Aviatrix_Edge_Domain",
+ *         },
+ *         {
+ *             connectedDomains: [
+ *                 "Aviatrix_Edge_Domain",
+ *                 "Shared_Service_Domain",
+ *             ],
+ *             securityDomainName: "Default_Domain",
+ *         },
+ *         {
+ *             connectedDomains: [
+ *                 "Aviatrix_Edge_Domain",
+ *                 "Default_Domain",
+ *             ],
+ *             securityDomainName: "Shared_Service_Domain",
+ *         },
+ *         {
+ *             connectedDomains: ["Aviatrix_Edge_Domain"],
+ *             securityDomainName: "SDN1",
+ *         },
+ *         {
+ *             securityDomainName: "mysdn2",
+ *         },
+ *         {
+ *             aviatrixFirewall: true,
+ *             securityDomainName: "firewall-domain",
+ *         },
+ *     ],
+ *     tgwName: "test-AWSGov-TGW",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **aws_tgw** can be imported using the `tgw_name`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixAwsTgw:AviatrixAwsTgw test tgw_name
+ * ```
+ */
 export class AviatrixAwsTgw extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixAwsTgw resource's state with the given name, ID, and optional extra
@@ -34,69 +150,63 @@ export class AviatrixAwsTgw extends pulumi.CustomResource {
     }
 
     /**
-     * This parameter represents the name of a Cloud-Account in Aviatrix controller.
+     * Name of the cloud account in the Aviatrix controller.
      */
     public readonly accountName!: pulumi.Output<string>;
     /**
-     * A list of Names of Aviatrix Transit Gateway to attach to one of the three default domains.
+     * A list of names of Aviatrix Transit Gateway(s) (transit VPCs) to attach to the Aviatrix_Edge_Domain.
      *
      * @deprecated Please set `manage_transit_gateway_attachment` to false, and use the standalone aviatrix_aws_tgw_transit_gateway_attachment resource instead.
      */
     public readonly attachedAviatrixTransitGateways!: pulumi.Output<string[] | undefined>;
     /**
-     * BGP Local ASN (Autonomous System Number), Integer between 1-4294967294.
+     * BGP Local ASN (Autonomous System Number). Integer between 1-4294967294. Example: "65001".
      */
     public readonly awsSideAsNumber!: pulumi.Output<string>;
     /**
-     * TGW CIDRs.
+     * Set of TGW CIDRs. For example, `cidrs = ["10.0.10.0/24", "10.1.10.0/24"]`. Available as of provider version R2.18.1+.
      */
     public readonly cidrs!: pulumi.Output<string[] | undefined>;
     /**
-     * Type of cloud service provider, requires an integer value. Supported for AWS (1) and AWS GOV (256). Default value: 1.
+     * Type of cloud service provider, requires an integer value. Supported for AWS (1) and AWSGov (256). Default value: 1.
      */
     public readonly cloudType!: pulumi.Output<number | undefined>;
     /**
-     * Enable Multicast.
+     * Enable multicast. Default value: false. Valid values: true, false. Available in provider version R2.17+.
      */
     public readonly enableMulticast!: pulumi.Output<boolean | undefined>;
     /**
-     * Inspection mode. Valid values: 'Domain-based' and 'Connection-based'.
+     * Inspection mode. Valid values: "Domain-based", "Connection-based". Default value: "Domain-based". Available as of provider version R2.23+.
      */
     public readonly inspectionMode!: pulumi.Output<string | undefined>;
     /**
-     * This parameter is a switch used to determine whether or not to manage security domains to the TGW using the
-     * aviatrix_aws_tgw resource. If this is set to false, security domains must be managed using the
-     * aviatrix_aws_tgw_security_domain resource. Valid values: true, false. Default value: true.
+     * This parameter is a switch used to determine whether or not to manage security domains using the **aviatrix_aws_tgw** resource. If this is set to false, creation and management of security domains must be done using the **aviatrix_aws_tgw_security_domain** resource. Valid values: true, false. Default value: true.
      */
     public readonly manageSecurityDomain!: pulumi.Output<boolean | undefined>;
     /**
-     * This parameter is a switch used to determine whether or not to manage transit gateway attachments to the TGW using the
-     * aviatrix_aws_tgw resource. If this is set to false, attachment of transit gateways must be done using the
-     * aviatrix_aws_tgw_transit_gateway_attachment resource. Valid values: true, false. Default value: true.
+     * This parameter is a switch used to determine whether or not to manage transit gateway attachments to the TGW using the **aviatrix_aws_tgw** resource. If this is set to false, attachment of transit gateways must be done using the **aviatrix_aws_tgw_transit_gateway_attachment** resource. Valid values: true, false. Default value: true.
      */
     public readonly manageTransitGatewayAttachment!: pulumi.Output<boolean | undefined>;
     /**
-     * This parameter is a switch used to determine whether or not to manage VPC attachments to the TGW using the
-     * aviatrix_aws_tgw resource. If this is set to false, attachment of VPCs must be done using the
-     * aviatrix_aws_tgw_vpc_attachment resource. Valid values: true, false. Default value: true.
+     * This parameter is a switch used to determine whether or not to manage VPC attachments to the TGW using the **aviatrix_aws_tgw** resource. If this is set to false, attachment of VPCs must be done using the **aviatrix_aws_tgw_vpc_attachment** resource. Valid values: true, false. Default value: true.
      */
     public readonly manageVpcAttachment!: pulumi.Output<boolean | undefined>;
     /**
-     * Region of cloud provider.
+     * AWS region of AWS TGW to be created in
      */
     public readonly region!: pulumi.Output<string>;
     /**
-     * Security Domains to create together with AWS TGW's creation.
+     * Security Domains to create together with AWS TGW's creation. Three default domains, along with the connections between them, are created automatically. These three domains can't be deleted, but the connection between any two of them can be.
      *
      * @deprecated Please set `manage_security_domain` to false, and use the standalone aviatrix_aws_tgw_network_domain resource instead.
      */
     public readonly securityDomains!: pulumi.Output<outputs.AviatrixAwsTgwSecurityDomain[] | undefined>;
     /**
-     * TGW ID.
+     * TGW ID. Available as of provider version R2.19+.
      */
     public /*out*/ readonly tgwId!: pulumi.Output<string>;
     /**
-     * Name of the AWS TGW which is going to be created.
+     * Name of the AWS TGW to be created
      */
     public readonly tgwName!: pulumi.Output<string>;
 
@@ -166,69 +276,63 @@ export class AviatrixAwsTgw extends pulumi.CustomResource {
  */
 export interface AviatrixAwsTgwState {
     /**
-     * This parameter represents the name of a Cloud-Account in Aviatrix controller.
+     * Name of the cloud account in the Aviatrix controller.
      */
     accountName?: pulumi.Input<string>;
     /**
-     * A list of Names of Aviatrix Transit Gateway to attach to one of the three default domains.
+     * A list of names of Aviatrix Transit Gateway(s) (transit VPCs) to attach to the Aviatrix_Edge_Domain.
      *
      * @deprecated Please set `manage_transit_gateway_attachment` to false, and use the standalone aviatrix_aws_tgw_transit_gateway_attachment resource instead.
      */
     attachedAviatrixTransitGateways?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * BGP Local ASN (Autonomous System Number), Integer between 1-4294967294.
+     * BGP Local ASN (Autonomous System Number). Integer between 1-4294967294. Example: "65001".
      */
     awsSideAsNumber?: pulumi.Input<string>;
     /**
-     * TGW CIDRs.
+     * Set of TGW CIDRs. For example, `cidrs = ["10.0.10.0/24", "10.1.10.0/24"]`. Available as of provider version R2.18.1+.
      */
     cidrs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Type of cloud service provider, requires an integer value. Supported for AWS (1) and AWS GOV (256). Default value: 1.
+     * Type of cloud service provider, requires an integer value. Supported for AWS (1) and AWSGov (256). Default value: 1.
      */
     cloudType?: pulumi.Input<number>;
     /**
-     * Enable Multicast.
+     * Enable multicast. Default value: false. Valid values: true, false. Available in provider version R2.17+.
      */
     enableMulticast?: pulumi.Input<boolean>;
     /**
-     * Inspection mode. Valid values: 'Domain-based' and 'Connection-based'.
+     * Inspection mode. Valid values: "Domain-based", "Connection-based". Default value: "Domain-based". Available as of provider version R2.23+.
      */
     inspectionMode?: pulumi.Input<string>;
     /**
-     * This parameter is a switch used to determine whether or not to manage security domains to the TGW using the
-     * aviatrix_aws_tgw resource. If this is set to false, security domains must be managed using the
-     * aviatrix_aws_tgw_security_domain resource. Valid values: true, false. Default value: true.
+     * This parameter is a switch used to determine whether or not to manage security domains using the **aviatrix_aws_tgw** resource. If this is set to false, creation and management of security domains must be done using the **aviatrix_aws_tgw_security_domain** resource. Valid values: true, false. Default value: true.
      */
     manageSecurityDomain?: pulumi.Input<boolean>;
     /**
-     * This parameter is a switch used to determine whether or not to manage transit gateway attachments to the TGW using the
-     * aviatrix_aws_tgw resource. If this is set to false, attachment of transit gateways must be done using the
-     * aviatrix_aws_tgw_transit_gateway_attachment resource. Valid values: true, false. Default value: true.
+     * This parameter is a switch used to determine whether or not to manage transit gateway attachments to the TGW using the **aviatrix_aws_tgw** resource. If this is set to false, attachment of transit gateways must be done using the **aviatrix_aws_tgw_transit_gateway_attachment** resource. Valid values: true, false. Default value: true.
      */
     manageTransitGatewayAttachment?: pulumi.Input<boolean>;
     /**
-     * This parameter is a switch used to determine whether or not to manage VPC attachments to the TGW using the
-     * aviatrix_aws_tgw resource. If this is set to false, attachment of VPCs must be done using the
-     * aviatrix_aws_tgw_vpc_attachment resource. Valid values: true, false. Default value: true.
+     * This parameter is a switch used to determine whether or not to manage VPC attachments to the TGW using the **aviatrix_aws_tgw** resource. If this is set to false, attachment of VPCs must be done using the **aviatrix_aws_tgw_vpc_attachment** resource. Valid values: true, false. Default value: true.
      */
     manageVpcAttachment?: pulumi.Input<boolean>;
     /**
-     * Region of cloud provider.
+     * AWS region of AWS TGW to be created in
      */
     region?: pulumi.Input<string>;
     /**
-     * Security Domains to create together with AWS TGW's creation.
+     * Security Domains to create together with AWS TGW's creation. Three default domains, along with the connections between them, are created automatically. These three domains can't be deleted, but the connection between any two of them can be.
      *
      * @deprecated Please set `manage_security_domain` to false, and use the standalone aviatrix_aws_tgw_network_domain resource instead.
      */
     securityDomains?: pulumi.Input<pulumi.Input<inputs.AviatrixAwsTgwSecurityDomain>[]>;
     /**
-     * TGW ID.
+     * TGW ID. Available as of provider version R2.19+.
      */
     tgwId?: pulumi.Input<string>;
     /**
-     * Name of the AWS TGW which is going to be created.
+     * Name of the AWS TGW to be created
      */
     tgwName?: pulumi.Input<string>;
 }
@@ -238,65 +342,59 @@ export interface AviatrixAwsTgwState {
  */
 export interface AviatrixAwsTgwArgs {
     /**
-     * This parameter represents the name of a Cloud-Account in Aviatrix controller.
+     * Name of the cloud account in the Aviatrix controller.
      */
     accountName: pulumi.Input<string>;
     /**
-     * A list of Names of Aviatrix Transit Gateway to attach to one of the three default domains.
+     * A list of names of Aviatrix Transit Gateway(s) (transit VPCs) to attach to the Aviatrix_Edge_Domain.
      *
      * @deprecated Please set `manage_transit_gateway_attachment` to false, and use the standalone aviatrix_aws_tgw_transit_gateway_attachment resource instead.
      */
     attachedAviatrixTransitGateways?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * BGP Local ASN (Autonomous System Number), Integer between 1-4294967294.
+     * BGP Local ASN (Autonomous System Number). Integer between 1-4294967294. Example: "65001".
      */
     awsSideAsNumber: pulumi.Input<string>;
     /**
-     * TGW CIDRs.
+     * Set of TGW CIDRs. For example, `cidrs = ["10.0.10.0/24", "10.1.10.0/24"]`. Available as of provider version R2.18.1+.
      */
     cidrs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Type of cloud service provider, requires an integer value. Supported for AWS (1) and AWS GOV (256). Default value: 1.
+     * Type of cloud service provider, requires an integer value. Supported for AWS (1) and AWSGov (256). Default value: 1.
      */
     cloudType?: pulumi.Input<number>;
     /**
-     * Enable Multicast.
+     * Enable multicast. Default value: false. Valid values: true, false. Available in provider version R2.17+.
      */
     enableMulticast?: pulumi.Input<boolean>;
     /**
-     * Inspection mode. Valid values: 'Domain-based' and 'Connection-based'.
+     * Inspection mode. Valid values: "Domain-based", "Connection-based". Default value: "Domain-based". Available as of provider version R2.23+.
      */
     inspectionMode?: pulumi.Input<string>;
     /**
-     * This parameter is a switch used to determine whether or not to manage security domains to the TGW using the
-     * aviatrix_aws_tgw resource. If this is set to false, security domains must be managed using the
-     * aviatrix_aws_tgw_security_domain resource. Valid values: true, false. Default value: true.
+     * This parameter is a switch used to determine whether or not to manage security domains using the **aviatrix_aws_tgw** resource. If this is set to false, creation and management of security domains must be done using the **aviatrix_aws_tgw_security_domain** resource. Valid values: true, false. Default value: true.
      */
     manageSecurityDomain?: pulumi.Input<boolean>;
     /**
-     * This parameter is a switch used to determine whether or not to manage transit gateway attachments to the TGW using the
-     * aviatrix_aws_tgw resource. If this is set to false, attachment of transit gateways must be done using the
-     * aviatrix_aws_tgw_transit_gateway_attachment resource. Valid values: true, false. Default value: true.
+     * This parameter is a switch used to determine whether or not to manage transit gateway attachments to the TGW using the **aviatrix_aws_tgw** resource. If this is set to false, attachment of transit gateways must be done using the **aviatrix_aws_tgw_transit_gateway_attachment** resource. Valid values: true, false. Default value: true.
      */
     manageTransitGatewayAttachment?: pulumi.Input<boolean>;
     /**
-     * This parameter is a switch used to determine whether or not to manage VPC attachments to the TGW using the
-     * aviatrix_aws_tgw resource. If this is set to false, attachment of VPCs must be done using the
-     * aviatrix_aws_tgw_vpc_attachment resource. Valid values: true, false. Default value: true.
+     * This parameter is a switch used to determine whether or not to manage VPC attachments to the TGW using the **aviatrix_aws_tgw** resource. If this is set to false, attachment of VPCs must be done using the **aviatrix_aws_tgw_vpc_attachment** resource. Valid values: true, false. Default value: true.
      */
     manageVpcAttachment?: pulumi.Input<boolean>;
     /**
-     * Region of cloud provider.
+     * AWS region of AWS TGW to be created in
      */
     region: pulumi.Input<string>;
     /**
-     * Security Domains to create together with AWS TGW's creation.
+     * Security Domains to create together with AWS TGW's creation. Three default domains, along with the connections between them, are created automatically. These three domains can't be deleted, but the connection between any two of them can be.
      *
      * @deprecated Please set `manage_security_domain` to false, and use the standalone aviatrix_aws_tgw_network_domain resource instead.
      */
     securityDomains?: pulumi.Input<pulumi.Input<inputs.AviatrixAwsTgwSecurityDomain>[]>;
     /**
-     * Name of the AWS TGW which is going to be created.
+     * Name of the AWS TGW to be created
      */
     tgwName: pulumi.Input<string>;
 }

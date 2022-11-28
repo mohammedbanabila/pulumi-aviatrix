@@ -9,23 +9,54 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_segmentation_security_domain_association** resource handles creation of [Transit Segmentation](https://docs.aviatrix.com/HowTos/transit_segmentation_faq.html) Security Domain and Transit Gateway Attachment Associations.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Segmentation Security Domain Association
+    ///     var testSegmentationSecurityDomainAssociation = new Aviatrix.AviatrixSegmentationSecurityDomainAssociation("testSegmentationSecurityDomainAssociation", new()
+    ///     {
+    ///         AttachmentName = "attachment-name",
+    ///         SecurityDomainName = "security-domain-name",
+    ///         TransitGatewayName = "transit-gw-name",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **aviatrix_segmentation_security_domain_association** can be imported using `transit_gateway_name`, `security_domain_name` and `attachment_name` separated by a `~` e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixSegmentationSecurityDomainAssociation:AviatrixSegmentationSecurityDomainAssociation test transit_gateway_name~security_domain_name~attachment_name
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixSegmentationSecurityDomainAssociation:AviatrixSegmentationSecurityDomainAssociation")]
     public partial class AviatrixSegmentationSecurityDomainAssociation : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Attachment name, either Spoke or Edge.
+        /// Name of the transit gateway attachment, Spoke or Edge, to associate with the security domain.
         /// </summary>
         [Output("attachmentName")]
         public Output<string> AttachmentName { get; private set; } = null!;
 
         /// <summary>
-        /// Security Domain name.
+        /// Name of the Segmentation Security Domain.
         /// </summary>
         [Output("securityDomainName")]
         public Output<string> SecurityDomainName { get; private set; } = null!;
 
         /// <summary>
-        /// Transit Gateway name.
+        /// Name of the Transit Gateway.
         /// </summary>
         [Output("transitGatewayName")]
         public Output<string> TransitGatewayName { get; private set; } = null!;
@@ -78,19 +109,19 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixSegmentationSecurityDomainAssociationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Attachment name, either Spoke or Edge.
+        /// Name of the transit gateway attachment, Spoke or Edge, to associate with the security domain.
         /// </summary>
         [Input("attachmentName", required: true)]
         public Input<string> AttachmentName { get; set; } = null!;
 
         /// <summary>
-        /// Security Domain name.
+        /// Name of the Segmentation Security Domain.
         /// </summary>
         [Input("securityDomainName", required: true)]
         public Input<string> SecurityDomainName { get; set; } = null!;
 
         /// <summary>
-        /// Transit Gateway name.
+        /// Name of the Transit Gateway.
         /// </summary>
         [Input("transitGatewayName", required: true)]
         public Input<string> TransitGatewayName { get; set; } = null!;
@@ -104,19 +135,19 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixSegmentationSecurityDomainAssociationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Attachment name, either Spoke or Edge.
+        /// Name of the transit gateway attachment, Spoke or Edge, to associate with the security domain.
         /// </summary>
         [Input("attachmentName")]
         public Input<string>? AttachmentName { get; set; }
 
         /// <summary>
-        /// Security Domain name.
+        /// Name of the Segmentation Security Domain.
         /// </summary>
         [Input("securityDomainName")]
         public Input<string>? SecurityDomainName { get; set; }
 
         /// <summary>
-        /// Transit Gateway name.
+        /// Name of the Transit Gateway.
         /// </summary>
         [Input("transitGatewayName")]
         public Input<string>? TransitGatewayName { get; set; }

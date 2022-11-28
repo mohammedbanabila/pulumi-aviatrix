@@ -10,10 +10,47 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_controller_private_oob** resource allows management of an Aviatrix Controller's private OOB configurations.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixControllerPrivateOob(ctx, "testPrivateOob", &aviatrix.AviatrixControllerPrivateOobArgs{
+//				EnablePrivateOob: pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **controller_private_oob** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixControllerPrivateOob:AviatrixControllerPrivateOob test 10-11-12-13
+//
+// ```
 type AviatrixControllerPrivateOob struct {
 	pulumi.CustomResourceState
 
-	// Switch to enable/disable Aviatrix controller private OOB.
+	// Switch to enable/disable Aviatrix controller private OOB. Valid values: true, false. Default value: false.
 	EnablePrivateOob pulumi.BoolPtrOutput `pulumi:"enablePrivateOob"`
 }
 
@@ -47,12 +84,12 @@ func GetAviatrixControllerPrivateOob(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixControllerPrivateOob resources.
 type aviatrixControllerPrivateOobState struct {
-	// Switch to enable/disable Aviatrix controller private OOB.
+	// Switch to enable/disable Aviatrix controller private OOB. Valid values: true, false. Default value: false.
 	EnablePrivateOob *bool `pulumi:"enablePrivateOob"`
 }
 
 type AviatrixControllerPrivateOobState struct {
-	// Switch to enable/disable Aviatrix controller private OOB.
+	// Switch to enable/disable Aviatrix controller private OOB. Valid values: true, false. Default value: false.
 	EnablePrivateOob pulumi.BoolPtrInput
 }
 
@@ -61,13 +98,13 @@ func (AviatrixControllerPrivateOobState) ElementType() reflect.Type {
 }
 
 type aviatrixControllerPrivateOobArgs struct {
-	// Switch to enable/disable Aviatrix controller private OOB.
+	// Switch to enable/disable Aviatrix controller private OOB. Valid values: true, false. Default value: false.
 	EnablePrivateOob *bool `pulumi:"enablePrivateOob"`
 }
 
 // The set of arguments for constructing a AviatrixControllerPrivateOob resource.
 type AviatrixControllerPrivateOobArgs struct {
-	// Switch to enable/disable Aviatrix controller private OOB.
+	// Switch to enable/disable Aviatrix controller private OOB. Valid values: true, false. Default value: false.
 	EnablePrivateOob pulumi.BoolPtrInput
 }
 
@@ -158,7 +195,7 @@ func (o AviatrixControllerPrivateOobOutput) ToAviatrixControllerPrivateOobOutput
 	return o
 }
 
-// Switch to enable/disable Aviatrix controller private OOB.
+// Switch to enable/disable Aviatrix controller private OOB. Valid values: true, false. Default value: false.
 func (o AviatrixControllerPrivateOobOutput) EnablePrivateOob() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixControllerPrivateOob) pulumi.BoolPtrOutput { return v.EnablePrivateOob }).(pulumi.BoolPtrOutput)
 }

@@ -21,9 +21,9 @@ class AviatrixAzureSpokeNativePeeringArgs:
         """
         The set of arguments for constructing a AviatrixAzureSpokeNativePeering resource.
         :param pulumi.Input[str] spoke_account_name: An Aviatrix account that corresponds to a subscription in Azure.
-        :param pulumi.Input[str] spoke_region: Spoke VNet region.
-        :param pulumi.Input[str] spoke_vpc_id: Combination of the Spoke VNet name and resource group.
-        :param pulumi.Input[str] transit_gateway_name: Name of an azure transit gateway with transit firenet enabled.
+        :param pulumi.Input[str] spoke_region: Spoke VNet region. Example: "West US".
+        :param pulumi.Input[str] spoke_vpc_id: Combination of the Spoke's VNet name, resource group and GUID. Example: "Foo_VNet:Bar_RG:GUID".
+        :param pulumi.Input[str] transit_gateway_name: Name of an Transit FireNet-enabled Azure transit gateway.
         """
         pulumi.set(__self__, "spoke_account_name", spoke_account_name)
         pulumi.set(__self__, "spoke_region", spoke_region)
@@ -46,7 +46,7 @@ class AviatrixAzureSpokeNativePeeringArgs:
     @pulumi.getter(name="spokeRegion")
     def spoke_region(self) -> pulumi.Input[str]:
         """
-        Spoke VNet region.
+        Spoke VNet region. Example: "West US".
         """
         return pulumi.get(self, "spoke_region")
 
@@ -58,7 +58,7 @@ class AviatrixAzureSpokeNativePeeringArgs:
     @pulumi.getter(name="spokeVpcId")
     def spoke_vpc_id(self) -> pulumi.Input[str]:
         """
-        Combination of the Spoke VNet name and resource group.
+        Combination of the Spoke's VNet name, resource group and GUID. Example: "Foo_VNet:Bar_RG:GUID".
         """
         return pulumi.get(self, "spoke_vpc_id")
 
@@ -70,7 +70,7 @@ class AviatrixAzureSpokeNativePeeringArgs:
     @pulumi.getter(name="transitGatewayName")
     def transit_gateway_name(self) -> pulumi.Input[str]:
         """
-        Name of an azure transit gateway with transit firenet enabled.
+        Name of an Transit FireNet-enabled Azure transit gateway.
         """
         return pulumi.get(self, "transit_gateway_name")
 
@@ -89,9 +89,9 @@ class _AviatrixAzureSpokeNativePeeringState:
         """
         Input properties used for looking up and filtering AviatrixAzureSpokeNativePeering resources.
         :param pulumi.Input[str] spoke_account_name: An Aviatrix account that corresponds to a subscription in Azure.
-        :param pulumi.Input[str] spoke_region: Spoke VNet region.
-        :param pulumi.Input[str] spoke_vpc_id: Combination of the Spoke VNet name and resource group.
-        :param pulumi.Input[str] transit_gateway_name: Name of an azure transit gateway with transit firenet enabled.
+        :param pulumi.Input[str] spoke_region: Spoke VNet region. Example: "West US".
+        :param pulumi.Input[str] spoke_vpc_id: Combination of the Spoke's VNet name, resource group and GUID. Example: "Foo_VNet:Bar_RG:GUID".
+        :param pulumi.Input[str] transit_gateway_name: Name of an Transit FireNet-enabled Azure transit gateway.
         """
         if spoke_account_name is not None:
             pulumi.set(__self__, "spoke_account_name", spoke_account_name)
@@ -118,7 +118,7 @@ class _AviatrixAzureSpokeNativePeeringState:
     @pulumi.getter(name="spokeRegion")
     def spoke_region(self) -> Optional[pulumi.Input[str]]:
         """
-        Spoke VNet region.
+        Spoke VNet region. Example: "West US".
         """
         return pulumi.get(self, "spoke_region")
 
@@ -130,7 +130,7 @@ class _AviatrixAzureSpokeNativePeeringState:
     @pulumi.getter(name="spokeVpcId")
     def spoke_vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Combination of the Spoke VNet name and resource group.
+        Combination of the Spoke's VNet name, resource group and GUID. Example: "Foo_VNet:Bar_RG:GUID".
         """
         return pulumi.get(self, "spoke_vpc_id")
 
@@ -142,7 +142,7 @@ class _AviatrixAzureSpokeNativePeeringState:
     @pulumi.getter(name="transitGatewayName")
     def transit_gateway_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of an azure transit gateway with transit firenet enabled.
+        Name of an Transit FireNet-enabled Azure transit gateway.
         """
         return pulumi.get(self, "transit_gateway_name")
 
@@ -162,13 +162,36 @@ class AviatrixAzureSpokeNativePeering(pulumi.CustomResource):
                  transit_gateway_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixAzureSpokeNativePeering resource with the given unique name, props, and options.
+        The **aviatrix_azure_spoke_native_peering** resource allows the creation and management of Aviatrix-created Azure Spoke VNet attachments via Native Peering.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Azure spoke native peering
+        test = aviatrix.AviatrixAzureSpokeNativePeering("test",
+            spoke_account_name="devops-azure",
+            spoke_region="West US",
+            spoke_vpc_id="Foo_VNet:Bar_RG:GUID",
+            transit_gateway_name="transit-gw-azure")
+        ```
+
+        ## Import
+
+        **azure_spoke_native_peering** can be imported using the `transit_gateway_name`, `spoke_account_name` and `spoke_vpc_id`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAzureSpokeNativePeering:AviatrixAzureSpokeNativePeering test transit_gateway_name~spoke_account_name~spoke_vpc_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] spoke_account_name: An Aviatrix account that corresponds to a subscription in Azure.
-        :param pulumi.Input[str] spoke_region: Spoke VNet region.
-        :param pulumi.Input[str] spoke_vpc_id: Combination of the Spoke VNet name and resource group.
-        :param pulumi.Input[str] transit_gateway_name: Name of an azure transit gateway with transit firenet enabled.
+        :param pulumi.Input[str] spoke_region: Spoke VNet region. Example: "West US".
+        :param pulumi.Input[str] spoke_vpc_id: Combination of the Spoke's VNet name, resource group and GUID. Example: "Foo_VNet:Bar_RG:GUID".
+        :param pulumi.Input[str] transit_gateway_name: Name of an Transit FireNet-enabled Azure transit gateway.
         """
         ...
     @overload
@@ -177,7 +200,30 @@ class AviatrixAzureSpokeNativePeering(pulumi.CustomResource):
                  args: AviatrixAzureSpokeNativePeeringArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixAzureSpokeNativePeering resource with the given unique name, props, and options.
+        The **aviatrix_azure_spoke_native_peering** resource allows the creation and management of Aviatrix-created Azure Spoke VNet attachments via Native Peering.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Azure spoke native peering
+        test = aviatrix.AviatrixAzureSpokeNativePeering("test",
+            spoke_account_name="devops-azure",
+            spoke_region="West US",
+            spoke_vpc_id="Foo_VNet:Bar_RG:GUID",
+            transit_gateway_name="transit-gw-azure")
+        ```
+
+        ## Import
+
+        **azure_spoke_native_peering** can be imported using the `transit_gateway_name`, `spoke_account_name` and `spoke_vpc_id`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAzureSpokeNativePeering:AviatrixAzureSpokeNativePeering test transit_gateway_name~spoke_account_name~spoke_vpc_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixAzureSpokeNativePeeringArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -240,9 +286,9 @@ class AviatrixAzureSpokeNativePeering(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] spoke_account_name: An Aviatrix account that corresponds to a subscription in Azure.
-        :param pulumi.Input[str] spoke_region: Spoke VNet region.
-        :param pulumi.Input[str] spoke_vpc_id: Combination of the Spoke VNet name and resource group.
-        :param pulumi.Input[str] transit_gateway_name: Name of an azure transit gateway with transit firenet enabled.
+        :param pulumi.Input[str] spoke_region: Spoke VNet region. Example: "West US".
+        :param pulumi.Input[str] spoke_vpc_id: Combination of the Spoke's VNet name, resource group and GUID. Example: "Foo_VNet:Bar_RG:GUID".
+        :param pulumi.Input[str] transit_gateway_name: Name of an Transit FireNet-enabled Azure transit gateway.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -266,7 +312,7 @@ class AviatrixAzureSpokeNativePeering(pulumi.CustomResource):
     @pulumi.getter(name="spokeRegion")
     def spoke_region(self) -> pulumi.Output[str]:
         """
-        Spoke VNet region.
+        Spoke VNet region. Example: "West US".
         """
         return pulumi.get(self, "spoke_region")
 
@@ -274,7 +320,7 @@ class AviatrixAzureSpokeNativePeering(pulumi.CustomResource):
     @pulumi.getter(name="spokeVpcId")
     def spoke_vpc_id(self) -> pulumi.Output[str]:
         """
-        Combination of the Spoke VNet name and resource group.
+        Combination of the Spoke's VNet name, resource group and GUID. Example: "Foo_VNet:Bar_RG:GUID".
         """
         return pulumi.get(self, "spoke_vpc_id")
 
@@ -282,7 +328,7 @@ class AviatrixAzureSpokeNativePeering(pulumi.CustomResource):
     @pulumi.getter(name="transitGatewayName")
     def transit_gateway_name(self) -> pulumi.Output[str]:
         """
-        Name of an azure transit gateway with transit firenet enabled.
+        Name of an Transit FireNet-enabled Azure transit gateway.
         """
         return pulumi.get(self, "transit_gateway_name")
 

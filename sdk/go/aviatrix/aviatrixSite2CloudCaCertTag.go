@@ -11,12 +11,108 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_site2cloud_ca_cert_tag** resource creates and manages Aviatrix-created Site2Cloud CA Cert Tags.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"io/ioutil"
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func readFileOrPanic(path string) pulumi.StringPtrInput {
+//		data, err := ioutil.ReadFile(path)
+//		if err != nil {
+//			panic(err.Error())
+//		}
+//		return pulumi.String(string(data))
+//	}
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixSite2CloudCaCertTag(ctx, "test", &aviatrix.AviatrixSite2CloudCaCertTagArgs{
+//				TagName: pulumi.String("test"),
+//				CaCertificates: AviatrixSite2CloudCaCertTagCaCertificateArray{
+//					&AviatrixSite2CloudCaCertTagCaCertificateArgs{
+//						CertContent: readFileOrPanic("/home/ubuntu/avx_gw_ca_cert_in_ui_root_only.crt"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// ```go
+// package main
+//
+// import (
+//
+//	"io/ioutil"
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func readFileOrPanic(path string) pulumi.StringPtrInput {
+//		data, err := ioutil.ReadFile(path)
+//		if err != nil {
+//			panic(err.Error())
+//		}
+//		return pulumi.String(string(data))
+//	}
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixSite2CloudCaCertTag(ctx, "test", &aviatrix.AviatrixSite2CloudCaCertTagArgs{
+//				TagName: pulumi.String("test"),
+//				CaCertificates: AviatrixSite2CloudCaCertTagCaCertificateArray{
+//					&AviatrixSite2CloudCaCertTagCaCertificateArgs{
+//						CertContent: readFileOrPanic("/home/ubuntu/avx_gw_ca_cert_root.crt"),
+//					},
+//					&AviatrixSite2CloudCaCertTagCaCertificateArgs{
+//						CertContent: readFileOrPanic("/home/ubuntu/avx_gw_ca_cert_intermediate.crt"),
+//					},
+//					&AviatrixSite2CloudCaCertTagCaCertificateArgs{
+//						CertContent: readFileOrPanic("/home/ubuntu/avx_gw_ca_cert_intermediate2.crt"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **site2cloud_ca_cert_tag** can be imported using the `tag_name` and, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixSite2CloudCaCertTag:AviatrixSite2CloudCaCertTag test tag_name
+//
+// ```
 type AviatrixSite2CloudCaCertTag struct {
 	pulumi.CustomResourceState
 
 	// A set of CA certificates.
 	CaCertificates AviatrixSite2CloudCaCertTagCaCertificateArrayOutput `pulumi:"caCertificates"`
-	// Unique name of the ca cert tag.
+	// Site2Cloud ca cert tag name.
 	TagName pulumi.StringOutput `pulumi:"tagName"`
 }
 
@@ -58,14 +154,14 @@ func GetAviatrixSite2CloudCaCertTag(ctx *pulumi.Context,
 type aviatrixSite2CloudCaCertTagState struct {
 	// A set of CA certificates.
 	CaCertificates []AviatrixSite2CloudCaCertTagCaCertificate `pulumi:"caCertificates"`
-	// Unique name of the ca cert tag.
+	// Site2Cloud ca cert tag name.
 	TagName *string `pulumi:"tagName"`
 }
 
 type AviatrixSite2CloudCaCertTagState struct {
 	// A set of CA certificates.
 	CaCertificates AviatrixSite2CloudCaCertTagCaCertificateArrayInput
-	// Unique name of the ca cert tag.
+	// Site2Cloud ca cert tag name.
 	TagName pulumi.StringPtrInput
 }
 
@@ -76,7 +172,7 @@ func (AviatrixSite2CloudCaCertTagState) ElementType() reflect.Type {
 type aviatrixSite2CloudCaCertTagArgs struct {
 	// A set of CA certificates.
 	CaCertificates []AviatrixSite2CloudCaCertTagCaCertificate `pulumi:"caCertificates"`
-	// Unique name of the ca cert tag.
+	// Site2Cloud ca cert tag name.
 	TagName string `pulumi:"tagName"`
 }
 
@@ -84,7 +180,7 @@ type aviatrixSite2CloudCaCertTagArgs struct {
 type AviatrixSite2CloudCaCertTagArgs struct {
 	// A set of CA certificates.
 	CaCertificates AviatrixSite2CloudCaCertTagCaCertificateArrayInput
-	// Unique name of the ca cert tag.
+	// Site2Cloud ca cert tag name.
 	TagName pulumi.StringInput
 }
 
@@ -182,7 +278,7 @@ func (o AviatrixSite2CloudCaCertTagOutput) CaCertificates() AviatrixSite2CloudCa
 	}).(AviatrixSite2CloudCaCertTagCaCertificateArrayOutput)
 }
 
-// Unique name of the ca cert tag.
+// Site2Cloud ca cert tag name.
 func (o AviatrixSite2CloudCaCertTagOutput) TagName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSite2CloudCaCertTag) pulumi.StringOutput { return v.TagName }).(pulumi.StringOutput)
 }

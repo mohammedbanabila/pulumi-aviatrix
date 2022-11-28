@@ -11,20 +11,58 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_sumologic_forwarder** resource allows the enabling and disabling of sumologic forwarder.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixSumologicForwarder(ctx, "testSumologicForwarder", &aviatrix.AviatrixSumologicForwarderArgs{
+//				AccessId:  pulumi.String("0"),
+//				AccessKey: pulumi.String("1.2.3.4"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **sumologic_forwarder** can be imported using "sumologic_forwarder", e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixSumologicForwarder:AviatrixSumologicForwarder test sumologic_forwarder
+//
+// ```
 type AviatrixSumologicForwarder struct {
 	pulumi.CustomResourceState
 
 	// Access ID.
 	AccessId pulumi.StringOutput `pulumi:"accessId"`
-	// Access key.
+	// Access Key.
 	AccessKey pulumi.StringOutput `pulumi:"accessKey"`
-	// Custom configuration.
+	// Custom configuration. The format should be key=value pairs.
 	CustomConfiguration pulumi.StringPtrOutput `pulumi:"customConfiguration"`
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways pulumi.StringArrayOutput `pulumi:"excludedGateways"`
-	// Source category.
+	// Source category. "Aviatrix_syslog" by default.
 	SourceCategory pulumi.StringPtrOutput `pulumi:"sourceCategory"`
-	// Enabled or not.
+	// The status of sumologic forwarder.
 	Status pulumi.StringOutput `pulumi:"status"`
 }
 
@@ -41,6 +79,13 @@ func NewAviatrixSumologicForwarder(ctx *pulumi.Context,
 	if args.AccessKey == nil {
 		return nil, errors.New("invalid value for required argument 'AccessKey'")
 	}
+	if args.AccessKey != nil {
+		args.AccessKey = pulumi.ToSecret(args.AccessKey).(pulumi.StringOutput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"accessKey",
+	})
+	opts = append(opts, secrets)
 	opts = pkgResourceDefaultOpts(opts)
 	var resource AviatrixSumologicForwarder
 	err := ctx.RegisterResource("aviatrix:index/aviatrixSumologicForwarder:AviatrixSumologicForwarder", name, args, &resource, opts...)
@@ -66,30 +111,30 @@ func GetAviatrixSumologicForwarder(ctx *pulumi.Context,
 type aviatrixSumologicForwarderState struct {
 	// Access ID.
 	AccessId *string `pulumi:"accessId"`
-	// Access key.
+	// Access Key.
 	AccessKey *string `pulumi:"accessKey"`
-	// Custom configuration.
+	// Custom configuration. The format should be key=value pairs.
 	CustomConfiguration *string `pulumi:"customConfiguration"`
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways []string `pulumi:"excludedGateways"`
-	// Source category.
+	// Source category. "Aviatrix_syslog" by default.
 	SourceCategory *string `pulumi:"sourceCategory"`
-	// Enabled or not.
+	// The status of sumologic forwarder.
 	Status *string `pulumi:"status"`
 }
 
 type AviatrixSumologicForwarderState struct {
 	// Access ID.
 	AccessId pulumi.StringPtrInput
-	// Access key.
+	// Access Key.
 	AccessKey pulumi.StringPtrInput
-	// Custom configuration.
+	// Custom configuration. The format should be key=value pairs.
 	CustomConfiguration pulumi.StringPtrInput
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways pulumi.StringArrayInput
-	// Source category.
+	// Source category. "Aviatrix_syslog" by default.
 	SourceCategory pulumi.StringPtrInput
-	// Enabled or not.
+	// The status of sumologic forwarder.
 	Status pulumi.StringPtrInput
 }
 
@@ -100,13 +145,13 @@ func (AviatrixSumologicForwarderState) ElementType() reflect.Type {
 type aviatrixSumologicForwarderArgs struct {
 	// Access ID.
 	AccessId string `pulumi:"accessId"`
-	// Access key.
+	// Access Key.
 	AccessKey string `pulumi:"accessKey"`
-	// Custom configuration.
+	// Custom configuration. The format should be key=value pairs.
 	CustomConfiguration *string `pulumi:"customConfiguration"`
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways []string `pulumi:"excludedGateways"`
-	// Source category.
+	// Source category. "Aviatrix_syslog" by default.
 	SourceCategory *string `pulumi:"sourceCategory"`
 }
 
@@ -114,13 +159,13 @@ type aviatrixSumologicForwarderArgs struct {
 type AviatrixSumologicForwarderArgs struct {
 	// Access ID.
 	AccessId pulumi.StringInput
-	// Access key.
+	// Access Key.
 	AccessKey pulumi.StringInput
-	// Custom configuration.
+	// Custom configuration. The format should be key=value pairs.
 	CustomConfiguration pulumi.StringPtrInput
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways pulumi.StringArrayInput
-	// Source category.
+	// Source category. "Aviatrix_syslog" by default.
 	SourceCategory pulumi.StringPtrInput
 }
 
@@ -216,27 +261,27 @@ func (o AviatrixSumologicForwarderOutput) AccessId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSumologicForwarder) pulumi.StringOutput { return v.AccessId }).(pulumi.StringOutput)
 }
 
-// Access key.
+// Access Key.
 func (o AviatrixSumologicForwarderOutput) AccessKey() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSumologicForwarder) pulumi.StringOutput { return v.AccessKey }).(pulumi.StringOutput)
 }
 
-// Custom configuration.
+// Custom configuration. The format should be key=value pairs.
 func (o AviatrixSumologicForwarderOutput) CustomConfiguration() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSumologicForwarder) pulumi.StringPtrOutput { return v.CustomConfiguration }).(pulumi.StringPtrOutput)
 }
 
-// List of excluded gateways.
+// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 func (o AviatrixSumologicForwarderOutput) ExcludedGateways() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixSumologicForwarder) pulumi.StringArrayOutput { return v.ExcludedGateways }).(pulumi.StringArrayOutput)
 }
 
-// Source category.
+// Source category. "Aviatrix_syslog" by default.
 func (o AviatrixSumologicForwarderOutput) SourceCategory() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSumologicForwarder) pulumi.StringPtrOutput { return v.SourceCategory }).(pulumi.StringPtrOutput)
 }
 
-// Enabled or not.
+// The status of sumologic forwarder.
 func (o AviatrixSumologicForwarderOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSumologicForwarder) pulumi.StringOutput { return v.Status }).(pulumi.StringOutput)
 }

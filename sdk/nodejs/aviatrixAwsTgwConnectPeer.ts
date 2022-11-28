@@ -4,6 +4,37 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_aws_tgw_connect_peer** resource allows the creation and management of AWS TGW Connect peers. This
+ * resource is available as of provider version R2.18.1+.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@astipkovits/aviatrix";
+ *
+ * // Create an Aviatrix AWS TGW Connect Peer
+ * const test = new aviatrix.AviatrixAwsTgwConnectPeer("test", {
+ *     tgwName: aviatrix_aws_tgw.test_aws_tgw.tgw_name,
+ *     connectionName: aviatrix_aws_tgw_connect.test_aws_tgw_connect.connection_name,
+ *     connectPeerName: "connect-peer-test",
+ *     connectAttachmentId: aviatrix_aws_tgw_connect.test_aws_tgw_connect.connect_attachment_id,
+ *     peerAsNumber: "65001",
+ *     peerGreAddress: "172.31.1.11",
+ *     bgpInsideCidrs: ["169.254.6.0/29"],
+ *     tgwGreAddress: "10.0.0.32",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **aws_tgw_connect_peer** can be imported using the `tgw_name`, `connection_name` and `connect_peer_name`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixAwsTgwConnectPeer:AviatrixAwsTgwConnectPeer test tgw_name~~connection_name~~connect_peer_name
+ * ```
+ */
 export class AviatrixAwsTgwConnectPeer extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixAwsTgwConnectPeer resource's state with the given name, ID, and optional extra
@@ -33,7 +64,7 @@ export class AviatrixAwsTgwConnectPeer extends pulumi.CustomResource {
     }
 
     /**
-     * Set of BGP Inside CIDR Blocks.
+     * Set of BGP Inside CIDR Block(s).
      */
     public readonly bgpInsideCidrs!: pulumi.Output<string[]>;
     /**
@@ -45,11 +76,11 @@ export class AviatrixAwsTgwConnectPeer extends pulumi.CustomResource {
      */
     public /*out*/ readonly connectPeerId!: pulumi.Output<string>;
     /**
-     * Connect Peer Name.
+     * TGW Connect peer name.
      */
     public readonly connectPeerName!: pulumi.Output<string>;
     /**
-     * AWS TGW Connect connection name.
+     * TGW Connect connection name.
      */
     public readonly connectionName!: pulumi.Output<string>;
     /**
@@ -65,7 +96,7 @@ export class AviatrixAwsTgwConnectPeer extends pulumi.CustomResource {
      */
     public readonly tgwGreAddress!: pulumi.Output<string | undefined>;
     /**
-     * AWS TGW Name.
+     * AWS TGW name.
      */
     public readonly tgwName!: pulumi.Output<string>;
 
@@ -134,7 +165,7 @@ export class AviatrixAwsTgwConnectPeer extends pulumi.CustomResource {
  */
 export interface AviatrixAwsTgwConnectPeerState {
     /**
-     * Set of BGP Inside CIDR Blocks.
+     * Set of BGP Inside CIDR Block(s).
      */
     bgpInsideCidrs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -146,11 +177,11 @@ export interface AviatrixAwsTgwConnectPeerState {
      */
     connectPeerId?: pulumi.Input<string>;
     /**
-     * Connect Peer Name.
+     * TGW Connect peer name.
      */
     connectPeerName?: pulumi.Input<string>;
     /**
-     * AWS TGW Connect connection name.
+     * TGW Connect connection name.
      */
     connectionName?: pulumi.Input<string>;
     /**
@@ -166,7 +197,7 @@ export interface AviatrixAwsTgwConnectPeerState {
      */
     tgwGreAddress?: pulumi.Input<string>;
     /**
-     * AWS TGW Name.
+     * AWS TGW name.
      */
     tgwName?: pulumi.Input<string>;
 }
@@ -176,7 +207,7 @@ export interface AviatrixAwsTgwConnectPeerState {
  */
 export interface AviatrixAwsTgwConnectPeerArgs {
     /**
-     * Set of BGP Inside CIDR Blocks.
+     * Set of BGP Inside CIDR Block(s).
      */
     bgpInsideCidrs: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -184,11 +215,11 @@ export interface AviatrixAwsTgwConnectPeerArgs {
      */
     connectAttachmentId: pulumi.Input<string>;
     /**
-     * Connect Peer Name.
+     * TGW Connect peer name.
      */
     connectPeerName: pulumi.Input<string>;
     /**
-     * AWS TGW Connect connection name.
+     * TGW Connect connection name.
      */
     connectionName: pulumi.Input<string>;
     /**
@@ -204,7 +235,7 @@ export interface AviatrixAwsTgwConnectPeerArgs {
      */
     tgwGreAddress?: pulumi.Input<string>;
     /**
-     * AWS TGW Name.
+     * AWS TGW name.
      */
     tgwName: pulumi.Input<string>;
 }

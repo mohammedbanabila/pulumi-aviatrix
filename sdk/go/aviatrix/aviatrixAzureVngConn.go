@@ -11,18 +11,56 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_azure_vng_conn** resource allows the creation and management of the connection between Aviatrix Transit Gateway and Azure VNG.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixAzureVngConn(ctx, "test", &aviatrix.AviatrixAzureVngConnArgs{
+//				ConnectionName:     pulumi.String("connection"),
+//				PrimaryGatewayName: pulumi.String("primary-gateway"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **aviatrix_azure_vng_conn** can be imported using the `connection_name`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixAzureVngConn:AviatrixAzureVngConn test connection
+//
+// ```
 type AviatrixAzureVngConn struct {
 	pulumi.CustomResourceState
 
-	// VNG attached or not
+	// The status of the connection.
 	Attached pulumi.BoolOutput `pulumi:"attached"`
-	// Connection name
+	// Connection name.
 	ConnectionName pulumi.StringOutput `pulumi:"connectionName"`
-	// Primary gateway name
+	// Primary Aviatrix transit gateway name.
 	PrimaryGatewayName pulumi.StringOutput `pulumi:"primaryGatewayName"`
-	// VNG name
+	// Name of Azure VNG.
 	VngName pulumi.StringOutput `pulumi:"vngName"`
-	// VPC ID
+	// VPC ID.
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
 }
 
@@ -62,28 +100,28 @@ func GetAviatrixAzureVngConn(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixAzureVngConn resources.
 type aviatrixAzureVngConnState struct {
-	// VNG attached or not
+	// The status of the connection.
 	Attached *bool `pulumi:"attached"`
-	// Connection name
+	// Connection name.
 	ConnectionName *string `pulumi:"connectionName"`
-	// Primary gateway name
+	// Primary Aviatrix transit gateway name.
 	PrimaryGatewayName *string `pulumi:"primaryGatewayName"`
-	// VNG name
+	// Name of Azure VNG.
 	VngName *string `pulumi:"vngName"`
-	// VPC ID
+	// VPC ID.
 	VpcId *string `pulumi:"vpcId"`
 }
 
 type AviatrixAzureVngConnState struct {
-	// VNG attached or not
+	// The status of the connection.
 	Attached pulumi.BoolPtrInput
-	// Connection name
+	// Connection name.
 	ConnectionName pulumi.StringPtrInput
-	// Primary gateway name
+	// Primary Aviatrix transit gateway name.
 	PrimaryGatewayName pulumi.StringPtrInput
-	// VNG name
+	// Name of Azure VNG.
 	VngName pulumi.StringPtrInput
-	// VPC ID
+	// VPC ID.
 	VpcId pulumi.StringPtrInput
 }
 
@@ -92,17 +130,17 @@ func (AviatrixAzureVngConnState) ElementType() reflect.Type {
 }
 
 type aviatrixAzureVngConnArgs struct {
-	// Connection name
+	// Connection name.
 	ConnectionName string `pulumi:"connectionName"`
-	// Primary gateway name
+	// Primary Aviatrix transit gateway name.
 	PrimaryGatewayName string `pulumi:"primaryGatewayName"`
 }
 
 // The set of arguments for constructing a AviatrixAzureVngConn resource.
 type AviatrixAzureVngConnArgs struct {
-	// Connection name
+	// Connection name.
 	ConnectionName pulumi.StringInput
-	// Primary gateway name
+	// Primary Aviatrix transit gateway name.
 	PrimaryGatewayName pulumi.StringInput
 }
 
@@ -193,27 +231,27 @@ func (o AviatrixAzureVngConnOutput) ToAviatrixAzureVngConnOutputWithContext(ctx 
 	return o
 }
 
-// VNG attached or not
+// The status of the connection.
 func (o AviatrixAzureVngConnOutput) Attached() pulumi.BoolOutput {
 	return o.ApplyT(func(v *AviatrixAzureVngConn) pulumi.BoolOutput { return v.Attached }).(pulumi.BoolOutput)
 }
 
-// Connection name
+// Connection name.
 func (o AviatrixAzureVngConnOutput) ConnectionName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAzureVngConn) pulumi.StringOutput { return v.ConnectionName }).(pulumi.StringOutput)
 }
 
-// Primary gateway name
+// Primary Aviatrix transit gateway name.
 func (o AviatrixAzureVngConnOutput) PrimaryGatewayName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAzureVngConn) pulumi.StringOutput { return v.PrimaryGatewayName }).(pulumi.StringOutput)
 }
 
-// VNG name
+// Name of Azure VNG.
 func (o AviatrixAzureVngConnOutput) VngName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAzureVngConn) pulumi.StringOutput { return v.VngName }).(pulumi.StringOutput)
 }
 
-// VPC ID
+// VPC ID.
 func (o AviatrixAzureVngConnOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAzureVngConn) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
 }

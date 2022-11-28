@@ -21,11 +21,11 @@ class AviatrixAwsTgwNetworkDomainArgs:
                  native_firewall: Optional[pulumi.Input[bool]] = None):
         """
         The set of arguments for constructing a AviatrixAwsTgwNetworkDomain resource.
-        :param pulumi.Input[str] tgw_name: AWS TGW name.
-        :param pulumi.Input[bool] aviatrix_firewall: Set to true if the network domain is an aviatrix firewall domain.
-        :param pulumi.Input[str] name: Network domain name.
-        :param pulumi.Input[bool] native_egress: Set to true if the network domain is a native egress domain.
-        :param pulumi.Input[bool] native_firewall: Set to true if the network domain is a native firewall domain.
+        :param pulumi.Input[str] tgw_name: The AWS TGW name of the network domain.
+        :param pulumi.Input[bool] aviatrix_firewall: Set to true if the network domain is to be used as an Aviatrix Firewall Domain for the Aviatrix Firewall Network. Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] name: The name of the network domain.
+        :param pulumi.Input[bool] native_egress: Set to true if the network domain is to be used as a native egress domain (for non-Aviatrix Firewall Network-based central Internet bound traffic). Valid values: true, false. Default value: false.
+        :param pulumi.Input[bool] native_firewall: Set to true if the network domain is to be used as a native firewall domain (for non-Aviatrix Firewall Network-based firewall traffic inspection). Valid values: true, false. Default value: false.
         """
         pulumi.set(__self__, "tgw_name", tgw_name)
         if aviatrix_firewall is not None:
@@ -41,7 +41,7 @@ class AviatrixAwsTgwNetworkDomainArgs:
     @pulumi.getter(name="tgwName")
     def tgw_name(self) -> pulumi.Input[str]:
         """
-        AWS TGW name.
+        The AWS TGW name of the network domain.
         """
         return pulumi.get(self, "tgw_name")
 
@@ -53,7 +53,7 @@ class AviatrixAwsTgwNetworkDomainArgs:
     @pulumi.getter(name="aviatrixFirewall")
     def aviatrix_firewall(self) -> Optional[pulumi.Input[bool]]:
         """
-        Set to true if the network domain is an aviatrix firewall domain.
+        Set to true if the network domain is to be used as an Aviatrix Firewall Domain for the Aviatrix Firewall Network. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "aviatrix_firewall")
 
@@ -65,7 +65,7 @@ class AviatrixAwsTgwNetworkDomainArgs:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        Network domain name.
+        The name of the network domain.
         """
         return pulumi.get(self, "name")
 
@@ -77,7 +77,7 @@ class AviatrixAwsTgwNetworkDomainArgs:
     @pulumi.getter(name="nativeEgress")
     def native_egress(self) -> Optional[pulumi.Input[bool]]:
         """
-        Set to true if the network domain is a native egress domain.
+        Set to true if the network domain is to be used as a native egress domain (for non-Aviatrix Firewall Network-based central Internet bound traffic). Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "native_egress")
 
@@ -89,7 +89,7 @@ class AviatrixAwsTgwNetworkDomainArgs:
     @pulumi.getter(name="nativeFirewall")
     def native_firewall(self) -> Optional[pulumi.Input[bool]]:
         """
-        Set to true if the network domain is a native firewall domain.
+        Set to true if the network domain is to be used as a native firewall domain (for non-Aviatrix Firewall Network-based firewall traffic inspection). Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "native_firewall")
 
@@ -108,11 +108,11 @@ class _AviatrixAwsTgwNetworkDomainState:
                  tgw_name: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixAwsTgwNetworkDomain resources.
-        :param pulumi.Input[bool] aviatrix_firewall: Set to true if the network domain is an aviatrix firewall domain.
-        :param pulumi.Input[str] name: Network domain name.
-        :param pulumi.Input[bool] native_egress: Set to true if the network domain is a native egress domain.
-        :param pulumi.Input[bool] native_firewall: Set to true if the network domain is a native firewall domain.
-        :param pulumi.Input[str] tgw_name: AWS TGW name.
+        :param pulumi.Input[bool] aviatrix_firewall: Set to true if the network domain is to be used as an Aviatrix Firewall Domain for the Aviatrix Firewall Network. Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] name: The name of the network domain.
+        :param pulumi.Input[bool] native_egress: Set to true if the network domain is to be used as a native egress domain (for non-Aviatrix Firewall Network-based central Internet bound traffic). Valid values: true, false. Default value: false.
+        :param pulumi.Input[bool] native_firewall: Set to true if the network domain is to be used as a native firewall domain (for non-Aviatrix Firewall Network-based firewall traffic inspection). Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] tgw_name: The AWS TGW name of the network domain.
         """
         if aviatrix_firewall is not None:
             pulumi.set(__self__, "aviatrix_firewall", aviatrix_firewall)
@@ -129,7 +129,7 @@ class _AviatrixAwsTgwNetworkDomainState:
     @pulumi.getter(name="aviatrixFirewall")
     def aviatrix_firewall(self) -> Optional[pulumi.Input[bool]]:
         """
-        Set to true if the network domain is an aviatrix firewall domain.
+        Set to true if the network domain is to be used as an Aviatrix Firewall Domain for the Aviatrix Firewall Network. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "aviatrix_firewall")
 
@@ -141,7 +141,7 @@ class _AviatrixAwsTgwNetworkDomainState:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        Network domain name.
+        The name of the network domain.
         """
         return pulumi.get(self, "name")
 
@@ -153,7 +153,7 @@ class _AviatrixAwsTgwNetworkDomainState:
     @pulumi.getter(name="nativeEgress")
     def native_egress(self) -> Optional[pulumi.Input[bool]]:
         """
-        Set to true if the network domain is a native egress domain.
+        Set to true if the network domain is to be used as a native egress domain (for non-Aviatrix Firewall Network-based central Internet bound traffic). Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "native_egress")
 
@@ -165,7 +165,7 @@ class _AviatrixAwsTgwNetworkDomainState:
     @pulumi.getter(name="nativeFirewall")
     def native_firewall(self) -> Optional[pulumi.Input[bool]]:
         """
-        Set to true if the network domain is a native firewall domain.
+        Set to true if the network domain is to be used as a native firewall domain (for non-Aviatrix Firewall Network-based firewall traffic inspection). Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "native_firewall")
 
@@ -177,7 +177,7 @@ class _AviatrixAwsTgwNetworkDomainState:
     @pulumi.getter(name="tgwName")
     def tgw_name(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS TGW name.
+        The AWS TGW name of the network domain.
         """
         return pulumi.get(self, "tgw_name")
 
@@ -198,14 +198,61 @@ class AviatrixAwsTgwNetworkDomain(pulumi.CustomResource):
                  tgw_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixAwsTgwNetworkDomain resource with the given unique name, props, and options.
+        The **aviatrix_aws_tgw_network_domain** resource allows the creation and management of Aviatrix network domains.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS TGW network domain
+        test_aws_tgw = aviatrix.AviatrixAwsTgw("testAwsTgw",
+            account_name="devops",
+            aws_side_as_number="64512",
+            region="us-east-1",
+            tgw_name="test-AWS-TGW",
+            manage_security_domain=False,
+            manage_vpc_attachment=False,
+            manage_transit_gateway_attachment=False)
+        default_domain = aviatrix.AviatrixAwsTgwNetworkDomain("defaultDomain", tgw_name=test_aws_tgw.tgw_name)
+        shared_service_domain = aviatrix.AviatrixAwsTgwNetworkDomain("sharedServiceDomain", tgw_name=test_aws_tgw.tgw_name)
+        aviatrix_edge_domain = aviatrix.AviatrixAwsTgwNetworkDomain("aviatrixEdgeDomain", tgw_name=test_aws_tgw.tgw_name)
+        default_sd_conn1 = aviatrix.AviatrixAwsTgwSecurityDomainConn("defaultSdConn1",
+            tgw_name=test_aws_tgw.tgw_name,
+            domain_name1=aviatrix_edge_domain.name,
+            domain_name2=default_domain.name)
+        default_sd_conn2 = aviatrix.AviatrixAwsTgwSecurityDomainConn("defaultSdConn2",
+            tgw_name=test_aws_tgw.tgw_name,
+            domain_name1=aviatrix_edge_domain.name,
+            domain_name2=shared_service_domain.name)
+        default_sd_conn3 = aviatrix.AviatrixAwsTgwSecurityDomainConn("defaultSdConn3",
+            tgw_name=test_aws_tgw.tgw_name,
+            domain_name1=default_domain.name,
+            domain_name2=shared_service_domain.name)
+        test = aviatrix.AviatrixAwsTgwNetworkDomain("test", tgw_name=test_aws_tgw.tgw_name,
+        opts=pulumi.ResourceOptions(depends_on=[
+                default_domain,
+                shared_service_domain,
+                aviatrix_edge_domain,
+            ]))
+        ```
+
+        ## Import
+
+        **aws_tgw_network_domain** can be imported using the `name` and `tgw_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAwsTgwNetworkDomain:AviatrixAwsTgwNetworkDomain test tgw_name~name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[bool] aviatrix_firewall: Set to true if the network domain is an aviatrix firewall domain.
-        :param pulumi.Input[str] name: Network domain name.
-        :param pulumi.Input[bool] native_egress: Set to true if the network domain is a native egress domain.
-        :param pulumi.Input[bool] native_firewall: Set to true if the network domain is a native firewall domain.
-        :param pulumi.Input[str] tgw_name: AWS TGW name.
+        :param pulumi.Input[bool] aviatrix_firewall: Set to true if the network domain is to be used as an Aviatrix Firewall Domain for the Aviatrix Firewall Network. Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] name: The name of the network domain.
+        :param pulumi.Input[bool] native_egress: Set to true if the network domain is to be used as a native egress domain (for non-Aviatrix Firewall Network-based central Internet bound traffic). Valid values: true, false. Default value: false.
+        :param pulumi.Input[bool] native_firewall: Set to true if the network domain is to be used as a native firewall domain (for non-Aviatrix Firewall Network-based firewall traffic inspection). Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] tgw_name: The AWS TGW name of the network domain.
         """
         ...
     @overload
@@ -214,7 +261,54 @@ class AviatrixAwsTgwNetworkDomain(pulumi.CustomResource):
                  args: AviatrixAwsTgwNetworkDomainArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixAwsTgwNetworkDomain resource with the given unique name, props, and options.
+        The **aviatrix_aws_tgw_network_domain** resource allows the creation and management of Aviatrix network domains.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS TGW network domain
+        test_aws_tgw = aviatrix.AviatrixAwsTgw("testAwsTgw",
+            account_name="devops",
+            aws_side_as_number="64512",
+            region="us-east-1",
+            tgw_name="test-AWS-TGW",
+            manage_security_domain=False,
+            manage_vpc_attachment=False,
+            manage_transit_gateway_attachment=False)
+        default_domain = aviatrix.AviatrixAwsTgwNetworkDomain("defaultDomain", tgw_name=test_aws_tgw.tgw_name)
+        shared_service_domain = aviatrix.AviatrixAwsTgwNetworkDomain("sharedServiceDomain", tgw_name=test_aws_tgw.tgw_name)
+        aviatrix_edge_domain = aviatrix.AviatrixAwsTgwNetworkDomain("aviatrixEdgeDomain", tgw_name=test_aws_tgw.tgw_name)
+        default_sd_conn1 = aviatrix.AviatrixAwsTgwSecurityDomainConn("defaultSdConn1",
+            tgw_name=test_aws_tgw.tgw_name,
+            domain_name1=aviatrix_edge_domain.name,
+            domain_name2=default_domain.name)
+        default_sd_conn2 = aviatrix.AviatrixAwsTgwSecurityDomainConn("defaultSdConn2",
+            tgw_name=test_aws_tgw.tgw_name,
+            domain_name1=aviatrix_edge_domain.name,
+            domain_name2=shared_service_domain.name)
+        default_sd_conn3 = aviatrix.AviatrixAwsTgwSecurityDomainConn("defaultSdConn3",
+            tgw_name=test_aws_tgw.tgw_name,
+            domain_name1=default_domain.name,
+            domain_name2=shared_service_domain.name)
+        test = aviatrix.AviatrixAwsTgwNetworkDomain("test", tgw_name=test_aws_tgw.tgw_name,
+        opts=pulumi.ResourceOptions(depends_on=[
+                default_domain,
+                shared_service_domain,
+                aviatrix_edge_domain,
+            ]))
+        ```
+
+        ## Import
+
+        **aws_tgw_network_domain** can be imported using the `name` and `tgw_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAwsTgwNetworkDomain:AviatrixAwsTgwNetworkDomain test tgw_name~name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixAwsTgwNetworkDomainArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -273,11 +367,11 @@ class AviatrixAwsTgwNetworkDomain(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[bool] aviatrix_firewall: Set to true if the network domain is an aviatrix firewall domain.
-        :param pulumi.Input[str] name: Network domain name.
-        :param pulumi.Input[bool] native_egress: Set to true if the network domain is a native egress domain.
-        :param pulumi.Input[bool] native_firewall: Set to true if the network domain is a native firewall domain.
-        :param pulumi.Input[str] tgw_name: AWS TGW name.
+        :param pulumi.Input[bool] aviatrix_firewall: Set to true if the network domain is to be used as an Aviatrix Firewall Domain for the Aviatrix Firewall Network. Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] name: The name of the network domain.
+        :param pulumi.Input[bool] native_egress: Set to true if the network domain is to be used as a native egress domain (for non-Aviatrix Firewall Network-based central Internet bound traffic). Valid values: true, false. Default value: false.
+        :param pulumi.Input[bool] native_firewall: Set to true if the network domain is to be used as a native firewall domain (for non-Aviatrix Firewall Network-based firewall traffic inspection). Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] tgw_name: The AWS TGW name of the network domain.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -294,7 +388,7 @@ class AviatrixAwsTgwNetworkDomain(pulumi.CustomResource):
     @pulumi.getter(name="aviatrixFirewall")
     def aviatrix_firewall(self) -> pulumi.Output[Optional[bool]]:
         """
-        Set to true if the network domain is an aviatrix firewall domain.
+        Set to true if the network domain is to be used as an Aviatrix Firewall Domain for the Aviatrix Firewall Network. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "aviatrix_firewall")
 
@@ -302,7 +396,7 @@ class AviatrixAwsTgwNetworkDomain(pulumi.CustomResource):
     @pulumi.getter
     def name(self) -> pulumi.Output[str]:
         """
-        Network domain name.
+        The name of the network domain.
         """
         return pulumi.get(self, "name")
 
@@ -310,7 +404,7 @@ class AviatrixAwsTgwNetworkDomain(pulumi.CustomResource):
     @pulumi.getter(name="nativeEgress")
     def native_egress(self) -> pulumi.Output[Optional[bool]]:
         """
-        Set to true if the network domain is a native egress domain.
+        Set to true if the network domain is to be used as a native egress domain (for non-Aviatrix Firewall Network-based central Internet bound traffic). Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "native_egress")
 
@@ -318,7 +412,7 @@ class AviatrixAwsTgwNetworkDomain(pulumi.CustomResource):
     @pulumi.getter(name="nativeFirewall")
     def native_firewall(self) -> pulumi.Output[Optional[bool]]:
         """
-        Set to true if the network domain is a native firewall domain.
+        Set to true if the network domain is to be used as a native firewall domain (for non-Aviatrix Firewall Network-based firewall traffic inspection). Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "native_firewall")
 
@@ -326,7 +420,7 @@ class AviatrixAwsTgwNetworkDomain(pulumi.CustomResource):
     @pulumi.getter(name="tgwName")
     def tgw_name(self) -> pulumi.Output[str]:
         """
-        AWS TGW name.
+        The AWS TGW name of the network domain.
         """
         return pulumi.get(self, "tgw_name")
 

@@ -11,14 +11,53 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_segmentation_network_domain_association** resource handles creation of [Transit Segmentation](https://docs.aviatrix.com/HowTos/transit_segmentation_faq.html) Network Domain and Transit Gateway Attachment Associations.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixSegmentationNetworkDomainAssociation(ctx, "testSegmentationNetworkDomainAssociation", &aviatrix.AviatrixSegmentationNetworkDomainAssociationArgs{
+//				AttachmentName:     pulumi.String("attachment-name"),
+//				NetworkDomainName:  pulumi.String("network-domain-name"),
+//				TransitGatewayName: pulumi.String("transit-gw-name"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **aviatrix_segmentation_network_domain_association** can be imported using `transit_gateway_name`, `network_domain_name` and `attachment_name` separated by a `~` e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixSegmentationNetworkDomainAssociation:AviatrixSegmentationNetworkDomainAssociation test transit_gateway_name~network_domain_name~attachment_name
+//
+// ```
 type AviatrixSegmentationNetworkDomainAssociation struct {
 	pulumi.CustomResourceState
 
-	// Attachment name, either Spoke or Edge.
+	// Name of the transit gateway attachment, Spoke or Edge, to associate with the network domain.
 	AttachmentName pulumi.StringOutput `pulumi:"attachmentName"`
-	// Network Domain name.
+	// Name of the Segmentation Network Domain.
 	NetworkDomainName pulumi.StringOutput `pulumi:"networkDomainName"`
-	// Transit Gateway name.
+	// Name of the Transit Gateway.
 	TransitGatewayName pulumi.StringOutput `pulumi:"transitGatewayName"`
 }
 
@@ -61,20 +100,20 @@ func GetAviatrixSegmentationNetworkDomainAssociation(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixSegmentationNetworkDomainAssociation resources.
 type aviatrixSegmentationNetworkDomainAssociationState struct {
-	// Attachment name, either Spoke or Edge.
+	// Name of the transit gateway attachment, Spoke or Edge, to associate with the network domain.
 	AttachmentName *string `pulumi:"attachmentName"`
-	// Network Domain name.
+	// Name of the Segmentation Network Domain.
 	NetworkDomainName *string `pulumi:"networkDomainName"`
-	// Transit Gateway name.
+	// Name of the Transit Gateway.
 	TransitGatewayName *string `pulumi:"transitGatewayName"`
 }
 
 type AviatrixSegmentationNetworkDomainAssociationState struct {
-	// Attachment name, either Spoke or Edge.
+	// Name of the transit gateway attachment, Spoke or Edge, to associate with the network domain.
 	AttachmentName pulumi.StringPtrInput
-	// Network Domain name.
+	// Name of the Segmentation Network Domain.
 	NetworkDomainName pulumi.StringPtrInput
-	// Transit Gateway name.
+	// Name of the Transit Gateway.
 	TransitGatewayName pulumi.StringPtrInput
 }
 
@@ -83,21 +122,21 @@ func (AviatrixSegmentationNetworkDomainAssociationState) ElementType() reflect.T
 }
 
 type aviatrixSegmentationNetworkDomainAssociationArgs struct {
-	// Attachment name, either Spoke or Edge.
+	// Name of the transit gateway attachment, Spoke or Edge, to associate with the network domain.
 	AttachmentName string `pulumi:"attachmentName"`
-	// Network Domain name.
+	// Name of the Segmentation Network Domain.
 	NetworkDomainName string `pulumi:"networkDomainName"`
-	// Transit Gateway name.
+	// Name of the Transit Gateway.
 	TransitGatewayName string `pulumi:"transitGatewayName"`
 }
 
 // The set of arguments for constructing a AviatrixSegmentationNetworkDomainAssociation resource.
 type AviatrixSegmentationNetworkDomainAssociationArgs struct {
-	// Attachment name, either Spoke or Edge.
+	// Name of the transit gateway attachment, Spoke or Edge, to associate with the network domain.
 	AttachmentName pulumi.StringInput
-	// Network Domain name.
+	// Name of the Segmentation Network Domain.
 	NetworkDomainName pulumi.StringInput
-	// Transit Gateway name.
+	// Name of the Transit Gateway.
 	TransitGatewayName pulumi.StringInput
 }
 
@@ -188,17 +227,17 @@ func (o AviatrixSegmentationNetworkDomainAssociationOutput) ToAviatrixSegmentati
 	return o
 }
 
-// Attachment name, either Spoke or Edge.
+// Name of the transit gateway attachment, Spoke or Edge, to associate with the network domain.
 func (o AviatrixSegmentationNetworkDomainAssociationOutput) AttachmentName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSegmentationNetworkDomainAssociation) pulumi.StringOutput { return v.AttachmentName }).(pulumi.StringOutput)
 }
 
-// Network Domain name.
+// Name of the Segmentation Network Domain.
 func (o AviatrixSegmentationNetworkDomainAssociationOutput) NetworkDomainName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSegmentationNetworkDomainAssociation) pulumi.StringOutput { return v.NetworkDomainName }).(pulumi.StringOutput)
 }
 
-// Transit Gateway name.
+// Name of the Transit Gateway.
 func (o AviatrixSegmentationNetworkDomainAssociationOutput) TransitGatewayName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSegmentationNetworkDomainAssociation) pulumi.StringOutput { return v.TransitGatewayName }).(pulumi.StringOutput)
 }

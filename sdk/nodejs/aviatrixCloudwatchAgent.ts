@@ -4,6 +4,34 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_cloudwatch_agent** resource allows the enabling and disabling of cloudwatch agent.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Enable cloudwatch agent
+ * const testCloudwatchAgent = new aviatrix.AviatrixCloudwatchAgent("test_cloudwatch_agent", {
+ *     cloudwatchRoleArn: "arn:aws:iam::469550033836:role/aviatrix-role-cloudwatch",
+ *     excludedGateways: [
+ *         "a",
+ *         "b",
+ *     ],
+ *     region: "us-east-1",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **cloudwatch_agent** can be imported using "cloudwatch_agent", e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixCloudwatchAgent:AviatrixCloudwatchAgent test cloudwatch_agent
+ * ```
+ */
 export class AviatrixCloudwatchAgent extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixCloudwatchAgent resource's state with the given name, ID, and optional extra
@@ -37,11 +65,11 @@ export class AviatrixCloudwatchAgent extends pulumi.CustomResource {
      */
     public readonly cloudwatchRoleArn!: pulumi.Output<string>;
     /**
-     * List of excluded gateways.
+     * List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
      */
     public readonly excludedGateways!: pulumi.Output<string[] | undefined>;
     /**
-     * Log group name.
+     * Log group name. "AVIATRIX-CLOUDWATCH-LOG" by default.
      */
     public readonly logGroupName!: pulumi.Output<string | undefined>;
     /**
@@ -49,7 +77,7 @@ export class AviatrixCloudwatchAgent extends pulumi.CustomResource {
      */
     public readonly region!: pulumi.Output<string>;
     /**
-     * Enabled or not.
+     * The status of cloudwatch agent.
      */
     public /*out*/ readonly status!: pulumi.Output<string>;
 
@@ -99,11 +127,11 @@ export interface AviatrixCloudwatchAgentState {
      */
     cloudwatchRoleArn?: pulumi.Input<string>;
     /**
-     * List of excluded gateways.
+     * List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
      */
     excludedGateways?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Log group name.
+     * Log group name. "AVIATRIX-CLOUDWATCH-LOG" by default.
      */
     logGroupName?: pulumi.Input<string>;
     /**
@@ -111,7 +139,7 @@ export interface AviatrixCloudwatchAgentState {
      */
     region?: pulumi.Input<string>;
     /**
-     * Enabled or not.
+     * The status of cloudwatch agent.
      */
     status?: pulumi.Input<string>;
 }
@@ -125,11 +153,11 @@ export interface AviatrixCloudwatchAgentArgs {
      */
     cloudwatchRoleArn: pulumi.Input<string>;
     /**
-     * List of excluded gateways.
+     * List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
      */
     excludedGateways?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Log group name.
+     * Log group name. "AVIATRIX-CLOUDWATCH-LOG" by default.
      */
     logGroupName?: pulumi.Input<string>;
     /**

@@ -9,6 +9,58 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_splunk_logging** resource allows the enabling and disabling of splunk logging.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Enable splunk logging using server and port combination
+    ///     var testSplunkLogging = new Aviatrix.AviatrixSplunkLogging("testSplunkLogging", new()
+    ///     {
+    ///         Port = 10,
+    ///         Server = "1.2.3.4",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ```csharp
+    /// using System;
+    /// using System.Collections.Generic;
+    /// using System.IO;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// 	private static string ReadFileBase64(string path) {
+    /// 		return Convert.ToBase64String(Encoding.UTF8.GetBytes(File.ReadAllText(path)))
+    /// 	}
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Enable splunk logging using configuration file
+    ///     var testSplunkLogging = new Aviatrix.AviatrixSplunkLogging("testSplunkLogging", new()
+    ///     {
+    ///         CustomOutputConfigFile = ReadFileBase64("/path/to/configuration.spl"),
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **splunk_logging** can be imported using `splunk_logging`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixSplunkLogging:AviatrixSplunkLogging test splunk_logging
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixSplunkLogging:AviatrixSplunkLogging")]
     public partial class AviatrixSplunkLogging : global::Pulumi.CustomResource
     {
@@ -19,13 +71,13 @@ namespace Pulumi.Aviatrix
         public Output<string?> CustomInputConfig { get; private set; } = null!;
 
         /// <summary>
-        /// Configuration file. Use the filebase64 function to read from a file.
+        /// Configuration file. Use the `filebase64` function to read from a file.
         /// </summary>
         [Output("customOutputConfigFile")]
         public Output<string?> CustomOutputConfigFile { get; private set; } = null!;
 
         /// <summary>
-        /// List of excluded gateways.
+        /// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         /// </summary>
         [Output("excludedGateways")]
         public Output<ImmutableArray<string>> ExcludedGateways { get; private set; } = null!;
@@ -43,7 +95,7 @@ namespace Pulumi.Aviatrix
         public Output<string?> Server { get; private set; } = null!;
 
         /// <summary>
-        /// Enabled or not.
+        /// The status of splunk logging.
         /// </summary>
         [Output("status")]
         public Output<string> Status { get; private set; } = null!;
@@ -102,7 +154,7 @@ namespace Pulumi.Aviatrix
         public Input<string>? CustomInputConfig { get; set; }
 
         /// <summary>
-        /// Configuration file. Use the filebase64 function to read from a file.
+        /// Configuration file. Use the `filebase64` function to read from a file.
         /// </summary>
         [Input("customOutputConfigFile")]
         public Input<string>? CustomOutputConfigFile { get; set; }
@@ -111,7 +163,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _excludedGateways;
 
         /// <summary>
-        /// List of excluded gateways.
+        /// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         /// </summary>
         public InputList<string> ExcludedGateways
         {
@@ -146,7 +198,7 @@ namespace Pulumi.Aviatrix
         public Input<string>? CustomInputConfig { get; set; }
 
         /// <summary>
-        /// Configuration file. Use the filebase64 function to read from a file.
+        /// Configuration file. Use the `filebase64` function to read from a file.
         /// </summary>
         [Input("customOutputConfigFile")]
         public Input<string>? CustomOutputConfigFile { get; set; }
@@ -155,7 +207,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _excludedGateways;
 
         /// <summary>
-        /// List of excluded gateways.
+        /// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         /// </summary>
         public InputList<string> ExcludedGateways
         {
@@ -176,7 +228,7 @@ namespace Pulumi.Aviatrix
         public Input<string>? Server { get; set; }
 
         /// <summary>
-        /// Enabled or not.
+        /// The status of splunk logging.
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }

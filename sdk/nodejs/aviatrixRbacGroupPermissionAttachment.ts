@@ -4,6 +4,30 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_rbac_group_permission_attachment** resource allows the creation and management of permission attachments to Aviatrix (Role-Based Access Control) RBAC groups.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Rbac Group Permission Attachment
+ * const testAttachment = new aviatrix.AviatrixRbacGroupPermissionAttachment("test_attachment", {
+ *     groupName: "write_only",
+ *     permissionName: "all_write",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **rbac_group_permission_attachment** can be imported using the `group_name` and `permission_name`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixRbacGroupPermissionAttachment:AviatrixRbacGroupPermissionAttachment test group_name~permission_name
+ * ```
+ */
 export class AviatrixRbacGroupPermissionAttachment extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixRbacGroupPermissionAttachment resource's state with the given name, ID, and optional extra
@@ -33,11 +57,11 @@ export class AviatrixRbacGroupPermissionAttachment extends pulumi.CustomResource
     }
 
     /**
-     * RBAC permission group name.
+     * This parameter represents the name of a RBAC group.
      */
     public readonly groupName!: pulumi.Output<string>;
     /**
-     * Permission name.
+     * This parameter represents the permission to attach to the RBAC group.
      */
     public readonly permissionName!: pulumi.Output<string>;
 
@@ -77,11 +101,11 @@ export class AviatrixRbacGroupPermissionAttachment extends pulumi.CustomResource
  */
 export interface AviatrixRbacGroupPermissionAttachmentState {
     /**
-     * RBAC permission group name.
+     * This parameter represents the name of a RBAC group.
      */
     groupName?: pulumi.Input<string>;
     /**
-     * Permission name.
+     * This parameter represents the permission to attach to the RBAC group.
      */
     permissionName?: pulumi.Input<string>;
 }
@@ -91,11 +115,11 @@ export interface AviatrixRbacGroupPermissionAttachmentState {
  */
 export interface AviatrixRbacGroupPermissionAttachmentArgs {
     /**
-     * RBAC permission group name.
+     * This parameter represents the name of a RBAC group.
      */
     groupName: pulumi.Input<string>;
     /**
-     * Permission name.
+     * This parameter represents the permission to attach to the RBAC group.
      */
     permissionName: pulumi.Input<string>;
 }

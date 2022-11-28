@@ -9,17 +9,59 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_firewall_tag** resource allows the creation and management of [Aviatrix Stateful Firewall tags](https://docs.aviatrix.com/HowTos/tag_firewall.html) for tag-based security for gateways.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Firewall Tag
+    ///     var testFirewallTag = new Aviatrix.AviatrixFirewallTag("testFirewallTag", new()
+    ///     {
+    ///         CidrLists = new[]
+    ///         {
+    ///             new Aviatrix.Inputs.AviatrixFirewallTagCidrListArgs
+    ///             {
+    ///                 Cidr = "10.1.0.0/24",
+    ///                 CidrTagName = "a1",
+    ///             },
+    ///             new Aviatrix.Inputs.AviatrixFirewallTagCidrListArgs
+    ///             {
+    ///                 Cidr = "10.2.0.0/24",
+    ///                 CidrTagName = "b1",
+    ///             },
+    ///         },
+    ///         FirewallTag = "test-firewall-tag",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **firewall_tag** can be imported using the `firewall_tag`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixFirewallTag:AviatrixFirewallTag test firewall_tag
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixFirewallTag:AviatrixFirewallTag")]
     public partial class AviatrixFirewallTag : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// A JSON file with information of 'cidr_tag_name' and 'cidr'.
+        /// Dynamic block representing a CIDR to filter, and a name to identify it:
         /// </summary>
         [Output("cidrLists")]
         public Output<ImmutableArray<Outputs.AviatrixFirewallTagCidrList>> CidrLists { get; private set; } = null!;
 
         /// <summary>
-        /// This parameter represents the name of a Cloud-Account in Aviatrix controller.
+        /// Name of the stateful firewall tag to be created.
         /// </summary>
         [Output("firewallTag")]
         public Output<string> FirewallTag { get; private set; } = null!;
@@ -75,7 +117,7 @@ namespace Pulumi.Aviatrix
         private InputList<Inputs.AviatrixFirewallTagCidrListArgs>? _cidrLists;
 
         /// <summary>
-        /// A JSON file with information of 'cidr_tag_name' and 'cidr'.
+        /// Dynamic block representing a CIDR to filter, and a name to identify it:
         /// </summary>
         public InputList<Inputs.AviatrixFirewallTagCidrListArgs> CidrLists
         {
@@ -84,7 +126,7 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// This parameter represents the name of a Cloud-Account in Aviatrix controller.
+        /// Name of the stateful firewall tag to be created.
         /// </summary>
         [Input("firewallTag", required: true)]
         public Input<string> FirewallTag { get; set; } = null!;
@@ -101,7 +143,7 @@ namespace Pulumi.Aviatrix
         private InputList<Inputs.AviatrixFirewallTagCidrListGetArgs>? _cidrLists;
 
         /// <summary>
-        /// A JSON file with information of 'cidr_tag_name' and 'cidr'.
+        /// Dynamic block representing a CIDR to filter, and a name to identify it:
         /// </summary>
         public InputList<Inputs.AviatrixFirewallTagCidrListGetArgs> CidrLists
         {
@@ -110,7 +152,7 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// This parameter represents the name of a Cloud-Account in Aviatrix controller.
+        /// Name of the stateful firewall tag to be created.
         /// </summary>
         [Input("firewallTag")]
         public Input<string>? FirewallTag { get; set; }

@@ -17,7 +17,7 @@ class AviatrixVpnUserAcceleratorArgs:
                  elb_name: pulumi.Input[str]):
         """
         The set of arguments for constructing a AviatrixVpnUserAccelerator resource.
-        :param pulumi.Input[str] elb_name: ELB to include into the VPN User Accelerator.
+        :param pulumi.Input[str] elb_name: Name of ELB to be added to VPN User Accelerator. Example: "Aviatrix-vpc-abcd2134".
         """
         pulumi.set(__self__, "elb_name", elb_name)
 
@@ -25,7 +25,7 @@ class AviatrixVpnUserAcceleratorArgs:
     @pulumi.getter(name="elbName")
     def elb_name(self) -> pulumi.Input[str]:
         """
-        ELB to include into the VPN User Accelerator.
+        Name of ELB to be added to VPN User Accelerator. Example: "Aviatrix-vpc-abcd2134".
         """
         return pulumi.get(self, "elb_name")
 
@@ -40,7 +40,7 @@ class _AviatrixVpnUserAcceleratorState:
                  elb_name: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixVpnUserAccelerator resources.
-        :param pulumi.Input[str] elb_name: ELB to include into the VPN User Accelerator.
+        :param pulumi.Input[str] elb_name: Name of ELB to be added to VPN User Accelerator. Example: "Aviatrix-vpc-abcd2134".
         """
         if elb_name is not None:
             pulumi.set(__self__, "elb_name", elb_name)
@@ -49,7 +49,7 @@ class _AviatrixVpnUserAcceleratorState:
     @pulumi.getter(name="elbName")
     def elb_name(self) -> Optional[pulumi.Input[str]]:
         """
-        ELB to include into the VPN User Accelerator.
+        Name of ELB to be added to VPN User Accelerator. Example: "Aviatrix-vpc-abcd2134".
         """
         return pulumi.get(self, "elb_name")
 
@@ -66,10 +66,29 @@ class AviatrixVpnUserAccelerator(pulumi.CustomResource):
                  elb_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixVpnUserAccelerator resource with the given unique name, props, and options.
+        The **aviatrix_vpn_user_accelerator** resource manages the [Aviatrix VPN User Accelerator](https://docs.aviatrix.com/HowTos/user_accelerator.html).
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Vpn User Accelerator
+        test_vpc_accelerator = aviatrix.AviatrixVpnUserAccelerator("testVpcAccelerator", elb_name="Aviatrix-vpc-abcd2134")
+        ```
+
+        ## Import
+
+        **vpn_user_accelerator** can be imported using the `elb_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixVpnUserAccelerator:AviatrixVpnUserAccelerator test Aviatrix-vpc-abcd1234
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] elb_name: ELB to include into the VPN User Accelerator.
+        :param pulumi.Input[str] elb_name: Name of ELB to be added to VPN User Accelerator. Example: "Aviatrix-vpc-abcd2134".
         """
         ...
     @overload
@@ -78,7 +97,26 @@ class AviatrixVpnUserAccelerator(pulumi.CustomResource):
                  args: AviatrixVpnUserAcceleratorArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixVpnUserAccelerator resource with the given unique name, props, and options.
+        The **aviatrix_vpn_user_accelerator** resource manages the [Aviatrix VPN User Accelerator](https://docs.aviatrix.com/HowTos/user_accelerator.html).
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Vpn User Accelerator
+        test_vpc_accelerator = aviatrix.AviatrixVpnUserAccelerator("testVpcAccelerator", elb_name="Aviatrix-vpc-abcd2134")
+        ```
+
+        ## Import
+
+        **vpn_user_accelerator** can be imported using the `elb_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixVpnUserAccelerator:AviatrixVpnUserAccelerator test Aviatrix-vpc-abcd1234
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixVpnUserAcceleratorArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -125,7 +163,7 @@ class AviatrixVpnUserAccelerator(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] elb_name: ELB to include into the VPN User Accelerator.
+        :param pulumi.Input[str] elb_name: Name of ELB to be added to VPN User Accelerator. Example: "Aviatrix-vpc-abcd2134".
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -138,7 +176,7 @@ class AviatrixVpnUserAccelerator(pulumi.CustomResource):
     @pulumi.getter(name="elbName")
     def elb_name(self) -> pulumi.Output[str]:
         """
-        ELB to include into the VPN User Accelerator.
+        Name of ELB to be added to VPN User Accelerator. Example: "Aviatrix-vpc-abcd2134".
         """
         return pulumi.get(self, "elb_name")
 

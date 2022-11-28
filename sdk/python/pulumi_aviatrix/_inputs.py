@@ -44,11 +44,17 @@ __all__ = [
 class AviatrixAppDomainSelectorArgs:
     def __init__(__self__, *,
                  match_expressions: pulumi.Input[Sequence[pulumi.Input['AviatrixAppDomainSelectorMatchExpressionArgs']]]):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['AviatrixAppDomainSelectorMatchExpressionArgs']]] match_expressions: List of match expressions. The App Domain will be a union of all resources matched by each `match_expressions`.`match_expressions` blocks cannot be empty.
+        """
         pulumi.set(__self__, "match_expressions", match_expressions)
 
     @property
     @pulumi.getter(name="matchExpressions")
     def match_expressions(self) -> pulumi.Input[Sequence[pulumi.Input['AviatrixAppDomainSelectorMatchExpressionArgs']]]:
+        """
+        List of match expressions. The App Domain will be a union of all resources matched by each `match_expressions`.`match_expressions` blocks cannot be empty.
+        """
         return pulumi.get(self, "match_expressions")
 
     @match_expressions.setter
@@ -67,6 +73,16 @@ class AviatrixAppDomainSelectorMatchExpressionArgs:
                  tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  type: Optional[pulumi.Input[str]] = None,
                  zone: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] account_id: - Account ID this expression matches.
+        :param pulumi.Input[str] account_name: - Account name this expression matches.
+        :param pulumi.Input[str] cidr: - CIDR block or IP Address this expression matches. `cidr` cannot be used with any other filters in the same `match_expressions` block.
+        :param pulumi.Input[str] region: - Region this expression matches.
+        :param pulumi.Input[str] res_id: - Resource ID this expression matches.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] tags: - Map of tags this expression matches.
+        :param pulumi.Input[str] type: - Type of resource this expression matches. Must be one of "vm", "vpc" or "subnet". `type` is required when `cidr` is not used.
+        :param pulumi.Input[str] zone: - Zone this expression matches.
+        """
         if account_id is not None:
             pulumi.set(__self__, "account_id", account_id)
         if account_name is not None:
@@ -87,6 +103,9 @@ class AviatrixAppDomainSelectorMatchExpressionArgs:
     @property
     @pulumi.getter(name="accountId")
     def account_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        - Account ID this expression matches.
+        """
         return pulumi.get(self, "account_id")
 
     @account_id.setter
@@ -96,6 +115,9 @@ class AviatrixAppDomainSelectorMatchExpressionArgs:
     @property
     @pulumi.getter(name="accountName")
     def account_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        - Account name this expression matches.
+        """
         return pulumi.get(self, "account_name")
 
     @account_name.setter
@@ -105,6 +127,9 @@ class AviatrixAppDomainSelectorMatchExpressionArgs:
     @property
     @pulumi.getter
     def cidr(self) -> Optional[pulumi.Input[str]]:
+        """
+        - CIDR block or IP Address this expression matches. `cidr` cannot be used with any other filters in the same `match_expressions` block.
+        """
         return pulumi.get(self, "cidr")
 
     @cidr.setter
@@ -114,6 +139,9 @@ class AviatrixAppDomainSelectorMatchExpressionArgs:
     @property
     @pulumi.getter
     def region(self) -> Optional[pulumi.Input[str]]:
+        """
+        - Region this expression matches.
+        """
         return pulumi.get(self, "region")
 
     @region.setter
@@ -123,6 +151,9 @@ class AviatrixAppDomainSelectorMatchExpressionArgs:
     @property
     @pulumi.getter(name="resId")
     def res_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        - Resource ID this expression matches.
+        """
         return pulumi.get(self, "res_id")
 
     @res_id.setter
@@ -132,6 +163,9 @@ class AviatrixAppDomainSelectorMatchExpressionArgs:
     @property
     @pulumi.getter
     def tags(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
+        """
+        - Map of tags this expression matches.
+        """
         return pulumi.get(self, "tags")
 
     @tags.setter
@@ -141,6 +175,9 @@ class AviatrixAppDomainSelectorMatchExpressionArgs:
     @property
     @pulumi.getter
     def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        - Type of resource this expression matches. Must be one of "vm", "vpc" or "subnet". `type` is required when `cidr` is not used.
+        """
         return pulumi.get(self, "type")
 
     @type.setter
@@ -150,6 +187,9 @@ class AviatrixAppDomainSelectorMatchExpressionArgs:
     @property
     @pulumi.getter
     def zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        - Zone this expression matches.
+        """
         return pulumi.get(self, "zone")
 
     @zone.setter
@@ -166,6 +206,14 @@ class AviatrixAwsTgwSecurityDomainArgs:
                  connected_domains: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  native_egress: Optional[pulumi.Input[bool]] = None,
                  native_firewall: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] security_domain_name: Three default domains ("Aviatrix_Edge_Domain", "Default_Domain" and "Shared_Service_Domain") are required with AWS TGW's creation.
+        :param pulumi.Input[Sequence[pulumi.Input['AviatrixAwsTgwSecurityDomainAttachedVpcArgs']]] attached_vpcs: A list of VPCs attached to the domain (name: `security_domain_name`) together with its creation. This list needs to be null for "Aviatrix_Edge_Domain".
+        :param pulumi.Input[bool] aviatrix_firewall: Set to true if the security domain is to be used as an Aviatrix Firewall Domain for the Aviatrix Firewall Network. Valid values: true, false. Default value: false.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] connected_domains: A list of domains connected to the domain (name: `security_domain_name`) together with its creation.
+        :param pulumi.Input[bool] native_egress: Set to true if the security domain is to be used as a native egress domain (for non-Aviatrix Firewall Network-based central Internet bound traffic). Valid values: true, false. Default value: false.
+        :param pulumi.Input[bool] native_firewall: Set to true if the security domain is to be used as a native firewall domain (for non-Aviatrix Firewall Network-based firewall traffic inspection). Valid values: true, false. Default value: false.
+        """
         pulumi.set(__self__, "security_domain_name", security_domain_name)
         if attached_vpcs is not None:
             warnings.warn("""Please set `manage_vpc_attachment` to false, and use the standalone aviatrix_aws_tgw_vpc_attachment resource instead.""", DeprecationWarning)
@@ -184,6 +232,9 @@ class AviatrixAwsTgwSecurityDomainArgs:
     @property
     @pulumi.getter(name="securityDomainName")
     def security_domain_name(self) -> pulumi.Input[str]:
+        """
+        Three default domains ("Aviatrix_Edge_Domain", "Default_Domain" and "Shared_Service_Domain") are required with AWS TGW's creation.
+        """
         return pulumi.get(self, "security_domain_name")
 
     @security_domain_name.setter
@@ -193,6 +244,9 @@ class AviatrixAwsTgwSecurityDomainArgs:
     @property
     @pulumi.getter(name="attachedVpcs")
     def attached_vpcs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['AviatrixAwsTgwSecurityDomainAttachedVpcArgs']]]]:
+        """
+        A list of VPCs attached to the domain (name: `security_domain_name`) together with its creation. This list needs to be null for "Aviatrix_Edge_Domain".
+        """
         return pulumi.get(self, "attached_vpcs")
 
     @attached_vpcs.setter
@@ -202,6 +256,9 @@ class AviatrixAwsTgwSecurityDomainArgs:
     @property
     @pulumi.getter(name="aviatrixFirewall")
     def aviatrix_firewall(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Set to true if the security domain is to be used as an Aviatrix Firewall Domain for the Aviatrix Firewall Network. Valid values: true, false. Default value: false.
+        """
         return pulumi.get(self, "aviatrix_firewall")
 
     @aviatrix_firewall.setter
@@ -211,6 +268,9 @@ class AviatrixAwsTgwSecurityDomainArgs:
     @property
     @pulumi.getter(name="connectedDomains")
     def connected_domains(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of domains connected to the domain (name: `security_domain_name`) together with its creation.
+        """
         return pulumi.get(self, "connected_domains")
 
     @connected_domains.setter
@@ -220,6 +280,9 @@ class AviatrixAwsTgwSecurityDomainArgs:
     @property
     @pulumi.getter(name="nativeEgress")
     def native_egress(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Set to true if the security domain is to be used as a native egress domain (for non-Aviatrix Firewall Network-based central Internet bound traffic). Valid values: true, false. Default value: false.
+        """
         return pulumi.get(self, "native_egress")
 
     @native_egress.setter
@@ -229,6 +292,9 @@ class AviatrixAwsTgwSecurityDomainArgs:
     @property
     @pulumi.getter(name="nativeFirewall")
     def native_firewall(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Set to true if the security domain is to be used as a native firewall domain (for non-Aviatrix Firewall Network-based firewall traffic inspection). Valid values: true, false. Default value: false.
+        """
         return pulumi.get(self, "native_firewall")
 
     @native_firewall.setter
@@ -247,6 +313,16 @@ class AviatrixAwsTgwSecurityDomainAttachedVpcArgs:
                  disable_local_route_propagation: Optional[pulumi.Input[bool]] = None,
                  route_tables: Optional[pulumi.Input[str]] = None,
                  subnets: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] vpc_account_name: Cloud account name of the VPC in the Aviatrix controller.
+        :param pulumi.Input[str] vpc_id: VPC ID of the VPC to be attached to the security domain
+        :param pulumi.Input[str] vpc_region: Region of the VPC, needs to be consistent with AWS TGW's region.
+        :param pulumi.Input[str] customized_route_advertisement: Advanced option. Customized route(s) to be advertised to other VPCs that are connected to the same TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
+        :param pulumi.Input[str] customized_routes: Advanced option. Customized Spoke VPC Routes. It allows the admin to enter non-RFC1918 routes in the VPC route table targeting the TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
+        :param pulumi.Input[bool] disable_local_route_propagation: Advanced option. If set to true, it disables automatic route propagation of this VPC to other VPCs within the same security domain. Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] route_tables: Advanced option. Route tables separated by ',' to participate in TGW Orchestrator, i.e., learned routes will be propagated to these route tables. Example: "rtb-212ff547,rtb-045397874c170c745".
+        :param pulumi.Input[str] subnets: Advanced option. VPC subnets separated by ',' to attach to the VPC. If left blank, the Aviatrix Controller automatically selects a subnet representing each AZ for the VPC attachment. Example: "subnet-214f5646,subnet-085e8c81a89d70846".
+        """
         pulumi.set(__self__, "vpc_account_name", vpc_account_name)
         pulumi.set(__self__, "vpc_id", vpc_id)
         pulumi.set(__self__, "vpc_region", vpc_region)
@@ -264,6 +340,9 @@ class AviatrixAwsTgwSecurityDomainAttachedVpcArgs:
     @property
     @pulumi.getter(name="vpcAccountName")
     def vpc_account_name(self) -> pulumi.Input[str]:
+        """
+        Cloud account name of the VPC in the Aviatrix controller.
+        """
         return pulumi.get(self, "vpc_account_name")
 
     @vpc_account_name.setter
@@ -273,6 +352,9 @@ class AviatrixAwsTgwSecurityDomainAttachedVpcArgs:
     @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> pulumi.Input[str]:
+        """
+        VPC ID of the VPC to be attached to the security domain
+        """
         return pulumi.get(self, "vpc_id")
 
     @vpc_id.setter
@@ -282,6 +364,9 @@ class AviatrixAwsTgwSecurityDomainAttachedVpcArgs:
     @property
     @pulumi.getter(name="vpcRegion")
     def vpc_region(self) -> pulumi.Input[str]:
+        """
+        Region of the VPC, needs to be consistent with AWS TGW's region.
+        """
         return pulumi.get(self, "vpc_region")
 
     @vpc_region.setter
@@ -291,6 +376,9 @@ class AviatrixAwsTgwSecurityDomainAttachedVpcArgs:
     @property
     @pulumi.getter(name="customizedRouteAdvertisement")
     def customized_route_advertisement(self) -> Optional[pulumi.Input[str]]:
+        """
+        Advanced option. Customized route(s) to be advertised to other VPCs that are connected to the same TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
+        """
         return pulumi.get(self, "customized_route_advertisement")
 
     @customized_route_advertisement.setter
@@ -300,6 +388,9 @@ class AviatrixAwsTgwSecurityDomainAttachedVpcArgs:
     @property
     @pulumi.getter(name="customizedRoutes")
     def customized_routes(self) -> Optional[pulumi.Input[str]]:
+        """
+        Advanced option. Customized Spoke VPC Routes. It allows the admin to enter non-RFC1918 routes in the VPC route table targeting the TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
+        """
         return pulumi.get(self, "customized_routes")
 
     @customized_routes.setter
@@ -309,6 +400,9 @@ class AviatrixAwsTgwSecurityDomainAttachedVpcArgs:
     @property
     @pulumi.getter(name="disableLocalRoutePropagation")
     def disable_local_route_propagation(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Advanced option. If set to true, it disables automatic route propagation of this VPC to other VPCs within the same security domain. Valid values: true, false. Default value: false.
+        """
         return pulumi.get(self, "disable_local_route_propagation")
 
     @disable_local_route_propagation.setter
@@ -318,6 +412,9 @@ class AviatrixAwsTgwSecurityDomainAttachedVpcArgs:
     @property
     @pulumi.getter(name="routeTables")
     def route_tables(self) -> Optional[pulumi.Input[str]]:
+        """
+        Advanced option. Route tables separated by ',' to participate in TGW Orchestrator, i.e., learned routes will be propagated to these route tables. Example: "rtb-212ff547,rtb-045397874c170c745".
+        """
         return pulumi.get(self, "route_tables")
 
     @route_tables.setter
@@ -327,6 +424,9 @@ class AviatrixAwsTgwSecurityDomainAttachedVpcArgs:
     @property
     @pulumi.getter
     def subnets(self) -> Optional[pulumi.Input[str]]:
+        """
+        Advanced option. VPC subnets separated by ',' to attach to the VPC. If left blank, the Aviatrix Controller automatically selects a subnet representing each AZ for the VPC attachment. Example: "subnet-214f5646,subnet-085e8c81a89d70846".
+        """
         return pulumi.get(self, "subnets")
 
     @subnets.setter
@@ -446,6 +546,16 @@ class AviatrixFirenetFirewallInstanceAssociationArgs:
                  lan_interface: Optional[pulumi.Input[str]] = None,
                  management_interface: Optional[pulumi.Input[str]] = None,
                  vendor_type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] firenet_gw_name: Name of the primary FireNet gateway.
+        :param pulumi.Input[str] instance_id: ID of Firewall instance.
+        :param pulumi.Input[bool] attached: Switch to attach/detach firewall instance to/from FireNet. Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] egress_interface: Egress interface ID. **Required if it is a firewall instance.**
+        :param pulumi.Input[str] firewall_name: Firewall instance name. **Required if it is a firewall instance.**
+        :param pulumi.Input[str] lan_interface: Lan interface ID. **Required if it is a firewall instance or FQDN gateway in Azure.**
+        :param pulumi.Input[str] management_interface: Management interface ID. **Required if it is a firewall instance.**
+        :param pulumi.Input[str] vendor_type: Type of firewall. Valid values: "Generic", "fqdn_gateway". Default value: "Generic". Value "fqdn_gateway" is required for FQDN gateway.
+        """
         pulumi.set(__self__, "firenet_gw_name", firenet_gw_name)
         pulumi.set(__self__, "instance_id", instance_id)
         if attached is not None:
@@ -464,6 +574,9 @@ class AviatrixFirenetFirewallInstanceAssociationArgs:
     @property
     @pulumi.getter(name="firenetGwName")
     def firenet_gw_name(self) -> pulumi.Input[str]:
+        """
+        Name of the primary FireNet gateway.
+        """
         return pulumi.get(self, "firenet_gw_name")
 
     @firenet_gw_name.setter
@@ -473,6 +586,9 @@ class AviatrixFirenetFirewallInstanceAssociationArgs:
     @property
     @pulumi.getter(name="instanceId")
     def instance_id(self) -> pulumi.Input[str]:
+        """
+        ID of Firewall instance.
+        """
         return pulumi.get(self, "instance_id")
 
     @instance_id.setter
@@ -482,6 +598,9 @@ class AviatrixFirenetFirewallInstanceAssociationArgs:
     @property
     @pulumi.getter
     def attached(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Switch to attach/detach firewall instance to/from FireNet. Valid values: true, false. Default value: false.
+        """
         return pulumi.get(self, "attached")
 
     @attached.setter
@@ -491,6 +610,9 @@ class AviatrixFirenetFirewallInstanceAssociationArgs:
     @property
     @pulumi.getter(name="egressInterface")
     def egress_interface(self) -> Optional[pulumi.Input[str]]:
+        """
+        Egress interface ID. **Required if it is a firewall instance.**
+        """
         return pulumi.get(self, "egress_interface")
 
     @egress_interface.setter
@@ -500,6 +622,9 @@ class AviatrixFirenetFirewallInstanceAssociationArgs:
     @property
     @pulumi.getter(name="firewallName")
     def firewall_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Firewall instance name. **Required if it is a firewall instance.**
+        """
         return pulumi.get(self, "firewall_name")
 
     @firewall_name.setter
@@ -509,6 +634,9 @@ class AviatrixFirenetFirewallInstanceAssociationArgs:
     @property
     @pulumi.getter(name="lanInterface")
     def lan_interface(self) -> Optional[pulumi.Input[str]]:
+        """
+        Lan interface ID. **Required if it is a firewall instance or FQDN gateway in Azure.**
+        """
         return pulumi.get(self, "lan_interface")
 
     @lan_interface.setter
@@ -518,6 +646,9 @@ class AviatrixFirenetFirewallInstanceAssociationArgs:
     @property
     @pulumi.getter(name="managementInterface")
     def management_interface(self) -> Optional[pulumi.Input[str]]:
+        """
+        Management interface ID. **Required if it is a firewall instance.**
+        """
         return pulumi.get(self, "management_interface")
 
     @management_interface.setter
@@ -527,6 +658,9 @@ class AviatrixFirenetFirewallInstanceAssociationArgs:
     @property
     @pulumi.getter(name="vendorType")
     def vendor_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Type of firewall. Valid values: "Generic", "fqdn_gateway". Default value: "Generic". Value "fqdn_gateway" is required for FQDN gateway.
+        """
         return pulumi.get(self, "vendor_type")
 
     @vendor_type.setter
@@ -544,6 +678,15 @@ class AviatrixFirewallPolicyArgs:
                  description: Optional[pulumi.Input[str]] = None,
                  log_enabled: Optional[pulumi.Input[bool]] = None,
                  protocol: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] action: Valid values: "allow", "deny" and "force-drop" (in stateful firewall rule to allow immediate packet dropping on established sessions).
+        :param pulumi.Input[str] dst_ip: Destination address, a valid IPv4 address or tag name such "HR" or "marketing" etc. Example: "10.30.0.0/16". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
+        :param pulumi.Input[str] port: A single port or a range of port numbers. Example: "25", "25:1024".
+        :param pulumi.Input[str] src_ip: Source address, a valid IPv4 address or tag name such "HR" or "marketing" etc. Example: "10.30.0.0/16". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
+        :param pulumi.Input[str] description: Description of the policy. Example: "This is policy no.1".
+        :param pulumi.Input[bool] log_enabled: Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] protocol: : Valid values: "all", "tcp", "udp", "icmp", "sctp", "rdp", "dccp". Default value: "all".
+        """
         pulumi.set(__self__, "action", action)
         pulumi.set(__self__, "dst_ip", dst_ip)
         pulumi.set(__self__, "port", port)
@@ -558,6 +701,9 @@ class AviatrixFirewallPolicyArgs:
     @property
     @pulumi.getter
     def action(self) -> pulumi.Input[str]:
+        """
+        Valid values: "allow", "deny" and "force-drop" (in stateful firewall rule to allow immediate packet dropping on established sessions).
+        """
         return pulumi.get(self, "action")
 
     @action.setter
@@ -567,6 +713,9 @@ class AviatrixFirewallPolicyArgs:
     @property
     @pulumi.getter(name="dstIp")
     def dst_ip(self) -> pulumi.Input[str]:
+        """
+        Destination address, a valid IPv4 address or tag name such "HR" or "marketing" etc. Example: "10.30.0.0/16". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
+        """
         return pulumi.get(self, "dst_ip")
 
     @dst_ip.setter
@@ -576,6 +725,9 @@ class AviatrixFirewallPolicyArgs:
     @property
     @pulumi.getter
     def port(self) -> pulumi.Input[str]:
+        """
+        A single port or a range of port numbers. Example: "25", "25:1024".
+        """
         return pulumi.get(self, "port")
 
     @port.setter
@@ -585,6 +737,9 @@ class AviatrixFirewallPolicyArgs:
     @property
     @pulumi.getter(name="srcIp")
     def src_ip(self) -> pulumi.Input[str]:
+        """
+        Source address, a valid IPv4 address or tag name such "HR" or "marketing" etc. Example: "10.30.0.0/16". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
+        """
         return pulumi.get(self, "src_ip")
 
     @src_ip.setter
@@ -594,6 +749,9 @@ class AviatrixFirewallPolicyArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        Description of the policy. Example: "This is policy no.1".
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -603,6 +761,9 @@ class AviatrixFirewallPolicyArgs:
     @property
     @pulumi.getter(name="logEnabled")
     def log_enabled(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Valid values: true, false. Default value: false.
+        """
         return pulumi.get(self, "log_enabled")
 
     @log_enabled.setter
@@ -612,6 +773,9 @@ class AviatrixFirewallPolicyArgs:
     @property
     @pulumi.getter
     def protocol(self) -> Optional[pulumi.Input[str]]:
+        """
+        : Valid values: "all", "tcp", "udp", "icmp", "sctp", "rdp", "dccp". Default value: "all".
+        """
         return pulumi.get(self, "protocol")
 
     @protocol.setter
@@ -624,12 +788,19 @@ class AviatrixFirewallTagCidrListArgs:
     def __init__(__self__, *,
                  cidr: pulumi.Input[str],
                  cidr_tag_name: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] cidr: CIDR address to filter. Example: "10.88.88.88/32".
+        :param pulumi.Input[str] cidr_tag_name: A name to identify the CIDR. Example: "policy1".
+        """
         pulumi.set(__self__, "cidr", cidr)
         pulumi.set(__self__, "cidr_tag_name", cidr_tag_name)
 
     @property
     @pulumi.getter
     def cidr(self) -> pulumi.Input[str]:
+        """
+        CIDR address to filter. Example: "10.88.88.88/32".
+        """
         return pulumi.get(self, "cidr")
 
     @cidr.setter
@@ -639,6 +810,9 @@ class AviatrixFirewallTagCidrListArgs:
     @property
     @pulumi.getter(name="cidrTagName")
     def cidr_tag_name(self) -> pulumi.Input[str]:
+        """
+        A name to identify the CIDR. Example: "policy1".
+        """
         return pulumi.get(self, "cidr_tag_name")
 
     @cidr_tag_name.setter
@@ -653,6 +827,14 @@ class AviatrixFqdnDomainNameArgs:
                  port: pulumi.Input[str],
                  proto: pulumi.Input[str],
                  action: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] fqdn: FQDN. Example: "facebook.com".
+        :param pulumi.Input[str] port: Port. Example "25".
+        :param pulumi.Input[str] proto: Protocol. Valid values: "all", "tcp", "udp", "icmp".
+        :param pulumi.Input[str] action: What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base Policy' if no value provided.
+               * For protocol "all", port must be set to "all".
+               * For protocol “icmp”, port must be set to “ping”.
+        """
         pulumi.set(__self__, "fqdn", fqdn)
         pulumi.set(__self__, "port", port)
         pulumi.set(__self__, "proto", proto)
@@ -662,6 +844,9 @@ class AviatrixFqdnDomainNameArgs:
     @property
     @pulumi.getter
     def fqdn(self) -> pulumi.Input[str]:
+        """
+        FQDN. Example: "facebook.com".
+        """
         return pulumi.get(self, "fqdn")
 
     @fqdn.setter
@@ -671,6 +856,9 @@ class AviatrixFqdnDomainNameArgs:
     @property
     @pulumi.getter
     def port(self) -> pulumi.Input[str]:
+        """
+        Port. Example "25".
+        """
         return pulumi.get(self, "port")
 
     @port.setter
@@ -680,6 +868,9 @@ class AviatrixFqdnDomainNameArgs:
     @property
     @pulumi.getter
     def proto(self) -> pulumi.Input[str]:
+        """
+        Protocol. Valid values: "all", "tcp", "udp", "icmp".
+        """
         return pulumi.get(self, "proto")
 
     @proto.setter
@@ -689,6 +880,11 @@ class AviatrixFqdnDomainNameArgs:
     @property
     @pulumi.getter
     def action(self) -> Optional[pulumi.Input[str]]:
+        """
+        What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base Policy' if no value provided.
+        * For protocol "all", port must be set to "all".
+        * For protocol “icmp”, port must be set to “ping”.
+        """
         return pulumi.get(self, "action")
 
     @action.setter
@@ -701,6 +897,10 @@ class AviatrixFqdnGwFilterTagListArgs:
     def __init__(__self__, *,
                  gw_name: pulumi.Input[str],
                  source_ip_lists: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input[str] gw_name: Name of the gateway to attach to the specific tag.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] source_ip_lists: List of source IPs in the VPC qualified for a specific tag.
+        """
         pulumi.set(__self__, "gw_name", gw_name)
         if source_ip_lists is not None:
             pulumi.set(__self__, "source_ip_lists", source_ip_lists)
@@ -708,6 +908,9 @@ class AviatrixFqdnGwFilterTagListArgs:
     @property
     @pulumi.getter(name="gwName")
     def gw_name(self) -> pulumi.Input[str]:
+        """
+        Name of the gateway to attach to the specific tag.
+        """
         return pulumi.get(self, "gw_name")
 
     @gw_name.setter
@@ -717,6 +920,9 @@ class AviatrixFqdnGwFilterTagListArgs:
     @property
     @pulumi.getter(name="sourceIpLists")
     def source_ip_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        List of source IPs in the VPC qualified for a specific tag.
+        """
         return pulumi.get(self, "source_ip_lists")
 
     @source_ip_lists.setter
@@ -739,6 +945,20 @@ class AviatrixGatewayDnatConnectionPolicyArgs:
                  protocol: Optional[pulumi.Input[str]] = None,
                  src_cidr: Optional[pulumi.Input[str]] = None,
                  src_port: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[bool] apply_route_entry: This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.19.2+.
+        :param pulumi.Input[str] connection: This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+        :param pulumi.Input[str] dnat_ips: This is a rule field that specifies the translated destination IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+        :param pulumi.Input[str] dnat_port: This is a rule field that specifies the translated destination port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+        :param pulumi.Input[str] dst_cidr: This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+        :param pulumi.Input[str] dst_port: This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+        :param pulumi.Input[str] exclude_rtb: This field specifies which VPC private route table will not be programmed with the default route entry.
+        :param pulumi.Input[str] interface: This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+        :param pulumi.Input[str] mark: This is a rule field that specifies a tag or mark of a TCP session when all qualifier conditions meet. When not specified, this field is not used.
+        :param pulumi.Input[str] protocol: This is a qualifier condition that specifies a destination port protocol where the rule applies. When not specified, this field is not used.
+        :param pulumi.Input[str] src_cidr: This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+        :param pulumi.Input[str] src_port: This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+        """
         if apply_route_entry is not None:
             pulumi.set(__self__, "apply_route_entry", apply_route_entry)
         if connection is not None:
@@ -767,6 +987,9 @@ class AviatrixGatewayDnatConnectionPolicyArgs:
     @property
     @pulumi.getter(name="applyRouteEntry")
     def apply_route_entry(self) -> Optional[pulumi.Input[bool]]:
+        """
+        This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.19.2+.
+        """
         return pulumi.get(self, "apply_route_entry")
 
     @apply_route_entry.setter
@@ -776,6 +999,9 @@ class AviatrixGatewayDnatConnectionPolicyArgs:
     @property
     @pulumi.getter
     def connection(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+        """
         return pulumi.get(self, "connection")
 
     @connection.setter
@@ -785,6 +1011,9 @@ class AviatrixGatewayDnatConnectionPolicyArgs:
     @property
     @pulumi.getter(name="dnatIps")
     def dnat_ips(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a rule field that specifies the translated destination IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+        """
         return pulumi.get(self, "dnat_ips")
 
     @dnat_ips.setter
@@ -794,6 +1023,9 @@ class AviatrixGatewayDnatConnectionPolicyArgs:
     @property
     @pulumi.getter(name="dnatPort")
     def dnat_port(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a rule field that specifies the translated destination port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+        """
         return pulumi.get(self, "dnat_port")
 
     @dnat_port.setter
@@ -803,6 +1035,9 @@ class AviatrixGatewayDnatConnectionPolicyArgs:
     @property
     @pulumi.getter(name="dstCidr")
     def dst_cidr(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+        """
         return pulumi.get(self, "dst_cidr")
 
     @dst_cidr.setter
@@ -812,6 +1047,9 @@ class AviatrixGatewayDnatConnectionPolicyArgs:
     @property
     @pulumi.getter(name="dstPort")
     def dst_port(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+        """
         return pulumi.get(self, "dst_port")
 
     @dst_port.setter
@@ -821,6 +1059,9 @@ class AviatrixGatewayDnatConnectionPolicyArgs:
     @property
     @pulumi.getter(name="excludeRtb")
     def exclude_rtb(self) -> Optional[pulumi.Input[str]]:
+        """
+        This field specifies which VPC private route table will not be programmed with the default route entry.
+        """
         return pulumi.get(self, "exclude_rtb")
 
     @exclude_rtb.setter
@@ -830,6 +1071,9 @@ class AviatrixGatewayDnatConnectionPolicyArgs:
     @property
     @pulumi.getter
     def interface(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+        """
         return pulumi.get(self, "interface")
 
     @interface.setter
@@ -839,6 +1083,9 @@ class AviatrixGatewayDnatConnectionPolicyArgs:
     @property
     @pulumi.getter
     def mark(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a rule field that specifies a tag or mark of a TCP session when all qualifier conditions meet. When not specified, this field is not used.
+        """
         return pulumi.get(self, "mark")
 
     @mark.setter
@@ -848,6 +1095,9 @@ class AviatrixGatewayDnatConnectionPolicyArgs:
     @property
     @pulumi.getter
     def protocol(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a destination port protocol where the rule applies. When not specified, this field is not used.
+        """
         return pulumi.get(self, "protocol")
 
     @protocol.setter
@@ -857,6 +1107,9 @@ class AviatrixGatewayDnatConnectionPolicyArgs:
     @property
     @pulumi.getter(name="srcCidr")
     def src_cidr(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+        """
         return pulumi.get(self, "src_cidr")
 
     @src_cidr.setter
@@ -866,6 +1119,9 @@ class AviatrixGatewayDnatConnectionPolicyArgs:
     @property
     @pulumi.getter(name="srcPort")
     def src_port(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+        """
         return pulumi.get(self, "src_port")
 
     @src_port.setter
@@ -888,6 +1144,20 @@ class AviatrixGatewayDnatDnatPolicyArgs:
                  protocol: Optional[pulumi.Input[str]] = None,
                  src_cidr: Optional[pulumi.Input[str]] = None,
                  src_port: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[bool] apply_route_entry: This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.19.2+.
+        :param pulumi.Input[str] connection: This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+        :param pulumi.Input[str] dnat_ips: This is a rule field that specifies the translated destination IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+        :param pulumi.Input[str] dnat_port: This is a rule field that specifies the translated destination port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+        :param pulumi.Input[str] dst_cidr: This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+        :param pulumi.Input[str] dst_port: This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+        :param pulumi.Input[str] exclude_rtb: This field specifies which VPC private route table will not be programmed with the default route entry.
+        :param pulumi.Input[str] interface: This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+        :param pulumi.Input[str] mark: This is a rule field that specifies a tag or mark of a TCP session when all qualifier conditions meet. When not specified, this field is not used.
+        :param pulumi.Input[str] protocol: This is a qualifier condition that specifies a destination port protocol where the rule applies. When not specified, this field is not used.
+        :param pulumi.Input[str] src_cidr: This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+        :param pulumi.Input[str] src_port: This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+        """
         if apply_route_entry is not None:
             pulumi.set(__self__, "apply_route_entry", apply_route_entry)
         if connection is not None:
@@ -916,6 +1186,9 @@ class AviatrixGatewayDnatDnatPolicyArgs:
     @property
     @pulumi.getter(name="applyRouteEntry")
     def apply_route_entry(self) -> Optional[pulumi.Input[bool]]:
+        """
+        This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.19.2+.
+        """
         return pulumi.get(self, "apply_route_entry")
 
     @apply_route_entry.setter
@@ -925,6 +1198,9 @@ class AviatrixGatewayDnatDnatPolicyArgs:
     @property
     @pulumi.getter
     def connection(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+        """
         return pulumi.get(self, "connection")
 
     @connection.setter
@@ -934,6 +1210,9 @@ class AviatrixGatewayDnatDnatPolicyArgs:
     @property
     @pulumi.getter(name="dnatIps")
     def dnat_ips(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a rule field that specifies the translated destination IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+        """
         return pulumi.get(self, "dnat_ips")
 
     @dnat_ips.setter
@@ -943,6 +1222,9 @@ class AviatrixGatewayDnatDnatPolicyArgs:
     @property
     @pulumi.getter(name="dnatPort")
     def dnat_port(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a rule field that specifies the translated destination port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+        """
         return pulumi.get(self, "dnat_port")
 
     @dnat_port.setter
@@ -952,6 +1234,9 @@ class AviatrixGatewayDnatDnatPolicyArgs:
     @property
     @pulumi.getter(name="dstCidr")
     def dst_cidr(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+        """
         return pulumi.get(self, "dst_cidr")
 
     @dst_cidr.setter
@@ -961,6 +1246,9 @@ class AviatrixGatewayDnatDnatPolicyArgs:
     @property
     @pulumi.getter(name="dstPort")
     def dst_port(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+        """
         return pulumi.get(self, "dst_port")
 
     @dst_port.setter
@@ -970,6 +1258,9 @@ class AviatrixGatewayDnatDnatPolicyArgs:
     @property
     @pulumi.getter(name="excludeRtb")
     def exclude_rtb(self) -> Optional[pulumi.Input[str]]:
+        """
+        This field specifies which VPC private route table will not be programmed with the default route entry.
+        """
         return pulumi.get(self, "exclude_rtb")
 
     @exclude_rtb.setter
@@ -979,6 +1270,9 @@ class AviatrixGatewayDnatDnatPolicyArgs:
     @property
     @pulumi.getter
     def interface(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+        """
         return pulumi.get(self, "interface")
 
     @interface.setter
@@ -988,6 +1282,9 @@ class AviatrixGatewayDnatDnatPolicyArgs:
     @property
     @pulumi.getter
     def mark(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a rule field that specifies a tag or mark of a TCP session when all qualifier conditions meet. When not specified, this field is not used.
+        """
         return pulumi.get(self, "mark")
 
     @mark.setter
@@ -997,6 +1294,9 @@ class AviatrixGatewayDnatDnatPolicyArgs:
     @property
     @pulumi.getter
     def protocol(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a destination port protocol where the rule applies. When not specified, this field is not used.
+        """
         return pulumi.get(self, "protocol")
 
     @protocol.setter
@@ -1006,6 +1306,9 @@ class AviatrixGatewayDnatDnatPolicyArgs:
     @property
     @pulumi.getter(name="srcCidr")
     def src_cidr(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+        """
         return pulumi.get(self, "src_cidr")
 
     @src_cidr.setter
@@ -1015,6 +1318,9 @@ class AviatrixGatewayDnatDnatPolicyArgs:
     @property
     @pulumi.getter(name="srcPort")
     def src_port(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+        """
         return pulumi.get(self, "src_port")
 
     @src_port.setter
@@ -1037,6 +1343,20 @@ class AviatrixGatewayDnatInterfacePolicyArgs:
                  protocol: Optional[pulumi.Input[str]] = None,
                  src_cidr: Optional[pulumi.Input[str]] = None,
                  src_port: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[bool] apply_route_entry: This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.19.2+.
+        :param pulumi.Input[str] connection: This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+        :param pulumi.Input[str] dnat_ips: This is a rule field that specifies the translated destination IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+        :param pulumi.Input[str] dnat_port: This is a rule field that specifies the translated destination port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+        :param pulumi.Input[str] dst_cidr: This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+        :param pulumi.Input[str] dst_port: This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+        :param pulumi.Input[str] exclude_rtb: This field specifies which VPC private route table will not be programmed with the default route entry.
+        :param pulumi.Input[str] interface: This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+        :param pulumi.Input[str] mark: This is a rule field that specifies a tag or mark of a TCP session when all qualifier conditions meet. When not specified, this field is not used.
+        :param pulumi.Input[str] protocol: This is a qualifier condition that specifies a destination port protocol where the rule applies. When not specified, this field is not used.
+        :param pulumi.Input[str] src_cidr: This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+        :param pulumi.Input[str] src_port: This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+        """
         if apply_route_entry is not None:
             pulumi.set(__self__, "apply_route_entry", apply_route_entry)
         if connection is not None:
@@ -1065,6 +1385,9 @@ class AviatrixGatewayDnatInterfacePolicyArgs:
     @property
     @pulumi.getter(name="applyRouteEntry")
     def apply_route_entry(self) -> Optional[pulumi.Input[bool]]:
+        """
+        This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.19.2+.
+        """
         return pulumi.get(self, "apply_route_entry")
 
     @apply_route_entry.setter
@@ -1074,6 +1397,9 @@ class AviatrixGatewayDnatInterfacePolicyArgs:
     @property
     @pulumi.getter
     def connection(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+        """
         return pulumi.get(self, "connection")
 
     @connection.setter
@@ -1083,6 +1409,9 @@ class AviatrixGatewayDnatInterfacePolicyArgs:
     @property
     @pulumi.getter(name="dnatIps")
     def dnat_ips(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a rule field that specifies the translated destination IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+        """
         return pulumi.get(self, "dnat_ips")
 
     @dnat_ips.setter
@@ -1092,6 +1421,9 @@ class AviatrixGatewayDnatInterfacePolicyArgs:
     @property
     @pulumi.getter(name="dnatPort")
     def dnat_port(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a rule field that specifies the translated destination port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+        """
         return pulumi.get(self, "dnat_port")
 
     @dnat_port.setter
@@ -1101,6 +1433,9 @@ class AviatrixGatewayDnatInterfacePolicyArgs:
     @property
     @pulumi.getter(name="dstCidr")
     def dst_cidr(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+        """
         return pulumi.get(self, "dst_cidr")
 
     @dst_cidr.setter
@@ -1110,6 +1445,9 @@ class AviatrixGatewayDnatInterfacePolicyArgs:
     @property
     @pulumi.getter(name="dstPort")
     def dst_port(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+        """
         return pulumi.get(self, "dst_port")
 
     @dst_port.setter
@@ -1119,6 +1457,9 @@ class AviatrixGatewayDnatInterfacePolicyArgs:
     @property
     @pulumi.getter(name="excludeRtb")
     def exclude_rtb(self) -> Optional[pulumi.Input[str]]:
+        """
+        This field specifies which VPC private route table will not be programmed with the default route entry.
+        """
         return pulumi.get(self, "exclude_rtb")
 
     @exclude_rtb.setter
@@ -1128,6 +1469,9 @@ class AviatrixGatewayDnatInterfacePolicyArgs:
     @property
     @pulumi.getter
     def interface(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+        """
         return pulumi.get(self, "interface")
 
     @interface.setter
@@ -1137,6 +1481,9 @@ class AviatrixGatewayDnatInterfacePolicyArgs:
     @property
     @pulumi.getter
     def mark(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a rule field that specifies a tag or mark of a TCP session when all qualifier conditions meet. When not specified, this field is not used.
+        """
         return pulumi.get(self, "mark")
 
     @mark.setter
@@ -1146,6 +1493,9 @@ class AviatrixGatewayDnatInterfacePolicyArgs:
     @property
     @pulumi.getter
     def protocol(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a destination port protocol where the rule applies. When not specified, this field is not used.
+        """
         return pulumi.get(self, "protocol")
 
     @protocol.setter
@@ -1155,6 +1505,9 @@ class AviatrixGatewayDnatInterfacePolicyArgs:
     @property
     @pulumi.getter(name="srcCidr")
     def src_cidr(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+        """
         return pulumi.get(self, "src_cidr")
 
     @src_cidr.setter
@@ -1164,6 +1517,9 @@ class AviatrixGatewayDnatInterfacePolicyArgs:
     @property
     @pulumi.getter(name="srcPort")
     def src_port(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+        """
         return pulumi.get(self, "src_port")
 
     @src_port.setter
@@ -1186,6 +1542,20 @@ class AviatrixGatewaySnatConnectionPolicyArgs:
                  snat_port: Optional[pulumi.Input[str]] = None,
                  src_cidr: Optional[pulumi.Input[str]] = None,
                  src_port: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[bool] apply_route_entry: This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.21.0+.
+        :param pulumi.Input[str] connection: This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+        :param pulumi.Input[str] dst_cidr: This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+        :param pulumi.Input[str] dst_port: This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+        :param pulumi.Input[str] exclude_rtb: This field specifies which VPC private route table will not be programmed with the default route entry.
+        :param pulumi.Input[str] interface: This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+        :param pulumi.Input[str] mark: This is a qualifier condition that specifies a tag or mark of a TCP session where the rule applies. When not specified, this field is not used.
+        :param pulumi.Input[str] protocol: This is a qualifier condition that specifies a destination port protocol where the rule applies. Valid values: 'all', 'tcp', 'udp', 'icmp'. 'Default: 'all'.
+        :param pulumi.Input[str] snat_ips: This is a rule field that specifies the changed source IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+        :param pulumi.Input[str] snat_port: This is a rule field that specifies the changed source port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+        :param pulumi.Input[str] src_cidr: This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+        :param pulumi.Input[str] src_port: This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+        """
         if apply_route_entry is not None:
             pulumi.set(__self__, "apply_route_entry", apply_route_entry)
         if connection is not None:
@@ -1214,6 +1584,9 @@ class AviatrixGatewaySnatConnectionPolicyArgs:
     @property
     @pulumi.getter(name="applyRouteEntry")
     def apply_route_entry(self) -> Optional[pulumi.Input[bool]]:
+        """
+        This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.21.0+.
+        """
         return pulumi.get(self, "apply_route_entry")
 
     @apply_route_entry.setter
@@ -1223,6 +1596,9 @@ class AviatrixGatewaySnatConnectionPolicyArgs:
     @property
     @pulumi.getter
     def connection(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+        """
         return pulumi.get(self, "connection")
 
     @connection.setter
@@ -1232,6 +1608,9 @@ class AviatrixGatewaySnatConnectionPolicyArgs:
     @property
     @pulumi.getter(name="dstCidr")
     def dst_cidr(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+        """
         return pulumi.get(self, "dst_cidr")
 
     @dst_cidr.setter
@@ -1241,6 +1620,9 @@ class AviatrixGatewaySnatConnectionPolicyArgs:
     @property
     @pulumi.getter(name="dstPort")
     def dst_port(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+        """
         return pulumi.get(self, "dst_port")
 
     @dst_port.setter
@@ -1250,6 +1632,9 @@ class AviatrixGatewaySnatConnectionPolicyArgs:
     @property
     @pulumi.getter(name="excludeRtb")
     def exclude_rtb(self) -> Optional[pulumi.Input[str]]:
+        """
+        This field specifies which VPC private route table will not be programmed with the default route entry.
+        """
         return pulumi.get(self, "exclude_rtb")
 
     @exclude_rtb.setter
@@ -1259,6 +1644,9 @@ class AviatrixGatewaySnatConnectionPolicyArgs:
     @property
     @pulumi.getter
     def interface(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+        """
         return pulumi.get(self, "interface")
 
     @interface.setter
@@ -1268,6 +1656,9 @@ class AviatrixGatewaySnatConnectionPolicyArgs:
     @property
     @pulumi.getter
     def mark(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a tag or mark of a TCP session where the rule applies. When not specified, this field is not used.
+        """
         return pulumi.get(self, "mark")
 
     @mark.setter
@@ -1277,6 +1668,9 @@ class AviatrixGatewaySnatConnectionPolicyArgs:
     @property
     @pulumi.getter
     def protocol(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a destination port protocol where the rule applies. Valid values: 'all', 'tcp', 'udp', 'icmp'. 'Default: 'all'.
+        """
         return pulumi.get(self, "protocol")
 
     @protocol.setter
@@ -1286,6 +1680,9 @@ class AviatrixGatewaySnatConnectionPolicyArgs:
     @property
     @pulumi.getter(name="snatIps")
     def snat_ips(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a rule field that specifies the changed source IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+        """
         return pulumi.get(self, "snat_ips")
 
     @snat_ips.setter
@@ -1295,6 +1692,9 @@ class AviatrixGatewaySnatConnectionPolicyArgs:
     @property
     @pulumi.getter(name="snatPort")
     def snat_port(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a rule field that specifies the changed source port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+        """
         return pulumi.get(self, "snat_port")
 
     @snat_port.setter
@@ -1304,6 +1704,9 @@ class AviatrixGatewaySnatConnectionPolicyArgs:
     @property
     @pulumi.getter(name="srcCidr")
     def src_cidr(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+        """
         return pulumi.get(self, "src_cidr")
 
     @src_cidr.setter
@@ -1313,6 +1716,9 @@ class AviatrixGatewaySnatConnectionPolicyArgs:
     @property
     @pulumi.getter(name="srcPort")
     def src_port(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+        """
         return pulumi.get(self, "src_port")
 
     @src_port.setter
@@ -1335,6 +1741,20 @@ class AviatrixGatewaySnatInterfacePolicyArgs:
                  snat_port: Optional[pulumi.Input[str]] = None,
                  src_cidr: Optional[pulumi.Input[str]] = None,
                  src_port: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[bool] apply_route_entry: This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.21.0+.
+        :param pulumi.Input[str] connection: This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+        :param pulumi.Input[str] dst_cidr: This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+        :param pulumi.Input[str] dst_port: This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+        :param pulumi.Input[str] exclude_rtb: This field specifies which VPC private route table will not be programmed with the default route entry.
+        :param pulumi.Input[str] interface: This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+        :param pulumi.Input[str] mark: This is a qualifier condition that specifies a tag or mark of a TCP session where the rule applies. When not specified, this field is not used.
+        :param pulumi.Input[str] protocol: This is a qualifier condition that specifies a destination port protocol where the rule applies. Valid values: 'all', 'tcp', 'udp', 'icmp'. 'Default: 'all'.
+        :param pulumi.Input[str] snat_ips: This is a rule field that specifies the changed source IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+        :param pulumi.Input[str] snat_port: This is a rule field that specifies the changed source port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+        :param pulumi.Input[str] src_cidr: This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+        :param pulumi.Input[str] src_port: This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+        """
         if apply_route_entry is not None:
             pulumi.set(__self__, "apply_route_entry", apply_route_entry)
         if connection is not None:
@@ -1363,6 +1783,9 @@ class AviatrixGatewaySnatInterfacePolicyArgs:
     @property
     @pulumi.getter(name="applyRouteEntry")
     def apply_route_entry(self) -> Optional[pulumi.Input[bool]]:
+        """
+        This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.21.0+.
+        """
         return pulumi.get(self, "apply_route_entry")
 
     @apply_route_entry.setter
@@ -1372,6 +1795,9 @@ class AviatrixGatewaySnatInterfacePolicyArgs:
     @property
     @pulumi.getter
     def connection(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+        """
         return pulumi.get(self, "connection")
 
     @connection.setter
@@ -1381,6 +1807,9 @@ class AviatrixGatewaySnatInterfacePolicyArgs:
     @property
     @pulumi.getter(name="dstCidr")
     def dst_cidr(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+        """
         return pulumi.get(self, "dst_cidr")
 
     @dst_cidr.setter
@@ -1390,6 +1819,9 @@ class AviatrixGatewaySnatInterfacePolicyArgs:
     @property
     @pulumi.getter(name="dstPort")
     def dst_port(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+        """
         return pulumi.get(self, "dst_port")
 
     @dst_port.setter
@@ -1399,6 +1831,9 @@ class AviatrixGatewaySnatInterfacePolicyArgs:
     @property
     @pulumi.getter(name="excludeRtb")
     def exclude_rtb(self) -> Optional[pulumi.Input[str]]:
+        """
+        This field specifies which VPC private route table will not be programmed with the default route entry.
+        """
         return pulumi.get(self, "exclude_rtb")
 
     @exclude_rtb.setter
@@ -1408,6 +1843,9 @@ class AviatrixGatewaySnatInterfacePolicyArgs:
     @property
     @pulumi.getter
     def interface(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+        """
         return pulumi.get(self, "interface")
 
     @interface.setter
@@ -1417,6 +1855,9 @@ class AviatrixGatewaySnatInterfacePolicyArgs:
     @property
     @pulumi.getter
     def mark(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a tag or mark of a TCP session where the rule applies. When not specified, this field is not used.
+        """
         return pulumi.get(self, "mark")
 
     @mark.setter
@@ -1426,6 +1867,9 @@ class AviatrixGatewaySnatInterfacePolicyArgs:
     @property
     @pulumi.getter
     def protocol(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a destination port protocol where the rule applies. Valid values: 'all', 'tcp', 'udp', 'icmp'. 'Default: 'all'.
+        """
         return pulumi.get(self, "protocol")
 
     @protocol.setter
@@ -1435,6 +1879,9 @@ class AviatrixGatewaySnatInterfacePolicyArgs:
     @property
     @pulumi.getter(name="snatIps")
     def snat_ips(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a rule field that specifies the changed source IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+        """
         return pulumi.get(self, "snat_ips")
 
     @snat_ips.setter
@@ -1444,6 +1891,9 @@ class AviatrixGatewaySnatInterfacePolicyArgs:
     @property
     @pulumi.getter(name="snatPort")
     def snat_port(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a rule field that specifies the changed source port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+        """
         return pulumi.get(self, "snat_port")
 
     @snat_port.setter
@@ -1453,6 +1903,9 @@ class AviatrixGatewaySnatInterfacePolicyArgs:
     @property
     @pulumi.getter(name="srcCidr")
     def src_cidr(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+        """
         return pulumi.get(self, "src_cidr")
 
     @src_cidr.setter
@@ -1462,6 +1915,9 @@ class AviatrixGatewaySnatInterfacePolicyArgs:
     @property
     @pulumi.getter(name="srcPort")
     def src_port(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+        """
         return pulumi.get(self, "src_port")
 
     @src_port.setter
@@ -1484,6 +1940,20 @@ class AviatrixGatewaySnatSnatPolicyArgs:
                  snat_port: Optional[pulumi.Input[str]] = None,
                  src_cidr: Optional[pulumi.Input[str]] = None,
                  src_port: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[bool] apply_route_entry: This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.21.0+.
+        :param pulumi.Input[str] connection: This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+        :param pulumi.Input[str] dst_cidr: This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+        :param pulumi.Input[str] dst_port: This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+        :param pulumi.Input[str] exclude_rtb: This field specifies which VPC private route table will not be programmed with the default route entry.
+        :param pulumi.Input[str] interface: This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+        :param pulumi.Input[str] mark: This is a qualifier condition that specifies a tag or mark of a TCP session where the rule applies. When not specified, this field is not used.
+        :param pulumi.Input[str] protocol: This is a qualifier condition that specifies a destination port protocol where the rule applies. Valid values: 'all', 'tcp', 'udp', 'icmp'. 'Default: 'all'.
+        :param pulumi.Input[str] snat_ips: This is a rule field that specifies the changed source IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+        :param pulumi.Input[str] snat_port: This is a rule field that specifies the changed source port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+        :param pulumi.Input[str] src_cidr: This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+        :param pulumi.Input[str] src_port: This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+        """
         if apply_route_entry is not None:
             pulumi.set(__self__, "apply_route_entry", apply_route_entry)
         if connection is not None:
@@ -1512,6 +1982,9 @@ class AviatrixGatewaySnatSnatPolicyArgs:
     @property
     @pulumi.getter(name="applyRouteEntry")
     def apply_route_entry(self) -> Optional[pulumi.Input[bool]]:
+        """
+        This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.21.0+.
+        """
         return pulumi.get(self, "apply_route_entry")
 
     @apply_route_entry.setter
@@ -1521,6 +1994,9 @@ class AviatrixGatewaySnatSnatPolicyArgs:
     @property
     @pulumi.getter
     def connection(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+        """
         return pulumi.get(self, "connection")
 
     @connection.setter
@@ -1530,6 +2006,9 @@ class AviatrixGatewaySnatSnatPolicyArgs:
     @property
     @pulumi.getter(name="dstCidr")
     def dst_cidr(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+        """
         return pulumi.get(self, "dst_cidr")
 
     @dst_cidr.setter
@@ -1539,6 +2018,9 @@ class AviatrixGatewaySnatSnatPolicyArgs:
     @property
     @pulumi.getter(name="dstPort")
     def dst_port(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+        """
         return pulumi.get(self, "dst_port")
 
     @dst_port.setter
@@ -1548,6 +2030,9 @@ class AviatrixGatewaySnatSnatPolicyArgs:
     @property
     @pulumi.getter(name="excludeRtb")
     def exclude_rtb(self) -> Optional[pulumi.Input[str]]:
+        """
+        This field specifies which VPC private route table will not be programmed with the default route entry.
+        """
         return pulumi.get(self, "exclude_rtb")
 
     @exclude_rtb.setter
@@ -1557,6 +2042,9 @@ class AviatrixGatewaySnatSnatPolicyArgs:
     @property
     @pulumi.getter
     def interface(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+        """
         return pulumi.get(self, "interface")
 
     @interface.setter
@@ -1566,6 +2054,9 @@ class AviatrixGatewaySnatSnatPolicyArgs:
     @property
     @pulumi.getter
     def mark(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a tag or mark of a TCP session where the rule applies. When not specified, this field is not used.
+        """
         return pulumi.get(self, "mark")
 
     @mark.setter
@@ -1575,6 +2066,9 @@ class AviatrixGatewaySnatSnatPolicyArgs:
     @property
     @pulumi.getter
     def protocol(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a destination port protocol where the rule applies. Valid values: 'all', 'tcp', 'udp', 'icmp'. 'Default: 'all'.
+        """
         return pulumi.get(self, "protocol")
 
     @protocol.setter
@@ -1584,6 +2078,9 @@ class AviatrixGatewaySnatSnatPolicyArgs:
     @property
     @pulumi.getter(name="snatIps")
     def snat_ips(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a rule field that specifies the changed source IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+        """
         return pulumi.get(self, "snat_ips")
 
     @snat_ips.setter
@@ -1593,6 +2090,9 @@ class AviatrixGatewaySnatSnatPolicyArgs:
     @property
     @pulumi.getter(name="snatPort")
     def snat_port(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a rule field that specifies the changed source port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+        """
         return pulumi.get(self, "snat_port")
 
     @snat_port.setter
@@ -1602,6 +2102,9 @@ class AviatrixGatewaySnatSnatPolicyArgs:
     @property
     @pulumi.getter(name="srcCidr")
     def src_cidr(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+        """
         return pulumi.get(self, "src_cidr")
 
     @src_cidr.setter
@@ -1611,6 +2114,9 @@ class AviatrixGatewaySnatSnatPolicyArgs:
     @property
     @pulumi.getter(name="srcPort")
     def src_port(self) -> Optional[pulumi.Input[str]]:
+        """
+        This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+        """
         return pulumi.get(self, "src_port")
 
     @src_port.setter
@@ -1631,6 +2137,18 @@ class AviatrixMicrosegPolicyListPolicyArgs:
                  priority: Optional[pulumi.Input[int]] = None,
                  uuid: Optional[pulumi.Input[str]] = None,
                  watch: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] action: Action for the policy. Must be one of PERMIT or DENY.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] dst_app_domains: List of App Domain UUIDs for the destination for the policy.
+        :param pulumi.Input[str] name: Name of the policy.
+        :param pulumi.Input[str] protocol: Protocol for the policy. Must be one of TCP, UDP, ICMP or ANY.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] src_app_domains: List of App Domain UUIDs for the source for the policy.
+        :param pulumi.Input[bool] logging: Whether to enable logging for packets that match the policy. Type: Boolean.
+        :param pulumi.Input[Sequence[pulumi.Input['AviatrixMicrosegPolicyListPolicyPortRangeArgs']]] port_ranges: List of port ranges for the policy. Cannot be used when `protocol` is "ICMP".
+        :param pulumi.Input[int] priority: Priority for the policy. Default: 0. Type: Integer.
+        :param pulumi.Input[str] uuid: UUID for the Policy.
+        :param pulumi.Input[bool] watch: Whether to enforce the policy or only watch packets. If "true" packets are only watched. This allows you to observe if the traffic impacted by this rule causes any inadvertent issues (such as traffic being dropped). Type: Boolean.
+        """
         pulumi.set(__self__, "action", action)
         pulumi.set(__self__, "dst_app_domains", dst_app_domains)
         pulumi.set(__self__, "name", name)
@@ -1650,6 +2168,9 @@ class AviatrixMicrosegPolicyListPolicyArgs:
     @property
     @pulumi.getter
     def action(self) -> pulumi.Input[str]:
+        """
+        Action for the policy. Must be one of PERMIT or DENY.
+        """
         return pulumi.get(self, "action")
 
     @action.setter
@@ -1659,6 +2180,9 @@ class AviatrixMicrosegPolicyListPolicyArgs:
     @property
     @pulumi.getter(name="dstAppDomains")
     def dst_app_domains(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        List of App Domain UUIDs for the destination for the policy.
+        """
         return pulumi.get(self, "dst_app_domains")
 
     @dst_app_domains.setter
@@ -1668,6 +2192,9 @@ class AviatrixMicrosegPolicyListPolicyArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        Name of the policy.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -1677,6 +2204,9 @@ class AviatrixMicrosegPolicyListPolicyArgs:
     @property
     @pulumi.getter
     def protocol(self) -> pulumi.Input[str]:
+        """
+        Protocol for the policy. Must be one of TCP, UDP, ICMP or ANY.
+        """
         return pulumi.get(self, "protocol")
 
     @protocol.setter
@@ -1686,6 +2216,9 @@ class AviatrixMicrosegPolicyListPolicyArgs:
     @property
     @pulumi.getter(name="srcAppDomains")
     def src_app_domains(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        List of App Domain UUIDs for the source for the policy.
+        """
         return pulumi.get(self, "src_app_domains")
 
     @src_app_domains.setter
@@ -1695,6 +2228,9 @@ class AviatrixMicrosegPolicyListPolicyArgs:
     @property
     @pulumi.getter
     def logging(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to enable logging for packets that match the policy. Type: Boolean.
+        """
         return pulumi.get(self, "logging")
 
     @logging.setter
@@ -1704,6 +2240,9 @@ class AviatrixMicrosegPolicyListPolicyArgs:
     @property
     @pulumi.getter(name="portRanges")
     def port_ranges(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['AviatrixMicrosegPolicyListPolicyPortRangeArgs']]]]:
+        """
+        List of port ranges for the policy. Cannot be used when `protocol` is "ICMP".
+        """
         return pulumi.get(self, "port_ranges")
 
     @port_ranges.setter
@@ -1713,6 +2252,9 @@ class AviatrixMicrosegPolicyListPolicyArgs:
     @property
     @pulumi.getter
     def priority(self) -> Optional[pulumi.Input[int]]:
+        """
+        Priority for the policy. Default: 0. Type: Integer.
+        """
         return pulumi.get(self, "priority")
 
     @priority.setter
@@ -1722,6 +2264,9 @@ class AviatrixMicrosegPolicyListPolicyArgs:
     @property
     @pulumi.getter
     def uuid(self) -> Optional[pulumi.Input[str]]:
+        """
+        UUID for the Policy.
+        """
         return pulumi.get(self, "uuid")
 
     @uuid.setter
@@ -1731,6 +2276,9 @@ class AviatrixMicrosegPolicyListPolicyArgs:
     @property
     @pulumi.getter
     def watch(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to enforce the policy or only watch packets. If "true" packets are only watched. This allows you to observe if the traffic impacted by this rule causes any inadvertent issues (such as traffic being dropped). Type: Boolean.
+        """
         return pulumi.get(self, "watch")
 
     @watch.setter
@@ -1743,6 +2291,10 @@ class AviatrixMicrosegPolicyListPolicyPortRangeArgs:
     def __init__(__self__, *,
                  lo: pulumi.Input[int],
                  hi: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] lo: Lower bound for the range of ports.
+        :param pulumi.Input[int] hi: Upper bound for the range of ports. When not set, `lo` is the only port that matches the policy.
+        """
         pulumi.set(__self__, "lo", lo)
         if hi is not None:
             pulumi.set(__self__, "hi", hi)
@@ -1750,6 +2302,9 @@ class AviatrixMicrosegPolicyListPolicyPortRangeArgs:
     @property
     @pulumi.getter
     def lo(self) -> pulumi.Input[int]:
+        """
+        Lower bound for the range of ports.
+        """
         return pulumi.get(self, "lo")
 
     @lo.setter
@@ -1759,6 +2314,9 @@ class AviatrixMicrosegPolicyListPolicyPortRangeArgs:
     @property
     @pulumi.getter
     def hi(self) -> Optional[pulumi.Input[int]]:
+        """
+        Upper bound for the range of ports. When not set, `lo` is the only port that matches the policy.
+        """
         return pulumi.get(self, "hi")
 
     @hi.setter
@@ -1771,12 +2329,19 @@ class AviatrixPrivateModeLbProxyArgs:
     def __init__(__self__, *,
                  instance_id: pulumi.Input[str],
                  vpc_id: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] instance_id: Instance ID of the proxy.
+        :param pulumi.Input[str] vpc_id: VPC ID of the proxy.
+        """
         pulumi.set(__self__, "instance_id", instance_id)
         pulumi.set(__self__, "vpc_id", vpc_id)
 
     @property
     @pulumi.getter(name="instanceId")
     def instance_id(self) -> pulumi.Input[str]:
+        """
+        Instance ID of the proxy.
+        """
         return pulumi.get(self, "instance_id")
 
     @instance_id.setter
@@ -1786,6 +2351,9 @@ class AviatrixPrivateModeLbProxyArgs:
     @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> pulumi.Input[str]:
+        """
+        VPC ID of the proxy.
+        """
         return pulumi.get(self, "vpc_id")
 
     @vpc_id.setter
@@ -1802,6 +2370,14 @@ class AviatrixSite2CloudCaCertTagCaCertificateArgs:
                  id: Optional[pulumi.Input[str]] = None,
                  issuer_name: Optional[pulumi.Input[str]] = None,
                  unique_serial: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] cert_content: Content of cert certificate to create only one cert. One CA cert only per file.
+        :param pulumi.Input[str] common_name: Common name of created cert.
+        :param pulumi.Input[str] expiration_time: Expiration time of created cert.
+        :param pulumi.Input[str] id: Unique id of created cert.
+        :param pulumi.Input[str] issuer_name: Issuer name of created cert.
+        :param pulumi.Input[str] unique_serial: Unique serial of created cert.
+        """
         pulumi.set(__self__, "cert_content", cert_content)
         if common_name is not None:
             pulumi.set(__self__, "common_name", common_name)
@@ -1817,6 +2393,9 @@ class AviatrixSite2CloudCaCertTagCaCertificateArgs:
     @property
     @pulumi.getter(name="certContent")
     def cert_content(self) -> pulumi.Input[str]:
+        """
+        Content of cert certificate to create only one cert. One CA cert only per file.
+        """
         return pulumi.get(self, "cert_content")
 
     @cert_content.setter
@@ -1826,6 +2405,9 @@ class AviatrixSite2CloudCaCertTagCaCertificateArgs:
     @property
     @pulumi.getter(name="commonName")
     def common_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Common name of created cert.
+        """
         return pulumi.get(self, "common_name")
 
     @common_name.setter
@@ -1835,6 +2417,9 @@ class AviatrixSite2CloudCaCertTagCaCertificateArgs:
     @property
     @pulumi.getter(name="expirationTime")
     def expiration_time(self) -> Optional[pulumi.Input[str]]:
+        """
+        Expiration time of created cert.
+        """
         return pulumi.get(self, "expiration_time")
 
     @expiration_time.setter
@@ -1844,6 +2429,9 @@ class AviatrixSite2CloudCaCertTagCaCertificateArgs:
     @property
     @pulumi.getter
     def id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Unique id of created cert.
+        """
         return pulumi.get(self, "id")
 
     @id.setter
@@ -1853,6 +2441,9 @@ class AviatrixSite2CloudCaCertTagCaCertificateArgs:
     @property
     @pulumi.getter(name="issuerName")
     def issuer_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Issuer name of created cert.
+        """
         return pulumi.get(self, "issuer_name")
 
     @issuer_name.setter
@@ -1862,6 +2453,9 @@ class AviatrixSite2CloudCaCertTagCaCertificateArgs:
     @property
     @pulumi.getter(name="uniqueSerial")
     def unique_serial(self) -> Optional[pulumi.Input[str]]:
+        """
+        Unique serial of created cert.
+        """
         return pulumi.get(self, "unique_serial")
 
     @unique_serial.setter
@@ -1874,12 +2468,19 @@ class AviatrixTransitGatewayBgpLanInterfaceArgs:
     def __init__(__self__, *,
                  subnet: pulumi.Input[str],
                  vpc_id: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] subnet: A VPC Network address range selected from one of the available network ranges.
+        :param pulumi.Input[str] vpc_id: VPC-ID/VNet-Name of cloud provider.
+        """
         pulumi.set(__self__, "subnet", subnet)
         pulumi.set(__self__, "vpc_id", vpc_id)
 
     @property
     @pulumi.getter
     def subnet(self) -> pulumi.Input[str]:
+        """
+        A VPC Network address range selected from one of the available network ranges.
+        """
         return pulumi.get(self, "subnet")
 
     @subnet.setter
@@ -1889,6 +2490,9 @@ class AviatrixTransitGatewayBgpLanInterfaceArgs:
     @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> pulumi.Input[str]:
+        """
+        VPC-ID/VNet-Name of cloud provider.
+        """
         return pulumi.get(self, "vpc_id")
 
     @vpc_id.setter
@@ -1901,12 +2505,19 @@ class AviatrixTransitGatewayHaBgpLanInterfaceArgs:
     def __init__(__self__, *,
                  subnet: pulumi.Input[str],
                  vpc_id: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] subnet: A VPC Network address range selected from one of the available network ranges.
+        :param pulumi.Input[str] vpc_id: VPC-ID/VNet-Name of cloud provider.
+        """
         pulumi.set(__self__, "subnet", subnet)
         pulumi.set(__self__, "vpc_id", vpc_id)
 
     @property
     @pulumi.getter
     def subnet(self) -> pulumi.Input[str]:
+        """
+        A VPC Network address range selected from one of the available network ranges.
+        """
         return pulumi.get(self, "subnet")
 
     @subnet.setter
@@ -1916,6 +2527,9 @@ class AviatrixTransitGatewayHaBgpLanInterfaceArgs:
     @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> pulumi.Input[str]:
+        """
+        VPC-ID/VNet-Name of cloud provider.
+        """
         return pulumi.get(self, "vpc_id")
 
     @vpc_id.setter
@@ -1929,6 +2543,11 @@ class AviatrixVpcPrivateSubnetArgs:
                  cidr: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] cidr: CIDR block.
+        :param pulumi.Input[str] name: Name of this subnet.
+        :param pulumi.Input[str] subnet_id: ID of this subnet.
+        """
         if cidr is not None:
             pulumi.set(__self__, "cidr", cidr)
         if name is not None:
@@ -1939,6 +2558,9 @@ class AviatrixVpcPrivateSubnetArgs:
     @property
     @pulumi.getter
     def cidr(self) -> Optional[pulumi.Input[str]]:
+        """
+        CIDR block.
+        """
         return pulumi.get(self, "cidr")
 
     @cidr.setter
@@ -1948,6 +2570,9 @@ class AviatrixVpcPrivateSubnetArgs:
     @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Name of this subnet.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -1957,6 +2582,9 @@ class AviatrixVpcPrivateSubnetArgs:
     @property
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of this subnet.
+        """
         return pulumi.get(self, "subnet_id")
 
     @subnet_id.setter
@@ -1970,6 +2598,11 @@ class AviatrixVpcPublicSubnetArgs:
                  cidr: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] cidr: CIDR block.
+        :param pulumi.Input[str] name: Name of this subnet.
+        :param pulumi.Input[str] subnet_id: ID of this subnet.
+        """
         if cidr is not None:
             pulumi.set(__self__, "cidr", cidr)
         if name is not None:
@@ -1980,6 +2613,9 @@ class AviatrixVpcPublicSubnetArgs:
     @property
     @pulumi.getter
     def cidr(self) -> Optional[pulumi.Input[str]]:
+        """
+        CIDR block.
+        """
         return pulumi.get(self, "cidr")
 
     @cidr.setter
@@ -1989,6 +2625,9 @@ class AviatrixVpcPublicSubnetArgs:
     @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Name of this subnet.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -1998,6 +2637,9 @@ class AviatrixVpcPublicSubnetArgs:
     @property
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of this subnet.
+        """
         return pulumi.get(self, "subnet_id")
 
     @subnet_id.setter
@@ -2012,6 +2654,12 @@ class AviatrixVpcSubnetArgs:
                  name: Optional[pulumi.Input[str]] = None,
                  region: Optional[pulumi.Input[str]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] cidr: CIDR block.
+        :param pulumi.Input[str] name: Name of this subnet.
+        :param pulumi.Input[str] region: Region of this subnet.
+        :param pulumi.Input[str] subnet_id: ID of this subnet.
+        """
         if cidr is not None:
             pulumi.set(__self__, "cidr", cidr)
         if name is not None:
@@ -2024,6 +2672,9 @@ class AviatrixVpcSubnetArgs:
     @property
     @pulumi.getter
     def cidr(self) -> Optional[pulumi.Input[str]]:
+        """
+        CIDR block.
+        """
         return pulumi.get(self, "cidr")
 
     @cidr.setter
@@ -2033,6 +2684,9 @@ class AviatrixVpcSubnetArgs:
     @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Name of this subnet.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -2042,6 +2696,9 @@ class AviatrixVpcSubnetArgs:
     @property
     @pulumi.getter
     def region(self) -> Optional[pulumi.Input[str]]:
+        """
+        Region of this subnet.
+        """
         return pulumi.get(self, "region")
 
     @region.setter
@@ -2051,6 +2708,9 @@ class AviatrixVpcSubnetArgs:
     @property
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of this subnet.
+        """
         return pulumi.get(self, "subnet_id")
 
     @subnet_id.setter
@@ -2065,6 +2725,12 @@ class AviatrixVpnProfilePolicyArgs:
                  port: pulumi.Input[str],
                  proto: pulumi.Input[str],
                  target: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] action: Should be the opposite of the base rule for correct behavior. Valid values for action: "allow", "deny".
+        :param pulumi.Input[str] port: Port to be allowed or denied. Valid values for port: a single port or a range of port numbers e.g.: "25", "25:1024". For "all" and "icmp", port should only be "0:65535".
+        :param pulumi.Input[str] proto: Protocol to allow or deny. Valid values for protocol: "all", "tcp", "udp", "icmp", "sctp", "rdp", "dccp".
+        :param pulumi.Input[str] target: CIDR to be allowed or denied. Valid values for target: IPv4 CIDRs. Example: "10.30.0.0/16".
+        """
         pulumi.set(__self__, "action", action)
         pulumi.set(__self__, "port", port)
         pulumi.set(__self__, "proto", proto)
@@ -2073,6 +2739,9 @@ class AviatrixVpnProfilePolicyArgs:
     @property
     @pulumi.getter
     def action(self) -> pulumi.Input[str]:
+        """
+        Should be the opposite of the base rule for correct behavior. Valid values for action: "allow", "deny".
+        """
         return pulumi.get(self, "action")
 
     @action.setter
@@ -2082,6 +2751,9 @@ class AviatrixVpnProfilePolicyArgs:
     @property
     @pulumi.getter
     def port(self) -> pulumi.Input[str]:
+        """
+        Port to be allowed or denied. Valid values for port: a single port or a range of port numbers e.g.: "25", "25:1024". For "all" and "icmp", port should only be "0:65535".
+        """
         return pulumi.get(self, "port")
 
     @port.setter
@@ -2091,6 +2763,9 @@ class AviatrixVpnProfilePolicyArgs:
     @property
     @pulumi.getter
     def proto(self) -> pulumi.Input[str]:
+        """
+        Protocol to allow or deny. Valid values for protocol: "all", "tcp", "udp", "icmp", "sctp", "rdp", "dccp".
+        """
         return pulumi.get(self, "proto")
 
     @proto.setter
@@ -2100,6 +2775,9 @@ class AviatrixVpnProfilePolicyArgs:
     @property
     @pulumi.getter
     def target(self) -> pulumi.Input[str]:
+        """
+        CIDR to be allowed or denied. Valid values for target: IPv4 CIDRs. Example: "10.30.0.0/16".
+        """
         return pulumi.get(self, "target")
 
     @target.setter
@@ -2147,6 +2825,16 @@ class GetAviatrixFirenetFirewallInstanceAssociationArgs:
                  lan_interface: str,
                  management_interface: str,
                  vendor_type: str):
+        """
+        :param str firenet_gw_name: Name of the primary FireNet gateway.
+        :param str firewall_name: Firewall instance name.
+               * `lan_interface`- Lan interface ID.
+        :param str instance_id: ID of Firewall instance.
+        :param str management_interface: Management interface ID.
+               * `egress_interface`- Egress interface ID.
+               * `attached`- Switch to attach/detach firewall instance to/from fireNet.
+        :param str vendor_type: Type of the firewall.
+        """
         pulumi.set(__self__, "attached", attached)
         pulumi.set(__self__, "egress_interface", egress_interface)
         pulumi.set(__self__, "firenet_gw_name", firenet_gw_name)
@@ -2177,6 +2865,9 @@ class GetAviatrixFirenetFirewallInstanceAssociationArgs:
     @property
     @pulumi.getter(name="firenetGwName")
     def firenet_gw_name(self) -> str:
+        """
+        Name of the primary FireNet gateway.
+        """
         return pulumi.get(self, "firenet_gw_name")
 
     @firenet_gw_name.setter
@@ -2186,6 +2877,10 @@ class GetAviatrixFirenetFirewallInstanceAssociationArgs:
     @property
     @pulumi.getter(name="firewallName")
     def firewall_name(self) -> str:
+        """
+        Firewall instance name.
+        * `lan_interface`- Lan interface ID.
+        """
         return pulumi.get(self, "firewall_name")
 
     @firewall_name.setter
@@ -2195,6 +2890,9 @@ class GetAviatrixFirenetFirewallInstanceAssociationArgs:
     @property
     @pulumi.getter(name="instanceId")
     def instance_id(self) -> str:
+        """
+        ID of Firewall instance.
+        """
         return pulumi.get(self, "instance_id")
 
     @instance_id.setter
@@ -2213,6 +2911,11 @@ class GetAviatrixFirenetFirewallInstanceAssociationArgs:
     @property
     @pulumi.getter(name="managementInterface")
     def management_interface(self) -> str:
+        """
+        Management interface ID.
+        * `egress_interface`- Egress interface ID.
+        * `attached`- Switch to attach/detach firewall instance to/from fireNet.
+        """
         return pulumi.get(self, "management_interface")
 
     @management_interface.setter
@@ -2222,6 +2925,9 @@ class GetAviatrixFirenetFirewallInstanceAssociationArgs:
     @property
     @pulumi.getter(name="vendorType")
     def vendor_type(self) -> str:
+        """
+        Type of the firewall.
+        """
         return pulumi.get(self, "vendor_type")
 
     @vendor_type.setter

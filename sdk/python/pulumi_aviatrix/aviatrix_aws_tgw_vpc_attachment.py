@@ -28,21 +28,17 @@ class AviatrixAwsTgwVpcAttachmentArgs:
                  subnets: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a AviatrixAwsTgwVpcAttachment resource.
-        :param pulumi.Input[str] region: Region of cloud provider.
+        :param pulumi.Input[str] region: AWS Region of the TGW.
         :param pulumi.Input[str] tgw_name: Name of the AWS TGW.
-        :param pulumi.Input[str] vpc_account_name: This parameter represents the name of a Cloud-Account in Aviatrix controller.
-        :param pulumi.Input[str] vpc_id: This parameter represents the ID of the VPC.
-        :param pulumi.Input[str] customized_route_advertisement: Advanced option. Customized route(s) to be advertised to other VPCs that are connected to the same TGW.
-        :param pulumi.Input[str] customized_routes: Advanced option. Customized Spoke VPC Routes. It allows the admin to enter non-RFC1918 routes in the VPC route table
-               targeting the TGW.
-        :param pulumi.Input[bool] disable_local_route_propagation: Advanced option. If set to true, it disables automatic route propagation of this VPC to other VPCs within the same
-               network domain.
-        :param pulumi.Input[str] edge_attachment: Edge attachment ID. To allow access to the private IP of the MGMT interface of the Firewalls, set this attribute to
-               enable Management Access From Onprem. This feature advertises the Firewalls private MGMT subnet to your Edge domain.
-        :param pulumi.Input[str] network_domain_name: The name of the network domain.
-        :param pulumi.Input[str] route_tables: Advanced option. Route tables separated by ',' to participate in TGW Orchestrator, i.e., learned routes will be
-               propagated to these route tables.
-        :param pulumi.Input[str] security_domain_name: The name of the security domain.
+        :param pulumi.Input[str] vpc_account_name: The name of the cloud account in the Aviatrix controller, which is associated with the VPC.
+        :param pulumi.Input[str] vpc_id: VPC ID of the VPC to be attached to the specified `security_domain_name`.
+        :param pulumi.Input[str] customized_route_advertisement: Advanced option. Customized route(s) to be advertised to other VPCs that are connected to the same TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
+        :param pulumi.Input[str] customized_routes: Advanced option. Customized Spoke VPC Routes. It allows the admin to enter non-RFC1918 routes in the VPC route table targeting the TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
+        :param pulumi.Input[bool] disable_local_route_propagation: Advanced option. If set to true, it disables automatic route propagation of this VPC to other VPCs within the same security domain. Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] edge_attachment: Advanced option. To allow access to the private IP of the MGMT interface of the Firewalls, set this attribute to enable Management Access From Onprem. This feature advertises the Firewalls private MGMT subnet to your Edge domain. Example: "vpn-0068bb31917ff2289".
+        :param pulumi.Input[str] network_domain_name: The name of the network domain, to which the VPC will be attached to. If changed, the VPC will be detached from the old domain, and attached to the new domain.
+        :param pulumi.Input[str] route_tables: Advanced option. Route tables separated by ',' to participate in TGW Orchestrator, i.e., learned routes will be propagated to these route tables. Example: "rtb-212ff547,rtb-045397874c170c745".
+        :param pulumi.Input[str] security_domain_name: The name of the security domain, to which the VPC will be attached to. If changed, the VPC will be detached from the old domain, and attached to the new domain.
         :param pulumi.Input[str] subnets: Advanced option. VPC subnets separated by ',' to attach to the VPC. If left blank, Aviatrix Controller automatically
                selects a subnet representing each AZ for the VPC attachment.
         """
@@ -74,7 +70,7 @@ class AviatrixAwsTgwVpcAttachmentArgs:
     @pulumi.getter
     def region(self) -> pulumi.Input[str]:
         """
-        Region of cloud provider.
+        AWS Region of the TGW.
         """
         return pulumi.get(self, "region")
 
@@ -98,7 +94,7 @@ class AviatrixAwsTgwVpcAttachmentArgs:
     @pulumi.getter(name="vpcAccountName")
     def vpc_account_name(self) -> pulumi.Input[str]:
         """
-        This parameter represents the name of a Cloud-Account in Aviatrix controller.
+        The name of the cloud account in the Aviatrix controller, which is associated with the VPC.
         """
         return pulumi.get(self, "vpc_account_name")
 
@@ -110,7 +106,7 @@ class AviatrixAwsTgwVpcAttachmentArgs:
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> pulumi.Input[str]:
         """
-        This parameter represents the ID of the VPC.
+        VPC ID of the VPC to be attached to the specified `security_domain_name`.
         """
         return pulumi.get(self, "vpc_id")
 
@@ -122,7 +118,7 @@ class AviatrixAwsTgwVpcAttachmentArgs:
     @pulumi.getter(name="customizedRouteAdvertisement")
     def customized_route_advertisement(self) -> Optional[pulumi.Input[str]]:
         """
-        Advanced option. Customized route(s) to be advertised to other VPCs that are connected to the same TGW.
+        Advanced option. Customized route(s) to be advertised to other VPCs that are connected to the same TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
         """
         return pulumi.get(self, "customized_route_advertisement")
 
@@ -134,8 +130,7 @@ class AviatrixAwsTgwVpcAttachmentArgs:
     @pulumi.getter(name="customizedRoutes")
     def customized_routes(self) -> Optional[pulumi.Input[str]]:
         """
-        Advanced option. Customized Spoke VPC Routes. It allows the admin to enter non-RFC1918 routes in the VPC route table
-        targeting the TGW.
+        Advanced option. Customized Spoke VPC Routes. It allows the admin to enter non-RFC1918 routes in the VPC route table targeting the TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
         """
         return pulumi.get(self, "customized_routes")
 
@@ -147,8 +142,7 @@ class AviatrixAwsTgwVpcAttachmentArgs:
     @pulumi.getter(name="disableLocalRoutePropagation")
     def disable_local_route_propagation(self) -> Optional[pulumi.Input[bool]]:
         """
-        Advanced option. If set to true, it disables automatic route propagation of this VPC to other VPCs within the same
-        network domain.
+        Advanced option. If set to true, it disables automatic route propagation of this VPC to other VPCs within the same security domain. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "disable_local_route_propagation")
 
@@ -160,8 +154,7 @@ class AviatrixAwsTgwVpcAttachmentArgs:
     @pulumi.getter(name="edgeAttachment")
     def edge_attachment(self) -> Optional[pulumi.Input[str]]:
         """
-        Edge attachment ID. To allow access to the private IP of the MGMT interface of the Firewalls, set this attribute to
-        enable Management Access From Onprem. This feature advertises the Firewalls private MGMT subnet to your Edge domain.
+        Advanced option. To allow access to the private IP of the MGMT interface of the Firewalls, set this attribute to enable Management Access From Onprem. This feature advertises the Firewalls private MGMT subnet to your Edge domain. Example: "vpn-0068bb31917ff2289".
         """
         return pulumi.get(self, "edge_attachment")
 
@@ -173,7 +166,7 @@ class AviatrixAwsTgwVpcAttachmentArgs:
     @pulumi.getter(name="networkDomainName")
     def network_domain_name(self) -> Optional[pulumi.Input[str]]:
         """
-        The name of the network domain.
+        The name of the network domain, to which the VPC will be attached to. If changed, the VPC will be detached from the old domain, and attached to the new domain.
         """
         return pulumi.get(self, "network_domain_name")
 
@@ -185,8 +178,7 @@ class AviatrixAwsTgwVpcAttachmentArgs:
     @pulumi.getter(name="routeTables")
     def route_tables(self) -> Optional[pulumi.Input[str]]:
         """
-        Advanced option. Route tables separated by ',' to participate in TGW Orchestrator, i.e., learned routes will be
-        propagated to these route tables.
+        Advanced option. Route tables separated by ',' to participate in TGW Orchestrator, i.e., learned routes will be propagated to these route tables. Example: "rtb-212ff547,rtb-045397874c170c745".
         """
         return pulumi.get(self, "route_tables")
 
@@ -198,7 +190,7 @@ class AviatrixAwsTgwVpcAttachmentArgs:
     @pulumi.getter(name="securityDomainName")
     def security_domain_name(self) -> Optional[pulumi.Input[str]]:
         """
-        The name of the security domain.
+        The name of the security domain, to which the VPC will be attached to. If changed, the VPC will be detached from the old domain, and attached to the new domain.
         """
         return pulumi.get(self, "security_domain_name")
 
@@ -237,23 +229,19 @@ class _AviatrixAwsTgwVpcAttachmentState:
                  vpc_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixAwsTgwVpcAttachment resources.
-        :param pulumi.Input[str] customized_route_advertisement: Advanced option. Customized route(s) to be advertised to other VPCs that are connected to the same TGW.
-        :param pulumi.Input[str] customized_routes: Advanced option. Customized Spoke VPC Routes. It allows the admin to enter non-RFC1918 routes in the VPC route table
-               targeting the TGW.
-        :param pulumi.Input[bool] disable_local_route_propagation: Advanced option. If set to true, it disables automatic route propagation of this VPC to other VPCs within the same
-               network domain.
-        :param pulumi.Input[str] edge_attachment: Edge attachment ID. To allow access to the private IP of the MGMT interface of the Firewalls, set this attribute to
-               enable Management Access From Onprem. This feature advertises the Firewalls private MGMT subnet to your Edge domain.
-        :param pulumi.Input[str] network_domain_name: The name of the network domain.
-        :param pulumi.Input[str] region: Region of cloud provider.
-        :param pulumi.Input[str] route_tables: Advanced option. Route tables separated by ',' to participate in TGW Orchestrator, i.e., learned routes will be
-               propagated to these route tables.
-        :param pulumi.Input[str] security_domain_name: The name of the security domain.
+        :param pulumi.Input[str] customized_route_advertisement: Advanced option. Customized route(s) to be advertised to other VPCs that are connected to the same TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
+        :param pulumi.Input[str] customized_routes: Advanced option. Customized Spoke VPC Routes. It allows the admin to enter non-RFC1918 routes in the VPC route table targeting the TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
+        :param pulumi.Input[bool] disable_local_route_propagation: Advanced option. If set to true, it disables automatic route propagation of this VPC to other VPCs within the same security domain. Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] edge_attachment: Advanced option. To allow access to the private IP of the MGMT interface of the Firewalls, set this attribute to enable Management Access From Onprem. This feature advertises the Firewalls private MGMT subnet to your Edge domain. Example: "vpn-0068bb31917ff2289".
+        :param pulumi.Input[str] network_domain_name: The name of the network domain, to which the VPC will be attached to. If changed, the VPC will be detached from the old domain, and attached to the new domain.
+        :param pulumi.Input[str] region: AWS Region of the TGW.
+        :param pulumi.Input[str] route_tables: Advanced option. Route tables separated by ',' to participate in TGW Orchestrator, i.e., learned routes will be propagated to these route tables. Example: "rtb-212ff547,rtb-045397874c170c745".
+        :param pulumi.Input[str] security_domain_name: The name of the security domain, to which the VPC will be attached to. If changed, the VPC will be detached from the old domain, and attached to the new domain.
         :param pulumi.Input[str] subnets: Advanced option. VPC subnets separated by ',' to attach to the VPC. If left blank, Aviatrix Controller automatically
                selects a subnet representing each AZ for the VPC attachment.
         :param pulumi.Input[str] tgw_name: Name of the AWS TGW.
-        :param pulumi.Input[str] vpc_account_name: This parameter represents the name of a Cloud-Account in Aviatrix controller.
-        :param pulumi.Input[str] vpc_id: This parameter represents the ID of the VPC.
+        :param pulumi.Input[str] vpc_account_name: The name of the cloud account in the Aviatrix controller, which is associated with the VPC.
+        :param pulumi.Input[str] vpc_id: VPC ID of the VPC to be attached to the specified `security_domain_name`.
         """
         if customized_route_advertisement is not None:
             pulumi.set(__self__, "customized_route_advertisement", customized_route_advertisement)
@@ -287,7 +275,7 @@ class _AviatrixAwsTgwVpcAttachmentState:
     @pulumi.getter(name="customizedRouteAdvertisement")
     def customized_route_advertisement(self) -> Optional[pulumi.Input[str]]:
         """
-        Advanced option. Customized route(s) to be advertised to other VPCs that are connected to the same TGW.
+        Advanced option. Customized route(s) to be advertised to other VPCs that are connected to the same TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
         """
         return pulumi.get(self, "customized_route_advertisement")
 
@@ -299,8 +287,7 @@ class _AviatrixAwsTgwVpcAttachmentState:
     @pulumi.getter(name="customizedRoutes")
     def customized_routes(self) -> Optional[pulumi.Input[str]]:
         """
-        Advanced option. Customized Spoke VPC Routes. It allows the admin to enter non-RFC1918 routes in the VPC route table
-        targeting the TGW.
+        Advanced option. Customized Spoke VPC Routes. It allows the admin to enter non-RFC1918 routes in the VPC route table targeting the TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
         """
         return pulumi.get(self, "customized_routes")
 
@@ -312,8 +299,7 @@ class _AviatrixAwsTgwVpcAttachmentState:
     @pulumi.getter(name="disableLocalRoutePropagation")
     def disable_local_route_propagation(self) -> Optional[pulumi.Input[bool]]:
         """
-        Advanced option. If set to true, it disables automatic route propagation of this VPC to other VPCs within the same
-        network domain.
+        Advanced option. If set to true, it disables automatic route propagation of this VPC to other VPCs within the same security domain. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "disable_local_route_propagation")
 
@@ -325,8 +311,7 @@ class _AviatrixAwsTgwVpcAttachmentState:
     @pulumi.getter(name="edgeAttachment")
     def edge_attachment(self) -> Optional[pulumi.Input[str]]:
         """
-        Edge attachment ID. To allow access to the private IP of the MGMT interface of the Firewalls, set this attribute to
-        enable Management Access From Onprem. This feature advertises the Firewalls private MGMT subnet to your Edge domain.
+        Advanced option. To allow access to the private IP of the MGMT interface of the Firewalls, set this attribute to enable Management Access From Onprem. This feature advertises the Firewalls private MGMT subnet to your Edge domain. Example: "vpn-0068bb31917ff2289".
         """
         return pulumi.get(self, "edge_attachment")
 
@@ -338,7 +323,7 @@ class _AviatrixAwsTgwVpcAttachmentState:
     @pulumi.getter(name="networkDomainName")
     def network_domain_name(self) -> Optional[pulumi.Input[str]]:
         """
-        The name of the network domain.
+        The name of the network domain, to which the VPC will be attached to. If changed, the VPC will be detached from the old domain, and attached to the new domain.
         """
         return pulumi.get(self, "network_domain_name")
 
@@ -350,7 +335,7 @@ class _AviatrixAwsTgwVpcAttachmentState:
     @pulumi.getter
     def region(self) -> Optional[pulumi.Input[str]]:
         """
-        Region of cloud provider.
+        AWS Region of the TGW.
         """
         return pulumi.get(self, "region")
 
@@ -362,8 +347,7 @@ class _AviatrixAwsTgwVpcAttachmentState:
     @pulumi.getter(name="routeTables")
     def route_tables(self) -> Optional[pulumi.Input[str]]:
         """
-        Advanced option. Route tables separated by ',' to participate in TGW Orchestrator, i.e., learned routes will be
-        propagated to these route tables.
+        Advanced option. Route tables separated by ',' to participate in TGW Orchestrator, i.e., learned routes will be propagated to these route tables. Example: "rtb-212ff547,rtb-045397874c170c745".
         """
         return pulumi.get(self, "route_tables")
 
@@ -375,7 +359,7 @@ class _AviatrixAwsTgwVpcAttachmentState:
     @pulumi.getter(name="securityDomainName")
     def security_domain_name(self) -> Optional[pulumi.Input[str]]:
         """
-        The name of the security domain.
+        The name of the security domain, to which the VPC will be attached to. If changed, the VPC will be detached from the old domain, and attached to the new domain.
         """
         return pulumi.get(self, "security_domain_name")
 
@@ -412,7 +396,7 @@ class _AviatrixAwsTgwVpcAttachmentState:
     @pulumi.getter(name="vpcAccountName")
     def vpc_account_name(self) -> Optional[pulumi.Input[str]]:
         """
-        This parameter represents the name of a Cloud-Account in Aviatrix controller.
+        The name of the cloud account in the Aviatrix controller, which is associated with the VPC.
         """
         return pulumi.get(self, "vpc_account_name")
 
@@ -424,7 +408,7 @@ class _AviatrixAwsTgwVpcAttachmentState:
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
-        This parameter represents the ID of the VPC.
+        VPC ID of the VPC to be attached to the specified `security_domain_name`.
         """
         return pulumi.get(self, "vpc_id")
 
@@ -452,26 +436,46 @@ class AviatrixAwsTgwVpcAttachment(pulumi.CustomResource):
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixAwsTgwVpcAttachment resource with the given unique name, props, and options.
+        The **aviatrix_aws_tgw_vpc_attachment** resource manages the attaching & detaching of the VPC to & from an AWS TGW, and FireNet Gateway to TGW Firewall Domain.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS TGW VPC Attachment
+        test_aws_tgw_vpc_attachment = aviatrix.AviatrixAwsTgwVpcAttachment("testAwsTgwVpcAttachment",
+            network_domain_name="my-ndn",
+            region="us-east-1",
+            tgw_name="test-tgw",
+            vpc_account_name="test-account",
+            vpc_id="vpc-0e2fac2b91c6697b3")
+        ```
+
+        ## Import
+
+        **aws_tgw_vpc_attachment** can be imported using the `tgw_name`, `security_domain_name` and `vpc_id`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAwsTgwVpcAttachment:AviatrixAwsTgwVpcAttachment test tgw_name~security_domain_name~vpc_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] customized_route_advertisement: Advanced option. Customized route(s) to be advertised to other VPCs that are connected to the same TGW.
-        :param pulumi.Input[str] customized_routes: Advanced option. Customized Spoke VPC Routes. It allows the admin to enter non-RFC1918 routes in the VPC route table
-               targeting the TGW.
-        :param pulumi.Input[bool] disable_local_route_propagation: Advanced option. If set to true, it disables automatic route propagation of this VPC to other VPCs within the same
-               network domain.
-        :param pulumi.Input[str] edge_attachment: Edge attachment ID. To allow access to the private IP of the MGMT interface of the Firewalls, set this attribute to
-               enable Management Access From Onprem. This feature advertises the Firewalls private MGMT subnet to your Edge domain.
-        :param pulumi.Input[str] network_domain_name: The name of the network domain.
-        :param pulumi.Input[str] region: Region of cloud provider.
-        :param pulumi.Input[str] route_tables: Advanced option. Route tables separated by ',' to participate in TGW Orchestrator, i.e., learned routes will be
-               propagated to these route tables.
-        :param pulumi.Input[str] security_domain_name: The name of the security domain.
+        :param pulumi.Input[str] customized_route_advertisement: Advanced option. Customized route(s) to be advertised to other VPCs that are connected to the same TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
+        :param pulumi.Input[str] customized_routes: Advanced option. Customized Spoke VPC Routes. It allows the admin to enter non-RFC1918 routes in the VPC route table targeting the TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
+        :param pulumi.Input[bool] disable_local_route_propagation: Advanced option. If set to true, it disables automatic route propagation of this VPC to other VPCs within the same security domain. Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] edge_attachment: Advanced option. To allow access to the private IP of the MGMT interface of the Firewalls, set this attribute to enable Management Access From Onprem. This feature advertises the Firewalls private MGMT subnet to your Edge domain. Example: "vpn-0068bb31917ff2289".
+        :param pulumi.Input[str] network_domain_name: The name of the network domain, to which the VPC will be attached to. If changed, the VPC will be detached from the old domain, and attached to the new domain.
+        :param pulumi.Input[str] region: AWS Region of the TGW.
+        :param pulumi.Input[str] route_tables: Advanced option. Route tables separated by ',' to participate in TGW Orchestrator, i.e., learned routes will be propagated to these route tables. Example: "rtb-212ff547,rtb-045397874c170c745".
+        :param pulumi.Input[str] security_domain_name: The name of the security domain, to which the VPC will be attached to. If changed, the VPC will be detached from the old domain, and attached to the new domain.
         :param pulumi.Input[str] subnets: Advanced option. VPC subnets separated by ',' to attach to the VPC. If left blank, Aviatrix Controller automatically
                selects a subnet representing each AZ for the VPC attachment.
         :param pulumi.Input[str] tgw_name: Name of the AWS TGW.
-        :param pulumi.Input[str] vpc_account_name: This parameter represents the name of a Cloud-Account in Aviatrix controller.
-        :param pulumi.Input[str] vpc_id: This parameter represents the ID of the VPC.
+        :param pulumi.Input[str] vpc_account_name: The name of the cloud account in the Aviatrix controller, which is associated with the VPC.
+        :param pulumi.Input[str] vpc_id: VPC ID of the VPC to be attached to the specified `security_domain_name`.
         """
         ...
     @overload
@@ -480,7 +484,31 @@ class AviatrixAwsTgwVpcAttachment(pulumi.CustomResource):
                  args: AviatrixAwsTgwVpcAttachmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixAwsTgwVpcAttachment resource with the given unique name, props, and options.
+        The **aviatrix_aws_tgw_vpc_attachment** resource manages the attaching & detaching of the VPC to & from an AWS TGW, and FireNet Gateway to TGW Firewall Domain.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS TGW VPC Attachment
+        test_aws_tgw_vpc_attachment = aviatrix.AviatrixAwsTgwVpcAttachment("testAwsTgwVpcAttachment",
+            network_domain_name="my-ndn",
+            region="us-east-1",
+            tgw_name="test-tgw",
+            vpc_account_name="test-account",
+            vpc_id="vpc-0e2fac2b91c6697b3")
+        ```
+
+        ## Import
+
+        **aws_tgw_vpc_attachment** can be imported using the `tgw_name`, `security_domain_name` and `vpc_id`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAwsTgwVpcAttachment:AviatrixAwsTgwVpcAttachment test tgw_name~security_domain_name~vpc_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixAwsTgwVpcAttachmentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -569,23 +597,19 @@ class AviatrixAwsTgwVpcAttachment(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] customized_route_advertisement: Advanced option. Customized route(s) to be advertised to other VPCs that are connected to the same TGW.
-        :param pulumi.Input[str] customized_routes: Advanced option. Customized Spoke VPC Routes. It allows the admin to enter non-RFC1918 routes in the VPC route table
-               targeting the TGW.
-        :param pulumi.Input[bool] disable_local_route_propagation: Advanced option. If set to true, it disables automatic route propagation of this VPC to other VPCs within the same
-               network domain.
-        :param pulumi.Input[str] edge_attachment: Edge attachment ID. To allow access to the private IP of the MGMT interface of the Firewalls, set this attribute to
-               enable Management Access From Onprem. This feature advertises the Firewalls private MGMT subnet to your Edge domain.
-        :param pulumi.Input[str] network_domain_name: The name of the network domain.
-        :param pulumi.Input[str] region: Region of cloud provider.
-        :param pulumi.Input[str] route_tables: Advanced option. Route tables separated by ',' to participate in TGW Orchestrator, i.e., learned routes will be
-               propagated to these route tables.
-        :param pulumi.Input[str] security_domain_name: The name of the security domain.
+        :param pulumi.Input[str] customized_route_advertisement: Advanced option. Customized route(s) to be advertised to other VPCs that are connected to the same TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
+        :param pulumi.Input[str] customized_routes: Advanced option. Customized Spoke VPC Routes. It allows the admin to enter non-RFC1918 routes in the VPC route table targeting the TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
+        :param pulumi.Input[bool] disable_local_route_propagation: Advanced option. If set to true, it disables automatic route propagation of this VPC to other VPCs within the same security domain. Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] edge_attachment: Advanced option. To allow access to the private IP of the MGMT interface of the Firewalls, set this attribute to enable Management Access From Onprem. This feature advertises the Firewalls private MGMT subnet to your Edge domain. Example: "vpn-0068bb31917ff2289".
+        :param pulumi.Input[str] network_domain_name: The name of the network domain, to which the VPC will be attached to. If changed, the VPC will be detached from the old domain, and attached to the new domain.
+        :param pulumi.Input[str] region: AWS Region of the TGW.
+        :param pulumi.Input[str] route_tables: Advanced option. Route tables separated by ',' to participate in TGW Orchestrator, i.e., learned routes will be propagated to these route tables. Example: "rtb-212ff547,rtb-045397874c170c745".
+        :param pulumi.Input[str] security_domain_name: The name of the security domain, to which the VPC will be attached to. If changed, the VPC will be detached from the old domain, and attached to the new domain.
         :param pulumi.Input[str] subnets: Advanced option. VPC subnets separated by ',' to attach to the VPC. If left blank, Aviatrix Controller automatically
                selects a subnet representing each AZ for the VPC attachment.
         :param pulumi.Input[str] tgw_name: Name of the AWS TGW.
-        :param pulumi.Input[str] vpc_account_name: This parameter represents the name of a Cloud-Account in Aviatrix controller.
-        :param pulumi.Input[str] vpc_id: This parameter represents the ID of the VPC.
+        :param pulumi.Input[str] vpc_account_name: The name of the cloud account in the Aviatrix controller, which is associated with the VPC.
+        :param pulumi.Input[str] vpc_id: VPC ID of the VPC to be attached to the specified `security_domain_name`.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -609,7 +633,7 @@ class AviatrixAwsTgwVpcAttachment(pulumi.CustomResource):
     @pulumi.getter(name="customizedRouteAdvertisement")
     def customized_route_advertisement(self) -> pulumi.Output[Optional[str]]:
         """
-        Advanced option. Customized route(s) to be advertised to other VPCs that are connected to the same TGW.
+        Advanced option. Customized route(s) to be advertised to other VPCs that are connected to the same TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
         """
         return pulumi.get(self, "customized_route_advertisement")
 
@@ -617,8 +641,7 @@ class AviatrixAwsTgwVpcAttachment(pulumi.CustomResource):
     @pulumi.getter(name="customizedRoutes")
     def customized_routes(self) -> pulumi.Output[Optional[str]]:
         """
-        Advanced option. Customized Spoke VPC Routes. It allows the admin to enter non-RFC1918 routes in the VPC route table
-        targeting the TGW.
+        Advanced option. Customized Spoke VPC Routes. It allows the admin to enter non-RFC1918 routes in the VPC route table targeting the TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
         """
         return pulumi.get(self, "customized_routes")
 
@@ -626,8 +649,7 @@ class AviatrixAwsTgwVpcAttachment(pulumi.CustomResource):
     @pulumi.getter(name="disableLocalRoutePropagation")
     def disable_local_route_propagation(self) -> pulumi.Output[Optional[bool]]:
         """
-        Advanced option. If set to true, it disables automatic route propagation of this VPC to other VPCs within the same
-        network domain.
+        Advanced option. If set to true, it disables automatic route propagation of this VPC to other VPCs within the same security domain. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "disable_local_route_propagation")
 
@@ -635,8 +657,7 @@ class AviatrixAwsTgwVpcAttachment(pulumi.CustomResource):
     @pulumi.getter(name="edgeAttachment")
     def edge_attachment(self) -> pulumi.Output[Optional[str]]:
         """
-        Edge attachment ID. To allow access to the private IP of the MGMT interface of the Firewalls, set this attribute to
-        enable Management Access From Onprem. This feature advertises the Firewalls private MGMT subnet to your Edge domain.
+        Advanced option. To allow access to the private IP of the MGMT interface of the Firewalls, set this attribute to enable Management Access From Onprem. This feature advertises the Firewalls private MGMT subnet to your Edge domain. Example: "vpn-0068bb31917ff2289".
         """
         return pulumi.get(self, "edge_attachment")
 
@@ -644,7 +665,7 @@ class AviatrixAwsTgwVpcAttachment(pulumi.CustomResource):
     @pulumi.getter(name="networkDomainName")
     def network_domain_name(self) -> pulumi.Output[Optional[str]]:
         """
-        The name of the network domain.
+        The name of the network domain, to which the VPC will be attached to. If changed, the VPC will be detached from the old domain, and attached to the new domain.
         """
         return pulumi.get(self, "network_domain_name")
 
@@ -652,7 +673,7 @@ class AviatrixAwsTgwVpcAttachment(pulumi.CustomResource):
     @pulumi.getter
     def region(self) -> pulumi.Output[str]:
         """
-        Region of cloud provider.
+        AWS Region of the TGW.
         """
         return pulumi.get(self, "region")
 
@@ -660,8 +681,7 @@ class AviatrixAwsTgwVpcAttachment(pulumi.CustomResource):
     @pulumi.getter(name="routeTables")
     def route_tables(self) -> pulumi.Output[str]:
         """
-        Advanced option. Route tables separated by ',' to participate in TGW Orchestrator, i.e., learned routes will be
-        propagated to these route tables.
+        Advanced option. Route tables separated by ',' to participate in TGW Orchestrator, i.e., learned routes will be propagated to these route tables. Example: "rtb-212ff547,rtb-045397874c170c745".
         """
         return pulumi.get(self, "route_tables")
 
@@ -669,7 +689,7 @@ class AviatrixAwsTgwVpcAttachment(pulumi.CustomResource):
     @pulumi.getter(name="securityDomainName")
     def security_domain_name(self) -> pulumi.Output[Optional[str]]:
         """
-        The name of the security domain.
+        The name of the security domain, to which the VPC will be attached to. If changed, the VPC will be detached from the old domain, and attached to the new domain.
         """
         return pulumi.get(self, "security_domain_name")
 
@@ -694,7 +714,7 @@ class AviatrixAwsTgwVpcAttachment(pulumi.CustomResource):
     @pulumi.getter(name="vpcAccountName")
     def vpc_account_name(self) -> pulumi.Output[str]:
         """
-        This parameter represents the name of a Cloud-Account in Aviatrix controller.
+        The name of the cloud account in the Aviatrix controller, which is associated with the VPC.
         """
         return pulumi.get(self, "vpc_account_name")
 
@@ -702,7 +722,7 @@ class AviatrixAwsTgwVpcAttachment(pulumi.CustomResource):
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> pulumi.Output[str]:
         """
-        This parameter represents the ID of the VPC.
+        VPC ID of the VPC to be attached to the specified `security_domain_name`.
         """
         return pulumi.get(self, "vpc_id")
 

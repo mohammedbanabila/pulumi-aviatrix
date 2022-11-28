@@ -2,9 +2,27 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_firenet** data source provides details about a specific FireNet created by the Aviatrix Controller.
+ *
+ * This data source can prove useful when a module accepts a FireNet's detail as an input variable.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Aviatrix FireNet Data Source
+ * const foo = pulumi.output(aviatrix.getAviatrixFirenet({
+ *     vpcId: "vpc-abcdef",
+ * }));
+ * ```
+ */
 export function getAviatrixFirenet(args: GetAviatrixFirenetArgs, opts?: pulumi.InvokeOptions): Promise<GetAviatrixFirenetResult> {
     if (!opts) {
         opts = {}
@@ -21,7 +39,13 @@ export function getAviatrixFirenet(args: GetAviatrixFirenetArgs, opts?: pulumi.I
  * A collection of arguments for invoking getAviatrixFirenet.
  */
 export interface GetAviatrixFirenetArgs {
+    /**
+     * List of firewall instances associated with fireNet.
+     */
     firewallInstanceAssociations?: inputs.GetAviatrixFirenetFirewallInstanceAssociation[];
+    /**
+     * ID of the Security VPC.
+     */
     vpcId: string;
 }
 
@@ -29,17 +53,41 @@ export interface GetAviatrixFirenetArgs {
  * A collection of values returned by getAviatrixFirenet.
  */
 export interface GetAviatrixFirenetResult {
+    /**
+     * Enable/Disable egress through firewall.
+     */
     readonly egressEnabled: boolean;
+    /**
+     * List of egress static CIDRs.
+     */
     readonly egressStaticCidrs: string[];
+    /**
+     * List of firewall instances associated with fireNet.
+     */
     readonly firewallInstanceAssociations?: outputs.GetAviatrixFirenetFirewallInstanceAssociation[];
+    /**
+     * (Optional) Hashing algorithm to load balance traffic across the firewall.
+     */
     readonly hashingAlgorithm: string;
     /**
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * Enable/Disable traffic inspection.
+     */
     readonly inspectionEnabled: boolean;
+    /**
+     * (Optional) Enable Keep Alive via Firewall LAN Interface.
+     */
     readonly keepAliveViaLanInterfaceEnabled: boolean;
+    /**
+     * Enable TGW segmentation for egress.
+     */
     readonly tgwSegmentationForEgressEnabled: boolean;
+    /**
+     * ID of the Security VPC.
+     */
     readonly vpcId: string;
 }
 
@@ -51,6 +99,12 @@ export function getAviatrixFirenetOutput(args: GetAviatrixFirenetOutputArgs, opt
  * A collection of arguments for invoking getAviatrixFirenet.
  */
 export interface GetAviatrixFirenetOutputArgs {
+    /**
+     * List of firewall instances associated with fireNet.
+     */
     firewallInstanceAssociations?: pulumi.Input<pulumi.Input<inputs.GetAviatrixFirenetFirewallInstanceAssociationArgs>[]>;
+    /**
+     * ID of the Security VPC.
+     */
     vpcId: pulumi.Input<string>;
 }

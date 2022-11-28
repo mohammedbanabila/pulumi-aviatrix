@@ -11,10 +11,47 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_controller_bgp_max_as_limit_config** resource allows management of an Aviatrix Controller's BGP max AS limit for transit gateways. This resource is available as of provider version R2.18.1+.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixControllerBgpMaxAsLimitConfig(ctx, "testMaxAsLimit", &aviatrix.AviatrixControllerBgpMaxAsLimitConfigArgs{
+//				MaxAsLimit: pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **aviatrix_controller_bgp_max_as_limit_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixControllerBgpMaxAsLimitConfig:AviatrixControllerBgpMaxAsLimitConfig test_max_as_limit 10-11-12-13
+//
+// ```
 type AviatrixControllerBgpMaxAsLimitConfig struct {
 	pulumi.CustomResourceState
 
-	// The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation.
+	// The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation. Must be a number in the range [1-254].
 	MaxAsLimit pulumi.IntOutput `pulumi:"maxAsLimit"`
 }
 
@@ -51,12 +88,12 @@ func GetAviatrixControllerBgpMaxAsLimitConfig(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixControllerBgpMaxAsLimitConfig resources.
 type aviatrixControllerBgpMaxAsLimitConfigState struct {
-	// The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation.
+	// The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation. Must be a number in the range [1-254].
 	MaxAsLimit *int `pulumi:"maxAsLimit"`
 }
 
 type AviatrixControllerBgpMaxAsLimitConfigState struct {
-	// The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation.
+	// The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation. Must be a number in the range [1-254].
 	MaxAsLimit pulumi.IntPtrInput
 }
 
@@ -65,13 +102,13 @@ func (AviatrixControllerBgpMaxAsLimitConfigState) ElementType() reflect.Type {
 }
 
 type aviatrixControllerBgpMaxAsLimitConfigArgs struct {
-	// The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation.
+	// The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation. Must be a number in the range [1-254].
 	MaxAsLimit int `pulumi:"maxAsLimit"`
 }
 
 // The set of arguments for constructing a AviatrixControllerBgpMaxAsLimitConfig resource.
 type AviatrixControllerBgpMaxAsLimitConfigArgs struct {
-	// The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation.
+	// The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation. Must be a number in the range [1-254].
 	MaxAsLimit pulumi.IntInput
 }
 
@@ -162,7 +199,7 @@ func (o AviatrixControllerBgpMaxAsLimitConfigOutput) ToAviatrixControllerBgpMaxA
 	return o
 }
 
-// The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation.
+// The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation. Must be a number in the range [1-254].
 func (o AviatrixControllerBgpMaxAsLimitConfigOutput) MaxAsLimit() pulumi.IntOutput {
 	return o.ApplyT(func(v *AviatrixControllerBgpMaxAsLimitConfig) pulumi.IntOutput { return v.MaxAsLimit }).(pulumi.IntOutput)
 }

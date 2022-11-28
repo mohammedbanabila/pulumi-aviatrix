@@ -24,11 +24,10 @@ class AviatrixSpokeTransitAttachmentArgs:
         The set of arguments for constructing a AviatrixSpokeTransitAttachment resource.
         :param pulumi.Input[str] spoke_gw_name: Name of the spoke gateway to attach to transit network.
         :param pulumi.Input[str] transit_gw_name: Name of the transit gateway to attach the spoke gateway to.
-        :param pulumi.Input[bool] enable_max_performance: Indicates whether the maximum amount of HPE tunnels will be created. Only valid when transit and spoke gateways are each
-               launched in Insane Mode and in the same cloud type. Available as of provider version R2.22.2+.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] route_tables: Learned routes will be propagated to these route tables.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] spoke_prepend_as_paths: AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on spoke gateway.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] transit_prepend_as_paths: AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit gateway.
+        :param pulumi.Input[bool] enable_max_performance: Indicates whether the maximum amount of HPE tunnels will be created. Only valid when transit and spoke gateways are each launched in Insane Mode and in the same cloud type. Default value: true. Available as of provider version R2.22.2+.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] route_tables: Learned routes will be propagated to these route tables. Example: ["rtb-212ff547","rtb-04539787"].
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] spoke_prepend_as_paths: Connection based AS Path Prepend. Valid only for BGP connection. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on spoke_gateway_name. Available as of provider version R2.23+.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] transit_prepend_as_paths: Connection based AS Path Prepend. Valid only for BGP connection. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on transit_gateway_name. Available as of provider version R2.23+.
         """
         pulumi.set(__self__, "spoke_gw_name", spoke_gw_name)
         pulumi.set(__self__, "transit_gw_name", transit_gw_name)
@@ -69,8 +68,7 @@ class AviatrixSpokeTransitAttachmentArgs:
     @pulumi.getter(name="enableMaxPerformance")
     def enable_max_performance(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicates whether the maximum amount of HPE tunnels will be created. Only valid when transit and spoke gateways are each
-        launched in Insane Mode and in the same cloud type. Available as of provider version R2.22.2+.
+        Indicates whether the maximum amount of HPE tunnels will be created. Only valid when transit and spoke gateways are each launched in Insane Mode and in the same cloud type. Default value: true. Available as of provider version R2.22.2+.
         """
         return pulumi.get(self, "enable_max_performance")
 
@@ -82,7 +80,7 @@ class AviatrixSpokeTransitAttachmentArgs:
     @pulumi.getter(name="routeTables")
     def route_tables(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Learned routes will be propagated to these route tables.
+        Learned routes will be propagated to these route tables. Example: ["rtb-212ff547","rtb-04539787"].
         """
         return pulumi.get(self, "route_tables")
 
@@ -94,7 +92,7 @@ class AviatrixSpokeTransitAttachmentArgs:
     @pulumi.getter(name="spokePrependAsPaths")
     def spoke_prepend_as_paths(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on spoke gateway.
+        Connection based AS Path Prepend. Valid only for BGP connection. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on spoke_gateway_name. Available as of provider version R2.23+.
         """
         return pulumi.get(self, "spoke_prepend_as_paths")
 
@@ -106,7 +104,7 @@ class AviatrixSpokeTransitAttachmentArgs:
     @pulumi.getter(name="transitPrependAsPaths")
     def transit_prepend_as_paths(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit gateway.
+        Connection based AS Path Prepend. Valid only for BGP connection. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on transit_gateway_name. Available as of provider version R2.23+.
         """
         return pulumi.get(self, "transit_prepend_as_paths")
 
@@ -127,14 +125,13 @@ class _AviatrixSpokeTransitAttachmentState:
                  transit_prepend_as_paths: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering AviatrixSpokeTransitAttachment resources.
-        :param pulumi.Input[bool] enable_max_performance: Indicates whether the maximum amount of HPE tunnels will be created. Only valid when transit and spoke gateways are each
-               launched in Insane Mode and in the same cloud type. Available as of provider version R2.22.2+.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] route_tables: Learned routes will be propagated to these route tables.
+        :param pulumi.Input[bool] enable_max_performance: Indicates whether the maximum amount of HPE tunnels will be created. Only valid when transit and spoke gateways are each launched in Insane Mode and in the same cloud type. Default value: true. Available as of provider version R2.22.2+.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] route_tables: Learned routes will be propagated to these route tables. Example: ["rtb-212ff547","rtb-04539787"].
         :param pulumi.Input[bool] spoke_bgp_enabled: Indicates whether the spoke gateway is BGP enabled or not.
         :param pulumi.Input[str] spoke_gw_name: Name of the spoke gateway to attach to transit network.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] spoke_prepend_as_paths: AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on spoke gateway.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] spoke_prepend_as_paths: Connection based AS Path Prepend. Valid only for BGP connection. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on spoke_gateway_name. Available as of provider version R2.23+.
         :param pulumi.Input[str] transit_gw_name: Name of the transit gateway to attach the spoke gateway to.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] transit_prepend_as_paths: AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit gateway.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] transit_prepend_as_paths: Connection based AS Path Prepend. Valid only for BGP connection. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on transit_gateway_name. Available as of provider version R2.23+.
         """
         if enable_max_performance is not None:
             pulumi.set(__self__, "enable_max_performance", enable_max_performance)
@@ -155,8 +152,7 @@ class _AviatrixSpokeTransitAttachmentState:
     @pulumi.getter(name="enableMaxPerformance")
     def enable_max_performance(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicates whether the maximum amount of HPE tunnels will be created. Only valid when transit and spoke gateways are each
-        launched in Insane Mode and in the same cloud type. Available as of provider version R2.22.2+.
+        Indicates whether the maximum amount of HPE tunnels will be created. Only valid when transit and spoke gateways are each launched in Insane Mode and in the same cloud type. Default value: true. Available as of provider version R2.22.2+.
         """
         return pulumi.get(self, "enable_max_performance")
 
@@ -168,7 +164,7 @@ class _AviatrixSpokeTransitAttachmentState:
     @pulumi.getter(name="routeTables")
     def route_tables(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Learned routes will be propagated to these route tables.
+        Learned routes will be propagated to these route tables. Example: ["rtb-212ff547","rtb-04539787"].
         """
         return pulumi.get(self, "route_tables")
 
@@ -204,7 +200,7 @@ class _AviatrixSpokeTransitAttachmentState:
     @pulumi.getter(name="spokePrependAsPaths")
     def spoke_prepend_as_paths(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on spoke gateway.
+        Connection based AS Path Prepend. Valid only for BGP connection. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on spoke_gateway_name. Available as of provider version R2.23+.
         """
         return pulumi.get(self, "spoke_prepend_as_paths")
 
@@ -228,7 +224,7 @@ class _AviatrixSpokeTransitAttachmentState:
     @pulumi.getter(name="transitPrependAsPaths")
     def transit_prepend_as_paths(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit gateway.
+        Connection based AS Path Prepend. Valid only for BGP connection. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on transit_gateway_name. Available as of provider version R2.23+.
         """
         return pulumi.get(self, "transit_prepend_as_paths")
 
@@ -250,16 +246,38 @@ class AviatrixSpokeTransitAttachment(pulumi.CustomResource):
                  transit_prepend_as_paths: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
-        Create a AviatrixSpokeTransitAttachment resource with the given unique name, props, and options.
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Spoke Transit Attachment
+        test_attachment = aviatrix.AviatrixSpokeTransitAttachment("testAttachment",
+            route_tables=[
+                "rtb-737d540c",
+                "rtb-626d045c",
+            ],
+            spoke_gw_name="spoke-gw",
+            transit_gw_name="transit-gw")
+        ```
+
+        ## Import
+
+        **spoke_transit_attachment** can be imported using the `spoke_gw_name` and `transit_gw_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixSpokeTransitAttachment:AviatrixSpokeTransitAttachment test spoke_gw_name~transit_gw_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[bool] enable_max_performance: Indicates whether the maximum amount of HPE tunnels will be created. Only valid when transit and spoke gateways are each
-               launched in Insane Mode and in the same cloud type. Available as of provider version R2.22.2+.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] route_tables: Learned routes will be propagated to these route tables.
+        :param pulumi.Input[bool] enable_max_performance: Indicates whether the maximum amount of HPE tunnels will be created. Only valid when transit and spoke gateways are each launched in Insane Mode and in the same cloud type. Default value: true. Available as of provider version R2.22.2+.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] route_tables: Learned routes will be propagated to these route tables. Example: ["rtb-212ff547","rtb-04539787"].
         :param pulumi.Input[str] spoke_gw_name: Name of the spoke gateway to attach to transit network.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] spoke_prepend_as_paths: AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on spoke gateway.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] spoke_prepend_as_paths: Connection based AS Path Prepend. Valid only for BGP connection. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on spoke_gateway_name. Available as of provider version R2.23+.
         :param pulumi.Input[str] transit_gw_name: Name of the transit gateway to attach the spoke gateway to.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] transit_prepend_as_paths: AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit gateway.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] transit_prepend_as_paths: Connection based AS Path Prepend. Valid only for BGP connection. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on transit_gateway_name. Available as of provider version R2.23+.
         """
         ...
     @overload
@@ -268,7 +286,30 @@ class AviatrixSpokeTransitAttachment(pulumi.CustomResource):
                  args: AviatrixSpokeTransitAttachmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixSpokeTransitAttachment resource with the given unique name, props, and options.
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Spoke Transit Attachment
+        test_attachment = aviatrix.AviatrixSpokeTransitAttachment("testAttachment",
+            route_tables=[
+                "rtb-737d540c",
+                "rtb-626d045c",
+            ],
+            spoke_gw_name="spoke-gw",
+            transit_gw_name="transit-gw")
+        ```
+
+        ## Import
+
+        **spoke_transit_attachment** can be imported using the `spoke_gw_name` and `transit_gw_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixSpokeTransitAttachment:AviatrixSpokeTransitAttachment test spoke_gw_name~transit_gw_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixSpokeTransitAttachmentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -334,14 +375,13 @@ class AviatrixSpokeTransitAttachment(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[bool] enable_max_performance: Indicates whether the maximum amount of HPE tunnels will be created. Only valid when transit and spoke gateways are each
-               launched in Insane Mode and in the same cloud type. Available as of provider version R2.22.2+.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] route_tables: Learned routes will be propagated to these route tables.
+        :param pulumi.Input[bool] enable_max_performance: Indicates whether the maximum amount of HPE tunnels will be created. Only valid when transit and spoke gateways are each launched in Insane Mode and in the same cloud type. Default value: true. Available as of provider version R2.22.2+.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] route_tables: Learned routes will be propagated to these route tables. Example: ["rtb-212ff547","rtb-04539787"].
         :param pulumi.Input[bool] spoke_bgp_enabled: Indicates whether the spoke gateway is BGP enabled or not.
         :param pulumi.Input[str] spoke_gw_name: Name of the spoke gateway to attach to transit network.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] spoke_prepend_as_paths: AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on spoke gateway.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] spoke_prepend_as_paths: Connection based AS Path Prepend. Valid only for BGP connection. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on spoke_gateway_name. Available as of provider version R2.23+.
         :param pulumi.Input[str] transit_gw_name: Name of the transit gateway to attach the spoke gateway to.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] transit_prepend_as_paths: AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit gateway.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] transit_prepend_as_paths: Connection based AS Path Prepend. Valid only for BGP connection. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on transit_gateway_name. Available as of provider version R2.23+.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -360,8 +400,7 @@ class AviatrixSpokeTransitAttachment(pulumi.CustomResource):
     @pulumi.getter(name="enableMaxPerformance")
     def enable_max_performance(self) -> pulumi.Output[Optional[bool]]:
         """
-        Indicates whether the maximum amount of HPE tunnels will be created. Only valid when transit and spoke gateways are each
-        launched in Insane Mode and in the same cloud type. Available as of provider version R2.22.2+.
+        Indicates whether the maximum amount of HPE tunnels will be created. Only valid when transit and spoke gateways are each launched in Insane Mode and in the same cloud type. Default value: true. Available as of provider version R2.22.2+.
         """
         return pulumi.get(self, "enable_max_performance")
 
@@ -369,7 +408,7 @@ class AviatrixSpokeTransitAttachment(pulumi.CustomResource):
     @pulumi.getter(name="routeTables")
     def route_tables(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        Learned routes will be propagated to these route tables.
+        Learned routes will be propagated to these route tables. Example: ["rtb-212ff547","rtb-04539787"].
         """
         return pulumi.get(self, "route_tables")
 
@@ -393,7 +432,7 @@ class AviatrixSpokeTransitAttachment(pulumi.CustomResource):
     @pulumi.getter(name="spokePrependAsPaths")
     def spoke_prepend_as_paths(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on spoke gateway.
+        Connection based AS Path Prepend. Valid only for BGP connection. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on spoke_gateway_name. Available as of provider version R2.23+.
         """
         return pulumi.get(self, "spoke_prepend_as_paths")
 
@@ -409,7 +448,7 @@ class AviatrixSpokeTransitAttachment(pulumi.CustomResource):
     @pulumi.getter(name="transitPrependAsPaths")
     def transit_prepend_as_paths(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit gateway.
+        Connection based AS Path Prepend. Valid only for BGP connection. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on transit_gateway_name. Available as of provider version R2.23+.
         """
         return pulumi.get(self, "transit_prepend_as_paths")
 

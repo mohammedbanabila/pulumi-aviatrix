@@ -13,11 +13,29 @@ namespace Pulumi.Aviatrix.Outputs
     [OutputType]
     public sealed class AviatrixAwsTgwSecurityDomain
     {
+        /// <summary>
+        /// A list of VPCs attached to the domain (name: `security_domain_name`) together with its creation. This list needs to be null for "Aviatrix_Edge_Domain".
+        /// </summary>
         public readonly ImmutableArray<Outputs.AviatrixAwsTgwSecurityDomainAttachedVpc> AttachedVpcs;
+        /// <summary>
+        /// Set to true if the security domain is to be used as an Aviatrix Firewall Domain for the Aviatrix Firewall Network. Valid values: true, false. Default value: false.
+        /// </summary>
         public readonly bool? AviatrixFirewall;
+        /// <summary>
+        /// A list of domains connected to the domain (name: `security_domain_name`) together with its creation.
+        /// </summary>
         public readonly ImmutableArray<string> ConnectedDomains;
+        /// <summary>
+        /// Set to true if the security domain is to be used as a native egress domain (for non-Aviatrix Firewall Network-based central Internet bound traffic). Valid values: true, false. Default value: false.
+        /// </summary>
         public readonly bool? NativeEgress;
+        /// <summary>
+        /// Set to true if the security domain is to be used as a native firewall domain (for non-Aviatrix Firewall Network-based firewall traffic inspection). Valid values: true, false. Default value: false.
+        /// </summary>
         public readonly bool? NativeFirewall;
+        /// <summary>
+        /// Three default domains ("Aviatrix_Edge_Domain", "Default_Domain" and "Shared_Service_Domain") are required with AWS TGW's creation.
+        /// </summary>
         public readonly string SecurityDomainName;
 
         [OutputConstructor]

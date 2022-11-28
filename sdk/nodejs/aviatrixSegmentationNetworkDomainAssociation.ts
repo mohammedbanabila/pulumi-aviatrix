@@ -4,6 +4,31 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_segmentation_network_domain_association** resource handles creation of [Transit Segmentation](https://docs.aviatrix.com/HowTos/transit_segmentation_faq.html) Network Domain and Transit Gateway Attachment Associations.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Segmentation Network Domain Association
+ * const testSegmentationNetworkDomainAssociation = new aviatrix.AviatrixSegmentationNetworkDomainAssociation("test_segmentation_network_domain_association", {
+ *     attachmentName: "attachment-name",
+ *     networkDomainName: "network-domain-name",
+ *     transitGatewayName: "transit-gw-name",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **aviatrix_segmentation_network_domain_association** can be imported using `transit_gateway_name`, `network_domain_name` and `attachment_name` separated by a `~` e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixSegmentationNetworkDomainAssociation:AviatrixSegmentationNetworkDomainAssociation test transit_gateway_name~network_domain_name~attachment_name
+ * ```
+ */
 export class AviatrixSegmentationNetworkDomainAssociation extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixSegmentationNetworkDomainAssociation resource's state with the given name, ID, and optional extra
@@ -33,15 +58,15 @@ export class AviatrixSegmentationNetworkDomainAssociation extends pulumi.CustomR
     }
 
     /**
-     * Attachment name, either Spoke or Edge.
+     * Name of the transit gateway attachment, Spoke or Edge, to associate with the network domain.
      */
     public readonly attachmentName!: pulumi.Output<string>;
     /**
-     * Network Domain name.
+     * Name of the Segmentation Network Domain.
      */
     public readonly networkDomainName!: pulumi.Output<string>;
     /**
-     * Transit Gateway name.
+     * Name of the Transit Gateway.
      */
     public readonly transitGatewayName!: pulumi.Output<string>;
 
@@ -86,15 +111,15 @@ export class AviatrixSegmentationNetworkDomainAssociation extends pulumi.CustomR
  */
 export interface AviatrixSegmentationNetworkDomainAssociationState {
     /**
-     * Attachment name, either Spoke or Edge.
+     * Name of the transit gateway attachment, Spoke or Edge, to associate with the network domain.
      */
     attachmentName?: pulumi.Input<string>;
     /**
-     * Network Domain name.
+     * Name of the Segmentation Network Domain.
      */
     networkDomainName?: pulumi.Input<string>;
     /**
-     * Transit Gateway name.
+     * Name of the Transit Gateway.
      */
     transitGatewayName?: pulumi.Input<string>;
 }
@@ -104,15 +129,15 @@ export interface AviatrixSegmentationNetworkDomainAssociationState {
  */
 export interface AviatrixSegmentationNetworkDomainAssociationArgs {
     /**
-     * Attachment name, either Spoke or Edge.
+     * Name of the transit gateway attachment, Spoke or Edge, to associate with the network domain.
      */
     attachmentName: pulumi.Input<string>;
     /**
-     * Network Domain name.
+     * Name of the Segmentation Network Domain.
      */
     networkDomainName: pulumi.Input<string>;
     /**
-     * Transit Gateway name.
+     * Name of the Transit Gateway.
      */
     transitGatewayName: pulumi.Input<string>;
 }

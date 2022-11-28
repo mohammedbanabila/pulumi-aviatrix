@@ -4,6 +4,33 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * !> **WARNING:** Resource 'aviatrix_aws_tgw_security_domain_connection' will be deprecated in future releases. Please use resource 'aviatrix_aws_tgw_peering_domain_conn' instead.
+ *
+ * The **aviatrix_aws_tgw_security_domain_connection** resource allows the creation and management of the connections between security domains in an AWS TGW.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Security Domain Connection
+ * const test = new aviatrix.AviatrixAwsTgwSecurityDomainConn("test", {
+ *     domainName1: "domain1",
+ *     domainName2: "domain2",
+ *     tgwName: "tgw",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **aws_tgw_security_domain_connection** can be imported using the `tgw_name`, `domain_name1` and `domain_name2`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixAwsTgwSecurityDomainConn:AviatrixAwsTgwSecurityDomainConn test tgw_name~domain_name1~domain_name2
+ * ```
+ */
 export class AviatrixAwsTgwSecurityDomainConn extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixAwsTgwSecurityDomainConn resource's state with the given name, ID, and optional extra
@@ -33,15 +60,15 @@ export class AviatrixAwsTgwSecurityDomainConn extends pulumi.CustomResource {
     }
 
     /**
-     * Security domain name 1.
+     * The name of a security domain to make a connection.
      */
     public readonly domainName1!: pulumi.Output<string>;
     /**
-     * Security domain name 2.
+     * The name of another security domain to make a connection.
      */
     public readonly domainName2!: pulumi.Output<string>;
     /**
-     * AWS TGW name.
+     * The AWS TGW name.
      */
     public readonly tgwName!: pulumi.Output<string>;
 
@@ -86,15 +113,15 @@ export class AviatrixAwsTgwSecurityDomainConn extends pulumi.CustomResource {
  */
 export interface AviatrixAwsTgwSecurityDomainConnState {
     /**
-     * Security domain name 1.
+     * The name of a security domain to make a connection.
      */
     domainName1?: pulumi.Input<string>;
     /**
-     * Security domain name 2.
+     * The name of another security domain to make a connection.
      */
     domainName2?: pulumi.Input<string>;
     /**
-     * AWS TGW name.
+     * The AWS TGW name.
      */
     tgwName?: pulumi.Input<string>;
 }
@@ -104,15 +131,15 @@ export interface AviatrixAwsTgwSecurityDomainConnState {
  */
 export interface AviatrixAwsTgwSecurityDomainConnArgs {
     /**
-     * Security domain name 1.
+     * The name of a security domain to make a connection.
      */
     domainName1: pulumi.Input<string>;
     /**
-     * Security domain name 2.
+     * The name of another security domain to make a connection.
      */
     domainName2: pulumi.Input<string>;
     /**
-     * AWS TGW name.
+     * The AWS TGW name.
      */
     tgwName: pulumi.Input<string>;
 }

@@ -31,21 +31,21 @@ class AviatrixEdgeCaagArgs:
                  secondary_dns_server_ip: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a AviatrixEdgeCaag resource.
-        :param pulumi.Input[str] lan_interface_ip_prefix: LAN interface IP / prefix.
-        :param pulumi.Input[str] management_interface_config: Management interface configuration. Valid values: 'DHCP' and 'Static'.
+        :param pulumi.Input[str] lan_interface_ip_prefix: LAN interface IP and subnet prefix.
+        :param pulumi.Input[str] management_interface_config: Management interface configuration. Valid values: "DHCP", "Static".
         :param pulumi.Input[str] wan_default_gateway_ip: WAN default gateway IP.
-        :param pulumi.Input[str] wan_interface_ip_prefix: WAN interface IP / prefix.
-        :param pulumi.Input[str] ztp_file_download_path: The location where the Edge as a CaaG ZTP file will be stored.
-        :param pulumi.Input[str] ztp_file_type: ZTP file type.
-        :param pulumi.Input[str] dns_server_ip: DNS server IP.
-        :param pulumi.Input[bool] enable_over_private_network: Enable management over private network.
-        :param pulumi.Input[str] local_as_number: Local AS number.
-        :param pulumi.Input[str] management_default_gateway_ip: Management default gateway IP.
-        :param pulumi.Input[str] management_egress_ip_prefix: Management egress gateway IP / prefix.
-        :param pulumi.Input[str] management_interface_ip_prefix: Management interface IP / prefix.
+        :param pulumi.Input[str] wan_interface_ip_prefix: WAN interface IP and subnet prefix.
+        :param pulumi.Input[str] ztp_file_download_path: The folder path where the ZTP file will be downloaded.
+        :param pulumi.Input[str] ztp_file_type: ZTP file type. Valid values: "iso", "cloud-init".
+        :param pulumi.Input[str] dns_server_ip: DNS server IP. Required and valid when `management_interface_config` is "Static".
+        :param pulumi.Input[bool] enable_over_private_network: Indicates whether it is public or private connection between controller and gateway. Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] local_as_number: BGP AS Number to assign to Edge as a CaaG.
+        :param pulumi.Input[str] management_default_gateway_ip: Management default gateway IP. Required and valid when `management_interface_config` is "Static".
+        :param pulumi.Input[str] management_egress_ip_prefix: Management egress gateway IP and subnet prefix.
+        :param pulumi.Input[str] management_interface_ip_prefix: Management interface IP and subnet prefix. Required and valid when `management_interface_config` is "Static".
         :param pulumi.Input[str] name: Edge as a CaaG name.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: AS path prepend.
-        :param pulumi.Input[str] secondary_dns_server_ip: Secondary DNS server IP.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires local_as_number to be set. Type: List.
+        :param pulumi.Input[str] secondary_dns_server_ip: Secondary DNS server IP. Required and valid when `management_interface_config` is "Static".
         """
         pulumi.set(__self__, "lan_interface_ip_prefix", lan_interface_ip_prefix)
         pulumi.set(__self__, "management_interface_config", management_interface_config)
@@ -76,7 +76,7 @@ class AviatrixEdgeCaagArgs:
     @pulumi.getter(name="lanInterfaceIpPrefix")
     def lan_interface_ip_prefix(self) -> pulumi.Input[str]:
         """
-        LAN interface IP / prefix.
+        LAN interface IP and subnet prefix.
         """
         return pulumi.get(self, "lan_interface_ip_prefix")
 
@@ -88,7 +88,7 @@ class AviatrixEdgeCaagArgs:
     @pulumi.getter(name="managementInterfaceConfig")
     def management_interface_config(self) -> pulumi.Input[str]:
         """
-        Management interface configuration. Valid values: 'DHCP' and 'Static'.
+        Management interface configuration. Valid values: "DHCP", "Static".
         """
         return pulumi.get(self, "management_interface_config")
 
@@ -112,7 +112,7 @@ class AviatrixEdgeCaagArgs:
     @pulumi.getter(name="wanInterfaceIpPrefix")
     def wan_interface_ip_prefix(self) -> pulumi.Input[str]:
         """
-        WAN interface IP / prefix.
+        WAN interface IP and subnet prefix.
         """
         return pulumi.get(self, "wan_interface_ip_prefix")
 
@@ -124,7 +124,7 @@ class AviatrixEdgeCaagArgs:
     @pulumi.getter(name="ztpFileDownloadPath")
     def ztp_file_download_path(self) -> pulumi.Input[str]:
         """
-        The location where the Edge as a CaaG ZTP file will be stored.
+        The folder path where the ZTP file will be downloaded.
         """
         return pulumi.get(self, "ztp_file_download_path")
 
@@ -136,7 +136,7 @@ class AviatrixEdgeCaagArgs:
     @pulumi.getter(name="ztpFileType")
     def ztp_file_type(self) -> pulumi.Input[str]:
         """
-        ZTP file type.
+        ZTP file type. Valid values: "iso", "cloud-init".
         """
         return pulumi.get(self, "ztp_file_type")
 
@@ -148,7 +148,7 @@ class AviatrixEdgeCaagArgs:
     @pulumi.getter(name="dnsServerIp")
     def dns_server_ip(self) -> Optional[pulumi.Input[str]]:
         """
-        DNS server IP.
+        DNS server IP. Required and valid when `management_interface_config` is "Static".
         """
         return pulumi.get(self, "dns_server_ip")
 
@@ -160,7 +160,7 @@ class AviatrixEdgeCaagArgs:
     @pulumi.getter(name="enableOverPrivateNetwork")
     def enable_over_private_network(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable management over private network.
+        Indicates whether it is public or private connection between controller and gateway. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_over_private_network")
 
@@ -172,7 +172,7 @@ class AviatrixEdgeCaagArgs:
     @pulumi.getter(name="localAsNumber")
     def local_as_number(self) -> Optional[pulumi.Input[str]]:
         """
-        Local AS number.
+        BGP AS Number to assign to Edge as a CaaG.
         """
         return pulumi.get(self, "local_as_number")
 
@@ -184,7 +184,7 @@ class AviatrixEdgeCaagArgs:
     @pulumi.getter(name="managementDefaultGatewayIp")
     def management_default_gateway_ip(self) -> Optional[pulumi.Input[str]]:
         """
-        Management default gateway IP.
+        Management default gateway IP. Required and valid when `management_interface_config` is "Static".
         """
         return pulumi.get(self, "management_default_gateway_ip")
 
@@ -196,7 +196,7 @@ class AviatrixEdgeCaagArgs:
     @pulumi.getter(name="managementEgressIpPrefix")
     def management_egress_ip_prefix(self) -> Optional[pulumi.Input[str]]:
         """
-        Management egress gateway IP / prefix.
+        Management egress gateway IP and subnet prefix.
         """
         return pulumi.get(self, "management_egress_ip_prefix")
 
@@ -208,7 +208,7 @@ class AviatrixEdgeCaagArgs:
     @pulumi.getter(name="managementInterfaceIpPrefix")
     def management_interface_ip_prefix(self) -> Optional[pulumi.Input[str]]:
         """
-        Management interface IP / prefix.
+        Management interface IP and subnet prefix. Required and valid when `management_interface_config` is "Static".
         """
         return pulumi.get(self, "management_interface_ip_prefix")
 
@@ -232,7 +232,7 @@ class AviatrixEdgeCaagArgs:
     @pulumi.getter(name="prependAsPaths")
     def prepend_as_paths(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        AS path prepend.
+        Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires local_as_number to be set. Type: List.
         """
         return pulumi.get(self, "prepend_as_paths")
 
@@ -244,7 +244,7 @@ class AviatrixEdgeCaagArgs:
     @pulumi.getter(name="secondaryDnsServerIp")
     def secondary_dns_server_ip(self) -> Optional[pulumi.Input[str]]:
         """
-        Secondary DNS server IP.
+        Secondary DNS server IP. Required and valid when `management_interface_config` is "Static".
         """
         return pulumi.get(self, "secondary_dns_server_ip")
 
@@ -274,22 +274,22 @@ class _AviatrixEdgeCaagState:
                  ztp_file_type: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixEdgeCaag resources.
-        :param pulumi.Input[str] dns_server_ip: DNS server IP.
-        :param pulumi.Input[bool] enable_over_private_network: Enable management over private network.
-        :param pulumi.Input[str] lan_interface_ip_prefix: LAN interface IP / prefix.
-        :param pulumi.Input[str] local_as_number: Local AS number.
-        :param pulumi.Input[str] management_default_gateway_ip: Management default gateway IP.
-        :param pulumi.Input[str] management_egress_ip_prefix: Management egress gateway IP / prefix.
-        :param pulumi.Input[str] management_interface_config: Management interface configuration. Valid values: 'DHCP' and 'Static'.
-        :param pulumi.Input[str] management_interface_ip_prefix: Management interface IP / prefix.
+        :param pulumi.Input[str] dns_server_ip: DNS server IP. Required and valid when `management_interface_config` is "Static".
+        :param pulumi.Input[bool] enable_over_private_network: Indicates whether it is public or private connection between controller and gateway. Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] lan_interface_ip_prefix: LAN interface IP and subnet prefix.
+        :param pulumi.Input[str] local_as_number: BGP AS Number to assign to Edge as a CaaG.
+        :param pulumi.Input[str] management_default_gateway_ip: Management default gateway IP. Required and valid when `management_interface_config` is "Static".
+        :param pulumi.Input[str] management_egress_ip_prefix: Management egress gateway IP and subnet prefix.
+        :param pulumi.Input[str] management_interface_config: Management interface configuration. Valid values: "DHCP", "Static".
+        :param pulumi.Input[str] management_interface_ip_prefix: Management interface IP and subnet prefix. Required and valid when `management_interface_config` is "Static".
         :param pulumi.Input[str] name: Edge as a CaaG name.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: AS path prepend.
-        :param pulumi.Input[str] secondary_dns_server_ip: Secondary DNS server IP.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires local_as_number to be set. Type: List.
+        :param pulumi.Input[str] secondary_dns_server_ip: Secondary DNS server IP. Required and valid when `management_interface_config` is "Static".
         :param pulumi.Input[str] state: State of Edge as a CaaG.
         :param pulumi.Input[str] wan_default_gateway_ip: WAN default gateway IP.
-        :param pulumi.Input[str] wan_interface_ip_prefix: WAN interface IP / prefix.
-        :param pulumi.Input[str] ztp_file_download_path: The location where the Edge as a CaaG ZTP file will be stored.
-        :param pulumi.Input[str] ztp_file_type: ZTP file type.
+        :param pulumi.Input[str] wan_interface_ip_prefix: WAN interface IP and subnet prefix.
+        :param pulumi.Input[str] ztp_file_download_path: The folder path where the ZTP file will be downloaded.
+        :param pulumi.Input[str] ztp_file_type: ZTP file type. Valid values: "iso", "cloud-init".
         """
         if dns_server_ip is not None:
             pulumi.set(__self__, "dns_server_ip", dns_server_ip)
@@ -328,7 +328,7 @@ class _AviatrixEdgeCaagState:
     @pulumi.getter(name="dnsServerIp")
     def dns_server_ip(self) -> Optional[pulumi.Input[str]]:
         """
-        DNS server IP.
+        DNS server IP. Required and valid when `management_interface_config` is "Static".
         """
         return pulumi.get(self, "dns_server_ip")
 
@@ -340,7 +340,7 @@ class _AviatrixEdgeCaagState:
     @pulumi.getter(name="enableOverPrivateNetwork")
     def enable_over_private_network(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable management over private network.
+        Indicates whether it is public or private connection between controller and gateway. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_over_private_network")
 
@@ -352,7 +352,7 @@ class _AviatrixEdgeCaagState:
     @pulumi.getter(name="lanInterfaceIpPrefix")
     def lan_interface_ip_prefix(self) -> Optional[pulumi.Input[str]]:
         """
-        LAN interface IP / prefix.
+        LAN interface IP and subnet prefix.
         """
         return pulumi.get(self, "lan_interface_ip_prefix")
 
@@ -364,7 +364,7 @@ class _AviatrixEdgeCaagState:
     @pulumi.getter(name="localAsNumber")
     def local_as_number(self) -> Optional[pulumi.Input[str]]:
         """
-        Local AS number.
+        BGP AS Number to assign to Edge as a CaaG.
         """
         return pulumi.get(self, "local_as_number")
 
@@ -376,7 +376,7 @@ class _AviatrixEdgeCaagState:
     @pulumi.getter(name="managementDefaultGatewayIp")
     def management_default_gateway_ip(self) -> Optional[pulumi.Input[str]]:
         """
-        Management default gateway IP.
+        Management default gateway IP. Required and valid when `management_interface_config` is "Static".
         """
         return pulumi.get(self, "management_default_gateway_ip")
 
@@ -388,7 +388,7 @@ class _AviatrixEdgeCaagState:
     @pulumi.getter(name="managementEgressIpPrefix")
     def management_egress_ip_prefix(self) -> Optional[pulumi.Input[str]]:
         """
-        Management egress gateway IP / prefix.
+        Management egress gateway IP and subnet prefix.
         """
         return pulumi.get(self, "management_egress_ip_prefix")
 
@@ -400,7 +400,7 @@ class _AviatrixEdgeCaagState:
     @pulumi.getter(name="managementInterfaceConfig")
     def management_interface_config(self) -> Optional[pulumi.Input[str]]:
         """
-        Management interface configuration. Valid values: 'DHCP' and 'Static'.
+        Management interface configuration. Valid values: "DHCP", "Static".
         """
         return pulumi.get(self, "management_interface_config")
 
@@ -412,7 +412,7 @@ class _AviatrixEdgeCaagState:
     @pulumi.getter(name="managementInterfaceIpPrefix")
     def management_interface_ip_prefix(self) -> Optional[pulumi.Input[str]]:
         """
-        Management interface IP / prefix.
+        Management interface IP and subnet prefix. Required and valid when `management_interface_config` is "Static".
         """
         return pulumi.get(self, "management_interface_ip_prefix")
 
@@ -436,7 +436,7 @@ class _AviatrixEdgeCaagState:
     @pulumi.getter(name="prependAsPaths")
     def prepend_as_paths(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        AS path prepend.
+        Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires local_as_number to be set. Type: List.
         """
         return pulumi.get(self, "prepend_as_paths")
 
@@ -448,7 +448,7 @@ class _AviatrixEdgeCaagState:
     @pulumi.getter(name="secondaryDnsServerIp")
     def secondary_dns_server_ip(self) -> Optional[pulumi.Input[str]]:
         """
-        Secondary DNS server IP.
+        Secondary DNS server IP. Required and valid when `management_interface_config` is "Static".
         """
         return pulumi.get(self, "secondary_dns_server_ip")
 
@@ -484,7 +484,7 @@ class _AviatrixEdgeCaagState:
     @pulumi.getter(name="wanInterfaceIpPrefix")
     def wan_interface_ip_prefix(self) -> Optional[pulumi.Input[str]]:
         """
-        WAN interface IP / prefix.
+        WAN interface IP and subnet prefix.
         """
         return pulumi.get(self, "wan_interface_ip_prefix")
 
@@ -496,7 +496,7 @@ class _AviatrixEdgeCaagState:
     @pulumi.getter(name="ztpFileDownloadPath")
     def ztp_file_download_path(self) -> Optional[pulumi.Input[str]]:
         """
-        The location where the Edge as a CaaG ZTP file will be stored.
+        The folder path where the ZTP file will be downloaded.
         """
         return pulumi.get(self, "ztp_file_download_path")
 
@@ -508,7 +508,7 @@ class _AviatrixEdgeCaagState:
     @pulumi.getter(name="ztpFileType")
     def ztp_file_type(self) -> Optional[pulumi.Input[str]]:
         """
-        ZTP file type.
+        ZTP file type. Valid values: "iso", "cloud-init".
         """
         return pulumi.get(self, "ztp_file_type")
 
@@ -539,24 +539,76 @@ class AviatrixEdgeCaag(pulumi.CustomResource):
                  ztp_file_type: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixEdgeCaag resource with the given unique name, props, and options.
+        The **aviatrix_edge_caag** resource creates the Aviatrix Edge as a CaaG. This resource is available as of provider version R2.22+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create a DHCP Edge as a CaaG
+        test = aviatrix.AviatrixEdgeCaag("test",
+            lan_interface_ip_prefix="10.60.0.0/24",
+            local_as_number="65000",
+            management_interface_config="DHCP",
+            prepend_as_paths=[
+                "65000",
+                "65000",
+            ],
+            wan_default_gateway_ip="10.60.0.0",
+            wan_interface_ip_prefix="10.60.0.0/24",
+            ztp_file_download_path="/image/download/path",
+            ztp_file_type="iso")
+        ```
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create a Static Edge as a CaaG
+        test = aviatrix.AviatrixEdgeCaag("test",
+            dns_server_ip="10.60.0.0",
+            lan_interface_ip_prefix="10.60.0.0/24",
+            local_as_number="65000",
+            management_default_gateway_ip="10.60.0.0",
+            management_interface_config="Static",
+            management_interface_ip_prefix="10.60.0.0/24",
+            prepend_as_paths=[
+                "65000",
+                "65000",
+            ],
+            secondary_dns_server_ip="10.60.0.0",
+            wan_default_gateway_ip="10.60.0.0",
+            wan_interface_ip_prefix="10.60.0.0/24",
+            ztp_file_download_path="/image/download/path",
+            ztp_file_type="iso")
+        ```
+
+        ## Import
+
+        **edge_caag** can be imported using the `name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixEdgeCaag:AviatrixEdgeCaag test name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] dns_server_ip: DNS server IP.
-        :param pulumi.Input[bool] enable_over_private_network: Enable management over private network.
-        :param pulumi.Input[str] lan_interface_ip_prefix: LAN interface IP / prefix.
-        :param pulumi.Input[str] local_as_number: Local AS number.
-        :param pulumi.Input[str] management_default_gateway_ip: Management default gateway IP.
-        :param pulumi.Input[str] management_egress_ip_prefix: Management egress gateway IP / prefix.
-        :param pulumi.Input[str] management_interface_config: Management interface configuration. Valid values: 'DHCP' and 'Static'.
-        :param pulumi.Input[str] management_interface_ip_prefix: Management interface IP / prefix.
+        :param pulumi.Input[str] dns_server_ip: DNS server IP. Required and valid when `management_interface_config` is "Static".
+        :param pulumi.Input[bool] enable_over_private_network: Indicates whether it is public or private connection between controller and gateway. Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] lan_interface_ip_prefix: LAN interface IP and subnet prefix.
+        :param pulumi.Input[str] local_as_number: BGP AS Number to assign to Edge as a CaaG.
+        :param pulumi.Input[str] management_default_gateway_ip: Management default gateway IP. Required and valid when `management_interface_config` is "Static".
+        :param pulumi.Input[str] management_egress_ip_prefix: Management egress gateway IP and subnet prefix.
+        :param pulumi.Input[str] management_interface_config: Management interface configuration. Valid values: "DHCP", "Static".
+        :param pulumi.Input[str] management_interface_ip_prefix: Management interface IP and subnet prefix. Required and valid when `management_interface_config` is "Static".
         :param pulumi.Input[str] name: Edge as a CaaG name.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: AS path prepend.
-        :param pulumi.Input[str] secondary_dns_server_ip: Secondary DNS server IP.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires local_as_number to be set. Type: List.
+        :param pulumi.Input[str] secondary_dns_server_ip: Secondary DNS server IP. Required and valid when `management_interface_config` is "Static".
         :param pulumi.Input[str] wan_default_gateway_ip: WAN default gateway IP.
-        :param pulumi.Input[str] wan_interface_ip_prefix: WAN interface IP / prefix.
-        :param pulumi.Input[str] ztp_file_download_path: The location where the Edge as a CaaG ZTP file will be stored.
-        :param pulumi.Input[str] ztp_file_type: ZTP file type.
+        :param pulumi.Input[str] wan_interface_ip_prefix: WAN interface IP and subnet prefix.
+        :param pulumi.Input[str] ztp_file_download_path: The folder path where the ZTP file will be downloaded.
+        :param pulumi.Input[str] ztp_file_type: ZTP file type. Valid values: "iso", "cloud-init".
         """
         ...
     @overload
@@ -565,7 +617,59 @@ class AviatrixEdgeCaag(pulumi.CustomResource):
                  args: AviatrixEdgeCaagArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixEdgeCaag resource with the given unique name, props, and options.
+        The **aviatrix_edge_caag** resource creates the Aviatrix Edge as a CaaG. This resource is available as of provider version R2.22+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create a DHCP Edge as a CaaG
+        test = aviatrix.AviatrixEdgeCaag("test",
+            lan_interface_ip_prefix="10.60.0.0/24",
+            local_as_number="65000",
+            management_interface_config="DHCP",
+            prepend_as_paths=[
+                "65000",
+                "65000",
+            ],
+            wan_default_gateway_ip="10.60.0.0",
+            wan_interface_ip_prefix="10.60.0.0/24",
+            ztp_file_download_path="/image/download/path",
+            ztp_file_type="iso")
+        ```
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create a Static Edge as a CaaG
+        test = aviatrix.AviatrixEdgeCaag("test",
+            dns_server_ip="10.60.0.0",
+            lan_interface_ip_prefix="10.60.0.0/24",
+            local_as_number="65000",
+            management_default_gateway_ip="10.60.0.0",
+            management_interface_config="Static",
+            management_interface_ip_prefix="10.60.0.0/24",
+            prepend_as_paths=[
+                "65000",
+                "65000",
+            ],
+            secondary_dns_server_ip="10.60.0.0",
+            wan_default_gateway_ip="10.60.0.0",
+            wan_interface_ip_prefix="10.60.0.0/24",
+            ztp_file_download_path="/image/download/path",
+            ztp_file_type="iso")
+        ```
+
+        ## Import
+
+        **edge_caag** can be imported using the `name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixEdgeCaag:AviatrixEdgeCaag test name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixEdgeCaagArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -666,22 +770,22 @@ class AviatrixEdgeCaag(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] dns_server_ip: DNS server IP.
-        :param pulumi.Input[bool] enable_over_private_network: Enable management over private network.
-        :param pulumi.Input[str] lan_interface_ip_prefix: LAN interface IP / prefix.
-        :param pulumi.Input[str] local_as_number: Local AS number.
-        :param pulumi.Input[str] management_default_gateway_ip: Management default gateway IP.
-        :param pulumi.Input[str] management_egress_ip_prefix: Management egress gateway IP / prefix.
-        :param pulumi.Input[str] management_interface_config: Management interface configuration. Valid values: 'DHCP' and 'Static'.
-        :param pulumi.Input[str] management_interface_ip_prefix: Management interface IP / prefix.
+        :param pulumi.Input[str] dns_server_ip: DNS server IP. Required and valid when `management_interface_config` is "Static".
+        :param pulumi.Input[bool] enable_over_private_network: Indicates whether it is public or private connection between controller and gateway. Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] lan_interface_ip_prefix: LAN interface IP and subnet prefix.
+        :param pulumi.Input[str] local_as_number: BGP AS Number to assign to Edge as a CaaG.
+        :param pulumi.Input[str] management_default_gateway_ip: Management default gateway IP. Required and valid when `management_interface_config` is "Static".
+        :param pulumi.Input[str] management_egress_ip_prefix: Management egress gateway IP and subnet prefix.
+        :param pulumi.Input[str] management_interface_config: Management interface configuration. Valid values: "DHCP", "Static".
+        :param pulumi.Input[str] management_interface_ip_prefix: Management interface IP and subnet prefix. Required and valid when `management_interface_config` is "Static".
         :param pulumi.Input[str] name: Edge as a CaaG name.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: AS path prepend.
-        :param pulumi.Input[str] secondary_dns_server_ip: Secondary DNS server IP.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires local_as_number to be set. Type: List.
+        :param pulumi.Input[str] secondary_dns_server_ip: Secondary DNS server IP. Required and valid when `management_interface_config` is "Static".
         :param pulumi.Input[str] state: State of Edge as a CaaG.
         :param pulumi.Input[str] wan_default_gateway_ip: WAN default gateway IP.
-        :param pulumi.Input[str] wan_interface_ip_prefix: WAN interface IP / prefix.
-        :param pulumi.Input[str] ztp_file_download_path: The location where the Edge as a CaaG ZTP file will be stored.
-        :param pulumi.Input[str] ztp_file_type: ZTP file type.
+        :param pulumi.Input[str] wan_interface_ip_prefix: WAN interface IP and subnet prefix.
+        :param pulumi.Input[str] ztp_file_download_path: The folder path where the ZTP file will be downloaded.
+        :param pulumi.Input[str] ztp_file_type: ZTP file type. Valid values: "iso", "cloud-init".
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -709,7 +813,7 @@ class AviatrixEdgeCaag(pulumi.CustomResource):
     @pulumi.getter(name="dnsServerIp")
     def dns_server_ip(self) -> pulumi.Output[Optional[str]]:
         """
-        DNS server IP.
+        DNS server IP. Required and valid when `management_interface_config` is "Static".
         """
         return pulumi.get(self, "dns_server_ip")
 
@@ -717,7 +821,7 @@ class AviatrixEdgeCaag(pulumi.CustomResource):
     @pulumi.getter(name="enableOverPrivateNetwork")
     def enable_over_private_network(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enable management over private network.
+        Indicates whether it is public or private connection between controller and gateway. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_over_private_network")
 
@@ -725,7 +829,7 @@ class AviatrixEdgeCaag(pulumi.CustomResource):
     @pulumi.getter(name="lanInterfaceIpPrefix")
     def lan_interface_ip_prefix(self) -> pulumi.Output[str]:
         """
-        LAN interface IP / prefix.
+        LAN interface IP and subnet prefix.
         """
         return pulumi.get(self, "lan_interface_ip_prefix")
 
@@ -733,7 +837,7 @@ class AviatrixEdgeCaag(pulumi.CustomResource):
     @pulumi.getter(name="localAsNumber")
     def local_as_number(self) -> pulumi.Output[str]:
         """
-        Local AS number.
+        BGP AS Number to assign to Edge as a CaaG.
         """
         return pulumi.get(self, "local_as_number")
 
@@ -741,7 +845,7 @@ class AviatrixEdgeCaag(pulumi.CustomResource):
     @pulumi.getter(name="managementDefaultGatewayIp")
     def management_default_gateway_ip(self) -> pulumi.Output[Optional[str]]:
         """
-        Management default gateway IP.
+        Management default gateway IP. Required and valid when `management_interface_config` is "Static".
         """
         return pulumi.get(self, "management_default_gateway_ip")
 
@@ -749,7 +853,7 @@ class AviatrixEdgeCaag(pulumi.CustomResource):
     @pulumi.getter(name="managementEgressIpPrefix")
     def management_egress_ip_prefix(self) -> pulumi.Output[Optional[str]]:
         """
-        Management egress gateway IP / prefix.
+        Management egress gateway IP and subnet prefix.
         """
         return pulumi.get(self, "management_egress_ip_prefix")
 
@@ -757,7 +861,7 @@ class AviatrixEdgeCaag(pulumi.CustomResource):
     @pulumi.getter(name="managementInterfaceConfig")
     def management_interface_config(self) -> pulumi.Output[str]:
         """
-        Management interface configuration. Valid values: 'DHCP' and 'Static'.
+        Management interface configuration. Valid values: "DHCP", "Static".
         """
         return pulumi.get(self, "management_interface_config")
 
@@ -765,7 +869,7 @@ class AviatrixEdgeCaag(pulumi.CustomResource):
     @pulumi.getter(name="managementInterfaceIpPrefix")
     def management_interface_ip_prefix(self) -> pulumi.Output[Optional[str]]:
         """
-        Management interface IP / prefix.
+        Management interface IP and subnet prefix. Required and valid when `management_interface_config` is "Static".
         """
         return pulumi.get(self, "management_interface_ip_prefix")
 
@@ -781,7 +885,7 @@ class AviatrixEdgeCaag(pulumi.CustomResource):
     @pulumi.getter(name="prependAsPaths")
     def prepend_as_paths(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        AS path prepend.
+        Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires local_as_number to be set. Type: List.
         """
         return pulumi.get(self, "prepend_as_paths")
 
@@ -789,7 +893,7 @@ class AviatrixEdgeCaag(pulumi.CustomResource):
     @pulumi.getter(name="secondaryDnsServerIp")
     def secondary_dns_server_ip(self) -> pulumi.Output[Optional[str]]:
         """
-        Secondary DNS server IP.
+        Secondary DNS server IP. Required and valid when `management_interface_config` is "Static".
         """
         return pulumi.get(self, "secondary_dns_server_ip")
 
@@ -813,7 +917,7 @@ class AviatrixEdgeCaag(pulumi.CustomResource):
     @pulumi.getter(name="wanInterfaceIpPrefix")
     def wan_interface_ip_prefix(self) -> pulumi.Output[str]:
         """
-        WAN interface IP / prefix.
+        WAN interface IP and subnet prefix.
         """
         return pulumi.get(self, "wan_interface_ip_prefix")
 
@@ -821,7 +925,7 @@ class AviatrixEdgeCaag(pulumi.CustomResource):
     @pulumi.getter(name="ztpFileDownloadPath")
     def ztp_file_download_path(self) -> pulumi.Output[str]:
         """
-        The location where the Edge as a CaaG ZTP file will be stored.
+        The folder path where the ZTP file will be downloaded.
         """
         return pulumi.get(self, "ztp_file_download_path")
 
@@ -829,7 +933,7 @@ class AviatrixEdgeCaag(pulumi.CustomResource):
     @pulumi.getter(name="ztpFileType")
     def ztp_file_type(self) -> pulumi.Output[str]:
         """
-        ZTP file type.
+        ZTP file type. Valid values: "iso", "cloud-init".
         """
         return pulumi.get(self, "ztp_file_type")
 

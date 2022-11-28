@@ -12,15 +12,27 @@ namespace Pulumi.Aviatrix.Inputs
 
     public sealed class AviatrixVpnProfilePolicyArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Should be the opposite of the base rule for correct behavior. Valid values for action: "allow", "deny".
+        /// </summary>
         [Input("action", required: true)]
         public Input<string> Action { get; set; } = null!;
 
+        /// <summary>
+        /// Port to be allowed or denied. Valid values for port: a single port or a range of port numbers e.g.: "25", "25:1024". For "all" and "icmp", port should only be "0:65535".
+        /// </summary>
         [Input("port", required: true)]
         public Input<string> Port { get; set; } = null!;
 
+        /// <summary>
+        /// Protocol to allow or deny. Valid values for protocol: "all", "tcp", "udp", "icmp", "sctp", "rdp", "dccp".
+        /// </summary>
         [Input("proto", required: true)]
         public Input<string> Proto { get; set; } = null!;
 
+        /// <summary>
+        /// CIDR to be allowed or denied. Valid values for target: IPv4 CIDRs. Example: "10.30.0.0/16".
+        /// </summary>
         [Input("target", required: true)]
         public Input<string> Target { get; set; } = null!;
 

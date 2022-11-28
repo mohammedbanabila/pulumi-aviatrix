@@ -4,6 +4,38 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_geo_vpn** resource enables and manages the [Aviatrix Geo VPN feature](https://docs.aviatrix.com/HowTos/GeoVPN.html).
+ *
+ * > **NOTE:** If ELBs/gateways are being managed by the Geo VPN, in order to update VPN configurations of the Geo VPN, all the VPN configurations of the ELBs/gateways must be updated simultaneously and share the same values. This can be achieved by managing the VPN configurations through variables and updating their values accordingly.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Geo VPN
+ * const testGeoVpn = new aviatrix.AviatrixGeoVpn("test_geo_vpn", {
+ *     accountName: "devops-aws",
+ *     cloudType: 1,
+ *     domainName: "aviatrix.live",
+ *     elbDnsNames: [
+ *         "elb-test1-497f5e89.elb.us-west-1.amazonaws.com",
+ *         "elb-test2-974f895e.elb.us-east-2.amazonaws.com",
+ *     ],
+ *     serviceName: "vpn",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **geo_vpn** can be imported using the `service_name` and `domain_name`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixGeoVpn:AviatrixGeoVpn test service_name~domain_name
+ * ```
+ */
 export class AviatrixGeoVpn extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixGeoVpn resource's state with the given name, ID, and optional extra

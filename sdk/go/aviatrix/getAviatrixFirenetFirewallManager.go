@@ -10,6 +10,42 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Use this data source to do 'save' or 'sync' for Aviatrix FireNet firewall manager.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err = aviatrix.GetAviatrixFirenetFirewallManager(ctx, &GetAviatrixFirenetFirewallManagerArgs{
+//				GatewayName:   "transit",
+//				Password:      pulumi.StringRef("password"),
+//				PublicIp:      pulumi.StringRef("1.2.3.4"),
+//				RouteTable:    pulumi.StringRef("router"),
+//				Save:          pulumi.BoolRef(true),
+//				Template:      pulumi.StringRef("template"),
+//				TemplateStack: pulumi.StringRef("templatestack"),
+//				Username:      pulumi.StringRef("admin-api"),
+//				VendorType:    "Palo Alto Networks Panorama",
+//				VpcId:         "vpc-abcd123",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 func GetAviatrixFirenetFirewallManager(ctx *pulumi.Context, args *GetAviatrixFirenetFirewallManagerArgs, opts ...pulumi.InvokeOption) (*GetAviatrixFirenetFirewallManagerResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetAviatrixFirenetFirewallManagerResult
@@ -22,19 +58,32 @@ func GetAviatrixFirenetFirewallManager(ctx *pulumi.Context, args *GetAviatrixFir
 
 // A collection of arguments for invoking getAviatrixFirenetFirewallManager.
 type GetAviatrixFirenetFirewallManagerArgs struct {
-	GatewayName     string  `pulumi:"gatewayName"`
-	NumberOfRetries *int    `pulumi:"numberOfRetries"`
-	Password        *string `pulumi:"password"`
-	PublicIp        *string `pulumi:"publicIp"`
-	RetryInterval   *int    `pulumi:"retryInterval"`
-	RouteTable      *string `pulumi:"routeTable"`
-	Save            *bool   `pulumi:"save"`
-	Synchronize     *bool   `pulumi:"synchronize"`
-	Template        *string `pulumi:"template"`
-	TemplateStack   *string `pulumi:"templateStack"`
-	Username        *string `pulumi:"username"`
-	VendorType      string  `pulumi:"vendorType"`
-	VpcId           string  `pulumi:"vpcId"`
+	// The FireNet gateway name.
+	GatewayName string `pulumi:"gatewayName"`
+	// Number of retries for `save` or `synchronize`. Example: 1. Default value: 0.
+	NumberOfRetries *int `pulumi:"numberOfRetries"`
+	// Panorama login password for API calls. Required for vendor type "Palo Alto Networks Panorama".
+	Password *string `pulumi:"password"`
+	// The public IP address of the Panorama instance. Required for vendor type "Palo Alto Networks Panorama".
+	PublicIp *string `pulumi:"publicIp"`
+	// Retry interval in seconds for `save` or `synchronize`. Example: 120. Default value: 300.
+	RetryInterval *int `pulumi:"retryInterval"`
+	// The name of firewall virtual router to program. If left unspecified, the Controller programs the Panorama template’s first router.
+	RouteTable *string `pulumi:"routeTable"`
+	// Switch to save or not.
+	Save *bool `pulumi:"save"`
+	// Switch to sync or not.
+	Synchronize *bool `pulumi:"synchronize"`
+	// Panorama template for each FireNet gateway. Required for vendor type "Palo Alto Networks Panorama".
+	Template *string `pulumi:"template"`
+	// Panorama template stack for each FireNet gateway. Required for vendor type "Palo Alto Networks Panorama".
+	TemplateStack *string `pulumi:"templateStack"`
+	// Panorama login name for API calls from the Controller. Required for vendor type "Palo Alto Networks Panorama".
+	Username *string `pulumi:"username"`
+	// Vendor type. Valid values: "Generic" and "Palo Alto Networks Panorama".
+	VendorType string `pulumi:"vendorType"`
+	// VPC ID.
+	VpcId string `pulumi:"vpcId"`
 }
 
 // A collection of values returned by getAviatrixFirenetFirewallManager.
@@ -71,19 +120,32 @@ func GetAviatrixFirenetFirewallManagerOutput(ctx *pulumi.Context, args GetAviatr
 
 // A collection of arguments for invoking getAviatrixFirenetFirewallManager.
 type GetAviatrixFirenetFirewallManagerOutputArgs struct {
-	GatewayName     pulumi.StringInput    `pulumi:"gatewayName"`
-	NumberOfRetries pulumi.IntPtrInput    `pulumi:"numberOfRetries"`
-	Password        pulumi.StringPtrInput `pulumi:"password"`
-	PublicIp        pulumi.StringPtrInput `pulumi:"publicIp"`
-	RetryInterval   pulumi.IntPtrInput    `pulumi:"retryInterval"`
-	RouteTable      pulumi.StringPtrInput `pulumi:"routeTable"`
-	Save            pulumi.BoolPtrInput   `pulumi:"save"`
-	Synchronize     pulumi.BoolPtrInput   `pulumi:"synchronize"`
-	Template        pulumi.StringPtrInput `pulumi:"template"`
-	TemplateStack   pulumi.StringPtrInput `pulumi:"templateStack"`
-	Username        pulumi.StringPtrInput `pulumi:"username"`
-	VendorType      pulumi.StringInput    `pulumi:"vendorType"`
-	VpcId           pulumi.StringInput    `pulumi:"vpcId"`
+	// The FireNet gateway name.
+	GatewayName pulumi.StringInput `pulumi:"gatewayName"`
+	// Number of retries for `save` or `synchronize`. Example: 1. Default value: 0.
+	NumberOfRetries pulumi.IntPtrInput `pulumi:"numberOfRetries"`
+	// Panorama login password for API calls. Required for vendor type "Palo Alto Networks Panorama".
+	Password pulumi.StringPtrInput `pulumi:"password"`
+	// The public IP address of the Panorama instance. Required for vendor type "Palo Alto Networks Panorama".
+	PublicIp pulumi.StringPtrInput `pulumi:"publicIp"`
+	// Retry interval in seconds for `save` or `synchronize`. Example: 120. Default value: 300.
+	RetryInterval pulumi.IntPtrInput `pulumi:"retryInterval"`
+	// The name of firewall virtual router to program. If left unspecified, the Controller programs the Panorama template’s first router.
+	RouteTable pulumi.StringPtrInput `pulumi:"routeTable"`
+	// Switch to save or not.
+	Save pulumi.BoolPtrInput `pulumi:"save"`
+	// Switch to sync or not.
+	Synchronize pulumi.BoolPtrInput `pulumi:"synchronize"`
+	// Panorama template for each FireNet gateway. Required for vendor type "Palo Alto Networks Panorama".
+	Template pulumi.StringPtrInput `pulumi:"template"`
+	// Panorama template stack for each FireNet gateway. Required for vendor type "Palo Alto Networks Panorama".
+	TemplateStack pulumi.StringPtrInput `pulumi:"templateStack"`
+	// Panorama login name for API calls from the Controller. Required for vendor type "Palo Alto Networks Panorama".
+	Username pulumi.StringPtrInput `pulumi:"username"`
+	// Vendor type. Valid values: "Generic" and "Palo Alto Networks Panorama".
+	VendorType pulumi.StringInput `pulumi:"vendorType"`
+	// VPC ID.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
 }
 
 func (GetAviatrixFirenetFirewallManagerOutputArgs) ElementType() reflect.Type {

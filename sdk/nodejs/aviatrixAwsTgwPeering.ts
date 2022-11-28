@@ -4,6 +4,30 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_aws_tgw_peering** resource allows the creation and management of Aviatrix-created inter-region peerings between AWS TGWs.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix AWS Tgw Peering
+ * const test = new aviatrix.AviatrixAwsTgwPeering("test", {
+ *     tgwName1: "tgw1",
+ *     tgwName2: "tgw2",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **aws_tgw_peering** can be imported using the `tgw_name1` and `tgw_name2`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixAwsTgwPeering:AviatrixAwsTgwPeering test tgw_name1~tgw_name2
+ * ```
+ */
 export class AviatrixAwsTgwPeering extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixAwsTgwPeering resource's state with the given name, ID, and optional extra
@@ -33,11 +57,11 @@ export class AviatrixAwsTgwPeering extends pulumi.CustomResource {
     }
 
     /**
-     * Name of the first AWS tgw to make a peer pair.
+     * This parameter represents name of the first AWS TGW to make a peer pair.
      */
     public readonly tgwName1!: pulumi.Output<string>;
     /**
-     * Name of the second AWS tgw to make a peer pair.
+     * This parameter represents name of the second AWS TGW to make a peer pair.
      */
     public readonly tgwName2!: pulumi.Output<string>;
 
@@ -77,11 +101,11 @@ export class AviatrixAwsTgwPeering extends pulumi.CustomResource {
  */
 export interface AviatrixAwsTgwPeeringState {
     /**
-     * Name of the first AWS tgw to make a peer pair.
+     * This parameter represents name of the first AWS TGW to make a peer pair.
      */
     tgwName1?: pulumi.Input<string>;
     /**
-     * Name of the second AWS tgw to make a peer pair.
+     * This parameter represents name of the second AWS TGW to make a peer pair.
      */
     tgwName2?: pulumi.Input<string>;
 }
@@ -91,11 +115,11 @@ export interface AviatrixAwsTgwPeeringState {
  */
 export interface AviatrixAwsTgwPeeringArgs {
     /**
-     * Name of the first AWS tgw to make a peer pair.
+     * This parameter represents name of the first AWS TGW to make a peer pair.
      */
     tgwName1: pulumi.Input<string>;
     /**
-     * Name of the second AWS tgw to make a peer pair.
+     * This parameter represents name of the second AWS TGW to make a peer pair.
      */
     tgwName2: pulumi.Input<string>;
 }

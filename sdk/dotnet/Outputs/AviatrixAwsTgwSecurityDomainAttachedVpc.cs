@@ -13,13 +13,37 @@ namespace Pulumi.Aviatrix.Outputs
     [OutputType]
     public sealed class AviatrixAwsTgwSecurityDomainAttachedVpc
     {
+        /// <summary>
+        /// Advanced option. Customized route(s) to be advertised to other VPCs that are connected to the same TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
+        /// </summary>
         public readonly string? CustomizedRouteAdvertisement;
+        /// <summary>
+        /// Advanced option. Customized Spoke VPC Routes. It allows the admin to enter non-RFC1918 routes in the VPC route table targeting the TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
+        /// </summary>
         public readonly string? CustomizedRoutes;
+        /// <summary>
+        /// Advanced option. If set to true, it disables automatic route propagation of this VPC to other VPCs within the same security domain. Valid values: true, false. Default value: false.
+        /// </summary>
         public readonly bool? DisableLocalRoutePropagation;
+        /// <summary>
+        /// Advanced option. Route tables separated by ',' to participate in TGW Orchestrator, i.e., learned routes will be propagated to these route tables. Example: "rtb-212ff547,rtb-045397874c170c745".
+        /// </summary>
         public readonly string? RouteTables;
+        /// <summary>
+        /// Advanced option. VPC subnets separated by ',' to attach to the VPC. If left blank, the Aviatrix Controller automatically selects a subnet representing each AZ for the VPC attachment. Example: "subnet-214f5646,subnet-085e8c81a89d70846".
+        /// </summary>
         public readonly string? Subnets;
+        /// <summary>
+        /// Cloud account name of the VPC in the Aviatrix controller.
+        /// </summary>
         public readonly string VpcAccountName;
+        /// <summary>
+        /// VPC ID of the VPC to be attached to the security domain
+        /// </summary>
         public readonly string VpcId;
+        /// <summary>
+        /// Region of the VPC, needs to be consistent with AWS TGW's region.
+        /// </summary>
         public readonly string VpcRegion;
 
         [OutputConstructor]

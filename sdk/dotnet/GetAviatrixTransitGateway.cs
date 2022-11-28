@@ -11,16 +11,71 @@ namespace Pulumi.Aviatrix
 {
     public static class GetAviatrixTransitGateway
     {
+        /// <summary>
+        /// The **aviatrix_transit_gateway** data source provides details about a specific transit gateway created by the Aviatrix Controller.
+        /// 
+        /// This data source can prove useful when a module accepts a transit gateway's detail as an input variable. For example, requiring the transit gateway's name for a spoke gateway's attachment.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using Pulumi;
+        /// using Aviatrix = Pulumi.Aviatrix;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var foo = Aviatrix.GetAviatrixTransitGateway.Invoke(new()
+        ///     {
+        ///         GwName = "gatewayname",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
         public static Task<GetAviatrixTransitGatewayResult> InvokeAsync(GetAviatrixTransitGatewayArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAviatrixTransitGatewayResult>("aviatrix:index/getAviatrixTransitGateway:getAviatrixTransitGateway", args ?? new GetAviatrixTransitGatewayArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAviatrixTransitGatewayResult>("aviatrix:index/getAviatrixTransitGateway:getAviatrixTransitGateway", args ?? new GetAviatrixTransitGatewayArgs(), options.WithDefaults());
 
+        /// <summary>
+        /// The **aviatrix_transit_gateway** data source provides details about a specific transit gateway created by the Aviatrix Controller.
+        /// 
+        /// This data source can prove useful when a module accepts a transit gateway's detail as an input variable. For example, requiring the transit gateway's name for a spoke gateway's attachment.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using Pulumi;
+        /// using Aviatrix = Pulumi.Aviatrix;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var foo = Aviatrix.GetAviatrixTransitGateway.Invoke(new()
+        ///     {
+        ///         GwName = "gatewayname",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
         public static Output<GetAviatrixTransitGatewayResult> Invoke(GetAviatrixTransitGatewayInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAviatrixTransitGatewayResult>("aviatrix:index/getAviatrixTransitGateway:getAviatrixTransitGateway", args ?? new GetAviatrixTransitGatewayInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAviatrixTransitGatewayResult>("aviatrix:index/getAviatrixTransitGateway:getAviatrixTransitGateway", args ?? new GetAviatrixTransitGatewayInvokeArgs(), options.WithDefaults());
     }
 
 
     public sealed class GetAviatrixTransitGatewayArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// Transit gateway name.
+        /// </summary>
         [Input("gwName", required: true)]
         public string GwName { get; set; } = null!;
 
@@ -32,6 +87,9 @@ namespace Pulumi.Aviatrix
 
     public sealed class GetAviatrixTransitGatewayInvokeArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// Transit gateway name.
+        /// </summary>
         [Input("gwName", required: true)]
         public Input<string> GwName { get; set; } = null!;
 
@@ -45,96 +103,347 @@ namespace Pulumi.Aviatrix
     [OutputType]
     public sealed class GetAviatrixTransitGatewayResult
     {
+        /// <summary>
+        /// Aviatrix account name.
+        /// </summary>
         public readonly string AccountName;
+        /// <summary>
+        /// When value is false, an idle address in Elastic IP pool is reused for this gateway. Otherwise, a new Elastic IP is allocated and used for this gateway.
+        /// </summary>
         public readonly bool AllocateNewEip;
+        /// <summary>
+        /// Approved learned CIDRs.
+        /// </summary>
         public readonly ImmutableArray<string> ApprovedLearnedCidrs;
+        /// <summary>
+        /// Availability domain for OCI.
+        /// </summary>
         public readonly string AvailabilityDomain;
+        /// <summary>
+        /// The name of the public IP address and its resource group in Azure to assign to this Transit Gateway.
+        /// </summary>
         public readonly string AzureEipNameResourceGroup;
+        /// <summary>
+        /// Status of Equal Cost Multi Path (ECMP) routing for the next hop.
+        /// </summary>
         public readonly bool BgpEcmp;
+        /// <summary>
+        /// BGP Hold Time.
+        /// </summary>
         public readonly int BgpHoldTime;
+        /// <summary>
+        /// Interfaces to run BGP protocol on top of the ethernet interface, to connect to the onprem/remote peer.
+        /// </summary>
         public readonly ImmutableArray<Outputs.GetAviatrixTransitGatewayBgpLanInterfaceResult> BgpLanInterfaces;
+        /// <summary>
+        /// List of available BGP LAN interface IPs for transit external device connection creation. Only supports GCP and Azure.
+        /// </summary>
         public readonly ImmutableArray<string> BgpLanIpLists;
+        /// <summary>
+        /// Intended CIDR list to advertise to VGW.
+        /// </summary>
         public readonly string BgpManualSpokeAdvertiseCidrs;
+        /// <summary>
+        /// BGP route polling time.
+        /// </summary>
         public readonly string BgpPollingTime;
+        /// <summary>
+        /// Instance ID of the transit gateway.
+        /// </summary>
         public readonly string CloudInstanceId;
+        /// <summary>
+        /// Type of cloud service provider.
+        /// * `connected_transit"` -  Status of Connected Transit of transit gateway.
+        /// </summary>
         public readonly int CloudType;
         public readonly bool ConnectedTransit;
+        /// <summary>
+        /// A list of comma separated CIDRs to be customized for the spoke VPC routes.
+        /// </summary>
         public readonly string CustomizedSpokeVpcRoutes;
+        /// <summary>
+        /// A list of CIDRs to be customized for the transit VPC routes.
+        /// </summary>
         public readonly ImmutableArray<string> CustomizedTransitVpcRoutes;
+        /// <summary>
+        /// The EIP address of the Transit Gateway.
+        /// </summary>
         public readonly string Eip;
+        /// <summary>
+        /// Status of Active-Standby Mode.
+        /// </summary>
         public readonly bool EnableActiveStandby;
+        /// <summary>
+        /// Status of Preemptive Mode for Active-Standby.
+        /// </summary>
         public readonly bool EnableActiveStandbyPreemptive;
+        /// <summary>
+        /// Status of Advertise Transit VPC network CIDR of the transit gateway.
+        /// </summary>
         public readonly bool EnableAdvertiseTransitCidr;
+        /// <summary>
+        /// Status of BGP over LAN functionality.
+        /// </summary>
         public readonly bool EnableBgpOverLan;
+        /// <summary>
+        /// Status of Egress Transit FireNet being enabled on the gateway.
+        /// </summary>
         public readonly bool EnableEgressTransitFirenet;
+        /// <summary>
+        /// Status of Encrypt Gateway EBS Volume of the transit gateway.
+        /// </summary>
         public readonly bool EnableEncryptVolume;
+        /// <summary>
+        /// Status of FireNet Interfaces of the transit gateway.
+        /// </summary>
         public readonly bool EnableFirenet;
+        /// <summary>
+        /// Status of AWS Gateway Load Balancer.
+        /// </summary>
         public readonly bool EnableGatewayLoadBalancer;
+        /// <summary>
+        /// Sign of readiness for TGW connection.
+        /// </summary>
         public readonly bool EnableHybridConnection;
+        /// <summary>
+        /// Status of jumbo frame support.
+        /// </summary>
         public readonly bool EnableJumboFrame;
+        /// <summary>
+        /// Status of Encrypted Transit Approval for transit gateway.
+        /// </summary>
         public readonly bool EnableLearnedCidrsApproval;
+        /// <summary>
+        /// Status of monitor gateway subnets.
+        /// </summary>
         public readonly bool EnableMonitorGatewaySubnets;
+        /// <summary>
+        /// Status of multi-tier transit mode on transit gateway.
+        /// </summary>
         public readonly bool EnableMultiTierTransit;
+        /// <summary>
+        /// Status of private OOB for the transit gateway.
+        /// </summary>
         public readonly bool EnablePrivateOob;
+        /// <summary>
+        /// Status of segmentation.
+        /// </summary>
         public readonly bool EnableSegmentation;
+        /// <summary>
+        /// Status of spot instance.
+        /// </summary>
         public readonly bool EnableSpotInstance;
+        /// <summary>
+        /// Status of Transit FireNet Interfaces of the transit gateway.
+        /// </summary>
         public readonly bool EnableTransitFirenet;
+        /// <summary>
+        /// Status of transit summarize CIDR to TGW.
+        /// </summary>
         public readonly bool EnableTransitSummarizeCidrToTgw;
+        /// <summary>
+        /// Status of Vpc Dns Server of the transit Gateway.
+        /// </summary>
         public readonly bool EnableVpcDnsServer;
+        /// <summary>
+        /// A list of comma separated CIDRs to be advertised to on-prem as "Excluded CIDR List".
+        /// </summary>
         public readonly string ExcludedAdvertisedSpokeRoutes;
+        /// <summary>
+        /// Fault domain for OCI.
+        /// </summary>
         public readonly string FaultDomain;
+        /// <summary>
+        /// A list of comma separated CIDRs to be filtered from the spoke VPC route table.
+        /// </summary>
         public readonly string FilteredSpokeVpcRoutes;
+        /// <summary>
+        /// Aviatrix transit gateway name.
+        /// </summary>
         public readonly string GwName;
+        /// <summary>
+        /// Size of transit gateway instance.
+        /// </summary>
         public readonly string GwSize;
+        /// <summary>
+        /// HA gateway availability domain for OCI.
+        /// </summary>
         public readonly string HaAvailabilityDomain;
+        /// <summary>
+        /// The name of the public IP address and its resource group in Azure to assign to the HA Transit Gateway.
+        /// </summary>
         public readonly string HaAzureEipNameResourceGroup;
+        /// <summary>
+        /// Interfaces to run BGP protocol on top of the ethernet interface, to connect to the onprem/remote peer. Only available for GCP HA Transit.
+        /// </summary>
         public readonly ImmutableArray<Outputs.GetAviatrixTransitGatewayHaBgpLanInterfaceResult> HaBgpLanInterfaces;
+        /// <summary>
+        /// List of available BGP LAN interface IPs for transit external device HA connection creation. Only supports GCP and Azure.
+        /// </summary>
         public readonly ImmutableArray<string> HaBgpLanIpLists;
+        /// <summary>
+        /// Cloud instance ID of HA transit gateway.
+        /// </summary>
         public readonly string HaCloudInstanceId;
+        /// <summary>
+        /// The EIP address of the HA Transit Gateway.
+        /// </summary>
         public readonly string HaEip;
+        /// <summary>
+        /// HA gateway fault domain for OCI.
+        /// </summary>
         public readonly string HaFaultDomain;
+        /// <summary>
+        /// Aviatrix transit gateway unique name of HA transit gateway.
+        /// * `ha_gw_size"` - HA Gateway Size.
+        /// </summary>
         public readonly string HaGwName;
         public readonly string HaGwSize;
+        /// <summary>
+        /// The image version of the HA gateway.
+        /// </summary>
         public readonly string HaImageVersion;
+        /// <summary>
+        /// AZ of subnet being created for Insane Mode Transit HA Gateway.
+        /// </summary>
         public readonly string HaInsaneModeAz;
+        /// <summary>
+        /// Transit gateway lan interface cidr for the HA gateway.
+        /// </summary>
         public readonly string HaLanInterfaceCidr;
+        /// <summary>
+        /// HA OOB availability zone.
+        /// </summary>
         public readonly string HaOobAvailabilityZone;
+        /// <summary>
+        /// HA OOB management subnet.
+        /// </summary>
         public readonly string HaOobManagementSubnet;
+        /// <summary>
+        /// Private IP address that assigned to the HA Transit Gateway.
+        /// </summary>
         public readonly string HaPrivateIp;
+        /// <summary>
+        /// Public IP address that assigned to the HA Transit Gateway.
+        /// </summary>
         public readonly string HaPublicIp;
+        /// <summary>
+        /// HA security group used for the transit gateway.
+        /// </summary>
         public readonly string HaSecurityGroupId;
+        /// <summary>
+        /// The software version of the HA gateway.
+        /// </summary>
         public readonly string HaSoftwareVersion;
+        /// <summary>
+        /// HA Subnet.
+        /// </summary>
         public readonly string HaSubnet;
+        /// <summary>
+        /// HA Zone.
+        /// </summary>
         public readonly string HaZone;
         /// <summary>
         /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// The image version of the gateway.
+        /// </summary>
         public readonly string ImageVersion;
+        /// <summary>
+        /// Status of Insane Mode of the transit gateway.
+        /// </summary>
         public readonly bool InsaneMode;
+        /// <summary>
+        /// AZ of subnet being created for Insane Mode transit gateway.
+        /// </summary>
         public readonly string InsaneModeAz;
+        /// <summary>
+        /// Transit gateway lan interface cidr.
+        /// </summary>
         public readonly string LanInterfaceCidr;
+        /// <summary>
+        /// LAN Private Subnet for GCP Transit FireNet.
+        /// </summary>
         public readonly string LanPrivateSubnet;
+        /// <summary>
+        /// LAN VPC ID for GCP Transit FireNet.
+        /// </summary>
         public readonly string LanVpcId;
+        /// <summary>
+        /// Learned CIDRs approval mode.
+        /// </summary>
         public readonly string LearnedCidrsApprovalMode;
+        /// <summary>
+        /// Local ASN number.
+        /// </summary>
         public readonly string LocalAsNumber;
+        /// <summary>
+        /// A set of monitored instance IDs.
+        /// </summary>
         public readonly ImmutableArray<string> MonitorExcludeLists;
+        /// <summary>
+        /// OOB availability zone.
+        /// </summary>
         public readonly string OobAvailabilityZone;
+        /// <summary>
+        /// OOB management subnet.
+        /// </summary>
         public readonly string OobManagementSubnet;
+        /// <summary>
+        /// List of AS numbers to populate BGP AP_PATH field when it advertises to VGW or peer devices.
+        /// </summary>
         public readonly ImmutableArray<string> PrependAsPaths;
+        /// <summary>
+        /// Private IP address of the transit gateway created.
+        /// </summary>
         public readonly string PrivateIp;
+        /// <summary>
+        /// Public IP address of the Transit Gateway created.
+        /// </summary>
         public readonly string PublicIp;
+        /// <summary>
+        /// Security group used for the transit gateway.
+        /// </summary>
         public readonly string SecurityGroupId;
+        /// <summary>
+        /// Status of Single AZ HA of transit gateway.
+        /// </summary>
         public readonly bool SingleAzHa;
+        /// <summary>
+        /// Status of Single IP Source Nat mode of the transit gateway.
+        /// </summary>
         public readonly bool SingleIpSnat;
+        /// <summary>
+        /// The software version of the gateway.
+        /// </summary>
         public readonly string SoftwareVersion;
+        /// <summary>
+        /// Price for spot instance.
+        /// </summary>
         public readonly string SpotPrice;
+        /// <summary>
+        /// Subnet Info.
+        /// </summary>
         public readonly string Subnet;
+        /// <summary>
+        /// Instance tag of cloud provider.
+        /// </summary>
         public readonly ImmutableArray<string> TagLists;
         public readonly ImmutableDictionary<string, string> Tags;
         public readonly int TunnelDetectionTime;
+        /// <summary>
+        /// VPC-ID of GCP cloud provider.
+        /// </summary>
         public readonly string VpcId;
+        /// <summary>
+        /// Region of cloud provider.
+        /// </summary>
         public readonly string VpcReg;
+        /// <summary>
+        /// Availability Zone for Azure.
+        /// </summary>
         public readonly string Zone;
 
         [OutputConstructor]

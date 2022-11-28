@@ -4,6 +4,39 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_splunk_logging** resource allows the enabling and disabling of splunk logging.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Enable splunk logging using server and port combination
+ * const testSplunkLogging = new aviatrix.AviatrixSplunkLogging("test_splunk_logging", {
+ *     port: 10,
+ *     server: "1.2.3.4",
+ * });
+ * ```
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@astipkovits/aviatrix";
+ * import * as fs from "fs";
+ *
+ * // Enable splunk logging using configuration file
+ * const testSplunkLogging = new aviatrix.AviatrixSplunkLogging("testSplunkLogging", {customOutputConfigFile: Buffer.from(fs.readFileSync("/path/to/configuration.spl"), 'binary').toString('base64')});
+ * ```
+ *
+ * ## Import
+ *
+ * **splunk_logging** can be imported using `splunk_logging`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixSplunkLogging:AviatrixSplunkLogging test splunk_logging
+ * ```
+ */
 export class AviatrixSplunkLogging extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixSplunkLogging resource's state with the given name, ID, and optional extra
@@ -37,11 +70,11 @@ export class AviatrixSplunkLogging extends pulumi.CustomResource {
      */
     public readonly customInputConfig!: pulumi.Output<string | undefined>;
     /**
-     * Configuration file. Use the filebase64 function to read from a file.
+     * Configuration file. Use the `filebase64` function to read from a file.
      */
     public readonly customOutputConfigFile!: pulumi.Output<string | undefined>;
     /**
-     * List of excluded gateways.
+     * List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
      */
     public readonly excludedGateways!: pulumi.Output<string[] | undefined>;
     /**
@@ -53,7 +86,7 @@ export class AviatrixSplunkLogging extends pulumi.CustomResource {
      */
     public readonly server!: pulumi.Output<string | undefined>;
     /**
-     * Enabled or not.
+     * The status of splunk logging.
      */
     public /*out*/ readonly status!: pulumi.Output<string>;
 
@@ -99,11 +132,11 @@ export interface AviatrixSplunkLoggingState {
      */
     customInputConfig?: pulumi.Input<string>;
     /**
-     * Configuration file. Use the filebase64 function to read from a file.
+     * Configuration file. Use the `filebase64` function to read from a file.
      */
     customOutputConfigFile?: pulumi.Input<string>;
     /**
-     * List of excluded gateways.
+     * List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
      */
     excludedGateways?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -115,7 +148,7 @@ export interface AviatrixSplunkLoggingState {
      */
     server?: pulumi.Input<string>;
     /**
-     * Enabled or not.
+     * The status of splunk logging.
      */
     status?: pulumi.Input<string>;
 }
@@ -129,11 +162,11 @@ export interface AviatrixSplunkLoggingArgs {
      */
     customInputConfig?: pulumi.Input<string>;
     /**
-     * Configuration file. Use the filebase64 function to read from a file.
+     * Configuration file. Use the `filebase64` function to read from a file.
      */
     customOutputConfigFile?: pulumi.Input<string>;
     /**
-     * List of excluded gateways.
+     * List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
      */
     excludedGateways?: pulumi.Input<pulumi.Input<string>[]>;
     /**

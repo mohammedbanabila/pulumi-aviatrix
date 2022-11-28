@@ -11,10 +11,49 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_periodic_ping** resource manages the periodic ping feature for Aviatrix gateways.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixPeriodicPing(ctx, "testPing", &aviatrix.AviatrixPeriodicPingArgs{
+//				GwName:    pulumi.String("test-gw"),
+//				Interval:  pulumi.Int(600),
+//				IpAddress: pulumi.String("127.0.0.1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **aviatrix_periodic_ping** can be imported using the `gw_name`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixPeriodicPing:AviatrixPeriodicPing test gw_name
+//
+// ```
 type AviatrixPeriodicPing struct {
 	pulumi.CustomResourceState
 
-	// Name of gateway.
+	// Name of the gateway.
 	GwName pulumi.StringOutput `pulumi:"gwName"`
 	// Interval between pings in seconds.
 	Interval pulumi.IntOutput `pulumi:"interval"`
@@ -61,7 +100,7 @@ func GetAviatrixPeriodicPing(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixPeriodicPing resources.
 type aviatrixPeriodicPingState struct {
-	// Name of gateway.
+	// Name of the gateway.
 	GwName *string `pulumi:"gwName"`
 	// Interval between pings in seconds.
 	Interval *int `pulumi:"interval"`
@@ -70,7 +109,7 @@ type aviatrixPeriodicPingState struct {
 }
 
 type AviatrixPeriodicPingState struct {
-	// Name of gateway.
+	// Name of the gateway.
 	GwName pulumi.StringPtrInput
 	// Interval between pings in seconds.
 	Interval pulumi.IntPtrInput
@@ -83,7 +122,7 @@ func (AviatrixPeriodicPingState) ElementType() reflect.Type {
 }
 
 type aviatrixPeriodicPingArgs struct {
-	// Name of gateway.
+	// Name of the gateway.
 	GwName string `pulumi:"gwName"`
 	// Interval between pings in seconds.
 	Interval int `pulumi:"interval"`
@@ -93,7 +132,7 @@ type aviatrixPeriodicPingArgs struct {
 
 // The set of arguments for constructing a AviatrixPeriodicPing resource.
 type AviatrixPeriodicPingArgs struct {
-	// Name of gateway.
+	// Name of the gateway.
 	GwName pulumi.StringInput
 	// Interval between pings in seconds.
 	Interval pulumi.IntInput
@@ -188,7 +227,7 @@ func (o AviatrixPeriodicPingOutput) ToAviatrixPeriodicPingOutputWithContext(ctx 
 	return o
 }
 
-// Name of gateway.
+// Name of the gateway.
 func (o AviatrixPeriodicPingOutput) GwName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixPeriodicPing) pulumi.StringOutput { return v.GwName }).(pulumi.StringOutput)
 }

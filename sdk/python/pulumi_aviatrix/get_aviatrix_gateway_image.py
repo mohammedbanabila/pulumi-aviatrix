@@ -51,6 +51,9 @@ class GetAviatrixGatewayImageResult:
     @property
     @pulumi.getter(name="imageVersion")
     def image_version(self) -> str:
+        """
+        Image version that is compatible with the given cloud_type and software_version.
+        """
         return pulumi.get(self, "image_version")
 
     @property
@@ -75,7 +78,15 @@ def get_aviatrix_gateway_image(cloud_type: Optional[int] = None,
                                software_version: Optional[str] = None,
                                opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetAviatrixGatewayImageResult:
     """
-    Use this data source to access information about an existing resource.
+    The **aviatrix_gateway_image** data source provides the current image version that pairs with the given software version
+    and cloud type.
+
+    This data source is useful for getting the correct image_version for a gateway when upgrading the software_version of
+    the gateway.
+
+
+    :param int cloud_type: Cloud type. Type: Integer. Example: 1 (AWS)
+    :param str software_version: Software version. Type: String. Example: "6.4.2487"
     """
     __args__ = dict()
     __args__['cloudType'] = cloud_type
@@ -95,6 +106,14 @@ def get_aviatrix_gateway_image_output(cloud_type: Optional[pulumi.Input[int]] = 
                                       software_version: Optional[pulumi.Input[str]] = None,
                                       opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetAviatrixGatewayImageResult]:
     """
-    Use this data source to access information about an existing resource.
+    The **aviatrix_gateway_image** data source provides the current image version that pairs with the given software version
+    and cloud type.
+
+    This data source is useful for getting the correct image_version for a gateway when upgrading the software_version of
+    the gateway.
+
+
+    :param int cloud_type: Cloud type. Type: Integer. Example: 1 (AWS)
+    :param str software_version: Software version. Type: String. Example: "6.4.2487"
     """
     ...

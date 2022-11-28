@@ -2,9 +2,19 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * ## Import
+ *
+ * **fqdn** can be imported using the `fqdn_tag`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixFqdn:AviatrixFqdn test fqdn_tag
+ * ```
+ */
 export class AviatrixFqdn extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixFqdn resource's state with the given name, ID, and optional extra
@@ -34,19 +44,19 @@ export class AviatrixFqdn extends pulumi.CustomResource {
     }
 
     /**
-     * A list of one or more domain names/tag rules.
+     * One or more domain names in a list with details as listed below:
      */
     public readonly domainNames!: pulumi.Output<outputs.AviatrixFqdnDomainName[] | undefined>;
     /**
-     * FQDN Filter Tag Status. Valid values: true or false.
+     * FQDN Filter tag status. Valid values: true, false.
      */
     public readonly fqdnEnabled!: pulumi.Output<boolean | undefined>;
     /**
-     * Specify the tag color to be a white-list tag or black-list tag. 'white' or 'black'
+     * Specify FQDN mode: whitelist or blacklist. Valid values: "white", "black".
      */
     public readonly fqdnMode!: pulumi.Output<string | undefined>;
     /**
-     * FQDN Filter Tag Name.
+     * FQDN Filter tag name.
      */
     public readonly fqdnTag!: pulumi.Output<string>;
     /**
@@ -54,8 +64,7 @@ export class AviatrixFqdn extends pulumi.CustomResource {
      */
     public readonly gwFilterTagLists!: pulumi.Output<outputs.AviatrixFqdnGwFilterTagList[] | undefined>;
     /**
-     * Enable to manage domain name rules in-line. If false, domain name rules must be managed using `aviatrix_fqdn_tag_rule`
-     * resources.
+     * Enable to manage domain name rules in-line. If false, domain name rules must be managed using `aviatrix.AviatrixFqdnTagRule` resources. Default: true. Valid values: true, false. Available in provider version R2.17+.
      */
     public readonly manageDomainNames!: pulumi.Output<boolean | undefined>;
 
@@ -100,19 +109,19 @@ export class AviatrixFqdn extends pulumi.CustomResource {
  */
 export interface AviatrixFqdnState {
     /**
-     * A list of one or more domain names/tag rules.
+     * One or more domain names in a list with details as listed below:
      */
     domainNames?: pulumi.Input<pulumi.Input<inputs.AviatrixFqdnDomainName>[]>;
     /**
-     * FQDN Filter Tag Status. Valid values: true or false.
+     * FQDN Filter tag status. Valid values: true, false.
      */
     fqdnEnabled?: pulumi.Input<boolean>;
     /**
-     * Specify the tag color to be a white-list tag or black-list tag. 'white' or 'black'
+     * Specify FQDN mode: whitelist or blacklist. Valid values: "white", "black".
      */
     fqdnMode?: pulumi.Input<string>;
     /**
-     * FQDN Filter Tag Name.
+     * FQDN Filter tag name.
      */
     fqdnTag?: pulumi.Input<string>;
     /**
@@ -120,8 +129,7 @@ export interface AviatrixFqdnState {
      */
     gwFilterTagLists?: pulumi.Input<pulumi.Input<inputs.AviatrixFqdnGwFilterTagList>[]>;
     /**
-     * Enable to manage domain name rules in-line. If false, domain name rules must be managed using `aviatrix_fqdn_tag_rule`
-     * resources.
+     * Enable to manage domain name rules in-line. If false, domain name rules must be managed using `aviatrix.AviatrixFqdnTagRule` resources. Default: true. Valid values: true, false. Available in provider version R2.17+.
      */
     manageDomainNames?: pulumi.Input<boolean>;
 }
@@ -131,19 +139,19 @@ export interface AviatrixFqdnState {
  */
 export interface AviatrixFqdnArgs {
     /**
-     * A list of one or more domain names/tag rules.
+     * One or more domain names in a list with details as listed below:
      */
     domainNames?: pulumi.Input<pulumi.Input<inputs.AviatrixFqdnDomainName>[]>;
     /**
-     * FQDN Filter Tag Status. Valid values: true or false.
+     * FQDN Filter tag status. Valid values: true, false.
      */
     fqdnEnabled?: pulumi.Input<boolean>;
     /**
-     * Specify the tag color to be a white-list tag or black-list tag. 'white' or 'black'
+     * Specify FQDN mode: whitelist or blacklist. Valid values: "white", "black".
      */
     fqdnMode?: pulumi.Input<string>;
     /**
-     * FQDN Filter Tag Name.
+     * FQDN Filter tag name.
      */
     fqdnTag: pulumi.Input<string>;
     /**
@@ -151,8 +159,7 @@ export interface AviatrixFqdnArgs {
      */
     gwFilterTagLists?: pulumi.Input<pulumi.Input<inputs.AviatrixFqdnGwFilterTagList>[]>;
     /**
-     * Enable to manage domain name rules in-line. If false, domain name rules must be managed using `aviatrix_fqdn_tag_rule`
-     * resources.
+     * Enable to manage domain name rules in-line. If false, domain name rules must be managed using `aviatrix.AviatrixFqdnTagRule` resources. Default: true. Valid values: true, false. Available in provider version R2.17+.
      */
     manageDomainNames?: pulumi.Input<boolean>;
 }

@@ -24,14 +24,14 @@ class AviatrixEdgeSpokeTransitAttachmentArgs:
                  transit_prepend_as_paths: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a AviatrixEdgeSpokeTransitAttachment resource.
-        :param pulumi.Input[str] spoke_gw_name: Name of the Edge as a Spoke to attach to the transit network.
+        :param pulumi.Input[str] spoke_gw_name: Name of the Edge as a Spoke to attach to transit network.
         :param pulumi.Input[str] transit_gw_name: Name of the transit gateway to attach the Edge as a Spoke to.
-        :param pulumi.Input[bool] enable_insane_mode: Enable jumbo frame.
-        :param pulumi.Input[bool] enable_jumbo_frame: Enable jumbo frame.
-        :param pulumi.Input[bool] enable_over_private_network: Enable over private network.
-        :param pulumi.Input[int] insane_mode_tunnel_number: Insane mode tunnel number.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] spoke_prepend_as_paths: AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on Edge as a Spoke.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] transit_prepend_as_paths: AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit gateway.
+        :param pulumi.Input[bool] enable_insane_mode: Switch to enable insane mode. Valid values: true, false. Default: false.
+        :param pulumi.Input[bool] enable_jumbo_frame: Switch to enable jumbo frame. Valid values: true, false. Default: false.
+        :param pulumi.Input[bool] enable_over_private_network: Switch to enable over the private network. Valid values: true, false. Default: true.
+        :param pulumi.Input[int] insane_mode_tunnel_number: Insane mode tunnel number. Default: 0.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] spoke_prepend_as_paths: Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Edge as a Spoke.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] transit_prepend_as_paths: Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Transit Gateway.
         """
         pulumi.set(__self__, "spoke_gw_name", spoke_gw_name)
         pulumi.set(__self__, "transit_gw_name", transit_gw_name)
@@ -52,7 +52,7 @@ class AviatrixEdgeSpokeTransitAttachmentArgs:
     @pulumi.getter(name="spokeGwName")
     def spoke_gw_name(self) -> pulumi.Input[str]:
         """
-        Name of the Edge as a Spoke to attach to the transit network.
+        Name of the Edge as a Spoke to attach to transit network.
         """
         return pulumi.get(self, "spoke_gw_name")
 
@@ -76,7 +76,7 @@ class AviatrixEdgeSpokeTransitAttachmentArgs:
     @pulumi.getter(name="enableInsaneMode")
     def enable_insane_mode(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable jumbo frame.
+        Switch to enable insane mode. Valid values: true, false. Default: false.
         """
         return pulumi.get(self, "enable_insane_mode")
 
@@ -88,7 +88,7 @@ class AviatrixEdgeSpokeTransitAttachmentArgs:
     @pulumi.getter(name="enableJumboFrame")
     def enable_jumbo_frame(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable jumbo frame.
+        Switch to enable jumbo frame. Valid values: true, false. Default: false.
         """
         return pulumi.get(self, "enable_jumbo_frame")
 
@@ -100,7 +100,7 @@ class AviatrixEdgeSpokeTransitAttachmentArgs:
     @pulumi.getter(name="enableOverPrivateNetwork")
     def enable_over_private_network(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable over private network.
+        Switch to enable over the private network. Valid values: true, false. Default: true.
         """
         return pulumi.get(self, "enable_over_private_network")
 
@@ -112,7 +112,7 @@ class AviatrixEdgeSpokeTransitAttachmentArgs:
     @pulumi.getter(name="insaneModeTunnelNumber")
     def insane_mode_tunnel_number(self) -> Optional[pulumi.Input[int]]:
         """
-        Insane mode tunnel number.
+        Insane mode tunnel number. Default: 0.
         """
         return pulumi.get(self, "insane_mode_tunnel_number")
 
@@ -124,7 +124,7 @@ class AviatrixEdgeSpokeTransitAttachmentArgs:
     @pulumi.getter(name="spokePrependAsPaths")
     def spoke_prepend_as_paths(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on Edge as a Spoke.
+        Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Edge as a Spoke.
         """
         return pulumi.get(self, "spoke_prepend_as_paths")
 
@@ -136,7 +136,7 @@ class AviatrixEdgeSpokeTransitAttachmentArgs:
     @pulumi.getter(name="transitPrependAsPaths")
     def transit_prepend_as_paths(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit gateway.
+        Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Transit Gateway.
         """
         return pulumi.get(self, "transit_prepend_as_paths")
 
@@ -158,14 +158,14 @@ class _AviatrixEdgeSpokeTransitAttachmentState:
                  transit_prepend_as_paths: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering AviatrixEdgeSpokeTransitAttachment resources.
-        :param pulumi.Input[bool] enable_insane_mode: Enable jumbo frame.
-        :param pulumi.Input[bool] enable_jumbo_frame: Enable jumbo frame.
-        :param pulumi.Input[bool] enable_over_private_network: Enable over private network.
-        :param pulumi.Input[int] insane_mode_tunnel_number: Insane mode tunnel number.
-        :param pulumi.Input[str] spoke_gw_name: Name of the Edge as a Spoke to attach to the transit network.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] spoke_prepend_as_paths: AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on Edge as a Spoke.
+        :param pulumi.Input[bool] enable_insane_mode: Switch to enable insane mode. Valid values: true, false. Default: false.
+        :param pulumi.Input[bool] enable_jumbo_frame: Switch to enable jumbo frame. Valid values: true, false. Default: false.
+        :param pulumi.Input[bool] enable_over_private_network: Switch to enable over the private network. Valid values: true, false. Default: true.
+        :param pulumi.Input[int] insane_mode_tunnel_number: Insane mode tunnel number. Default: 0.
+        :param pulumi.Input[str] spoke_gw_name: Name of the Edge as a Spoke to attach to transit network.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] spoke_prepend_as_paths: Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Edge as a Spoke.
         :param pulumi.Input[str] transit_gw_name: Name of the transit gateway to attach the Edge as a Spoke to.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] transit_prepend_as_paths: AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit gateway.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] transit_prepend_as_paths: Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Transit Gateway.
         """
         if enable_insane_mode is not None:
             pulumi.set(__self__, "enable_insane_mode", enable_insane_mode)
@@ -188,7 +188,7 @@ class _AviatrixEdgeSpokeTransitAttachmentState:
     @pulumi.getter(name="enableInsaneMode")
     def enable_insane_mode(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable jumbo frame.
+        Switch to enable insane mode. Valid values: true, false. Default: false.
         """
         return pulumi.get(self, "enable_insane_mode")
 
@@ -200,7 +200,7 @@ class _AviatrixEdgeSpokeTransitAttachmentState:
     @pulumi.getter(name="enableJumboFrame")
     def enable_jumbo_frame(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable jumbo frame.
+        Switch to enable jumbo frame. Valid values: true, false. Default: false.
         """
         return pulumi.get(self, "enable_jumbo_frame")
 
@@ -212,7 +212,7 @@ class _AviatrixEdgeSpokeTransitAttachmentState:
     @pulumi.getter(name="enableOverPrivateNetwork")
     def enable_over_private_network(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable over private network.
+        Switch to enable over the private network. Valid values: true, false. Default: true.
         """
         return pulumi.get(self, "enable_over_private_network")
 
@@ -224,7 +224,7 @@ class _AviatrixEdgeSpokeTransitAttachmentState:
     @pulumi.getter(name="insaneModeTunnelNumber")
     def insane_mode_tunnel_number(self) -> Optional[pulumi.Input[int]]:
         """
-        Insane mode tunnel number.
+        Insane mode tunnel number. Default: 0.
         """
         return pulumi.get(self, "insane_mode_tunnel_number")
 
@@ -236,7 +236,7 @@ class _AviatrixEdgeSpokeTransitAttachmentState:
     @pulumi.getter(name="spokeGwName")
     def spoke_gw_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the Edge as a Spoke to attach to the transit network.
+        Name of the Edge as a Spoke to attach to transit network.
         """
         return pulumi.get(self, "spoke_gw_name")
 
@@ -248,7 +248,7 @@ class _AviatrixEdgeSpokeTransitAttachmentState:
     @pulumi.getter(name="spokePrependAsPaths")
     def spoke_prepend_as_paths(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on Edge as a Spoke.
+        Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Edge as a Spoke.
         """
         return pulumi.get(self, "spoke_prepend_as_paths")
 
@@ -272,7 +272,7 @@ class _AviatrixEdgeSpokeTransitAttachmentState:
     @pulumi.getter(name="transitPrependAsPaths")
     def transit_prepend_as_paths(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit gateway.
+        Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Transit Gateway.
         """
         return pulumi.get(self, "transit_prepend_as_paths")
 
@@ -296,17 +296,38 @@ class AviatrixEdgeSpokeTransitAttachment(pulumi.CustomResource):
                  transit_prepend_as_paths: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
-        Create a AviatrixEdgeSpokeTransitAttachment resource with the given unique name, props, and options.
+        The **aviatrix_edge_spoke_transit_attachment** resource allows the creation and management of Aviatrix Edge as a Spoke to Transit gateway attachments. This resource is available as of provider version R2.23+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Edge as a Spoke Transit Attachment
+        test_attachment = aviatrix.AviatrixEdgeSpokeTransitAttachment("testAttachment",
+            spoke_gw_name="edge-as-a-spoke",
+            transit_gw_name="transit-gw")
+        ```
+
+        ## Import
+
+        **spoke_transit_attachment** can be imported using the `spoke_gw_name` and `transit_gw_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixEdgeSpokeTransitAttachment:AviatrixEdgeSpokeTransitAttachment test spoke_gw_name~transit_gw_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[bool] enable_insane_mode: Enable jumbo frame.
-        :param pulumi.Input[bool] enable_jumbo_frame: Enable jumbo frame.
-        :param pulumi.Input[bool] enable_over_private_network: Enable over private network.
-        :param pulumi.Input[int] insane_mode_tunnel_number: Insane mode tunnel number.
-        :param pulumi.Input[str] spoke_gw_name: Name of the Edge as a Spoke to attach to the transit network.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] spoke_prepend_as_paths: AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on Edge as a Spoke.
+        :param pulumi.Input[bool] enable_insane_mode: Switch to enable insane mode. Valid values: true, false. Default: false.
+        :param pulumi.Input[bool] enable_jumbo_frame: Switch to enable jumbo frame. Valid values: true, false. Default: false.
+        :param pulumi.Input[bool] enable_over_private_network: Switch to enable over the private network. Valid values: true, false. Default: true.
+        :param pulumi.Input[int] insane_mode_tunnel_number: Insane mode tunnel number. Default: 0.
+        :param pulumi.Input[str] spoke_gw_name: Name of the Edge as a Spoke to attach to transit network.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] spoke_prepend_as_paths: Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Edge as a Spoke.
         :param pulumi.Input[str] transit_gw_name: Name of the transit gateway to attach the Edge as a Spoke to.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] transit_prepend_as_paths: AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit gateway.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] transit_prepend_as_paths: Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Transit Gateway.
         """
         ...
     @overload
@@ -315,7 +336,28 @@ class AviatrixEdgeSpokeTransitAttachment(pulumi.CustomResource):
                  args: AviatrixEdgeSpokeTransitAttachmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixEdgeSpokeTransitAttachment resource with the given unique name, props, and options.
+        The **aviatrix_edge_spoke_transit_attachment** resource allows the creation and management of Aviatrix Edge as a Spoke to Transit gateway attachments. This resource is available as of provider version R2.23+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Edge as a Spoke Transit Attachment
+        test_attachment = aviatrix.AviatrixEdgeSpokeTransitAttachment("testAttachment",
+            spoke_gw_name="edge-as-a-spoke",
+            transit_gw_name="transit-gw")
+        ```
+
+        ## Import
+
+        **spoke_transit_attachment** can be imported using the `spoke_gw_name` and `transit_gw_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixEdgeSpokeTransitAttachment:AviatrixEdgeSpokeTransitAttachment test spoke_gw_name~transit_gw_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixEdgeSpokeTransitAttachmentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -385,14 +427,14 @@ class AviatrixEdgeSpokeTransitAttachment(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[bool] enable_insane_mode: Enable jumbo frame.
-        :param pulumi.Input[bool] enable_jumbo_frame: Enable jumbo frame.
-        :param pulumi.Input[bool] enable_over_private_network: Enable over private network.
-        :param pulumi.Input[int] insane_mode_tunnel_number: Insane mode tunnel number.
-        :param pulumi.Input[str] spoke_gw_name: Name of the Edge as a Spoke to attach to the transit network.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] spoke_prepend_as_paths: AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on Edge as a Spoke.
+        :param pulumi.Input[bool] enable_insane_mode: Switch to enable insane mode. Valid values: true, false. Default: false.
+        :param pulumi.Input[bool] enable_jumbo_frame: Switch to enable jumbo frame. Valid values: true, false. Default: false.
+        :param pulumi.Input[bool] enable_over_private_network: Switch to enable over the private network. Valid values: true, false. Default: true.
+        :param pulumi.Input[int] insane_mode_tunnel_number: Insane mode tunnel number. Default: 0.
+        :param pulumi.Input[str] spoke_gw_name: Name of the Edge as a Spoke to attach to transit network.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] spoke_prepend_as_paths: Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Edge as a Spoke.
         :param pulumi.Input[str] transit_gw_name: Name of the transit gateway to attach the Edge as a Spoke to.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] transit_prepend_as_paths: AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit gateway.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] transit_prepend_as_paths: Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Transit Gateway.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -412,7 +454,7 @@ class AviatrixEdgeSpokeTransitAttachment(pulumi.CustomResource):
     @pulumi.getter(name="enableInsaneMode")
     def enable_insane_mode(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enable jumbo frame.
+        Switch to enable insane mode. Valid values: true, false. Default: false.
         """
         return pulumi.get(self, "enable_insane_mode")
 
@@ -420,7 +462,7 @@ class AviatrixEdgeSpokeTransitAttachment(pulumi.CustomResource):
     @pulumi.getter(name="enableJumboFrame")
     def enable_jumbo_frame(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enable jumbo frame.
+        Switch to enable jumbo frame. Valid values: true, false. Default: false.
         """
         return pulumi.get(self, "enable_jumbo_frame")
 
@@ -428,7 +470,7 @@ class AviatrixEdgeSpokeTransitAttachment(pulumi.CustomResource):
     @pulumi.getter(name="enableOverPrivateNetwork")
     def enable_over_private_network(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enable over private network.
+        Switch to enable over the private network. Valid values: true, false. Default: true.
         """
         return pulumi.get(self, "enable_over_private_network")
 
@@ -436,7 +478,7 @@ class AviatrixEdgeSpokeTransitAttachment(pulumi.CustomResource):
     @pulumi.getter(name="insaneModeTunnelNumber")
     def insane_mode_tunnel_number(self) -> pulumi.Output[Optional[int]]:
         """
-        Insane mode tunnel number.
+        Insane mode tunnel number. Default: 0.
         """
         return pulumi.get(self, "insane_mode_tunnel_number")
 
@@ -444,7 +486,7 @@ class AviatrixEdgeSpokeTransitAttachment(pulumi.CustomResource):
     @pulumi.getter(name="spokeGwName")
     def spoke_gw_name(self) -> pulumi.Output[str]:
         """
-        Name of the Edge as a Spoke to attach to the transit network.
+        Name of the Edge as a Spoke to attach to transit network.
         """
         return pulumi.get(self, "spoke_gw_name")
 
@@ -452,7 +494,7 @@ class AviatrixEdgeSpokeTransitAttachment(pulumi.CustomResource):
     @pulumi.getter(name="spokePrependAsPaths")
     def spoke_prepend_as_paths(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on Edge as a Spoke.
+        Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Edge as a Spoke.
         """
         return pulumi.get(self, "spoke_prepend_as_paths")
 
@@ -468,7 +510,7 @@ class AviatrixEdgeSpokeTransitAttachment(pulumi.CustomResource):
     @pulumi.getter(name="transitPrependAsPaths")
     def transit_prepend_as_paths(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit gateway.
+        Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Transit Gateway.
         """
         return pulumi.get(self, "transit_prepend_as_paths")
 

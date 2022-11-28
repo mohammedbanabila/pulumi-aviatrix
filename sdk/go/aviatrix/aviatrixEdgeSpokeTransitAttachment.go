@@ -11,24 +11,62 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_edge_spoke_transit_attachment** resource allows the creation and management of Aviatrix Edge as a Spoke to Transit gateway attachments. This resource is available as of provider version R2.23+.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixEdgeSpokeTransitAttachment(ctx, "testAttachment", &aviatrix.AviatrixEdgeSpokeTransitAttachmentArgs{
+//				SpokeGwName:   pulumi.String("edge-as-a-spoke"),
+//				TransitGwName: pulumi.String("transit-gw"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **spoke_transit_attachment** can be imported using the `spoke_gw_name` and `transit_gw_name`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixEdgeSpokeTransitAttachment:AviatrixEdgeSpokeTransitAttachment test spoke_gw_name~transit_gw_name
+//
+// ```
 type AviatrixEdgeSpokeTransitAttachment struct {
 	pulumi.CustomResourceState
 
-	// Enable jumbo frame.
+	// Switch to enable insane mode. Valid values: true, false. Default: false.
 	EnableInsaneMode pulumi.BoolPtrOutput `pulumi:"enableInsaneMode"`
-	// Enable jumbo frame.
+	// Switch to enable jumbo frame. Valid values: true, false. Default: false.
 	EnableJumboFrame pulumi.BoolPtrOutput `pulumi:"enableJumboFrame"`
-	// Enable over private network.
+	// Switch to enable over the private network. Valid values: true, false. Default: true.
 	EnableOverPrivateNetwork pulumi.BoolPtrOutput `pulumi:"enableOverPrivateNetwork"`
-	// Insane mode tunnel number.
+	// Insane mode tunnel number. Default: 0.
 	InsaneModeTunnelNumber pulumi.IntPtrOutput `pulumi:"insaneModeTunnelNumber"`
-	// Name of the Edge as a Spoke to attach to the transit network.
+	// Name of the Edge as a Spoke to attach to transit network.
 	SpokeGwName pulumi.StringOutput `pulumi:"spokeGwName"`
-	// AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on Edge as a Spoke.
+	// Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Edge as a Spoke.
 	SpokePrependAsPaths pulumi.StringArrayOutput `pulumi:"spokePrependAsPaths"`
 	// Name of the transit gateway to attach the Edge as a Spoke to.
 	TransitGwName pulumi.StringOutput `pulumi:"transitGwName"`
-	// AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit gateway.
+	// Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Transit Gateway.
 	TransitPrependAsPaths pulumi.StringArrayOutput `pulumi:"transitPrependAsPaths"`
 }
 
@@ -68,40 +106,40 @@ func GetAviatrixEdgeSpokeTransitAttachment(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixEdgeSpokeTransitAttachment resources.
 type aviatrixEdgeSpokeTransitAttachmentState struct {
-	// Enable jumbo frame.
+	// Switch to enable insane mode. Valid values: true, false. Default: false.
 	EnableInsaneMode *bool `pulumi:"enableInsaneMode"`
-	// Enable jumbo frame.
+	// Switch to enable jumbo frame. Valid values: true, false. Default: false.
 	EnableJumboFrame *bool `pulumi:"enableJumboFrame"`
-	// Enable over private network.
+	// Switch to enable over the private network. Valid values: true, false. Default: true.
 	EnableOverPrivateNetwork *bool `pulumi:"enableOverPrivateNetwork"`
-	// Insane mode tunnel number.
+	// Insane mode tunnel number. Default: 0.
 	InsaneModeTunnelNumber *int `pulumi:"insaneModeTunnelNumber"`
-	// Name of the Edge as a Spoke to attach to the transit network.
+	// Name of the Edge as a Spoke to attach to transit network.
 	SpokeGwName *string `pulumi:"spokeGwName"`
-	// AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on Edge as a Spoke.
+	// Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Edge as a Spoke.
 	SpokePrependAsPaths []string `pulumi:"spokePrependAsPaths"`
 	// Name of the transit gateway to attach the Edge as a Spoke to.
 	TransitGwName *string `pulumi:"transitGwName"`
-	// AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit gateway.
+	// Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Transit Gateway.
 	TransitPrependAsPaths []string `pulumi:"transitPrependAsPaths"`
 }
 
 type AviatrixEdgeSpokeTransitAttachmentState struct {
-	// Enable jumbo frame.
+	// Switch to enable insane mode. Valid values: true, false. Default: false.
 	EnableInsaneMode pulumi.BoolPtrInput
-	// Enable jumbo frame.
+	// Switch to enable jumbo frame. Valid values: true, false. Default: false.
 	EnableJumboFrame pulumi.BoolPtrInput
-	// Enable over private network.
+	// Switch to enable over the private network. Valid values: true, false. Default: true.
 	EnableOverPrivateNetwork pulumi.BoolPtrInput
-	// Insane mode tunnel number.
+	// Insane mode tunnel number. Default: 0.
 	InsaneModeTunnelNumber pulumi.IntPtrInput
-	// Name of the Edge as a Spoke to attach to the transit network.
+	// Name of the Edge as a Spoke to attach to transit network.
 	SpokeGwName pulumi.StringPtrInput
-	// AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on Edge as a Spoke.
+	// Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Edge as a Spoke.
 	SpokePrependAsPaths pulumi.StringArrayInput
 	// Name of the transit gateway to attach the Edge as a Spoke to.
 	TransitGwName pulumi.StringPtrInput
-	// AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit gateway.
+	// Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Transit Gateway.
 	TransitPrependAsPaths pulumi.StringArrayInput
 }
 
@@ -110,41 +148,41 @@ func (AviatrixEdgeSpokeTransitAttachmentState) ElementType() reflect.Type {
 }
 
 type aviatrixEdgeSpokeTransitAttachmentArgs struct {
-	// Enable jumbo frame.
+	// Switch to enable insane mode. Valid values: true, false. Default: false.
 	EnableInsaneMode *bool `pulumi:"enableInsaneMode"`
-	// Enable jumbo frame.
+	// Switch to enable jumbo frame. Valid values: true, false. Default: false.
 	EnableJumboFrame *bool `pulumi:"enableJumboFrame"`
-	// Enable over private network.
+	// Switch to enable over the private network. Valid values: true, false. Default: true.
 	EnableOverPrivateNetwork *bool `pulumi:"enableOverPrivateNetwork"`
-	// Insane mode tunnel number.
+	// Insane mode tunnel number. Default: 0.
 	InsaneModeTunnelNumber *int `pulumi:"insaneModeTunnelNumber"`
-	// Name of the Edge as a Spoke to attach to the transit network.
+	// Name of the Edge as a Spoke to attach to transit network.
 	SpokeGwName string `pulumi:"spokeGwName"`
-	// AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on Edge as a Spoke.
+	// Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Edge as a Spoke.
 	SpokePrependAsPaths []string `pulumi:"spokePrependAsPaths"`
 	// Name of the transit gateway to attach the Edge as a Spoke to.
 	TransitGwName string `pulumi:"transitGwName"`
-	// AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit gateway.
+	// Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Transit Gateway.
 	TransitPrependAsPaths []string `pulumi:"transitPrependAsPaths"`
 }
 
 // The set of arguments for constructing a AviatrixEdgeSpokeTransitAttachment resource.
 type AviatrixEdgeSpokeTransitAttachmentArgs struct {
-	// Enable jumbo frame.
+	// Switch to enable insane mode. Valid values: true, false. Default: false.
 	EnableInsaneMode pulumi.BoolPtrInput
-	// Enable jumbo frame.
+	// Switch to enable jumbo frame. Valid values: true, false. Default: false.
 	EnableJumboFrame pulumi.BoolPtrInput
-	// Enable over private network.
+	// Switch to enable over the private network. Valid values: true, false. Default: true.
 	EnableOverPrivateNetwork pulumi.BoolPtrInput
-	// Insane mode tunnel number.
+	// Insane mode tunnel number. Default: 0.
 	InsaneModeTunnelNumber pulumi.IntPtrInput
-	// Name of the Edge as a Spoke to attach to the transit network.
+	// Name of the Edge as a Spoke to attach to transit network.
 	SpokeGwName pulumi.StringInput
-	// AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on Edge as a Spoke.
+	// Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Edge as a Spoke.
 	SpokePrependAsPaths pulumi.StringArrayInput
 	// Name of the transit gateway to attach the Edge as a Spoke to.
 	TransitGwName pulumi.StringInput
-	// AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit gateway.
+	// Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Transit Gateway.
 	TransitPrependAsPaths pulumi.StringArrayInput
 }
 
@@ -235,32 +273,32 @@ func (o AviatrixEdgeSpokeTransitAttachmentOutput) ToAviatrixEdgeSpokeTransitAtta
 	return o
 }
 
-// Enable jumbo frame.
+// Switch to enable insane mode. Valid values: true, false. Default: false.
 func (o AviatrixEdgeSpokeTransitAttachmentOutput) EnableInsaneMode() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpokeTransitAttachment) pulumi.BoolPtrOutput { return v.EnableInsaneMode }).(pulumi.BoolPtrOutput)
 }
 
-// Enable jumbo frame.
+// Switch to enable jumbo frame. Valid values: true, false. Default: false.
 func (o AviatrixEdgeSpokeTransitAttachmentOutput) EnableJumboFrame() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpokeTransitAttachment) pulumi.BoolPtrOutput { return v.EnableJumboFrame }).(pulumi.BoolPtrOutput)
 }
 
-// Enable over private network.
+// Switch to enable over the private network. Valid values: true, false. Default: true.
 func (o AviatrixEdgeSpokeTransitAttachmentOutput) EnableOverPrivateNetwork() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpokeTransitAttachment) pulumi.BoolPtrOutput { return v.EnableOverPrivateNetwork }).(pulumi.BoolPtrOutput)
 }
 
-// Insane mode tunnel number.
+// Insane mode tunnel number. Default: 0.
 func (o AviatrixEdgeSpokeTransitAttachmentOutput) InsaneModeTunnelNumber() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpokeTransitAttachment) pulumi.IntPtrOutput { return v.InsaneModeTunnelNumber }).(pulumi.IntPtrOutput)
 }
 
-// Name of the Edge as a Spoke to attach to the transit network.
+// Name of the Edge as a Spoke to attach to transit network.
 func (o AviatrixEdgeSpokeTransitAttachmentOutput) SpokeGwName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpokeTransitAttachment) pulumi.StringOutput { return v.SpokeGwName }).(pulumi.StringOutput)
 }
 
-// AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on Edge as a Spoke.
+// Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Edge as a Spoke.
 func (o AviatrixEdgeSpokeTransitAttachmentOutput) SpokePrependAsPaths() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpokeTransitAttachment) pulumi.StringArrayOutput { return v.SpokePrependAsPaths }).(pulumi.StringArrayOutput)
 }
@@ -270,7 +308,7 @@ func (o AviatrixEdgeSpokeTransitAttachmentOutput) TransitGwName() pulumi.StringO
 	return o.ApplyT(func(v *AviatrixEdgeSpokeTransitAttachment) pulumi.StringOutput { return v.TransitGwName }).(pulumi.StringOutput)
 }
 
-// AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit gateway.
+// Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Transit Gateway.
 func (o AviatrixEdgeSpokeTransitAttachmentOutput) TransitPrependAsPaths() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpokeTransitAttachment) pulumi.StringArrayOutput { return v.TransitPrependAsPaths }).(pulumi.StringArrayOutput)
 }

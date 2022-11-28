@@ -9,11 +9,42 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_periodic_ping** resource manages the periodic ping feature for Aviatrix gateways.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Enable Periodic Ping for a Gateway
+    ///     var testPing = new Aviatrix.AviatrixPeriodicPing("testPing", new()
+    ///     {
+    ///         GwName = "test-gw",
+    ///         Interval = 600,
+    ///         IpAddress = "127.0.0.1",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **aviatrix_periodic_ping** can be imported using the `gw_name`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixPeriodicPing:AviatrixPeriodicPing test gw_name
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixPeriodicPing:AviatrixPeriodicPing")]
     public partial class AviatrixPeriodicPing : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Name of gateway.
+        /// Name of the gateway.
         /// </summary>
         [Output("gwName")]
         public Output<string> GwName { get; private set; } = null!;
@@ -78,7 +109,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixPeriodicPingArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Name of gateway.
+        /// Name of the gateway.
         /// </summary>
         [Input("gwName", required: true)]
         public Input<string> GwName { get; set; } = null!;
@@ -104,7 +135,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixPeriodicPingState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Name of gateway.
+        /// Name of the gateway.
         /// </summary>
         [Input("gwName")]
         public Input<string>? GwName { get; set; }

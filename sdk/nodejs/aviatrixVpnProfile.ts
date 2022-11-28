@@ -2,9 +2,53 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_vpn_profile** resource allows the creation and management of Aviatrix VPN user profiles.
+ *
+ * > **NOTE:** As of R2.15, management of user/profile attachment can be set using `manageUserAttachment`. This argument must be set to *true* in either **aviatrix_vpn_user** or **aviatrix_vpn_profile**. If attachment is managed in the **aviatrix_vpn_profile** (set to *true*), it must be set to *false* in the **aviatrix_vpn_user** resource and vice versa.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix AWS VPN User Profile
+ * const testVpnProfile = new aviatrix.AviatrixVpnProfile("test_vpn_profile", {
+ *     baseRule: "allow_all",
+ *     policies: [
+ *         {
+ *             action: "deny",
+ *             port: "443",
+ *             proto: "tcp",
+ *             target: "10.0.0.0/32",
+ *         },
+ *         {
+ *             action: "deny",
+ *             port: "443",
+ *             proto: "tcp",
+ *             target: "10.0.0.1/32",
+ *         },
+ *     ],
+ *     users: [
+ *         "user1",
+ *         "user2",
+ *     ],
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **vpn_profile** can be imported using the VPN profile's `name`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixVpnProfile:AviatrixVpnProfile test name
+ * ```
+ */
 export class AviatrixVpnProfile extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixVpnProfile resource's state with the given name, ID, and optional extra
@@ -34,20 +78,23 @@ export class AviatrixVpnProfile extends pulumi.CustomResource {
     }
 
     /**
-     * Base policy rule of the profile to be added. Enter 'allow_all' or 'deny_all'.
+     * Base policy rule of the profile to be added. Enter "allowAll" or "denyAll", based on whether you want a whitelist or blacklist.
      */
     public readonly baseRule!: pulumi.Output<string | undefined>;
+    /**
+     * This parameter is a switch used to determine whether or not to manage VPN user attachments to the VPN profile using this resource. If this is set to false, attachment must be managed using the **aviatrix_vpn_user** resource. Valid values: true, false. Default value: true.
+     */
     public readonly manageUserAttachment!: pulumi.Output<boolean | undefined>;
     /**
-     * name for the VPN profile.
+     * Enter any name for the VPN profile.
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * New security policy for the profile.
+     * New security policy for the profile. Each policy has the following attributes:
      */
     public readonly policies!: pulumi.Output<outputs.AviatrixVpnProfilePolicy[] | undefined>;
     /**
-     * List of VPN users to attach to this profile.
+     * List of VPN users to attach to this profile. This should be set to null if `manageUserAttachment` is set to false.
      */
     public readonly users!: pulumi.Output<string[] | undefined>;
 
@@ -87,20 +134,23 @@ export class AviatrixVpnProfile extends pulumi.CustomResource {
  */
 export interface AviatrixVpnProfileState {
     /**
-     * Base policy rule of the profile to be added. Enter 'allow_all' or 'deny_all'.
+     * Base policy rule of the profile to be added. Enter "allowAll" or "denyAll", based on whether you want a whitelist or blacklist.
      */
     baseRule?: pulumi.Input<string>;
+    /**
+     * This parameter is a switch used to determine whether or not to manage VPN user attachments to the VPN profile using this resource. If this is set to false, attachment must be managed using the **aviatrix_vpn_user** resource. Valid values: true, false. Default value: true.
+     */
     manageUserAttachment?: pulumi.Input<boolean>;
     /**
-     * name for the VPN profile.
+     * Enter any name for the VPN profile.
      */
     name?: pulumi.Input<string>;
     /**
-     * New security policy for the profile.
+     * New security policy for the profile. Each policy has the following attributes:
      */
     policies?: pulumi.Input<pulumi.Input<inputs.AviatrixVpnProfilePolicy>[]>;
     /**
-     * List of VPN users to attach to this profile.
+     * List of VPN users to attach to this profile. This should be set to null if `manageUserAttachment` is set to false.
      */
     users?: pulumi.Input<pulumi.Input<string>[]>;
 }
@@ -110,20 +160,23 @@ export interface AviatrixVpnProfileState {
  */
 export interface AviatrixVpnProfileArgs {
     /**
-     * Base policy rule of the profile to be added. Enter 'allow_all' or 'deny_all'.
+     * Base policy rule of the profile to be added. Enter "allowAll" or "denyAll", based on whether you want a whitelist or blacklist.
      */
     baseRule?: pulumi.Input<string>;
+    /**
+     * This parameter is a switch used to determine whether or not to manage VPN user attachments to the VPN profile using this resource. If this is set to false, attachment must be managed using the **aviatrix_vpn_user** resource. Valid values: true, false. Default value: true.
+     */
     manageUserAttachment?: pulumi.Input<boolean>;
     /**
-     * name for the VPN profile.
+     * Enter any name for the VPN profile.
      */
     name?: pulumi.Input<string>;
     /**
-     * New security policy for the profile.
+     * New security policy for the profile. Each policy has the following attributes:
      */
     policies?: pulumi.Input<pulumi.Input<inputs.AviatrixVpnProfilePolicy>[]>;
     /**
-     * List of VPN users to attach to this profile.
+     * List of VPN users to attach to this profile. This should be set to null if `manageUserAttachment` is set to false.
      */
     users?: pulumi.Input<pulumi.Input<string>[]>;
 }

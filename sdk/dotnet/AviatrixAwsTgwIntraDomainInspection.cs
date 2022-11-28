@@ -9,23 +9,54 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_aws_tgw_intra_domain_inspection** resource allows the creation and management of intra domain inspection of security domains in an AWS TGW.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Intra Domain Inspection
+    ///     var test = new Aviatrix.AviatrixAwsTgwIntraDomainInspection("test", new()
+    ///     {
+    ///         FirewallDomainName = "firewall-domain",
+    ///         RouteDomainName = "mysd",
+    ///         TgwName = "test-AWS-TGW",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **aviatrix_aws_tgw_intra_domain_inspection** can be imported using the `tgw_name` and `route_domain_name`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixAwsTgwIntraDomainInspection:AviatrixAwsTgwIntraDomainInspection test tgw_name~route_domain_name
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixAwsTgwIntraDomainInspection:AviatrixAwsTgwIntraDomainInspection")]
     public partial class AviatrixAwsTgwIntraDomainInspection : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Firewall domain name.
+        /// The name of a firewall security domain.
         /// </summary>
         [Output("firewallDomainName")]
         public Output<string> FirewallDomainName { get; private set; } = null!;
 
         /// <summary>
-        /// Route domain name.
+        /// The name of a security domain.
         /// </summary>
         [Output("routeDomainName")]
         public Output<string> RouteDomainName { get; private set; } = null!;
 
         /// <summary>
-        /// AWS TGW name.
+        /// The AWS TGW name.
         /// </summary>
         [Output("tgwName")]
         public Output<string> TgwName { get; private set; } = null!;
@@ -78,19 +109,19 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixAwsTgwIntraDomainInspectionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Firewall domain name.
+        /// The name of a firewall security domain.
         /// </summary>
         [Input("firewallDomainName", required: true)]
         public Input<string> FirewallDomainName { get; set; } = null!;
 
         /// <summary>
-        /// Route domain name.
+        /// The name of a security domain.
         /// </summary>
         [Input("routeDomainName", required: true)]
         public Input<string> RouteDomainName { get; set; } = null!;
 
         /// <summary>
-        /// AWS TGW name.
+        /// The AWS TGW name.
         /// </summary>
         [Input("tgwName", required: true)]
         public Input<string> TgwName { get; set; } = null!;
@@ -104,19 +135,19 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixAwsTgwIntraDomainInspectionState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Firewall domain name.
+        /// The name of a firewall security domain.
         /// </summary>
         [Input("firewallDomainName")]
         public Input<string>? FirewallDomainName { get; set; }
 
         /// <summary>
-        /// Route domain name.
+        /// The name of a security domain.
         /// </summary>
         [Input("routeDomainName")]
         public Input<string>? RouteDomainName { get; set; }
 
         /// <summary>
-        /// AWS TGW name.
+        /// The AWS TGW name.
         /// </summary>
         [Input("tgwName")]
         public Input<string>? TgwName { get; set; }

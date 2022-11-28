@@ -11,12 +11,54 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixFqdnPassThrough(ctx, "testFqdnPassThrough", &aviatrix.AviatrixFqdnPassThroughArgs{
+//				GwName: pulumi.Any(aviatrix_gateway.Test_gw_aws.Gw_name),
+//				PassThroughCidrs: pulumi.StringArray{
+//					pulumi.String("10.0.0.0/24"),
+//					pulumi.String("10.0.1.0/24"),
+//					pulumi.String("10.0.2.0/24"),
+//				},
+//			}, pulumi.DependsOn([]pulumi.Resource{
+//				aviatrix_fqdn.Test_fqdn,
+//			}))
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **fqdn_pass_through** can be imported using the `gw_name`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixFqdnPassThrough:AviatrixFqdnPassThrough test gw_name
+//
+// ```
 type AviatrixFqdnPassThrough struct {
 	pulumi.CustomResourceState
 
-	// Gateway to apply FQDN pass-through rules to.
+	// Gateway name to apply pass-through rules to.
 	GwName pulumi.StringOutput `pulumi:"gwName"`
-	// CIDRs to allow originating requests to ignore FQDN filtering rules.
+	// List of origin CIDR's to allow to pass-through FQDN filtering rules. Minimum list length: 1.
 	PassThroughCidrs pulumi.StringArrayOutput `pulumi:"passThroughCidrs"`
 }
 
@@ -56,16 +98,16 @@ func GetAviatrixFqdnPassThrough(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixFqdnPassThrough resources.
 type aviatrixFqdnPassThroughState struct {
-	// Gateway to apply FQDN pass-through rules to.
+	// Gateway name to apply pass-through rules to.
 	GwName *string `pulumi:"gwName"`
-	// CIDRs to allow originating requests to ignore FQDN filtering rules.
+	// List of origin CIDR's to allow to pass-through FQDN filtering rules. Minimum list length: 1.
 	PassThroughCidrs []string `pulumi:"passThroughCidrs"`
 }
 
 type AviatrixFqdnPassThroughState struct {
-	// Gateway to apply FQDN pass-through rules to.
+	// Gateway name to apply pass-through rules to.
 	GwName pulumi.StringPtrInput
-	// CIDRs to allow originating requests to ignore FQDN filtering rules.
+	// List of origin CIDR's to allow to pass-through FQDN filtering rules. Minimum list length: 1.
 	PassThroughCidrs pulumi.StringArrayInput
 }
 
@@ -74,17 +116,17 @@ func (AviatrixFqdnPassThroughState) ElementType() reflect.Type {
 }
 
 type aviatrixFqdnPassThroughArgs struct {
-	// Gateway to apply FQDN pass-through rules to.
+	// Gateway name to apply pass-through rules to.
 	GwName string `pulumi:"gwName"`
-	// CIDRs to allow originating requests to ignore FQDN filtering rules.
+	// List of origin CIDR's to allow to pass-through FQDN filtering rules. Minimum list length: 1.
 	PassThroughCidrs []string `pulumi:"passThroughCidrs"`
 }
 
 // The set of arguments for constructing a AviatrixFqdnPassThrough resource.
 type AviatrixFqdnPassThroughArgs struct {
-	// Gateway to apply FQDN pass-through rules to.
+	// Gateway name to apply pass-through rules to.
 	GwName pulumi.StringInput
-	// CIDRs to allow originating requests to ignore FQDN filtering rules.
+	// List of origin CIDR's to allow to pass-through FQDN filtering rules. Minimum list length: 1.
 	PassThroughCidrs pulumi.StringArrayInput
 }
 
@@ -175,12 +217,12 @@ func (o AviatrixFqdnPassThroughOutput) ToAviatrixFqdnPassThroughOutputWithContex
 	return o
 }
 
-// Gateway to apply FQDN pass-through rules to.
+// Gateway name to apply pass-through rules to.
 func (o AviatrixFqdnPassThroughOutput) GwName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixFqdnPassThrough) pulumi.StringOutput { return v.GwName }).(pulumi.StringOutput)
 }
 
-// CIDRs to allow originating requests to ignore FQDN filtering rules.
+// List of origin CIDR's to allow to pass-through FQDN filtering rules. Minimum list length: 1.
 func (o AviatrixFqdnPassThroughOutput) PassThroughCidrs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixFqdnPassThrough) pulumi.StringArrayOutput { return v.PassThroughCidrs }).(pulumi.StringArrayOutput)
 }

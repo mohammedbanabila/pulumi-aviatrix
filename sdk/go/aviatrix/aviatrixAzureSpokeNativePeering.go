@@ -11,16 +11,56 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_azure_spoke_native_peering** resource allows the creation and management of Aviatrix-created Azure Spoke VNet attachments via Native Peering.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixAzureSpokeNativePeering(ctx, "test", &aviatrix.AviatrixAzureSpokeNativePeeringArgs{
+//				SpokeAccountName:   pulumi.String("devops-azure"),
+//				SpokeRegion:        pulumi.String("West US"),
+//				SpokeVpcId:         pulumi.String("Foo_VNet:Bar_RG:GUID"),
+//				TransitGatewayName: pulumi.String("transit-gw-azure"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **azure_spoke_native_peering** can be imported using the `transit_gateway_name`, `spoke_account_name` and `spoke_vpc_id`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixAzureSpokeNativePeering:AviatrixAzureSpokeNativePeering test transit_gateway_name~spoke_account_name~spoke_vpc_id
+//
+// ```
 type AviatrixAzureSpokeNativePeering struct {
 	pulumi.CustomResourceState
 
 	// An Aviatrix account that corresponds to a subscription in Azure.
 	SpokeAccountName pulumi.StringOutput `pulumi:"spokeAccountName"`
-	// Spoke VNet region.
+	// Spoke VNet region. Example: "West US".
 	SpokeRegion pulumi.StringOutput `pulumi:"spokeRegion"`
-	// Combination of the Spoke VNet name and resource group.
+	// Combination of the Spoke's VNet name, resource group and GUID. Example: "Foo_VNet:Bar_RG:GUID".
 	SpokeVpcId pulumi.StringOutput `pulumi:"spokeVpcId"`
-	// Name of an azure transit gateway with transit firenet enabled.
+	// Name of an Transit FireNet-enabled Azure transit gateway.
 	TransitGatewayName pulumi.StringOutput `pulumi:"transitGatewayName"`
 }
 
@@ -68,22 +108,22 @@ func GetAviatrixAzureSpokeNativePeering(ctx *pulumi.Context,
 type aviatrixAzureSpokeNativePeeringState struct {
 	// An Aviatrix account that corresponds to a subscription in Azure.
 	SpokeAccountName *string `pulumi:"spokeAccountName"`
-	// Spoke VNet region.
+	// Spoke VNet region. Example: "West US".
 	SpokeRegion *string `pulumi:"spokeRegion"`
-	// Combination of the Spoke VNet name and resource group.
+	// Combination of the Spoke's VNet name, resource group and GUID. Example: "Foo_VNet:Bar_RG:GUID".
 	SpokeVpcId *string `pulumi:"spokeVpcId"`
-	// Name of an azure transit gateway with transit firenet enabled.
+	// Name of an Transit FireNet-enabled Azure transit gateway.
 	TransitGatewayName *string `pulumi:"transitGatewayName"`
 }
 
 type AviatrixAzureSpokeNativePeeringState struct {
 	// An Aviatrix account that corresponds to a subscription in Azure.
 	SpokeAccountName pulumi.StringPtrInput
-	// Spoke VNet region.
+	// Spoke VNet region. Example: "West US".
 	SpokeRegion pulumi.StringPtrInput
-	// Combination of the Spoke VNet name and resource group.
+	// Combination of the Spoke's VNet name, resource group and GUID. Example: "Foo_VNet:Bar_RG:GUID".
 	SpokeVpcId pulumi.StringPtrInput
-	// Name of an azure transit gateway with transit firenet enabled.
+	// Name of an Transit FireNet-enabled Azure transit gateway.
 	TransitGatewayName pulumi.StringPtrInput
 }
 
@@ -94,11 +134,11 @@ func (AviatrixAzureSpokeNativePeeringState) ElementType() reflect.Type {
 type aviatrixAzureSpokeNativePeeringArgs struct {
 	// An Aviatrix account that corresponds to a subscription in Azure.
 	SpokeAccountName string `pulumi:"spokeAccountName"`
-	// Spoke VNet region.
+	// Spoke VNet region. Example: "West US".
 	SpokeRegion string `pulumi:"spokeRegion"`
-	// Combination of the Spoke VNet name and resource group.
+	// Combination of the Spoke's VNet name, resource group and GUID. Example: "Foo_VNet:Bar_RG:GUID".
 	SpokeVpcId string `pulumi:"spokeVpcId"`
-	// Name of an azure transit gateway with transit firenet enabled.
+	// Name of an Transit FireNet-enabled Azure transit gateway.
 	TransitGatewayName string `pulumi:"transitGatewayName"`
 }
 
@@ -106,11 +146,11 @@ type aviatrixAzureSpokeNativePeeringArgs struct {
 type AviatrixAzureSpokeNativePeeringArgs struct {
 	// An Aviatrix account that corresponds to a subscription in Azure.
 	SpokeAccountName pulumi.StringInput
-	// Spoke VNet region.
+	// Spoke VNet region. Example: "West US".
 	SpokeRegion pulumi.StringInput
-	// Combination of the Spoke VNet name and resource group.
+	// Combination of the Spoke's VNet name, resource group and GUID. Example: "Foo_VNet:Bar_RG:GUID".
 	SpokeVpcId pulumi.StringInput
-	// Name of an azure transit gateway with transit firenet enabled.
+	// Name of an Transit FireNet-enabled Azure transit gateway.
 	TransitGatewayName pulumi.StringInput
 }
 
@@ -206,17 +246,17 @@ func (o AviatrixAzureSpokeNativePeeringOutput) SpokeAccountName() pulumi.StringO
 	return o.ApplyT(func(v *AviatrixAzureSpokeNativePeering) pulumi.StringOutput { return v.SpokeAccountName }).(pulumi.StringOutput)
 }
 
-// Spoke VNet region.
+// Spoke VNet region. Example: "West US".
 func (o AviatrixAzureSpokeNativePeeringOutput) SpokeRegion() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAzureSpokeNativePeering) pulumi.StringOutput { return v.SpokeRegion }).(pulumi.StringOutput)
 }
 
-// Combination of the Spoke VNet name and resource group.
+// Combination of the Spoke's VNet name, resource group and GUID. Example: "Foo_VNet:Bar_RG:GUID".
 func (o AviatrixAzureSpokeNativePeeringOutput) SpokeVpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAzureSpokeNativePeering) pulumi.StringOutput { return v.SpokeVpcId }).(pulumi.StringOutput)
 }
 
-// Name of an azure transit gateway with transit firenet enabled.
+// Name of an Transit FireNet-enabled Azure transit gateway.
 func (o AviatrixAzureSpokeNativePeeringOutput) TransitGatewayName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAzureSpokeNativePeering) pulumi.StringOutput { return v.TransitGatewayName }).(pulumi.StringOutput)
 }

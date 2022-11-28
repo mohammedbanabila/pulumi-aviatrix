@@ -11,18 +11,61 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_netflow_agent** resource allows the enabling and disabling of netflow agent.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixNetflowAgent(ctx, "testNetflowAgent", &aviatrix.AviatrixNetflowAgentArgs{
+//				ExcludedGateways: pulumi.StringArray{
+//					pulumi.String("a"),
+//					pulumi.String("b"),
+//				},
+//				Port:     pulumi.Int(10),
+//				ServerIp: pulumi.String("1.2.3.4"),
+//				Version:  pulumi.Int(5),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **netflow_agent** can be imported using "netflow_agent", e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixNetflowAgent:AviatrixNetflowAgent test netflow_agent
+//
+// ```
 type AviatrixNetflowAgent struct {
 	pulumi.CustomResourceState
 
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways pulumi.StringArrayOutput `pulumi:"excludedGateways"`
 	// Netflow server port.
 	Port pulumi.IntOutput `pulumi:"port"`
 	// Netflow server IP address.
 	ServerIp pulumi.StringOutput `pulumi:"serverIp"`
-	// Enabled or not.
+	// The status of netflow agent.
 	Status pulumi.StringOutput `pulumi:"status"`
-	// Netflow version.
+	// Netflow version (5 or 9). 5 by default.
 	Version pulumi.IntPtrOutput `pulumi:"version"`
 }
 
@@ -62,28 +105,28 @@ func GetAviatrixNetflowAgent(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixNetflowAgent resources.
 type aviatrixNetflowAgentState struct {
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways []string `pulumi:"excludedGateways"`
 	// Netflow server port.
 	Port *int `pulumi:"port"`
 	// Netflow server IP address.
 	ServerIp *string `pulumi:"serverIp"`
-	// Enabled or not.
+	// The status of netflow agent.
 	Status *string `pulumi:"status"`
-	// Netflow version.
+	// Netflow version (5 or 9). 5 by default.
 	Version *int `pulumi:"version"`
 }
 
 type AviatrixNetflowAgentState struct {
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways pulumi.StringArrayInput
 	// Netflow server port.
 	Port pulumi.IntPtrInput
 	// Netflow server IP address.
 	ServerIp pulumi.StringPtrInput
-	// Enabled or not.
+	// The status of netflow agent.
 	Status pulumi.StringPtrInput
-	// Netflow version.
+	// Netflow version (5 or 9). 5 by default.
 	Version pulumi.IntPtrInput
 }
 
@@ -92,25 +135,25 @@ func (AviatrixNetflowAgentState) ElementType() reflect.Type {
 }
 
 type aviatrixNetflowAgentArgs struct {
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways []string `pulumi:"excludedGateways"`
 	// Netflow server port.
 	Port int `pulumi:"port"`
 	// Netflow server IP address.
 	ServerIp string `pulumi:"serverIp"`
-	// Netflow version.
+	// Netflow version (5 or 9). 5 by default.
 	Version *int `pulumi:"version"`
 }
 
 // The set of arguments for constructing a AviatrixNetflowAgent resource.
 type AviatrixNetflowAgentArgs struct {
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways pulumi.StringArrayInput
 	// Netflow server port.
 	Port pulumi.IntInput
 	// Netflow server IP address.
 	ServerIp pulumi.StringInput
-	// Netflow version.
+	// Netflow version (5 or 9). 5 by default.
 	Version pulumi.IntPtrInput
 }
 
@@ -201,7 +244,7 @@ func (o AviatrixNetflowAgentOutput) ToAviatrixNetflowAgentOutputWithContext(ctx 
 	return o
 }
 
-// List of excluded gateways.
+// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 func (o AviatrixNetflowAgentOutput) ExcludedGateways() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixNetflowAgent) pulumi.StringArrayOutput { return v.ExcludedGateways }).(pulumi.StringArrayOutput)
 }
@@ -216,12 +259,12 @@ func (o AviatrixNetflowAgentOutput) ServerIp() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixNetflowAgent) pulumi.StringOutput { return v.ServerIp }).(pulumi.StringOutput)
 }
 
-// Enabled or not.
+// The status of netflow agent.
 func (o AviatrixNetflowAgentOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixNetflowAgent) pulumi.StringOutput { return v.Status }).(pulumi.StringOutput)
 }
 
-// Netflow version.
+// Netflow version (5 or 9). 5 by default.
 func (o AviatrixNetflowAgentOutput) Version() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *AviatrixNetflowAgent) pulumi.IntPtrOutput { return v.Version }).(pulumi.IntPtrOutput)
 }

@@ -4,6 +4,23 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_gateway** data source provides details about a specific gateway created by the Aviatrix Controller.
+ *
+ * This data source can prove useful when a module accepts a gateway's detail as an input variable. For example, requiring the gateway's name configuring a site2cloud connection.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Aviatrix Gateway Data Source
+ * const foo = pulumi.output(aviatrix.getAviatrixGateway({
+ *     gwName: "gatewayname",
+ * }));
+ * ```
+ */
 export function getAviatrixGateway(args: GetAviatrixGatewayArgs, opts?: pulumi.InvokeOptions): Promise<GetAviatrixGatewayResult> {
     if (!opts) {
         opts = {}
@@ -19,6 +36,9 @@ export function getAviatrixGateway(args: GetAviatrixGatewayArgs, opts?: pulumi.I
  * A collection of arguments for invoking getAviatrixGateway.
  */
 export interface GetAviatrixGatewayArgs {
+    /**
+     * Gateway name.
+     */
     gwName: string;
 }
 
@@ -26,90 +46,276 @@ export interface GetAviatrixGatewayArgs {
  * A collection of values returned by getAviatrixGateway.
  */
 export interface GetAviatrixGatewayResult {
+    /**
+     * Aviatrix account name.
+     */
     readonly accountName: string;
+    /**
+     * A list of destination CIDR ranges that will also go through the VPN tunnel when Split Tunnel Mode is enabled.
+     */
     readonly additionalCidrs: string;
+    /**
+     * A list of CIDR ranges separated by comma to configure when 'designated_gateway' feature is enabled.
+     */
     readonly additionalCidrsDesignatedGateway: string;
+    /**
+     * When value is false, an idle address in Elastic IP pool is reused for this gateway. Otherwise, a new Elastic IP is allocated and used for this gateway.
+     */
     readonly allocateNewEip: boolean;
+    /**
+     * Availability domain for OCI.
+     */
     readonly availabilityDomain: string;
     readonly azureEipNameResourceGroup: string;
+    /**
+     * Instance ID of the gateway.
+     */
     readonly cloudInstanceId: string;
+    /**
+     * Type of cloud service provider.
+     */
     readonly cloudType: number;
+    /**
+     * API hostname for DUO auth mode.
+     */
     readonly duoApiHostname: string;
+    /**
+     * Integration key for DUO auth mode.
+     */
     readonly duoIntegrationKey: string;
+    /**
+     * Push mode for DUO auth.
+     */
     readonly duoPushMode: string;
+    /**
+     * ELB DNS Name.
+     */
     readonly elbDnsName: string;
+    /**
+     * Name of the ELB created.
+     */
     readonly elbName: string;
+    /**
+     * Status of Designated Gateway feature for Gateway.
+     */
     readonly enableDesignatedGateway: boolean;
+    /**
+     * Status of ELB for the gateway.
+     */
     readonly enableElb: boolean;
+    /**
+     * Enable encrypt gateway EBS volume. Only supported for AWS provider.
+     */
     readonly enableEncryptVolume: boolean;
     readonly enableJumboFrame: boolean;
+    /**
+     * Status LDAP or not.
+     */
     readonly enableLdap: boolean;
     readonly enableMonitorGatewaySubnets: boolean;
     readonly enablePublicSubnetFiltering: boolean;
     readonly enableSpotInstance: boolean;
+    /**
+     * Status of VPC Dns Server for Gateway.
+     */
     readonly enableVpcDnsServer: boolean;
+    /**
+     * Status of VPN NAT.
+     */
     readonly enableVpnNat: boolean;
+    /**
+     * Fault domain for OCI.
+     */
     readonly faultDomain: string;
     readonly fqdnLanCidr: string;
     readonly fqdnLanInterface: string;
     readonly fqdnLanVpcId: string;
+    /**
+     * Aviatrix gateway name.
+     */
     readonly gwName: string;
+    /**
+     * Size of gateway Instance.
+     */
     readonly gwSize: string;
     /**
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
     readonly idleTimeout: number;
+    /**
+     * The image version of the gateway.
+     */
     readonly imageVersion: string;
+    /**
+     * Status of Insane Mode for Gateway.
+     */
     readonly insaneMode: boolean;
+    /**
+     * AZ of subnet being created for Insane Mode gateway.
+     */
     readonly insaneModeAz: string;
+    /**
+     * LDAP base DN.
+     */
     readonly ldapBaseDn: string;
+    /**
+     * LDAP bind DN.
+     */
     readonly ldapBindDn: string;
+    /**
+     * LDAP server address.
+     */
     readonly ldapServer: string;
+    /**
+     * LDAP user attribute.
+     */
     readonly ldapUsernameAttribute: string;
+    /**
+     * Maximum connection of VPN access.
+     */
     readonly maxVpnConn: string;
     readonly monitorExcludeLists: string[];
+    /**
+     * A list of DNS servers used to resolve domain names by a connected VPN user when Split Tunnel Mode is enabled.
+     */
     readonly nameServers: string;
+    /**
+     * URL for Okta auth mode.
+     */
     readonly oktaUrl: string;
+    /**
+     * Username suffix for Okta auth mode.
+     */
     readonly oktaUsernameSuffix: string;
+    /**
+     * Two step authentication mode.
+     */
     readonly otpMode: string;
+    /**
+     * HA gateway availability domain for OCI.
+     */
     readonly peeringHaAvailabilityDomain: string;
     readonly peeringHaAzureEipNameResourceGroup: string;
+    /**
+     * Instance ID of the peering HA gateway.
+     */
     readonly peeringHaCloudInstanceId: string;
+    /**
+     * HA gateway fault domain for OCI.
+     */
     readonly peeringHaFaultDomain: string;
+    /**
+     * Aviatrix gateway unique name of HA gateway.
+     */
     readonly peeringHaGwName: string;
+    /**
+     * Peering HA Gateway Size.
+     */
     readonly peeringHaGwSize: string;
+    /**
+     * The image version of the HA gateway.
+     */
     readonly peeringHaImageVersion: string;
+    /**
+     * AZ of subnet being created for Insane Mode Peering HA Gateway. Required if insaneMode is set.
+     */
     readonly peeringHaInsaneModeAz: string;
+    /**
+     * Private IP address of HA gateway.
+     */
     readonly peeringHaPrivateIp: string;
+    /**
+     * Public IP address that you want assigned to the HA peering instance.
+     */
     readonly peeringHaPublicIp: string;
     readonly peeringHaSecurityGroupId: string;
+    /**
+     * The software version of the HA gateway.
+     */
     readonly peeringHaSoftwareVersion: string;
+    /**
+     * Public Subnet Information while creating Peering HA Gateway, only subnet is accepted. Required to create peering ha gateway if cloudType = 1 or 8 (AWS or Azure).
+     */
     readonly peeringHaSubnet: string;
+    /**
+     * Zone information for creating Peering HA Gateway. Required to create peering ha gateway if cloudType = 4 (GCP).
+     */
     readonly peeringHaZone: string;
+    /**
+     * Private IP address of the Gateway created.
+     */
     readonly privateIp: string;
+    /**
+     * NS server used by the gateway.
+     */
     readonly publicDnsServer: string;
+    /**
+     * Public IP address of the Gateway created.
+     */
     readonly publicIp: string;
     readonly publicSubnetFilteringGuardDutyEnforced: boolean;
     readonly publicSubnetFilteringHaRouteTables: string[];
     readonly publicSubnetFilteringRouteTables: string[];
     readonly renegotiationInterval: number;
+    /**
+     * Status of SAML.
+     */
     readonly samlEnabled: boolean;
+    /**
+     * A list of domain names that will use the NameServer when a specific name is not in the destination when Split Tunnel Mode is enabled.
+     */
     readonly searchDomains: string;
+    /**
+     * Security group used for the gateway.
+     */
     readonly securityGroupId: string;
+    /**
+     * Status of Single AZ HA.
+     */
     readonly singleAzHa: boolean;
+    /**
+     * Single IP Source NAT status for the container.
+     */
     readonly singleIpSnat: boolean;
+    /**
+     * The software version of the gateway.
+     */
     readonly softwareVersion: string;
+    /**
+     * Status of split tunnel mode.
+     */
     readonly splitTunnel: boolean;
     readonly spotPrice: string;
+    /**
+     * A VPC Network address range selected from one of the available network ranges.
+     */
     readonly subnet: string;
+    /**
+     * Instance tag of cloud provider.
+     */
     readonly tagLists: string[];
     readonly tags: {[key: string]: string};
     readonly tunnelDetectionTime: number;
+    /**
+     * VPC-ID/VNet-Name of cloud provider.
+     */
     readonly vpcId: string;
+    /**
+     * Region of cloud provider.
+     */
     readonly vpcReg: string;
+    /**
+     * Status of user access through VPN to the container.
+     */
     readonly vpnAccess: boolean;
+    /**
+     * VPN CIDR block for the container.
+     */
     readonly vpnCidr: string;
+    /**
+     * ELB protocol for VPN gateway with ELB enabled.
+     */
     readonly vpnProtocol: string;
     readonly zone: string;
 }
@@ -122,5 +328,8 @@ export function getAviatrixGatewayOutput(args: GetAviatrixGatewayOutputArgs, opt
  * A collection of arguments for invoking getAviatrixGateway.
  */
 export interface GetAviatrixGatewayOutputArgs {
+    /**
+     * Gateway name.
+     */
     gwName: pulumi.Input<string>;
 }

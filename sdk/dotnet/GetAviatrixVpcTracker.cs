@@ -11,25 +11,97 @@ namespace Pulumi.Aviatrix
 {
     public static class GetAviatrixVpcTracker
     {
+        /// <summary>
+        /// Use this data source to get the list of VPC's for use in other resources.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using Pulumi;
+        /// using Aviatrix = Pulumi.Aviatrix;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var foo = Aviatrix.GetAviatrixVpcTracker.Invoke(new()
+        ///     {
+        ///         AccountName = "bar",
+        ///         Cidr = "10.0.0.1/24",
+        ///         CloudType = 1,
+        ///         Region = "us-west-1",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// ## Notes
+        /// 
+        /// * Please be aware this data source could take up to 20 minutes to refresh depending on the number of VPCs and cloud accounts.
+        /// </summary>
         public static Task<GetAviatrixVpcTrackerResult> InvokeAsync(GetAviatrixVpcTrackerArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAviatrixVpcTrackerResult>("aviatrix:index/getAviatrixVpcTracker:getAviatrixVpcTracker", args ?? new GetAviatrixVpcTrackerArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAviatrixVpcTrackerResult>("aviatrix:index/getAviatrixVpcTracker:getAviatrixVpcTracker", args ?? new GetAviatrixVpcTrackerArgs(), options.WithDefaults());
 
+        /// <summary>
+        /// Use this data source to get the list of VPC's for use in other resources.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using Pulumi;
+        /// using Aviatrix = Pulumi.Aviatrix;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var foo = Aviatrix.GetAviatrixVpcTracker.Invoke(new()
+        ///     {
+        ///         AccountName = "bar",
+        ///         Cidr = "10.0.0.1/24",
+        ///         CloudType = 1,
+        ///         Region = "us-west-1",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// ## Notes
+        /// 
+        /// * Please be aware this data source could take up to 20 minutes to refresh depending on the number of VPCs and cloud accounts.
+        /// </summary>
         public static Output<GetAviatrixVpcTrackerResult> Invoke(GetAviatrixVpcTrackerInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAviatrixVpcTrackerResult>("aviatrix:index/getAviatrixVpcTracker:getAviatrixVpcTracker", args ?? new GetAviatrixVpcTrackerInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAviatrixVpcTrackerResult>("aviatrix:index/getAviatrixVpcTracker:getAviatrixVpcTracker", args ?? new GetAviatrixVpcTrackerInvokeArgs(), options.WithDefaults());
     }
 
 
     public sealed class GetAviatrixVpcTrackerArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// Filters VPC list by access account name.
+        /// </summary>
         [Input("accountName")]
         public string? AccountName { get; set; }
 
+        /// <summary>
+        /// Filters VPC list by CIDR (AWS/Azure only).
+        /// </summary>
         [Input("cidr")]
         public string? Cidr { get; set; }
 
+        /// <summary>
+        /// Filters VPC list by cloud provider id. For example, cloud_type = 1 will give all AWS VPCs.
+        /// </summary>
         [Input("cloudType")]
         public int? CloudType { get; set; }
 
+        /// <summary>
+        /// Filters VPC list by region (AWS/Azure only).
+        /// </summary>
         [Input("region")]
         public string? Region { get; set; }
 
@@ -41,15 +113,27 @@ namespace Pulumi.Aviatrix
 
     public sealed class GetAviatrixVpcTrackerInvokeArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// Filters VPC list by access account name.
+        /// </summary>
         [Input("accountName")]
         public Input<string>? AccountName { get; set; }
 
+        /// <summary>
+        /// Filters VPC list by CIDR (AWS/Azure only).
+        /// </summary>
         [Input("cidr")]
         public Input<string>? Cidr { get; set; }
 
+        /// <summary>
+        /// Filters VPC list by cloud provider id. For example, cloud_type = 1 will give all AWS VPCs.
+        /// </summary>
         [Input("cloudType")]
         public Input<int>? CloudType { get; set; }
 
+        /// <summary>
+        /// Filters VPC list by region (AWS/Azure only).
+        /// </summary>
         [Input("region")]
         public Input<string>? Region { get; set; }
 
@@ -63,14 +147,29 @@ namespace Pulumi.Aviatrix
     [OutputType]
     public sealed class GetAviatrixVpcTrackerResult
     {
+        /// <summary>
+        /// Aviatrix access account associated with the VPC.
+        /// </summary>
         public readonly string? AccountName;
+        /// <summary>
+        /// Subnet CIDR.
+        /// </summary>
         public readonly string? Cidr;
+        /// <summary>
+        /// Cloud provider id hosting this VPC.
+        /// </summary>
         public readonly int? CloudType;
         /// <summary>
         /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// Subnet region.
+        /// </summary>
         public readonly string? Region;
+        /// <summary>
+        /// List of VPCs from the VPC tracker.
+        /// </summary>
         public readonly ImmutableArray<Outputs.GetAviatrixVpcTrackerVpcListResult> VpcLists;
 
         [OutputConstructor]

@@ -11,18 +11,27 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// ## Import
+//
+// **gateway_dnat** can be imported using the `gw_name`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixGatewayDnat:AviatrixGatewayDnat test gw_name
+//
+// ```
 type AviatrixGatewayDnat struct {
 	pulumi.CustomResourceState
 
 	// Computed attribute to store the previous connection policy.
 	ConnectionPolicies AviatrixGatewayDnatConnectionPolicyArrayOutput `pulumi:"connectionPolicies"`
-	// Policy rule to be applied to gateway.
+	// Policy rule applied for enabling Destination NAT (DNAT), which allows you to change the destination to a virtual address range. Currently only supports AWS(1) and Azure(8).
 	DnatPolicies AviatrixGatewayDnatDnatPolicyArrayOutput `pulumi:"dnatPolicies"`
-	// Name of the gateway.
+	// Name of the Aviatrix gateway the custom DNAT will be configured for.
 	GwName pulumi.StringOutput `pulumi:"gwName"`
 	// Computed attribute to store the previous interface policy.
 	InterfacePolicies AviatrixGatewayDnatInterfacePolicyArrayOutput `pulumi:"interfacePolicies"`
-	// Whether to sync the policies to the HA gateway.
+	// Sync the policies to the HA gateway. Valid values: true, false. Default: true.
 	SyncToHa pulumi.BoolPtrOutput `pulumi:"syncToHa"`
 }
 
@@ -64,26 +73,26 @@ func GetAviatrixGatewayDnat(ctx *pulumi.Context,
 type aviatrixGatewayDnatState struct {
 	// Computed attribute to store the previous connection policy.
 	ConnectionPolicies []AviatrixGatewayDnatConnectionPolicy `pulumi:"connectionPolicies"`
-	// Policy rule to be applied to gateway.
+	// Policy rule applied for enabling Destination NAT (DNAT), which allows you to change the destination to a virtual address range. Currently only supports AWS(1) and Azure(8).
 	DnatPolicies []AviatrixGatewayDnatDnatPolicy `pulumi:"dnatPolicies"`
-	// Name of the gateway.
+	// Name of the Aviatrix gateway the custom DNAT will be configured for.
 	GwName *string `pulumi:"gwName"`
 	// Computed attribute to store the previous interface policy.
 	InterfacePolicies []AviatrixGatewayDnatInterfacePolicy `pulumi:"interfacePolicies"`
-	// Whether to sync the policies to the HA gateway.
+	// Sync the policies to the HA gateway. Valid values: true, false. Default: true.
 	SyncToHa *bool `pulumi:"syncToHa"`
 }
 
 type AviatrixGatewayDnatState struct {
 	// Computed attribute to store the previous connection policy.
 	ConnectionPolicies AviatrixGatewayDnatConnectionPolicyArrayInput
-	// Policy rule to be applied to gateway.
+	// Policy rule applied for enabling Destination NAT (DNAT), which allows you to change the destination to a virtual address range. Currently only supports AWS(1) and Azure(8).
 	DnatPolicies AviatrixGatewayDnatDnatPolicyArrayInput
-	// Name of the gateway.
+	// Name of the Aviatrix gateway the custom DNAT will be configured for.
 	GwName pulumi.StringPtrInput
 	// Computed attribute to store the previous interface policy.
 	InterfacePolicies AviatrixGatewayDnatInterfacePolicyArrayInput
-	// Whether to sync the policies to the HA gateway.
+	// Sync the policies to the HA gateway. Valid values: true, false. Default: true.
 	SyncToHa pulumi.BoolPtrInput
 }
 
@@ -92,21 +101,21 @@ func (AviatrixGatewayDnatState) ElementType() reflect.Type {
 }
 
 type aviatrixGatewayDnatArgs struct {
-	// Policy rule to be applied to gateway.
+	// Policy rule applied for enabling Destination NAT (DNAT), which allows you to change the destination to a virtual address range. Currently only supports AWS(1) and Azure(8).
 	DnatPolicies []AviatrixGatewayDnatDnatPolicy `pulumi:"dnatPolicies"`
-	// Name of the gateway.
+	// Name of the Aviatrix gateway the custom DNAT will be configured for.
 	GwName string `pulumi:"gwName"`
-	// Whether to sync the policies to the HA gateway.
+	// Sync the policies to the HA gateway. Valid values: true, false. Default: true.
 	SyncToHa *bool `pulumi:"syncToHa"`
 }
 
 // The set of arguments for constructing a AviatrixGatewayDnat resource.
 type AviatrixGatewayDnatArgs struct {
-	// Policy rule to be applied to gateway.
+	// Policy rule applied for enabling Destination NAT (DNAT), which allows you to change the destination to a virtual address range. Currently only supports AWS(1) and Azure(8).
 	DnatPolicies AviatrixGatewayDnatDnatPolicyArrayInput
-	// Name of the gateway.
+	// Name of the Aviatrix gateway the custom DNAT will be configured for.
 	GwName pulumi.StringInput
-	// Whether to sync the policies to the HA gateway.
+	// Sync the policies to the HA gateway. Valid values: true, false. Default: true.
 	SyncToHa pulumi.BoolPtrInput
 }
 
@@ -204,12 +213,12 @@ func (o AviatrixGatewayDnatOutput) ConnectionPolicies() AviatrixGatewayDnatConne
 	}).(AviatrixGatewayDnatConnectionPolicyArrayOutput)
 }
 
-// Policy rule to be applied to gateway.
+// Policy rule applied for enabling Destination NAT (DNAT), which allows you to change the destination to a virtual address range. Currently only supports AWS(1) and Azure(8).
 func (o AviatrixGatewayDnatOutput) DnatPolicies() AviatrixGatewayDnatDnatPolicyArrayOutput {
 	return o.ApplyT(func(v *AviatrixGatewayDnat) AviatrixGatewayDnatDnatPolicyArrayOutput { return v.DnatPolicies }).(AviatrixGatewayDnatDnatPolicyArrayOutput)
 }
 
-// Name of the gateway.
+// Name of the Aviatrix gateway the custom DNAT will be configured for.
 func (o AviatrixGatewayDnatOutput) GwName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixGatewayDnat) pulumi.StringOutput { return v.GwName }).(pulumi.StringOutput)
 }
@@ -219,7 +228,7 @@ func (o AviatrixGatewayDnatOutput) InterfacePolicies() AviatrixGatewayDnatInterf
 	return o.ApplyT(func(v *AviatrixGatewayDnat) AviatrixGatewayDnatInterfacePolicyArrayOutput { return v.InterfacePolicies }).(AviatrixGatewayDnatInterfacePolicyArrayOutput)
 }
 
-// Whether to sync the policies to the HA gateway.
+// Sync the policies to the HA gateway. Valid values: true, false. Default: true.
 func (o AviatrixGatewayDnatOutput) SyncToHa() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixGatewayDnat) pulumi.BoolPtrOutput { return v.SyncToHa }).(pulumi.BoolPtrOutput)
 }

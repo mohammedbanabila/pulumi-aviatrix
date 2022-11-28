@@ -55,21 +55,33 @@ class GetAviatrixFirenetResult:
     @property
     @pulumi.getter(name="egressEnabled")
     def egress_enabled(self) -> bool:
+        """
+        Enable/Disable egress through firewall.
+        """
         return pulumi.get(self, "egress_enabled")
 
     @property
     @pulumi.getter(name="egressStaticCidrs")
     def egress_static_cidrs(self) -> Sequence[str]:
+        """
+        List of egress static CIDRs.
+        """
         return pulumi.get(self, "egress_static_cidrs")
 
     @property
     @pulumi.getter(name="firewallInstanceAssociations")
     def firewall_instance_associations(self) -> Optional[Sequence['outputs.GetAviatrixFirenetFirewallInstanceAssociationResult']]:
+        """
+        List of firewall instances associated with fireNet.
+        """
         return pulumi.get(self, "firewall_instance_associations")
 
     @property
     @pulumi.getter(name="hashingAlgorithm")
     def hashing_algorithm(self) -> str:
+        """
+        (Optional) Hashing algorithm to load balance traffic across the firewall.
+        """
         return pulumi.get(self, "hashing_algorithm")
 
     @property
@@ -83,21 +95,33 @@ class GetAviatrixFirenetResult:
     @property
     @pulumi.getter(name="inspectionEnabled")
     def inspection_enabled(self) -> bool:
+        """
+        Enable/Disable traffic inspection.
+        """
         return pulumi.get(self, "inspection_enabled")
 
     @property
     @pulumi.getter(name="keepAliveViaLanInterfaceEnabled")
     def keep_alive_via_lan_interface_enabled(self) -> bool:
+        """
+        (Optional) Enable Keep Alive via Firewall LAN Interface.
+        """
         return pulumi.get(self, "keep_alive_via_lan_interface_enabled")
 
     @property
     @pulumi.getter(name="tgwSegmentationForEgressEnabled")
     def tgw_segmentation_for_egress_enabled(self) -> bool:
+        """
+        Enable TGW segmentation for egress.
+        """
         return pulumi.get(self, "tgw_segmentation_for_egress_enabled")
 
     @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> str:
+        """
+        ID of the Security VPC.
+        """
         return pulumi.get(self, "vpc_id")
 
 
@@ -122,7 +146,22 @@ def get_aviatrix_firenet(firewall_instance_associations: Optional[Sequence[pulum
                          vpc_id: Optional[str] = None,
                          opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetAviatrixFirenetResult:
     """
-    Use this data source to access information about an existing resource.
+    The **aviatrix_firenet** data source provides details about a specific FireNet created by the Aviatrix Controller.
+
+    This data source can prove useful when a module accepts a FireNet's detail as an input variable.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_aviatrix as aviatrix
+
+    foo = aviatrix.get_aviatrix_firenet(vpc_id="vpc-abcdef")
+    ```
+
+
+    :param Sequence[pulumi.InputType['GetAviatrixFirenetFirewallInstanceAssociationArgs']] firewall_instance_associations: List of firewall instances associated with fireNet.
+    :param str vpc_id: ID of the Security VPC.
     """
     __args__ = dict()
     __args__['firewallInstanceAssociations'] = firewall_instance_associations
@@ -147,6 +186,21 @@ def get_aviatrix_firenet_output(firewall_instance_associations: Optional[pulumi.
                                 vpc_id: Optional[pulumi.Input[str]] = None,
                                 opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetAviatrixFirenetResult]:
     """
-    Use this data source to access information about an existing resource.
+    The **aviatrix_firenet** data source provides details about a specific FireNet created by the Aviatrix Controller.
+
+    This data source can prove useful when a module accepts a FireNet's detail as an input variable.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_aviatrix as aviatrix
+
+    foo = aviatrix.get_aviatrix_firenet(vpc_id="vpc-abcdef")
+    ```
+
+
+    :param Sequence[pulumi.InputType['GetAviatrixFirenetFirewallInstanceAssociationArgs']] firewall_instance_associations: List of firewall instances associated with fireNet.
+    :param str vpc_id: ID of the Security VPC.
     """
     ...

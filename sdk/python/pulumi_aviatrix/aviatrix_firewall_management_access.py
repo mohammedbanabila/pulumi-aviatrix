@@ -18,8 +18,8 @@ class AviatrixFirewallManagementAccessArgs:
                  transit_firenet_gateway_name: pulumi.Input[str]):
         """
         The set of arguments for constructing a AviatrixFirewallManagementAccess resource.
-        :param pulumi.Input[str] management_access_resource_name: Name of the resource to be enabled firewall management access.
-        :param pulumi.Input[str] transit_firenet_gateway_name: Name of the transit firenet gateway.
+        :param pulumi.Input[str] management_access_resource_name: Name of the resource to enable Firewall Management Access.
+        :param pulumi.Input[str] transit_firenet_gateway_name: Name of the Transit FireNet-enabled transit gateway. Currently supports AWS(1) and Azure(8) providers.
         """
         pulumi.set(__self__, "management_access_resource_name", management_access_resource_name)
         pulumi.set(__self__, "transit_firenet_gateway_name", transit_firenet_gateway_name)
@@ -28,7 +28,7 @@ class AviatrixFirewallManagementAccessArgs:
     @pulumi.getter(name="managementAccessResourceName")
     def management_access_resource_name(self) -> pulumi.Input[str]:
         """
-        Name of the resource to be enabled firewall management access.
+        Name of the resource to enable Firewall Management Access.
         """
         return pulumi.get(self, "management_access_resource_name")
 
@@ -40,7 +40,7 @@ class AviatrixFirewallManagementAccessArgs:
     @pulumi.getter(name="transitFirenetGatewayName")
     def transit_firenet_gateway_name(self) -> pulumi.Input[str]:
         """
-        Name of the transit firenet gateway.
+        Name of the Transit FireNet-enabled transit gateway. Currently supports AWS(1) and Azure(8) providers.
         """
         return pulumi.get(self, "transit_firenet_gateway_name")
 
@@ -56,8 +56,8 @@ class _AviatrixFirewallManagementAccessState:
                  transit_firenet_gateway_name: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixFirewallManagementAccess resources.
-        :param pulumi.Input[str] management_access_resource_name: Name of the resource to be enabled firewall management access.
-        :param pulumi.Input[str] transit_firenet_gateway_name: Name of the transit firenet gateway.
+        :param pulumi.Input[str] management_access_resource_name: Name of the resource to enable Firewall Management Access.
+        :param pulumi.Input[str] transit_firenet_gateway_name: Name of the Transit FireNet-enabled transit gateway. Currently supports AWS(1) and Azure(8) providers.
         """
         if management_access_resource_name is not None:
             pulumi.set(__self__, "management_access_resource_name", management_access_resource_name)
@@ -68,7 +68,7 @@ class _AviatrixFirewallManagementAccessState:
     @pulumi.getter(name="managementAccessResourceName")
     def management_access_resource_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the resource to be enabled firewall management access.
+        Name of the resource to enable Firewall Management Access.
         """
         return pulumi.get(self, "management_access_resource_name")
 
@@ -80,7 +80,7 @@ class _AviatrixFirewallManagementAccessState:
     @pulumi.getter(name="transitFirenetGatewayName")
     def transit_firenet_gateway_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the transit firenet gateway.
+        Name of the Transit FireNet-enabled transit gateway. Currently supports AWS(1) and Azure(8) providers.
         """
         return pulumi.get(self, "transit_firenet_gateway_name")
 
@@ -98,11 +98,32 @@ class AviatrixFirewallManagementAccess(pulumi.CustomResource):
                  transit_firenet_gateway_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixFirewallManagementAccess resource with the given unique name, props, and options.
+        The **aviatrix_firewall_management_access** resource allows the management of which resource to permit visibility into the Transit (FireNet) VPC.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Firewall Management Access
+        test_firewall_management_access = aviatrix.AviatrixFirewallManagementAccess("testFirewallManagementAccess",
+            management_access_resource_name="SPOKE:spoke-gw",
+            transit_firenet_gateway_name="transit-gw")
+        ```
+
+        ## Import
+
+        **firewall_management_access** can be imported using the `transit_firenet_gateway_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixFirewallManagementAccess:AviatrixFirewallManagementAccess test transit_firenet_gateway_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] management_access_resource_name: Name of the resource to be enabled firewall management access.
-        :param pulumi.Input[str] transit_firenet_gateway_name: Name of the transit firenet gateway.
+        :param pulumi.Input[str] management_access_resource_name: Name of the resource to enable Firewall Management Access.
+        :param pulumi.Input[str] transit_firenet_gateway_name: Name of the Transit FireNet-enabled transit gateway. Currently supports AWS(1) and Azure(8) providers.
         """
         ...
     @overload
@@ -111,7 +132,28 @@ class AviatrixFirewallManagementAccess(pulumi.CustomResource):
                  args: AviatrixFirewallManagementAccessArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixFirewallManagementAccess resource with the given unique name, props, and options.
+        The **aviatrix_firewall_management_access** resource allows the management of which resource to permit visibility into the Transit (FireNet) VPC.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Firewall Management Access
+        test_firewall_management_access = aviatrix.AviatrixFirewallManagementAccess("testFirewallManagementAccess",
+            management_access_resource_name="SPOKE:spoke-gw",
+            transit_firenet_gateway_name="transit-gw")
+        ```
+
+        ## Import
+
+        **firewall_management_access** can be imported using the `transit_firenet_gateway_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixFirewallManagementAccess:AviatrixFirewallManagementAccess test transit_firenet_gateway_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixFirewallManagementAccessArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -163,8 +205,8 @@ class AviatrixFirewallManagementAccess(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] management_access_resource_name: Name of the resource to be enabled firewall management access.
-        :param pulumi.Input[str] transit_firenet_gateway_name: Name of the transit firenet gateway.
+        :param pulumi.Input[str] management_access_resource_name: Name of the resource to enable Firewall Management Access.
+        :param pulumi.Input[str] transit_firenet_gateway_name: Name of the Transit FireNet-enabled transit gateway. Currently supports AWS(1) and Azure(8) providers.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -178,7 +220,7 @@ class AviatrixFirewallManagementAccess(pulumi.CustomResource):
     @pulumi.getter(name="managementAccessResourceName")
     def management_access_resource_name(self) -> pulumi.Output[str]:
         """
-        Name of the resource to be enabled firewall management access.
+        Name of the resource to enable Firewall Management Access.
         """
         return pulumi.get(self, "management_access_resource_name")
 
@@ -186,7 +228,7 @@ class AviatrixFirewallManagementAccess(pulumi.CustomResource):
     @pulumi.getter(name="transitFirenetGatewayName")
     def transit_firenet_gateway_name(self) -> pulumi.Output[str]:
         """
-        Name of the transit firenet gateway.
+        Name of the Transit FireNet-enabled transit gateway. Currently supports AWS(1) and Azure(8) providers.
         """
         return pulumi.get(self, "transit_firenet_gateway_name")
 

@@ -9,18 +9,50 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Spoke Transit Attachment
+    ///     var testAttachment = new Aviatrix.AviatrixSpokeTransitAttachment("testAttachment", new()
+    ///     {
+    ///         RouteTables = new[]
+    ///         {
+    ///             "rtb-737d540c",
+    ///             "rtb-626d045c",
+    ///         },
+    ///         SpokeGwName = "spoke-gw",
+    ///         TransitGwName = "transit-gw",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **spoke_transit_attachment** can be imported using the `spoke_gw_name` and `transit_gw_name`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixSpokeTransitAttachment:AviatrixSpokeTransitAttachment test spoke_gw_name~transit_gw_name
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixSpokeTransitAttachment:AviatrixSpokeTransitAttachment")]
     public partial class AviatrixSpokeTransitAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Indicates whether the maximum amount of HPE tunnels will be created. Only valid when transit and spoke gateways are each
-        /// launched in Insane Mode and in the same cloud type. Available as of provider version R2.22.2+.
+        /// Indicates whether the maximum amount of HPE tunnels will be created. Only valid when transit and spoke gateways are each launched in Insane Mode and in the same cloud type. Default value: true. Available as of provider version R2.22.2+.
         /// </summary>
         [Output("enableMaxPerformance")]
         public Output<bool?> EnableMaxPerformance { get; private set; } = null!;
 
         /// <summary>
-        /// Learned routes will be propagated to these route tables.
+        /// Learned routes will be propagated to these route tables. Example: ["rtb-212ff547","rtb-04539787"].
         /// </summary>
         [Output("routeTables")]
         public Output<ImmutableArray<string>> RouteTables { get; private set; } = null!;
@@ -38,7 +70,7 @@ namespace Pulumi.Aviatrix
         public Output<string> SpokeGwName { get; private set; } = null!;
 
         /// <summary>
-        /// AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on spoke gateway.
+        /// Connection based AS Path Prepend. Valid only for BGP connection. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on spoke_gateway_name. Available as of provider version R2.23+.
         /// </summary>
         [Output("spokePrependAsPaths")]
         public Output<ImmutableArray<string>> SpokePrependAsPaths { get; private set; } = null!;
@@ -50,7 +82,7 @@ namespace Pulumi.Aviatrix
         public Output<string> TransitGwName { get; private set; } = null!;
 
         /// <summary>
-        /// AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit gateway.
+        /// Connection based AS Path Prepend. Valid only for BGP connection. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on transit_gateway_name. Available as of provider version R2.23+.
         /// </summary>
         [Output("transitPrependAsPaths")]
         public Output<ImmutableArray<string>> TransitPrependAsPaths { get; private set; } = null!;
@@ -103,8 +135,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixSpokeTransitAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Indicates whether the maximum amount of HPE tunnels will be created. Only valid when transit and spoke gateways are each
-        /// launched in Insane Mode and in the same cloud type. Available as of provider version R2.22.2+.
+        /// Indicates whether the maximum amount of HPE tunnels will be created. Only valid when transit and spoke gateways are each launched in Insane Mode and in the same cloud type. Default value: true. Available as of provider version R2.22.2+.
         /// </summary>
         [Input("enableMaxPerformance")]
         public Input<bool>? EnableMaxPerformance { get; set; }
@@ -113,7 +144,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _routeTables;
 
         /// <summary>
-        /// Learned routes will be propagated to these route tables.
+        /// Learned routes will be propagated to these route tables. Example: ["rtb-212ff547","rtb-04539787"].
         /// </summary>
         public InputList<string> RouteTables
         {
@@ -131,7 +162,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _spokePrependAsPaths;
 
         /// <summary>
-        /// AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on spoke gateway.
+        /// Connection based AS Path Prepend. Valid only for BGP connection. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on spoke_gateway_name. Available as of provider version R2.23+.
         /// </summary>
         public InputList<string> SpokePrependAsPaths
         {
@@ -149,7 +180,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _transitPrependAsPaths;
 
         /// <summary>
-        /// AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit gateway.
+        /// Connection based AS Path Prepend. Valid only for BGP connection. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on transit_gateway_name. Available as of provider version R2.23+.
         /// </summary>
         public InputList<string> TransitPrependAsPaths
         {
@@ -166,8 +197,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixSpokeTransitAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Indicates whether the maximum amount of HPE tunnels will be created. Only valid when transit and spoke gateways are each
-        /// launched in Insane Mode and in the same cloud type. Available as of provider version R2.22.2+.
+        /// Indicates whether the maximum amount of HPE tunnels will be created. Only valid when transit and spoke gateways are each launched in Insane Mode and in the same cloud type. Default value: true. Available as of provider version R2.22.2+.
         /// </summary>
         [Input("enableMaxPerformance")]
         public Input<bool>? EnableMaxPerformance { get; set; }
@@ -176,7 +206,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _routeTables;
 
         /// <summary>
-        /// Learned routes will be propagated to these route tables.
+        /// Learned routes will be propagated to these route tables. Example: ["rtb-212ff547","rtb-04539787"].
         /// </summary>
         public InputList<string> RouteTables
         {
@@ -200,7 +230,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _spokePrependAsPaths;
 
         /// <summary>
-        /// AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on spoke gateway.
+        /// Connection based AS Path Prepend. Valid only for BGP connection. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on spoke_gateway_name. Available as of provider version R2.23+.
         /// </summary>
         public InputList<string> SpokePrependAsPaths
         {
@@ -218,7 +248,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _transitPrependAsPaths;
 
         /// <summary>
-        /// AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit gateway.
+        /// Connection based AS Path Prepend. Valid only for BGP connection. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on transit_gateway_name. Available as of provider version R2.23+.
         /// </summary>
         public InputList<string> TransitPrependAsPaths
         {

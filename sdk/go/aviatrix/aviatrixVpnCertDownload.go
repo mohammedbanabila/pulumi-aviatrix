@@ -10,13 +10,52 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_vpn_cert_download** resource manages the VPN Certificate Download configuration for SAML Authentication
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixVpnCertDownload(ctx, "testVpnCertDownload", &aviatrix.AviatrixVpnCertDownloadArgs{
+//				DownloadEnabled: pulumi.Bool(true),
+//				SamlEndpoints: pulumi.StringArray{
+//					pulumi.String("saml_endpoint_name"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **vpn_cert_download** can be imported using the default id `vpn_cert_download`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixVpnCertDownload:AviatrixVpnCertDownload test_vpn_cert_download vpn_cert_download
+//
+// ```
 type AviatrixVpnCertDownload struct {
 	pulumi.CustomResourceState
 
-	// Whether the VPN Certificate download is enabled. Supported Values: "true", "false"
+	// Whether the VPN Certificate download is enabled. Supported Values: "true", "false".
 	DownloadEnabled pulumi.BoolPtrOutput `pulumi:"downloadEnabled"`
-	// List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is
-	// supported. Example: ["saml_endpoint_1"].
+	// List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is supported. Example: ["samlEndpoint1"].
 	SamlEndpoints pulumi.StringArrayOutput `pulumi:"samlEndpoints"`
 }
 
@@ -50,18 +89,16 @@ func GetAviatrixVpnCertDownload(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixVpnCertDownload resources.
 type aviatrixVpnCertDownloadState struct {
-	// Whether the VPN Certificate download is enabled. Supported Values: "true", "false"
+	// Whether the VPN Certificate download is enabled. Supported Values: "true", "false".
 	DownloadEnabled *bool `pulumi:"downloadEnabled"`
-	// List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is
-	// supported. Example: ["saml_endpoint_1"].
+	// List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is supported. Example: ["samlEndpoint1"].
 	SamlEndpoints []string `pulumi:"samlEndpoints"`
 }
 
 type AviatrixVpnCertDownloadState struct {
-	// Whether the VPN Certificate download is enabled. Supported Values: "true", "false"
+	// Whether the VPN Certificate download is enabled. Supported Values: "true", "false".
 	DownloadEnabled pulumi.BoolPtrInput
-	// List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is
-	// supported. Example: ["saml_endpoint_1"].
+	// List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is supported. Example: ["samlEndpoint1"].
 	SamlEndpoints pulumi.StringArrayInput
 }
 
@@ -70,19 +107,17 @@ func (AviatrixVpnCertDownloadState) ElementType() reflect.Type {
 }
 
 type aviatrixVpnCertDownloadArgs struct {
-	// Whether the VPN Certificate download is enabled. Supported Values: "true", "false"
+	// Whether the VPN Certificate download is enabled. Supported Values: "true", "false".
 	DownloadEnabled *bool `pulumi:"downloadEnabled"`
-	// List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is
-	// supported. Example: ["saml_endpoint_1"].
+	// List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is supported. Example: ["samlEndpoint1"].
 	SamlEndpoints []string `pulumi:"samlEndpoints"`
 }
 
 // The set of arguments for constructing a AviatrixVpnCertDownload resource.
 type AviatrixVpnCertDownloadArgs struct {
-	// Whether the VPN Certificate download is enabled. Supported Values: "true", "false"
+	// Whether the VPN Certificate download is enabled. Supported Values: "true", "false".
 	DownloadEnabled pulumi.BoolPtrInput
-	// List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is
-	// supported. Example: ["saml_endpoint_1"].
+	// List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is supported. Example: ["samlEndpoint1"].
 	SamlEndpoints pulumi.StringArrayInput
 }
 
@@ -173,13 +208,12 @@ func (o AviatrixVpnCertDownloadOutput) ToAviatrixVpnCertDownloadOutputWithContex
 	return o
 }
 
-// Whether the VPN Certificate download is enabled. Supported Values: "true", "false"
+// Whether the VPN Certificate download is enabled. Supported Values: "true", "false".
 func (o AviatrixVpnCertDownloadOutput) DownloadEnabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixVpnCertDownload) pulumi.BoolPtrOutput { return v.DownloadEnabled }).(pulumi.BoolPtrOutput)
 }
 
-// List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is
-// supported. Example: ["saml_endpoint_1"].
+// List of SAML endpoint names for which the downloading should be enabled . Currently, only a single endpoint is supported. Example: ["samlEndpoint1"].
 func (o AviatrixVpnCertDownloadOutput) SamlEndpoints() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixVpnCertDownload) pulumi.StringArrayOutput { return v.SamlEndpoints }).(pulumi.StringArrayOutput)
 }

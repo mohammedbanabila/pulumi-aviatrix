@@ -26,16 +26,16 @@ class AviatrixRemoteSyslogArgs:
                  template: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a AviatrixRemoteSyslog resource.
-        :param pulumi.Input[int] port: Listening port of the remote syslog server.
-        :param pulumi.Input[str] server: FQDN or IP address of the remote syslog server.
-        :param pulumi.Input[str] ca_certificate_file: CA certificate file.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of excluded gateways.
-        :param pulumi.Input[int] index: A total of 10 profiles from index 0 to 9 are supported for remote syslog, while index 9 is reserved for CoPilot.
+        :param pulumi.Input[int] port: Port number.
+        :param pulumi.Input[str] server: Server IP.
+        :param pulumi.Input[str] ca_certificate_file: The Certificate Authority (CA) certificate. Use the `file` function to read from a file.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
+        :param pulumi.Input[int] index: Profile index. An index from 0 to 9 is supported. 0 by default.
         :param pulumi.Input[str] name: Profile name.
-        :param pulumi.Input[str] private_key_file: Private key of the controller that pairs with the public certificate.
-        :param pulumi.Input[str] protocol: TCP or UDP (TCP by default).
-        :param pulumi.Input[str] public_certificate_file: Public certificate of the controller signed by the same CA.
-        :param pulumi.Input[str] template: Useful when forwarding to 3rd party servers like Datadog or Sumo
+        :param pulumi.Input[str] private_key_file: The private key of the controller that pairs with the public certificate. Use the `file` function to read from a file.
+        :param pulumi.Input[str] protocol: TCP or UDP. TCP by default.
+        :param pulumi.Input[str] public_certificate_file: The public certificate of the controller signed by the same CA. Use the `file` function to read from a file.
+        :param pulumi.Input[str] template: Optional custom template.
         """
         pulumi.set(__self__, "port", port)
         pulumi.set(__self__, "server", server)
@@ -60,7 +60,7 @@ class AviatrixRemoteSyslogArgs:
     @pulumi.getter
     def port(self) -> pulumi.Input[int]:
         """
-        Listening port of the remote syslog server.
+        Port number.
         """
         return pulumi.get(self, "port")
 
@@ -72,7 +72,7 @@ class AviatrixRemoteSyslogArgs:
     @pulumi.getter
     def server(self) -> pulumi.Input[str]:
         """
-        FQDN or IP address of the remote syslog server.
+        Server IP.
         """
         return pulumi.get(self, "server")
 
@@ -84,7 +84,7 @@ class AviatrixRemoteSyslogArgs:
     @pulumi.getter(name="caCertificateFile")
     def ca_certificate_file(self) -> Optional[pulumi.Input[str]]:
         """
-        CA certificate file.
+        The Certificate Authority (CA) certificate. Use the `file` function to read from a file.
         """
         return pulumi.get(self, "ca_certificate_file")
 
@@ -96,7 +96,7 @@ class AviatrixRemoteSyslogArgs:
     @pulumi.getter(name="excludedGateways")
     def excluded_gateways(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of excluded gateways.
+        List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         """
         return pulumi.get(self, "excluded_gateways")
 
@@ -108,7 +108,7 @@ class AviatrixRemoteSyslogArgs:
     @pulumi.getter
     def index(self) -> Optional[pulumi.Input[int]]:
         """
-        A total of 10 profiles from index 0 to 9 are supported for remote syslog, while index 9 is reserved for CoPilot.
+        Profile index. An index from 0 to 9 is supported. 0 by default.
         """
         return pulumi.get(self, "index")
 
@@ -132,7 +132,7 @@ class AviatrixRemoteSyslogArgs:
     @pulumi.getter(name="privateKeyFile")
     def private_key_file(self) -> Optional[pulumi.Input[str]]:
         """
-        Private key of the controller that pairs with the public certificate.
+        The private key of the controller that pairs with the public certificate. Use the `file` function to read from a file.
         """
         return pulumi.get(self, "private_key_file")
 
@@ -144,7 +144,7 @@ class AviatrixRemoteSyslogArgs:
     @pulumi.getter
     def protocol(self) -> Optional[pulumi.Input[str]]:
         """
-        TCP or UDP (TCP by default).
+        TCP or UDP. TCP by default.
         """
         return pulumi.get(self, "protocol")
 
@@ -156,7 +156,7 @@ class AviatrixRemoteSyslogArgs:
     @pulumi.getter(name="publicCertificateFile")
     def public_certificate_file(self) -> Optional[pulumi.Input[str]]:
         """
-        Public certificate of the controller signed by the same CA.
+        The public certificate of the controller signed by the same CA. Use the `file` function to read from a file.
         """
         return pulumi.get(self, "public_certificate_file")
 
@@ -168,7 +168,7 @@ class AviatrixRemoteSyslogArgs:
     @pulumi.getter
     def template(self) -> Optional[pulumi.Input[str]]:
         """
-        Useful when forwarding to 3rd party servers like Datadog or Sumo
+        Optional custom template.
         """
         return pulumi.get(self, "template")
 
@@ -194,18 +194,18 @@ class _AviatrixRemoteSyslogState:
                  template: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixRemoteSyslog resources.
-        :param pulumi.Input[str] ca_certificate_file: CA certificate file.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of excluded gateways.
-        :param pulumi.Input[int] index: A total of 10 profiles from index 0 to 9 are supported for remote syslog, while index 9 is reserved for CoPilot.
+        :param pulumi.Input[str] ca_certificate_file: The Certificate Authority (CA) certificate. Use the `file` function to read from a file.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
+        :param pulumi.Input[int] index: Profile index. An index from 0 to 9 is supported. 0 by default.
         :param pulumi.Input[str] name: Profile name.
-        :param pulumi.Input[bool] notls: True if not protected by TLS.
-        :param pulumi.Input[int] port: Listening port of the remote syslog server.
-        :param pulumi.Input[str] private_key_file: Private key of the controller that pairs with the public certificate.
-        :param pulumi.Input[str] protocol: TCP or UDP (TCP by default).
-        :param pulumi.Input[str] public_certificate_file: Public certificate of the controller signed by the same CA.
-        :param pulumi.Input[str] server: FQDN or IP address of the remote syslog server.
-        :param pulumi.Input[str] status: Enabled or not.
-        :param pulumi.Input[str] template: Useful when forwarding to 3rd party servers like Datadog or Sumo
+        :param pulumi.Input[bool] notls: This attribute is true if the remote syslog is not protected by TLS.
+        :param pulumi.Input[int] port: Port number.
+        :param pulumi.Input[str] private_key_file: The private key of the controller that pairs with the public certificate. Use the `file` function to read from a file.
+        :param pulumi.Input[str] protocol: TCP or UDP. TCP by default.
+        :param pulumi.Input[str] public_certificate_file: The public certificate of the controller signed by the same CA. Use the `file` function to read from a file.
+        :param pulumi.Input[str] server: Server IP.
+        :param pulumi.Input[str] status: The status of remote syslog.
+        :param pulumi.Input[str] template: Optional custom template.
         """
         if ca_certificate_file is not None:
             pulumi.set(__self__, "ca_certificate_file", ca_certificate_file)
@@ -236,7 +236,7 @@ class _AviatrixRemoteSyslogState:
     @pulumi.getter(name="caCertificateFile")
     def ca_certificate_file(self) -> Optional[pulumi.Input[str]]:
         """
-        CA certificate file.
+        The Certificate Authority (CA) certificate. Use the `file` function to read from a file.
         """
         return pulumi.get(self, "ca_certificate_file")
 
@@ -248,7 +248,7 @@ class _AviatrixRemoteSyslogState:
     @pulumi.getter(name="excludedGateways")
     def excluded_gateways(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of excluded gateways.
+        List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         """
         return pulumi.get(self, "excluded_gateways")
 
@@ -260,7 +260,7 @@ class _AviatrixRemoteSyslogState:
     @pulumi.getter
     def index(self) -> Optional[pulumi.Input[int]]:
         """
-        A total of 10 profiles from index 0 to 9 are supported for remote syslog, while index 9 is reserved for CoPilot.
+        Profile index. An index from 0 to 9 is supported. 0 by default.
         """
         return pulumi.get(self, "index")
 
@@ -284,7 +284,7 @@ class _AviatrixRemoteSyslogState:
     @pulumi.getter
     def notls(self) -> Optional[pulumi.Input[bool]]:
         """
-        True if not protected by TLS.
+        This attribute is true if the remote syslog is not protected by TLS.
         """
         return pulumi.get(self, "notls")
 
@@ -296,7 +296,7 @@ class _AviatrixRemoteSyslogState:
     @pulumi.getter
     def port(self) -> Optional[pulumi.Input[int]]:
         """
-        Listening port of the remote syslog server.
+        Port number.
         """
         return pulumi.get(self, "port")
 
@@ -308,7 +308,7 @@ class _AviatrixRemoteSyslogState:
     @pulumi.getter(name="privateKeyFile")
     def private_key_file(self) -> Optional[pulumi.Input[str]]:
         """
-        Private key of the controller that pairs with the public certificate.
+        The private key of the controller that pairs with the public certificate. Use the `file` function to read from a file.
         """
         return pulumi.get(self, "private_key_file")
 
@@ -320,7 +320,7 @@ class _AviatrixRemoteSyslogState:
     @pulumi.getter
     def protocol(self) -> Optional[pulumi.Input[str]]:
         """
-        TCP or UDP (TCP by default).
+        TCP or UDP. TCP by default.
         """
         return pulumi.get(self, "protocol")
 
@@ -332,7 +332,7 @@ class _AviatrixRemoteSyslogState:
     @pulumi.getter(name="publicCertificateFile")
     def public_certificate_file(self) -> Optional[pulumi.Input[str]]:
         """
-        Public certificate of the controller signed by the same CA.
+        The public certificate of the controller signed by the same CA. Use the `file` function to read from a file.
         """
         return pulumi.get(self, "public_certificate_file")
 
@@ -344,7 +344,7 @@ class _AviatrixRemoteSyslogState:
     @pulumi.getter
     def server(self) -> Optional[pulumi.Input[str]]:
         """
-        FQDN or IP address of the remote syslog server.
+        Server IP.
         """
         return pulumi.get(self, "server")
 
@@ -356,7 +356,7 @@ class _AviatrixRemoteSyslogState:
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[str]]:
         """
-        Enabled or not.
+        The status of remote syslog.
         """
         return pulumi.get(self, "status")
 
@@ -368,7 +368,7 @@ class _AviatrixRemoteSyslogState:
     @pulumi.getter
     def template(self) -> Optional[pulumi.Input[str]]:
         """
-        Useful when forwarding to 3rd party servers like Datadog or Sumo
+        Optional custom template.
         """
         return pulumi.get(self, "template")
 
@@ -394,19 +394,57 @@ class AviatrixRemoteSyslog(pulumi.CustomResource):
                  template: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixRemoteSyslog resource with the given unique name, props, and options.
+        The **aviatrix_remote_syslog** resource allows the enabling and disabling of remote syslog.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Enable remote syslog without TLS
+        test_remote_syslog = aviatrix.AviatrixRemoteSyslog("testRemoteSyslog",
+            index=0,
+            port=10,
+            protocol="TCP",
+            server="1.2.3.4")
+        ```
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Enable remote syslog with TLS
+        test_remote_syslog = aviatrix.AviatrixRemoteSyslog("testRemoteSyslog",
+            index=0,
+            server="1.2.3.4",
+            port=10,
+            protocol="TCP",
+            ca_certificate_file=(lambda path: open(path).read())("/path/to/ca.pem"),
+            public_certificate_file=(lambda path: open(path).read())("/path/to/server.pem"),
+            private_key_file=(lambda path: open(path).read())("/path/to/client.pem"))
+        ```
+
+        ## Import
+
+        **remote_syslog** can be imported using "remote_syslog_" + `index`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixRemoteSyslog:AviatrixRemoteSyslog test remote_syslog_0
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] ca_certificate_file: CA certificate file.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of excluded gateways.
-        :param pulumi.Input[int] index: A total of 10 profiles from index 0 to 9 are supported for remote syslog, while index 9 is reserved for CoPilot.
+        :param pulumi.Input[str] ca_certificate_file: The Certificate Authority (CA) certificate. Use the `file` function to read from a file.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
+        :param pulumi.Input[int] index: Profile index. An index from 0 to 9 is supported. 0 by default.
         :param pulumi.Input[str] name: Profile name.
-        :param pulumi.Input[int] port: Listening port of the remote syslog server.
-        :param pulumi.Input[str] private_key_file: Private key of the controller that pairs with the public certificate.
-        :param pulumi.Input[str] protocol: TCP or UDP (TCP by default).
-        :param pulumi.Input[str] public_certificate_file: Public certificate of the controller signed by the same CA.
-        :param pulumi.Input[str] server: FQDN or IP address of the remote syslog server.
-        :param pulumi.Input[str] template: Useful when forwarding to 3rd party servers like Datadog or Sumo
+        :param pulumi.Input[int] port: Port number.
+        :param pulumi.Input[str] private_key_file: The private key of the controller that pairs with the public certificate. Use the `file` function to read from a file.
+        :param pulumi.Input[str] protocol: TCP or UDP. TCP by default.
+        :param pulumi.Input[str] public_certificate_file: The public certificate of the controller signed by the same CA. Use the `file` function to read from a file.
+        :param pulumi.Input[str] server: Server IP.
+        :param pulumi.Input[str] template: Optional custom template.
         """
         ...
     @overload
@@ -415,7 +453,45 @@ class AviatrixRemoteSyslog(pulumi.CustomResource):
                  args: AviatrixRemoteSyslogArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixRemoteSyslog resource with the given unique name, props, and options.
+        The **aviatrix_remote_syslog** resource allows the enabling and disabling of remote syslog.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Enable remote syslog without TLS
+        test_remote_syslog = aviatrix.AviatrixRemoteSyslog("testRemoteSyslog",
+            index=0,
+            port=10,
+            protocol="TCP",
+            server="1.2.3.4")
+        ```
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Enable remote syslog with TLS
+        test_remote_syslog = aviatrix.AviatrixRemoteSyslog("testRemoteSyslog",
+            index=0,
+            server="1.2.3.4",
+            port=10,
+            protocol="TCP",
+            ca_certificate_file=(lambda path: open(path).read())("/path/to/ca.pem"),
+            public_certificate_file=(lambda path: open(path).read())("/path/to/server.pem"),
+            private_key_file=(lambda path: open(path).read())("/path/to/client.pem"))
+        ```
+
+        ## Import
+
+        **remote_syslog** can be imported using "remote_syslog_" + `index`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixRemoteSyslog:AviatrixRemoteSyslog test remote_syslog_0
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixRemoteSyslogArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -495,18 +571,18 @@ class AviatrixRemoteSyslog(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] ca_certificate_file: CA certificate file.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of excluded gateways.
-        :param pulumi.Input[int] index: A total of 10 profiles from index 0 to 9 are supported for remote syslog, while index 9 is reserved for CoPilot.
+        :param pulumi.Input[str] ca_certificate_file: The Certificate Authority (CA) certificate. Use the `file` function to read from a file.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
+        :param pulumi.Input[int] index: Profile index. An index from 0 to 9 is supported. 0 by default.
         :param pulumi.Input[str] name: Profile name.
-        :param pulumi.Input[bool] notls: True if not protected by TLS.
-        :param pulumi.Input[int] port: Listening port of the remote syslog server.
-        :param pulumi.Input[str] private_key_file: Private key of the controller that pairs with the public certificate.
-        :param pulumi.Input[str] protocol: TCP or UDP (TCP by default).
-        :param pulumi.Input[str] public_certificate_file: Public certificate of the controller signed by the same CA.
-        :param pulumi.Input[str] server: FQDN or IP address of the remote syslog server.
-        :param pulumi.Input[str] status: Enabled or not.
-        :param pulumi.Input[str] template: Useful when forwarding to 3rd party servers like Datadog or Sumo
+        :param pulumi.Input[bool] notls: This attribute is true if the remote syslog is not protected by TLS.
+        :param pulumi.Input[int] port: Port number.
+        :param pulumi.Input[str] private_key_file: The private key of the controller that pairs with the public certificate. Use the `file` function to read from a file.
+        :param pulumi.Input[str] protocol: TCP or UDP. TCP by default.
+        :param pulumi.Input[str] public_certificate_file: The public certificate of the controller signed by the same CA. Use the `file` function to read from a file.
+        :param pulumi.Input[str] server: Server IP.
+        :param pulumi.Input[str] status: The status of remote syslog.
+        :param pulumi.Input[str] template: Optional custom template.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -530,7 +606,7 @@ class AviatrixRemoteSyslog(pulumi.CustomResource):
     @pulumi.getter(name="caCertificateFile")
     def ca_certificate_file(self) -> pulumi.Output[Optional[str]]:
         """
-        CA certificate file.
+        The Certificate Authority (CA) certificate. Use the `file` function to read from a file.
         """
         return pulumi.get(self, "ca_certificate_file")
 
@@ -538,7 +614,7 @@ class AviatrixRemoteSyslog(pulumi.CustomResource):
     @pulumi.getter(name="excludedGateways")
     def excluded_gateways(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        List of excluded gateways.
+        List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         """
         return pulumi.get(self, "excluded_gateways")
 
@@ -546,7 +622,7 @@ class AviatrixRemoteSyslog(pulumi.CustomResource):
     @pulumi.getter
     def index(self) -> pulumi.Output[Optional[int]]:
         """
-        A total of 10 profiles from index 0 to 9 are supported for remote syslog, while index 9 is reserved for CoPilot.
+        Profile index. An index from 0 to 9 is supported. 0 by default.
         """
         return pulumi.get(self, "index")
 
@@ -562,7 +638,7 @@ class AviatrixRemoteSyslog(pulumi.CustomResource):
     @pulumi.getter
     def notls(self) -> pulumi.Output[bool]:
         """
-        True if not protected by TLS.
+        This attribute is true if the remote syslog is not protected by TLS.
         """
         return pulumi.get(self, "notls")
 
@@ -570,7 +646,7 @@ class AviatrixRemoteSyslog(pulumi.CustomResource):
     @pulumi.getter
     def port(self) -> pulumi.Output[int]:
         """
-        Listening port of the remote syslog server.
+        Port number.
         """
         return pulumi.get(self, "port")
 
@@ -578,7 +654,7 @@ class AviatrixRemoteSyslog(pulumi.CustomResource):
     @pulumi.getter(name="privateKeyFile")
     def private_key_file(self) -> pulumi.Output[Optional[str]]:
         """
-        Private key of the controller that pairs with the public certificate.
+        The private key of the controller that pairs with the public certificate. Use the `file` function to read from a file.
         """
         return pulumi.get(self, "private_key_file")
 
@@ -586,7 +662,7 @@ class AviatrixRemoteSyslog(pulumi.CustomResource):
     @pulumi.getter
     def protocol(self) -> pulumi.Output[Optional[str]]:
         """
-        TCP or UDP (TCP by default).
+        TCP or UDP. TCP by default.
         """
         return pulumi.get(self, "protocol")
 
@@ -594,7 +670,7 @@ class AviatrixRemoteSyslog(pulumi.CustomResource):
     @pulumi.getter(name="publicCertificateFile")
     def public_certificate_file(self) -> pulumi.Output[Optional[str]]:
         """
-        Public certificate of the controller signed by the same CA.
+        The public certificate of the controller signed by the same CA. Use the `file` function to read from a file.
         """
         return pulumi.get(self, "public_certificate_file")
 
@@ -602,7 +678,7 @@ class AviatrixRemoteSyslog(pulumi.CustomResource):
     @pulumi.getter
     def server(self) -> pulumi.Output[str]:
         """
-        FQDN or IP address of the remote syslog server.
+        Server IP.
         """
         return pulumi.get(self, "server")
 
@@ -610,7 +686,7 @@ class AviatrixRemoteSyslog(pulumi.CustomResource):
     @pulumi.getter
     def status(self) -> pulumi.Output[str]:
         """
-        Enabled or not.
+        The status of remote syslog.
         """
         return pulumi.get(self, "status")
 
@@ -618,7 +694,7 @@ class AviatrixRemoteSyslog(pulumi.CustomResource):
     @pulumi.getter
     def template(self) -> pulumi.Output[Optional[str]]:
         """
-        Useful when forwarding to 3rd party servers like Datadog or Sumo
+        Optional custom template.
         """
         return pulumi.get(self, "template")
 

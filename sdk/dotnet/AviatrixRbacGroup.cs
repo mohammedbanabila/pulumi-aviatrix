@@ -9,17 +9,46 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_rbac_group** resource allows the creation and management of [Aviatrix (Role-Based Access Control) RBAC groups](https://docs.aviatrix.com/HowTos/rbac_faq.html).
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix RBAC Group
+    ///     var testGroup = new Aviatrix.AviatrixRbacGroup("testGroup", new()
+    ///     {
+    ///         GroupName = "write_only",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **rbac_group** can be imported using the `group_name`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixRbacGroup:AviatrixRbacGroup test group_name
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixRbacGroup:AviatrixRbacGroup")]
     public partial class AviatrixRbacGroup : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// RBAC permission group name.
+        /// This parameter represents the name of a RBAC group to be created.
         /// </summary>
         [Output("groupName")]
         public Output<string> GroupName { get; private set; } = null!;
 
         /// <summary>
-        /// Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login
+        /// Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login . Supported values: true, false. Default value: false. Available in provider version R2.17.1+.
         /// </summary>
         [Output("localLogin")]
         public Output<bool?> LocalLogin { get; private set; } = null!;
@@ -72,13 +101,13 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixRbacGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// RBAC permission group name.
+        /// This parameter represents the name of a RBAC group to be created.
         /// </summary>
         [Input("groupName", required: true)]
         public Input<string> GroupName { get; set; } = null!;
 
         /// <summary>
-        /// Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login
+        /// Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login . Supported values: true, false. Default value: false. Available in provider version R2.17.1+.
         /// </summary>
         [Input("localLogin")]
         public Input<bool>? LocalLogin { get; set; }
@@ -92,13 +121,13 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixRbacGroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// RBAC permission group name.
+        /// This parameter represents the name of a RBAC group to be created.
         /// </summary>
         [Input("groupName")]
         public Input<string>? GroupName { get; set; }
 
         /// <summary>
-        /// Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login
+        /// Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login . Supported values: true, false. Default value: false. Available in provider version R2.17.1+.
         /// </summary>
         [Input("localLogin")]
         public Input<bool>? LocalLogin { get; set; }

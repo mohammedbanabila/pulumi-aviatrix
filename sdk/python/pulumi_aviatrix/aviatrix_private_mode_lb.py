@@ -26,10 +26,10 @@ class AviatrixPrivateModeLbArgs:
         The set of arguments for constructing a AviatrixPrivateModeLb resource.
         :param pulumi.Input[str] account_name: Name of the access account.
         :param pulumi.Input[str] lb_type: Type of load balancer to create. Must be one of controller or multicloud.
-        :param pulumi.Input[str] region: Name of the VPC region.
-        :param pulumi.Input[str] vpc_id: ID of the VPC for the load balancer.
-        :param pulumi.Input[str] multicloud_access_vpc_id: VPC ID of multicloud access VPC to connect to. Required when lb_type is multicloud.
-        :param pulumi.Input[Sequence[pulumi.Input['AviatrixPrivateModeLbProxyArgs']]] proxies: List of multicloud proxies.
+        :param pulumi.Input[str] region: Name of the region containing the VPC.
+        :param pulumi.Input[str] vpc_id: VPC ID of the proxy.
+        :param pulumi.Input[str] multicloud_access_vpc_id: ID of the VPC with a multicloud endpoint. Required when `lb_type` is multicloud.
+        :param pulumi.Input[Sequence[pulumi.Input['AviatrixPrivateModeLbProxyArgs']]] proxies: List of multicloud proxies. Only valid when `lb_type` is multicloud.
         """
         pulumi.set(__self__, "account_name", account_name)
         pulumi.set(__self__, "lb_type", lb_type)
@@ -68,7 +68,7 @@ class AviatrixPrivateModeLbArgs:
     @pulumi.getter
     def region(self) -> pulumi.Input[str]:
         """
-        Name of the VPC region.
+        Name of the region containing the VPC.
         """
         return pulumi.get(self, "region")
 
@@ -80,7 +80,7 @@ class AviatrixPrivateModeLbArgs:
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> pulumi.Input[str]:
         """
-        ID of the VPC for the load balancer.
+        VPC ID of the proxy.
         """
         return pulumi.get(self, "vpc_id")
 
@@ -92,7 +92,7 @@ class AviatrixPrivateModeLbArgs:
     @pulumi.getter(name="multicloudAccessVpcId")
     def multicloud_access_vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
-        VPC ID of multicloud access VPC to connect to. Required when lb_type is multicloud.
+        ID of the VPC with a multicloud endpoint. Required when `lb_type` is multicloud.
         """
         return pulumi.get(self, "multicloud_access_vpc_id")
 
@@ -104,7 +104,7 @@ class AviatrixPrivateModeLbArgs:
     @pulumi.getter
     def proxies(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['AviatrixPrivateModeLbProxyArgs']]]]:
         """
-        List of multicloud proxies.
+        List of multicloud proxies. Only valid when `lb_type` is multicloud.
         """
         return pulumi.get(self, "proxies")
 
@@ -126,10 +126,10 @@ class _AviatrixPrivateModeLbState:
         Input properties used for looking up and filtering AviatrixPrivateModeLb resources.
         :param pulumi.Input[str] account_name: Name of the access account.
         :param pulumi.Input[str] lb_type: Type of load balancer to create. Must be one of controller or multicloud.
-        :param pulumi.Input[str] multicloud_access_vpc_id: VPC ID of multicloud access VPC to connect to. Required when lb_type is multicloud.
-        :param pulumi.Input[Sequence[pulumi.Input['AviatrixPrivateModeLbProxyArgs']]] proxies: List of multicloud proxies.
-        :param pulumi.Input[str] region: Name of the VPC region.
-        :param pulumi.Input[str] vpc_id: ID of the VPC for the load balancer.
+        :param pulumi.Input[str] multicloud_access_vpc_id: ID of the VPC with a multicloud endpoint. Required when `lb_type` is multicloud.
+        :param pulumi.Input[Sequence[pulumi.Input['AviatrixPrivateModeLbProxyArgs']]] proxies: List of multicloud proxies. Only valid when `lb_type` is multicloud.
+        :param pulumi.Input[str] region: Name of the region containing the VPC.
+        :param pulumi.Input[str] vpc_id: VPC ID of the proxy.
         """
         if account_name is not None:
             pulumi.set(__self__, "account_name", account_name)
@@ -172,7 +172,7 @@ class _AviatrixPrivateModeLbState:
     @pulumi.getter(name="multicloudAccessVpcId")
     def multicloud_access_vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
-        VPC ID of multicloud access VPC to connect to. Required when lb_type is multicloud.
+        ID of the VPC with a multicloud endpoint. Required when `lb_type` is multicloud.
         """
         return pulumi.get(self, "multicloud_access_vpc_id")
 
@@ -184,7 +184,7 @@ class _AviatrixPrivateModeLbState:
     @pulumi.getter
     def proxies(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['AviatrixPrivateModeLbProxyArgs']]]]:
         """
-        List of multicloud proxies.
+        List of multicloud proxies. Only valid when `lb_type` is multicloud.
         """
         return pulumi.get(self, "proxies")
 
@@ -196,7 +196,7 @@ class _AviatrixPrivateModeLbState:
     @pulumi.getter
     def region(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the VPC region.
+        Name of the region containing the VPC.
         """
         return pulumi.get(self, "region")
 
@@ -208,7 +208,7 @@ class _AviatrixPrivateModeLbState:
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
-        ID of the VPC for the load balancer.
+        VPC ID of the proxy.
         """
         return pulumi.get(self, "vpc_id")
 
@@ -230,15 +230,24 @@ class AviatrixPrivateModeLb(pulumi.CustomResource):
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixPrivateModeLb resource with the given unique name, props, and options.
+        The **aviatrix_private_mode_lb** resource allows management of a Private Mode load balancer. This resource is available as of provider version R2.23+.
+
+        ## Import
+
+        **aviatrix_private_mode_lb** can be imported using the `vpc_id`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixPrivateModeLb:AviatrixPrivateModeLb test vpc-1234567
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] account_name: Name of the access account.
         :param pulumi.Input[str] lb_type: Type of load balancer to create. Must be one of controller or multicloud.
-        :param pulumi.Input[str] multicloud_access_vpc_id: VPC ID of multicloud access VPC to connect to. Required when lb_type is multicloud.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixPrivateModeLbProxyArgs']]]] proxies: List of multicloud proxies.
-        :param pulumi.Input[str] region: Name of the VPC region.
-        :param pulumi.Input[str] vpc_id: ID of the VPC for the load balancer.
+        :param pulumi.Input[str] multicloud_access_vpc_id: ID of the VPC with a multicloud endpoint. Required when `lb_type` is multicloud.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixPrivateModeLbProxyArgs']]]] proxies: List of multicloud proxies. Only valid when `lb_type` is multicloud.
+        :param pulumi.Input[str] region: Name of the region containing the VPC.
+        :param pulumi.Input[str] vpc_id: VPC ID of the proxy.
         """
         ...
     @overload
@@ -247,7 +256,16 @@ class AviatrixPrivateModeLb(pulumi.CustomResource):
                  args: AviatrixPrivateModeLbArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixPrivateModeLb resource with the given unique name, props, and options.
+        The **aviatrix_private_mode_lb** resource allows management of a Private Mode load balancer. This resource is available as of provider version R2.23+.
+
+        ## Import
+
+        **aviatrix_private_mode_lb** can be imported using the `vpc_id`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixPrivateModeLb:AviatrixPrivateModeLb test vpc-1234567
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixPrivateModeLbArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -317,10 +335,10 @@ class AviatrixPrivateModeLb(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] account_name: Name of the access account.
         :param pulumi.Input[str] lb_type: Type of load balancer to create. Must be one of controller or multicloud.
-        :param pulumi.Input[str] multicloud_access_vpc_id: VPC ID of multicloud access VPC to connect to. Required when lb_type is multicloud.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixPrivateModeLbProxyArgs']]]] proxies: List of multicloud proxies.
-        :param pulumi.Input[str] region: Name of the VPC region.
-        :param pulumi.Input[str] vpc_id: ID of the VPC for the load balancer.
+        :param pulumi.Input[str] multicloud_access_vpc_id: ID of the VPC with a multicloud endpoint. Required when `lb_type` is multicloud.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixPrivateModeLbProxyArgs']]]] proxies: List of multicloud proxies. Only valid when `lb_type` is multicloud.
+        :param pulumi.Input[str] region: Name of the region containing the VPC.
+        :param pulumi.Input[str] vpc_id: VPC ID of the proxy.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -354,7 +372,7 @@ class AviatrixPrivateModeLb(pulumi.CustomResource):
     @pulumi.getter(name="multicloudAccessVpcId")
     def multicloud_access_vpc_id(self) -> pulumi.Output[Optional[str]]:
         """
-        VPC ID of multicloud access VPC to connect to. Required when lb_type is multicloud.
+        ID of the VPC with a multicloud endpoint. Required when `lb_type` is multicloud.
         """
         return pulumi.get(self, "multicloud_access_vpc_id")
 
@@ -362,7 +380,7 @@ class AviatrixPrivateModeLb(pulumi.CustomResource):
     @pulumi.getter
     def proxies(self) -> pulumi.Output[Optional[Sequence['outputs.AviatrixPrivateModeLbProxy']]]:
         """
-        List of multicloud proxies.
+        List of multicloud proxies. Only valid when `lb_type` is multicloud.
         """
         return pulumi.get(self, "proxies")
 
@@ -370,7 +388,7 @@ class AviatrixPrivateModeLb(pulumi.CustomResource):
     @pulumi.getter
     def region(self) -> pulumi.Output[str]:
         """
-        Name of the VPC region.
+        Name of the region containing the VPC.
         """
         return pulumi.get(self, "region")
 
@@ -378,7 +396,7 @@ class AviatrixPrivateModeLb(pulumi.CustomResource):
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> pulumi.Output[str]:
         """
-        ID of the VPC for the load balancer.
+        VPC ID of the proxy.
         """
         return pulumi.get(self, "vpc_id")
 

@@ -11,20 +11,29 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// ## Import
+//
+// **gateway_snat** can be imported using the `gw_name`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixGatewaySnat:AviatrixGatewaySnat test gw_name
+//
+// ```
 type AviatrixGatewaySnat struct {
 	pulumi.CustomResourceState
 
 	// Computed attribute to store the previous connection policy.
 	ConnectionPolicies AviatrixGatewaySnatConnectionPolicyArrayOutput `pulumi:"connectionPolicies"`
-	// Name of the gateway.
+	// Name of the Aviatrix gateway the custom SNAT will be configured for.
 	GwName pulumi.StringOutput `pulumi:"gwName"`
 	// Computed attribute to store the previous interface policy.
 	InterfacePolicies AviatrixGatewaySnatInterfacePolicyArrayOutput `pulumi:"interfacePolicies"`
-	// Nat mode. Currently only supports 'customized_snat'.
+	// NAT mode. Valid values: "customizedSnat". Default value: "customizedSnat".
 	SnatMode pulumi.StringPtrOutput `pulumi:"snatMode"`
-	// Policy rules applied for 'snat_mode'' of 'customized_snat'.'
+	// Policy rule applied for enabling source NAT (mode: "customizedSnat"). Currently only supports AWS(1) and Azure(8).
 	SnatPolicies AviatrixGatewaySnatSnatPolicyArrayOutput `pulumi:"snatPolicies"`
-	// Whether to sync the policies to the HA gateway.
+	// Sync the policies to the HA gateway. Valid values: true, false. Default: false.
 	SyncToHa pulumi.BoolPtrOutput `pulumi:"syncToHa"`
 }
 
@@ -63,30 +72,30 @@ func GetAviatrixGatewaySnat(ctx *pulumi.Context,
 type aviatrixGatewaySnatState struct {
 	// Computed attribute to store the previous connection policy.
 	ConnectionPolicies []AviatrixGatewaySnatConnectionPolicy `pulumi:"connectionPolicies"`
-	// Name of the gateway.
+	// Name of the Aviatrix gateway the custom SNAT will be configured for.
 	GwName *string `pulumi:"gwName"`
 	// Computed attribute to store the previous interface policy.
 	InterfacePolicies []AviatrixGatewaySnatInterfacePolicy `pulumi:"interfacePolicies"`
-	// Nat mode. Currently only supports 'customized_snat'.
+	// NAT mode. Valid values: "customizedSnat". Default value: "customizedSnat".
 	SnatMode *string `pulumi:"snatMode"`
-	// Policy rules applied for 'snat_mode'' of 'customized_snat'.'
+	// Policy rule applied for enabling source NAT (mode: "customizedSnat"). Currently only supports AWS(1) and Azure(8).
 	SnatPolicies []AviatrixGatewaySnatSnatPolicy `pulumi:"snatPolicies"`
-	// Whether to sync the policies to the HA gateway.
+	// Sync the policies to the HA gateway. Valid values: true, false. Default: false.
 	SyncToHa *bool `pulumi:"syncToHa"`
 }
 
 type AviatrixGatewaySnatState struct {
 	// Computed attribute to store the previous connection policy.
 	ConnectionPolicies AviatrixGatewaySnatConnectionPolicyArrayInput
-	// Name of the gateway.
+	// Name of the Aviatrix gateway the custom SNAT will be configured for.
 	GwName pulumi.StringPtrInput
 	// Computed attribute to store the previous interface policy.
 	InterfacePolicies AviatrixGatewaySnatInterfacePolicyArrayInput
-	// Nat mode. Currently only supports 'customized_snat'.
+	// NAT mode. Valid values: "customizedSnat". Default value: "customizedSnat".
 	SnatMode pulumi.StringPtrInput
-	// Policy rules applied for 'snat_mode'' of 'customized_snat'.'
+	// Policy rule applied for enabling source NAT (mode: "customizedSnat"). Currently only supports AWS(1) and Azure(8).
 	SnatPolicies AviatrixGatewaySnatSnatPolicyArrayInput
-	// Whether to sync the policies to the HA gateway.
+	// Sync the policies to the HA gateway. Valid values: true, false. Default: false.
 	SyncToHa pulumi.BoolPtrInput
 }
 
@@ -95,25 +104,25 @@ func (AviatrixGatewaySnatState) ElementType() reflect.Type {
 }
 
 type aviatrixGatewaySnatArgs struct {
-	// Name of the gateway.
+	// Name of the Aviatrix gateway the custom SNAT will be configured for.
 	GwName string `pulumi:"gwName"`
-	// Nat mode. Currently only supports 'customized_snat'.
+	// NAT mode. Valid values: "customizedSnat". Default value: "customizedSnat".
 	SnatMode *string `pulumi:"snatMode"`
-	// Policy rules applied for 'snat_mode'' of 'customized_snat'.'
+	// Policy rule applied for enabling source NAT (mode: "customizedSnat"). Currently only supports AWS(1) and Azure(8).
 	SnatPolicies []AviatrixGatewaySnatSnatPolicy `pulumi:"snatPolicies"`
-	// Whether to sync the policies to the HA gateway.
+	// Sync the policies to the HA gateway. Valid values: true, false. Default: false.
 	SyncToHa *bool `pulumi:"syncToHa"`
 }
 
 // The set of arguments for constructing a AviatrixGatewaySnat resource.
 type AviatrixGatewaySnatArgs struct {
-	// Name of the gateway.
+	// Name of the Aviatrix gateway the custom SNAT will be configured for.
 	GwName pulumi.StringInput
-	// Nat mode. Currently only supports 'customized_snat'.
+	// NAT mode. Valid values: "customizedSnat". Default value: "customizedSnat".
 	SnatMode pulumi.StringPtrInput
-	// Policy rules applied for 'snat_mode'' of 'customized_snat'.'
+	// Policy rule applied for enabling source NAT (mode: "customizedSnat"). Currently only supports AWS(1) and Azure(8).
 	SnatPolicies AviatrixGatewaySnatSnatPolicyArrayInput
-	// Whether to sync the policies to the HA gateway.
+	// Sync the policies to the HA gateway. Valid values: true, false. Default: false.
 	SyncToHa pulumi.BoolPtrInput
 }
 
@@ -211,7 +220,7 @@ func (o AviatrixGatewaySnatOutput) ConnectionPolicies() AviatrixGatewaySnatConne
 	}).(AviatrixGatewaySnatConnectionPolicyArrayOutput)
 }
 
-// Name of the gateway.
+// Name of the Aviatrix gateway the custom SNAT will be configured for.
 func (o AviatrixGatewaySnatOutput) GwName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixGatewaySnat) pulumi.StringOutput { return v.GwName }).(pulumi.StringOutput)
 }
@@ -221,17 +230,17 @@ func (o AviatrixGatewaySnatOutput) InterfacePolicies() AviatrixGatewaySnatInterf
 	return o.ApplyT(func(v *AviatrixGatewaySnat) AviatrixGatewaySnatInterfacePolicyArrayOutput { return v.InterfacePolicies }).(AviatrixGatewaySnatInterfacePolicyArrayOutput)
 }
 
-// Nat mode. Currently only supports 'customized_snat'.
+// NAT mode. Valid values: "customizedSnat". Default value: "customizedSnat".
 func (o AviatrixGatewaySnatOutput) SnatMode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixGatewaySnat) pulumi.StringPtrOutput { return v.SnatMode }).(pulumi.StringPtrOutput)
 }
 
-// Policy rules applied for 'snat_mode” of 'customized_snat'.'
+// Policy rule applied for enabling source NAT (mode: "customizedSnat"). Currently only supports AWS(1) and Azure(8).
 func (o AviatrixGatewaySnatOutput) SnatPolicies() AviatrixGatewaySnatSnatPolicyArrayOutput {
 	return o.ApplyT(func(v *AviatrixGatewaySnat) AviatrixGatewaySnatSnatPolicyArrayOutput { return v.SnatPolicies }).(AviatrixGatewaySnatSnatPolicyArrayOutput)
 }
 
-// Whether to sync the policies to the HA gateway.
+// Sync the policies to the HA gateway. Valid values: true, false. Default: false.
 func (o AviatrixGatewaySnatOutput) SyncToHa() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixGatewaySnat) pulumi.BoolPtrOutput { return v.SyncToHa }).(pulumi.BoolPtrOutput)
 }

@@ -11,14 +11,53 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_device_interface_config** resource allows the configuration of the WAN primary interface and IP for a device, for use in CloudN.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixDeviceInterfaceConfig(ctx, "testDeviceInterfaceConfig", &aviatrix.AviatrixDeviceInterfaceConfigArgs{
+//				DeviceName:                  pulumi.String("test-device"),
+//				WanPrimaryInterface:         pulumi.String("eth0"),
+//				WanPrimaryInterfacePublicIp: pulumi.String("181.12.43.21"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **device_interface_config** can be imported using the `device_name`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixDeviceInterfaceConfig:AviatrixDeviceInterfaceConfig test device_name
+//
+// ```
 type AviatrixDeviceInterfaceConfig struct {
 	pulumi.CustomResourceState
 
-	// Name of device.
+	// Name of the device.
 	DeviceName pulumi.StringOutput `pulumi:"deviceName"`
-	// WAN primary interface of the device.
+	// Name of the WAN primary interface.
 	WanPrimaryInterface pulumi.StringOutput `pulumi:"wanPrimaryInterface"`
-	// WAN primary interface public IP address.
+	// The WAN Primary interface public IP.
 	WanPrimaryInterfacePublicIp pulumi.StringOutput `pulumi:"wanPrimaryInterfacePublicIp"`
 }
 
@@ -61,20 +100,20 @@ func GetAviatrixDeviceInterfaceConfig(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixDeviceInterfaceConfig resources.
 type aviatrixDeviceInterfaceConfigState struct {
-	// Name of device.
+	// Name of the device.
 	DeviceName *string `pulumi:"deviceName"`
-	// WAN primary interface of the device.
+	// Name of the WAN primary interface.
 	WanPrimaryInterface *string `pulumi:"wanPrimaryInterface"`
-	// WAN primary interface public IP address.
+	// The WAN Primary interface public IP.
 	WanPrimaryInterfacePublicIp *string `pulumi:"wanPrimaryInterfacePublicIp"`
 }
 
 type AviatrixDeviceInterfaceConfigState struct {
-	// Name of device.
+	// Name of the device.
 	DeviceName pulumi.StringPtrInput
-	// WAN primary interface of the device.
+	// Name of the WAN primary interface.
 	WanPrimaryInterface pulumi.StringPtrInput
-	// WAN primary interface public IP address.
+	// The WAN Primary interface public IP.
 	WanPrimaryInterfacePublicIp pulumi.StringPtrInput
 }
 
@@ -83,21 +122,21 @@ func (AviatrixDeviceInterfaceConfigState) ElementType() reflect.Type {
 }
 
 type aviatrixDeviceInterfaceConfigArgs struct {
-	// Name of device.
+	// Name of the device.
 	DeviceName string `pulumi:"deviceName"`
-	// WAN primary interface of the device.
+	// Name of the WAN primary interface.
 	WanPrimaryInterface string `pulumi:"wanPrimaryInterface"`
-	// WAN primary interface public IP address.
+	// The WAN Primary interface public IP.
 	WanPrimaryInterfacePublicIp string `pulumi:"wanPrimaryInterfacePublicIp"`
 }
 
 // The set of arguments for constructing a AviatrixDeviceInterfaceConfig resource.
 type AviatrixDeviceInterfaceConfigArgs struct {
-	// Name of device.
+	// Name of the device.
 	DeviceName pulumi.StringInput
-	// WAN primary interface of the device.
+	// Name of the WAN primary interface.
 	WanPrimaryInterface pulumi.StringInput
-	// WAN primary interface public IP address.
+	// The WAN Primary interface public IP.
 	WanPrimaryInterfacePublicIp pulumi.StringInput
 }
 
@@ -188,17 +227,17 @@ func (o AviatrixDeviceInterfaceConfigOutput) ToAviatrixDeviceInterfaceConfigOutp
 	return o
 }
 
-// Name of device.
+// Name of the device.
 func (o AviatrixDeviceInterfaceConfigOutput) DeviceName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixDeviceInterfaceConfig) pulumi.StringOutput { return v.DeviceName }).(pulumi.StringOutput)
 }
 
-// WAN primary interface of the device.
+// Name of the WAN primary interface.
 func (o AviatrixDeviceInterfaceConfigOutput) WanPrimaryInterface() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixDeviceInterfaceConfig) pulumi.StringOutput { return v.WanPrimaryInterface }).(pulumi.StringOutput)
 }
 
-// WAN primary interface public IP address.
+// The WAN Primary interface public IP.
 func (o AviatrixDeviceInterfaceConfigOutput) WanPrimaryInterfacePublicIp() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixDeviceInterfaceConfig) pulumi.StringOutput { return v.WanPrimaryInterfacePublicIp }).(pulumi.StringOutput)
 }

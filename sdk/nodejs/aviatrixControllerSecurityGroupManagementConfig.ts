@@ -4,6 +4,39 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_controller_security_group_management_config** resource allows management of an Aviatrix Controller's security group management configurations. This resource is available as of v2.20.1.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Controller Security Group Management Config to Enable Security Group Management
+ * const testSqmConfig = new aviatrix.AviatrixControllerSecurityGroupManagementConfig("test_sqm_config", {
+ *     accountName: "devops",
+ *     enableSecurityGroupManagement: true,
+ * });
+ * ```
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Controller Security Group Management Config to Disable Security Group Management
+ * const testSqmConfig = new aviatrix.AviatrixControllerSecurityGroupManagementConfig("test_sqm_config", {
+ *     enableSecurityGroupManagement: false,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Instance controller_security_group_management_config can be imported using controller IP, e.g. controller IP is 10.11.12.13
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixControllerSecurityGroupManagementConfig:AviatrixControllerSecurityGroupManagementConfig test 10-11-12-13
+ * ```
+ */
 export class AviatrixControllerSecurityGroupManagementConfig extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixControllerSecurityGroupManagementConfig resource's state with the given name, ID, and optional extra
@@ -33,11 +66,11 @@ export class AviatrixControllerSecurityGroupManagementConfig extends pulumi.Cust
     }
 
     /**
-     * Cloud account name of user.
+     * Select the [primary access account](https://docs.aviatrix.com/HowTos/aviatrix_account.html#setup-primary-access-account-for-aws-cloud).
      */
     public readonly accountName!: pulumi.Output<string | undefined>;
     /**
-     * Used to manage the Controller instance’s inbound rules from gateways.
+     * Enable to allow Controller to automatically manage inbound rules from gateways. Valid values: true, false.
      */
     public readonly enableSecurityGroupManagement!: pulumi.Output<boolean>;
 
@@ -74,11 +107,11 @@ export class AviatrixControllerSecurityGroupManagementConfig extends pulumi.Cust
  */
 export interface AviatrixControllerSecurityGroupManagementConfigState {
     /**
-     * Cloud account name of user.
+     * Select the [primary access account](https://docs.aviatrix.com/HowTos/aviatrix_account.html#setup-primary-access-account-for-aws-cloud).
      */
     accountName?: pulumi.Input<string>;
     /**
-     * Used to manage the Controller instance’s inbound rules from gateways.
+     * Enable to allow Controller to automatically manage inbound rules from gateways. Valid values: true, false.
      */
     enableSecurityGroupManagement?: pulumi.Input<boolean>;
 }
@@ -88,11 +121,11 @@ export interface AviatrixControllerSecurityGroupManagementConfigState {
  */
 export interface AviatrixControllerSecurityGroupManagementConfigArgs {
     /**
-     * Cloud account name of user.
+     * Select the [primary access account](https://docs.aviatrix.com/HowTos/aviatrix_account.html#setup-primary-access-account-for-aws-cloud).
      */
     accountName?: pulumi.Input<string>;
     /**
-     * Used to manage the Controller instance’s inbound rules from gateways.
+     * Enable to allow Controller to automatically manage inbound rules from gateways. Valid values: true, false.
      */
     enableSecurityGroupManagement: pulumi.Input<boolean>;
 }

@@ -11,16 +11,71 @@ namespace Pulumi.Aviatrix
 {
     public static class GetAviatrixGateway
     {
+        /// <summary>
+        /// The **aviatrix_gateway** data source provides details about a specific gateway created by the Aviatrix Controller.
+        /// 
+        /// This data source can prove useful when a module accepts a gateway's detail as an input variable. For example, requiring the gateway's name configuring a site2cloud connection.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using Pulumi;
+        /// using Aviatrix = Pulumi.Aviatrix;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var foo = Aviatrix.GetAviatrixGateway.Invoke(new()
+        ///     {
+        ///         GwName = "gatewayname",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
         public static Task<GetAviatrixGatewayResult> InvokeAsync(GetAviatrixGatewayArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAviatrixGatewayResult>("aviatrix:index/getAviatrixGateway:getAviatrixGateway", args ?? new GetAviatrixGatewayArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAviatrixGatewayResult>("aviatrix:index/getAviatrixGateway:getAviatrixGateway", args ?? new GetAviatrixGatewayArgs(), options.WithDefaults());
 
+        /// <summary>
+        /// The **aviatrix_gateway** data source provides details about a specific gateway created by the Aviatrix Controller.
+        /// 
+        /// This data source can prove useful when a module accepts a gateway's detail as an input variable. For example, requiring the gateway's name configuring a site2cloud connection.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using Pulumi;
+        /// using Aviatrix = Pulumi.Aviatrix;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var foo = Aviatrix.GetAviatrixGateway.Invoke(new()
+        ///     {
+        ///         GwName = "gatewayname",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
         public static Output<GetAviatrixGatewayResult> Invoke(GetAviatrixGatewayInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAviatrixGatewayResult>("aviatrix:index/getAviatrixGateway:getAviatrixGateway", args ?? new GetAviatrixGatewayInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAviatrixGatewayResult>("aviatrix:index/getAviatrixGateway:getAviatrixGateway", args ?? new GetAviatrixGatewayInvokeArgs(), options.WithDefaults());
     }
 
 
     public sealed class GetAviatrixGatewayArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// Gateway name.
+        /// </summary>
         [Input("gwName", required: true)]
         public string GwName { get; set; } = null!;
 
@@ -32,6 +87,9 @@ namespace Pulumi.Aviatrix
 
     public sealed class GetAviatrixGatewayInvokeArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// Gateway name.
+        /// </summary>
         [Input("gwName", required: true)]
         public Input<string> GwName { get; set; } = null!;
 
@@ -45,90 +103,276 @@ namespace Pulumi.Aviatrix
     [OutputType]
     public sealed class GetAviatrixGatewayResult
     {
+        /// <summary>
+        /// Aviatrix account name.
+        /// </summary>
         public readonly string AccountName;
+        /// <summary>
+        /// A list of destination CIDR ranges that will also go through the VPN tunnel when Split Tunnel Mode is enabled.
+        /// </summary>
         public readonly string AdditionalCidrs;
+        /// <summary>
+        /// A list of CIDR ranges separated by comma to configure when 'designated_gateway' feature is enabled.
+        /// </summary>
         public readonly string AdditionalCidrsDesignatedGateway;
+        /// <summary>
+        /// When value is false, an idle address in Elastic IP pool is reused for this gateway. Otherwise, a new Elastic IP is allocated and used for this gateway.
+        /// </summary>
         public readonly bool AllocateNewEip;
+        /// <summary>
+        /// Availability domain for OCI.
+        /// </summary>
         public readonly string AvailabilityDomain;
         public readonly string AzureEipNameResourceGroup;
+        /// <summary>
+        /// Instance ID of the gateway.
+        /// </summary>
         public readonly string CloudInstanceId;
+        /// <summary>
+        /// Type of cloud service provider.
+        /// </summary>
         public readonly int CloudType;
+        /// <summary>
+        /// API hostname for DUO auth mode.
+        /// </summary>
         public readonly string DuoApiHostname;
+        /// <summary>
+        /// Integration key for DUO auth mode.
+        /// </summary>
         public readonly string DuoIntegrationKey;
+        /// <summary>
+        /// Push mode for DUO auth.
+        /// </summary>
         public readonly string DuoPushMode;
+        /// <summary>
+        /// ELB DNS Name.
+        /// </summary>
         public readonly string ElbDnsName;
+        /// <summary>
+        /// Name of the ELB created.
+        /// </summary>
         public readonly string ElbName;
+        /// <summary>
+        /// Status of Designated Gateway feature for Gateway.
+        /// </summary>
         public readonly bool EnableDesignatedGateway;
+        /// <summary>
+        /// Status of ELB for the gateway.
+        /// </summary>
         public readonly bool EnableElb;
+        /// <summary>
+        /// Enable encrypt gateway EBS volume. Only supported for AWS provider.
+        /// </summary>
         public readonly bool EnableEncryptVolume;
         public readonly bool EnableJumboFrame;
+        /// <summary>
+        /// Status LDAP or not.
+        /// </summary>
         public readonly bool EnableLdap;
         public readonly bool EnableMonitorGatewaySubnets;
         public readonly bool EnablePublicSubnetFiltering;
         public readonly bool EnableSpotInstance;
+        /// <summary>
+        /// Status of VPC Dns Server for Gateway.
+        /// </summary>
         public readonly bool EnableVpcDnsServer;
+        /// <summary>
+        /// Status of VPN NAT.
+        /// </summary>
         public readonly bool EnableVpnNat;
+        /// <summary>
+        /// Fault domain for OCI.
+        /// </summary>
         public readonly string FaultDomain;
         public readonly string FqdnLanCidr;
         public readonly string FqdnLanInterface;
         public readonly string FqdnLanVpcId;
+        /// <summary>
+        /// Aviatrix gateway name.
+        /// </summary>
         public readonly string GwName;
+        /// <summary>
+        /// Size of gateway Instance.
+        /// </summary>
         public readonly string GwSize;
         /// <summary>
         /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
         public readonly int IdleTimeout;
+        /// <summary>
+        /// The image version of the gateway.
+        /// </summary>
         public readonly string ImageVersion;
+        /// <summary>
+        /// Status of Insane Mode for Gateway.
+        /// </summary>
         public readonly bool InsaneMode;
+        /// <summary>
+        /// AZ of subnet being created for Insane Mode gateway.
+        /// </summary>
         public readonly string InsaneModeAz;
+        /// <summary>
+        /// LDAP base DN.
+        /// </summary>
         public readonly string LdapBaseDn;
+        /// <summary>
+        /// LDAP bind DN.
+        /// </summary>
         public readonly string LdapBindDn;
+        /// <summary>
+        /// LDAP server address.
+        /// </summary>
         public readonly string LdapServer;
+        /// <summary>
+        /// LDAP user attribute.
+        /// </summary>
         public readonly string LdapUsernameAttribute;
+        /// <summary>
+        /// Maximum connection of VPN access.
+        /// </summary>
         public readonly string MaxVpnConn;
         public readonly ImmutableArray<string> MonitorExcludeLists;
+        /// <summary>
+        /// A list of DNS servers used to resolve domain names by a connected VPN user when Split Tunnel Mode is enabled.
+        /// </summary>
         public readonly string NameServers;
+        /// <summary>
+        /// URL for Okta auth mode.
+        /// </summary>
         public readonly string OktaUrl;
+        /// <summary>
+        /// Username suffix for Okta auth mode.
+        /// </summary>
         public readonly string OktaUsernameSuffix;
+        /// <summary>
+        /// Two step authentication mode.
+        /// </summary>
         public readonly string OtpMode;
+        /// <summary>
+        /// HA gateway availability domain for OCI.
+        /// </summary>
         public readonly string PeeringHaAvailabilityDomain;
         public readonly string PeeringHaAzureEipNameResourceGroup;
+        /// <summary>
+        /// Instance ID of the peering HA gateway.
+        /// </summary>
         public readonly string PeeringHaCloudInstanceId;
+        /// <summary>
+        /// HA gateway fault domain for OCI.
+        /// </summary>
         public readonly string PeeringHaFaultDomain;
+        /// <summary>
+        /// Aviatrix gateway unique name of HA gateway.
+        /// </summary>
         public readonly string PeeringHaGwName;
+        /// <summary>
+        /// Peering HA Gateway Size.
+        /// </summary>
         public readonly string PeeringHaGwSize;
+        /// <summary>
+        /// The image version of the HA gateway.
+        /// </summary>
         public readonly string PeeringHaImageVersion;
+        /// <summary>
+        /// AZ of subnet being created for Insane Mode Peering HA Gateway. Required if insane_mode is set.
+        /// </summary>
         public readonly string PeeringHaInsaneModeAz;
+        /// <summary>
+        /// Private IP address of HA gateway.
+        /// </summary>
         public readonly string PeeringHaPrivateIp;
+        /// <summary>
+        /// Public IP address that you want assigned to the HA peering instance.
+        /// </summary>
         public readonly string PeeringHaPublicIp;
         public readonly string PeeringHaSecurityGroupId;
+        /// <summary>
+        /// The software version of the HA gateway.
+        /// </summary>
         public readonly string PeeringHaSoftwareVersion;
+        /// <summary>
+        /// Public Subnet Information while creating Peering HA Gateway, only subnet is accepted. Required to create peering ha gateway if cloud_type = 1 or 8 (AWS or Azure).
+        /// </summary>
         public readonly string PeeringHaSubnet;
+        /// <summary>
+        /// Zone information for creating Peering HA Gateway. Required to create peering ha gateway if cloud_type = 4 (GCP).
+        /// </summary>
         public readonly string PeeringHaZone;
+        /// <summary>
+        /// Private IP address of the Gateway created.
+        /// </summary>
         public readonly string PrivateIp;
+        /// <summary>
+        /// NS server used by the gateway.
+        /// </summary>
         public readonly string PublicDnsServer;
+        /// <summary>
+        /// Public IP address of the Gateway created.
+        /// </summary>
         public readonly string PublicIp;
         public readonly bool PublicSubnetFilteringGuardDutyEnforced;
         public readonly ImmutableArray<string> PublicSubnetFilteringHaRouteTables;
         public readonly ImmutableArray<string> PublicSubnetFilteringRouteTables;
         public readonly int RenegotiationInterval;
+        /// <summary>
+        /// Status of SAML.
+        /// </summary>
         public readonly bool SamlEnabled;
+        /// <summary>
+        /// A list of domain names that will use the NameServer when a specific name is not in the destination when Split Tunnel Mode is enabled.
+        /// </summary>
         public readonly string SearchDomains;
+        /// <summary>
+        /// Security group used for the gateway.
+        /// </summary>
         public readonly string SecurityGroupId;
+        /// <summary>
+        /// Status of Single AZ HA.
+        /// </summary>
         public readonly bool SingleAzHa;
+        /// <summary>
+        /// Single IP Source NAT status for the container.
+        /// </summary>
         public readonly bool SingleIpSnat;
+        /// <summary>
+        /// The software version of the gateway.
+        /// </summary>
         public readonly string SoftwareVersion;
+        /// <summary>
+        /// Status of split tunnel mode.
+        /// </summary>
         public readonly bool SplitTunnel;
         public readonly string SpotPrice;
+        /// <summary>
+        /// A VPC Network address range selected from one of the available network ranges.
+        /// </summary>
         public readonly string Subnet;
+        /// <summary>
+        /// Instance tag of cloud provider.
+        /// </summary>
         public readonly ImmutableArray<string> TagLists;
         public readonly ImmutableDictionary<string, string> Tags;
         public readonly int TunnelDetectionTime;
+        /// <summary>
+        /// VPC-ID/VNet-Name of cloud provider.
+        /// </summary>
         public readonly string VpcId;
+        /// <summary>
+        /// Region of cloud provider.
+        /// </summary>
         public readonly string VpcReg;
+        /// <summary>
+        /// Status of user access through VPN to the container.
+        /// </summary>
         public readonly bool VpnAccess;
+        /// <summary>
+        /// VPN CIDR block for the container.
+        /// </summary>
         public readonly string VpnCidr;
+        /// <summary>
+        /// ELB protocol for VPN gateway with ELB enabled.
+        /// </summary>
         public readonly string VpnProtocol;
         public readonly string Zone;
 

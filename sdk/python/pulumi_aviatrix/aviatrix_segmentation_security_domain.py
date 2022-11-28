@@ -17,7 +17,7 @@ class AviatrixSegmentationSecurityDomainArgs:
                  domain_name: pulumi.Input[str]):
         """
         The set of arguments for constructing a AviatrixSegmentationSecurityDomain resource.
-        :param pulumi.Input[str] domain_name: Security domain name.
+        :param pulumi.Input[str] domain_name: Name of the Security Domain.
         """
         pulumi.set(__self__, "domain_name", domain_name)
 
@@ -25,7 +25,7 @@ class AviatrixSegmentationSecurityDomainArgs:
     @pulumi.getter(name="domainName")
     def domain_name(self) -> pulumi.Input[str]:
         """
-        Security domain name.
+        Name of the Security Domain.
         """
         return pulumi.get(self, "domain_name")
 
@@ -40,7 +40,7 @@ class _AviatrixSegmentationSecurityDomainState:
                  domain_name: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixSegmentationSecurityDomain resources.
-        :param pulumi.Input[str] domain_name: Security domain name.
+        :param pulumi.Input[str] domain_name: Name of the Security Domain.
         """
         if domain_name is not None:
             pulumi.set(__self__, "domain_name", domain_name)
@@ -49,7 +49,7 @@ class _AviatrixSegmentationSecurityDomainState:
     @pulumi.getter(name="domainName")
     def domain_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Security domain name.
+        Name of the Security Domain.
         """
         return pulumi.get(self, "domain_name")
 
@@ -66,10 +66,29 @@ class AviatrixSegmentationSecurityDomain(pulumi.CustomResource):
                  domain_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixSegmentationSecurityDomain resource with the given unique name, props, and options.
+        The **aviatrix_segmentation_security_domain** resource handles creation of [Transit Segmentation](https://docs.aviatrix.com/HowTos/transit_segmentation_faq.html) Security Domains.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Segmentation Security Domain
+        test_segmentation_security_domain = aviatrix.AviatrixSegmentationSecurityDomain("testSegmentationSecurityDomain", domain_name="domain-a")
+        ```
+
+        ## Import
+
+        **aviatrix_segmentation_security_domain** can be imported using the `domain_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixSegmentationSecurityDomain:AviatrixSegmentationSecurityDomain test domain_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] domain_name: Security domain name.
+        :param pulumi.Input[str] domain_name: Name of the Security Domain.
         """
         ...
     @overload
@@ -78,7 +97,26 @@ class AviatrixSegmentationSecurityDomain(pulumi.CustomResource):
                  args: AviatrixSegmentationSecurityDomainArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixSegmentationSecurityDomain resource with the given unique name, props, and options.
+        The **aviatrix_segmentation_security_domain** resource handles creation of [Transit Segmentation](https://docs.aviatrix.com/HowTos/transit_segmentation_faq.html) Security Domains.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Segmentation Security Domain
+        test_segmentation_security_domain = aviatrix.AviatrixSegmentationSecurityDomain("testSegmentationSecurityDomain", domain_name="domain-a")
+        ```
+
+        ## Import
+
+        **aviatrix_segmentation_security_domain** can be imported using the `domain_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixSegmentationSecurityDomain:AviatrixSegmentationSecurityDomain test domain_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixSegmentationSecurityDomainArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -125,7 +163,7 @@ class AviatrixSegmentationSecurityDomain(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] domain_name: Security domain name.
+        :param pulumi.Input[str] domain_name: Name of the Security Domain.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -138,7 +176,7 @@ class AviatrixSegmentationSecurityDomain(pulumi.CustomResource):
     @pulumi.getter(name="domainName")
     def domain_name(self) -> pulumi.Output[str]:
         """
-        Security domain name.
+        Name of the Security Domain.
         """
         return pulumi.get(self, "domain_name")
 

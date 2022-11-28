@@ -10,6 +10,39 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Use this data source to get the list of VPC's for use in other resources.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err = aviatrix.GetAviatrixVpcTracker(ctx, &GetAviatrixVpcTrackerArgs{
+//				AccountName: pulumi.StringRef("bar"),
+//				Cidr:        pulumi.StringRef("10.0.0.1/24"),
+//				CloudType:   pulumi.IntRef(1),
+//				Region:      pulumi.StringRef("us-west-1"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// ## Notes
+//
+// * Please be aware this data source could take up to 20 minutes to refresh depending on the number of VPCs and cloud accounts.
 func GetAviatrixVpcTracker(ctx *pulumi.Context, args *GetAviatrixVpcTrackerArgs, opts ...pulumi.InvokeOption) (*GetAviatrixVpcTrackerResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetAviatrixVpcTrackerResult
@@ -22,20 +55,29 @@ func GetAviatrixVpcTracker(ctx *pulumi.Context, args *GetAviatrixVpcTrackerArgs,
 
 // A collection of arguments for invoking getAviatrixVpcTracker.
 type GetAviatrixVpcTrackerArgs struct {
+	// Filters VPC list by access account name.
 	AccountName *string `pulumi:"accountName"`
-	Cidr        *string `pulumi:"cidr"`
-	CloudType   *int    `pulumi:"cloudType"`
-	Region      *string `pulumi:"region"`
+	// Filters VPC list by CIDR (AWS/Azure only).
+	Cidr *string `pulumi:"cidr"`
+	// Filters VPC list by cloud provider id. For example, cloudType = 1 will give all AWS VPCs.
+	CloudType *int `pulumi:"cloudType"`
+	// Filters VPC list by region (AWS/Azure only).
+	Region *string `pulumi:"region"`
 }
 
 // A collection of values returned by getAviatrixVpcTracker.
 type GetAviatrixVpcTrackerResult struct {
+	// Aviatrix access account associated with the VPC.
 	AccountName *string `pulumi:"accountName"`
-	Cidr        *string `pulumi:"cidr"`
-	CloudType   *int    `pulumi:"cloudType"`
+	// Subnet CIDR.
+	Cidr *string `pulumi:"cidr"`
+	// Cloud provider id hosting this VPC.
+	CloudType *int `pulumi:"cloudType"`
 	// The provider-assigned unique ID for this managed resource.
-	Id       string                         `pulumi:"id"`
-	Region   *string                        `pulumi:"region"`
+	Id string `pulumi:"id"`
+	// Subnet region.
+	Region *string `pulumi:"region"`
+	// List of VPCs from the VPC tracker.
 	VpcLists []GetAviatrixVpcTrackerVpcList `pulumi:"vpcLists"`
 }
 
@@ -54,10 +96,14 @@ func GetAviatrixVpcTrackerOutput(ctx *pulumi.Context, args GetAviatrixVpcTracker
 
 // A collection of arguments for invoking getAviatrixVpcTracker.
 type GetAviatrixVpcTrackerOutputArgs struct {
+	// Filters VPC list by access account name.
 	AccountName pulumi.StringPtrInput `pulumi:"accountName"`
-	Cidr        pulumi.StringPtrInput `pulumi:"cidr"`
-	CloudType   pulumi.IntPtrInput    `pulumi:"cloudType"`
-	Region      pulumi.StringPtrInput `pulumi:"region"`
+	// Filters VPC list by CIDR (AWS/Azure only).
+	Cidr pulumi.StringPtrInput `pulumi:"cidr"`
+	// Filters VPC list by cloud provider id. For example, cloudType = 1 will give all AWS VPCs.
+	CloudType pulumi.IntPtrInput `pulumi:"cloudType"`
+	// Filters VPC list by region (AWS/Azure only).
+	Region pulumi.StringPtrInput `pulumi:"region"`
 }
 
 func (GetAviatrixVpcTrackerOutputArgs) ElementType() reflect.Type {
@@ -79,14 +125,17 @@ func (o GetAviatrixVpcTrackerResultOutput) ToGetAviatrixVpcTrackerResultOutputWi
 	return o
 }
 
+// Aviatrix access account associated with the VPC.
 func (o GetAviatrixVpcTrackerResultOutput) AccountName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetAviatrixVpcTrackerResult) *string { return v.AccountName }).(pulumi.StringPtrOutput)
 }
 
+// Subnet CIDR.
 func (o GetAviatrixVpcTrackerResultOutput) Cidr() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetAviatrixVpcTrackerResult) *string { return v.Cidr }).(pulumi.StringPtrOutput)
 }
 
+// Cloud provider id hosting this VPC.
 func (o GetAviatrixVpcTrackerResultOutput) CloudType() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v GetAviatrixVpcTrackerResult) *int { return v.CloudType }).(pulumi.IntPtrOutput)
 }
@@ -96,10 +145,12 @@ func (o GetAviatrixVpcTrackerResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixVpcTrackerResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
+// Subnet region.
 func (o GetAviatrixVpcTrackerResultOutput) Region() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetAviatrixVpcTrackerResult) *string { return v.Region }).(pulumi.StringPtrOutput)
 }
 
+// List of VPCs from the VPC tracker.
 func (o GetAviatrixVpcTrackerResultOutput) VpcLists() GetAviatrixVpcTrackerVpcListArrayOutput {
 	return o.ApplyT(func(v GetAviatrixVpcTrackerResult) []GetAviatrixVpcTrackerVpcList { return v.VpcLists }).(GetAviatrixVpcTrackerVpcListArrayOutput)
 }

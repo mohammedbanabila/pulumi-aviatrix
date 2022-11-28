@@ -20,8 +20,8 @@ class AviatrixFirewallTagArgs:
                  cidr_lists: Optional[pulumi.Input[Sequence[pulumi.Input['AviatrixFirewallTagCidrListArgs']]]] = None):
         """
         The set of arguments for constructing a AviatrixFirewallTag resource.
-        :param pulumi.Input[str] firewall_tag: This parameter represents the name of a Cloud-Account in Aviatrix controller.
-        :param pulumi.Input[Sequence[pulumi.Input['AviatrixFirewallTagCidrListArgs']]] cidr_lists: A JSON file with information of 'cidr_tag_name' and 'cidr'.
+        :param pulumi.Input[str] firewall_tag: Name of the stateful firewall tag to be created.
+        :param pulumi.Input[Sequence[pulumi.Input['AviatrixFirewallTagCidrListArgs']]] cidr_lists: Dynamic block representing a CIDR to filter, and a name to identify it:
         """
         pulumi.set(__self__, "firewall_tag", firewall_tag)
         if cidr_lists is not None:
@@ -31,7 +31,7 @@ class AviatrixFirewallTagArgs:
     @pulumi.getter(name="firewallTag")
     def firewall_tag(self) -> pulumi.Input[str]:
         """
-        This parameter represents the name of a Cloud-Account in Aviatrix controller.
+        Name of the stateful firewall tag to be created.
         """
         return pulumi.get(self, "firewall_tag")
 
@@ -43,7 +43,7 @@ class AviatrixFirewallTagArgs:
     @pulumi.getter(name="cidrLists")
     def cidr_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['AviatrixFirewallTagCidrListArgs']]]]:
         """
-        A JSON file with information of 'cidr_tag_name' and 'cidr'.
+        Dynamic block representing a CIDR to filter, and a name to identify it:
         """
         return pulumi.get(self, "cidr_lists")
 
@@ -59,8 +59,8 @@ class _AviatrixFirewallTagState:
                  firewall_tag: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixFirewallTag resources.
-        :param pulumi.Input[Sequence[pulumi.Input['AviatrixFirewallTagCidrListArgs']]] cidr_lists: A JSON file with information of 'cidr_tag_name' and 'cidr'.
-        :param pulumi.Input[str] firewall_tag: This parameter represents the name of a Cloud-Account in Aviatrix controller.
+        :param pulumi.Input[Sequence[pulumi.Input['AviatrixFirewallTagCidrListArgs']]] cidr_lists: Dynamic block representing a CIDR to filter, and a name to identify it:
+        :param pulumi.Input[str] firewall_tag: Name of the stateful firewall tag to be created.
         """
         if cidr_lists is not None:
             pulumi.set(__self__, "cidr_lists", cidr_lists)
@@ -71,7 +71,7 @@ class _AviatrixFirewallTagState:
     @pulumi.getter(name="cidrLists")
     def cidr_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['AviatrixFirewallTagCidrListArgs']]]]:
         """
-        A JSON file with information of 'cidr_tag_name' and 'cidr'.
+        Dynamic block representing a CIDR to filter, and a name to identify it:
         """
         return pulumi.get(self, "cidr_lists")
 
@@ -83,7 +83,7 @@ class _AviatrixFirewallTagState:
     @pulumi.getter(name="firewallTag")
     def firewall_tag(self) -> Optional[pulumi.Input[str]]:
         """
-        This parameter represents the name of a Cloud-Account in Aviatrix controller.
+        Name of the stateful firewall tag to be created.
         """
         return pulumi.get(self, "firewall_tag")
 
@@ -101,11 +101,41 @@ class AviatrixFirewallTag(pulumi.CustomResource):
                  firewall_tag: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixFirewallTag resource with the given unique name, props, and options.
+        The **aviatrix_firewall_tag** resource allows the creation and management of [Aviatrix Stateful Firewall tags](https://docs.aviatrix.com/HowTos/tag_firewall.html) for tag-based security for gateways.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Firewall Tag
+        test_firewall_tag = aviatrix.AviatrixFirewallTag("testFirewallTag",
+            cidr_lists=[
+                aviatrix.AviatrixFirewallTagCidrListArgs(
+                    cidr="10.1.0.0/24",
+                    cidr_tag_name="a1",
+                ),
+                aviatrix.AviatrixFirewallTagCidrListArgs(
+                    cidr="10.2.0.0/24",
+                    cidr_tag_name="b1",
+                ),
+            ],
+            firewall_tag="test-firewall-tag")
+        ```
+
+        ## Import
+
+        **firewall_tag** can be imported using the `firewall_tag`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixFirewallTag:AviatrixFirewallTag test firewall_tag
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixFirewallTagCidrListArgs']]]] cidr_lists: A JSON file with information of 'cidr_tag_name' and 'cidr'.
-        :param pulumi.Input[str] firewall_tag: This parameter represents the name of a Cloud-Account in Aviatrix controller.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixFirewallTagCidrListArgs']]]] cidr_lists: Dynamic block representing a CIDR to filter, and a name to identify it:
+        :param pulumi.Input[str] firewall_tag: Name of the stateful firewall tag to be created.
         """
         ...
     @overload
@@ -114,7 +144,37 @@ class AviatrixFirewallTag(pulumi.CustomResource):
                  args: AviatrixFirewallTagArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixFirewallTag resource with the given unique name, props, and options.
+        The **aviatrix_firewall_tag** resource allows the creation and management of [Aviatrix Stateful Firewall tags](https://docs.aviatrix.com/HowTos/tag_firewall.html) for tag-based security for gateways.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Firewall Tag
+        test_firewall_tag = aviatrix.AviatrixFirewallTag("testFirewallTag",
+            cidr_lists=[
+                aviatrix.AviatrixFirewallTagCidrListArgs(
+                    cidr="10.1.0.0/24",
+                    cidr_tag_name="a1",
+                ),
+                aviatrix.AviatrixFirewallTagCidrListArgs(
+                    cidr="10.2.0.0/24",
+                    cidr_tag_name="b1",
+                ),
+            ],
+            firewall_tag="test-firewall-tag")
+        ```
+
+        ## Import
+
+        **firewall_tag** can be imported using the `firewall_tag`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixFirewallTag:AviatrixFirewallTag test firewall_tag
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixFirewallTagArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -164,8 +224,8 @@ class AviatrixFirewallTag(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixFirewallTagCidrListArgs']]]] cidr_lists: A JSON file with information of 'cidr_tag_name' and 'cidr'.
-        :param pulumi.Input[str] firewall_tag: This parameter represents the name of a Cloud-Account in Aviatrix controller.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixFirewallTagCidrListArgs']]]] cidr_lists: Dynamic block representing a CIDR to filter, and a name to identify it:
+        :param pulumi.Input[str] firewall_tag: Name of the stateful firewall tag to be created.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -179,7 +239,7 @@ class AviatrixFirewallTag(pulumi.CustomResource):
     @pulumi.getter(name="cidrLists")
     def cidr_lists(self) -> pulumi.Output[Optional[Sequence['outputs.AviatrixFirewallTagCidrList']]]:
         """
-        A JSON file with information of 'cidr_tag_name' and 'cidr'.
+        Dynamic block representing a CIDR to filter, and a name to identify it:
         """
         return pulumi.get(self, "cidr_lists")
 
@@ -187,7 +247,7 @@ class AviatrixFirewallTag(pulumi.CustomResource):
     @pulumi.getter(name="firewallTag")
     def firewall_tag(self) -> pulumi.Output[str]:
         """
-        This parameter represents the name of a Cloud-Account in Aviatrix controller.
+        Name of the stateful firewall tag to be created.
         """
         return pulumi.get(self, "firewall_tag")
 

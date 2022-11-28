@@ -2,9 +2,27 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_transit_gateway** data source provides details about a specific transit gateway created by the Aviatrix Controller.
+ *
+ * This data source can prove useful when a module accepts a transit gateway's detail as an input variable. For example, requiring the transit gateway's name for a spoke gateway's attachment.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Aviatrix Transit Gateway Data Source
+ * const foo = pulumi.output(aviatrix.getAviatrixTransitGateway({
+ *     gwName: "gatewayname",
+ * }));
+ * ```
+ */
 export function getAviatrixTransitGateway(args: GetAviatrixTransitGatewayArgs, opts?: pulumi.InvokeOptions): Promise<GetAviatrixTransitGatewayResult> {
     if (!opts) {
         opts = {}
@@ -20,6 +38,9 @@ export function getAviatrixTransitGateway(args: GetAviatrixTransitGatewayArgs, o
  * A collection of arguments for invoking getAviatrixTransitGateway.
  */
 export interface GetAviatrixTransitGatewayArgs {
+    /**
+     * Transit gateway name.
+     */
     gwName: string;
 }
 
@@ -27,96 +48,347 @@ export interface GetAviatrixTransitGatewayArgs {
  * A collection of values returned by getAviatrixTransitGateway.
  */
 export interface GetAviatrixTransitGatewayResult {
+    /**
+     * Aviatrix account name.
+     */
     readonly accountName: string;
+    /**
+     * When value is false, an idle address in Elastic IP pool is reused for this gateway. Otherwise, a new Elastic IP is allocated and used for this gateway.
+     */
     readonly allocateNewEip: boolean;
+    /**
+     * Approved learned CIDRs.
+     */
     readonly approvedLearnedCidrs: string[];
+    /**
+     * Availability domain for OCI.
+     */
     readonly availabilityDomain: string;
+    /**
+     * The name of the public IP address and its resource group in Azure to assign to this Transit Gateway.
+     */
     readonly azureEipNameResourceGroup: string;
+    /**
+     * Status of Equal Cost Multi Path (ECMP) routing for the next hop.
+     */
     readonly bgpEcmp: boolean;
+    /**
+     * BGP Hold Time.
+     */
     readonly bgpHoldTime: number;
+    /**
+     * Interfaces to run BGP protocol on top of the ethernet interface, to connect to the onprem/remote peer.
+     */
     readonly bgpLanInterfaces: outputs.GetAviatrixTransitGatewayBgpLanInterface[];
+    /**
+     * List of available BGP LAN interface IPs for transit external device connection creation. Only supports GCP and Azure.
+     */
     readonly bgpLanIpLists: string[];
+    /**
+     * Intended CIDR list to advertise to VGW.
+     */
     readonly bgpManualSpokeAdvertiseCidrs: string;
+    /**
+     * BGP route polling time.
+     */
     readonly bgpPollingTime: string;
+    /**
+     * Instance ID of the transit gateway.
+     */
     readonly cloudInstanceId: string;
+    /**
+     * Type of cloud service provider.
+     * * `connectedTransit"` -  Status of Connected Transit of transit gateway.
+     */
     readonly cloudType: number;
     readonly connectedTransit: boolean;
+    /**
+     * A list of comma separated CIDRs to be customized for the spoke VPC routes.
+     */
     readonly customizedSpokeVpcRoutes: string;
+    /**
+     * A list of CIDRs to be customized for the transit VPC routes.
+     */
     readonly customizedTransitVpcRoutes: string[];
+    /**
+     * The EIP address of the Transit Gateway.
+     */
     readonly eip: string;
+    /**
+     * Status of Active-Standby Mode.
+     */
     readonly enableActiveStandby: boolean;
+    /**
+     * Status of Preemptive Mode for Active-Standby.
+     */
     readonly enableActiveStandbyPreemptive: boolean;
+    /**
+     * Status of Advertise Transit VPC network CIDR of the transit gateway.
+     */
     readonly enableAdvertiseTransitCidr: boolean;
+    /**
+     * Status of BGP over LAN functionality.
+     */
     readonly enableBgpOverLan: boolean;
+    /**
+     * Status of Egress Transit FireNet being enabled on the gateway.
+     */
     readonly enableEgressTransitFirenet: boolean;
+    /**
+     * Status of Encrypt Gateway EBS Volume of the transit gateway.
+     */
     readonly enableEncryptVolume: boolean;
+    /**
+     * Status of FireNet Interfaces of the transit gateway.
+     */
     readonly enableFirenet: boolean;
+    /**
+     * Status of AWS Gateway Load Balancer.
+     */
     readonly enableGatewayLoadBalancer: boolean;
+    /**
+     * Sign of readiness for TGW connection.
+     */
     readonly enableHybridConnection: boolean;
+    /**
+     * Status of jumbo frame support.
+     */
     readonly enableJumboFrame: boolean;
+    /**
+     * Status of Encrypted Transit Approval for transit gateway.
+     */
     readonly enableLearnedCidrsApproval: boolean;
+    /**
+     * Status of monitor gateway subnets.
+     */
     readonly enableMonitorGatewaySubnets: boolean;
+    /**
+     * Status of multi-tier transit mode on transit gateway.
+     */
     readonly enableMultiTierTransit: boolean;
+    /**
+     * Status of private OOB for the transit gateway.
+     */
     readonly enablePrivateOob: boolean;
+    /**
+     * Status of segmentation.
+     */
     readonly enableSegmentation: boolean;
+    /**
+     * Status of spot instance.
+     */
     readonly enableSpotInstance: boolean;
+    /**
+     * Status of Transit FireNet Interfaces of the transit gateway.
+     */
     readonly enableTransitFirenet: boolean;
+    /**
+     * Status of transit summarize CIDR to TGW.
+     */
     readonly enableTransitSummarizeCidrToTgw: boolean;
+    /**
+     * Status of Vpc Dns Server of the transit Gateway.
+     */
     readonly enableVpcDnsServer: boolean;
+    /**
+     * A list of comma separated CIDRs to be advertised to on-prem as "Excluded CIDR List".
+     */
     readonly excludedAdvertisedSpokeRoutes: string;
+    /**
+     * Fault domain for OCI.
+     */
     readonly faultDomain: string;
+    /**
+     * A list of comma separated CIDRs to be filtered from the spoke VPC route table.
+     */
     readonly filteredSpokeVpcRoutes: string;
+    /**
+     * Aviatrix transit gateway name.
+     */
     readonly gwName: string;
+    /**
+     * Size of transit gateway instance.
+     */
     readonly gwSize: string;
+    /**
+     * HA gateway availability domain for OCI.
+     */
     readonly haAvailabilityDomain: string;
+    /**
+     * The name of the public IP address and its resource group in Azure to assign to the HA Transit Gateway.
+     */
     readonly haAzureEipNameResourceGroup: string;
+    /**
+     * Interfaces to run BGP protocol on top of the ethernet interface, to connect to the onprem/remote peer. Only available for GCP HA Transit.
+     */
     readonly haBgpLanInterfaces: outputs.GetAviatrixTransitGatewayHaBgpLanInterface[];
+    /**
+     * List of available BGP LAN interface IPs for transit external device HA connection creation. Only supports GCP and Azure.
+     */
     readonly haBgpLanIpLists: string[];
+    /**
+     * Cloud instance ID of HA transit gateway.
+     */
     readonly haCloudInstanceId: string;
+    /**
+     * The EIP address of the HA Transit Gateway.
+     */
     readonly haEip: string;
+    /**
+     * HA gateway fault domain for OCI.
+     */
     readonly haFaultDomain: string;
+    /**
+     * Aviatrix transit gateway unique name of HA transit gateway.
+     * * `haGwSize"` - HA Gateway Size.
+     */
     readonly haGwName: string;
     readonly haGwSize: string;
+    /**
+     * The image version of the HA gateway.
+     */
     readonly haImageVersion: string;
+    /**
+     * AZ of subnet being created for Insane Mode Transit HA Gateway.
+     */
     readonly haInsaneModeAz: string;
+    /**
+     * Transit gateway lan interface cidr for the HA gateway.
+     */
     readonly haLanInterfaceCidr: string;
+    /**
+     * HA OOB availability zone.
+     */
     readonly haOobAvailabilityZone: string;
+    /**
+     * HA OOB management subnet.
+     */
     readonly haOobManagementSubnet: string;
+    /**
+     * Private IP address that assigned to the HA Transit Gateway.
+     */
     readonly haPrivateIp: string;
+    /**
+     * Public IP address that assigned to the HA Transit Gateway.
+     */
     readonly haPublicIp: string;
+    /**
+     * HA security group used for the transit gateway.
+     */
     readonly haSecurityGroupId: string;
+    /**
+     * The software version of the HA gateway.
+     */
     readonly haSoftwareVersion: string;
+    /**
+     * HA Subnet.
+     */
     readonly haSubnet: string;
+    /**
+     * HA Zone.
+     */
     readonly haZone: string;
     /**
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * The image version of the gateway.
+     */
     readonly imageVersion: string;
+    /**
+     * Status of Insane Mode of the transit gateway.
+     */
     readonly insaneMode: boolean;
+    /**
+     * AZ of subnet being created for Insane Mode transit gateway.
+     */
     readonly insaneModeAz: string;
+    /**
+     * Transit gateway lan interface cidr.
+     */
     readonly lanInterfaceCidr: string;
+    /**
+     * LAN Private Subnet for GCP Transit FireNet.
+     */
     readonly lanPrivateSubnet: string;
+    /**
+     * LAN VPC ID for GCP Transit FireNet.
+     */
     readonly lanVpcId: string;
+    /**
+     * Learned CIDRs approval mode.
+     */
     readonly learnedCidrsApprovalMode: string;
+    /**
+     * Local ASN number.
+     */
     readonly localAsNumber: string;
+    /**
+     * A set of monitored instance IDs.
+     */
     readonly monitorExcludeLists: string[];
+    /**
+     * OOB availability zone.
+     */
     readonly oobAvailabilityZone: string;
+    /**
+     * OOB management subnet.
+     */
     readonly oobManagementSubnet: string;
+    /**
+     * List of AS numbers to populate BGP AP_PATH field when it advertises to VGW or peer devices.
+     */
     readonly prependAsPaths: string[];
+    /**
+     * Private IP address of the transit gateway created.
+     */
     readonly privateIp: string;
+    /**
+     * Public IP address of the Transit Gateway created.
+     */
     readonly publicIp: string;
+    /**
+     * Security group used for the transit gateway.
+     */
     readonly securityGroupId: string;
+    /**
+     * Status of Single AZ HA of transit gateway.
+     */
     readonly singleAzHa: boolean;
+    /**
+     * Status of Single IP Source Nat mode of the transit gateway.
+     */
     readonly singleIpSnat: boolean;
+    /**
+     * The software version of the gateway.
+     */
     readonly softwareVersion: string;
+    /**
+     * Price for spot instance.
+     */
     readonly spotPrice: string;
+    /**
+     * Subnet Info.
+     */
     readonly subnet: string;
+    /**
+     * Instance tag of cloud provider.
+     */
     readonly tagLists: string[];
     readonly tags: {[key: string]: string};
     readonly tunnelDetectionTime: number;
+    /**
+     * VPC-ID of GCP cloud provider.
+     */
     readonly vpcId: string;
+    /**
+     * Region of cloud provider.
+     */
     readonly vpcReg: string;
+    /**
+     * Availability Zone for Azure.
+     */
     readonly zone: string;
 }
 
@@ -128,5 +400,8 @@ export function getAviatrixTransitGatewayOutput(args: GetAviatrixTransitGatewayO
  * A collection of arguments for invoking getAviatrixTransitGateway.
  */
 export interface GetAviatrixTransitGatewayOutputArgs {
+    /**
+     * Transit gateway name.
+     */
     gwName: pulumi.Input<string>;
 }

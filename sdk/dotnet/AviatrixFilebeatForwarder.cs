@@ -9,17 +9,55 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_filebeat_forwarder** resource allows the enabling and disabling of filebeat forwarder.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.IO;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Enable filebeat forwarder
+    ///     var testFilebeatForwarder = new Aviatrix.AviatrixFilebeatForwarder("testFilebeatForwarder", new()
+    ///     {
+    ///         Server = "1.2.3.4",
+    ///         Port = 10,
+    ///         TrustedCaFile = File.ReadAllText("/path/to/ca.pem"),
+    ///         ConfigFile = File.ReadAllText("/path/to/config.txt"),
+    ///         ExcludedGateways = new[]
+    ///         {
+    ///             "a",
+    ///             "b",
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **filebeat_forwarder** can be imported using "filebeat_forwarder", e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixFilebeatForwarder:AviatrixFilebeatForwarder test filebeat_forwarder
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixFilebeatForwarder:AviatrixFilebeatForwarder")]
     public partial class AviatrixFilebeatForwarder : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Configuration file.
+        /// The config file. Use the `file` function to read from a file.
         /// </summary>
         [Output("configFile")]
         public Output<string?> ConfigFile { get; private set; } = null!;
 
         /// <summary>
-        /// List of excluded gateways.
+        /// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         /// </summary>
         [Output("excludedGateways")]
         public Output<ImmutableArray<string>> ExcludedGateways { get; private set; } = null!;
@@ -37,13 +75,13 @@ namespace Pulumi.Aviatrix
         public Output<string> Server { get; private set; } = null!;
 
         /// <summary>
-        /// Enabled or not.
+        /// The status of filebeat forwarder.
         /// </summary>
         [Output("status")]
         public Output<string> Status { get; private set; } = null!;
 
         /// <summary>
-        /// Trusted CA file.
+        /// The trusted CA file. Use the `file` function to read from a file.
         /// </summary>
         [Output("trustedCaFile")]
         public Output<string?> TrustedCaFile { get; private set; } = null!;
@@ -96,7 +134,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixFilebeatForwarderArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Configuration file.
+        /// The config file. Use the `file` function to read from a file.
         /// </summary>
         [Input("configFile")]
         public Input<string>? ConfigFile { get; set; }
@@ -105,7 +143,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _excludedGateways;
 
         /// <summary>
-        /// List of excluded gateways.
+        /// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         /// </summary>
         public InputList<string> ExcludedGateways
         {
@@ -126,7 +164,7 @@ namespace Pulumi.Aviatrix
         public Input<string> Server { get; set; } = null!;
 
         /// <summary>
-        /// Trusted CA file.
+        /// The trusted CA file. Use the `file` function to read from a file.
         /// </summary>
         [Input("trustedCaFile")]
         public Input<string>? TrustedCaFile { get; set; }
@@ -140,7 +178,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixFilebeatForwarderState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Configuration file.
+        /// The config file. Use the `file` function to read from a file.
         /// </summary>
         [Input("configFile")]
         public Input<string>? ConfigFile { get; set; }
@@ -149,7 +187,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _excludedGateways;
 
         /// <summary>
-        /// List of excluded gateways.
+        /// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         /// </summary>
         public InputList<string> ExcludedGateways
         {
@@ -170,13 +208,13 @@ namespace Pulumi.Aviatrix
         public Input<string>? Server { get; set; }
 
         /// <summary>
-        /// Enabled or not.
+        /// The status of filebeat forwarder.
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }
 
         /// <summary>
-        /// Trusted CA file.
+        /// The trusted CA file. Use the `file` function to read from a file.
         /// </summary>
         [Input("trustedCaFile")]
         public Input<string>? TrustedCaFile { get; set; }

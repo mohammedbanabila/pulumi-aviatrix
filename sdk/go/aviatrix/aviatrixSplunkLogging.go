@@ -10,20 +10,93 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_splunk_logging** resource allows the enabling and disabling of splunk logging.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixSplunkLogging(ctx, "testSplunkLogging", &aviatrix.AviatrixSplunkLoggingArgs{
+//				Port:   pulumi.Int(10),
+//				Server: pulumi.String("1.2.3.4"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"encoding/base64"
+//	"io/ioutil"
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func filebase64OrPanic(path string) pulumi.StringPtrInput {
+//		if fileData, err := ioutil.ReadFile(path); err == nil {
+//			return pulumi.String(base64.StdEncoding.EncodeToString(fileData[:]))
+//		} else {
+//			panic(err.Error())
+//		}
+//	}
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixSplunkLogging(ctx, "testSplunkLogging", &aviatrix.AviatrixSplunkLoggingArgs{
+//				CustomOutputConfigFile: filebase64OrPanic("/path/to/configuration.spl"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **splunk_logging** can be imported using `splunk_logging`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixSplunkLogging:AviatrixSplunkLogging test splunk_logging
+//
+// ```
 type AviatrixSplunkLogging struct {
 	pulumi.CustomResourceState
 
 	// Custom configuration.
 	CustomInputConfig pulumi.StringPtrOutput `pulumi:"customInputConfig"`
-	// Configuration file. Use the filebase64 function to read from a file.
+	// Configuration file. Use the `filebase64` function to read from a file.
 	CustomOutputConfigFile pulumi.StringPtrOutput `pulumi:"customOutputConfigFile"`
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways pulumi.StringArrayOutput `pulumi:"excludedGateways"`
 	// Port number.
 	Port pulumi.IntPtrOutput `pulumi:"port"`
 	// Server IP.
 	Server pulumi.StringPtrOutput `pulumi:"server"`
-	// Enabled or not.
+	// The status of splunk logging.
 	Status pulumi.StringOutput `pulumi:"status"`
 }
 
@@ -59,30 +132,30 @@ func GetAviatrixSplunkLogging(ctx *pulumi.Context,
 type aviatrixSplunkLoggingState struct {
 	// Custom configuration.
 	CustomInputConfig *string `pulumi:"customInputConfig"`
-	// Configuration file. Use the filebase64 function to read from a file.
+	// Configuration file. Use the `filebase64` function to read from a file.
 	CustomOutputConfigFile *string `pulumi:"customOutputConfigFile"`
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways []string `pulumi:"excludedGateways"`
 	// Port number.
 	Port *int `pulumi:"port"`
 	// Server IP.
 	Server *string `pulumi:"server"`
-	// Enabled or not.
+	// The status of splunk logging.
 	Status *string `pulumi:"status"`
 }
 
 type AviatrixSplunkLoggingState struct {
 	// Custom configuration.
 	CustomInputConfig pulumi.StringPtrInput
-	// Configuration file. Use the filebase64 function to read from a file.
+	// Configuration file. Use the `filebase64` function to read from a file.
 	CustomOutputConfigFile pulumi.StringPtrInput
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways pulumi.StringArrayInput
 	// Port number.
 	Port pulumi.IntPtrInput
 	// Server IP.
 	Server pulumi.StringPtrInput
-	// Enabled or not.
+	// The status of splunk logging.
 	Status pulumi.StringPtrInput
 }
 
@@ -93,9 +166,9 @@ func (AviatrixSplunkLoggingState) ElementType() reflect.Type {
 type aviatrixSplunkLoggingArgs struct {
 	// Custom configuration.
 	CustomInputConfig *string `pulumi:"customInputConfig"`
-	// Configuration file. Use the filebase64 function to read from a file.
+	// Configuration file. Use the `filebase64` function to read from a file.
 	CustomOutputConfigFile *string `pulumi:"customOutputConfigFile"`
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways []string `pulumi:"excludedGateways"`
 	// Port number.
 	Port *int `pulumi:"port"`
@@ -107,9 +180,9 @@ type aviatrixSplunkLoggingArgs struct {
 type AviatrixSplunkLoggingArgs struct {
 	// Custom configuration.
 	CustomInputConfig pulumi.StringPtrInput
-	// Configuration file. Use the filebase64 function to read from a file.
+	// Configuration file. Use the `filebase64` function to read from a file.
 	CustomOutputConfigFile pulumi.StringPtrInput
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways pulumi.StringArrayInput
 	// Port number.
 	Port pulumi.IntPtrInput
@@ -209,12 +282,12 @@ func (o AviatrixSplunkLoggingOutput) CustomInputConfig() pulumi.StringPtrOutput 
 	return o.ApplyT(func(v *AviatrixSplunkLogging) pulumi.StringPtrOutput { return v.CustomInputConfig }).(pulumi.StringPtrOutput)
 }
 
-// Configuration file. Use the filebase64 function to read from a file.
+// Configuration file. Use the `filebase64` function to read from a file.
 func (o AviatrixSplunkLoggingOutput) CustomOutputConfigFile() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSplunkLogging) pulumi.StringPtrOutput { return v.CustomOutputConfigFile }).(pulumi.StringPtrOutput)
 }
 
-// List of excluded gateways.
+// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 func (o AviatrixSplunkLoggingOutput) ExcludedGateways() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixSplunkLogging) pulumi.StringArrayOutput { return v.ExcludedGateways }).(pulumi.StringArrayOutput)
 }
@@ -229,7 +302,7 @@ func (o AviatrixSplunkLoggingOutput) Server() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSplunkLogging) pulumi.StringPtrOutput { return v.Server }).(pulumi.StringPtrOutput)
 }
 
-// Enabled or not.
+// The status of splunk logging.
 func (o AviatrixSplunkLoggingOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSplunkLogging) pulumi.StringOutput { return v.Status }).(pulumi.StringOutput)
 }

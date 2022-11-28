@@ -10,6 +10,11 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_gateway_image** data source provides the current image version that pairs with the given software version
+// and cloud type.
+//
+// This data source is useful for getting the correct imageVersion for a gateway when upgrading the softwareVersion of
+// the gateway.
 func GetAviatrixGatewayImage(ctx *pulumi.Context, args *GetAviatrixGatewayImageArgs, opts ...pulumi.InvokeOption) (*GetAviatrixGatewayImageResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetAviatrixGatewayImageResult
@@ -22,7 +27,9 @@ func GetAviatrixGatewayImage(ctx *pulumi.Context, args *GetAviatrixGatewayImageA
 
 // A collection of arguments for invoking getAviatrixGatewayImage.
 type GetAviatrixGatewayImageArgs struct {
-	CloudType       int    `pulumi:"cloudType"`
+	// Cloud type. Type: Integer. Example: 1 (AWS)
+	CloudType int `pulumi:"cloudType"`
+	// Software version. Type: String. Example: "6.4.2487"
 	SoftwareVersion string `pulumi:"softwareVersion"`
 }
 
@@ -30,7 +37,8 @@ type GetAviatrixGatewayImageArgs struct {
 type GetAviatrixGatewayImageResult struct {
 	CloudType int `pulumi:"cloudType"`
 	// The provider-assigned unique ID for this managed resource.
-	Id              string `pulumi:"id"`
+	Id string `pulumi:"id"`
+	// Image version that is compatible with the given cloudType and software_version.
 	ImageVersion    string `pulumi:"imageVersion"`
 	SoftwareVersion string `pulumi:"softwareVersion"`
 }
@@ -50,7 +58,9 @@ func GetAviatrixGatewayImageOutput(ctx *pulumi.Context, args GetAviatrixGatewayI
 
 // A collection of arguments for invoking getAviatrixGatewayImage.
 type GetAviatrixGatewayImageOutputArgs struct {
-	CloudType       pulumi.IntInput    `pulumi:"cloudType"`
+	// Cloud type. Type: Integer. Example: 1 (AWS)
+	CloudType pulumi.IntInput `pulumi:"cloudType"`
+	// Software version. Type: String. Example: "6.4.2487"
 	SoftwareVersion pulumi.StringInput `pulumi:"softwareVersion"`
 }
 
@@ -82,6 +92,7 @@ func (o GetAviatrixGatewayImageResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixGatewayImageResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
+// Image version that is compatible with the given cloudType and software_version.
 func (o GetAviatrixGatewayImageResultOutput) ImageVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixGatewayImageResult) string { return v.ImageVersion }).(pulumi.StringOutput)
 }

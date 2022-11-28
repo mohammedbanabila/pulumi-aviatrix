@@ -13,7 +13,13 @@ namespace Pulumi.Aviatrix.Outputs
     [OutputType]
     public sealed class GetAviatrixTransitGatewayBgpLanInterfaceResult
     {
+        /// <summary>
+        /// Subnet Info.
+        /// </summary>
         public readonly string Subnet;
+        /// <summary>
+        /// VPC-ID of GCP cloud provider.
+        /// </summary>
         public readonly string VpcId;
 
         [OutputConstructor]

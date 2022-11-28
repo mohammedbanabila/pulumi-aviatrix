@@ -4,6 +4,30 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_transit_firenet_policy** resource allows the creation and management of Aviatrix Transit FireNet policies that determine which resources should be inspected in the Transit FireNet solution.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Transit FireNet Policy
+ * const testTransitFirenetPolicy = new aviatrix.AviatrixTransitFirenetPolicy("test_transit_firenet_policy", {
+ *     inspectedResourceName: "SPOKE:spokeGw1",
+ *     transitFirenetGatewayName: "transitGw1",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **transit_firenet_policy** can be imported using the `transit_firenet_gateway_name` and `inspected_resource_name`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixTransitFirenetPolicy:AviatrixTransitFirenetPolicy test transit_firenet_gateway_name~inspected_resource_name
+ * ```
+ */
 export class AviatrixTransitFirenetPolicy extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixTransitFirenetPolicy resource's state with the given name, ID, and optional extra
@@ -33,11 +57,11 @@ export class AviatrixTransitFirenetPolicy extends pulumi.CustomResource {
     }
 
     /**
-     * Name of the resource to be added to transit firenet policy.
+     * The name of the resource which will be inspected.
      */
     public readonly inspectedResourceName!: pulumi.Output<string>;
     /**
-     * Name of the transit firenet gateway.
+     * Name of the Transit FireNet-enabled transit gateway. Currently supports AWS and Azure.
      */
     public readonly transitFirenetGatewayName!: pulumi.Output<string>;
 
@@ -77,11 +101,11 @@ export class AviatrixTransitFirenetPolicy extends pulumi.CustomResource {
  */
 export interface AviatrixTransitFirenetPolicyState {
     /**
-     * Name of the resource to be added to transit firenet policy.
+     * The name of the resource which will be inspected.
      */
     inspectedResourceName?: pulumi.Input<string>;
     /**
-     * Name of the transit firenet gateway.
+     * Name of the Transit FireNet-enabled transit gateway. Currently supports AWS and Azure.
      */
     transitFirenetGatewayName?: pulumi.Input<string>;
 }
@@ -91,11 +115,11 @@ export interface AviatrixTransitFirenetPolicyState {
  */
 export interface AviatrixTransitFirenetPolicyArgs {
     /**
-     * Name of the resource to be added to transit firenet policy.
+     * The name of the resource which will be inspected.
      */
     inspectedResourceName: pulumi.Input<string>;
     /**
-     * Name of the transit firenet gateway.
+     * Name of the Transit FireNet-enabled transit gateway. Currently supports AWS and Azure.
      */
     transitFirenetGatewayName: pulumi.Input<string>;
 }

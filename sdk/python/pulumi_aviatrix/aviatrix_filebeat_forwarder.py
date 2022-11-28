@@ -23,9 +23,9 @@ class AviatrixFilebeatForwarderArgs:
         The set of arguments for constructing a AviatrixFilebeatForwarder resource.
         :param pulumi.Input[int] port: Port number.
         :param pulumi.Input[str] server: Server IP.
-        :param pulumi.Input[str] config_file: Configuration file.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of excluded gateways.
-        :param pulumi.Input[str] trusted_ca_file: Trusted CA file.
+        :param pulumi.Input[str] config_file: The config file. Use the `file` function to read from a file.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
+        :param pulumi.Input[str] trusted_ca_file: The trusted CA file. Use the `file` function to read from a file.
         """
         pulumi.set(__self__, "port", port)
         pulumi.set(__self__, "server", server)
@@ -64,7 +64,7 @@ class AviatrixFilebeatForwarderArgs:
     @pulumi.getter(name="configFile")
     def config_file(self) -> Optional[pulumi.Input[str]]:
         """
-        Configuration file.
+        The config file. Use the `file` function to read from a file.
         """
         return pulumi.get(self, "config_file")
 
@@ -76,7 +76,7 @@ class AviatrixFilebeatForwarderArgs:
     @pulumi.getter(name="excludedGateways")
     def excluded_gateways(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of excluded gateways.
+        List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         """
         return pulumi.get(self, "excluded_gateways")
 
@@ -88,7 +88,7 @@ class AviatrixFilebeatForwarderArgs:
     @pulumi.getter(name="trustedCaFile")
     def trusted_ca_file(self) -> Optional[pulumi.Input[str]]:
         """
-        Trusted CA file.
+        The trusted CA file. Use the `file` function to read from a file.
         """
         return pulumi.get(self, "trusted_ca_file")
 
@@ -108,12 +108,12 @@ class _AviatrixFilebeatForwarderState:
                  trusted_ca_file: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixFilebeatForwarder resources.
-        :param pulumi.Input[str] config_file: Configuration file.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of excluded gateways.
+        :param pulumi.Input[str] config_file: The config file. Use the `file` function to read from a file.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         :param pulumi.Input[int] port: Port number.
         :param pulumi.Input[str] server: Server IP.
-        :param pulumi.Input[str] status: Enabled or not.
-        :param pulumi.Input[str] trusted_ca_file: Trusted CA file.
+        :param pulumi.Input[str] status: The status of filebeat forwarder.
+        :param pulumi.Input[str] trusted_ca_file: The trusted CA file. Use the `file` function to read from a file.
         """
         if config_file is not None:
             pulumi.set(__self__, "config_file", config_file)
@@ -132,7 +132,7 @@ class _AviatrixFilebeatForwarderState:
     @pulumi.getter(name="configFile")
     def config_file(self) -> Optional[pulumi.Input[str]]:
         """
-        Configuration file.
+        The config file. Use the `file` function to read from a file.
         """
         return pulumi.get(self, "config_file")
 
@@ -144,7 +144,7 @@ class _AviatrixFilebeatForwarderState:
     @pulumi.getter(name="excludedGateways")
     def excluded_gateways(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of excluded gateways.
+        List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         """
         return pulumi.get(self, "excluded_gateways")
 
@@ -180,7 +180,7 @@ class _AviatrixFilebeatForwarderState:
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[str]]:
         """
-        Enabled or not.
+        The status of filebeat forwarder.
         """
         return pulumi.get(self, "status")
 
@@ -192,7 +192,7 @@ class _AviatrixFilebeatForwarderState:
     @pulumi.getter(name="trustedCaFile")
     def trusted_ca_file(self) -> Optional[pulumi.Input[str]]:
         """
-        Trusted CA file.
+        The trusted CA file. Use the `file` function to read from a file.
         """
         return pulumi.get(self, "trusted_ca_file")
 
@@ -213,14 +213,41 @@ class AviatrixFilebeatForwarder(pulumi.CustomResource):
                  trusted_ca_file: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixFilebeatForwarder resource with the given unique name, props, and options.
+        The **aviatrix_filebeat_forwarder** resource allows the enabling and disabling of filebeat forwarder.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Enable filebeat forwarder
+        test_filebeat_forwarder = aviatrix.AviatrixFilebeatForwarder("testFilebeatForwarder",
+            server="1.2.3.4",
+            port=10,
+            trusted_ca_file=(lambda path: open(path).read())("/path/to/ca.pem"),
+            config_file=(lambda path: open(path).read())("/path/to/config.txt"),
+            excluded_gateways=[
+                "a",
+                "b",
+            ])
+        ```
+
+        ## Import
+
+        **filebeat_forwarder** can be imported using "filebeat_forwarder", e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixFilebeatForwarder:AviatrixFilebeatForwarder test filebeat_forwarder
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] config_file: Configuration file.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of excluded gateways.
+        :param pulumi.Input[str] config_file: The config file. Use the `file` function to read from a file.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         :param pulumi.Input[int] port: Port number.
         :param pulumi.Input[str] server: Server IP.
-        :param pulumi.Input[str] trusted_ca_file: Trusted CA file.
+        :param pulumi.Input[str] trusted_ca_file: The trusted CA file. Use the `file` function to read from a file.
         """
         ...
     @overload
@@ -229,7 +256,34 @@ class AviatrixFilebeatForwarder(pulumi.CustomResource):
                  args: AviatrixFilebeatForwarderArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixFilebeatForwarder resource with the given unique name, props, and options.
+        The **aviatrix_filebeat_forwarder** resource allows the enabling and disabling of filebeat forwarder.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Enable filebeat forwarder
+        test_filebeat_forwarder = aviatrix.AviatrixFilebeatForwarder("testFilebeatForwarder",
+            server="1.2.3.4",
+            port=10,
+            trusted_ca_file=(lambda path: open(path).read())("/path/to/ca.pem"),
+            config_file=(lambda path: open(path).read())("/path/to/config.txt"),
+            excluded_gateways=[
+                "a",
+                "b",
+            ])
+        ```
+
+        ## Import
+
+        **filebeat_forwarder** can be imported using "filebeat_forwarder", e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixFilebeatForwarder:AviatrixFilebeatForwarder test filebeat_forwarder
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixFilebeatForwarderArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -292,12 +346,12 @@ class AviatrixFilebeatForwarder(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] config_file: Configuration file.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of excluded gateways.
+        :param pulumi.Input[str] config_file: The config file. Use the `file` function to read from a file.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         :param pulumi.Input[int] port: Port number.
         :param pulumi.Input[str] server: Server IP.
-        :param pulumi.Input[str] status: Enabled or not.
-        :param pulumi.Input[str] trusted_ca_file: Trusted CA file.
+        :param pulumi.Input[str] status: The status of filebeat forwarder.
+        :param pulumi.Input[str] trusted_ca_file: The trusted CA file. Use the `file` function to read from a file.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -315,7 +369,7 @@ class AviatrixFilebeatForwarder(pulumi.CustomResource):
     @pulumi.getter(name="configFile")
     def config_file(self) -> pulumi.Output[Optional[str]]:
         """
-        Configuration file.
+        The config file. Use the `file` function to read from a file.
         """
         return pulumi.get(self, "config_file")
 
@@ -323,7 +377,7 @@ class AviatrixFilebeatForwarder(pulumi.CustomResource):
     @pulumi.getter(name="excludedGateways")
     def excluded_gateways(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        List of excluded gateways.
+        List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         """
         return pulumi.get(self, "excluded_gateways")
 
@@ -347,7 +401,7 @@ class AviatrixFilebeatForwarder(pulumi.CustomResource):
     @pulumi.getter
     def status(self) -> pulumi.Output[str]:
         """
-        Enabled or not.
+        The status of filebeat forwarder.
         """
         return pulumi.get(self, "status")
 
@@ -355,7 +409,7 @@ class AviatrixFilebeatForwarder(pulumi.CustomResource):
     @pulumi.getter(name="trustedCaFile")
     def trusted_ca_file(self) -> pulumi.Output[Optional[str]]:
         """
-        Trusted CA file.
+        The trusted CA file. Use the `file` function to read from a file.
         """
         return pulumi.get(self, "trusted_ca_file")
 

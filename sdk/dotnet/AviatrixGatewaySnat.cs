@@ -9,6 +9,15 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// ## Import
+    /// 
+    /// **gateway_snat** can be imported using the `gw_name`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixGatewaySnat:AviatrixGatewaySnat test gw_name
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixGatewaySnat:AviatrixGatewaySnat")]
     public partial class AviatrixGatewaySnat : global::Pulumi.CustomResource
     {
@@ -19,7 +28,7 @@ namespace Pulumi.Aviatrix
         public Output<ImmutableArray<Outputs.AviatrixGatewaySnatConnectionPolicy>> ConnectionPolicies { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the gateway.
+        /// Name of the Aviatrix gateway the custom SNAT will be configured for.
         /// </summary>
         [Output("gwName")]
         public Output<string> GwName { get; private set; } = null!;
@@ -31,19 +40,19 @@ namespace Pulumi.Aviatrix
         public Output<ImmutableArray<Outputs.AviatrixGatewaySnatInterfacePolicy>> InterfacePolicies { get; private set; } = null!;
 
         /// <summary>
-        /// Nat mode. Currently only supports 'customized_snat'.
+        /// NAT mode. Valid values: "customized_snat". Default value: "customized_snat".
         /// </summary>
         [Output("snatMode")]
         public Output<string?> SnatMode { get; private set; } = null!;
 
         /// <summary>
-        /// Policy rules applied for 'snat_mode'' of 'customized_snat'.'
+        /// Policy rule applied for enabling source NAT (mode: "customized_snat"). Currently only supports AWS(1) and Azure(8).
         /// </summary>
         [Output("snatPolicies")]
         public Output<ImmutableArray<Outputs.AviatrixGatewaySnatSnatPolicy>> SnatPolicies { get; private set; } = null!;
 
         /// <summary>
-        /// Whether to sync the policies to the HA gateway.
+        /// Sync the policies to the HA gateway. Valid values: true, false. Default: false.
         /// </summary>
         [Output("syncToHa")]
         public Output<bool?> SyncToHa { get; private set; } = null!;
@@ -96,13 +105,13 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixGatewaySnatArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Name of the gateway.
+        /// Name of the Aviatrix gateway the custom SNAT will be configured for.
         /// </summary>
         [Input("gwName", required: true)]
         public Input<string> GwName { get; set; } = null!;
 
         /// <summary>
-        /// Nat mode. Currently only supports 'customized_snat'.
+        /// NAT mode. Valid values: "customized_snat". Default value: "customized_snat".
         /// </summary>
         [Input("snatMode")]
         public Input<string>? SnatMode { get; set; }
@@ -111,7 +120,7 @@ namespace Pulumi.Aviatrix
         private InputList<Inputs.AviatrixGatewaySnatSnatPolicyArgs>? _snatPolicies;
 
         /// <summary>
-        /// Policy rules applied for 'snat_mode'' of 'customized_snat'.'
+        /// Policy rule applied for enabling source NAT (mode: "customized_snat"). Currently only supports AWS(1) and Azure(8).
         /// </summary>
         public InputList<Inputs.AviatrixGatewaySnatSnatPolicyArgs> SnatPolicies
         {
@@ -120,7 +129,7 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Whether to sync the policies to the HA gateway.
+        /// Sync the policies to the HA gateway. Valid values: true, false. Default: false.
         /// </summary>
         [Input("syncToHa")]
         public Input<bool>? SyncToHa { get; set; }
@@ -146,7 +155,7 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Name of the gateway.
+        /// Name of the Aviatrix gateway the custom SNAT will be configured for.
         /// </summary>
         [Input("gwName")]
         public Input<string>? GwName { get; set; }
@@ -164,7 +173,7 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Nat mode. Currently only supports 'customized_snat'.
+        /// NAT mode. Valid values: "customized_snat". Default value: "customized_snat".
         /// </summary>
         [Input("snatMode")]
         public Input<string>? SnatMode { get; set; }
@@ -173,7 +182,7 @@ namespace Pulumi.Aviatrix
         private InputList<Inputs.AviatrixGatewaySnatSnatPolicyGetArgs>? _snatPolicies;
 
         /// <summary>
-        /// Policy rules applied for 'snat_mode'' of 'customized_snat'.'
+        /// Policy rule applied for enabling source NAT (mode: "customized_snat"). Currently only supports AWS(1) and Azure(8).
         /// </summary>
         public InputList<Inputs.AviatrixGatewaySnatSnatPolicyGetArgs> SnatPolicies
         {
@@ -182,7 +191,7 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Whether to sync the policies to the HA gateway.
+        /// Sync the policies to the HA gateway. Valid values: true, false. Default: false.
         /// </summary>
         [Input("syncToHa")]
         public Input<bool>? SyncToHa { get; set; }

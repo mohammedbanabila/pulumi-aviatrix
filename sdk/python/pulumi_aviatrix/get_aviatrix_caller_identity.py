@@ -31,6 +31,9 @@ class GetAviatrixCallerIdentityResult:
     @property
     @pulumi.getter
     def cid(self) -> str:
+        """
+        Aviatrix caller identity.
+        """
         return pulumi.get(self, "cid")
 
     @property
@@ -54,7 +57,7 @@ class AwaitableGetAviatrixCallerIdentityResult(GetAviatrixCallerIdentityResult):
 
 def get_aviatrix_caller_identity(opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetAviatrixCallerIdentityResult:
     """
-    Use this data source to access information about an existing resource.
+    The **aviatrix_caller_identity** data source provides the Aviatrix CID for use in other resources.
     """
     __args__ = dict()
     opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)

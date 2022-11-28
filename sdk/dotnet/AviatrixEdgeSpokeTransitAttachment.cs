@@ -9,41 +9,71 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_edge_spoke_transit_attachment** resource allows the creation and management of Aviatrix Edge as a Spoke to Transit gateway attachments. This resource is available as of provider version R2.23+.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Edge as a Spoke Transit Attachment
+    ///     var testAttachment = new Aviatrix.AviatrixEdgeSpokeTransitAttachment("testAttachment", new()
+    ///     {
+    ///         SpokeGwName = "edge-as-a-spoke",
+    ///         TransitGwName = "transit-gw",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **spoke_transit_attachment** can be imported using the `spoke_gw_name` and `transit_gw_name`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixEdgeSpokeTransitAttachment:AviatrixEdgeSpokeTransitAttachment test spoke_gw_name~transit_gw_name
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixEdgeSpokeTransitAttachment:AviatrixEdgeSpokeTransitAttachment")]
     public partial class AviatrixEdgeSpokeTransitAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Enable jumbo frame.
+        /// Switch to enable insane mode. Valid values: true, false. Default: false.
         /// </summary>
         [Output("enableInsaneMode")]
         public Output<bool?> EnableInsaneMode { get; private set; } = null!;
 
         /// <summary>
-        /// Enable jumbo frame.
+        /// Switch to enable jumbo frame. Valid values: true, false. Default: false.
         /// </summary>
         [Output("enableJumboFrame")]
         public Output<bool?> EnableJumboFrame { get; private set; } = null!;
 
         /// <summary>
-        /// Enable over private network.
+        /// Switch to enable over the private network. Valid values: true, false. Default: true.
         /// </summary>
         [Output("enableOverPrivateNetwork")]
         public Output<bool?> EnableOverPrivateNetwork { get; private set; } = null!;
 
         /// <summary>
-        /// Insane mode tunnel number.
+        /// Insane mode tunnel number. Default: 0.
         /// </summary>
         [Output("insaneModeTunnelNumber")]
         public Output<int?> InsaneModeTunnelNumber { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the Edge as a Spoke to attach to the transit network.
+        /// Name of the Edge as a Spoke to attach to transit network.
         /// </summary>
         [Output("spokeGwName")]
         public Output<string> SpokeGwName { get; private set; } = null!;
 
         /// <summary>
-        /// AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on Edge as a Spoke.
+        /// Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Edge as a Spoke.
         /// </summary>
         [Output("spokePrependAsPaths")]
         public Output<ImmutableArray<string>> SpokePrependAsPaths { get; private set; } = null!;
@@ -55,7 +85,7 @@ namespace Pulumi.Aviatrix
         public Output<string> TransitGwName { get; private set; } = null!;
 
         /// <summary>
-        /// AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit gateway.
+        /// Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Transit Gateway.
         /// </summary>
         [Output("transitPrependAsPaths")]
         public Output<ImmutableArray<string>> TransitPrependAsPaths { get; private set; } = null!;
@@ -108,31 +138,31 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixEdgeSpokeTransitAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Enable jumbo frame.
+        /// Switch to enable insane mode. Valid values: true, false. Default: false.
         /// </summary>
         [Input("enableInsaneMode")]
         public Input<bool>? EnableInsaneMode { get; set; }
 
         /// <summary>
-        /// Enable jumbo frame.
+        /// Switch to enable jumbo frame. Valid values: true, false. Default: false.
         /// </summary>
         [Input("enableJumboFrame")]
         public Input<bool>? EnableJumboFrame { get; set; }
 
         /// <summary>
-        /// Enable over private network.
+        /// Switch to enable over the private network. Valid values: true, false. Default: true.
         /// </summary>
         [Input("enableOverPrivateNetwork")]
         public Input<bool>? EnableOverPrivateNetwork { get; set; }
 
         /// <summary>
-        /// Insane mode tunnel number.
+        /// Insane mode tunnel number. Default: 0.
         /// </summary>
         [Input("insaneModeTunnelNumber")]
         public Input<int>? InsaneModeTunnelNumber { get; set; }
 
         /// <summary>
-        /// Name of the Edge as a Spoke to attach to the transit network.
+        /// Name of the Edge as a Spoke to attach to transit network.
         /// </summary>
         [Input("spokeGwName", required: true)]
         public Input<string> SpokeGwName { get; set; } = null!;
@@ -141,7 +171,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _spokePrependAsPaths;
 
         /// <summary>
-        /// AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on Edge as a Spoke.
+        /// Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Edge as a Spoke.
         /// </summary>
         public InputList<string> SpokePrependAsPaths
         {
@@ -159,7 +189,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _transitPrependAsPaths;
 
         /// <summary>
-        /// AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit gateway.
+        /// Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Transit Gateway.
         /// </summary>
         public InputList<string> TransitPrependAsPaths
         {
@@ -176,31 +206,31 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixEdgeSpokeTransitAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Enable jumbo frame.
+        /// Switch to enable insane mode. Valid values: true, false. Default: false.
         /// </summary>
         [Input("enableInsaneMode")]
         public Input<bool>? EnableInsaneMode { get; set; }
 
         /// <summary>
-        /// Enable jumbo frame.
+        /// Switch to enable jumbo frame. Valid values: true, false. Default: false.
         /// </summary>
         [Input("enableJumboFrame")]
         public Input<bool>? EnableJumboFrame { get; set; }
 
         /// <summary>
-        /// Enable over private network.
+        /// Switch to enable over the private network. Valid values: true, false. Default: true.
         /// </summary>
         [Input("enableOverPrivateNetwork")]
         public Input<bool>? EnableOverPrivateNetwork { get; set; }
 
         /// <summary>
-        /// Insane mode tunnel number.
+        /// Insane mode tunnel number. Default: 0.
         /// </summary>
         [Input("insaneModeTunnelNumber")]
         public Input<int>? InsaneModeTunnelNumber { get; set; }
 
         /// <summary>
-        /// Name of the Edge as a Spoke to attach to the transit network.
+        /// Name of the Edge as a Spoke to attach to transit network.
         /// </summary>
         [Input("spokeGwName")]
         public Input<string>? SpokeGwName { get; set; }
@@ -209,7 +239,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _spokePrependAsPaths;
 
         /// <summary>
-        /// AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on Edge as a Spoke.
+        /// Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Edge as a Spoke.
         /// </summary>
         public InputList<string> SpokePrependAsPaths
         {
@@ -227,7 +257,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _transitPrependAsPaths;
 
         /// <summary>
-        /// AS Path Prepend customized by specifying AS PATH for a BGP connection. Applies on transit gateway.
+        /// Connection based AS Path Prepend. Can only use the gateway's own local AS number, repeated up to 25 times. Applies on the Transit Gateway.
         /// </summary>
         public InputList<string> TransitPrependAsPaths
         {

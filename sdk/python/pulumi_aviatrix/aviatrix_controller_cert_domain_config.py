@@ -17,7 +17,7 @@ class AviatrixControllerCertDomainConfigArgs:
                  cert_domain: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a AviatrixControllerCertDomainConfig resource.
-        :param pulumi.Input[str] cert_domain: Domain name that is used in FQDN for generating cert.
+        :param pulumi.Input[str] cert_domain: Domain name that is used in FQDN for generating cert. Default value: "aviatrixnetwork.com".
         """
         if cert_domain is not None:
             pulumi.set(__self__, "cert_domain", cert_domain)
@@ -26,7 +26,7 @@ class AviatrixControllerCertDomainConfigArgs:
     @pulumi.getter(name="certDomain")
     def cert_domain(self) -> Optional[pulumi.Input[str]]:
         """
-        Domain name that is used in FQDN for generating cert.
+        Domain name that is used in FQDN for generating cert. Default value: "aviatrixnetwork.com".
         """
         return pulumi.get(self, "cert_domain")
 
@@ -41,7 +41,7 @@ class _AviatrixControllerCertDomainConfigState:
                  cert_domain: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixControllerCertDomainConfig resources.
-        :param pulumi.Input[str] cert_domain: Domain name that is used in FQDN for generating cert.
+        :param pulumi.Input[str] cert_domain: Domain name that is used in FQDN for generating cert. Default value: "aviatrixnetwork.com".
         """
         if cert_domain is not None:
             pulumi.set(__self__, "cert_domain", cert_domain)
@@ -50,7 +50,7 @@ class _AviatrixControllerCertDomainConfigState:
     @pulumi.getter(name="certDomain")
     def cert_domain(self) -> Optional[pulumi.Input[str]]:
         """
-        Domain name that is used in FQDN for generating cert.
+        Domain name that is used in FQDN for generating cert. Default value: "aviatrixnetwork.com".
         """
         return pulumi.get(self, "cert_domain")
 
@@ -67,10 +67,31 @@ class AviatrixControllerCertDomainConfig(pulumi.CustomResource):
                  cert_domain: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixControllerCertDomainConfig resource with the given unique name, props, and options.
+        The **aviatrix_controller_cert_domain_config** resource allows management of an Aviatrix Controller's cert domain config. This resource is available as of provider version R2.19+.
+
+        !> **WARNING:** Changing the Controller's cert domain config causes all other API calls to the controller to fail. If multiple other resources are created with the **aviatrix_controller_cert_domain_config** resource, a dependency on the **aviatrix_controller_cert_domain_config** resource must be added.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix controller cert domain config
+        test = aviatrix.AviatrixControllerCertDomainConfig("test", cert_domain="abc.com")
+        ```
+
+        ## Import
+
+        **aviatrix_controller_cert_domain_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixControllerCertDomainConfig:AviatrixControllerCertDomainConfig test 10-11-12-13
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] cert_domain: Domain name that is used in FQDN for generating cert.
+        :param pulumi.Input[str] cert_domain: Domain name that is used in FQDN for generating cert. Default value: "aviatrixnetwork.com".
         """
         ...
     @overload
@@ -79,7 +100,28 @@ class AviatrixControllerCertDomainConfig(pulumi.CustomResource):
                  args: Optional[AviatrixControllerCertDomainConfigArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixControllerCertDomainConfig resource with the given unique name, props, and options.
+        The **aviatrix_controller_cert_domain_config** resource allows management of an Aviatrix Controller's cert domain config. This resource is available as of provider version R2.19+.
+
+        !> **WARNING:** Changing the Controller's cert domain config causes all other API calls to the controller to fail. If multiple other resources are created with the **aviatrix_controller_cert_domain_config** resource, a dependency on the **aviatrix_controller_cert_domain_config** resource must be added.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix controller cert domain config
+        test = aviatrix.AviatrixControllerCertDomainConfig("test", cert_domain="abc.com")
+        ```
+
+        ## Import
+
+        **aviatrix_controller_cert_domain_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixControllerCertDomainConfig:AviatrixControllerCertDomainConfig test 10-11-12-13
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixControllerCertDomainConfigArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -124,7 +166,7 @@ class AviatrixControllerCertDomainConfig(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] cert_domain: Domain name that is used in FQDN for generating cert.
+        :param pulumi.Input[str] cert_domain: Domain name that is used in FQDN for generating cert. Default value: "aviatrixnetwork.com".
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -137,7 +179,7 @@ class AviatrixControllerCertDomainConfig(pulumi.CustomResource):
     @pulumi.getter(name="certDomain")
     def cert_domain(self) -> pulumi.Output[Optional[str]]:
         """
-        Domain name that is used in FQDN for generating cert.
+        Domain name that is used in FQDN for generating cert. Default value: "aviatrixnetwork.com".
         """
         return pulumi.get(self, "cert_domain")
 

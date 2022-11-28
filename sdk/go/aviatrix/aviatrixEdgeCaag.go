@@ -11,40 +11,124 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_edge_caag** resource creates the Aviatrix Edge as a CaaG. This resource is available as of provider version R2.22+.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixEdgeCaag(ctx, "test", &aviatrix.AviatrixEdgeCaagArgs{
+//				LanInterfaceIpPrefix:      pulumi.String("10.60.0.0/24"),
+//				LocalAsNumber:             pulumi.String("65000"),
+//				ManagementInterfaceConfig: pulumi.String("DHCP"),
+//				PrependAsPaths: pulumi.StringArray{
+//					pulumi.String("65000"),
+//					pulumi.String("65000"),
+//				},
+//				WanDefaultGatewayIp:  pulumi.String("10.60.0.0"),
+//				WanInterfaceIpPrefix: pulumi.String("10.60.0.0/24"),
+//				ZtpFileDownloadPath:  pulumi.String("/image/download/path"),
+//				ZtpFileType:          pulumi.String("iso"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixEdgeCaag(ctx, "test", &aviatrix.AviatrixEdgeCaagArgs{
+//				DnsServerIp:                 pulumi.String("10.60.0.0"),
+//				LanInterfaceIpPrefix:        pulumi.String("10.60.0.0/24"),
+//				LocalAsNumber:               pulumi.String("65000"),
+//				ManagementDefaultGatewayIp:  pulumi.String("10.60.0.0"),
+//				ManagementInterfaceConfig:   pulumi.String("Static"),
+//				ManagementInterfaceIpPrefix: pulumi.String("10.60.0.0/24"),
+//				PrependAsPaths: pulumi.StringArray{
+//					pulumi.String("65000"),
+//					pulumi.String("65000"),
+//				},
+//				SecondaryDnsServerIp: pulumi.String("10.60.0.0"),
+//				WanDefaultGatewayIp:  pulumi.String("10.60.0.0"),
+//				WanInterfaceIpPrefix: pulumi.String("10.60.0.0/24"),
+//				ZtpFileDownloadPath:  pulumi.String("/image/download/path"),
+//				ZtpFileType:          pulumi.String("iso"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **edge_caag** can be imported using the `name`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixEdgeCaag:AviatrixEdgeCaag test name
+//
+// ```
 type AviatrixEdgeCaag struct {
 	pulumi.CustomResourceState
 
-	// DNS server IP.
+	// DNS server IP. Required and valid when `managementInterfaceConfig` is "Static".
 	DnsServerIp pulumi.StringPtrOutput `pulumi:"dnsServerIp"`
-	// Enable management over private network.
+	// Indicates whether it is public or private connection between controller and gateway. Valid values: true, false. Default value: false.
 	EnableOverPrivateNetwork pulumi.BoolPtrOutput `pulumi:"enableOverPrivateNetwork"`
-	// LAN interface IP / prefix.
+	// LAN interface IP and subnet prefix.
 	LanInterfaceIpPrefix pulumi.StringOutput `pulumi:"lanInterfaceIpPrefix"`
-	// Local AS number.
+	// BGP AS Number to assign to Edge as a CaaG.
 	LocalAsNumber pulumi.StringOutput `pulumi:"localAsNumber"`
-	// Management default gateway IP.
+	// Management default gateway IP. Required and valid when `managementInterfaceConfig` is "Static".
 	ManagementDefaultGatewayIp pulumi.StringPtrOutput `pulumi:"managementDefaultGatewayIp"`
-	// Management egress gateway IP / prefix.
+	// Management egress gateway IP and subnet prefix.
 	ManagementEgressIpPrefix pulumi.StringPtrOutput `pulumi:"managementEgressIpPrefix"`
-	// Management interface configuration. Valid values: 'DHCP' and 'Static'.
+	// Management interface configuration. Valid values: "DHCP", "Static".
 	ManagementInterfaceConfig pulumi.StringOutput `pulumi:"managementInterfaceConfig"`
-	// Management interface IP / prefix.
+	// Management interface IP and subnet prefix. Required and valid when `managementInterfaceConfig` is "Static".
 	ManagementInterfaceIpPrefix pulumi.StringPtrOutput `pulumi:"managementInterfaceIpPrefix"`
 	// Edge as a CaaG name.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// AS path prepend.
+	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires localAsNumber to be set. Type: List.
 	PrependAsPaths pulumi.StringArrayOutput `pulumi:"prependAsPaths"`
-	// Secondary DNS server IP.
+	// Secondary DNS server IP. Required and valid when `managementInterfaceConfig` is "Static".
 	SecondaryDnsServerIp pulumi.StringPtrOutput `pulumi:"secondaryDnsServerIp"`
 	// State of Edge as a CaaG.
 	State pulumi.StringOutput `pulumi:"state"`
 	// WAN default gateway IP.
 	WanDefaultGatewayIp pulumi.StringOutput `pulumi:"wanDefaultGatewayIp"`
-	// WAN interface IP / prefix.
+	// WAN interface IP and subnet prefix.
 	WanInterfaceIpPrefix pulumi.StringOutput `pulumi:"wanInterfaceIpPrefix"`
-	// The location where the Edge as a CaaG ZTP file will be stored.
+	// The folder path where the ZTP file will be downloaded.
 	ZtpFileDownloadPath pulumi.StringOutput `pulumi:"ztpFileDownloadPath"`
-	// ZTP file type.
+	// ZTP file type. Valid values: "iso", "cloud-init".
 	ZtpFileType pulumi.StringOutput `pulumi:"ztpFileType"`
 }
 
@@ -96,72 +180,72 @@ func GetAviatrixEdgeCaag(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixEdgeCaag resources.
 type aviatrixEdgeCaagState struct {
-	// DNS server IP.
+	// DNS server IP. Required and valid when `managementInterfaceConfig` is "Static".
 	DnsServerIp *string `pulumi:"dnsServerIp"`
-	// Enable management over private network.
+	// Indicates whether it is public or private connection between controller and gateway. Valid values: true, false. Default value: false.
 	EnableOverPrivateNetwork *bool `pulumi:"enableOverPrivateNetwork"`
-	// LAN interface IP / prefix.
+	// LAN interface IP and subnet prefix.
 	LanInterfaceIpPrefix *string `pulumi:"lanInterfaceIpPrefix"`
-	// Local AS number.
+	// BGP AS Number to assign to Edge as a CaaG.
 	LocalAsNumber *string `pulumi:"localAsNumber"`
-	// Management default gateway IP.
+	// Management default gateway IP. Required and valid when `managementInterfaceConfig` is "Static".
 	ManagementDefaultGatewayIp *string `pulumi:"managementDefaultGatewayIp"`
-	// Management egress gateway IP / prefix.
+	// Management egress gateway IP and subnet prefix.
 	ManagementEgressIpPrefix *string `pulumi:"managementEgressIpPrefix"`
-	// Management interface configuration. Valid values: 'DHCP' and 'Static'.
+	// Management interface configuration. Valid values: "DHCP", "Static".
 	ManagementInterfaceConfig *string `pulumi:"managementInterfaceConfig"`
-	// Management interface IP / prefix.
+	// Management interface IP and subnet prefix. Required and valid when `managementInterfaceConfig` is "Static".
 	ManagementInterfaceIpPrefix *string `pulumi:"managementInterfaceIpPrefix"`
 	// Edge as a CaaG name.
 	Name *string `pulumi:"name"`
-	// AS path prepend.
+	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires localAsNumber to be set. Type: List.
 	PrependAsPaths []string `pulumi:"prependAsPaths"`
-	// Secondary DNS server IP.
+	// Secondary DNS server IP. Required and valid when `managementInterfaceConfig` is "Static".
 	SecondaryDnsServerIp *string `pulumi:"secondaryDnsServerIp"`
 	// State of Edge as a CaaG.
 	State *string `pulumi:"state"`
 	// WAN default gateway IP.
 	WanDefaultGatewayIp *string `pulumi:"wanDefaultGatewayIp"`
-	// WAN interface IP / prefix.
+	// WAN interface IP and subnet prefix.
 	WanInterfaceIpPrefix *string `pulumi:"wanInterfaceIpPrefix"`
-	// The location where the Edge as a CaaG ZTP file will be stored.
+	// The folder path where the ZTP file will be downloaded.
 	ZtpFileDownloadPath *string `pulumi:"ztpFileDownloadPath"`
-	// ZTP file type.
+	// ZTP file type. Valid values: "iso", "cloud-init".
 	ZtpFileType *string `pulumi:"ztpFileType"`
 }
 
 type AviatrixEdgeCaagState struct {
-	// DNS server IP.
+	// DNS server IP. Required and valid when `managementInterfaceConfig` is "Static".
 	DnsServerIp pulumi.StringPtrInput
-	// Enable management over private network.
+	// Indicates whether it is public or private connection between controller and gateway. Valid values: true, false. Default value: false.
 	EnableOverPrivateNetwork pulumi.BoolPtrInput
-	// LAN interface IP / prefix.
+	// LAN interface IP and subnet prefix.
 	LanInterfaceIpPrefix pulumi.StringPtrInput
-	// Local AS number.
+	// BGP AS Number to assign to Edge as a CaaG.
 	LocalAsNumber pulumi.StringPtrInput
-	// Management default gateway IP.
+	// Management default gateway IP. Required and valid when `managementInterfaceConfig` is "Static".
 	ManagementDefaultGatewayIp pulumi.StringPtrInput
-	// Management egress gateway IP / prefix.
+	// Management egress gateway IP and subnet prefix.
 	ManagementEgressIpPrefix pulumi.StringPtrInput
-	// Management interface configuration. Valid values: 'DHCP' and 'Static'.
+	// Management interface configuration. Valid values: "DHCP", "Static".
 	ManagementInterfaceConfig pulumi.StringPtrInput
-	// Management interface IP / prefix.
+	// Management interface IP and subnet prefix. Required and valid when `managementInterfaceConfig` is "Static".
 	ManagementInterfaceIpPrefix pulumi.StringPtrInput
 	// Edge as a CaaG name.
 	Name pulumi.StringPtrInput
-	// AS path prepend.
+	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires localAsNumber to be set. Type: List.
 	PrependAsPaths pulumi.StringArrayInput
-	// Secondary DNS server IP.
+	// Secondary DNS server IP. Required and valid when `managementInterfaceConfig` is "Static".
 	SecondaryDnsServerIp pulumi.StringPtrInput
 	// State of Edge as a CaaG.
 	State pulumi.StringPtrInput
 	// WAN default gateway IP.
 	WanDefaultGatewayIp pulumi.StringPtrInput
-	// WAN interface IP / prefix.
+	// WAN interface IP and subnet prefix.
 	WanInterfaceIpPrefix pulumi.StringPtrInput
-	// The location where the Edge as a CaaG ZTP file will be stored.
+	// The folder path where the ZTP file will be downloaded.
 	ZtpFileDownloadPath pulumi.StringPtrInput
-	// ZTP file type.
+	// ZTP file type. Valid values: "iso", "cloud-init".
 	ZtpFileType pulumi.StringPtrInput
 }
 
@@ -170,69 +254,69 @@ func (AviatrixEdgeCaagState) ElementType() reflect.Type {
 }
 
 type aviatrixEdgeCaagArgs struct {
-	// DNS server IP.
+	// DNS server IP. Required and valid when `managementInterfaceConfig` is "Static".
 	DnsServerIp *string `pulumi:"dnsServerIp"`
-	// Enable management over private network.
+	// Indicates whether it is public or private connection between controller and gateway. Valid values: true, false. Default value: false.
 	EnableOverPrivateNetwork *bool `pulumi:"enableOverPrivateNetwork"`
-	// LAN interface IP / prefix.
+	// LAN interface IP and subnet prefix.
 	LanInterfaceIpPrefix string `pulumi:"lanInterfaceIpPrefix"`
-	// Local AS number.
+	// BGP AS Number to assign to Edge as a CaaG.
 	LocalAsNumber *string `pulumi:"localAsNumber"`
-	// Management default gateway IP.
+	// Management default gateway IP. Required and valid when `managementInterfaceConfig` is "Static".
 	ManagementDefaultGatewayIp *string `pulumi:"managementDefaultGatewayIp"`
-	// Management egress gateway IP / prefix.
+	// Management egress gateway IP and subnet prefix.
 	ManagementEgressIpPrefix *string `pulumi:"managementEgressIpPrefix"`
-	// Management interface configuration. Valid values: 'DHCP' and 'Static'.
+	// Management interface configuration. Valid values: "DHCP", "Static".
 	ManagementInterfaceConfig string `pulumi:"managementInterfaceConfig"`
-	// Management interface IP / prefix.
+	// Management interface IP and subnet prefix. Required and valid when `managementInterfaceConfig` is "Static".
 	ManagementInterfaceIpPrefix *string `pulumi:"managementInterfaceIpPrefix"`
 	// Edge as a CaaG name.
 	Name *string `pulumi:"name"`
-	// AS path prepend.
+	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires localAsNumber to be set. Type: List.
 	PrependAsPaths []string `pulumi:"prependAsPaths"`
-	// Secondary DNS server IP.
+	// Secondary DNS server IP. Required and valid when `managementInterfaceConfig` is "Static".
 	SecondaryDnsServerIp *string `pulumi:"secondaryDnsServerIp"`
 	// WAN default gateway IP.
 	WanDefaultGatewayIp string `pulumi:"wanDefaultGatewayIp"`
-	// WAN interface IP / prefix.
+	// WAN interface IP and subnet prefix.
 	WanInterfaceIpPrefix string `pulumi:"wanInterfaceIpPrefix"`
-	// The location where the Edge as a CaaG ZTP file will be stored.
+	// The folder path where the ZTP file will be downloaded.
 	ZtpFileDownloadPath string `pulumi:"ztpFileDownloadPath"`
-	// ZTP file type.
+	// ZTP file type. Valid values: "iso", "cloud-init".
 	ZtpFileType string `pulumi:"ztpFileType"`
 }
 
 // The set of arguments for constructing a AviatrixEdgeCaag resource.
 type AviatrixEdgeCaagArgs struct {
-	// DNS server IP.
+	// DNS server IP. Required and valid when `managementInterfaceConfig` is "Static".
 	DnsServerIp pulumi.StringPtrInput
-	// Enable management over private network.
+	// Indicates whether it is public or private connection between controller and gateway. Valid values: true, false. Default value: false.
 	EnableOverPrivateNetwork pulumi.BoolPtrInput
-	// LAN interface IP / prefix.
+	// LAN interface IP and subnet prefix.
 	LanInterfaceIpPrefix pulumi.StringInput
-	// Local AS number.
+	// BGP AS Number to assign to Edge as a CaaG.
 	LocalAsNumber pulumi.StringPtrInput
-	// Management default gateway IP.
+	// Management default gateway IP. Required and valid when `managementInterfaceConfig` is "Static".
 	ManagementDefaultGatewayIp pulumi.StringPtrInput
-	// Management egress gateway IP / prefix.
+	// Management egress gateway IP and subnet prefix.
 	ManagementEgressIpPrefix pulumi.StringPtrInput
-	// Management interface configuration. Valid values: 'DHCP' and 'Static'.
+	// Management interface configuration. Valid values: "DHCP", "Static".
 	ManagementInterfaceConfig pulumi.StringInput
-	// Management interface IP / prefix.
+	// Management interface IP and subnet prefix. Required and valid when `managementInterfaceConfig` is "Static".
 	ManagementInterfaceIpPrefix pulumi.StringPtrInput
 	// Edge as a CaaG name.
 	Name pulumi.StringPtrInput
-	// AS path prepend.
+	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires localAsNumber to be set. Type: List.
 	PrependAsPaths pulumi.StringArrayInput
-	// Secondary DNS server IP.
+	// Secondary DNS server IP. Required and valid when `managementInterfaceConfig` is "Static".
 	SecondaryDnsServerIp pulumi.StringPtrInput
 	// WAN default gateway IP.
 	WanDefaultGatewayIp pulumi.StringInput
-	// WAN interface IP / prefix.
+	// WAN interface IP and subnet prefix.
 	WanInterfaceIpPrefix pulumi.StringInput
-	// The location where the Edge as a CaaG ZTP file will be stored.
+	// The folder path where the ZTP file will be downloaded.
 	ZtpFileDownloadPath pulumi.StringInput
-	// ZTP file type.
+	// ZTP file type. Valid values: "iso", "cloud-init".
 	ZtpFileType pulumi.StringInput
 }
 
@@ -323,42 +407,42 @@ func (o AviatrixEdgeCaagOutput) ToAviatrixEdgeCaagOutputWithContext(ctx context.
 	return o
 }
 
-// DNS server IP.
+// DNS server IP. Required and valid when `managementInterfaceConfig` is "Static".
 func (o AviatrixEdgeCaagOutput) DnsServerIp() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixEdgeCaag) pulumi.StringPtrOutput { return v.DnsServerIp }).(pulumi.StringPtrOutput)
 }
 
-// Enable management over private network.
+// Indicates whether it is public or private connection between controller and gateway. Valid values: true, false. Default value: false.
 func (o AviatrixEdgeCaagOutput) EnableOverPrivateNetwork() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixEdgeCaag) pulumi.BoolPtrOutput { return v.EnableOverPrivateNetwork }).(pulumi.BoolPtrOutput)
 }
 
-// LAN interface IP / prefix.
+// LAN interface IP and subnet prefix.
 func (o AviatrixEdgeCaagOutput) LanInterfaceIpPrefix() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixEdgeCaag) pulumi.StringOutput { return v.LanInterfaceIpPrefix }).(pulumi.StringOutput)
 }
 
-// Local AS number.
+// BGP AS Number to assign to Edge as a CaaG.
 func (o AviatrixEdgeCaagOutput) LocalAsNumber() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixEdgeCaag) pulumi.StringOutput { return v.LocalAsNumber }).(pulumi.StringOutput)
 }
 
-// Management default gateway IP.
+// Management default gateway IP. Required and valid when `managementInterfaceConfig` is "Static".
 func (o AviatrixEdgeCaagOutput) ManagementDefaultGatewayIp() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixEdgeCaag) pulumi.StringPtrOutput { return v.ManagementDefaultGatewayIp }).(pulumi.StringPtrOutput)
 }
 
-// Management egress gateway IP / prefix.
+// Management egress gateway IP and subnet prefix.
 func (o AviatrixEdgeCaagOutput) ManagementEgressIpPrefix() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixEdgeCaag) pulumi.StringPtrOutput { return v.ManagementEgressIpPrefix }).(pulumi.StringPtrOutput)
 }
 
-// Management interface configuration. Valid values: 'DHCP' and 'Static'.
+// Management interface configuration. Valid values: "DHCP", "Static".
 func (o AviatrixEdgeCaagOutput) ManagementInterfaceConfig() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixEdgeCaag) pulumi.StringOutput { return v.ManagementInterfaceConfig }).(pulumi.StringOutput)
 }
 
-// Management interface IP / prefix.
+// Management interface IP and subnet prefix. Required and valid when `managementInterfaceConfig` is "Static".
 func (o AviatrixEdgeCaagOutput) ManagementInterfaceIpPrefix() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixEdgeCaag) pulumi.StringPtrOutput { return v.ManagementInterfaceIpPrefix }).(pulumi.StringPtrOutput)
 }
@@ -368,12 +452,12 @@ func (o AviatrixEdgeCaagOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixEdgeCaag) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// AS path prepend.
+// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires localAsNumber to be set. Type: List.
 func (o AviatrixEdgeCaagOutput) PrependAsPaths() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixEdgeCaag) pulumi.StringArrayOutput { return v.PrependAsPaths }).(pulumi.StringArrayOutput)
 }
 
-// Secondary DNS server IP.
+// Secondary DNS server IP. Required and valid when `managementInterfaceConfig` is "Static".
 func (o AviatrixEdgeCaagOutput) SecondaryDnsServerIp() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixEdgeCaag) pulumi.StringPtrOutput { return v.SecondaryDnsServerIp }).(pulumi.StringPtrOutput)
 }
@@ -388,17 +472,17 @@ func (o AviatrixEdgeCaagOutput) WanDefaultGatewayIp() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixEdgeCaag) pulumi.StringOutput { return v.WanDefaultGatewayIp }).(pulumi.StringOutput)
 }
 
-// WAN interface IP / prefix.
+// WAN interface IP and subnet prefix.
 func (o AviatrixEdgeCaagOutput) WanInterfaceIpPrefix() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixEdgeCaag) pulumi.StringOutput { return v.WanInterfaceIpPrefix }).(pulumi.StringOutput)
 }
 
-// The location where the Edge as a CaaG ZTP file will be stored.
+// The folder path where the ZTP file will be downloaded.
 func (o AviatrixEdgeCaagOutput) ZtpFileDownloadPath() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixEdgeCaag) pulumi.StringOutput { return v.ZtpFileDownloadPath }).(pulumi.StringOutput)
 }
 
-// ZTP file type.
+// ZTP file type. Valid values: "iso", "cloud-init".
 func (o AviatrixEdgeCaagOutput) ZtpFileType() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixEdgeCaag) pulumi.StringOutput { return v.ZtpFileType }).(pulumi.StringOutput)
 }

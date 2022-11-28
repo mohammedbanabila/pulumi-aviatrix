@@ -9,6 +9,41 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_cloudwatch_agent** resource allows the enabling and disabling of cloudwatch agent.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Enable cloudwatch agent
+    ///     var testCloudwatchAgent = new Aviatrix.AviatrixCloudwatchAgent("testCloudwatchAgent", new()
+    ///     {
+    ///         CloudwatchRoleArn = "arn:aws:iam::469550033836:role/aviatrix-role-cloudwatch",
+    ///         ExcludedGateways = new[]
+    ///         {
+    ///             "a",
+    ///             "b",
+    ///         },
+    ///         Region = "us-east-1",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **cloudwatch_agent** can be imported using "cloudwatch_agent", e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixCloudwatchAgent:AviatrixCloudwatchAgent test cloudwatch_agent
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixCloudwatchAgent:AviatrixCloudwatchAgent")]
     public partial class AviatrixCloudwatchAgent : global::Pulumi.CustomResource
     {
@@ -19,13 +54,13 @@ namespace Pulumi.Aviatrix
         public Output<string> CloudwatchRoleArn { get; private set; } = null!;
 
         /// <summary>
-        /// List of excluded gateways.
+        /// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         /// </summary>
         [Output("excludedGateways")]
         public Output<ImmutableArray<string>> ExcludedGateways { get; private set; } = null!;
 
         /// <summary>
-        /// Log group name.
+        /// Log group name. "AVIATRIX-CLOUDWATCH-LOG" by default.
         /// </summary>
         [Output("logGroupName")]
         public Output<string?> LogGroupName { get; private set; } = null!;
@@ -37,7 +72,7 @@ namespace Pulumi.Aviatrix
         public Output<string> Region { get; private set; } = null!;
 
         /// <summary>
-        /// Enabled or not.
+        /// The status of cloudwatch agent.
         /// </summary>
         [Output("status")]
         public Output<string> Status { get; private set; } = null!;
@@ -99,7 +134,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _excludedGateways;
 
         /// <summary>
-        /// List of excluded gateways.
+        /// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         /// </summary>
         public InputList<string> ExcludedGateways
         {
@@ -108,7 +143,7 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Log group name.
+        /// Log group name. "AVIATRIX-CLOUDWATCH-LOG" by default.
         /// </summary>
         [Input("logGroupName")]
         public Input<string>? LogGroupName { get; set; }
@@ -137,7 +172,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _excludedGateways;
 
         /// <summary>
-        /// List of excluded gateways.
+        /// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         /// </summary>
         public InputList<string> ExcludedGateways
         {
@@ -146,7 +181,7 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Log group name.
+        /// Log group name. "AVIATRIX-CLOUDWATCH-LOG" by default.
         /// </summary>
         [Input("logGroupName")]
         public Input<string>? LogGroupName { get; set; }
@@ -158,7 +193,7 @@ namespace Pulumi.Aviatrix
         public Input<string>? Region { get; set; }
 
         /// <summary>
-        /// Enabled or not.
+        /// The status of cloudwatch agent.
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }

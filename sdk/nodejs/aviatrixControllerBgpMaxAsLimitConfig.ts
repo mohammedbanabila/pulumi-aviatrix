@@ -4,6 +4,29 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_controller_bgp_max_as_limit_config** resource allows management of an Aviatrix Controller's BGP max AS limit for transit gateways. This resource is available as of provider version R2.18.1+.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Controller BGP max AS limit config
+ * const testMaxAsLimit = new aviatrix.AviatrixControllerBgpMaxAsLimitConfig("test_max_as_limit", {
+ *     maxAsLimit: 1,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **aviatrix_controller_bgp_max_as_limit_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixControllerBgpMaxAsLimitConfig:AviatrixControllerBgpMaxAsLimitConfig test_max_as_limit 10-11-12-13
+ * ```
+ */
 export class AviatrixControllerBgpMaxAsLimitConfig extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixControllerBgpMaxAsLimitConfig resource's state with the given name, ID, and optional extra
@@ -33,7 +56,7 @@ export class AviatrixControllerBgpMaxAsLimitConfig extends pulumi.CustomResource
     }
 
     /**
-     * The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation.
+     * The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation. Must be a number in the range [1-254].
      */
     public readonly maxAsLimit!: pulumi.Output<number>;
 
@@ -68,7 +91,7 @@ export class AviatrixControllerBgpMaxAsLimitConfig extends pulumi.CustomResource
  */
 export interface AviatrixControllerBgpMaxAsLimitConfigState {
     /**
-     * The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation.
+     * The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation. Must be a number in the range [1-254].
      */
     maxAsLimit?: pulumi.Input<number>;
 }
@@ -78,7 +101,7 @@ export interface AviatrixControllerBgpMaxAsLimitConfigState {
  */
 export interface AviatrixControllerBgpMaxAsLimitConfigArgs {
     /**
-     * The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation.
+     * The maximum AS path limit allowed by transit gateways when handling BGP/Peering route propagation. Must be a number in the range [1-254].
      */
     maxAsLimit: pulumi.Input<number>;
 }

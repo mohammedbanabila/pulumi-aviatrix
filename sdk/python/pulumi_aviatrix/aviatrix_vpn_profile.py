@@ -23,10 +23,11 @@ class AviatrixVpnProfileArgs:
                  users: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a AviatrixVpnProfile resource.
-        :param pulumi.Input[str] base_rule: Base policy rule of the profile to be added. Enter 'allow_all' or 'deny_all'.
-        :param pulumi.Input[str] name: name for the VPN profile.
-        :param pulumi.Input[Sequence[pulumi.Input['AviatrixVpnProfilePolicyArgs']]] policies: New security policy for the profile.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] users: List of VPN users to attach to this profile.
+        :param pulumi.Input[str] base_rule: Base policy rule of the profile to be added. Enter "allow_all" or "deny_all", based on whether you want a whitelist or blacklist.
+        :param pulumi.Input[bool] manage_user_attachment: This parameter is a switch used to determine whether or not to manage VPN user attachments to the VPN profile using this resource. If this is set to false, attachment must be managed using the **aviatrix_vpn_user** resource. Valid values: true, false. Default value: true.
+        :param pulumi.Input[str] name: Enter any name for the VPN profile.
+        :param pulumi.Input[Sequence[pulumi.Input['AviatrixVpnProfilePolicyArgs']]] policies: New security policy for the profile. Each policy has the following attributes:
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] users: List of VPN users to attach to this profile. This should be set to null if `manage_user_attachment` is set to false.
         """
         if base_rule is not None:
             pulumi.set(__self__, "base_rule", base_rule)
@@ -43,7 +44,7 @@ class AviatrixVpnProfileArgs:
     @pulumi.getter(name="baseRule")
     def base_rule(self) -> Optional[pulumi.Input[str]]:
         """
-        Base policy rule of the profile to be added. Enter 'allow_all' or 'deny_all'.
+        Base policy rule of the profile to be added. Enter "allow_all" or "deny_all", based on whether you want a whitelist or blacklist.
         """
         return pulumi.get(self, "base_rule")
 
@@ -54,6 +55,9 @@ class AviatrixVpnProfileArgs:
     @property
     @pulumi.getter(name="manageUserAttachment")
     def manage_user_attachment(self) -> Optional[pulumi.Input[bool]]:
+        """
+        This parameter is a switch used to determine whether or not to manage VPN user attachments to the VPN profile using this resource. If this is set to false, attachment must be managed using the **aviatrix_vpn_user** resource. Valid values: true, false. Default value: true.
+        """
         return pulumi.get(self, "manage_user_attachment")
 
     @manage_user_attachment.setter
@@ -64,7 +68,7 @@ class AviatrixVpnProfileArgs:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        name for the VPN profile.
+        Enter any name for the VPN profile.
         """
         return pulumi.get(self, "name")
 
@@ -76,7 +80,7 @@ class AviatrixVpnProfileArgs:
     @pulumi.getter
     def policies(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['AviatrixVpnProfilePolicyArgs']]]]:
         """
-        New security policy for the profile.
+        New security policy for the profile. Each policy has the following attributes:
         """
         return pulumi.get(self, "policies")
 
@@ -88,7 +92,7 @@ class AviatrixVpnProfileArgs:
     @pulumi.getter
     def users(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of VPN users to attach to this profile.
+        List of VPN users to attach to this profile. This should be set to null if `manage_user_attachment` is set to false.
         """
         return pulumi.get(self, "users")
 
@@ -107,10 +111,11 @@ class _AviatrixVpnProfileState:
                  users: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering AviatrixVpnProfile resources.
-        :param pulumi.Input[str] base_rule: Base policy rule of the profile to be added. Enter 'allow_all' or 'deny_all'.
-        :param pulumi.Input[str] name: name for the VPN profile.
-        :param pulumi.Input[Sequence[pulumi.Input['AviatrixVpnProfilePolicyArgs']]] policies: New security policy for the profile.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] users: List of VPN users to attach to this profile.
+        :param pulumi.Input[str] base_rule: Base policy rule of the profile to be added. Enter "allow_all" or "deny_all", based on whether you want a whitelist or blacklist.
+        :param pulumi.Input[bool] manage_user_attachment: This parameter is a switch used to determine whether or not to manage VPN user attachments to the VPN profile using this resource. If this is set to false, attachment must be managed using the **aviatrix_vpn_user** resource. Valid values: true, false. Default value: true.
+        :param pulumi.Input[str] name: Enter any name for the VPN profile.
+        :param pulumi.Input[Sequence[pulumi.Input['AviatrixVpnProfilePolicyArgs']]] policies: New security policy for the profile. Each policy has the following attributes:
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] users: List of VPN users to attach to this profile. This should be set to null if `manage_user_attachment` is set to false.
         """
         if base_rule is not None:
             pulumi.set(__self__, "base_rule", base_rule)
@@ -127,7 +132,7 @@ class _AviatrixVpnProfileState:
     @pulumi.getter(name="baseRule")
     def base_rule(self) -> Optional[pulumi.Input[str]]:
         """
-        Base policy rule of the profile to be added. Enter 'allow_all' or 'deny_all'.
+        Base policy rule of the profile to be added. Enter "allow_all" or "deny_all", based on whether you want a whitelist or blacklist.
         """
         return pulumi.get(self, "base_rule")
 
@@ -138,6 +143,9 @@ class _AviatrixVpnProfileState:
     @property
     @pulumi.getter(name="manageUserAttachment")
     def manage_user_attachment(self) -> Optional[pulumi.Input[bool]]:
+        """
+        This parameter is a switch used to determine whether or not to manage VPN user attachments to the VPN profile using this resource. If this is set to false, attachment must be managed using the **aviatrix_vpn_user** resource. Valid values: true, false. Default value: true.
+        """
         return pulumi.get(self, "manage_user_attachment")
 
     @manage_user_attachment.setter
@@ -148,7 +156,7 @@ class _AviatrixVpnProfileState:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        name for the VPN profile.
+        Enter any name for the VPN profile.
         """
         return pulumi.get(self, "name")
 
@@ -160,7 +168,7 @@ class _AviatrixVpnProfileState:
     @pulumi.getter
     def policies(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['AviatrixVpnProfilePolicyArgs']]]]:
         """
-        New security policy for the profile.
+        New security policy for the profile. Each policy has the following attributes:
         """
         return pulumi.get(self, "policies")
 
@@ -172,7 +180,7 @@ class _AviatrixVpnProfileState:
     @pulumi.getter
     def users(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of VPN users to attach to this profile.
+        List of VPN users to attach to this profile. This should be set to null if `manage_user_attachment` is set to false.
         """
         return pulumi.get(self, "users")
 
@@ -193,13 +201,54 @@ class AviatrixVpnProfile(pulumi.CustomResource):
                  users: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
-        Create a AviatrixVpnProfile resource with the given unique name, props, and options.
+        The **aviatrix_vpn_profile** resource allows the creation and management of Aviatrix VPN user profiles.
+
+        > **NOTE:** As of R2.15, management of user/profile attachment can be set using `manage_user_attachment`. This argument must be set to *true* in either **aviatrix_vpn_user** or **aviatrix_vpn_profile**. If attachment is managed in the **aviatrix_vpn_profile** (set to *true*), it must be set to *false* in the **aviatrix_vpn_user** resource and vice versa.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS VPN User Profile
+        test_vpn_profile = aviatrix.AviatrixVpnProfile("testVpnProfile",
+            base_rule="allow_all",
+            policies=[
+                aviatrix.AviatrixVpnProfilePolicyArgs(
+                    action="deny",
+                    port="443",
+                    proto="tcp",
+                    target="10.0.0.0/32",
+                ),
+                aviatrix.AviatrixVpnProfilePolicyArgs(
+                    action="deny",
+                    port="443",
+                    proto="tcp",
+                    target="10.0.0.1/32",
+                ),
+            ],
+            users=[
+                "user1",
+                "user2",
+            ])
+        ```
+
+        ## Import
+
+        **vpn_profile** can be imported using the VPN profile's `name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixVpnProfile:AviatrixVpnProfile test name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] base_rule: Base policy rule of the profile to be added. Enter 'allow_all' or 'deny_all'.
-        :param pulumi.Input[str] name: name for the VPN profile.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixVpnProfilePolicyArgs']]]] policies: New security policy for the profile.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] users: List of VPN users to attach to this profile.
+        :param pulumi.Input[str] base_rule: Base policy rule of the profile to be added. Enter "allow_all" or "deny_all", based on whether you want a whitelist or blacklist.
+        :param pulumi.Input[bool] manage_user_attachment: This parameter is a switch used to determine whether or not to manage VPN user attachments to the VPN profile using this resource. If this is set to false, attachment must be managed using the **aviatrix_vpn_user** resource. Valid values: true, false. Default value: true.
+        :param pulumi.Input[str] name: Enter any name for the VPN profile.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixVpnProfilePolicyArgs']]]] policies: New security policy for the profile. Each policy has the following attributes:
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] users: List of VPN users to attach to this profile. This should be set to null if `manage_user_attachment` is set to false.
         """
         ...
     @overload
@@ -208,7 +257,47 @@ class AviatrixVpnProfile(pulumi.CustomResource):
                  args: Optional[AviatrixVpnProfileArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixVpnProfile resource with the given unique name, props, and options.
+        The **aviatrix_vpn_profile** resource allows the creation and management of Aviatrix VPN user profiles.
+
+        > **NOTE:** As of R2.15, management of user/profile attachment can be set using `manage_user_attachment`. This argument must be set to *true* in either **aviatrix_vpn_user** or **aviatrix_vpn_profile**. If attachment is managed in the **aviatrix_vpn_profile** (set to *true*), it must be set to *false* in the **aviatrix_vpn_user** resource and vice versa.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS VPN User Profile
+        test_vpn_profile = aviatrix.AviatrixVpnProfile("testVpnProfile",
+            base_rule="allow_all",
+            policies=[
+                aviatrix.AviatrixVpnProfilePolicyArgs(
+                    action="deny",
+                    port="443",
+                    proto="tcp",
+                    target="10.0.0.0/32",
+                ),
+                aviatrix.AviatrixVpnProfilePolicyArgs(
+                    action="deny",
+                    port="443",
+                    proto="tcp",
+                    target="10.0.0.1/32",
+                ),
+            ],
+            users=[
+                "user1",
+                "user2",
+            ])
+        ```
+
+        ## Import
+
+        **vpn_profile** can be imported using the VPN profile's `name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixVpnProfile:AviatrixVpnProfile test name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixVpnProfileArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -265,10 +354,11 @@ class AviatrixVpnProfile(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] base_rule: Base policy rule of the profile to be added. Enter 'allow_all' or 'deny_all'.
-        :param pulumi.Input[str] name: name for the VPN profile.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixVpnProfilePolicyArgs']]]] policies: New security policy for the profile.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] users: List of VPN users to attach to this profile.
+        :param pulumi.Input[str] base_rule: Base policy rule of the profile to be added. Enter "allow_all" or "deny_all", based on whether you want a whitelist or blacklist.
+        :param pulumi.Input[bool] manage_user_attachment: This parameter is a switch used to determine whether or not to manage VPN user attachments to the VPN profile using this resource. If this is set to false, attachment must be managed using the **aviatrix_vpn_user** resource. Valid values: true, false. Default value: true.
+        :param pulumi.Input[str] name: Enter any name for the VPN profile.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixVpnProfilePolicyArgs']]]] policies: New security policy for the profile. Each policy has the following attributes:
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] users: List of VPN users to attach to this profile. This should be set to null if `manage_user_attachment` is set to false.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -285,20 +375,23 @@ class AviatrixVpnProfile(pulumi.CustomResource):
     @pulumi.getter(name="baseRule")
     def base_rule(self) -> pulumi.Output[Optional[str]]:
         """
-        Base policy rule of the profile to be added. Enter 'allow_all' or 'deny_all'.
+        Base policy rule of the profile to be added. Enter "allow_all" or "deny_all", based on whether you want a whitelist or blacklist.
         """
         return pulumi.get(self, "base_rule")
 
     @property
     @pulumi.getter(name="manageUserAttachment")
     def manage_user_attachment(self) -> pulumi.Output[Optional[bool]]:
+        """
+        This parameter is a switch used to determine whether or not to manage VPN user attachments to the VPN profile using this resource. If this is set to false, attachment must be managed using the **aviatrix_vpn_user** resource. Valid values: true, false. Default value: true.
+        """
         return pulumi.get(self, "manage_user_attachment")
 
     @property
     @pulumi.getter
     def name(self) -> pulumi.Output[str]:
         """
-        name for the VPN profile.
+        Enter any name for the VPN profile.
         """
         return pulumi.get(self, "name")
 
@@ -306,7 +399,7 @@ class AviatrixVpnProfile(pulumi.CustomResource):
     @pulumi.getter
     def policies(self) -> pulumi.Output[Optional[Sequence['outputs.AviatrixVpnProfilePolicy']]]:
         """
-        New security policy for the profile.
+        New security policy for the profile. Each policy has the following attributes:
         """
         return pulumi.get(self, "policies")
 
@@ -314,7 +407,7 @@ class AviatrixVpnProfile(pulumi.CustomResource):
     @pulumi.getter
     def users(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        List of VPN users to attach to this profile.
+        List of VPN users to attach to this profile. This should be set to null if `manage_user_attachment` is set to false.
         """
         return pulumi.get(self, "users")
 

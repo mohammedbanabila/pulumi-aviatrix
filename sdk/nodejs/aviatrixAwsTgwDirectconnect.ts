@@ -4,6 +4,33 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_aws_tgw_directconnect** resource allows the creation and management of Aviatrix-created AWS TGW DirectConnect connections.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix AWS TGW Directconnect
+ * const testAwsTgwDirectconnect = new aviatrix.AviatrixAwsTgwDirectconnect("test_aws_tgw_directconnect", {
+ *     allowedPrefix: "10.12.0.0/24",
+ *     directconnectAccountName: "username",
+ *     dxGatewayId: "30321d76-dd01-49bf",
+ *     networkDomainName: "my-ndn-1",
+ *     tgwName: "my-aws-tgw-1",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **aws_tgw_directconnect** can be imported using the `tgw_name` and `dx_gateway_id`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixAwsTgwDirectconnect:AviatrixAwsTgwDirectconnect test tgw_name~dx_gateway_id
+ * ```
+ */
 export class AviatrixAwsTgwDirectconnect extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixAwsTgwDirectconnect resource's state with the given name, ID, and optional extra
@@ -33,7 +60,7 @@ export class AviatrixAwsTgwDirectconnect extends pulumi.CustomResource {
     }
 
     /**
-     * Public IP address. Example: '40.0.0.0'.
+     * A list of comma separated CIDRs for DXGW to advertise to remote(on-prem).
      */
     public readonly allowedPrefix!: pulumi.Output<string>;
     /**
@@ -45,15 +72,15 @@ export class AviatrixAwsTgwDirectconnect extends pulumi.CustomResource {
      */
     public readonly dxGatewayId!: pulumi.Output<string>;
     /**
-     * Switch to enable/disable encrypted transit approval for direct connection. Valid values: true, false.
+     * Switch to enable/disable [encrypted transit approval](https://docs.aviatrix.com/HowTos/tgw_approval.html) for AWS TGW DirectConnect. Valid values: true, false. Default value: false.
      */
     public readonly enableLearnedCidrsApproval!: pulumi.Output<boolean | undefined>;
     /**
-     * The name of an Aviatrix network domain, to which the direct connect gateway will be attached.
+     * The name of a network domain, to which the direct connect gateway will be attached.
      */
     public readonly networkDomainName!: pulumi.Output<string | undefined>;
     /**
-     * The name of an Aviatrix security domain, to which the direct connect gateway will be attached.
+     * The name of a security domain, to which the direct connect gateway will be attached.
      *
      * @deprecated Please use network_domain_name instead.
      */
@@ -115,7 +142,7 @@ export class AviatrixAwsTgwDirectconnect extends pulumi.CustomResource {
  */
 export interface AviatrixAwsTgwDirectconnectState {
     /**
-     * Public IP address. Example: '40.0.0.0'.
+     * A list of comma separated CIDRs for DXGW to advertise to remote(on-prem).
      */
     allowedPrefix?: pulumi.Input<string>;
     /**
@@ -127,15 +154,15 @@ export interface AviatrixAwsTgwDirectconnectState {
      */
     dxGatewayId?: pulumi.Input<string>;
     /**
-     * Switch to enable/disable encrypted transit approval for direct connection. Valid values: true, false.
+     * Switch to enable/disable [encrypted transit approval](https://docs.aviatrix.com/HowTos/tgw_approval.html) for AWS TGW DirectConnect. Valid values: true, false. Default value: false.
      */
     enableLearnedCidrsApproval?: pulumi.Input<boolean>;
     /**
-     * The name of an Aviatrix network domain, to which the direct connect gateway will be attached.
+     * The name of a network domain, to which the direct connect gateway will be attached.
      */
     networkDomainName?: pulumi.Input<string>;
     /**
-     * The name of an Aviatrix security domain, to which the direct connect gateway will be attached.
+     * The name of a security domain, to which the direct connect gateway will be attached.
      *
      * @deprecated Please use network_domain_name instead.
      */
@@ -151,7 +178,7 @@ export interface AviatrixAwsTgwDirectconnectState {
  */
 export interface AviatrixAwsTgwDirectconnectArgs {
     /**
-     * Public IP address. Example: '40.0.0.0'.
+     * A list of comma separated CIDRs for DXGW to advertise to remote(on-prem).
      */
     allowedPrefix: pulumi.Input<string>;
     /**
@@ -163,15 +190,15 @@ export interface AviatrixAwsTgwDirectconnectArgs {
      */
     dxGatewayId: pulumi.Input<string>;
     /**
-     * Switch to enable/disable encrypted transit approval for direct connection. Valid values: true, false.
+     * Switch to enable/disable [encrypted transit approval](https://docs.aviatrix.com/HowTos/tgw_approval.html) for AWS TGW DirectConnect. Valid values: true, false. Default value: false.
      */
     enableLearnedCidrsApproval?: pulumi.Input<boolean>;
     /**
-     * The name of an Aviatrix network domain, to which the direct connect gateway will be attached.
+     * The name of a network domain, to which the direct connect gateway will be attached.
      */
     networkDomainName?: pulumi.Input<string>;
     /**
-     * The name of an Aviatrix security domain, to which the direct connect gateway will be attached.
+     * The name of a security domain, to which the direct connect gateway will be attached.
      *
      * @deprecated Please use network_domain_name instead.
      */

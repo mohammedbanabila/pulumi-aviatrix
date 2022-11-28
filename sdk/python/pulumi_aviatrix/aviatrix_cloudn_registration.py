@@ -22,12 +22,12 @@ class AviatrixCloudnRegistrationArgs:
                  prepend_as_paths: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a AviatrixCloudnRegistration resource.
-        :param pulumi.Input[str] address: CloudN IP Address or FQDN.
-        :param pulumi.Input[str] password: CloudN password.
-        :param pulumi.Input[str] username: CloudN username.
-        :param pulumi.Input[str] local_as_number: Changes the Aviatrix CloudN ASN number before you setup Aviatrix Transit Gateway connection configurations.
-        :param pulumi.Input[str] name: CloudN name to register on controller.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: AS path prepend.
+        :param pulumi.Input[str] address: Aviatrix CloudN's public or private IP. Type: String.
+        :param pulumi.Input[str] password: Aviatrix account password corresponding to above username. Type: String.
+        :param pulumi.Input[str] username: Aviatrix account username which will be used to log in to Aviatrix CloudN. Type: String.
+        :param pulumi.Input[str] local_as_number: BGP AS Number to assign to the Transit Gateway. Type: String.
+        :param pulumi.Input[str] name: Gateway name to assign to the CloudN device. Type: String.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires local_as_number to be set. Type: List.
         """
         pulumi.set(__self__, "address", address)
         pulumi.set(__self__, "password", password)
@@ -43,7 +43,7 @@ class AviatrixCloudnRegistrationArgs:
     @pulumi.getter
     def address(self) -> pulumi.Input[str]:
         """
-        CloudN IP Address or FQDN.
+        Aviatrix CloudN's public or private IP. Type: String.
         """
         return pulumi.get(self, "address")
 
@@ -55,7 +55,7 @@ class AviatrixCloudnRegistrationArgs:
     @pulumi.getter
     def password(self) -> pulumi.Input[str]:
         """
-        CloudN password.
+        Aviatrix account password corresponding to above username. Type: String.
         """
         return pulumi.get(self, "password")
 
@@ -67,7 +67,7 @@ class AviatrixCloudnRegistrationArgs:
     @pulumi.getter
     def username(self) -> pulumi.Input[str]:
         """
-        CloudN username.
+        Aviatrix account username which will be used to log in to Aviatrix CloudN. Type: String.
         """
         return pulumi.get(self, "username")
 
@@ -79,7 +79,7 @@ class AviatrixCloudnRegistrationArgs:
     @pulumi.getter(name="localAsNumber")
     def local_as_number(self) -> Optional[pulumi.Input[str]]:
         """
-        Changes the Aviatrix CloudN ASN number before you setup Aviatrix Transit Gateway connection configurations.
+        BGP AS Number to assign to the Transit Gateway. Type: String.
         """
         return pulumi.get(self, "local_as_number")
 
@@ -91,7 +91,7 @@ class AviatrixCloudnRegistrationArgs:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        CloudN name to register on controller.
+        Gateway name to assign to the CloudN device. Type: String.
         """
         return pulumi.get(self, "name")
 
@@ -103,7 +103,7 @@ class AviatrixCloudnRegistrationArgs:
     @pulumi.getter(name="prependAsPaths")
     def prepend_as_paths(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        AS path prepend.
+        Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires local_as_number to be set. Type: List.
         """
         return pulumi.get(self, "prepend_as_paths")
 
@@ -123,12 +123,12 @@ class _AviatrixCloudnRegistrationState:
                  username: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixCloudnRegistration resources.
-        :param pulumi.Input[str] address: CloudN IP Address or FQDN.
-        :param pulumi.Input[str] local_as_number: Changes the Aviatrix CloudN ASN number before you setup Aviatrix Transit Gateway connection configurations.
-        :param pulumi.Input[str] name: CloudN name to register on controller.
-        :param pulumi.Input[str] password: CloudN password.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: AS path prepend.
-        :param pulumi.Input[str] username: CloudN username.
+        :param pulumi.Input[str] address: Aviatrix CloudN's public or private IP. Type: String.
+        :param pulumi.Input[str] local_as_number: BGP AS Number to assign to the Transit Gateway. Type: String.
+        :param pulumi.Input[str] name: Gateway name to assign to the CloudN device. Type: String.
+        :param pulumi.Input[str] password: Aviatrix account password corresponding to above username. Type: String.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires local_as_number to be set. Type: List.
+        :param pulumi.Input[str] username: Aviatrix account username which will be used to log in to Aviatrix CloudN. Type: String.
         """
         if address is not None:
             pulumi.set(__self__, "address", address)
@@ -147,7 +147,7 @@ class _AviatrixCloudnRegistrationState:
     @pulumi.getter
     def address(self) -> Optional[pulumi.Input[str]]:
         """
-        CloudN IP Address or FQDN.
+        Aviatrix CloudN's public or private IP. Type: String.
         """
         return pulumi.get(self, "address")
 
@@ -159,7 +159,7 @@ class _AviatrixCloudnRegistrationState:
     @pulumi.getter(name="localAsNumber")
     def local_as_number(self) -> Optional[pulumi.Input[str]]:
         """
-        Changes the Aviatrix CloudN ASN number before you setup Aviatrix Transit Gateway connection configurations.
+        BGP AS Number to assign to the Transit Gateway. Type: String.
         """
         return pulumi.get(self, "local_as_number")
 
@@ -171,7 +171,7 @@ class _AviatrixCloudnRegistrationState:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        CloudN name to register on controller.
+        Gateway name to assign to the CloudN device. Type: String.
         """
         return pulumi.get(self, "name")
 
@@ -183,7 +183,7 @@ class _AviatrixCloudnRegistrationState:
     @pulumi.getter
     def password(self) -> Optional[pulumi.Input[str]]:
         """
-        CloudN password.
+        Aviatrix account password corresponding to above username. Type: String.
         """
         return pulumi.get(self, "password")
 
@@ -195,7 +195,7 @@ class _AviatrixCloudnRegistrationState:
     @pulumi.getter(name="prependAsPaths")
     def prepend_as_paths(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        AS path prepend.
+        Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires local_as_number to be set. Type: List.
         """
         return pulumi.get(self, "prepend_as_paths")
 
@@ -207,7 +207,7 @@ class _AviatrixCloudnRegistrationState:
     @pulumi.getter
     def username(self) -> Optional[pulumi.Input[str]]:
         """
-        CloudN username.
+        Aviatrix account username which will be used to log in to Aviatrix CloudN. Type: String.
         """
         return pulumi.get(self, "username")
 
@@ -229,15 +229,42 @@ class AviatrixCloudnRegistration(pulumi.CustomResource):
                  username: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixCloudnRegistration resource with the given unique name, props, and options.
+        The **aviatrix_cloudn_registration** resource allows the registration and deregistration of Aviatrix CloudN as a Gateway. This resource is available as of provider version R2.21+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create a CloudN Registration
+        test_cloudn_registration = aviatrix.AviatrixCloudnRegistration("testCloudnRegistration",
+            address="10.210.38.100",
+            local_as_number="65000",
+            password="password",
+            prepend_as_paths=[
+                "65000",
+                "65000",
+            ],
+            username="admin")
+        ```
+
+        ## Import
+
+        **cloudn_registration** can be imported using the `name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixCloudnRegistration:AviatrixCloudnRegistration test_cloudn_registration name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] address: CloudN IP Address or FQDN.
-        :param pulumi.Input[str] local_as_number: Changes the Aviatrix CloudN ASN number before you setup Aviatrix Transit Gateway connection configurations.
-        :param pulumi.Input[str] name: CloudN name to register on controller.
-        :param pulumi.Input[str] password: CloudN password.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: AS path prepend.
-        :param pulumi.Input[str] username: CloudN username.
+        :param pulumi.Input[str] address: Aviatrix CloudN's public or private IP. Type: String.
+        :param pulumi.Input[str] local_as_number: BGP AS Number to assign to the Transit Gateway. Type: String.
+        :param pulumi.Input[str] name: Gateway name to assign to the CloudN device. Type: String.
+        :param pulumi.Input[str] password: Aviatrix account password corresponding to above username. Type: String.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires local_as_number to be set. Type: List.
+        :param pulumi.Input[str] username: Aviatrix account username which will be used to log in to Aviatrix CloudN. Type: String.
         """
         ...
     @overload
@@ -246,7 +273,34 @@ class AviatrixCloudnRegistration(pulumi.CustomResource):
                  args: AviatrixCloudnRegistrationArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixCloudnRegistration resource with the given unique name, props, and options.
+        The **aviatrix_cloudn_registration** resource allows the registration and deregistration of Aviatrix CloudN as a Gateway. This resource is available as of provider version R2.21+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create a CloudN Registration
+        test_cloudn_registration = aviatrix.AviatrixCloudnRegistration("testCloudnRegistration",
+            address="10.210.38.100",
+            local_as_number="65000",
+            password="password",
+            prepend_as_paths=[
+                "65000",
+                "65000",
+            ],
+            username="admin")
+        ```
+
+        ## Import
+
+        **cloudn_registration** can be imported using the `name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixCloudnRegistration:AviatrixCloudnRegistration test_cloudn_registration name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixCloudnRegistrationArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -284,11 +338,13 @@ class AviatrixCloudnRegistration(pulumi.CustomResource):
             __props__.__dict__["name"] = name
             if password is None and not opts.urn:
                 raise TypeError("Missing required property 'password'")
-            __props__.__dict__["password"] = password
+            __props__.__dict__["password"] = None if password is None else pulumi.Output.secret(password)
             __props__.__dict__["prepend_as_paths"] = prepend_as_paths
             if username is None and not opts.urn:
                 raise TypeError("Missing required property 'username'")
             __props__.__dict__["username"] = username
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["password"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(AviatrixCloudnRegistration, __self__).__init__(
             'aviatrix:index/aviatrixCloudnRegistration:AviatrixCloudnRegistration',
             resource_name,
@@ -312,12 +368,12 @@ class AviatrixCloudnRegistration(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] address: CloudN IP Address or FQDN.
-        :param pulumi.Input[str] local_as_number: Changes the Aviatrix CloudN ASN number before you setup Aviatrix Transit Gateway connection configurations.
-        :param pulumi.Input[str] name: CloudN name to register on controller.
-        :param pulumi.Input[str] password: CloudN password.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: AS path prepend.
-        :param pulumi.Input[str] username: CloudN username.
+        :param pulumi.Input[str] address: Aviatrix CloudN's public or private IP. Type: String.
+        :param pulumi.Input[str] local_as_number: BGP AS Number to assign to the Transit Gateway. Type: String.
+        :param pulumi.Input[str] name: Gateway name to assign to the CloudN device. Type: String.
+        :param pulumi.Input[str] password: Aviatrix account password corresponding to above username. Type: String.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires local_as_number to be set. Type: List.
+        :param pulumi.Input[str] username: Aviatrix account username which will be used to log in to Aviatrix CloudN. Type: String.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -335,7 +391,7 @@ class AviatrixCloudnRegistration(pulumi.CustomResource):
     @pulumi.getter
     def address(self) -> pulumi.Output[str]:
         """
-        CloudN IP Address or FQDN.
+        Aviatrix CloudN's public or private IP. Type: String.
         """
         return pulumi.get(self, "address")
 
@@ -343,7 +399,7 @@ class AviatrixCloudnRegistration(pulumi.CustomResource):
     @pulumi.getter(name="localAsNumber")
     def local_as_number(self) -> pulumi.Output[str]:
         """
-        Changes the Aviatrix CloudN ASN number before you setup Aviatrix Transit Gateway connection configurations.
+        BGP AS Number to assign to the Transit Gateway. Type: String.
         """
         return pulumi.get(self, "local_as_number")
 
@@ -351,7 +407,7 @@ class AviatrixCloudnRegistration(pulumi.CustomResource):
     @pulumi.getter
     def name(self) -> pulumi.Output[str]:
         """
-        CloudN name to register on controller.
+        Gateway name to assign to the CloudN device. Type: String.
         """
         return pulumi.get(self, "name")
 
@@ -359,7 +415,7 @@ class AviatrixCloudnRegistration(pulumi.CustomResource):
     @pulumi.getter
     def password(self) -> pulumi.Output[str]:
         """
-        CloudN password.
+        Aviatrix account password corresponding to above username. Type: String.
         """
         return pulumi.get(self, "password")
 
@@ -367,7 +423,7 @@ class AviatrixCloudnRegistration(pulumi.CustomResource):
     @pulumi.getter(name="prependAsPaths")
     def prepend_as_paths(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        AS path prepend.
+        Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires local_as_number to be set. Type: List.
         """
         return pulumi.get(self, "prepend_as_paths")
 
@@ -375,7 +431,7 @@ class AviatrixCloudnRegistration(pulumi.CustomResource):
     @pulumi.getter
     def username(self) -> pulumi.Output[str]:
         """
-        CloudN username.
+        Aviatrix account username which will be used to log in to Aviatrix CloudN. Type: String.
         """
         return pulumi.get(self, "username")
 

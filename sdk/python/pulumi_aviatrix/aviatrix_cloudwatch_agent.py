@@ -22,8 +22,8 @@ class AviatrixCloudwatchAgentArgs:
         The set of arguments for constructing a AviatrixCloudwatchAgent resource.
         :param pulumi.Input[str] cloudwatch_role_arn: CloudWatch role ARN.
         :param pulumi.Input[str] region: Name of AWS region.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of excluded gateways.
-        :param pulumi.Input[str] log_group_name: Log group name.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
+        :param pulumi.Input[str] log_group_name: Log group name. "AVIATRIX-CLOUDWATCH-LOG" by default.
         """
         pulumi.set(__self__, "cloudwatch_role_arn", cloudwatch_role_arn)
         pulumi.set(__self__, "region", region)
@@ -60,7 +60,7 @@ class AviatrixCloudwatchAgentArgs:
     @pulumi.getter(name="excludedGateways")
     def excluded_gateways(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of excluded gateways.
+        List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         """
         return pulumi.get(self, "excluded_gateways")
 
@@ -72,7 +72,7 @@ class AviatrixCloudwatchAgentArgs:
     @pulumi.getter(name="logGroupName")
     def log_group_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Log group name.
+        Log group name. "AVIATRIX-CLOUDWATCH-LOG" by default.
         """
         return pulumi.get(self, "log_group_name")
 
@@ -92,10 +92,10 @@ class _AviatrixCloudwatchAgentState:
         """
         Input properties used for looking up and filtering AviatrixCloudwatchAgent resources.
         :param pulumi.Input[str] cloudwatch_role_arn: CloudWatch role ARN.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of excluded gateways.
-        :param pulumi.Input[str] log_group_name: Log group name.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
+        :param pulumi.Input[str] log_group_name: Log group name. "AVIATRIX-CLOUDWATCH-LOG" by default.
         :param pulumi.Input[str] region: Name of AWS region.
-        :param pulumi.Input[str] status: Enabled or not.
+        :param pulumi.Input[str] status: The status of cloudwatch agent.
         """
         if cloudwatch_role_arn is not None:
             pulumi.set(__self__, "cloudwatch_role_arn", cloudwatch_role_arn)
@@ -124,7 +124,7 @@ class _AviatrixCloudwatchAgentState:
     @pulumi.getter(name="excludedGateways")
     def excluded_gateways(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of excluded gateways.
+        List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         """
         return pulumi.get(self, "excluded_gateways")
 
@@ -136,7 +136,7 @@ class _AviatrixCloudwatchAgentState:
     @pulumi.getter(name="logGroupName")
     def log_group_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Log group name.
+        Log group name. "AVIATRIX-CLOUDWATCH-LOG" by default.
         """
         return pulumi.get(self, "log_group_name")
 
@@ -160,7 +160,7 @@ class _AviatrixCloudwatchAgentState:
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[str]]:
         """
-        Enabled or not.
+        The status of cloudwatch agent.
         """
         return pulumi.get(self, "status")
 
@@ -180,12 +180,37 @@ class AviatrixCloudwatchAgent(pulumi.CustomResource):
                  region: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixCloudwatchAgent resource with the given unique name, props, and options.
+        The **aviatrix_cloudwatch_agent** resource allows the enabling and disabling of cloudwatch agent.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Enable cloudwatch agent
+        test_cloudwatch_agent = aviatrix.AviatrixCloudwatchAgent("testCloudwatchAgent",
+            cloudwatch_role_arn="arn:aws:iam::469550033836:role/aviatrix-role-cloudwatch",
+            excluded_gateways=[
+                "a",
+                "b",
+            ],
+            region="us-east-1")
+        ```
+
+        ## Import
+
+        **cloudwatch_agent** can be imported using "cloudwatch_agent", e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixCloudwatchAgent:AviatrixCloudwatchAgent test cloudwatch_agent
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cloudwatch_role_arn: CloudWatch role ARN.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of excluded gateways.
-        :param pulumi.Input[str] log_group_name: Log group name.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
+        :param pulumi.Input[str] log_group_name: Log group name. "AVIATRIX-CLOUDWATCH-LOG" by default.
         :param pulumi.Input[str] region: Name of AWS region.
         """
         ...
@@ -195,7 +220,32 @@ class AviatrixCloudwatchAgent(pulumi.CustomResource):
                  args: AviatrixCloudwatchAgentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixCloudwatchAgent resource with the given unique name, props, and options.
+        The **aviatrix_cloudwatch_agent** resource allows the enabling and disabling of cloudwatch agent.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Enable cloudwatch agent
+        test_cloudwatch_agent = aviatrix.AviatrixCloudwatchAgent("testCloudwatchAgent",
+            cloudwatch_role_arn="arn:aws:iam::469550033836:role/aviatrix-role-cloudwatch",
+            excluded_gateways=[
+                "a",
+                "b",
+            ],
+            region="us-east-1")
+        ```
+
+        ## Import
+
+        **cloudwatch_agent** can be imported using "cloudwatch_agent", e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixCloudwatchAgent:AviatrixCloudwatchAgent test cloudwatch_agent
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixCloudwatchAgentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -256,10 +306,10 @@ class AviatrixCloudwatchAgent(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cloudwatch_role_arn: CloudWatch role ARN.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of excluded gateways.
-        :param pulumi.Input[str] log_group_name: Log group name.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
+        :param pulumi.Input[str] log_group_name: Log group name. "AVIATRIX-CLOUDWATCH-LOG" by default.
         :param pulumi.Input[str] region: Name of AWS region.
-        :param pulumi.Input[str] status: Enabled or not.
+        :param pulumi.Input[str] status: The status of cloudwatch agent.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -284,7 +334,7 @@ class AviatrixCloudwatchAgent(pulumi.CustomResource):
     @pulumi.getter(name="excludedGateways")
     def excluded_gateways(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        List of excluded gateways.
+        List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         """
         return pulumi.get(self, "excluded_gateways")
 
@@ -292,7 +342,7 @@ class AviatrixCloudwatchAgent(pulumi.CustomResource):
     @pulumi.getter(name="logGroupName")
     def log_group_name(self) -> pulumi.Output[Optional[str]]:
         """
-        Log group name.
+        Log group name. "AVIATRIX-CLOUDWATCH-LOG" by default.
         """
         return pulumi.get(self, "log_group_name")
 
@@ -308,7 +358,7 @@ class AviatrixCloudwatchAgent(pulumi.CustomResource):
     @pulumi.getter
     def status(self) -> pulumi.Output[str]:
         """
-        Enabled or not.
+        The status of cloudwatch agent.
         """
         return pulumi.get(self, "status")
 

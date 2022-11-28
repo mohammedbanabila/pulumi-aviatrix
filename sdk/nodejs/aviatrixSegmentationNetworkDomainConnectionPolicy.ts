@@ -4,6 +4,30 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_segmentation_network_domain_connection_policy** resource handles creation of [Transit Segmentation](https://docs.aviatrix.com/HowTos/transit_segmentation_faq.html) Network Domain Connection Policies.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Segmentation Network Domain
+ * const testSegmentationNetworkDomainConnectionPolicy = new aviatrix.AviatrixSegmentationNetworkDomainConnectionPolicy("test_segmentation_network_domain_connection_policy", {
+ *     domainName1: "domain-a",
+ *     domainName2: "domain-b",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **aviatrix_segmentation_network_domain_connection_policy** can be imported using `domain_name_1` and `domain_name_2` separated by a `~`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixSegmentationNetworkDomainConnectionPolicy:AviatrixSegmentationNetworkDomainConnectionPolicy test domain_name_1~domain_name_2
+ * ```
+ */
 export class AviatrixSegmentationNetworkDomainConnectionPolicy extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixSegmentationNetworkDomainConnectionPolicy resource's state with the given name, ID, and optional extra
@@ -33,11 +57,11 @@ export class AviatrixSegmentationNetworkDomainConnectionPolicy extends pulumi.Cu
     }
 
     /**
-     * Name of network domain that will be connected to domain 2.
+     * Name of the Network Domain to connect to Domain 2.
      */
     public readonly domainName1!: pulumi.Output<string>;
     /**
-     * Name of network domain that will be connected to domain 1.
+     * Name of the Network Domain to connect to Domain 1.
      */
     public readonly domainName2!: pulumi.Output<string>;
 
@@ -77,11 +101,11 @@ export class AviatrixSegmentationNetworkDomainConnectionPolicy extends pulumi.Cu
  */
 export interface AviatrixSegmentationNetworkDomainConnectionPolicyState {
     /**
-     * Name of network domain that will be connected to domain 2.
+     * Name of the Network Domain to connect to Domain 2.
      */
     domainName1?: pulumi.Input<string>;
     /**
-     * Name of network domain that will be connected to domain 1.
+     * Name of the Network Domain to connect to Domain 1.
      */
     domainName2?: pulumi.Input<string>;
 }
@@ -91,11 +115,11 @@ export interface AviatrixSegmentationNetworkDomainConnectionPolicyState {
  */
 export interface AviatrixSegmentationNetworkDomainConnectionPolicyArgs {
     /**
-     * Name of network domain that will be connected to domain 2.
+     * Name of the Network Domain to connect to Domain 2.
      */
     domainName1: pulumi.Input<string>;
     /**
-     * Name of network domain that will be connected to domain 1.
+     * Name of the Network Domain to connect to Domain 1.
      */
     domainName2: pulumi.Input<string>;
 }

@@ -23,13 +23,13 @@ class AviatrixAwsTgwDirectconnectArgs:
                  security_domain_name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a AviatrixAwsTgwDirectconnect resource.
-        :param pulumi.Input[str] allowed_prefix: Public IP address. Example: '40.0.0.0'.
+        :param pulumi.Input[str] allowed_prefix: A list of comma separated CIDRs for DXGW to advertise to remote(on-prem).
         :param pulumi.Input[str] directconnect_account_name: This parameter represents the name of an Account in Aviatrix controller.
         :param pulumi.Input[str] dx_gateway_id: This parameter represents the name of a Direct Connect Gateway ID.
         :param pulumi.Input[str] tgw_name: This parameter represents the name of an AWS TGW.
-        :param pulumi.Input[bool] enable_learned_cidrs_approval: Switch to enable/disable encrypted transit approval for direct connection. Valid values: true, false.
-        :param pulumi.Input[str] network_domain_name: The name of an Aviatrix network domain, to which the direct connect gateway will be attached.
-        :param pulumi.Input[str] security_domain_name: The name of an Aviatrix security domain, to which the direct connect gateway will be attached.
+        :param pulumi.Input[bool] enable_learned_cidrs_approval: Switch to enable/disable [encrypted transit approval](https://docs.aviatrix.com/HowTos/tgw_approval.html) for AWS TGW DirectConnect. Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] network_domain_name: The name of a network domain, to which the direct connect gateway will be attached.
+        :param pulumi.Input[str] security_domain_name: The name of a security domain, to which the direct connect gateway will be attached.
         """
         pulumi.set(__self__, "allowed_prefix", allowed_prefix)
         pulumi.set(__self__, "directconnect_account_name", directconnect_account_name)
@@ -49,7 +49,7 @@ class AviatrixAwsTgwDirectconnectArgs:
     @pulumi.getter(name="allowedPrefix")
     def allowed_prefix(self) -> pulumi.Input[str]:
         """
-        Public IP address. Example: '40.0.0.0'.
+        A list of comma separated CIDRs for DXGW to advertise to remote(on-prem).
         """
         return pulumi.get(self, "allowed_prefix")
 
@@ -97,7 +97,7 @@ class AviatrixAwsTgwDirectconnectArgs:
     @pulumi.getter(name="enableLearnedCidrsApproval")
     def enable_learned_cidrs_approval(self) -> Optional[pulumi.Input[bool]]:
         """
-        Switch to enable/disable encrypted transit approval for direct connection. Valid values: true, false.
+        Switch to enable/disable [encrypted transit approval](https://docs.aviatrix.com/HowTos/tgw_approval.html) for AWS TGW DirectConnect. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_learned_cidrs_approval")
 
@@ -109,7 +109,7 @@ class AviatrixAwsTgwDirectconnectArgs:
     @pulumi.getter(name="networkDomainName")
     def network_domain_name(self) -> Optional[pulumi.Input[str]]:
         """
-        The name of an Aviatrix network domain, to which the direct connect gateway will be attached.
+        The name of a network domain, to which the direct connect gateway will be attached.
         """
         return pulumi.get(self, "network_domain_name")
 
@@ -121,7 +121,7 @@ class AviatrixAwsTgwDirectconnectArgs:
     @pulumi.getter(name="securityDomainName")
     def security_domain_name(self) -> Optional[pulumi.Input[str]]:
         """
-        The name of an Aviatrix security domain, to which the direct connect gateway will be attached.
+        The name of a security domain, to which the direct connect gateway will be attached.
         """
         return pulumi.get(self, "security_domain_name")
 
@@ -142,12 +142,12 @@ class _AviatrixAwsTgwDirectconnectState:
                  tgw_name: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixAwsTgwDirectconnect resources.
-        :param pulumi.Input[str] allowed_prefix: Public IP address. Example: '40.0.0.0'.
+        :param pulumi.Input[str] allowed_prefix: A list of comma separated CIDRs for DXGW to advertise to remote(on-prem).
         :param pulumi.Input[str] directconnect_account_name: This parameter represents the name of an Account in Aviatrix controller.
         :param pulumi.Input[str] dx_gateway_id: This parameter represents the name of a Direct Connect Gateway ID.
-        :param pulumi.Input[bool] enable_learned_cidrs_approval: Switch to enable/disable encrypted transit approval for direct connection. Valid values: true, false.
-        :param pulumi.Input[str] network_domain_name: The name of an Aviatrix network domain, to which the direct connect gateway will be attached.
-        :param pulumi.Input[str] security_domain_name: The name of an Aviatrix security domain, to which the direct connect gateway will be attached.
+        :param pulumi.Input[bool] enable_learned_cidrs_approval: Switch to enable/disable [encrypted transit approval](https://docs.aviatrix.com/HowTos/tgw_approval.html) for AWS TGW DirectConnect. Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] network_domain_name: The name of a network domain, to which the direct connect gateway will be attached.
+        :param pulumi.Input[str] security_domain_name: The name of a security domain, to which the direct connect gateway will be attached.
         :param pulumi.Input[str] tgw_name: This parameter represents the name of an AWS TGW.
         """
         if allowed_prefix is not None:
@@ -172,7 +172,7 @@ class _AviatrixAwsTgwDirectconnectState:
     @pulumi.getter(name="allowedPrefix")
     def allowed_prefix(self) -> Optional[pulumi.Input[str]]:
         """
-        Public IP address. Example: '40.0.0.0'.
+        A list of comma separated CIDRs for DXGW to advertise to remote(on-prem).
         """
         return pulumi.get(self, "allowed_prefix")
 
@@ -208,7 +208,7 @@ class _AviatrixAwsTgwDirectconnectState:
     @pulumi.getter(name="enableLearnedCidrsApproval")
     def enable_learned_cidrs_approval(self) -> Optional[pulumi.Input[bool]]:
         """
-        Switch to enable/disable encrypted transit approval for direct connection. Valid values: true, false.
+        Switch to enable/disable [encrypted transit approval](https://docs.aviatrix.com/HowTos/tgw_approval.html) for AWS TGW DirectConnect. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_learned_cidrs_approval")
 
@@ -220,7 +220,7 @@ class _AviatrixAwsTgwDirectconnectState:
     @pulumi.getter(name="networkDomainName")
     def network_domain_name(self) -> Optional[pulumi.Input[str]]:
         """
-        The name of an Aviatrix network domain, to which the direct connect gateway will be attached.
+        The name of a network domain, to which the direct connect gateway will be attached.
         """
         return pulumi.get(self, "network_domain_name")
 
@@ -232,7 +232,7 @@ class _AviatrixAwsTgwDirectconnectState:
     @pulumi.getter(name="securityDomainName")
     def security_domain_name(self) -> Optional[pulumi.Input[str]]:
         """
-        The name of an Aviatrix security domain, to which the direct connect gateway will be attached.
+        The name of a security domain, to which the direct connect gateway will be attached.
         """
         return pulumi.get(self, "security_domain_name")
 
@@ -267,15 +267,39 @@ class AviatrixAwsTgwDirectconnect(pulumi.CustomResource):
                  tgw_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixAwsTgwDirectconnect resource with the given unique name, props, and options.
+        The **aviatrix_aws_tgw_directconnect** resource allows the creation and management of Aviatrix-created AWS TGW DirectConnect connections.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS TGW Directconnect
+        test_aws_tgw_directconnect = aviatrix.AviatrixAwsTgwDirectconnect("testAwsTgwDirectconnect",
+            allowed_prefix="10.12.0.0/24",
+            directconnect_account_name="username",
+            dx_gateway_id="30321d76-dd01-49bf",
+            network_domain_name="my-ndn-1",
+            tgw_name="my-aws-tgw-1")
+        ```
+
+        ## Import
+
+        **aws_tgw_directconnect** can be imported using the `tgw_name` and `dx_gateway_id`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAwsTgwDirectconnect:AviatrixAwsTgwDirectconnect test tgw_name~dx_gateway_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] allowed_prefix: Public IP address. Example: '40.0.0.0'.
+        :param pulumi.Input[str] allowed_prefix: A list of comma separated CIDRs for DXGW to advertise to remote(on-prem).
         :param pulumi.Input[str] directconnect_account_name: This parameter represents the name of an Account in Aviatrix controller.
         :param pulumi.Input[str] dx_gateway_id: This parameter represents the name of a Direct Connect Gateway ID.
-        :param pulumi.Input[bool] enable_learned_cidrs_approval: Switch to enable/disable encrypted transit approval for direct connection. Valid values: true, false.
-        :param pulumi.Input[str] network_domain_name: The name of an Aviatrix network domain, to which the direct connect gateway will be attached.
-        :param pulumi.Input[str] security_domain_name: The name of an Aviatrix security domain, to which the direct connect gateway will be attached.
+        :param pulumi.Input[bool] enable_learned_cidrs_approval: Switch to enable/disable [encrypted transit approval](https://docs.aviatrix.com/HowTos/tgw_approval.html) for AWS TGW DirectConnect. Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] network_domain_name: The name of a network domain, to which the direct connect gateway will be attached.
+        :param pulumi.Input[str] security_domain_name: The name of a security domain, to which the direct connect gateway will be attached.
         :param pulumi.Input[str] tgw_name: This parameter represents the name of an AWS TGW.
         """
         ...
@@ -285,7 +309,31 @@ class AviatrixAwsTgwDirectconnect(pulumi.CustomResource):
                  args: AviatrixAwsTgwDirectconnectArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixAwsTgwDirectconnect resource with the given unique name, props, and options.
+        The **aviatrix_aws_tgw_directconnect** resource allows the creation and management of Aviatrix-created AWS TGW DirectConnect connections.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS TGW Directconnect
+        test_aws_tgw_directconnect = aviatrix.AviatrixAwsTgwDirectconnect("testAwsTgwDirectconnect",
+            allowed_prefix="10.12.0.0/24",
+            directconnect_account_name="username",
+            dx_gateway_id="30321d76-dd01-49bf",
+            network_domain_name="my-ndn-1",
+            tgw_name="my-aws-tgw-1")
+        ```
+
+        ## Import
+
+        **aws_tgw_directconnect** can be imported using the `tgw_name` and `dx_gateway_id`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAwsTgwDirectconnect:AviatrixAwsTgwDirectconnect test tgw_name~dx_gateway_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixAwsTgwDirectconnectArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -359,12 +407,12 @@ class AviatrixAwsTgwDirectconnect(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] allowed_prefix: Public IP address. Example: '40.0.0.0'.
+        :param pulumi.Input[str] allowed_prefix: A list of comma separated CIDRs for DXGW to advertise to remote(on-prem).
         :param pulumi.Input[str] directconnect_account_name: This parameter represents the name of an Account in Aviatrix controller.
         :param pulumi.Input[str] dx_gateway_id: This parameter represents the name of a Direct Connect Gateway ID.
-        :param pulumi.Input[bool] enable_learned_cidrs_approval: Switch to enable/disable encrypted transit approval for direct connection. Valid values: true, false.
-        :param pulumi.Input[str] network_domain_name: The name of an Aviatrix network domain, to which the direct connect gateway will be attached.
-        :param pulumi.Input[str] security_domain_name: The name of an Aviatrix security domain, to which the direct connect gateway will be attached.
+        :param pulumi.Input[bool] enable_learned_cidrs_approval: Switch to enable/disable [encrypted transit approval](https://docs.aviatrix.com/HowTos/tgw_approval.html) for AWS TGW DirectConnect. Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] network_domain_name: The name of a network domain, to which the direct connect gateway will be attached.
+        :param pulumi.Input[str] security_domain_name: The name of a security domain, to which the direct connect gateway will be attached.
         :param pulumi.Input[str] tgw_name: This parameter represents the name of an AWS TGW.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -384,7 +432,7 @@ class AviatrixAwsTgwDirectconnect(pulumi.CustomResource):
     @pulumi.getter(name="allowedPrefix")
     def allowed_prefix(self) -> pulumi.Output[str]:
         """
-        Public IP address. Example: '40.0.0.0'.
+        A list of comma separated CIDRs for DXGW to advertise to remote(on-prem).
         """
         return pulumi.get(self, "allowed_prefix")
 
@@ -408,7 +456,7 @@ class AviatrixAwsTgwDirectconnect(pulumi.CustomResource):
     @pulumi.getter(name="enableLearnedCidrsApproval")
     def enable_learned_cidrs_approval(self) -> pulumi.Output[Optional[bool]]:
         """
-        Switch to enable/disable encrypted transit approval for direct connection. Valid values: true, false.
+        Switch to enable/disable [encrypted transit approval](https://docs.aviatrix.com/HowTos/tgw_approval.html) for AWS TGW DirectConnect. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_learned_cidrs_approval")
 
@@ -416,7 +464,7 @@ class AviatrixAwsTgwDirectconnect(pulumi.CustomResource):
     @pulumi.getter(name="networkDomainName")
     def network_domain_name(self) -> pulumi.Output[Optional[str]]:
         """
-        The name of an Aviatrix network domain, to which the direct connect gateway will be attached.
+        The name of a network domain, to which the direct connect gateway will be attached.
         """
         return pulumi.get(self, "network_domain_name")
 
@@ -424,7 +472,7 @@ class AviatrixAwsTgwDirectconnect(pulumi.CustomResource):
     @pulumi.getter(name="securityDomainName")
     def security_domain_name(self) -> pulumi.Output[Optional[str]]:
         """
-        The name of an Aviatrix security domain, to which the direct connect gateway will be attached.
+        The name of a security domain, to which the direct connect gateway will be attached.
         """
         return pulumi.get(self, "security_domain_name")
 

@@ -31,18 +31,18 @@ class AviatrixSpokeVpcArgs:
         """
         The set of arguments for constructing a AviatrixSpokeVpc resource.
         :param pulumi.Input[str] account_name: This parameter represents the name of a Cloud-Account in Aviatrix controller.
-        :param pulumi.Input[int] cloud_type: Type of cloud service provider.
+        :param pulumi.Input[int] cloud_type: Type of cloud service provider. AWS=1, GCP=4, ARM=8.
         :param pulumi.Input[str] gw_name: Name of the gateway which is going to be created.
-        :param pulumi.Input[str] subnet: Public Subnet Info.
-        :param pulumi.Input[str] vpc_id: VPC-ID/VNet-Name of cloud provider.
-        :param pulumi.Input[str] vpc_reg: Region of cloud provider.
-        :param pulumi.Input[str] vpc_size: Size of the gateway instance.
+        :param pulumi.Input[str] subnet: Public Subnet Info. Example: AWS: "CIDRZONESubnetName", etc...
+        :param pulumi.Input[str] vpc_id: VPC-ID/VNet-Name of cloud provider. Required if cloud_type is "1" or "4". Example: AWS: "vpc-abcd1234", etc...
+        :param pulumi.Input[str] vpc_reg: Region of cloud provider. Example: AWS: "us-east-1", GCP: "us-west1-b", ARM: "East US 2", etc...
+        :param pulumi.Input[str] vpc_size: Size of the gateway instance. Example: AWS: "t2.large", GCP: "f1.micro", ARM: "StandardD2", etc...
         :param pulumi.Input[str] enable_nat: Specify whether enabling NAT feature on the gateway or not.
-        :param pulumi.Input[str] ha_gw_size: HA Gateway Size.
-        :param pulumi.Input[str] ha_subnet: HA Subnet. Required if enabling HA for AWS/Azure.
-        :param pulumi.Input[str] ha_zone: HA Zone. Required if enabling HA for GCP.
-        :param pulumi.Input[str] single_az_ha: Set to 'enabled' if this feature is desired.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] tag_lists: Instance tag of cloud provider.
+        :param pulumi.Input[str] ha_gw_size: HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set). Example: "t2.micro".
+        :param pulumi.Input[str] ha_subnet: HA Subnet. Required for enabling HA for AWS/ARM gateways. Setting to empty/unset will disable HA. Setting to a valid subnet (Example: 10.12.0.0/24) will create an HA gateway on the subnet.
+        :param pulumi.Input[str] ha_zone: HA Zone. Required for enabling HA for GCP gateway. Setting to empty/unset will disable HA. Setting to a valid zone will create an HA gateway in the zone. Example: "us-west1-c".
+        :param pulumi.Input[str] single_az_ha: Set to "enabled" if this feature is desired.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tag_lists: Instance tag of cloud provider. Example: key1:value1,key002:value002, etc... Only AWS (cloud_type is "1") is supported
         :param pulumi.Input[str] transit_gw: Specify the transit Gateway.
         """
         pulumi.set(__self__, "account_name", account_name)
@@ -83,7 +83,7 @@ class AviatrixSpokeVpcArgs:
     @pulumi.getter(name="cloudType")
     def cloud_type(self) -> pulumi.Input[int]:
         """
-        Type of cloud service provider.
+        Type of cloud service provider. AWS=1, GCP=4, ARM=8.
         """
         return pulumi.get(self, "cloud_type")
 
@@ -107,7 +107,7 @@ class AviatrixSpokeVpcArgs:
     @pulumi.getter
     def subnet(self) -> pulumi.Input[str]:
         """
-        Public Subnet Info.
+        Public Subnet Info. Example: AWS: "CIDRZONESubnetName", etc...
         """
         return pulumi.get(self, "subnet")
 
@@ -119,7 +119,7 @@ class AviatrixSpokeVpcArgs:
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> pulumi.Input[str]:
         """
-        VPC-ID/VNet-Name of cloud provider.
+        VPC-ID/VNet-Name of cloud provider. Required if cloud_type is "1" or "4". Example: AWS: "vpc-abcd1234", etc...
         """
         return pulumi.get(self, "vpc_id")
 
@@ -131,7 +131,7 @@ class AviatrixSpokeVpcArgs:
     @pulumi.getter(name="vpcReg")
     def vpc_reg(self) -> pulumi.Input[str]:
         """
-        Region of cloud provider.
+        Region of cloud provider. Example: AWS: "us-east-1", GCP: "us-west1-b", ARM: "East US 2", etc...
         """
         return pulumi.get(self, "vpc_reg")
 
@@ -143,7 +143,7 @@ class AviatrixSpokeVpcArgs:
     @pulumi.getter(name="vpcSize")
     def vpc_size(self) -> pulumi.Input[str]:
         """
-        Size of the gateway instance.
+        Size of the gateway instance. Example: AWS: "t2.large", GCP: "f1.micro", ARM: "StandardD2", etc...
         """
         return pulumi.get(self, "vpc_size")
 
@@ -167,7 +167,7 @@ class AviatrixSpokeVpcArgs:
     @pulumi.getter(name="haGwSize")
     def ha_gw_size(self) -> Optional[pulumi.Input[str]]:
         """
-        HA Gateway Size.
+        HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set). Example: "t2.micro".
         """
         return pulumi.get(self, "ha_gw_size")
 
@@ -179,7 +179,7 @@ class AviatrixSpokeVpcArgs:
     @pulumi.getter(name="haSubnet")
     def ha_subnet(self) -> Optional[pulumi.Input[str]]:
         """
-        HA Subnet. Required if enabling HA for AWS/Azure.
+        HA Subnet. Required for enabling HA for AWS/ARM gateways. Setting to empty/unset will disable HA. Setting to a valid subnet (Example: 10.12.0.0/24) will create an HA gateway on the subnet.
         """
         return pulumi.get(self, "ha_subnet")
 
@@ -191,7 +191,7 @@ class AviatrixSpokeVpcArgs:
     @pulumi.getter(name="haZone")
     def ha_zone(self) -> Optional[pulumi.Input[str]]:
         """
-        HA Zone. Required if enabling HA for GCP.
+        HA Zone. Required for enabling HA for GCP gateway. Setting to empty/unset will disable HA. Setting to a valid zone will create an HA gateway in the zone. Example: "us-west1-c".
         """
         return pulumi.get(self, "ha_zone")
 
@@ -203,7 +203,7 @@ class AviatrixSpokeVpcArgs:
     @pulumi.getter(name="singleAzHa")
     def single_az_ha(self) -> Optional[pulumi.Input[str]]:
         """
-        Set to 'enabled' if this feature is desired.
+        Set to "enabled" if this feature is desired.
         """
         return pulumi.get(self, "single_az_ha")
 
@@ -215,7 +215,7 @@ class AviatrixSpokeVpcArgs:
     @pulumi.getter(name="tagLists")
     def tag_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Instance tag of cloud provider.
+        Instance tag of cloud provider. Example: key1:value1,key002:value002, etc... Only AWS (cloud_type is "1") is supported
         """
         return pulumi.get(self, "tag_lists")
 
@@ -258,19 +258,19 @@ class _AviatrixSpokeVpcState:
         Input properties used for looking up and filtering AviatrixSpokeVpc resources.
         :param pulumi.Input[str] account_name: This parameter represents the name of a Cloud-Account in Aviatrix controller.
         :param pulumi.Input[str] cloud_instance_id: Cloud instance ID.
-        :param pulumi.Input[int] cloud_type: Type of cloud service provider.
+        :param pulumi.Input[int] cloud_type: Type of cloud service provider. AWS=1, GCP=4, ARM=8.
         :param pulumi.Input[str] enable_nat: Specify whether enabling NAT feature on the gateway or not.
         :param pulumi.Input[str] gw_name: Name of the gateway which is going to be created.
-        :param pulumi.Input[str] ha_gw_size: HA Gateway Size.
-        :param pulumi.Input[str] ha_subnet: HA Subnet. Required if enabling HA for AWS/Azure.
-        :param pulumi.Input[str] ha_zone: HA Zone. Required if enabling HA for GCP.
-        :param pulumi.Input[str] single_az_ha: Set to 'enabled' if this feature is desired.
-        :param pulumi.Input[str] subnet: Public Subnet Info.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] tag_lists: Instance tag of cloud provider.
+        :param pulumi.Input[str] ha_gw_size: HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set). Example: "t2.micro".
+        :param pulumi.Input[str] ha_subnet: HA Subnet. Required for enabling HA for AWS/ARM gateways. Setting to empty/unset will disable HA. Setting to a valid subnet (Example: 10.12.0.0/24) will create an HA gateway on the subnet.
+        :param pulumi.Input[str] ha_zone: HA Zone. Required for enabling HA for GCP gateway. Setting to empty/unset will disable HA. Setting to a valid zone will create an HA gateway in the zone. Example: "us-west1-c".
+        :param pulumi.Input[str] single_az_ha: Set to "enabled" if this feature is desired.
+        :param pulumi.Input[str] subnet: Public Subnet Info. Example: AWS: "CIDRZONESubnetName", etc...
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tag_lists: Instance tag of cloud provider. Example: key1:value1,key002:value002, etc... Only AWS (cloud_type is "1") is supported
         :param pulumi.Input[str] transit_gw: Specify the transit Gateway.
-        :param pulumi.Input[str] vpc_id: VPC-ID/VNet-Name of cloud provider.
-        :param pulumi.Input[str] vpc_reg: Region of cloud provider.
-        :param pulumi.Input[str] vpc_size: Size of the gateway instance.
+        :param pulumi.Input[str] vpc_id: VPC-ID/VNet-Name of cloud provider. Required if cloud_type is "1" or "4". Example: AWS: "vpc-abcd1234", etc...
+        :param pulumi.Input[str] vpc_reg: Region of cloud provider. Example: AWS: "us-east-1", GCP: "us-west1-b", ARM: "East US 2", etc...
+        :param pulumi.Input[str] vpc_size: Size of the gateway instance. Example: AWS: "t2.large", GCP: "f1.micro", ARM: "StandardD2", etc...
         """
         if account_name is not None:
             pulumi.set(__self__, "account_name", account_name)
@@ -331,7 +331,7 @@ class _AviatrixSpokeVpcState:
     @pulumi.getter(name="cloudType")
     def cloud_type(self) -> Optional[pulumi.Input[int]]:
         """
-        Type of cloud service provider.
+        Type of cloud service provider. AWS=1, GCP=4, ARM=8.
         """
         return pulumi.get(self, "cloud_type")
 
@@ -367,7 +367,7 @@ class _AviatrixSpokeVpcState:
     @pulumi.getter(name="haGwSize")
     def ha_gw_size(self) -> Optional[pulumi.Input[str]]:
         """
-        HA Gateway Size.
+        HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set). Example: "t2.micro".
         """
         return pulumi.get(self, "ha_gw_size")
 
@@ -379,7 +379,7 @@ class _AviatrixSpokeVpcState:
     @pulumi.getter(name="haSubnet")
     def ha_subnet(self) -> Optional[pulumi.Input[str]]:
         """
-        HA Subnet. Required if enabling HA for AWS/Azure.
+        HA Subnet. Required for enabling HA for AWS/ARM gateways. Setting to empty/unset will disable HA. Setting to a valid subnet (Example: 10.12.0.0/24) will create an HA gateway on the subnet.
         """
         return pulumi.get(self, "ha_subnet")
 
@@ -391,7 +391,7 @@ class _AviatrixSpokeVpcState:
     @pulumi.getter(name="haZone")
     def ha_zone(self) -> Optional[pulumi.Input[str]]:
         """
-        HA Zone. Required if enabling HA for GCP.
+        HA Zone. Required for enabling HA for GCP gateway. Setting to empty/unset will disable HA. Setting to a valid zone will create an HA gateway in the zone. Example: "us-west1-c".
         """
         return pulumi.get(self, "ha_zone")
 
@@ -403,7 +403,7 @@ class _AviatrixSpokeVpcState:
     @pulumi.getter(name="singleAzHa")
     def single_az_ha(self) -> Optional[pulumi.Input[str]]:
         """
-        Set to 'enabled' if this feature is desired.
+        Set to "enabled" if this feature is desired.
         """
         return pulumi.get(self, "single_az_ha")
 
@@ -415,7 +415,7 @@ class _AviatrixSpokeVpcState:
     @pulumi.getter
     def subnet(self) -> Optional[pulumi.Input[str]]:
         """
-        Public Subnet Info.
+        Public Subnet Info. Example: AWS: "CIDRZONESubnetName", etc...
         """
         return pulumi.get(self, "subnet")
 
@@ -427,7 +427,7 @@ class _AviatrixSpokeVpcState:
     @pulumi.getter(name="tagLists")
     def tag_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Instance tag of cloud provider.
+        Instance tag of cloud provider. Example: key1:value1,key002:value002, etc... Only AWS (cloud_type is "1") is supported
         """
         return pulumi.get(self, "tag_lists")
 
@@ -451,7 +451,7 @@ class _AviatrixSpokeVpcState:
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
-        VPC-ID/VNet-Name of cloud provider.
+        VPC-ID/VNet-Name of cloud provider. Required if cloud_type is "1" or "4". Example: AWS: "vpc-abcd1234", etc...
         """
         return pulumi.get(self, "vpc_id")
 
@@ -463,7 +463,7 @@ class _AviatrixSpokeVpcState:
     @pulumi.getter(name="vpcReg")
     def vpc_reg(self) -> Optional[pulumi.Input[str]]:
         """
-        Region of cloud provider.
+        Region of cloud provider. Example: AWS: "us-east-1", GCP: "us-west1-b", ARM: "East US 2", etc...
         """
         return pulumi.get(self, "vpc_reg")
 
@@ -475,7 +475,7 @@ class _AviatrixSpokeVpcState:
     @pulumi.getter(name="vpcSize")
     def vpc_size(self) -> Optional[pulumi.Input[str]]:
         """
-        Size of the gateway instance.
+        Size of the gateway instance. Example: AWS: "t2.large", GCP: "f1.micro", ARM: "StandardD2", etc...
         """
         return pulumi.get(self, "vpc_size")
 
@@ -505,23 +505,34 @@ class AviatrixSpokeVpc(pulumi.CustomResource):
                  vpc_size: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixSpokeVpc resource with the given unique name, props, and options.
+        The AviatrixSpokeVpc resource allows to create and manage Aviatrix Spoke Gateways.
+
+        !> **WARNING:** The `AviatrixSpokeVpc` resource is deprecated as of **Release 2.0**. It is currently kept for backward-compatibility and will be removed in the future. Please use the spoke gateway resource instead. If this is already in the state, please remove it from the state file and import as `AviatrixSpokeGateway`.
+
+        ## Import
+
+        Instance spoke_vpc can be imported using the gw_name, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixSpokeVpc:AviatrixSpokeVpc test gw_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] account_name: This parameter represents the name of a Cloud-Account in Aviatrix controller.
-        :param pulumi.Input[int] cloud_type: Type of cloud service provider.
+        :param pulumi.Input[int] cloud_type: Type of cloud service provider. AWS=1, GCP=4, ARM=8.
         :param pulumi.Input[str] enable_nat: Specify whether enabling NAT feature on the gateway or not.
         :param pulumi.Input[str] gw_name: Name of the gateway which is going to be created.
-        :param pulumi.Input[str] ha_gw_size: HA Gateway Size.
-        :param pulumi.Input[str] ha_subnet: HA Subnet. Required if enabling HA for AWS/Azure.
-        :param pulumi.Input[str] ha_zone: HA Zone. Required if enabling HA for GCP.
-        :param pulumi.Input[str] single_az_ha: Set to 'enabled' if this feature is desired.
-        :param pulumi.Input[str] subnet: Public Subnet Info.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] tag_lists: Instance tag of cloud provider.
+        :param pulumi.Input[str] ha_gw_size: HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set). Example: "t2.micro".
+        :param pulumi.Input[str] ha_subnet: HA Subnet. Required for enabling HA for AWS/ARM gateways. Setting to empty/unset will disable HA. Setting to a valid subnet (Example: 10.12.0.0/24) will create an HA gateway on the subnet.
+        :param pulumi.Input[str] ha_zone: HA Zone. Required for enabling HA for GCP gateway. Setting to empty/unset will disable HA. Setting to a valid zone will create an HA gateway in the zone. Example: "us-west1-c".
+        :param pulumi.Input[str] single_az_ha: Set to "enabled" if this feature is desired.
+        :param pulumi.Input[str] subnet: Public Subnet Info. Example: AWS: "CIDRZONESubnetName", etc...
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tag_lists: Instance tag of cloud provider. Example: key1:value1,key002:value002, etc... Only AWS (cloud_type is "1") is supported
         :param pulumi.Input[str] transit_gw: Specify the transit Gateway.
-        :param pulumi.Input[str] vpc_id: VPC-ID/VNet-Name of cloud provider.
-        :param pulumi.Input[str] vpc_reg: Region of cloud provider.
-        :param pulumi.Input[str] vpc_size: Size of the gateway instance.
+        :param pulumi.Input[str] vpc_id: VPC-ID/VNet-Name of cloud provider. Required if cloud_type is "1" or "4". Example: AWS: "vpc-abcd1234", etc...
+        :param pulumi.Input[str] vpc_reg: Region of cloud provider. Example: AWS: "us-east-1", GCP: "us-west1-b", ARM: "East US 2", etc...
+        :param pulumi.Input[str] vpc_size: Size of the gateway instance. Example: AWS: "t2.large", GCP: "f1.micro", ARM: "StandardD2", etc...
         """
         ...
     @overload
@@ -530,7 +541,18 @@ class AviatrixSpokeVpc(pulumi.CustomResource):
                  args: AviatrixSpokeVpcArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixSpokeVpc resource with the given unique name, props, and options.
+        The AviatrixSpokeVpc resource allows to create and manage Aviatrix Spoke Gateways.
+
+        !> **WARNING:** The `AviatrixSpokeVpc` resource is deprecated as of **Release 2.0**. It is currently kept for backward-compatibility and will be removed in the future. Please use the spoke gateway resource instead. If this is already in the state, please remove it from the state file and import as `AviatrixSpokeGateway`.
+
+        ## Import
+
+        Instance spoke_vpc can be imported using the gw_name, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixSpokeVpc:AviatrixSpokeVpc test gw_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixSpokeVpcArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -632,19 +654,19 @@ class AviatrixSpokeVpc(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] account_name: This parameter represents the name of a Cloud-Account in Aviatrix controller.
         :param pulumi.Input[str] cloud_instance_id: Cloud instance ID.
-        :param pulumi.Input[int] cloud_type: Type of cloud service provider.
+        :param pulumi.Input[int] cloud_type: Type of cloud service provider. AWS=1, GCP=4, ARM=8.
         :param pulumi.Input[str] enable_nat: Specify whether enabling NAT feature on the gateway or not.
         :param pulumi.Input[str] gw_name: Name of the gateway which is going to be created.
-        :param pulumi.Input[str] ha_gw_size: HA Gateway Size.
-        :param pulumi.Input[str] ha_subnet: HA Subnet. Required if enabling HA for AWS/Azure.
-        :param pulumi.Input[str] ha_zone: HA Zone. Required if enabling HA for GCP.
-        :param pulumi.Input[str] single_az_ha: Set to 'enabled' if this feature is desired.
-        :param pulumi.Input[str] subnet: Public Subnet Info.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] tag_lists: Instance tag of cloud provider.
+        :param pulumi.Input[str] ha_gw_size: HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set). Example: "t2.micro".
+        :param pulumi.Input[str] ha_subnet: HA Subnet. Required for enabling HA for AWS/ARM gateways. Setting to empty/unset will disable HA. Setting to a valid subnet (Example: 10.12.0.0/24) will create an HA gateway on the subnet.
+        :param pulumi.Input[str] ha_zone: HA Zone. Required for enabling HA for GCP gateway. Setting to empty/unset will disable HA. Setting to a valid zone will create an HA gateway in the zone. Example: "us-west1-c".
+        :param pulumi.Input[str] single_az_ha: Set to "enabled" if this feature is desired.
+        :param pulumi.Input[str] subnet: Public Subnet Info. Example: AWS: "CIDRZONESubnetName", etc...
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tag_lists: Instance tag of cloud provider. Example: key1:value1,key002:value002, etc... Only AWS (cloud_type is "1") is supported
         :param pulumi.Input[str] transit_gw: Specify the transit Gateway.
-        :param pulumi.Input[str] vpc_id: VPC-ID/VNet-Name of cloud provider.
-        :param pulumi.Input[str] vpc_reg: Region of cloud provider.
-        :param pulumi.Input[str] vpc_size: Size of the gateway instance.
+        :param pulumi.Input[str] vpc_id: VPC-ID/VNet-Name of cloud provider. Required if cloud_type is "1" or "4". Example: AWS: "vpc-abcd1234", etc...
+        :param pulumi.Input[str] vpc_reg: Region of cloud provider. Example: AWS: "us-east-1", GCP: "us-west1-b", ARM: "East US 2", etc...
+        :param pulumi.Input[str] vpc_size: Size of the gateway instance. Example: AWS: "t2.large", GCP: "f1.micro", ARM: "StandardD2", etc...
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -687,7 +709,7 @@ class AviatrixSpokeVpc(pulumi.CustomResource):
     @pulumi.getter(name="cloudType")
     def cloud_type(self) -> pulumi.Output[int]:
         """
-        Type of cloud service provider.
+        Type of cloud service provider. AWS=1, GCP=4, ARM=8.
         """
         return pulumi.get(self, "cloud_type")
 
@@ -711,7 +733,7 @@ class AviatrixSpokeVpc(pulumi.CustomResource):
     @pulumi.getter(name="haGwSize")
     def ha_gw_size(self) -> pulumi.Output[Optional[str]]:
         """
-        HA Gateway Size.
+        HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set). Example: "t2.micro".
         """
         return pulumi.get(self, "ha_gw_size")
 
@@ -719,7 +741,7 @@ class AviatrixSpokeVpc(pulumi.CustomResource):
     @pulumi.getter(name="haSubnet")
     def ha_subnet(self) -> pulumi.Output[Optional[str]]:
         """
-        HA Subnet. Required if enabling HA for AWS/Azure.
+        HA Subnet. Required for enabling HA for AWS/ARM gateways. Setting to empty/unset will disable HA. Setting to a valid subnet (Example: 10.12.0.0/24) will create an HA gateway on the subnet.
         """
         return pulumi.get(self, "ha_subnet")
 
@@ -727,7 +749,7 @@ class AviatrixSpokeVpc(pulumi.CustomResource):
     @pulumi.getter(name="haZone")
     def ha_zone(self) -> pulumi.Output[Optional[str]]:
         """
-        HA Zone. Required if enabling HA for GCP.
+        HA Zone. Required for enabling HA for GCP gateway. Setting to empty/unset will disable HA. Setting to a valid zone will create an HA gateway in the zone. Example: "us-west1-c".
         """
         return pulumi.get(self, "ha_zone")
 
@@ -735,7 +757,7 @@ class AviatrixSpokeVpc(pulumi.CustomResource):
     @pulumi.getter(name="singleAzHa")
     def single_az_ha(self) -> pulumi.Output[Optional[str]]:
         """
-        Set to 'enabled' if this feature is desired.
+        Set to "enabled" if this feature is desired.
         """
         return pulumi.get(self, "single_az_ha")
 
@@ -743,7 +765,7 @@ class AviatrixSpokeVpc(pulumi.CustomResource):
     @pulumi.getter
     def subnet(self) -> pulumi.Output[str]:
         """
-        Public Subnet Info.
+        Public Subnet Info. Example: AWS: "CIDRZONESubnetName", etc...
         """
         return pulumi.get(self, "subnet")
 
@@ -751,7 +773,7 @@ class AviatrixSpokeVpc(pulumi.CustomResource):
     @pulumi.getter(name="tagLists")
     def tag_lists(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        Instance tag of cloud provider.
+        Instance tag of cloud provider. Example: key1:value1,key002:value002, etc... Only AWS (cloud_type is "1") is supported
         """
         return pulumi.get(self, "tag_lists")
 
@@ -767,7 +789,7 @@ class AviatrixSpokeVpc(pulumi.CustomResource):
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> pulumi.Output[str]:
         """
-        VPC-ID/VNet-Name of cloud provider.
+        VPC-ID/VNet-Name of cloud provider. Required if cloud_type is "1" or "4". Example: AWS: "vpc-abcd1234", etc...
         """
         return pulumi.get(self, "vpc_id")
 
@@ -775,7 +797,7 @@ class AviatrixSpokeVpc(pulumi.CustomResource):
     @pulumi.getter(name="vpcReg")
     def vpc_reg(self) -> pulumi.Output[str]:
         """
-        Region of cloud provider.
+        Region of cloud provider. Example: AWS: "us-east-1", GCP: "us-west1-b", ARM: "East US 2", etc...
         """
         return pulumi.get(self, "vpc_reg")
 
@@ -783,7 +805,7 @@ class AviatrixSpokeVpc(pulumi.CustomResource):
     @pulumi.getter(name="vpcSize")
     def vpc_size(self) -> pulumi.Output[str]:
         """
-        Size of the gateway instance.
+        Size of the gateway instance. Example: AWS: "t2.large", GCP: "f1.micro", ARM: "StandardD2", etc...
         """
         return pulumi.get(self, "vpc_size")
 

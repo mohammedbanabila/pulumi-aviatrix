@@ -9,6 +9,38 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_azure_spoke_native_peering** resource allows the creation and management of Aviatrix-created Azure Spoke VNet attachments via Native Peering.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Azure spoke native peering
+    ///     var test = new Aviatrix.AviatrixAzureSpokeNativePeering("test", new()
+    ///     {
+    ///         SpokeAccountName = "devops-azure",
+    ///         SpokeRegion = "West US",
+    ///         SpokeVpcId = "Foo_VNet:Bar_RG:GUID",
+    ///         TransitGatewayName = "transit-gw-azure",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **azure_spoke_native_peering** can be imported using the `transit_gateway_name`, `spoke_account_name` and `spoke_vpc_id`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixAzureSpokeNativePeering:AviatrixAzureSpokeNativePeering test transit_gateway_name~spoke_account_name~spoke_vpc_id
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixAzureSpokeNativePeering:AviatrixAzureSpokeNativePeering")]
     public partial class AviatrixAzureSpokeNativePeering : global::Pulumi.CustomResource
     {
@@ -19,19 +51,19 @@ namespace Pulumi.Aviatrix
         public Output<string> SpokeAccountName { get; private set; } = null!;
 
         /// <summary>
-        /// Spoke VNet region.
+        /// Spoke VNet region. Example: "West US".
         /// </summary>
         [Output("spokeRegion")]
         public Output<string> SpokeRegion { get; private set; } = null!;
 
         /// <summary>
-        /// Combination of the Spoke VNet name and resource group.
+        /// Combination of the Spoke's VNet name, resource group and GUID. Example: "Foo_VNet:Bar_RG:GUID".
         /// </summary>
         [Output("spokeVpcId")]
         public Output<string> SpokeVpcId { get; private set; } = null!;
 
         /// <summary>
-        /// Name of an azure transit gateway with transit firenet enabled.
+        /// Name of an Transit FireNet-enabled Azure transit gateway.
         /// </summary>
         [Output("transitGatewayName")]
         public Output<string> TransitGatewayName { get; private set; } = null!;
@@ -90,19 +122,19 @@ namespace Pulumi.Aviatrix
         public Input<string> SpokeAccountName { get; set; } = null!;
 
         /// <summary>
-        /// Spoke VNet region.
+        /// Spoke VNet region. Example: "West US".
         /// </summary>
         [Input("spokeRegion", required: true)]
         public Input<string> SpokeRegion { get; set; } = null!;
 
         /// <summary>
-        /// Combination of the Spoke VNet name and resource group.
+        /// Combination of the Spoke's VNet name, resource group and GUID. Example: "Foo_VNet:Bar_RG:GUID".
         /// </summary>
         [Input("spokeVpcId", required: true)]
         public Input<string> SpokeVpcId { get; set; } = null!;
 
         /// <summary>
-        /// Name of an azure transit gateway with transit firenet enabled.
+        /// Name of an Transit FireNet-enabled Azure transit gateway.
         /// </summary>
         [Input("transitGatewayName", required: true)]
         public Input<string> TransitGatewayName { get; set; } = null!;
@@ -122,19 +154,19 @@ namespace Pulumi.Aviatrix
         public Input<string>? SpokeAccountName { get; set; }
 
         /// <summary>
-        /// Spoke VNet region.
+        /// Spoke VNet region. Example: "West US".
         /// </summary>
         [Input("spokeRegion")]
         public Input<string>? SpokeRegion { get; set; }
 
         /// <summary>
-        /// Combination of the Spoke VNet name and resource group.
+        /// Combination of the Spoke's VNet name, resource group and GUID. Example: "Foo_VNet:Bar_RG:GUID".
         /// </summary>
         [Input("spokeVpcId")]
         public Input<string>? SpokeVpcId { get; set; }
 
         /// <summary>
-        /// Name of an azure transit gateway with transit firenet enabled.
+        /// Name of an Transit FireNet-enabled Azure transit gateway.
         /// </summary>
         [Input("transitGatewayName")]
         public Input<string>? TransitGatewayName { get; set; }

@@ -9,6 +9,15 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// ## Import
+    /// 
+    /// **site2cloud** can be imported using the `connection_name` and `vpc_id`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixSite2Cloud:AviatrixSite2Cloud test connection_name~vpc_id
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixSite2Cloud:AviatrixSite2Cloud")]
     public partial class AviatrixSite2Cloud : global::Pulumi.CustomResource
     {
@@ -19,13 +28,13 @@ namespace Pulumi.Aviatrix
         public Output<string?> AuthType { get; private set; } = null!;
 
         /// <summary>
-        /// Backup gateway name.
+        /// Backup gateway name. **NOTE: Please see notes here regarding HA requirements.**
         /// </summary>
         [Output("backupGatewayName")]
         public Output<string?> BackupGatewayName { get; private set; } = null!;
 
         /// <summary>
-        /// Backup local tunnel IP address.
+        /// Backup local tunnel IP address. Only valid when HA enabled route based connection. Available as of provider version R2.19+.
         /// </summary>
         [Output("backupLocalTunnelIp")]
         public Output<string?> BackupLocalTunnelIp { get; private set; } = null!;
@@ -37,31 +46,31 @@ namespace Pulumi.Aviatrix
         public Output<string?> BackupPreSharedKey { get; private set; } = null!;
 
         /// <summary>
-        /// Backup remote remote gateway IP.
+        /// Backup Remote Gateway IP. **NOTE: Please see notes here regarding HA requirements.**
         /// </summary>
         [Output("backupRemoteGatewayIp")]
         public Output<string> BackupRemoteGatewayIp { get; private set; } = null!;
 
         /// <summary>
-        /// Latitude of backup remote gateway.
+        /// Latitude of backup remote gateway. Does not support refresh.
         /// </summary>
         [Output("backupRemoteGatewayLatitude")]
         public Output<double?> BackupRemoteGatewayLatitude { get; private set; } = null!;
 
         /// <summary>
-        /// Longitude of backup remote gateway.
+        /// Longitude of backup remote gateway. Does not support refresh.
         /// </summary>
         [Output("backupRemoteGatewayLongitude")]
         public Output<double?> BackupRemoteGatewayLongitude { get; private set; } = null!;
 
         /// <summary>
-        /// Backup remote identifier. Required for Cert based authentication type with HA enabled.
+        /// Backup remote identifier. Required for Cert based authentication type with HA enabled. Example: "gw-10-10-0-116".
         /// </summary>
         [Output("backupRemoteIdentifier")]
         public Output<string?> BackupRemoteIdentifier { get; private set; } = null!;
 
         /// <summary>
-        /// Backup remote tunnel IP address.
+        /// Backup remote tunnel IP address. Only valid when HA enabled route based connection. Available as of provider version R2.19+.
         /// </summary>
         [Output("backupRemoteTunnelIp")]
         public Output<string?> BackupRemoteTunnelIp { get; private set; } = null!;
@@ -73,154 +82,151 @@ namespace Pulumi.Aviatrix
         public Output<string?> CaCertTagName { get; private set; } = null!;
 
         /// <summary>
-        /// Site2Cloud Connection Name.
+        /// Site2Cloud connection name.
         /// </summary>
         [Output("connectionName")]
         public Output<string> ConnectionName { get; private set; } = null!;
 
         /// <summary>
-        /// Connection Type. Valid values: 'mapped' and 'unmapped'.
+        /// Connection type. Valid Values: "mapped", "unmapped".
         /// </summary>
         [Output("connectionType")]
         public Output<string> ConnectionType { get; private set; } = null!;
 
         /// <summary>
-        /// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption.
+        /// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption. Valid values: true, false. **NOTE: Please see notes here for more information.**
         /// </summary>
         [Output("customAlgorithms")]
         public Output<bool?> CustomAlgorithms { get; private set; } = null!;
 
         /// <summary>
-        /// Enable custom mapped.
+        /// Enable custom mapped connection. Default value: false. Valid values: true/false. Available in provider version R2.17.1+.
         /// </summary>
         [Output("customMapped")]
         public Output<bool?> CustomMapped { get; private set; } = null!;
 
         /// <summary>
-        /// Switch to Enable/Disable active_active_ha for an existing site2cloud connection.
+        /// Enable/disable active active HA for an existing site2cloud connection. Valid values: true, false. Default value: false.
         /// </summary>
         [Output("enableActiveActive")]
         public Output<bool?> EnableActiveActive { get; private set; } = null!;
 
         /// <summary>
-        /// Switch to Enable/Disable Deed Peer Detection for an existing site2cloud connection.
+        /// Enable/disable Deed Peer Detection for an existing site2cloud connection. Default value: true. **NOTE: Please see notes here in regards to any deltas found in your state with the addition of this argument in R1.9**
         /// </summary>
         [Output("enableDeadPeerDetection")]
         public Output<bool?> EnableDeadPeerDetection { get; private set; } = null!;
 
         /// <summary>
-        /// Enable Event Triggered HA.
+        /// Enable Event Triggered HA. Default value: false. Valid values: true or false. Available as of provider version R2.19+.
         /// </summary>
         [Output("enableEventTriggeredHa")]
         public Output<bool?> EnableEventTriggeredHa { get; private set; } = null!;
 
         /// <summary>
-        /// Switch to enable IKEv2 for policy based site2cloud.
+        /// Switch to enable IKEv2. Valid values: true, false. Default value: false.
         /// </summary>
         [Output("enableIkev2")]
         public Output<bool?> EnableIkev2 { get; private set; } = null!;
 
         /// <summary>
-        /// Enable single IP HA on a site2cloud connection.
+        /// Enable single IP HA feature. Available as of provider version 2.19+.
         /// </summary>
         [Output("enableSingleIpHa")]
         public Output<bool?> EnableSingleIpHa { get; private set; } = null!;
 
         /// <summary>
-        /// Enable spoke gateway with mapped site2cloud configurations to forward traffic from site2cloud connection to Aviatrix
-        /// Transit Gateway.
+        /// Enable spoke gateway with mapped site2cloud configurations to forward traffic from site2cloud connection to Aviatrix Transit Gateway. Default value: false. Valid values: true or false. Available in provider version 2.17.2+.
         /// </summary>
         [Output("forwardTrafficToTransit")]
         public Output<bool?> ForwardTrafficToTransit { get; private set; } = null!;
 
         /// <summary>
-        /// Specify whether enabling HA or not.
+        /// Specify whether or not to enable HA. Valid Values: true, false. **NOTE: Please see notes here regarding HA requirements.**
         /// </summary>
         [Output("haEnabled")]
         public Output<bool?> HaEnabled { get; private set; } = null!;
 
         /// <summary>
-        /// Local Initiated Traffic Destination Real CIDRs.
+        /// List of Local Initiated Traffic Destination Real CIDRs.
         /// </summary>
         [Output("localDestinationRealCidrs")]
         public Output<ImmutableArray<string>> LocalDestinationRealCidrs { get; private set; } = null!;
 
         /// <summary>
-        /// Local Initiated Traffic Destination Virtual CIDRs.
+        /// List of Local Initiated Traffic Destination Virtual CIDRs.
         /// </summary>
         [Output("localDestinationVirtualCidrs")]
         public Output<ImmutableArray<string>> LocalDestinationVirtualCidrs { get; private set; } = null!;
 
         /// <summary>
-        /// Local Initiated Traffic Source Real CIDRs.
+        /// List of Local Initiated Traffic Source Real CIDRs.
         /// </summary>
         [Output("localSourceRealCidrs")]
         public Output<ImmutableArray<string>> LocalSourceRealCidrs { get; private set; } = null!;
 
         /// <summary>
-        /// Local Initiated Traffic Source Virtual CIDRs.
+        /// List of Local Initiated Traffic Source Virtual CIDRs.
         /// </summary>
         [Output("localSourceVirtualCidrs")]
         public Output<ImmutableArray<string>> LocalSourceVirtualCidrs { get; private set; } = null!;
 
         /// <summary>
-        /// Local Subnet CIDR.
+        /// Local subnet CIDR. **Required for connection type "mapped", except for `custom_mapped` connection.**
         /// </summary>
         [Output("localSubnetCidr")]
         public Output<string> LocalSubnetCidr { get; private set; } = null!;
 
         /// <summary>
-        /// Local Subnet CIDR (Virtual).
+        /// Local subnet CIDR (Virtual). **Required for connection type "mapped", except for `custom_mapped` connection.**
         /// </summary>
         [Output("localSubnetVirtual")]
         public Output<string?> LocalSubnetVirtual { get; private set; } = null!;
 
         /// <summary>
-        /// Local tunnel IP address.
+        /// Local tunnel IP address. Only valid for route based connection. Available as of provider version R2.19+.
         /// </summary>
         [Output("localTunnelIp")]
         public Output<string?> LocalTunnelIp { get; private set; } = null!;
 
         /// <summary>
-        /// Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'.
+        /// Phase one Authentication. Valid values: "SHA-1", "SHA-256", "SHA-384" and "SHA-512". Default value: "SHA-256".
         /// </summary>
         [Output("phase1Authentication")]
         public Output<string?> Phase1Authentication { get; private set; } = null!;
 
         /// <summary>
-        /// Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+        /// Phase one DH Groups. Valid values: "1", "2", "5", "14", "15", "16", "17", "18", "19", "20" and "21". Default value: "14".
         /// </summary>
         [Output("phase1DhGroups")]
         public Output<string?> Phase1DhGroups { get; private set; } = null!;
 
         /// <summary>
-        /// Phase one Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC' and 'AES-256-CBC', 'AES-128-GCM-64',
-        /// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', and 'AES-256-GCM-128'.
+        /// Phase one Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", and "AES-256-GCM-128". Default value: "AES-256-CBC".
         /// </summary>
         [Output("phase1Encryption")]
         public Output<string?> Phase1Encryption { get; private set; } = null!;
 
         /// <summary>
-        /// Phase 1 remote identifier of the IPsec tunnel.
+        /// Phase 1 remote identifier of the IPsec tunnel. This can be configured to be either the public IP address or the private IP address of the peer terminating the IPsec tunnel. Example: ["1.2.3.4"] when HA is disabled, ["1.2.3.4", "5.6.7.8"] when HA is enabled. Available as of provider version R2.19+.
         /// </summary>
         [Output("phase1RemoteIdentifiers")]
         public Output<ImmutableArray<string>> Phase1RemoteIdentifiers { get; private set; } = null!;
 
         /// <summary>
-        /// Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'.
+        /// Phase two Authentication. Valid values: "NO-AUTH", "HMAC-SHA-1", "HMAC-SHA-256", "HMAC-SHA-384" and "HMAC-SHA-512". Default value: "HMAC-SHA-256".
         /// </summary>
         [Output("phase2Authentication")]
         public Output<string?> Phase2Authentication { get; private set; } = null!;
 
         /// <summary>
-        /// Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+        /// Phase two DH Groups. Valid values: "1", "2", "5", "14", "15", "16", "17", "18", "19", "20" and "21". Default value: "14".
         /// </summary>
         [Output("phase2DhGroups")]
         public Output<string?> Phase2DhGroups { get; private set; } = null!;
 
         /// <summary>
-        /// Phase two Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'AES-128-GCM-64',
-        /// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', 'AES-256-GCM-128', and 'NULL-ENCR'.
+        /// Phase two Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", "AES-256-GCM-128" and "NULL-ENCR". Default value: "AES-256-CBC".
         /// </summary>
         [Output("phase2Encryption")]
         public Output<string?> Phase2Encryption { get; private set; } = null!;
@@ -232,85 +238,85 @@ namespace Pulumi.Aviatrix
         public Output<string?> PreSharedKey { get; private set; } = null!;
 
         /// <summary>
-        /// Primary Cloud Gateway Name.
+        /// Primary cloud gateway name.
         /// </summary>
         [Output("primaryCloudGatewayName")]
         public Output<string> PrimaryCloudGatewayName { get; private set; } = null!;
 
         /// <summary>
-        /// Private route encryption switch.
+        /// Private route encryption switch. Valid values: true, false.
         /// </summary>
         [Output("privateRouteEncryption")]
         public Output<bool?> PrivateRouteEncryption { get; private set; } = null!;
 
         /// <summary>
-        /// Remote Initiated Traffic Destination Real CIDRs.
+        /// List of  Remote Initiated Traffic Destination Real CIDRs.
         /// </summary>
         [Output("remoteDestinationRealCidrs")]
         public Output<ImmutableArray<string>> RemoteDestinationRealCidrs { get; private set; } = null!;
 
         /// <summary>
-        /// Remote Initiated Traffic Destination Virtual CIDRs.
+        /// List of Remote Initiated Traffic Destination Virtual CIDRs.
         /// </summary>
         [Output("remoteDestinationVirtualCidrs")]
         public Output<ImmutableArray<string>> RemoteDestinationVirtualCidrs { get; private set; } = null!;
 
         /// <summary>
-        /// Remote Gateway IP.
+        /// Remote gateway IP.
         /// </summary>
         [Output("remoteGatewayIp")]
         public Output<string> RemoteGatewayIp { get; private set; } = null!;
 
         /// <summary>
-        /// Latitude of remote gateway.
+        /// Latitude of remote gateway. Does not support refresh.
         /// </summary>
         [Output("remoteGatewayLatitude")]
         public Output<double?> RemoteGatewayLatitude { get; private set; } = null!;
 
         /// <summary>
-        /// Longitude of remote gateway.
+        /// Longitude of remote gateway. Does not support refresh.
         /// </summary>
         [Output("remoteGatewayLongitude")]
         public Output<double?> RemoteGatewayLongitude { get; private set; } = null!;
 
         /// <summary>
-        /// Remote gateway type. Valid values: 'generic', 'avx', 'aws', 'azure', 'sonicwall' and 'oracle'.
+        /// Remote gateway type. Valid Values: "generic", "avx", "aws", "azure", "sonicwall", "oracle".
         /// </summary>
         [Output("remoteGatewayType")]
         public Output<string> RemoteGatewayType { get; private set; } = null!;
 
         /// <summary>
-        /// Remote identifier. Required for Cert based authentication type.
+        /// Remote identifier. Required for Cert based authentication type. Example: "gw-10-10-0-115".
         /// </summary>
         [Output("remoteIdentifier")]
         public Output<string?> RemoteIdentifier { get; private set; } = null!;
 
         /// <summary>
-        /// Remote Initiated Traffic Source Real CIDRs.
+        /// List of Remote Initiated Traffic Source Real CIDRs.
         /// </summary>
         [Output("remoteSourceRealCidrs")]
         public Output<ImmutableArray<string>> RemoteSourceRealCidrs { get; private set; } = null!;
 
         /// <summary>
-        /// Remote Initiated Traffic Source Virtual CIDRs.
+        /// List of Remote Initiated Traffic Source Virtual CIDRs.
         /// </summary>
         [Output("remoteSourceVirtualCidrs")]
         public Output<ImmutableArray<string>> RemoteSourceVirtualCidrs { get; private set; } = null!;
 
         /// <summary>
-        /// Remote Subnet CIDR.
+        /// Remote subnet CIDR. **Not required for custom_mapped connection.**
         /// </summary>
         [Output("remoteSubnetCidr")]
         public Output<string?> RemoteSubnetCidr { get; private set; } = null!;
 
         /// <summary>
-        /// Remote Subnet CIDR (Virtual).
+        /// Remote subnet CIDR (Virtual). **Required for connection type "mapped", except for `custom_mapped` connection.**
         /// </summary>
         [Output("remoteSubnetVirtual")]
         public Output<string?> RemoteSubnetVirtual { get; private set; } = null!;
 
         /// <summary>
-        /// Remote tunnel IP address.
+        /// Remote tunnel IP address. Only valid for route based connection. Available as of provider version R2.19+.
         /// </summary>
         [Output("remoteTunnelIp")]
         public Output<string?> RemoteTunnelIp { get; private set; } = null!;
@@ -322,19 +328,19 @@ namespace Pulumi.Aviatrix
         public Output<ImmutableArray<string>> RouteTableLists { get; private set; } = null!;
 
         /// <summary>
-        /// Specify ssl_server_pool for tunnel_type 'tcp'. Default value is '192.168.44.0/24'
+        /// Specify ssl_server_pool. Default value: "192.168.44.0/24". **NOTE: Please see notes here for more information.**
         /// </summary>
         [Output("sslServerPool")]
         public Output<string?> SslServerPool { get; private set; } = null!;
 
         /// <summary>
-        /// Site2Cloud Tunnel Type. Valid values: 'policy' and 'route'.
+        /// Site2Cloud tunnel type. Valid Values: "policy", "route".
         /// </summary>
         [Output("tunnelType")]
         public Output<string> TunnelType { get; private set; } = null!;
 
         /// <summary>
-        /// VPC Id of the cloud gateway.
+        /// VPC ID of the cloud gateway.
         /// </summary>
         [Output("vpcId")]
         public Output<string> VpcId { get; private set; } = null!;
@@ -363,6 +369,11 @@ namespace Pulumi.Aviatrix
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/astipkovits",
+                AdditionalSecretOutputs =
+                {
+                    "backupPreSharedKey",
+                    "preSharedKey",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -393,49 +404,59 @@ namespace Pulumi.Aviatrix
         public Input<string>? AuthType { get; set; }
 
         /// <summary>
-        /// Backup gateway name.
+        /// Backup gateway name. **NOTE: Please see notes here regarding HA requirements.**
         /// </summary>
         [Input("backupGatewayName")]
         public Input<string>? BackupGatewayName { get; set; }
 
         /// <summary>
-        /// Backup local tunnel IP address.
+        /// Backup local tunnel IP address. Only valid when HA enabled route based connection. Available as of provider version R2.19+.
         /// </summary>
         [Input("backupLocalTunnelIp")]
         public Input<string>? BackupLocalTunnelIp { get; set; }
 
+        [Input("backupPreSharedKey")]
+        private Input<string>? _backupPreSharedKey;
+
         /// <summary>
         /// Backup Pre-Shared Key.
         /// </summary>
-        [Input("backupPreSharedKey")]
-        public Input<string>? BackupPreSharedKey { get; set; }
+        public Input<string>? BackupPreSharedKey
+        {
+            get => _backupPreSharedKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _backupPreSharedKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
-        /// Backup remote remote gateway IP.
+        /// Backup Remote Gateway IP. **NOTE: Please see notes here regarding HA requirements.**
         /// </summary>
         [Input("backupRemoteGatewayIp")]
         public Input<string>? BackupRemoteGatewayIp { get; set; }
 
         /// <summary>
-        /// Latitude of backup remote gateway.
+        /// Latitude of backup remote gateway. Does not support refresh.
         /// </summary>
         [Input("backupRemoteGatewayLatitude")]
         public Input<double>? BackupRemoteGatewayLatitude { get; set; }
 
         /// <summary>
-        /// Longitude of backup remote gateway.
+        /// Longitude of backup remote gateway. Does not support refresh.
         /// </summary>
         [Input("backupRemoteGatewayLongitude")]
         public Input<double>? BackupRemoteGatewayLongitude { get; set; }
 
         /// <summary>
-        /// Backup remote identifier. Required for Cert based authentication type with HA enabled.
+        /// Backup remote identifier. Required for Cert based authentication type with HA enabled. Example: "gw-10-10-0-116".
         /// </summary>
         [Input("backupRemoteIdentifier")]
         public Input<string>? BackupRemoteIdentifier { get; set; }
 
         /// <summary>
-        /// Backup remote tunnel IP address.
+        /// Backup remote tunnel IP address. Only valid when HA enabled route based connection. Available as of provider version R2.19+.
         /// </summary>
         [Input("backupRemoteTunnelIp")]
         public Input<string>? BackupRemoteTunnelIp { get; set; }
@@ -447,68 +468,67 @@ namespace Pulumi.Aviatrix
         public Input<string>? CaCertTagName { get; set; }
 
         /// <summary>
-        /// Site2Cloud Connection Name.
+        /// Site2Cloud connection name.
         /// </summary>
         [Input("connectionName", required: true)]
         public Input<string> ConnectionName { get; set; } = null!;
 
         /// <summary>
-        /// Connection Type. Valid values: 'mapped' and 'unmapped'.
+        /// Connection type. Valid Values: "mapped", "unmapped".
         /// </summary>
         [Input("connectionType", required: true)]
         public Input<string> ConnectionType { get; set; } = null!;
 
         /// <summary>
-        /// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption.
+        /// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption. Valid values: true, false. **NOTE: Please see notes here for more information.**
         /// </summary>
         [Input("customAlgorithms")]
         public Input<bool>? CustomAlgorithms { get; set; }
 
         /// <summary>
-        /// Enable custom mapped.
+        /// Enable custom mapped connection. Default value: false. Valid values: true/false. Available in provider version R2.17.1+.
         /// </summary>
         [Input("customMapped")]
         public Input<bool>? CustomMapped { get; set; }
 
         /// <summary>
-        /// Switch to Enable/Disable active_active_ha for an existing site2cloud connection.
+        /// Enable/disable active active HA for an existing site2cloud connection. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableActiveActive")]
         public Input<bool>? EnableActiveActive { get; set; }
 
         /// <summary>
-        /// Switch to Enable/Disable Deed Peer Detection for an existing site2cloud connection.
+        /// Enable/disable Deed Peer Detection for an existing site2cloud connection. Default value: true. **NOTE: Please see notes here in regards to any deltas found in your state with the addition of this argument in R1.9**
         /// </summary>
         [Input("enableDeadPeerDetection")]
         public Input<bool>? EnableDeadPeerDetection { get; set; }
 
         /// <summary>
-        /// Enable Event Triggered HA.
+        /// Enable Event Triggered HA. Default value: false. Valid values: true or false. Available as of provider version R2.19+.
         /// </summary>
         [Input("enableEventTriggeredHa")]
         public Input<bool>? EnableEventTriggeredHa { get; set; }
 
         /// <summary>
-        /// Switch to enable IKEv2 for policy based site2cloud.
+        /// Switch to enable IKEv2. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableIkev2")]
         public Input<bool>? EnableIkev2 { get; set; }
 
         /// <summary>
-        /// Enable single IP HA on a site2cloud connection.
+        /// Enable single IP HA feature. Available as of provider version 2.19+.
         /// </summary>
         [Input("enableSingleIpHa")]
         public Input<bool>? EnableSingleIpHa { get; set; }
 
         /// <summary>
-        /// Enable spoke gateway with mapped site2cloud configurations to forward traffic from site2cloud connection to Aviatrix
-        /// Transit Gateway.
+        /// Enable spoke gateway with mapped site2cloud configurations to forward traffic from site2cloud connection to Aviatrix Transit Gateway. Default value: false. Valid values: true or false. Available in provider version 2.17.2+.
         /// </summary>
         [Input("forwardTrafficToTransit")]
         public Input<bool>? ForwardTrafficToTransit { get; set; }
 
         /// <summary>
-        /// Specify whether enabling HA or not.
+        /// Specify whether or not to enable HA. Valid Values: true, false. **NOTE: Please see notes here regarding HA requirements.**
         /// </summary>
         [Input("haEnabled")]
         public Input<bool>? HaEnabled { get; set; }
@@ -517,7 +537,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _localDestinationRealCidrs;
 
         /// <summary>
-        /// Local Initiated Traffic Destination Real CIDRs.
+        /// List of Local Initiated Traffic Destination Real CIDRs.
         /// </summary>
         public InputList<string> LocalDestinationRealCidrs
         {
@@ -529,7 +549,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _localDestinationVirtualCidrs;
 
         /// <summary>
-        /// Local Initiated Traffic Destination Virtual CIDRs.
+        /// List of Local Initiated Traffic Destination Virtual CIDRs.
         /// </summary>
         public InputList<string> LocalDestinationVirtualCidrs
         {
@@ -541,7 +561,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _localSourceRealCidrs;
 
         /// <summary>
-        /// Local Initiated Traffic Source Real CIDRs.
+        /// List of Local Initiated Traffic Source Real CIDRs.
         /// </summary>
         public InputList<string> LocalSourceRealCidrs
         {
@@ -553,7 +573,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _localSourceVirtualCidrs;
 
         /// <summary>
-        /// Local Initiated Traffic Source Virtual CIDRs.
+        /// List of Local Initiated Traffic Source Virtual CIDRs.
         /// </summary>
         public InputList<string> LocalSourceVirtualCidrs
         {
@@ -562,38 +582,37 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Local Subnet CIDR.
+        /// Local subnet CIDR. **Required for connection type "mapped", except for `custom_mapped` connection.**
         /// </summary>
         [Input("localSubnetCidr")]
         public Input<string>? LocalSubnetCidr { get; set; }
 
         /// <summary>
-        /// Local Subnet CIDR (Virtual).
+        /// Local subnet CIDR (Virtual). **Required for connection type "mapped", except for `custom_mapped` connection.**
         /// </summary>
         [Input("localSubnetVirtual")]
         public Input<string>? LocalSubnetVirtual { get; set; }
 
         /// <summary>
-        /// Local tunnel IP address.
+        /// Local tunnel IP address. Only valid for route based connection. Available as of provider version R2.19+.
         /// </summary>
         [Input("localTunnelIp")]
         public Input<string>? LocalTunnelIp { get; set; }
 
         /// <summary>
-        /// Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'.
+        /// Phase one Authentication. Valid values: "SHA-1", "SHA-256", "SHA-384" and "SHA-512". Default value: "SHA-256".
         /// </summary>
         [Input("phase1Authentication")]
         public Input<string>? Phase1Authentication { get; set; }
 
         /// <summary>
-        /// Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+        /// Phase one DH Groups. Valid values: "1", "2", "5", "14", "15", "16", "17", "18", "19", "20" and "21". Default value: "14".
         /// </summary>
         [Input("phase1DhGroups")]
         public Input<string>? Phase1DhGroups { get; set; }
 
         /// <summary>
-        /// Phase one Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC' and 'AES-256-CBC', 'AES-128-GCM-64',
-        /// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', and 'AES-256-GCM-128'.
+        /// Phase one Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", and "AES-256-GCM-128". Default value: "AES-256-CBC".
         /// </summary>
         [Input("phase1Encryption")]
         public Input<string>? Phase1Encryption { get; set; }
@@ -602,7 +621,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _phase1RemoteIdentifiers;
 
         /// <summary>
-        /// Phase 1 remote identifier of the IPsec tunnel.
+        /// Phase 1 remote identifier of the IPsec tunnel. This can be configured to be either the public IP address or the private IP address of the peer terminating the IPsec tunnel. Example: ["1.2.3.4"] when HA is disabled, ["1.2.3.4", "5.6.7.8"] when HA is enabled. Available as of provider version R2.19+.
         /// </summary>
         public InputList<string> Phase1RemoteIdentifiers
         {
@@ -611,38 +630,47 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'.
+        /// Phase two Authentication. Valid values: "NO-AUTH", "HMAC-SHA-1", "HMAC-SHA-256", "HMAC-SHA-384" and "HMAC-SHA-512". Default value: "HMAC-SHA-256".
         /// </summary>
         [Input("phase2Authentication")]
         public Input<string>? Phase2Authentication { get; set; }
 
         /// <summary>
-        /// Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+        /// Phase two DH Groups. Valid values: "1", "2", "5", "14", "15", "16", "17", "18", "19", "20" and "21". Default value: "14".
         /// </summary>
         [Input("phase2DhGroups")]
         public Input<string>? Phase2DhGroups { get; set; }
 
         /// <summary>
-        /// Phase two Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'AES-128-GCM-64',
-        /// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', 'AES-256-GCM-128', and 'NULL-ENCR'.
+        /// Phase two Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", "AES-256-GCM-128" and "NULL-ENCR". Default value: "AES-256-CBC".
         /// </summary>
         [Input("phase2Encryption")]
         public Input<string>? Phase2Encryption { get; set; }
 
+        [Input("preSharedKey")]
+        private Input<string>? _preSharedKey;
+
         /// <summary>
         /// Pre-Shared Key.
         /// </summary>
-        [Input("preSharedKey")]
-        public Input<string>? PreSharedKey { get; set; }
+        public Input<string>? PreSharedKey
+        {
+            get => _preSharedKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _preSharedKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
-        /// Primary Cloud Gateway Name.
+        /// Primary cloud gateway name.
         /// </summary>
         [Input("primaryCloudGatewayName", required: true)]
         public Input<string> PrimaryCloudGatewayName { get; set; } = null!;
 
         /// <summary>
-        /// Private route encryption switch.
+        /// Private route encryption switch. Valid values: true, false.
         /// </summary>
         [Input("privateRouteEncryption")]
         public Input<bool>? PrivateRouteEncryption { get; set; }
@@ -651,7 +679,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _remoteDestinationRealCidrs;
 
         /// <summary>
-        /// Remote Initiated Traffic Destination Real CIDRs.
+        /// List of  Remote Initiated Traffic Destination Real CIDRs.
         /// </summary>
         public InputList<string> RemoteDestinationRealCidrs
         {
@@ -663,7 +691,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _remoteDestinationVirtualCidrs;
 
         /// <summary>
-        /// Remote Initiated Traffic Destination Virtual CIDRs.
+        /// List of Remote Initiated Traffic Destination Virtual CIDRs.
         /// </summary>
         public InputList<string> RemoteDestinationVirtualCidrs
         {
@@ -672,31 +700,31 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Remote Gateway IP.
+        /// Remote gateway IP.
         /// </summary>
         [Input("remoteGatewayIp", required: true)]
         public Input<string> RemoteGatewayIp { get; set; } = null!;
 
         /// <summary>
-        /// Latitude of remote gateway.
+        /// Latitude of remote gateway. Does not support refresh.
         /// </summary>
         [Input("remoteGatewayLatitude")]
         public Input<double>? RemoteGatewayLatitude { get; set; }
 
         /// <summary>
-        /// Longitude of remote gateway.
+        /// Longitude of remote gateway. Does not support refresh.
         /// </summary>
         [Input("remoteGatewayLongitude")]
         public Input<double>? RemoteGatewayLongitude { get; set; }
 
         /// <summary>
-        /// Remote gateway type. Valid values: 'generic', 'avx', 'aws', 'azure', 'sonicwall' and 'oracle'.
+        /// Remote gateway type. Valid Values: "generic", "avx", "aws", "azure", "sonicwall", "oracle".
         /// </summary>
         [Input("remoteGatewayType", required: true)]
         public Input<string> RemoteGatewayType { get; set; } = null!;
 
         /// <summary>
-        /// Remote identifier. Required for Cert based authentication type.
+        /// Remote identifier. Required for Cert based authentication type. Example: "gw-10-10-0-115".
         /// </summary>
         [Input("remoteIdentifier")]
         public Input<string>? RemoteIdentifier { get; set; }
@@ -705,7 +733,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _remoteSourceRealCidrs;
 
         /// <summary>
-        /// Remote Initiated Traffic Source Real CIDRs.
+        /// List of Remote Initiated Traffic Source Real CIDRs.
         /// </summary>
         public InputList<string> RemoteSourceRealCidrs
         {
@@ -717,7 +745,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _remoteSourceVirtualCidrs;
 
         /// <summary>
-        /// Remote Initiated Traffic Source Virtual CIDRs.
+        /// List of Remote Initiated Traffic Source Virtual CIDRs.
         /// </summary>
         public InputList<string> RemoteSourceVirtualCidrs
         {
@@ -726,19 +754,19 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Remote Subnet CIDR.
+        /// Remote subnet CIDR. **Not required for custom_mapped connection.**
         /// </summary>
         [Input("remoteSubnetCidr")]
         public Input<string>? RemoteSubnetCidr { get; set; }
 
         /// <summary>
-        /// Remote Subnet CIDR (Virtual).
+        /// Remote subnet CIDR (Virtual). **Required for connection type "mapped", except for `custom_mapped` connection.**
         /// </summary>
         [Input("remoteSubnetVirtual")]
         public Input<string>? RemoteSubnetVirtual { get; set; }
 
         /// <summary>
-        /// Remote tunnel IP address.
+        /// Remote tunnel IP address. Only valid for route based connection. Available as of provider version R2.19+.
         /// </summary>
         [Input("remoteTunnelIp")]
         public Input<string>? RemoteTunnelIp { get; set; }
@@ -756,19 +784,19 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Specify ssl_server_pool for tunnel_type 'tcp'. Default value is '192.168.44.0/24'
+        /// Specify ssl_server_pool. Default value: "192.168.44.0/24". **NOTE: Please see notes here for more information.**
         /// </summary>
         [Input("sslServerPool")]
         public Input<string>? SslServerPool { get; set; }
 
         /// <summary>
-        /// Site2Cloud Tunnel Type. Valid values: 'policy' and 'route'.
+        /// Site2Cloud tunnel type. Valid Values: "policy", "route".
         /// </summary>
         [Input("tunnelType", required: true)]
         public Input<string> TunnelType { get; set; } = null!;
 
         /// <summary>
-        /// VPC Id of the cloud gateway.
+        /// VPC ID of the cloud gateway.
         /// </summary>
         [Input("vpcId", required: true)]
         public Input<string> VpcId { get; set; } = null!;
@@ -788,49 +816,59 @@ namespace Pulumi.Aviatrix
         public Input<string>? AuthType { get; set; }
 
         /// <summary>
-        /// Backup gateway name.
+        /// Backup gateway name. **NOTE: Please see notes here regarding HA requirements.**
         /// </summary>
         [Input("backupGatewayName")]
         public Input<string>? BackupGatewayName { get; set; }
 
         /// <summary>
-        /// Backup local tunnel IP address.
+        /// Backup local tunnel IP address. Only valid when HA enabled route based connection. Available as of provider version R2.19+.
         /// </summary>
         [Input("backupLocalTunnelIp")]
         public Input<string>? BackupLocalTunnelIp { get; set; }
 
+        [Input("backupPreSharedKey")]
+        private Input<string>? _backupPreSharedKey;
+
         /// <summary>
         /// Backup Pre-Shared Key.
         /// </summary>
-        [Input("backupPreSharedKey")]
-        public Input<string>? BackupPreSharedKey { get; set; }
+        public Input<string>? BackupPreSharedKey
+        {
+            get => _backupPreSharedKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _backupPreSharedKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
-        /// Backup remote remote gateway IP.
+        /// Backup Remote Gateway IP. **NOTE: Please see notes here regarding HA requirements.**
         /// </summary>
         [Input("backupRemoteGatewayIp")]
         public Input<string>? BackupRemoteGatewayIp { get; set; }
 
         /// <summary>
-        /// Latitude of backup remote gateway.
+        /// Latitude of backup remote gateway. Does not support refresh.
         /// </summary>
         [Input("backupRemoteGatewayLatitude")]
         public Input<double>? BackupRemoteGatewayLatitude { get; set; }
 
         /// <summary>
-        /// Longitude of backup remote gateway.
+        /// Longitude of backup remote gateway. Does not support refresh.
         /// </summary>
         [Input("backupRemoteGatewayLongitude")]
         public Input<double>? BackupRemoteGatewayLongitude { get; set; }
 
         /// <summary>
-        /// Backup remote identifier. Required for Cert based authentication type with HA enabled.
+        /// Backup remote identifier. Required for Cert based authentication type with HA enabled. Example: "gw-10-10-0-116".
         /// </summary>
         [Input("backupRemoteIdentifier")]
         public Input<string>? BackupRemoteIdentifier { get; set; }
 
         /// <summary>
-        /// Backup remote tunnel IP address.
+        /// Backup remote tunnel IP address. Only valid when HA enabled route based connection. Available as of provider version R2.19+.
         /// </summary>
         [Input("backupRemoteTunnelIp")]
         public Input<string>? BackupRemoteTunnelIp { get; set; }
@@ -842,68 +880,67 @@ namespace Pulumi.Aviatrix
         public Input<string>? CaCertTagName { get; set; }
 
         /// <summary>
-        /// Site2Cloud Connection Name.
+        /// Site2Cloud connection name.
         /// </summary>
         [Input("connectionName")]
         public Input<string>? ConnectionName { get; set; }
 
         /// <summary>
-        /// Connection Type. Valid values: 'mapped' and 'unmapped'.
+        /// Connection type. Valid Values: "mapped", "unmapped".
         /// </summary>
         [Input("connectionType")]
         public Input<string>? ConnectionType { get; set; }
 
         /// <summary>
-        /// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption.
+        /// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption. Valid values: true, false. **NOTE: Please see notes here for more information.**
         /// </summary>
         [Input("customAlgorithms")]
         public Input<bool>? CustomAlgorithms { get; set; }
 
         /// <summary>
-        /// Enable custom mapped.
+        /// Enable custom mapped connection. Default value: false. Valid values: true/false. Available in provider version R2.17.1+.
         /// </summary>
         [Input("customMapped")]
         public Input<bool>? CustomMapped { get; set; }
 
         /// <summary>
-        /// Switch to Enable/Disable active_active_ha for an existing site2cloud connection.
+        /// Enable/disable active active HA for an existing site2cloud connection. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableActiveActive")]
         public Input<bool>? EnableActiveActive { get; set; }
 
         /// <summary>
-        /// Switch to Enable/Disable Deed Peer Detection for an existing site2cloud connection.
+        /// Enable/disable Deed Peer Detection for an existing site2cloud connection. Default value: true. **NOTE: Please see notes here in regards to any deltas found in your state with the addition of this argument in R1.9**
         /// </summary>
         [Input("enableDeadPeerDetection")]
         public Input<bool>? EnableDeadPeerDetection { get; set; }
 
         /// <summary>
-        /// Enable Event Triggered HA.
+        /// Enable Event Triggered HA. Default value: false. Valid values: true or false. Available as of provider version R2.19+.
         /// </summary>
         [Input("enableEventTriggeredHa")]
         public Input<bool>? EnableEventTriggeredHa { get; set; }
 
         /// <summary>
-        /// Switch to enable IKEv2 for policy based site2cloud.
+        /// Switch to enable IKEv2. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableIkev2")]
         public Input<bool>? EnableIkev2 { get; set; }
 
         /// <summary>
-        /// Enable single IP HA on a site2cloud connection.
+        /// Enable single IP HA feature. Available as of provider version 2.19+.
         /// </summary>
         [Input("enableSingleIpHa")]
         public Input<bool>? EnableSingleIpHa { get; set; }
 
         /// <summary>
-        /// Enable spoke gateway with mapped site2cloud configurations to forward traffic from site2cloud connection to Aviatrix
-        /// Transit Gateway.
+        /// Enable spoke gateway with mapped site2cloud configurations to forward traffic from site2cloud connection to Aviatrix Transit Gateway. Default value: false. Valid values: true or false. Available in provider version 2.17.2+.
         /// </summary>
         [Input("forwardTrafficToTransit")]
         public Input<bool>? ForwardTrafficToTransit { get; set; }
 
         /// <summary>
-        /// Specify whether enabling HA or not.
+        /// Specify whether or not to enable HA. Valid Values: true, false. **NOTE: Please see notes here regarding HA requirements.**
         /// </summary>
         [Input("haEnabled")]
         public Input<bool>? HaEnabled { get; set; }
@@ -912,7 +949,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _localDestinationRealCidrs;
 
         /// <summary>
-        /// Local Initiated Traffic Destination Real CIDRs.
+        /// List of Local Initiated Traffic Destination Real CIDRs.
         /// </summary>
         public InputList<string> LocalDestinationRealCidrs
         {
@@ -924,7 +961,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _localDestinationVirtualCidrs;
 
         /// <summary>
-        /// Local Initiated Traffic Destination Virtual CIDRs.
+        /// List of Local Initiated Traffic Destination Virtual CIDRs.
         /// </summary>
         public InputList<string> LocalDestinationVirtualCidrs
         {
@@ -936,7 +973,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _localSourceRealCidrs;
 
         /// <summary>
-        /// Local Initiated Traffic Source Real CIDRs.
+        /// List of Local Initiated Traffic Source Real CIDRs.
         /// </summary>
         public InputList<string> LocalSourceRealCidrs
         {
@@ -948,7 +985,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _localSourceVirtualCidrs;
 
         /// <summary>
-        /// Local Initiated Traffic Source Virtual CIDRs.
+        /// List of Local Initiated Traffic Source Virtual CIDRs.
         /// </summary>
         public InputList<string> LocalSourceVirtualCidrs
         {
@@ -957,38 +994,37 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Local Subnet CIDR.
+        /// Local subnet CIDR. **Required for connection type "mapped", except for `custom_mapped` connection.**
         /// </summary>
         [Input("localSubnetCidr")]
         public Input<string>? LocalSubnetCidr { get; set; }
 
         /// <summary>
-        /// Local Subnet CIDR (Virtual).
+        /// Local subnet CIDR (Virtual). **Required for connection type "mapped", except for `custom_mapped` connection.**
         /// </summary>
         [Input("localSubnetVirtual")]
         public Input<string>? LocalSubnetVirtual { get; set; }
 
         /// <summary>
-        /// Local tunnel IP address.
+        /// Local tunnel IP address. Only valid for route based connection. Available as of provider version R2.19+.
         /// </summary>
         [Input("localTunnelIp")]
         public Input<string>? LocalTunnelIp { get; set; }
 
         /// <summary>
-        /// Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'.
+        /// Phase one Authentication. Valid values: "SHA-1", "SHA-256", "SHA-384" and "SHA-512". Default value: "SHA-256".
         /// </summary>
         [Input("phase1Authentication")]
         public Input<string>? Phase1Authentication { get; set; }
 
         /// <summary>
-        /// Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+        /// Phase one DH Groups. Valid values: "1", "2", "5", "14", "15", "16", "17", "18", "19", "20" and "21". Default value: "14".
         /// </summary>
         [Input("phase1DhGroups")]
         public Input<string>? Phase1DhGroups { get; set; }
 
         /// <summary>
-        /// Phase one Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC' and 'AES-256-CBC', 'AES-128-GCM-64',
-        /// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', and 'AES-256-GCM-128'.
+        /// Phase one Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", and "AES-256-GCM-128". Default value: "AES-256-CBC".
         /// </summary>
         [Input("phase1Encryption")]
         public Input<string>? Phase1Encryption { get; set; }
@@ -997,7 +1033,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _phase1RemoteIdentifiers;
 
         /// <summary>
-        /// Phase 1 remote identifier of the IPsec tunnel.
+        /// Phase 1 remote identifier of the IPsec tunnel. This can be configured to be either the public IP address or the private IP address of the peer terminating the IPsec tunnel. Example: ["1.2.3.4"] when HA is disabled, ["1.2.3.4", "5.6.7.8"] when HA is enabled. Available as of provider version R2.19+.
         /// </summary>
         public InputList<string> Phase1RemoteIdentifiers
         {
@@ -1006,38 +1042,47 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'.
+        /// Phase two Authentication. Valid values: "NO-AUTH", "HMAC-SHA-1", "HMAC-SHA-256", "HMAC-SHA-384" and "HMAC-SHA-512". Default value: "HMAC-SHA-256".
         /// </summary>
         [Input("phase2Authentication")]
         public Input<string>? Phase2Authentication { get; set; }
 
         /// <summary>
-        /// Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+        /// Phase two DH Groups. Valid values: "1", "2", "5", "14", "15", "16", "17", "18", "19", "20" and "21". Default value: "14".
         /// </summary>
         [Input("phase2DhGroups")]
         public Input<string>? Phase2DhGroups { get; set; }
 
         /// <summary>
-        /// Phase two Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'AES-128-GCM-64',
-        /// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', 'AES-256-GCM-128', and 'NULL-ENCR'.
+        /// Phase two Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", "AES-256-GCM-128" and "NULL-ENCR". Default value: "AES-256-CBC".
         /// </summary>
         [Input("phase2Encryption")]
         public Input<string>? Phase2Encryption { get; set; }
 
+        [Input("preSharedKey")]
+        private Input<string>? _preSharedKey;
+
         /// <summary>
         /// Pre-Shared Key.
         /// </summary>
-        [Input("preSharedKey")]
-        public Input<string>? PreSharedKey { get; set; }
+        public Input<string>? PreSharedKey
+        {
+            get => _preSharedKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _preSharedKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
-        /// Primary Cloud Gateway Name.
+        /// Primary cloud gateway name.
         /// </summary>
         [Input("primaryCloudGatewayName")]
         public Input<string>? PrimaryCloudGatewayName { get; set; }
 
         /// <summary>
-        /// Private route encryption switch.
+        /// Private route encryption switch. Valid values: true, false.
         /// </summary>
         [Input("privateRouteEncryption")]
         public Input<bool>? PrivateRouteEncryption { get; set; }
@@ -1046,7 +1091,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _remoteDestinationRealCidrs;
 
         /// <summary>
-        /// Remote Initiated Traffic Destination Real CIDRs.
+        /// List of  Remote Initiated Traffic Destination Real CIDRs.
         /// </summary>
         public InputList<string> RemoteDestinationRealCidrs
         {
@@ -1058,7 +1103,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _remoteDestinationVirtualCidrs;
 
         /// <summary>
-        /// Remote Initiated Traffic Destination Virtual CIDRs.
+        /// List of Remote Initiated Traffic Destination Virtual CIDRs.
         /// </summary>
         public InputList<string> RemoteDestinationVirtualCidrs
         {
@@ -1067,31 +1112,31 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Remote Gateway IP.
+        /// Remote gateway IP.
         /// </summary>
         [Input("remoteGatewayIp")]
         public Input<string>? RemoteGatewayIp { get; set; }
 
         /// <summary>
-        /// Latitude of remote gateway.
+        /// Latitude of remote gateway. Does not support refresh.
         /// </summary>
         [Input("remoteGatewayLatitude")]
         public Input<double>? RemoteGatewayLatitude { get; set; }
 
         /// <summary>
-        /// Longitude of remote gateway.
+        /// Longitude of remote gateway. Does not support refresh.
         /// </summary>
         [Input("remoteGatewayLongitude")]
         public Input<double>? RemoteGatewayLongitude { get; set; }
 
         /// <summary>
-        /// Remote gateway type. Valid values: 'generic', 'avx', 'aws', 'azure', 'sonicwall' and 'oracle'.
+        /// Remote gateway type. Valid Values: "generic", "avx", "aws", "azure", "sonicwall", "oracle".
         /// </summary>
         [Input("remoteGatewayType")]
         public Input<string>? RemoteGatewayType { get; set; }
 
         /// <summary>
-        /// Remote identifier. Required for Cert based authentication type.
+        /// Remote identifier. Required for Cert based authentication type. Example: "gw-10-10-0-115".
         /// </summary>
         [Input("remoteIdentifier")]
         public Input<string>? RemoteIdentifier { get; set; }
@@ -1100,7 +1145,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _remoteSourceRealCidrs;
 
         /// <summary>
-        /// Remote Initiated Traffic Source Real CIDRs.
+        /// List of Remote Initiated Traffic Source Real CIDRs.
         /// </summary>
         public InputList<string> RemoteSourceRealCidrs
         {
@@ -1112,7 +1157,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _remoteSourceVirtualCidrs;
 
         /// <summary>
-        /// Remote Initiated Traffic Source Virtual CIDRs.
+        /// List of Remote Initiated Traffic Source Virtual CIDRs.
         /// </summary>
         public InputList<string> RemoteSourceVirtualCidrs
         {
@@ -1121,19 +1166,19 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Remote Subnet CIDR.
+        /// Remote subnet CIDR. **Not required for custom_mapped connection.**
         /// </summary>
         [Input("remoteSubnetCidr")]
         public Input<string>? RemoteSubnetCidr { get; set; }
 
         /// <summary>
-        /// Remote Subnet CIDR (Virtual).
+        /// Remote subnet CIDR (Virtual). **Required for connection type "mapped", except for `custom_mapped` connection.**
         /// </summary>
         [Input("remoteSubnetVirtual")]
         public Input<string>? RemoteSubnetVirtual { get; set; }
 
         /// <summary>
-        /// Remote tunnel IP address.
+        /// Remote tunnel IP address. Only valid for route based connection. Available as of provider version R2.19+.
         /// </summary>
         [Input("remoteTunnelIp")]
         public Input<string>? RemoteTunnelIp { get; set; }
@@ -1151,19 +1196,19 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Specify ssl_server_pool for tunnel_type 'tcp'. Default value is '192.168.44.0/24'
+        /// Specify ssl_server_pool. Default value: "192.168.44.0/24". **NOTE: Please see notes here for more information.**
         /// </summary>
         [Input("sslServerPool")]
         public Input<string>? SslServerPool { get; set; }
 
         /// <summary>
-        /// Site2Cloud Tunnel Type. Valid values: 'policy' and 'route'.
+        /// Site2Cloud tunnel type. Valid Values: "policy", "route".
         /// </summary>
         [Input("tunnelType")]
         public Input<string>? TunnelType { get; set; }
 
         /// <summary>
-        /// VPC Id of the cloud gateway.
+        /// VPC ID of the cloud gateway.
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }

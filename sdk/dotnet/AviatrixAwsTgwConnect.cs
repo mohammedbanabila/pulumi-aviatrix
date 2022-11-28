@@ -9,6 +9,44 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_aws_tgw_connect** resource allows the creation and management of AWS TGW Connect connections. To create
+    /// and manage TGW Connect peers, please use `aviatrix.AviatrixAwsTgwConnectPeer` resources. This resource is available as of
+    /// provider version R2.18.1+.
+    /// 
+    /// &gt; **NOTE:** Before creating an AWS TGW Connect, the AWS TGW must have an attached VPC via
+    /// the `aviatrix.AviatrixAwsTgwVpcAttachment` resource. Also, the AWS TGW must have configured CIDRs via
+    /// the `aviatrix.AviatrixAwsTgw` `cidrs` attribute.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix AWS TGW Connect
+    ///     var testAwsTgwConnect = new Aviatrix.AviatrixAwsTgwConnect("testAwsTgwConnect", new()
+    ///     {
+    ///         TgwName = aviatrix_aws_tgw.Test_aws_tgw.Tgw_name,
+    ///         ConnectionName = "aws-tgw-connect",
+    ///         TransportVpcId = aviatrix_aws_tgw_vpc_attachment.Test_aws_tgw_vpc_attachment.Vpc_id,
+    ///         NetworkDomainName = aviatrix_aws_tgw_vpc_attachment.Test_aws_tgw_vpc_attachment.Network_domain_name,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **aws_tgw_connect** can be imported using the `tgw_name` and `connection_name`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixAwsTgwConnect:AviatrixAwsTgwConnect test tgw_name~~connection_name
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixAwsTgwConnect:AviatrixAwsTgwConnect")]
     public partial class AviatrixAwsTgwConnect : global::Pulumi.CustomResource
     {
@@ -19,25 +57,25 @@ namespace Pulumi.Aviatrix
         public Output<string> ConnectAttachmentId { get; private set; } = null!;
 
         /// <summary>
-        /// Connection Name.
+        /// Connection name.
         /// </summary>
         [Output("connectionName")]
         public Output<string> ConnectionName { get; private set; } = null!;
 
         /// <summary>
-        /// Network Domain Name.
+        /// Network Domain name.
         /// </summary>
         [Output("networkDomainName")]
         public Output<string?> NetworkDomainName { get; private set; } = null!;
 
         /// <summary>
-        /// Security Domain Name.
+        /// Security Domain name.
         /// </summary>
         [Output("securityDomainName")]
         public Output<string?> SecurityDomainName { get; private set; } = null!;
 
         /// <summary>
-        /// AWS TGW Name.
+        /// AWS TGW name.
         /// </summary>
         [Output("tgwName")]
         public Output<string> TgwName { get; private set; } = null!;
@@ -102,25 +140,25 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixAwsTgwConnectArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Connection Name.
+        /// Connection name.
         /// </summary>
         [Input("connectionName", required: true)]
         public Input<string> ConnectionName { get; set; } = null!;
 
         /// <summary>
-        /// Network Domain Name.
+        /// Network Domain name.
         /// </summary>
         [Input("networkDomainName")]
         public Input<string>? NetworkDomainName { get; set; }
 
         /// <summary>
-        /// Security Domain Name.
+        /// Security Domain name.
         /// </summary>
         [Input("securityDomainName")]
         public Input<string>? SecurityDomainName { get; set; }
 
         /// <summary>
-        /// AWS TGW Name.
+        /// AWS TGW name.
         /// </summary>
         [Input("tgwName", required: true)]
         public Input<string> TgwName { get; set; } = null!;
@@ -146,25 +184,25 @@ namespace Pulumi.Aviatrix
         public Input<string>? ConnectAttachmentId { get; set; }
 
         /// <summary>
-        /// Connection Name.
+        /// Connection name.
         /// </summary>
         [Input("connectionName")]
         public Input<string>? ConnectionName { get; set; }
 
         /// <summary>
-        /// Network Domain Name.
+        /// Network Domain name.
         /// </summary>
         [Input("networkDomainName")]
         public Input<string>? NetworkDomainName { get; set; }
 
         /// <summary>
-        /// Security Domain Name.
+        /// Security Domain name.
         /// </summary>
         [Input("securityDomainName")]
         public Input<string>? SecurityDomainName { get; set; }
 
         /// <summary>
-        /// AWS TGW Name.
+        /// AWS TGW name.
         /// </summary>
         [Input("tgwName")]
         public Input<string>? TgwName { get; set; }

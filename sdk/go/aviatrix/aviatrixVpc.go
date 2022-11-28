@@ -11,52 +11,315 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_vpc** resource allows the creation and management of Aviatrix-created VPCs of various cloud types.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixVpc(ctx, "awsVpc", &aviatrix.AviatrixVpcArgs{
+//				AccountName:        pulumi.String("devops"),
+//				AviatrixFirenetVpc: pulumi.Bool(false),
+//				AviatrixTransitVpc: pulumi.Bool(false),
+//				Cidr:               pulumi.String("10.0.0.0/16"),
+//				CloudType:          pulumi.Int(1),
+//				Region:             pulumi.String("us-west-1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixVpc(ctx, "gcpVpc", &aviatrix.AviatrixVpcArgs{
+//				AccountName: pulumi.String("devops"),
+//				CloudType:   pulumi.Int(4),
+//				Subnets: AviatrixVpcSubnetArray{
+//					&AviatrixVpcSubnetArgs{
+//						Cidr:   pulumi.String("10.10.0.0/24"),
+//						Name:   pulumi.String("subnet-1"),
+//						Region: pulumi.String("us-west1"),
+//					},
+//					&AviatrixVpcSubnetArgs{
+//						Cidr:   pulumi.String("10.11.0.0/24"),
+//						Name:   pulumi.String("subnet-2"),
+//						Region: pulumi.String("us-west2"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixVpc(ctx, "azureVnet", &aviatrix.AviatrixVpcArgs{
+//				AccountName:        pulumi.String("devops"),
+//				AviatrixFirenetVpc: pulumi.Bool(false),
+//				Cidr:               pulumi.String("12.0.0.0/16"),
+//				CloudType:          pulumi.Int(8),
+//				Region:             pulumi.String("Central US"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixVpc(ctx, "ociVpc", &aviatrix.AviatrixVpcArgs{
+//				AccountName: pulumi.String("devops"),
+//				Cidr:        pulumi.String("10.0.0.0/24"),
+//				CloudType:   pulumi.Int(16),
+//				Region:      pulumi.String("us-ashburn-1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixVpc(ctx, "azureVnet", &aviatrix.AviatrixVpcArgs{
+//				AccountName:        pulumi.String("devops"),
+//				AviatrixFirenetVpc: pulumi.Bool(false),
+//				Cidr:               pulumi.String("12.0.0.0/16"),
+//				CloudType:          pulumi.Int(32),
+//				Region:             pulumi.String("USGov Arizona"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixVpc(ctx, "awsgovVnet", &aviatrix.AviatrixVpcArgs{
+//				AccountName:        pulumi.String("devops"),
+//				AviatrixFirenetVpc: pulumi.Bool(false),
+//				AviatrixTransitVpc: pulumi.Bool(false),
+//				Cidr:               pulumi.String("12.0.0.0/20"),
+//				CloudType:          pulumi.Int(256),
+//				Region:             pulumi.String("us-gov-west-1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixVpc(ctx, "awsChinaVnet", &aviatrix.AviatrixVpcArgs{
+//				AccountName:        pulumi.String("devops"),
+//				AviatrixTransitVpc: pulumi.Bool(false),
+//				Cidr:               pulumi.String("12.0.0.0/20"),
+//				CloudType:          pulumi.Int(1024),
+//				Region:             pulumi.String("cn-north-1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixVpc(ctx, "azureChinaVnet", &aviatrix.AviatrixVpcArgs{
+//				AccountName: pulumi.String("devops"),
+//				Cidr:        pulumi.String("12.0.0.0/16"),
+//				CloudType:   pulumi.Int(2048),
+//				Region:      pulumi.String("China North"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixVpc(ctx, "aliyunVpc", &aviatrix.AviatrixVpcArgs{
+//				AccountName: pulumi.String("devops"),
+//				Cidr:        pulumi.String("10.0.0.0/20"),
+//				CloudType:   pulumi.Int(8192),
+//				Region:      pulumi.String("acs-us-west-1 (Silicon Valley)"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **vpc** can be imported using the VPC's `name`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixVpc:AviatrixVpc test name
+//
+// ```
 type AviatrixVpc struct {
 	pulumi.CustomResourceState
 
-	// Account name. This account will be used to create an Aviatrix VPC.
+	// This parameter represents the name of a Cloud-Account in Aviatrix controller.
 	AccountName pulumi.StringOutput `pulumi:"accountName"`
 	// List of OCI availability domains.
 	AvailabilityDomains pulumi.StringArrayOutput `pulumi:"availabilityDomains"`
-	// Specify the VPC as Aviatrix FireNet VPC or not. Required to be false for GCP provider.
+	// Specify whether it is an Aviatrix FireNet VPC to be used for [Aviatrix FireNet](https://docs.aviatrix.com/HowTos/firewall_network_faq.html) and [Transit FireNet](https://docs.aviatrix.com/HowTos/transit_firenet_faq.html) solutions. **Only AWS, Azure, AzureGov, AWSGov, AWSChina and AzureChina are supported. Required to be false for other providers.** Valid values: true, false. Default: false.
 	AviatrixFirenetVpc pulumi.BoolPtrOutput `pulumi:"aviatrixFirenetVpc"`
-	// Specify the VPC as Aviatrix Transit VPC or not. Required to be false for GCP provider.
+	// Specify whether it is an [Aviatrix Transit VPC](https://docs.aviatrix.com/HowTos/create_vpc.html#aviatrix-transit-vpc) to be used for [Transit Network](https://docs.aviatrix.com/HowTos/transitvpc_faq.html) or [TGW](https://docs.aviatrix.com/HowTos/tgw_faq.html) solutions. **Only AWS, AWSGov, AWSChina, and Alibaba Cloud are supported. Required to be false for other providers.** Valid values: true, false. Default: false.
 	AviatrixTransitVpc pulumi.BoolPtrOutput `pulumi:"aviatrixTransitVpc"`
-	// Azure vnet resource ID.
+	// Azure VNet resource ID.
 	AzureVnetResourceId pulumi.StringOutput `pulumi:"azureVnetResourceId"`
-	// Subnet of the VPC to be created. Required to be empty for GCP provider, and non-empty for other providers.
+	// CIDR block.
 	Cidr pulumi.StringPtrOutput `pulumi:"cidr"`
-	// Type of cloud service provider.
+	// Type of cloud service provider, requires an integer value. Currently only AWS(1), GCP(4), Azure(8), OCI(16), AzureGov(32), AWSGov(256), AWSChina(1024), AzureChina(2048), Alibaba Cloud(8192) are supported.
 	CloudType pulumi.IntOutput `pulumi:"cloudType"`
-	// Enable Native AWS GWLB for FireNet Function. Only valid with cloud_type = 1 (AWS). Valid values: true or false. Default
-	// value: false. Available as of provider version R2.18+.
+	// Enable Native AWS Gateway Load Balancer for FireNet Function. Only valid with cloudType = 1 (AWS). **This option is only applicable to TGW-integrated FireNet**. Currently, AWS Gateway Load Balancer is only supported in AWS regions: us-west-2, us-east-1, eu-west-1, ap-southeast-2 and sa-east-1. Valid values: true or false. Default value: false. Available as of provider version R2.18+.
 	EnableNativeGwlb pulumi.BoolPtrOutput `pulumi:"enableNativeGwlb"`
-	// Switch to enable private oob subnet. Only supported for AWS/AWSGov provider. Valid values: true, false. Default value:
-	// false.
+	// Switch to enable private oob subnet. Only supported for AWS, AWSGov and AWSChina providers. Valid values: true, false. Default value: false. Available as of provider version R2.18+.
 	EnablePrivateOobSubnet pulumi.BoolPtrOutput `pulumi:"enablePrivateOobSubnet"`
 	// List of OCI fault domains.
 	FaultDomains pulumi.StringArrayOutput `pulumi:"faultDomains"`
-	// Name of the VPC to be created.
+	// Name of this subnet.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// Number of public subnet and private subnet pair to be created.
+	// Number of public subnet and private subnet pair created. Only supported for AWS, Azure provider. Example: 1. Available in provider version R2.17+.
 	NumOfSubnetPairs pulumi.IntPtrOutput `pulumi:"numOfSubnetPairs"`
-	// Switch to only launch private subnets. Only available when Private Mode is enabled on the Controller.
+	// Switch to only launch private subnets. Only available when Private Mode is enabled on the Controller. Only AWS, Azure, AzureGov and AWSGov are supported. Available in Provider version R2.23+.
 	PrivateModeSubnets pulumi.BoolPtrOutput `pulumi:"privateModeSubnets"`
-	// List of private subnet of the VPC to be created.
+	// List of private subnet of the VPC(AWS, Azure) to be created.
 	PrivateSubnets AviatrixVpcPrivateSubnetArrayOutput `pulumi:"privateSubnets"`
-	// List of public subnet of the VPC to be created.
+	// List of public subnet of the VPC(AWS, Azure) to be created.
 	PublicSubnets AviatrixVpcPublicSubnetArrayOutput `pulumi:"publicSubnets"`
-	// Region of cloud provider. Required to be empty for GCP provider, and non-empty for other providers.
+	// Region of this subnet.
 	Region pulumi.StringPtrOutput `pulumi:"region"`
-	// Resource group of the Azure VPC created.
+	// The name of an existing resource group or a new resource group to be created for the Azure VNet.  A new resource group will be created if left blank. Only available for Azure, AzureGov and AzureChina providers. Available as of provider version R2.19+.
 	ResourceGroup pulumi.StringOutput `pulumi:"resourceGroup"`
-	// List of route table ids associated with this VPC.
+	// List of route table ids associated with this VPC. Only populated for AWS, AWSGov and Azure VPC.
 	RouteTables pulumi.StringArrayOutput `pulumi:"routeTables"`
-	// Subnet size.
+	// Subnet size. Only supported for AWS, Azure provider. Example: 24. Available in provider version R2.17+.
 	SubnetSize pulumi.IntPtrOutput `pulumi:"subnetSize"`
-	// List of subnet of the VPC to be created. Required to be non-empty for GCP provider, and empty for other providers.
+	// List of subnets to be specify for GCP provider. Required to be non-empty for GCP provider, and empty for other providers.
 	Subnets AviatrixVpcSubnetArrayOutput `pulumi:"subnets"`
-	// ID of the VPC created.
+	// ID of the VPC to be created.
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
 }
 
@@ -96,96 +359,92 @@ func GetAviatrixVpc(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixVpc resources.
 type aviatrixVpcState struct {
-	// Account name. This account will be used to create an Aviatrix VPC.
+	// This parameter represents the name of a Cloud-Account in Aviatrix controller.
 	AccountName *string `pulumi:"accountName"`
 	// List of OCI availability domains.
 	AvailabilityDomains []string `pulumi:"availabilityDomains"`
-	// Specify the VPC as Aviatrix FireNet VPC or not. Required to be false for GCP provider.
+	// Specify whether it is an Aviatrix FireNet VPC to be used for [Aviatrix FireNet](https://docs.aviatrix.com/HowTos/firewall_network_faq.html) and [Transit FireNet](https://docs.aviatrix.com/HowTos/transit_firenet_faq.html) solutions. **Only AWS, Azure, AzureGov, AWSGov, AWSChina and AzureChina are supported. Required to be false for other providers.** Valid values: true, false. Default: false.
 	AviatrixFirenetVpc *bool `pulumi:"aviatrixFirenetVpc"`
-	// Specify the VPC as Aviatrix Transit VPC or not. Required to be false for GCP provider.
+	// Specify whether it is an [Aviatrix Transit VPC](https://docs.aviatrix.com/HowTos/create_vpc.html#aviatrix-transit-vpc) to be used for [Transit Network](https://docs.aviatrix.com/HowTos/transitvpc_faq.html) or [TGW](https://docs.aviatrix.com/HowTos/tgw_faq.html) solutions. **Only AWS, AWSGov, AWSChina, and Alibaba Cloud are supported. Required to be false for other providers.** Valid values: true, false. Default: false.
 	AviatrixTransitVpc *bool `pulumi:"aviatrixTransitVpc"`
-	// Azure vnet resource ID.
+	// Azure VNet resource ID.
 	AzureVnetResourceId *string `pulumi:"azureVnetResourceId"`
-	// Subnet of the VPC to be created. Required to be empty for GCP provider, and non-empty for other providers.
+	// CIDR block.
 	Cidr *string `pulumi:"cidr"`
-	// Type of cloud service provider.
+	// Type of cloud service provider, requires an integer value. Currently only AWS(1), GCP(4), Azure(8), OCI(16), AzureGov(32), AWSGov(256), AWSChina(1024), AzureChina(2048), Alibaba Cloud(8192) are supported.
 	CloudType *int `pulumi:"cloudType"`
-	// Enable Native AWS GWLB for FireNet Function. Only valid with cloud_type = 1 (AWS). Valid values: true or false. Default
-	// value: false. Available as of provider version R2.18+.
+	// Enable Native AWS Gateway Load Balancer for FireNet Function. Only valid with cloudType = 1 (AWS). **This option is only applicable to TGW-integrated FireNet**. Currently, AWS Gateway Load Balancer is only supported in AWS regions: us-west-2, us-east-1, eu-west-1, ap-southeast-2 and sa-east-1. Valid values: true or false. Default value: false. Available as of provider version R2.18+.
 	EnableNativeGwlb *bool `pulumi:"enableNativeGwlb"`
-	// Switch to enable private oob subnet. Only supported for AWS/AWSGov provider. Valid values: true, false. Default value:
-	// false.
+	// Switch to enable private oob subnet. Only supported for AWS, AWSGov and AWSChina providers. Valid values: true, false. Default value: false. Available as of provider version R2.18+.
 	EnablePrivateOobSubnet *bool `pulumi:"enablePrivateOobSubnet"`
 	// List of OCI fault domains.
 	FaultDomains []string `pulumi:"faultDomains"`
-	// Name of the VPC to be created.
+	// Name of this subnet.
 	Name *string `pulumi:"name"`
-	// Number of public subnet and private subnet pair to be created.
+	// Number of public subnet and private subnet pair created. Only supported for AWS, Azure provider. Example: 1. Available in provider version R2.17+.
 	NumOfSubnetPairs *int `pulumi:"numOfSubnetPairs"`
-	// Switch to only launch private subnets. Only available when Private Mode is enabled on the Controller.
+	// Switch to only launch private subnets. Only available when Private Mode is enabled on the Controller. Only AWS, Azure, AzureGov and AWSGov are supported. Available in Provider version R2.23+.
 	PrivateModeSubnets *bool `pulumi:"privateModeSubnets"`
-	// List of private subnet of the VPC to be created.
+	// List of private subnet of the VPC(AWS, Azure) to be created.
 	PrivateSubnets []AviatrixVpcPrivateSubnet `pulumi:"privateSubnets"`
-	// List of public subnet of the VPC to be created.
+	// List of public subnet of the VPC(AWS, Azure) to be created.
 	PublicSubnets []AviatrixVpcPublicSubnet `pulumi:"publicSubnets"`
-	// Region of cloud provider. Required to be empty for GCP provider, and non-empty for other providers.
+	// Region of this subnet.
 	Region *string `pulumi:"region"`
-	// Resource group of the Azure VPC created.
+	// The name of an existing resource group or a new resource group to be created for the Azure VNet.  A new resource group will be created if left blank. Only available for Azure, AzureGov and AzureChina providers. Available as of provider version R2.19+.
 	ResourceGroup *string `pulumi:"resourceGroup"`
-	// List of route table ids associated with this VPC.
+	// List of route table ids associated with this VPC. Only populated for AWS, AWSGov and Azure VPC.
 	RouteTables []string `pulumi:"routeTables"`
-	// Subnet size.
+	// Subnet size. Only supported for AWS, Azure provider. Example: 24. Available in provider version R2.17+.
 	SubnetSize *int `pulumi:"subnetSize"`
-	// List of subnet of the VPC to be created. Required to be non-empty for GCP provider, and empty for other providers.
+	// List of subnets to be specify for GCP provider. Required to be non-empty for GCP provider, and empty for other providers.
 	Subnets []AviatrixVpcSubnet `pulumi:"subnets"`
-	// ID of the VPC created.
+	// ID of the VPC to be created.
 	VpcId *string `pulumi:"vpcId"`
 }
 
 type AviatrixVpcState struct {
-	// Account name. This account will be used to create an Aviatrix VPC.
+	// This parameter represents the name of a Cloud-Account in Aviatrix controller.
 	AccountName pulumi.StringPtrInput
 	// List of OCI availability domains.
 	AvailabilityDomains pulumi.StringArrayInput
-	// Specify the VPC as Aviatrix FireNet VPC or not. Required to be false for GCP provider.
+	// Specify whether it is an Aviatrix FireNet VPC to be used for [Aviatrix FireNet](https://docs.aviatrix.com/HowTos/firewall_network_faq.html) and [Transit FireNet](https://docs.aviatrix.com/HowTos/transit_firenet_faq.html) solutions. **Only AWS, Azure, AzureGov, AWSGov, AWSChina and AzureChina are supported. Required to be false for other providers.** Valid values: true, false. Default: false.
 	AviatrixFirenetVpc pulumi.BoolPtrInput
-	// Specify the VPC as Aviatrix Transit VPC or not. Required to be false for GCP provider.
+	// Specify whether it is an [Aviatrix Transit VPC](https://docs.aviatrix.com/HowTos/create_vpc.html#aviatrix-transit-vpc) to be used for [Transit Network](https://docs.aviatrix.com/HowTos/transitvpc_faq.html) or [TGW](https://docs.aviatrix.com/HowTos/tgw_faq.html) solutions. **Only AWS, AWSGov, AWSChina, and Alibaba Cloud are supported. Required to be false for other providers.** Valid values: true, false. Default: false.
 	AviatrixTransitVpc pulumi.BoolPtrInput
-	// Azure vnet resource ID.
+	// Azure VNet resource ID.
 	AzureVnetResourceId pulumi.StringPtrInput
-	// Subnet of the VPC to be created. Required to be empty for GCP provider, and non-empty for other providers.
+	// CIDR block.
 	Cidr pulumi.StringPtrInput
-	// Type of cloud service provider.
+	// Type of cloud service provider, requires an integer value. Currently only AWS(1), GCP(4), Azure(8), OCI(16), AzureGov(32), AWSGov(256), AWSChina(1024), AzureChina(2048), Alibaba Cloud(8192) are supported.
 	CloudType pulumi.IntPtrInput
-	// Enable Native AWS GWLB for FireNet Function. Only valid with cloud_type = 1 (AWS). Valid values: true or false. Default
-	// value: false. Available as of provider version R2.18+.
+	// Enable Native AWS Gateway Load Balancer for FireNet Function. Only valid with cloudType = 1 (AWS). **This option is only applicable to TGW-integrated FireNet**. Currently, AWS Gateway Load Balancer is only supported in AWS regions: us-west-2, us-east-1, eu-west-1, ap-southeast-2 and sa-east-1. Valid values: true or false. Default value: false. Available as of provider version R2.18+.
 	EnableNativeGwlb pulumi.BoolPtrInput
-	// Switch to enable private oob subnet. Only supported for AWS/AWSGov provider. Valid values: true, false. Default value:
-	// false.
+	// Switch to enable private oob subnet. Only supported for AWS, AWSGov and AWSChina providers. Valid values: true, false. Default value: false. Available as of provider version R2.18+.
 	EnablePrivateOobSubnet pulumi.BoolPtrInput
 	// List of OCI fault domains.
 	FaultDomains pulumi.StringArrayInput
-	// Name of the VPC to be created.
+	// Name of this subnet.
 	Name pulumi.StringPtrInput
-	// Number of public subnet and private subnet pair to be created.
+	// Number of public subnet and private subnet pair created. Only supported for AWS, Azure provider. Example: 1. Available in provider version R2.17+.
 	NumOfSubnetPairs pulumi.IntPtrInput
-	// Switch to only launch private subnets. Only available when Private Mode is enabled on the Controller.
+	// Switch to only launch private subnets. Only available when Private Mode is enabled on the Controller. Only AWS, Azure, AzureGov and AWSGov are supported. Available in Provider version R2.23+.
 	PrivateModeSubnets pulumi.BoolPtrInput
-	// List of private subnet of the VPC to be created.
+	// List of private subnet of the VPC(AWS, Azure) to be created.
 	PrivateSubnets AviatrixVpcPrivateSubnetArrayInput
-	// List of public subnet of the VPC to be created.
+	// List of public subnet of the VPC(AWS, Azure) to be created.
 	PublicSubnets AviatrixVpcPublicSubnetArrayInput
-	// Region of cloud provider. Required to be empty for GCP provider, and non-empty for other providers.
+	// Region of this subnet.
 	Region pulumi.StringPtrInput
-	// Resource group of the Azure VPC created.
+	// The name of an existing resource group or a new resource group to be created for the Azure VNet.  A new resource group will be created if left blank. Only available for Azure, AzureGov and AzureChina providers. Available as of provider version R2.19+.
 	ResourceGroup pulumi.StringPtrInput
-	// List of route table ids associated with this VPC.
+	// List of route table ids associated with this VPC. Only populated for AWS, AWSGov and Azure VPC.
 	RouteTables pulumi.StringArrayInput
-	// Subnet size.
+	// Subnet size. Only supported for AWS, Azure provider. Example: 24. Available in provider version R2.17+.
 	SubnetSize pulumi.IntPtrInput
-	// List of subnet of the VPC to be created. Required to be non-empty for GCP provider, and empty for other providers.
+	// List of subnets to be specify for GCP provider. Required to be non-empty for GCP provider, and empty for other providers.
 	Subnets AviatrixVpcSubnetArrayInput
-	// ID of the VPC created.
+	// ID of the VPC to be created.
 	VpcId pulumi.StringPtrInput
 }
 
@@ -194,69 +453,65 @@ func (AviatrixVpcState) ElementType() reflect.Type {
 }
 
 type aviatrixVpcArgs struct {
-	// Account name. This account will be used to create an Aviatrix VPC.
+	// This parameter represents the name of a Cloud-Account in Aviatrix controller.
 	AccountName string `pulumi:"accountName"`
-	// Specify the VPC as Aviatrix FireNet VPC or not. Required to be false for GCP provider.
+	// Specify whether it is an Aviatrix FireNet VPC to be used for [Aviatrix FireNet](https://docs.aviatrix.com/HowTos/firewall_network_faq.html) and [Transit FireNet](https://docs.aviatrix.com/HowTos/transit_firenet_faq.html) solutions. **Only AWS, Azure, AzureGov, AWSGov, AWSChina and AzureChina are supported. Required to be false for other providers.** Valid values: true, false. Default: false.
 	AviatrixFirenetVpc *bool `pulumi:"aviatrixFirenetVpc"`
-	// Specify the VPC as Aviatrix Transit VPC or not. Required to be false for GCP provider.
+	// Specify whether it is an [Aviatrix Transit VPC](https://docs.aviatrix.com/HowTos/create_vpc.html#aviatrix-transit-vpc) to be used for [Transit Network](https://docs.aviatrix.com/HowTos/transitvpc_faq.html) or [TGW](https://docs.aviatrix.com/HowTos/tgw_faq.html) solutions. **Only AWS, AWSGov, AWSChina, and Alibaba Cloud are supported. Required to be false for other providers.** Valid values: true, false. Default: false.
 	AviatrixTransitVpc *bool `pulumi:"aviatrixTransitVpc"`
-	// Subnet of the VPC to be created. Required to be empty for GCP provider, and non-empty for other providers.
+	// CIDR block.
 	Cidr *string `pulumi:"cidr"`
-	// Type of cloud service provider.
+	// Type of cloud service provider, requires an integer value. Currently only AWS(1), GCP(4), Azure(8), OCI(16), AzureGov(32), AWSGov(256), AWSChina(1024), AzureChina(2048), Alibaba Cloud(8192) are supported.
 	CloudType int `pulumi:"cloudType"`
-	// Enable Native AWS GWLB for FireNet Function. Only valid with cloud_type = 1 (AWS). Valid values: true or false. Default
-	// value: false. Available as of provider version R2.18+.
+	// Enable Native AWS Gateway Load Balancer for FireNet Function. Only valid with cloudType = 1 (AWS). **This option is only applicable to TGW-integrated FireNet**. Currently, AWS Gateway Load Balancer is only supported in AWS regions: us-west-2, us-east-1, eu-west-1, ap-southeast-2 and sa-east-1. Valid values: true or false. Default value: false. Available as of provider version R2.18+.
 	EnableNativeGwlb *bool `pulumi:"enableNativeGwlb"`
-	// Switch to enable private oob subnet. Only supported for AWS/AWSGov provider. Valid values: true, false. Default value:
-	// false.
+	// Switch to enable private oob subnet. Only supported for AWS, AWSGov and AWSChina providers. Valid values: true, false. Default value: false. Available as of provider version R2.18+.
 	EnablePrivateOobSubnet *bool `pulumi:"enablePrivateOobSubnet"`
-	// Name of the VPC to be created.
+	// Name of this subnet.
 	Name *string `pulumi:"name"`
-	// Number of public subnet and private subnet pair to be created.
+	// Number of public subnet and private subnet pair created. Only supported for AWS, Azure provider. Example: 1. Available in provider version R2.17+.
 	NumOfSubnetPairs *int `pulumi:"numOfSubnetPairs"`
-	// Switch to only launch private subnets. Only available when Private Mode is enabled on the Controller.
+	// Switch to only launch private subnets. Only available when Private Mode is enabled on the Controller. Only AWS, Azure, AzureGov and AWSGov are supported. Available in Provider version R2.23+.
 	PrivateModeSubnets *bool `pulumi:"privateModeSubnets"`
-	// Region of cloud provider. Required to be empty for GCP provider, and non-empty for other providers.
+	// Region of this subnet.
 	Region *string `pulumi:"region"`
-	// Resource group of the Azure VPC created.
+	// The name of an existing resource group or a new resource group to be created for the Azure VNet.  A new resource group will be created if left blank. Only available for Azure, AzureGov and AzureChina providers. Available as of provider version R2.19+.
 	ResourceGroup *string `pulumi:"resourceGroup"`
-	// Subnet size.
+	// Subnet size. Only supported for AWS, Azure provider. Example: 24. Available in provider version R2.17+.
 	SubnetSize *int `pulumi:"subnetSize"`
-	// List of subnet of the VPC to be created. Required to be non-empty for GCP provider, and empty for other providers.
+	// List of subnets to be specify for GCP provider. Required to be non-empty for GCP provider, and empty for other providers.
 	Subnets []AviatrixVpcSubnet `pulumi:"subnets"`
 }
 
 // The set of arguments for constructing a AviatrixVpc resource.
 type AviatrixVpcArgs struct {
-	// Account name. This account will be used to create an Aviatrix VPC.
+	// This parameter represents the name of a Cloud-Account in Aviatrix controller.
 	AccountName pulumi.StringInput
-	// Specify the VPC as Aviatrix FireNet VPC or not. Required to be false for GCP provider.
+	// Specify whether it is an Aviatrix FireNet VPC to be used for [Aviatrix FireNet](https://docs.aviatrix.com/HowTos/firewall_network_faq.html) and [Transit FireNet](https://docs.aviatrix.com/HowTos/transit_firenet_faq.html) solutions. **Only AWS, Azure, AzureGov, AWSGov, AWSChina and AzureChina are supported. Required to be false for other providers.** Valid values: true, false. Default: false.
 	AviatrixFirenetVpc pulumi.BoolPtrInput
-	// Specify the VPC as Aviatrix Transit VPC or not. Required to be false for GCP provider.
+	// Specify whether it is an [Aviatrix Transit VPC](https://docs.aviatrix.com/HowTos/create_vpc.html#aviatrix-transit-vpc) to be used for [Transit Network](https://docs.aviatrix.com/HowTos/transitvpc_faq.html) or [TGW](https://docs.aviatrix.com/HowTos/tgw_faq.html) solutions. **Only AWS, AWSGov, AWSChina, and Alibaba Cloud are supported. Required to be false for other providers.** Valid values: true, false. Default: false.
 	AviatrixTransitVpc pulumi.BoolPtrInput
-	// Subnet of the VPC to be created. Required to be empty for GCP provider, and non-empty for other providers.
+	// CIDR block.
 	Cidr pulumi.StringPtrInput
-	// Type of cloud service provider.
+	// Type of cloud service provider, requires an integer value. Currently only AWS(1), GCP(4), Azure(8), OCI(16), AzureGov(32), AWSGov(256), AWSChina(1024), AzureChina(2048), Alibaba Cloud(8192) are supported.
 	CloudType pulumi.IntInput
-	// Enable Native AWS GWLB for FireNet Function. Only valid with cloud_type = 1 (AWS). Valid values: true or false. Default
-	// value: false. Available as of provider version R2.18+.
+	// Enable Native AWS Gateway Load Balancer for FireNet Function. Only valid with cloudType = 1 (AWS). **This option is only applicable to TGW-integrated FireNet**. Currently, AWS Gateway Load Balancer is only supported in AWS regions: us-west-2, us-east-1, eu-west-1, ap-southeast-2 and sa-east-1. Valid values: true or false. Default value: false. Available as of provider version R2.18+.
 	EnableNativeGwlb pulumi.BoolPtrInput
-	// Switch to enable private oob subnet. Only supported for AWS/AWSGov provider. Valid values: true, false. Default value:
-	// false.
+	// Switch to enable private oob subnet. Only supported for AWS, AWSGov and AWSChina providers. Valid values: true, false. Default value: false. Available as of provider version R2.18+.
 	EnablePrivateOobSubnet pulumi.BoolPtrInput
-	// Name of the VPC to be created.
+	// Name of this subnet.
 	Name pulumi.StringPtrInput
-	// Number of public subnet and private subnet pair to be created.
+	// Number of public subnet and private subnet pair created. Only supported for AWS, Azure provider. Example: 1. Available in provider version R2.17+.
 	NumOfSubnetPairs pulumi.IntPtrInput
-	// Switch to only launch private subnets. Only available when Private Mode is enabled on the Controller.
+	// Switch to only launch private subnets. Only available when Private Mode is enabled on the Controller. Only AWS, Azure, AzureGov and AWSGov are supported. Available in Provider version R2.23+.
 	PrivateModeSubnets pulumi.BoolPtrInput
-	// Region of cloud provider. Required to be empty for GCP provider, and non-empty for other providers.
+	// Region of this subnet.
 	Region pulumi.StringPtrInput
-	// Resource group of the Azure VPC created.
+	// The name of an existing resource group or a new resource group to be created for the Azure VNet.  A new resource group will be created if left blank. Only available for Azure, AzureGov and AzureChina providers. Available as of provider version R2.19+.
 	ResourceGroup pulumi.StringPtrInput
-	// Subnet size.
+	// Subnet size. Only supported for AWS, Azure provider. Example: 24. Available in provider version R2.17+.
 	SubnetSize pulumi.IntPtrInput
-	// List of subnet of the VPC to be created. Required to be non-empty for GCP provider, and empty for other providers.
+	// List of subnets to be specify for GCP provider. Required to be non-empty for GCP provider, and empty for other providers.
 	Subnets AviatrixVpcSubnetArrayInput
 }
 
@@ -347,7 +602,7 @@ func (o AviatrixVpcOutput) ToAviatrixVpcOutputWithContext(ctx context.Context) A
 	return o
 }
 
-// Account name. This account will be used to create an Aviatrix VPC.
+// This parameter represents the name of a Cloud-Account in Aviatrix controller.
 func (o AviatrixVpcOutput) AccountName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixVpc) pulumi.StringOutput { return v.AccountName }).(pulumi.StringOutput)
 }
@@ -357,39 +612,37 @@ func (o AviatrixVpcOutput) AvailabilityDomains() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixVpc) pulumi.StringArrayOutput { return v.AvailabilityDomains }).(pulumi.StringArrayOutput)
 }
 
-// Specify the VPC as Aviatrix FireNet VPC or not. Required to be false for GCP provider.
+// Specify whether it is an Aviatrix FireNet VPC to be used for [Aviatrix FireNet](https://docs.aviatrix.com/HowTos/firewall_network_faq.html) and [Transit FireNet](https://docs.aviatrix.com/HowTos/transit_firenet_faq.html) solutions. **Only AWS, Azure, AzureGov, AWSGov, AWSChina and AzureChina are supported. Required to be false for other providers.** Valid values: true, false. Default: false.
 func (o AviatrixVpcOutput) AviatrixFirenetVpc() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixVpc) pulumi.BoolPtrOutput { return v.AviatrixFirenetVpc }).(pulumi.BoolPtrOutput)
 }
 
-// Specify the VPC as Aviatrix Transit VPC or not. Required to be false for GCP provider.
+// Specify whether it is an [Aviatrix Transit VPC](https://docs.aviatrix.com/HowTos/create_vpc.html#aviatrix-transit-vpc) to be used for [Transit Network](https://docs.aviatrix.com/HowTos/transitvpc_faq.html) or [TGW](https://docs.aviatrix.com/HowTos/tgw_faq.html) solutions. **Only AWS, AWSGov, AWSChina, and Alibaba Cloud are supported. Required to be false for other providers.** Valid values: true, false. Default: false.
 func (o AviatrixVpcOutput) AviatrixTransitVpc() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixVpc) pulumi.BoolPtrOutput { return v.AviatrixTransitVpc }).(pulumi.BoolPtrOutput)
 }
 
-// Azure vnet resource ID.
+// Azure VNet resource ID.
 func (o AviatrixVpcOutput) AzureVnetResourceId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixVpc) pulumi.StringOutput { return v.AzureVnetResourceId }).(pulumi.StringOutput)
 }
 
-// Subnet of the VPC to be created. Required to be empty for GCP provider, and non-empty for other providers.
+// CIDR block.
 func (o AviatrixVpcOutput) Cidr() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixVpc) pulumi.StringPtrOutput { return v.Cidr }).(pulumi.StringPtrOutput)
 }
 
-// Type of cloud service provider.
+// Type of cloud service provider, requires an integer value. Currently only AWS(1), GCP(4), Azure(8), OCI(16), AzureGov(32), AWSGov(256), AWSChina(1024), AzureChina(2048), Alibaba Cloud(8192) are supported.
 func (o AviatrixVpcOutput) CloudType() pulumi.IntOutput {
 	return o.ApplyT(func(v *AviatrixVpc) pulumi.IntOutput { return v.CloudType }).(pulumi.IntOutput)
 }
 
-// Enable Native AWS GWLB for FireNet Function. Only valid with cloud_type = 1 (AWS). Valid values: true or false. Default
-// value: false. Available as of provider version R2.18+.
+// Enable Native AWS Gateway Load Balancer for FireNet Function. Only valid with cloudType = 1 (AWS). **This option is only applicable to TGW-integrated FireNet**. Currently, AWS Gateway Load Balancer is only supported in AWS regions: us-west-2, us-east-1, eu-west-1, ap-southeast-2 and sa-east-1. Valid values: true or false. Default value: false. Available as of provider version R2.18+.
 func (o AviatrixVpcOutput) EnableNativeGwlb() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixVpc) pulumi.BoolPtrOutput { return v.EnableNativeGwlb }).(pulumi.BoolPtrOutput)
 }
 
-// Switch to enable private oob subnet. Only supported for AWS/AWSGov provider. Valid values: true, false. Default value:
-// false.
+// Switch to enable private oob subnet. Only supported for AWS, AWSGov and AWSChina providers. Valid values: true, false. Default value: false. Available as of provider version R2.18+.
 func (o AviatrixVpcOutput) EnablePrivateOobSubnet() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixVpc) pulumi.BoolPtrOutput { return v.EnablePrivateOobSubnet }).(pulumi.BoolPtrOutput)
 }
@@ -399,57 +652,57 @@ func (o AviatrixVpcOutput) FaultDomains() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixVpc) pulumi.StringArrayOutput { return v.FaultDomains }).(pulumi.StringArrayOutput)
 }
 
-// Name of the VPC to be created.
+// Name of this subnet.
 func (o AviatrixVpcOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixVpc) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// Number of public subnet and private subnet pair to be created.
+// Number of public subnet and private subnet pair created. Only supported for AWS, Azure provider. Example: 1. Available in provider version R2.17+.
 func (o AviatrixVpcOutput) NumOfSubnetPairs() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *AviatrixVpc) pulumi.IntPtrOutput { return v.NumOfSubnetPairs }).(pulumi.IntPtrOutput)
 }
 
-// Switch to only launch private subnets. Only available when Private Mode is enabled on the Controller.
+// Switch to only launch private subnets. Only available when Private Mode is enabled on the Controller. Only AWS, Azure, AzureGov and AWSGov are supported. Available in Provider version R2.23+.
 func (o AviatrixVpcOutput) PrivateModeSubnets() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixVpc) pulumi.BoolPtrOutput { return v.PrivateModeSubnets }).(pulumi.BoolPtrOutput)
 }
 
-// List of private subnet of the VPC to be created.
+// List of private subnet of the VPC(AWS, Azure) to be created.
 func (o AviatrixVpcOutput) PrivateSubnets() AviatrixVpcPrivateSubnetArrayOutput {
 	return o.ApplyT(func(v *AviatrixVpc) AviatrixVpcPrivateSubnetArrayOutput { return v.PrivateSubnets }).(AviatrixVpcPrivateSubnetArrayOutput)
 }
 
-// List of public subnet of the VPC to be created.
+// List of public subnet of the VPC(AWS, Azure) to be created.
 func (o AviatrixVpcOutput) PublicSubnets() AviatrixVpcPublicSubnetArrayOutput {
 	return o.ApplyT(func(v *AviatrixVpc) AviatrixVpcPublicSubnetArrayOutput { return v.PublicSubnets }).(AviatrixVpcPublicSubnetArrayOutput)
 }
 
-// Region of cloud provider. Required to be empty for GCP provider, and non-empty for other providers.
+// Region of this subnet.
 func (o AviatrixVpcOutput) Region() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixVpc) pulumi.StringPtrOutput { return v.Region }).(pulumi.StringPtrOutput)
 }
 
-// Resource group of the Azure VPC created.
+// The name of an existing resource group or a new resource group to be created for the Azure VNet.  A new resource group will be created if left blank. Only available for Azure, AzureGov and AzureChina providers. Available as of provider version R2.19+.
 func (o AviatrixVpcOutput) ResourceGroup() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixVpc) pulumi.StringOutput { return v.ResourceGroup }).(pulumi.StringOutput)
 }
 
-// List of route table ids associated with this VPC.
+// List of route table ids associated with this VPC. Only populated for AWS, AWSGov and Azure VPC.
 func (o AviatrixVpcOutput) RouteTables() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixVpc) pulumi.StringArrayOutput { return v.RouteTables }).(pulumi.StringArrayOutput)
 }
 
-// Subnet size.
+// Subnet size. Only supported for AWS, Azure provider. Example: 24. Available in provider version R2.17+.
 func (o AviatrixVpcOutput) SubnetSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *AviatrixVpc) pulumi.IntPtrOutput { return v.SubnetSize }).(pulumi.IntPtrOutput)
 }
 
-// List of subnet of the VPC to be created. Required to be non-empty for GCP provider, and empty for other providers.
+// List of subnets to be specify for GCP provider. Required to be non-empty for GCP provider, and empty for other providers.
 func (o AviatrixVpcOutput) Subnets() AviatrixVpcSubnetArrayOutput {
 	return o.ApplyT(func(v *AviatrixVpc) AviatrixVpcSubnetArrayOutput { return v.Subnets }).(AviatrixVpcSubnetArrayOutput)
 }
 
-// ID of the VPC created.
+// ID of the VPC to be created.
 func (o AviatrixVpcOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixVpc) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
 }

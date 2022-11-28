@@ -4,6 +4,30 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Gateway FQDN Tag Rule filter rule
+ * const testFqdn = new aviatrix.AviatrixFqdnTagRule("test_fqdn", {
+ *     fqdn: "reddit.com",
+ *     fqdnTagName: "my_tag",
+ *     port: "443",
+ *     protocol: "tcp",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **fqdn_tag_rule** can be imported using the `fqdn_tag_name`, `fqdn`, `protocol`, `port` and `action` separated by `~`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixFqdnTagRule:AviatrixFqdnTagRule test "fqdn_tag_name~fqdn~protocol~port~action"
+ * ```
+ */
 export class AviatrixFqdnTagRule extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixFqdnTagRule resource's state with the given name, ID, and optional extra
@@ -33,24 +57,25 @@ export class AviatrixFqdnTagRule extends pulumi.CustomResource {
     }
 
     /**
-     * What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base
-     * Policy' if no value is provided.
+     * What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base Policy' if no value provided.
+     * * For protocol "all", port must be set to "all".
+     * * For protocol “icmp”, port must be set to “ping”.
      */
     public readonly action!: pulumi.Output<string | undefined>;
     /**
-     * FQDN.
+     * FQDN. Example: "facebook.com".
      */
     public readonly fqdn!: pulumi.Output<string>;
     /**
-     * FQDN Filter Tag Name to attach this domain.
+     * FQDN Filter tag name.
      */
     public readonly fqdnTagName!: pulumi.Output<string>;
     /**
-     * Port.
+     * Port. Example "25".
      */
     public readonly port!: pulumi.Output<string>;
     /**
-     * Protocol.
+     * Protocol. Valid values: "all", "tcp", "udp", "icmp".
      */
     public readonly protocol!: pulumi.Output<string>;
 
@@ -102,24 +127,25 @@ export class AviatrixFqdnTagRule extends pulumi.CustomResource {
  */
 export interface AviatrixFqdnTagRuleState {
     /**
-     * What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base
-     * Policy' if no value is provided.
+     * What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base Policy' if no value provided.
+     * * For protocol "all", port must be set to "all".
+     * * For protocol “icmp”, port must be set to “ping”.
      */
     action?: pulumi.Input<string>;
     /**
-     * FQDN.
+     * FQDN. Example: "facebook.com".
      */
     fqdn?: pulumi.Input<string>;
     /**
-     * FQDN Filter Tag Name to attach this domain.
+     * FQDN Filter tag name.
      */
     fqdnTagName?: pulumi.Input<string>;
     /**
-     * Port.
+     * Port. Example "25".
      */
     port?: pulumi.Input<string>;
     /**
-     * Protocol.
+     * Protocol. Valid values: "all", "tcp", "udp", "icmp".
      */
     protocol?: pulumi.Input<string>;
 }
@@ -129,24 +155,25 @@ export interface AviatrixFqdnTagRuleState {
  */
 export interface AviatrixFqdnTagRuleArgs {
     /**
-     * What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base
-     * Policy' if no value is provided.
+     * What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base Policy' if no value provided.
+     * * For protocol "all", port must be set to "all".
+     * * For protocol “icmp”, port must be set to “ping”.
      */
     action?: pulumi.Input<string>;
     /**
-     * FQDN.
+     * FQDN. Example: "facebook.com".
      */
     fqdn: pulumi.Input<string>;
     /**
-     * FQDN Filter Tag Name to attach this domain.
+     * FQDN Filter tag name.
      */
     fqdnTagName: pulumi.Input<string>;
     /**
-     * Port.
+     * Port. Example "25".
      */
     port: pulumi.Input<string>;
     /**
-     * Protocol.
+     * Protocol. Valid values: "all", "tcp", "udp", "icmp".
      */
     protocol: pulumi.Input<string>;
 }

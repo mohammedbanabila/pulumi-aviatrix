@@ -9,6 +9,15 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// ## Import
+    /// 
+    /// **gateway_dnat** can be imported using the `gw_name`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixGatewayDnat:AviatrixGatewayDnat test gw_name
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixGatewayDnat:AviatrixGatewayDnat")]
     public partial class AviatrixGatewayDnat : global::Pulumi.CustomResource
     {
@@ -19,13 +28,13 @@ namespace Pulumi.Aviatrix
         public Output<ImmutableArray<Outputs.AviatrixGatewayDnatConnectionPolicy>> ConnectionPolicies { get; private set; } = null!;
 
         /// <summary>
-        /// Policy rule to be applied to gateway.
+        /// Policy rule applied for enabling Destination NAT (DNAT), which allows you to change the destination to a virtual address range. Currently only supports AWS(1) and Azure(8).
         /// </summary>
         [Output("dnatPolicies")]
         public Output<ImmutableArray<Outputs.AviatrixGatewayDnatDnatPolicy>> DnatPolicies { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the gateway.
+        /// Name of the Aviatrix gateway the custom DNAT will be configured for.
         /// </summary>
         [Output("gwName")]
         public Output<string> GwName { get; private set; } = null!;
@@ -37,7 +46,7 @@ namespace Pulumi.Aviatrix
         public Output<ImmutableArray<Outputs.AviatrixGatewayDnatInterfacePolicy>> InterfacePolicies { get; private set; } = null!;
 
         /// <summary>
-        /// Whether to sync the policies to the HA gateway.
+        /// Sync the policies to the HA gateway. Valid values: true, false. Default: true.
         /// </summary>
         [Output("syncToHa")]
         public Output<bool?> SyncToHa { get; private set; } = null!;
@@ -93,7 +102,7 @@ namespace Pulumi.Aviatrix
         private InputList<Inputs.AviatrixGatewayDnatDnatPolicyArgs>? _dnatPolicies;
 
         /// <summary>
-        /// Policy rule to be applied to gateway.
+        /// Policy rule applied for enabling Destination NAT (DNAT), which allows you to change the destination to a virtual address range. Currently only supports AWS(1) and Azure(8).
         /// </summary>
         public InputList<Inputs.AviatrixGatewayDnatDnatPolicyArgs> DnatPolicies
         {
@@ -102,13 +111,13 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Name of the gateway.
+        /// Name of the Aviatrix gateway the custom DNAT will be configured for.
         /// </summary>
         [Input("gwName", required: true)]
         public Input<string> GwName { get; set; } = null!;
 
         /// <summary>
-        /// Whether to sync the policies to the HA gateway.
+        /// Sync the policies to the HA gateway. Valid values: true, false. Default: true.
         /// </summary>
         [Input("syncToHa")]
         public Input<bool>? SyncToHa { get; set; }
@@ -137,7 +146,7 @@ namespace Pulumi.Aviatrix
         private InputList<Inputs.AviatrixGatewayDnatDnatPolicyGetArgs>? _dnatPolicies;
 
         /// <summary>
-        /// Policy rule to be applied to gateway.
+        /// Policy rule applied for enabling Destination NAT (DNAT), which allows you to change the destination to a virtual address range. Currently only supports AWS(1) and Azure(8).
         /// </summary>
         public InputList<Inputs.AviatrixGatewayDnatDnatPolicyGetArgs> DnatPolicies
         {
@@ -146,7 +155,7 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Name of the gateway.
+        /// Name of the Aviatrix gateway the custom DNAT will be configured for.
         /// </summary>
         [Input("gwName")]
         public Input<string>? GwName { get; set; }
@@ -164,7 +173,7 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Whether to sync the policies to the HA gateway.
+        /// Sync the policies to the HA gateway. Valid values: true, false. Default: true.
         /// </summary>
         [Input("syncToHa")]
         public Input<bool>? SyncToHa { get; set; }

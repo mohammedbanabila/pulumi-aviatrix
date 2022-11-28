@@ -9,6 +9,36 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_sumologic_forwarder** resource allows the enabling and disabling of sumologic forwarder.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Enable sumologic forwarder
+    ///     var testSumologicForwarder = new Aviatrix.AviatrixSumologicForwarder("testSumologicForwarder", new()
+    ///     {
+    ///         AccessId = "0",
+    ///         AccessKey = "1.2.3.4",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **sumologic_forwarder** can be imported using "sumologic_forwarder", e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixSumologicForwarder:AviatrixSumologicForwarder test sumologic_forwarder
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixSumologicForwarder:AviatrixSumologicForwarder")]
     public partial class AviatrixSumologicForwarder : global::Pulumi.CustomResource
     {
@@ -19,31 +49,31 @@ namespace Pulumi.Aviatrix
         public Output<string> AccessId { get; private set; } = null!;
 
         /// <summary>
-        /// Access key.
+        /// Access Key.
         /// </summary>
         [Output("accessKey")]
         public Output<string> AccessKey { get; private set; } = null!;
 
         /// <summary>
-        /// Custom configuration.
+        /// Custom configuration. The format should be key=value pairs.
         /// </summary>
         [Output("customConfiguration")]
         public Output<string?> CustomConfiguration { get; private set; } = null!;
 
         /// <summary>
-        /// List of excluded gateways.
+        /// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         /// </summary>
         [Output("excludedGateways")]
         public Output<ImmutableArray<string>> ExcludedGateways { get; private set; } = null!;
 
         /// <summary>
-        /// Source category.
+        /// Source category. "Aviatrix_syslog" by default.
         /// </summary>
         [Output("sourceCategory")]
         public Output<string?> SourceCategory { get; private set; } = null!;
 
         /// <summary>
-        /// Enabled or not.
+        /// The status of sumologic forwarder.
         /// </summary>
         [Output("status")]
         public Output<string> Status { get; private set; } = null!;
@@ -72,6 +102,10 @@ namespace Pulumi.Aviatrix
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/astipkovits",
+                AdditionalSecretOutputs =
+                {
+                    "accessKey",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -101,14 +135,24 @@ namespace Pulumi.Aviatrix
         [Input("accessId", required: true)]
         public Input<string> AccessId { get; set; } = null!;
 
-        /// <summary>
-        /// Access key.
-        /// </summary>
         [Input("accessKey", required: true)]
-        public Input<string> AccessKey { get; set; } = null!;
+        private Input<string>? _accessKey;
 
         /// <summary>
-        /// Custom configuration.
+        /// Access Key.
+        /// </summary>
+        public Input<string>? AccessKey
+        {
+            get => _accessKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _accessKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// Custom configuration. The format should be key=value pairs.
         /// </summary>
         [Input("customConfiguration")]
         public Input<string>? CustomConfiguration { get; set; }
@@ -117,7 +161,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _excludedGateways;
 
         /// <summary>
-        /// List of excluded gateways.
+        /// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         /// </summary>
         public InputList<string> ExcludedGateways
         {
@@ -126,7 +170,7 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Source category.
+        /// Source category. "Aviatrix_syslog" by default.
         /// </summary>
         [Input("sourceCategory")]
         public Input<string>? SourceCategory { get; set; }
@@ -145,14 +189,24 @@ namespace Pulumi.Aviatrix
         [Input("accessId")]
         public Input<string>? AccessId { get; set; }
 
-        /// <summary>
-        /// Access key.
-        /// </summary>
         [Input("accessKey")]
-        public Input<string>? AccessKey { get; set; }
+        private Input<string>? _accessKey;
 
         /// <summary>
-        /// Custom configuration.
+        /// Access Key.
+        /// </summary>
+        public Input<string>? AccessKey
+        {
+            get => _accessKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _accessKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// Custom configuration. The format should be key=value pairs.
         /// </summary>
         [Input("customConfiguration")]
         public Input<string>? CustomConfiguration { get; set; }
@@ -161,7 +215,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _excludedGateways;
 
         /// <summary>
-        /// List of excluded gateways.
+        /// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         /// </summary>
         public InputList<string> ExcludedGateways
         {
@@ -170,13 +224,13 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Source category.
+        /// Source category. "Aviatrix_syslog" by default.
         /// </summary>
         [Input("sourceCategory")]
         public Input<string>? SourceCategory { get; set; }
 
         /// <summary>
-        /// Enabled or not.
+        /// The status of sumologic forwarder.
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }

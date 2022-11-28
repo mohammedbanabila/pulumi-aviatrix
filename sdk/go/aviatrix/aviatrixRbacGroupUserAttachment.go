@@ -11,12 +11,50 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_rbac_group_user_attachment** resource allows the creation and management of user attachments to Aviatrix (Role-Based Access Control) RBAC groups.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixRbacGroupUserAttachment(ctx, "testAttachment", &aviatrix.AviatrixRbacGroupUserAttachmentArgs{
+//				GroupName: pulumi.String("write_only"),
+//				UserName:  pulumi.String("user_name"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **rbac_group_user_attachment** can be imported using the `group_name` and `user_name`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixRbacGroupUserAttachment:AviatrixRbacGroupUserAttachment test group_name~user_name
+//
+// ```
 type AviatrixRbacGroupUserAttachment struct {
 	pulumi.CustomResourceState
 
-	// RBAC permission group name.
+	// This parameter represents the name of a RBAC group.
 	GroupName pulumi.StringOutput `pulumi:"groupName"`
-	// Account user name.
+	// Username of the account user.
 	UserName pulumi.StringOutput `pulumi:"userName"`
 }
 
@@ -56,16 +94,16 @@ func GetAviatrixRbacGroupUserAttachment(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixRbacGroupUserAttachment resources.
 type aviatrixRbacGroupUserAttachmentState struct {
-	// RBAC permission group name.
+	// This parameter represents the name of a RBAC group.
 	GroupName *string `pulumi:"groupName"`
-	// Account user name.
+	// Username of the account user.
 	UserName *string `pulumi:"userName"`
 }
 
 type AviatrixRbacGroupUserAttachmentState struct {
-	// RBAC permission group name.
+	// This parameter represents the name of a RBAC group.
 	GroupName pulumi.StringPtrInput
-	// Account user name.
+	// Username of the account user.
 	UserName pulumi.StringPtrInput
 }
 
@@ -74,17 +112,17 @@ func (AviatrixRbacGroupUserAttachmentState) ElementType() reflect.Type {
 }
 
 type aviatrixRbacGroupUserAttachmentArgs struct {
-	// RBAC permission group name.
+	// This parameter represents the name of a RBAC group.
 	GroupName string `pulumi:"groupName"`
-	// Account user name.
+	// Username of the account user.
 	UserName string `pulumi:"userName"`
 }
 
 // The set of arguments for constructing a AviatrixRbacGroupUserAttachment resource.
 type AviatrixRbacGroupUserAttachmentArgs struct {
-	// RBAC permission group name.
+	// This parameter represents the name of a RBAC group.
 	GroupName pulumi.StringInput
-	// Account user name.
+	// Username of the account user.
 	UserName pulumi.StringInput
 }
 
@@ -175,12 +213,12 @@ func (o AviatrixRbacGroupUserAttachmentOutput) ToAviatrixRbacGroupUserAttachment
 	return o
 }
 
-// RBAC permission group name.
+// This parameter represents the name of a RBAC group.
 func (o AviatrixRbacGroupUserAttachmentOutput) GroupName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixRbacGroupUserAttachment) pulumi.StringOutput { return v.GroupName }).(pulumi.StringOutput)
 }
 
-// Account user name.
+// Username of the account user.
 func (o AviatrixRbacGroupUserAttachmentOutput) UserName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixRbacGroupUserAttachment) pulumi.StringOutput { return v.UserName }).(pulumi.StringOutput)
 }

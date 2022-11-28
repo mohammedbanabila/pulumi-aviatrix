@@ -11,10 +11,82 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// !> **WARNING** **aviatrix_microseg_policy_list** is part of the Micro-segmentation private preview feature for R2.22.0. If you wish to enable a private preview mode feature, please contact your sales representative or Aviatrix Support.
+//
+// The **aviatrix_microseg_policy_list** resource handles the creation and management of Micro-segmentation Policies. Available as of Provider R2.22.0+.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixMicrosegPolicyList(ctx, "test", &aviatrix.AviatrixMicrosegPolicyListArgs{
+//				Policies: AviatrixMicrosegPolicyListPolicyArray{
+//					&AviatrixMicrosegPolicyListPolicyArgs{
+//						Action: pulumi.String("DENY"),
+//						DstAppDomains: pulumi.StringArray{
+//							pulumi.String("82e50c85-82bf-4b3b-b9da-aaed34a3aa53"),
+//						},
+//						Logging:  pulumi.Bool(false),
+//						Name:     pulumi.String("microseg-policy-1"),
+//						Priority: pulumi.Int(1),
+//						Protocol: pulumi.String("ICMP"),
+//						SrcAppDomains: pulumi.StringArray{
+//							pulumi.String("f15c9890-c8c4-4c1a-a2b5-ef0ab34d2e30"),
+//						},
+//						Watch: pulumi.Bool(false),
+//					},
+//					&AviatrixMicrosegPolicyListPolicyArgs{
+//						Action: pulumi.String("PERMIT"),
+//						DstAppDomains: pulumi.StringArray{
+//							pulumi.String("f05b0ad7-d2d7-4d16-b2f6-48492319414c"),
+//						},
+//						Name: pulumi.String("microseg-policy"),
+//						PortRanges: AviatrixMicrosegPolicyListPolicyPortRangeArray{
+//							&AviatrixMicrosegPolicyListPolicyPortRangeArgs{
+//								Hi: pulumi.Int(50000),
+//								Lo: pulumi.Int(49000),
+//							},
+//						},
+//						Priority: pulumi.Int(0),
+//						Protocol: pulumi.String("TCP"),
+//						SrcAppDomains: pulumi.StringArray{
+//							pulumi.String("7e7d1573-7a7a-4a53-bcb5-1ad5041961e0"),
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **aviatrix_microseg_policy_list** can be imported using the controller IP, e.g. controller IP is 10.11.12.13
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixMicrosegPolicyList:AviatrixMicrosegPolicyList test 10-11-12-13
+//
+// ```
 type AviatrixMicrosegPolicyList struct {
 	pulumi.CustomResourceState
 
-	// List of micro-segmentation policies.
+	// List of policies.
 	Policies AviatrixMicrosegPolicyListPolicyArrayOutput `pulumi:"policies"`
 }
 
@@ -51,12 +123,12 @@ func GetAviatrixMicrosegPolicyList(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixMicrosegPolicyList resources.
 type aviatrixMicrosegPolicyListState struct {
-	// List of micro-segmentation policies.
+	// List of policies.
 	Policies []AviatrixMicrosegPolicyListPolicy `pulumi:"policies"`
 }
 
 type AviatrixMicrosegPolicyListState struct {
-	// List of micro-segmentation policies.
+	// List of policies.
 	Policies AviatrixMicrosegPolicyListPolicyArrayInput
 }
 
@@ -65,13 +137,13 @@ func (AviatrixMicrosegPolicyListState) ElementType() reflect.Type {
 }
 
 type aviatrixMicrosegPolicyListArgs struct {
-	// List of micro-segmentation policies.
+	// List of policies.
 	Policies []AviatrixMicrosegPolicyListPolicy `pulumi:"policies"`
 }
 
 // The set of arguments for constructing a AviatrixMicrosegPolicyList resource.
 type AviatrixMicrosegPolicyListArgs struct {
-	// List of micro-segmentation policies.
+	// List of policies.
 	Policies AviatrixMicrosegPolicyListPolicyArrayInput
 }
 
@@ -162,7 +234,7 @@ func (o AviatrixMicrosegPolicyListOutput) ToAviatrixMicrosegPolicyListOutputWith
 	return o
 }
 
-// List of micro-segmentation policies.
+// List of policies.
 func (o AviatrixMicrosegPolicyListOutput) Policies() AviatrixMicrosegPolicyListPolicyArrayOutput {
 	return o.ApplyT(func(v *AviatrixMicrosegPolicyList) AviatrixMicrosegPolicyListPolicyArrayOutput { return v.Policies }).(AviatrixMicrosegPolicyListPolicyArrayOutput)
 }

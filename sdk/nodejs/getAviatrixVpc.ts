@@ -2,9 +2,27 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_vpc** data source provides details about a specific VPC created by the Aviatrix Controller.
+ *
+ * This data source can prove useful when a module accepts any form of VPC detail as an input variable. For example, requiring a subnet CIDR specification when creating a gateway.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Aviatrix VPC Data Source
+ * const test = pulumi.output(aviatrix.getAviatrixVpc({
+ *     name: "vpc-test",
+ * }));
+ * ```
+ */
 export function getAviatrixVpc(args: GetAviatrixVpcArgs, opts?: pulumi.InvokeOptions): Promise<GetAviatrixVpcResult> {
     if (!opts) {
         opts = {}
@@ -21,7 +39,13 @@ export function getAviatrixVpc(args: GetAviatrixVpcArgs, opts?: pulumi.InvokeOpt
  * A collection of arguments for invoking getAviatrixVpc.
  */
 export interface GetAviatrixVpcArgs {
+    /**
+     * Name of the Aviatrix VPC.
+     */
     name: string;
+    /**
+     * Filters the `routeTables` list to contain only public or private route tables. Valid values are 'private' or 'public'. If not set `routeTables` is not filtered.
+     */
     routeTablesFilter?: string;
 }
 
@@ -29,28 +53,82 @@ export interface GetAviatrixVpcArgs {
  * A collection of values returned by getAviatrixVpc.
  */
 export interface GetAviatrixVpcResult {
+    /**
+     * Account name of the VPC created.
+     */
     readonly accountName: string;
+    /**
+     * List of OCI availability domains.
+     */
     readonly availabilityDomains: string[];
+    /**
+     * Switch if the VPC created is an Aviatrix FireNet VPC or not.
+     */
     readonly aviatrixFirenetVpc: boolean;
+    /**
+     * Switch if the VPC created is an Aviatrix Transit VPC or not.
+     */
     readonly aviatrixTransitVpc: boolean;
+    /**
+     * Azure vnet resource ID.
+     */
     readonly azureVnetResourceId: string;
+    /**
+     * Private subnet CIDR.
+     */
     readonly cidr: string;
+    /**
+     * Type of cloud service provider.
+     */
     readonly cloudType: number;
+    /**
+     * List of OCI fault domains.
+     */
     readonly faultDomains: string[];
     /**
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * Private subnet name.
+     */
     readonly name: string;
+    /**
+     * Number of public subnet and private subnet pair created. Only supported for AWS, Azure provider.
+     */
     readonly numOfSubnetPairs: number;
+    /**
+     * List of private subnet of the VPC(AWS, Azure) created.
+     */
     readonly privateSubnets: outputs.GetAviatrixVpcPrivateSubnet[];
+    /**
+     * List of public subnet of the VPC(AWS, Azure) created.
+     */
     readonly publicSubnets: outputs.GetAviatrixVpcPublicSubnet[];
+    /**
+     * Region of the VPC created.
+     */
     readonly region: string;
+    /**
+     * Resource group of the Azure VPC created.
+     */
     readonly resourceGroup: string;
+    /**
+     * List of route table ids associated with this VPC. Only populated for AWS, AWSGov and Azure vpc.
+     */
     readonly routeTables: string[];
     readonly routeTablesFilter?: string;
+    /**
+     * Subnet size. Only supported for AWS, Azure provider.
+     */
     readonly subnetSize: number;
+    /**
+     * List of subnet of the VPC created.
+     */
     readonly subnets: outputs.GetAviatrixVpcSubnet[];
+    /**
+     * ID of the VPC created.
+     */
     readonly vpcId: string;
 }
 
@@ -62,6 +140,12 @@ export function getAviatrixVpcOutput(args: GetAviatrixVpcOutputArgs, opts?: pulu
  * A collection of arguments for invoking getAviatrixVpc.
  */
 export interface GetAviatrixVpcOutputArgs {
+    /**
+     * Name of the Aviatrix VPC.
+     */
     name: pulumi.Input<string>;
+    /**
+     * Filters the `routeTables` list to contain only public or private route tables. Valid values are 'private' or 'public'. If not set `routeTables` is not filtered.
+     */
     routeTablesFilter?: pulumi.Input<string>;
 }

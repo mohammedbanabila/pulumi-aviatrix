@@ -22,8 +22,8 @@ class AviatrixSplunkLoggingArgs:
         """
         The set of arguments for constructing a AviatrixSplunkLogging resource.
         :param pulumi.Input[str] custom_input_config: Custom configuration.
-        :param pulumi.Input[str] custom_output_config_file: Configuration file. Use the filebase64 function to read from a file.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of excluded gateways.
+        :param pulumi.Input[str] custom_output_config_file: Configuration file. Use the `filebase64` function to read from a file.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         :param pulumi.Input[int] port: Port number.
         :param pulumi.Input[str] server: Server IP.
         """
@@ -54,7 +54,7 @@ class AviatrixSplunkLoggingArgs:
     @pulumi.getter(name="customOutputConfigFile")
     def custom_output_config_file(self) -> Optional[pulumi.Input[str]]:
         """
-        Configuration file. Use the filebase64 function to read from a file.
+        Configuration file. Use the `filebase64` function to read from a file.
         """
         return pulumi.get(self, "custom_output_config_file")
 
@@ -66,7 +66,7 @@ class AviatrixSplunkLoggingArgs:
     @pulumi.getter(name="excludedGateways")
     def excluded_gateways(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of excluded gateways.
+        List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         """
         return pulumi.get(self, "excluded_gateways")
 
@@ -111,11 +111,11 @@ class _AviatrixSplunkLoggingState:
         """
         Input properties used for looking up and filtering AviatrixSplunkLogging resources.
         :param pulumi.Input[str] custom_input_config: Custom configuration.
-        :param pulumi.Input[str] custom_output_config_file: Configuration file. Use the filebase64 function to read from a file.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of excluded gateways.
+        :param pulumi.Input[str] custom_output_config_file: Configuration file. Use the `filebase64` function to read from a file.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         :param pulumi.Input[int] port: Port number.
         :param pulumi.Input[str] server: Server IP.
-        :param pulumi.Input[str] status: Enabled or not.
+        :param pulumi.Input[str] status: The status of splunk logging.
         """
         if custom_input_config is not None:
             pulumi.set(__self__, "custom_input_config", custom_input_config)
@@ -146,7 +146,7 @@ class _AviatrixSplunkLoggingState:
     @pulumi.getter(name="customOutputConfigFile")
     def custom_output_config_file(self) -> Optional[pulumi.Input[str]]:
         """
-        Configuration file. Use the filebase64 function to read from a file.
+        Configuration file. Use the `filebase64` function to read from a file.
         """
         return pulumi.get(self, "custom_output_config_file")
 
@@ -158,7 +158,7 @@ class _AviatrixSplunkLoggingState:
     @pulumi.getter(name="excludedGateways")
     def excluded_gateways(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of excluded gateways.
+        List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         """
         return pulumi.get(self, "excluded_gateways")
 
@@ -194,7 +194,7 @@ class _AviatrixSplunkLoggingState:
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[str]]:
         """
-        Enabled or not.
+        The status of splunk logging.
         """
         return pulumi.get(self, "status")
 
@@ -215,12 +215,42 @@ class AviatrixSplunkLogging(pulumi.CustomResource):
                  server: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixSplunkLogging resource with the given unique name, props, and options.
+        The **aviatrix_splunk_logging** resource allows the enabling and disabling of splunk logging.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Enable splunk logging using server and port combination
+        test_splunk_logging = aviatrix.AviatrixSplunkLogging("testSplunkLogging",
+            port=10,
+            server="1.2.3.4")
+        ```
+
+        ```python
+        import pulumi
+        import base64
+        import pulumi_aviatrix as aviatrix
+
+        # Enable splunk logging using configuration file
+        test_splunk_logging = aviatrix.AviatrixSplunkLogging("testSplunkLogging", custom_output_config_file=(lambda path: base64.b64encode(open(path).read().encode()).decode())("/path/to/configuration.spl"))
+        ```
+
+        ## Import
+
+        **splunk_logging** can be imported using `splunk_logging`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixSplunkLogging:AviatrixSplunkLogging test splunk_logging
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] custom_input_config: Custom configuration.
-        :param pulumi.Input[str] custom_output_config_file: Configuration file. Use the filebase64 function to read from a file.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of excluded gateways.
+        :param pulumi.Input[str] custom_output_config_file: Configuration file. Use the `filebase64` function to read from a file.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         :param pulumi.Input[int] port: Port number.
         :param pulumi.Input[str] server: Server IP.
         """
@@ -231,7 +261,37 @@ class AviatrixSplunkLogging(pulumi.CustomResource):
                  args: Optional[AviatrixSplunkLoggingArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixSplunkLogging resource with the given unique name, props, and options.
+        The **aviatrix_splunk_logging** resource allows the enabling and disabling of splunk logging.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Enable splunk logging using server and port combination
+        test_splunk_logging = aviatrix.AviatrixSplunkLogging("testSplunkLogging",
+            port=10,
+            server="1.2.3.4")
+        ```
+
+        ```python
+        import pulumi
+        import base64
+        import pulumi_aviatrix as aviatrix
+
+        # Enable splunk logging using configuration file
+        test_splunk_logging = aviatrix.AviatrixSplunkLogging("testSplunkLogging", custom_output_config_file=(lambda path: base64.b64encode(open(path).read().encode()).decode())("/path/to/configuration.spl"))
+        ```
+
+        ## Import
+
+        **splunk_logging** can be imported using `splunk_logging`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixSplunkLogging:AviatrixSplunkLogging test splunk_logging
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixSplunkLoggingArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -291,11 +351,11 @@ class AviatrixSplunkLogging(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] custom_input_config: Custom configuration.
-        :param pulumi.Input[str] custom_output_config_file: Configuration file. Use the filebase64 function to read from a file.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of excluded gateways.
+        :param pulumi.Input[str] custom_output_config_file: Configuration file. Use the `filebase64` function to read from a file.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         :param pulumi.Input[int] port: Port number.
         :param pulumi.Input[str] server: Server IP.
-        :param pulumi.Input[str] status: Enabled or not.
+        :param pulumi.Input[str] status: The status of splunk logging.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -321,7 +381,7 @@ class AviatrixSplunkLogging(pulumi.CustomResource):
     @pulumi.getter(name="customOutputConfigFile")
     def custom_output_config_file(self) -> pulumi.Output[Optional[str]]:
         """
-        Configuration file. Use the filebase64 function to read from a file.
+        Configuration file. Use the `filebase64` function to read from a file.
         """
         return pulumi.get(self, "custom_output_config_file")
 
@@ -329,7 +389,7 @@ class AviatrixSplunkLogging(pulumi.CustomResource):
     @pulumi.getter(name="excludedGateways")
     def excluded_gateways(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        List of excluded gateways.
+        List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         """
         return pulumi.get(self, "excluded_gateways")
 
@@ -353,7 +413,7 @@ class AviatrixSplunkLogging(pulumi.CustomResource):
     @pulumi.getter
     def status(self) -> pulumi.Output[str]:
         """
-        Enabled or not.
+        The status of splunk logging.
         """
         return pulumi.get(self, "status")
 

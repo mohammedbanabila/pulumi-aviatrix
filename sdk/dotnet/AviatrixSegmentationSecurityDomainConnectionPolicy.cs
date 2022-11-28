@@ -9,17 +9,47 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_segmentation_security_domain_connection_policy** resource handles creation of [Transit Segmentation](https://docs.aviatrix.com/HowTos/transit_segmentation_faq.html) Security Domain Connection Policies.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Segmentation Security Domain
+    ///     var testSegmentationSecurityDomainConnectionPolicy = new Aviatrix.AviatrixSegmentationSecurityDomainConnectionPolicy("testSegmentationSecurityDomainConnectionPolicy", new()
+    ///     {
+    ///         DomainName1 = "domain-a",
+    ///         DomainName2 = "domain-b",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **aviatrix_segmentation_security_domain_connection_policy** can be imported using `domain_name_1` and `domain_name_2` separated by a `~`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixSegmentationSecurityDomainConnectionPolicy:AviatrixSegmentationSecurityDomainConnectionPolicy test domain_name_1~domain_name_2
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixSegmentationSecurityDomainConnectionPolicy:AviatrixSegmentationSecurityDomainConnectionPolicy")]
     public partial class AviatrixSegmentationSecurityDomainConnectionPolicy : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Name of security domain that will be connected to domain 2.
+        /// Name of the Security Domain to connect to Domain 2.
         /// </summary>
         [Output("domainName1")]
         public Output<string> DomainName1 { get; private set; } = null!;
 
         /// <summary>
-        /// Name of security domain that will be connected to domain 1.
+        /// Name of the Security Domain to connect to Domain 1.
         /// </summary>
         [Output("domainName2")]
         public Output<string> DomainName2 { get; private set; } = null!;
@@ -72,13 +102,13 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixSegmentationSecurityDomainConnectionPolicyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Name of security domain that will be connected to domain 2.
+        /// Name of the Security Domain to connect to Domain 2.
         /// </summary>
         [Input("domainName1", required: true)]
         public Input<string> DomainName1 { get; set; } = null!;
 
         /// <summary>
-        /// Name of security domain that will be connected to domain 1.
+        /// Name of the Security Domain to connect to Domain 1.
         /// </summary>
         [Input("domainName2", required: true)]
         public Input<string> DomainName2 { get; set; } = null!;
@@ -92,13 +122,13 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixSegmentationSecurityDomainConnectionPolicyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Name of security domain that will be connected to domain 2.
+        /// Name of the Security Domain to connect to Domain 2.
         /// </summary>
         [Input("domainName1")]
         public Input<string>? DomainName1 { get; set; }
 
         /// <summary>
-        /// Name of security domain that will be connected to domain 1.
+        /// Name of the Security Domain to connect to Domain 1.
         /// </summary>
         [Input("domainName2")]
         public Input<string>? DomainName2 { get; set; }

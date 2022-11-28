@@ -11,20 +11,61 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_aws_tgw_directconnect** resource allows the creation and management of Aviatrix-created AWS TGW DirectConnect connections.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixAwsTgwDirectconnect(ctx, "testAwsTgwDirectconnect", &aviatrix.AviatrixAwsTgwDirectconnectArgs{
+//				AllowedPrefix:            pulumi.String("10.12.0.0/24"),
+//				DirectconnectAccountName: pulumi.String("username"),
+//				DxGatewayId:              pulumi.String("30321d76-dd01-49bf"),
+//				NetworkDomainName:        pulumi.String("my-ndn-1"),
+//				TgwName:                  pulumi.String("my-aws-tgw-1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **aws_tgw_directconnect** can be imported using the `tgw_name` and `dx_gateway_id`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixAwsTgwDirectconnect:AviatrixAwsTgwDirectconnect test tgw_name~dx_gateway_id
+//
+// ```
 type AviatrixAwsTgwDirectconnect struct {
 	pulumi.CustomResourceState
 
-	// Public IP address. Example: '40.0.0.0'.
+	// A list of comma separated CIDRs for DXGW to advertise to remote(on-prem).
 	AllowedPrefix pulumi.StringOutput `pulumi:"allowedPrefix"`
 	// This parameter represents the name of an Account in Aviatrix controller.
 	DirectconnectAccountName pulumi.StringOutput `pulumi:"directconnectAccountName"`
 	// This parameter represents the name of a Direct Connect Gateway ID.
 	DxGatewayId pulumi.StringOutput `pulumi:"dxGatewayId"`
-	// Switch to enable/disable encrypted transit approval for direct connection. Valid values: true, false.
+	// Switch to enable/disable [encrypted transit approval](https://docs.aviatrix.com/HowTos/tgw_approval.html) for AWS TGW DirectConnect. Valid values: true, false. Default value: false.
 	EnableLearnedCidrsApproval pulumi.BoolPtrOutput `pulumi:"enableLearnedCidrsApproval"`
-	// The name of an Aviatrix network domain, to which the direct connect gateway will be attached.
+	// The name of a network domain, to which the direct connect gateway will be attached.
 	NetworkDomainName pulumi.StringPtrOutput `pulumi:"networkDomainName"`
-	// The name of an Aviatrix security domain, to which the direct connect gateway will be attached.
+	// The name of a security domain, to which the direct connect gateway will be attached.
 	//
 	// Deprecated: Please use network_domain_name instead.
 	SecurityDomainName pulumi.StringPtrOutput `pulumi:"securityDomainName"`
@@ -74,17 +115,17 @@ func GetAviatrixAwsTgwDirectconnect(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixAwsTgwDirectconnect resources.
 type aviatrixAwsTgwDirectconnectState struct {
-	// Public IP address. Example: '40.0.0.0'.
+	// A list of comma separated CIDRs for DXGW to advertise to remote(on-prem).
 	AllowedPrefix *string `pulumi:"allowedPrefix"`
 	// This parameter represents the name of an Account in Aviatrix controller.
 	DirectconnectAccountName *string `pulumi:"directconnectAccountName"`
 	// This parameter represents the name of a Direct Connect Gateway ID.
 	DxGatewayId *string `pulumi:"dxGatewayId"`
-	// Switch to enable/disable encrypted transit approval for direct connection. Valid values: true, false.
+	// Switch to enable/disable [encrypted transit approval](https://docs.aviatrix.com/HowTos/tgw_approval.html) for AWS TGW DirectConnect. Valid values: true, false. Default value: false.
 	EnableLearnedCidrsApproval *bool `pulumi:"enableLearnedCidrsApproval"`
-	// The name of an Aviatrix network domain, to which the direct connect gateway will be attached.
+	// The name of a network domain, to which the direct connect gateway will be attached.
 	NetworkDomainName *string `pulumi:"networkDomainName"`
-	// The name of an Aviatrix security domain, to which the direct connect gateway will be attached.
+	// The name of a security domain, to which the direct connect gateway will be attached.
 	//
 	// Deprecated: Please use network_domain_name instead.
 	SecurityDomainName *string `pulumi:"securityDomainName"`
@@ -93,17 +134,17 @@ type aviatrixAwsTgwDirectconnectState struct {
 }
 
 type AviatrixAwsTgwDirectconnectState struct {
-	// Public IP address. Example: '40.0.0.0'.
+	// A list of comma separated CIDRs for DXGW to advertise to remote(on-prem).
 	AllowedPrefix pulumi.StringPtrInput
 	// This parameter represents the name of an Account in Aviatrix controller.
 	DirectconnectAccountName pulumi.StringPtrInput
 	// This parameter represents the name of a Direct Connect Gateway ID.
 	DxGatewayId pulumi.StringPtrInput
-	// Switch to enable/disable encrypted transit approval for direct connection. Valid values: true, false.
+	// Switch to enable/disable [encrypted transit approval](https://docs.aviatrix.com/HowTos/tgw_approval.html) for AWS TGW DirectConnect. Valid values: true, false. Default value: false.
 	EnableLearnedCidrsApproval pulumi.BoolPtrInput
-	// The name of an Aviatrix network domain, to which the direct connect gateway will be attached.
+	// The name of a network domain, to which the direct connect gateway will be attached.
 	NetworkDomainName pulumi.StringPtrInput
-	// The name of an Aviatrix security domain, to which the direct connect gateway will be attached.
+	// The name of a security domain, to which the direct connect gateway will be attached.
 	//
 	// Deprecated: Please use network_domain_name instead.
 	SecurityDomainName pulumi.StringPtrInput
@@ -116,17 +157,17 @@ func (AviatrixAwsTgwDirectconnectState) ElementType() reflect.Type {
 }
 
 type aviatrixAwsTgwDirectconnectArgs struct {
-	// Public IP address. Example: '40.0.0.0'.
+	// A list of comma separated CIDRs for DXGW to advertise to remote(on-prem).
 	AllowedPrefix string `pulumi:"allowedPrefix"`
 	// This parameter represents the name of an Account in Aviatrix controller.
 	DirectconnectAccountName string `pulumi:"directconnectAccountName"`
 	// This parameter represents the name of a Direct Connect Gateway ID.
 	DxGatewayId string `pulumi:"dxGatewayId"`
-	// Switch to enable/disable encrypted transit approval for direct connection. Valid values: true, false.
+	// Switch to enable/disable [encrypted transit approval](https://docs.aviatrix.com/HowTos/tgw_approval.html) for AWS TGW DirectConnect. Valid values: true, false. Default value: false.
 	EnableLearnedCidrsApproval *bool `pulumi:"enableLearnedCidrsApproval"`
-	// The name of an Aviatrix network domain, to which the direct connect gateway will be attached.
+	// The name of a network domain, to which the direct connect gateway will be attached.
 	NetworkDomainName *string `pulumi:"networkDomainName"`
-	// The name of an Aviatrix security domain, to which the direct connect gateway will be attached.
+	// The name of a security domain, to which the direct connect gateway will be attached.
 	//
 	// Deprecated: Please use network_domain_name instead.
 	SecurityDomainName *string `pulumi:"securityDomainName"`
@@ -136,17 +177,17 @@ type aviatrixAwsTgwDirectconnectArgs struct {
 
 // The set of arguments for constructing a AviatrixAwsTgwDirectconnect resource.
 type AviatrixAwsTgwDirectconnectArgs struct {
-	// Public IP address. Example: '40.0.0.0'.
+	// A list of comma separated CIDRs for DXGW to advertise to remote(on-prem).
 	AllowedPrefix pulumi.StringInput
 	// This parameter represents the name of an Account in Aviatrix controller.
 	DirectconnectAccountName pulumi.StringInput
 	// This parameter represents the name of a Direct Connect Gateway ID.
 	DxGatewayId pulumi.StringInput
-	// Switch to enable/disable encrypted transit approval for direct connection. Valid values: true, false.
+	// Switch to enable/disable [encrypted transit approval](https://docs.aviatrix.com/HowTos/tgw_approval.html) for AWS TGW DirectConnect. Valid values: true, false. Default value: false.
 	EnableLearnedCidrsApproval pulumi.BoolPtrInput
-	// The name of an Aviatrix network domain, to which the direct connect gateway will be attached.
+	// The name of a network domain, to which the direct connect gateway will be attached.
 	NetworkDomainName pulumi.StringPtrInput
-	// The name of an Aviatrix security domain, to which the direct connect gateway will be attached.
+	// The name of a security domain, to which the direct connect gateway will be attached.
 	//
 	// Deprecated: Please use network_domain_name instead.
 	SecurityDomainName pulumi.StringPtrInput
@@ -241,7 +282,7 @@ func (o AviatrixAwsTgwDirectconnectOutput) ToAviatrixAwsTgwDirectconnectOutputWi
 	return o
 }
 
-// Public IP address. Example: '40.0.0.0'.
+// A list of comma separated CIDRs for DXGW to advertise to remote(on-prem).
 func (o AviatrixAwsTgwDirectconnectOutput) AllowedPrefix() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwDirectconnect) pulumi.StringOutput { return v.AllowedPrefix }).(pulumi.StringOutput)
 }
@@ -256,17 +297,17 @@ func (o AviatrixAwsTgwDirectconnectOutput) DxGatewayId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwDirectconnect) pulumi.StringOutput { return v.DxGatewayId }).(pulumi.StringOutput)
 }
 
-// Switch to enable/disable encrypted transit approval for direct connection. Valid values: true, false.
+// Switch to enable/disable [encrypted transit approval](https://docs.aviatrix.com/HowTos/tgw_approval.html) for AWS TGW DirectConnect. Valid values: true, false. Default value: false.
 func (o AviatrixAwsTgwDirectconnectOutput) EnableLearnedCidrsApproval() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwDirectconnect) pulumi.BoolPtrOutput { return v.EnableLearnedCidrsApproval }).(pulumi.BoolPtrOutput)
 }
 
-// The name of an Aviatrix network domain, to which the direct connect gateway will be attached.
+// The name of a network domain, to which the direct connect gateway will be attached.
 func (o AviatrixAwsTgwDirectconnectOutput) NetworkDomainName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwDirectconnect) pulumi.StringPtrOutput { return v.NetworkDomainName }).(pulumi.StringPtrOutput)
 }
 
-// The name of an Aviatrix security domain, to which the direct connect gateway will be attached.
+// The name of a security domain, to which the direct connect gateway will be attached.
 //
 // Deprecated: Please use network_domain_name instead.
 func (o AviatrixAwsTgwDirectconnectOutput) SecurityDomainName() pulumi.StringPtrOutput {

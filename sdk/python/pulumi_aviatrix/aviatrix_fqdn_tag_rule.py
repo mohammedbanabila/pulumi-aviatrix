@@ -21,12 +21,13 @@ class AviatrixFqdnTagRuleArgs:
                  action: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a AviatrixFqdnTagRule resource.
-        :param pulumi.Input[str] fqdn: FQDN.
-        :param pulumi.Input[str] fqdn_tag_name: FQDN Filter Tag Name to attach this domain.
-        :param pulumi.Input[str] port: Port.
-        :param pulumi.Input[str] protocol: Protocol.
-        :param pulumi.Input[str] action: What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base
-               Policy' if no value is provided.
+        :param pulumi.Input[str] fqdn: FQDN. Example: "facebook.com".
+        :param pulumi.Input[str] fqdn_tag_name: FQDN Filter tag name.
+        :param pulumi.Input[str] port: Port. Example "25".
+        :param pulumi.Input[str] protocol: Protocol. Valid values: "all", "tcp", "udp", "icmp".
+        :param pulumi.Input[str] action: What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base Policy' if no value provided.
+               * For protocol "all", port must be set to "all".
+               * For protocol “icmp”, port must be set to “ping”.
         """
         pulumi.set(__self__, "fqdn", fqdn)
         pulumi.set(__self__, "fqdn_tag_name", fqdn_tag_name)
@@ -39,7 +40,7 @@ class AviatrixFqdnTagRuleArgs:
     @pulumi.getter
     def fqdn(self) -> pulumi.Input[str]:
         """
-        FQDN.
+        FQDN. Example: "facebook.com".
         """
         return pulumi.get(self, "fqdn")
 
@@ -51,7 +52,7 @@ class AviatrixFqdnTagRuleArgs:
     @pulumi.getter(name="fqdnTagName")
     def fqdn_tag_name(self) -> pulumi.Input[str]:
         """
-        FQDN Filter Tag Name to attach this domain.
+        FQDN Filter tag name.
         """
         return pulumi.get(self, "fqdn_tag_name")
 
@@ -63,7 +64,7 @@ class AviatrixFqdnTagRuleArgs:
     @pulumi.getter
     def port(self) -> pulumi.Input[str]:
         """
-        Port.
+        Port. Example "25".
         """
         return pulumi.get(self, "port")
 
@@ -75,7 +76,7 @@ class AviatrixFqdnTagRuleArgs:
     @pulumi.getter
     def protocol(self) -> pulumi.Input[str]:
         """
-        Protocol.
+        Protocol. Valid values: "all", "tcp", "udp", "icmp".
         """
         return pulumi.get(self, "protocol")
 
@@ -87,8 +88,9 @@ class AviatrixFqdnTagRuleArgs:
     @pulumi.getter
     def action(self) -> Optional[pulumi.Input[str]]:
         """
-        What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base
-        Policy' if no value is provided.
+        What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base Policy' if no value provided.
+        * For protocol "all", port must be set to "all".
+        * For protocol “icmp”, port must be set to “ping”.
         """
         return pulumi.get(self, "action")
 
@@ -107,12 +109,13 @@ class _AviatrixFqdnTagRuleState:
                  protocol: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixFqdnTagRule resources.
-        :param pulumi.Input[str] action: What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base
-               Policy' if no value is provided.
-        :param pulumi.Input[str] fqdn: FQDN.
-        :param pulumi.Input[str] fqdn_tag_name: FQDN Filter Tag Name to attach this domain.
-        :param pulumi.Input[str] port: Port.
-        :param pulumi.Input[str] protocol: Protocol.
+        :param pulumi.Input[str] action: What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base Policy' if no value provided.
+               * For protocol "all", port must be set to "all".
+               * For protocol “icmp”, port must be set to “ping”.
+        :param pulumi.Input[str] fqdn: FQDN. Example: "facebook.com".
+        :param pulumi.Input[str] fqdn_tag_name: FQDN Filter tag name.
+        :param pulumi.Input[str] port: Port. Example "25".
+        :param pulumi.Input[str] protocol: Protocol. Valid values: "all", "tcp", "udp", "icmp".
         """
         if action is not None:
             pulumi.set(__self__, "action", action)
@@ -129,8 +132,9 @@ class _AviatrixFqdnTagRuleState:
     @pulumi.getter
     def action(self) -> Optional[pulumi.Input[str]]:
         """
-        What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base
-        Policy' if no value is provided.
+        What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base Policy' if no value provided.
+        * For protocol "all", port must be set to "all".
+        * For protocol “icmp”, port must be set to “ping”.
         """
         return pulumi.get(self, "action")
 
@@ -142,7 +146,7 @@ class _AviatrixFqdnTagRuleState:
     @pulumi.getter
     def fqdn(self) -> Optional[pulumi.Input[str]]:
         """
-        FQDN.
+        FQDN. Example: "facebook.com".
         """
         return pulumi.get(self, "fqdn")
 
@@ -154,7 +158,7 @@ class _AviatrixFqdnTagRuleState:
     @pulumi.getter(name="fqdnTagName")
     def fqdn_tag_name(self) -> Optional[pulumi.Input[str]]:
         """
-        FQDN Filter Tag Name to attach this domain.
+        FQDN Filter tag name.
         """
         return pulumi.get(self, "fqdn_tag_name")
 
@@ -166,7 +170,7 @@ class _AviatrixFqdnTagRuleState:
     @pulumi.getter
     def port(self) -> Optional[pulumi.Input[str]]:
         """
-        Port.
+        Port. Example "25".
         """
         return pulumi.get(self, "port")
 
@@ -178,7 +182,7 @@ class _AviatrixFqdnTagRuleState:
     @pulumi.getter
     def protocol(self) -> Optional[pulumi.Input[str]]:
         """
-        Protocol.
+        Protocol. Valid values: "all", "tcp", "udp", "icmp".
         """
         return pulumi.get(self, "protocol")
 
@@ -199,15 +203,37 @@ class AviatrixFqdnTagRule(pulumi.CustomResource):
                  protocol: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixFqdnTagRule resource with the given unique name, props, and options.
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Gateway FQDN Tag Rule filter rule
+        test_fqdn = aviatrix.AviatrixFqdnTagRule("testFqdn",
+            fqdn="reddit.com",
+            fqdn_tag_name="my_tag",
+            port="443",
+            protocol="tcp")
+        ```
+
+        ## Import
+
+        **fqdn_tag_rule** can be imported using the `fqdn_tag_name`, `fqdn`, `protocol`, `port` and `action` separated by `~`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixFqdnTagRule:AviatrixFqdnTagRule test "fqdn_tag_name~fqdn~protocol~port~action"
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] action: What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base
-               Policy' if no value is provided.
-        :param pulumi.Input[str] fqdn: FQDN.
-        :param pulumi.Input[str] fqdn_tag_name: FQDN Filter Tag Name to attach this domain.
-        :param pulumi.Input[str] port: Port.
-        :param pulumi.Input[str] protocol: Protocol.
+        :param pulumi.Input[str] action: What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base Policy' if no value provided.
+               * For protocol "all", port must be set to "all".
+               * For protocol “icmp”, port must be set to “ping”.
+        :param pulumi.Input[str] fqdn: FQDN. Example: "facebook.com".
+        :param pulumi.Input[str] fqdn_tag_name: FQDN Filter tag name.
+        :param pulumi.Input[str] port: Port. Example "25".
+        :param pulumi.Input[str] protocol: Protocol. Valid values: "all", "tcp", "udp", "icmp".
         """
         ...
     @overload
@@ -216,7 +242,28 @@ class AviatrixFqdnTagRule(pulumi.CustomResource):
                  args: AviatrixFqdnTagRuleArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixFqdnTagRule resource with the given unique name, props, and options.
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Gateway FQDN Tag Rule filter rule
+        test_fqdn = aviatrix.AviatrixFqdnTagRule("testFqdn",
+            fqdn="reddit.com",
+            fqdn_tag_name="my_tag",
+            port="443",
+            protocol="tcp")
+        ```
+
+        ## Import
+
+        **fqdn_tag_rule** can be imported using the `fqdn_tag_name`, `fqdn`, `protocol`, `port` and `action` separated by `~`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixFqdnTagRule:AviatrixFqdnTagRule test "fqdn_tag_name~fqdn~protocol~port~action"
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixFqdnTagRuleArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -281,12 +328,13 @@ class AviatrixFqdnTagRule(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] action: What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base
-               Policy' if no value is provided.
-        :param pulumi.Input[str] fqdn: FQDN.
-        :param pulumi.Input[str] fqdn_tag_name: FQDN Filter Tag Name to attach this domain.
-        :param pulumi.Input[str] port: Port.
-        :param pulumi.Input[str] protocol: Protocol.
+        :param pulumi.Input[str] action: What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base Policy' if no value provided.
+               * For protocol "all", port must be set to "all".
+               * For protocol “icmp”, port must be set to “ping”.
+        :param pulumi.Input[str] fqdn: FQDN. Example: "facebook.com".
+        :param pulumi.Input[str] fqdn_tag_name: FQDN Filter tag name.
+        :param pulumi.Input[str] port: Port. Example "25".
+        :param pulumi.Input[str] protocol: Protocol. Valid values: "all", "tcp", "udp", "icmp".
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -303,8 +351,9 @@ class AviatrixFqdnTagRule(pulumi.CustomResource):
     @pulumi.getter
     def action(self) -> pulumi.Output[Optional[str]]:
         """
-        What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base
-        Policy' if no value is provided.
+        What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base Policy' if no value provided.
+        * For protocol "all", port must be set to "all".
+        * For protocol “icmp”, port must be set to “ping”.
         """
         return pulumi.get(self, "action")
 
@@ -312,7 +361,7 @@ class AviatrixFqdnTagRule(pulumi.CustomResource):
     @pulumi.getter
     def fqdn(self) -> pulumi.Output[str]:
         """
-        FQDN.
+        FQDN. Example: "facebook.com".
         """
         return pulumi.get(self, "fqdn")
 
@@ -320,7 +369,7 @@ class AviatrixFqdnTagRule(pulumi.CustomResource):
     @pulumi.getter(name="fqdnTagName")
     def fqdn_tag_name(self) -> pulumi.Output[str]:
         """
-        FQDN Filter Tag Name to attach this domain.
+        FQDN Filter tag name.
         """
         return pulumi.get(self, "fqdn_tag_name")
 
@@ -328,7 +377,7 @@ class AviatrixFqdnTagRule(pulumi.CustomResource):
     @pulumi.getter
     def port(self) -> pulumi.Output[str]:
         """
-        Port.
+        Port. Example "25".
         """
         return pulumi.get(self, "port")
 
@@ -336,7 +385,7 @@ class AviatrixFqdnTagRule(pulumi.CustomResource):
     @pulumi.getter
     def protocol(self) -> pulumi.Output[str]:
         """
-        Protocol.
+        Protocol. Valid values: "all", "tcp", "udp", "icmp".
         """
         return pulumi.get(self, "protocol")
 

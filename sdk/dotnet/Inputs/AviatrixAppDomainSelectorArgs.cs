@@ -14,6 +14,10 @@ namespace Pulumi.Aviatrix.Inputs
     {
         [Input("matchExpressions", required: true)]
         private InputList<Inputs.AviatrixAppDomainSelectorMatchExpressionArgs>? _matchExpressions;
+
+        /// <summary>
+        /// List of match expressions. The App Domain will be a union of all resources matched by each `match_expressions`.`match_expressions` blocks cannot be empty.
+        /// </summary>
         public InputList<Inputs.AviatrixAppDomainSelectorMatchExpressionArgs> MatchExpressions
         {
             get => _matchExpressions ?? (_matchExpressions = new InputList<Inputs.AviatrixAppDomainSelectorMatchExpressionArgs>());

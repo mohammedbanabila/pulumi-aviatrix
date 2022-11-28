@@ -13,7 +13,13 @@ namespace Pulumi.Aviatrix.Outputs
     [OutputType]
     public sealed class AviatrixPrivateModeLbProxy
     {
+        /// <summary>
+        /// Instance ID of the proxy.
+        /// </summary>
         public readonly string InstanceId;
+        /// <summary>
+        /// VPC ID of the proxy.
+        /// </summary>
         public readonly string VpcId;
 
         [OutputConstructor]

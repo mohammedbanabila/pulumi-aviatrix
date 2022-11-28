@@ -4,6 +4,29 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_segmentation_network_domain** resource handles creation of [Transit Segmentation](https://docs.aviatrix.com/HowTos/transit_segmentation_faq.html) Network Domains.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Segmentation Network Domain
+ * const testSegmentationNetworkDomain = new aviatrix.AviatrixSegmentationNetworkDomain("test_segmentation_network_domain", {
+ *     domainName: "domain-a",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **aviatrix_segmentation_network_domain** can be imported using the `domain_name`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixSegmentationNetworkDomain:AviatrixSegmentationNetworkDomain test domain_name
+ * ```
+ */
 export class AviatrixSegmentationNetworkDomain extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixSegmentationNetworkDomain resource's state with the given name, ID, and optional extra
@@ -33,7 +56,7 @@ export class AviatrixSegmentationNetworkDomain extends pulumi.CustomResource {
     }
 
     /**
-     * Network domain name.
+     * Name of the Network Domain.
      */
     public readonly domainName!: pulumi.Output<string>;
 
@@ -68,7 +91,7 @@ export class AviatrixSegmentationNetworkDomain extends pulumi.CustomResource {
  */
 export interface AviatrixSegmentationNetworkDomainState {
     /**
-     * Network domain name.
+     * Name of the Network Domain.
      */
     domainName?: pulumi.Input<string>;
 }
@@ -78,7 +101,7 @@ export interface AviatrixSegmentationNetworkDomainState {
  */
 export interface AviatrixSegmentationNetworkDomainArgs {
     /**
-     * Network domain name.
+     * Name of the Network Domain.
      */
     domainName: pulumi.Input<string>;
 }

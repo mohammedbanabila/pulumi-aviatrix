@@ -10,6 +10,35 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Use this data source to get the list of firewall instance images for use in other resources.
+//
+// **NOTE:** A firenet enabled gateway in a security VPC is required for this data source.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err = aviatrix.GetAviatrixFirewallInstanceImages(ctx, &GetAviatrixFirewallInstanceImagesArgs{
+//				VpcId: "vpc-1234567",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 func GetAviatrixFirewallInstanceImages(ctx *pulumi.Context, args *GetAviatrixFirewallInstanceImagesArgs, opts ...pulumi.InvokeOption) (*GetAviatrixFirewallInstanceImagesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetAviatrixFirewallInstanceImagesResult
@@ -22,11 +51,13 @@ func GetAviatrixFirewallInstanceImages(ctx *pulumi.Context, args *GetAviatrixFir
 
 // A collection of arguments for invoking getAviatrixFirewallInstanceImages.
 type GetAviatrixFirewallInstanceImagesArgs struct {
+	// VPC ID. Example: AWS: "vpc-abcd1234", GCP: "vpc-gcp-test~-~project_id", Azure: "vnet_name:rg_name:resource_guid", OCI: "vpc-oracle-test1".
 	VpcId string `pulumi:"vpcId"`
 }
 
 // A collection of values returned by getAviatrixFirewallInstanceImages.
 type GetAviatrixFirewallInstanceImagesResult struct {
+	// List of firewall images.
 	FirewallImages []GetAviatrixFirewallInstanceImagesFirewallImage `pulumi:"firewallImages"`
 	// The provider-assigned unique ID for this managed resource.
 	Id    string `pulumi:"id"`
@@ -48,6 +79,7 @@ func GetAviatrixFirewallInstanceImagesOutput(ctx *pulumi.Context, args GetAviatr
 
 // A collection of arguments for invoking getAviatrixFirewallInstanceImages.
 type GetAviatrixFirewallInstanceImagesOutputArgs struct {
+	// VPC ID. Example: AWS: "vpc-abcd1234", GCP: "vpc-gcp-test~-~project_id", Azure: "vnet_name:rg_name:resource_guid", OCI: "vpc-oracle-test1".
 	VpcId pulumi.StringInput `pulumi:"vpcId"`
 }
 
@@ -70,6 +102,7 @@ func (o GetAviatrixFirewallInstanceImagesResultOutput) ToGetAviatrixFirewallInst
 	return o
 }
 
+// List of firewall images.
 func (o GetAviatrixFirewallInstanceImagesResultOutput) FirewallImages() GetAviatrixFirewallInstanceImagesFirewallImageArrayOutput {
 	return o.ApplyT(func(v GetAviatrixFirewallInstanceImagesResult) []GetAviatrixFirewallInstanceImagesFirewallImage {
 		return v.FirewallImages

@@ -9,23 +9,56 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// !&gt; **WARNING:** Resource 'aviatrix_aws_tgw_security_domain_connection' will be deprecated in future releases. Please use resource 'aviatrix_aws_tgw_peering_domain_conn' instead.
+    /// 
+    /// The **aviatrix_aws_tgw_security_domain_connection** resource allows the creation and management of the connections between security domains in an AWS TGW.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Security Domain Connection
+    ///     var test = new Aviatrix.AviatrixAwsTgwSecurityDomainConn("test", new()
+    ///     {
+    ///         DomainName1 = "domain1",
+    ///         DomainName2 = "domain2",
+    ///         TgwName = "tgw",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **aws_tgw_security_domain_connection** can be imported using the `tgw_name`, `domain_name1` and `domain_name2`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixAwsTgwSecurityDomainConn:AviatrixAwsTgwSecurityDomainConn test tgw_name~domain_name1~domain_name2
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixAwsTgwSecurityDomainConn:AviatrixAwsTgwSecurityDomainConn")]
     public partial class AviatrixAwsTgwSecurityDomainConn : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Security domain name 1.
+        /// The name of a security domain to make a connection.
         /// </summary>
         [Output("domainName1")]
         public Output<string> DomainName1 { get; private set; } = null!;
 
         /// <summary>
-        /// Security domain name 2.
+        /// The name of another security domain to make a connection.
         /// </summary>
         [Output("domainName2")]
         public Output<string> DomainName2 { get; private set; } = null!;
 
         /// <summary>
-        /// AWS TGW name.
+        /// The AWS TGW name.
         /// </summary>
         [Output("tgwName")]
         public Output<string> TgwName { get; private set; } = null!;
@@ -78,19 +111,19 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixAwsTgwSecurityDomainConnArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Security domain name 1.
+        /// The name of a security domain to make a connection.
         /// </summary>
         [Input("domainName1", required: true)]
         public Input<string> DomainName1 { get; set; } = null!;
 
         /// <summary>
-        /// Security domain name 2.
+        /// The name of another security domain to make a connection.
         /// </summary>
         [Input("domainName2", required: true)]
         public Input<string> DomainName2 { get; set; } = null!;
 
         /// <summary>
-        /// AWS TGW name.
+        /// The AWS TGW name.
         /// </summary>
         [Input("tgwName", required: true)]
         public Input<string> TgwName { get; set; } = null!;
@@ -104,19 +137,19 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixAwsTgwSecurityDomainConnState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Security domain name 1.
+        /// The name of a security domain to make a connection.
         /// </summary>
         [Input("domainName1")]
         public Input<string>? DomainName1 { get; set; }
 
         /// <summary>
-        /// Security domain name 2.
+        /// The name of another security domain to make a connection.
         /// </summary>
         [Input("domainName2")]
         public Input<string>? DomainName2 { get; set; }
 
         /// <summary>
-        /// AWS TGW name.
+        /// The AWS TGW name.
         /// </summary>
         [Input("tgwName")]
         public Input<string>? TgwName { get; set; }

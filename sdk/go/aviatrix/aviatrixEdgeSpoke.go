@@ -11,70 +11,158 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_edge_spoke** resource creates the Aviatrix Edge as a Spoke. This resource is available as of provider version R2.23+.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixEdgeSpoke(ctx, "test", &aviatrix.AviatrixEdgeSpokeArgs{
+//				GwName:                    pulumi.String("edge-test"),
+//				LanInterfaceIpPrefix:      pulumi.String("10.60.0.0/24"),
+//				LocalAsNumber:             pulumi.String("65000"),
+//				ManagementInterfaceConfig: pulumi.String("DHCP"),
+//				PrependAsPaths: pulumi.StringArray{
+//					pulumi.String("65000"),
+//					pulumi.String("65000"),
+//				},
+//				SiteId:               pulumi.String("site-123"),
+//				WanDefaultGatewayIp:  pulumi.String("10.60.0.0"),
+//				WanInterfaceIpPrefix: pulumi.String("10.60.0.0/24"),
+//				ZtpFileDownloadPath:  pulumi.String("/ztp/download/path"),
+//				ZtpFileType:          pulumi.String("iso"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixEdgeSpoke(ctx, "test", &aviatrix.AviatrixEdgeSpokeArgs{
+//				DnsServerIp:                 pulumi.String("10.60.0.0"),
+//				GwName:                      pulumi.String("edge-test"),
+//				LanInterfaceIpPrefix:        pulumi.String("10.60.0.0/24"),
+//				LocalAsNumber:               pulumi.String("65000"),
+//				ManagementDefaultGatewayIp:  pulumi.String("10.60.0.0"),
+//				ManagementInterfaceConfig:   pulumi.String("Static"),
+//				ManagementInterfaceIpPrefix: pulumi.String("10.60.0.0/24"),
+//				PrependAsPaths: pulumi.StringArray{
+//					pulumi.String("65000"),
+//					pulumi.String("65000"),
+//				},
+//				SecondaryDnsServerIp: pulumi.String("10.60.0.0"),
+//				SiteId:               pulumi.String("site-123"),
+//				WanDefaultGatewayIp:  pulumi.String("10.60.0.0"),
+//				WanInterfaceIpPrefix: pulumi.String("10.60.0.0/24"),
+//				ZtpFileDownloadPath:  pulumi.String("/ztp/download/path"),
+//				ZtpFileType:          pulumi.String("iso"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **edge_spoke** can be imported using the `gw_name`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixEdgeSpoke:AviatrixEdgeSpoke test gw_name
+//
+// ```
 type AviatrixEdgeSpoke struct {
 	pulumi.CustomResourceState
 
-	// Approved learned CIDRs for BGP Spoke Gateway.
+	// Set of approved learned CIDRs. Valid only when `enableLearnedCidrsApproval` is set to true. Example: ["10.1.0.0/116", "10.2.0.0/16"].
 	ApprovedLearnedCidrs pulumi.StringArrayOutput `pulumi:"approvedLearnedCidrs"`
-	// BGP Hold Time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 12 and 360.
+	// BGP hold time. Unit is in seconds. Valid values are between 12 and 360. Default value: 180.
 	BgpHoldTime pulumi.IntPtrOutput `pulumi:"bgpHoldTime"`
-	// BGP route polling time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 10 and 50.
+	// BGP route polling time. Unit is in seconds. Valid values are between 10 and 50. Default value: 50.
 	BgpPollingTime pulumi.IntPtrOutput `pulumi:"bgpPollingTime"`
-	// DNS server IP.
+	// DNS server IP. Required and valid when `managementInterfaceConfig` is "Static".
 	DnsServerIp pulumi.StringPtrOutput `pulumi:"dnsServerIp"`
-	// Enables Edge Active-Standby Mode.
+	// Switch to enable Edge Active-Standby mode. Valid values: true, false. Default value: false.
 	EnableEdgeActiveStandby pulumi.BoolPtrOutput `pulumi:"enableEdgeActiveStandby"`
-	// Enables Preemptive Mode for Edge Active-Standby, available only with Active-Standby enabled.
+	// Switch to enable Preemptive Mode for Edge Active-Standby. Valid values: true, false. Default value: false.
 	EnableEdgeActiveStandbyPreemptive pulumi.BoolPtrOutput `pulumi:"enableEdgeActiveStandbyPreemptive"`
-	// Enable Edge transitive routing.
+	// Switch to enable Edge transitive routing. Valid values: true, false. Default value: false.
 	EnableEdgeTransitiveRouting pulumi.BoolPtrOutput `pulumi:"enableEdgeTransitiveRouting"`
-	// Enable jumbo frame.
+	// Switch to enable jumbo frame. Valid values: true, false. Default value: false.
 	EnableJumboFrame pulumi.BoolPtrOutput `pulumi:"enableJumboFrame"`
-	// Switch to enable/disable learned CIDR approval for BGP Spoke Gateway. Valid values: true, false.
+	// Switch to enable learned CIDR approval. Valid values: true, false. Default value: false.
 	EnableLearnedCidrsApproval pulumi.BoolPtrOutput `pulumi:"enableLearnedCidrsApproval"`
-	// Enable management over private network.
+	// Switch to enable management over the private network. Valid values: true, false. Default value: false.
 	EnableManagementOverPrivateNetwork pulumi.BoolPtrOutput `pulumi:"enableManagementOverPrivateNetwork"`
-	// Enable preserve as path when advertising manual summary CIDRs on BGP spoke gateway.
+	// Switch to enable preserve asPath when advertising manual summary CIDRs. Valid values: true, false. Default value: false.
 	EnablePreserveAsPath pulumi.BoolPtrOutput `pulumi:"enablePreserveAsPath"`
 	// Edge as a Spoke name.
 	GwName pulumi.StringOutput `pulumi:"gwName"`
-	// LAN interface IP/prefix.
+	// LAN interface IP and subnet prefix.
 	LanInterfaceIpPrefix pulumi.StringOutput `pulumi:"lanInterfaceIpPrefix"`
-	// The latitude of the Edge as a Spoke.
+	// Latitude of Edge as a Spoke. Valid values are between -90 and 90. Example: "47.7511".
 	Latitude pulumi.StringOutput `pulumi:"latitude"`
-	// Local AS number.
+	// BGP AS Number to assign to Edge as a Spoke.
 	LocalAsNumber pulumi.StringOutput `pulumi:"localAsNumber"`
-	// The longitude of the Edge as a Spoke.
+	// Longitude of Edge as a Spoke. Valid values are between -180 and 180. Example: "120.7401".
 	Longitude pulumi.StringOutput `pulumi:"longitude"`
-	// Management default gateway IP.
+	// Management default gateway IP. Required and valid when `managementInterfaceConfig` is "Static".
 	ManagementDefaultGatewayIp pulumi.StringPtrOutput `pulumi:"managementDefaultGatewayIp"`
-	// Management egress gateway IP/prefix.
+	// Management egress gateway IP and subnet prefix.
 	ManagementEgressIpPrefix pulumi.StringPtrOutput `pulumi:"managementEgressIpPrefix"`
-	// Management interface configuration. Valid values: 'DHCP' and 'Static'.
+	// Management interface configuration. Valid values: "DHCP", "Static".
 	ManagementInterfaceConfig pulumi.StringOutput `pulumi:"managementInterfaceConfig"`
-	// Management interface IP/prefix.
+	// Management interface IP and subnet prefix. Required and valid when `managementInterfaceConfig` is "Static".
 	ManagementInterfaceIpPrefix pulumi.StringPtrOutput `pulumi:"managementInterfaceIpPrefix"`
-	// List of AS numbers to prepend gateway BGP AS_Path field.
+	// List of AS numbers to prepend gateway BGP AS_Path field. Valid only when `localAsNumber` is set. Example: ["65023", "65023"].
 	PrependAsPaths pulumi.StringArrayOutput `pulumi:"prependAsPaths"`
-	// Ethernet interface RX queue size.
+	// Ethernet interface RX queue size. Once set, can't be deleted or disabled. Valid values: "1K", "2K", "4K".
 	RxQueueSize pulumi.StringPtrOutput `pulumi:"rxQueueSize"`
-	// Secondary DNS server IP.
+	// Secondary DNS server IP. Required and valid when `managementInterfaceConfig` is "Static".
 	SecondaryDnsServerIp pulumi.StringPtrOutput `pulumi:"secondaryDnsServerIp"`
 	// Site ID.
 	SiteId pulumi.StringOutput `pulumi:"siteId"`
-	// Intended CIDR list to be advertised to external BGP router.
+	// Set of intended CIDRs to be advertised to external BGP router. Example: ["10.1.0.0/116", "10.2.0.0/16"].
 	SpokeBgpManualAdvertiseCidrs pulumi.StringArrayOutput `pulumi:"spokeBgpManualAdvertiseCidrs"`
 	// State of Edge as a Spoke.
 	State pulumi.StringOutput `pulumi:"state"`
 	// WAN default gateway IP.
 	WanDefaultGatewayIp pulumi.StringOutput `pulumi:"wanDefaultGatewayIp"`
-	// WAN interface IP/prefix.
+	// WAN interface IP and subnet prefix.
 	WanInterfaceIpPrefix pulumi.StringOutput `pulumi:"wanInterfaceIpPrefix"`
-	// WAN interface public IP.
+	// WAN public IP. Required for attaching connections over the Internet.
 	WanPublicIp pulumi.StringOutput `pulumi:"wanPublicIp"`
-	// The location where the Edge as a CaaG ZTP file will be stored.
+	// The folder path where the ZTP file will be downloaded.
 	ZtpFileDownloadPath pulumi.StringOutput `pulumi:"ztpFileDownloadPath"`
-	// ZTP file type.
+	// ZTP file type. Valid values: "iso", "cloud-init".
 	ZtpFileType pulumi.StringOutput `pulumi:"ztpFileType"`
 }
 
@@ -132,132 +220,132 @@ func GetAviatrixEdgeSpoke(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixEdgeSpoke resources.
 type aviatrixEdgeSpokeState struct {
-	// Approved learned CIDRs for BGP Spoke Gateway.
+	// Set of approved learned CIDRs. Valid only when `enableLearnedCidrsApproval` is set to true. Example: ["10.1.0.0/116", "10.2.0.0/16"].
 	ApprovedLearnedCidrs []string `pulumi:"approvedLearnedCidrs"`
-	// BGP Hold Time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 12 and 360.
+	// BGP hold time. Unit is in seconds. Valid values are between 12 and 360. Default value: 180.
 	BgpHoldTime *int `pulumi:"bgpHoldTime"`
-	// BGP route polling time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 10 and 50.
+	// BGP route polling time. Unit is in seconds. Valid values are between 10 and 50. Default value: 50.
 	BgpPollingTime *int `pulumi:"bgpPollingTime"`
-	// DNS server IP.
+	// DNS server IP. Required and valid when `managementInterfaceConfig` is "Static".
 	DnsServerIp *string `pulumi:"dnsServerIp"`
-	// Enables Edge Active-Standby Mode.
+	// Switch to enable Edge Active-Standby mode. Valid values: true, false. Default value: false.
 	EnableEdgeActiveStandby *bool `pulumi:"enableEdgeActiveStandby"`
-	// Enables Preemptive Mode for Edge Active-Standby, available only with Active-Standby enabled.
+	// Switch to enable Preemptive Mode for Edge Active-Standby. Valid values: true, false. Default value: false.
 	EnableEdgeActiveStandbyPreemptive *bool `pulumi:"enableEdgeActiveStandbyPreemptive"`
-	// Enable Edge transitive routing.
+	// Switch to enable Edge transitive routing. Valid values: true, false. Default value: false.
 	EnableEdgeTransitiveRouting *bool `pulumi:"enableEdgeTransitiveRouting"`
-	// Enable jumbo frame.
+	// Switch to enable jumbo frame. Valid values: true, false. Default value: false.
 	EnableJumboFrame *bool `pulumi:"enableJumboFrame"`
-	// Switch to enable/disable learned CIDR approval for BGP Spoke Gateway. Valid values: true, false.
+	// Switch to enable learned CIDR approval. Valid values: true, false. Default value: false.
 	EnableLearnedCidrsApproval *bool `pulumi:"enableLearnedCidrsApproval"`
-	// Enable management over private network.
+	// Switch to enable management over the private network. Valid values: true, false. Default value: false.
 	EnableManagementOverPrivateNetwork *bool `pulumi:"enableManagementOverPrivateNetwork"`
-	// Enable preserve as path when advertising manual summary CIDRs on BGP spoke gateway.
+	// Switch to enable preserve asPath when advertising manual summary CIDRs. Valid values: true, false. Default value: false.
 	EnablePreserveAsPath *bool `pulumi:"enablePreserveAsPath"`
 	// Edge as a Spoke name.
 	GwName *string `pulumi:"gwName"`
-	// LAN interface IP/prefix.
+	// LAN interface IP and subnet prefix.
 	LanInterfaceIpPrefix *string `pulumi:"lanInterfaceIpPrefix"`
-	// The latitude of the Edge as a Spoke.
+	// Latitude of Edge as a Spoke. Valid values are between -90 and 90. Example: "47.7511".
 	Latitude *string `pulumi:"latitude"`
-	// Local AS number.
+	// BGP AS Number to assign to Edge as a Spoke.
 	LocalAsNumber *string `pulumi:"localAsNumber"`
-	// The longitude of the Edge as a Spoke.
+	// Longitude of Edge as a Spoke. Valid values are between -180 and 180. Example: "120.7401".
 	Longitude *string `pulumi:"longitude"`
-	// Management default gateway IP.
+	// Management default gateway IP. Required and valid when `managementInterfaceConfig` is "Static".
 	ManagementDefaultGatewayIp *string `pulumi:"managementDefaultGatewayIp"`
-	// Management egress gateway IP/prefix.
+	// Management egress gateway IP and subnet prefix.
 	ManagementEgressIpPrefix *string `pulumi:"managementEgressIpPrefix"`
-	// Management interface configuration. Valid values: 'DHCP' and 'Static'.
+	// Management interface configuration. Valid values: "DHCP", "Static".
 	ManagementInterfaceConfig *string `pulumi:"managementInterfaceConfig"`
-	// Management interface IP/prefix.
+	// Management interface IP and subnet prefix. Required and valid when `managementInterfaceConfig` is "Static".
 	ManagementInterfaceIpPrefix *string `pulumi:"managementInterfaceIpPrefix"`
-	// List of AS numbers to prepend gateway BGP AS_Path field.
+	// List of AS numbers to prepend gateway BGP AS_Path field. Valid only when `localAsNumber` is set. Example: ["65023", "65023"].
 	PrependAsPaths []string `pulumi:"prependAsPaths"`
-	// Ethernet interface RX queue size.
+	// Ethernet interface RX queue size. Once set, can't be deleted or disabled. Valid values: "1K", "2K", "4K".
 	RxQueueSize *string `pulumi:"rxQueueSize"`
-	// Secondary DNS server IP.
+	// Secondary DNS server IP. Required and valid when `managementInterfaceConfig` is "Static".
 	SecondaryDnsServerIp *string `pulumi:"secondaryDnsServerIp"`
 	// Site ID.
 	SiteId *string `pulumi:"siteId"`
-	// Intended CIDR list to be advertised to external BGP router.
+	// Set of intended CIDRs to be advertised to external BGP router. Example: ["10.1.0.0/116", "10.2.0.0/16"].
 	SpokeBgpManualAdvertiseCidrs []string `pulumi:"spokeBgpManualAdvertiseCidrs"`
 	// State of Edge as a Spoke.
 	State *string `pulumi:"state"`
 	// WAN default gateway IP.
 	WanDefaultGatewayIp *string `pulumi:"wanDefaultGatewayIp"`
-	// WAN interface IP/prefix.
+	// WAN interface IP and subnet prefix.
 	WanInterfaceIpPrefix *string `pulumi:"wanInterfaceIpPrefix"`
-	// WAN interface public IP.
+	// WAN public IP. Required for attaching connections over the Internet.
 	WanPublicIp *string `pulumi:"wanPublicIp"`
-	// The location where the Edge as a CaaG ZTP file will be stored.
+	// The folder path where the ZTP file will be downloaded.
 	ZtpFileDownloadPath *string `pulumi:"ztpFileDownloadPath"`
-	// ZTP file type.
+	// ZTP file type. Valid values: "iso", "cloud-init".
 	ZtpFileType *string `pulumi:"ztpFileType"`
 }
 
 type AviatrixEdgeSpokeState struct {
-	// Approved learned CIDRs for BGP Spoke Gateway.
+	// Set of approved learned CIDRs. Valid only when `enableLearnedCidrsApproval` is set to true. Example: ["10.1.0.0/116", "10.2.0.0/16"].
 	ApprovedLearnedCidrs pulumi.StringArrayInput
-	// BGP Hold Time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 12 and 360.
+	// BGP hold time. Unit is in seconds. Valid values are between 12 and 360. Default value: 180.
 	BgpHoldTime pulumi.IntPtrInput
-	// BGP route polling time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 10 and 50.
+	// BGP route polling time. Unit is in seconds. Valid values are between 10 and 50. Default value: 50.
 	BgpPollingTime pulumi.IntPtrInput
-	// DNS server IP.
+	// DNS server IP. Required and valid when `managementInterfaceConfig` is "Static".
 	DnsServerIp pulumi.StringPtrInput
-	// Enables Edge Active-Standby Mode.
+	// Switch to enable Edge Active-Standby mode. Valid values: true, false. Default value: false.
 	EnableEdgeActiveStandby pulumi.BoolPtrInput
-	// Enables Preemptive Mode for Edge Active-Standby, available only with Active-Standby enabled.
+	// Switch to enable Preemptive Mode for Edge Active-Standby. Valid values: true, false. Default value: false.
 	EnableEdgeActiveStandbyPreemptive pulumi.BoolPtrInput
-	// Enable Edge transitive routing.
+	// Switch to enable Edge transitive routing. Valid values: true, false. Default value: false.
 	EnableEdgeTransitiveRouting pulumi.BoolPtrInput
-	// Enable jumbo frame.
+	// Switch to enable jumbo frame. Valid values: true, false. Default value: false.
 	EnableJumboFrame pulumi.BoolPtrInput
-	// Switch to enable/disable learned CIDR approval for BGP Spoke Gateway. Valid values: true, false.
+	// Switch to enable learned CIDR approval. Valid values: true, false. Default value: false.
 	EnableLearnedCidrsApproval pulumi.BoolPtrInput
-	// Enable management over private network.
+	// Switch to enable management over the private network. Valid values: true, false. Default value: false.
 	EnableManagementOverPrivateNetwork pulumi.BoolPtrInput
-	// Enable preserve as path when advertising manual summary CIDRs on BGP spoke gateway.
+	// Switch to enable preserve asPath when advertising manual summary CIDRs. Valid values: true, false. Default value: false.
 	EnablePreserveAsPath pulumi.BoolPtrInput
 	// Edge as a Spoke name.
 	GwName pulumi.StringPtrInput
-	// LAN interface IP/prefix.
+	// LAN interface IP and subnet prefix.
 	LanInterfaceIpPrefix pulumi.StringPtrInput
-	// The latitude of the Edge as a Spoke.
+	// Latitude of Edge as a Spoke. Valid values are between -90 and 90. Example: "47.7511".
 	Latitude pulumi.StringPtrInput
-	// Local AS number.
+	// BGP AS Number to assign to Edge as a Spoke.
 	LocalAsNumber pulumi.StringPtrInput
-	// The longitude of the Edge as a Spoke.
+	// Longitude of Edge as a Spoke. Valid values are between -180 and 180. Example: "120.7401".
 	Longitude pulumi.StringPtrInput
-	// Management default gateway IP.
+	// Management default gateway IP. Required and valid when `managementInterfaceConfig` is "Static".
 	ManagementDefaultGatewayIp pulumi.StringPtrInput
-	// Management egress gateway IP/prefix.
+	// Management egress gateway IP and subnet prefix.
 	ManagementEgressIpPrefix pulumi.StringPtrInput
-	// Management interface configuration. Valid values: 'DHCP' and 'Static'.
+	// Management interface configuration. Valid values: "DHCP", "Static".
 	ManagementInterfaceConfig pulumi.StringPtrInput
-	// Management interface IP/prefix.
+	// Management interface IP and subnet prefix. Required and valid when `managementInterfaceConfig` is "Static".
 	ManagementInterfaceIpPrefix pulumi.StringPtrInput
-	// List of AS numbers to prepend gateway BGP AS_Path field.
+	// List of AS numbers to prepend gateway BGP AS_Path field. Valid only when `localAsNumber` is set. Example: ["65023", "65023"].
 	PrependAsPaths pulumi.StringArrayInput
-	// Ethernet interface RX queue size.
+	// Ethernet interface RX queue size. Once set, can't be deleted or disabled. Valid values: "1K", "2K", "4K".
 	RxQueueSize pulumi.StringPtrInput
-	// Secondary DNS server IP.
+	// Secondary DNS server IP. Required and valid when `managementInterfaceConfig` is "Static".
 	SecondaryDnsServerIp pulumi.StringPtrInput
 	// Site ID.
 	SiteId pulumi.StringPtrInput
-	// Intended CIDR list to be advertised to external BGP router.
+	// Set of intended CIDRs to be advertised to external BGP router. Example: ["10.1.0.0/116", "10.2.0.0/16"].
 	SpokeBgpManualAdvertiseCidrs pulumi.StringArrayInput
 	// State of Edge as a Spoke.
 	State pulumi.StringPtrInput
 	// WAN default gateway IP.
 	WanDefaultGatewayIp pulumi.StringPtrInput
-	// WAN interface IP/prefix.
+	// WAN interface IP and subnet prefix.
 	WanInterfaceIpPrefix pulumi.StringPtrInput
-	// WAN interface public IP.
+	// WAN public IP. Required for attaching connections over the Internet.
 	WanPublicIp pulumi.StringPtrInput
-	// The location where the Edge as a CaaG ZTP file will be stored.
+	// The folder path where the ZTP file will be downloaded.
 	ZtpFileDownloadPath pulumi.StringPtrInput
-	// ZTP file type.
+	// ZTP file type. Valid values: "iso", "cloud-init".
 	ZtpFileType pulumi.StringPtrInput
 }
 
@@ -266,129 +354,129 @@ func (AviatrixEdgeSpokeState) ElementType() reflect.Type {
 }
 
 type aviatrixEdgeSpokeArgs struct {
-	// Approved learned CIDRs for BGP Spoke Gateway.
+	// Set of approved learned CIDRs. Valid only when `enableLearnedCidrsApproval` is set to true. Example: ["10.1.0.0/116", "10.2.0.0/16"].
 	ApprovedLearnedCidrs []string `pulumi:"approvedLearnedCidrs"`
-	// BGP Hold Time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 12 and 360.
+	// BGP hold time. Unit is in seconds. Valid values are between 12 and 360. Default value: 180.
 	BgpHoldTime *int `pulumi:"bgpHoldTime"`
-	// BGP route polling time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 10 and 50.
+	// BGP route polling time. Unit is in seconds. Valid values are between 10 and 50. Default value: 50.
 	BgpPollingTime *int `pulumi:"bgpPollingTime"`
-	// DNS server IP.
+	// DNS server IP. Required and valid when `managementInterfaceConfig` is "Static".
 	DnsServerIp *string `pulumi:"dnsServerIp"`
-	// Enables Edge Active-Standby Mode.
+	// Switch to enable Edge Active-Standby mode. Valid values: true, false. Default value: false.
 	EnableEdgeActiveStandby *bool `pulumi:"enableEdgeActiveStandby"`
-	// Enables Preemptive Mode for Edge Active-Standby, available only with Active-Standby enabled.
+	// Switch to enable Preemptive Mode for Edge Active-Standby. Valid values: true, false. Default value: false.
 	EnableEdgeActiveStandbyPreemptive *bool `pulumi:"enableEdgeActiveStandbyPreemptive"`
-	// Enable Edge transitive routing.
+	// Switch to enable Edge transitive routing. Valid values: true, false. Default value: false.
 	EnableEdgeTransitiveRouting *bool `pulumi:"enableEdgeTransitiveRouting"`
-	// Enable jumbo frame.
+	// Switch to enable jumbo frame. Valid values: true, false. Default value: false.
 	EnableJumboFrame *bool `pulumi:"enableJumboFrame"`
-	// Switch to enable/disable learned CIDR approval for BGP Spoke Gateway. Valid values: true, false.
+	// Switch to enable learned CIDR approval. Valid values: true, false. Default value: false.
 	EnableLearnedCidrsApproval *bool `pulumi:"enableLearnedCidrsApproval"`
-	// Enable management over private network.
+	// Switch to enable management over the private network. Valid values: true, false. Default value: false.
 	EnableManagementOverPrivateNetwork *bool `pulumi:"enableManagementOverPrivateNetwork"`
-	// Enable preserve as path when advertising manual summary CIDRs on BGP spoke gateway.
+	// Switch to enable preserve asPath when advertising manual summary CIDRs. Valid values: true, false. Default value: false.
 	EnablePreserveAsPath *bool `pulumi:"enablePreserveAsPath"`
 	// Edge as a Spoke name.
 	GwName string `pulumi:"gwName"`
-	// LAN interface IP/prefix.
+	// LAN interface IP and subnet prefix.
 	LanInterfaceIpPrefix string `pulumi:"lanInterfaceIpPrefix"`
-	// The latitude of the Edge as a Spoke.
+	// Latitude of Edge as a Spoke. Valid values are between -90 and 90. Example: "47.7511".
 	Latitude *string `pulumi:"latitude"`
-	// Local AS number.
+	// BGP AS Number to assign to Edge as a Spoke.
 	LocalAsNumber *string `pulumi:"localAsNumber"`
-	// The longitude of the Edge as a Spoke.
+	// Longitude of Edge as a Spoke. Valid values are between -180 and 180. Example: "120.7401".
 	Longitude *string `pulumi:"longitude"`
-	// Management default gateway IP.
+	// Management default gateway IP. Required and valid when `managementInterfaceConfig` is "Static".
 	ManagementDefaultGatewayIp *string `pulumi:"managementDefaultGatewayIp"`
-	// Management egress gateway IP/prefix.
+	// Management egress gateway IP and subnet prefix.
 	ManagementEgressIpPrefix *string `pulumi:"managementEgressIpPrefix"`
-	// Management interface configuration. Valid values: 'DHCP' and 'Static'.
+	// Management interface configuration. Valid values: "DHCP", "Static".
 	ManagementInterfaceConfig string `pulumi:"managementInterfaceConfig"`
-	// Management interface IP/prefix.
+	// Management interface IP and subnet prefix. Required and valid when `managementInterfaceConfig` is "Static".
 	ManagementInterfaceIpPrefix *string `pulumi:"managementInterfaceIpPrefix"`
-	// List of AS numbers to prepend gateway BGP AS_Path field.
+	// List of AS numbers to prepend gateway BGP AS_Path field. Valid only when `localAsNumber` is set. Example: ["65023", "65023"].
 	PrependAsPaths []string `pulumi:"prependAsPaths"`
-	// Ethernet interface RX queue size.
+	// Ethernet interface RX queue size. Once set, can't be deleted or disabled. Valid values: "1K", "2K", "4K".
 	RxQueueSize *string `pulumi:"rxQueueSize"`
-	// Secondary DNS server IP.
+	// Secondary DNS server IP. Required and valid when `managementInterfaceConfig` is "Static".
 	SecondaryDnsServerIp *string `pulumi:"secondaryDnsServerIp"`
 	// Site ID.
 	SiteId string `pulumi:"siteId"`
-	// Intended CIDR list to be advertised to external BGP router.
+	// Set of intended CIDRs to be advertised to external BGP router. Example: ["10.1.0.0/116", "10.2.0.0/16"].
 	SpokeBgpManualAdvertiseCidrs []string `pulumi:"spokeBgpManualAdvertiseCidrs"`
 	// WAN default gateway IP.
 	WanDefaultGatewayIp string `pulumi:"wanDefaultGatewayIp"`
-	// WAN interface IP/prefix.
+	// WAN interface IP and subnet prefix.
 	WanInterfaceIpPrefix string `pulumi:"wanInterfaceIpPrefix"`
-	// WAN interface public IP.
+	// WAN public IP. Required for attaching connections over the Internet.
 	WanPublicIp *string `pulumi:"wanPublicIp"`
-	// The location where the Edge as a CaaG ZTP file will be stored.
+	// The folder path where the ZTP file will be downloaded.
 	ZtpFileDownloadPath string `pulumi:"ztpFileDownloadPath"`
-	// ZTP file type.
+	// ZTP file type. Valid values: "iso", "cloud-init".
 	ZtpFileType string `pulumi:"ztpFileType"`
 }
 
 // The set of arguments for constructing a AviatrixEdgeSpoke resource.
 type AviatrixEdgeSpokeArgs struct {
-	// Approved learned CIDRs for BGP Spoke Gateway.
+	// Set of approved learned CIDRs. Valid only when `enableLearnedCidrsApproval` is set to true. Example: ["10.1.0.0/116", "10.2.0.0/16"].
 	ApprovedLearnedCidrs pulumi.StringArrayInput
-	// BGP Hold Time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 12 and 360.
+	// BGP hold time. Unit is in seconds. Valid values are between 12 and 360. Default value: 180.
 	BgpHoldTime pulumi.IntPtrInput
-	// BGP route polling time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 10 and 50.
+	// BGP route polling time. Unit is in seconds. Valid values are between 10 and 50. Default value: 50.
 	BgpPollingTime pulumi.IntPtrInput
-	// DNS server IP.
+	// DNS server IP. Required and valid when `managementInterfaceConfig` is "Static".
 	DnsServerIp pulumi.StringPtrInput
-	// Enables Edge Active-Standby Mode.
+	// Switch to enable Edge Active-Standby mode. Valid values: true, false. Default value: false.
 	EnableEdgeActiveStandby pulumi.BoolPtrInput
-	// Enables Preemptive Mode for Edge Active-Standby, available only with Active-Standby enabled.
+	// Switch to enable Preemptive Mode for Edge Active-Standby. Valid values: true, false. Default value: false.
 	EnableEdgeActiveStandbyPreemptive pulumi.BoolPtrInput
-	// Enable Edge transitive routing.
+	// Switch to enable Edge transitive routing. Valid values: true, false. Default value: false.
 	EnableEdgeTransitiveRouting pulumi.BoolPtrInput
-	// Enable jumbo frame.
+	// Switch to enable jumbo frame. Valid values: true, false. Default value: false.
 	EnableJumboFrame pulumi.BoolPtrInput
-	// Switch to enable/disable learned CIDR approval for BGP Spoke Gateway. Valid values: true, false.
+	// Switch to enable learned CIDR approval. Valid values: true, false. Default value: false.
 	EnableLearnedCidrsApproval pulumi.BoolPtrInput
-	// Enable management over private network.
+	// Switch to enable management over the private network. Valid values: true, false. Default value: false.
 	EnableManagementOverPrivateNetwork pulumi.BoolPtrInput
-	// Enable preserve as path when advertising manual summary CIDRs on BGP spoke gateway.
+	// Switch to enable preserve asPath when advertising manual summary CIDRs. Valid values: true, false. Default value: false.
 	EnablePreserveAsPath pulumi.BoolPtrInput
 	// Edge as a Spoke name.
 	GwName pulumi.StringInput
-	// LAN interface IP/prefix.
+	// LAN interface IP and subnet prefix.
 	LanInterfaceIpPrefix pulumi.StringInput
-	// The latitude of the Edge as a Spoke.
+	// Latitude of Edge as a Spoke. Valid values are between -90 and 90. Example: "47.7511".
 	Latitude pulumi.StringPtrInput
-	// Local AS number.
+	// BGP AS Number to assign to Edge as a Spoke.
 	LocalAsNumber pulumi.StringPtrInput
-	// The longitude of the Edge as a Spoke.
+	// Longitude of Edge as a Spoke. Valid values are between -180 and 180. Example: "120.7401".
 	Longitude pulumi.StringPtrInput
-	// Management default gateway IP.
+	// Management default gateway IP. Required and valid when `managementInterfaceConfig` is "Static".
 	ManagementDefaultGatewayIp pulumi.StringPtrInput
-	// Management egress gateway IP/prefix.
+	// Management egress gateway IP and subnet prefix.
 	ManagementEgressIpPrefix pulumi.StringPtrInput
-	// Management interface configuration. Valid values: 'DHCP' and 'Static'.
+	// Management interface configuration. Valid values: "DHCP", "Static".
 	ManagementInterfaceConfig pulumi.StringInput
-	// Management interface IP/prefix.
+	// Management interface IP and subnet prefix. Required and valid when `managementInterfaceConfig` is "Static".
 	ManagementInterfaceIpPrefix pulumi.StringPtrInput
-	// List of AS numbers to prepend gateway BGP AS_Path field.
+	// List of AS numbers to prepend gateway BGP AS_Path field. Valid only when `localAsNumber` is set. Example: ["65023", "65023"].
 	PrependAsPaths pulumi.StringArrayInput
-	// Ethernet interface RX queue size.
+	// Ethernet interface RX queue size. Once set, can't be deleted or disabled. Valid values: "1K", "2K", "4K".
 	RxQueueSize pulumi.StringPtrInput
-	// Secondary DNS server IP.
+	// Secondary DNS server IP. Required and valid when `managementInterfaceConfig` is "Static".
 	SecondaryDnsServerIp pulumi.StringPtrInput
 	// Site ID.
 	SiteId pulumi.StringInput
-	// Intended CIDR list to be advertised to external BGP router.
+	// Set of intended CIDRs to be advertised to external BGP router. Example: ["10.1.0.0/116", "10.2.0.0/16"].
 	SpokeBgpManualAdvertiseCidrs pulumi.StringArrayInput
 	// WAN default gateway IP.
 	WanDefaultGatewayIp pulumi.StringInput
-	// WAN interface IP/prefix.
+	// WAN interface IP and subnet prefix.
 	WanInterfaceIpPrefix pulumi.StringInput
-	// WAN interface public IP.
+	// WAN public IP. Required for attaching connections over the Internet.
 	WanPublicIp pulumi.StringPtrInput
-	// The location where the Edge as a CaaG ZTP file will be stored.
+	// The folder path where the ZTP file will be downloaded.
 	ZtpFileDownloadPath pulumi.StringInput
-	// ZTP file type.
+	// ZTP file type. Valid values: "iso", "cloud-init".
 	ZtpFileType pulumi.StringInput
 }
 
@@ -479,57 +567,57 @@ func (o AviatrixEdgeSpokeOutput) ToAviatrixEdgeSpokeOutputWithContext(ctx contex
 	return o
 }
 
-// Approved learned CIDRs for BGP Spoke Gateway.
+// Set of approved learned CIDRs. Valid only when `enableLearnedCidrsApproval` is set to true. Example: ["10.1.0.0/116", "10.2.0.0/16"].
 func (o AviatrixEdgeSpokeOutput) ApprovedLearnedCidrs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpoke) pulumi.StringArrayOutput { return v.ApprovedLearnedCidrs }).(pulumi.StringArrayOutput)
 }
 
-// BGP Hold Time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 12 and 360.
+// BGP hold time. Unit is in seconds. Valid values are between 12 and 360. Default value: 180.
 func (o AviatrixEdgeSpokeOutput) BgpHoldTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpoke) pulumi.IntPtrOutput { return v.BgpHoldTime }).(pulumi.IntPtrOutput)
 }
 
-// BGP route polling time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 10 and 50.
+// BGP route polling time. Unit is in seconds. Valid values are between 10 and 50. Default value: 50.
 func (o AviatrixEdgeSpokeOutput) BgpPollingTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpoke) pulumi.IntPtrOutput { return v.BgpPollingTime }).(pulumi.IntPtrOutput)
 }
 
-// DNS server IP.
+// DNS server IP. Required and valid when `managementInterfaceConfig` is "Static".
 func (o AviatrixEdgeSpokeOutput) DnsServerIp() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpoke) pulumi.StringPtrOutput { return v.DnsServerIp }).(pulumi.StringPtrOutput)
 }
 
-// Enables Edge Active-Standby Mode.
+// Switch to enable Edge Active-Standby mode. Valid values: true, false. Default value: false.
 func (o AviatrixEdgeSpokeOutput) EnableEdgeActiveStandby() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpoke) pulumi.BoolPtrOutput { return v.EnableEdgeActiveStandby }).(pulumi.BoolPtrOutput)
 }
 
-// Enables Preemptive Mode for Edge Active-Standby, available only with Active-Standby enabled.
+// Switch to enable Preemptive Mode for Edge Active-Standby. Valid values: true, false. Default value: false.
 func (o AviatrixEdgeSpokeOutput) EnableEdgeActiveStandbyPreemptive() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpoke) pulumi.BoolPtrOutput { return v.EnableEdgeActiveStandbyPreemptive }).(pulumi.BoolPtrOutput)
 }
 
-// Enable Edge transitive routing.
+// Switch to enable Edge transitive routing. Valid values: true, false. Default value: false.
 func (o AviatrixEdgeSpokeOutput) EnableEdgeTransitiveRouting() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpoke) pulumi.BoolPtrOutput { return v.EnableEdgeTransitiveRouting }).(pulumi.BoolPtrOutput)
 }
 
-// Enable jumbo frame.
+// Switch to enable jumbo frame. Valid values: true, false. Default value: false.
 func (o AviatrixEdgeSpokeOutput) EnableJumboFrame() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpoke) pulumi.BoolPtrOutput { return v.EnableJumboFrame }).(pulumi.BoolPtrOutput)
 }
 
-// Switch to enable/disable learned CIDR approval for BGP Spoke Gateway. Valid values: true, false.
+// Switch to enable learned CIDR approval. Valid values: true, false. Default value: false.
 func (o AviatrixEdgeSpokeOutput) EnableLearnedCidrsApproval() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpoke) pulumi.BoolPtrOutput { return v.EnableLearnedCidrsApproval }).(pulumi.BoolPtrOutput)
 }
 
-// Enable management over private network.
+// Switch to enable management over the private network. Valid values: true, false. Default value: false.
 func (o AviatrixEdgeSpokeOutput) EnableManagementOverPrivateNetwork() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpoke) pulumi.BoolPtrOutput { return v.EnableManagementOverPrivateNetwork }).(pulumi.BoolPtrOutput)
 }
 
-// Enable preserve as path when advertising manual summary CIDRs on BGP spoke gateway.
+// Switch to enable preserve asPath when advertising manual summary CIDRs. Valid values: true, false. Default value: false.
 func (o AviatrixEdgeSpokeOutput) EnablePreserveAsPath() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpoke) pulumi.BoolPtrOutput { return v.EnablePreserveAsPath }).(pulumi.BoolPtrOutput)
 }
@@ -539,57 +627,57 @@ func (o AviatrixEdgeSpokeOutput) GwName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpoke) pulumi.StringOutput { return v.GwName }).(pulumi.StringOutput)
 }
 
-// LAN interface IP/prefix.
+// LAN interface IP and subnet prefix.
 func (o AviatrixEdgeSpokeOutput) LanInterfaceIpPrefix() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpoke) pulumi.StringOutput { return v.LanInterfaceIpPrefix }).(pulumi.StringOutput)
 }
 
-// The latitude of the Edge as a Spoke.
+// Latitude of Edge as a Spoke. Valid values are between -90 and 90. Example: "47.7511".
 func (o AviatrixEdgeSpokeOutput) Latitude() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpoke) pulumi.StringOutput { return v.Latitude }).(pulumi.StringOutput)
 }
 
-// Local AS number.
+// BGP AS Number to assign to Edge as a Spoke.
 func (o AviatrixEdgeSpokeOutput) LocalAsNumber() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpoke) pulumi.StringOutput { return v.LocalAsNumber }).(pulumi.StringOutput)
 }
 
-// The longitude of the Edge as a Spoke.
+// Longitude of Edge as a Spoke. Valid values are between -180 and 180. Example: "120.7401".
 func (o AviatrixEdgeSpokeOutput) Longitude() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpoke) pulumi.StringOutput { return v.Longitude }).(pulumi.StringOutput)
 }
 
-// Management default gateway IP.
+// Management default gateway IP. Required and valid when `managementInterfaceConfig` is "Static".
 func (o AviatrixEdgeSpokeOutput) ManagementDefaultGatewayIp() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpoke) pulumi.StringPtrOutput { return v.ManagementDefaultGatewayIp }).(pulumi.StringPtrOutput)
 }
 
-// Management egress gateway IP/prefix.
+// Management egress gateway IP and subnet prefix.
 func (o AviatrixEdgeSpokeOutput) ManagementEgressIpPrefix() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpoke) pulumi.StringPtrOutput { return v.ManagementEgressIpPrefix }).(pulumi.StringPtrOutput)
 }
 
-// Management interface configuration. Valid values: 'DHCP' and 'Static'.
+// Management interface configuration. Valid values: "DHCP", "Static".
 func (o AviatrixEdgeSpokeOutput) ManagementInterfaceConfig() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpoke) pulumi.StringOutput { return v.ManagementInterfaceConfig }).(pulumi.StringOutput)
 }
 
-// Management interface IP/prefix.
+// Management interface IP and subnet prefix. Required and valid when `managementInterfaceConfig` is "Static".
 func (o AviatrixEdgeSpokeOutput) ManagementInterfaceIpPrefix() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpoke) pulumi.StringPtrOutput { return v.ManagementInterfaceIpPrefix }).(pulumi.StringPtrOutput)
 }
 
-// List of AS numbers to prepend gateway BGP AS_Path field.
+// List of AS numbers to prepend gateway BGP AS_Path field. Valid only when `localAsNumber` is set. Example: ["65023", "65023"].
 func (o AviatrixEdgeSpokeOutput) PrependAsPaths() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpoke) pulumi.StringArrayOutput { return v.PrependAsPaths }).(pulumi.StringArrayOutput)
 }
 
-// Ethernet interface RX queue size.
+// Ethernet interface RX queue size. Once set, can't be deleted or disabled. Valid values: "1K", "2K", "4K".
 func (o AviatrixEdgeSpokeOutput) RxQueueSize() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpoke) pulumi.StringPtrOutput { return v.RxQueueSize }).(pulumi.StringPtrOutput)
 }
 
-// Secondary DNS server IP.
+// Secondary DNS server IP. Required and valid when `managementInterfaceConfig` is "Static".
 func (o AviatrixEdgeSpokeOutput) SecondaryDnsServerIp() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpoke) pulumi.StringPtrOutput { return v.SecondaryDnsServerIp }).(pulumi.StringPtrOutput)
 }
@@ -599,7 +687,7 @@ func (o AviatrixEdgeSpokeOutput) SiteId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpoke) pulumi.StringOutput { return v.SiteId }).(pulumi.StringOutput)
 }
 
-// Intended CIDR list to be advertised to external BGP router.
+// Set of intended CIDRs to be advertised to external BGP router. Example: ["10.1.0.0/116", "10.2.0.0/16"].
 func (o AviatrixEdgeSpokeOutput) SpokeBgpManualAdvertiseCidrs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpoke) pulumi.StringArrayOutput { return v.SpokeBgpManualAdvertiseCidrs }).(pulumi.StringArrayOutput)
 }
@@ -614,22 +702,22 @@ func (o AviatrixEdgeSpokeOutput) WanDefaultGatewayIp() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpoke) pulumi.StringOutput { return v.WanDefaultGatewayIp }).(pulumi.StringOutput)
 }
 
-// WAN interface IP/prefix.
+// WAN interface IP and subnet prefix.
 func (o AviatrixEdgeSpokeOutput) WanInterfaceIpPrefix() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpoke) pulumi.StringOutput { return v.WanInterfaceIpPrefix }).(pulumi.StringOutput)
 }
 
-// WAN interface public IP.
+// WAN public IP. Required for attaching connections over the Internet.
 func (o AviatrixEdgeSpokeOutput) WanPublicIp() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpoke) pulumi.StringOutput { return v.WanPublicIp }).(pulumi.StringOutput)
 }
 
-// The location where the Edge as a CaaG ZTP file will be stored.
+// The folder path where the ZTP file will be downloaded.
 func (o AviatrixEdgeSpokeOutput) ZtpFileDownloadPath() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpoke) pulumi.StringOutput { return v.ZtpFileDownloadPath }).(pulumi.StringOutput)
 }
 
-// ZTP file type.
+// ZTP file type. Valid values: "iso", "cloud-init".
 func (o AviatrixEdgeSpokeOutput) ZtpFileType() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixEdgeSpoke) pulumi.StringOutput { return v.ZtpFileType }).(pulumi.StringOutput)
 }

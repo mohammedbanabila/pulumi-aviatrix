@@ -9,125 +9,188 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_transit_cloudn_conn** resource creates and manages the connection between an Aviatrix Transit Gateway and an Aviatrix CloudN device. Available as of provider version R2.21.0+.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Transit Gateway to CloudN Connection
+    ///     var test = new Aviatrix.AviatrixTransitCloudnConn("test", new()
+    ///     {
+    ///         BgpLocalAsNum = "123",
+    ///         CloudnAsNum = "345",
+    ///         CloudnNeighborAsNum = "65005",
+    ///         CloudnNeighborIp = "182.1.2.3",
+    ///         CloudnRemoteIp = "172.12.13.14",
+    ///         ConnectionName = "my_conn",
+    ///         GwName = "transitGw",
+    ///         VpcId = "vpc-abcd1234",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Transit Gateway to CloudN Connection with HA
+    ///     var test = new Aviatrix.AviatrixTransitCloudnConn("test", new()
+    ///     {
+    ///         BackupCloudnAsNum = "123",
+    ///         BackupCloudnIp = "1.2.3.6",
+    ///         BackupCloudnNeighborAsNum = "345",
+    ///         BackupCloudnNeighborIp = "1.2.3.7",
+    ///         BgpLocalAsNum = "123",
+    ///         CloudnAsNum = "345",
+    ///         CloudnNeighborAsNum = "65005",
+    ///         CloudnNeighborIp = "1.2.3.5",
+    ///         CloudnRemoteIp = "1.2.3.4",
+    ///         ConnectionName = "my_conn",
+    ///         EnableHa = true,
+    ///         GwName = "transitGw",
+    ///         VpcId = "vpc-abcd1234",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **transit_cloudn_conn** can be imported using the `connection_name` and `vpc_id`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixTransitCloudnConn:AviatrixTransitCloudnConn test connection_name~vpc_id
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixTransitCloudnConn:AviatrixTransitCloudnConn")]
     public partial class AviatrixTransitCloudnConn : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
+        /// Set of approved CIDRs. Requires `enable_learned_cidrs_approval` to be true. Type: Set(String).
         /// </summary>
         [Output("approvedCidrs")]
         public Output<ImmutableArray<string>> ApprovedCidrs { get; private set; } = null!;
 
         /// <summary>
-        /// Backup Aviatrix CloudN BGP ASN.
+        /// BGP AS Number of HA CloudN. Type: String.
         /// </summary>
         [Output("backupCloudnAsNum")]
         public Output<string?> BackupCloudnAsNum { get; private set; } = null!;
 
         /// <summary>
-        /// Backup Aviatrix CloudN IP Address.
+        /// IP Address of HA CloudN. Required when `enable_ha` is true. Type: String.
         /// </summary>
         [Output("backupCloudnIp")]
         public Output<string?> BackupCloudnIp { get; private set; } = null!;
 
         /// <summary>
-        /// Backup Aviatrix CloudN LAN Interface Neighbor's BGP ASN.
+        /// BGP AS Number of HA CloudN Neighbor. Type: String.
         /// </summary>
         [Output("backupCloudnNeighborAsNum")]
         public Output<string?> BackupCloudnNeighborAsNum { get; private set; } = null!;
 
         /// <summary>
-        /// Backup Aviatrix CloudN LAN Interface Neighbor's IP Address.
+        /// IP Address of HA CloudN Neighbor. Type: String.
         /// </summary>
         [Output("backupCloudnNeighborIp")]
         public Output<string?> BackupCloudnNeighborIp { get; private set; } = null!;
 
         /// <summary>
-        /// Enable direct connect to Backup Aviatrix CloudN over private network.
+        /// Flag to enable direct connect over private network to HA CloudN. Type: Boolean.
         /// </summary>
         [Output("backupDirectConnect")]
         public Output<bool?> BackupDirectConnect { get; private set; } = null!;
 
         /// <summary>
-        /// Enable Insane Mode for connection to Backup Aviatrix CloudN.
+        /// Flag to enable insane mode connection to HA CloudN. Type: Boolean.
         /// </summary>
         [Output("backupInsaneMode")]
         public Output<bool?> BackupInsaneMode { get; private set; } = null!;
 
         /// <summary>
-        /// BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+        /// BGP AS Number of the Transit Gateway. Type: String.
         /// </summary>
         [Output("bgpLocalAsNum")]
         public Output<string> BgpLocalAsNum { get; private set; } = null!;
 
         /// <summary>
-        /// Aviatrix CloudN BGP ASN (Autonomous System Number). Integer between 1-4294967294.
+        /// BGP AS Number of the Aviatrix CloudN. Type: String.
         /// </summary>
         [Output("cloudnAsNum")]
         public Output<string> CloudnAsNum { get; private set; } = null!;
 
         /// <summary>
-        /// CloudN LAN Interface Neighbor's BGP ASN.
+        /// BGP AS Number of the Aviatrix CloudN neighbor. Type: String.
         /// </summary>
         [Output("cloudnNeighborAsNum")]
         public Output<string> CloudnNeighborAsNum { get; private set; } = null!;
 
         /// <summary>
-        /// Aviatrix CloudN LAN Interface Neighbor's IP Address.
+        /// IP Address of Aviatrix CloudN neighbor. Type: String.
         /// </summary>
         [Output("cloudnNeighborIp")]
         public Output<string> CloudnNeighborIp { get; private set; } = null!;
 
         /// <summary>
-        /// Aviatrix CloudN IP Address.
+        /// IP Address of Aviatrix CloudN. Type: String.
         /// </summary>
         [Output("cloudnRemoteIp")]
         public Output<string> CloudnRemoteIp { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the transit Aviatrix CloudN connection.
+        /// Name of the Transit Gateway to CloudN Connection. Type: String.
         /// </summary>
         [Output("connectionName")]
         public Output<string> ConnectionName { get; private set; } = null!;
 
         /// <summary>
-        /// Enable Direct Connect for private network infrastructure.
+        /// Enable direct connect over private network. Type: Boolean. Default: true.
         /// </summary>
         [Output("directConnect")]
         public Output<bool?> DirectConnect { get; private set; } = null!;
 
         /// <summary>
-        /// Enable connection to HA CloudN.
+        /// Enable connection to HA CloudN. Type: Boolean.
         /// </summary>
         [Output("enableHa")]
         public Output<bool?> EnableHa { get; private set; } = null!;
 
         /// <summary>
-        /// Enable learned CIDRs approval.
+        /// Enable encrypted transit approval for connection. Type: Boolean.
         /// </summary>
         [Output("enableLearnedCidrsApproval")]
         public Output<bool?> EnableLearnedCidrsApproval { get; private set; } = null!;
 
         /// <summary>
-        /// Enable load balancing between Aviatrix CloudN and Backup CloudN.
+        /// Flag to enable load balancing between CloudN and HA CloudN. Type: Boolean.
         /// </summary>
         [Output("enableLoadBalancing")]
         public Output<bool?> EnableLoadBalancing { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the Transit Gateway.
+        /// Name of the Transit Gateway. Type: String.
         /// </summary>
         [Output("gwName")]
         public Output<string> GwName { get; private set; } = null!;
 
         /// <summary>
-        /// Enable Insane Mode for this connection.
+        /// Enable insane mode connection. Type: Boolean.
         /// </summary>
         [Output("insaneMode")]
         public Output<bool?> InsaneMode { get; private set; } = null!;
 
         /// <summary>
-        /// The ID of the VPC where the Transit Gateway is located.
+        /// VPC ID of the Aviatrix Transit Gateway. Type: String.
         /// </summary>
         [Output("vpcId")]
         public Output<string> VpcId { get; private set; } = null!;
@@ -183,7 +246,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _approvedCidrs;
 
         /// <summary>
-        /// Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
+        /// Set of approved CIDRs. Requires `enable_learned_cidrs_approval` to be true. Type: Set(String).
         /// </summary>
         public InputList<string> ApprovedCidrs
         {
@@ -192,115 +255,115 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Backup Aviatrix CloudN BGP ASN.
+        /// BGP AS Number of HA CloudN. Type: String.
         /// </summary>
         [Input("backupCloudnAsNum")]
         public Input<string>? BackupCloudnAsNum { get; set; }
 
         /// <summary>
-        /// Backup Aviatrix CloudN IP Address.
+        /// IP Address of HA CloudN. Required when `enable_ha` is true. Type: String.
         /// </summary>
         [Input("backupCloudnIp")]
         public Input<string>? BackupCloudnIp { get; set; }
 
         /// <summary>
-        /// Backup Aviatrix CloudN LAN Interface Neighbor's BGP ASN.
+        /// BGP AS Number of HA CloudN Neighbor. Type: String.
         /// </summary>
         [Input("backupCloudnNeighborAsNum")]
         public Input<string>? BackupCloudnNeighborAsNum { get; set; }
 
         /// <summary>
-        /// Backup Aviatrix CloudN LAN Interface Neighbor's IP Address.
+        /// IP Address of HA CloudN Neighbor. Type: String.
         /// </summary>
         [Input("backupCloudnNeighborIp")]
         public Input<string>? BackupCloudnNeighborIp { get; set; }
 
         /// <summary>
-        /// Enable direct connect to Backup Aviatrix CloudN over private network.
+        /// Flag to enable direct connect over private network to HA CloudN. Type: Boolean.
         /// </summary>
         [Input("backupDirectConnect")]
         public Input<bool>? BackupDirectConnect { get; set; }
 
         /// <summary>
-        /// Enable Insane Mode for connection to Backup Aviatrix CloudN.
+        /// Flag to enable insane mode connection to HA CloudN. Type: Boolean.
         /// </summary>
         [Input("backupInsaneMode")]
         public Input<bool>? BackupInsaneMode { get; set; }
 
         /// <summary>
-        /// BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+        /// BGP AS Number of the Transit Gateway. Type: String.
         /// </summary>
         [Input("bgpLocalAsNum", required: true)]
         public Input<string> BgpLocalAsNum { get; set; } = null!;
 
         /// <summary>
-        /// Aviatrix CloudN BGP ASN (Autonomous System Number). Integer between 1-4294967294.
+        /// BGP AS Number of the Aviatrix CloudN. Type: String.
         /// </summary>
         [Input("cloudnAsNum", required: true)]
         public Input<string> CloudnAsNum { get; set; } = null!;
 
         /// <summary>
-        /// CloudN LAN Interface Neighbor's BGP ASN.
+        /// BGP AS Number of the Aviatrix CloudN neighbor. Type: String.
         /// </summary>
         [Input("cloudnNeighborAsNum", required: true)]
         public Input<string> CloudnNeighborAsNum { get; set; } = null!;
 
         /// <summary>
-        /// Aviatrix CloudN LAN Interface Neighbor's IP Address.
+        /// IP Address of Aviatrix CloudN neighbor. Type: String.
         /// </summary>
         [Input("cloudnNeighborIp", required: true)]
         public Input<string> CloudnNeighborIp { get; set; } = null!;
 
         /// <summary>
-        /// Aviatrix CloudN IP Address.
+        /// IP Address of Aviatrix CloudN. Type: String.
         /// </summary>
         [Input("cloudnRemoteIp", required: true)]
         public Input<string> CloudnRemoteIp { get; set; } = null!;
 
         /// <summary>
-        /// The name of the transit Aviatrix CloudN connection.
+        /// Name of the Transit Gateway to CloudN Connection. Type: String.
         /// </summary>
         [Input("connectionName", required: true)]
         public Input<string> ConnectionName { get; set; } = null!;
 
         /// <summary>
-        /// Enable Direct Connect for private network infrastructure.
+        /// Enable direct connect over private network. Type: Boolean. Default: true.
         /// </summary>
         [Input("directConnect")]
         public Input<bool>? DirectConnect { get; set; }
 
         /// <summary>
-        /// Enable connection to HA CloudN.
+        /// Enable connection to HA CloudN. Type: Boolean.
         /// </summary>
         [Input("enableHa")]
         public Input<bool>? EnableHa { get; set; }
 
         /// <summary>
-        /// Enable learned CIDRs approval.
+        /// Enable encrypted transit approval for connection. Type: Boolean.
         /// </summary>
         [Input("enableLearnedCidrsApproval")]
         public Input<bool>? EnableLearnedCidrsApproval { get; set; }
 
         /// <summary>
-        /// Enable load balancing between Aviatrix CloudN and Backup CloudN.
+        /// Flag to enable load balancing between CloudN and HA CloudN. Type: Boolean.
         /// </summary>
         [Input("enableLoadBalancing")]
         public Input<bool>? EnableLoadBalancing { get; set; }
 
         /// <summary>
-        /// The name of the Transit Gateway.
+        /// Name of the Transit Gateway. Type: String.
         /// </summary>
         [Input("gwName", required: true)]
         public Input<string> GwName { get; set; } = null!;
 
         /// <summary>
-        /// Enable Insane Mode for this connection.
+        /// Enable insane mode connection. Type: Boolean.
         /// </summary>
         [Input("insaneMode")]
         public Input<bool>? InsaneMode { get; set; }
 
         /// <summary>
-        /// The ID of the VPC where the Transit Gateway is located.
+        /// VPC ID of the Aviatrix Transit Gateway. Type: String.
         /// </summary>
         [Input("vpcId", required: true)]
         public Input<string> VpcId { get; set; } = null!;
@@ -317,7 +380,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _approvedCidrs;
 
         /// <summary>
-        /// Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
+        /// Set of approved CIDRs. Requires `enable_learned_cidrs_approval` to be true. Type: Set(String).
         /// </summary>
         public InputList<string> ApprovedCidrs
         {
@@ -326,115 +389,115 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Backup Aviatrix CloudN BGP ASN.
+        /// BGP AS Number of HA CloudN. Type: String.
         /// </summary>
         [Input("backupCloudnAsNum")]
         public Input<string>? BackupCloudnAsNum { get; set; }
 
         /// <summary>
-        /// Backup Aviatrix CloudN IP Address.
+        /// IP Address of HA CloudN. Required when `enable_ha` is true. Type: String.
         /// </summary>
         [Input("backupCloudnIp")]
         public Input<string>? BackupCloudnIp { get; set; }
 
         /// <summary>
-        /// Backup Aviatrix CloudN LAN Interface Neighbor's BGP ASN.
+        /// BGP AS Number of HA CloudN Neighbor. Type: String.
         /// </summary>
         [Input("backupCloudnNeighborAsNum")]
         public Input<string>? BackupCloudnNeighborAsNum { get; set; }
 
         /// <summary>
-        /// Backup Aviatrix CloudN LAN Interface Neighbor's IP Address.
+        /// IP Address of HA CloudN Neighbor. Type: String.
         /// </summary>
         [Input("backupCloudnNeighborIp")]
         public Input<string>? BackupCloudnNeighborIp { get; set; }
 
         /// <summary>
-        /// Enable direct connect to Backup Aviatrix CloudN over private network.
+        /// Flag to enable direct connect over private network to HA CloudN. Type: Boolean.
         /// </summary>
         [Input("backupDirectConnect")]
         public Input<bool>? BackupDirectConnect { get; set; }
 
         /// <summary>
-        /// Enable Insane Mode for connection to Backup Aviatrix CloudN.
+        /// Flag to enable insane mode connection to HA CloudN. Type: Boolean.
         /// </summary>
         [Input("backupInsaneMode")]
         public Input<bool>? BackupInsaneMode { get; set; }
 
         /// <summary>
-        /// BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+        /// BGP AS Number of the Transit Gateway. Type: String.
         /// </summary>
         [Input("bgpLocalAsNum")]
         public Input<string>? BgpLocalAsNum { get; set; }
 
         /// <summary>
-        /// Aviatrix CloudN BGP ASN (Autonomous System Number). Integer between 1-4294967294.
+        /// BGP AS Number of the Aviatrix CloudN. Type: String.
         /// </summary>
         [Input("cloudnAsNum")]
         public Input<string>? CloudnAsNum { get; set; }
 
         /// <summary>
-        /// CloudN LAN Interface Neighbor's BGP ASN.
+        /// BGP AS Number of the Aviatrix CloudN neighbor. Type: String.
         /// </summary>
         [Input("cloudnNeighborAsNum")]
         public Input<string>? CloudnNeighborAsNum { get; set; }
 
         /// <summary>
-        /// Aviatrix CloudN LAN Interface Neighbor's IP Address.
+        /// IP Address of Aviatrix CloudN neighbor. Type: String.
         /// </summary>
         [Input("cloudnNeighborIp")]
         public Input<string>? CloudnNeighborIp { get; set; }
 
         /// <summary>
-        /// Aviatrix CloudN IP Address.
+        /// IP Address of Aviatrix CloudN. Type: String.
         /// </summary>
         [Input("cloudnRemoteIp")]
         public Input<string>? CloudnRemoteIp { get; set; }
 
         /// <summary>
-        /// The name of the transit Aviatrix CloudN connection.
+        /// Name of the Transit Gateway to CloudN Connection. Type: String.
         /// </summary>
         [Input("connectionName")]
         public Input<string>? ConnectionName { get; set; }
 
         /// <summary>
-        /// Enable Direct Connect for private network infrastructure.
+        /// Enable direct connect over private network. Type: Boolean. Default: true.
         /// </summary>
         [Input("directConnect")]
         public Input<bool>? DirectConnect { get; set; }
 
         /// <summary>
-        /// Enable connection to HA CloudN.
+        /// Enable connection to HA CloudN. Type: Boolean.
         /// </summary>
         [Input("enableHa")]
         public Input<bool>? EnableHa { get; set; }
 
         /// <summary>
-        /// Enable learned CIDRs approval.
+        /// Enable encrypted transit approval for connection. Type: Boolean.
         /// </summary>
         [Input("enableLearnedCidrsApproval")]
         public Input<bool>? EnableLearnedCidrsApproval { get; set; }
 
         /// <summary>
-        /// Enable load balancing between Aviatrix CloudN and Backup CloudN.
+        /// Flag to enable load balancing between CloudN and HA CloudN. Type: Boolean.
         /// </summary>
         [Input("enableLoadBalancing")]
         public Input<bool>? EnableLoadBalancing { get; set; }
 
         /// <summary>
-        /// The name of the Transit Gateway.
+        /// Name of the Transit Gateway. Type: String.
         /// </summary>
         [Input("gwName")]
         public Input<string>? GwName { get; set; }
 
         /// <summary>
-        /// Enable Insane Mode for this connection.
+        /// Enable insane mode connection. Type: Boolean.
         /// </summary>
         [Input("insaneMode")]
         public Input<bool>? InsaneMode { get; set; }
 
         /// <summary>
-        /// The ID of the VPC where the Transit Gateway is located.
+        /// VPC ID of the Aviatrix Transit Gateway. Type: String.
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }

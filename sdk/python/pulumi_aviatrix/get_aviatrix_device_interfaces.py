@@ -49,6 +49,9 @@ class GetAviatrixDeviceInterfacesResult:
     @property
     @pulumi.getter(name="wanInterfaces")
     def wan_interfaces(self) -> Sequence['outputs.GetAviatrixDeviceInterfacesWanInterfaceResult']:
+        """
+        List of WAN interfaces.
+        """
         return pulumi.get(self, "wan_interfaces")
 
 
@@ -66,7 +69,19 @@ class AwaitableGetAviatrixDeviceInterfacesResult(GetAviatrixDeviceInterfacesResu
 def get_aviatrix_device_interfaces(device_name: Optional[str] = None,
                                    opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetAviatrixDeviceInterfacesResult:
     """
-    Use this data source to access information about an existing resource.
+    Use this data source to get the list of device WAN interfaces for use in other resources.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_aviatrix as aviatrix
+
+    test = aviatrix.get_aviatrix_device_interfaces(device_name="test-device")
+    ```
+
+
+    :param str device_name: Device name.
     """
     __args__ = dict()
     __args__['deviceName'] = device_name
@@ -83,6 +98,18 @@ def get_aviatrix_device_interfaces(device_name: Optional[str] = None,
 def get_aviatrix_device_interfaces_output(device_name: Optional[pulumi.Input[str]] = None,
                                           opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetAviatrixDeviceInterfacesResult]:
     """
-    Use this data source to access information about an existing resource.
+    Use this data source to get the list of device WAN interfaces for use in other resources.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_aviatrix as aviatrix
+
+    test = aviatrix.get_aviatrix_device_interfaces(device_name="test-device")
+    ```
+
+
+    :param str device_name: Device name.
     """
     ...

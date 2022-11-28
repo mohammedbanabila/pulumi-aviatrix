@@ -18,8 +18,8 @@ class AviatrixSegmentationNetworkDomainConnectionPolicyArgs:
                  domain_name2: pulumi.Input[str]):
         """
         The set of arguments for constructing a AviatrixSegmentationNetworkDomainConnectionPolicy resource.
-        :param pulumi.Input[str] domain_name1: Name of network domain that will be connected to domain 2.
-        :param pulumi.Input[str] domain_name2: Name of network domain that will be connected to domain 1.
+        :param pulumi.Input[str] domain_name1: Name of the Network Domain to connect to Domain 2.
+        :param pulumi.Input[str] domain_name2: Name of the Network Domain to connect to Domain 1.
         """
         pulumi.set(__self__, "domain_name1", domain_name1)
         pulumi.set(__self__, "domain_name2", domain_name2)
@@ -28,7 +28,7 @@ class AviatrixSegmentationNetworkDomainConnectionPolicyArgs:
     @pulumi.getter(name="domainName1")
     def domain_name1(self) -> pulumi.Input[str]:
         """
-        Name of network domain that will be connected to domain 2.
+        Name of the Network Domain to connect to Domain 2.
         """
         return pulumi.get(self, "domain_name1")
 
@@ -40,7 +40,7 @@ class AviatrixSegmentationNetworkDomainConnectionPolicyArgs:
     @pulumi.getter(name="domainName2")
     def domain_name2(self) -> pulumi.Input[str]:
         """
-        Name of network domain that will be connected to domain 1.
+        Name of the Network Domain to connect to Domain 1.
         """
         return pulumi.get(self, "domain_name2")
 
@@ -56,8 +56,8 @@ class _AviatrixSegmentationNetworkDomainConnectionPolicyState:
                  domain_name2: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixSegmentationNetworkDomainConnectionPolicy resources.
-        :param pulumi.Input[str] domain_name1: Name of network domain that will be connected to domain 2.
-        :param pulumi.Input[str] domain_name2: Name of network domain that will be connected to domain 1.
+        :param pulumi.Input[str] domain_name1: Name of the Network Domain to connect to Domain 2.
+        :param pulumi.Input[str] domain_name2: Name of the Network Domain to connect to Domain 1.
         """
         if domain_name1 is not None:
             pulumi.set(__self__, "domain_name1", domain_name1)
@@ -68,7 +68,7 @@ class _AviatrixSegmentationNetworkDomainConnectionPolicyState:
     @pulumi.getter(name="domainName1")
     def domain_name1(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of network domain that will be connected to domain 2.
+        Name of the Network Domain to connect to Domain 2.
         """
         return pulumi.get(self, "domain_name1")
 
@@ -80,7 +80,7 @@ class _AviatrixSegmentationNetworkDomainConnectionPolicyState:
     @pulumi.getter(name="domainName2")
     def domain_name2(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of network domain that will be connected to domain 1.
+        Name of the Network Domain to connect to Domain 1.
         """
         return pulumi.get(self, "domain_name2")
 
@@ -98,11 +98,32 @@ class AviatrixSegmentationNetworkDomainConnectionPolicy(pulumi.CustomResource):
                  domain_name2: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixSegmentationNetworkDomainConnectionPolicy resource with the given unique name, props, and options.
+        The **aviatrix_segmentation_network_domain_connection_policy** resource handles creation of [Transit Segmentation](https://docs.aviatrix.com/HowTos/transit_segmentation_faq.html) Network Domain Connection Policies.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Segmentation Network Domain
+        test_segmentation_network_domain_connection_policy = aviatrix.AviatrixSegmentationNetworkDomainConnectionPolicy("testSegmentationNetworkDomainConnectionPolicy",
+            domain_name1="domain-a",
+            domain_name2="domain-b")
+        ```
+
+        ## Import
+
+        **aviatrix_segmentation_network_domain_connection_policy** can be imported using `domain_name_1` and `domain_name_2` separated by a `~`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixSegmentationNetworkDomainConnectionPolicy:AviatrixSegmentationNetworkDomainConnectionPolicy test domain_name_1~domain_name_2
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] domain_name1: Name of network domain that will be connected to domain 2.
-        :param pulumi.Input[str] domain_name2: Name of network domain that will be connected to domain 1.
+        :param pulumi.Input[str] domain_name1: Name of the Network Domain to connect to Domain 2.
+        :param pulumi.Input[str] domain_name2: Name of the Network Domain to connect to Domain 1.
         """
         ...
     @overload
@@ -111,7 +132,28 @@ class AviatrixSegmentationNetworkDomainConnectionPolicy(pulumi.CustomResource):
                  args: AviatrixSegmentationNetworkDomainConnectionPolicyArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixSegmentationNetworkDomainConnectionPolicy resource with the given unique name, props, and options.
+        The **aviatrix_segmentation_network_domain_connection_policy** resource handles creation of [Transit Segmentation](https://docs.aviatrix.com/HowTos/transit_segmentation_faq.html) Network Domain Connection Policies.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Segmentation Network Domain
+        test_segmentation_network_domain_connection_policy = aviatrix.AviatrixSegmentationNetworkDomainConnectionPolicy("testSegmentationNetworkDomainConnectionPolicy",
+            domain_name1="domain-a",
+            domain_name2="domain-b")
+        ```
+
+        ## Import
+
+        **aviatrix_segmentation_network_domain_connection_policy** can be imported using `domain_name_1` and `domain_name_2` separated by a `~`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixSegmentationNetworkDomainConnectionPolicy:AviatrixSegmentationNetworkDomainConnectionPolicy test domain_name_1~domain_name_2
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixSegmentationNetworkDomainConnectionPolicyArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -163,8 +205,8 @@ class AviatrixSegmentationNetworkDomainConnectionPolicy(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] domain_name1: Name of network domain that will be connected to domain 2.
-        :param pulumi.Input[str] domain_name2: Name of network domain that will be connected to domain 1.
+        :param pulumi.Input[str] domain_name1: Name of the Network Domain to connect to Domain 2.
+        :param pulumi.Input[str] domain_name2: Name of the Network Domain to connect to Domain 1.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -178,7 +220,7 @@ class AviatrixSegmentationNetworkDomainConnectionPolicy(pulumi.CustomResource):
     @pulumi.getter(name="domainName1")
     def domain_name1(self) -> pulumi.Output[str]:
         """
-        Name of network domain that will be connected to domain 2.
+        Name of the Network Domain to connect to Domain 2.
         """
         return pulumi.get(self, "domain_name1")
 
@@ -186,7 +228,7 @@ class AviatrixSegmentationNetworkDomainConnectionPolicy(pulumi.CustomResource):
     @pulumi.getter(name="domainName2")
     def domain_name2(self) -> pulumi.Output[str]:
         """
-        Name of network domain that will be connected to domain 1.
+        Name of the Network Domain to connect to Domain 1.
         """
         return pulumi.get(self, "domain_name2")
 

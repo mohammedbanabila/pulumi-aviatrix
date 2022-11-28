@@ -11,6 +11,19 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The AviatrixSpokeVpc resource allows to create and manage Aviatrix Spoke Gateways.
+//
+// !> **WARNING:** The `AviatrixSpokeVpc` resource is deprecated as of **Release 2.0**. It is currently kept for backward-compatibility and will be removed in the future. Please use the spoke gateway resource instead. If this is already in the state, please remove it from the state file and import as `AviatrixSpokeGateway`.
+//
+// ## Import
+//
+// Instance spoke_vpc can be imported using the gw_name, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixSpokeVpc:AviatrixSpokeVpc test gw_name
+//
+// ```
 type AviatrixSpokeVpc struct {
 	pulumi.CustomResourceState
 
@@ -18,31 +31,31 @@ type AviatrixSpokeVpc struct {
 	AccountName pulumi.StringOutput `pulumi:"accountName"`
 	// Cloud instance ID.
 	CloudInstanceId pulumi.StringOutput `pulumi:"cloudInstanceId"`
-	// Type of cloud service provider.
+	// Type of cloud service provider. AWS=1, GCP=4, ARM=8.
 	CloudType pulumi.IntOutput `pulumi:"cloudType"`
 	// Specify whether enabling NAT feature on the gateway or not.
 	EnableNat pulumi.StringPtrOutput `pulumi:"enableNat"`
 	// Name of the gateway which is going to be created.
 	GwName pulumi.StringOutput `pulumi:"gwName"`
-	// HA Gateway Size.
+	// HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set). Example: "t2.micro".
 	HaGwSize pulumi.StringPtrOutput `pulumi:"haGwSize"`
-	// HA Subnet. Required if enabling HA for AWS/Azure.
+	// HA Subnet. Required for enabling HA for AWS/ARM gateways. Setting to empty/unset will disable HA. Setting to a valid subnet (Example: 10.12.0.0/24) will create an HA gateway on the subnet.
 	HaSubnet pulumi.StringPtrOutput `pulumi:"haSubnet"`
-	// HA Zone. Required if enabling HA for GCP.
+	// HA Zone. Required for enabling HA for GCP gateway. Setting to empty/unset will disable HA. Setting to a valid zone will create an HA gateway in the zone. Example: "us-west1-c".
 	HaZone pulumi.StringPtrOutput `pulumi:"haZone"`
-	// Set to 'enabled' if this feature is desired.
+	// Set to "enabled" if this feature is desired.
 	SingleAzHa pulumi.StringPtrOutput `pulumi:"singleAzHa"`
-	// Public Subnet Info.
+	// Public Subnet Info. Example: AWS: "CIDRZONESubnetName", etc...
 	Subnet pulumi.StringOutput `pulumi:"subnet"`
-	// Instance tag of cloud provider.
+	// Instance tag of cloud provider. Example: key1:value1,key002:value002, etc... Only AWS (cloud_type is "1") is supported
 	TagLists pulumi.StringArrayOutput `pulumi:"tagLists"`
 	// Specify the transit Gateway.
 	TransitGw pulumi.StringPtrOutput `pulumi:"transitGw"`
-	// VPC-ID/VNet-Name of cloud provider.
+	// VPC-ID/VNet-Name of cloud provider. Required if cloudType is "1" or "4". Example: AWS: "vpc-abcd1234", etc...
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
-	// Region of cloud provider.
+	// Region of cloud provider. Example: AWS: "us-east-1", GCP: "us-west1-b", ARM: "East US 2", etc...
 	VpcReg pulumi.StringOutput `pulumi:"vpcReg"`
-	// Size of the gateway instance.
+	// Size of the gateway instance. Example: AWS: "t2.large", GCP: "f1.micro", ARM: "StandardD2", etc...
 	VpcSize pulumi.StringOutput `pulumi:"vpcSize"`
 }
 
@@ -101,31 +114,31 @@ type aviatrixSpokeVpcState struct {
 	AccountName *string `pulumi:"accountName"`
 	// Cloud instance ID.
 	CloudInstanceId *string `pulumi:"cloudInstanceId"`
-	// Type of cloud service provider.
+	// Type of cloud service provider. AWS=1, GCP=4, ARM=8.
 	CloudType *int `pulumi:"cloudType"`
 	// Specify whether enabling NAT feature on the gateway or not.
 	EnableNat *string `pulumi:"enableNat"`
 	// Name of the gateway which is going to be created.
 	GwName *string `pulumi:"gwName"`
-	// HA Gateway Size.
+	// HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set). Example: "t2.micro".
 	HaGwSize *string `pulumi:"haGwSize"`
-	// HA Subnet. Required if enabling HA for AWS/Azure.
+	// HA Subnet. Required for enabling HA for AWS/ARM gateways. Setting to empty/unset will disable HA. Setting to a valid subnet (Example: 10.12.0.0/24) will create an HA gateway on the subnet.
 	HaSubnet *string `pulumi:"haSubnet"`
-	// HA Zone. Required if enabling HA for GCP.
+	// HA Zone. Required for enabling HA for GCP gateway. Setting to empty/unset will disable HA. Setting to a valid zone will create an HA gateway in the zone. Example: "us-west1-c".
 	HaZone *string `pulumi:"haZone"`
-	// Set to 'enabled' if this feature is desired.
+	// Set to "enabled" if this feature is desired.
 	SingleAzHa *string `pulumi:"singleAzHa"`
-	// Public Subnet Info.
+	// Public Subnet Info. Example: AWS: "CIDRZONESubnetName", etc...
 	Subnet *string `pulumi:"subnet"`
-	// Instance tag of cloud provider.
+	// Instance tag of cloud provider. Example: key1:value1,key002:value002, etc... Only AWS (cloud_type is "1") is supported
 	TagLists []string `pulumi:"tagLists"`
 	// Specify the transit Gateway.
 	TransitGw *string `pulumi:"transitGw"`
-	// VPC-ID/VNet-Name of cloud provider.
+	// VPC-ID/VNet-Name of cloud provider. Required if cloudType is "1" or "4". Example: AWS: "vpc-abcd1234", etc...
 	VpcId *string `pulumi:"vpcId"`
-	// Region of cloud provider.
+	// Region of cloud provider. Example: AWS: "us-east-1", GCP: "us-west1-b", ARM: "East US 2", etc...
 	VpcReg *string `pulumi:"vpcReg"`
-	// Size of the gateway instance.
+	// Size of the gateway instance. Example: AWS: "t2.large", GCP: "f1.micro", ARM: "StandardD2", etc...
 	VpcSize *string `pulumi:"vpcSize"`
 }
 
@@ -134,31 +147,31 @@ type AviatrixSpokeVpcState struct {
 	AccountName pulumi.StringPtrInput
 	// Cloud instance ID.
 	CloudInstanceId pulumi.StringPtrInput
-	// Type of cloud service provider.
+	// Type of cloud service provider. AWS=1, GCP=4, ARM=8.
 	CloudType pulumi.IntPtrInput
 	// Specify whether enabling NAT feature on the gateway or not.
 	EnableNat pulumi.StringPtrInput
 	// Name of the gateway which is going to be created.
 	GwName pulumi.StringPtrInput
-	// HA Gateway Size.
+	// HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set). Example: "t2.micro".
 	HaGwSize pulumi.StringPtrInput
-	// HA Subnet. Required if enabling HA for AWS/Azure.
+	// HA Subnet. Required for enabling HA for AWS/ARM gateways. Setting to empty/unset will disable HA. Setting to a valid subnet (Example: 10.12.0.0/24) will create an HA gateway on the subnet.
 	HaSubnet pulumi.StringPtrInput
-	// HA Zone. Required if enabling HA for GCP.
+	// HA Zone. Required for enabling HA for GCP gateway. Setting to empty/unset will disable HA. Setting to a valid zone will create an HA gateway in the zone. Example: "us-west1-c".
 	HaZone pulumi.StringPtrInput
-	// Set to 'enabled' if this feature is desired.
+	// Set to "enabled" if this feature is desired.
 	SingleAzHa pulumi.StringPtrInput
-	// Public Subnet Info.
+	// Public Subnet Info. Example: AWS: "CIDRZONESubnetName", etc...
 	Subnet pulumi.StringPtrInput
-	// Instance tag of cloud provider.
+	// Instance tag of cloud provider. Example: key1:value1,key002:value002, etc... Only AWS (cloud_type is "1") is supported
 	TagLists pulumi.StringArrayInput
 	// Specify the transit Gateway.
 	TransitGw pulumi.StringPtrInput
-	// VPC-ID/VNet-Name of cloud provider.
+	// VPC-ID/VNet-Name of cloud provider. Required if cloudType is "1" or "4". Example: AWS: "vpc-abcd1234", etc...
 	VpcId pulumi.StringPtrInput
-	// Region of cloud provider.
+	// Region of cloud provider. Example: AWS: "us-east-1", GCP: "us-west1-b", ARM: "East US 2", etc...
 	VpcReg pulumi.StringPtrInput
-	// Size of the gateway instance.
+	// Size of the gateway instance. Example: AWS: "t2.large", GCP: "f1.micro", ARM: "StandardD2", etc...
 	VpcSize pulumi.StringPtrInput
 }
 
@@ -169,31 +182,31 @@ func (AviatrixSpokeVpcState) ElementType() reflect.Type {
 type aviatrixSpokeVpcArgs struct {
 	// This parameter represents the name of a Cloud-Account in Aviatrix controller.
 	AccountName string `pulumi:"accountName"`
-	// Type of cloud service provider.
+	// Type of cloud service provider. AWS=1, GCP=4, ARM=8.
 	CloudType int `pulumi:"cloudType"`
 	// Specify whether enabling NAT feature on the gateway or not.
 	EnableNat *string `pulumi:"enableNat"`
 	// Name of the gateway which is going to be created.
 	GwName string `pulumi:"gwName"`
-	// HA Gateway Size.
+	// HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set). Example: "t2.micro".
 	HaGwSize *string `pulumi:"haGwSize"`
-	// HA Subnet. Required if enabling HA for AWS/Azure.
+	// HA Subnet. Required for enabling HA for AWS/ARM gateways. Setting to empty/unset will disable HA. Setting to a valid subnet (Example: 10.12.0.0/24) will create an HA gateway on the subnet.
 	HaSubnet *string `pulumi:"haSubnet"`
-	// HA Zone. Required if enabling HA for GCP.
+	// HA Zone. Required for enabling HA for GCP gateway. Setting to empty/unset will disable HA. Setting to a valid zone will create an HA gateway in the zone. Example: "us-west1-c".
 	HaZone *string `pulumi:"haZone"`
-	// Set to 'enabled' if this feature is desired.
+	// Set to "enabled" if this feature is desired.
 	SingleAzHa *string `pulumi:"singleAzHa"`
-	// Public Subnet Info.
+	// Public Subnet Info. Example: AWS: "CIDRZONESubnetName", etc...
 	Subnet string `pulumi:"subnet"`
-	// Instance tag of cloud provider.
+	// Instance tag of cloud provider. Example: key1:value1,key002:value002, etc... Only AWS (cloud_type is "1") is supported
 	TagLists []string `pulumi:"tagLists"`
 	// Specify the transit Gateway.
 	TransitGw *string `pulumi:"transitGw"`
-	// VPC-ID/VNet-Name of cloud provider.
+	// VPC-ID/VNet-Name of cloud provider. Required if cloudType is "1" or "4". Example: AWS: "vpc-abcd1234", etc...
 	VpcId string `pulumi:"vpcId"`
-	// Region of cloud provider.
+	// Region of cloud provider. Example: AWS: "us-east-1", GCP: "us-west1-b", ARM: "East US 2", etc...
 	VpcReg string `pulumi:"vpcReg"`
-	// Size of the gateway instance.
+	// Size of the gateway instance. Example: AWS: "t2.large", GCP: "f1.micro", ARM: "StandardD2", etc...
 	VpcSize string `pulumi:"vpcSize"`
 }
 
@@ -201,31 +214,31 @@ type aviatrixSpokeVpcArgs struct {
 type AviatrixSpokeVpcArgs struct {
 	// This parameter represents the name of a Cloud-Account in Aviatrix controller.
 	AccountName pulumi.StringInput
-	// Type of cloud service provider.
+	// Type of cloud service provider. AWS=1, GCP=4, ARM=8.
 	CloudType pulumi.IntInput
 	// Specify whether enabling NAT feature on the gateway or not.
 	EnableNat pulumi.StringPtrInput
 	// Name of the gateway which is going to be created.
 	GwName pulumi.StringInput
-	// HA Gateway Size.
+	// HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set). Example: "t2.micro".
 	HaGwSize pulumi.StringPtrInput
-	// HA Subnet. Required if enabling HA for AWS/Azure.
+	// HA Subnet. Required for enabling HA for AWS/ARM gateways. Setting to empty/unset will disable HA. Setting to a valid subnet (Example: 10.12.0.0/24) will create an HA gateway on the subnet.
 	HaSubnet pulumi.StringPtrInput
-	// HA Zone. Required if enabling HA for GCP.
+	// HA Zone. Required for enabling HA for GCP gateway. Setting to empty/unset will disable HA. Setting to a valid zone will create an HA gateway in the zone. Example: "us-west1-c".
 	HaZone pulumi.StringPtrInput
-	// Set to 'enabled' if this feature is desired.
+	// Set to "enabled" if this feature is desired.
 	SingleAzHa pulumi.StringPtrInput
-	// Public Subnet Info.
+	// Public Subnet Info. Example: AWS: "CIDRZONESubnetName", etc...
 	Subnet pulumi.StringInput
-	// Instance tag of cloud provider.
+	// Instance tag of cloud provider. Example: key1:value1,key002:value002, etc... Only AWS (cloud_type is "1") is supported
 	TagLists pulumi.StringArrayInput
 	// Specify the transit Gateway.
 	TransitGw pulumi.StringPtrInput
-	// VPC-ID/VNet-Name of cloud provider.
+	// VPC-ID/VNet-Name of cloud provider. Required if cloudType is "1" or "4". Example: AWS: "vpc-abcd1234", etc...
 	VpcId pulumi.StringInput
-	// Region of cloud provider.
+	// Region of cloud provider. Example: AWS: "us-east-1", GCP: "us-west1-b", ARM: "East US 2", etc...
 	VpcReg pulumi.StringInput
-	// Size of the gateway instance.
+	// Size of the gateway instance. Example: AWS: "t2.large", GCP: "f1.micro", ARM: "StandardD2", etc...
 	VpcSize pulumi.StringInput
 }
 
@@ -326,7 +339,7 @@ func (o AviatrixSpokeVpcOutput) CloudInstanceId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeVpc) pulumi.StringOutput { return v.CloudInstanceId }).(pulumi.StringOutput)
 }
 
-// Type of cloud service provider.
+// Type of cloud service provider. AWS=1, GCP=4, ARM=8.
 func (o AviatrixSpokeVpcOutput) CloudType() pulumi.IntOutput {
 	return o.ApplyT(func(v *AviatrixSpokeVpc) pulumi.IntOutput { return v.CloudType }).(pulumi.IntOutput)
 }
@@ -341,32 +354,32 @@ func (o AviatrixSpokeVpcOutput) GwName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeVpc) pulumi.StringOutput { return v.GwName }).(pulumi.StringOutput)
 }
 
-// HA Gateway Size.
+// HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set). Example: "t2.micro".
 func (o AviatrixSpokeVpcOutput) HaGwSize() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeVpc) pulumi.StringPtrOutput { return v.HaGwSize }).(pulumi.StringPtrOutput)
 }
 
-// HA Subnet. Required if enabling HA for AWS/Azure.
+// HA Subnet. Required for enabling HA for AWS/ARM gateways. Setting to empty/unset will disable HA. Setting to a valid subnet (Example: 10.12.0.0/24) will create an HA gateway on the subnet.
 func (o AviatrixSpokeVpcOutput) HaSubnet() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeVpc) pulumi.StringPtrOutput { return v.HaSubnet }).(pulumi.StringPtrOutput)
 }
 
-// HA Zone. Required if enabling HA for GCP.
+// HA Zone. Required for enabling HA for GCP gateway. Setting to empty/unset will disable HA. Setting to a valid zone will create an HA gateway in the zone. Example: "us-west1-c".
 func (o AviatrixSpokeVpcOutput) HaZone() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeVpc) pulumi.StringPtrOutput { return v.HaZone }).(pulumi.StringPtrOutput)
 }
 
-// Set to 'enabled' if this feature is desired.
+// Set to "enabled" if this feature is desired.
 func (o AviatrixSpokeVpcOutput) SingleAzHa() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeVpc) pulumi.StringPtrOutput { return v.SingleAzHa }).(pulumi.StringPtrOutput)
 }
 
-// Public Subnet Info.
+// Public Subnet Info. Example: AWS: "CIDRZONESubnetName", etc...
 func (o AviatrixSpokeVpcOutput) Subnet() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeVpc) pulumi.StringOutput { return v.Subnet }).(pulumi.StringOutput)
 }
 
-// Instance tag of cloud provider.
+// Instance tag of cloud provider. Example: key1:value1,key002:value002, etc... Only AWS (cloud_type is "1") is supported
 func (o AviatrixSpokeVpcOutput) TagLists() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixSpokeVpc) pulumi.StringArrayOutput { return v.TagLists }).(pulumi.StringArrayOutput)
 }
@@ -376,17 +389,17 @@ func (o AviatrixSpokeVpcOutput) TransitGw() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSpokeVpc) pulumi.StringPtrOutput { return v.TransitGw }).(pulumi.StringPtrOutput)
 }
 
-// VPC-ID/VNet-Name of cloud provider.
+// VPC-ID/VNet-Name of cloud provider. Required if cloudType is "1" or "4". Example: AWS: "vpc-abcd1234", etc...
 func (o AviatrixSpokeVpcOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeVpc) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
 }
 
-// Region of cloud provider.
+// Region of cloud provider. Example: AWS: "us-east-1", GCP: "us-west1-b", ARM: "East US 2", etc...
 func (o AviatrixSpokeVpcOutput) VpcReg() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeVpc) pulumi.StringOutput { return v.VpcReg }).(pulumi.StringOutput)
 }
 
-// Size of the gateway instance.
+// Size of the gateway instance. Example: AWS: "t2.large", GCP: "f1.micro", ARM: "StandardD2", etc...
 func (o AviatrixSpokeVpcOutput) VpcSize() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSpokeVpc) pulumi.StringOutput { return v.VpcSize }).(pulumi.StringOutput)
 }

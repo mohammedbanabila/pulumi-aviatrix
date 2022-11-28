@@ -21,7 +21,7 @@ class AviatrixSite2CloudCaCertTagArgs:
         """
         The set of arguments for constructing a AviatrixSite2CloudCaCertTag resource.
         :param pulumi.Input[Sequence[pulumi.Input['AviatrixSite2CloudCaCertTagCaCertificateArgs']]] ca_certificates: A set of CA certificates.
-        :param pulumi.Input[str] tag_name: Unique name of the ca cert tag.
+        :param pulumi.Input[str] tag_name: Site2Cloud ca cert tag name.
         """
         pulumi.set(__self__, "ca_certificates", ca_certificates)
         pulumi.set(__self__, "tag_name", tag_name)
@@ -42,7 +42,7 @@ class AviatrixSite2CloudCaCertTagArgs:
     @pulumi.getter(name="tagName")
     def tag_name(self) -> pulumi.Input[str]:
         """
-        Unique name of the ca cert tag.
+        Site2Cloud ca cert tag name.
         """
         return pulumi.get(self, "tag_name")
 
@@ -59,7 +59,7 @@ class _AviatrixSite2CloudCaCertTagState:
         """
         Input properties used for looking up and filtering AviatrixSite2CloudCaCertTag resources.
         :param pulumi.Input[Sequence[pulumi.Input['AviatrixSite2CloudCaCertTagCaCertificateArgs']]] ca_certificates: A set of CA certificates.
-        :param pulumi.Input[str] tag_name: Unique name of the ca cert tag.
+        :param pulumi.Input[str] tag_name: Site2Cloud ca cert tag name.
         """
         if ca_certificates is not None:
             pulumi.set(__self__, "ca_certificates", ca_certificates)
@@ -82,7 +82,7 @@ class _AviatrixSite2CloudCaCertTagState:
     @pulumi.getter(name="tagName")
     def tag_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Unique name of the ca cert tag.
+        Site2Cloud ca cert tag name.
         """
         return pulumi.get(self, "tag_name")
 
@@ -100,11 +100,53 @@ class AviatrixSite2CloudCaCertTag(pulumi.CustomResource):
                  tag_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixSite2CloudCaCertTag resource with the given unique name, props, and options.
+        The **aviatrix_site2cloud_ca_cert_tag** resource creates and manages Aviatrix-created Site2Cloud CA Cert Tags.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Site2cloud CA Cert Tag Containing One Cert
+        test = aviatrix.AviatrixSite2CloudCaCertTag("test",
+            tag_name="test",
+            ca_certificates=[aviatrix.AviatrixSite2CloudCaCertTagCaCertificateArgs(
+                cert_content=(lambda path: open(path).read())("/home/ubuntu/avx_gw_ca_cert_in_ui_root_only.crt"),
+            )])
+        ```
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Site2cloud CA Cert Tag Containing Multiple Certs
+        test = aviatrix.AviatrixSite2CloudCaCertTag("test",
+            tag_name="test",
+            ca_certificates=[
+                aviatrix.AviatrixSite2CloudCaCertTagCaCertificateArgs(
+                    cert_content=(lambda path: open(path).read())("/home/ubuntu/avx_gw_ca_cert_root.crt"),
+                ),
+                aviatrix.AviatrixSite2CloudCaCertTagCaCertificateArgs(
+                    cert_content=(lambda path: open(path).read())("/home/ubuntu/avx_gw_ca_cert_intermediate.crt"),
+                ),
+                aviatrix.AviatrixSite2CloudCaCertTagCaCertificateArgs(
+                    cert_content=(lambda path: open(path).read())("/home/ubuntu/avx_gw_ca_cert_intermediate2.crt"),
+                ),
+            ])
+        ```
+
+        ## Import
+
+        **site2cloud_ca_cert_tag** can be imported using the `tag_name` and, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixSite2CloudCaCertTag:AviatrixSite2CloudCaCertTag test tag_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixSite2CloudCaCertTagCaCertificateArgs']]]] ca_certificates: A set of CA certificates.
-        :param pulumi.Input[str] tag_name: Unique name of the ca cert tag.
+        :param pulumi.Input[str] tag_name: Site2Cloud ca cert tag name.
         """
         ...
     @overload
@@ -113,7 +155,49 @@ class AviatrixSite2CloudCaCertTag(pulumi.CustomResource):
                  args: AviatrixSite2CloudCaCertTagArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixSite2CloudCaCertTag resource with the given unique name, props, and options.
+        The **aviatrix_site2cloud_ca_cert_tag** resource creates and manages Aviatrix-created Site2Cloud CA Cert Tags.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Site2cloud CA Cert Tag Containing One Cert
+        test = aviatrix.AviatrixSite2CloudCaCertTag("test",
+            tag_name="test",
+            ca_certificates=[aviatrix.AviatrixSite2CloudCaCertTagCaCertificateArgs(
+                cert_content=(lambda path: open(path).read())("/home/ubuntu/avx_gw_ca_cert_in_ui_root_only.crt"),
+            )])
+        ```
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Site2cloud CA Cert Tag Containing Multiple Certs
+        test = aviatrix.AviatrixSite2CloudCaCertTag("test",
+            tag_name="test",
+            ca_certificates=[
+                aviatrix.AviatrixSite2CloudCaCertTagCaCertificateArgs(
+                    cert_content=(lambda path: open(path).read())("/home/ubuntu/avx_gw_ca_cert_root.crt"),
+                ),
+                aviatrix.AviatrixSite2CloudCaCertTagCaCertificateArgs(
+                    cert_content=(lambda path: open(path).read())("/home/ubuntu/avx_gw_ca_cert_intermediate.crt"),
+                ),
+                aviatrix.AviatrixSite2CloudCaCertTagCaCertificateArgs(
+                    cert_content=(lambda path: open(path).read())("/home/ubuntu/avx_gw_ca_cert_intermediate2.crt"),
+                ),
+            ])
+        ```
+
+        ## Import
+
+        **site2cloud_ca_cert_tag** can be imported using the `tag_name` and, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixSite2CloudCaCertTag:AviatrixSite2CloudCaCertTag test tag_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixSite2CloudCaCertTagArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -166,7 +250,7 @@ class AviatrixSite2CloudCaCertTag(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixSite2CloudCaCertTagCaCertificateArgs']]]] ca_certificates: A set of CA certificates.
-        :param pulumi.Input[str] tag_name: Unique name of the ca cert tag.
+        :param pulumi.Input[str] tag_name: Site2Cloud ca cert tag name.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -188,7 +272,7 @@ class AviatrixSite2CloudCaCertTag(pulumi.CustomResource):
     @pulumi.getter(name="tagName")
     def tag_name(self) -> pulumi.Output[str]:
         """
-        Unique name of the ca cert tag.
+        Site2Cloud ca cert tag name.
         """
         return pulumi.get(self, "tag_name")
 

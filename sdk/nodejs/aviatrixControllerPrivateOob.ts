@@ -4,6 +4,29 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_controller_private_oob** resource allows management of an Aviatrix Controller's private OOB configurations.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Controller Private OOB
+ * const testPrivateOob = new aviatrix.AviatrixControllerPrivateOob("test_private_oob", {
+ *     enablePrivateOob: true,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **controller_private_oob** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixControllerPrivateOob:AviatrixControllerPrivateOob test 10-11-12-13
+ * ```
+ */
 export class AviatrixControllerPrivateOob extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixControllerPrivateOob resource's state with the given name, ID, and optional extra
@@ -33,7 +56,7 @@ export class AviatrixControllerPrivateOob extends pulumi.CustomResource {
     }
 
     /**
-     * Switch to enable/disable Aviatrix controller private OOB.
+     * Switch to enable/disable Aviatrix controller private OOB. Valid values: true, false. Default value: false.
      */
     public readonly enablePrivateOob!: pulumi.Output<boolean | undefined>;
 
@@ -65,7 +88,7 @@ export class AviatrixControllerPrivateOob extends pulumi.CustomResource {
  */
 export interface AviatrixControllerPrivateOobState {
     /**
-     * Switch to enable/disable Aviatrix controller private OOB.
+     * Switch to enable/disable Aviatrix controller private OOB. Valid values: true, false. Default value: false.
      */
     enablePrivateOob?: pulumi.Input<boolean>;
 }
@@ -75,7 +98,7 @@ export interface AviatrixControllerPrivateOobState {
  */
 export interface AviatrixControllerPrivateOobArgs {
     /**
-     * Switch to enable/disable Aviatrix controller private OOB.
+     * Switch to enable/disable Aviatrix controller private OOB. Valid values: true, false. Default value: false.
      */
     enablePrivateOob?: pulumi.Input<boolean>;
 }

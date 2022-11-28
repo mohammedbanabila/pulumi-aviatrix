@@ -9,6 +9,19 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_account** resource allows the creation and management of Aviatrix cloud accounts.
+    /// 
+    /// &gt; **NOTE:** With the release of Controller 5.4 (compatible with Aviatrix provider R2.13), Role-Based Access Control (RBAC) is now integrated into the Accounts workflow. Any **aviatrix_account** created in 5.3 by default will have admin privileges (attached to the 'admin' RBAC permission group). In 5.4, any new accounts created will not be attached to any RBAC group unless otherwise specified through the **aviatrix_rbac_group_access_account_attachment** resource.
+    /// 
+    /// ## Import
+    /// 
+    /// **account** can be imported using the `account_name` (when doing import, need to leave sensitive attributes blank), e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixAccount:AviatrixAccount test account_name
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixAccount:AviatrixAccount")]
     public partial class AviatrixAccount : global::Pulumi.CustomResource
     {
@@ -19,43 +32,43 @@ namespace Pulumi.Aviatrix
         public Output<string> AccountName { get; private set; } = null!;
 
         /// <summary>
-        /// Alibaba Cloud Access Key.
+        /// Alibaba Cloud Access Key. Required when creating an account for Alibaba Cloud.
         /// </summary>
         [Output("alicloudAccessKey")]
         public Output<string?> AlicloudAccessKey { get; private set; } = null!;
 
         /// <summary>
-        /// Alibaba Cloud Account ID to associate with Aviatrix account.
+        /// Alibaba Cloud Account number to associate with Aviatrix account. Required when creating an account for Alibaba Cloud.
         /// </summary>
         [Output("alicloudAccountId")]
         public Output<string?> AlicloudAccountId { get; private set; } = null!;
 
         /// <summary>
-        /// Alibaba Cloud Secret Key.
+        /// Alibaba Cloud Secret Key. Required when creating an account for Alibaba Cloud.
         /// </summary>
         [Output("alicloudSecretKey")]
         public Output<string?> AlicloudSecretKey { get; private set; } = null!;
 
         /// <summary>
-        /// Azure Application ID.
+        /// Azure ARM Application ID. Required when creating an account for Azure.
         /// </summary>
         [Output("armApplicationId")]
         public Output<string?> ArmApplicationId { get; private set; } = null!;
 
         /// <summary>
-        /// Azure Application Key.
+        /// Azure ARM Application key. Required when creating an account for Azure.
         /// </summary>
         [Output("armApplicationKey")]
         public Output<string?> ArmApplicationKey { get; private set; } = null!;
 
         /// <summary>
-        /// Azure Directory ID.
+        /// Azure ARM Directory ID. Required when creating an account for Azure.
         /// </summary>
         [Output("armDirectoryId")]
         public Output<string?> ArmDirectoryId { get; private set; } = null!;
 
         /// <summary>
-        /// Azure Subscription ID.
+        /// Azure ARM Subscription ID. Required when creating an account for Azure.
         /// </summary>
         [Output("armSubscriptionId")]
         public Output<string?> ArmSubscriptionId { get; private set; } = null!;
@@ -67,307 +80,307 @@ namespace Pulumi.Aviatrix
         public Output<bool?> AuditAccount { get; private set; } = null!;
 
         /// <summary>
-        /// AWS Access Key.
+        /// AWS Access Key. Required when `aws_iam` is "false" and when creating an account for AWS.
         /// </summary>
         [Output("awsAccessKey")]
         public Output<string?> AwsAccessKey { get; private set; } = null!;
 
         /// <summary>
-        /// AWS Account number to associate with Aviatrix account. Should be 12 digits.
+        /// AWS Account number to associate with Aviatrix account. Required when creating an account for AWS.
         /// </summary>
         [Output("awsAccountNumber")]
         public Output<string?> AwsAccountNumber { get; private set; } = null!;
 
         /// <summary>
-        /// AWS Top Secret Region or Secret Region Custom Certificate Authority file path on the controller.
+        /// (Optional) AWS Top Secret Region or Secret Region Custom Certificate Authority file name on the controller. Available as of provider R2.19.5+.
         /// </summary>
         [Output("awsCaCertPath")]
         public Output<string> AwsCaCertPath { get; private set; } = null!;
 
         /// <summary>
-        /// AWS App role ARN for gateways.
+        /// A separate AWS App role ARN to assign to gateways created by the controller. Required when `aws_gateway_role_ec2` is set. Only allowed when `aws_iam`, `awsgov_iam`, or `awschina_iam` is "true" when creating an account for AWS, AWSGov or AWSChina, respectively. Available as of provider version R2.19+.
         /// </summary>
         [Output("awsGatewayRoleApp")]
         public Output<string?> AwsGatewayRoleApp { get; private set; } = null!;
 
         /// <summary>
-        /// AWS EC2 role ARN for gateways.
+        /// A separate AWS EC2 role ARN to assign to gateways created by the controller. Required when `aws_gateway_role_app` is set. Only allowed when `aws_iam`, `awsgov_iam`, or `awschina_iam` is "true" when creating an account for AWS, AWSGov or AWSChina, respectively. Available as of provider version R2.19+.
         /// </summary>
         [Output("awsGatewayRoleEc2")]
         public Output<string?> AwsGatewayRoleEc2 { get; private set; } = null!;
 
         /// <summary>
-        /// AWS IAM-role based flag.
+        /// AWS IAM-role based flag, this option is for UserConnect.
         /// </summary>
         [Output("awsIam")]
         public Output<bool?> AwsIam { get; private set; } = null!;
 
         /// <summary>
-        /// AWS App role ARN.
+        /// AWS App role ARN, this option is for UserConnect. Required when `aws_iam` is "true" and when creating an account for AWS.
         /// </summary>
         [Output("awsRoleApp")]
         public Output<string> AwsRoleApp { get; private set; } = null!;
 
         /// <summary>
-        /// AWS EC2 role ARN.
+        /// AWS EC2 role ARN, this option is for UserConnect. Required when `aws_iam` is "true" and when creating an account for AWS.
         /// </summary>
         [Output("awsRoleEc2")]
         public Output<string> AwsRoleEc2 { get; private set; } = null!;
 
         /// <summary>
-        /// AWS Secret Key.
+        /// AWS Secret Key. Required when `aws_iam` is "false" and when creating an account for AWS.
         /// </summary>
         [Output("awsSecretKey")]
         public Output<string?> AwsSecretKey { get; private set; } = null!;
 
         /// <summary>
-        /// AWS China Access Key.
+        /// AWSChina Access Key. Required when `awschina_iam` is "false" and when creating an account for AWSChina. Available as of provider version 2.19+.
         /// </summary>
         [Output("awschinaAccessKey")]
         public Output<string?> AwschinaAccessKey { get; private set; } = null!;
 
         /// <summary>
-        /// AWS China Account Number.
+        /// AWSChina Account number to associate with Aviatrix account. Required when creating an account for AWSChina. Available as of provider version 2.19+.
         /// </summary>
         [Output("awschinaAccountNumber")]
         public Output<string?> AwschinaAccountNumber { get; private set; } = null!;
 
         /// <summary>
-        /// AWS China IAM-role based flag.
+        /// AWSChina IAM-role based flag. Available as of provider version 2.19+.
         /// </summary>
         [Output("awschinaIam")]
         public Output<bool?> AwschinaIam { get; private set; } = null!;
 
         /// <summary>
-        /// AWS China App Role ARN.
+        /// AWSChina App role ARN. Available when `awschina_iam` is "true" and when creating an account for AWSChina. If left empty, the ARN will be computed. Available as of provider version 2.19+.
         /// </summary>
         [Output("awschinaRoleApp")]
         public Output<string> AwschinaRoleApp { get; private set; } = null!;
 
         /// <summary>
-        /// AWS China EC2 Role ARN.
+        /// AWSChina EC2 role ARN. Available when `awschina_iam` is "true" and when creating an account for AWSChina. If left empty, the ARN will be computed. Available as of provider version 2.19+.
         /// </summary>
         [Output("awschinaRoleEc2")]
         public Output<string> AwschinaRoleEc2 { get; private set; } = null!;
 
         /// <summary>
-        /// AWS China Secret Key.
+        /// AWSChina Secret Key. Required when `awschina_iam` is "false" and when creating an account for AWSChina. Available as of provider version 2.19+.
         /// </summary>
         [Output("awschinaSecretKey")]
         public Output<string?> AwschinaSecretKey { get; private set; } = null!;
 
         /// <summary>
-        /// AWS Gov Access Key.
+        /// AWS Access Key. Required when creating an account for AWSGov.
         /// </summary>
         [Output("awsgovAccessKey")]
         public Output<string?> AwsgovAccessKey { get; private set; } = null!;
 
         /// <summary>
-        /// AWS Gov Account number to associate with Aviatrix account.
+        /// AWSGov Account number to associate with Aviatrix account. Required when creating an account for AWSGov.
         /// </summary>
         [Output("awsgovAccountNumber")]
         public Output<string?> AwsgovAccountNumber { get; private set; } = null!;
 
         /// <summary>
-        /// AWSGov IAM-role based flag
+        /// AWSGov IAM-role based flag. Available as of provider version 2.19+.
         /// </summary>
         [Output("awsgovIam")]
         public Output<bool?> AwsgovIam { get; private set; } = null!;
 
         /// <summary>
-        /// AWSGov App role ARN
+        /// AWSGov App role ARN. Available when `awsgov_iam` is "true" and when creating an account for AWSGov. If left empty, the ARN will be computed. Available as of provider version 2.19+.
         /// </summary>
         [Output("awsgovRoleApp")]
         public Output<string> AwsgovRoleApp { get; private set; } = null!;
 
         /// <summary>
-        /// AWSGov EC2 role ARN
+        /// AWSGov EC2 role ARN. Available when `awsgov_iam` is "true" and when creating an account for AWSGov. If left empty, the ARN will be computed. Available as of provider version 2.19+.
         /// </summary>
         [Output("awsgovRoleEc2")]
         public Output<string> AwsgovRoleEc2 { get; private set; } = null!;
 
         /// <summary>
-        /// AWS Gov Secret Key.
+        /// AWS Secret Key. Required when creating an account for AWSGov.
         /// </summary>
         [Output("awsgovSecretKey")]
         public Output<string?> AwsgovSecretKey { get; private set; } = null!;
 
         /// <summary>
-        /// AWS Secret Region Account Number.
+        /// AWS Secret Region Account Number. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Output("awssAccountNumber")]
         public Output<string?> AwssAccountNumber { get; private set; } = null!;
 
         /// <summary>
-        /// AWS Secret Region Custom Certificate Authority file path.
+        /// AWS Secret Region Custom Certificate Authority local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Output("awssCaChainCert")]
         public Output<string?> AwssCaChainCert { get; private set; } = null!;
 
         /// <summary>
-        /// AWS Secret Region CAP Account Name.
+        /// AWS Secret Region Account Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Output("awssCapAccountName")]
         public Output<string?> AwssCapAccountName { get; private set; } = null!;
 
         /// <summary>
-        /// AWS Secret Region CAP Agency.
+        /// AWS Secret Region CAP Agency. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Output("awssCapAgency")]
         public Output<string?> AwssCapAgency { get; private set; } = null!;
 
         /// <summary>
-        /// AWS Secret Region CAP Certificate file path.
+        /// AWS Secret Region CAP Certificate local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Output("awssCapCert")]
         public Output<string?> AwssCapCert { get; private set; } = null!;
 
         /// <summary>
-        /// AWS Secret Region CAP Certificate Key file path.
+        /// AWS Secret Region CAP Certificate Key local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Output("awssCapCertKey")]
         public Output<string?> AwssCapCertKey { get; private set; } = null!;
 
         /// <summary>
-        /// AWS Secret Region CAP Certificate Key file path on the controller.
+        /// (Optional) AWS Secret Region CAP Certificate Key file name on the controller. Available as of provider R2.19.5+.
         /// </summary>
         [Output("awssCapCertKeyPath")]
         public Output<string> AwssCapCertKeyPath { get; private set; } = null!;
 
         /// <summary>
-        /// AWS Secret Region CAP Certificate file path on the controller.
+        /// (Optional) AWS Secret Region CAP Certificate file name on the controller. Available as of provider R2.19.5+.
         /// </summary>
         [Output("awssCapCertPath")]
         public Output<string> AwssCapCertPath { get; private set; } = null!;
 
         /// <summary>
-        /// AWS Secret Region CAP Role Name.
+        /// AWS Secret Region Role Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Output("awssCapRoleName")]
         public Output<string?> AwssCapRoleName { get; private set; } = null!;
 
         /// <summary>
-        /// AWS Secret Region CAP Endpoint URL.
+        /// AWS Secret Region CAP Url. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Output("awssCapUrl")]
         public Output<string?> AwssCapUrl { get; private set; } = null!;
 
         /// <summary>
-        /// AWS Top Secret Region Account Number.
+        /// AWS Top Secret Region Account Number. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Output("awstsAccountNumber")]
         public Output<string?> AwstsAccountNumber { get; private set; } = null!;
 
         /// <summary>
-        /// AWS Top Secret Region Custom Certificate Authority file path.
+        /// AWS Top Secret Region Custom Certificate Authority local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Output("awstsCaChainCert")]
         public Output<string?> AwstsCaChainCert { get; private set; } = null!;
 
         /// <summary>
-        /// AWS Top Secret Region CAP Agency.
+        /// AWS Top Secret Region CAP Agency. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Output("awstsCapAgency")]
         public Output<string?> AwstsCapAgency { get; private set; } = null!;
 
         /// <summary>
-        /// AWS Top Secret Region CAP Certificate file path.
+        /// AWS Top Secret Region CAP Certificate local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Output("awstsCapCert")]
         public Output<string?> AwstsCapCert { get; private set; } = null!;
 
         /// <summary>
-        /// AWS Top Secret Region CAP Certificate Key file path.
+        /// AWS Top Secret Region CAP Certificate Key local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Output("awstsCapCertKey")]
         public Output<string?> AwstsCapCertKey { get; private set; } = null!;
 
         /// <summary>
-        /// AWS Top Secret Region CAP Certificate Key file path on the controller.
+        /// (Optional) AWS Top Secret Region CAP Certificate Key file name on the controller. Available as of provider R2.19.5+.
         /// </summary>
         [Output("awstsCapCertKeyPath")]
         public Output<string> AwstsCapCertKeyPath { get; private set; } = null!;
 
         /// <summary>
-        /// AWS Top Secret Region CAP Certificate file path on the controller.
+        /// (Optional) AWS Top Secret Region CAP Certificate file name on the controller. Available as of provider R2.19.5+.
         /// </summary>
         [Output("awstsCapCertPath")]
         public Output<string> AwstsCapCertPath { get; private set; } = null!;
 
         /// <summary>
-        /// AWS Top Secret Region CAP Mission.
+        /// AWS Top Secret Region Mission. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Output("awstsCapMission")]
         public Output<string?> AwstsCapMission { get; private set; } = null!;
 
         /// <summary>
-        /// AWS Top Secret Region CAP Role Name.
+        /// AWS Top Secret Region Role Name. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Output("awstsCapRoleName")]
         public Output<string?> AwstsCapRoleName { get; private set; } = null!;
 
         /// <summary>
-        /// AWS Top Secret Region CAP Endpoint URL.
+        /// AWS Top Secret Region CAP Url. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Output("awstsCapUrl")]
         public Output<string?> AwstsCapUrl { get; private set; } = null!;
 
         /// <summary>
-        /// Azure China Application ID.
+        /// AzureChina ARM Application ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
         /// </summary>
         [Output("azurechinaApplicationId")]
         public Output<string?> AzurechinaApplicationId { get; private set; } = null!;
 
         /// <summary>
-        /// Azure China Application Key.
+        /// AzureChina ARM Application key. Required when creating an account for AzureChina. Available as of provider version 2.19+.
         /// </summary>
         [Output("azurechinaApplicationKey")]
         public Output<string?> AzurechinaApplicationKey { get; private set; } = null!;
 
         /// <summary>
-        /// Azure China Directory ID.
+        /// AzureChina ARM Directory ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
         /// </summary>
         [Output("azurechinaDirectoryId")]
         public Output<string?> AzurechinaDirectoryId { get; private set; } = null!;
 
         /// <summary>
-        /// Azure China Subscription ID.
+        /// AzureChina ARM Subscription ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
         /// </summary>
         [Output("azurechinaSubscriptionId")]
         public Output<string?> AzurechinaSubscriptionId { get; private set; } = null!;
 
         /// <summary>
-        /// Azure Gov Application ID.
+        /// AzureGov ARM Application ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
         /// </summary>
         [Output("azuregovApplicationId")]
         public Output<string?> AzuregovApplicationId { get; private set; } = null!;
 
         /// <summary>
-        /// Azure Gov Application Key.
+        /// AzureGov ARM Application key. Required when creating an account for AzureGov. Available as of provider version R2.19+.
         /// </summary>
         [Output("azuregovApplicationKey")]
         public Output<string?> AzuregovApplicationKey { get; private set; } = null!;
 
         /// <summary>
-        /// Azure Gov Directory ID.
+        /// AzureGov ARM Directory ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
         /// </summary>
         [Output("azuregovDirectoryId")]
         public Output<string?> AzuregovDirectoryId { get; private set; } = null!;
 
         /// <summary>
-        /// Azure Gov Subscription ID.
+        /// AzureGov ARM Subscription ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
         /// </summary>
         [Output("azuregovSubscriptionId")]
         public Output<string?> AzuregovSubscriptionId { get; private set; } = null!;
 
         /// <summary>
-        /// Type of cloud service provider.
+        /// Type of cloud service provider. Only AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina and Alibaba Cloud are supported currently. Enter 1 for AWS, 4 for GCP, 8 for Azure, 16 for OCI, 32 for AzureGov, 256 for AWSGov, 1024 for AWSChina or 2048 for AzureChina, 8192 for Alibaba Cloud.
         /// </summary>
         [Output("cloudType")]
         public Output<int> CloudType { get; private set; } = null!;
 
         /// <summary>
-        /// GCloud Project credentials local file path.
+        /// GCloud Project Credentials [local filepath].json. Required when creating an account for GCP.
         /// </summary>
         [Output("gcloudProjectCredentialsFilepath")]
         public Output<string?> GcloudProjectCredentialsFilepath { get; private set; } = null!;
@@ -379,31 +392,31 @@ namespace Pulumi.Aviatrix
         public Output<string?> GcloudProjectId { get; private set; } = null!;
 
         /// <summary>
-        /// OCI API Private Key local file path.
+        /// Oracle OCI API Private Key local file path. Required when creating an account for OCI.
         /// </summary>
         [Output("ociApiPrivateKeyFilepath")]
         public Output<string?> OciApiPrivateKeyFilepath { get; private set; } = null!;
 
         /// <summary>
-        /// OCI Compartment OCID.
+        /// Oracle OCI Compartment ID. Required when creating an account for OCI.
         /// </summary>
         [Output("ociCompartmentId")]
         public Output<string?> OciCompartmentId { get; private set; } = null!;
 
         /// <summary>
-        /// OCI Tenancy OCID.
+        /// Oracle OCI Tenancy ID. Required when creating an account for OCI.
         /// </summary>
         [Output("ociTenancyId")]
         public Output<string?> OciTenancyId { get; private set; } = null!;
 
         /// <summary>
-        /// OCI User OCID.
+        /// Oracle OCI User ID. Required when creating an account for OCI.
         /// </summary>
         [Output("ociUserId")]
         public Output<string?> OciUserId { get; private set; } = null!;
 
         /// <summary>
-        /// List of RBAC permission group names.
+        /// A list of existing RBAC group names. This attribute should only be used when creating an account. Updating this attribute will have no effect. Available as of provider version R2.23.0+.
         /// </summary>
         [Output("rbacGroups")]
         public Output<ImmutableArray<string>> RbacGroups { get; private set; } = null!;
@@ -432,6 +445,36 @@ namespace Pulumi.Aviatrix
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/astipkovits",
+                AdditionalSecretOutputs =
+                {
+                    "alicloudAccessKey",
+                    "alicloudSecretKey",
+                    "armApplicationId",
+                    "armApplicationKey",
+                    "armDirectoryId",
+                    "awsAccessKey",
+                    "awsSecretKey",
+                    "awschinaAccessKey",
+                    "awschinaSecretKey",
+                    "awsgovAccessKey",
+                    "awsgovSecretKey",
+                    "awssCaChainCert",
+                    "awssCapCert",
+                    "awssCapCertKey",
+                    "awstsCaChainCert",
+                    "awstsCapCert",
+                    "awstsCapCertKey",
+                    "azurechinaApplicationId",
+                    "azurechinaApplicationKey",
+                    "azurechinaDirectoryId",
+                    "azuregovApplicationId",
+                    "azuregovApplicationKey",
+                    "azuregovDirectoryId",
+                    "ociApiPrivateKeyFilepath",
+                    "ociCompartmentId",
+                    "ociTenancyId",
+                    "ociUserId",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -461,44 +504,94 @@ namespace Pulumi.Aviatrix
         [Input("accountName", required: true)]
         public Input<string> AccountName { get; set; } = null!;
 
-        /// <summary>
-        /// Alibaba Cloud Access Key.
-        /// </summary>
         [Input("alicloudAccessKey")]
-        public Input<string>? AlicloudAccessKey { get; set; }
+        private Input<string>? _alicloudAccessKey;
 
         /// <summary>
-        /// Alibaba Cloud Account ID to associate with Aviatrix account.
+        /// Alibaba Cloud Access Key. Required when creating an account for Alibaba Cloud.
+        /// </summary>
+        public Input<string>? AlicloudAccessKey
+        {
+            get => _alicloudAccessKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _alicloudAccessKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// Alibaba Cloud Account number to associate with Aviatrix account. Required when creating an account for Alibaba Cloud.
         /// </summary>
         [Input("alicloudAccountId")]
         public Input<string>? AlicloudAccountId { get; set; }
 
-        /// <summary>
-        /// Alibaba Cloud Secret Key.
-        /// </summary>
         [Input("alicloudSecretKey")]
-        public Input<string>? AlicloudSecretKey { get; set; }
+        private Input<string>? _alicloudSecretKey;
 
         /// <summary>
-        /// Azure Application ID.
+        /// Alibaba Cloud Secret Key. Required when creating an account for Alibaba Cloud.
         /// </summary>
+        public Input<string>? AlicloudSecretKey
+        {
+            get => _alicloudSecretKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _alicloudSecretKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("armApplicationId")]
-        public Input<string>? ArmApplicationId { get; set; }
+        private Input<string>? _armApplicationId;
 
         /// <summary>
-        /// Azure Application Key.
+        /// Azure ARM Application ID. Required when creating an account for Azure.
         /// </summary>
+        public Input<string>? ArmApplicationId
+        {
+            get => _armApplicationId;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _armApplicationId = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("armApplicationKey")]
-        public Input<string>? ArmApplicationKey { get; set; }
+        private Input<string>? _armApplicationKey;
 
         /// <summary>
-        /// Azure Directory ID.
+        /// Azure ARM Application key. Required when creating an account for Azure.
         /// </summary>
+        public Input<string>? ArmApplicationKey
+        {
+            get => _armApplicationKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _armApplicationKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("armDirectoryId")]
-        public Input<string>? ArmDirectoryId { get; set; }
+        private Input<string>? _armDirectoryId;
 
         /// <summary>
-        /// Azure Subscription ID.
+        /// Azure ARM Directory ID. Required when creating an account for Azure.
+        /// </summary>
+        public Input<string>? ArmDirectoryId
+        {
+            get => _armDirectoryId;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _armDirectoryId = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// Azure ARM Subscription ID. Required when creating an account for Azure.
         /// </summary>
         [Input("armSubscriptionId")]
         public Input<string>? ArmSubscriptionId { get; set; }
@@ -509,278 +602,458 @@ namespace Pulumi.Aviatrix
         [Input("auditAccount")]
         public Input<bool>? AuditAccount { get; set; }
 
-        /// <summary>
-        /// AWS Access Key.
-        /// </summary>
         [Input("awsAccessKey")]
-        public Input<string>? AwsAccessKey { get; set; }
+        private Input<string>? _awsAccessKey;
 
         /// <summary>
-        /// AWS Account number to associate with Aviatrix account. Should be 12 digits.
+        /// AWS Access Key. Required when `aws_iam` is "false" and when creating an account for AWS.
+        /// </summary>
+        public Input<string>? AwsAccessKey
+        {
+            get => _awsAccessKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _awsAccessKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// AWS Account number to associate with Aviatrix account. Required when creating an account for AWS.
         /// </summary>
         [Input("awsAccountNumber")]
         public Input<string>? AwsAccountNumber { get; set; }
 
         /// <summary>
-        /// AWS App role ARN for gateways.
+        /// A separate AWS App role ARN to assign to gateways created by the controller. Required when `aws_gateway_role_ec2` is set. Only allowed when `aws_iam`, `awsgov_iam`, or `awschina_iam` is "true" when creating an account for AWS, AWSGov or AWSChina, respectively. Available as of provider version R2.19+.
         /// </summary>
         [Input("awsGatewayRoleApp")]
         public Input<string>? AwsGatewayRoleApp { get; set; }
 
         /// <summary>
-        /// AWS EC2 role ARN for gateways.
+        /// A separate AWS EC2 role ARN to assign to gateways created by the controller. Required when `aws_gateway_role_app` is set. Only allowed when `aws_iam`, `awsgov_iam`, or `awschina_iam` is "true" when creating an account for AWS, AWSGov or AWSChina, respectively. Available as of provider version R2.19+.
         /// </summary>
         [Input("awsGatewayRoleEc2")]
         public Input<string>? AwsGatewayRoleEc2 { get; set; }
 
         /// <summary>
-        /// AWS IAM-role based flag.
+        /// AWS IAM-role based flag, this option is for UserConnect.
         /// </summary>
         [Input("awsIam")]
         public Input<bool>? AwsIam { get; set; }
 
         /// <summary>
-        /// AWS App role ARN.
+        /// AWS App role ARN, this option is for UserConnect. Required when `aws_iam` is "true" and when creating an account for AWS.
         /// </summary>
         [Input("awsRoleApp")]
         public Input<string>? AwsRoleApp { get; set; }
 
         /// <summary>
-        /// AWS EC2 role ARN.
+        /// AWS EC2 role ARN, this option is for UserConnect. Required when `aws_iam` is "true" and when creating an account for AWS.
         /// </summary>
         [Input("awsRoleEc2")]
         public Input<string>? AwsRoleEc2 { get; set; }
 
-        /// <summary>
-        /// AWS Secret Key.
-        /// </summary>
         [Input("awsSecretKey")]
-        public Input<string>? AwsSecretKey { get; set; }
+        private Input<string>? _awsSecretKey;
 
         /// <summary>
-        /// AWS China Access Key.
+        /// AWS Secret Key. Required when `aws_iam` is "false" and when creating an account for AWS.
         /// </summary>
+        public Input<string>? AwsSecretKey
+        {
+            get => _awsSecretKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _awsSecretKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("awschinaAccessKey")]
-        public Input<string>? AwschinaAccessKey { get; set; }
+        private Input<string>? _awschinaAccessKey;
 
         /// <summary>
-        /// AWS China Account Number.
+        /// AWSChina Access Key. Required when `awschina_iam` is "false" and when creating an account for AWSChina. Available as of provider version 2.19+.
+        /// </summary>
+        public Input<string>? AwschinaAccessKey
+        {
+            get => _awschinaAccessKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _awschinaAccessKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// AWSChina Account number to associate with Aviatrix account. Required when creating an account for AWSChina. Available as of provider version 2.19+.
         /// </summary>
         [Input("awschinaAccountNumber")]
         public Input<string>? AwschinaAccountNumber { get; set; }
 
         /// <summary>
-        /// AWS China IAM-role based flag.
+        /// AWSChina IAM-role based flag. Available as of provider version 2.19+.
         /// </summary>
         [Input("awschinaIam")]
         public Input<bool>? AwschinaIam { get; set; }
 
         /// <summary>
-        /// AWS China App Role ARN.
+        /// AWSChina App role ARN. Available when `awschina_iam` is "true" and when creating an account for AWSChina. If left empty, the ARN will be computed. Available as of provider version 2.19+.
         /// </summary>
         [Input("awschinaRoleApp")]
         public Input<string>? AwschinaRoleApp { get; set; }
 
         /// <summary>
-        /// AWS China EC2 Role ARN.
+        /// AWSChina EC2 role ARN. Available when `awschina_iam` is "true" and when creating an account for AWSChina. If left empty, the ARN will be computed. Available as of provider version 2.19+.
         /// </summary>
         [Input("awschinaRoleEc2")]
         public Input<string>? AwschinaRoleEc2 { get; set; }
 
-        /// <summary>
-        /// AWS China Secret Key.
-        /// </summary>
         [Input("awschinaSecretKey")]
-        public Input<string>? AwschinaSecretKey { get; set; }
+        private Input<string>? _awschinaSecretKey;
 
         /// <summary>
-        /// AWS Gov Access Key.
+        /// AWSChina Secret Key. Required when `awschina_iam` is "false" and when creating an account for AWSChina. Available as of provider version 2.19+.
         /// </summary>
+        public Input<string>? AwschinaSecretKey
+        {
+            get => _awschinaSecretKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _awschinaSecretKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("awsgovAccessKey")]
-        public Input<string>? AwsgovAccessKey { get; set; }
+        private Input<string>? _awsgovAccessKey;
 
         /// <summary>
-        /// AWS Gov Account number to associate with Aviatrix account.
+        /// AWS Access Key. Required when creating an account for AWSGov.
+        /// </summary>
+        public Input<string>? AwsgovAccessKey
+        {
+            get => _awsgovAccessKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _awsgovAccessKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// AWSGov Account number to associate with Aviatrix account. Required when creating an account for AWSGov.
         /// </summary>
         [Input("awsgovAccountNumber")]
         public Input<string>? AwsgovAccountNumber { get; set; }
 
         /// <summary>
-        /// AWSGov IAM-role based flag
+        /// AWSGov IAM-role based flag. Available as of provider version 2.19+.
         /// </summary>
         [Input("awsgovIam")]
         public Input<bool>? AwsgovIam { get; set; }
 
         /// <summary>
-        /// AWSGov App role ARN
+        /// AWSGov App role ARN. Available when `awsgov_iam` is "true" and when creating an account for AWSGov. If left empty, the ARN will be computed. Available as of provider version 2.19+.
         /// </summary>
         [Input("awsgovRoleApp")]
         public Input<string>? AwsgovRoleApp { get; set; }
 
         /// <summary>
-        /// AWSGov EC2 role ARN
+        /// AWSGov EC2 role ARN. Available when `awsgov_iam` is "true" and when creating an account for AWSGov. If left empty, the ARN will be computed. Available as of provider version 2.19+.
         /// </summary>
         [Input("awsgovRoleEc2")]
         public Input<string>? AwsgovRoleEc2 { get; set; }
 
-        /// <summary>
-        /// AWS Gov Secret Key.
-        /// </summary>
         [Input("awsgovSecretKey")]
-        public Input<string>? AwsgovSecretKey { get; set; }
+        private Input<string>? _awsgovSecretKey;
 
         /// <summary>
-        /// AWS Secret Region Account Number.
+        /// AWS Secret Key. Required when creating an account for AWSGov.
+        /// </summary>
+        public Input<string>? AwsgovSecretKey
+        {
+            get => _awsgovSecretKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _awsgovSecretKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// AWS Secret Region Account Number. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Input("awssAccountNumber")]
         public Input<string>? AwssAccountNumber { get; set; }
 
-        /// <summary>
-        /// AWS Secret Region Custom Certificate Authority file path.
-        /// </summary>
         [Input("awssCaChainCert")]
-        public Input<string>? AwssCaChainCert { get; set; }
+        private Input<string>? _awssCaChainCert;
 
         /// <summary>
-        /// AWS Secret Region CAP Account Name.
+        /// AWS Secret Region Custom Certificate Authority local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        /// </summary>
+        public Input<string>? AwssCaChainCert
+        {
+            get => _awssCaChainCert;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _awssCaChainCert = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// AWS Secret Region Account Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Input("awssCapAccountName")]
         public Input<string>? AwssCapAccountName { get; set; }
 
         /// <summary>
-        /// AWS Secret Region CAP Agency.
+        /// AWS Secret Region CAP Agency. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Input("awssCapAgency")]
         public Input<string>? AwssCapAgency { get; set; }
 
-        /// <summary>
-        /// AWS Secret Region CAP Certificate file path.
-        /// </summary>
         [Input("awssCapCert")]
-        public Input<string>? AwssCapCert { get; set; }
+        private Input<string>? _awssCapCert;
 
         /// <summary>
-        /// AWS Secret Region CAP Certificate Key file path.
+        /// AWS Secret Region CAP Certificate local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
+        public Input<string>? AwssCapCert
+        {
+            get => _awssCapCert;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _awssCapCert = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("awssCapCertKey")]
-        public Input<string>? AwssCapCertKey { get; set; }
+        private Input<string>? _awssCapCertKey;
 
         /// <summary>
-        /// AWS Secret Region CAP Role Name.
+        /// AWS Secret Region CAP Certificate Key local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        /// </summary>
+        public Input<string>? AwssCapCertKey
+        {
+            get => _awssCapCertKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _awssCapCertKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// AWS Secret Region Role Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Input("awssCapRoleName")]
         public Input<string>? AwssCapRoleName { get; set; }
 
         /// <summary>
-        /// AWS Secret Region CAP Endpoint URL.
+        /// AWS Secret Region CAP Url. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Input("awssCapUrl")]
         public Input<string>? AwssCapUrl { get; set; }
 
         /// <summary>
-        /// AWS Top Secret Region Account Number.
+        /// AWS Top Secret Region Account Number. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Input("awstsAccountNumber")]
         public Input<string>? AwstsAccountNumber { get; set; }
 
-        /// <summary>
-        /// AWS Top Secret Region Custom Certificate Authority file path.
-        /// </summary>
         [Input("awstsCaChainCert")]
-        public Input<string>? AwstsCaChainCert { get; set; }
+        private Input<string>? _awstsCaChainCert;
 
         /// <summary>
-        /// AWS Top Secret Region CAP Agency.
+        /// AWS Top Secret Region Custom Certificate Authority local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        /// </summary>
+        public Input<string>? AwstsCaChainCert
+        {
+            get => _awstsCaChainCert;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _awstsCaChainCert = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// AWS Top Secret Region CAP Agency. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Input("awstsCapAgency")]
         public Input<string>? AwstsCapAgency { get; set; }
 
-        /// <summary>
-        /// AWS Top Secret Region CAP Certificate file path.
-        /// </summary>
         [Input("awstsCapCert")]
-        public Input<string>? AwstsCapCert { get; set; }
+        private Input<string>? _awstsCapCert;
 
         /// <summary>
-        /// AWS Top Secret Region CAP Certificate Key file path.
+        /// AWS Top Secret Region CAP Certificate local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
+        public Input<string>? AwstsCapCert
+        {
+            get => _awstsCapCert;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _awstsCapCert = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("awstsCapCertKey")]
-        public Input<string>? AwstsCapCertKey { get; set; }
+        private Input<string>? _awstsCapCertKey;
 
         /// <summary>
-        /// AWS Top Secret Region CAP Mission.
+        /// AWS Top Secret Region CAP Certificate Key local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        /// </summary>
+        public Input<string>? AwstsCapCertKey
+        {
+            get => _awstsCapCertKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _awstsCapCertKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// AWS Top Secret Region Mission. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Input("awstsCapMission")]
         public Input<string>? AwstsCapMission { get; set; }
 
         /// <summary>
-        /// AWS Top Secret Region CAP Role Name.
+        /// AWS Top Secret Region Role Name. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Input("awstsCapRoleName")]
         public Input<string>? AwstsCapRoleName { get; set; }
 
         /// <summary>
-        /// AWS Top Secret Region CAP Endpoint URL.
+        /// AWS Top Secret Region CAP Url. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Input("awstsCapUrl")]
         public Input<string>? AwstsCapUrl { get; set; }
 
-        /// <summary>
-        /// Azure China Application ID.
-        /// </summary>
         [Input("azurechinaApplicationId")]
-        public Input<string>? AzurechinaApplicationId { get; set; }
+        private Input<string>? _azurechinaApplicationId;
 
         /// <summary>
-        /// Azure China Application Key.
+        /// AzureChina ARM Application ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
         /// </summary>
+        public Input<string>? AzurechinaApplicationId
+        {
+            get => _azurechinaApplicationId;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _azurechinaApplicationId = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("azurechinaApplicationKey")]
-        public Input<string>? AzurechinaApplicationKey { get; set; }
+        private Input<string>? _azurechinaApplicationKey;
 
         /// <summary>
-        /// Azure China Directory ID.
+        /// AzureChina ARM Application key. Required when creating an account for AzureChina. Available as of provider version 2.19+.
         /// </summary>
+        public Input<string>? AzurechinaApplicationKey
+        {
+            get => _azurechinaApplicationKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _azurechinaApplicationKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("azurechinaDirectoryId")]
-        public Input<string>? AzurechinaDirectoryId { get; set; }
+        private Input<string>? _azurechinaDirectoryId;
 
         /// <summary>
-        /// Azure China Subscription ID.
+        /// AzureChina ARM Directory ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
+        /// </summary>
+        public Input<string>? AzurechinaDirectoryId
+        {
+            get => _azurechinaDirectoryId;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _azurechinaDirectoryId = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// AzureChina ARM Subscription ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
         /// </summary>
         [Input("azurechinaSubscriptionId")]
         public Input<string>? AzurechinaSubscriptionId { get; set; }
 
-        /// <summary>
-        /// Azure Gov Application ID.
-        /// </summary>
         [Input("azuregovApplicationId")]
-        public Input<string>? AzuregovApplicationId { get; set; }
+        private Input<string>? _azuregovApplicationId;
 
         /// <summary>
-        /// Azure Gov Application Key.
+        /// AzureGov ARM Application ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
         /// </summary>
+        public Input<string>? AzuregovApplicationId
+        {
+            get => _azuregovApplicationId;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _azuregovApplicationId = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("azuregovApplicationKey")]
-        public Input<string>? AzuregovApplicationKey { get; set; }
+        private Input<string>? _azuregovApplicationKey;
 
         /// <summary>
-        /// Azure Gov Directory ID.
+        /// AzureGov ARM Application key. Required when creating an account for AzureGov. Available as of provider version R2.19+.
         /// </summary>
+        public Input<string>? AzuregovApplicationKey
+        {
+            get => _azuregovApplicationKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _azuregovApplicationKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("azuregovDirectoryId")]
-        public Input<string>? AzuregovDirectoryId { get; set; }
+        private Input<string>? _azuregovDirectoryId;
 
         /// <summary>
-        /// Azure Gov Subscription ID.
+        /// AzureGov ARM Directory ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
+        /// </summary>
+        public Input<string>? AzuregovDirectoryId
+        {
+            get => _azuregovDirectoryId;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _azuregovDirectoryId = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// AzureGov ARM Subscription ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
         /// </summary>
         [Input("azuregovSubscriptionId")]
         public Input<string>? AzuregovSubscriptionId { get; set; }
 
         /// <summary>
-        /// Type of cloud service provider.
+        /// Type of cloud service provider. Only AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina and Alibaba Cloud are supported currently. Enter 1 for AWS, 4 for GCP, 8 for Azure, 16 for OCI, 32 for AzureGov, 256 for AWSGov, 1024 for AWSChina or 2048 for AzureChina, 8192 for Alibaba Cloud.
         /// </summary>
         [Input("cloudType", required: true)]
         public Input<int> CloudType { get; set; } = null!;
 
         /// <summary>
-        /// GCloud Project credentials local file path.
+        /// GCloud Project Credentials [local filepath].json. Required when creating an account for GCP.
         /// </summary>
         [Input("gcloudProjectCredentialsFilepath")]
         public Input<string>? GcloudProjectCredentialsFilepath { get; set; }
@@ -791,35 +1064,75 @@ namespace Pulumi.Aviatrix
         [Input("gcloudProjectId")]
         public Input<string>? GcloudProjectId { get; set; }
 
-        /// <summary>
-        /// OCI API Private Key local file path.
-        /// </summary>
         [Input("ociApiPrivateKeyFilepath")]
-        public Input<string>? OciApiPrivateKeyFilepath { get; set; }
+        private Input<string>? _ociApiPrivateKeyFilepath;
 
         /// <summary>
-        /// OCI Compartment OCID.
+        /// Oracle OCI API Private Key local file path. Required when creating an account for OCI.
         /// </summary>
+        public Input<string>? OciApiPrivateKeyFilepath
+        {
+            get => _ociApiPrivateKeyFilepath;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _ociApiPrivateKeyFilepath = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("ociCompartmentId")]
-        public Input<string>? OciCompartmentId { get; set; }
+        private Input<string>? _ociCompartmentId;
 
         /// <summary>
-        /// OCI Tenancy OCID.
+        /// Oracle OCI Compartment ID. Required when creating an account for OCI.
         /// </summary>
+        public Input<string>? OciCompartmentId
+        {
+            get => _ociCompartmentId;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _ociCompartmentId = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("ociTenancyId")]
-        public Input<string>? OciTenancyId { get; set; }
+        private Input<string>? _ociTenancyId;
 
         /// <summary>
-        /// OCI User OCID.
+        /// Oracle OCI Tenancy ID. Required when creating an account for OCI.
         /// </summary>
+        public Input<string>? OciTenancyId
+        {
+            get => _ociTenancyId;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _ociTenancyId = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("ociUserId")]
-        public Input<string>? OciUserId { get; set; }
+        private Input<string>? _ociUserId;
+
+        /// <summary>
+        /// Oracle OCI User ID. Required when creating an account for OCI.
+        /// </summary>
+        public Input<string>? OciUserId
+        {
+            get => _ociUserId;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _ociUserId = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         [Input("rbacGroups")]
         private InputList<string>? _rbacGroups;
 
         /// <summary>
-        /// List of RBAC permission group names.
+        /// A list of existing RBAC group names. This attribute should only be used when creating an account. Updating this attribute will have no effect. Available as of provider version R2.23.0+.
         /// </summary>
         public InputList<string> RbacGroups
         {
@@ -841,44 +1154,94 @@ namespace Pulumi.Aviatrix
         [Input("accountName")]
         public Input<string>? AccountName { get; set; }
 
-        /// <summary>
-        /// Alibaba Cloud Access Key.
-        /// </summary>
         [Input("alicloudAccessKey")]
-        public Input<string>? AlicloudAccessKey { get; set; }
+        private Input<string>? _alicloudAccessKey;
 
         /// <summary>
-        /// Alibaba Cloud Account ID to associate with Aviatrix account.
+        /// Alibaba Cloud Access Key. Required when creating an account for Alibaba Cloud.
+        /// </summary>
+        public Input<string>? AlicloudAccessKey
+        {
+            get => _alicloudAccessKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _alicloudAccessKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// Alibaba Cloud Account number to associate with Aviatrix account. Required when creating an account for Alibaba Cloud.
         /// </summary>
         [Input("alicloudAccountId")]
         public Input<string>? AlicloudAccountId { get; set; }
 
-        /// <summary>
-        /// Alibaba Cloud Secret Key.
-        /// </summary>
         [Input("alicloudSecretKey")]
-        public Input<string>? AlicloudSecretKey { get; set; }
+        private Input<string>? _alicloudSecretKey;
 
         /// <summary>
-        /// Azure Application ID.
+        /// Alibaba Cloud Secret Key. Required when creating an account for Alibaba Cloud.
         /// </summary>
+        public Input<string>? AlicloudSecretKey
+        {
+            get => _alicloudSecretKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _alicloudSecretKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("armApplicationId")]
-        public Input<string>? ArmApplicationId { get; set; }
+        private Input<string>? _armApplicationId;
 
         /// <summary>
-        /// Azure Application Key.
+        /// Azure ARM Application ID. Required when creating an account for Azure.
         /// </summary>
+        public Input<string>? ArmApplicationId
+        {
+            get => _armApplicationId;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _armApplicationId = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("armApplicationKey")]
-        public Input<string>? ArmApplicationKey { get; set; }
+        private Input<string>? _armApplicationKey;
 
         /// <summary>
-        /// Azure Directory ID.
+        /// Azure ARM Application key. Required when creating an account for Azure.
         /// </summary>
+        public Input<string>? ArmApplicationKey
+        {
+            get => _armApplicationKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _armApplicationKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("armDirectoryId")]
-        public Input<string>? ArmDirectoryId { get; set; }
+        private Input<string>? _armDirectoryId;
 
         /// <summary>
-        /// Azure Subscription ID.
+        /// Azure ARM Directory ID. Required when creating an account for Azure.
+        /// </summary>
+        public Input<string>? ArmDirectoryId
+        {
+            get => _armDirectoryId;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _armDirectoryId = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// Azure ARM Subscription ID. Required when creating an account for Azure.
         /// </summary>
         [Input("armSubscriptionId")]
         public Input<string>? ArmSubscriptionId { get; set; }
@@ -889,308 +1252,488 @@ namespace Pulumi.Aviatrix
         [Input("auditAccount")]
         public Input<bool>? AuditAccount { get; set; }
 
-        /// <summary>
-        /// AWS Access Key.
-        /// </summary>
         [Input("awsAccessKey")]
-        public Input<string>? AwsAccessKey { get; set; }
+        private Input<string>? _awsAccessKey;
 
         /// <summary>
-        /// AWS Account number to associate with Aviatrix account. Should be 12 digits.
+        /// AWS Access Key. Required when `aws_iam` is "false" and when creating an account for AWS.
+        /// </summary>
+        public Input<string>? AwsAccessKey
+        {
+            get => _awsAccessKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _awsAccessKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// AWS Account number to associate with Aviatrix account. Required when creating an account for AWS.
         /// </summary>
         [Input("awsAccountNumber")]
         public Input<string>? AwsAccountNumber { get; set; }
 
         /// <summary>
-        /// AWS Top Secret Region or Secret Region Custom Certificate Authority file path on the controller.
+        /// (Optional) AWS Top Secret Region or Secret Region Custom Certificate Authority file name on the controller. Available as of provider R2.19.5+.
         /// </summary>
         [Input("awsCaCertPath")]
         public Input<string>? AwsCaCertPath { get; set; }
 
         /// <summary>
-        /// AWS App role ARN for gateways.
+        /// A separate AWS App role ARN to assign to gateways created by the controller. Required when `aws_gateway_role_ec2` is set. Only allowed when `aws_iam`, `awsgov_iam`, or `awschina_iam` is "true" when creating an account for AWS, AWSGov or AWSChina, respectively. Available as of provider version R2.19+.
         /// </summary>
         [Input("awsGatewayRoleApp")]
         public Input<string>? AwsGatewayRoleApp { get; set; }
 
         /// <summary>
-        /// AWS EC2 role ARN for gateways.
+        /// A separate AWS EC2 role ARN to assign to gateways created by the controller. Required when `aws_gateway_role_app` is set. Only allowed when `aws_iam`, `awsgov_iam`, or `awschina_iam` is "true" when creating an account for AWS, AWSGov or AWSChina, respectively. Available as of provider version R2.19+.
         /// </summary>
         [Input("awsGatewayRoleEc2")]
         public Input<string>? AwsGatewayRoleEc2 { get; set; }
 
         /// <summary>
-        /// AWS IAM-role based flag.
+        /// AWS IAM-role based flag, this option is for UserConnect.
         /// </summary>
         [Input("awsIam")]
         public Input<bool>? AwsIam { get; set; }
 
         /// <summary>
-        /// AWS App role ARN.
+        /// AWS App role ARN, this option is for UserConnect. Required when `aws_iam` is "true" and when creating an account for AWS.
         /// </summary>
         [Input("awsRoleApp")]
         public Input<string>? AwsRoleApp { get; set; }
 
         /// <summary>
-        /// AWS EC2 role ARN.
+        /// AWS EC2 role ARN, this option is for UserConnect. Required when `aws_iam` is "true" and when creating an account for AWS.
         /// </summary>
         [Input("awsRoleEc2")]
         public Input<string>? AwsRoleEc2 { get; set; }
 
-        /// <summary>
-        /// AWS Secret Key.
-        /// </summary>
         [Input("awsSecretKey")]
-        public Input<string>? AwsSecretKey { get; set; }
+        private Input<string>? _awsSecretKey;
 
         /// <summary>
-        /// AWS China Access Key.
+        /// AWS Secret Key. Required when `aws_iam` is "false" and when creating an account for AWS.
         /// </summary>
+        public Input<string>? AwsSecretKey
+        {
+            get => _awsSecretKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _awsSecretKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("awschinaAccessKey")]
-        public Input<string>? AwschinaAccessKey { get; set; }
+        private Input<string>? _awschinaAccessKey;
 
         /// <summary>
-        /// AWS China Account Number.
+        /// AWSChina Access Key. Required when `awschina_iam` is "false" and when creating an account for AWSChina. Available as of provider version 2.19+.
+        /// </summary>
+        public Input<string>? AwschinaAccessKey
+        {
+            get => _awschinaAccessKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _awschinaAccessKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// AWSChina Account number to associate with Aviatrix account. Required when creating an account for AWSChina. Available as of provider version 2.19+.
         /// </summary>
         [Input("awschinaAccountNumber")]
         public Input<string>? AwschinaAccountNumber { get; set; }
 
         /// <summary>
-        /// AWS China IAM-role based flag.
+        /// AWSChina IAM-role based flag. Available as of provider version 2.19+.
         /// </summary>
         [Input("awschinaIam")]
         public Input<bool>? AwschinaIam { get; set; }
 
         /// <summary>
-        /// AWS China App Role ARN.
+        /// AWSChina App role ARN. Available when `awschina_iam` is "true" and when creating an account for AWSChina. If left empty, the ARN will be computed. Available as of provider version 2.19+.
         /// </summary>
         [Input("awschinaRoleApp")]
         public Input<string>? AwschinaRoleApp { get; set; }
 
         /// <summary>
-        /// AWS China EC2 Role ARN.
+        /// AWSChina EC2 role ARN. Available when `awschina_iam` is "true" and when creating an account for AWSChina. If left empty, the ARN will be computed. Available as of provider version 2.19+.
         /// </summary>
         [Input("awschinaRoleEc2")]
         public Input<string>? AwschinaRoleEc2 { get; set; }
 
-        /// <summary>
-        /// AWS China Secret Key.
-        /// </summary>
         [Input("awschinaSecretKey")]
-        public Input<string>? AwschinaSecretKey { get; set; }
+        private Input<string>? _awschinaSecretKey;
 
         /// <summary>
-        /// AWS Gov Access Key.
+        /// AWSChina Secret Key. Required when `awschina_iam` is "false" and when creating an account for AWSChina. Available as of provider version 2.19+.
         /// </summary>
+        public Input<string>? AwschinaSecretKey
+        {
+            get => _awschinaSecretKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _awschinaSecretKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("awsgovAccessKey")]
-        public Input<string>? AwsgovAccessKey { get; set; }
+        private Input<string>? _awsgovAccessKey;
 
         /// <summary>
-        /// AWS Gov Account number to associate with Aviatrix account.
+        /// AWS Access Key. Required when creating an account for AWSGov.
+        /// </summary>
+        public Input<string>? AwsgovAccessKey
+        {
+            get => _awsgovAccessKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _awsgovAccessKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// AWSGov Account number to associate with Aviatrix account. Required when creating an account for AWSGov.
         /// </summary>
         [Input("awsgovAccountNumber")]
         public Input<string>? AwsgovAccountNumber { get; set; }
 
         /// <summary>
-        /// AWSGov IAM-role based flag
+        /// AWSGov IAM-role based flag. Available as of provider version 2.19+.
         /// </summary>
         [Input("awsgovIam")]
         public Input<bool>? AwsgovIam { get; set; }
 
         /// <summary>
-        /// AWSGov App role ARN
+        /// AWSGov App role ARN. Available when `awsgov_iam` is "true" and when creating an account for AWSGov. If left empty, the ARN will be computed. Available as of provider version 2.19+.
         /// </summary>
         [Input("awsgovRoleApp")]
         public Input<string>? AwsgovRoleApp { get; set; }
 
         /// <summary>
-        /// AWSGov EC2 role ARN
+        /// AWSGov EC2 role ARN. Available when `awsgov_iam` is "true" and when creating an account for AWSGov. If left empty, the ARN will be computed. Available as of provider version 2.19+.
         /// </summary>
         [Input("awsgovRoleEc2")]
         public Input<string>? AwsgovRoleEc2 { get; set; }
 
-        /// <summary>
-        /// AWS Gov Secret Key.
-        /// </summary>
         [Input("awsgovSecretKey")]
-        public Input<string>? AwsgovSecretKey { get; set; }
+        private Input<string>? _awsgovSecretKey;
 
         /// <summary>
-        /// AWS Secret Region Account Number.
+        /// AWS Secret Key. Required when creating an account for AWSGov.
+        /// </summary>
+        public Input<string>? AwsgovSecretKey
+        {
+            get => _awsgovSecretKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _awsgovSecretKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// AWS Secret Region Account Number. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Input("awssAccountNumber")]
         public Input<string>? AwssAccountNumber { get; set; }
 
-        /// <summary>
-        /// AWS Secret Region Custom Certificate Authority file path.
-        /// </summary>
         [Input("awssCaChainCert")]
-        public Input<string>? AwssCaChainCert { get; set; }
+        private Input<string>? _awssCaChainCert;
 
         /// <summary>
-        /// AWS Secret Region CAP Account Name.
+        /// AWS Secret Region Custom Certificate Authority local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        /// </summary>
+        public Input<string>? AwssCaChainCert
+        {
+            get => _awssCaChainCert;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _awssCaChainCert = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// AWS Secret Region Account Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Input("awssCapAccountName")]
         public Input<string>? AwssCapAccountName { get; set; }
 
         /// <summary>
-        /// AWS Secret Region CAP Agency.
+        /// AWS Secret Region CAP Agency. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Input("awssCapAgency")]
         public Input<string>? AwssCapAgency { get; set; }
 
-        /// <summary>
-        /// AWS Secret Region CAP Certificate file path.
-        /// </summary>
         [Input("awssCapCert")]
-        public Input<string>? AwssCapCert { get; set; }
+        private Input<string>? _awssCapCert;
 
         /// <summary>
-        /// AWS Secret Region CAP Certificate Key file path.
+        /// AWS Secret Region CAP Certificate local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
+        public Input<string>? AwssCapCert
+        {
+            get => _awssCapCert;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _awssCapCert = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("awssCapCertKey")]
-        public Input<string>? AwssCapCertKey { get; set; }
+        private Input<string>? _awssCapCertKey;
 
         /// <summary>
-        /// AWS Secret Region CAP Certificate Key file path on the controller.
+        /// AWS Secret Region CAP Certificate Key local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
+        /// </summary>
+        public Input<string>? AwssCapCertKey
+        {
+            get => _awssCapCertKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _awssCapCertKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// (Optional) AWS Secret Region CAP Certificate Key file name on the controller. Available as of provider R2.19.5+.
         /// </summary>
         [Input("awssCapCertKeyPath")]
         public Input<string>? AwssCapCertKeyPath { get; set; }
 
         /// <summary>
-        /// AWS Secret Region CAP Certificate file path on the controller.
+        /// (Optional) AWS Secret Region CAP Certificate file name on the controller. Available as of provider R2.19.5+.
         /// </summary>
         [Input("awssCapCertPath")]
         public Input<string>? AwssCapCertPath { get; set; }
 
         /// <summary>
-        /// AWS Secret Region CAP Role Name.
+        /// AWS Secret Region Role Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Input("awssCapRoleName")]
         public Input<string>? AwssCapRoleName { get; set; }
 
         /// <summary>
-        /// AWS Secret Region CAP Endpoint URL.
+        /// AWS Secret Region CAP Url. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Input("awssCapUrl")]
         public Input<string>? AwssCapUrl { get; set; }
 
         /// <summary>
-        /// AWS Top Secret Region Account Number.
+        /// AWS Top Secret Region Account Number. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Input("awstsAccountNumber")]
         public Input<string>? AwstsAccountNumber { get; set; }
 
-        /// <summary>
-        /// AWS Top Secret Region Custom Certificate Authority file path.
-        /// </summary>
         [Input("awstsCaChainCert")]
-        public Input<string>? AwstsCaChainCert { get; set; }
+        private Input<string>? _awstsCaChainCert;
 
         /// <summary>
-        /// AWS Top Secret Region CAP Agency.
+        /// AWS Top Secret Region Custom Certificate Authority local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        /// </summary>
+        public Input<string>? AwstsCaChainCert
+        {
+            get => _awstsCaChainCert;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _awstsCaChainCert = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// AWS Top Secret Region CAP Agency. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Input("awstsCapAgency")]
         public Input<string>? AwstsCapAgency { get; set; }
 
-        /// <summary>
-        /// AWS Top Secret Region CAP Certificate file path.
-        /// </summary>
         [Input("awstsCapCert")]
-        public Input<string>? AwstsCapCert { get; set; }
+        private Input<string>? _awstsCapCert;
 
         /// <summary>
-        /// AWS Top Secret Region CAP Certificate Key file path.
+        /// AWS Top Secret Region CAP Certificate local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
+        public Input<string>? AwstsCapCert
+        {
+            get => _awstsCapCert;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _awstsCapCert = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("awstsCapCertKey")]
-        public Input<string>? AwstsCapCertKey { get; set; }
+        private Input<string>? _awstsCapCertKey;
 
         /// <summary>
-        /// AWS Top Secret Region CAP Certificate Key file path on the controller.
+        /// AWS Top Secret Region CAP Certificate Key local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
+        /// </summary>
+        public Input<string>? AwstsCapCertKey
+        {
+            get => _awstsCapCertKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _awstsCapCertKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// (Optional) AWS Top Secret Region CAP Certificate Key file name on the controller. Available as of provider R2.19.5+.
         /// </summary>
         [Input("awstsCapCertKeyPath")]
         public Input<string>? AwstsCapCertKeyPath { get; set; }
 
         /// <summary>
-        /// AWS Top Secret Region CAP Certificate file path on the controller.
+        /// (Optional) AWS Top Secret Region CAP Certificate file name on the controller. Available as of provider R2.19.5+.
         /// </summary>
         [Input("awstsCapCertPath")]
         public Input<string>? AwstsCapCertPath { get; set; }
 
         /// <summary>
-        /// AWS Top Secret Region CAP Mission.
+        /// AWS Top Secret Region Mission. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Input("awstsCapMission")]
         public Input<string>? AwstsCapMission { get; set; }
 
         /// <summary>
-        /// AWS Top Secret Region CAP Role Name.
+        /// AWS Top Secret Region Role Name. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Input("awstsCapRoleName")]
         public Input<string>? AwstsCapRoleName { get; set; }
 
         /// <summary>
-        /// AWS Top Secret Region CAP Endpoint URL.
+        /// AWS Top Secret Region CAP Url. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
         /// </summary>
         [Input("awstsCapUrl")]
         public Input<string>? AwstsCapUrl { get; set; }
 
-        /// <summary>
-        /// Azure China Application ID.
-        /// </summary>
         [Input("azurechinaApplicationId")]
-        public Input<string>? AzurechinaApplicationId { get; set; }
+        private Input<string>? _azurechinaApplicationId;
 
         /// <summary>
-        /// Azure China Application Key.
+        /// AzureChina ARM Application ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
         /// </summary>
+        public Input<string>? AzurechinaApplicationId
+        {
+            get => _azurechinaApplicationId;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _azurechinaApplicationId = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("azurechinaApplicationKey")]
-        public Input<string>? AzurechinaApplicationKey { get; set; }
+        private Input<string>? _azurechinaApplicationKey;
 
         /// <summary>
-        /// Azure China Directory ID.
+        /// AzureChina ARM Application key. Required when creating an account for AzureChina. Available as of provider version 2.19+.
         /// </summary>
+        public Input<string>? AzurechinaApplicationKey
+        {
+            get => _azurechinaApplicationKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _azurechinaApplicationKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("azurechinaDirectoryId")]
-        public Input<string>? AzurechinaDirectoryId { get; set; }
+        private Input<string>? _azurechinaDirectoryId;
 
         /// <summary>
-        /// Azure China Subscription ID.
+        /// AzureChina ARM Directory ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
+        /// </summary>
+        public Input<string>? AzurechinaDirectoryId
+        {
+            get => _azurechinaDirectoryId;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _azurechinaDirectoryId = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// AzureChina ARM Subscription ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
         /// </summary>
         [Input("azurechinaSubscriptionId")]
         public Input<string>? AzurechinaSubscriptionId { get; set; }
 
-        /// <summary>
-        /// Azure Gov Application ID.
-        /// </summary>
         [Input("azuregovApplicationId")]
-        public Input<string>? AzuregovApplicationId { get; set; }
+        private Input<string>? _azuregovApplicationId;
 
         /// <summary>
-        /// Azure Gov Application Key.
+        /// AzureGov ARM Application ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
         /// </summary>
+        public Input<string>? AzuregovApplicationId
+        {
+            get => _azuregovApplicationId;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _azuregovApplicationId = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("azuregovApplicationKey")]
-        public Input<string>? AzuregovApplicationKey { get; set; }
+        private Input<string>? _azuregovApplicationKey;
 
         /// <summary>
-        /// Azure Gov Directory ID.
+        /// AzureGov ARM Application key. Required when creating an account for AzureGov. Available as of provider version R2.19+.
         /// </summary>
+        public Input<string>? AzuregovApplicationKey
+        {
+            get => _azuregovApplicationKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _azuregovApplicationKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("azuregovDirectoryId")]
-        public Input<string>? AzuregovDirectoryId { get; set; }
+        private Input<string>? _azuregovDirectoryId;
 
         /// <summary>
-        /// Azure Gov Subscription ID.
+        /// AzureGov ARM Directory ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
+        /// </summary>
+        public Input<string>? AzuregovDirectoryId
+        {
+            get => _azuregovDirectoryId;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _azuregovDirectoryId = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// AzureGov ARM Subscription ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
         /// </summary>
         [Input("azuregovSubscriptionId")]
         public Input<string>? AzuregovSubscriptionId { get; set; }
 
         /// <summary>
-        /// Type of cloud service provider.
+        /// Type of cloud service provider. Only AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina and Alibaba Cloud are supported currently. Enter 1 for AWS, 4 for GCP, 8 for Azure, 16 for OCI, 32 for AzureGov, 256 for AWSGov, 1024 for AWSChina or 2048 for AzureChina, 8192 for Alibaba Cloud.
         /// </summary>
         [Input("cloudType")]
         public Input<int>? CloudType { get; set; }
 
         /// <summary>
-        /// GCloud Project credentials local file path.
+        /// GCloud Project Credentials [local filepath].json. Required when creating an account for GCP.
         /// </summary>
         [Input("gcloudProjectCredentialsFilepath")]
         public Input<string>? GcloudProjectCredentialsFilepath { get; set; }
@@ -1201,35 +1744,75 @@ namespace Pulumi.Aviatrix
         [Input("gcloudProjectId")]
         public Input<string>? GcloudProjectId { get; set; }
 
-        /// <summary>
-        /// OCI API Private Key local file path.
-        /// </summary>
         [Input("ociApiPrivateKeyFilepath")]
-        public Input<string>? OciApiPrivateKeyFilepath { get; set; }
+        private Input<string>? _ociApiPrivateKeyFilepath;
 
         /// <summary>
-        /// OCI Compartment OCID.
+        /// Oracle OCI API Private Key local file path. Required when creating an account for OCI.
         /// </summary>
+        public Input<string>? OciApiPrivateKeyFilepath
+        {
+            get => _ociApiPrivateKeyFilepath;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _ociApiPrivateKeyFilepath = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("ociCompartmentId")]
-        public Input<string>? OciCompartmentId { get; set; }
+        private Input<string>? _ociCompartmentId;
 
         /// <summary>
-        /// OCI Tenancy OCID.
+        /// Oracle OCI Compartment ID. Required when creating an account for OCI.
         /// </summary>
+        public Input<string>? OciCompartmentId
+        {
+            get => _ociCompartmentId;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _ociCompartmentId = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("ociTenancyId")]
-        public Input<string>? OciTenancyId { get; set; }
+        private Input<string>? _ociTenancyId;
 
         /// <summary>
-        /// OCI User OCID.
+        /// Oracle OCI Tenancy ID. Required when creating an account for OCI.
         /// </summary>
+        public Input<string>? OciTenancyId
+        {
+            get => _ociTenancyId;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _ociTenancyId = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("ociUserId")]
-        public Input<string>? OciUserId { get; set; }
+        private Input<string>? _ociUserId;
+
+        /// <summary>
+        /// Oracle OCI User ID. Required when creating an account for OCI.
+        /// </summary>
+        public Input<string>? OciUserId
+        {
+            get => _ociUserId;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _ociUserId = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         [Input("rbacGroups")]
         private InputList<string>? _rbacGroups;
 
         /// <summary>
-        /// List of RBAC permission group names.
+        /// A list of existing RBAC group names. This attribute should only be used when creating an account. Updating this attribute will have no effect. Available as of provider version R2.23.0+.
         /// </summary>
         public InputList<string> RbacGroups
         {

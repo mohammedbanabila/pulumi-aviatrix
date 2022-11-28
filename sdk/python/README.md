@@ -19,7 +19,7 @@ pip install pulumi-aviatrix
 The following configuration points are available for the `aviatrix` provider:
 
 Mandatory:
-- `aviatrix:controllerIp` (environment: `AVIATRIX_CONTROLLERIP`) - The Aviatrix controller's IP address
+- `aviatrix:controllerIp` (environment: `AVIATRIX_CONTROLLER_IP`) - The Aviatrix controller's IP address
 - `aviatrix:username` (environment: `AVIATRIX_USERNAME`) - The Aviatrix controller's username
 - `aviatrix:password` (environment: `AVIATRIX_PASSWORD`) - The Aviatrix controller's password
 

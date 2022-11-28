@@ -4,6 +4,13 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_gateway_image** data source provides the current image version that pairs with the given software version
+ * and cloud type.
+ *
+ * This data source is useful for getting the correct imageVersion for a gateway when upgrading the softwareVersion of
+ * the gateway.
+ */
 export function getAviatrixGatewayImage(args: GetAviatrixGatewayImageArgs, opts?: pulumi.InvokeOptions): Promise<GetAviatrixGatewayImageResult> {
     if (!opts) {
         opts = {}
@@ -20,7 +27,13 @@ export function getAviatrixGatewayImage(args: GetAviatrixGatewayImageArgs, opts?
  * A collection of arguments for invoking getAviatrixGatewayImage.
  */
 export interface GetAviatrixGatewayImageArgs {
+    /**
+     * Cloud type. Type: Integer. Example: 1 (AWS)
+     */
     cloudType: number;
+    /**
+     * Software version. Type: String. Example: "6.4.2487"
+     */
     softwareVersion: string;
 }
 
@@ -33,6 +46,9 @@ export interface GetAviatrixGatewayImageResult {
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * Image version that is compatible with the given cloudType and software_version.
+     */
     readonly imageVersion: string;
     readonly softwareVersion: string;
 }
@@ -45,6 +61,12 @@ export function getAviatrixGatewayImageOutput(args: GetAviatrixGatewayImageOutpu
  * A collection of arguments for invoking getAviatrixGatewayImage.
  */
 export interface GetAviatrixGatewayImageOutputArgs {
+    /**
+     * Cloud type. Type: Integer. Example: 1 (AWS)
+     */
     cloudType: pulumi.Input<number>;
+    /**
+     * Software version. Type: String. Example: "6.4.2487"
+     */
     softwareVersion: pulumi.Input<string>;
 }

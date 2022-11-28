@@ -9,11 +9,40 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_segmentation_network_domain** resource handles creation of [Transit Segmentation](https://docs.aviatrix.com/HowTos/transit_segmentation_faq.html) Network Domains.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Segmentation Network Domain
+    ///     var testSegmentationNetworkDomain = new Aviatrix.AviatrixSegmentationNetworkDomain("testSegmentationNetworkDomain", new()
+    ///     {
+    ///         DomainName = "domain-a",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **aviatrix_segmentation_network_domain** can be imported using the `domain_name`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixSegmentationNetworkDomain:AviatrixSegmentationNetworkDomain test domain_name
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixSegmentationNetworkDomain:AviatrixSegmentationNetworkDomain")]
     public partial class AviatrixSegmentationNetworkDomain : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Network domain name.
+        /// Name of the Network Domain.
         /// </summary>
         [Output("domainName")]
         public Output<string> DomainName { get; private set; } = null!;
@@ -66,7 +95,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixSegmentationNetworkDomainArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Network domain name.
+        /// Name of the Network Domain.
         /// </summary>
         [Input("domainName", required: true)]
         public Input<string> DomainName { get; set; } = null!;
@@ -80,7 +109,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixSegmentationNetworkDomainState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Network domain name.
+        /// Name of the Network Domain.
         /// </summary>
         [Input("domainName")]
         public Input<string>? DomainName { get; set; }

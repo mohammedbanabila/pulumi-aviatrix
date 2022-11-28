@@ -4,6 +4,45 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_controller_email_config** resource allows management of an Aviatrix Controller's notification email configurations.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Controller Email Config
+ * const testEmailConfig = new aviatrix.AviatrixControllerEmailConfig("test_email_config", {
+ *     adminAlertEmail: "administrator@mycompany.com",
+ *     criticalAlertEmail: "it-support@mycompany.com",
+ *     securityEventEmail: "security-admin-group@mycompany.com",
+ *     statusChangeEmail: "it-admin-group@mycompany.com",
+ * });
+ * ```
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Controller Email Config and configure the Status Change Notification Interval
+ * const testEmailConfig = new aviatrix.AviatrixControllerEmailConfig("test_email_config", {
+ *     adminAlertEmail: "administrator@mycompany.com",
+ *     criticalAlertEmail: "it-support@mycompany.com",
+ *     securityEventEmail: "security-admin-group@mycompany.com",
+ *     statusChangeEmail: "it-admin-group@mycompany.com",
+ *     statusChangeNotificationInterval: 20,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Instance controller_email_config can be imported using controller IP, e.g. controller IP is 10.11.12.13
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixControllerEmailConfig:AviatrixControllerEmailConfig test 10-11-12-13
+ * ```
+ */
 export class AviatrixControllerEmailConfig extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixControllerEmailConfig resource's state with the given name, ID, and optional extra
@@ -65,7 +104,7 @@ export class AviatrixControllerEmailConfig extends pulumi.CustomResource {
      */
     public /*out*/ readonly statusChangeEmailVerified!: pulumi.Output<boolean>;
     /**
-     * Status change notification interval in seconds.
+     * Status change notification interval in seconds. Default value: 60.
      */
     public readonly statusChangeNotificationInterval!: pulumi.Output<number | undefined>;
 
@@ -157,7 +196,7 @@ export interface AviatrixControllerEmailConfigState {
      */
     statusChangeEmailVerified?: pulumi.Input<boolean>;
     /**
-     * Status change notification interval in seconds.
+     * Status change notification interval in seconds. Default value: 60.
      */
     statusChangeNotificationInterval?: pulumi.Input<number>;
 }
@@ -183,7 +222,7 @@ export interface AviatrixControllerEmailConfigArgs {
      */
     statusChangeEmail: pulumi.Input<string>;
     /**
-     * Status change notification interval in seconds.
+     * Status change notification interval in seconds. Default value: 60.
      */
     statusChangeNotificationInterval?: pulumi.Input<number>;
 }

@@ -32,19 +32,18 @@ class AviatrixAwsTgwVpnConnArgs:
         """
         The set of arguments for constructing a AviatrixAwsTgwVpnConn resource.
         :param pulumi.Input[str] connection_name: Unique name of the connection.
-        :param pulumi.Input[str] public_ip: Public IP address. Example: '40.0.0.0'.
+        :param pulumi.Input[str] public_ip: Public IP address. Example: "40.0.0.0".
         :param pulumi.Input[str] route_domain_name: The name of a route domain, to which the vpn will be attached.
         :param pulumi.Input[str] tgw_name: This parameter represents the name of an AWS TGW.
-        :param pulumi.Input[str] connection_type: Connection type. Valid values: 'dynamic', 'static'. 'dynamic' stands for a BGP VPN connection; 'static' stands for a
-               static VPN connection. Default value: 'dynamic'.
-        :param pulumi.Input[bool] enable_global_acceleration: Enable Global Acceleration.
-        :param pulumi.Input[bool] enable_learned_cidrs_approval: Switch to enable/disable encrypted transit approval for vpn connection. Valid values: true, false.
+        :param pulumi.Input[str] connection_type: Connection type. Valid values: 'dynamic', 'static'. 'dynamic' stands for a BGP VPN connection; 'static' stands for a static VPN connection. Default value: 'dynamic'.
+        :param pulumi.Input[bool] enable_global_acceleration: Enable Global Acceleration. Type: Boolean. Default: false.
+        :param pulumi.Input[bool] enable_learned_cidrs_approval: Switch to enable/disable [encrypted transit approval](https://docs.aviatrix.com/HowTos/tgw_approval.html) for AWS TGW VPN connection. Valid values: true, false. Default value: false.
         :param pulumi.Input[str] inside_ip_cidr_tun1: Inside IP CIDR for Tunnel 1. A /30 CIDR in 169.254.0.0/16.
         :param pulumi.Input[str] inside_ip_cidr_tun2: Inside IP CIDR for Tunnel 2. A /30 CIDR in 169.254.0.0/16.
-        :param pulumi.Input[str] pre_shared_key_tun1: Pre-Shared Key for Tunnel 1. A 8-64 character string with alphanumeric, underscore(_) and dot(.). It cannot start with 0
-        :param pulumi.Input[str] pre_shared_key_tun2: Pre-Shared Key for Tunnel 2. A 8-64 character string with alphanumeric, underscore(_) and dot(.). It cannot start with 0
-        :param pulumi.Input[str] remote_as_number: AWS side as a number. Integer between 1-4294967294. Example: '12'. Required for a dynamic VPN connection.
-        :param pulumi.Input[str] remote_cidr: Remote CIDRs joined as a string with ','. Required for a static VPN connection.
+        :param pulumi.Input[str] pre_shared_key_tun1: Pre-Shared Key for Tunnel 1. A 8-64 character string with alphanumeric underscore(_) and dot(.). It cannot start with 0.
+        :param pulumi.Input[str] pre_shared_key_tun2: Pre-Shared Key for Tunnel 2. A 8-64 character string with alphanumeric underscore(_) and dot(.). It cannot start with 0.
+        :param pulumi.Input[str] remote_as_number: AWS side as a number. Integer between 1-4294967294. Example: "12". **Required for a dynamic VPN connection.**
+        :param pulumi.Input[str] remote_cidr: Remote CIDRs separated by ",". Example: AWS: "16.0.0.0/16,16.1.0.0/16". **Required for a static VPN connection.**
         """
         pulumi.set(__self__, "connection_name", connection_name)
         pulumi.set(__self__, "public_ip", public_ip)
@@ -85,7 +84,7 @@ class AviatrixAwsTgwVpnConnArgs:
     @pulumi.getter(name="publicIp")
     def public_ip(self) -> pulumi.Input[str]:
         """
-        Public IP address. Example: '40.0.0.0'.
+        Public IP address. Example: "40.0.0.0".
         """
         return pulumi.get(self, "public_ip")
 
@@ -121,8 +120,7 @@ class AviatrixAwsTgwVpnConnArgs:
     @pulumi.getter(name="connectionType")
     def connection_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Connection type. Valid values: 'dynamic', 'static'. 'dynamic' stands for a BGP VPN connection; 'static' stands for a
-        static VPN connection. Default value: 'dynamic'.
+        Connection type. Valid values: 'dynamic', 'static'. 'dynamic' stands for a BGP VPN connection; 'static' stands for a static VPN connection. Default value: 'dynamic'.
         """
         return pulumi.get(self, "connection_type")
 
@@ -134,7 +132,7 @@ class AviatrixAwsTgwVpnConnArgs:
     @pulumi.getter(name="enableGlobalAcceleration")
     def enable_global_acceleration(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable Global Acceleration.
+        Enable Global Acceleration. Type: Boolean. Default: false.
         """
         return pulumi.get(self, "enable_global_acceleration")
 
@@ -146,7 +144,7 @@ class AviatrixAwsTgwVpnConnArgs:
     @pulumi.getter(name="enableLearnedCidrsApproval")
     def enable_learned_cidrs_approval(self) -> Optional[pulumi.Input[bool]]:
         """
-        Switch to enable/disable encrypted transit approval for vpn connection. Valid values: true, false.
+        Switch to enable/disable [encrypted transit approval](https://docs.aviatrix.com/HowTos/tgw_approval.html) for AWS TGW VPN connection. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_learned_cidrs_approval")
 
@@ -182,7 +180,7 @@ class AviatrixAwsTgwVpnConnArgs:
     @pulumi.getter(name="preSharedKeyTun1")
     def pre_shared_key_tun1(self) -> Optional[pulumi.Input[str]]:
         """
-        Pre-Shared Key for Tunnel 1. A 8-64 character string with alphanumeric, underscore(_) and dot(.). It cannot start with 0
+        Pre-Shared Key for Tunnel 1. A 8-64 character string with alphanumeric underscore(_) and dot(.). It cannot start with 0.
         """
         return pulumi.get(self, "pre_shared_key_tun1")
 
@@ -194,7 +192,7 @@ class AviatrixAwsTgwVpnConnArgs:
     @pulumi.getter(name="preSharedKeyTun2")
     def pre_shared_key_tun2(self) -> Optional[pulumi.Input[str]]:
         """
-        Pre-Shared Key for Tunnel 2. A 8-64 character string with alphanumeric, underscore(_) and dot(.). It cannot start with 0
+        Pre-Shared Key for Tunnel 2. A 8-64 character string with alphanumeric underscore(_) and dot(.). It cannot start with 0.
         """
         return pulumi.get(self, "pre_shared_key_tun2")
 
@@ -206,7 +204,7 @@ class AviatrixAwsTgwVpnConnArgs:
     @pulumi.getter(name="remoteAsNumber")
     def remote_as_number(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS side as a number. Integer between 1-4294967294. Example: '12'. Required for a dynamic VPN connection.
+        AWS side as a number. Integer between 1-4294967294. Example: "12". **Required for a dynamic VPN connection.**
         """
         return pulumi.get(self, "remote_as_number")
 
@@ -218,7 +216,7 @@ class AviatrixAwsTgwVpnConnArgs:
     @pulumi.getter(name="remoteCidr")
     def remote_cidr(self) -> Optional[pulumi.Input[str]]:
         """
-        Remote CIDRs joined as a string with ','. Required for a static VPN connection.
+        Remote CIDRs separated by ",". Example: AWS: "16.0.0.0/16,16.1.0.0/16". **Required for a static VPN connection.**
         """
         return pulumi.get(self, "remote_cidr")
 
@@ -248,21 +246,20 @@ class _AviatrixAwsTgwVpnConnState:
         """
         Input properties used for looking up and filtering AviatrixAwsTgwVpnConn resources.
         :param pulumi.Input[str] connection_name: Unique name of the connection.
-        :param pulumi.Input[str] connection_type: Connection type. Valid values: 'dynamic', 'static'. 'dynamic' stands for a BGP VPN connection; 'static' stands for a
-               static VPN connection. Default value: 'dynamic'.
-        :param pulumi.Input[bool] enable_global_acceleration: Enable Global Acceleration.
-        :param pulumi.Input[bool] enable_learned_cidrs_approval: Switch to enable/disable encrypted transit approval for vpn connection. Valid values: true, false.
+        :param pulumi.Input[str] connection_type: Connection type. Valid values: 'dynamic', 'static'. 'dynamic' stands for a BGP VPN connection; 'static' stands for a static VPN connection. Default value: 'dynamic'.
+        :param pulumi.Input[bool] enable_global_acceleration: Enable Global Acceleration. Type: Boolean. Default: false.
+        :param pulumi.Input[bool] enable_learned_cidrs_approval: Switch to enable/disable [encrypted transit approval](https://docs.aviatrix.com/HowTos/tgw_approval.html) for AWS TGW VPN connection. Valid values: true, false. Default value: false.
         :param pulumi.Input[str] inside_ip_cidr_tun1: Inside IP CIDR for Tunnel 1. A /30 CIDR in 169.254.0.0/16.
         :param pulumi.Input[str] inside_ip_cidr_tun2: Inside IP CIDR for Tunnel 2. A /30 CIDR in 169.254.0.0/16.
-        :param pulumi.Input[str] pre_shared_key_tun1: Pre-Shared Key for Tunnel 1. A 8-64 character string with alphanumeric, underscore(_) and dot(.). It cannot start with 0
-        :param pulumi.Input[str] pre_shared_key_tun2: Pre-Shared Key for Tunnel 2. A 8-64 character string with alphanumeric, underscore(_) and dot(.). It cannot start with 0
-        :param pulumi.Input[str] public_ip: Public IP address. Example: '40.0.0.0'.
-        :param pulumi.Input[str] remote_as_number: AWS side as a number. Integer between 1-4294967294. Example: '12'. Required for a dynamic VPN connection.
-        :param pulumi.Input[str] remote_cidr: Remote CIDRs joined as a string with ','. Required for a static VPN connection.
+        :param pulumi.Input[str] pre_shared_key_tun1: Pre-Shared Key for Tunnel 1. A 8-64 character string with alphanumeric underscore(_) and dot(.). It cannot start with 0.
+        :param pulumi.Input[str] pre_shared_key_tun2: Pre-Shared Key for Tunnel 2. A 8-64 character string with alphanumeric underscore(_) and dot(.). It cannot start with 0.
+        :param pulumi.Input[str] public_ip: Public IP address. Example: "40.0.0.0".
+        :param pulumi.Input[str] remote_as_number: AWS side as a number. Integer between 1-4294967294. Example: "12". **Required for a dynamic VPN connection.**
+        :param pulumi.Input[str] remote_cidr: Remote CIDRs separated by ",". Example: AWS: "16.0.0.0/16,16.1.0.0/16". **Required for a static VPN connection.**
         :param pulumi.Input[str] route_domain_name: The name of a route domain, to which the vpn will be attached.
         :param pulumi.Input[str] tgw_name: This parameter represents the name of an AWS TGW.
-        :param pulumi.Input[str] vpn_id: ID of the vpn connection.
-        :param pulumi.Input[Sequence[pulumi.Input['AviatrixAwsTgwVpnConnVpnTunnelDataArgs']]] vpn_tunnel_datas: VPN tunnel data.
+        :param pulumi.Input[str] vpn_id: ID of the VPN generated by creation of the connection.
+        :param pulumi.Input[Sequence[pulumi.Input['AviatrixAwsTgwVpnConnVpnTunnelDataArgs']]] vpn_tunnel_datas: AWS TGW VPN tunnel data.
         """
         if connection_name is not None:
             pulumi.set(__self__, "connection_name", connection_name)
@@ -311,8 +308,7 @@ class _AviatrixAwsTgwVpnConnState:
     @pulumi.getter(name="connectionType")
     def connection_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Connection type. Valid values: 'dynamic', 'static'. 'dynamic' stands for a BGP VPN connection; 'static' stands for a
-        static VPN connection. Default value: 'dynamic'.
+        Connection type. Valid values: 'dynamic', 'static'. 'dynamic' stands for a BGP VPN connection; 'static' stands for a static VPN connection. Default value: 'dynamic'.
         """
         return pulumi.get(self, "connection_type")
 
@@ -324,7 +320,7 @@ class _AviatrixAwsTgwVpnConnState:
     @pulumi.getter(name="enableGlobalAcceleration")
     def enable_global_acceleration(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable Global Acceleration.
+        Enable Global Acceleration. Type: Boolean. Default: false.
         """
         return pulumi.get(self, "enable_global_acceleration")
 
@@ -336,7 +332,7 @@ class _AviatrixAwsTgwVpnConnState:
     @pulumi.getter(name="enableLearnedCidrsApproval")
     def enable_learned_cidrs_approval(self) -> Optional[pulumi.Input[bool]]:
         """
-        Switch to enable/disable encrypted transit approval for vpn connection. Valid values: true, false.
+        Switch to enable/disable [encrypted transit approval](https://docs.aviatrix.com/HowTos/tgw_approval.html) for AWS TGW VPN connection. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_learned_cidrs_approval")
 
@@ -372,7 +368,7 @@ class _AviatrixAwsTgwVpnConnState:
     @pulumi.getter(name="preSharedKeyTun1")
     def pre_shared_key_tun1(self) -> Optional[pulumi.Input[str]]:
         """
-        Pre-Shared Key for Tunnel 1. A 8-64 character string with alphanumeric, underscore(_) and dot(.). It cannot start with 0
+        Pre-Shared Key for Tunnel 1. A 8-64 character string with alphanumeric underscore(_) and dot(.). It cannot start with 0.
         """
         return pulumi.get(self, "pre_shared_key_tun1")
 
@@ -384,7 +380,7 @@ class _AviatrixAwsTgwVpnConnState:
     @pulumi.getter(name="preSharedKeyTun2")
     def pre_shared_key_tun2(self) -> Optional[pulumi.Input[str]]:
         """
-        Pre-Shared Key for Tunnel 2. A 8-64 character string with alphanumeric, underscore(_) and dot(.). It cannot start with 0
+        Pre-Shared Key for Tunnel 2. A 8-64 character string with alphanumeric underscore(_) and dot(.). It cannot start with 0.
         """
         return pulumi.get(self, "pre_shared_key_tun2")
 
@@ -396,7 +392,7 @@ class _AviatrixAwsTgwVpnConnState:
     @pulumi.getter(name="publicIp")
     def public_ip(self) -> Optional[pulumi.Input[str]]:
         """
-        Public IP address. Example: '40.0.0.0'.
+        Public IP address. Example: "40.0.0.0".
         """
         return pulumi.get(self, "public_ip")
 
@@ -408,7 +404,7 @@ class _AviatrixAwsTgwVpnConnState:
     @pulumi.getter(name="remoteAsNumber")
     def remote_as_number(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS side as a number. Integer between 1-4294967294. Example: '12'. Required for a dynamic VPN connection.
+        AWS side as a number. Integer between 1-4294967294. Example: "12". **Required for a dynamic VPN connection.**
         """
         return pulumi.get(self, "remote_as_number")
 
@@ -420,7 +416,7 @@ class _AviatrixAwsTgwVpnConnState:
     @pulumi.getter(name="remoteCidr")
     def remote_cidr(self) -> Optional[pulumi.Input[str]]:
         """
-        Remote CIDRs joined as a string with ','. Required for a static VPN connection.
+        Remote CIDRs separated by ",". Example: AWS: "16.0.0.0/16,16.1.0.0/16". **Required for a static VPN connection.**
         """
         return pulumi.get(self, "remote_cidr")
 
@@ -456,7 +452,7 @@ class _AviatrixAwsTgwVpnConnState:
     @pulumi.getter(name="vpnId")
     def vpn_id(self) -> Optional[pulumi.Input[str]]:
         """
-        ID of the vpn connection.
+        ID of the VPN generated by creation of the connection.
         """
         return pulumi.get(self, "vpn_id")
 
@@ -468,7 +464,7 @@ class _AviatrixAwsTgwVpnConnState:
     @pulumi.getter(name="vpnTunnelDatas")
     def vpn_tunnel_datas(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['AviatrixAwsTgwVpnConnVpnTunnelDataArgs']]]]:
         """
-        VPN tunnel data.
+        AWS TGW VPN tunnel data.
         """
         return pulumi.get(self, "vpn_tunnel_datas")
 
@@ -497,21 +493,58 @@ class AviatrixAwsTgwVpnConn(pulumi.CustomResource):
                  tgw_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixAwsTgwVpnConn resource with the given unique name, props, and options.
+        The **aviatrix_aws_tgw_vpn_conn** resource allows the creation and management of Aviatrix AWS TGW VPN connections in their selected Security Domain.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS TGW VPN Connection (dynamic)
+        test_aws_tgw_vpn_conn = aviatrix.AviatrixAwsTgwVpnConn("testAwsTgwVpnConn",
+            connection_name="my-conn1",
+            connection_type="dynamic",
+            public_ip="40.0.0.0",
+            remote_as_number="12",
+            route_domain_name="Default_Domain",
+            tgw_name="test-tgw1")
+        ```
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS TGW VPN Connection (static)
+        test_aws_tgw_vpn_conn = aviatrix.AviatrixAwsTgwVpnConn("testAwsTgwVpnConn",
+            connection_name="my-conn1",
+            connection_type="static",
+            public_ip="40.0.0.0",
+            remote_cidr="16.0.0.0/16,16.1.0.0/16",
+            route_domain_name="Default_Domain",
+            tgw_name="test-tgw1")
+        ```
+
+        ## Import
+
+        **aws_tgw_vpn_conn** can be imported using the `tgw_name` and `vpn_id`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAwsTgwVpnConn:AviatrixAwsTgwVpnConn test tgw_name~vpn_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] connection_name: Unique name of the connection.
-        :param pulumi.Input[str] connection_type: Connection type. Valid values: 'dynamic', 'static'. 'dynamic' stands for a BGP VPN connection; 'static' stands for a
-               static VPN connection. Default value: 'dynamic'.
-        :param pulumi.Input[bool] enable_global_acceleration: Enable Global Acceleration.
-        :param pulumi.Input[bool] enable_learned_cidrs_approval: Switch to enable/disable encrypted transit approval for vpn connection. Valid values: true, false.
+        :param pulumi.Input[str] connection_type: Connection type. Valid values: 'dynamic', 'static'. 'dynamic' stands for a BGP VPN connection; 'static' stands for a static VPN connection. Default value: 'dynamic'.
+        :param pulumi.Input[bool] enable_global_acceleration: Enable Global Acceleration. Type: Boolean. Default: false.
+        :param pulumi.Input[bool] enable_learned_cidrs_approval: Switch to enable/disable [encrypted transit approval](https://docs.aviatrix.com/HowTos/tgw_approval.html) for AWS TGW VPN connection. Valid values: true, false. Default value: false.
         :param pulumi.Input[str] inside_ip_cidr_tun1: Inside IP CIDR for Tunnel 1. A /30 CIDR in 169.254.0.0/16.
         :param pulumi.Input[str] inside_ip_cidr_tun2: Inside IP CIDR for Tunnel 2. A /30 CIDR in 169.254.0.0/16.
-        :param pulumi.Input[str] pre_shared_key_tun1: Pre-Shared Key for Tunnel 1. A 8-64 character string with alphanumeric, underscore(_) and dot(.). It cannot start with 0
-        :param pulumi.Input[str] pre_shared_key_tun2: Pre-Shared Key for Tunnel 2. A 8-64 character string with alphanumeric, underscore(_) and dot(.). It cannot start with 0
-        :param pulumi.Input[str] public_ip: Public IP address. Example: '40.0.0.0'.
-        :param pulumi.Input[str] remote_as_number: AWS side as a number. Integer between 1-4294967294. Example: '12'. Required for a dynamic VPN connection.
-        :param pulumi.Input[str] remote_cidr: Remote CIDRs joined as a string with ','. Required for a static VPN connection.
+        :param pulumi.Input[str] pre_shared_key_tun1: Pre-Shared Key for Tunnel 1. A 8-64 character string with alphanumeric underscore(_) and dot(.). It cannot start with 0.
+        :param pulumi.Input[str] pre_shared_key_tun2: Pre-Shared Key for Tunnel 2. A 8-64 character string with alphanumeric underscore(_) and dot(.). It cannot start with 0.
+        :param pulumi.Input[str] public_ip: Public IP address. Example: "40.0.0.0".
+        :param pulumi.Input[str] remote_as_number: AWS side as a number. Integer between 1-4294967294. Example: "12". **Required for a dynamic VPN connection.**
+        :param pulumi.Input[str] remote_cidr: Remote CIDRs separated by ",". Example: AWS: "16.0.0.0/16,16.1.0.0/16". **Required for a static VPN connection.**
         :param pulumi.Input[str] route_domain_name: The name of a route domain, to which the vpn will be attached.
         :param pulumi.Input[str] tgw_name: This parameter represents the name of an AWS TGW.
         """
@@ -522,7 +555,45 @@ class AviatrixAwsTgwVpnConn(pulumi.CustomResource):
                  args: AviatrixAwsTgwVpnConnArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixAwsTgwVpnConn resource with the given unique name, props, and options.
+        The **aviatrix_aws_tgw_vpn_conn** resource allows the creation and management of Aviatrix AWS TGW VPN connections in their selected Security Domain.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS TGW VPN Connection (dynamic)
+        test_aws_tgw_vpn_conn = aviatrix.AviatrixAwsTgwVpnConn("testAwsTgwVpnConn",
+            connection_name="my-conn1",
+            connection_type="dynamic",
+            public_ip="40.0.0.0",
+            remote_as_number="12",
+            route_domain_name="Default_Domain",
+            tgw_name="test-tgw1")
+        ```
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS TGW VPN Connection (static)
+        test_aws_tgw_vpn_conn = aviatrix.AviatrixAwsTgwVpnConn("testAwsTgwVpnConn",
+            connection_name="my-conn1",
+            connection_type="static",
+            public_ip="40.0.0.0",
+            remote_cidr="16.0.0.0/16,16.1.0.0/16",
+            route_domain_name="Default_Domain",
+            tgw_name="test-tgw1")
+        ```
+
+        ## Import
+
+        **aws_tgw_vpn_conn** can be imported using the `tgw_name` and `vpn_id`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAwsTgwVpnConn:AviatrixAwsTgwVpnConn test tgw_name~vpn_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixAwsTgwVpnConnArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -568,8 +639,8 @@ class AviatrixAwsTgwVpnConn(pulumi.CustomResource):
             __props__.__dict__["enable_learned_cidrs_approval"] = enable_learned_cidrs_approval
             __props__.__dict__["inside_ip_cidr_tun1"] = inside_ip_cidr_tun1
             __props__.__dict__["inside_ip_cidr_tun2"] = inside_ip_cidr_tun2
-            __props__.__dict__["pre_shared_key_tun1"] = pre_shared_key_tun1
-            __props__.__dict__["pre_shared_key_tun2"] = pre_shared_key_tun2
+            __props__.__dict__["pre_shared_key_tun1"] = None if pre_shared_key_tun1 is None else pulumi.Output.secret(pre_shared_key_tun1)
+            __props__.__dict__["pre_shared_key_tun2"] = None if pre_shared_key_tun2 is None else pulumi.Output.secret(pre_shared_key_tun2)
             if public_ip is None and not opts.urn:
                 raise TypeError("Missing required property 'public_ip'")
             __props__.__dict__["public_ip"] = public_ip
@@ -583,6 +654,8 @@ class AviatrixAwsTgwVpnConn(pulumi.CustomResource):
             __props__.__dict__["tgw_name"] = tgw_name
             __props__.__dict__["vpn_id"] = None
             __props__.__dict__["vpn_tunnel_datas"] = None
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["preSharedKeyTun1", "preSharedKeyTun2"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(AviatrixAwsTgwVpnConn, __self__).__init__(
             'aviatrix:index/aviatrixAwsTgwVpnConn:AviatrixAwsTgwVpnConn',
             resource_name,
@@ -616,21 +689,20 @@ class AviatrixAwsTgwVpnConn(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] connection_name: Unique name of the connection.
-        :param pulumi.Input[str] connection_type: Connection type. Valid values: 'dynamic', 'static'. 'dynamic' stands for a BGP VPN connection; 'static' stands for a
-               static VPN connection. Default value: 'dynamic'.
-        :param pulumi.Input[bool] enable_global_acceleration: Enable Global Acceleration.
-        :param pulumi.Input[bool] enable_learned_cidrs_approval: Switch to enable/disable encrypted transit approval for vpn connection. Valid values: true, false.
+        :param pulumi.Input[str] connection_type: Connection type. Valid values: 'dynamic', 'static'. 'dynamic' stands for a BGP VPN connection; 'static' stands for a static VPN connection. Default value: 'dynamic'.
+        :param pulumi.Input[bool] enable_global_acceleration: Enable Global Acceleration. Type: Boolean. Default: false.
+        :param pulumi.Input[bool] enable_learned_cidrs_approval: Switch to enable/disable [encrypted transit approval](https://docs.aviatrix.com/HowTos/tgw_approval.html) for AWS TGW VPN connection. Valid values: true, false. Default value: false.
         :param pulumi.Input[str] inside_ip_cidr_tun1: Inside IP CIDR for Tunnel 1. A /30 CIDR in 169.254.0.0/16.
         :param pulumi.Input[str] inside_ip_cidr_tun2: Inside IP CIDR for Tunnel 2. A /30 CIDR in 169.254.0.0/16.
-        :param pulumi.Input[str] pre_shared_key_tun1: Pre-Shared Key for Tunnel 1. A 8-64 character string with alphanumeric, underscore(_) and dot(.). It cannot start with 0
-        :param pulumi.Input[str] pre_shared_key_tun2: Pre-Shared Key for Tunnel 2. A 8-64 character string with alphanumeric, underscore(_) and dot(.). It cannot start with 0
-        :param pulumi.Input[str] public_ip: Public IP address. Example: '40.0.0.0'.
-        :param pulumi.Input[str] remote_as_number: AWS side as a number. Integer between 1-4294967294. Example: '12'. Required for a dynamic VPN connection.
-        :param pulumi.Input[str] remote_cidr: Remote CIDRs joined as a string with ','. Required for a static VPN connection.
+        :param pulumi.Input[str] pre_shared_key_tun1: Pre-Shared Key for Tunnel 1. A 8-64 character string with alphanumeric underscore(_) and dot(.). It cannot start with 0.
+        :param pulumi.Input[str] pre_shared_key_tun2: Pre-Shared Key for Tunnel 2. A 8-64 character string with alphanumeric underscore(_) and dot(.). It cannot start with 0.
+        :param pulumi.Input[str] public_ip: Public IP address. Example: "40.0.0.0".
+        :param pulumi.Input[str] remote_as_number: AWS side as a number. Integer between 1-4294967294. Example: "12". **Required for a dynamic VPN connection.**
+        :param pulumi.Input[str] remote_cidr: Remote CIDRs separated by ",". Example: AWS: "16.0.0.0/16,16.1.0.0/16". **Required for a static VPN connection.**
         :param pulumi.Input[str] route_domain_name: The name of a route domain, to which the vpn will be attached.
         :param pulumi.Input[str] tgw_name: This parameter represents the name of an AWS TGW.
-        :param pulumi.Input[str] vpn_id: ID of the vpn connection.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixAwsTgwVpnConnVpnTunnelDataArgs']]]] vpn_tunnel_datas: VPN tunnel data.
+        :param pulumi.Input[str] vpn_id: ID of the VPN generated by creation of the connection.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixAwsTgwVpnConnVpnTunnelDataArgs']]]] vpn_tunnel_datas: AWS TGW VPN tunnel data.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -665,8 +737,7 @@ class AviatrixAwsTgwVpnConn(pulumi.CustomResource):
     @pulumi.getter(name="connectionType")
     def connection_type(self) -> pulumi.Output[Optional[str]]:
         """
-        Connection type. Valid values: 'dynamic', 'static'. 'dynamic' stands for a BGP VPN connection; 'static' stands for a
-        static VPN connection. Default value: 'dynamic'.
+        Connection type. Valid values: 'dynamic', 'static'. 'dynamic' stands for a BGP VPN connection; 'static' stands for a static VPN connection. Default value: 'dynamic'.
         """
         return pulumi.get(self, "connection_type")
 
@@ -674,7 +745,7 @@ class AviatrixAwsTgwVpnConn(pulumi.CustomResource):
     @pulumi.getter(name="enableGlobalAcceleration")
     def enable_global_acceleration(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enable Global Acceleration.
+        Enable Global Acceleration. Type: Boolean. Default: false.
         """
         return pulumi.get(self, "enable_global_acceleration")
 
@@ -682,7 +753,7 @@ class AviatrixAwsTgwVpnConn(pulumi.CustomResource):
     @pulumi.getter(name="enableLearnedCidrsApproval")
     def enable_learned_cidrs_approval(self) -> pulumi.Output[Optional[bool]]:
         """
-        Switch to enable/disable encrypted transit approval for vpn connection. Valid values: true, false.
+        Switch to enable/disable [encrypted transit approval](https://docs.aviatrix.com/HowTos/tgw_approval.html) for AWS TGW VPN connection. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_learned_cidrs_approval")
 
@@ -706,7 +777,7 @@ class AviatrixAwsTgwVpnConn(pulumi.CustomResource):
     @pulumi.getter(name="preSharedKeyTun1")
     def pre_shared_key_tun1(self) -> pulumi.Output[Optional[str]]:
         """
-        Pre-Shared Key for Tunnel 1. A 8-64 character string with alphanumeric, underscore(_) and dot(.). It cannot start with 0
+        Pre-Shared Key for Tunnel 1. A 8-64 character string with alphanumeric underscore(_) and dot(.). It cannot start with 0.
         """
         return pulumi.get(self, "pre_shared_key_tun1")
 
@@ -714,7 +785,7 @@ class AviatrixAwsTgwVpnConn(pulumi.CustomResource):
     @pulumi.getter(name="preSharedKeyTun2")
     def pre_shared_key_tun2(self) -> pulumi.Output[Optional[str]]:
         """
-        Pre-Shared Key for Tunnel 2. A 8-64 character string with alphanumeric, underscore(_) and dot(.). It cannot start with 0
+        Pre-Shared Key for Tunnel 2. A 8-64 character string with alphanumeric underscore(_) and dot(.). It cannot start with 0.
         """
         return pulumi.get(self, "pre_shared_key_tun2")
 
@@ -722,7 +793,7 @@ class AviatrixAwsTgwVpnConn(pulumi.CustomResource):
     @pulumi.getter(name="publicIp")
     def public_ip(self) -> pulumi.Output[str]:
         """
-        Public IP address. Example: '40.0.0.0'.
+        Public IP address. Example: "40.0.0.0".
         """
         return pulumi.get(self, "public_ip")
 
@@ -730,7 +801,7 @@ class AviatrixAwsTgwVpnConn(pulumi.CustomResource):
     @pulumi.getter(name="remoteAsNumber")
     def remote_as_number(self) -> pulumi.Output[Optional[str]]:
         """
-        AWS side as a number. Integer between 1-4294967294. Example: '12'. Required for a dynamic VPN connection.
+        AWS side as a number. Integer between 1-4294967294. Example: "12". **Required for a dynamic VPN connection.**
         """
         return pulumi.get(self, "remote_as_number")
 
@@ -738,7 +809,7 @@ class AviatrixAwsTgwVpnConn(pulumi.CustomResource):
     @pulumi.getter(name="remoteCidr")
     def remote_cidr(self) -> pulumi.Output[Optional[str]]:
         """
-        Remote CIDRs joined as a string with ','. Required for a static VPN connection.
+        Remote CIDRs separated by ",". Example: AWS: "16.0.0.0/16,16.1.0.0/16". **Required for a static VPN connection.**
         """
         return pulumi.get(self, "remote_cidr")
 
@@ -762,7 +833,7 @@ class AviatrixAwsTgwVpnConn(pulumi.CustomResource):
     @pulumi.getter(name="vpnId")
     def vpn_id(self) -> pulumi.Output[str]:
         """
-        ID of the vpn connection.
+        ID of the VPN generated by creation of the connection.
         """
         return pulumi.get(self, "vpn_id")
 
@@ -770,7 +841,7 @@ class AviatrixAwsTgwVpnConn(pulumi.CustomResource):
     @pulumi.getter(name="vpnTunnelDatas")
     def vpn_tunnel_datas(self) -> pulumi.Output[Sequence['outputs.AviatrixAwsTgwVpnConnVpnTunnelData']]:
         """
-        VPN tunnel data.
+        AWS TGW VPN tunnel data.
         """
         return pulumi.get(self, "vpn_tunnel_datas")
 

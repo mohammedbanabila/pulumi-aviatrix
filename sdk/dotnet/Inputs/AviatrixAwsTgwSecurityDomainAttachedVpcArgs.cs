@@ -12,27 +12,51 @@ namespace Pulumi.Aviatrix.Inputs
 
     public sealed class AviatrixAwsTgwSecurityDomainAttachedVpcArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Advanced option. Customized route(s) to be advertised to other VPCs that are connected to the same TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
+        /// </summary>
         [Input("customizedRouteAdvertisement")]
         public Input<string>? CustomizedRouteAdvertisement { get; set; }
 
+        /// <summary>
+        /// Advanced option. Customized Spoke VPC Routes. It allows the admin to enter non-RFC1918 routes in the VPC route table targeting the TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
+        /// </summary>
         [Input("customizedRoutes")]
         public Input<string>? CustomizedRoutes { get; set; }
 
+        /// <summary>
+        /// Advanced option. If set to true, it disables automatic route propagation of this VPC to other VPCs within the same security domain. Valid values: true, false. Default value: false.
+        /// </summary>
         [Input("disableLocalRoutePropagation")]
         public Input<bool>? DisableLocalRoutePropagation { get; set; }
 
+        /// <summary>
+        /// Advanced option. Route tables separated by ',' to participate in TGW Orchestrator, i.e., learned routes will be propagated to these route tables. Example: "rtb-212ff547,rtb-045397874c170c745".
+        /// </summary>
         [Input("routeTables")]
         public Input<string>? RouteTables { get; set; }
 
+        /// <summary>
+        /// Advanced option. VPC subnets separated by ',' to attach to the VPC. If left blank, the Aviatrix Controller automatically selects a subnet representing each AZ for the VPC attachment. Example: "subnet-214f5646,subnet-085e8c81a89d70846".
+        /// </summary>
         [Input("subnets")]
         public Input<string>? Subnets { get; set; }
 
+        /// <summary>
+        /// Cloud account name of the VPC in the Aviatrix controller.
+        /// </summary>
         [Input("vpcAccountName", required: true)]
         public Input<string> VpcAccountName { get; set; } = null!;
 
+        /// <summary>
+        /// VPC ID of the VPC to be attached to the security domain
+        /// </summary>
         [Input("vpcId", required: true)]
         public Input<string> VpcId { get; set; } = null!;
 
+        /// <summary>
+        /// Region of the VPC, needs to be consistent with AWS TGW's region.
+        /// </summary>
         [Input("vpcRegion", required: true)]
         public Input<string> VpcRegion { get; set; } = null!;
 

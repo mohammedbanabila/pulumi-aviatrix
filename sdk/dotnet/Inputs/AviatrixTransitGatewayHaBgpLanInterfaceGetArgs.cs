@@ -12,9 +12,15 @@ namespace Pulumi.Aviatrix.Inputs
 
     public sealed class AviatrixTransitGatewayHaBgpLanInterfaceGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// A VPC Network address range selected from one of the available network ranges.
+        /// </summary>
         [Input("subnet", required: true)]
         public Input<string> Subnet { get; set; } = null!;
 
+        /// <summary>
+        /// VPC-ID/VNet-Name of cloud provider.
+        /// </summary>
         [Input("vpcId", required: true)]
         public Input<string> VpcId { get; set; } = null!;
 

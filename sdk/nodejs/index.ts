@@ -5,123 +5,588 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 // Export members:
-export * from "./aviatrixAccount";
-export * from "./aviatrixAccountUser";
-export * from "./aviatrixAppDomain";
-export * from "./aviatrixArmPeer";
-export * from "./aviatrixAwsGuardDuty";
-export * from "./aviatrixAwsPeer";
-export * from "./aviatrixAwsTgw";
-export * from "./aviatrixAwsTgwConnect";
-export * from "./aviatrixAwsTgwConnectPeer";
-export * from "./aviatrixAwsTgwDirectconnect";
-export * from "./aviatrixAwsTgwIntraDomainInspection";
-export * from "./aviatrixAwsTgwNetworkDomain";
-export * from "./aviatrixAwsTgwPeering";
-export * from "./aviatrixAwsTgwPeeringDomainConn";
-export * from "./aviatrixAwsTgwSecurityDomain";
-export * from "./aviatrixAwsTgwSecurityDomainConn";
-export * from "./aviatrixAwsTgwTransitGatewayAttachment";
-export * from "./aviatrixAwsTgwVpcAttachment";
-export * from "./aviatrixAwsTgwVpnConn";
-export * from "./aviatrixAzurePeer";
-export * from "./aviatrixAzureSpokeNativePeering";
-export * from "./aviatrixAzureVngConn";
-export * from "./aviatrixCloudnRegistration";
-export * from "./aviatrixCloudnTransitGatewayAttachment";
-export * from "./aviatrixCloudwatchAgent";
-export * from "./aviatrixControllerBgpMaxAsLimitConfig";
-export * from "./aviatrixControllerCertDomainConfig";
-export * from "./aviatrixControllerConfig";
-export * from "./aviatrixControllerEmailConfig";
-export * from "./aviatrixControllerEmailExceptionNotificationConfig";
-export * from "./aviatrixControllerGatewayKeepaliveConfig";
-export * from "./aviatrixControllerPrivateModeConfig";
-export * from "./aviatrixControllerPrivateOob";
-export * from "./aviatrixControllerSecurityGroupManagementConfig";
-export * from "./aviatrixCopilotAssociation";
-export * from "./aviatrixCopilotSecurityGroupManagementConfig";
-export * from "./aviatrixDatadogAgent";
-export * from "./aviatrixDeviceInterfaceConfig";
-export * from "./aviatrixEdgeCaag";
-export * from "./aviatrixEdgeSpoke";
-export * from "./aviatrixEdgeSpokeExternalDeviceConn";
-export * from "./aviatrixEdgeSpokeTransitAttachment";
-export * from "./aviatrixFilebeatForwarder";
-export * from "./aviatrixFirenet";
-export * from "./aviatrixFirewall";
-export * from "./aviatrixFirewallInstance";
-export * from "./aviatrixFirewallInstanceAssociation";
-export * from "./aviatrixFirewallManagementAccess";
-export * from "./aviatrixFirewallPolicy";
-export * from "./aviatrixFirewallTag";
-export * from "./aviatrixFqdn";
-export * from "./aviatrixFqdnPassThrough";
-export * from "./aviatrixFqdnTagRule";
-export * from "./aviatrixGateway";
-export * from "./aviatrixGatewayCertificateConfig";
-export * from "./aviatrixGatewayDnat";
-export * from "./aviatrixGatewaySnat";
-export * from "./aviatrixGeoVpn";
-export * from "./aviatrixMicrosegPolicyList";
-export * from "./aviatrixNetflowAgent";
-export * from "./aviatrixPeriodicPing";
-export * from "./aviatrixPrivateModeLb";
-export * from "./aviatrixPrivateModeMulticloudEndpoint";
-export * from "./aviatrixProxyConfig";
-export * from "./aviatrixRbacGroup";
-export * from "./aviatrixRbacGroupAccessAccountAttachment";
-export * from "./aviatrixRbacGroupPermissionAttachment";
-export * from "./aviatrixRbacGroupUserAttachment";
-export * from "./aviatrixRemoteSyslog";
-export * from "./aviatrixSamlEndpoint";
-export * from "./aviatrixSegmentationNetworkDomain";
-export * from "./aviatrixSegmentationNetworkDomainAssociation";
-export * from "./aviatrixSegmentationNetworkDomainConnectionPolicy";
-export * from "./aviatrixSegmentationSecurityDomain";
-export * from "./aviatrixSegmentationSecurityDomainAssociation";
-export * from "./aviatrixSegmentationSecurityDomainConnectionPolicy";
-export * from "./aviatrixSite2Cloud";
-export * from "./aviatrixSite2CloudCaCertTag";
-export * from "./aviatrixSplunkLogging";
-export * from "./aviatrixSpokeGateway";
-export * from "./aviatrixSpokeGatewaySubnetGroup";
-export * from "./aviatrixSpokeTransitAttachment";
-export * from "./aviatrixSpokeVpc";
-export * from "./aviatrixSumologicForwarder";
-export * from "./aviatrixTransPeer";
-export * from "./aviatrixTransitCloudnConn";
-export * from "./aviatrixTransitExternalDeviceConn";
-export * from "./aviatrixTransitFirenetPolicy";
-export * from "./aviatrixTransitGateway";
-export * from "./aviatrixTransitGatewayPeering";
-export * from "./aviatrixTransitVpc";
-export * from "./aviatrixTunnel";
-export * from "./aviatrixVgwConn";
-export * from "./aviatrixVpc";
-export * from "./aviatrixVpnCertDownload";
-export * from "./aviatrixVpnProfile";
-export * from "./aviatrixVpnUser";
-export * from "./aviatrixVpnUserAccelerator";
-export * from "./aviatrix_spoke_external_device_conn";
-export * from "./getAviatrixAccount";
-export * from "./getAviatrixCallerIdentity";
-export * from "./getAviatrixDeviceInterfaces";
-export * from "./getAviatrixFirenet";
-export * from "./getAviatrixFirenetFirewallManager";
-export * from "./getAviatrixFirenetVendorIntegration";
-export * from "./getAviatrixFirewall";
-export * from "./getAviatrixFirewallInstanceImages";
-export * from "./getAviatrixGateway";
-export * from "./getAviatrixGatewayImage";
-export * from "./getAviatrixNetworkDomains";
-export * from "./getAviatrixSpokeGateway";
-export * from "./getAviatrixSpokeGatewayInspectionSubnets";
-export * from "./getAviatrixTransitGateway";
-export * from "./getAviatrixTransitGateways";
-export * from "./getAviatrixVpc";
-export * from "./getAviatrixVpcTracker";
-export * from "./provider";
+export { AviatrixAccountArgs, AviatrixAccountState } from "./aviatrixAccount";
+export type AviatrixAccount = import("./aviatrixAccount").AviatrixAccount;
+export const AviatrixAccount: typeof import("./aviatrixAccount").AviatrixAccount = null as any;
+utilities.lazyLoad(exports, ["AviatrixAccount"], () => require("./aviatrixAccount"));
+
+export { AviatrixAccountUserArgs, AviatrixAccountUserState } from "./aviatrixAccountUser";
+export type AviatrixAccountUser = import("./aviatrixAccountUser").AviatrixAccountUser;
+export const AviatrixAccountUser: typeof import("./aviatrixAccountUser").AviatrixAccountUser = null as any;
+utilities.lazyLoad(exports, ["AviatrixAccountUser"], () => require("./aviatrixAccountUser"));
+
+export { AviatrixAppDomainArgs, AviatrixAppDomainState } from "./aviatrixAppDomain";
+export type AviatrixAppDomain = import("./aviatrixAppDomain").AviatrixAppDomain;
+export const AviatrixAppDomain: typeof import("./aviatrixAppDomain").AviatrixAppDomain = null as any;
+utilities.lazyLoad(exports, ["AviatrixAppDomain"], () => require("./aviatrixAppDomain"));
+
+export { AviatrixArmPeerArgs, AviatrixArmPeerState } from "./aviatrixArmPeer";
+export type AviatrixArmPeer = import("./aviatrixArmPeer").AviatrixArmPeer;
+export const AviatrixArmPeer: typeof import("./aviatrixArmPeer").AviatrixArmPeer = null as any;
+utilities.lazyLoad(exports, ["AviatrixArmPeer"], () => require("./aviatrixArmPeer"));
+
+export { AviatrixAwsGuardDutyArgs, AviatrixAwsGuardDutyState } from "./aviatrixAwsGuardDuty";
+export type AviatrixAwsGuardDuty = import("./aviatrixAwsGuardDuty").AviatrixAwsGuardDuty;
+export const AviatrixAwsGuardDuty: typeof import("./aviatrixAwsGuardDuty").AviatrixAwsGuardDuty = null as any;
+utilities.lazyLoad(exports, ["AviatrixAwsGuardDuty"], () => require("./aviatrixAwsGuardDuty"));
+
+export { AviatrixAwsPeerArgs, AviatrixAwsPeerState } from "./aviatrixAwsPeer";
+export type AviatrixAwsPeer = import("./aviatrixAwsPeer").AviatrixAwsPeer;
+export const AviatrixAwsPeer: typeof import("./aviatrixAwsPeer").AviatrixAwsPeer = null as any;
+utilities.lazyLoad(exports, ["AviatrixAwsPeer"], () => require("./aviatrixAwsPeer"));
+
+export { AviatrixAwsTgwArgs, AviatrixAwsTgwState } from "./aviatrixAwsTgw";
+export type AviatrixAwsTgw = import("./aviatrixAwsTgw").AviatrixAwsTgw;
+export const AviatrixAwsTgw: typeof import("./aviatrixAwsTgw").AviatrixAwsTgw = null as any;
+utilities.lazyLoad(exports, ["AviatrixAwsTgw"], () => require("./aviatrixAwsTgw"));
+
+export { AviatrixAwsTgwConnectArgs, AviatrixAwsTgwConnectState } from "./aviatrixAwsTgwConnect";
+export type AviatrixAwsTgwConnect = import("./aviatrixAwsTgwConnect").AviatrixAwsTgwConnect;
+export const AviatrixAwsTgwConnect: typeof import("./aviatrixAwsTgwConnect").AviatrixAwsTgwConnect = null as any;
+utilities.lazyLoad(exports, ["AviatrixAwsTgwConnect"], () => require("./aviatrixAwsTgwConnect"));
+
+export { AviatrixAwsTgwConnectPeerArgs, AviatrixAwsTgwConnectPeerState } from "./aviatrixAwsTgwConnectPeer";
+export type AviatrixAwsTgwConnectPeer = import("./aviatrixAwsTgwConnectPeer").AviatrixAwsTgwConnectPeer;
+export const AviatrixAwsTgwConnectPeer: typeof import("./aviatrixAwsTgwConnectPeer").AviatrixAwsTgwConnectPeer = null as any;
+utilities.lazyLoad(exports, ["AviatrixAwsTgwConnectPeer"], () => require("./aviatrixAwsTgwConnectPeer"));
+
+export { AviatrixAwsTgwDirectconnectArgs, AviatrixAwsTgwDirectconnectState } from "./aviatrixAwsTgwDirectconnect";
+export type AviatrixAwsTgwDirectconnect = import("./aviatrixAwsTgwDirectconnect").AviatrixAwsTgwDirectconnect;
+export const AviatrixAwsTgwDirectconnect: typeof import("./aviatrixAwsTgwDirectconnect").AviatrixAwsTgwDirectconnect = null as any;
+utilities.lazyLoad(exports, ["AviatrixAwsTgwDirectconnect"], () => require("./aviatrixAwsTgwDirectconnect"));
+
+export { AviatrixAwsTgwIntraDomainInspectionArgs, AviatrixAwsTgwIntraDomainInspectionState } from "./aviatrixAwsTgwIntraDomainInspection";
+export type AviatrixAwsTgwIntraDomainInspection = import("./aviatrixAwsTgwIntraDomainInspection").AviatrixAwsTgwIntraDomainInspection;
+export const AviatrixAwsTgwIntraDomainInspection: typeof import("./aviatrixAwsTgwIntraDomainInspection").AviatrixAwsTgwIntraDomainInspection = null as any;
+utilities.lazyLoad(exports, ["AviatrixAwsTgwIntraDomainInspection"], () => require("./aviatrixAwsTgwIntraDomainInspection"));
+
+export { AviatrixAwsTgwNetworkDomainArgs, AviatrixAwsTgwNetworkDomainState } from "./aviatrixAwsTgwNetworkDomain";
+export type AviatrixAwsTgwNetworkDomain = import("./aviatrixAwsTgwNetworkDomain").AviatrixAwsTgwNetworkDomain;
+export const AviatrixAwsTgwNetworkDomain: typeof import("./aviatrixAwsTgwNetworkDomain").AviatrixAwsTgwNetworkDomain = null as any;
+utilities.lazyLoad(exports, ["AviatrixAwsTgwNetworkDomain"], () => require("./aviatrixAwsTgwNetworkDomain"));
+
+export { AviatrixAwsTgwPeeringArgs, AviatrixAwsTgwPeeringState } from "./aviatrixAwsTgwPeering";
+export type AviatrixAwsTgwPeering = import("./aviatrixAwsTgwPeering").AviatrixAwsTgwPeering;
+export const AviatrixAwsTgwPeering: typeof import("./aviatrixAwsTgwPeering").AviatrixAwsTgwPeering = null as any;
+utilities.lazyLoad(exports, ["AviatrixAwsTgwPeering"], () => require("./aviatrixAwsTgwPeering"));
+
+export { AviatrixAwsTgwPeeringDomainConnArgs, AviatrixAwsTgwPeeringDomainConnState } from "./aviatrixAwsTgwPeeringDomainConn";
+export type AviatrixAwsTgwPeeringDomainConn = import("./aviatrixAwsTgwPeeringDomainConn").AviatrixAwsTgwPeeringDomainConn;
+export const AviatrixAwsTgwPeeringDomainConn: typeof import("./aviatrixAwsTgwPeeringDomainConn").AviatrixAwsTgwPeeringDomainConn = null as any;
+utilities.lazyLoad(exports, ["AviatrixAwsTgwPeeringDomainConn"], () => require("./aviatrixAwsTgwPeeringDomainConn"));
+
+export { AviatrixAwsTgwSecurityDomainArgs, AviatrixAwsTgwSecurityDomainState } from "./aviatrixAwsTgwSecurityDomain";
+export type AviatrixAwsTgwSecurityDomain = import("./aviatrixAwsTgwSecurityDomain").AviatrixAwsTgwSecurityDomain;
+export const AviatrixAwsTgwSecurityDomain: typeof import("./aviatrixAwsTgwSecurityDomain").AviatrixAwsTgwSecurityDomain = null as any;
+utilities.lazyLoad(exports, ["AviatrixAwsTgwSecurityDomain"], () => require("./aviatrixAwsTgwSecurityDomain"));
+
+export { AviatrixAwsTgwSecurityDomainConnArgs, AviatrixAwsTgwSecurityDomainConnState } from "./aviatrixAwsTgwSecurityDomainConn";
+export type AviatrixAwsTgwSecurityDomainConn = import("./aviatrixAwsTgwSecurityDomainConn").AviatrixAwsTgwSecurityDomainConn;
+export const AviatrixAwsTgwSecurityDomainConn: typeof import("./aviatrixAwsTgwSecurityDomainConn").AviatrixAwsTgwSecurityDomainConn = null as any;
+utilities.lazyLoad(exports, ["AviatrixAwsTgwSecurityDomainConn"], () => require("./aviatrixAwsTgwSecurityDomainConn"));
+
+export { AviatrixAwsTgwTransitGatewayAttachmentArgs, AviatrixAwsTgwTransitGatewayAttachmentState } from "./aviatrixAwsTgwTransitGatewayAttachment";
+export type AviatrixAwsTgwTransitGatewayAttachment = import("./aviatrixAwsTgwTransitGatewayAttachment").AviatrixAwsTgwTransitGatewayAttachment;
+export const AviatrixAwsTgwTransitGatewayAttachment: typeof import("./aviatrixAwsTgwTransitGatewayAttachment").AviatrixAwsTgwTransitGatewayAttachment = null as any;
+utilities.lazyLoad(exports, ["AviatrixAwsTgwTransitGatewayAttachment"], () => require("./aviatrixAwsTgwTransitGatewayAttachment"));
+
+export { AviatrixAwsTgwVpcAttachmentArgs, AviatrixAwsTgwVpcAttachmentState } from "./aviatrixAwsTgwVpcAttachment";
+export type AviatrixAwsTgwVpcAttachment = import("./aviatrixAwsTgwVpcAttachment").AviatrixAwsTgwVpcAttachment;
+export const AviatrixAwsTgwVpcAttachment: typeof import("./aviatrixAwsTgwVpcAttachment").AviatrixAwsTgwVpcAttachment = null as any;
+utilities.lazyLoad(exports, ["AviatrixAwsTgwVpcAttachment"], () => require("./aviatrixAwsTgwVpcAttachment"));
+
+export { AviatrixAwsTgwVpnConnArgs, AviatrixAwsTgwVpnConnState } from "./aviatrixAwsTgwVpnConn";
+export type AviatrixAwsTgwVpnConn = import("./aviatrixAwsTgwVpnConn").AviatrixAwsTgwVpnConn;
+export const AviatrixAwsTgwVpnConn: typeof import("./aviatrixAwsTgwVpnConn").AviatrixAwsTgwVpnConn = null as any;
+utilities.lazyLoad(exports, ["AviatrixAwsTgwVpnConn"], () => require("./aviatrixAwsTgwVpnConn"));
+
+export { AviatrixAzurePeerArgs, AviatrixAzurePeerState } from "./aviatrixAzurePeer";
+export type AviatrixAzurePeer = import("./aviatrixAzurePeer").AviatrixAzurePeer;
+export const AviatrixAzurePeer: typeof import("./aviatrixAzurePeer").AviatrixAzurePeer = null as any;
+utilities.lazyLoad(exports, ["AviatrixAzurePeer"], () => require("./aviatrixAzurePeer"));
+
+export { AviatrixAzureSpokeNativePeeringArgs, AviatrixAzureSpokeNativePeeringState } from "./aviatrixAzureSpokeNativePeering";
+export type AviatrixAzureSpokeNativePeering = import("./aviatrixAzureSpokeNativePeering").AviatrixAzureSpokeNativePeering;
+export const AviatrixAzureSpokeNativePeering: typeof import("./aviatrixAzureSpokeNativePeering").AviatrixAzureSpokeNativePeering = null as any;
+utilities.lazyLoad(exports, ["AviatrixAzureSpokeNativePeering"], () => require("./aviatrixAzureSpokeNativePeering"));
+
+export { AviatrixAzureVngConnArgs, AviatrixAzureVngConnState } from "./aviatrixAzureVngConn";
+export type AviatrixAzureVngConn = import("./aviatrixAzureVngConn").AviatrixAzureVngConn;
+export const AviatrixAzureVngConn: typeof import("./aviatrixAzureVngConn").AviatrixAzureVngConn = null as any;
+utilities.lazyLoad(exports, ["AviatrixAzureVngConn"], () => require("./aviatrixAzureVngConn"));
+
+export { AviatrixCloudnRegistrationArgs, AviatrixCloudnRegistrationState } from "./aviatrixCloudnRegistration";
+export type AviatrixCloudnRegistration = import("./aviatrixCloudnRegistration").AviatrixCloudnRegistration;
+export const AviatrixCloudnRegistration: typeof import("./aviatrixCloudnRegistration").AviatrixCloudnRegistration = null as any;
+utilities.lazyLoad(exports, ["AviatrixCloudnRegistration"], () => require("./aviatrixCloudnRegistration"));
+
+export { AviatrixCloudnTransitGatewayAttachmentArgs, AviatrixCloudnTransitGatewayAttachmentState } from "./aviatrixCloudnTransitGatewayAttachment";
+export type AviatrixCloudnTransitGatewayAttachment = import("./aviatrixCloudnTransitGatewayAttachment").AviatrixCloudnTransitGatewayAttachment;
+export const AviatrixCloudnTransitGatewayAttachment: typeof import("./aviatrixCloudnTransitGatewayAttachment").AviatrixCloudnTransitGatewayAttachment = null as any;
+utilities.lazyLoad(exports, ["AviatrixCloudnTransitGatewayAttachment"], () => require("./aviatrixCloudnTransitGatewayAttachment"));
+
+export { AviatrixCloudwatchAgentArgs, AviatrixCloudwatchAgentState } from "./aviatrixCloudwatchAgent";
+export type AviatrixCloudwatchAgent = import("./aviatrixCloudwatchAgent").AviatrixCloudwatchAgent;
+export const AviatrixCloudwatchAgent: typeof import("./aviatrixCloudwatchAgent").AviatrixCloudwatchAgent = null as any;
+utilities.lazyLoad(exports, ["AviatrixCloudwatchAgent"], () => require("./aviatrixCloudwatchAgent"));
+
+export { AviatrixControllerBgpMaxAsLimitConfigArgs, AviatrixControllerBgpMaxAsLimitConfigState } from "./aviatrixControllerBgpMaxAsLimitConfig";
+export type AviatrixControllerBgpMaxAsLimitConfig = import("./aviatrixControllerBgpMaxAsLimitConfig").AviatrixControllerBgpMaxAsLimitConfig;
+export const AviatrixControllerBgpMaxAsLimitConfig: typeof import("./aviatrixControllerBgpMaxAsLimitConfig").AviatrixControllerBgpMaxAsLimitConfig = null as any;
+utilities.lazyLoad(exports, ["AviatrixControllerBgpMaxAsLimitConfig"], () => require("./aviatrixControllerBgpMaxAsLimitConfig"));
+
+export { AviatrixControllerCertDomainConfigArgs, AviatrixControllerCertDomainConfigState } from "./aviatrixControllerCertDomainConfig";
+export type AviatrixControllerCertDomainConfig = import("./aviatrixControllerCertDomainConfig").AviatrixControllerCertDomainConfig;
+export const AviatrixControllerCertDomainConfig: typeof import("./aviatrixControllerCertDomainConfig").AviatrixControllerCertDomainConfig = null as any;
+utilities.lazyLoad(exports, ["AviatrixControllerCertDomainConfig"], () => require("./aviatrixControllerCertDomainConfig"));
+
+export { AviatrixControllerConfigArgs, AviatrixControllerConfigState } from "./aviatrixControllerConfig";
+export type AviatrixControllerConfig = import("./aviatrixControllerConfig").AviatrixControllerConfig;
+export const AviatrixControllerConfig: typeof import("./aviatrixControllerConfig").AviatrixControllerConfig = null as any;
+utilities.lazyLoad(exports, ["AviatrixControllerConfig"], () => require("./aviatrixControllerConfig"));
+
+export { AviatrixControllerEmailConfigArgs, AviatrixControllerEmailConfigState } from "./aviatrixControllerEmailConfig";
+export type AviatrixControllerEmailConfig = import("./aviatrixControllerEmailConfig").AviatrixControllerEmailConfig;
+export const AviatrixControllerEmailConfig: typeof import("./aviatrixControllerEmailConfig").AviatrixControllerEmailConfig = null as any;
+utilities.lazyLoad(exports, ["AviatrixControllerEmailConfig"], () => require("./aviatrixControllerEmailConfig"));
+
+export { AviatrixControllerEmailExceptionNotificationConfigArgs, AviatrixControllerEmailExceptionNotificationConfigState } from "./aviatrixControllerEmailExceptionNotificationConfig";
+export type AviatrixControllerEmailExceptionNotificationConfig = import("./aviatrixControllerEmailExceptionNotificationConfig").AviatrixControllerEmailExceptionNotificationConfig;
+export const AviatrixControllerEmailExceptionNotificationConfig: typeof import("./aviatrixControllerEmailExceptionNotificationConfig").AviatrixControllerEmailExceptionNotificationConfig = null as any;
+utilities.lazyLoad(exports, ["AviatrixControllerEmailExceptionNotificationConfig"], () => require("./aviatrixControllerEmailExceptionNotificationConfig"));
+
+export { AviatrixControllerGatewayKeepaliveConfigArgs, AviatrixControllerGatewayKeepaliveConfigState } from "./aviatrixControllerGatewayKeepaliveConfig";
+export type AviatrixControllerGatewayKeepaliveConfig = import("./aviatrixControllerGatewayKeepaliveConfig").AviatrixControllerGatewayKeepaliveConfig;
+export const AviatrixControllerGatewayKeepaliveConfig: typeof import("./aviatrixControllerGatewayKeepaliveConfig").AviatrixControllerGatewayKeepaliveConfig = null as any;
+utilities.lazyLoad(exports, ["AviatrixControllerGatewayKeepaliveConfig"], () => require("./aviatrixControllerGatewayKeepaliveConfig"));
+
+export { AviatrixControllerPrivateModeConfigArgs, AviatrixControllerPrivateModeConfigState } from "./aviatrixControllerPrivateModeConfig";
+export type AviatrixControllerPrivateModeConfig = import("./aviatrixControllerPrivateModeConfig").AviatrixControllerPrivateModeConfig;
+export const AviatrixControllerPrivateModeConfig: typeof import("./aviatrixControllerPrivateModeConfig").AviatrixControllerPrivateModeConfig = null as any;
+utilities.lazyLoad(exports, ["AviatrixControllerPrivateModeConfig"], () => require("./aviatrixControllerPrivateModeConfig"));
+
+export { AviatrixControllerPrivateOobArgs, AviatrixControllerPrivateOobState } from "./aviatrixControllerPrivateOob";
+export type AviatrixControllerPrivateOob = import("./aviatrixControllerPrivateOob").AviatrixControllerPrivateOob;
+export const AviatrixControllerPrivateOob: typeof import("./aviatrixControllerPrivateOob").AviatrixControllerPrivateOob = null as any;
+utilities.lazyLoad(exports, ["AviatrixControllerPrivateOob"], () => require("./aviatrixControllerPrivateOob"));
+
+export { AviatrixControllerSecurityGroupManagementConfigArgs, AviatrixControllerSecurityGroupManagementConfigState } from "./aviatrixControllerSecurityGroupManagementConfig";
+export type AviatrixControllerSecurityGroupManagementConfig = import("./aviatrixControllerSecurityGroupManagementConfig").AviatrixControllerSecurityGroupManagementConfig;
+export const AviatrixControllerSecurityGroupManagementConfig: typeof import("./aviatrixControllerSecurityGroupManagementConfig").AviatrixControllerSecurityGroupManagementConfig = null as any;
+utilities.lazyLoad(exports, ["AviatrixControllerSecurityGroupManagementConfig"], () => require("./aviatrixControllerSecurityGroupManagementConfig"));
+
+export { AviatrixCopilotAssociationArgs, AviatrixCopilotAssociationState } from "./aviatrixCopilotAssociation";
+export type AviatrixCopilotAssociation = import("./aviatrixCopilotAssociation").AviatrixCopilotAssociation;
+export const AviatrixCopilotAssociation: typeof import("./aviatrixCopilotAssociation").AviatrixCopilotAssociation = null as any;
+utilities.lazyLoad(exports, ["AviatrixCopilotAssociation"], () => require("./aviatrixCopilotAssociation"));
+
+export { AviatrixCopilotSecurityGroupManagementConfigArgs, AviatrixCopilotSecurityGroupManagementConfigState } from "./aviatrixCopilotSecurityGroupManagementConfig";
+export type AviatrixCopilotSecurityGroupManagementConfig = import("./aviatrixCopilotSecurityGroupManagementConfig").AviatrixCopilotSecurityGroupManagementConfig;
+export const AviatrixCopilotSecurityGroupManagementConfig: typeof import("./aviatrixCopilotSecurityGroupManagementConfig").AviatrixCopilotSecurityGroupManagementConfig = null as any;
+utilities.lazyLoad(exports, ["AviatrixCopilotSecurityGroupManagementConfig"], () => require("./aviatrixCopilotSecurityGroupManagementConfig"));
+
+export { AviatrixDatadogAgentArgs, AviatrixDatadogAgentState } from "./aviatrixDatadogAgent";
+export type AviatrixDatadogAgent = import("./aviatrixDatadogAgent").AviatrixDatadogAgent;
+export const AviatrixDatadogAgent: typeof import("./aviatrixDatadogAgent").AviatrixDatadogAgent = null as any;
+utilities.lazyLoad(exports, ["AviatrixDatadogAgent"], () => require("./aviatrixDatadogAgent"));
+
+export { AviatrixDeviceInterfaceConfigArgs, AviatrixDeviceInterfaceConfigState } from "./aviatrixDeviceInterfaceConfig";
+export type AviatrixDeviceInterfaceConfig = import("./aviatrixDeviceInterfaceConfig").AviatrixDeviceInterfaceConfig;
+export const AviatrixDeviceInterfaceConfig: typeof import("./aviatrixDeviceInterfaceConfig").AviatrixDeviceInterfaceConfig = null as any;
+utilities.lazyLoad(exports, ["AviatrixDeviceInterfaceConfig"], () => require("./aviatrixDeviceInterfaceConfig"));
+
+export { AviatrixEdgeCaagArgs, AviatrixEdgeCaagState } from "./aviatrixEdgeCaag";
+export type AviatrixEdgeCaag = import("./aviatrixEdgeCaag").AviatrixEdgeCaag;
+export const AviatrixEdgeCaag: typeof import("./aviatrixEdgeCaag").AviatrixEdgeCaag = null as any;
+utilities.lazyLoad(exports, ["AviatrixEdgeCaag"], () => require("./aviatrixEdgeCaag"));
+
+export { AviatrixEdgeSpokeArgs, AviatrixEdgeSpokeState } from "./aviatrixEdgeSpoke";
+export type AviatrixEdgeSpoke = import("./aviatrixEdgeSpoke").AviatrixEdgeSpoke;
+export const AviatrixEdgeSpoke: typeof import("./aviatrixEdgeSpoke").AviatrixEdgeSpoke = null as any;
+utilities.lazyLoad(exports, ["AviatrixEdgeSpoke"], () => require("./aviatrixEdgeSpoke"));
+
+export { AviatrixEdgeSpokeExternalDeviceConnArgs, AviatrixEdgeSpokeExternalDeviceConnState } from "./aviatrixEdgeSpokeExternalDeviceConn";
+export type AviatrixEdgeSpokeExternalDeviceConn = import("./aviatrixEdgeSpokeExternalDeviceConn").AviatrixEdgeSpokeExternalDeviceConn;
+export const AviatrixEdgeSpokeExternalDeviceConn: typeof import("./aviatrixEdgeSpokeExternalDeviceConn").AviatrixEdgeSpokeExternalDeviceConn = null as any;
+utilities.lazyLoad(exports, ["AviatrixEdgeSpokeExternalDeviceConn"], () => require("./aviatrixEdgeSpokeExternalDeviceConn"));
+
+export { AviatrixEdgeSpokeTransitAttachmentArgs, AviatrixEdgeSpokeTransitAttachmentState } from "./aviatrixEdgeSpokeTransitAttachment";
+export type AviatrixEdgeSpokeTransitAttachment = import("./aviatrixEdgeSpokeTransitAttachment").AviatrixEdgeSpokeTransitAttachment;
+export const AviatrixEdgeSpokeTransitAttachment: typeof import("./aviatrixEdgeSpokeTransitAttachment").AviatrixEdgeSpokeTransitAttachment = null as any;
+utilities.lazyLoad(exports, ["AviatrixEdgeSpokeTransitAttachment"], () => require("./aviatrixEdgeSpokeTransitAttachment"));
+
+export { AviatrixFilebeatForwarderArgs, AviatrixFilebeatForwarderState } from "./aviatrixFilebeatForwarder";
+export type AviatrixFilebeatForwarder = import("./aviatrixFilebeatForwarder").AviatrixFilebeatForwarder;
+export const AviatrixFilebeatForwarder: typeof import("./aviatrixFilebeatForwarder").AviatrixFilebeatForwarder = null as any;
+utilities.lazyLoad(exports, ["AviatrixFilebeatForwarder"], () => require("./aviatrixFilebeatForwarder"));
+
+export { AviatrixFirenetArgs, AviatrixFirenetState } from "./aviatrixFirenet";
+export type AviatrixFirenet = import("./aviatrixFirenet").AviatrixFirenet;
+export const AviatrixFirenet: typeof import("./aviatrixFirenet").AviatrixFirenet = null as any;
+utilities.lazyLoad(exports, ["AviatrixFirenet"], () => require("./aviatrixFirenet"));
+
+export { AviatrixFirewallArgs, AviatrixFirewallState } from "./aviatrixFirewall";
+export type AviatrixFirewall = import("./aviatrixFirewall").AviatrixFirewall;
+export const AviatrixFirewall: typeof import("./aviatrixFirewall").AviatrixFirewall = null as any;
+utilities.lazyLoad(exports, ["AviatrixFirewall"], () => require("./aviatrixFirewall"));
+
+export { AviatrixFirewallInstanceArgs, AviatrixFirewallInstanceState } from "./aviatrixFirewallInstance";
+export type AviatrixFirewallInstance = import("./aviatrixFirewallInstance").AviatrixFirewallInstance;
+export const AviatrixFirewallInstance: typeof import("./aviatrixFirewallInstance").AviatrixFirewallInstance = null as any;
+utilities.lazyLoad(exports, ["AviatrixFirewallInstance"], () => require("./aviatrixFirewallInstance"));
+
+export { AviatrixFirewallInstanceAssociationArgs, AviatrixFirewallInstanceAssociationState } from "./aviatrixFirewallInstanceAssociation";
+export type AviatrixFirewallInstanceAssociation = import("./aviatrixFirewallInstanceAssociation").AviatrixFirewallInstanceAssociation;
+export const AviatrixFirewallInstanceAssociation: typeof import("./aviatrixFirewallInstanceAssociation").AviatrixFirewallInstanceAssociation = null as any;
+utilities.lazyLoad(exports, ["AviatrixFirewallInstanceAssociation"], () => require("./aviatrixFirewallInstanceAssociation"));
+
+export { AviatrixFirewallManagementAccessArgs, AviatrixFirewallManagementAccessState } from "./aviatrixFirewallManagementAccess";
+export type AviatrixFirewallManagementAccess = import("./aviatrixFirewallManagementAccess").AviatrixFirewallManagementAccess;
+export const AviatrixFirewallManagementAccess: typeof import("./aviatrixFirewallManagementAccess").AviatrixFirewallManagementAccess = null as any;
+utilities.lazyLoad(exports, ["AviatrixFirewallManagementAccess"], () => require("./aviatrixFirewallManagementAccess"));
+
+export { AviatrixFirewallPolicyArgs, AviatrixFirewallPolicyState } from "./aviatrixFirewallPolicy";
+export type AviatrixFirewallPolicy = import("./aviatrixFirewallPolicy").AviatrixFirewallPolicy;
+export const AviatrixFirewallPolicy: typeof import("./aviatrixFirewallPolicy").AviatrixFirewallPolicy = null as any;
+utilities.lazyLoad(exports, ["AviatrixFirewallPolicy"], () => require("./aviatrixFirewallPolicy"));
+
+export { AviatrixFirewallTagArgs, AviatrixFirewallTagState } from "./aviatrixFirewallTag";
+export type AviatrixFirewallTag = import("./aviatrixFirewallTag").AviatrixFirewallTag;
+export const AviatrixFirewallTag: typeof import("./aviatrixFirewallTag").AviatrixFirewallTag = null as any;
+utilities.lazyLoad(exports, ["AviatrixFirewallTag"], () => require("./aviatrixFirewallTag"));
+
+export { AviatrixFqdnArgs, AviatrixFqdnState } from "./aviatrixFqdn";
+export type AviatrixFqdn = import("./aviatrixFqdn").AviatrixFqdn;
+export const AviatrixFqdn: typeof import("./aviatrixFqdn").AviatrixFqdn = null as any;
+utilities.lazyLoad(exports, ["AviatrixFqdn"], () => require("./aviatrixFqdn"));
+
+export { AviatrixFqdnPassThroughArgs, AviatrixFqdnPassThroughState } from "./aviatrixFqdnPassThrough";
+export type AviatrixFqdnPassThrough = import("./aviatrixFqdnPassThrough").AviatrixFqdnPassThrough;
+export const AviatrixFqdnPassThrough: typeof import("./aviatrixFqdnPassThrough").AviatrixFqdnPassThrough = null as any;
+utilities.lazyLoad(exports, ["AviatrixFqdnPassThrough"], () => require("./aviatrixFqdnPassThrough"));
+
+export { AviatrixFqdnTagRuleArgs, AviatrixFqdnTagRuleState } from "./aviatrixFqdnTagRule";
+export type AviatrixFqdnTagRule = import("./aviatrixFqdnTagRule").AviatrixFqdnTagRule;
+export const AviatrixFqdnTagRule: typeof import("./aviatrixFqdnTagRule").AviatrixFqdnTagRule = null as any;
+utilities.lazyLoad(exports, ["AviatrixFqdnTagRule"], () => require("./aviatrixFqdnTagRule"));
+
+export { AviatrixGatewayArgs, AviatrixGatewayState } from "./aviatrixGateway";
+export type AviatrixGateway = import("./aviatrixGateway").AviatrixGateway;
+export const AviatrixGateway: typeof import("./aviatrixGateway").AviatrixGateway = null as any;
+utilities.lazyLoad(exports, ["AviatrixGateway"], () => require("./aviatrixGateway"));
+
+export { AviatrixGatewayCertificateConfigArgs, AviatrixGatewayCertificateConfigState } from "./aviatrixGatewayCertificateConfig";
+export type AviatrixGatewayCertificateConfig = import("./aviatrixGatewayCertificateConfig").AviatrixGatewayCertificateConfig;
+export const AviatrixGatewayCertificateConfig: typeof import("./aviatrixGatewayCertificateConfig").AviatrixGatewayCertificateConfig = null as any;
+utilities.lazyLoad(exports, ["AviatrixGatewayCertificateConfig"], () => require("./aviatrixGatewayCertificateConfig"));
+
+export { AviatrixGatewayDnatArgs, AviatrixGatewayDnatState } from "./aviatrixGatewayDnat";
+export type AviatrixGatewayDnat = import("./aviatrixGatewayDnat").AviatrixGatewayDnat;
+export const AviatrixGatewayDnat: typeof import("./aviatrixGatewayDnat").AviatrixGatewayDnat = null as any;
+utilities.lazyLoad(exports, ["AviatrixGatewayDnat"], () => require("./aviatrixGatewayDnat"));
+
+export { AviatrixGatewaySnatArgs, AviatrixGatewaySnatState } from "./aviatrixGatewaySnat";
+export type AviatrixGatewaySnat = import("./aviatrixGatewaySnat").AviatrixGatewaySnat;
+export const AviatrixGatewaySnat: typeof import("./aviatrixGatewaySnat").AviatrixGatewaySnat = null as any;
+utilities.lazyLoad(exports, ["AviatrixGatewaySnat"], () => require("./aviatrixGatewaySnat"));
+
+export { AviatrixGeoVpnArgs, AviatrixGeoVpnState } from "./aviatrixGeoVpn";
+export type AviatrixGeoVpn = import("./aviatrixGeoVpn").AviatrixGeoVpn;
+export const AviatrixGeoVpn: typeof import("./aviatrixGeoVpn").AviatrixGeoVpn = null as any;
+utilities.lazyLoad(exports, ["AviatrixGeoVpn"], () => require("./aviatrixGeoVpn"));
+
+export { AviatrixMicrosegPolicyListArgs, AviatrixMicrosegPolicyListState } from "./aviatrixMicrosegPolicyList";
+export type AviatrixMicrosegPolicyList = import("./aviatrixMicrosegPolicyList").AviatrixMicrosegPolicyList;
+export const AviatrixMicrosegPolicyList: typeof import("./aviatrixMicrosegPolicyList").AviatrixMicrosegPolicyList = null as any;
+utilities.lazyLoad(exports, ["AviatrixMicrosegPolicyList"], () => require("./aviatrixMicrosegPolicyList"));
+
+export { AviatrixNetflowAgentArgs, AviatrixNetflowAgentState } from "./aviatrixNetflowAgent";
+export type AviatrixNetflowAgent = import("./aviatrixNetflowAgent").AviatrixNetflowAgent;
+export const AviatrixNetflowAgent: typeof import("./aviatrixNetflowAgent").AviatrixNetflowAgent = null as any;
+utilities.lazyLoad(exports, ["AviatrixNetflowAgent"], () => require("./aviatrixNetflowAgent"));
+
+export { AviatrixPeriodicPingArgs, AviatrixPeriodicPingState } from "./aviatrixPeriodicPing";
+export type AviatrixPeriodicPing = import("./aviatrixPeriodicPing").AviatrixPeriodicPing;
+export const AviatrixPeriodicPing: typeof import("./aviatrixPeriodicPing").AviatrixPeriodicPing = null as any;
+utilities.lazyLoad(exports, ["AviatrixPeriodicPing"], () => require("./aviatrixPeriodicPing"));
+
+export { AviatrixPrivateModeLbArgs, AviatrixPrivateModeLbState } from "./aviatrixPrivateModeLb";
+export type AviatrixPrivateModeLb = import("./aviatrixPrivateModeLb").AviatrixPrivateModeLb;
+export const AviatrixPrivateModeLb: typeof import("./aviatrixPrivateModeLb").AviatrixPrivateModeLb = null as any;
+utilities.lazyLoad(exports, ["AviatrixPrivateModeLb"], () => require("./aviatrixPrivateModeLb"));
+
+export { AviatrixPrivateModeMulticloudEndpointArgs, AviatrixPrivateModeMulticloudEndpointState } from "./aviatrixPrivateModeMulticloudEndpoint";
+export type AviatrixPrivateModeMulticloudEndpoint = import("./aviatrixPrivateModeMulticloudEndpoint").AviatrixPrivateModeMulticloudEndpoint;
+export const AviatrixPrivateModeMulticloudEndpoint: typeof import("./aviatrixPrivateModeMulticloudEndpoint").AviatrixPrivateModeMulticloudEndpoint = null as any;
+utilities.lazyLoad(exports, ["AviatrixPrivateModeMulticloudEndpoint"], () => require("./aviatrixPrivateModeMulticloudEndpoint"));
+
+export { AviatrixProxyConfigArgs, AviatrixProxyConfigState } from "./aviatrixProxyConfig";
+export type AviatrixProxyConfig = import("./aviatrixProxyConfig").AviatrixProxyConfig;
+export const AviatrixProxyConfig: typeof import("./aviatrixProxyConfig").AviatrixProxyConfig = null as any;
+utilities.lazyLoad(exports, ["AviatrixProxyConfig"], () => require("./aviatrixProxyConfig"));
+
+export { AviatrixRbacGroupArgs, AviatrixRbacGroupState } from "./aviatrixRbacGroup";
+export type AviatrixRbacGroup = import("./aviatrixRbacGroup").AviatrixRbacGroup;
+export const AviatrixRbacGroup: typeof import("./aviatrixRbacGroup").AviatrixRbacGroup = null as any;
+utilities.lazyLoad(exports, ["AviatrixRbacGroup"], () => require("./aviatrixRbacGroup"));
+
+export { AviatrixRbacGroupAccessAccountAttachmentArgs, AviatrixRbacGroupAccessAccountAttachmentState } from "./aviatrixRbacGroupAccessAccountAttachment";
+export type AviatrixRbacGroupAccessAccountAttachment = import("./aviatrixRbacGroupAccessAccountAttachment").AviatrixRbacGroupAccessAccountAttachment;
+export const AviatrixRbacGroupAccessAccountAttachment: typeof import("./aviatrixRbacGroupAccessAccountAttachment").AviatrixRbacGroupAccessAccountAttachment = null as any;
+utilities.lazyLoad(exports, ["AviatrixRbacGroupAccessAccountAttachment"], () => require("./aviatrixRbacGroupAccessAccountAttachment"));
+
+export { AviatrixRbacGroupPermissionAttachmentArgs, AviatrixRbacGroupPermissionAttachmentState } from "./aviatrixRbacGroupPermissionAttachment";
+export type AviatrixRbacGroupPermissionAttachment = import("./aviatrixRbacGroupPermissionAttachment").AviatrixRbacGroupPermissionAttachment;
+export const AviatrixRbacGroupPermissionAttachment: typeof import("./aviatrixRbacGroupPermissionAttachment").AviatrixRbacGroupPermissionAttachment = null as any;
+utilities.lazyLoad(exports, ["AviatrixRbacGroupPermissionAttachment"], () => require("./aviatrixRbacGroupPermissionAttachment"));
+
+export { AviatrixRbacGroupUserAttachmentArgs, AviatrixRbacGroupUserAttachmentState } from "./aviatrixRbacGroupUserAttachment";
+export type AviatrixRbacGroupUserAttachment = import("./aviatrixRbacGroupUserAttachment").AviatrixRbacGroupUserAttachment;
+export const AviatrixRbacGroupUserAttachment: typeof import("./aviatrixRbacGroupUserAttachment").AviatrixRbacGroupUserAttachment = null as any;
+utilities.lazyLoad(exports, ["AviatrixRbacGroupUserAttachment"], () => require("./aviatrixRbacGroupUserAttachment"));
+
+export { AviatrixRemoteSyslogArgs, AviatrixRemoteSyslogState } from "./aviatrixRemoteSyslog";
+export type AviatrixRemoteSyslog = import("./aviatrixRemoteSyslog").AviatrixRemoteSyslog;
+export const AviatrixRemoteSyslog: typeof import("./aviatrixRemoteSyslog").AviatrixRemoteSyslog = null as any;
+utilities.lazyLoad(exports, ["AviatrixRemoteSyslog"], () => require("./aviatrixRemoteSyslog"));
+
+export { AviatrixSamlEndpointArgs, AviatrixSamlEndpointState } from "./aviatrixSamlEndpoint";
+export type AviatrixSamlEndpoint = import("./aviatrixSamlEndpoint").AviatrixSamlEndpoint;
+export const AviatrixSamlEndpoint: typeof import("./aviatrixSamlEndpoint").AviatrixSamlEndpoint = null as any;
+utilities.lazyLoad(exports, ["AviatrixSamlEndpoint"], () => require("./aviatrixSamlEndpoint"));
+
+export { AviatrixSegmentationNetworkDomainArgs, AviatrixSegmentationNetworkDomainState } from "./aviatrixSegmentationNetworkDomain";
+export type AviatrixSegmentationNetworkDomain = import("./aviatrixSegmentationNetworkDomain").AviatrixSegmentationNetworkDomain;
+export const AviatrixSegmentationNetworkDomain: typeof import("./aviatrixSegmentationNetworkDomain").AviatrixSegmentationNetworkDomain = null as any;
+utilities.lazyLoad(exports, ["AviatrixSegmentationNetworkDomain"], () => require("./aviatrixSegmentationNetworkDomain"));
+
+export { AviatrixSegmentationNetworkDomainAssociationArgs, AviatrixSegmentationNetworkDomainAssociationState } from "./aviatrixSegmentationNetworkDomainAssociation";
+export type AviatrixSegmentationNetworkDomainAssociation = import("./aviatrixSegmentationNetworkDomainAssociation").AviatrixSegmentationNetworkDomainAssociation;
+export const AviatrixSegmentationNetworkDomainAssociation: typeof import("./aviatrixSegmentationNetworkDomainAssociation").AviatrixSegmentationNetworkDomainAssociation = null as any;
+utilities.lazyLoad(exports, ["AviatrixSegmentationNetworkDomainAssociation"], () => require("./aviatrixSegmentationNetworkDomainAssociation"));
+
+export { AviatrixSegmentationNetworkDomainConnectionPolicyArgs, AviatrixSegmentationNetworkDomainConnectionPolicyState } from "./aviatrixSegmentationNetworkDomainConnectionPolicy";
+export type AviatrixSegmentationNetworkDomainConnectionPolicy = import("./aviatrixSegmentationNetworkDomainConnectionPolicy").AviatrixSegmentationNetworkDomainConnectionPolicy;
+export const AviatrixSegmentationNetworkDomainConnectionPolicy: typeof import("./aviatrixSegmentationNetworkDomainConnectionPolicy").AviatrixSegmentationNetworkDomainConnectionPolicy = null as any;
+utilities.lazyLoad(exports, ["AviatrixSegmentationNetworkDomainConnectionPolicy"], () => require("./aviatrixSegmentationNetworkDomainConnectionPolicy"));
+
+export { AviatrixSegmentationSecurityDomainArgs, AviatrixSegmentationSecurityDomainState } from "./aviatrixSegmentationSecurityDomain";
+export type AviatrixSegmentationSecurityDomain = import("./aviatrixSegmentationSecurityDomain").AviatrixSegmentationSecurityDomain;
+export const AviatrixSegmentationSecurityDomain: typeof import("./aviatrixSegmentationSecurityDomain").AviatrixSegmentationSecurityDomain = null as any;
+utilities.lazyLoad(exports, ["AviatrixSegmentationSecurityDomain"], () => require("./aviatrixSegmentationSecurityDomain"));
+
+export { AviatrixSegmentationSecurityDomainAssociationArgs, AviatrixSegmentationSecurityDomainAssociationState } from "./aviatrixSegmentationSecurityDomainAssociation";
+export type AviatrixSegmentationSecurityDomainAssociation = import("./aviatrixSegmentationSecurityDomainAssociation").AviatrixSegmentationSecurityDomainAssociation;
+export const AviatrixSegmentationSecurityDomainAssociation: typeof import("./aviatrixSegmentationSecurityDomainAssociation").AviatrixSegmentationSecurityDomainAssociation = null as any;
+utilities.lazyLoad(exports, ["AviatrixSegmentationSecurityDomainAssociation"], () => require("./aviatrixSegmentationSecurityDomainAssociation"));
+
+export { AviatrixSegmentationSecurityDomainConnectionPolicyArgs, AviatrixSegmentationSecurityDomainConnectionPolicyState } from "./aviatrixSegmentationSecurityDomainConnectionPolicy";
+export type AviatrixSegmentationSecurityDomainConnectionPolicy = import("./aviatrixSegmentationSecurityDomainConnectionPolicy").AviatrixSegmentationSecurityDomainConnectionPolicy;
+export const AviatrixSegmentationSecurityDomainConnectionPolicy: typeof import("./aviatrixSegmentationSecurityDomainConnectionPolicy").AviatrixSegmentationSecurityDomainConnectionPolicy = null as any;
+utilities.lazyLoad(exports, ["AviatrixSegmentationSecurityDomainConnectionPolicy"], () => require("./aviatrixSegmentationSecurityDomainConnectionPolicy"));
+
+export { AviatrixSite2CloudArgs, AviatrixSite2CloudState } from "./aviatrixSite2Cloud";
+export type AviatrixSite2Cloud = import("./aviatrixSite2Cloud").AviatrixSite2Cloud;
+export const AviatrixSite2Cloud: typeof import("./aviatrixSite2Cloud").AviatrixSite2Cloud = null as any;
+utilities.lazyLoad(exports, ["AviatrixSite2Cloud"], () => require("./aviatrixSite2Cloud"));
+
+export { AviatrixSite2CloudCaCertTagArgs, AviatrixSite2CloudCaCertTagState } from "./aviatrixSite2CloudCaCertTag";
+export type AviatrixSite2CloudCaCertTag = import("./aviatrixSite2CloudCaCertTag").AviatrixSite2CloudCaCertTag;
+export const AviatrixSite2CloudCaCertTag: typeof import("./aviatrixSite2CloudCaCertTag").AviatrixSite2CloudCaCertTag = null as any;
+utilities.lazyLoad(exports, ["AviatrixSite2CloudCaCertTag"], () => require("./aviatrixSite2CloudCaCertTag"));
+
+export { AviatrixSplunkLoggingArgs, AviatrixSplunkLoggingState } from "./aviatrixSplunkLogging";
+export type AviatrixSplunkLogging = import("./aviatrixSplunkLogging").AviatrixSplunkLogging;
+export const AviatrixSplunkLogging: typeof import("./aviatrixSplunkLogging").AviatrixSplunkLogging = null as any;
+utilities.lazyLoad(exports, ["AviatrixSplunkLogging"], () => require("./aviatrixSplunkLogging"));
+
+export { AviatrixSpokeGatewayArgs, AviatrixSpokeGatewayState } from "./aviatrixSpokeGateway";
+export type AviatrixSpokeGateway = import("./aviatrixSpokeGateway").AviatrixSpokeGateway;
+export const AviatrixSpokeGateway: typeof import("./aviatrixSpokeGateway").AviatrixSpokeGateway = null as any;
+utilities.lazyLoad(exports, ["AviatrixSpokeGateway"], () => require("./aviatrixSpokeGateway"));
+
+export { AviatrixSpokeGatewaySubnetGroupArgs, AviatrixSpokeGatewaySubnetGroupState } from "./aviatrixSpokeGatewaySubnetGroup";
+export type AviatrixSpokeGatewaySubnetGroup = import("./aviatrixSpokeGatewaySubnetGroup").AviatrixSpokeGatewaySubnetGroup;
+export const AviatrixSpokeGatewaySubnetGroup: typeof import("./aviatrixSpokeGatewaySubnetGroup").AviatrixSpokeGatewaySubnetGroup = null as any;
+utilities.lazyLoad(exports, ["AviatrixSpokeGatewaySubnetGroup"], () => require("./aviatrixSpokeGatewaySubnetGroup"));
+
+export { AviatrixSpokeTransitAttachmentArgs, AviatrixSpokeTransitAttachmentState } from "./aviatrixSpokeTransitAttachment";
+export type AviatrixSpokeTransitAttachment = import("./aviatrixSpokeTransitAttachment").AviatrixSpokeTransitAttachment;
+export const AviatrixSpokeTransitAttachment: typeof import("./aviatrixSpokeTransitAttachment").AviatrixSpokeTransitAttachment = null as any;
+utilities.lazyLoad(exports, ["AviatrixSpokeTransitAttachment"], () => require("./aviatrixSpokeTransitAttachment"));
+
+export { AviatrixSpokeVpcArgs, AviatrixSpokeVpcState } from "./aviatrixSpokeVpc";
+export type AviatrixSpokeVpc = import("./aviatrixSpokeVpc").AviatrixSpokeVpc;
+export const AviatrixSpokeVpc: typeof import("./aviatrixSpokeVpc").AviatrixSpokeVpc = null as any;
+utilities.lazyLoad(exports, ["AviatrixSpokeVpc"], () => require("./aviatrixSpokeVpc"));
+
+export { AviatrixSumologicForwarderArgs, AviatrixSumologicForwarderState } from "./aviatrixSumologicForwarder";
+export type AviatrixSumologicForwarder = import("./aviatrixSumologicForwarder").AviatrixSumologicForwarder;
+export const AviatrixSumologicForwarder: typeof import("./aviatrixSumologicForwarder").AviatrixSumologicForwarder = null as any;
+utilities.lazyLoad(exports, ["AviatrixSumologicForwarder"], () => require("./aviatrixSumologicForwarder"));
+
+export { AviatrixTransPeerArgs, AviatrixTransPeerState } from "./aviatrixTransPeer";
+export type AviatrixTransPeer = import("./aviatrixTransPeer").AviatrixTransPeer;
+export const AviatrixTransPeer: typeof import("./aviatrixTransPeer").AviatrixTransPeer = null as any;
+utilities.lazyLoad(exports, ["AviatrixTransPeer"], () => require("./aviatrixTransPeer"));
+
+export { AviatrixTransitCloudnConnArgs, AviatrixTransitCloudnConnState } from "./aviatrixTransitCloudnConn";
+export type AviatrixTransitCloudnConn = import("./aviatrixTransitCloudnConn").AviatrixTransitCloudnConn;
+export const AviatrixTransitCloudnConn: typeof import("./aviatrixTransitCloudnConn").AviatrixTransitCloudnConn = null as any;
+utilities.lazyLoad(exports, ["AviatrixTransitCloudnConn"], () => require("./aviatrixTransitCloudnConn"));
+
+export { AviatrixTransitExternalDeviceConnArgs, AviatrixTransitExternalDeviceConnState } from "./aviatrixTransitExternalDeviceConn";
+export type AviatrixTransitExternalDeviceConn = import("./aviatrixTransitExternalDeviceConn").AviatrixTransitExternalDeviceConn;
+export const AviatrixTransitExternalDeviceConn: typeof import("./aviatrixTransitExternalDeviceConn").AviatrixTransitExternalDeviceConn = null as any;
+utilities.lazyLoad(exports, ["AviatrixTransitExternalDeviceConn"], () => require("./aviatrixTransitExternalDeviceConn"));
+
+export { AviatrixTransitFirenetPolicyArgs, AviatrixTransitFirenetPolicyState } from "./aviatrixTransitFirenetPolicy";
+export type AviatrixTransitFirenetPolicy = import("./aviatrixTransitFirenetPolicy").AviatrixTransitFirenetPolicy;
+export const AviatrixTransitFirenetPolicy: typeof import("./aviatrixTransitFirenetPolicy").AviatrixTransitFirenetPolicy = null as any;
+utilities.lazyLoad(exports, ["AviatrixTransitFirenetPolicy"], () => require("./aviatrixTransitFirenetPolicy"));
+
+export { AviatrixTransitGatewayArgs, AviatrixTransitGatewayState } from "./aviatrixTransitGateway";
+export type AviatrixTransitGateway = import("./aviatrixTransitGateway").AviatrixTransitGateway;
+export const AviatrixTransitGateway: typeof import("./aviatrixTransitGateway").AviatrixTransitGateway = null as any;
+utilities.lazyLoad(exports, ["AviatrixTransitGateway"], () => require("./aviatrixTransitGateway"));
+
+export { AviatrixTransitGatewayPeeringArgs, AviatrixTransitGatewayPeeringState } from "./aviatrixTransitGatewayPeering";
+export type AviatrixTransitGatewayPeering = import("./aviatrixTransitGatewayPeering").AviatrixTransitGatewayPeering;
+export const AviatrixTransitGatewayPeering: typeof import("./aviatrixTransitGatewayPeering").AviatrixTransitGatewayPeering = null as any;
+utilities.lazyLoad(exports, ["AviatrixTransitGatewayPeering"], () => require("./aviatrixTransitGatewayPeering"));
+
+export { AviatrixTransitVpcArgs, AviatrixTransitVpcState } from "./aviatrixTransitVpc";
+export type AviatrixTransitVpc = import("./aviatrixTransitVpc").AviatrixTransitVpc;
+export const AviatrixTransitVpc: typeof import("./aviatrixTransitVpc").AviatrixTransitVpc = null as any;
+utilities.lazyLoad(exports, ["AviatrixTransitVpc"], () => require("./aviatrixTransitVpc"));
+
+export { AviatrixTunnelArgs, AviatrixTunnelState } from "./aviatrixTunnel";
+export type AviatrixTunnel = import("./aviatrixTunnel").AviatrixTunnel;
+export const AviatrixTunnel: typeof import("./aviatrixTunnel").AviatrixTunnel = null as any;
+utilities.lazyLoad(exports, ["AviatrixTunnel"], () => require("./aviatrixTunnel"));
+
+export { AviatrixVgwConnArgs, AviatrixVgwConnState } from "./aviatrixVgwConn";
+export type AviatrixVgwConn = import("./aviatrixVgwConn").AviatrixVgwConn;
+export const AviatrixVgwConn: typeof import("./aviatrixVgwConn").AviatrixVgwConn = null as any;
+utilities.lazyLoad(exports, ["AviatrixVgwConn"], () => require("./aviatrixVgwConn"));
+
+export { AviatrixVpcArgs, AviatrixVpcState } from "./aviatrixVpc";
+export type AviatrixVpc = import("./aviatrixVpc").AviatrixVpc;
+export const AviatrixVpc: typeof import("./aviatrixVpc").AviatrixVpc = null as any;
+utilities.lazyLoad(exports, ["AviatrixVpc"], () => require("./aviatrixVpc"));
+
+export { AviatrixVpnCertDownloadArgs, AviatrixVpnCertDownloadState } from "./aviatrixVpnCertDownload";
+export type AviatrixVpnCertDownload = import("./aviatrixVpnCertDownload").AviatrixVpnCertDownload;
+export const AviatrixVpnCertDownload: typeof import("./aviatrixVpnCertDownload").AviatrixVpnCertDownload = null as any;
+utilities.lazyLoad(exports, ["AviatrixVpnCertDownload"], () => require("./aviatrixVpnCertDownload"));
+
+export { AviatrixVpnProfileArgs, AviatrixVpnProfileState } from "./aviatrixVpnProfile";
+export type AviatrixVpnProfile = import("./aviatrixVpnProfile").AviatrixVpnProfile;
+export const AviatrixVpnProfile: typeof import("./aviatrixVpnProfile").AviatrixVpnProfile = null as any;
+utilities.lazyLoad(exports, ["AviatrixVpnProfile"], () => require("./aviatrixVpnProfile"));
+
+export { AviatrixVpnUserArgs, AviatrixVpnUserState } from "./aviatrixVpnUser";
+export type AviatrixVpnUser = import("./aviatrixVpnUser").AviatrixVpnUser;
+export const AviatrixVpnUser: typeof import("./aviatrixVpnUser").AviatrixVpnUser = null as any;
+utilities.lazyLoad(exports, ["AviatrixVpnUser"], () => require("./aviatrixVpnUser"));
+
+export { AviatrixVpnUserAcceleratorArgs, AviatrixVpnUserAcceleratorState } from "./aviatrixVpnUserAccelerator";
+export type AviatrixVpnUserAccelerator = import("./aviatrixVpnUserAccelerator").AviatrixVpnUserAccelerator;
+export const AviatrixVpnUserAccelerator: typeof import("./aviatrixVpnUserAccelerator").AviatrixVpnUserAccelerator = null as any;
+utilities.lazyLoad(exports, ["AviatrixVpnUserAccelerator"], () => require("./aviatrixVpnUserAccelerator"));
+
+export { Aviatrix_spoke_external_device_connArgs, Aviatrix_spoke_external_device_connState } from "./aviatrix_spoke_external_device_conn";
+export type Aviatrix_spoke_external_device_conn = import("./aviatrix_spoke_external_device_conn").Aviatrix_spoke_external_device_conn;
+export const Aviatrix_spoke_external_device_conn: typeof import("./aviatrix_spoke_external_device_conn").Aviatrix_spoke_external_device_conn = null as any;
+utilities.lazyLoad(exports, ["Aviatrix_spoke_external_device_conn"], () => require("./aviatrix_spoke_external_device_conn"));
+
+export { GetAviatrixAccountArgs, GetAviatrixAccountResult, GetAviatrixAccountOutputArgs } from "./getAviatrixAccount";
+export const getAviatrixAccount: typeof import("./getAviatrixAccount").getAviatrixAccount = null as any;
+export const getAviatrixAccountOutput: typeof import("./getAviatrixAccount").getAviatrixAccountOutput = null as any;
+utilities.lazyLoad(exports, ["getAviatrixAccount","getAviatrixAccountOutput"], () => require("./getAviatrixAccount"));
+
+export { GetAviatrixCallerIdentityResult } from "./getAviatrixCallerIdentity";
+export const getAviatrixCallerIdentity: typeof import("./getAviatrixCallerIdentity").getAviatrixCallerIdentity = null as any;
+utilities.lazyLoad(exports, ["getAviatrixCallerIdentity"], () => require("./getAviatrixCallerIdentity"));
+
+export { GetAviatrixDeviceInterfacesArgs, GetAviatrixDeviceInterfacesResult, GetAviatrixDeviceInterfacesOutputArgs } from "./getAviatrixDeviceInterfaces";
+export const getAviatrixDeviceInterfaces: typeof import("./getAviatrixDeviceInterfaces").getAviatrixDeviceInterfaces = null as any;
+export const getAviatrixDeviceInterfacesOutput: typeof import("./getAviatrixDeviceInterfaces").getAviatrixDeviceInterfacesOutput = null as any;
+utilities.lazyLoad(exports, ["getAviatrixDeviceInterfaces","getAviatrixDeviceInterfacesOutput"], () => require("./getAviatrixDeviceInterfaces"));
+
+export { GetAviatrixFirenetArgs, GetAviatrixFirenetResult, GetAviatrixFirenetOutputArgs } from "./getAviatrixFirenet";
+export const getAviatrixFirenet: typeof import("./getAviatrixFirenet").getAviatrixFirenet = null as any;
+export const getAviatrixFirenetOutput: typeof import("./getAviatrixFirenet").getAviatrixFirenetOutput = null as any;
+utilities.lazyLoad(exports, ["getAviatrixFirenet","getAviatrixFirenetOutput"], () => require("./getAviatrixFirenet"));
+
+export { GetAviatrixFirenetFirewallManagerArgs, GetAviatrixFirenetFirewallManagerResult, GetAviatrixFirenetFirewallManagerOutputArgs } from "./getAviatrixFirenetFirewallManager";
+export const getAviatrixFirenetFirewallManager: typeof import("./getAviatrixFirenetFirewallManager").getAviatrixFirenetFirewallManager = null as any;
+export const getAviatrixFirenetFirewallManagerOutput: typeof import("./getAviatrixFirenetFirewallManager").getAviatrixFirenetFirewallManagerOutput = null as any;
+utilities.lazyLoad(exports, ["getAviatrixFirenetFirewallManager","getAviatrixFirenetFirewallManagerOutput"], () => require("./getAviatrixFirenetFirewallManager"));
+
+export { GetAviatrixFirenetVendorIntegrationArgs, GetAviatrixFirenetVendorIntegrationResult, GetAviatrixFirenetVendorIntegrationOutputArgs } from "./getAviatrixFirenetVendorIntegration";
+export const getAviatrixFirenetVendorIntegration: typeof import("./getAviatrixFirenetVendorIntegration").getAviatrixFirenetVendorIntegration = null as any;
+export const getAviatrixFirenetVendorIntegrationOutput: typeof import("./getAviatrixFirenetVendorIntegration").getAviatrixFirenetVendorIntegrationOutput = null as any;
+utilities.lazyLoad(exports, ["getAviatrixFirenetVendorIntegration","getAviatrixFirenetVendorIntegrationOutput"], () => require("./getAviatrixFirenetVendorIntegration"));
+
+export { GetAviatrixFirewallArgs, GetAviatrixFirewallResult, GetAviatrixFirewallOutputArgs } from "./getAviatrixFirewall";
+export const getAviatrixFirewall: typeof import("./getAviatrixFirewall").getAviatrixFirewall = null as any;
+export const getAviatrixFirewallOutput: typeof import("./getAviatrixFirewall").getAviatrixFirewallOutput = null as any;
+utilities.lazyLoad(exports, ["getAviatrixFirewall","getAviatrixFirewallOutput"], () => require("./getAviatrixFirewall"));
+
+export { GetAviatrixFirewallInstanceImagesArgs, GetAviatrixFirewallInstanceImagesResult, GetAviatrixFirewallInstanceImagesOutputArgs } from "./getAviatrixFirewallInstanceImages";
+export const getAviatrixFirewallInstanceImages: typeof import("./getAviatrixFirewallInstanceImages").getAviatrixFirewallInstanceImages = null as any;
+export const getAviatrixFirewallInstanceImagesOutput: typeof import("./getAviatrixFirewallInstanceImages").getAviatrixFirewallInstanceImagesOutput = null as any;
+utilities.lazyLoad(exports, ["getAviatrixFirewallInstanceImages","getAviatrixFirewallInstanceImagesOutput"], () => require("./getAviatrixFirewallInstanceImages"));
+
+export { GetAviatrixGatewayArgs, GetAviatrixGatewayResult, GetAviatrixGatewayOutputArgs } from "./getAviatrixGateway";
+export const getAviatrixGateway: typeof import("./getAviatrixGateway").getAviatrixGateway = null as any;
+export const getAviatrixGatewayOutput: typeof import("./getAviatrixGateway").getAviatrixGatewayOutput = null as any;
+utilities.lazyLoad(exports, ["getAviatrixGateway","getAviatrixGatewayOutput"], () => require("./getAviatrixGateway"));
+
+export { GetAviatrixGatewayImageArgs, GetAviatrixGatewayImageResult, GetAviatrixGatewayImageOutputArgs } from "./getAviatrixGatewayImage";
+export const getAviatrixGatewayImage: typeof import("./getAviatrixGatewayImage").getAviatrixGatewayImage = null as any;
+export const getAviatrixGatewayImageOutput: typeof import("./getAviatrixGatewayImage").getAviatrixGatewayImageOutput = null as any;
+utilities.lazyLoad(exports, ["getAviatrixGatewayImage","getAviatrixGatewayImageOutput"], () => require("./getAviatrixGatewayImage"));
+
+export { GetAviatrixNetworkDomainsResult } from "./getAviatrixNetworkDomains";
+export const getAviatrixNetworkDomains: typeof import("./getAviatrixNetworkDomains").getAviatrixNetworkDomains = null as any;
+utilities.lazyLoad(exports, ["getAviatrixNetworkDomains"], () => require("./getAviatrixNetworkDomains"));
+
+export { GetAviatrixSpokeGatewayArgs, GetAviatrixSpokeGatewayResult, GetAviatrixSpokeGatewayOutputArgs } from "./getAviatrixSpokeGateway";
+export const getAviatrixSpokeGateway: typeof import("./getAviatrixSpokeGateway").getAviatrixSpokeGateway = null as any;
+export const getAviatrixSpokeGatewayOutput: typeof import("./getAviatrixSpokeGateway").getAviatrixSpokeGatewayOutput = null as any;
+utilities.lazyLoad(exports, ["getAviatrixSpokeGateway","getAviatrixSpokeGatewayOutput"], () => require("./getAviatrixSpokeGateway"));
+
+export { GetAviatrixSpokeGatewayInspectionSubnetsArgs, GetAviatrixSpokeGatewayInspectionSubnetsResult, GetAviatrixSpokeGatewayInspectionSubnetsOutputArgs } from "./getAviatrixSpokeGatewayInspectionSubnets";
+export const getAviatrixSpokeGatewayInspectionSubnets: typeof import("./getAviatrixSpokeGatewayInspectionSubnets").getAviatrixSpokeGatewayInspectionSubnets = null as any;
+export const getAviatrixSpokeGatewayInspectionSubnetsOutput: typeof import("./getAviatrixSpokeGatewayInspectionSubnets").getAviatrixSpokeGatewayInspectionSubnetsOutput = null as any;
+utilities.lazyLoad(exports, ["getAviatrixSpokeGatewayInspectionSubnets","getAviatrixSpokeGatewayInspectionSubnetsOutput"], () => require("./getAviatrixSpokeGatewayInspectionSubnets"));
+
+export { GetAviatrixTransitGatewayArgs, GetAviatrixTransitGatewayResult, GetAviatrixTransitGatewayOutputArgs } from "./getAviatrixTransitGateway";
+export const getAviatrixTransitGateway: typeof import("./getAviatrixTransitGateway").getAviatrixTransitGateway = null as any;
+export const getAviatrixTransitGatewayOutput: typeof import("./getAviatrixTransitGateway").getAviatrixTransitGatewayOutput = null as any;
+utilities.lazyLoad(exports, ["getAviatrixTransitGateway","getAviatrixTransitGatewayOutput"], () => require("./getAviatrixTransitGateway"));
+
+export { GetAviatrixTransitGatewaysResult } from "./getAviatrixTransitGateways";
+export const getAviatrixTransitGateways: typeof import("./getAviatrixTransitGateways").getAviatrixTransitGateways = null as any;
+utilities.lazyLoad(exports, ["getAviatrixTransitGateways"], () => require("./getAviatrixTransitGateways"));
+
+export { GetAviatrixVpcArgs, GetAviatrixVpcResult, GetAviatrixVpcOutputArgs } from "./getAviatrixVpc";
+export const getAviatrixVpc: typeof import("./getAviatrixVpc").getAviatrixVpc = null as any;
+export const getAviatrixVpcOutput: typeof import("./getAviatrixVpc").getAviatrixVpcOutput = null as any;
+utilities.lazyLoad(exports, ["getAviatrixVpc","getAviatrixVpcOutput"], () => require("./getAviatrixVpc"));
+
+export { GetAviatrixVpcTrackerArgs, GetAviatrixVpcTrackerResult, GetAviatrixVpcTrackerOutputArgs } from "./getAviatrixVpcTracker";
+export const getAviatrixVpcTracker: typeof import("./getAviatrixVpcTracker").getAviatrixVpcTracker = null as any;
+export const getAviatrixVpcTrackerOutput: typeof import("./getAviatrixVpcTracker").getAviatrixVpcTrackerOutput = null as any;
+utilities.lazyLoad(exports, ["getAviatrixVpcTracker","getAviatrixVpcTrackerOutput"], () => require("./getAviatrixVpcTracker"));
+
+export { ProviderArgs } from "./provider";
+export type Provider = import("./provider").Provider;
+export const Provider: typeof import("./provider").Provider = null as any;
+utilities.lazyLoad(exports, ["Provider"], () => require("./provider"));
+
 
 // Export sub-modules:
 import * as config from "./config";
@@ -131,107 +596,6 @@ export {
     config,
     types,
 };
-
-// Import resources to register:
-import { AviatrixAccount } from "./aviatrixAccount";
-import { AviatrixAccountUser } from "./aviatrixAccountUser";
-import { AviatrixAppDomain } from "./aviatrixAppDomain";
-import { AviatrixArmPeer } from "./aviatrixArmPeer";
-import { AviatrixAwsGuardDuty } from "./aviatrixAwsGuardDuty";
-import { AviatrixAwsPeer } from "./aviatrixAwsPeer";
-import { AviatrixAwsTgw } from "./aviatrixAwsTgw";
-import { AviatrixAwsTgwConnect } from "./aviatrixAwsTgwConnect";
-import { AviatrixAwsTgwConnectPeer } from "./aviatrixAwsTgwConnectPeer";
-import { AviatrixAwsTgwDirectconnect } from "./aviatrixAwsTgwDirectconnect";
-import { AviatrixAwsTgwIntraDomainInspection } from "./aviatrixAwsTgwIntraDomainInspection";
-import { AviatrixAwsTgwNetworkDomain } from "./aviatrixAwsTgwNetworkDomain";
-import { AviatrixAwsTgwPeering } from "./aviatrixAwsTgwPeering";
-import { AviatrixAwsTgwPeeringDomainConn } from "./aviatrixAwsTgwPeeringDomainConn";
-import { AviatrixAwsTgwSecurityDomain } from "./aviatrixAwsTgwSecurityDomain";
-import { AviatrixAwsTgwSecurityDomainConn } from "./aviatrixAwsTgwSecurityDomainConn";
-import { AviatrixAwsTgwTransitGatewayAttachment } from "./aviatrixAwsTgwTransitGatewayAttachment";
-import { AviatrixAwsTgwVpcAttachment } from "./aviatrixAwsTgwVpcAttachment";
-import { AviatrixAwsTgwVpnConn } from "./aviatrixAwsTgwVpnConn";
-import { AviatrixAzurePeer } from "./aviatrixAzurePeer";
-import { AviatrixAzureSpokeNativePeering } from "./aviatrixAzureSpokeNativePeering";
-import { AviatrixAzureVngConn } from "./aviatrixAzureVngConn";
-import { AviatrixCloudnRegistration } from "./aviatrixCloudnRegistration";
-import { AviatrixCloudnTransitGatewayAttachment } from "./aviatrixCloudnTransitGatewayAttachment";
-import { AviatrixCloudwatchAgent } from "./aviatrixCloudwatchAgent";
-import { AviatrixControllerBgpMaxAsLimitConfig } from "./aviatrixControllerBgpMaxAsLimitConfig";
-import { AviatrixControllerCertDomainConfig } from "./aviatrixControllerCertDomainConfig";
-import { AviatrixControllerConfig } from "./aviatrixControllerConfig";
-import { AviatrixControllerEmailConfig } from "./aviatrixControllerEmailConfig";
-import { AviatrixControllerEmailExceptionNotificationConfig } from "./aviatrixControllerEmailExceptionNotificationConfig";
-import { AviatrixControllerGatewayKeepaliveConfig } from "./aviatrixControllerGatewayKeepaliveConfig";
-import { AviatrixControllerPrivateModeConfig } from "./aviatrixControllerPrivateModeConfig";
-import { AviatrixControllerPrivateOob } from "./aviatrixControllerPrivateOob";
-import { AviatrixControllerSecurityGroupManagementConfig } from "./aviatrixControllerSecurityGroupManagementConfig";
-import { AviatrixCopilotAssociation } from "./aviatrixCopilotAssociation";
-import { AviatrixCopilotSecurityGroupManagementConfig } from "./aviatrixCopilotSecurityGroupManagementConfig";
-import { AviatrixDatadogAgent } from "./aviatrixDatadogAgent";
-import { AviatrixDeviceInterfaceConfig } from "./aviatrixDeviceInterfaceConfig";
-import { AviatrixEdgeCaag } from "./aviatrixEdgeCaag";
-import { AviatrixEdgeSpoke } from "./aviatrixEdgeSpoke";
-import { AviatrixEdgeSpokeExternalDeviceConn } from "./aviatrixEdgeSpokeExternalDeviceConn";
-import { AviatrixEdgeSpokeTransitAttachment } from "./aviatrixEdgeSpokeTransitAttachment";
-import { AviatrixFilebeatForwarder } from "./aviatrixFilebeatForwarder";
-import { AviatrixFirenet } from "./aviatrixFirenet";
-import { AviatrixFirewall } from "./aviatrixFirewall";
-import { AviatrixFirewallInstance } from "./aviatrixFirewallInstance";
-import { AviatrixFirewallInstanceAssociation } from "./aviatrixFirewallInstanceAssociation";
-import { AviatrixFirewallManagementAccess } from "./aviatrixFirewallManagementAccess";
-import { AviatrixFirewallPolicy } from "./aviatrixFirewallPolicy";
-import { AviatrixFirewallTag } from "./aviatrixFirewallTag";
-import { AviatrixFqdn } from "./aviatrixFqdn";
-import { AviatrixFqdnPassThrough } from "./aviatrixFqdnPassThrough";
-import { AviatrixFqdnTagRule } from "./aviatrixFqdnTagRule";
-import { AviatrixGateway } from "./aviatrixGateway";
-import { AviatrixGatewayCertificateConfig } from "./aviatrixGatewayCertificateConfig";
-import { AviatrixGatewayDnat } from "./aviatrixGatewayDnat";
-import { AviatrixGatewaySnat } from "./aviatrixGatewaySnat";
-import { AviatrixGeoVpn } from "./aviatrixGeoVpn";
-import { AviatrixMicrosegPolicyList } from "./aviatrixMicrosegPolicyList";
-import { AviatrixNetflowAgent } from "./aviatrixNetflowAgent";
-import { AviatrixPeriodicPing } from "./aviatrixPeriodicPing";
-import { AviatrixPrivateModeLb } from "./aviatrixPrivateModeLb";
-import { AviatrixPrivateModeMulticloudEndpoint } from "./aviatrixPrivateModeMulticloudEndpoint";
-import { AviatrixProxyConfig } from "./aviatrixProxyConfig";
-import { AviatrixRbacGroup } from "./aviatrixRbacGroup";
-import { AviatrixRbacGroupAccessAccountAttachment } from "./aviatrixRbacGroupAccessAccountAttachment";
-import { AviatrixRbacGroupPermissionAttachment } from "./aviatrixRbacGroupPermissionAttachment";
-import { AviatrixRbacGroupUserAttachment } from "./aviatrixRbacGroupUserAttachment";
-import { AviatrixRemoteSyslog } from "./aviatrixRemoteSyslog";
-import { AviatrixSamlEndpoint } from "./aviatrixSamlEndpoint";
-import { AviatrixSegmentationNetworkDomain } from "./aviatrixSegmentationNetworkDomain";
-import { AviatrixSegmentationNetworkDomainAssociation } from "./aviatrixSegmentationNetworkDomainAssociation";
-import { AviatrixSegmentationNetworkDomainConnectionPolicy } from "./aviatrixSegmentationNetworkDomainConnectionPolicy";
-import { AviatrixSegmentationSecurityDomain } from "./aviatrixSegmentationSecurityDomain";
-import { AviatrixSegmentationSecurityDomainAssociation } from "./aviatrixSegmentationSecurityDomainAssociation";
-import { AviatrixSegmentationSecurityDomainConnectionPolicy } from "./aviatrixSegmentationSecurityDomainConnectionPolicy";
-import { AviatrixSite2Cloud } from "./aviatrixSite2Cloud";
-import { AviatrixSite2CloudCaCertTag } from "./aviatrixSite2CloudCaCertTag";
-import { AviatrixSplunkLogging } from "./aviatrixSplunkLogging";
-import { AviatrixSpokeGateway } from "./aviatrixSpokeGateway";
-import { AviatrixSpokeGatewaySubnetGroup } from "./aviatrixSpokeGatewaySubnetGroup";
-import { AviatrixSpokeTransitAttachment } from "./aviatrixSpokeTransitAttachment";
-import { AviatrixSpokeVpc } from "./aviatrixSpokeVpc";
-import { AviatrixSumologicForwarder } from "./aviatrixSumologicForwarder";
-import { AviatrixTransPeer } from "./aviatrixTransPeer";
-import { AviatrixTransitCloudnConn } from "./aviatrixTransitCloudnConn";
-import { AviatrixTransitExternalDeviceConn } from "./aviatrixTransitExternalDeviceConn";
-import { AviatrixTransitFirenetPolicy } from "./aviatrixTransitFirenetPolicy";
-import { AviatrixTransitGateway } from "./aviatrixTransitGateway";
-import { AviatrixTransitGatewayPeering } from "./aviatrixTransitGatewayPeering";
-import { AviatrixTransitVpc } from "./aviatrixTransitVpc";
-import { AviatrixTunnel } from "./aviatrixTunnel";
-import { AviatrixVgwConn } from "./aviatrixVgwConn";
-import { AviatrixVpc } from "./aviatrixVpc";
-import { AviatrixVpnCertDownload } from "./aviatrixVpnCertDownload";
-import { AviatrixVpnProfile } from "./aviatrixVpnProfile";
-import { AviatrixVpnUser } from "./aviatrixVpnUser";
-import { AviatrixVpnUserAccelerator } from "./aviatrixVpnUserAccelerator";
-import { Aviatrix_spoke_external_device_conn } from "./aviatrix_spoke_external_device_conn";
 
 const _module = {
     version: utilities.getVersion(),
@@ -539,9 +903,6 @@ pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixVpnProfile", _m
 pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixVpnUser", _module)
 pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrixVpnUserAccelerator", _module)
 pulumi.runtime.registerResourceModule("aviatrix", "index/aviatrix_spoke_external_device_conn", _module)
-
-import { Provider } from "./provider";
-
 pulumi.runtime.registerResourcePackage("aviatrix", {
     version: utilities.getVersion(),
     constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {

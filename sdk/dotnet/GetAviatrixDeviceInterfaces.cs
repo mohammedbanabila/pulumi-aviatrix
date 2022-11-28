@@ -11,16 +11,67 @@ namespace Pulumi.Aviatrix
 {
     public static class GetAviatrixDeviceInterfaces
     {
+        /// <summary>
+        /// Use this data source to get the list of device WAN interfaces for use in other resources.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using Pulumi;
+        /// using Aviatrix = Pulumi.Aviatrix;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var test = Aviatrix.GetAviatrixDeviceInterfaces.Invoke(new()
+        ///     {
+        ///         DeviceName = "test-device",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
         public static Task<GetAviatrixDeviceInterfacesResult> InvokeAsync(GetAviatrixDeviceInterfacesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAviatrixDeviceInterfacesResult>("aviatrix:index/getAviatrixDeviceInterfaces:getAviatrixDeviceInterfaces", args ?? new GetAviatrixDeviceInterfacesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAviatrixDeviceInterfacesResult>("aviatrix:index/getAviatrixDeviceInterfaces:getAviatrixDeviceInterfaces", args ?? new GetAviatrixDeviceInterfacesArgs(), options.WithDefaults());
 
+        /// <summary>
+        /// Use this data source to get the list of device WAN interfaces for use in other resources.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using Pulumi;
+        /// using Aviatrix = Pulumi.Aviatrix;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var test = Aviatrix.GetAviatrixDeviceInterfaces.Invoke(new()
+        ///     {
+        ///         DeviceName = "test-device",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
         public static Output<GetAviatrixDeviceInterfacesResult> Invoke(GetAviatrixDeviceInterfacesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAviatrixDeviceInterfacesResult>("aviatrix:index/getAviatrixDeviceInterfaces:getAviatrixDeviceInterfaces", args ?? new GetAviatrixDeviceInterfacesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAviatrixDeviceInterfacesResult>("aviatrix:index/getAviatrixDeviceInterfaces:getAviatrixDeviceInterfaces", args ?? new GetAviatrixDeviceInterfacesInvokeArgs(), options.WithDefaults());
     }
 
 
     public sealed class GetAviatrixDeviceInterfacesArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// Device name.
+        /// </summary>
         [Input("deviceName", required: true)]
         public string DeviceName { get; set; } = null!;
 
@@ -32,6 +83,9 @@ namespace Pulumi.Aviatrix
 
     public sealed class GetAviatrixDeviceInterfacesInvokeArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// Device name.
+        /// </summary>
         [Input("deviceName", required: true)]
         public Input<string> DeviceName { get; set; } = null!;
 
@@ -50,6 +104,9 @@ namespace Pulumi.Aviatrix
         /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// List of WAN interfaces.
+        /// </summary>
         public readonly ImmutableArray<Outputs.GetAviatrixDeviceInterfacesWanInterfaceResult> WanInterfaces;
 
         [OutputConstructor]

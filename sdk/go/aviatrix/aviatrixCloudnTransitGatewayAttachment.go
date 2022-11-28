@@ -11,28 +11,72 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_cloudn_transit_gateway_attachment** resource allows the creation and management of CloudN Transit Gateway Attachments. This resource is available as of provider version R2.19+.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixCloudnTransitGatewayAttachment(ctx, "test", &aviatrix.AviatrixCloudnTransitGatewayAttachmentArgs{
+//				DeviceName:                       pulumi.Any(aviatrix_device_registration.Test_device.Name),
+//				TransitGatewayName:               pulumi.Any(aviatrix_transit_gateway.Aws_transit.Gw_name),
+//				ConnectionName:                   pulumi.String("cloudn-transit-attachment-test"),
+//				TransitGatewayBgpAsn:             pulumi.String("65000"),
+//				CloudnBgpAsn:                     pulumi.String("65046"),
+//				CloudnLanInterfaceNeighborIp:     pulumi.String("10.210.38.100"),
+//				CloudnLanInterfaceNeighborBgpAsn: pulumi.String("65219"),
+//				EnableOverPrivateNetwork:         pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **aviatrix_cloudn_transit_gateway_attachment** can be imported using the `connection_name`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixCloudnTransitGatewayAttachment:AviatrixCloudnTransitGatewayAttachment test connection_name
+//
+// ```
 type AviatrixCloudnTransitGatewayAttachment struct {
 	pulumi.CustomResourceState
 
-	// CloudN BGP AS Number.
+	// CloudN BGP AS Number. Type: String.
 	CloudnBgpAsn pulumi.StringOutput `pulumi:"cloudnBgpAsn"`
-	// CloudN LAN Interface Neighbor's BGP AS Number.
+	// CloudN LAN Interface Neighbor's AS Number. Type: String.
 	CloudnLanInterfaceNeighborBgpAsn pulumi.StringOutput `pulumi:"cloudnLanInterfaceNeighborBgpAsn"`
-	// CloudN LAN Interface Neighbor's IP.
+	// CloudN LAN Interface Neighbor's IP Address. Type: String.
 	CloudnLanInterfaceNeighborIp pulumi.StringOutput `pulumi:"cloudnLanInterfaceNeighborIp"`
-	// Connection name.
+	// Connection Name. Type: String.
 	ConnectionName pulumi.StringOutput `pulumi:"connectionName"`
-	// Device name.
+	// CloudN device name. Type: String.
 	DeviceName pulumi.StringOutput `pulumi:"deviceName"`
-	// Enable jumbo frame.
+	// Enable Jumbo Frame support for the connection. Type: Boolean. Default: false.
 	EnableJumboFrame pulumi.BoolPtrOutput `pulumi:"enableJumboFrame"`
-	// Enable over private network.
+	// Enable connection over private network. Type: Boolean. Default: true.
 	EnableOverPrivateNetwork pulumi.BoolPtrOutput `pulumi:"enableOverPrivateNetwork"`
-	// AS path prepend.
+	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires transitGatewayBgpAsn to be set. Type: List. Available as of provider version R2.21.0+.
 	PrependAsPaths pulumi.StringArrayOutput `pulumi:"prependAsPaths"`
-	// Transit Gateway BGP AS Number.
+	// Transit Gateway BGP AS Number. Type: String.
 	TransitGatewayBgpAsn pulumi.StringOutput `pulumi:"transitGatewayBgpAsn"`
-	// Transit Gateway name.
+	// Transit Gateway Name. Type: String.
 	TransitGatewayName pulumi.StringOutput `pulumi:"transitGatewayName"`
 }
 
@@ -87,48 +131,48 @@ func GetAviatrixCloudnTransitGatewayAttachment(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixCloudnTransitGatewayAttachment resources.
 type aviatrixCloudnTransitGatewayAttachmentState struct {
-	// CloudN BGP AS Number.
+	// CloudN BGP AS Number. Type: String.
 	CloudnBgpAsn *string `pulumi:"cloudnBgpAsn"`
-	// CloudN LAN Interface Neighbor's BGP AS Number.
+	// CloudN LAN Interface Neighbor's AS Number. Type: String.
 	CloudnLanInterfaceNeighborBgpAsn *string `pulumi:"cloudnLanInterfaceNeighborBgpAsn"`
-	// CloudN LAN Interface Neighbor's IP.
+	// CloudN LAN Interface Neighbor's IP Address. Type: String.
 	CloudnLanInterfaceNeighborIp *string `pulumi:"cloudnLanInterfaceNeighborIp"`
-	// Connection name.
+	// Connection Name. Type: String.
 	ConnectionName *string `pulumi:"connectionName"`
-	// Device name.
+	// CloudN device name. Type: String.
 	DeviceName *string `pulumi:"deviceName"`
-	// Enable jumbo frame.
+	// Enable Jumbo Frame support for the connection. Type: Boolean. Default: false.
 	EnableJumboFrame *bool `pulumi:"enableJumboFrame"`
-	// Enable over private network.
+	// Enable connection over private network. Type: Boolean. Default: true.
 	EnableOverPrivateNetwork *bool `pulumi:"enableOverPrivateNetwork"`
-	// AS path prepend.
+	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires transitGatewayBgpAsn to be set. Type: List. Available as of provider version R2.21.0+.
 	PrependAsPaths []string `pulumi:"prependAsPaths"`
-	// Transit Gateway BGP AS Number.
+	// Transit Gateway BGP AS Number. Type: String.
 	TransitGatewayBgpAsn *string `pulumi:"transitGatewayBgpAsn"`
-	// Transit Gateway name.
+	// Transit Gateway Name. Type: String.
 	TransitGatewayName *string `pulumi:"transitGatewayName"`
 }
 
 type AviatrixCloudnTransitGatewayAttachmentState struct {
-	// CloudN BGP AS Number.
+	// CloudN BGP AS Number. Type: String.
 	CloudnBgpAsn pulumi.StringPtrInput
-	// CloudN LAN Interface Neighbor's BGP AS Number.
+	// CloudN LAN Interface Neighbor's AS Number. Type: String.
 	CloudnLanInterfaceNeighborBgpAsn pulumi.StringPtrInput
-	// CloudN LAN Interface Neighbor's IP.
+	// CloudN LAN Interface Neighbor's IP Address. Type: String.
 	CloudnLanInterfaceNeighborIp pulumi.StringPtrInput
-	// Connection name.
+	// Connection Name. Type: String.
 	ConnectionName pulumi.StringPtrInput
-	// Device name.
+	// CloudN device name. Type: String.
 	DeviceName pulumi.StringPtrInput
-	// Enable jumbo frame.
+	// Enable Jumbo Frame support for the connection. Type: Boolean. Default: false.
 	EnableJumboFrame pulumi.BoolPtrInput
-	// Enable over private network.
+	// Enable connection over private network. Type: Boolean. Default: true.
 	EnableOverPrivateNetwork pulumi.BoolPtrInput
-	// AS path prepend.
+	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires transitGatewayBgpAsn to be set. Type: List. Available as of provider version R2.21.0+.
 	PrependAsPaths pulumi.StringArrayInput
-	// Transit Gateway BGP AS Number.
+	// Transit Gateway BGP AS Number. Type: String.
 	TransitGatewayBgpAsn pulumi.StringPtrInput
-	// Transit Gateway name.
+	// Transit Gateway Name. Type: String.
 	TransitGatewayName pulumi.StringPtrInput
 }
 
@@ -137,49 +181,49 @@ func (AviatrixCloudnTransitGatewayAttachmentState) ElementType() reflect.Type {
 }
 
 type aviatrixCloudnTransitGatewayAttachmentArgs struct {
-	// CloudN BGP AS Number.
+	// CloudN BGP AS Number. Type: String.
 	CloudnBgpAsn string `pulumi:"cloudnBgpAsn"`
-	// CloudN LAN Interface Neighbor's BGP AS Number.
+	// CloudN LAN Interface Neighbor's AS Number. Type: String.
 	CloudnLanInterfaceNeighborBgpAsn string `pulumi:"cloudnLanInterfaceNeighborBgpAsn"`
-	// CloudN LAN Interface Neighbor's IP.
+	// CloudN LAN Interface Neighbor's IP Address. Type: String.
 	CloudnLanInterfaceNeighborIp string `pulumi:"cloudnLanInterfaceNeighborIp"`
-	// Connection name.
+	// Connection Name. Type: String.
 	ConnectionName string `pulumi:"connectionName"`
-	// Device name.
+	// CloudN device name. Type: String.
 	DeviceName string `pulumi:"deviceName"`
-	// Enable jumbo frame.
+	// Enable Jumbo Frame support for the connection. Type: Boolean. Default: false.
 	EnableJumboFrame *bool `pulumi:"enableJumboFrame"`
-	// Enable over private network.
+	// Enable connection over private network. Type: Boolean. Default: true.
 	EnableOverPrivateNetwork *bool `pulumi:"enableOverPrivateNetwork"`
-	// AS path prepend.
+	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires transitGatewayBgpAsn to be set. Type: List. Available as of provider version R2.21.0+.
 	PrependAsPaths []string `pulumi:"prependAsPaths"`
-	// Transit Gateway BGP AS Number.
+	// Transit Gateway BGP AS Number. Type: String.
 	TransitGatewayBgpAsn string `pulumi:"transitGatewayBgpAsn"`
-	// Transit Gateway name.
+	// Transit Gateway Name. Type: String.
 	TransitGatewayName string `pulumi:"transitGatewayName"`
 }
 
 // The set of arguments for constructing a AviatrixCloudnTransitGatewayAttachment resource.
 type AviatrixCloudnTransitGatewayAttachmentArgs struct {
-	// CloudN BGP AS Number.
+	// CloudN BGP AS Number. Type: String.
 	CloudnBgpAsn pulumi.StringInput
-	// CloudN LAN Interface Neighbor's BGP AS Number.
+	// CloudN LAN Interface Neighbor's AS Number. Type: String.
 	CloudnLanInterfaceNeighborBgpAsn pulumi.StringInput
-	// CloudN LAN Interface Neighbor's IP.
+	// CloudN LAN Interface Neighbor's IP Address. Type: String.
 	CloudnLanInterfaceNeighborIp pulumi.StringInput
-	// Connection name.
+	// Connection Name. Type: String.
 	ConnectionName pulumi.StringInput
-	// Device name.
+	// CloudN device name. Type: String.
 	DeviceName pulumi.StringInput
-	// Enable jumbo frame.
+	// Enable Jumbo Frame support for the connection. Type: Boolean. Default: false.
 	EnableJumboFrame pulumi.BoolPtrInput
-	// Enable over private network.
+	// Enable connection over private network. Type: Boolean. Default: true.
 	EnableOverPrivateNetwork pulumi.BoolPtrInput
-	// AS path prepend.
+	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires transitGatewayBgpAsn to be set. Type: List. Available as of provider version R2.21.0+.
 	PrependAsPaths pulumi.StringArrayInput
-	// Transit Gateway BGP AS Number.
+	// Transit Gateway BGP AS Number. Type: String.
 	TransitGatewayBgpAsn pulumi.StringInput
-	// Transit Gateway name.
+	// Transit Gateway Name. Type: String.
 	TransitGatewayName pulumi.StringInput
 }
 
@@ -270,58 +314,58 @@ func (o AviatrixCloudnTransitGatewayAttachmentOutput) ToAviatrixCloudnTransitGat
 	return o
 }
 
-// CloudN BGP AS Number.
+// CloudN BGP AS Number. Type: String.
 func (o AviatrixCloudnTransitGatewayAttachmentOutput) CloudnBgpAsn() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixCloudnTransitGatewayAttachment) pulumi.StringOutput { return v.CloudnBgpAsn }).(pulumi.StringOutput)
 }
 
-// CloudN LAN Interface Neighbor's BGP AS Number.
+// CloudN LAN Interface Neighbor's AS Number. Type: String.
 func (o AviatrixCloudnTransitGatewayAttachmentOutput) CloudnLanInterfaceNeighborBgpAsn() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixCloudnTransitGatewayAttachment) pulumi.StringOutput {
 		return v.CloudnLanInterfaceNeighborBgpAsn
 	}).(pulumi.StringOutput)
 }
 
-// CloudN LAN Interface Neighbor's IP.
+// CloudN LAN Interface Neighbor's IP Address. Type: String.
 func (o AviatrixCloudnTransitGatewayAttachmentOutput) CloudnLanInterfaceNeighborIp() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixCloudnTransitGatewayAttachment) pulumi.StringOutput {
 		return v.CloudnLanInterfaceNeighborIp
 	}).(pulumi.StringOutput)
 }
 
-// Connection name.
+// Connection Name. Type: String.
 func (o AviatrixCloudnTransitGatewayAttachmentOutput) ConnectionName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixCloudnTransitGatewayAttachment) pulumi.StringOutput { return v.ConnectionName }).(pulumi.StringOutput)
 }
 
-// Device name.
+// CloudN device name. Type: String.
 func (o AviatrixCloudnTransitGatewayAttachmentOutput) DeviceName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixCloudnTransitGatewayAttachment) pulumi.StringOutput { return v.DeviceName }).(pulumi.StringOutput)
 }
 
-// Enable jumbo frame.
+// Enable Jumbo Frame support for the connection. Type: Boolean. Default: false.
 func (o AviatrixCloudnTransitGatewayAttachmentOutput) EnableJumboFrame() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixCloudnTransitGatewayAttachment) pulumi.BoolPtrOutput { return v.EnableJumboFrame }).(pulumi.BoolPtrOutput)
 }
 
-// Enable over private network.
+// Enable connection over private network. Type: Boolean. Default: true.
 func (o AviatrixCloudnTransitGatewayAttachmentOutput) EnableOverPrivateNetwork() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixCloudnTransitGatewayAttachment) pulumi.BoolPtrOutput {
 		return v.EnableOverPrivateNetwork
 	}).(pulumi.BoolPtrOutput)
 }
 
-// AS path prepend.
+// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Requires transitGatewayBgpAsn to be set. Type: List. Available as of provider version R2.21.0+.
 func (o AviatrixCloudnTransitGatewayAttachmentOutput) PrependAsPaths() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixCloudnTransitGatewayAttachment) pulumi.StringArrayOutput { return v.PrependAsPaths }).(pulumi.StringArrayOutput)
 }
 
-// Transit Gateway BGP AS Number.
+// Transit Gateway BGP AS Number. Type: String.
 func (o AviatrixCloudnTransitGatewayAttachmentOutput) TransitGatewayBgpAsn() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixCloudnTransitGatewayAttachment) pulumi.StringOutput { return v.TransitGatewayBgpAsn }).(pulumi.StringOutput)
 }
 
-// Transit Gateway name.
+// Transit Gateway Name. Type: String.
 func (o AviatrixCloudnTransitGatewayAttachmentOutput) TransitGatewayName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixCloudnTransitGatewayAttachment) pulumi.StringOutput { return v.TransitGatewayName }).(pulumi.StringOutput)
 }

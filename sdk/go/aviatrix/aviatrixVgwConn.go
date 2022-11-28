@@ -11,31 +11,77 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_vgw_conn** resource manages the connection between the Aviatrix transit gateway and AWS VGW for purposes of Transit Network.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixVgwConn(ctx, "testVgwConn", &aviatrix.AviatrixVgwConnArgs{
+//				BgpLocalAsNum: pulumi.String("65001"),
+//				BgpVgwAccount: pulumi.String("dev-account-1"),
+//				BgpVgwId:      pulumi.String("vgw-abcd1234"),
+//				BgpVgwRegion:  pulumi.String("us-east-1"),
+//				ConnName:      pulumi.String("my-connection-vgw-to-tgw"),
+//				GwName:        pulumi.String("my-transit-gw"),
+//				PrependAsPaths: pulumi.StringArray{
+//					pulumi.String("65001"),
+//					pulumi.String("65001"),
+//				},
+//				VpcId: pulumi.String("vpc-abcd1234"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **vgw_conn** can be imported using the `conn_name` and `vpc_id`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixVgwConn:AviatrixVgwConn test conn_name~vpc_id
+//
+// ```
 type AviatrixVgwConn struct {
 	pulumi.CustomResourceState
 
-	// BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+	// BGP Local ASN (Autonomous System Number). Integer between 1-4294967294. Example: "65001".
 	BgpLocalAsNum pulumi.StringOutput `pulumi:"bgpLocalAsNum"`
-	// Account of AWS's VGW that is used for this connection.
+	// Cloud Account used to create the AWS VGW that will be used for this connection. Example: "dev-account-1".
 	BgpVgwAccount pulumi.StringOutput `pulumi:"bgpVgwAccount"`
-	// Id of AWS's VGW that is used for this connection.
+	// ID of AWS VGW that will be used for this connection. Example: "vgw-abcd1234".
 	BgpVgwId pulumi.StringOutput `pulumi:"bgpVgwId"`
-	// Region of AWS's VGW that is used for this connection.
+	// Region of AWS VGW that will be used for this connection. Example: "us-east-1".
 	BgpVgwRegion pulumi.StringOutput `pulumi:"bgpVgwRegion"`
-	// The name of the VGW connection which is going to be created.
+	// The name of for Transit GW to VGW connection connection which is going to be created. Example: "my-connection-vgw-to-tgw".
 	ConnName pulumi.StringOutput `pulumi:"connName"`
-	// Enable Event Triggered HA.
+	// Enable Event Triggered HA. Default value: false. Valid values: true or false. Available as of provider version R2.19+.
 	EnableEventTriggeredHa pulumi.BoolPtrOutput `pulumi:"enableEventTriggeredHa"`
-	// Enable learned CIDR approval for the connection. Requires the transit_gateway's 'learned_cidrs_approval_mode' attribute
-	// be set to 'connection'. Valid values: true, false. Default value: false. Available as of provider version R2.18+.
+	// Enable learned CIDRs approval for the connection. Requires the transit_gateway's 'learned_cidrs_approval_mode' attribute be set to 'connection'. Valid values: true, false. Default value: false. Available as of provider version R2.18+.
 	EnableLearnedCidrsApproval pulumi.BoolPtrOutput `pulumi:"enableLearnedCidrsApproval"`
-	// Name of the Transit Gateway.
+	// Name of the Transit Gateway. Example: "my-transit-gw".
 	GwName pulumi.StringOutput `pulumi:"gwName"`
 	// Configure manual BGP advertised CIDRs for this connection. Available as of provider version R2.18+.
 	ManualBgpAdvertisedCidrs pulumi.StringArrayOutput `pulumi:"manualBgpAdvertisedCidrs"`
-	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection.
+	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Available as of provider version R2.19.2.
 	PrependAsPaths pulumi.StringArrayOutput `pulumi:"prependAsPaths"`
-	// VPC-ID where the Transit Gateway is located.
+	// VPC ID where the Transit Gateway is located. Example: AWS: "vpc-abcd1234".
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
 }
 
@@ -90,54 +136,52 @@ func GetAviatrixVgwConn(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixVgwConn resources.
 type aviatrixVgwConnState struct {
-	// BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+	// BGP Local ASN (Autonomous System Number). Integer between 1-4294967294. Example: "65001".
 	BgpLocalAsNum *string `pulumi:"bgpLocalAsNum"`
-	// Account of AWS's VGW that is used for this connection.
+	// Cloud Account used to create the AWS VGW that will be used for this connection. Example: "dev-account-1".
 	BgpVgwAccount *string `pulumi:"bgpVgwAccount"`
-	// Id of AWS's VGW that is used for this connection.
+	// ID of AWS VGW that will be used for this connection. Example: "vgw-abcd1234".
 	BgpVgwId *string `pulumi:"bgpVgwId"`
-	// Region of AWS's VGW that is used for this connection.
+	// Region of AWS VGW that will be used for this connection. Example: "us-east-1".
 	BgpVgwRegion *string `pulumi:"bgpVgwRegion"`
-	// The name of the VGW connection which is going to be created.
+	// The name of for Transit GW to VGW connection connection which is going to be created. Example: "my-connection-vgw-to-tgw".
 	ConnName *string `pulumi:"connName"`
-	// Enable Event Triggered HA.
+	// Enable Event Triggered HA. Default value: false. Valid values: true or false. Available as of provider version R2.19+.
 	EnableEventTriggeredHa *bool `pulumi:"enableEventTriggeredHa"`
-	// Enable learned CIDR approval for the connection. Requires the transit_gateway's 'learned_cidrs_approval_mode' attribute
-	// be set to 'connection'. Valid values: true, false. Default value: false. Available as of provider version R2.18+.
+	// Enable learned CIDRs approval for the connection. Requires the transit_gateway's 'learned_cidrs_approval_mode' attribute be set to 'connection'. Valid values: true, false. Default value: false. Available as of provider version R2.18+.
 	EnableLearnedCidrsApproval *bool `pulumi:"enableLearnedCidrsApproval"`
-	// Name of the Transit Gateway.
+	// Name of the Transit Gateway. Example: "my-transit-gw".
 	GwName *string `pulumi:"gwName"`
 	// Configure manual BGP advertised CIDRs for this connection. Available as of provider version R2.18+.
 	ManualBgpAdvertisedCidrs []string `pulumi:"manualBgpAdvertisedCidrs"`
-	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection.
+	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Available as of provider version R2.19.2.
 	PrependAsPaths []string `pulumi:"prependAsPaths"`
-	// VPC-ID where the Transit Gateway is located.
+	// VPC ID where the Transit Gateway is located. Example: AWS: "vpc-abcd1234".
 	VpcId *string `pulumi:"vpcId"`
 }
 
 type AviatrixVgwConnState struct {
-	// BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+	// BGP Local ASN (Autonomous System Number). Integer between 1-4294967294. Example: "65001".
 	BgpLocalAsNum pulumi.StringPtrInput
-	// Account of AWS's VGW that is used for this connection.
+	// Cloud Account used to create the AWS VGW that will be used for this connection. Example: "dev-account-1".
 	BgpVgwAccount pulumi.StringPtrInput
-	// Id of AWS's VGW that is used for this connection.
+	// ID of AWS VGW that will be used for this connection. Example: "vgw-abcd1234".
 	BgpVgwId pulumi.StringPtrInput
-	// Region of AWS's VGW that is used for this connection.
+	// Region of AWS VGW that will be used for this connection. Example: "us-east-1".
 	BgpVgwRegion pulumi.StringPtrInput
-	// The name of the VGW connection which is going to be created.
+	// The name of for Transit GW to VGW connection connection which is going to be created. Example: "my-connection-vgw-to-tgw".
 	ConnName pulumi.StringPtrInput
-	// Enable Event Triggered HA.
+	// Enable Event Triggered HA. Default value: false. Valid values: true or false. Available as of provider version R2.19+.
 	EnableEventTriggeredHa pulumi.BoolPtrInput
-	// Enable learned CIDR approval for the connection. Requires the transit_gateway's 'learned_cidrs_approval_mode' attribute
-	// be set to 'connection'. Valid values: true, false. Default value: false. Available as of provider version R2.18+.
+	// Enable learned CIDRs approval for the connection. Requires the transit_gateway's 'learned_cidrs_approval_mode' attribute be set to 'connection'. Valid values: true, false. Default value: false. Available as of provider version R2.18+.
 	EnableLearnedCidrsApproval pulumi.BoolPtrInput
-	// Name of the Transit Gateway.
+	// Name of the Transit Gateway. Example: "my-transit-gw".
 	GwName pulumi.StringPtrInput
 	// Configure manual BGP advertised CIDRs for this connection. Available as of provider version R2.18+.
 	ManualBgpAdvertisedCidrs pulumi.StringArrayInput
-	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection.
+	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Available as of provider version R2.19.2.
 	PrependAsPaths pulumi.StringArrayInput
-	// VPC-ID where the Transit Gateway is located.
+	// VPC ID where the Transit Gateway is located. Example: AWS: "vpc-abcd1234".
 	VpcId pulumi.StringPtrInput
 }
 
@@ -146,55 +190,53 @@ func (AviatrixVgwConnState) ElementType() reflect.Type {
 }
 
 type aviatrixVgwConnArgs struct {
-	// BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+	// BGP Local ASN (Autonomous System Number). Integer between 1-4294967294. Example: "65001".
 	BgpLocalAsNum string `pulumi:"bgpLocalAsNum"`
-	// Account of AWS's VGW that is used for this connection.
+	// Cloud Account used to create the AWS VGW that will be used for this connection. Example: "dev-account-1".
 	BgpVgwAccount string `pulumi:"bgpVgwAccount"`
-	// Id of AWS's VGW that is used for this connection.
+	// ID of AWS VGW that will be used for this connection. Example: "vgw-abcd1234".
 	BgpVgwId string `pulumi:"bgpVgwId"`
-	// Region of AWS's VGW that is used for this connection.
+	// Region of AWS VGW that will be used for this connection. Example: "us-east-1".
 	BgpVgwRegion string `pulumi:"bgpVgwRegion"`
-	// The name of the VGW connection which is going to be created.
+	// The name of for Transit GW to VGW connection connection which is going to be created. Example: "my-connection-vgw-to-tgw".
 	ConnName string `pulumi:"connName"`
-	// Enable Event Triggered HA.
+	// Enable Event Triggered HA. Default value: false. Valid values: true or false. Available as of provider version R2.19+.
 	EnableEventTriggeredHa *bool `pulumi:"enableEventTriggeredHa"`
-	// Enable learned CIDR approval for the connection. Requires the transit_gateway's 'learned_cidrs_approval_mode' attribute
-	// be set to 'connection'. Valid values: true, false. Default value: false. Available as of provider version R2.18+.
+	// Enable learned CIDRs approval for the connection. Requires the transit_gateway's 'learned_cidrs_approval_mode' attribute be set to 'connection'. Valid values: true, false. Default value: false. Available as of provider version R2.18+.
 	EnableLearnedCidrsApproval *bool `pulumi:"enableLearnedCidrsApproval"`
-	// Name of the Transit Gateway.
+	// Name of the Transit Gateway. Example: "my-transit-gw".
 	GwName string `pulumi:"gwName"`
 	// Configure manual BGP advertised CIDRs for this connection. Available as of provider version R2.18+.
 	ManualBgpAdvertisedCidrs []string `pulumi:"manualBgpAdvertisedCidrs"`
-	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection.
+	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Available as of provider version R2.19.2.
 	PrependAsPaths []string `pulumi:"prependAsPaths"`
-	// VPC-ID where the Transit Gateway is located.
+	// VPC ID where the Transit Gateway is located. Example: AWS: "vpc-abcd1234".
 	VpcId string `pulumi:"vpcId"`
 }
 
 // The set of arguments for constructing a AviatrixVgwConn resource.
 type AviatrixVgwConnArgs struct {
-	// BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+	// BGP Local ASN (Autonomous System Number). Integer between 1-4294967294. Example: "65001".
 	BgpLocalAsNum pulumi.StringInput
-	// Account of AWS's VGW that is used for this connection.
+	// Cloud Account used to create the AWS VGW that will be used for this connection. Example: "dev-account-1".
 	BgpVgwAccount pulumi.StringInput
-	// Id of AWS's VGW that is used for this connection.
+	// ID of AWS VGW that will be used for this connection. Example: "vgw-abcd1234".
 	BgpVgwId pulumi.StringInput
-	// Region of AWS's VGW that is used for this connection.
+	// Region of AWS VGW that will be used for this connection. Example: "us-east-1".
 	BgpVgwRegion pulumi.StringInput
-	// The name of the VGW connection which is going to be created.
+	// The name of for Transit GW to VGW connection connection which is going to be created. Example: "my-connection-vgw-to-tgw".
 	ConnName pulumi.StringInput
-	// Enable Event Triggered HA.
+	// Enable Event Triggered HA. Default value: false. Valid values: true or false. Available as of provider version R2.19+.
 	EnableEventTriggeredHa pulumi.BoolPtrInput
-	// Enable learned CIDR approval for the connection. Requires the transit_gateway's 'learned_cidrs_approval_mode' attribute
-	// be set to 'connection'. Valid values: true, false. Default value: false. Available as of provider version R2.18+.
+	// Enable learned CIDRs approval for the connection. Requires the transit_gateway's 'learned_cidrs_approval_mode' attribute be set to 'connection'. Valid values: true, false. Default value: false. Available as of provider version R2.18+.
 	EnableLearnedCidrsApproval pulumi.BoolPtrInput
-	// Name of the Transit Gateway.
+	// Name of the Transit Gateway. Example: "my-transit-gw".
 	GwName pulumi.StringInput
 	// Configure manual BGP advertised CIDRs for this connection. Available as of provider version R2.18+.
 	ManualBgpAdvertisedCidrs pulumi.StringArrayInput
-	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection.
+	// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Available as of provider version R2.19.2.
 	PrependAsPaths pulumi.StringArrayInput
-	// VPC-ID where the Transit Gateway is located.
+	// VPC ID where the Transit Gateway is located. Example: AWS: "vpc-abcd1234".
 	VpcId pulumi.StringInput
 }
 
@@ -285,43 +327,42 @@ func (o AviatrixVgwConnOutput) ToAviatrixVgwConnOutputWithContext(ctx context.Co
 	return o
 }
 
-// BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+// BGP Local ASN (Autonomous System Number). Integer between 1-4294967294. Example: "65001".
 func (o AviatrixVgwConnOutput) BgpLocalAsNum() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixVgwConn) pulumi.StringOutput { return v.BgpLocalAsNum }).(pulumi.StringOutput)
 }
 
-// Account of AWS's VGW that is used for this connection.
+// Cloud Account used to create the AWS VGW that will be used for this connection. Example: "dev-account-1".
 func (o AviatrixVgwConnOutput) BgpVgwAccount() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixVgwConn) pulumi.StringOutput { return v.BgpVgwAccount }).(pulumi.StringOutput)
 }
 
-// Id of AWS's VGW that is used for this connection.
+// ID of AWS VGW that will be used for this connection. Example: "vgw-abcd1234".
 func (o AviatrixVgwConnOutput) BgpVgwId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixVgwConn) pulumi.StringOutput { return v.BgpVgwId }).(pulumi.StringOutput)
 }
 
-// Region of AWS's VGW that is used for this connection.
+// Region of AWS VGW that will be used for this connection. Example: "us-east-1".
 func (o AviatrixVgwConnOutput) BgpVgwRegion() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixVgwConn) pulumi.StringOutput { return v.BgpVgwRegion }).(pulumi.StringOutput)
 }
 
-// The name of the VGW connection which is going to be created.
+// The name of for Transit GW to VGW connection connection which is going to be created. Example: "my-connection-vgw-to-tgw".
 func (o AviatrixVgwConnOutput) ConnName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixVgwConn) pulumi.StringOutput { return v.ConnName }).(pulumi.StringOutput)
 }
 
-// Enable Event Triggered HA.
+// Enable Event Triggered HA. Default value: false. Valid values: true or false. Available as of provider version R2.19+.
 func (o AviatrixVgwConnOutput) EnableEventTriggeredHa() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixVgwConn) pulumi.BoolPtrOutput { return v.EnableEventTriggeredHa }).(pulumi.BoolPtrOutput)
 }
 
-// Enable learned CIDR approval for the connection. Requires the transit_gateway's 'learned_cidrs_approval_mode' attribute
-// be set to 'connection'. Valid values: true, false. Default value: false. Available as of provider version R2.18+.
+// Enable learned CIDRs approval for the connection. Requires the transit_gateway's 'learned_cidrs_approval_mode' attribute be set to 'connection'. Valid values: true, false. Default value: false. Available as of provider version R2.18+.
 func (o AviatrixVgwConnOutput) EnableLearnedCidrsApproval() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixVgwConn) pulumi.BoolPtrOutput { return v.EnableLearnedCidrsApproval }).(pulumi.BoolPtrOutput)
 }
 
-// Name of the Transit Gateway.
+// Name of the Transit Gateway. Example: "my-transit-gw".
 func (o AviatrixVgwConnOutput) GwName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixVgwConn) pulumi.StringOutput { return v.GwName }).(pulumi.StringOutput)
 }
@@ -331,12 +372,12 @@ func (o AviatrixVgwConnOutput) ManualBgpAdvertisedCidrs() pulumi.StringArrayOutp
 	return o.ApplyT(func(v *AviatrixVgwConn) pulumi.StringArrayOutput { return v.ManualBgpAdvertisedCidrs }).(pulumi.StringArrayOutput)
 }
 
-// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection.
+// Connection AS Path Prepend customized by specifying AS PATH for a BGP connection. Available as of provider version R2.19.2.
 func (o AviatrixVgwConnOutput) PrependAsPaths() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixVgwConn) pulumi.StringArrayOutput { return v.PrependAsPaths }).(pulumi.StringArrayOutput)
 }
 
-// VPC-ID where the Transit Gateway is located.
+// VPC ID where the Transit Gateway is located. Example: AWS: "vpc-abcd1234".
 func (o AviatrixVgwConnOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixVgwConn) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
 }

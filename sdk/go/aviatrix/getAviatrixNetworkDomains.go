@@ -7,6 +7,9 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_network_domains** data source provides details about all Network Domains created by the Aviatrix Controller. Available as of provider version 2.23+.
+//
+// ## Example Usage
 func GetAviatrixNetworkDomains(ctx *pulumi.Context, opts ...pulumi.InvokeOption) (*GetAviatrixNetworkDomainsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetAviatrixNetworkDomainsResult
@@ -20,6 +23,7 @@ func GetAviatrixNetworkDomains(ctx *pulumi.Context, opts ...pulumi.InvokeOption)
 // A collection of values returned by getAviatrixNetworkDomains.
 type GetAviatrixNetworkDomainsResult struct {
 	// The provider-assigned unique ID for this managed resource.
-	Id             string                                   `pulumi:"id"`
+	Id string `pulumi:"id"`
+	// The list of all Network Domains
 	NetworkDomains []GetAviatrixNetworkDomainsNetworkDomain `pulumi:"networkDomains"`
 }

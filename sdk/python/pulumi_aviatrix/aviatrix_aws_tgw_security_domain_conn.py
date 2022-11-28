@@ -19,9 +19,9 @@ class AviatrixAwsTgwSecurityDomainConnArgs:
                  tgw_name: pulumi.Input[str]):
         """
         The set of arguments for constructing a AviatrixAwsTgwSecurityDomainConn resource.
-        :param pulumi.Input[str] domain_name1: Security domain name 1.
-        :param pulumi.Input[str] domain_name2: Security domain name 2.
-        :param pulumi.Input[str] tgw_name: AWS TGW name.
+        :param pulumi.Input[str] domain_name1: The name of a security domain to make a connection.
+        :param pulumi.Input[str] domain_name2: The name of another security domain to make a connection.
+        :param pulumi.Input[str] tgw_name: The AWS TGW name.
         """
         pulumi.set(__self__, "domain_name1", domain_name1)
         pulumi.set(__self__, "domain_name2", domain_name2)
@@ -31,7 +31,7 @@ class AviatrixAwsTgwSecurityDomainConnArgs:
     @pulumi.getter(name="domainName1")
     def domain_name1(self) -> pulumi.Input[str]:
         """
-        Security domain name 1.
+        The name of a security domain to make a connection.
         """
         return pulumi.get(self, "domain_name1")
 
@@ -43,7 +43,7 @@ class AviatrixAwsTgwSecurityDomainConnArgs:
     @pulumi.getter(name="domainName2")
     def domain_name2(self) -> pulumi.Input[str]:
         """
-        Security domain name 2.
+        The name of another security domain to make a connection.
         """
         return pulumi.get(self, "domain_name2")
 
@@ -55,7 +55,7 @@ class AviatrixAwsTgwSecurityDomainConnArgs:
     @pulumi.getter(name="tgwName")
     def tgw_name(self) -> pulumi.Input[str]:
         """
-        AWS TGW name.
+        The AWS TGW name.
         """
         return pulumi.get(self, "tgw_name")
 
@@ -72,9 +72,9 @@ class _AviatrixAwsTgwSecurityDomainConnState:
                  tgw_name: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixAwsTgwSecurityDomainConn resources.
-        :param pulumi.Input[str] domain_name1: Security domain name 1.
-        :param pulumi.Input[str] domain_name2: Security domain name 2.
-        :param pulumi.Input[str] tgw_name: AWS TGW name.
+        :param pulumi.Input[str] domain_name1: The name of a security domain to make a connection.
+        :param pulumi.Input[str] domain_name2: The name of another security domain to make a connection.
+        :param pulumi.Input[str] tgw_name: The AWS TGW name.
         """
         if domain_name1 is not None:
             pulumi.set(__self__, "domain_name1", domain_name1)
@@ -87,7 +87,7 @@ class _AviatrixAwsTgwSecurityDomainConnState:
     @pulumi.getter(name="domainName1")
     def domain_name1(self) -> Optional[pulumi.Input[str]]:
         """
-        Security domain name 1.
+        The name of a security domain to make a connection.
         """
         return pulumi.get(self, "domain_name1")
 
@@ -99,7 +99,7 @@ class _AviatrixAwsTgwSecurityDomainConnState:
     @pulumi.getter(name="domainName2")
     def domain_name2(self) -> Optional[pulumi.Input[str]]:
         """
-        Security domain name 2.
+        The name of another security domain to make a connection.
         """
         return pulumi.get(self, "domain_name2")
 
@@ -111,7 +111,7 @@ class _AviatrixAwsTgwSecurityDomainConnState:
     @pulumi.getter(name="tgwName")
     def tgw_name(self) -> Optional[pulumi.Input[str]]:
         """
-        AWS TGW name.
+        The AWS TGW name.
         """
         return pulumi.get(self, "tgw_name")
 
@@ -130,12 +130,36 @@ class AviatrixAwsTgwSecurityDomainConn(pulumi.CustomResource):
                  tgw_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixAwsTgwSecurityDomainConn resource with the given unique name, props, and options.
+        !> **WARNING:** Resource 'aviatrix_aws_tgw_security_domain_connection' will be deprecated in future releases. Please use resource 'aviatrix_aws_tgw_peering_domain_conn' instead.
+
+        The **aviatrix_aws_tgw_security_domain_connection** resource allows the creation and management of the connections between security domains in an AWS TGW.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Security Domain Connection
+        test = aviatrix.AviatrixAwsTgwSecurityDomainConn("test",
+            domain_name1="domain1",
+            domain_name2="domain2",
+            tgw_name="tgw")
+        ```
+
+        ## Import
+
+        **aws_tgw_security_domain_connection** can be imported using the `tgw_name`, `domain_name1` and `domain_name2`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAwsTgwSecurityDomainConn:AviatrixAwsTgwSecurityDomainConn test tgw_name~domain_name1~domain_name2
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] domain_name1: Security domain name 1.
-        :param pulumi.Input[str] domain_name2: Security domain name 2.
-        :param pulumi.Input[str] tgw_name: AWS TGW name.
+        :param pulumi.Input[str] domain_name1: The name of a security domain to make a connection.
+        :param pulumi.Input[str] domain_name2: The name of another security domain to make a connection.
+        :param pulumi.Input[str] tgw_name: The AWS TGW name.
         """
         ...
     @overload
@@ -144,7 +168,31 @@ class AviatrixAwsTgwSecurityDomainConn(pulumi.CustomResource):
                  args: AviatrixAwsTgwSecurityDomainConnArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixAwsTgwSecurityDomainConn resource with the given unique name, props, and options.
+        !> **WARNING:** Resource 'aviatrix_aws_tgw_security_domain_connection' will be deprecated in future releases. Please use resource 'aviatrix_aws_tgw_peering_domain_conn' instead.
+
+        The **aviatrix_aws_tgw_security_domain_connection** resource allows the creation and management of the connections between security domains in an AWS TGW.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Security Domain Connection
+        test = aviatrix.AviatrixAwsTgwSecurityDomainConn("test",
+            domain_name1="domain1",
+            domain_name2="domain2",
+            tgw_name="tgw")
+        ```
+
+        ## Import
+
+        **aws_tgw_security_domain_connection** can be imported using the `tgw_name`, `domain_name1` and `domain_name2`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAwsTgwSecurityDomainConn:AviatrixAwsTgwSecurityDomainConn test tgw_name~domain_name1~domain_name2
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixAwsTgwSecurityDomainConnArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -201,9 +249,9 @@ class AviatrixAwsTgwSecurityDomainConn(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] domain_name1: Security domain name 1.
-        :param pulumi.Input[str] domain_name2: Security domain name 2.
-        :param pulumi.Input[str] tgw_name: AWS TGW name.
+        :param pulumi.Input[str] domain_name1: The name of a security domain to make a connection.
+        :param pulumi.Input[str] domain_name2: The name of another security domain to make a connection.
+        :param pulumi.Input[str] tgw_name: The AWS TGW name.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -218,7 +266,7 @@ class AviatrixAwsTgwSecurityDomainConn(pulumi.CustomResource):
     @pulumi.getter(name="domainName1")
     def domain_name1(self) -> pulumi.Output[str]:
         """
-        Security domain name 1.
+        The name of a security domain to make a connection.
         """
         return pulumi.get(self, "domain_name1")
 
@@ -226,7 +274,7 @@ class AviatrixAwsTgwSecurityDomainConn(pulumi.CustomResource):
     @pulumi.getter(name="domainName2")
     def domain_name2(self) -> pulumi.Output[str]:
         """
-        Security domain name 2.
+        The name of another security domain to make a connection.
         """
         return pulumi.get(self, "domain_name2")
 
@@ -234,7 +282,7 @@ class AviatrixAwsTgwSecurityDomainConn(pulumi.CustomResource):
     @pulumi.getter(name="tgwName")
     def tgw_name(self) -> pulumi.Output[str]:
         """
-        AWS TGW name.
+        The AWS TGW name.
         """
         return pulumi.get(self, "tgw_name")
 

@@ -26,12 +26,12 @@ class AviatrixAwsPeerArgs:
         The set of arguments for constructing a AviatrixAwsPeer resource.
         :param pulumi.Input[str] account_name1: This parameter represents the name of an AWS Cloud-Account in Aviatrix controller.
         :param pulumi.Input[str] account_name2: This parameter represents the name of an AWS Cloud-Account in Aviatrix controller.
-        :param pulumi.Input[str] vpc_id1: VPC-ID of AWS cloud.
-        :param pulumi.Input[str] vpc_id2: VPC-ID of AWS cloud.
-        :param pulumi.Input[str] vpc_reg1: Region of AWS cloud.
-        :param pulumi.Input[str] vpc_reg2: Region of AWS cloud.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] rtb_list1s: List of Route table ID.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] rtb_list2s: List of Route table ID.
+        :param pulumi.Input[str] vpc_id1: VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
+        :param pulumi.Input[str] vpc_id2: VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
+        :param pulumi.Input[str] vpc_reg1: Region of AWS cloud. Example: AWS: "us-east-1".
+        :param pulumi.Input[str] vpc_reg2: Region of AWS cloud. Example: AWS: "us-east-1".
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] rtb_list1s: List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] rtb_list2s: List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
         """
         pulumi.set(__self__, "account_name1", account_name1)
         pulumi.set(__self__, "account_name2", account_name2)
@@ -72,7 +72,7 @@ class AviatrixAwsPeerArgs:
     @pulumi.getter(name="vpcId1")
     def vpc_id1(self) -> pulumi.Input[str]:
         """
-        VPC-ID of AWS cloud.
+        VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
         """
         return pulumi.get(self, "vpc_id1")
 
@@ -84,7 +84,7 @@ class AviatrixAwsPeerArgs:
     @pulumi.getter(name="vpcId2")
     def vpc_id2(self) -> pulumi.Input[str]:
         """
-        VPC-ID of AWS cloud.
+        VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
         """
         return pulumi.get(self, "vpc_id2")
 
@@ -96,7 +96,7 @@ class AviatrixAwsPeerArgs:
     @pulumi.getter(name="vpcReg1")
     def vpc_reg1(self) -> pulumi.Input[str]:
         """
-        Region of AWS cloud.
+        Region of AWS cloud. Example: AWS: "us-east-1".
         """
         return pulumi.get(self, "vpc_reg1")
 
@@ -108,7 +108,7 @@ class AviatrixAwsPeerArgs:
     @pulumi.getter(name="vpcReg2")
     def vpc_reg2(self) -> pulumi.Input[str]:
         """
-        Region of AWS cloud.
+        Region of AWS cloud. Example: AWS: "us-east-1".
         """
         return pulumi.get(self, "vpc_reg2")
 
@@ -120,7 +120,7 @@ class AviatrixAwsPeerArgs:
     @pulumi.getter(name="rtbList1s")
     def rtb_list1s(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of Route table ID.
+        List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
         """
         return pulumi.get(self, "rtb_list1s")
 
@@ -132,7 +132,7 @@ class AviatrixAwsPeerArgs:
     @pulumi.getter(name="rtbList2s")
     def rtb_list2s(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of Route table ID.
+        List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
         """
         return pulumi.get(self, "rtb_list2s")
 
@@ -159,13 +159,13 @@ class _AviatrixAwsPeerState:
         :param pulumi.Input[str] account_name1: This parameter represents the name of an AWS Cloud-Account in Aviatrix controller.
         :param pulumi.Input[str] account_name2: This parameter represents the name of an AWS Cloud-Account in Aviatrix controller.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] rtb_list1_outputs: List of route table ID of vpc_id1.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] rtb_list1s: List of Route table ID.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] rtb_list1s: List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
         :param pulumi.Input[Sequence[pulumi.Input[str]]] rtb_list2_outputs: List of route table ID of vpc_id2.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] rtb_list2s: List of Route table ID.
-        :param pulumi.Input[str] vpc_id1: VPC-ID of AWS cloud.
-        :param pulumi.Input[str] vpc_id2: VPC-ID of AWS cloud.
-        :param pulumi.Input[str] vpc_reg1: Region of AWS cloud.
-        :param pulumi.Input[str] vpc_reg2: Region of AWS cloud.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] rtb_list2s: List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
+        :param pulumi.Input[str] vpc_id1: VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
+        :param pulumi.Input[str] vpc_id2: VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
+        :param pulumi.Input[str] vpc_reg1: Region of AWS cloud. Example: AWS: "us-east-1".
+        :param pulumi.Input[str] vpc_reg2: Region of AWS cloud. Example: AWS: "us-east-1".
         """
         if account_name1 is not None:
             pulumi.set(__self__, "account_name1", account_name1)
@@ -228,7 +228,7 @@ class _AviatrixAwsPeerState:
     @pulumi.getter(name="rtbList1s")
     def rtb_list1s(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of Route table ID.
+        List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
         """
         return pulumi.get(self, "rtb_list1s")
 
@@ -252,7 +252,7 @@ class _AviatrixAwsPeerState:
     @pulumi.getter(name="rtbList2s")
     def rtb_list2s(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of Route table ID.
+        List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
         """
         return pulumi.get(self, "rtb_list2s")
 
@@ -264,7 +264,7 @@ class _AviatrixAwsPeerState:
     @pulumi.getter(name="vpcId1")
     def vpc_id1(self) -> Optional[pulumi.Input[str]]:
         """
-        VPC-ID of AWS cloud.
+        VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
         """
         return pulumi.get(self, "vpc_id1")
 
@@ -276,7 +276,7 @@ class _AviatrixAwsPeerState:
     @pulumi.getter(name="vpcId2")
     def vpc_id2(self) -> Optional[pulumi.Input[str]]:
         """
-        VPC-ID of AWS cloud.
+        VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
         """
         return pulumi.get(self, "vpc_id2")
 
@@ -288,7 +288,7 @@ class _AviatrixAwsPeerState:
     @pulumi.getter(name="vpcReg1")
     def vpc_reg1(self) -> Optional[pulumi.Input[str]]:
         """
-        Region of AWS cloud.
+        Region of AWS cloud. Example: AWS: "us-east-1".
         """
         return pulumi.get(self, "vpc_reg1")
 
@@ -300,7 +300,7 @@ class _AviatrixAwsPeerState:
     @pulumi.getter(name="vpcReg2")
     def vpc_reg2(self) -> Optional[pulumi.Input[str]]:
         """
-        Region of AWS cloud.
+        Region of AWS cloud. Example: AWS: "us-east-1".
         """
         return pulumi.get(self, "vpc_reg2")
 
@@ -324,17 +324,44 @@ class AviatrixAwsPeer(pulumi.CustomResource):
                  vpc_reg2: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixAwsPeer resource with the given unique name, props, and options.
+        The **aviatrix_aws_peer** resource allows the creation and management of Aviatrix-created native AWS intra and inter-region VPC peerings.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS Peering
+        test_awspeer = aviatrix.AviatrixAwsPeer("testAwspeer",
+            account_name1="test1-account",
+            account_name2="test2-account",
+            rtb_list1s=["rtb-abcd1234"],
+            rtb_list2s=["rtb-wxyz5678"],
+            vpc_id1="vpc-abcd1234",
+            vpc_id2="vpc-rdef3333",
+            vpc_reg1="us-east-1",
+            vpc_reg2="us-west-1")
+        ```
+
+        ## Import
+
+        **aws_peer** can be imported using the `vpc_id1` and `vpc_id2`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAwsPeer:AviatrixAwsPeer test vpc_id1~vpc_id2
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] account_name1: This parameter represents the name of an AWS Cloud-Account in Aviatrix controller.
         :param pulumi.Input[str] account_name2: This parameter represents the name of an AWS Cloud-Account in Aviatrix controller.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] rtb_list1s: List of Route table ID.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] rtb_list2s: List of Route table ID.
-        :param pulumi.Input[str] vpc_id1: VPC-ID of AWS cloud.
-        :param pulumi.Input[str] vpc_id2: VPC-ID of AWS cloud.
-        :param pulumi.Input[str] vpc_reg1: Region of AWS cloud.
-        :param pulumi.Input[str] vpc_reg2: Region of AWS cloud.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] rtb_list1s: List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] rtb_list2s: List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
+        :param pulumi.Input[str] vpc_id1: VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
+        :param pulumi.Input[str] vpc_id2: VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
+        :param pulumi.Input[str] vpc_reg1: Region of AWS cloud. Example: AWS: "us-east-1".
+        :param pulumi.Input[str] vpc_reg2: Region of AWS cloud. Example: AWS: "us-east-1".
         """
         ...
     @overload
@@ -343,7 +370,34 @@ class AviatrixAwsPeer(pulumi.CustomResource):
                  args: AviatrixAwsPeerArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixAwsPeer resource with the given unique name, props, and options.
+        The **aviatrix_aws_peer** resource allows the creation and management of Aviatrix-created native AWS intra and inter-region VPC peerings.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS Peering
+        test_awspeer = aviatrix.AviatrixAwsPeer("testAwspeer",
+            account_name1="test1-account",
+            account_name2="test2-account",
+            rtb_list1s=["rtb-abcd1234"],
+            rtb_list2s=["rtb-wxyz5678"],
+            vpc_id1="vpc-abcd1234",
+            vpc_id2="vpc-rdef3333",
+            vpc_reg1="us-east-1",
+            vpc_reg2="us-west-1")
+        ```
+
+        ## Import
+
+        **aws_peer** can be imported using the `vpc_id1` and `vpc_id2`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixAwsPeer:AviatrixAwsPeer test vpc_id1~vpc_id2
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixAwsPeerArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -428,13 +482,13 @@ class AviatrixAwsPeer(pulumi.CustomResource):
         :param pulumi.Input[str] account_name1: This parameter represents the name of an AWS Cloud-Account in Aviatrix controller.
         :param pulumi.Input[str] account_name2: This parameter represents the name of an AWS Cloud-Account in Aviatrix controller.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] rtb_list1_outputs: List of route table ID of vpc_id1.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] rtb_list1s: List of Route table ID.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] rtb_list1s: List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
         :param pulumi.Input[Sequence[pulumi.Input[str]]] rtb_list2_outputs: List of route table ID of vpc_id2.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] rtb_list2s: List of Route table ID.
-        :param pulumi.Input[str] vpc_id1: VPC-ID of AWS cloud.
-        :param pulumi.Input[str] vpc_id2: VPC-ID of AWS cloud.
-        :param pulumi.Input[str] vpc_reg1: Region of AWS cloud.
-        :param pulumi.Input[str] vpc_reg2: Region of AWS cloud.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] rtb_list2s: List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
+        :param pulumi.Input[str] vpc_id1: VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
+        :param pulumi.Input[str] vpc_id2: VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
+        :param pulumi.Input[str] vpc_reg1: Region of AWS cloud. Example: AWS: "us-east-1".
+        :param pulumi.Input[str] vpc_reg2: Region of AWS cloud. Example: AWS: "us-east-1".
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -480,7 +534,7 @@ class AviatrixAwsPeer(pulumi.CustomResource):
     @pulumi.getter(name="rtbList1s")
     def rtb_list1s(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        List of Route table ID.
+        List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
         """
         return pulumi.get(self, "rtb_list1s")
 
@@ -496,7 +550,7 @@ class AviatrixAwsPeer(pulumi.CustomResource):
     @pulumi.getter(name="rtbList2s")
     def rtb_list2s(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        List of Route table ID.
+        List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
         """
         return pulumi.get(self, "rtb_list2s")
 
@@ -504,7 +558,7 @@ class AviatrixAwsPeer(pulumi.CustomResource):
     @pulumi.getter(name="vpcId1")
     def vpc_id1(self) -> pulumi.Output[str]:
         """
-        VPC-ID of AWS cloud.
+        VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
         """
         return pulumi.get(self, "vpc_id1")
 
@@ -512,7 +566,7 @@ class AviatrixAwsPeer(pulumi.CustomResource):
     @pulumi.getter(name="vpcId2")
     def vpc_id2(self) -> pulumi.Output[str]:
         """
-        VPC-ID of AWS cloud.
+        VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
         """
         return pulumi.get(self, "vpc_id2")
 
@@ -520,7 +574,7 @@ class AviatrixAwsPeer(pulumi.CustomResource):
     @pulumi.getter(name="vpcReg1")
     def vpc_reg1(self) -> pulumi.Output[str]:
         """
-        Region of AWS cloud.
+        Region of AWS cloud. Example: AWS: "us-east-1".
         """
         return pulumi.get(self, "vpc_reg1")
 
@@ -528,7 +582,7 @@ class AviatrixAwsPeer(pulumi.CustomResource):
     @pulumi.getter(name="vpcReg2")
     def vpc_reg2(self) -> pulumi.Output[str]:
         """
-        Region of AWS cloud.
+        Region of AWS cloud. Example: AWS: "us-east-1".
         """
         return pulumi.get(self, "vpc_reg2")
 

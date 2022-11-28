@@ -9,6 +9,38 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_private_mode_multicloud_endpoint** resource allows management of a Private Mode multicloud endpoint. This resource is available as of provider version R2.23+.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Controller Private Mode config
+    ///     var test = new Aviatrix.AviatrixPrivateModeMulticloudEndpoint("test", new()
+    ///     {
+    ///         AccountName = "devops",
+    ///         ControllerLbVpcId = "vpc-abcdefg",
+    ///         Region = "us-east-1",
+    ///         VpcId = "vpc-abcdef",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **aviatrix_private_mode_multicloud_endpoint** can be imported using the `vpc_id`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixPrivateModeMulticloudEndpoint:AviatrixPrivateModeMulticloudEndpoint test vpc-1234567
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixPrivateModeMulticloudEndpoint:AviatrixPrivateModeMulticloudEndpoint")]
     public partial class AviatrixPrivateModeMulticloudEndpoint : global::Pulumi.CustomResource
     {
@@ -19,25 +51,25 @@ namespace Pulumi.Aviatrix
         public Output<string> AccountName { get; private set; } = null!;
 
         /// <summary>
-        /// ID of the VPC with the Controller load balancer.
+        /// ID of the VPC containing a Private Mode controller load balancer.
         /// </summary>
         [Output("controllerLbVpcId")]
         public Output<string> ControllerLbVpcId { get; private set; } = null!;
 
         /// <summary>
-        /// DNS entry of this endpoint.
+        /// DNS entry of the endpoint.
         /// </summary>
         [Output("dnsEntry")]
         public Output<string> DnsEntry { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the VPC region.
+        /// Region of the VPC.
         /// </summary>
         [Output("region")]
         public Output<string> Region { get; private set; } = null!;
 
         /// <summary>
-        /// VPC ID.
+        /// ID of the VPC to create the endpoint in.
         /// </summary>
         [Output("vpcId")]
         public Output<string> VpcId { get; private set; } = null!;
@@ -96,19 +128,19 @@ namespace Pulumi.Aviatrix
         public Input<string> AccountName { get; set; } = null!;
 
         /// <summary>
-        /// ID of the VPC with the Controller load balancer.
+        /// ID of the VPC containing a Private Mode controller load balancer.
         /// </summary>
         [Input("controllerLbVpcId", required: true)]
         public Input<string> ControllerLbVpcId { get; set; } = null!;
 
         /// <summary>
-        /// Name of the VPC region.
+        /// Region of the VPC.
         /// </summary>
         [Input("region", required: true)]
         public Input<string> Region { get; set; } = null!;
 
         /// <summary>
-        /// VPC ID.
+        /// ID of the VPC to create the endpoint in.
         /// </summary>
         [Input("vpcId", required: true)]
         public Input<string> VpcId { get; set; } = null!;
@@ -128,25 +160,25 @@ namespace Pulumi.Aviatrix
         public Input<string>? AccountName { get; set; }
 
         /// <summary>
-        /// ID of the VPC with the Controller load balancer.
+        /// ID of the VPC containing a Private Mode controller load balancer.
         /// </summary>
         [Input("controllerLbVpcId")]
         public Input<string>? ControllerLbVpcId { get; set; }
 
         /// <summary>
-        /// DNS entry of this endpoint.
+        /// DNS entry of the endpoint.
         /// </summary>
         [Input("dnsEntry")]
         public Input<string>? DnsEntry { get; set; }
 
         /// <summary>
-        /// Name of the VPC region.
+        /// Region of the VPC.
         /// </summary>
         [Input("region")]
         public Input<string>? Region { get; set; }
 
         /// <summary>
-        /// VPC ID.
+        /// ID of the VPC to create the endpoint in.
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }

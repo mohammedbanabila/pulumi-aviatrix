@@ -10,17 +10,75 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_vpn_profile** resource allows the creation and management of Aviatrix VPN user profiles.
+//
+// > **NOTE:** As of R2.15, management of user/profile attachment can be set using `manageUserAttachment`. This argument must be set to *true* in either **aviatrix_vpn_user** or **aviatrix_vpn_profile**. If attachment is managed in the **aviatrix_vpn_profile** (set to *true*), it must be set to *false* in the **aviatrix_vpn_user** resource and vice versa.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixVpnProfile(ctx, "testVpnProfile", &aviatrix.AviatrixVpnProfileArgs{
+//				BaseRule: pulumi.String("allow_all"),
+//				Policies: AviatrixVpnProfilePolicyArray{
+//					&AviatrixVpnProfilePolicyArgs{
+//						Action: pulumi.String("deny"),
+//						Port:   pulumi.String("443"),
+//						Proto:  pulumi.String("tcp"),
+//						Target: pulumi.String("10.0.0.0/32"),
+//					},
+//					&AviatrixVpnProfilePolicyArgs{
+//						Action: pulumi.String("deny"),
+//						Port:   pulumi.String("443"),
+//						Proto:  pulumi.String("tcp"),
+//						Target: pulumi.String("10.0.0.1/32"),
+//					},
+//				},
+//				Users: pulumi.StringArray{
+//					pulumi.String("user1"),
+//					pulumi.String("user2"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **vpn_profile** can be imported using the VPN profile's `name`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixVpnProfile:AviatrixVpnProfile test name
+//
+// ```
 type AviatrixVpnProfile struct {
 	pulumi.CustomResourceState
 
-	// Base policy rule of the profile to be added. Enter 'allow_all' or 'deny_all'.
-	BaseRule             pulumi.StringPtrOutput `pulumi:"baseRule"`
-	ManageUserAttachment pulumi.BoolPtrOutput   `pulumi:"manageUserAttachment"`
-	// name for the VPN profile.
+	// Base policy rule of the profile to be added. Enter "allowAll" or "denyAll", based on whether you want a whitelist or blacklist.
+	BaseRule pulumi.StringPtrOutput `pulumi:"baseRule"`
+	// This parameter is a switch used to determine whether or not to manage VPN user attachments to the VPN profile using this resource. If this is set to false, attachment must be managed using the **aviatrix_vpn_user** resource. Valid values: true, false. Default value: true.
+	ManageUserAttachment pulumi.BoolPtrOutput `pulumi:"manageUserAttachment"`
+	// Enter any name for the VPN profile.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// New security policy for the profile.
+	// New security policy for the profile. Each policy has the following attributes:
 	Policies AviatrixVpnProfilePolicyArrayOutput `pulumi:"policies"`
-	// List of VPN users to attach to this profile.
+	// List of VPN users to attach to this profile. This should be set to null if `manageUserAttachment` is set to false.
 	Users pulumi.StringArrayOutput `pulumi:"users"`
 }
 
@@ -54,26 +112,28 @@ func GetAviatrixVpnProfile(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixVpnProfile resources.
 type aviatrixVpnProfileState struct {
-	// Base policy rule of the profile to be added. Enter 'allow_all' or 'deny_all'.
-	BaseRule             *string `pulumi:"baseRule"`
-	ManageUserAttachment *bool   `pulumi:"manageUserAttachment"`
-	// name for the VPN profile.
+	// Base policy rule of the profile to be added. Enter "allowAll" or "denyAll", based on whether you want a whitelist or blacklist.
+	BaseRule *string `pulumi:"baseRule"`
+	// This parameter is a switch used to determine whether or not to manage VPN user attachments to the VPN profile using this resource. If this is set to false, attachment must be managed using the **aviatrix_vpn_user** resource. Valid values: true, false. Default value: true.
+	ManageUserAttachment *bool `pulumi:"manageUserAttachment"`
+	// Enter any name for the VPN profile.
 	Name *string `pulumi:"name"`
-	// New security policy for the profile.
+	// New security policy for the profile. Each policy has the following attributes:
 	Policies []AviatrixVpnProfilePolicy `pulumi:"policies"`
-	// List of VPN users to attach to this profile.
+	// List of VPN users to attach to this profile. This should be set to null if `manageUserAttachment` is set to false.
 	Users []string `pulumi:"users"`
 }
 
 type AviatrixVpnProfileState struct {
-	// Base policy rule of the profile to be added. Enter 'allow_all' or 'deny_all'.
-	BaseRule             pulumi.StringPtrInput
+	// Base policy rule of the profile to be added. Enter "allowAll" or "denyAll", based on whether you want a whitelist or blacklist.
+	BaseRule pulumi.StringPtrInput
+	// This parameter is a switch used to determine whether or not to manage VPN user attachments to the VPN profile using this resource. If this is set to false, attachment must be managed using the **aviatrix_vpn_user** resource. Valid values: true, false. Default value: true.
 	ManageUserAttachment pulumi.BoolPtrInput
-	// name for the VPN profile.
+	// Enter any name for the VPN profile.
 	Name pulumi.StringPtrInput
-	// New security policy for the profile.
+	// New security policy for the profile. Each policy has the following attributes:
 	Policies AviatrixVpnProfilePolicyArrayInput
-	// List of VPN users to attach to this profile.
+	// List of VPN users to attach to this profile. This should be set to null if `manageUserAttachment` is set to false.
 	Users pulumi.StringArrayInput
 }
 
@@ -82,27 +142,29 @@ func (AviatrixVpnProfileState) ElementType() reflect.Type {
 }
 
 type aviatrixVpnProfileArgs struct {
-	// Base policy rule of the profile to be added. Enter 'allow_all' or 'deny_all'.
-	BaseRule             *string `pulumi:"baseRule"`
-	ManageUserAttachment *bool   `pulumi:"manageUserAttachment"`
-	// name for the VPN profile.
+	// Base policy rule of the profile to be added. Enter "allowAll" or "denyAll", based on whether you want a whitelist or blacklist.
+	BaseRule *string `pulumi:"baseRule"`
+	// This parameter is a switch used to determine whether or not to manage VPN user attachments to the VPN profile using this resource. If this is set to false, attachment must be managed using the **aviatrix_vpn_user** resource. Valid values: true, false. Default value: true.
+	ManageUserAttachment *bool `pulumi:"manageUserAttachment"`
+	// Enter any name for the VPN profile.
 	Name *string `pulumi:"name"`
-	// New security policy for the profile.
+	// New security policy for the profile. Each policy has the following attributes:
 	Policies []AviatrixVpnProfilePolicy `pulumi:"policies"`
-	// List of VPN users to attach to this profile.
+	// List of VPN users to attach to this profile. This should be set to null if `manageUserAttachment` is set to false.
 	Users []string `pulumi:"users"`
 }
 
 // The set of arguments for constructing a AviatrixVpnProfile resource.
 type AviatrixVpnProfileArgs struct {
-	// Base policy rule of the profile to be added. Enter 'allow_all' or 'deny_all'.
-	BaseRule             pulumi.StringPtrInput
+	// Base policy rule of the profile to be added. Enter "allowAll" or "denyAll", based on whether you want a whitelist or blacklist.
+	BaseRule pulumi.StringPtrInput
+	// This parameter is a switch used to determine whether or not to manage VPN user attachments to the VPN profile using this resource. If this is set to false, attachment must be managed using the **aviatrix_vpn_user** resource. Valid values: true, false. Default value: true.
 	ManageUserAttachment pulumi.BoolPtrInput
-	// name for the VPN profile.
+	// Enter any name for the VPN profile.
 	Name pulumi.StringPtrInput
-	// New security policy for the profile.
+	// New security policy for the profile. Each policy has the following attributes:
 	Policies AviatrixVpnProfilePolicyArrayInput
-	// List of VPN users to attach to this profile.
+	// List of VPN users to attach to this profile. This should be set to null if `manageUserAttachment` is set to false.
 	Users pulumi.StringArrayInput
 }
 
@@ -193,26 +255,27 @@ func (o AviatrixVpnProfileOutput) ToAviatrixVpnProfileOutputWithContext(ctx cont
 	return o
 }
 
-// Base policy rule of the profile to be added. Enter 'allow_all' or 'deny_all'.
+// Base policy rule of the profile to be added. Enter "allowAll" or "denyAll", based on whether you want a whitelist or blacklist.
 func (o AviatrixVpnProfileOutput) BaseRule() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixVpnProfile) pulumi.StringPtrOutput { return v.BaseRule }).(pulumi.StringPtrOutput)
 }
 
+// This parameter is a switch used to determine whether or not to manage VPN user attachments to the VPN profile using this resource. If this is set to false, attachment must be managed using the **aviatrix_vpn_user** resource. Valid values: true, false. Default value: true.
 func (o AviatrixVpnProfileOutput) ManageUserAttachment() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixVpnProfile) pulumi.BoolPtrOutput { return v.ManageUserAttachment }).(pulumi.BoolPtrOutput)
 }
 
-// name for the VPN profile.
+// Enter any name for the VPN profile.
 func (o AviatrixVpnProfileOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixVpnProfile) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// New security policy for the profile.
+// New security policy for the profile. Each policy has the following attributes:
 func (o AviatrixVpnProfileOutput) Policies() AviatrixVpnProfilePolicyArrayOutput {
 	return o.ApplyT(func(v *AviatrixVpnProfile) AviatrixVpnProfilePolicyArrayOutput { return v.Policies }).(AviatrixVpnProfilePolicyArrayOutput)
 }
 
-// List of VPN users to attach to this profile.
+// List of VPN users to attach to this profile. This should be set to null if `manageUserAttachment` is set to false.
 func (o AviatrixVpnProfileOutput) Users() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixVpnProfile) pulumi.StringArrayOutput { return v.Users }).(pulumi.StringArrayOutput)
 }

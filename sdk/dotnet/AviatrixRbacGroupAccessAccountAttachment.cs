@@ -9,17 +9,47 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_rbac_group_access_account_attachment** resource allows the creation and management of access account attachments to Aviatrix (Role-Based Access Control) RBAC groups.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix RBAC Group Access Account Attachment
+    ///     var testAttachment = new Aviatrix.AviatrixRbacGroupAccessAccountAttachment("testAttachment", new()
+    ///     {
+    ///         AccessAccountName = "account_name",
+    ///         GroupName = "write_only",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **rbac_group_access_account_attachment** can be imported using the `group_name` and `access_account_name`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixRbacGroupAccessAccountAttachment:AviatrixRbacGroupAccessAccountAttachment test group_name~access_account_name
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixRbacGroupAccessAccountAttachment:AviatrixRbacGroupAccessAccountAttachment")]
     public partial class AviatrixRbacGroupAccessAccountAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Access account name.
+        /// Account name. This can be used for logging in to CloudN console or UserConnect controller.
         /// </summary>
         [Output("accessAccountName")]
         public Output<string> AccessAccountName { get; private set; } = null!;
 
         /// <summary>
-        /// RBAC permission group name.
+        /// This parameter represents the name of a RBAC group.
         /// </summary>
         [Output("groupName")]
         public Output<string> GroupName { get; private set; } = null!;
@@ -72,13 +102,13 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixRbacGroupAccessAccountAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Access account name.
+        /// Account name. This can be used for logging in to CloudN console or UserConnect controller.
         /// </summary>
         [Input("accessAccountName", required: true)]
         public Input<string> AccessAccountName { get; set; } = null!;
 
         /// <summary>
-        /// RBAC permission group name.
+        /// This parameter represents the name of a RBAC group.
         /// </summary>
         [Input("groupName", required: true)]
         public Input<string> GroupName { get; set; } = null!;
@@ -92,13 +122,13 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixRbacGroupAccessAccountAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Access account name.
+        /// Account name. This can be used for logging in to CloudN console or UserConnect controller.
         /// </summary>
         [Input("accessAccountName")]
         public Input<string>? AccessAccountName { get; set; }
 
         /// <summary>
-        /// RBAC permission group name.
+        /// This parameter represents the name of a RBAC group.
         /// </summary>
         [Input("groupName")]
         public Input<string>? GroupName { get; set; }

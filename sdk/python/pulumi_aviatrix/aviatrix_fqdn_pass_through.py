@@ -18,8 +18,8 @@ class AviatrixFqdnPassThroughArgs:
                  pass_through_cidrs: pulumi.Input[Sequence[pulumi.Input[str]]]):
         """
         The set of arguments for constructing a AviatrixFqdnPassThrough resource.
-        :param pulumi.Input[str] gw_name: Gateway to apply FQDN pass-through rules to.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] pass_through_cidrs: CIDRs to allow originating requests to ignore FQDN filtering rules.
+        :param pulumi.Input[str] gw_name: Gateway name to apply pass-through rules to.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] pass_through_cidrs: List of origin CIDR's to allow to pass-through FQDN filtering rules. Minimum list length: 1.
         """
         pulumi.set(__self__, "gw_name", gw_name)
         pulumi.set(__self__, "pass_through_cidrs", pass_through_cidrs)
@@ -28,7 +28,7 @@ class AviatrixFqdnPassThroughArgs:
     @pulumi.getter(name="gwName")
     def gw_name(self) -> pulumi.Input[str]:
         """
-        Gateway to apply FQDN pass-through rules to.
+        Gateway name to apply pass-through rules to.
         """
         return pulumi.get(self, "gw_name")
 
@@ -40,7 +40,7 @@ class AviatrixFqdnPassThroughArgs:
     @pulumi.getter(name="passThroughCidrs")
     def pass_through_cidrs(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
         """
-        CIDRs to allow originating requests to ignore FQDN filtering rules.
+        List of origin CIDR's to allow to pass-through FQDN filtering rules. Minimum list length: 1.
         """
         return pulumi.get(self, "pass_through_cidrs")
 
@@ -56,8 +56,8 @@ class _AviatrixFqdnPassThroughState:
                  pass_through_cidrs: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering AviatrixFqdnPassThrough resources.
-        :param pulumi.Input[str] gw_name: Gateway to apply FQDN pass-through rules to.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] pass_through_cidrs: CIDRs to allow originating requests to ignore FQDN filtering rules.
+        :param pulumi.Input[str] gw_name: Gateway name to apply pass-through rules to.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] pass_through_cidrs: List of origin CIDR's to allow to pass-through FQDN filtering rules. Minimum list length: 1.
         """
         if gw_name is not None:
             pulumi.set(__self__, "gw_name", gw_name)
@@ -68,7 +68,7 @@ class _AviatrixFqdnPassThroughState:
     @pulumi.getter(name="gwName")
     def gw_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Gateway to apply FQDN pass-through rules to.
+        Gateway name to apply pass-through rules to.
         """
         return pulumi.get(self, "gw_name")
 
@@ -80,7 +80,7 @@ class _AviatrixFqdnPassThroughState:
     @pulumi.getter(name="passThroughCidrs")
     def pass_through_cidrs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        CIDRs to allow originating requests to ignore FQDN filtering rules.
+        List of origin CIDR's to allow to pass-through FQDN filtering rules. Minimum list length: 1.
         """
         return pulumi.get(self, "pass_through_cidrs")
 
@@ -98,11 +98,35 @@ class AviatrixFqdnPassThrough(pulumi.CustomResource):
                  pass_through_cidrs: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
-        Create a AviatrixFqdnPassThrough resource with the given unique name, props, and options.
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Gateway FQDN filter pass-through
+        test_fqdn_pass_through = aviatrix.AviatrixFqdnPassThrough("testFqdnPassThrough",
+            gw_name=aviatrix_gateway["test_gw_aws"]["gw_name"],
+            pass_through_cidrs=[
+                "10.0.0.0/24",
+                "10.0.1.0/24",
+                "10.0.2.0/24",
+            ],
+            opts=pulumi.ResourceOptions(depends_on=[aviatrix_fqdn["test_fqdn"]]))
+        ```
+
+        ## Import
+
+        **fqdn_pass_through** can be imported using the `gw_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixFqdnPassThrough:AviatrixFqdnPassThrough test gw_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] gw_name: Gateway to apply FQDN pass-through rules to.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] pass_through_cidrs: CIDRs to allow originating requests to ignore FQDN filtering rules.
+        :param pulumi.Input[str] gw_name: Gateway name to apply pass-through rules to.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] pass_through_cidrs: List of origin CIDR's to allow to pass-through FQDN filtering rules. Minimum list length: 1.
         """
         ...
     @overload
@@ -111,7 +135,31 @@ class AviatrixFqdnPassThrough(pulumi.CustomResource):
                  args: AviatrixFqdnPassThroughArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixFqdnPassThrough resource with the given unique name, props, and options.
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Gateway FQDN filter pass-through
+        test_fqdn_pass_through = aviatrix.AviatrixFqdnPassThrough("testFqdnPassThrough",
+            gw_name=aviatrix_gateway["test_gw_aws"]["gw_name"],
+            pass_through_cidrs=[
+                "10.0.0.0/24",
+                "10.0.1.0/24",
+                "10.0.2.0/24",
+            ],
+            opts=pulumi.ResourceOptions(depends_on=[aviatrix_fqdn["test_fqdn"]]))
+        ```
+
+        ## Import
+
+        **fqdn_pass_through** can be imported using the `gw_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixFqdnPassThrough:AviatrixFqdnPassThrough test gw_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixFqdnPassThroughArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -163,8 +211,8 @@ class AviatrixFqdnPassThrough(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] gw_name: Gateway to apply FQDN pass-through rules to.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] pass_through_cidrs: CIDRs to allow originating requests to ignore FQDN filtering rules.
+        :param pulumi.Input[str] gw_name: Gateway name to apply pass-through rules to.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] pass_through_cidrs: List of origin CIDR's to allow to pass-through FQDN filtering rules. Minimum list length: 1.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -178,7 +226,7 @@ class AviatrixFqdnPassThrough(pulumi.CustomResource):
     @pulumi.getter(name="gwName")
     def gw_name(self) -> pulumi.Output[str]:
         """
-        Gateway to apply FQDN pass-through rules to.
+        Gateway name to apply pass-through rules to.
         """
         return pulumi.get(self, "gw_name")
 
@@ -186,7 +234,7 @@ class AviatrixFqdnPassThrough(pulumi.CustomResource):
     @pulumi.getter(name="passThroughCidrs")
     def pass_through_cidrs(self) -> pulumi.Output[Sequence[str]]:
         """
-        CIDRs to allow originating requests to ignore FQDN filtering rules.
+        List of origin CIDR's to allow to pass-through FQDN filtering rules. Minimum list length: 1.
         """
         return pulumi.get(self, "pass_through_cidrs")
 

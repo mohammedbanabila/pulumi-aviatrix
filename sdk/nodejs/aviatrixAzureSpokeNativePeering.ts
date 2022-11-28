@@ -4,6 +4,32 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_azure_spoke_native_peering** resource allows the creation and management of Aviatrix-created Azure Spoke VNet attachments via Native Peering.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Azure spoke native peering
+ * const test = new aviatrix.AviatrixAzureSpokeNativePeering("test", {
+ *     spokeAccountName: "devops-azure",
+ *     spokeRegion: "West US",
+ *     spokeVpcId: "Foo_VNet:Bar_RG:GUID",
+ *     transitGatewayName: "transit-gw-azure",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **azure_spoke_native_peering** can be imported using the `transit_gateway_name`, `spoke_account_name` and `spoke_vpc_id`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixAzureSpokeNativePeering:AviatrixAzureSpokeNativePeering test transit_gateway_name~spoke_account_name~spoke_vpc_id
+ * ```
+ */
 export class AviatrixAzureSpokeNativePeering extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixAzureSpokeNativePeering resource's state with the given name, ID, and optional extra
@@ -37,15 +63,15 @@ export class AviatrixAzureSpokeNativePeering extends pulumi.CustomResource {
      */
     public readonly spokeAccountName!: pulumi.Output<string>;
     /**
-     * Spoke VNet region.
+     * Spoke VNet region. Example: "West US".
      */
     public readonly spokeRegion!: pulumi.Output<string>;
     /**
-     * Combination of the Spoke VNet name and resource group.
+     * Combination of the Spoke's VNet name, resource group and GUID. Example: "Foo_VNet:Bar_RG:GUID".
      */
     public readonly spokeVpcId!: pulumi.Output<string>;
     /**
-     * Name of an azure transit gateway with transit firenet enabled.
+     * Name of an Transit FireNet-enabled Azure transit gateway.
      */
     public readonly transitGatewayName!: pulumi.Output<string>;
 
@@ -99,15 +125,15 @@ export interface AviatrixAzureSpokeNativePeeringState {
      */
     spokeAccountName?: pulumi.Input<string>;
     /**
-     * Spoke VNet region.
+     * Spoke VNet region. Example: "West US".
      */
     spokeRegion?: pulumi.Input<string>;
     /**
-     * Combination of the Spoke VNet name and resource group.
+     * Combination of the Spoke's VNet name, resource group and GUID. Example: "Foo_VNet:Bar_RG:GUID".
      */
     spokeVpcId?: pulumi.Input<string>;
     /**
-     * Name of an azure transit gateway with transit firenet enabled.
+     * Name of an Transit FireNet-enabled Azure transit gateway.
      */
     transitGatewayName?: pulumi.Input<string>;
 }
@@ -121,15 +147,15 @@ export interface AviatrixAzureSpokeNativePeeringArgs {
      */
     spokeAccountName: pulumi.Input<string>;
     /**
-     * Spoke VNet region.
+     * Spoke VNet region. Example: "West US".
      */
     spokeRegion: pulumi.Input<string>;
     /**
-     * Combination of the Spoke VNet name and resource group.
+     * Combination of the Spoke's VNet name, resource group and GUID. Example: "Foo_VNet:Bar_RG:GUID".
      */
     spokeVpcId: pulumi.Input<string>;
     /**
-     * Name of an azure transit gateway with transit firenet enabled.
+     * Name of an Transit FireNet-enabled Azure transit gateway.
      */
     transitGatewayName: pulumi.Input<string>;
 }

@@ -9,145 +9,258 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_controller_config** resource allows management of an Aviatrix Controller's configurations.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Controller Config
+    ///     var testControllerConfig = new Aviatrix.AviatrixControllerConfig("testControllerConfig", new()
+    ///     {
+    ///         FqdnExceptionRule = false,
+    ///         HttpAccess = true,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Controller Config with Controller Upgrade Without Upgrading Gateways
+    ///     var testControllerConfig = new Aviatrix.AviatrixControllerConfig("testControllerConfig", new()
+    ///     {
+    ///         FqdnExceptionRule = false,
+    ///         HttpAccess = true,
+    ///         ManageGatewayUpgrades = false,
+    ///         TargetVersion = "latest",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Controller Config with Controller Upgrade + Upgrade All Gateways
+    ///     var testControllerConfig = new Aviatrix.AviatrixControllerConfig("testControllerConfig", new()
+    ///     {
+    ///         FqdnExceptionRule = false,
+    ///         HttpAccess = true,
+    ///         TargetVersion = "latest",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Controller Config with Cloudn Backup Configuration Enabled
+    ///     var testControllerConfig = new Aviatrix.AviatrixControllerConfig("testControllerConfig", new()
+    ///     {
+    ///         BackupAccountName = "account_example",
+    ///         BackupBucketName = "bucket_example",
+    ///         BackupCloudType = 1,
+    ///         BackupConfiguration = true,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Controller Config and import HTTPS certificates
+    ///     var testControllerConfig = new Aviatrix.AviatrixControllerConfig("testControllerConfig", new()
+    ///     {
+    ///         CaCertificateFilePath = "/path/to/ca_certificate.pem",
+    ///         ServerPrivateKeyFilePath = "/path/to/server.key",
+    ///         ServerPublicCertificateFilePath = "/path/to/server.crt",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Controller Config and configure the AWS Guard Duty Scanning Interval
+    ///     var testControllerConfig = new Aviatrix.AviatrixControllerConfig("testControllerConfig", new()
+    ///     {
+    ///         AwsGuardDutyScanningInterval = 10,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Instance controller_config can be imported using controller IP, e.g. controller IP is 10.11.12.13
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixControllerConfig:AviatrixControllerConfig test 10-11-12-13
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixControllerConfig:AviatrixControllerConfig")]
     public partial class AviatrixControllerConfig : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Scanning Interval for AWS Guard Duty.
+        /// Configure the AWS Guard Duty scanning interval. Valid values: 5, 10, 15, 30 or 60. Default value: 60. Available as of provider version R2.18+.
         /// </summary>
         [Output("awsGuardDutyScanningInterval")]
         public Output<int?> AwsGuardDutyScanningInterval { get; private set; } = null!;
 
         /// <summary>
-        /// This parameter represents the name of a Cloud-Account in Aviatrix controller.
+        /// Name of the cloud account in the Aviatrix controller.
         /// </summary>
         [Output("backupAccountName")]
         public Output<string?> BackupAccountName { get; private set; } = null!;
 
         /// <summary>
-        /// Bucket name. Required for AWS, AWSGov, GCP and OCI.
+        /// Bucket Name. Required to enable configuration backup for AWS, AWSGov, GCP and OCI.
         /// </summary>
         [Output("backupBucketName")]
         public Output<string?> BackupBucketName { get; private set; } = null!;
 
         /// <summary>
-        /// Type of cloud service provider, requires an integer value. Use 1 for AWS.
+        /// Type of cloud service provider, requires an integer value. Use 1 for AWS, 4 for GCP, 8 for Azure, 16 for OCI, and 256 for AWSGov.
         /// </summary>
         [Output("backupCloudType")]
         public Output<int?> BackupCloudType { get; private set; } = null!;
 
         /// <summary>
-        /// Switch to enable/disable controller cloudn backup config.
+        /// Switch to enable/disable controller CloudN backup config. Valid values: true, false. Default value: false.
         /// </summary>
         [Output("backupConfiguration")]
         public Output<bool?> BackupConfiguration { get; private set; } = null!;
 
         /// <summary>
-        /// Container name. Required for Azure.
+        /// Container name. Required to enable configuration backup for Azure.
         /// </summary>
         [Output("backupContainerName")]
         public Output<string?> BackupContainerName { get; private set; } = null!;
 
         /// <summary>
-        /// Name of region. Required for Azure and OCI.
+        /// Name of region. Required to enable configuration backup for Azure and OCI.
         /// </summary>
         [Output("backupRegion")]
         public Output<string?> BackupRegion { get; private set; } = null!;
 
         /// <summary>
-        /// Storage name. Required for Azure.
+        /// Storage name. Required to enable configuration backup for Azure.
         /// </summary>
         [Output("backupStorageName")]
         public Output<string?> BackupStorageName { get; private set; } = null!;
 
         /// <summary>
-        /// CA certificate file.
+        /// CA certificate. To read certificate file from a file, please use the built-in `file` function. Available as of provider version R2.21.2+.
         /// </summary>
         [Output("caCertificateFile")]
         public Output<string?> CaCertificateFile { get; private set; } = null!;
 
         /// <summary>
-        /// File path to the CA certificate.
+        /// File path to CA certificate. Available as of provider version R2.18+.
         /// </summary>
         [Output("caCertificateFilePath")]
         public Output<string?> CaCertificateFilePath { get; private set; } = null!;
 
         /// <summary>
-        /// Current version of the controller.
+        /// Current version of the controller including the build number. Example: "6.5.123". Available as of provider version R2.20.0+.
         /// </summary>
         [Output("currentVersion")]
         public Output<string> CurrentVersion { get; private set; } = null!;
 
         /// <summary>
-        /// Enable VPC/VNET DNS Server.
+        /// Enable VPC/VNET DNS Server for the controller. Valid values: true, false. Default value: false.
         /// </summary>
         [Output("enableVpcDnsServer")]
         public Output<bool?> EnableVpcDnsServer { get; private set; } = null!;
 
         /// <summary>
-        /// A system-wide mode. Default: true.
+        /// Enable/disable packets without an SNI field to pass through gateway(s). Valid values: true, false. Default value: true. For more information on this setting, please see [here](https://docs.aviatrix.com/HowTos/FQDN_Whitelists_Ref_Design.html#exception-rule)
         /// </summary>
         [Output("fqdnExceptionRule")]
         public Output<bool?> FqdnExceptionRule { get; private set; } = null!;
 
         /// <summary>
-        /// Switch for http access. Default: false.
+        /// Switch for HTTP access. Valid values: true, false. Default value: false.
         /// </summary>
         [Output("httpAccess")]
         public Output<bool?> HttpAccess { get; private set; } = null!;
 
         /// <summary>
-        /// If true, aviatrix_controller_config will upgrade all gateways when target_version is set. If false, only the controller
-        /// will be upgraded when target_version is set. In that case gateway upgrades should be handled in each gateway resource
-        /// individually using the software_version and image_version attributes.
+        /// If true, aviatrix.AviatrixControllerConfig will upgrade all gateways when target_version is set. If false, only the controller will be upgraded when target_version is set. In that case gateway upgrades should be handled in each gateway resource individually using the software_version and image_version attributes. Type: boolean. Default: true. Available as of provider version R2.20.0+.
         /// </summary>
         [Output("manageGatewayUpgrades")]
         public Output<bool?> ManageGatewayUpgrades { get; private set; } = null!;
 
         /// <summary>
-        /// Switch to enable the controller to backup up to a maximum of 3 rotating backups.
+        /// Switch to enable the Controller to backup up to a maximum of 3 rotating backups. Valid values: true, false. Default value: false.
         /// </summary>
         [Output("multipleBackups")]
         public Output<bool?> MultipleBackups { get; private set; } = null!;
 
         /// <summary>
-        /// Previous version of the controller.
+        /// Previous version of the controller including the build number. Example: "6.5.123". Available as of provider version R2.20.0+.
         /// </summary>
         [Output("previousVersion")]
         public Output<string> PreviousVersion { get; private set; } = null!;
 
         /// <summary>
-        /// Server private key file.
+        /// Server private key. To read the private key from a file, please use the built-in `file` function. Available as of provider version R2.21.2+.
         /// </summary>
         [Output("serverPrivateKeyFile")]
         public Output<string?> ServerPrivateKeyFile { get; private set; } = null!;
 
         /// <summary>
-        /// File path to the server private key.
+        /// File path to server private key. Available as of provider version R2.18+.
         /// </summary>
         [Output("serverPrivateKeyFilePath")]
         public Output<string?> ServerPrivateKeyFilePath { get; private set; } = null!;
 
         /// <summary>
-        /// Server public certificate file.
+        /// Server public certificate. To read certificate file from a file, please use the built-in `file` function. Available as of provider version R2.21.2+.
         /// </summary>
         [Output("serverPublicCertificateFile")]
         public Output<string?> ServerPublicCertificateFile { get; private set; } = null!;
 
         /// <summary>
-        /// File path to the server public certificate.
+        /// File path to the server public certificate. Available as of provider version R2.18+.
         /// </summary>
         [Output("serverPublicCertificateFilePath")]
         public Output<string?> ServerPublicCertificateFilePath { get; private set; } = null!;
 
         /// <summary>
-        /// The release version number to which the controller will be upgraded to.
+        /// The release version number to which the controller will be upgraded to. If not specified, controller will not be upgraded. If set to "latest", controller will be upgraded to the latest release. Please see the [Controller upgrade guide](https://docs.aviatrix.com/HowTos/inline_upgrade.html) for more information.
         /// </summary>
         [Output("targetVersion")]
         public Output<string?> TargetVersion { get; private set; } = null!;
 
         /// <summary>
-        /// Current version of the controller without the build number.
+        /// Current version of the controller without build number. Example: "6.5"
         /// </summary>
         [Output("version")]
         public Output<string> Version { get; private set; } = null!;
@@ -176,6 +289,12 @@ namespace Pulumi.Aviatrix
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/astipkovits",
+                AdditionalSecretOutputs =
+                {
+                    "caCertificateFile",
+                    "serverPrivateKeyFile",
+                    "serverPublicCertificateFile",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -200,123 +319,151 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixControllerConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Scanning Interval for AWS Guard Duty.
+        /// Configure the AWS Guard Duty scanning interval. Valid values: 5, 10, 15, 30 or 60. Default value: 60. Available as of provider version R2.18+.
         /// </summary>
         [Input("awsGuardDutyScanningInterval")]
         public Input<int>? AwsGuardDutyScanningInterval { get; set; }
 
         /// <summary>
-        /// This parameter represents the name of a Cloud-Account in Aviatrix controller.
+        /// Name of the cloud account in the Aviatrix controller.
         /// </summary>
         [Input("backupAccountName")]
         public Input<string>? BackupAccountName { get; set; }
 
         /// <summary>
-        /// Bucket name. Required for AWS, AWSGov, GCP and OCI.
+        /// Bucket Name. Required to enable configuration backup for AWS, AWSGov, GCP and OCI.
         /// </summary>
         [Input("backupBucketName")]
         public Input<string>? BackupBucketName { get; set; }
 
         /// <summary>
-        /// Type of cloud service provider, requires an integer value. Use 1 for AWS.
+        /// Type of cloud service provider, requires an integer value. Use 1 for AWS, 4 for GCP, 8 for Azure, 16 for OCI, and 256 for AWSGov.
         /// </summary>
         [Input("backupCloudType")]
         public Input<int>? BackupCloudType { get; set; }
 
         /// <summary>
-        /// Switch to enable/disable controller cloudn backup config.
+        /// Switch to enable/disable controller CloudN backup config. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("backupConfiguration")]
         public Input<bool>? BackupConfiguration { get; set; }
 
         /// <summary>
-        /// Container name. Required for Azure.
+        /// Container name. Required to enable configuration backup for Azure.
         /// </summary>
         [Input("backupContainerName")]
         public Input<string>? BackupContainerName { get; set; }
 
         /// <summary>
-        /// Name of region. Required for Azure and OCI.
+        /// Name of region. Required to enable configuration backup for Azure and OCI.
         /// </summary>
         [Input("backupRegion")]
         public Input<string>? BackupRegion { get; set; }
 
         /// <summary>
-        /// Storage name. Required for Azure.
+        /// Storage name. Required to enable configuration backup for Azure.
         /// </summary>
         [Input("backupStorageName")]
         public Input<string>? BackupStorageName { get; set; }
 
-        /// <summary>
-        /// CA certificate file.
-        /// </summary>
         [Input("caCertificateFile")]
-        public Input<string>? CaCertificateFile { get; set; }
+        private Input<string>? _caCertificateFile;
 
         /// <summary>
-        /// File path to the CA certificate.
+        /// CA certificate. To read certificate file from a file, please use the built-in `file` function. Available as of provider version R2.21.2+.
+        /// </summary>
+        public Input<string>? CaCertificateFile
+        {
+            get => _caCertificateFile;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _caCertificateFile = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// File path to CA certificate. Available as of provider version R2.18+.
         /// </summary>
         [Input("caCertificateFilePath")]
         public Input<string>? CaCertificateFilePath { get; set; }
 
         /// <summary>
-        /// Enable VPC/VNET DNS Server.
+        /// Enable VPC/VNET DNS Server for the controller. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableVpcDnsServer")]
         public Input<bool>? EnableVpcDnsServer { get; set; }
 
         /// <summary>
-        /// A system-wide mode. Default: true.
+        /// Enable/disable packets without an SNI field to pass through gateway(s). Valid values: true, false. Default value: true. For more information on this setting, please see [here](https://docs.aviatrix.com/HowTos/FQDN_Whitelists_Ref_Design.html#exception-rule)
         /// </summary>
         [Input("fqdnExceptionRule")]
         public Input<bool>? FqdnExceptionRule { get; set; }
 
         /// <summary>
-        /// Switch for http access. Default: false.
+        /// Switch for HTTP access. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("httpAccess")]
         public Input<bool>? HttpAccess { get; set; }
 
         /// <summary>
-        /// If true, aviatrix_controller_config will upgrade all gateways when target_version is set. If false, only the controller
-        /// will be upgraded when target_version is set. In that case gateway upgrades should be handled in each gateway resource
-        /// individually using the software_version and image_version attributes.
+        /// If true, aviatrix.AviatrixControllerConfig will upgrade all gateways when target_version is set. If false, only the controller will be upgraded when target_version is set. In that case gateway upgrades should be handled in each gateway resource individually using the software_version and image_version attributes. Type: boolean. Default: true. Available as of provider version R2.20.0+.
         /// </summary>
         [Input("manageGatewayUpgrades")]
         public Input<bool>? ManageGatewayUpgrades { get; set; }
 
         /// <summary>
-        /// Switch to enable the controller to backup up to a maximum of 3 rotating backups.
+        /// Switch to enable the Controller to backup up to a maximum of 3 rotating backups. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("multipleBackups")]
         public Input<bool>? MultipleBackups { get; set; }
 
-        /// <summary>
-        /// Server private key file.
-        /// </summary>
         [Input("serverPrivateKeyFile")]
-        public Input<string>? ServerPrivateKeyFile { get; set; }
+        private Input<string>? _serverPrivateKeyFile;
 
         /// <summary>
-        /// File path to the server private key.
+        /// Server private key. To read the private key from a file, please use the built-in `file` function. Available as of provider version R2.21.2+.
+        /// </summary>
+        public Input<string>? ServerPrivateKeyFile
+        {
+            get => _serverPrivateKeyFile;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _serverPrivateKeyFile = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// File path to server private key. Available as of provider version R2.18+.
         /// </summary>
         [Input("serverPrivateKeyFilePath")]
         public Input<string>? ServerPrivateKeyFilePath { get; set; }
 
-        /// <summary>
-        /// Server public certificate file.
-        /// </summary>
         [Input("serverPublicCertificateFile")]
-        public Input<string>? ServerPublicCertificateFile { get; set; }
+        private Input<string>? _serverPublicCertificateFile;
 
         /// <summary>
-        /// File path to the server public certificate.
+        /// Server public certificate. To read certificate file from a file, please use the built-in `file` function. Available as of provider version R2.21.2+.
+        /// </summary>
+        public Input<string>? ServerPublicCertificateFile
+        {
+            get => _serverPublicCertificateFile;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _serverPublicCertificateFile = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// File path to the server public certificate. Available as of provider version R2.18+.
         /// </summary>
         [Input("serverPublicCertificateFilePath")]
         public Input<string>? ServerPublicCertificateFilePath { get; set; }
 
         /// <summary>
-        /// The release version number to which the controller will be upgraded to.
+        /// The release version number to which the controller will be upgraded to. If not specified, controller will not be upgraded. If set to "latest", controller will be upgraded to the latest release. Please see the [Controller upgrade guide](https://docs.aviatrix.com/HowTos/inline_upgrade.html) for more information.
         /// </summary>
         [Input("targetVersion")]
         public Input<string>? TargetVersion { get; set; }
@@ -330,141 +477,169 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixControllerConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Scanning Interval for AWS Guard Duty.
+        /// Configure the AWS Guard Duty scanning interval. Valid values: 5, 10, 15, 30 or 60. Default value: 60. Available as of provider version R2.18+.
         /// </summary>
         [Input("awsGuardDutyScanningInterval")]
         public Input<int>? AwsGuardDutyScanningInterval { get; set; }
 
         /// <summary>
-        /// This parameter represents the name of a Cloud-Account in Aviatrix controller.
+        /// Name of the cloud account in the Aviatrix controller.
         /// </summary>
         [Input("backupAccountName")]
         public Input<string>? BackupAccountName { get; set; }
 
         /// <summary>
-        /// Bucket name. Required for AWS, AWSGov, GCP and OCI.
+        /// Bucket Name. Required to enable configuration backup for AWS, AWSGov, GCP and OCI.
         /// </summary>
         [Input("backupBucketName")]
         public Input<string>? BackupBucketName { get; set; }
 
         /// <summary>
-        /// Type of cloud service provider, requires an integer value. Use 1 for AWS.
+        /// Type of cloud service provider, requires an integer value. Use 1 for AWS, 4 for GCP, 8 for Azure, 16 for OCI, and 256 for AWSGov.
         /// </summary>
         [Input("backupCloudType")]
         public Input<int>? BackupCloudType { get; set; }
 
         /// <summary>
-        /// Switch to enable/disable controller cloudn backup config.
+        /// Switch to enable/disable controller CloudN backup config. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("backupConfiguration")]
         public Input<bool>? BackupConfiguration { get; set; }
 
         /// <summary>
-        /// Container name. Required for Azure.
+        /// Container name. Required to enable configuration backup for Azure.
         /// </summary>
         [Input("backupContainerName")]
         public Input<string>? BackupContainerName { get; set; }
 
         /// <summary>
-        /// Name of region. Required for Azure and OCI.
+        /// Name of region. Required to enable configuration backup for Azure and OCI.
         /// </summary>
         [Input("backupRegion")]
         public Input<string>? BackupRegion { get; set; }
 
         /// <summary>
-        /// Storage name. Required for Azure.
+        /// Storage name. Required to enable configuration backup for Azure.
         /// </summary>
         [Input("backupStorageName")]
         public Input<string>? BackupStorageName { get; set; }
 
-        /// <summary>
-        /// CA certificate file.
-        /// </summary>
         [Input("caCertificateFile")]
-        public Input<string>? CaCertificateFile { get; set; }
+        private Input<string>? _caCertificateFile;
 
         /// <summary>
-        /// File path to the CA certificate.
+        /// CA certificate. To read certificate file from a file, please use the built-in `file` function. Available as of provider version R2.21.2+.
+        /// </summary>
+        public Input<string>? CaCertificateFile
+        {
+            get => _caCertificateFile;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _caCertificateFile = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// File path to CA certificate. Available as of provider version R2.18+.
         /// </summary>
         [Input("caCertificateFilePath")]
         public Input<string>? CaCertificateFilePath { get; set; }
 
         /// <summary>
-        /// Current version of the controller.
+        /// Current version of the controller including the build number. Example: "6.5.123". Available as of provider version R2.20.0+.
         /// </summary>
         [Input("currentVersion")]
         public Input<string>? CurrentVersion { get; set; }
 
         /// <summary>
-        /// Enable VPC/VNET DNS Server.
+        /// Enable VPC/VNET DNS Server for the controller. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableVpcDnsServer")]
         public Input<bool>? EnableVpcDnsServer { get; set; }
 
         /// <summary>
-        /// A system-wide mode. Default: true.
+        /// Enable/disable packets without an SNI field to pass through gateway(s). Valid values: true, false. Default value: true. For more information on this setting, please see [here](https://docs.aviatrix.com/HowTos/FQDN_Whitelists_Ref_Design.html#exception-rule)
         /// </summary>
         [Input("fqdnExceptionRule")]
         public Input<bool>? FqdnExceptionRule { get; set; }
 
         /// <summary>
-        /// Switch for http access. Default: false.
+        /// Switch for HTTP access. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("httpAccess")]
         public Input<bool>? HttpAccess { get; set; }
 
         /// <summary>
-        /// If true, aviatrix_controller_config will upgrade all gateways when target_version is set. If false, only the controller
-        /// will be upgraded when target_version is set. In that case gateway upgrades should be handled in each gateway resource
-        /// individually using the software_version and image_version attributes.
+        /// If true, aviatrix.AviatrixControllerConfig will upgrade all gateways when target_version is set. If false, only the controller will be upgraded when target_version is set. In that case gateway upgrades should be handled in each gateway resource individually using the software_version and image_version attributes. Type: boolean. Default: true. Available as of provider version R2.20.0+.
         /// </summary>
         [Input("manageGatewayUpgrades")]
         public Input<bool>? ManageGatewayUpgrades { get; set; }
 
         /// <summary>
-        /// Switch to enable the controller to backup up to a maximum of 3 rotating backups.
+        /// Switch to enable the Controller to backup up to a maximum of 3 rotating backups. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("multipleBackups")]
         public Input<bool>? MultipleBackups { get; set; }
 
         /// <summary>
-        /// Previous version of the controller.
+        /// Previous version of the controller including the build number. Example: "6.5.123". Available as of provider version R2.20.0+.
         /// </summary>
         [Input("previousVersion")]
         public Input<string>? PreviousVersion { get; set; }
 
-        /// <summary>
-        /// Server private key file.
-        /// </summary>
         [Input("serverPrivateKeyFile")]
-        public Input<string>? ServerPrivateKeyFile { get; set; }
+        private Input<string>? _serverPrivateKeyFile;
 
         /// <summary>
-        /// File path to the server private key.
+        /// Server private key. To read the private key from a file, please use the built-in `file` function. Available as of provider version R2.21.2+.
+        /// </summary>
+        public Input<string>? ServerPrivateKeyFile
+        {
+            get => _serverPrivateKeyFile;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _serverPrivateKeyFile = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// File path to server private key. Available as of provider version R2.18+.
         /// </summary>
         [Input("serverPrivateKeyFilePath")]
         public Input<string>? ServerPrivateKeyFilePath { get; set; }
 
-        /// <summary>
-        /// Server public certificate file.
-        /// </summary>
         [Input("serverPublicCertificateFile")]
-        public Input<string>? ServerPublicCertificateFile { get; set; }
+        private Input<string>? _serverPublicCertificateFile;
 
         /// <summary>
-        /// File path to the server public certificate.
+        /// Server public certificate. To read certificate file from a file, please use the built-in `file` function. Available as of provider version R2.21.2+.
+        /// </summary>
+        public Input<string>? ServerPublicCertificateFile
+        {
+            get => _serverPublicCertificateFile;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _serverPublicCertificateFile = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// File path to the server public certificate. Available as of provider version R2.18+.
         /// </summary>
         [Input("serverPublicCertificateFilePath")]
         public Input<string>? ServerPublicCertificateFilePath { get; set; }
 
         /// <summary>
-        /// The release version number to which the controller will be upgraded to.
+        /// The release version number to which the controller will be upgraded to. If not specified, controller will not be upgraded. If set to "latest", controller will be upgraded to the latest release. Please see the [Controller upgrade guide](https://docs.aviatrix.com/HowTos/inline_upgrade.html) for more information.
         /// </summary>
         [Input("targetVersion")]
         public Input<string>? TargetVersion { get; set; }
 
         /// <summary>
-        /// Current version of the controller without the build number.
+        /// Current version of the controller without build number. Example: "6.5"
         /// </summary>
         [Input("version")]
         public Input<string>? Version { get; set; }

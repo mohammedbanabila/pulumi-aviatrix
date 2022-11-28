@@ -11,119 +11,125 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// ## Import
+//
+// **site2cloud** can be imported using the `connection_name` and `vpc_id`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixSite2Cloud:AviatrixSite2Cloud test connection_name~vpc_id
+//
+// ```
 type AviatrixSite2Cloud struct {
 	pulumi.CustomResourceState
 
 	// Authentication Type. Valid values: 'PSK' and 'Cert'. Default value: 'PSK'.
 	AuthType pulumi.StringPtrOutput `pulumi:"authType"`
-	// Backup gateway name.
+	// Backup gateway name. **NOTE: Please see notes here regarding HA requirements.**
 	BackupGatewayName pulumi.StringPtrOutput `pulumi:"backupGatewayName"`
-	// Backup local tunnel IP address.
+	// Backup local tunnel IP address. Only valid when HA enabled route based connection. Available as of provider version R2.19+.
 	BackupLocalTunnelIp pulumi.StringPtrOutput `pulumi:"backupLocalTunnelIp"`
 	// Backup Pre-Shared Key.
 	BackupPreSharedKey pulumi.StringPtrOutput `pulumi:"backupPreSharedKey"`
-	// Backup remote remote gateway IP.
+	// Backup Remote Gateway IP. **NOTE: Please see notes here regarding HA requirements.**
 	BackupRemoteGatewayIp pulumi.StringOutput `pulumi:"backupRemoteGatewayIp"`
-	// Latitude of backup remote gateway.
+	// Latitude of backup remote gateway. Does not support refresh.
 	BackupRemoteGatewayLatitude pulumi.Float64PtrOutput `pulumi:"backupRemoteGatewayLatitude"`
-	// Longitude of backup remote gateway.
+	// Longitude of backup remote gateway. Does not support refresh.
 	BackupRemoteGatewayLongitude pulumi.Float64PtrOutput `pulumi:"backupRemoteGatewayLongitude"`
-	// Backup remote identifier. Required for Cert based authentication type with HA enabled.
+	// Backup remote identifier. Required for Cert based authentication type with HA enabled. Example: "gw-10-10-0-116".
 	BackupRemoteIdentifier pulumi.StringPtrOutput `pulumi:"backupRemoteIdentifier"`
-	// Backup remote tunnel IP address.
+	// Backup remote tunnel IP address. Only valid when HA enabled route based connection. Available as of provider version R2.19+.
 	BackupRemoteTunnelIp pulumi.StringPtrOutput `pulumi:"backupRemoteTunnelIp"`
 	// Name of Remote CA Certificate Tag for creating Site2Cloud tunnels. Required for Cert based authentication type.
 	CaCertTagName pulumi.StringPtrOutput `pulumi:"caCertTagName"`
-	// Site2Cloud Connection Name.
+	// Site2Cloud connection name.
 	ConnectionName pulumi.StringOutput `pulumi:"connectionName"`
-	// Connection Type. Valid values: 'mapped' and 'unmapped'.
+	// Connection type. Valid Values: "mapped", "unmapped".
 	ConnectionType pulumi.StringOutput `pulumi:"connectionType"`
-	// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption.
+	// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption. Valid values: true, false. **NOTE: Please see notes here for more information.**
 	CustomAlgorithms pulumi.BoolPtrOutput `pulumi:"customAlgorithms"`
-	// Enable custom mapped.
+	// Enable custom mapped connection. Default value: false. Valid values: true/false. Available in provider version R2.17.1+.
 	CustomMapped pulumi.BoolPtrOutput `pulumi:"customMapped"`
-	// Switch to Enable/Disable active_active_ha for an existing site2cloud connection.
+	// Enable/disable active active HA for an existing site2cloud connection. Valid values: true, false. Default value: false.
 	EnableActiveActive pulumi.BoolPtrOutput `pulumi:"enableActiveActive"`
-	// Switch to Enable/Disable Deed Peer Detection for an existing site2cloud connection.
+	// Enable/disable Deed Peer Detection for an existing site2cloud connection. Default value: true. **NOTE: Please see notes here in regards to any deltas found in your state with the addition of this argument in R1.9**
 	EnableDeadPeerDetection pulumi.BoolPtrOutput `pulumi:"enableDeadPeerDetection"`
-	// Enable Event Triggered HA.
+	// Enable Event Triggered HA. Default value: false. Valid values: true or false. Available as of provider version R2.19+.
 	EnableEventTriggeredHa pulumi.BoolPtrOutput `pulumi:"enableEventTriggeredHa"`
-	// Switch to enable IKEv2 for policy based site2cloud.
+	// Switch to enable IKEv2. Valid values: true, false. Default value: false.
 	EnableIkev2 pulumi.BoolPtrOutput `pulumi:"enableIkev2"`
-	// Enable single IP HA on a site2cloud connection.
+	// Enable single IP HA feature. Available as of provider version 2.19+.
 	EnableSingleIpHa pulumi.BoolPtrOutput `pulumi:"enableSingleIpHa"`
-	// Enable spoke gateway with mapped site2cloud configurations to forward traffic from site2cloud connection to Aviatrix
-	// Transit Gateway.
+	// Enable spoke gateway with mapped site2cloud configurations to forward traffic from site2cloud connection to Aviatrix Transit Gateway. Default value: false. Valid values: true or false. Available in provider version 2.17.2+.
 	ForwardTrafficToTransit pulumi.BoolPtrOutput `pulumi:"forwardTrafficToTransit"`
-	// Specify whether enabling HA or not.
+	// Specify whether or not to enable HA. Valid Values: true, false. **NOTE: Please see notes here regarding HA requirements.**
 	HaEnabled pulumi.BoolPtrOutput `pulumi:"haEnabled"`
-	// Local Initiated Traffic Destination Real CIDRs.
+	// List of Local Initiated Traffic Destination Real CIDRs.
 	LocalDestinationRealCidrs pulumi.StringArrayOutput `pulumi:"localDestinationRealCidrs"`
-	// Local Initiated Traffic Destination Virtual CIDRs.
+	// List of Local Initiated Traffic Destination Virtual CIDRs.
 	LocalDestinationVirtualCidrs pulumi.StringArrayOutput `pulumi:"localDestinationVirtualCidrs"`
-	// Local Initiated Traffic Source Real CIDRs.
+	// List of Local Initiated Traffic Source Real CIDRs.
 	LocalSourceRealCidrs pulumi.StringArrayOutput `pulumi:"localSourceRealCidrs"`
-	// Local Initiated Traffic Source Virtual CIDRs.
+	// List of Local Initiated Traffic Source Virtual CIDRs.
 	LocalSourceVirtualCidrs pulumi.StringArrayOutput `pulumi:"localSourceVirtualCidrs"`
-	// Local Subnet CIDR.
+	// Local subnet CIDR. **Required for connection type "mapped", except for `customMapped` connection.**
 	LocalSubnetCidr pulumi.StringOutput `pulumi:"localSubnetCidr"`
-	// Local Subnet CIDR (Virtual).
+	// Local subnet CIDR (Virtual). **Required for connection type "mapped", except for `customMapped` connection.**
 	LocalSubnetVirtual pulumi.StringPtrOutput `pulumi:"localSubnetVirtual"`
-	// Local tunnel IP address.
+	// Local tunnel IP address. Only valid for route based connection. Available as of provider version R2.19+.
 	LocalTunnelIp pulumi.StringPtrOutput `pulumi:"localTunnelIp"`
-	// Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'.
+	// Phase one Authentication. Valid values: "SHA-1", "SHA-256", "SHA-384" and "SHA-512". Default value: "SHA-256".
 	Phase1Authentication pulumi.StringPtrOutput `pulumi:"phase1Authentication"`
-	// Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+	// Phase one DH Groups. Valid values: "1", "2", "5", "14", "15", "16", "17", "18", "19", "20" and "21". Default value: "14".
 	Phase1DhGroups pulumi.StringPtrOutput `pulumi:"phase1DhGroups"`
-	// Phase one Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC' and 'AES-256-CBC', 'AES-128-GCM-64',
-	// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', and 'AES-256-GCM-128'.
+	// Phase one Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", and "AES-256-GCM-128". Default value: "AES-256-CBC".
 	Phase1Encryption pulumi.StringPtrOutput `pulumi:"phase1Encryption"`
-	// Phase 1 remote identifier of the IPsec tunnel.
+	// Phase 1 remote identifier of the IPsec tunnel. This can be configured to be either the public IP address or the private IP address of the peer terminating the IPsec tunnel. Example: ["1.2.3.4"] when HA is disabled, ["1.2.3.4", "5.6.7.8"] when HA is enabled. Available as of provider version R2.19+.
 	Phase1RemoteIdentifiers pulumi.StringArrayOutput `pulumi:"phase1RemoteIdentifiers"`
-	// Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'.
+	// Phase two Authentication. Valid values: "NO-AUTH", "HMAC-SHA-1", "HMAC-SHA-256", "HMAC-SHA-384" and "HMAC-SHA-512". Default value: "HMAC-SHA-256".
 	Phase2Authentication pulumi.StringPtrOutput `pulumi:"phase2Authentication"`
-	// Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+	// Phase two DH Groups. Valid values: "1", "2", "5", "14", "15", "16", "17", "18", "19", "20" and "21". Default value: "14".
 	Phase2DhGroups pulumi.StringPtrOutput `pulumi:"phase2DhGroups"`
-	// Phase two Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'AES-128-GCM-64',
-	// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', 'AES-256-GCM-128', and 'NULL-ENCR'.
+	// Phase two Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", "AES-256-GCM-128" and "NULL-ENCR". Default value: "AES-256-CBC".
 	Phase2Encryption pulumi.StringPtrOutput `pulumi:"phase2Encryption"`
 	// Pre-Shared Key.
 	PreSharedKey pulumi.StringPtrOutput `pulumi:"preSharedKey"`
-	// Primary Cloud Gateway Name.
+	// Primary cloud gateway name.
 	PrimaryCloudGatewayName pulumi.StringOutput `pulumi:"primaryCloudGatewayName"`
-	// Private route encryption switch.
+	// Private route encryption switch. Valid values: true, false.
 	PrivateRouteEncryption pulumi.BoolPtrOutput `pulumi:"privateRouteEncryption"`
-	// Remote Initiated Traffic Destination Real CIDRs.
+	// List of  Remote Initiated Traffic Destination Real CIDRs.
 	RemoteDestinationRealCidrs pulumi.StringArrayOutput `pulumi:"remoteDestinationRealCidrs"`
-	// Remote Initiated Traffic Destination Virtual CIDRs.
+	// List of Remote Initiated Traffic Destination Virtual CIDRs.
 	RemoteDestinationVirtualCidrs pulumi.StringArrayOutput `pulumi:"remoteDestinationVirtualCidrs"`
-	// Remote Gateway IP.
+	// Remote gateway IP.
 	RemoteGatewayIp pulumi.StringOutput `pulumi:"remoteGatewayIp"`
-	// Latitude of remote gateway.
+	// Latitude of remote gateway. Does not support refresh.
 	RemoteGatewayLatitude pulumi.Float64PtrOutput `pulumi:"remoteGatewayLatitude"`
-	// Longitude of remote gateway.
+	// Longitude of remote gateway. Does not support refresh.
 	RemoteGatewayLongitude pulumi.Float64PtrOutput `pulumi:"remoteGatewayLongitude"`
-	// Remote gateway type. Valid values: 'generic', 'avx', 'aws', 'azure', 'sonicwall' and 'oracle'.
+	// Remote gateway type. Valid Values: "generic", "avx", "aws", "azure", "sonicwall", "oracle".
 	RemoteGatewayType pulumi.StringOutput `pulumi:"remoteGatewayType"`
-	// Remote identifier. Required for Cert based authentication type.
+	// Remote identifier. Required for Cert based authentication type. Example: "gw-10-10-0-115".
 	RemoteIdentifier pulumi.StringPtrOutput `pulumi:"remoteIdentifier"`
-	// Remote Initiated Traffic Source Real CIDRs.
+	// List of Remote Initiated Traffic Source Real CIDRs.
 	RemoteSourceRealCidrs pulumi.StringArrayOutput `pulumi:"remoteSourceRealCidrs"`
-	// Remote Initiated Traffic Source Virtual CIDRs.
+	// List of Remote Initiated Traffic Source Virtual CIDRs.
 	RemoteSourceVirtualCidrs pulumi.StringArrayOutput `pulumi:"remoteSourceVirtualCidrs"`
-	// Remote Subnet CIDR.
+	// Remote subnet CIDR. **Not required for customMapped connection.**
 	RemoteSubnetCidr pulumi.StringPtrOutput `pulumi:"remoteSubnetCidr"`
-	// Remote Subnet CIDR (Virtual).
+	// Remote subnet CIDR (Virtual). **Required for connection type "mapped", except for `customMapped` connection.**
 	RemoteSubnetVirtual pulumi.StringPtrOutput `pulumi:"remoteSubnetVirtual"`
-	// Remote tunnel IP address.
+	// Remote tunnel IP address. Only valid for route based connection. Available as of provider version R2.19+.
 	RemoteTunnelIp pulumi.StringPtrOutput `pulumi:"remoteTunnelIp"`
 	// Route tables to modify.
 	RouteTableLists pulumi.StringArrayOutput `pulumi:"routeTableLists"`
-	// Specify ssl_server_pool for tunnel_type 'tcp'. Default value is '192.168.44.0/24'
+	// Specify ssl_server_pool. Default value: "192.168.44.0/24". **NOTE: Please see notes here for more information.**
 	SslServerPool pulumi.StringPtrOutput `pulumi:"sslServerPool"`
-	// Site2Cloud Tunnel Type. Valid values: 'policy' and 'route'.
+	// Site2Cloud tunnel type. Valid Values: "policy", "route".
 	TunnelType pulumi.StringOutput `pulumi:"tunnelType"`
-	// VPC Id of the cloud gateway.
+	// VPC ID of the cloud gateway.
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
 }
 
@@ -155,6 +161,17 @@ func NewAviatrixSite2Cloud(ctx *pulumi.Context,
 	if args.VpcId == nil {
 		return nil, errors.New("invalid value for required argument 'VpcId'")
 	}
+	if args.BackupPreSharedKey != nil {
+		args.BackupPreSharedKey = pulumi.ToSecret(args.BackupPreSharedKey).(pulumi.StringPtrOutput)
+	}
+	if args.PreSharedKey != nil {
+		args.PreSharedKey = pulumi.ToSecret(args.PreSharedKey).(pulumi.StringPtrOutput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"backupPreSharedKey",
+		"preSharedKey",
+	})
+	opts = append(opts, secrets)
 	opts = pkgResourceDefaultOpts(opts)
 	var resource AviatrixSite2Cloud
 	err := ctx.RegisterResource("aviatrix:index/aviatrixSite2Cloud:AviatrixSite2Cloud", name, args, &resource, opts...)
@@ -180,228 +197,222 @@ func GetAviatrixSite2Cloud(ctx *pulumi.Context,
 type aviatrixSite2CloudState struct {
 	// Authentication Type. Valid values: 'PSK' and 'Cert'. Default value: 'PSK'.
 	AuthType *string `pulumi:"authType"`
-	// Backup gateway name.
+	// Backup gateway name. **NOTE: Please see notes here regarding HA requirements.**
 	BackupGatewayName *string `pulumi:"backupGatewayName"`
-	// Backup local tunnel IP address.
+	// Backup local tunnel IP address. Only valid when HA enabled route based connection. Available as of provider version R2.19+.
 	BackupLocalTunnelIp *string `pulumi:"backupLocalTunnelIp"`
 	// Backup Pre-Shared Key.
 	BackupPreSharedKey *string `pulumi:"backupPreSharedKey"`
-	// Backup remote remote gateway IP.
+	// Backup Remote Gateway IP. **NOTE: Please see notes here regarding HA requirements.**
 	BackupRemoteGatewayIp *string `pulumi:"backupRemoteGatewayIp"`
-	// Latitude of backup remote gateway.
+	// Latitude of backup remote gateway. Does not support refresh.
 	BackupRemoteGatewayLatitude *float64 `pulumi:"backupRemoteGatewayLatitude"`
-	// Longitude of backup remote gateway.
+	// Longitude of backup remote gateway. Does not support refresh.
 	BackupRemoteGatewayLongitude *float64 `pulumi:"backupRemoteGatewayLongitude"`
-	// Backup remote identifier. Required for Cert based authentication type with HA enabled.
+	// Backup remote identifier. Required for Cert based authentication type with HA enabled. Example: "gw-10-10-0-116".
 	BackupRemoteIdentifier *string `pulumi:"backupRemoteIdentifier"`
-	// Backup remote tunnel IP address.
+	// Backup remote tunnel IP address. Only valid when HA enabled route based connection. Available as of provider version R2.19+.
 	BackupRemoteTunnelIp *string `pulumi:"backupRemoteTunnelIp"`
 	// Name of Remote CA Certificate Tag for creating Site2Cloud tunnels. Required for Cert based authentication type.
 	CaCertTagName *string `pulumi:"caCertTagName"`
-	// Site2Cloud Connection Name.
+	// Site2Cloud connection name.
 	ConnectionName *string `pulumi:"connectionName"`
-	// Connection Type. Valid values: 'mapped' and 'unmapped'.
+	// Connection type. Valid Values: "mapped", "unmapped".
 	ConnectionType *string `pulumi:"connectionType"`
-	// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption.
+	// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption. Valid values: true, false. **NOTE: Please see notes here for more information.**
 	CustomAlgorithms *bool `pulumi:"customAlgorithms"`
-	// Enable custom mapped.
+	// Enable custom mapped connection. Default value: false. Valid values: true/false. Available in provider version R2.17.1+.
 	CustomMapped *bool `pulumi:"customMapped"`
-	// Switch to Enable/Disable active_active_ha for an existing site2cloud connection.
+	// Enable/disable active active HA for an existing site2cloud connection. Valid values: true, false. Default value: false.
 	EnableActiveActive *bool `pulumi:"enableActiveActive"`
-	// Switch to Enable/Disable Deed Peer Detection for an existing site2cloud connection.
+	// Enable/disable Deed Peer Detection for an existing site2cloud connection. Default value: true. **NOTE: Please see notes here in regards to any deltas found in your state with the addition of this argument in R1.9**
 	EnableDeadPeerDetection *bool `pulumi:"enableDeadPeerDetection"`
-	// Enable Event Triggered HA.
+	// Enable Event Triggered HA. Default value: false. Valid values: true or false. Available as of provider version R2.19+.
 	EnableEventTriggeredHa *bool `pulumi:"enableEventTriggeredHa"`
-	// Switch to enable IKEv2 for policy based site2cloud.
+	// Switch to enable IKEv2. Valid values: true, false. Default value: false.
 	EnableIkev2 *bool `pulumi:"enableIkev2"`
-	// Enable single IP HA on a site2cloud connection.
+	// Enable single IP HA feature. Available as of provider version 2.19+.
 	EnableSingleIpHa *bool `pulumi:"enableSingleIpHa"`
-	// Enable spoke gateway with mapped site2cloud configurations to forward traffic from site2cloud connection to Aviatrix
-	// Transit Gateway.
+	// Enable spoke gateway with mapped site2cloud configurations to forward traffic from site2cloud connection to Aviatrix Transit Gateway. Default value: false. Valid values: true or false. Available in provider version 2.17.2+.
 	ForwardTrafficToTransit *bool `pulumi:"forwardTrafficToTransit"`
-	// Specify whether enabling HA or not.
+	// Specify whether or not to enable HA. Valid Values: true, false. **NOTE: Please see notes here regarding HA requirements.**
 	HaEnabled *bool `pulumi:"haEnabled"`
-	// Local Initiated Traffic Destination Real CIDRs.
+	// List of Local Initiated Traffic Destination Real CIDRs.
 	LocalDestinationRealCidrs []string `pulumi:"localDestinationRealCidrs"`
-	// Local Initiated Traffic Destination Virtual CIDRs.
+	// List of Local Initiated Traffic Destination Virtual CIDRs.
 	LocalDestinationVirtualCidrs []string `pulumi:"localDestinationVirtualCidrs"`
-	// Local Initiated Traffic Source Real CIDRs.
+	// List of Local Initiated Traffic Source Real CIDRs.
 	LocalSourceRealCidrs []string `pulumi:"localSourceRealCidrs"`
-	// Local Initiated Traffic Source Virtual CIDRs.
+	// List of Local Initiated Traffic Source Virtual CIDRs.
 	LocalSourceVirtualCidrs []string `pulumi:"localSourceVirtualCidrs"`
-	// Local Subnet CIDR.
+	// Local subnet CIDR. **Required for connection type "mapped", except for `customMapped` connection.**
 	LocalSubnetCidr *string `pulumi:"localSubnetCidr"`
-	// Local Subnet CIDR (Virtual).
+	// Local subnet CIDR (Virtual). **Required for connection type "mapped", except for `customMapped` connection.**
 	LocalSubnetVirtual *string `pulumi:"localSubnetVirtual"`
-	// Local tunnel IP address.
+	// Local tunnel IP address. Only valid for route based connection. Available as of provider version R2.19+.
 	LocalTunnelIp *string `pulumi:"localTunnelIp"`
-	// Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'.
+	// Phase one Authentication. Valid values: "SHA-1", "SHA-256", "SHA-384" and "SHA-512". Default value: "SHA-256".
 	Phase1Authentication *string `pulumi:"phase1Authentication"`
-	// Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+	// Phase one DH Groups. Valid values: "1", "2", "5", "14", "15", "16", "17", "18", "19", "20" and "21". Default value: "14".
 	Phase1DhGroups *string `pulumi:"phase1DhGroups"`
-	// Phase one Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC' and 'AES-256-CBC', 'AES-128-GCM-64',
-	// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', and 'AES-256-GCM-128'.
+	// Phase one Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", and "AES-256-GCM-128". Default value: "AES-256-CBC".
 	Phase1Encryption *string `pulumi:"phase1Encryption"`
-	// Phase 1 remote identifier of the IPsec tunnel.
+	// Phase 1 remote identifier of the IPsec tunnel. This can be configured to be either the public IP address or the private IP address of the peer terminating the IPsec tunnel. Example: ["1.2.3.4"] when HA is disabled, ["1.2.3.4", "5.6.7.8"] when HA is enabled. Available as of provider version R2.19+.
 	Phase1RemoteIdentifiers []string `pulumi:"phase1RemoteIdentifiers"`
-	// Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'.
+	// Phase two Authentication. Valid values: "NO-AUTH", "HMAC-SHA-1", "HMAC-SHA-256", "HMAC-SHA-384" and "HMAC-SHA-512". Default value: "HMAC-SHA-256".
 	Phase2Authentication *string `pulumi:"phase2Authentication"`
-	// Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+	// Phase two DH Groups. Valid values: "1", "2", "5", "14", "15", "16", "17", "18", "19", "20" and "21". Default value: "14".
 	Phase2DhGroups *string `pulumi:"phase2DhGroups"`
-	// Phase two Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'AES-128-GCM-64',
-	// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', 'AES-256-GCM-128', and 'NULL-ENCR'.
+	// Phase two Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", "AES-256-GCM-128" and "NULL-ENCR". Default value: "AES-256-CBC".
 	Phase2Encryption *string `pulumi:"phase2Encryption"`
 	// Pre-Shared Key.
 	PreSharedKey *string `pulumi:"preSharedKey"`
-	// Primary Cloud Gateway Name.
+	// Primary cloud gateway name.
 	PrimaryCloudGatewayName *string `pulumi:"primaryCloudGatewayName"`
-	// Private route encryption switch.
+	// Private route encryption switch. Valid values: true, false.
 	PrivateRouteEncryption *bool `pulumi:"privateRouteEncryption"`
-	// Remote Initiated Traffic Destination Real CIDRs.
+	// List of  Remote Initiated Traffic Destination Real CIDRs.
 	RemoteDestinationRealCidrs []string `pulumi:"remoteDestinationRealCidrs"`
-	// Remote Initiated Traffic Destination Virtual CIDRs.
+	// List of Remote Initiated Traffic Destination Virtual CIDRs.
 	RemoteDestinationVirtualCidrs []string `pulumi:"remoteDestinationVirtualCidrs"`
-	// Remote Gateway IP.
+	// Remote gateway IP.
 	RemoteGatewayIp *string `pulumi:"remoteGatewayIp"`
-	// Latitude of remote gateway.
+	// Latitude of remote gateway. Does not support refresh.
 	RemoteGatewayLatitude *float64 `pulumi:"remoteGatewayLatitude"`
-	// Longitude of remote gateway.
+	// Longitude of remote gateway. Does not support refresh.
 	RemoteGatewayLongitude *float64 `pulumi:"remoteGatewayLongitude"`
-	// Remote gateway type. Valid values: 'generic', 'avx', 'aws', 'azure', 'sonicwall' and 'oracle'.
+	// Remote gateway type. Valid Values: "generic", "avx", "aws", "azure", "sonicwall", "oracle".
 	RemoteGatewayType *string `pulumi:"remoteGatewayType"`
-	// Remote identifier. Required for Cert based authentication type.
+	// Remote identifier. Required for Cert based authentication type. Example: "gw-10-10-0-115".
 	RemoteIdentifier *string `pulumi:"remoteIdentifier"`
-	// Remote Initiated Traffic Source Real CIDRs.
+	// List of Remote Initiated Traffic Source Real CIDRs.
 	RemoteSourceRealCidrs []string `pulumi:"remoteSourceRealCidrs"`
-	// Remote Initiated Traffic Source Virtual CIDRs.
+	// List of Remote Initiated Traffic Source Virtual CIDRs.
 	RemoteSourceVirtualCidrs []string `pulumi:"remoteSourceVirtualCidrs"`
-	// Remote Subnet CIDR.
+	// Remote subnet CIDR. **Not required for customMapped connection.**
 	RemoteSubnetCidr *string `pulumi:"remoteSubnetCidr"`
-	// Remote Subnet CIDR (Virtual).
+	// Remote subnet CIDR (Virtual). **Required for connection type "mapped", except for `customMapped` connection.**
 	RemoteSubnetVirtual *string `pulumi:"remoteSubnetVirtual"`
-	// Remote tunnel IP address.
+	// Remote tunnel IP address. Only valid for route based connection. Available as of provider version R2.19+.
 	RemoteTunnelIp *string `pulumi:"remoteTunnelIp"`
 	// Route tables to modify.
 	RouteTableLists []string `pulumi:"routeTableLists"`
-	// Specify ssl_server_pool for tunnel_type 'tcp'. Default value is '192.168.44.0/24'
+	// Specify ssl_server_pool. Default value: "192.168.44.0/24". **NOTE: Please see notes here for more information.**
 	SslServerPool *string `pulumi:"sslServerPool"`
-	// Site2Cloud Tunnel Type. Valid values: 'policy' and 'route'.
+	// Site2Cloud tunnel type. Valid Values: "policy", "route".
 	TunnelType *string `pulumi:"tunnelType"`
-	// VPC Id of the cloud gateway.
+	// VPC ID of the cloud gateway.
 	VpcId *string `pulumi:"vpcId"`
 }
 
 type AviatrixSite2CloudState struct {
 	// Authentication Type. Valid values: 'PSK' and 'Cert'. Default value: 'PSK'.
 	AuthType pulumi.StringPtrInput
-	// Backup gateway name.
+	// Backup gateway name. **NOTE: Please see notes here regarding HA requirements.**
 	BackupGatewayName pulumi.StringPtrInput
-	// Backup local tunnel IP address.
+	// Backup local tunnel IP address. Only valid when HA enabled route based connection. Available as of provider version R2.19+.
 	BackupLocalTunnelIp pulumi.StringPtrInput
 	// Backup Pre-Shared Key.
 	BackupPreSharedKey pulumi.StringPtrInput
-	// Backup remote remote gateway IP.
+	// Backup Remote Gateway IP. **NOTE: Please see notes here regarding HA requirements.**
 	BackupRemoteGatewayIp pulumi.StringPtrInput
-	// Latitude of backup remote gateway.
+	// Latitude of backup remote gateway. Does not support refresh.
 	BackupRemoteGatewayLatitude pulumi.Float64PtrInput
-	// Longitude of backup remote gateway.
+	// Longitude of backup remote gateway. Does not support refresh.
 	BackupRemoteGatewayLongitude pulumi.Float64PtrInput
-	// Backup remote identifier. Required for Cert based authentication type with HA enabled.
+	// Backup remote identifier. Required for Cert based authentication type with HA enabled. Example: "gw-10-10-0-116".
 	BackupRemoteIdentifier pulumi.StringPtrInput
-	// Backup remote tunnel IP address.
+	// Backup remote tunnel IP address. Only valid when HA enabled route based connection. Available as of provider version R2.19+.
 	BackupRemoteTunnelIp pulumi.StringPtrInput
 	// Name of Remote CA Certificate Tag for creating Site2Cloud tunnels. Required for Cert based authentication type.
 	CaCertTagName pulumi.StringPtrInput
-	// Site2Cloud Connection Name.
+	// Site2Cloud connection name.
 	ConnectionName pulumi.StringPtrInput
-	// Connection Type. Valid values: 'mapped' and 'unmapped'.
+	// Connection type. Valid Values: "mapped", "unmapped".
 	ConnectionType pulumi.StringPtrInput
-	// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption.
+	// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption. Valid values: true, false. **NOTE: Please see notes here for more information.**
 	CustomAlgorithms pulumi.BoolPtrInput
-	// Enable custom mapped.
+	// Enable custom mapped connection. Default value: false. Valid values: true/false. Available in provider version R2.17.1+.
 	CustomMapped pulumi.BoolPtrInput
-	// Switch to Enable/Disable active_active_ha for an existing site2cloud connection.
+	// Enable/disable active active HA for an existing site2cloud connection. Valid values: true, false. Default value: false.
 	EnableActiveActive pulumi.BoolPtrInput
-	// Switch to Enable/Disable Deed Peer Detection for an existing site2cloud connection.
+	// Enable/disable Deed Peer Detection for an existing site2cloud connection. Default value: true. **NOTE: Please see notes here in regards to any deltas found in your state with the addition of this argument in R1.9**
 	EnableDeadPeerDetection pulumi.BoolPtrInput
-	// Enable Event Triggered HA.
+	// Enable Event Triggered HA. Default value: false. Valid values: true or false. Available as of provider version R2.19+.
 	EnableEventTriggeredHa pulumi.BoolPtrInput
-	// Switch to enable IKEv2 for policy based site2cloud.
+	// Switch to enable IKEv2. Valid values: true, false. Default value: false.
 	EnableIkev2 pulumi.BoolPtrInput
-	// Enable single IP HA on a site2cloud connection.
+	// Enable single IP HA feature. Available as of provider version 2.19+.
 	EnableSingleIpHa pulumi.BoolPtrInput
-	// Enable spoke gateway with mapped site2cloud configurations to forward traffic from site2cloud connection to Aviatrix
-	// Transit Gateway.
+	// Enable spoke gateway with mapped site2cloud configurations to forward traffic from site2cloud connection to Aviatrix Transit Gateway. Default value: false. Valid values: true or false. Available in provider version 2.17.2+.
 	ForwardTrafficToTransit pulumi.BoolPtrInput
-	// Specify whether enabling HA or not.
+	// Specify whether or not to enable HA. Valid Values: true, false. **NOTE: Please see notes here regarding HA requirements.**
 	HaEnabled pulumi.BoolPtrInput
-	// Local Initiated Traffic Destination Real CIDRs.
+	// List of Local Initiated Traffic Destination Real CIDRs.
 	LocalDestinationRealCidrs pulumi.StringArrayInput
-	// Local Initiated Traffic Destination Virtual CIDRs.
+	// List of Local Initiated Traffic Destination Virtual CIDRs.
 	LocalDestinationVirtualCidrs pulumi.StringArrayInput
-	// Local Initiated Traffic Source Real CIDRs.
+	// List of Local Initiated Traffic Source Real CIDRs.
 	LocalSourceRealCidrs pulumi.StringArrayInput
-	// Local Initiated Traffic Source Virtual CIDRs.
+	// List of Local Initiated Traffic Source Virtual CIDRs.
 	LocalSourceVirtualCidrs pulumi.StringArrayInput
-	// Local Subnet CIDR.
+	// Local subnet CIDR. **Required for connection type "mapped", except for `customMapped` connection.**
 	LocalSubnetCidr pulumi.StringPtrInput
-	// Local Subnet CIDR (Virtual).
+	// Local subnet CIDR (Virtual). **Required for connection type "mapped", except for `customMapped` connection.**
 	LocalSubnetVirtual pulumi.StringPtrInput
-	// Local tunnel IP address.
+	// Local tunnel IP address. Only valid for route based connection. Available as of provider version R2.19+.
 	LocalTunnelIp pulumi.StringPtrInput
-	// Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'.
+	// Phase one Authentication. Valid values: "SHA-1", "SHA-256", "SHA-384" and "SHA-512". Default value: "SHA-256".
 	Phase1Authentication pulumi.StringPtrInput
-	// Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+	// Phase one DH Groups. Valid values: "1", "2", "5", "14", "15", "16", "17", "18", "19", "20" and "21". Default value: "14".
 	Phase1DhGroups pulumi.StringPtrInput
-	// Phase one Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC' and 'AES-256-CBC', 'AES-128-GCM-64',
-	// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', and 'AES-256-GCM-128'.
+	// Phase one Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", and "AES-256-GCM-128". Default value: "AES-256-CBC".
 	Phase1Encryption pulumi.StringPtrInput
-	// Phase 1 remote identifier of the IPsec tunnel.
+	// Phase 1 remote identifier of the IPsec tunnel. This can be configured to be either the public IP address or the private IP address of the peer terminating the IPsec tunnel. Example: ["1.2.3.4"] when HA is disabled, ["1.2.3.4", "5.6.7.8"] when HA is enabled. Available as of provider version R2.19+.
 	Phase1RemoteIdentifiers pulumi.StringArrayInput
-	// Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'.
+	// Phase two Authentication. Valid values: "NO-AUTH", "HMAC-SHA-1", "HMAC-SHA-256", "HMAC-SHA-384" and "HMAC-SHA-512". Default value: "HMAC-SHA-256".
 	Phase2Authentication pulumi.StringPtrInput
-	// Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+	// Phase two DH Groups. Valid values: "1", "2", "5", "14", "15", "16", "17", "18", "19", "20" and "21". Default value: "14".
 	Phase2DhGroups pulumi.StringPtrInput
-	// Phase two Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'AES-128-GCM-64',
-	// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', 'AES-256-GCM-128', and 'NULL-ENCR'.
+	// Phase two Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", "AES-256-GCM-128" and "NULL-ENCR". Default value: "AES-256-CBC".
 	Phase2Encryption pulumi.StringPtrInput
 	// Pre-Shared Key.
 	PreSharedKey pulumi.StringPtrInput
-	// Primary Cloud Gateway Name.
+	// Primary cloud gateway name.
 	PrimaryCloudGatewayName pulumi.StringPtrInput
-	// Private route encryption switch.
+	// Private route encryption switch. Valid values: true, false.
 	PrivateRouteEncryption pulumi.BoolPtrInput
-	// Remote Initiated Traffic Destination Real CIDRs.
+	// List of  Remote Initiated Traffic Destination Real CIDRs.
 	RemoteDestinationRealCidrs pulumi.StringArrayInput
-	// Remote Initiated Traffic Destination Virtual CIDRs.
+	// List of Remote Initiated Traffic Destination Virtual CIDRs.
 	RemoteDestinationVirtualCidrs pulumi.StringArrayInput
-	// Remote Gateway IP.
+	// Remote gateway IP.
 	RemoteGatewayIp pulumi.StringPtrInput
-	// Latitude of remote gateway.
+	// Latitude of remote gateway. Does not support refresh.
 	RemoteGatewayLatitude pulumi.Float64PtrInput
-	// Longitude of remote gateway.
+	// Longitude of remote gateway. Does not support refresh.
 	RemoteGatewayLongitude pulumi.Float64PtrInput
-	// Remote gateway type. Valid values: 'generic', 'avx', 'aws', 'azure', 'sonicwall' and 'oracle'.
+	// Remote gateway type. Valid Values: "generic", "avx", "aws", "azure", "sonicwall", "oracle".
 	RemoteGatewayType pulumi.StringPtrInput
-	// Remote identifier. Required for Cert based authentication type.
+	// Remote identifier. Required for Cert based authentication type. Example: "gw-10-10-0-115".
 	RemoteIdentifier pulumi.StringPtrInput
-	// Remote Initiated Traffic Source Real CIDRs.
+	// List of Remote Initiated Traffic Source Real CIDRs.
 	RemoteSourceRealCidrs pulumi.StringArrayInput
-	// Remote Initiated Traffic Source Virtual CIDRs.
+	// List of Remote Initiated Traffic Source Virtual CIDRs.
 	RemoteSourceVirtualCidrs pulumi.StringArrayInput
-	// Remote Subnet CIDR.
+	// Remote subnet CIDR. **Not required for customMapped connection.**
 	RemoteSubnetCidr pulumi.StringPtrInput
-	// Remote Subnet CIDR (Virtual).
+	// Remote subnet CIDR (Virtual). **Required for connection type "mapped", except for `customMapped` connection.**
 	RemoteSubnetVirtual pulumi.StringPtrInput
-	// Remote tunnel IP address.
+	// Remote tunnel IP address. Only valid for route based connection. Available as of provider version R2.19+.
 	RemoteTunnelIp pulumi.StringPtrInput
 	// Route tables to modify.
 	RouteTableLists pulumi.StringArrayInput
-	// Specify ssl_server_pool for tunnel_type 'tcp'. Default value is '192.168.44.0/24'
+	// Specify ssl_server_pool. Default value: "192.168.44.0/24". **NOTE: Please see notes here for more information.**
 	SslServerPool pulumi.StringPtrInput
-	// Site2Cloud Tunnel Type. Valid values: 'policy' and 'route'.
+	// Site2Cloud tunnel type. Valid Values: "policy", "route".
 	TunnelType pulumi.StringPtrInput
-	// VPC Id of the cloud gateway.
+	// VPC ID of the cloud gateway.
 	VpcId pulumi.StringPtrInput
 }
 
@@ -412,114 +423,111 @@ func (AviatrixSite2CloudState) ElementType() reflect.Type {
 type aviatrixSite2CloudArgs struct {
 	// Authentication Type. Valid values: 'PSK' and 'Cert'. Default value: 'PSK'.
 	AuthType *string `pulumi:"authType"`
-	// Backup gateway name.
+	// Backup gateway name. **NOTE: Please see notes here regarding HA requirements.**
 	BackupGatewayName *string `pulumi:"backupGatewayName"`
-	// Backup local tunnel IP address.
+	// Backup local tunnel IP address. Only valid when HA enabled route based connection. Available as of provider version R2.19+.
 	BackupLocalTunnelIp *string `pulumi:"backupLocalTunnelIp"`
 	// Backup Pre-Shared Key.
 	BackupPreSharedKey *string `pulumi:"backupPreSharedKey"`
-	// Backup remote remote gateway IP.
+	// Backup Remote Gateway IP. **NOTE: Please see notes here regarding HA requirements.**
 	BackupRemoteGatewayIp *string `pulumi:"backupRemoteGatewayIp"`
-	// Latitude of backup remote gateway.
+	// Latitude of backup remote gateway. Does not support refresh.
 	BackupRemoteGatewayLatitude *float64 `pulumi:"backupRemoteGatewayLatitude"`
-	// Longitude of backup remote gateway.
+	// Longitude of backup remote gateway. Does not support refresh.
 	BackupRemoteGatewayLongitude *float64 `pulumi:"backupRemoteGatewayLongitude"`
-	// Backup remote identifier. Required for Cert based authentication type with HA enabled.
+	// Backup remote identifier. Required for Cert based authentication type with HA enabled. Example: "gw-10-10-0-116".
 	BackupRemoteIdentifier *string `pulumi:"backupRemoteIdentifier"`
-	// Backup remote tunnel IP address.
+	// Backup remote tunnel IP address. Only valid when HA enabled route based connection. Available as of provider version R2.19+.
 	BackupRemoteTunnelIp *string `pulumi:"backupRemoteTunnelIp"`
 	// Name of Remote CA Certificate Tag for creating Site2Cloud tunnels. Required for Cert based authentication type.
 	CaCertTagName *string `pulumi:"caCertTagName"`
-	// Site2Cloud Connection Name.
+	// Site2Cloud connection name.
 	ConnectionName string `pulumi:"connectionName"`
-	// Connection Type. Valid values: 'mapped' and 'unmapped'.
+	// Connection type. Valid Values: "mapped", "unmapped".
 	ConnectionType string `pulumi:"connectionType"`
-	// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption.
+	// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption. Valid values: true, false. **NOTE: Please see notes here for more information.**
 	CustomAlgorithms *bool `pulumi:"customAlgorithms"`
-	// Enable custom mapped.
+	// Enable custom mapped connection. Default value: false. Valid values: true/false. Available in provider version R2.17.1+.
 	CustomMapped *bool `pulumi:"customMapped"`
-	// Switch to Enable/Disable active_active_ha for an existing site2cloud connection.
+	// Enable/disable active active HA for an existing site2cloud connection. Valid values: true, false. Default value: false.
 	EnableActiveActive *bool `pulumi:"enableActiveActive"`
-	// Switch to Enable/Disable Deed Peer Detection for an existing site2cloud connection.
+	// Enable/disable Deed Peer Detection for an existing site2cloud connection. Default value: true. **NOTE: Please see notes here in regards to any deltas found in your state with the addition of this argument in R1.9**
 	EnableDeadPeerDetection *bool `pulumi:"enableDeadPeerDetection"`
-	// Enable Event Triggered HA.
+	// Enable Event Triggered HA. Default value: false. Valid values: true or false. Available as of provider version R2.19+.
 	EnableEventTriggeredHa *bool `pulumi:"enableEventTriggeredHa"`
-	// Switch to enable IKEv2 for policy based site2cloud.
+	// Switch to enable IKEv2. Valid values: true, false. Default value: false.
 	EnableIkev2 *bool `pulumi:"enableIkev2"`
-	// Enable single IP HA on a site2cloud connection.
+	// Enable single IP HA feature. Available as of provider version 2.19+.
 	EnableSingleIpHa *bool `pulumi:"enableSingleIpHa"`
-	// Enable spoke gateway with mapped site2cloud configurations to forward traffic from site2cloud connection to Aviatrix
-	// Transit Gateway.
+	// Enable spoke gateway with mapped site2cloud configurations to forward traffic from site2cloud connection to Aviatrix Transit Gateway. Default value: false. Valid values: true or false. Available in provider version 2.17.2+.
 	ForwardTrafficToTransit *bool `pulumi:"forwardTrafficToTransit"`
-	// Specify whether enabling HA or not.
+	// Specify whether or not to enable HA. Valid Values: true, false. **NOTE: Please see notes here regarding HA requirements.**
 	HaEnabled *bool `pulumi:"haEnabled"`
-	// Local Initiated Traffic Destination Real CIDRs.
+	// List of Local Initiated Traffic Destination Real CIDRs.
 	LocalDestinationRealCidrs []string `pulumi:"localDestinationRealCidrs"`
-	// Local Initiated Traffic Destination Virtual CIDRs.
+	// List of Local Initiated Traffic Destination Virtual CIDRs.
 	LocalDestinationVirtualCidrs []string `pulumi:"localDestinationVirtualCidrs"`
-	// Local Initiated Traffic Source Real CIDRs.
+	// List of Local Initiated Traffic Source Real CIDRs.
 	LocalSourceRealCidrs []string `pulumi:"localSourceRealCidrs"`
-	// Local Initiated Traffic Source Virtual CIDRs.
+	// List of Local Initiated Traffic Source Virtual CIDRs.
 	LocalSourceVirtualCidrs []string `pulumi:"localSourceVirtualCidrs"`
-	// Local Subnet CIDR.
+	// Local subnet CIDR. **Required for connection type "mapped", except for `customMapped` connection.**
 	LocalSubnetCidr *string `pulumi:"localSubnetCidr"`
-	// Local Subnet CIDR (Virtual).
+	// Local subnet CIDR (Virtual). **Required for connection type "mapped", except for `customMapped` connection.**
 	LocalSubnetVirtual *string `pulumi:"localSubnetVirtual"`
-	// Local tunnel IP address.
+	// Local tunnel IP address. Only valid for route based connection. Available as of provider version R2.19+.
 	LocalTunnelIp *string `pulumi:"localTunnelIp"`
-	// Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'.
+	// Phase one Authentication. Valid values: "SHA-1", "SHA-256", "SHA-384" and "SHA-512". Default value: "SHA-256".
 	Phase1Authentication *string `pulumi:"phase1Authentication"`
-	// Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+	// Phase one DH Groups. Valid values: "1", "2", "5", "14", "15", "16", "17", "18", "19", "20" and "21". Default value: "14".
 	Phase1DhGroups *string `pulumi:"phase1DhGroups"`
-	// Phase one Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC' and 'AES-256-CBC', 'AES-128-GCM-64',
-	// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', and 'AES-256-GCM-128'.
+	// Phase one Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", and "AES-256-GCM-128". Default value: "AES-256-CBC".
 	Phase1Encryption *string `pulumi:"phase1Encryption"`
-	// Phase 1 remote identifier of the IPsec tunnel.
+	// Phase 1 remote identifier of the IPsec tunnel. This can be configured to be either the public IP address or the private IP address of the peer terminating the IPsec tunnel. Example: ["1.2.3.4"] when HA is disabled, ["1.2.3.4", "5.6.7.8"] when HA is enabled. Available as of provider version R2.19+.
 	Phase1RemoteIdentifiers []string `pulumi:"phase1RemoteIdentifiers"`
-	// Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'.
+	// Phase two Authentication. Valid values: "NO-AUTH", "HMAC-SHA-1", "HMAC-SHA-256", "HMAC-SHA-384" and "HMAC-SHA-512". Default value: "HMAC-SHA-256".
 	Phase2Authentication *string `pulumi:"phase2Authentication"`
-	// Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+	// Phase two DH Groups. Valid values: "1", "2", "5", "14", "15", "16", "17", "18", "19", "20" and "21". Default value: "14".
 	Phase2DhGroups *string `pulumi:"phase2DhGroups"`
-	// Phase two Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'AES-128-GCM-64',
-	// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', 'AES-256-GCM-128', and 'NULL-ENCR'.
+	// Phase two Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", "AES-256-GCM-128" and "NULL-ENCR". Default value: "AES-256-CBC".
 	Phase2Encryption *string `pulumi:"phase2Encryption"`
 	// Pre-Shared Key.
 	PreSharedKey *string `pulumi:"preSharedKey"`
-	// Primary Cloud Gateway Name.
+	// Primary cloud gateway name.
 	PrimaryCloudGatewayName string `pulumi:"primaryCloudGatewayName"`
-	// Private route encryption switch.
+	// Private route encryption switch. Valid values: true, false.
 	PrivateRouteEncryption *bool `pulumi:"privateRouteEncryption"`
-	// Remote Initiated Traffic Destination Real CIDRs.
+	// List of  Remote Initiated Traffic Destination Real CIDRs.
 	RemoteDestinationRealCidrs []string `pulumi:"remoteDestinationRealCidrs"`
-	// Remote Initiated Traffic Destination Virtual CIDRs.
+	// List of Remote Initiated Traffic Destination Virtual CIDRs.
 	RemoteDestinationVirtualCidrs []string `pulumi:"remoteDestinationVirtualCidrs"`
-	// Remote Gateway IP.
+	// Remote gateway IP.
 	RemoteGatewayIp string `pulumi:"remoteGatewayIp"`
-	// Latitude of remote gateway.
+	// Latitude of remote gateway. Does not support refresh.
 	RemoteGatewayLatitude *float64 `pulumi:"remoteGatewayLatitude"`
-	// Longitude of remote gateway.
+	// Longitude of remote gateway. Does not support refresh.
 	RemoteGatewayLongitude *float64 `pulumi:"remoteGatewayLongitude"`
-	// Remote gateway type. Valid values: 'generic', 'avx', 'aws', 'azure', 'sonicwall' and 'oracle'.
+	// Remote gateway type. Valid Values: "generic", "avx", "aws", "azure", "sonicwall", "oracle".
 	RemoteGatewayType string `pulumi:"remoteGatewayType"`
-	// Remote identifier. Required for Cert based authentication type.
+	// Remote identifier. Required for Cert based authentication type. Example: "gw-10-10-0-115".
 	RemoteIdentifier *string `pulumi:"remoteIdentifier"`
-	// Remote Initiated Traffic Source Real CIDRs.
+	// List of Remote Initiated Traffic Source Real CIDRs.
 	RemoteSourceRealCidrs []string `pulumi:"remoteSourceRealCidrs"`
-	// Remote Initiated Traffic Source Virtual CIDRs.
+	// List of Remote Initiated Traffic Source Virtual CIDRs.
 	RemoteSourceVirtualCidrs []string `pulumi:"remoteSourceVirtualCidrs"`
-	// Remote Subnet CIDR.
+	// Remote subnet CIDR. **Not required for customMapped connection.**
 	RemoteSubnetCidr *string `pulumi:"remoteSubnetCidr"`
-	// Remote Subnet CIDR (Virtual).
+	// Remote subnet CIDR (Virtual). **Required for connection type "mapped", except for `customMapped` connection.**
 	RemoteSubnetVirtual *string `pulumi:"remoteSubnetVirtual"`
-	// Remote tunnel IP address.
+	// Remote tunnel IP address. Only valid for route based connection. Available as of provider version R2.19+.
 	RemoteTunnelIp *string `pulumi:"remoteTunnelIp"`
 	// Route tables to modify.
 	RouteTableLists []string `pulumi:"routeTableLists"`
-	// Specify ssl_server_pool for tunnel_type 'tcp'. Default value is '192.168.44.0/24'
+	// Specify ssl_server_pool. Default value: "192.168.44.0/24". **NOTE: Please see notes here for more information.**
 	SslServerPool *string `pulumi:"sslServerPool"`
-	// Site2Cloud Tunnel Type. Valid values: 'policy' and 'route'.
+	// Site2Cloud tunnel type. Valid Values: "policy", "route".
 	TunnelType string `pulumi:"tunnelType"`
-	// VPC Id of the cloud gateway.
+	// VPC ID of the cloud gateway.
 	VpcId string `pulumi:"vpcId"`
 }
 
@@ -527,114 +535,111 @@ type aviatrixSite2CloudArgs struct {
 type AviatrixSite2CloudArgs struct {
 	// Authentication Type. Valid values: 'PSK' and 'Cert'. Default value: 'PSK'.
 	AuthType pulumi.StringPtrInput
-	// Backup gateway name.
+	// Backup gateway name. **NOTE: Please see notes here regarding HA requirements.**
 	BackupGatewayName pulumi.StringPtrInput
-	// Backup local tunnel IP address.
+	// Backup local tunnel IP address. Only valid when HA enabled route based connection. Available as of provider version R2.19+.
 	BackupLocalTunnelIp pulumi.StringPtrInput
 	// Backup Pre-Shared Key.
 	BackupPreSharedKey pulumi.StringPtrInput
-	// Backup remote remote gateway IP.
+	// Backup Remote Gateway IP. **NOTE: Please see notes here regarding HA requirements.**
 	BackupRemoteGatewayIp pulumi.StringPtrInput
-	// Latitude of backup remote gateway.
+	// Latitude of backup remote gateway. Does not support refresh.
 	BackupRemoteGatewayLatitude pulumi.Float64PtrInput
-	// Longitude of backup remote gateway.
+	// Longitude of backup remote gateway. Does not support refresh.
 	BackupRemoteGatewayLongitude pulumi.Float64PtrInput
-	// Backup remote identifier. Required for Cert based authentication type with HA enabled.
+	// Backup remote identifier. Required for Cert based authentication type with HA enabled. Example: "gw-10-10-0-116".
 	BackupRemoteIdentifier pulumi.StringPtrInput
-	// Backup remote tunnel IP address.
+	// Backup remote tunnel IP address. Only valid when HA enabled route based connection. Available as of provider version R2.19+.
 	BackupRemoteTunnelIp pulumi.StringPtrInput
 	// Name of Remote CA Certificate Tag for creating Site2Cloud tunnels. Required for Cert based authentication type.
 	CaCertTagName pulumi.StringPtrInput
-	// Site2Cloud Connection Name.
+	// Site2Cloud connection name.
 	ConnectionName pulumi.StringInput
-	// Connection Type. Valid values: 'mapped' and 'unmapped'.
+	// Connection type. Valid Values: "mapped", "unmapped".
 	ConnectionType pulumi.StringInput
-	// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption.
+	// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption. Valid values: true, false. **NOTE: Please see notes here for more information.**
 	CustomAlgorithms pulumi.BoolPtrInput
-	// Enable custom mapped.
+	// Enable custom mapped connection. Default value: false. Valid values: true/false. Available in provider version R2.17.1+.
 	CustomMapped pulumi.BoolPtrInput
-	// Switch to Enable/Disable active_active_ha for an existing site2cloud connection.
+	// Enable/disable active active HA for an existing site2cloud connection. Valid values: true, false. Default value: false.
 	EnableActiveActive pulumi.BoolPtrInput
-	// Switch to Enable/Disable Deed Peer Detection for an existing site2cloud connection.
+	// Enable/disable Deed Peer Detection for an existing site2cloud connection. Default value: true. **NOTE: Please see notes here in regards to any deltas found in your state with the addition of this argument in R1.9**
 	EnableDeadPeerDetection pulumi.BoolPtrInput
-	// Enable Event Triggered HA.
+	// Enable Event Triggered HA. Default value: false. Valid values: true or false. Available as of provider version R2.19+.
 	EnableEventTriggeredHa pulumi.BoolPtrInput
-	// Switch to enable IKEv2 for policy based site2cloud.
+	// Switch to enable IKEv2. Valid values: true, false. Default value: false.
 	EnableIkev2 pulumi.BoolPtrInput
-	// Enable single IP HA on a site2cloud connection.
+	// Enable single IP HA feature. Available as of provider version 2.19+.
 	EnableSingleIpHa pulumi.BoolPtrInput
-	// Enable spoke gateway with mapped site2cloud configurations to forward traffic from site2cloud connection to Aviatrix
-	// Transit Gateway.
+	// Enable spoke gateway with mapped site2cloud configurations to forward traffic from site2cloud connection to Aviatrix Transit Gateway. Default value: false. Valid values: true or false. Available in provider version 2.17.2+.
 	ForwardTrafficToTransit pulumi.BoolPtrInput
-	// Specify whether enabling HA or not.
+	// Specify whether or not to enable HA. Valid Values: true, false. **NOTE: Please see notes here regarding HA requirements.**
 	HaEnabled pulumi.BoolPtrInput
-	// Local Initiated Traffic Destination Real CIDRs.
+	// List of Local Initiated Traffic Destination Real CIDRs.
 	LocalDestinationRealCidrs pulumi.StringArrayInput
-	// Local Initiated Traffic Destination Virtual CIDRs.
+	// List of Local Initiated Traffic Destination Virtual CIDRs.
 	LocalDestinationVirtualCidrs pulumi.StringArrayInput
-	// Local Initiated Traffic Source Real CIDRs.
+	// List of Local Initiated Traffic Source Real CIDRs.
 	LocalSourceRealCidrs pulumi.StringArrayInput
-	// Local Initiated Traffic Source Virtual CIDRs.
+	// List of Local Initiated Traffic Source Virtual CIDRs.
 	LocalSourceVirtualCidrs pulumi.StringArrayInput
-	// Local Subnet CIDR.
+	// Local subnet CIDR. **Required for connection type "mapped", except for `customMapped` connection.**
 	LocalSubnetCidr pulumi.StringPtrInput
-	// Local Subnet CIDR (Virtual).
+	// Local subnet CIDR (Virtual). **Required for connection type "mapped", except for `customMapped` connection.**
 	LocalSubnetVirtual pulumi.StringPtrInput
-	// Local tunnel IP address.
+	// Local tunnel IP address. Only valid for route based connection. Available as of provider version R2.19+.
 	LocalTunnelIp pulumi.StringPtrInput
-	// Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'.
+	// Phase one Authentication. Valid values: "SHA-1", "SHA-256", "SHA-384" and "SHA-512". Default value: "SHA-256".
 	Phase1Authentication pulumi.StringPtrInput
-	// Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+	// Phase one DH Groups. Valid values: "1", "2", "5", "14", "15", "16", "17", "18", "19", "20" and "21". Default value: "14".
 	Phase1DhGroups pulumi.StringPtrInput
-	// Phase one Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC' and 'AES-256-CBC', 'AES-128-GCM-64',
-	// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', and 'AES-256-GCM-128'.
+	// Phase one Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", and "AES-256-GCM-128". Default value: "AES-256-CBC".
 	Phase1Encryption pulumi.StringPtrInput
-	// Phase 1 remote identifier of the IPsec tunnel.
+	// Phase 1 remote identifier of the IPsec tunnel. This can be configured to be either the public IP address or the private IP address of the peer terminating the IPsec tunnel. Example: ["1.2.3.4"] when HA is disabled, ["1.2.3.4", "5.6.7.8"] when HA is enabled. Available as of provider version R2.19+.
 	Phase1RemoteIdentifiers pulumi.StringArrayInput
-	// Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'.
+	// Phase two Authentication. Valid values: "NO-AUTH", "HMAC-SHA-1", "HMAC-SHA-256", "HMAC-SHA-384" and "HMAC-SHA-512". Default value: "HMAC-SHA-256".
 	Phase2Authentication pulumi.StringPtrInput
-	// Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+	// Phase two DH Groups. Valid values: "1", "2", "5", "14", "15", "16", "17", "18", "19", "20" and "21". Default value: "14".
 	Phase2DhGroups pulumi.StringPtrInput
-	// Phase two Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'AES-128-GCM-64',
-	// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', 'AES-256-GCM-128', and 'NULL-ENCR'.
+	// Phase two Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", "AES-256-GCM-128" and "NULL-ENCR". Default value: "AES-256-CBC".
 	Phase2Encryption pulumi.StringPtrInput
 	// Pre-Shared Key.
 	PreSharedKey pulumi.StringPtrInput
-	// Primary Cloud Gateway Name.
+	// Primary cloud gateway name.
 	PrimaryCloudGatewayName pulumi.StringInput
-	// Private route encryption switch.
+	// Private route encryption switch. Valid values: true, false.
 	PrivateRouteEncryption pulumi.BoolPtrInput
-	// Remote Initiated Traffic Destination Real CIDRs.
+	// List of  Remote Initiated Traffic Destination Real CIDRs.
 	RemoteDestinationRealCidrs pulumi.StringArrayInput
-	// Remote Initiated Traffic Destination Virtual CIDRs.
+	// List of Remote Initiated Traffic Destination Virtual CIDRs.
 	RemoteDestinationVirtualCidrs pulumi.StringArrayInput
-	// Remote Gateway IP.
+	// Remote gateway IP.
 	RemoteGatewayIp pulumi.StringInput
-	// Latitude of remote gateway.
+	// Latitude of remote gateway. Does not support refresh.
 	RemoteGatewayLatitude pulumi.Float64PtrInput
-	// Longitude of remote gateway.
+	// Longitude of remote gateway. Does not support refresh.
 	RemoteGatewayLongitude pulumi.Float64PtrInput
-	// Remote gateway type. Valid values: 'generic', 'avx', 'aws', 'azure', 'sonicwall' and 'oracle'.
+	// Remote gateway type. Valid Values: "generic", "avx", "aws", "azure", "sonicwall", "oracle".
 	RemoteGatewayType pulumi.StringInput
-	// Remote identifier. Required for Cert based authentication type.
+	// Remote identifier. Required for Cert based authentication type. Example: "gw-10-10-0-115".
 	RemoteIdentifier pulumi.StringPtrInput
-	// Remote Initiated Traffic Source Real CIDRs.
+	// List of Remote Initiated Traffic Source Real CIDRs.
 	RemoteSourceRealCidrs pulumi.StringArrayInput
-	// Remote Initiated Traffic Source Virtual CIDRs.
+	// List of Remote Initiated Traffic Source Virtual CIDRs.
 	RemoteSourceVirtualCidrs pulumi.StringArrayInput
-	// Remote Subnet CIDR.
+	// Remote subnet CIDR. **Not required for customMapped connection.**
 	RemoteSubnetCidr pulumi.StringPtrInput
-	// Remote Subnet CIDR (Virtual).
+	// Remote subnet CIDR (Virtual). **Required for connection type "mapped", except for `customMapped` connection.**
 	RemoteSubnetVirtual pulumi.StringPtrInput
-	// Remote tunnel IP address.
+	// Remote tunnel IP address. Only valid for route based connection. Available as of provider version R2.19+.
 	RemoteTunnelIp pulumi.StringPtrInput
 	// Route tables to modify.
 	RouteTableLists pulumi.StringArrayInput
-	// Specify ssl_server_pool for tunnel_type 'tcp'. Default value is '192.168.44.0/24'
+	// Specify ssl_server_pool. Default value: "192.168.44.0/24". **NOTE: Please see notes here for more information.**
 	SslServerPool pulumi.StringPtrInput
-	// Site2Cloud Tunnel Type. Valid values: 'policy' and 'route'.
+	// Site2Cloud tunnel type. Valid Values: "policy", "route".
 	TunnelType pulumi.StringInput
-	// VPC Id of the cloud gateway.
+	// VPC ID of the cloud gateway.
 	VpcId pulumi.StringInput
 }
 
@@ -730,12 +735,12 @@ func (o AviatrixSite2CloudOutput) AuthType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringPtrOutput { return v.AuthType }).(pulumi.StringPtrOutput)
 }
 
-// Backup gateway name.
+// Backup gateway name. **NOTE: Please see notes here regarding HA requirements.**
 func (o AviatrixSite2CloudOutput) BackupGatewayName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringPtrOutput { return v.BackupGatewayName }).(pulumi.StringPtrOutput)
 }
 
-// Backup local tunnel IP address.
+// Backup local tunnel IP address. Only valid when HA enabled route based connection. Available as of provider version R2.19+.
 func (o AviatrixSite2CloudOutput) BackupLocalTunnelIp() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringPtrOutput { return v.BackupLocalTunnelIp }).(pulumi.StringPtrOutput)
 }
@@ -745,27 +750,27 @@ func (o AviatrixSite2CloudOutput) BackupPreSharedKey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringPtrOutput { return v.BackupPreSharedKey }).(pulumi.StringPtrOutput)
 }
 
-// Backup remote remote gateway IP.
+// Backup Remote Gateway IP. **NOTE: Please see notes here regarding HA requirements.**
 func (o AviatrixSite2CloudOutput) BackupRemoteGatewayIp() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringOutput { return v.BackupRemoteGatewayIp }).(pulumi.StringOutput)
 }
 
-// Latitude of backup remote gateway.
+// Latitude of backup remote gateway. Does not support refresh.
 func (o AviatrixSite2CloudOutput) BackupRemoteGatewayLatitude() pulumi.Float64PtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.Float64PtrOutput { return v.BackupRemoteGatewayLatitude }).(pulumi.Float64PtrOutput)
 }
 
-// Longitude of backup remote gateway.
+// Longitude of backup remote gateway. Does not support refresh.
 func (o AviatrixSite2CloudOutput) BackupRemoteGatewayLongitude() pulumi.Float64PtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.Float64PtrOutput { return v.BackupRemoteGatewayLongitude }).(pulumi.Float64PtrOutput)
 }
 
-// Backup remote identifier. Required for Cert based authentication type with HA enabled.
+// Backup remote identifier. Required for Cert based authentication type with HA enabled. Example: "gw-10-10-0-116".
 func (o AviatrixSite2CloudOutput) BackupRemoteIdentifier() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringPtrOutput { return v.BackupRemoteIdentifier }).(pulumi.StringPtrOutput)
 }
 
-// Backup remote tunnel IP address.
+// Backup remote tunnel IP address. Only valid when HA enabled route based connection. Available as of provider version R2.19+.
 func (o AviatrixSite2CloudOutput) BackupRemoteTunnelIp() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringPtrOutput { return v.BackupRemoteTunnelIp }).(pulumi.StringPtrOutput)
 }
@@ -775,130 +780,127 @@ func (o AviatrixSite2CloudOutput) CaCertTagName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringPtrOutput { return v.CaCertTagName }).(pulumi.StringPtrOutput)
 }
 
-// Site2Cloud Connection Name.
+// Site2Cloud connection name.
 func (o AviatrixSite2CloudOutput) ConnectionName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringOutput { return v.ConnectionName }).(pulumi.StringOutput)
 }
 
-// Connection Type. Valid values: 'mapped' and 'unmapped'.
+// Connection type. Valid Values: "mapped", "unmapped".
 func (o AviatrixSite2CloudOutput) ConnectionType() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringOutput { return v.ConnectionType }).(pulumi.StringOutput)
 }
 
-// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption.
+// Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption. Valid values: true, false. **NOTE: Please see notes here for more information.**
 func (o AviatrixSite2CloudOutput) CustomAlgorithms() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.BoolPtrOutput { return v.CustomAlgorithms }).(pulumi.BoolPtrOutput)
 }
 
-// Enable custom mapped.
+// Enable custom mapped connection. Default value: false. Valid values: true/false. Available in provider version R2.17.1+.
 func (o AviatrixSite2CloudOutput) CustomMapped() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.BoolPtrOutput { return v.CustomMapped }).(pulumi.BoolPtrOutput)
 }
 
-// Switch to Enable/Disable active_active_ha for an existing site2cloud connection.
+// Enable/disable active active HA for an existing site2cloud connection. Valid values: true, false. Default value: false.
 func (o AviatrixSite2CloudOutput) EnableActiveActive() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.BoolPtrOutput { return v.EnableActiveActive }).(pulumi.BoolPtrOutput)
 }
 
-// Switch to Enable/Disable Deed Peer Detection for an existing site2cloud connection.
+// Enable/disable Deed Peer Detection for an existing site2cloud connection. Default value: true. **NOTE: Please see notes here in regards to any deltas found in your state with the addition of this argument in R1.9**
 func (o AviatrixSite2CloudOutput) EnableDeadPeerDetection() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.BoolPtrOutput { return v.EnableDeadPeerDetection }).(pulumi.BoolPtrOutput)
 }
 
-// Enable Event Triggered HA.
+// Enable Event Triggered HA. Default value: false. Valid values: true or false. Available as of provider version R2.19+.
 func (o AviatrixSite2CloudOutput) EnableEventTriggeredHa() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.BoolPtrOutput { return v.EnableEventTriggeredHa }).(pulumi.BoolPtrOutput)
 }
 
-// Switch to enable IKEv2 for policy based site2cloud.
+// Switch to enable IKEv2. Valid values: true, false. Default value: false.
 func (o AviatrixSite2CloudOutput) EnableIkev2() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.BoolPtrOutput { return v.EnableIkev2 }).(pulumi.BoolPtrOutput)
 }
 
-// Enable single IP HA on a site2cloud connection.
+// Enable single IP HA feature. Available as of provider version 2.19+.
 func (o AviatrixSite2CloudOutput) EnableSingleIpHa() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.BoolPtrOutput { return v.EnableSingleIpHa }).(pulumi.BoolPtrOutput)
 }
 
-// Enable spoke gateway with mapped site2cloud configurations to forward traffic from site2cloud connection to Aviatrix
-// Transit Gateway.
+// Enable spoke gateway with mapped site2cloud configurations to forward traffic from site2cloud connection to Aviatrix Transit Gateway. Default value: false. Valid values: true or false. Available in provider version 2.17.2+.
 func (o AviatrixSite2CloudOutput) ForwardTrafficToTransit() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.BoolPtrOutput { return v.ForwardTrafficToTransit }).(pulumi.BoolPtrOutput)
 }
 
-// Specify whether enabling HA or not.
+// Specify whether or not to enable HA. Valid Values: true, false. **NOTE: Please see notes here regarding HA requirements.**
 func (o AviatrixSite2CloudOutput) HaEnabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.BoolPtrOutput { return v.HaEnabled }).(pulumi.BoolPtrOutput)
 }
 
-// Local Initiated Traffic Destination Real CIDRs.
+// List of Local Initiated Traffic Destination Real CIDRs.
 func (o AviatrixSite2CloudOutput) LocalDestinationRealCidrs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringArrayOutput { return v.LocalDestinationRealCidrs }).(pulumi.StringArrayOutput)
 }
 
-// Local Initiated Traffic Destination Virtual CIDRs.
+// List of Local Initiated Traffic Destination Virtual CIDRs.
 func (o AviatrixSite2CloudOutput) LocalDestinationVirtualCidrs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringArrayOutput { return v.LocalDestinationVirtualCidrs }).(pulumi.StringArrayOutput)
 }
 
-// Local Initiated Traffic Source Real CIDRs.
+// List of Local Initiated Traffic Source Real CIDRs.
 func (o AviatrixSite2CloudOutput) LocalSourceRealCidrs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringArrayOutput { return v.LocalSourceRealCidrs }).(pulumi.StringArrayOutput)
 }
 
-// Local Initiated Traffic Source Virtual CIDRs.
+// List of Local Initiated Traffic Source Virtual CIDRs.
 func (o AviatrixSite2CloudOutput) LocalSourceVirtualCidrs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringArrayOutput { return v.LocalSourceVirtualCidrs }).(pulumi.StringArrayOutput)
 }
 
-// Local Subnet CIDR.
+// Local subnet CIDR. **Required for connection type "mapped", except for `customMapped` connection.**
 func (o AviatrixSite2CloudOutput) LocalSubnetCidr() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringOutput { return v.LocalSubnetCidr }).(pulumi.StringOutput)
 }
 
-// Local Subnet CIDR (Virtual).
+// Local subnet CIDR (Virtual). **Required for connection type "mapped", except for `customMapped` connection.**
 func (o AviatrixSite2CloudOutput) LocalSubnetVirtual() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringPtrOutput { return v.LocalSubnetVirtual }).(pulumi.StringPtrOutput)
 }
 
-// Local tunnel IP address.
+// Local tunnel IP address. Only valid for route based connection. Available as of provider version R2.19+.
 func (o AviatrixSite2CloudOutput) LocalTunnelIp() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringPtrOutput { return v.LocalTunnelIp }).(pulumi.StringPtrOutput)
 }
 
-// Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'.
+// Phase one Authentication. Valid values: "SHA-1", "SHA-256", "SHA-384" and "SHA-512". Default value: "SHA-256".
 func (o AviatrixSite2CloudOutput) Phase1Authentication() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringPtrOutput { return v.Phase1Authentication }).(pulumi.StringPtrOutput)
 }
 
-// Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+// Phase one DH Groups. Valid values: "1", "2", "5", "14", "15", "16", "17", "18", "19", "20" and "21". Default value: "14".
 func (o AviatrixSite2CloudOutput) Phase1DhGroups() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringPtrOutput { return v.Phase1DhGroups }).(pulumi.StringPtrOutput)
 }
 
-// Phase one Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC' and 'AES-256-CBC', 'AES-128-GCM-64',
-// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', and 'AES-256-GCM-128'.
+// Phase one Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", and "AES-256-GCM-128". Default value: "AES-256-CBC".
 func (o AviatrixSite2CloudOutput) Phase1Encryption() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringPtrOutput { return v.Phase1Encryption }).(pulumi.StringPtrOutput)
 }
 
-// Phase 1 remote identifier of the IPsec tunnel.
+// Phase 1 remote identifier of the IPsec tunnel. This can be configured to be either the public IP address or the private IP address of the peer terminating the IPsec tunnel. Example: ["1.2.3.4"] when HA is disabled, ["1.2.3.4", "5.6.7.8"] when HA is enabled. Available as of provider version R2.19+.
 func (o AviatrixSite2CloudOutput) Phase1RemoteIdentifiers() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringArrayOutput { return v.Phase1RemoteIdentifiers }).(pulumi.StringArrayOutput)
 }
 
-// Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'.
+// Phase two Authentication. Valid values: "NO-AUTH", "HMAC-SHA-1", "HMAC-SHA-256", "HMAC-SHA-384" and "HMAC-SHA-512". Default value: "HMAC-SHA-256".
 func (o AviatrixSite2CloudOutput) Phase2Authentication() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringPtrOutput { return v.Phase2Authentication }).(pulumi.StringPtrOutput)
 }
 
-// Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+// Phase two DH Groups. Valid values: "1", "2", "5", "14", "15", "16", "17", "18", "19", "20" and "21". Default value: "14".
 func (o AviatrixSite2CloudOutput) Phase2DhGroups() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringPtrOutput { return v.Phase2DhGroups }).(pulumi.StringPtrOutput)
 }
 
-// Phase two Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'AES-128-GCM-64',
-// 'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', 'AES-256-GCM-128', and 'NULL-ENCR'.
+// Phase two Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", "AES-256-GCM-128" and "NULL-ENCR". Default value: "AES-256-CBC".
 func (o AviatrixSite2CloudOutput) Phase2Encryption() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringPtrOutput { return v.Phase2Encryption }).(pulumi.StringPtrOutput)
 }
@@ -908,72 +910,72 @@ func (o AviatrixSite2CloudOutput) PreSharedKey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringPtrOutput { return v.PreSharedKey }).(pulumi.StringPtrOutput)
 }
 
-// Primary Cloud Gateway Name.
+// Primary cloud gateway name.
 func (o AviatrixSite2CloudOutput) PrimaryCloudGatewayName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringOutput { return v.PrimaryCloudGatewayName }).(pulumi.StringOutput)
 }
 
-// Private route encryption switch.
+// Private route encryption switch. Valid values: true, false.
 func (o AviatrixSite2CloudOutput) PrivateRouteEncryption() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.BoolPtrOutput { return v.PrivateRouteEncryption }).(pulumi.BoolPtrOutput)
 }
 
-// Remote Initiated Traffic Destination Real CIDRs.
+// List of  Remote Initiated Traffic Destination Real CIDRs.
 func (o AviatrixSite2CloudOutput) RemoteDestinationRealCidrs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringArrayOutput { return v.RemoteDestinationRealCidrs }).(pulumi.StringArrayOutput)
 }
 
-// Remote Initiated Traffic Destination Virtual CIDRs.
+// List of Remote Initiated Traffic Destination Virtual CIDRs.
 func (o AviatrixSite2CloudOutput) RemoteDestinationVirtualCidrs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringArrayOutput { return v.RemoteDestinationVirtualCidrs }).(pulumi.StringArrayOutput)
 }
 
-// Remote Gateway IP.
+// Remote gateway IP.
 func (o AviatrixSite2CloudOutput) RemoteGatewayIp() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringOutput { return v.RemoteGatewayIp }).(pulumi.StringOutput)
 }
 
-// Latitude of remote gateway.
+// Latitude of remote gateway. Does not support refresh.
 func (o AviatrixSite2CloudOutput) RemoteGatewayLatitude() pulumi.Float64PtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.Float64PtrOutput { return v.RemoteGatewayLatitude }).(pulumi.Float64PtrOutput)
 }
 
-// Longitude of remote gateway.
+// Longitude of remote gateway. Does not support refresh.
 func (o AviatrixSite2CloudOutput) RemoteGatewayLongitude() pulumi.Float64PtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.Float64PtrOutput { return v.RemoteGatewayLongitude }).(pulumi.Float64PtrOutput)
 }
 
-// Remote gateway type. Valid values: 'generic', 'avx', 'aws', 'azure', 'sonicwall' and 'oracle'.
+// Remote gateway type. Valid Values: "generic", "avx", "aws", "azure", "sonicwall", "oracle".
 func (o AviatrixSite2CloudOutput) RemoteGatewayType() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringOutput { return v.RemoteGatewayType }).(pulumi.StringOutput)
 }
 
-// Remote identifier. Required for Cert based authentication type.
+// Remote identifier. Required for Cert based authentication type. Example: "gw-10-10-0-115".
 func (o AviatrixSite2CloudOutput) RemoteIdentifier() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringPtrOutput { return v.RemoteIdentifier }).(pulumi.StringPtrOutput)
 }
 
-// Remote Initiated Traffic Source Real CIDRs.
+// List of Remote Initiated Traffic Source Real CIDRs.
 func (o AviatrixSite2CloudOutput) RemoteSourceRealCidrs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringArrayOutput { return v.RemoteSourceRealCidrs }).(pulumi.StringArrayOutput)
 }
 
-// Remote Initiated Traffic Source Virtual CIDRs.
+// List of Remote Initiated Traffic Source Virtual CIDRs.
 func (o AviatrixSite2CloudOutput) RemoteSourceVirtualCidrs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringArrayOutput { return v.RemoteSourceVirtualCidrs }).(pulumi.StringArrayOutput)
 }
 
-// Remote Subnet CIDR.
+// Remote subnet CIDR. **Not required for customMapped connection.**
 func (o AviatrixSite2CloudOutput) RemoteSubnetCidr() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringPtrOutput { return v.RemoteSubnetCidr }).(pulumi.StringPtrOutput)
 }
 
-// Remote Subnet CIDR (Virtual).
+// Remote subnet CIDR (Virtual). **Required for connection type "mapped", except for `customMapped` connection.**
 func (o AviatrixSite2CloudOutput) RemoteSubnetVirtual() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringPtrOutput { return v.RemoteSubnetVirtual }).(pulumi.StringPtrOutput)
 }
 
-// Remote tunnel IP address.
+// Remote tunnel IP address. Only valid for route based connection. Available as of provider version R2.19+.
 func (o AviatrixSite2CloudOutput) RemoteTunnelIp() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringPtrOutput { return v.RemoteTunnelIp }).(pulumi.StringPtrOutput)
 }
@@ -983,17 +985,17 @@ func (o AviatrixSite2CloudOutput) RouteTableLists() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringArrayOutput { return v.RouteTableLists }).(pulumi.StringArrayOutput)
 }
 
-// Specify ssl_server_pool for tunnel_type 'tcp'. Default value is '192.168.44.0/24'
+// Specify ssl_server_pool. Default value: "192.168.44.0/24". **NOTE: Please see notes here for more information.**
 func (o AviatrixSite2CloudOutput) SslServerPool() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringPtrOutput { return v.SslServerPool }).(pulumi.StringPtrOutput)
 }
 
-// Site2Cloud Tunnel Type. Valid values: 'policy' and 'route'.
+// Site2Cloud tunnel type. Valid Values: "policy", "route".
 func (o AviatrixSite2CloudOutput) TunnelType() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringOutput { return v.TunnelType }).(pulumi.StringOutput)
 }
 
-// VPC Id of the cloud gateway.
+// VPC ID of the cloud gateway.
 func (o AviatrixSite2CloudOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSite2Cloud) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
 }

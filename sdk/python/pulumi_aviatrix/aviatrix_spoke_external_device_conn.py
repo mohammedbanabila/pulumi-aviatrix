@@ -52,45 +52,43 @@ class Aviatrix_spoke_external_device_connArgs:
                  tunnel_protocol: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Aviatrix_spoke_external_device_conn resource.
-        :param pulumi.Input[str] connection_name: The name of the spoke external device connection which is going to be created.
-        :param pulumi.Input[str] gw_name: Name of the BGP Spoke Gateway.
-        :param pulumi.Input[str] remote_gateway_ip: Remote Gateway IP.
-        :param pulumi.Input[str] vpc_id: ID of the VPC where the BGP Spoke Gateway is located.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] approved_cidrs: Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
-        :param pulumi.Input[str] backup_bgp_md5_key: Backup BGP MD5 authentication key.
-        :param pulumi.Input[str] backup_bgp_remote_as_num: Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+        :param pulumi.Input[str] connection_name: Spoke external device connection name.
+        :param pulumi.Input[str] gw_name: Aviatrix spoke gateway name.
+        :param pulumi.Input[str] remote_gateway_ip: Remote gateway IP.
+        :param pulumi.Input[str] vpc_id: VPC ID of the Aviatrix spoke gateway.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] approved_cidrs: Set of approved CIDRs. Requires `enable_learned_cidrs_approval` to be true. Type: Set(String).
+        :param pulumi.Input[str] backup_bgp_md5_key: Backup BGP MD5 Authentication Key. Valid with HA enabled for connection. Example: 'avx03,avx04'.
+        :param pulumi.Input[str] backup_bgp_remote_as_num: Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required if HA enabled for 'bgp' connection.
         :param pulumi.Input[bool] backup_direct_connect: Backup direct connect for backup external device.
         :param pulumi.Input[str] backup_local_tunnel_cidr: Source CIDR for the tunnel from the backup Aviatrix spoke gateway.
-        :param pulumi.Input[str] backup_pre_shared_key: Backup pre shared key.
+        :param pulumi.Input[str] backup_pre_shared_key: Backup Pre-Shared Key.
         :param pulumi.Input[str] backup_remote_gateway_ip: Backup remote gateway IP.
         :param pulumi.Input[str] backup_remote_tunnel_cidr: Destination CIDR for the tunnel to the backup external device.
-        :param pulumi.Input[str] bgp_local_as_num: BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
-        :param pulumi.Input[str] bgp_md5_key: BGP MD5 authentication key.
-        :param pulumi.Input[str] bgp_remote_as_num: BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+        :param pulumi.Input[str] bgp_local_as_num: BGP local ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
+        :param pulumi.Input[str] bgp_md5_key: BGP MD5 Authentication Key. Example: 'avx01,avx02'.
+        :param pulumi.Input[str] bgp_remote_as_num: BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
         :param pulumi.Input[str] connection_type: Connection type. Valid values: 'bgp', 'static'. Default value: 'bgp'.
-        :param pulumi.Input[bool] custom_algorithms: Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption.
+        :param pulumi.Input[bool] custom_algorithms: Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption. Valid values: true, false. **NOTE: Please see notes here for more information.**
         :param pulumi.Input[bool] direct_connect: Set true for private network infrastructure.
-        :param pulumi.Input[bool] enable_event_triggered_ha: Enable Event Triggered HA.
-        :param pulumi.Input[bool] enable_ikev2: Set as true if use IKEv2.
-        :param pulumi.Input[bool] enable_learned_cidrs_approval: Enable learned CIDR approval for the connection. Only valid with 'connection_type' = 'bgp'. Requires the spoke_gateway's
-               'learned_cidrs_approval_mode' attribute be set to 'connection'. Valid values: true, false. Default value: false.
+        :param pulumi.Input[bool] enable_event_triggered_ha: Enable Event Triggered HA. Default value: false. Valid values: true or false.
+        :param pulumi.Input[bool] enable_ikev2: Set as true to enable IKEv2 protocol.
+        :param pulumi.Input[bool] enable_learned_cidrs_approval: Enable learned CIDRs approval for the connection. Only valid with `connection_type` = 'bgp'. Requires the spoke_gateway's `learned_cidrs_approval_mode` attribute be set to 'connection'. Valid values: true, false. Default value: false.
         :param pulumi.Input[bool] ha_enabled: Set as true if there are two external devices.
+               * `backup_remote_gateway_ip ` - (Optional) Backup remote gateway IP. Required if HA enabled.
         :param pulumi.Input[str] local_tunnel_cidr: Source CIDR for the tunnel from the Aviatrix spoke gateway.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] manual_bgp_advertised_cidrs: Configure manual BGP advertised CIDRs for this connection. Only valid with 'connection_type' = 'bgp'.
-        :param pulumi.Input[str] phase1_authentication: Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'.
-        :param pulumi.Input[str] phase1_dh_groups: Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
-        :param pulumi.Input[str] phase1_encryption: Phase one Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC' and 'AES-256-CBC', 'AES-128-GCM-64',
-               'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', and 'AES-256-GCM-128'.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] phase1_remote_identifiers: Phase 1 remote identifier of the IPsec tunnel.
-        :param pulumi.Input[str] phase2_authentication: Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'.
-        :param pulumi.Input[str] phase2_dh_groups: Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
-        :param pulumi.Input[str] phase2_encryption: Phase two Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'AES-128-GCM-64',
-               'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', 'AES-256-GCM-128', and 'NULL-ENCR'.
-        :param pulumi.Input[str] pre_shared_key: If left blank, the pre-shared key will be auto generated.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] manual_bgp_advertised_cidrs: Configure manual BGP advertised CIDRs for this connection. Only valid with `connection_type`= 'bgp'.
+        :param pulumi.Input[str] phase1_authentication: Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'. Default value: 'SHA-256'.
+        :param pulumi.Input[str] phase1_dh_groups: Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
+        :param pulumi.Input[str] phase1_encryption: Phase one Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", and "AES-256-GCM-128". Default value: "AES-256-CBC".
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] phase1_remote_identifiers: Phase 1 remote identifier of the IPsec tunnel. This can be configured to be either the public IP address or the private IP address of the peer terminating the IPsec tunnel. Example: ["1.2.3.4"] when HA is disabled, ["1.2.3.4", "5.6.7.8"] when HA is enabled.
+        :param pulumi.Input[str] phase2_authentication: Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'. Default value: 'HMAC-SHA-256'.
+        :param pulumi.Input[str] phase2_dh_groups: Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
+        :param pulumi.Input[str] phase2_encryption: Phase two Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", "AES-256-GCM-128" and "NULL-ENCR". Default value: "AES-256-CBC".
+        :param pulumi.Input[str] pre_shared_key: Pre-Shared Key.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: Connection AS Path Prepend customized by specifying AS PATH for a BGP connection.
         :param pulumi.Input[str] remote_subnet: Remote CIDRs joined as a string with ','. Required for a 'static' type connection.
         :param pulumi.Input[str] remote_tunnel_cidr: Destination CIDR for the tunnel to the external device.
-        :param pulumi.Input[str] tunnel_protocol: Tunnel Protocol. Valid value: 'IPsec'. Default value: 'IPsec'. Case insensitive.
+        :param pulumi.Input[str] tunnel_protocol: Tunnel protocol, only valid with `connection_type` = 'bgp'. Valid values: 'IPsec'. Default value: 'IPsec'. Case insensitive.
         """
         pulumi.set(__self__, "connection_name", connection_name)
         pulumi.set(__self__, "gw_name", gw_name)
@@ -165,7 +163,7 @@ class Aviatrix_spoke_external_device_connArgs:
     @pulumi.getter(name="connectionName")
     def connection_name(self) -> pulumi.Input[str]:
         """
-        The name of the spoke external device connection which is going to be created.
+        Spoke external device connection name.
         """
         return pulumi.get(self, "connection_name")
 
@@ -177,7 +175,7 @@ class Aviatrix_spoke_external_device_connArgs:
     @pulumi.getter(name="gwName")
     def gw_name(self) -> pulumi.Input[str]:
         """
-        Name of the BGP Spoke Gateway.
+        Aviatrix spoke gateway name.
         """
         return pulumi.get(self, "gw_name")
 
@@ -189,7 +187,7 @@ class Aviatrix_spoke_external_device_connArgs:
     @pulumi.getter(name="remoteGatewayIp")
     def remote_gateway_ip(self) -> pulumi.Input[str]:
         """
-        Remote Gateway IP.
+        Remote gateway IP.
         """
         return pulumi.get(self, "remote_gateway_ip")
 
@@ -201,7 +199,7 @@ class Aviatrix_spoke_external_device_connArgs:
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> pulumi.Input[str]:
         """
-        ID of the VPC where the BGP Spoke Gateway is located.
+        VPC ID of the Aviatrix spoke gateway.
         """
         return pulumi.get(self, "vpc_id")
 
@@ -213,7 +211,7 @@ class Aviatrix_spoke_external_device_connArgs:
     @pulumi.getter(name="approvedCidrs")
     def approved_cidrs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
+        Set of approved CIDRs. Requires `enable_learned_cidrs_approval` to be true. Type: Set(String).
         """
         return pulumi.get(self, "approved_cidrs")
 
@@ -225,7 +223,7 @@ class Aviatrix_spoke_external_device_connArgs:
     @pulumi.getter(name="backupBgpMd5Key")
     def backup_bgp_md5_key(self) -> Optional[pulumi.Input[str]]:
         """
-        Backup BGP MD5 authentication key.
+        Backup BGP MD5 Authentication Key. Valid with HA enabled for connection. Example: 'avx03,avx04'.
         """
         return pulumi.get(self, "backup_bgp_md5_key")
 
@@ -237,7 +235,7 @@ class Aviatrix_spoke_external_device_connArgs:
     @pulumi.getter(name="backupBgpRemoteAsNum")
     def backup_bgp_remote_as_num(self) -> Optional[pulumi.Input[str]]:
         """
-        Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+        Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required if HA enabled for 'bgp' connection.
         """
         return pulumi.get(self, "backup_bgp_remote_as_num")
 
@@ -273,7 +271,7 @@ class Aviatrix_spoke_external_device_connArgs:
     @pulumi.getter(name="backupPreSharedKey")
     def backup_pre_shared_key(self) -> Optional[pulumi.Input[str]]:
         """
-        Backup pre shared key.
+        Backup Pre-Shared Key.
         """
         return pulumi.get(self, "backup_pre_shared_key")
 
@@ -309,7 +307,7 @@ class Aviatrix_spoke_external_device_connArgs:
     @pulumi.getter(name="bgpLocalAsNum")
     def bgp_local_as_num(self) -> Optional[pulumi.Input[str]]:
         """
-        BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+        BGP local ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
         """
         return pulumi.get(self, "bgp_local_as_num")
 
@@ -321,7 +319,7 @@ class Aviatrix_spoke_external_device_connArgs:
     @pulumi.getter(name="bgpMd5Key")
     def bgp_md5_key(self) -> Optional[pulumi.Input[str]]:
         """
-        BGP MD5 authentication key.
+        BGP MD5 Authentication Key. Example: 'avx01,avx02'.
         """
         return pulumi.get(self, "bgp_md5_key")
 
@@ -333,7 +331,7 @@ class Aviatrix_spoke_external_device_connArgs:
     @pulumi.getter(name="bgpRemoteAsNum")
     def bgp_remote_as_num(self) -> Optional[pulumi.Input[str]]:
         """
-        BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+        BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
         """
         return pulumi.get(self, "bgp_remote_as_num")
 
@@ -357,7 +355,7 @@ class Aviatrix_spoke_external_device_connArgs:
     @pulumi.getter(name="customAlgorithms")
     def custom_algorithms(self) -> Optional[pulumi.Input[bool]]:
         """
-        Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption.
+        Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption. Valid values: true, false. **NOTE: Please see notes here for more information.**
         """
         return pulumi.get(self, "custom_algorithms")
 
@@ -381,7 +379,7 @@ class Aviatrix_spoke_external_device_connArgs:
     @pulumi.getter(name="enableEventTriggeredHa")
     def enable_event_triggered_ha(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable Event Triggered HA.
+        Enable Event Triggered HA. Default value: false. Valid values: true or false.
         """
         return pulumi.get(self, "enable_event_triggered_ha")
 
@@ -393,7 +391,7 @@ class Aviatrix_spoke_external_device_connArgs:
     @pulumi.getter(name="enableIkev2")
     def enable_ikev2(self) -> Optional[pulumi.Input[bool]]:
         """
-        Set as true if use IKEv2.
+        Set as true to enable IKEv2 protocol.
         """
         return pulumi.get(self, "enable_ikev2")
 
@@ -405,8 +403,7 @@ class Aviatrix_spoke_external_device_connArgs:
     @pulumi.getter(name="enableLearnedCidrsApproval")
     def enable_learned_cidrs_approval(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable learned CIDR approval for the connection. Only valid with 'connection_type' = 'bgp'. Requires the spoke_gateway's
-        'learned_cidrs_approval_mode' attribute be set to 'connection'. Valid values: true, false. Default value: false.
+        Enable learned CIDRs approval for the connection. Only valid with `connection_type` = 'bgp'. Requires the spoke_gateway's `learned_cidrs_approval_mode` attribute be set to 'connection'. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_learned_cidrs_approval")
 
@@ -419,6 +416,7 @@ class Aviatrix_spoke_external_device_connArgs:
     def ha_enabled(self) -> Optional[pulumi.Input[bool]]:
         """
         Set as true if there are two external devices.
+        * `backup_remote_gateway_ip ` - (Optional) Backup remote gateway IP. Required if HA enabled.
         """
         return pulumi.get(self, "ha_enabled")
 
@@ -442,7 +440,7 @@ class Aviatrix_spoke_external_device_connArgs:
     @pulumi.getter(name="manualBgpAdvertisedCidrs")
     def manual_bgp_advertised_cidrs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Configure manual BGP advertised CIDRs for this connection. Only valid with 'connection_type' = 'bgp'.
+        Configure manual BGP advertised CIDRs for this connection. Only valid with `connection_type`= 'bgp'.
         """
         return pulumi.get(self, "manual_bgp_advertised_cidrs")
 
@@ -454,7 +452,7 @@ class Aviatrix_spoke_external_device_connArgs:
     @pulumi.getter(name="phase1Authentication")
     def phase1_authentication(self) -> Optional[pulumi.Input[str]]:
         """
-        Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'.
+        Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'. Default value: 'SHA-256'.
         """
         return pulumi.get(self, "phase1_authentication")
 
@@ -466,7 +464,7 @@ class Aviatrix_spoke_external_device_connArgs:
     @pulumi.getter(name="phase1DhGroups")
     def phase1_dh_groups(self) -> Optional[pulumi.Input[str]]:
         """
-        Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+        Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
         """
         return pulumi.get(self, "phase1_dh_groups")
 
@@ -478,8 +476,7 @@ class Aviatrix_spoke_external_device_connArgs:
     @pulumi.getter(name="phase1Encryption")
     def phase1_encryption(self) -> Optional[pulumi.Input[str]]:
         """
-        Phase one Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC' and 'AES-256-CBC', 'AES-128-GCM-64',
-        'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', and 'AES-256-GCM-128'.
+        Phase one Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", and "AES-256-GCM-128". Default value: "AES-256-CBC".
         """
         return pulumi.get(self, "phase1_encryption")
 
@@ -491,7 +488,7 @@ class Aviatrix_spoke_external_device_connArgs:
     @pulumi.getter(name="phase1RemoteIdentifiers")
     def phase1_remote_identifiers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Phase 1 remote identifier of the IPsec tunnel.
+        Phase 1 remote identifier of the IPsec tunnel. This can be configured to be either the public IP address or the private IP address of the peer terminating the IPsec tunnel. Example: ["1.2.3.4"] when HA is disabled, ["1.2.3.4", "5.6.7.8"] when HA is enabled.
         """
         return pulumi.get(self, "phase1_remote_identifiers")
 
@@ -503,7 +500,7 @@ class Aviatrix_spoke_external_device_connArgs:
     @pulumi.getter(name="phase2Authentication")
     def phase2_authentication(self) -> Optional[pulumi.Input[str]]:
         """
-        Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'.
+        Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'. Default value: 'HMAC-SHA-256'.
         """
         return pulumi.get(self, "phase2_authentication")
 
@@ -515,7 +512,7 @@ class Aviatrix_spoke_external_device_connArgs:
     @pulumi.getter(name="phase2DhGroups")
     def phase2_dh_groups(self) -> Optional[pulumi.Input[str]]:
         """
-        Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+        Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
         """
         return pulumi.get(self, "phase2_dh_groups")
 
@@ -527,8 +524,7 @@ class Aviatrix_spoke_external_device_connArgs:
     @pulumi.getter(name="phase2Encryption")
     def phase2_encryption(self) -> Optional[pulumi.Input[str]]:
         """
-        Phase two Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'AES-128-GCM-64',
-        'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', 'AES-256-GCM-128', and 'NULL-ENCR'.
+        Phase two Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", "AES-256-GCM-128" and "NULL-ENCR". Default value: "AES-256-CBC".
         """
         return pulumi.get(self, "phase2_encryption")
 
@@ -540,7 +536,7 @@ class Aviatrix_spoke_external_device_connArgs:
     @pulumi.getter(name="preSharedKey")
     def pre_shared_key(self) -> Optional[pulumi.Input[str]]:
         """
-        If left blank, the pre-shared key will be auto generated.
+        Pre-Shared Key.
         """
         return pulumi.get(self, "pre_shared_key")
 
@@ -588,7 +584,7 @@ class Aviatrix_spoke_external_device_connArgs:
     @pulumi.getter(name="tunnelProtocol")
     def tunnel_protocol(self) -> Optional[pulumi.Input[str]]:
         """
-        Tunnel Protocol. Valid value: 'IPsec'. Default value: 'IPsec'. Case insensitive.
+        Tunnel protocol, only valid with `connection_type` = 'bgp'. Valid values: 'IPsec'. Default value: 'IPsec'. Case insensitive.
         """
         return pulumi.get(self, "tunnel_protocol")
 
@@ -638,45 +634,43 @@ class _Aviatrix_spoke_external_device_connState:
                  vpc_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Aviatrix_spoke_external_device_conn resources.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] approved_cidrs: Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
-        :param pulumi.Input[str] backup_bgp_md5_key: Backup BGP MD5 authentication key.
-        :param pulumi.Input[str] backup_bgp_remote_as_num: Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] approved_cidrs: Set of approved CIDRs. Requires `enable_learned_cidrs_approval` to be true. Type: Set(String).
+        :param pulumi.Input[str] backup_bgp_md5_key: Backup BGP MD5 Authentication Key. Valid with HA enabled for connection. Example: 'avx03,avx04'.
+        :param pulumi.Input[str] backup_bgp_remote_as_num: Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required if HA enabled for 'bgp' connection.
         :param pulumi.Input[bool] backup_direct_connect: Backup direct connect for backup external device.
         :param pulumi.Input[str] backup_local_tunnel_cidr: Source CIDR for the tunnel from the backup Aviatrix spoke gateway.
-        :param pulumi.Input[str] backup_pre_shared_key: Backup pre shared key.
+        :param pulumi.Input[str] backup_pre_shared_key: Backup Pre-Shared Key.
         :param pulumi.Input[str] backup_remote_gateway_ip: Backup remote gateway IP.
         :param pulumi.Input[str] backup_remote_tunnel_cidr: Destination CIDR for the tunnel to the backup external device.
-        :param pulumi.Input[str] bgp_local_as_num: BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
-        :param pulumi.Input[str] bgp_md5_key: BGP MD5 authentication key.
-        :param pulumi.Input[str] bgp_remote_as_num: BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
-        :param pulumi.Input[str] connection_name: The name of the spoke external device connection which is going to be created.
+        :param pulumi.Input[str] bgp_local_as_num: BGP local ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
+        :param pulumi.Input[str] bgp_md5_key: BGP MD5 Authentication Key. Example: 'avx01,avx02'.
+        :param pulumi.Input[str] bgp_remote_as_num: BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
+        :param pulumi.Input[str] connection_name: Spoke external device connection name.
         :param pulumi.Input[str] connection_type: Connection type. Valid values: 'bgp', 'static'. Default value: 'bgp'.
-        :param pulumi.Input[bool] custom_algorithms: Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption.
+        :param pulumi.Input[bool] custom_algorithms: Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption. Valid values: true, false. **NOTE: Please see notes here for more information.**
         :param pulumi.Input[bool] direct_connect: Set true for private network infrastructure.
-        :param pulumi.Input[bool] enable_event_triggered_ha: Enable Event Triggered HA.
-        :param pulumi.Input[bool] enable_ikev2: Set as true if use IKEv2.
-        :param pulumi.Input[bool] enable_learned_cidrs_approval: Enable learned CIDR approval for the connection. Only valid with 'connection_type' = 'bgp'. Requires the spoke_gateway's
-               'learned_cidrs_approval_mode' attribute be set to 'connection'. Valid values: true, false. Default value: false.
-        :param pulumi.Input[str] gw_name: Name of the BGP Spoke Gateway.
+        :param pulumi.Input[bool] enable_event_triggered_ha: Enable Event Triggered HA. Default value: false. Valid values: true or false.
+        :param pulumi.Input[bool] enable_ikev2: Set as true to enable IKEv2 protocol.
+        :param pulumi.Input[bool] enable_learned_cidrs_approval: Enable learned CIDRs approval for the connection. Only valid with `connection_type` = 'bgp'. Requires the spoke_gateway's `learned_cidrs_approval_mode` attribute be set to 'connection'. Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] gw_name: Aviatrix spoke gateway name.
         :param pulumi.Input[bool] ha_enabled: Set as true if there are two external devices.
+               * `backup_remote_gateway_ip ` - (Optional) Backup remote gateway IP. Required if HA enabled.
         :param pulumi.Input[str] local_tunnel_cidr: Source CIDR for the tunnel from the Aviatrix spoke gateway.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] manual_bgp_advertised_cidrs: Configure manual BGP advertised CIDRs for this connection. Only valid with 'connection_type' = 'bgp'.
-        :param pulumi.Input[str] phase1_authentication: Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'.
-        :param pulumi.Input[str] phase1_dh_groups: Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
-        :param pulumi.Input[str] phase1_encryption: Phase one Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC' and 'AES-256-CBC', 'AES-128-GCM-64',
-               'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', and 'AES-256-GCM-128'.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] phase1_remote_identifiers: Phase 1 remote identifier of the IPsec tunnel.
-        :param pulumi.Input[str] phase2_authentication: Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'.
-        :param pulumi.Input[str] phase2_dh_groups: Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
-        :param pulumi.Input[str] phase2_encryption: Phase two Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'AES-128-GCM-64',
-               'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', 'AES-256-GCM-128', and 'NULL-ENCR'.
-        :param pulumi.Input[str] pre_shared_key: If left blank, the pre-shared key will be auto generated.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] manual_bgp_advertised_cidrs: Configure manual BGP advertised CIDRs for this connection. Only valid with `connection_type`= 'bgp'.
+        :param pulumi.Input[str] phase1_authentication: Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'. Default value: 'SHA-256'.
+        :param pulumi.Input[str] phase1_dh_groups: Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
+        :param pulumi.Input[str] phase1_encryption: Phase one Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", and "AES-256-GCM-128". Default value: "AES-256-CBC".
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] phase1_remote_identifiers: Phase 1 remote identifier of the IPsec tunnel. This can be configured to be either the public IP address or the private IP address of the peer terminating the IPsec tunnel. Example: ["1.2.3.4"] when HA is disabled, ["1.2.3.4", "5.6.7.8"] when HA is enabled.
+        :param pulumi.Input[str] phase2_authentication: Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'. Default value: 'HMAC-SHA-256'.
+        :param pulumi.Input[str] phase2_dh_groups: Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
+        :param pulumi.Input[str] phase2_encryption: Phase two Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", "AES-256-GCM-128" and "NULL-ENCR". Default value: "AES-256-CBC".
+        :param pulumi.Input[str] pre_shared_key: Pre-Shared Key.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: Connection AS Path Prepend customized by specifying AS PATH for a BGP connection.
-        :param pulumi.Input[str] remote_gateway_ip: Remote Gateway IP.
+        :param pulumi.Input[str] remote_gateway_ip: Remote gateway IP.
         :param pulumi.Input[str] remote_subnet: Remote CIDRs joined as a string with ','. Required for a 'static' type connection.
         :param pulumi.Input[str] remote_tunnel_cidr: Destination CIDR for the tunnel to the external device.
-        :param pulumi.Input[str] tunnel_protocol: Tunnel Protocol. Valid value: 'IPsec'. Default value: 'IPsec'. Case insensitive.
-        :param pulumi.Input[str] vpc_id: ID of the VPC where the BGP Spoke Gateway is located.
+        :param pulumi.Input[str] tunnel_protocol: Tunnel protocol, only valid with `connection_type` = 'bgp'. Valid values: 'IPsec'. Default value: 'IPsec'. Case insensitive.
+        :param pulumi.Input[str] vpc_id: VPC ID of the Aviatrix spoke gateway.
         """
         if approved_cidrs is not None:
             pulumi.set(__self__, "approved_cidrs", approved_cidrs)
@@ -755,7 +749,7 @@ class _Aviatrix_spoke_external_device_connState:
     @pulumi.getter(name="approvedCidrs")
     def approved_cidrs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
+        Set of approved CIDRs. Requires `enable_learned_cidrs_approval` to be true. Type: Set(String).
         """
         return pulumi.get(self, "approved_cidrs")
 
@@ -767,7 +761,7 @@ class _Aviatrix_spoke_external_device_connState:
     @pulumi.getter(name="backupBgpMd5Key")
     def backup_bgp_md5_key(self) -> Optional[pulumi.Input[str]]:
         """
-        Backup BGP MD5 authentication key.
+        Backup BGP MD5 Authentication Key. Valid with HA enabled for connection. Example: 'avx03,avx04'.
         """
         return pulumi.get(self, "backup_bgp_md5_key")
 
@@ -779,7 +773,7 @@ class _Aviatrix_spoke_external_device_connState:
     @pulumi.getter(name="backupBgpRemoteAsNum")
     def backup_bgp_remote_as_num(self) -> Optional[pulumi.Input[str]]:
         """
-        Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+        Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required if HA enabled for 'bgp' connection.
         """
         return pulumi.get(self, "backup_bgp_remote_as_num")
 
@@ -815,7 +809,7 @@ class _Aviatrix_spoke_external_device_connState:
     @pulumi.getter(name="backupPreSharedKey")
     def backup_pre_shared_key(self) -> Optional[pulumi.Input[str]]:
         """
-        Backup pre shared key.
+        Backup Pre-Shared Key.
         """
         return pulumi.get(self, "backup_pre_shared_key")
 
@@ -851,7 +845,7 @@ class _Aviatrix_spoke_external_device_connState:
     @pulumi.getter(name="bgpLocalAsNum")
     def bgp_local_as_num(self) -> Optional[pulumi.Input[str]]:
         """
-        BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+        BGP local ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
         """
         return pulumi.get(self, "bgp_local_as_num")
 
@@ -863,7 +857,7 @@ class _Aviatrix_spoke_external_device_connState:
     @pulumi.getter(name="bgpMd5Key")
     def bgp_md5_key(self) -> Optional[pulumi.Input[str]]:
         """
-        BGP MD5 authentication key.
+        BGP MD5 Authentication Key. Example: 'avx01,avx02'.
         """
         return pulumi.get(self, "bgp_md5_key")
 
@@ -875,7 +869,7 @@ class _Aviatrix_spoke_external_device_connState:
     @pulumi.getter(name="bgpRemoteAsNum")
     def bgp_remote_as_num(self) -> Optional[pulumi.Input[str]]:
         """
-        BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+        BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
         """
         return pulumi.get(self, "bgp_remote_as_num")
 
@@ -887,7 +881,7 @@ class _Aviatrix_spoke_external_device_connState:
     @pulumi.getter(name="connectionName")
     def connection_name(self) -> Optional[pulumi.Input[str]]:
         """
-        The name of the spoke external device connection which is going to be created.
+        Spoke external device connection name.
         """
         return pulumi.get(self, "connection_name")
 
@@ -911,7 +905,7 @@ class _Aviatrix_spoke_external_device_connState:
     @pulumi.getter(name="customAlgorithms")
     def custom_algorithms(self) -> Optional[pulumi.Input[bool]]:
         """
-        Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption.
+        Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption. Valid values: true, false. **NOTE: Please see notes here for more information.**
         """
         return pulumi.get(self, "custom_algorithms")
 
@@ -935,7 +929,7 @@ class _Aviatrix_spoke_external_device_connState:
     @pulumi.getter(name="enableEventTriggeredHa")
     def enable_event_triggered_ha(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable Event Triggered HA.
+        Enable Event Triggered HA. Default value: false. Valid values: true or false.
         """
         return pulumi.get(self, "enable_event_triggered_ha")
 
@@ -947,7 +941,7 @@ class _Aviatrix_spoke_external_device_connState:
     @pulumi.getter(name="enableIkev2")
     def enable_ikev2(self) -> Optional[pulumi.Input[bool]]:
         """
-        Set as true if use IKEv2.
+        Set as true to enable IKEv2 protocol.
         """
         return pulumi.get(self, "enable_ikev2")
 
@@ -959,8 +953,7 @@ class _Aviatrix_spoke_external_device_connState:
     @pulumi.getter(name="enableLearnedCidrsApproval")
     def enable_learned_cidrs_approval(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable learned CIDR approval for the connection. Only valid with 'connection_type' = 'bgp'. Requires the spoke_gateway's
-        'learned_cidrs_approval_mode' attribute be set to 'connection'. Valid values: true, false. Default value: false.
+        Enable learned CIDRs approval for the connection. Only valid with `connection_type` = 'bgp'. Requires the spoke_gateway's `learned_cidrs_approval_mode` attribute be set to 'connection'. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_learned_cidrs_approval")
 
@@ -972,7 +965,7 @@ class _Aviatrix_spoke_external_device_connState:
     @pulumi.getter(name="gwName")
     def gw_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the BGP Spoke Gateway.
+        Aviatrix spoke gateway name.
         """
         return pulumi.get(self, "gw_name")
 
@@ -985,6 +978,7 @@ class _Aviatrix_spoke_external_device_connState:
     def ha_enabled(self) -> Optional[pulumi.Input[bool]]:
         """
         Set as true if there are two external devices.
+        * `backup_remote_gateway_ip ` - (Optional) Backup remote gateway IP. Required if HA enabled.
         """
         return pulumi.get(self, "ha_enabled")
 
@@ -1008,7 +1002,7 @@ class _Aviatrix_spoke_external_device_connState:
     @pulumi.getter(name="manualBgpAdvertisedCidrs")
     def manual_bgp_advertised_cidrs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Configure manual BGP advertised CIDRs for this connection. Only valid with 'connection_type' = 'bgp'.
+        Configure manual BGP advertised CIDRs for this connection. Only valid with `connection_type`= 'bgp'.
         """
         return pulumi.get(self, "manual_bgp_advertised_cidrs")
 
@@ -1020,7 +1014,7 @@ class _Aviatrix_spoke_external_device_connState:
     @pulumi.getter(name="phase1Authentication")
     def phase1_authentication(self) -> Optional[pulumi.Input[str]]:
         """
-        Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'.
+        Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'. Default value: 'SHA-256'.
         """
         return pulumi.get(self, "phase1_authentication")
 
@@ -1032,7 +1026,7 @@ class _Aviatrix_spoke_external_device_connState:
     @pulumi.getter(name="phase1DhGroups")
     def phase1_dh_groups(self) -> Optional[pulumi.Input[str]]:
         """
-        Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+        Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
         """
         return pulumi.get(self, "phase1_dh_groups")
 
@@ -1044,8 +1038,7 @@ class _Aviatrix_spoke_external_device_connState:
     @pulumi.getter(name="phase1Encryption")
     def phase1_encryption(self) -> Optional[pulumi.Input[str]]:
         """
-        Phase one Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC' and 'AES-256-CBC', 'AES-128-GCM-64',
-        'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', and 'AES-256-GCM-128'.
+        Phase one Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", and "AES-256-GCM-128". Default value: "AES-256-CBC".
         """
         return pulumi.get(self, "phase1_encryption")
 
@@ -1057,7 +1050,7 @@ class _Aviatrix_spoke_external_device_connState:
     @pulumi.getter(name="phase1RemoteIdentifiers")
     def phase1_remote_identifiers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Phase 1 remote identifier of the IPsec tunnel.
+        Phase 1 remote identifier of the IPsec tunnel. This can be configured to be either the public IP address or the private IP address of the peer terminating the IPsec tunnel. Example: ["1.2.3.4"] when HA is disabled, ["1.2.3.4", "5.6.7.8"] when HA is enabled.
         """
         return pulumi.get(self, "phase1_remote_identifiers")
 
@@ -1069,7 +1062,7 @@ class _Aviatrix_spoke_external_device_connState:
     @pulumi.getter(name="phase2Authentication")
     def phase2_authentication(self) -> Optional[pulumi.Input[str]]:
         """
-        Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'.
+        Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'. Default value: 'HMAC-SHA-256'.
         """
         return pulumi.get(self, "phase2_authentication")
 
@@ -1081,7 +1074,7 @@ class _Aviatrix_spoke_external_device_connState:
     @pulumi.getter(name="phase2DhGroups")
     def phase2_dh_groups(self) -> Optional[pulumi.Input[str]]:
         """
-        Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+        Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
         """
         return pulumi.get(self, "phase2_dh_groups")
 
@@ -1093,8 +1086,7 @@ class _Aviatrix_spoke_external_device_connState:
     @pulumi.getter(name="phase2Encryption")
     def phase2_encryption(self) -> Optional[pulumi.Input[str]]:
         """
-        Phase two Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'AES-128-GCM-64',
-        'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', 'AES-256-GCM-128', and 'NULL-ENCR'.
+        Phase two Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", "AES-256-GCM-128" and "NULL-ENCR". Default value: "AES-256-CBC".
         """
         return pulumi.get(self, "phase2_encryption")
 
@@ -1106,7 +1098,7 @@ class _Aviatrix_spoke_external_device_connState:
     @pulumi.getter(name="preSharedKey")
     def pre_shared_key(self) -> Optional[pulumi.Input[str]]:
         """
-        If left blank, the pre-shared key will be auto generated.
+        Pre-Shared Key.
         """
         return pulumi.get(self, "pre_shared_key")
 
@@ -1130,7 +1122,7 @@ class _Aviatrix_spoke_external_device_connState:
     @pulumi.getter(name="remoteGatewayIp")
     def remote_gateway_ip(self) -> Optional[pulumi.Input[str]]:
         """
-        Remote Gateway IP.
+        Remote gateway IP.
         """
         return pulumi.get(self, "remote_gateway_ip")
 
@@ -1166,7 +1158,7 @@ class _Aviatrix_spoke_external_device_connState:
     @pulumi.getter(name="tunnelProtocol")
     def tunnel_protocol(self) -> Optional[pulumi.Input[str]]:
         """
-        Tunnel Protocol. Valid value: 'IPsec'. Default value: 'IPsec'. Case insensitive.
+        Tunnel protocol, only valid with `connection_type` = 'bgp'. Valid values: 'IPsec'. Default value: 'IPsec'. Case insensitive.
         """
         return pulumi.get(self, "tunnel_protocol")
 
@@ -1178,7 +1170,7 @@ class _Aviatrix_spoke_external_device_connState:
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
-        ID of the VPC where the BGP Spoke Gateway is located.
+        VPC ID of the Aviatrix spoke gateway.
         """
         return pulumi.get(self, "vpc_id")
 
@@ -1230,48 +1222,60 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Aviatrix_spoke_external_device_conn resource with the given unique name, props, and options.
+        The **aviatrix_spoke_external_device_conn** resource creates and manages the connection between the Aviatrix BGP enabled spoke gateway and an External Device for purposes of Transit Network.
+
+        ## Notes
+
+        ### custom_algorithms
+        If set to true, the six algorithm arguments cannot all be default value. If set to false, default values will be used for all six algorithm arguments.
+
+        ## Import
+
+        **spoke_external_device_conn** can be imported using the `connection_name` and `vpc_id`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrix_spoke_external_device_conn:aviatrix_spoke_external_device_conn test connection_name~vpc_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] approved_cidrs: Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
-        :param pulumi.Input[str] backup_bgp_md5_key: Backup BGP MD5 authentication key.
-        :param pulumi.Input[str] backup_bgp_remote_as_num: Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] approved_cidrs: Set of approved CIDRs. Requires `enable_learned_cidrs_approval` to be true. Type: Set(String).
+        :param pulumi.Input[str] backup_bgp_md5_key: Backup BGP MD5 Authentication Key. Valid with HA enabled for connection. Example: 'avx03,avx04'.
+        :param pulumi.Input[str] backup_bgp_remote_as_num: Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required if HA enabled for 'bgp' connection.
         :param pulumi.Input[bool] backup_direct_connect: Backup direct connect for backup external device.
         :param pulumi.Input[str] backup_local_tunnel_cidr: Source CIDR for the tunnel from the backup Aviatrix spoke gateway.
-        :param pulumi.Input[str] backup_pre_shared_key: Backup pre shared key.
+        :param pulumi.Input[str] backup_pre_shared_key: Backup Pre-Shared Key.
         :param pulumi.Input[str] backup_remote_gateway_ip: Backup remote gateway IP.
         :param pulumi.Input[str] backup_remote_tunnel_cidr: Destination CIDR for the tunnel to the backup external device.
-        :param pulumi.Input[str] bgp_local_as_num: BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
-        :param pulumi.Input[str] bgp_md5_key: BGP MD5 authentication key.
-        :param pulumi.Input[str] bgp_remote_as_num: BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
-        :param pulumi.Input[str] connection_name: The name of the spoke external device connection which is going to be created.
+        :param pulumi.Input[str] bgp_local_as_num: BGP local ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
+        :param pulumi.Input[str] bgp_md5_key: BGP MD5 Authentication Key. Example: 'avx01,avx02'.
+        :param pulumi.Input[str] bgp_remote_as_num: BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
+        :param pulumi.Input[str] connection_name: Spoke external device connection name.
         :param pulumi.Input[str] connection_type: Connection type. Valid values: 'bgp', 'static'. Default value: 'bgp'.
-        :param pulumi.Input[bool] custom_algorithms: Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption.
+        :param pulumi.Input[bool] custom_algorithms: Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption. Valid values: true, false. **NOTE: Please see notes here for more information.**
         :param pulumi.Input[bool] direct_connect: Set true for private network infrastructure.
-        :param pulumi.Input[bool] enable_event_triggered_ha: Enable Event Triggered HA.
-        :param pulumi.Input[bool] enable_ikev2: Set as true if use IKEv2.
-        :param pulumi.Input[bool] enable_learned_cidrs_approval: Enable learned CIDR approval for the connection. Only valid with 'connection_type' = 'bgp'. Requires the spoke_gateway's
-               'learned_cidrs_approval_mode' attribute be set to 'connection'. Valid values: true, false. Default value: false.
-        :param pulumi.Input[str] gw_name: Name of the BGP Spoke Gateway.
+        :param pulumi.Input[bool] enable_event_triggered_ha: Enable Event Triggered HA. Default value: false. Valid values: true or false.
+        :param pulumi.Input[bool] enable_ikev2: Set as true to enable IKEv2 protocol.
+        :param pulumi.Input[bool] enable_learned_cidrs_approval: Enable learned CIDRs approval for the connection. Only valid with `connection_type` = 'bgp'. Requires the spoke_gateway's `learned_cidrs_approval_mode` attribute be set to 'connection'. Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] gw_name: Aviatrix spoke gateway name.
         :param pulumi.Input[bool] ha_enabled: Set as true if there are two external devices.
+               * `backup_remote_gateway_ip ` - (Optional) Backup remote gateway IP. Required if HA enabled.
         :param pulumi.Input[str] local_tunnel_cidr: Source CIDR for the tunnel from the Aviatrix spoke gateway.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] manual_bgp_advertised_cidrs: Configure manual BGP advertised CIDRs for this connection. Only valid with 'connection_type' = 'bgp'.
-        :param pulumi.Input[str] phase1_authentication: Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'.
-        :param pulumi.Input[str] phase1_dh_groups: Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
-        :param pulumi.Input[str] phase1_encryption: Phase one Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC' and 'AES-256-CBC', 'AES-128-GCM-64',
-               'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', and 'AES-256-GCM-128'.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] phase1_remote_identifiers: Phase 1 remote identifier of the IPsec tunnel.
-        :param pulumi.Input[str] phase2_authentication: Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'.
-        :param pulumi.Input[str] phase2_dh_groups: Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
-        :param pulumi.Input[str] phase2_encryption: Phase two Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'AES-128-GCM-64',
-               'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', 'AES-256-GCM-128', and 'NULL-ENCR'.
-        :param pulumi.Input[str] pre_shared_key: If left blank, the pre-shared key will be auto generated.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] manual_bgp_advertised_cidrs: Configure manual BGP advertised CIDRs for this connection. Only valid with `connection_type`= 'bgp'.
+        :param pulumi.Input[str] phase1_authentication: Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'. Default value: 'SHA-256'.
+        :param pulumi.Input[str] phase1_dh_groups: Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
+        :param pulumi.Input[str] phase1_encryption: Phase one Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", and "AES-256-GCM-128". Default value: "AES-256-CBC".
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] phase1_remote_identifiers: Phase 1 remote identifier of the IPsec tunnel. This can be configured to be either the public IP address or the private IP address of the peer terminating the IPsec tunnel. Example: ["1.2.3.4"] when HA is disabled, ["1.2.3.4", "5.6.7.8"] when HA is enabled.
+        :param pulumi.Input[str] phase2_authentication: Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'. Default value: 'HMAC-SHA-256'.
+        :param pulumi.Input[str] phase2_dh_groups: Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
+        :param pulumi.Input[str] phase2_encryption: Phase two Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", "AES-256-GCM-128" and "NULL-ENCR". Default value: "AES-256-CBC".
+        :param pulumi.Input[str] pre_shared_key: Pre-Shared Key.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: Connection AS Path Prepend customized by specifying AS PATH for a BGP connection.
-        :param pulumi.Input[str] remote_gateway_ip: Remote Gateway IP.
+        :param pulumi.Input[str] remote_gateway_ip: Remote gateway IP.
         :param pulumi.Input[str] remote_subnet: Remote CIDRs joined as a string with ','. Required for a 'static' type connection.
         :param pulumi.Input[str] remote_tunnel_cidr: Destination CIDR for the tunnel to the external device.
-        :param pulumi.Input[str] tunnel_protocol: Tunnel Protocol. Valid value: 'IPsec'. Default value: 'IPsec'. Case insensitive.
-        :param pulumi.Input[str] vpc_id: ID of the VPC where the BGP Spoke Gateway is located.
+        :param pulumi.Input[str] tunnel_protocol: Tunnel protocol, only valid with `connection_type` = 'bgp'. Valid values: 'IPsec'. Default value: 'IPsec'. Case insensitive.
+        :param pulumi.Input[str] vpc_id: VPC ID of the Aviatrix spoke gateway.
         """
         ...
     @overload
@@ -1280,7 +1284,21 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
                  args: Aviatrix_spoke_external_device_connArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Aviatrix_spoke_external_device_conn resource with the given unique name, props, and options.
+        The **aviatrix_spoke_external_device_conn** resource creates and manages the connection between the Aviatrix BGP enabled spoke gateway and an External Device for purposes of Transit Network.
+
+        ## Notes
+
+        ### custom_algorithms
+        If set to true, the six algorithm arguments cannot all be default value. If set to false, default values will be used for all six algorithm arguments.
+
+        ## Import
+
+        **spoke_external_device_conn** can be imported using the `connection_name` and `vpc_id`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrix_spoke_external_device_conn:aviatrix_spoke_external_device_conn test connection_name~vpc_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param Aviatrix_spoke_external_device_connArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -1342,15 +1360,15 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
             __props__ = Aviatrix_spoke_external_device_connArgs.__new__(Aviatrix_spoke_external_device_connArgs)
 
             __props__.__dict__["approved_cidrs"] = approved_cidrs
-            __props__.__dict__["backup_bgp_md5_key"] = backup_bgp_md5_key
+            __props__.__dict__["backup_bgp_md5_key"] = None if backup_bgp_md5_key is None else pulumi.Output.secret(backup_bgp_md5_key)
             __props__.__dict__["backup_bgp_remote_as_num"] = backup_bgp_remote_as_num
             __props__.__dict__["backup_direct_connect"] = backup_direct_connect
             __props__.__dict__["backup_local_tunnel_cidr"] = backup_local_tunnel_cidr
-            __props__.__dict__["backup_pre_shared_key"] = backup_pre_shared_key
+            __props__.__dict__["backup_pre_shared_key"] = None if backup_pre_shared_key is None else pulumi.Output.secret(backup_pre_shared_key)
             __props__.__dict__["backup_remote_gateway_ip"] = backup_remote_gateway_ip
             __props__.__dict__["backup_remote_tunnel_cidr"] = backup_remote_tunnel_cidr
             __props__.__dict__["bgp_local_as_num"] = bgp_local_as_num
-            __props__.__dict__["bgp_md5_key"] = bgp_md5_key
+            __props__.__dict__["bgp_md5_key"] = None if bgp_md5_key is None else pulumi.Output.secret(bgp_md5_key)
             __props__.__dict__["bgp_remote_as_num"] = bgp_remote_as_num
             if connection_name is None and not opts.urn:
                 raise TypeError("Missing required property 'connection_name'")
@@ -1374,7 +1392,7 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
             __props__.__dict__["phase2_authentication"] = phase2_authentication
             __props__.__dict__["phase2_dh_groups"] = phase2_dh_groups
             __props__.__dict__["phase2_encryption"] = phase2_encryption
-            __props__.__dict__["pre_shared_key"] = pre_shared_key
+            __props__.__dict__["pre_shared_key"] = None if pre_shared_key is None else pulumi.Output.secret(pre_shared_key)
             __props__.__dict__["prepend_as_paths"] = prepend_as_paths
             if remote_gateway_ip is None and not opts.urn:
                 raise TypeError("Missing required property 'remote_gateway_ip'")
@@ -1385,6 +1403,8 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
             if vpc_id is None and not opts.urn:
                 raise TypeError("Missing required property 'vpc_id'")
             __props__.__dict__["vpc_id"] = vpc_id
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["backupBgpMd5Key", "backupPreSharedKey", "bgpMd5Key", "preSharedKey"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(Aviatrix_spoke_external_device_conn, __self__).__init__(
             'aviatrix:index/aviatrix_spoke_external_device_conn:aviatrix_spoke_external_device_conn',
             resource_name,
@@ -1438,45 +1458,43 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] approved_cidrs: Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
-        :param pulumi.Input[str] backup_bgp_md5_key: Backup BGP MD5 authentication key.
-        :param pulumi.Input[str] backup_bgp_remote_as_num: Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] approved_cidrs: Set of approved CIDRs. Requires `enable_learned_cidrs_approval` to be true. Type: Set(String).
+        :param pulumi.Input[str] backup_bgp_md5_key: Backup BGP MD5 Authentication Key. Valid with HA enabled for connection. Example: 'avx03,avx04'.
+        :param pulumi.Input[str] backup_bgp_remote_as_num: Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required if HA enabled for 'bgp' connection.
         :param pulumi.Input[bool] backup_direct_connect: Backup direct connect for backup external device.
         :param pulumi.Input[str] backup_local_tunnel_cidr: Source CIDR for the tunnel from the backup Aviatrix spoke gateway.
-        :param pulumi.Input[str] backup_pre_shared_key: Backup pre shared key.
+        :param pulumi.Input[str] backup_pre_shared_key: Backup Pre-Shared Key.
         :param pulumi.Input[str] backup_remote_gateway_ip: Backup remote gateway IP.
         :param pulumi.Input[str] backup_remote_tunnel_cidr: Destination CIDR for the tunnel to the backup external device.
-        :param pulumi.Input[str] bgp_local_as_num: BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
-        :param pulumi.Input[str] bgp_md5_key: BGP MD5 authentication key.
-        :param pulumi.Input[str] bgp_remote_as_num: BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
-        :param pulumi.Input[str] connection_name: The name of the spoke external device connection which is going to be created.
+        :param pulumi.Input[str] bgp_local_as_num: BGP local ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
+        :param pulumi.Input[str] bgp_md5_key: BGP MD5 Authentication Key. Example: 'avx01,avx02'.
+        :param pulumi.Input[str] bgp_remote_as_num: BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
+        :param pulumi.Input[str] connection_name: Spoke external device connection name.
         :param pulumi.Input[str] connection_type: Connection type. Valid values: 'bgp', 'static'. Default value: 'bgp'.
-        :param pulumi.Input[bool] custom_algorithms: Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption.
+        :param pulumi.Input[bool] custom_algorithms: Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption. Valid values: true, false. **NOTE: Please see notes here for more information.**
         :param pulumi.Input[bool] direct_connect: Set true for private network infrastructure.
-        :param pulumi.Input[bool] enable_event_triggered_ha: Enable Event Triggered HA.
-        :param pulumi.Input[bool] enable_ikev2: Set as true if use IKEv2.
-        :param pulumi.Input[bool] enable_learned_cidrs_approval: Enable learned CIDR approval for the connection. Only valid with 'connection_type' = 'bgp'. Requires the spoke_gateway's
-               'learned_cidrs_approval_mode' attribute be set to 'connection'. Valid values: true, false. Default value: false.
-        :param pulumi.Input[str] gw_name: Name of the BGP Spoke Gateway.
+        :param pulumi.Input[bool] enable_event_triggered_ha: Enable Event Triggered HA. Default value: false. Valid values: true or false.
+        :param pulumi.Input[bool] enable_ikev2: Set as true to enable IKEv2 protocol.
+        :param pulumi.Input[bool] enable_learned_cidrs_approval: Enable learned CIDRs approval for the connection. Only valid with `connection_type` = 'bgp'. Requires the spoke_gateway's `learned_cidrs_approval_mode` attribute be set to 'connection'. Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] gw_name: Aviatrix spoke gateway name.
         :param pulumi.Input[bool] ha_enabled: Set as true if there are two external devices.
+               * `backup_remote_gateway_ip ` - (Optional) Backup remote gateway IP. Required if HA enabled.
         :param pulumi.Input[str] local_tunnel_cidr: Source CIDR for the tunnel from the Aviatrix spoke gateway.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] manual_bgp_advertised_cidrs: Configure manual BGP advertised CIDRs for this connection. Only valid with 'connection_type' = 'bgp'.
-        :param pulumi.Input[str] phase1_authentication: Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'.
-        :param pulumi.Input[str] phase1_dh_groups: Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
-        :param pulumi.Input[str] phase1_encryption: Phase one Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC' and 'AES-256-CBC', 'AES-128-GCM-64',
-               'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', and 'AES-256-GCM-128'.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] phase1_remote_identifiers: Phase 1 remote identifier of the IPsec tunnel.
-        :param pulumi.Input[str] phase2_authentication: Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'.
-        :param pulumi.Input[str] phase2_dh_groups: Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
-        :param pulumi.Input[str] phase2_encryption: Phase two Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'AES-128-GCM-64',
-               'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', 'AES-256-GCM-128', and 'NULL-ENCR'.
-        :param pulumi.Input[str] pre_shared_key: If left blank, the pre-shared key will be auto generated.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] manual_bgp_advertised_cidrs: Configure manual BGP advertised CIDRs for this connection. Only valid with `connection_type`= 'bgp'.
+        :param pulumi.Input[str] phase1_authentication: Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'. Default value: 'SHA-256'.
+        :param pulumi.Input[str] phase1_dh_groups: Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
+        :param pulumi.Input[str] phase1_encryption: Phase one Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", and "AES-256-GCM-128". Default value: "AES-256-CBC".
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] phase1_remote_identifiers: Phase 1 remote identifier of the IPsec tunnel. This can be configured to be either the public IP address or the private IP address of the peer terminating the IPsec tunnel. Example: ["1.2.3.4"] when HA is disabled, ["1.2.3.4", "5.6.7.8"] when HA is enabled.
+        :param pulumi.Input[str] phase2_authentication: Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'. Default value: 'HMAC-SHA-256'.
+        :param pulumi.Input[str] phase2_dh_groups: Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
+        :param pulumi.Input[str] phase2_encryption: Phase two Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", "AES-256-GCM-128" and "NULL-ENCR". Default value: "AES-256-CBC".
+        :param pulumi.Input[str] pre_shared_key: Pre-Shared Key.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: Connection AS Path Prepend customized by specifying AS PATH for a BGP connection.
-        :param pulumi.Input[str] remote_gateway_ip: Remote Gateway IP.
+        :param pulumi.Input[str] remote_gateway_ip: Remote gateway IP.
         :param pulumi.Input[str] remote_subnet: Remote CIDRs joined as a string with ','. Required for a 'static' type connection.
         :param pulumi.Input[str] remote_tunnel_cidr: Destination CIDR for the tunnel to the external device.
-        :param pulumi.Input[str] tunnel_protocol: Tunnel Protocol. Valid value: 'IPsec'. Default value: 'IPsec'. Case insensitive.
-        :param pulumi.Input[str] vpc_id: ID of the VPC where the BGP Spoke Gateway is located.
+        :param pulumi.Input[str] tunnel_protocol: Tunnel protocol, only valid with `connection_type` = 'bgp'. Valid values: 'IPsec'. Default value: 'IPsec'. Case insensitive.
+        :param pulumi.Input[str] vpc_id: VPC ID of the Aviatrix spoke gateway.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -1524,7 +1542,7 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
     @pulumi.getter(name="approvedCidrs")
     def approved_cidrs(self) -> pulumi.Output[Sequence[str]]:
         """
-        Set of approved cidrs. Requires 'enable_learned_cidrs_approval' to be true. Type: Set(String).
+        Set of approved CIDRs. Requires `enable_learned_cidrs_approval` to be true. Type: Set(String).
         """
         return pulumi.get(self, "approved_cidrs")
 
@@ -1532,7 +1550,7 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
     @pulumi.getter(name="backupBgpMd5Key")
     def backup_bgp_md5_key(self) -> pulumi.Output[Optional[str]]:
         """
-        Backup BGP MD5 authentication key.
+        Backup BGP MD5 Authentication Key. Valid with HA enabled for connection. Example: 'avx03,avx04'.
         """
         return pulumi.get(self, "backup_bgp_md5_key")
 
@@ -1540,7 +1558,7 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
     @pulumi.getter(name="backupBgpRemoteAsNum")
     def backup_bgp_remote_as_num(self) -> pulumi.Output[Optional[str]]:
         """
-        Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+        Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required if HA enabled for 'bgp' connection.
         """
         return pulumi.get(self, "backup_bgp_remote_as_num")
 
@@ -1564,7 +1582,7 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
     @pulumi.getter(name="backupPreSharedKey")
     def backup_pre_shared_key(self) -> pulumi.Output[Optional[str]]:
         """
-        Backup pre shared key.
+        Backup Pre-Shared Key.
         """
         return pulumi.get(self, "backup_pre_shared_key")
 
@@ -1588,7 +1606,7 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
     @pulumi.getter(name="bgpLocalAsNum")
     def bgp_local_as_num(self) -> pulumi.Output[Optional[str]]:
         """
-        BGP local ASN (Autonomous System Number). Integer between 1-4294967294.
+        BGP local ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
         """
         return pulumi.get(self, "bgp_local_as_num")
 
@@ -1596,7 +1614,7 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
     @pulumi.getter(name="bgpMd5Key")
     def bgp_md5_key(self) -> pulumi.Output[Optional[str]]:
         """
-        BGP MD5 authentication key.
+        BGP MD5 Authentication Key. Example: 'avx01,avx02'.
         """
         return pulumi.get(self, "bgp_md5_key")
 
@@ -1604,7 +1622,7 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
     @pulumi.getter(name="bgpRemoteAsNum")
     def bgp_remote_as_num(self) -> pulumi.Output[Optional[str]]:
         """
-        BGP remote ASN (Autonomous System Number). Integer between 1-4294967294.
+        BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required for 'bgp' connection.
         """
         return pulumi.get(self, "bgp_remote_as_num")
 
@@ -1612,7 +1630,7 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
     @pulumi.getter(name="connectionName")
     def connection_name(self) -> pulumi.Output[str]:
         """
-        The name of the spoke external device connection which is going to be created.
+        Spoke external device connection name.
         """
         return pulumi.get(self, "connection_name")
 
@@ -1628,7 +1646,7 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
     @pulumi.getter(name="customAlgorithms")
     def custom_algorithms(self) -> pulumi.Output[Optional[bool]]:
         """
-        Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption.
+        Switch to enable custom/non-default algorithms for IPSec Authentication/Encryption. Valid values: true, false. **NOTE: Please see notes here for more information.**
         """
         return pulumi.get(self, "custom_algorithms")
 
@@ -1644,7 +1662,7 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
     @pulumi.getter(name="enableEventTriggeredHa")
     def enable_event_triggered_ha(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enable Event Triggered HA.
+        Enable Event Triggered HA. Default value: false. Valid values: true or false.
         """
         return pulumi.get(self, "enable_event_triggered_ha")
 
@@ -1652,7 +1670,7 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
     @pulumi.getter(name="enableIkev2")
     def enable_ikev2(self) -> pulumi.Output[Optional[bool]]:
         """
-        Set as true if use IKEv2.
+        Set as true to enable IKEv2 protocol.
         """
         return pulumi.get(self, "enable_ikev2")
 
@@ -1660,8 +1678,7 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
     @pulumi.getter(name="enableLearnedCidrsApproval")
     def enable_learned_cidrs_approval(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enable learned CIDR approval for the connection. Only valid with 'connection_type' = 'bgp'. Requires the spoke_gateway's
-        'learned_cidrs_approval_mode' attribute be set to 'connection'. Valid values: true, false. Default value: false.
+        Enable learned CIDRs approval for the connection. Only valid with `connection_type` = 'bgp'. Requires the spoke_gateway's `learned_cidrs_approval_mode` attribute be set to 'connection'. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_learned_cidrs_approval")
 
@@ -1669,7 +1686,7 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
     @pulumi.getter(name="gwName")
     def gw_name(self) -> pulumi.Output[str]:
         """
-        Name of the BGP Spoke Gateway.
+        Aviatrix spoke gateway name.
         """
         return pulumi.get(self, "gw_name")
 
@@ -1678,6 +1695,7 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
     def ha_enabled(self) -> pulumi.Output[Optional[bool]]:
         """
         Set as true if there are two external devices.
+        * `backup_remote_gateway_ip ` - (Optional) Backup remote gateway IP. Required if HA enabled.
         """
         return pulumi.get(self, "ha_enabled")
 
@@ -1693,7 +1711,7 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
     @pulumi.getter(name="manualBgpAdvertisedCidrs")
     def manual_bgp_advertised_cidrs(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        Configure manual BGP advertised CIDRs for this connection. Only valid with 'connection_type' = 'bgp'.
+        Configure manual BGP advertised CIDRs for this connection. Only valid with `connection_type`= 'bgp'.
         """
         return pulumi.get(self, "manual_bgp_advertised_cidrs")
 
@@ -1701,7 +1719,7 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
     @pulumi.getter(name="phase1Authentication")
     def phase1_authentication(self) -> pulumi.Output[Optional[str]]:
         """
-        Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'.
+        Phase one Authentication. Valid values: 'SHA-1', 'SHA-256', 'SHA-384' and 'SHA-512'. Default value: 'SHA-256'.
         """
         return pulumi.get(self, "phase1_authentication")
 
@@ -1709,7 +1727,7 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
     @pulumi.getter(name="phase1DhGroups")
     def phase1_dh_groups(self) -> pulumi.Output[Optional[str]]:
         """
-        Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+        Phase one DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
         """
         return pulumi.get(self, "phase1_dh_groups")
 
@@ -1717,8 +1735,7 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
     @pulumi.getter(name="phase1Encryption")
     def phase1_encryption(self) -> pulumi.Output[Optional[str]]:
         """
-        Phase one Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC' and 'AES-256-CBC', 'AES-128-GCM-64',
-        'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', and 'AES-256-GCM-128'.
+        Phase one Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", and "AES-256-GCM-128". Default value: "AES-256-CBC".
         """
         return pulumi.get(self, "phase1_encryption")
 
@@ -1726,7 +1743,7 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
     @pulumi.getter(name="phase1RemoteIdentifiers")
     def phase1_remote_identifiers(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        Phase 1 remote identifier of the IPsec tunnel.
+        Phase 1 remote identifier of the IPsec tunnel. This can be configured to be either the public IP address or the private IP address of the peer terminating the IPsec tunnel. Example: ["1.2.3.4"] when HA is disabled, ["1.2.3.4", "5.6.7.8"] when HA is enabled.
         """
         return pulumi.get(self, "phase1_remote_identifiers")
 
@@ -1734,7 +1751,7 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
     @pulumi.getter(name="phase2Authentication")
     def phase2_authentication(self) -> pulumi.Output[Optional[str]]:
         """
-        Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'.
+        Phase two Authentication. Valid values: 'NO-AUTH', 'HMAC-SHA-1', 'HMAC-SHA-256', 'HMAC-SHA-384' and 'HMAC-SHA-512'. Default value: 'HMAC-SHA-256'.
         """
         return pulumi.get(self, "phase2_authentication")
 
@@ -1742,7 +1759,7 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
     @pulumi.getter(name="phase2DhGroups")
     def phase2_dh_groups(self) -> pulumi.Output[Optional[str]]:
         """
-        Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'.
+        Phase two DH Groups. Valid values: '1', '2', '5', '14', '15', '16', '17', '18', '19', '20' and '21'. Default value: '14'.
         """
         return pulumi.get(self, "phase2_dh_groups")
 
@@ -1750,8 +1767,7 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
     @pulumi.getter(name="phase2Encryption")
     def phase2_encryption(self) -> pulumi.Output[Optional[str]]:
         """
-        Phase two Encryption. Valid values: '3DES', 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'AES-128-GCM-64',
-        'AES-128-GCM-96', 'AES-128-GCM-128', 'AES-256-GCM-64', 'AES-256-GCM-96', 'AES-256-GCM-128', and 'NULL-ENCR'.
+        Phase two Encryption. Valid values: "3DES", "AES-128-CBC", "AES-192-CBC", "AES-256-CBC", "AES-128-GCM-64", "AES-128-GCM-96", "AES-128-GCM-128", "AES-256-GCM-64", "AES-256-GCM-96", "AES-256-GCM-128" and "NULL-ENCR". Default value: "AES-256-CBC".
         """
         return pulumi.get(self, "phase2_encryption")
 
@@ -1759,7 +1775,7 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
     @pulumi.getter(name="preSharedKey")
     def pre_shared_key(self) -> pulumi.Output[Optional[str]]:
         """
-        If left blank, the pre-shared key will be auto generated.
+        Pre-Shared Key.
         """
         return pulumi.get(self, "pre_shared_key")
 
@@ -1775,7 +1791,7 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
     @pulumi.getter(name="remoteGatewayIp")
     def remote_gateway_ip(self) -> pulumi.Output[str]:
         """
-        Remote Gateway IP.
+        Remote gateway IP.
         """
         return pulumi.get(self, "remote_gateway_ip")
 
@@ -1799,7 +1815,7 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
     @pulumi.getter(name="tunnelProtocol")
     def tunnel_protocol(self) -> pulumi.Output[Optional[str]]:
         """
-        Tunnel Protocol. Valid value: 'IPsec'. Default value: 'IPsec'. Case insensitive.
+        Tunnel protocol, only valid with `connection_type` = 'bgp'. Valid values: 'IPsec'. Default value: 'IPsec'. Case insensitive.
         """
         return pulumi.get(self, "tunnel_protocol")
 
@@ -1807,7 +1823,7 @@ class Aviatrix_spoke_external_device_conn(pulumi.CustomResource):
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> pulumi.Output[str]:
         """
-        ID of the VPC where the BGP Spoke Gateway is located.
+        VPC ID of the Aviatrix spoke gateway.
         """
         return pulumi.get(self, "vpc_id")
 

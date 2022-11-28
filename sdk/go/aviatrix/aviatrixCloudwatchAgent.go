@@ -11,18 +11,60 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_cloudwatch_agent** resource allows the enabling and disabling of cloudwatch agent.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixCloudwatchAgent(ctx, "testCloudwatchAgent", &aviatrix.AviatrixCloudwatchAgentArgs{
+//				CloudwatchRoleArn: pulumi.String("arn:aws:iam::469550033836:role/aviatrix-role-cloudwatch"),
+//				ExcludedGateways: pulumi.StringArray{
+//					pulumi.String("a"),
+//					pulumi.String("b"),
+//				},
+//				Region: pulumi.String("us-east-1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **cloudwatch_agent** can be imported using "cloudwatch_agent", e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixCloudwatchAgent:AviatrixCloudwatchAgent test cloudwatch_agent
+//
+// ```
 type AviatrixCloudwatchAgent struct {
 	pulumi.CustomResourceState
 
 	// CloudWatch role ARN.
 	CloudwatchRoleArn pulumi.StringOutput `pulumi:"cloudwatchRoleArn"`
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways pulumi.StringArrayOutput `pulumi:"excludedGateways"`
-	// Log group name.
+	// Log group name. "AVIATRIX-CLOUDWATCH-LOG" by default.
 	LogGroupName pulumi.StringPtrOutput `pulumi:"logGroupName"`
 	// Name of AWS region.
 	Region pulumi.StringOutput `pulumi:"region"`
-	// Enabled or not.
+	// The status of cloudwatch agent.
 	Status pulumi.StringOutput `pulumi:"status"`
 }
 
@@ -64,26 +106,26 @@ func GetAviatrixCloudwatchAgent(ctx *pulumi.Context,
 type aviatrixCloudwatchAgentState struct {
 	// CloudWatch role ARN.
 	CloudwatchRoleArn *string `pulumi:"cloudwatchRoleArn"`
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways []string `pulumi:"excludedGateways"`
-	// Log group name.
+	// Log group name. "AVIATRIX-CLOUDWATCH-LOG" by default.
 	LogGroupName *string `pulumi:"logGroupName"`
 	// Name of AWS region.
 	Region *string `pulumi:"region"`
-	// Enabled or not.
+	// The status of cloudwatch agent.
 	Status *string `pulumi:"status"`
 }
 
 type AviatrixCloudwatchAgentState struct {
 	// CloudWatch role ARN.
 	CloudwatchRoleArn pulumi.StringPtrInput
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways pulumi.StringArrayInput
-	// Log group name.
+	// Log group name. "AVIATRIX-CLOUDWATCH-LOG" by default.
 	LogGroupName pulumi.StringPtrInput
 	// Name of AWS region.
 	Region pulumi.StringPtrInput
-	// Enabled or not.
+	// The status of cloudwatch agent.
 	Status pulumi.StringPtrInput
 }
 
@@ -94,9 +136,9 @@ func (AviatrixCloudwatchAgentState) ElementType() reflect.Type {
 type aviatrixCloudwatchAgentArgs struct {
 	// CloudWatch role ARN.
 	CloudwatchRoleArn string `pulumi:"cloudwatchRoleArn"`
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways []string `pulumi:"excludedGateways"`
-	// Log group name.
+	// Log group name. "AVIATRIX-CLOUDWATCH-LOG" by default.
 	LogGroupName *string `pulumi:"logGroupName"`
 	// Name of AWS region.
 	Region string `pulumi:"region"`
@@ -106,9 +148,9 @@ type aviatrixCloudwatchAgentArgs struct {
 type AviatrixCloudwatchAgentArgs struct {
 	// CloudWatch role ARN.
 	CloudwatchRoleArn pulumi.StringInput
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways pulumi.StringArrayInput
-	// Log group name.
+	// Log group name. "AVIATRIX-CLOUDWATCH-LOG" by default.
 	LogGroupName pulumi.StringPtrInput
 	// Name of AWS region.
 	Region pulumi.StringInput
@@ -206,12 +248,12 @@ func (o AviatrixCloudwatchAgentOutput) CloudwatchRoleArn() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixCloudwatchAgent) pulumi.StringOutput { return v.CloudwatchRoleArn }).(pulumi.StringOutput)
 }
 
-// List of excluded gateways.
+// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 func (o AviatrixCloudwatchAgentOutput) ExcludedGateways() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixCloudwatchAgent) pulumi.StringArrayOutput { return v.ExcludedGateways }).(pulumi.StringArrayOutput)
 }
 
-// Log group name.
+// Log group name. "AVIATRIX-CLOUDWATCH-LOG" by default.
 func (o AviatrixCloudwatchAgentOutput) LogGroupName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixCloudwatchAgent) pulumi.StringPtrOutput { return v.LogGroupName }).(pulumi.StringPtrOutput)
 }
@@ -221,7 +263,7 @@ func (o AviatrixCloudwatchAgentOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixCloudwatchAgent) pulumi.StringOutput { return v.Region }).(pulumi.StringOutput)
 }
 
-// Enabled or not.
+// The status of cloudwatch agent.
 func (o AviatrixCloudwatchAgentOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixCloudwatchAgent) pulumi.StringOutput { return v.Status }).(pulumi.StringOutput)
 }

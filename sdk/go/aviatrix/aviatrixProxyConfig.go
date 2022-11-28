@@ -11,14 +11,63 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_proxy_config** resource allows management of an Aviatrix Controller's proxy configurations.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"io/ioutil"
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func readFileOrPanic(path string) pulumi.StringPtrInput {
+//		data, err := ioutil.ReadFile(path)
+//		if err != nil {
+//			panic(err.Error())
+//		}
+//		return pulumi.String(string(data))
+//	}
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixProxyConfig(ctx, "testProxyConfig", &aviatrix.AviatrixProxyConfigArgs{
+//				HttpProxy:          pulumi.String("172.31.52.145:3127"),
+//				HttpsProxy:         pulumi.String("172.31.52.145:3129"),
+//				ProxyCaCertificate: readFileOrPanic("/path/to/ca.pem"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **controller_proxy_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixProxyConfig:AviatrixProxyConfig test 10-11-12-13
+//
+// ```
 type AviatrixProxyConfig struct {
 	pulumi.CustomResourceState
 
-	// http proxy URL.
+	// Http proxy URL.
 	HttpProxy pulumi.StringOutput `pulumi:"httpProxy"`
-	// https proxy URL.
+	// Https proxy URL.
 	HttpsProxy pulumi.StringOutput `pulumi:"httpsProxy"`
-	// Server CA Certificate file.
+	// Server CA Certificate file. Use the `file` function to read from a file.
 	ProxyCaCertificate pulumi.StringPtrOutput `pulumi:"proxyCaCertificate"`
 }
 
@@ -58,20 +107,20 @@ func GetAviatrixProxyConfig(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixProxyConfig resources.
 type aviatrixProxyConfigState struct {
-	// http proxy URL.
+	// Http proxy URL.
 	HttpProxy *string `pulumi:"httpProxy"`
-	// https proxy URL.
+	// Https proxy URL.
 	HttpsProxy *string `pulumi:"httpsProxy"`
-	// Server CA Certificate file.
+	// Server CA Certificate file. Use the `file` function to read from a file.
 	ProxyCaCertificate *string `pulumi:"proxyCaCertificate"`
 }
 
 type AviatrixProxyConfigState struct {
-	// http proxy URL.
+	// Http proxy URL.
 	HttpProxy pulumi.StringPtrInput
-	// https proxy URL.
+	// Https proxy URL.
 	HttpsProxy pulumi.StringPtrInput
-	// Server CA Certificate file.
+	// Server CA Certificate file. Use the `file` function to read from a file.
 	ProxyCaCertificate pulumi.StringPtrInput
 }
 
@@ -80,21 +129,21 @@ func (AviatrixProxyConfigState) ElementType() reflect.Type {
 }
 
 type aviatrixProxyConfigArgs struct {
-	// http proxy URL.
+	// Http proxy URL.
 	HttpProxy string `pulumi:"httpProxy"`
-	// https proxy URL.
+	// Https proxy URL.
 	HttpsProxy string `pulumi:"httpsProxy"`
-	// Server CA Certificate file.
+	// Server CA Certificate file. Use the `file` function to read from a file.
 	ProxyCaCertificate *string `pulumi:"proxyCaCertificate"`
 }
 
 // The set of arguments for constructing a AviatrixProxyConfig resource.
 type AviatrixProxyConfigArgs struct {
-	// http proxy URL.
+	// Http proxy URL.
 	HttpProxy pulumi.StringInput
-	// https proxy URL.
+	// Https proxy URL.
 	HttpsProxy pulumi.StringInput
-	// Server CA Certificate file.
+	// Server CA Certificate file. Use the `file` function to read from a file.
 	ProxyCaCertificate pulumi.StringPtrInput
 }
 
@@ -185,17 +234,17 @@ func (o AviatrixProxyConfigOutput) ToAviatrixProxyConfigOutputWithContext(ctx co
 	return o
 }
 
-// http proxy URL.
+// Http proxy URL.
 func (o AviatrixProxyConfigOutput) HttpProxy() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixProxyConfig) pulumi.StringOutput { return v.HttpProxy }).(pulumi.StringOutput)
 }
 
-// https proxy URL.
+// Https proxy URL.
 func (o AviatrixProxyConfigOutput) HttpsProxy() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixProxyConfig) pulumi.StringOutput { return v.HttpsProxy }).(pulumi.StringOutput)
 }
 
-// Server CA Certificate file.
+// Server CA Certificate file. Use the `file` function to read from a file.
 func (o AviatrixProxyConfigOutput) ProxyCaCertificate() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixProxyConfig) pulumi.StringPtrOutput { return v.ProxyCaCertificate }).(pulumi.StringPtrOutput)
 }

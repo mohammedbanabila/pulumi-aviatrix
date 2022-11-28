@@ -13,7 +13,13 @@ namespace Pulumi.Aviatrix.Outputs
     [OutputType]
     public sealed class AviatrixMicrosegPolicyListPolicyPortRange
     {
+        /// <summary>
+        /// Upper bound for the range of ports. When not set, `lo` is the only port that matches the policy.
+        /// </summary>
         public readonly int? Hi;
+        /// <summary>
+        /// Lower bound for the range of ports.
+        /// </summary>
         public readonly int Lo;
 
         [OutputConstructor]

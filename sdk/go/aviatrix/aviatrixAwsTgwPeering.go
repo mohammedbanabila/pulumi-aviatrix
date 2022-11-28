@@ -11,12 +11,50 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_aws_tgw_peering** resource allows the creation and management of Aviatrix-created inter-region peerings between AWS TGWs.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixAwsTgwPeering(ctx, "test", &aviatrix.AviatrixAwsTgwPeeringArgs{
+//				TgwName1: pulumi.String("tgw1"),
+//				TgwName2: pulumi.String("tgw2"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **aws_tgw_peering** can be imported using the `tgw_name1` and `tgw_name2`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixAwsTgwPeering:AviatrixAwsTgwPeering test tgw_name1~tgw_name2
+//
+// ```
 type AviatrixAwsTgwPeering struct {
 	pulumi.CustomResourceState
 
-	// Name of the first AWS tgw to make a peer pair.
+	// This parameter represents name of the first AWS TGW to make a peer pair.
 	TgwName1 pulumi.StringOutput `pulumi:"tgwName1"`
-	// Name of the second AWS tgw to make a peer pair.
+	// This parameter represents name of the second AWS TGW to make a peer pair.
 	TgwName2 pulumi.StringOutput `pulumi:"tgwName2"`
 }
 
@@ -56,16 +94,16 @@ func GetAviatrixAwsTgwPeering(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixAwsTgwPeering resources.
 type aviatrixAwsTgwPeeringState struct {
-	// Name of the first AWS tgw to make a peer pair.
+	// This parameter represents name of the first AWS TGW to make a peer pair.
 	TgwName1 *string `pulumi:"tgwName1"`
-	// Name of the second AWS tgw to make a peer pair.
+	// This parameter represents name of the second AWS TGW to make a peer pair.
 	TgwName2 *string `pulumi:"tgwName2"`
 }
 
 type AviatrixAwsTgwPeeringState struct {
-	// Name of the first AWS tgw to make a peer pair.
+	// This parameter represents name of the first AWS TGW to make a peer pair.
 	TgwName1 pulumi.StringPtrInput
-	// Name of the second AWS tgw to make a peer pair.
+	// This parameter represents name of the second AWS TGW to make a peer pair.
 	TgwName2 pulumi.StringPtrInput
 }
 
@@ -74,17 +112,17 @@ func (AviatrixAwsTgwPeeringState) ElementType() reflect.Type {
 }
 
 type aviatrixAwsTgwPeeringArgs struct {
-	// Name of the first AWS tgw to make a peer pair.
+	// This parameter represents name of the first AWS TGW to make a peer pair.
 	TgwName1 string `pulumi:"tgwName1"`
-	// Name of the second AWS tgw to make a peer pair.
+	// This parameter represents name of the second AWS TGW to make a peer pair.
 	TgwName2 string `pulumi:"tgwName2"`
 }
 
 // The set of arguments for constructing a AviatrixAwsTgwPeering resource.
 type AviatrixAwsTgwPeeringArgs struct {
-	// Name of the first AWS tgw to make a peer pair.
+	// This parameter represents name of the first AWS TGW to make a peer pair.
 	TgwName1 pulumi.StringInput
-	// Name of the second AWS tgw to make a peer pair.
+	// This parameter represents name of the second AWS TGW to make a peer pair.
 	TgwName2 pulumi.StringInput
 }
 
@@ -175,12 +213,12 @@ func (o AviatrixAwsTgwPeeringOutput) ToAviatrixAwsTgwPeeringOutputWithContext(ct
 	return o
 }
 
-// Name of the first AWS tgw to make a peer pair.
+// This parameter represents name of the first AWS TGW to make a peer pair.
 func (o AviatrixAwsTgwPeeringOutput) TgwName1() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwPeering) pulumi.StringOutput { return v.TgwName1 }).(pulumi.StringOutput)
 }
 
-// Name of the second AWS tgw to make a peer pair.
+// This parameter represents name of the second AWS TGW to make a peer pair.
 func (o AviatrixAwsTgwPeeringOutput) TgwName2() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwPeering) pulumi.StringOutput { return v.TgwName2 }).(pulumi.StringOutput)
 }

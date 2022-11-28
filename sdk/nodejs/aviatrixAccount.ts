@@ -4,6 +4,19 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_account** resource allows the creation and management of Aviatrix cloud accounts.
+ *
+ * > **NOTE:** With the release of Controller 5.4 (compatible with Aviatrix provider R2.13), Role-Based Access Control (RBAC) is now integrated into the Accounts workflow. Any **aviatrix_account** created in 5.3 by default will have admin privileges (attached to the 'admin' RBAC permission group). In 5.4, any new accounts created will not be attached to any RBAC group unless otherwise specified through the **aviatrix_rbac_group_access_account_attachment** resource.
+ *
+ * ## Import
+ *
+ * **account** can be imported using the `account_name` (when doing import, need to leave sensitive attributes blank), e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixAccount:AviatrixAccount test account_name
+ * ```
+ */
 export class AviatrixAccount extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixAccount resource's state with the given name, ID, and optional extra
@@ -37,31 +50,31 @@ export class AviatrixAccount extends pulumi.CustomResource {
      */
     public readonly accountName!: pulumi.Output<string>;
     /**
-     * Alibaba Cloud Access Key.
+     * Alibaba Cloud Access Key. Required when creating an account for Alibaba Cloud.
      */
     public readonly alicloudAccessKey!: pulumi.Output<string | undefined>;
     /**
-     * Alibaba Cloud Account ID to associate with Aviatrix account.
+     * Alibaba Cloud Account number to associate with Aviatrix account. Required when creating an account for Alibaba Cloud.
      */
     public readonly alicloudAccountId!: pulumi.Output<string | undefined>;
     /**
-     * Alibaba Cloud Secret Key.
+     * Alibaba Cloud Secret Key. Required when creating an account for Alibaba Cloud.
      */
     public readonly alicloudSecretKey!: pulumi.Output<string | undefined>;
     /**
-     * Azure Application ID.
+     * Azure ARM Application ID. Required when creating an account for Azure.
      */
     public readonly armApplicationId!: pulumi.Output<string | undefined>;
     /**
-     * Azure Application Key.
+     * Azure ARM Application key. Required when creating an account for Azure.
      */
     public readonly armApplicationKey!: pulumi.Output<string | undefined>;
     /**
-     * Azure Directory ID.
+     * Azure ARM Directory ID. Required when creating an account for Azure.
      */
     public readonly armDirectoryId!: pulumi.Output<string | undefined>;
     /**
-     * Azure Subscription ID.
+     * Azure ARM Subscription ID. Required when creating an account for Azure.
      */
     public readonly armSubscriptionId!: pulumi.Output<string | undefined>;
     /**
@@ -69,207 +82,207 @@ export class AviatrixAccount extends pulumi.CustomResource {
      */
     public readonly auditAccount!: pulumi.Output<boolean | undefined>;
     /**
-     * AWS Access Key.
+     * AWS Access Key. Required when `awsIam` is "false" and when creating an account for AWS.
      */
     public readonly awsAccessKey!: pulumi.Output<string | undefined>;
     /**
-     * AWS Account number to associate with Aviatrix account. Should be 12 digits.
+     * AWS Account number to associate with Aviatrix account. Required when creating an account for AWS.
      */
     public readonly awsAccountNumber!: pulumi.Output<string | undefined>;
     /**
-     * AWS Top Secret Region or Secret Region Custom Certificate Authority file path on the controller.
+     * (Optional) AWS Top Secret Region or Secret Region Custom Certificate Authority file name on the controller. Available as of provider R2.19.5+.
      */
     public /*out*/ readonly awsCaCertPath!: pulumi.Output<string>;
     /**
-     * AWS App role ARN for gateways.
+     * A separate AWS App role ARN to assign to gateways created by the controller. Required when `awsGatewayRoleEc2` is set. Only allowed when `awsIam`, `awsgovIam`, or `awschinaIam` is "true" when creating an account for AWS, AWSGov or AWSChina, respectively. Available as of provider version R2.19+.
      */
     public readonly awsGatewayRoleApp!: pulumi.Output<string | undefined>;
     /**
-     * AWS EC2 role ARN for gateways.
+     * A separate AWS EC2 role ARN to assign to gateways created by the controller. Required when `awsGatewayRoleApp` is set. Only allowed when `awsIam`, `awsgovIam`, or `awschinaIam` is "true" when creating an account for AWS, AWSGov or AWSChina, respectively. Available as of provider version R2.19+.
      */
     public readonly awsGatewayRoleEc2!: pulumi.Output<string | undefined>;
     /**
-     * AWS IAM-role based flag.
+     * AWS IAM-role based flag, this option is for UserConnect.
      */
     public readonly awsIam!: pulumi.Output<boolean | undefined>;
     /**
-     * AWS App role ARN.
+     * AWS App role ARN, this option is for UserConnect. Required when `awsIam` is "true" and when creating an account for AWS.
      */
     public readonly awsRoleApp!: pulumi.Output<string>;
     /**
-     * AWS EC2 role ARN.
+     * AWS EC2 role ARN, this option is for UserConnect. Required when `awsIam` is "true" and when creating an account for AWS.
      */
     public readonly awsRoleEc2!: pulumi.Output<string>;
     /**
-     * AWS Secret Key.
+     * AWS Secret Key. Required when `awsIam` is "false" and when creating an account for AWS.
      */
     public readonly awsSecretKey!: pulumi.Output<string | undefined>;
     /**
-     * AWS China Access Key.
+     * AWSChina Access Key. Required when `awschinaIam` is "false" and when creating an account for AWSChina. Available as of provider version 2.19+.
      */
     public readonly awschinaAccessKey!: pulumi.Output<string | undefined>;
     /**
-     * AWS China Account Number.
+     * AWSChina Account number to associate with Aviatrix account. Required when creating an account for AWSChina. Available as of provider version 2.19+.
      */
     public readonly awschinaAccountNumber!: pulumi.Output<string | undefined>;
     /**
-     * AWS China IAM-role based flag.
+     * AWSChina IAM-role based flag. Available as of provider version 2.19+.
      */
     public readonly awschinaIam!: pulumi.Output<boolean | undefined>;
     /**
-     * AWS China App Role ARN.
+     * AWSChina App role ARN. Available when `awschinaIam` is "true" and when creating an account for AWSChina. If left empty, the ARN will be computed. Available as of provider version 2.19+.
      */
     public readonly awschinaRoleApp!: pulumi.Output<string>;
     /**
-     * AWS China EC2 Role ARN.
+     * AWSChina EC2 role ARN. Available when `awschinaIam` is "true" and when creating an account for AWSChina. If left empty, the ARN will be computed. Available as of provider version 2.19+.
      */
     public readonly awschinaRoleEc2!: pulumi.Output<string>;
     /**
-     * AWS China Secret Key.
+     * AWSChina Secret Key. Required when `awschinaIam` is "false" and when creating an account for AWSChina. Available as of provider version 2.19+.
      */
     public readonly awschinaSecretKey!: pulumi.Output<string | undefined>;
     /**
-     * AWS Gov Access Key.
+     * AWS Access Key. Required when creating an account for AWSGov.
      */
     public readonly awsgovAccessKey!: pulumi.Output<string | undefined>;
     /**
-     * AWS Gov Account number to associate with Aviatrix account.
+     * AWSGov Account number to associate with Aviatrix account. Required when creating an account for AWSGov.
      */
     public readonly awsgovAccountNumber!: pulumi.Output<string | undefined>;
     /**
-     * AWSGov IAM-role based flag
+     * AWSGov IAM-role based flag. Available as of provider version 2.19+.
      */
     public readonly awsgovIam!: pulumi.Output<boolean | undefined>;
     /**
-     * AWSGov App role ARN
+     * AWSGov App role ARN. Available when `awsgovIam` is "true" and when creating an account for AWSGov. If left empty, the ARN will be computed. Available as of provider version 2.19+.
      */
     public readonly awsgovRoleApp!: pulumi.Output<string>;
     /**
-     * AWSGov EC2 role ARN
+     * AWSGov EC2 role ARN. Available when `awsgovIam` is "true" and when creating an account for AWSGov. If left empty, the ARN will be computed. Available as of provider version 2.19+.
      */
     public readonly awsgovRoleEc2!: pulumi.Output<string>;
     /**
-     * AWS Gov Secret Key.
+     * AWS Secret Key. Required when creating an account for AWSGov.
      */
     public readonly awsgovSecretKey!: pulumi.Output<string | undefined>;
     /**
-     * AWS Secret Region Account Number.
+     * AWS Secret Region Account Number. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
      */
     public readonly awssAccountNumber!: pulumi.Output<string | undefined>;
     /**
-     * AWS Secret Region Custom Certificate Authority file path.
+     * AWS Secret Region Custom Certificate Authority local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
      */
     public readonly awssCaChainCert!: pulumi.Output<string | undefined>;
     /**
-     * AWS Secret Region CAP Account Name.
+     * AWS Secret Region Account Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
      */
     public readonly awssCapAccountName!: pulumi.Output<string | undefined>;
     /**
-     * AWS Secret Region CAP Agency.
+     * AWS Secret Region CAP Agency. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
      */
     public readonly awssCapAgency!: pulumi.Output<string | undefined>;
     /**
-     * AWS Secret Region CAP Certificate file path.
+     * AWS Secret Region CAP Certificate local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
      */
     public readonly awssCapCert!: pulumi.Output<string | undefined>;
     /**
-     * AWS Secret Region CAP Certificate Key file path.
+     * AWS Secret Region CAP Certificate Key local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
      */
     public readonly awssCapCertKey!: pulumi.Output<string | undefined>;
     /**
-     * AWS Secret Region CAP Certificate Key file path on the controller.
+     * (Optional) AWS Secret Region CAP Certificate Key file name on the controller. Available as of provider R2.19.5+.
      */
     public /*out*/ readonly awssCapCertKeyPath!: pulumi.Output<string>;
     /**
-     * AWS Secret Region CAP Certificate file path on the controller.
+     * (Optional) AWS Secret Region CAP Certificate file name on the controller. Available as of provider R2.19.5+.
      */
     public /*out*/ readonly awssCapCertPath!: pulumi.Output<string>;
     /**
-     * AWS Secret Region CAP Role Name.
+     * AWS Secret Region Role Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
      */
     public readonly awssCapRoleName!: pulumi.Output<string | undefined>;
     /**
-     * AWS Secret Region CAP Endpoint URL.
+     * AWS Secret Region CAP Url. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
      */
     public readonly awssCapUrl!: pulumi.Output<string | undefined>;
     /**
-     * AWS Top Secret Region Account Number.
+     * AWS Top Secret Region Account Number. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
      */
     public readonly awstsAccountNumber!: pulumi.Output<string | undefined>;
     /**
-     * AWS Top Secret Region Custom Certificate Authority file path.
+     * AWS Top Secret Region Custom Certificate Authority local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
      */
     public readonly awstsCaChainCert!: pulumi.Output<string | undefined>;
     /**
-     * AWS Top Secret Region CAP Agency.
+     * AWS Top Secret Region CAP Agency. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
      */
     public readonly awstsCapAgency!: pulumi.Output<string | undefined>;
     /**
-     * AWS Top Secret Region CAP Certificate file path.
+     * AWS Top Secret Region CAP Certificate local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
      */
     public readonly awstsCapCert!: pulumi.Output<string | undefined>;
     /**
-     * AWS Top Secret Region CAP Certificate Key file path.
+     * AWS Top Secret Region CAP Certificate Key local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
      */
     public readonly awstsCapCertKey!: pulumi.Output<string | undefined>;
     /**
-     * AWS Top Secret Region CAP Certificate Key file path on the controller.
+     * (Optional) AWS Top Secret Region CAP Certificate Key file name on the controller. Available as of provider R2.19.5+.
      */
     public /*out*/ readonly awstsCapCertKeyPath!: pulumi.Output<string>;
     /**
-     * AWS Top Secret Region CAP Certificate file path on the controller.
+     * (Optional) AWS Top Secret Region CAP Certificate file name on the controller. Available as of provider R2.19.5+.
      */
     public /*out*/ readonly awstsCapCertPath!: pulumi.Output<string>;
     /**
-     * AWS Top Secret Region CAP Mission.
+     * AWS Top Secret Region Mission. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
      */
     public readonly awstsCapMission!: pulumi.Output<string | undefined>;
     /**
-     * AWS Top Secret Region CAP Role Name.
+     * AWS Top Secret Region Role Name. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
      */
     public readonly awstsCapRoleName!: pulumi.Output<string | undefined>;
     /**
-     * AWS Top Secret Region CAP Endpoint URL.
+     * AWS Top Secret Region CAP Url. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
      */
     public readonly awstsCapUrl!: pulumi.Output<string | undefined>;
     /**
-     * Azure China Application ID.
+     * AzureChina ARM Application ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
      */
     public readonly azurechinaApplicationId!: pulumi.Output<string | undefined>;
     /**
-     * Azure China Application Key.
+     * AzureChina ARM Application key. Required when creating an account for AzureChina. Available as of provider version 2.19+.
      */
     public readonly azurechinaApplicationKey!: pulumi.Output<string | undefined>;
     /**
-     * Azure China Directory ID.
+     * AzureChina ARM Directory ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
      */
     public readonly azurechinaDirectoryId!: pulumi.Output<string | undefined>;
     /**
-     * Azure China Subscription ID.
+     * AzureChina ARM Subscription ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
      */
     public readonly azurechinaSubscriptionId!: pulumi.Output<string | undefined>;
     /**
-     * Azure Gov Application ID.
+     * AzureGov ARM Application ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
      */
     public readonly azuregovApplicationId!: pulumi.Output<string | undefined>;
     /**
-     * Azure Gov Application Key.
+     * AzureGov ARM Application key. Required when creating an account for AzureGov. Available as of provider version R2.19+.
      */
     public readonly azuregovApplicationKey!: pulumi.Output<string | undefined>;
     /**
-     * Azure Gov Directory ID.
+     * AzureGov ARM Directory ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
      */
     public readonly azuregovDirectoryId!: pulumi.Output<string | undefined>;
     /**
-     * Azure Gov Subscription ID.
+     * AzureGov ARM Subscription ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
      */
     public readonly azuregovSubscriptionId!: pulumi.Output<string | undefined>;
     /**
-     * Type of cloud service provider.
+     * Type of cloud service provider. Only AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina and Alibaba Cloud are supported currently. Enter 1 for AWS, 4 for GCP, 8 for Azure, 16 for OCI, 32 for AzureGov, 256 for AWSGov, 1024 for AWSChina or 2048 for AzureChina, 8192 for Alibaba Cloud.
      */
     public readonly cloudType!: pulumi.Output<number>;
     /**
-     * GCloud Project credentials local file path.
+     * GCloud Project Credentials [local filepath].json. Required when creating an account for GCP.
      */
     public readonly gcloudProjectCredentialsFilepath!: pulumi.Output<string | undefined>;
     /**
@@ -277,23 +290,23 @@ export class AviatrixAccount extends pulumi.CustomResource {
      */
     public readonly gcloudProjectId!: pulumi.Output<string | undefined>;
     /**
-     * OCI API Private Key local file path.
+     * Oracle OCI API Private Key local file path. Required when creating an account for OCI.
      */
     public readonly ociApiPrivateKeyFilepath!: pulumi.Output<string | undefined>;
     /**
-     * OCI Compartment OCID.
+     * Oracle OCI Compartment ID. Required when creating an account for OCI.
      */
     public readonly ociCompartmentId!: pulumi.Output<string | undefined>;
     /**
-     * OCI Tenancy OCID.
+     * Oracle OCI Tenancy ID. Required when creating an account for OCI.
      */
     public readonly ociTenancyId!: pulumi.Output<string | undefined>;
     /**
-     * OCI User OCID.
+     * Oracle OCI User ID. Required when creating an account for OCI.
      */
     public readonly ociUserId!: pulumi.Output<string | undefined>;
     /**
-     * List of RBAC permission group names.
+     * A list of existing RBAC group names. This attribute should only be used when creating an account. Updating this attribute will have no effect. Available as of provider version R2.23.0+.
      */
     public readonly rbacGroups!: pulumi.Output<string[] | undefined>;
 
@@ -385,65 +398,65 @@ export class AviatrixAccount extends pulumi.CustomResource {
                 throw new Error("Missing required property 'cloudType'");
             }
             resourceInputs["accountName"] = args ? args.accountName : undefined;
-            resourceInputs["alicloudAccessKey"] = args ? args.alicloudAccessKey : undefined;
+            resourceInputs["alicloudAccessKey"] = args?.alicloudAccessKey ? pulumi.secret(args.alicloudAccessKey) : undefined;
             resourceInputs["alicloudAccountId"] = args ? args.alicloudAccountId : undefined;
-            resourceInputs["alicloudSecretKey"] = args ? args.alicloudSecretKey : undefined;
-            resourceInputs["armApplicationId"] = args ? args.armApplicationId : undefined;
-            resourceInputs["armApplicationKey"] = args ? args.armApplicationKey : undefined;
-            resourceInputs["armDirectoryId"] = args ? args.armDirectoryId : undefined;
+            resourceInputs["alicloudSecretKey"] = args?.alicloudSecretKey ? pulumi.secret(args.alicloudSecretKey) : undefined;
+            resourceInputs["armApplicationId"] = args?.armApplicationId ? pulumi.secret(args.armApplicationId) : undefined;
+            resourceInputs["armApplicationKey"] = args?.armApplicationKey ? pulumi.secret(args.armApplicationKey) : undefined;
+            resourceInputs["armDirectoryId"] = args?.armDirectoryId ? pulumi.secret(args.armDirectoryId) : undefined;
             resourceInputs["armSubscriptionId"] = args ? args.armSubscriptionId : undefined;
             resourceInputs["auditAccount"] = args ? args.auditAccount : undefined;
-            resourceInputs["awsAccessKey"] = args ? args.awsAccessKey : undefined;
+            resourceInputs["awsAccessKey"] = args?.awsAccessKey ? pulumi.secret(args.awsAccessKey) : undefined;
             resourceInputs["awsAccountNumber"] = args ? args.awsAccountNumber : undefined;
             resourceInputs["awsGatewayRoleApp"] = args ? args.awsGatewayRoleApp : undefined;
             resourceInputs["awsGatewayRoleEc2"] = args ? args.awsGatewayRoleEc2 : undefined;
             resourceInputs["awsIam"] = args ? args.awsIam : undefined;
             resourceInputs["awsRoleApp"] = args ? args.awsRoleApp : undefined;
             resourceInputs["awsRoleEc2"] = args ? args.awsRoleEc2 : undefined;
-            resourceInputs["awsSecretKey"] = args ? args.awsSecretKey : undefined;
-            resourceInputs["awschinaAccessKey"] = args ? args.awschinaAccessKey : undefined;
+            resourceInputs["awsSecretKey"] = args?.awsSecretKey ? pulumi.secret(args.awsSecretKey) : undefined;
+            resourceInputs["awschinaAccessKey"] = args?.awschinaAccessKey ? pulumi.secret(args.awschinaAccessKey) : undefined;
             resourceInputs["awschinaAccountNumber"] = args ? args.awschinaAccountNumber : undefined;
             resourceInputs["awschinaIam"] = args ? args.awschinaIam : undefined;
             resourceInputs["awschinaRoleApp"] = args ? args.awschinaRoleApp : undefined;
             resourceInputs["awschinaRoleEc2"] = args ? args.awschinaRoleEc2 : undefined;
-            resourceInputs["awschinaSecretKey"] = args ? args.awschinaSecretKey : undefined;
-            resourceInputs["awsgovAccessKey"] = args ? args.awsgovAccessKey : undefined;
+            resourceInputs["awschinaSecretKey"] = args?.awschinaSecretKey ? pulumi.secret(args.awschinaSecretKey) : undefined;
+            resourceInputs["awsgovAccessKey"] = args?.awsgovAccessKey ? pulumi.secret(args.awsgovAccessKey) : undefined;
             resourceInputs["awsgovAccountNumber"] = args ? args.awsgovAccountNumber : undefined;
             resourceInputs["awsgovIam"] = args ? args.awsgovIam : undefined;
             resourceInputs["awsgovRoleApp"] = args ? args.awsgovRoleApp : undefined;
             resourceInputs["awsgovRoleEc2"] = args ? args.awsgovRoleEc2 : undefined;
-            resourceInputs["awsgovSecretKey"] = args ? args.awsgovSecretKey : undefined;
+            resourceInputs["awsgovSecretKey"] = args?.awsgovSecretKey ? pulumi.secret(args.awsgovSecretKey) : undefined;
             resourceInputs["awssAccountNumber"] = args ? args.awssAccountNumber : undefined;
-            resourceInputs["awssCaChainCert"] = args ? args.awssCaChainCert : undefined;
+            resourceInputs["awssCaChainCert"] = args?.awssCaChainCert ? pulumi.secret(args.awssCaChainCert) : undefined;
             resourceInputs["awssCapAccountName"] = args ? args.awssCapAccountName : undefined;
             resourceInputs["awssCapAgency"] = args ? args.awssCapAgency : undefined;
-            resourceInputs["awssCapCert"] = args ? args.awssCapCert : undefined;
-            resourceInputs["awssCapCertKey"] = args ? args.awssCapCertKey : undefined;
+            resourceInputs["awssCapCert"] = args?.awssCapCert ? pulumi.secret(args.awssCapCert) : undefined;
+            resourceInputs["awssCapCertKey"] = args?.awssCapCertKey ? pulumi.secret(args.awssCapCertKey) : undefined;
             resourceInputs["awssCapRoleName"] = args ? args.awssCapRoleName : undefined;
             resourceInputs["awssCapUrl"] = args ? args.awssCapUrl : undefined;
             resourceInputs["awstsAccountNumber"] = args ? args.awstsAccountNumber : undefined;
-            resourceInputs["awstsCaChainCert"] = args ? args.awstsCaChainCert : undefined;
+            resourceInputs["awstsCaChainCert"] = args?.awstsCaChainCert ? pulumi.secret(args.awstsCaChainCert) : undefined;
             resourceInputs["awstsCapAgency"] = args ? args.awstsCapAgency : undefined;
-            resourceInputs["awstsCapCert"] = args ? args.awstsCapCert : undefined;
-            resourceInputs["awstsCapCertKey"] = args ? args.awstsCapCertKey : undefined;
+            resourceInputs["awstsCapCert"] = args?.awstsCapCert ? pulumi.secret(args.awstsCapCert) : undefined;
+            resourceInputs["awstsCapCertKey"] = args?.awstsCapCertKey ? pulumi.secret(args.awstsCapCertKey) : undefined;
             resourceInputs["awstsCapMission"] = args ? args.awstsCapMission : undefined;
             resourceInputs["awstsCapRoleName"] = args ? args.awstsCapRoleName : undefined;
             resourceInputs["awstsCapUrl"] = args ? args.awstsCapUrl : undefined;
-            resourceInputs["azurechinaApplicationId"] = args ? args.azurechinaApplicationId : undefined;
-            resourceInputs["azurechinaApplicationKey"] = args ? args.azurechinaApplicationKey : undefined;
-            resourceInputs["azurechinaDirectoryId"] = args ? args.azurechinaDirectoryId : undefined;
+            resourceInputs["azurechinaApplicationId"] = args?.azurechinaApplicationId ? pulumi.secret(args.azurechinaApplicationId) : undefined;
+            resourceInputs["azurechinaApplicationKey"] = args?.azurechinaApplicationKey ? pulumi.secret(args.azurechinaApplicationKey) : undefined;
+            resourceInputs["azurechinaDirectoryId"] = args?.azurechinaDirectoryId ? pulumi.secret(args.azurechinaDirectoryId) : undefined;
             resourceInputs["azurechinaSubscriptionId"] = args ? args.azurechinaSubscriptionId : undefined;
-            resourceInputs["azuregovApplicationId"] = args ? args.azuregovApplicationId : undefined;
-            resourceInputs["azuregovApplicationKey"] = args ? args.azuregovApplicationKey : undefined;
-            resourceInputs["azuregovDirectoryId"] = args ? args.azuregovDirectoryId : undefined;
+            resourceInputs["azuregovApplicationId"] = args?.azuregovApplicationId ? pulumi.secret(args.azuregovApplicationId) : undefined;
+            resourceInputs["azuregovApplicationKey"] = args?.azuregovApplicationKey ? pulumi.secret(args.azuregovApplicationKey) : undefined;
+            resourceInputs["azuregovDirectoryId"] = args?.azuregovDirectoryId ? pulumi.secret(args.azuregovDirectoryId) : undefined;
             resourceInputs["azuregovSubscriptionId"] = args ? args.azuregovSubscriptionId : undefined;
             resourceInputs["cloudType"] = args ? args.cloudType : undefined;
             resourceInputs["gcloudProjectCredentialsFilepath"] = args ? args.gcloudProjectCredentialsFilepath : undefined;
             resourceInputs["gcloudProjectId"] = args ? args.gcloudProjectId : undefined;
-            resourceInputs["ociApiPrivateKeyFilepath"] = args ? args.ociApiPrivateKeyFilepath : undefined;
-            resourceInputs["ociCompartmentId"] = args ? args.ociCompartmentId : undefined;
-            resourceInputs["ociTenancyId"] = args ? args.ociTenancyId : undefined;
-            resourceInputs["ociUserId"] = args ? args.ociUserId : undefined;
+            resourceInputs["ociApiPrivateKeyFilepath"] = args?.ociApiPrivateKeyFilepath ? pulumi.secret(args.ociApiPrivateKeyFilepath) : undefined;
+            resourceInputs["ociCompartmentId"] = args?.ociCompartmentId ? pulumi.secret(args.ociCompartmentId) : undefined;
+            resourceInputs["ociTenancyId"] = args?.ociTenancyId ? pulumi.secret(args.ociTenancyId) : undefined;
+            resourceInputs["ociUserId"] = args?.ociUserId ? pulumi.secret(args.ociUserId) : undefined;
             resourceInputs["rbacGroups"] = args ? args.rbacGroups : undefined;
             resourceInputs["awsCaCertPath"] = undefined /*out*/;
             resourceInputs["awssCapCertKeyPath"] = undefined /*out*/;
@@ -452,6 +465,8 @@ export class AviatrixAccount extends pulumi.CustomResource {
             resourceInputs["awstsCapCertPath"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["alicloudAccessKey", "alicloudSecretKey", "armApplicationId", "armApplicationKey", "armDirectoryId", "awsAccessKey", "awsSecretKey", "awschinaAccessKey", "awschinaSecretKey", "awsgovAccessKey", "awsgovSecretKey", "awssCaChainCert", "awssCapCert", "awssCapCertKey", "awstsCaChainCert", "awstsCapCert", "awstsCapCertKey", "azurechinaApplicationId", "azurechinaApplicationKey", "azurechinaDirectoryId", "azuregovApplicationId", "azuregovApplicationKey", "azuregovDirectoryId", "ociApiPrivateKeyFilepath", "ociCompartmentId", "ociTenancyId", "ociUserId"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(AviatrixAccount.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -465,31 +480,31 @@ export interface AviatrixAccountState {
      */
     accountName?: pulumi.Input<string>;
     /**
-     * Alibaba Cloud Access Key.
+     * Alibaba Cloud Access Key. Required when creating an account for Alibaba Cloud.
      */
     alicloudAccessKey?: pulumi.Input<string>;
     /**
-     * Alibaba Cloud Account ID to associate with Aviatrix account.
+     * Alibaba Cloud Account number to associate with Aviatrix account. Required when creating an account for Alibaba Cloud.
      */
     alicloudAccountId?: pulumi.Input<string>;
     /**
-     * Alibaba Cloud Secret Key.
+     * Alibaba Cloud Secret Key. Required when creating an account for Alibaba Cloud.
      */
     alicloudSecretKey?: pulumi.Input<string>;
     /**
-     * Azure Application ID.
+     * Azure ARM Application ID. Required when creating an account for Azure.
      */
     armApplicationId?: pulumi.Input<string>;
     /**
-     * Azure Application Key.
+     * Azure ARM Application key. Required when creating an account for Azure.
      */
     armApplicationKey?: pulumi.Input<string>;
     /**
-     * Azure Directory ID.
+     * Azure ARM Directory ID. Required when creating an account for Azure.
      */
     armDirectoryId?: pulumi.Input<string>;
     /**
-     * Azure Subscription ID.
+     * Azure ARM Subscription ID. Required when creating an account for Azure.
      */
     armSubscriptionId?: pulumi.Input<string>;
     /**
@@ -497,207 +512,207 @@ export interface AviatrixAccountState {
      */
     auditAccount?: pulumi.Input<boolean>;
     /**
-     * AWS Access Key.
+     * AWS Access Key. Required when `awsIam` is "false" and when creating an account for AWS.
      */
     awsAccessKey?: pulumi.Input<string>;
     /**
-     * AWS Account number to associate with Aviatrix account. Should be 12 digits.
+     * AWS Account number to associate with Aviatrix account. Required when creating an account for AWS.
      */
     awsAccountNumber?: pulumi.Input<string>;
     /**
-     * AWS Top Secret Region or Secret Region Custom Certificate Authority file path on the controller.
+     * (Optional) AWS Top Secret Region or Secret Region Custom Certificate Authority file name on the controller. Available as of provider R2.19.5+.
      */
     awsCaCertPath?: pulumi.Input<string>;
     /**
-     * AWS App role ARN for gateways.
+     * A separate AWS App role ARN to assign to gateways created by the controller. Required when `awsGatewayRoleEc2` is set. Only allowed when `awsIam`, `awsgovIam`, or `awschinaIam` is "true" when creating an account for AWS, AWSGov or AWSChina, respectively. Available as of provider version R2.19+.
      */
     awsGatewayRoleApp?: pulumi.Input<string>;
     /**
-     * AWS EC2 role ARN for gateways.
+     * A separate AWS EC2 role ARN to assign to gateways created by the controller. Required when `awsGatewayRoleApp` is set. Only allowed when `awsIam`, `awsgovIam`, or `awschinaIam` is "true" when creating an account for AWS, AWSGov or AWSChina, respectively. Available as of provider version R2.19+.
      */
     awsGatewayRoleEc2?: pulumi.Input<string>;
     /**
-     * AWS IAM-role based flag.
+     * AWS IAM-role based flag, this option is for UserConnect.
      */
     awsIam?: pulumi.Input<boolean>;
     /**
-     * AWS App role ARN.
+     * AWS App role ARN, this option is for UserConnect. Required when `awsIam` is "true" and when creating an account for AWS.
      */
     awsRoleApp?: pulumi.Input<string>;
     /**
-     * AWS EC2 role ARN.
+     * AWS EC2 role ARN, this option is for UserConnect. Required when `awsIam` is "true" and when creating an account for AWS.
      */
     awsRoleEc2?: pulumi.Input<string>;
     /**
-     * AWS Secret Key.
+     * AWS Secret Key. Required when `awsIam` is "false" and when creating an account for AWS.
      */
     awsSecretKey?: pulumi.Input<string>;
     /**
-     * AWS China Access Key.
+     * AWSChina Access Key. Required when `awschinaIam` is "false" and when creating an account for AWSChina. Available as of provider version 2.19+.
      */
     awschinaAccessKey?: pulumi.Input<string>;
     /**
-     * AWS China Account Number.
+     * AWSChina Account number to associate with Aviatrix account. Required when creating an account for AWSChina. Available as of provider version 2.19+.
      */
     awschinaAccountNumber?: pulumi.Input<string>;
     /**
-     * AWS China IAM-role based flag.
+     * AWSChina IAM-role based flag. Available as of provider version 2.19+.
      */
     awschinaIam?: pulumi.Input<boolean>;
     /**
-     * AWS China App Role ARN.
+     * AWSChina App role ARN. Available when `awschinaIam` is "true" and when creating an account for AWSChina. If left empty, the ARN will be computed. Available as of provider version 2.19+.
      */
     awschinaRoleApp?: pulumi.Input<string>;
     /**
-     * AWS China EC2 Role ARN.
+     * AWSChina EC2 role ARN. Available when `awschinaIam` is "true" and when creating an account for AWSChina. If left empty, the ARN will be computed. Available as of provider version 2.19+.
      */
     awschinaRoleEc2?: pulumi.Input<string>;
     /**
-     * AWS China Secret Key.
+     * AWSChina Secret Key. Required when `awschinaIam` is "false" and when creating an account for AWSChina. Available as of provider version 2.19+.
      */
     awschinaSecretKey?: pulumi.Input<string>;
     /**
-     * AWS Gov Access Key.
+     * AWS Access Key. Required when creating an account for AWSGov.
      */
     awsgovAccessKey?: pulumi.Input<string>;
     /**
-     * AWS Gov Account number to associate with Aviatrix account.
+     * AWSGov Account number to associate with Aviatrix account. Required when creating an account for AWSGov.
      */
     awsgovAccountNumber?: pulumi.Input<string>;
     /**
-     * AWSGov IAM-role based flag
+     * AWSGov IAM-role based flag. Available as of provider version 2.19+.
      */
     awsgovIam?: pulumi.Input<boolean>;
     /**
-     * AWSGov App role ARN
+     * AWSGov App role ARN. Available when `awsgovIam` is "true" and when creating an account for AWSGov. If left empty, the ARN will be computed. Available as of provider version 2.19+.
      */
     awsgovRoleApp?: pulumi.Input<string>;
     /**
-     * AWSGov EC2 role ARN
+     * AWSGov EC2 role ARN. Available when `awsgovIam` is "true" and when creating an account for AWSGov. If left empty, the ARN will be computed. Available as of provider version 2.19+.
      */
     awsgovRoleEc2?: pulumi.Input<string>;
     /**
-     * AWS Gov Secret Key.
+     * AWS Secret Key. Required when creating an account for AWSGov.
      */
     awsgovSecretKey?: pulumi.Input<string>;
     /**
-     * AWS Secret Region Account Number.
+     * AWS Secret Region Account Number. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
      */
     awssAccountNumber?: pulumi.Input<string>;
     /**
-     * AWS Secret Region Custom Certificate Authority file path.
+     * AWS Secret Region Custom Certificate Authority local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
      */
     awssCaChainCert?: pulumi.Input<string>;
     /**
-     * AWS Secret Region CAP Account Name.
+     * AWS Secret Region Account Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
      */
     awssCapAccountName?: pulumi.Input<string>;
     /**
-     * AWS Secret Region CAP Agency.
+     * AWS Secret Region CAP Agency. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
      */
     awssCapAgency?: pulumi.Input<string>;
     /**
-     * AWS Secret Region CAP Certificate file path.
+     * AWS Secret Region CAP Certificate local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
      */
     awssCapCert?: pulumi.Input<string>;
     /**
-     * AWS Secret Region CAP Certificate Key file path.
+     * AWS Secret Region CAP Certificate Key local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
      */
     awssCapCertKey?: pulumi.Input<string>;
     /**
-     * AWS Secret Region CAP Certificate Key file path on the controller.
+     * (Optional) AWS Secret Region CAP Certificate Key file name on the controller. Available as of provider R2.19.5+.
      */
     awssCapCertKeyPath?: pulumi.Input<string>;
     /**
-     * AWS Secret Region CAP Certificate file path on the controller.
+     * (Optional) AWS Secret Region CAP Certificate file name on the controller. Available as of provider R2.19.5+.
      */
     awssCapCertPath?: pulumi.Input<string>;
     /**
-     * AWS Secret Region CAP Role Name.
+     * AWS Secret Region Role Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
      */
     awssCapRoleName?: pulumi.Input<string>;
     /**
-     * AWS Secret Region CAP Endpoint URL.
+     * AWS Secret Region CAP Url. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
      */
     awssCapUrl?: pulumi.Input<string>;
     /**
-     * AWS Top Secret Region Account Number.
+     * AWS Top Secret Region Account Number. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
      */
     awstsAccountNumber?: pulumi.Input<string>;
     /**
-     * AWS Top Secret Region Custom Certificate Authority file path.
+     * AWS Top Secret Region Custom Certificate Authority local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
      */
     awstsCaChainCert?: pulumi.Input<string>;
     /**
-     * AWS Top Secret Region CAP Agency.
+     * AWS Top Secret Region CAP Agency. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
      */
     awstsCapAgency?: pulumi.Input<string>;
     /**
-     * AWS Top Secret Region CAP Certificate file path.
+     * AWS Top Secret Region CAP Certificate local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
      */
     awstsCapCert?: pulumi.Input<string>;
     /**
-     * AWS Top Secret Region CAP Certificate Key file path.
+     * AWS Top Secret Region CAP Certificate Key local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
      */
     awstsCapCertKey?: pulumi.Input<string>;
     /**
-     * AWS Top Secret Region CAP Certificate Key file path on the controller.
+     * (Optional) AWS Top Secret Region CAP Certificate Key file name on the controller. Available as of provider R2.19.5+.
      */
     awstsCapCertKeyPath?: pulumi.Input<string>;
     /**
-     * AWS Top Secret Region CAP Certificate file path on the controller.
+     * (Optional) AWS Top Secret Region CAP Certificate file name on the controller. Available as of provider R2.19.5+.
      */
     awstsCapCertPath?: pulumi.Input<string>;
     /**
-     * AWS Top Secret Region CAP Mission.
+     * AWS Top Secret Region Mission. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
      */
     awstsCapMission?: pulumi.Input<string>;
     /**
-     * AWS Top Secret Region CAP Role Name.
+     * AWS Top Secret Region Role Name. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
      */
     awstsCapRoleName?: pulumi.Input<string>;
     /**
-     * AWS Top Secret Region CAP Endpoint URL.
+     * AWS Top Secret Region CAP Url. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
      */
     awstsCapUrl?: pulumi.Input<string>;
     /**
-     * Azure China Application ID.
+     * AzureChina ARM Application ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
      */
     azurechinaApplicationId?: pulumi.Input<string>;
     /**
-     * Azure China Application Key.
+     * AzureChina ARM Application key. Required when creating an account for AzureChina. Available as of provider version 2.19+.
      */
     azurechinaApplicationKey?: pulumi.Input<string>;
     /**
-     * Azure China Directory ID.
+     * AzureChina ARM Directory ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
      */
     azurechinaDirectoryId?: pulumi.Input<string>;
     /**
-     * Azure China Subscription ID.
+     * AzureChina ARM Subscription ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
      */
     azurechinaSubscriptionId?: pulumi.Input<string>;
     /**
-     * Azure Gov Application ID.
+     * AzureGov ARM Application ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
      */
     azuregovApplicationId?: pulumi.Input<string>;
     /**
-     * Azure Gov Application Key.
+     * AzureGov ARM Application key. Required when creating an account for AzureGov. Available as of provider version R2.19+.
      */
     azuregovApplicationKey?: pulumi.Input<string>;
     /**
-     * Azure Gov Directory ID.
+     * AzureGov ARM Directory ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
      */
     azuregovDirectoryId?: pulumi.Input<string>;
     /**
-     * Azure Gov Subscription ID.
+     * AzureGov ARM Subscription ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
      */
     azuregovSubscriptionId?: pulumi.Input<string>;
     /**
-     * Type of cloud service provider.
+     * Type of cloud service provider. Only AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina and Alibaba Cloud are supported currently. Enter 1 for AWS, 4 for GCP, 8 for Azure, 16 for OCI, 32 for AzureGov, 256 for AWSGov, 1024 for AWSChina or 2048 for AzureChina, 8192 for Alibaba Cloud.
      */
     cloudType?: pulumi.Input<number>;
     /**
-     * GCloud Project credentials local file path.
+     * GCloud Project Credentials [local filepath].json. Required when creating an account for GCP.
      */
     gcloudProjectCredentialsFilepath?: pulumi.Input<string>;
     /**
@@ -705,23 +720,23 @@ export interface AviatrixAccountState {
      */
     gcloudProjectId?: pulumi.Input<string>;
     /**
-     * OCI API Private Key local file path.
+     * Oracle OCI API Private Key local file path. Required when creating an account for OCI.
      */
     ociApiPrivateKeyFilepath?: pulumi.Input<string>;
     /**
-     * OCI Compartment OCID.
+     * Oracle OCI Compartment ID. Required when creating an account for OCI.
      */
     ociCompartmentId?: pulumi.Input<string>;
     /**
-     * OCI Tenancy OCID.
+     * Oracle OCI Tenancy ID. Required when creating an account for OCI.
      */
     ociTenancyId?: pulumi.Input<string>;
     /**
-     * OCI User OCID.
+     * Oracle OCI User ID. Required when creating an account for OCI.
      */
     ociUserId?: pulumi.Input<string>;
     /**
-     * List of RBAC permission group names.
+     * A list of existing RBAC group names. This attribute should only be used when creating an account. Updating this attribute will have no effect. Available as of provider version R2.23.0+.
      */
     rbacGroups?: pulumi.Input<pulumi.Input<string>[]>;
 }
@@ -735,31 +750,31 @@ export interface AviatrixAccountArgs {
      */
     accountName: pulumi.Input<string>;
     /**
-     * Alibaba Cloud Access Key.
+     * Alibaba Cloud Access Key. Required when creating an account for Alibaba Cloud.
      */
     alicloudAccessKey?: pulumi.Input<string>;
     /**
-     * Alibaba Cloud Account ID to associate with Aviatrix account.
+     * Alibaba Cloud Account number to associate with Aviatrix account. Required when creating an account for Alibaba Cloud.
      */
     alicloudAccountId?: pulumi.Input<string>;
     /**
-     * Alibaba Cloud Secret Key.
+     * Alibaba Cloud Secret Key. Required when creating an account for Alibaba Cloud.
      */
     alicloudSecretKey?: pulumi.Input<string>;
     /**
-     * Azure Application ID.
+     * Azure ARM Application ID. Required when creating an account for Azure.
      */
     armApplicationId?: pulumi.Input<string>;
     /**
-     * Azure Application Key.
+     * Azure ARM Application key. Required when creating an account for Azure.
      */
     armApplicationKey?: pulumi.Input<string>;
     /**
-     * Azure Directory ID.
+     * Azure ARM Directory ID. Required when creating an account for Azure.
      */
     armDirectoryId?: pulumi.Input<string>;
     /**
-     * Azure Subscription ID.
+     * Azure ARM Subscription ID. Required when creating an account for Azure.
      */
     armSubscriptionId?: pulumi.Input<string>;
     /**
@@ -767,187 +782,187 @@ export interface AviatrixAccountArgs {
      */
     auditAccount?: pulumi.Input<boolean>;
     /**
-     * AWS Access Key.
+     * AWS Access Key. Required when `awsIam` is "false" and when creating an account for AWS.
      */
     awsAccessKey?: pulumi.Input<string>;
     /**
-     * AWS Account number to associate with Aviatrix account. Should be 12 digits.
+     * AWS Account number to associate with Aviatrix account. Required when creating an account for AWS.
      */
     awsAccountNumber?: pulumi.Input<string>;
     /**
-     * AWS App role ARN for gateways.
+     * A separate AWS App role ARN to assign to gateways created by the controller. Required when `awsGatewayRoleEc2` is set. Only allowed when `awsIam`, `awsgovIam`, or `awschinaIam` is "true" when creating an account for AWS, AWSGov or AWSChina, respectively. Available as of provider version R2.19+.
      */
     awsGatewayRoleApp?: pulumi.Input<string>;
     /**
-     * AWS EC2 role ARN for gateways.
+     * A separate AWS EC2 role ARN to assign to gateways created by the controller. Required when `awsGatewayRoleApp` is set. Only allowed when `awsIam`, `awsgovIam`, or `awschinaIam` is "true" when creating an account for AWS, AWSGov or AWSChina, respectively. Available as of provider version R2.19+.
      */
     awsGatewayRoleEc2?: pulumi.Input<string>;
     /**
-     * AWS IAM-role based flag.
+     * AWS IAM-role based flag, this option is for UserConnect.
      */
     awsIam?: pulumi.Input<boolean>;
     /**
-     * AWS App role ARN.
+     * AWS App role ARN, this option is for UserConnect. Required when `awsIam` is "true" and when creating an account for AWS.
      */
     awsRoleApp?: pulumi.Input<string>;
     /**
-     * AWS EC2 role ARN.
+     * AWS EC2 role ARN, this option is for UserConnect. Required when `awsIam` is "true" and when creating an account for AWS.
      */
     awsRoleEc2?: pulumi.Input<string>;
     /**
-     * AWS Secret Key.
+     * AWS Secret Key. Required when `awsIam` is "false" and when creating an account for AWS.
      */
     awsSecretKey?: pulumi.Input<string>;
     /**
-     * AWS China Access Key.
+     * AWSChina Access Key. Required when `awschinaIam` is "false" and when creating an account for AWSChina. Available as of provider version 2.19+.
      */
     awschinaAccessKey?: pulumi.Input<string>;
     /**
-     * AWS China Account Number.
+     * AWSChina Account number to associate with Aviatrix account. Required when creating an account for AWSChina. Available as of provider version 2.19+.
      */
     awschinaAccountNumber?: pulumi.Input<string>;
     /**
-     * AWS China IAM-role based flag.
+     * AWSChina IAM-role based flag. Available as of provider version 2.19+.
      */
     awschinaIam?: pulumi.Input<boolean>;
     /**
-     * AWS China App Role ARN.
+     * AWSChina App role ARN. Available when `awschinaIam` is "true" and when creating an account for AWSChina. If left empty, the ARN will be computed. Available as of provider version 2.19+.
      */
     awschinaRoleApp?: pulumi.Input<string>;
     /**
-     * AWS China EC2 Role ARN.
+     * AWSChina EC2 role ARN. Available when `awschinaIam` is "true" and when creating an account for AWSChina. If left empty, the ARN will be computed. Available as of provider version 2.19+.
      */
     awschinaRoleEc2?: pulumi.Input<string>;
     /**
-     * AWS China Secret Key.
+     * AWSChina Secret Key. Required when `awschinaIam` is "false" and when creating an account for AWSChina. Available as of provider version 2.19+.
      */
     awschinaSecretKey?: pulumi.Input<string>;
     /**
-     * AWS Gov Access Key.
+     * AWS Access Key. Required when creating an account for AWSGov.
      */
     awsgovAccessKey?: pulumi.Input<string>;
     /**
-     * AWS Gov Account number to associate with Aviatrix account.
+     * AWSGov Account number to associate with Aviatrix account. Required when creating an account for AWSGov.
      */
     awsgovAccountNumber?: pulumi.Input<string>;
     /**
-     * AWSGov IAM-role based flag
+     * AWSGov IAM-role based flag. Available as of provider version 2.19+.
      */
     awsgovIam?: pulumi.Input<boolean>;
     /**
-     * AWSGov App role ARN
+     * AWSGov App role ARN. Available when `awsgovIam` is "true" and when creating an account for AWSGov. If left empty, the ARN will be computed. Available as of provider version 2.19+.
      */
     awsgovRoleApp?: pulumi.Input<string>;
     /**
-     * AWSGov EC2 role ARN
+     * AWSGov EC2 role ARN. Available when `awsgovIam` is "true" and when creating an account for AWSGov. If left empty, the ARN will be computed. Available as of provider version 2.19+.
      */
     awsgovRoleEc2?: pulumi.Input<string>;
     /**
-     * AWS Gov Secret Key.
+     * AWS Secret Key. Required when creating an account for AWSGov.
      */
     awsgovSecretKey?: pulumi.Input<string>;
     /**
-     * AWS Secret Region Account Number.
+     * AWS Secret Region Account Number. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
      */
     awssAccountNumber?: pulumi.Input<string>;
     /**
-     * AWS Secret Region Custom Certificate Authority file path.
+     * AWS Secret Region Custom Certificate Authority local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
      */
     awssCaChainCert?: pulumi.Input<string>;
     /**
-     * AWS Secret Region CAP Account Name.
+     * AWS Secret Region Account Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
      */
     awssCapAccountName?: pulumi.Input<string>;
     /**
-     * AWS Secret Region CAP Agency.
+     * AWS Secret Region CAP Agency. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
      */
     awssCapAgency?: pulumi.Input<string>;
     /**
-     * AWS Secret Region CAP Certificate file path.
+     * AWS Secret Region CAP Certificate local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
      */
     awssCapCert?: pulumi.Input<string>;
     /**
-     * AWS Secret Region CAP Certificate Key file path.
+     * AWS Secret Region CAP Certificate Key local file path. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
      */
     awssCapCertKey?: pulumi.Input<string>;
     /**
-     * AWS Secret Region CAP Role Name.
+     * AWS Secret Region Role Name. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
      */
     awssCapRoleName?: pulumi.Input<string>;
     /**
-     * AWS Secret Region CAP Endpoint URL.
+     * AWS Secret Region CAP Url. Required when creating an account in AWS Secret Region. Available as of provider version R2.19.5+.
      */
     awssCapUrl?: pulumi.Input<string>;
     /**
-     * AWS Top Secret Region Account Number.
+     * AWS Top Secret Region Account Number. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
      */
     awstsAccountNumber?: pulumi.Input<string>;
     /**
-     * AWS Top Secret Region Custom Certificate Authority file path.
+     * AWS Top Secret Region Custom Certificate Authority local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
      */
     awstsCaChainCert?: pulumi.Input<string>;
     /**
-     * AWS Top Secret Region CAP Agency.
+     * AWS Top Secret Region CAP Agency. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
      */
     awstsCapAgency?: pulumi.Input<string>;
     /**
-     * AWS Top Secret Region CAP Certificate file path.
+     * AWS Top Secret Region CAP Certificate local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
      */
     awstsCapCert?: pulumi.Input<string>;
     /**
-     * AWS Top Secret Region CAP Certificate Key file path.
+     * AWS Top Secret Region CAP Certificate Key local file path. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
      */
     awstsCapCertKey?: pulumi.Input<string>;
     /**
-     * AWS Top Secret Region CAP Mission.
+     * AWS Top Secret Region Mission. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
      */
     awstsCapMission?: pulumi.Input<string>;
     /**
-     * AWS Top Secret Region CAP Role Name.
+     * AWS Top Secret Region Role Name. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
      */
     awstsCapRoleName?: pulumi.Input<string>;
     /**
-     * AWS Top Secret Region CAP Endpoint URL.
+     * AWS Top Secret Region CAP Url. Required when creating an account in AWS Top Secret Region. Available as of provider version R2.19.5+.
      */
     awstsCapUrl?: pulumi.Input<string>;
     /**
-     * Azure China Application ID.
+     * AzureChina ARM Application ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
      */
     azurechinaApplicationId?: pulumi.Input<string>;
     /**
-     * Azure China Application Key.
+     * AzureChina ARM Application key. Required when creating an account for AzureChina. Available as of provider version 2.19+.
      */
     azurechinaApplicationKey?: pulumi.Input<string>;
     /**
-     * Azure China Directory ID.
+     * AzureChina ARM Directory ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
      */
     azurechinaDirectoryId?: pulumi.Input<string>;
     /**
-     * Azure China Subscription ID.
+     * AzureChina ARM Subscription ID. Required when creating an account for AzureChina. Available as of provider version 2.19+.
      */
     azurechinaSubscriptionId?: pulumi.Input<string>;
     /**
-     * Azure Gov Application ID.
+     * AzureGov ARM Application ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
      */
     azuregovApplicationId?: pulumi.Input<string>;
     /**
-     * Azure Gov Application Key.
+     * AzureGov ARM Application key. Required when creating an account for AzureGov. Available as of provider version R2.19+.
      */
     azuregovApplicationKey?: pulumi.Input<string>;
     /**
-     * Azure Gov Directory ID.
+     * AzureGov ARM Directory ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
      */
     azuregovDirectoryId?: pulumi.Input<string>;
     /**
-     * Azure Gov Subscription ID.
+     * AzureGov ARM Subscription ID. Required when creating an account for AzureGov. Available as of provider version R2.19+.
      */
     azuregovSubscriptionId?: pulumi.Input<string>;
     /**
-     * Type of cloud service provider.
+     * Type of cloud service provider. Only AWS, GCP, Azure, OCI, AzureGov, AWSGov, AWSChina, AzureChina and Alibaba Cloud are supported currently. Enter 1 for AWS, 4 for GCP, 8 for Azure, 16 for OCI, 32 for AzureGov, 256 for AWSGov, 1024 for AWSChina or 2048 for AzureChina, 8192 for Alibaba Cloud.
      */
     cloudType: pulumi.Input<number>;
     /**
-     * GCloud Project credentials local file path.
+     * GCloud Project Credentials [local filepath].json. Required when creating an account for GCP.
      */
     gcloudProjectCredentialsFilepath?: pulumi.Input<string>;
     /**
@@ -955,23 +970,23 @@ export interface AviatrixAccountArgs {
      */
     gcloudProjectId?: pulumi.Input<string>;
     /**
-     * OCI API Private Key local file path.
+     * Oracle OCI API Private Key local file path. Required when creating an account for OCI.
      */
     ociApiPrivateKeyFilepath?: pulumi.Input<string>;
     /**
-     * OCI Compartment OCID.
+     * Oracle OCI Compartment ID. Required when creating an account for OCI.
      */
     ociCompartmentId?: pulumi.Input<string>;
     /**
-     * OCI Tenancy OCID.
+     * Oracle OCI Tenancy ID. Required when creating an account for OCI.
      */
     ociTenancyId?: pulumi.Input<string>;
     /**
-     * OCI User OCID.
+     * Oracle OCI User ID. Required when creating an account for OCI.
      */
     ociUserId?: pulumi.Input<string>;
     /**
-     * List of RBAC permission group names.
+     * A list of existing RBAC group names. This attribute should only be used when creating an account. Updating this attribute will have no effect. Available as of provider version R2.23.0+.
      */
     rbacGroups?: pulumi.Input<pulumi.Input<string>[]>;
 }

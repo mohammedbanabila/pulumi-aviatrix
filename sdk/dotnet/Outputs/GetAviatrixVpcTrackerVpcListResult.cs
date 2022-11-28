@@ -13,13 +13,37 @@ namespace Pulumi.Aviatrix.Outputs
     [OutputType]
     public sealed class GetAviatrixVpcTrackerVpcListResult
     {
+        /// <summary>
+        /// Filters VPC list by access account name.
+        /// </summary>
         public readonly string AccountName;
+        /// <summary>
+        /// Filters VPC list by CIDR (AWS/Azure only).
+        /// </summary>
         public readonly string Cidr;
+        /// <summary>
+        /// Filters VPC list by cloud provider id. For example, cloud_type = 1 will give all AWS VPCs.
+        /// </summary>
         public readonly int CloudType;
+        /// <summary>
+        /// Number of running instances in the VPC.
+        /// </summary>
         public readonly int InstanceCount;
+        /// <summary>
+        /// Subnet name.
+        /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// Filters VPC list by region (AWS/Azure only).
+        /// </summary>
         public readonly string Region;
+        /// <summary>
+        /// List of subnets within this VPC (GCP only).
+        /// </summary>
         public readonly ImmutableArray<Outputs.GetAviatrixVpcTrackerVpcListSubnetResult> Subnets;
+        /// <summary>
+        /// VPC id.
+        /// </summary>
         public readonly string VpcId;
 
         [OutputConstructor]

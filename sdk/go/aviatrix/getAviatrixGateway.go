@@ -10,6 +10,35 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_gateway** data source provides details about a specific gateway created by the Aviatrix Controller.
+//
+// This data source can prove useful when a module accepts a gateway's detail as an input variable. For example, requiring the gateway's name configuring a site2cloud connection.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err = aviatrix.LookupAviatrixGateway(ctx, &GetAviatrixGatewayArgs{
+//				GwName: "gatewayname",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 func LookupAviatrixGateway(ctx *pulumi.Context, args *LookupAviatrixGatewayArgs, opts ...pulumi.InvokeOption) (*LookupAviatrixGatewayResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)
 	var rv LookupAviatrixGatewayResult
@@ -22,95 +51,158 @@ func LookupAviatrixGateway(ctx *pulumi.Context, args *LookupAviatrixGatewayArgs,
 
 // A collection of arguments for invoking getAviatrixGateway.
 type LookupAviatrixGatewayArgs struct {
+	// Gateway name.
 	GwName string `pulumi:"gwName"`
 }
 
 // A collection of values returned by getAviatrixGateway.
 type LookupAviatrixGatewayResult struct {
-	AccountName                      string `pulumi:"accountName"`
-	AdditionalCidrs                  string `pulumi:"additionalCidrs"`
+	// Aviatrix account name.
+	AccountName string `pulumi:"accountName"`
+	// A list of destination CIDR ranges that will also go through the VPN tunnel when Split Tunnel Mode is enabled.
+	AdditionalCidrs string `pulumi:"additionalCidrs"`
+	// A list of CIDR ranges separated by comma to configure when 'designated_gateway' feature is enabled.
 	AdditionalCidrsDesignatedGateway string `pulumi:"additionalCidrsDesignatedGateway"`
-	AllocateNewEip                   bool   `pulumi:"allocateNewEip"`
-	AvailabilityDomain               string `pulumi:"availabilityDomain"`
-	AzureEipNameResourceGroup        string `pulumi:"azureEipNameResourceGroup"`
-	CloudInstanceId                  string `pulumi:"cloudInstanceId"`
-	CloudType                        int    `pulumi:"cloudType"`
-	DuoApiHostname                   string `pulumi:"duoApiHostname"`
-	DuoIntegrationKey                string `pulumi:"duoIntegrationKey"`
-	DuoPushMode                      string `pulumi:"duoPushMode"`
-	ElbDnsName                       string `pulumi:"elbDnsName"`
-	ElbName                          string `pulumi:"elbName"`
-	EnableDesignatedGateway          bool   `pulumi:"enableDesignatedGateway"`
-	EnableElb                        bool   `pulumi:"enableElb"`
-	EnableEncryptVolume              bool   `pulumi:"enableEncryptVolume"`
-	EnableJumboFrame                 bool   `pulumi:"enableJumboFrame"`
-	EnableLdap                       bool   `pulumi:"enableLdap"`
-	EnableMonitorGatewaySubnets      bool   `pulumi:"enableMonitorGatewaySubnets"`
-	EnablePublicSubnetFiltering      bool   `pulumi:"enablePublicSubnetFiltering"`
-	EnableSpotInstance               bool   `pulumi:"enableSpotInstance"`
-	EnableVpcDnsServer               bool   `pulumi:"enableVpcDnsServer"`
-	EnableVpnNat                     bool   `pulumi:"enableVpnNat"`
-	FaultDomain                      string `pulumi:"faultDomain"`
-	FqdnLanCidr                      string `pulumi:"fqdnLanCidr"`
-	FqdnLanInterface                 string `pulumi:"fqdnLanInterface"`
-	FqdnLanVpcId                     string `pulumi:"fqdnLanVpcId"`
-	GwName                           string `pulumi:"gwName"`
-	GwSize                           string `pulumi:"gwSize"`
+	// When value is false, an idle address in Elastic IP pool is reused for this gateway. Otherwise, a new Elastic IP is allocated and used for this gateway.
+	AllocateNewEip bool `pulumi:"allocateNewEip"`
+	// Availability domain for OCI.
+	AvailabilityDomain        string `pulumi:"availabilityDomain"`
+	AzureEipNameResourceGroup string `pulumi:"azureEipNameResourceGroup"`
+	// Instance ID of the gateway.
+	CloudInstanceId string `pulumi:"cloudInstanceId"`
+	// Type of cloud service provider.
+	CloudType int `pulumi:"cloudType"`
+	// API hostname for DUO auth mode.
+	DuoApiHostname string `pulumi:"duoApiHostname"`
+	// Integration key for DUO auth mode.
+	DuoIntegrationKey string `pulumi:"duoIntegrationKey"`
+	// Push mode for DUO auth.
+	DuoPushMode string `pulumi:"duoPushMode"`
+	// ELB DNS Name.
+	ElbDnsName string `pulumi:"elbDnsName"`
+	// Name of the ELB created.
+	ElbName string `pulumi:"elbName"`
+	// Status of Designated Gateway feature for Gateway.
+	EnableDesignatedGateway bool `pulumi:"enableDesignatedGateway"`
+	// Status of ELB for the gateway.
+	EnableElb bool `pulumi:"enableElb"`
+	// Enable encrypt gateway EBS volume. Only supported for AWS provider.
+	EnableEncryptVolume bool `pulumi:"enableEncryptVolume"`
+	EnableJumboFrame    bool `pulumi:"enableJumboFrame"`
+	// Status LDAP or not.
+	EnableLdap                  bool `pulumi:"enableLdap"`
+	EnableMonitorGatewaySubnets bool `pulumi:"enableMonitorGatewaySubnets"`
+	EnablePublicSubnetFiltering bool `pulumi:"enablePublicSubnetFiltering"`
+	EnableSpotInstance          bool `pulumi:"enableSpotInstance"`
+	// Status of VPC Dns Server for Gateway.
+	EnableVpcDnsServer bool `pulumi:"enableVpcDnsServer"`
+	// Status of VPN NAT.
+	EnableVpnNat bool `pulumi:"enableVpnNat"`
+	// Fault domain for OCI.
+	FaultDomain      string `pulumi:"faultDomain"`
+	FqdnLanCidr      string `pulumi:"fqdnLanCidr"`
+	FqdnLanInterface string `pulumi:"fqdnLanInterface"`
+	FqdnLanVpcId     string `pulumi:"fqdnLanVpcId"`
+	// Aviatrix gateway name.
+	GwName string `pulumi:"gwName"`
+	// Size of gateway Instance.
+	GwSize string `pulumi:"gwSize"`
 	// The provider-assigned unique ID for this managed resource.
-	Id                                     string            `pulumi:"id"`
-	IdleTimeout                            int               `pulumi:"idleTimeout"`
-	ImageVersion                           string            `pulumi:"imageVersion"`
-	InsaneMode                             bool              `pulumi:"insaneMode"`
-	InsaneModeAz                           string            `pulumi:"insaneModeAz"`
-	LdapBaseDn                             string            `pulumi:"ldapBaseDn"`
-	LdapBindDn                             string            `pulumi:"ldapBindDn"`
-	LdapServer                             string            `pulumi:"ldapServer"`
-	LdapUsernameAttribute                  string            `pulumi:"ldapUsernameAttribute"`
-	MaxVpnConn                             string            `pulumi:"maxVpnConn"`
-	MonitorExcludeLists                    []string          `pulumi:"monitorExcludeLists"`
-	NameServers                            string            `pulumi:"nameServers"`
-	OktaUrl                                string            `pulumi:"oktaUrl"`
-	OktaUsernameSuffix                     string            `pulumi:"oktaUsernameSuffix"`
-	OtpMode                                string            `pulumi:"otpMode"`
-	PeeringHaAvailabilityDomain            string            `pulumi:"peeringHaAvailabilityDomain"`
-	PeeringHaAzureEipNameResourceGroup     string            `pulumi:"peeringHaAzureEipNameResourceGroup"`
-	PeeringHaCloudInstanceId               string            `pulumi:"peeringHaCloudInstanceId"`
-	PeeringHaFaultDomain                   string            `pulumi:"peeringHaFaultDomain"`
-	PeeringHaGwName                        string            `pulumi:"peeringHaGwName"`
-	PeeringHaGwSize                        string            `pulumi:"peeringHaGwSize"`
-	PeeringHaImageVersion                  string            `pulumi:"peeringHaImageVersion"`
-	PeeringHaInsaneModeAz                  string            `pulumi:"peeringHaInsaneModeAz"`
-	PeeringHaPrivateIp                     string            `pulumi:"peeringHaPrivateIp"`
-	PeeringHaPublicIp                      string            `pulumi:"peeringHaPublicIp"`
-	PeeringHaSecurityGroupId               string            `pulumi:"peeringHaSecurityGroupId"`
-	PeeringHaSoftwareVersion               string            `pulumi:"peeringHaSoftwareVersion"`
-	PeeringHaSubnet                        string            `pulumi:"peeringHaSubnet"`
-	PeeringHaZone                          string            `pulumi:"peeringHaZone"`
-	PrivateIp                              string            `pulumi:"privateIp"`
-	PublicDnsServer                        string            `pulumi:"publicDnsServer"`
-	PublicIp                               string            `pulumi:"publicIp"`
-	PublicSubnetFilteringGuardDutyEnforced bool              `pulumi:"publicSubnetFilteringGuardDutyEnforced"`
-	PublicSubnetFilteringHaRouteTables     []string          `pulumi:"publicSubnetFilteringHaRouteTables"`
-	PublicSubnetFilteringRouteTables       []string          `pulumi:"publicSubnetFilteringRouteTables"`
-	RenegotiationInterval                  int               `pulumi:"renegotiationInterval"`
-	SamlEnabled                            bool              `pulumi:"samlEnabled"`
-	SearchDomains                          string            `pulumi:"searchDomains"`
-	SecurityGroupId                        string            `pulumi:"securityGroupId"`
-	SingleAzHa                             bool              `pulumi:"singleAzHa"`
-	SingleIpSnat                           bool              `pulumi:"singleIpSnat"`
-	SoftwareVersion                        string            `pulumi:"softwareVersion"`
-	SplitTunnel                            bool              `pulumi:"splitTunnel"`
-	SpotPrice                              string            `pulumi:"spotPrice"`
-	Subnet                                 string            `pulumi:"subnet"`
-	TagLists                               []string          `pulumi:"tagLists"`
-	Tags                                   map[string]string `pulumi:"tags"`
-	TunnelDetectionTime                    int               `pulumi:"tunnelDetectionTime"`
-	VpcId                                  string            `pulumi:"vpcId"`
-	VpcReg                                 string            `pulumi:"vpcReg"`
-	VpnAccess                              bool              `pulumi:"vpnAccess"`
-	VpnCidr                                string            `pulumi:"vpnCidr"`
-	VpnProtocol                            string            `pulumi:"vpnProtocol"`
-	Zone                                   string            `pulumi:"zone"`
+	Id          string `pulumi:"id"`
+	IdleTimeout int    `pulumi:"idleTimeout"`
+	// The image version of the gateway.
+	ImageVersion string `pulumi:"imageVersion"`
+	// Status of Insane Mode for Gateway.
+	InsaneMode bool `pulumi:"insaneMode"`
+	// AZ of subnet being created for Insane Mode gateway.
+	InsaneModeAz string `pulumi:"insaneModeAz"`
+	// LDAP base DN.
+	LdapBaseDn string `pulumi:"ldapBaseDn"`
+	// LDAP bind DN.
+	LdapBindDn string `pulumi:"ldapBindDn"`
+	// LDAP server address.
+	LdapServer string `pulumi:"ldapServer"`
+	// LDAP user attribute.
+	LdapUsernameAttribute string `pulumi:"ldapUsernameAttribute"`
+	// Maximum connection of VPN access.
+	MaxVpnConn          string   `pulumi:"maxVpnConn"`
+	MonitorExcludeLists []string `pulumi:"monitorExcludeLists"`
+	// A list of DNS servers used to resolve domain names by a connected VPN user when Split Tunnel Mode is enabled.
+	NameServers string `pulumi:"nameServers"`
+	// URL for Okta auth mode.
+	OktaUrl string `pulumi:"oktaUrl"`
+	// Username suffix for Okta auth mode.
+	OktaUsernameSuffix string `pulumi:"oktaUsernameSuffix"`
+	// Two step authentication mode.
+	OtpMode string `pulumi:"otpMode"`
+	// HA gateway availability domain for OCI.
+	PeeringHaAvailabilityDomain        string `pulumi:"peeringHaAvailabilityDomain"`
+	PeeringHaAzureEipNameResourceGroup string `pulumi:"peeringHaAzureEipNameResourceGroup"`
+	// Instance ID of the peering HA gateway.
+	PeeringHaCloudInstanceId string `pulumi:"peeringHaCloudInstanceId"`
+	// HA gateway fault domain for OCI.
+	PeeringHaFaultDomain string `pulumi:"peeringHaFaultDomain"`
+	// Aviatrix gateway unique name of HA gateway.
+	PeeringHaGwName string `pulumi:"peeringHaGwName"`
+	// Peering HA Gateway Size.
+	PeeringHaGwSize string `pulumi:"peeringHaGwSize"`
+	// The image version of the HA gateway.
+	PeeringHaImageVersion string `pulumi:"peeringHaImageVersion"`
+	// AZ of subnet being created for Insane Mode Peering HA Gateway. Required if insaneMode is set.
+	PeeringHaInsaneModeAz string `pulumi:"peeringHaInsaneModeAz"`
+	// Private IP address of HA gateway.
+	PeeringHaPrivateIp string `pulumi:"peeringHaPrivateIp"`
+	// Public IP address that you want assigned to the HA peering instance.
+	PeeringHaPublicIp        string `pulumi:"peeringHaPublicIp"`
+	PeeringHaSecurityGroupId string `pulumi:"peeringHaSecurityGroupId"`
+	// The software version of the HA gateway.
+	PeeringHaSoftwareVersion string `pulumi:"peeringHaSoftwareVersion"`
+	// Public Subnet Information while creating Peering HA Gateway, only subnet is accepted. Required to create peering ha gateway if cloudType = 1 or 8 (AWS or Azure).
+	PeeringHaSubnet string `pulumi:"peeringHaSubnet"`
+	// Zone information for creating Peering HA Gateway. Required to create peering ha gateway if cloudType = 4 (GCP).
+	PeeringHaZone string `pulumi:"peeringHaZone"`
+	// Private IP address of the Gateway created.
+	PrivateIp string `pulumi:"privateIp"`
+	// NS server used by the gateway.
+	PublicDnsServer string `pulumi:"publicDnsServer"`
+	// Public IP address of the Gateway created.
+	PublicIp                               string   `pulumi:"publicIp"`
+	PublicSubnetFilteringGuardDutyEnforced bool     `pulumi:"publicSubnetFilteringGuardDutyEnforced"`
+	PublicSubnetFilteringHaRouteTables     []string `pulumi:"publicSubnetFilteringHaRouteTables"`
+	PublicSubnetFilteringRouteTables       []string `pulumi:"publicSubnetFilteringRouteTables"`
+	RenegotiationInterval                  int      `pulumi:"renegotiationInterval"`
+	// Status of SAML.
+	SamlEnabled bool `pulumi:"samlEnabled"`
+	// A list of domain names that will use the NameServer when a specific name is not in the destination when Split Tunnel Mode is enabled.
+	SearchDomains string `pulumi:"searchDomains"`
+	// Security group used for the gateway.
+	SecurityGroupId string `pulumi:"securityGroupId"`
+	// Status of Single AZ HA.
+	SingleAzHa bool `pulumi:"singleAzHa"`
+	// Single IP Source NAT status for the container.
+	SingleIpSnat bool `pulumi:"singleIpSnat"`
+	// The software version of the gateway.
+	SoftwareVersion string `pulumi:"softwareVersion"`
+	// Status of split tunnel mode.
+	SplitTunnel bool   `pulumi:"splitTunnel"`
+	SpotPrice   string `pulumi:"spotPrice"`
+	// A VPC Network address range selected from one of the available network ranges.
+	Subnet string `pulumi:"subnet"`
+	// Instance tag of cloud provider.
+	TagLists            []string          `pulumi:"tagLists"`
+	Tags                map[string]string `pulumi:"tags"`
+	TunnelDetectionTime int               `pulumi:"tunnelDetectionTime"`
+	// VPC-ID/VNet-Name of cloud provider.
+	VpcId string `pulumi:"vpcId"`
+	// Region of cloud provider.
+	VpcReg string `pulumi:"vpcReg"`
+	// Status of user access through VPN to the container.
+	VpnAccess bool `pulumi:"vpnAccess"`
+	// VPN CIDR block for the container.
+	VpnCidr string `pulumi:"vpnCidr"`
+	// ELB protocol for VPN gateway with ELB enabled.
+	VpnProtocol string `pulumi:"vpnProtocol"`
+	Zone        string `pulumi:"zone"`
 }
 
 func LookupAviatrixGatewayOutput(ctx *pulumi.Context, args LookupAviatrixGatewayOutputArgs, opts ...pulumi.InvokeOption) LookupAviatrixGatewayResultOutput {
@@ -128,6 +220,7 @@ func LookupAviatrixGatewayOutput(ctx *pulumi.Context, args LookupAviatrixGateway
 
 // A collection of arguments for invoking getAviatrixGateway.
 type LookupAviatrixGatewayOutputArgs struct {
+	// Gateway name.
 	GwName pulumi.StringInput `pulumi:"gwName"`
 }
 
@@ -150,22 +243,27 @@ func (o LookupAviatrixGatewayResultOutput) ToLookupAviatrixGatewayResultOutputWi
 	return o
 }
 
+// Aviatrix account name.
 func (o LookupAviatrixGatewayResultOutput) AccountName() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.AccountName }).(pulumi.StringOutput)
 }
 
+// A list of destination CIDR ranges that will also go through the VPN tunnel when Split Tunnel Mode is enabled.
 func (o LookupAviatrixGatewayResultOutput) AdditionalCidrs() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.AdditionalCidrs }).(pulumi.StringOutput)
 }
 
+// A list of CIDR ranges separated by comma to configure when 'designated_gateway' feature is enabled.
 func (o LookupAviatrixGatewayResultOutput) AdditionalCidrsDesignatedGateway() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.AdditionalCidrsDesignatedGateway }).(pulumi.StringOutput)
 }
 
+// When value is false, an idle address in Elastic IP pool is reused for this gateway. Otherwise, a new Elastic IP is allocated and used for this gateway.
 func (o LookupAviatrixGatewayResultOutput) AllocateNewEip() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) bool { return v.AllocateNewEip }).(pulumi.BoolOutput)
 }
 
+// Availability domain for OCI.
 func (o LookupAviatrixGatewayResultOutput) AvailabilityDomain() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.AvailabilityDomain }).(pulumi.StringOutput)
 }
@@ -174,42 +272,52 @@ func (o LookupAviatrixGatewayResultOutput) AzureEipNameResourceGroup() pulumi.St
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.AzureEipNameResourceGroup }).(pulumi.StringOutput)
 }
 
+// Instance ID of the gateway.
 func (o LookupAviatrixGatewayResultOutput) CloudInstanceId() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.CloudInstanceId }).(pulumi.StringOutput)
 }
 
+// Type of cloud service provider.
 func (o LookupAviatrixGatewayResultOutput) CloudType() pulumi.IntOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) int { return v.CloudType }).(pulumi.IntOutput)
 }
 
+// API hostname for DUO auth mode.
 func (o LookupAviatrixGatewayResultOutput) DuoApiHostname() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.DuoApiHostname }).(pulumi.StringOutput)
 }
 
+// Integration key for DUO auth mode.
 func (o LookupAviatrixGatewayResultOutput) DuoIntegrationKey() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.DuoIntegrationKey }).(pulumi.StringOutput)
 }
 
+// Push mode for DUO auth.
 func (o LookupAviatrixGatewayResultOutput) DuoPushMode() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.DuoPushMode }).(pulumi.StringOutput)
 }
 
+// ELB DNS Name.
 func (o LookupAviatrixGatewayResultOutput) ElbDnsName() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.ElbDnsName }).(pulumi.StringOutput)
 }
 
+// Name of the ELB created.
 func (o LookupAviatrixGatewayResultOutput) ElbName() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.ElbName }).(pulumi.StringOutput)
 }
 
+// Status of Designated Gateway feature for Gateway.
 func (o LookupAviatrixGatewayResultOutput) EnableDesignatedGateway() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) bool { return v.EnableDesignatedGateway }).(pulumi.BoolOutput)
 }
 
+// Status of ELB for the gateway.
 func (o LookupAviatrixGatewayResultOutput) EnableElb() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) bool { return v.EnableElb }).(pulumi.BoolOutput)
 }
 
+// Enable encrypt gateway EBS volume. Only supported for AWS provider.
 func (o LookupAviatrixGatewayResultOutput) EnableEncryptVolume() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) bool { return v.EnableEncryptVolume }).(pulumi.BoolOutput)
 }
@@ -218,6 +326,7 @@ func (o LookupAviatrixGatewayResultOutput) EnableJumboFrame() pulumi.BoolOutput 
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) bool { return v.EnableJumboFrame }).(pulumi.BoolOutput)
 }
 
+// Status LDAP or not.
 func (o LookupAviatrixGatewayResultOutput) EnableLdap() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) bool { return v.EnableLdap }).(pulumi.BoolOutput)
 }
@@ -234,14 +343,17 @@ func (o LookupAviatrixGatewayResultOutput) EnableSpotInstance() pulumi.BoolOutpu
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) bool { return v.EnableSpotInstance }).(pulumi.BoolOutput)
 }
 
+// Status of VPC Dns Server for Gateway.
 func (o LookupAviatrixGatewayResultOutput) EnableVpcDnsServer() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) bool { return v.EnableVpcDnsServer }).(pulumi.BoolOutput)
 }
 
+// Status of VPN NAT.
 func (o LookupAviatrixGatewayResultOutput) EnableVpnNat() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) bool { return v.EnableVpnNat }).(pulumi.BoolOutput)
 }
 
+// Fault domain for OCI.
 func (o LookupAviatrixGatewayResultOutput) FaultDomain() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.FaultDomain }).(pulumi.StringOutput)
 }
@@ -258,10 +370,12 @@ func (o LookupAviatrixGatewayResultOutput) FqdnLanVpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.FqdnLanVpcId }).(pulumi.StringOutput)
 }
 
+// Aviatrix gateway name.
 func (o LookupAviatrixGatewayResultOutput) GwName() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.GwName }).(pulumi.StringOutput)
 }
 
+// Size of gateway Instance.
 func (o LookupAviatrixGatewayResultOutput) GwSize() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.GwSize }).(pulumi.StringOutput)
 }
@@ -275,34 +389,42 @@ func (o LookupAviatrixGatewayResultOutput) IdleTimeout() pulumi.IntOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) int { return v.IdleTimeout }).(pulumi.IntOutput)
 }
 
+// The image version of the gateway.
 func (o LookupAviatrixGatewayResultOutput) ImageVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.ImageVersion }).(pulumi.StringOutput)
 }
 
+// Status of Insane Mode for Gateway.
 func (o LookupAviatrixGatewayResultOutput) InsaneMode() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) bool { return v.InsaneMode }).(pulumi.BoolOutput)
 }
 
+// AZ of subnet being created for Insane Mode gateway.
 func (o LookupAviatrixGatewayResultOutput) InsaneModeAz() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.InsaneModeAz }).(pulumi.StringOutput)
 }
 
+// LDAP base DN.
 func (o LookupAviatrixGatewayResultOutput) LdapBaseDn() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.LdapBaseDn }).(pulumi.StringOutput)
 }
 
+// LDAP bind DN.
 func (o LookupAviatrixGatewayResultOutput) LdapBindDn() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.LdapBindDn }).(pulumi.StringOutput)
 }
 
+// LDAP server address.
 func (o LookupAviatrixGatewayResultOutput) LdapServer() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.LdapServer }).(pulumi.StringOutput)
 }
 
+// LDAP user attribute.
 func (o LookupAviatrixGatewayResultOutput) LdapUsernameAttribute() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.LdapUsernameAttribute }).(pulumi.StringOutput)
 }
 
+// Maximum connection of VPN access.
 func (o LookupAviatrixGatewayResultOutput) MaxVpnConn() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.MaxVpnConn }).(pulumi.StringOutput)
 }
@@ -311,22 +433,27 @@ func (o LookupAviatrixGatewayResultOutput) MonitorExcludeLists() pulumi.StringAr
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) []string { return v.MonitorExcludeLists }).(pulumi.StringArrayOutput)
 }
 
+// A list of DNS servers used to resolve domain names by a connected VPN user when Split Tunnel Mode is enabled.
 func (o LookupAviatrixGatewayResultOutput) NameServers() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.NameServers }).(pulumi.StringOutput)
 }
 
+// URL for Okta auth mode.
 func (o LookupAviatrixGatewayResultOutput) OktaUrl() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.OktaUrl }).(pulumi.StringOutput)
 }
 
+// Username suffix for Okta auth mode.
 func (o LookupAviatrixGatewayResultOutput) OktaUsernameSuffix() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.OktaUsernameSuffix }).(pulumi.StringOutput)
 }
 
+// Two step authentication mode.
 func (o LookupAviatrixGatewayResultOutput) OtpMode() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.OtpMode }).(pulumi.StringOutput)
 }
 
+// HA gateway availability domain for OCI.
 func (o LookupAviatrixGatewayResultOutput) PeeringHaAvailabilityDomain() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.PeeringHaAvailabilityDomain }).(pulumi.StringOutput)
 }
@@ -335,34 +462,42 @@ func (o LookupAviatrixGatewayResultOutput) PeeringHaAzureEipNameResourceGroup() 
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.PeeringHaAzureEipNameResourceGroup }).(pulumi.StringOutput)
 }
 
+// Instance ID of the peering HA gateway.
 func (o LookupAviatrixGatewayResultOutput) PeeringHaCloudInstanceId() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.PeeringHaCloudInstanceId }).(pulumi.StringOutput)
 }
 
+// HA gateway fault domain for OCI.
 func (o LookupAviatrixGatewayResultOutput) PeeringHaFaultDomain() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.PeeringHaFaultDomain }).(pulumi.StringOutput)
 }
 
+// Aviatrix gateway unique name of HA gateway.
 func (o LookupAviatrixGatewayResultOutput) PeeringHaGwName() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.PeeringHaGwName }).(pulumi.StringOutput)
 }
 
+// Peering HA Gateway Size.
 func (o LookupAviatrixGatewayResultOutput) PeeringHaGwSize() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.PeeringHaGwSize }).(pulumi.StringOutput)
 }
 
+// The image version of the HA gateway.
 func (o LookupAviatrixGatewayResultOutput) PeeringHaImageVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.PeeringHaImageVersion }).(pulumi.StringOutput)
 }
 
+// AZ of subnet being created for Insane Mode Peering HA Gateway. Required if insaneMode is set.
 func (o LookupAviatrixGatewayResultOutput) PeeringHaInsaneModeAz() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.PeeringHaInsaneModeAz }).(pulumi.StringOutput)
 }
 
+// Private IP address of HA gateway.
 func (o LookupAviatrixGatewayResultOutput) PeeringHaPrivateIp() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.PeeringHaPrivateIp }).(pulumi.StringOutput)
 }
 
+// Public IP address that you want assigned to the HA peering instance.
 func (o LookupAviatrixGatewayResultOutput) PeeringHaPublicIp() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.PeeringHaPublicIp }).(pulumi.StringOutput)
 }
@@ -371,26 +506,32 @@ func (o LookupAviatrixGatewayResultOutput) PeeringHaSecurityGroupId() pulumi.Str
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.PeeringHaSecurityGroupId }).(pulumi.StringOutput)
 }
 
+// The software version of the HA gateway.
 func (o LookupAviatrixGatewayResultOutput) PeeringHaSoftwareVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.PeeringHaSoftwareVersion }).(pulumi.StringOutput)
 }
 
+// Public Subnet Information while creating Peering HA Gateway, only subnet is accepted. Required to create peering ha gateway if cloudType = 1 or 8 (AWS or Azure).
 func (o LookupAviatrixGatewayResultOutput) PeeringHaSubnet() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.PeeringHaSubnet }).(pulumi.StringOutput)
 }
 
+// Zone information for creating Peering HA Gateway. Required to create peering ha gateway if cloudType = 4 (GCP).
 func (o LookupAviatrixGatewayResultOutput) PeeringHaZone() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.PeeringHaZone }).(pulumi.StringOutput)
 }
 
+// Private IP address of the Gateway created.
 func (o LookupAviatrixGatewayResultOutput) PrivateIp() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.PrivateIp }).(pulumi.StringOutput)
 }
 
+// NS server used by the gateway.
 func (o LookupAviatrixGatewayResultOutput) PublicDnsServer() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.PublicDnsServer }).(pulumi.StringOutput)
 }
 
+// Public IP address of the Gateway created.
 func (o LookupAviatrixGatewayResultOutput) PublicIp() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.PublicIp }).(pulumi.StringOutput)
 }
@@ -411,30 +552,37 @@ func (o LookupAviatrixGatewayResultOutput) RenegotiationInterval() pulumi.IntOut
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) int { return v.RenegotiationInterval }).(pulumi.IntOutput)
 }
 
+// Status of SAML.
 func (o LookupAviatrixGatewayResultOutput) SamlEnabled() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) bool { return v.SamlEnabled }).(pulumi.BoolOutput)
 }
 
+// A list of domain names that will use the NameServer when a specific name is not in the destination when Split Tunnel Mode is enabled.
 func (o LookupAviatrixGatewayResultOutput) SearchDomains() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.SearchDomains }).(pulumi.StringOutput)
 }
 
+// Security group used for the gateway.
 func (o LookupAviatrixGatewayResultOutput) SecurityGroupId() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.SecurityGroupId }).(pulumi.StringOutput)
 }
 
+// Status of Single AZ HA.
 func (o LookupAviatrixGatewayResultOutput) SingleAzHa() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) bool { return v.SingleAzHa }).(pulumi.BoolOutput)
 }
 
+// Single IP Source NAT status for the container.
 func (o LookupAviatrixGatewayResultOutput) SingleIpSnat() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) bool { return v.SingleIpSnat }).(pulumi.BoolOutput)
 }
 
+// The software version of the gateway.
 func (o LookupAviatrixGatewayResultOutput) SoftwareVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.SoftwareVersion }).(pulumi.StringOutput)
 }
 
+// Status of split tunnel mode.
 func (o LookupAviatrixGatewayResultOutput) SplitTunnel() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) bool { return v.SplitTunnel }).(pulumi.BoolOutput)
 }
@@ -443,10 +591,12 @@ func (o LookupAviatrixGatewayResultOutput) SpotPrice() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.SpotPrice }).(pulumi.StringOutput)
 }
 
+// A VPC Network address range selected from one of the available network ranges.
 func (o LookupAviatrixGatewayResultOutput) Subnet() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.Subnet }).(pulumi.StringOutput)
 }
 
+// Instance tag of cloud provider.
 func (o LookupAviatrixGatewayResultOutput) TagLists() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) []string { return v.TagLists }).(pulumi.StringArrayOutput)
 }
@@ -459,22 +609,27 @@ func (o LookupAviatrixGatewayResultOutput) TunnelDetectionTime() pulumi.IntOutpu
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) int { return v.TunnelDetectionTime }).(pulumi.IntOutput)
 }
 
+// VPC-ID/VNet-Name of cloud provider.
 func (o LookupAviatrixGatewayResultOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.VpcId }).(pulumi.StringOutput)
 }
 
+// Region of cloud provider.
 func (o LookupAviatrixGatewayResultOutput) VpcReg() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.VpcReg }).(pulumi.StringOutput)
 }
 
+// Status of user access through VPN to the container.
 func (o LookupAviatrixGatewayResultOutput) VpnAccess() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) bool { return v.VpnAccess }).(pulumi.BoolOutput)
 }
 
+// VPN CIDR block for the container.
 func (o LookupAviatrixGatewayResultOutput) VpnCidr() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.VpnCidr }).(pulumi.StringOutput)
 }
 
+// ELB protocol for VPN gateway with ELB enabled.
 func (o LookupAviatrixGatewayResultOutput) VpnProtocol() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixGatewayResult) string { return v.VpnProtocol }).(pulumi.StringOutput)
 }

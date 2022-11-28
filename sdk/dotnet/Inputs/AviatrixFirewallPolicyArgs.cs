@@ -12,24 +12,45 @@ namespace Pulumi.Aviatrix.Inputs
 
     public sealed class AviatrixFirewallPolicyArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Valid values: "allow", "deny" and "force-drop" (in stateful firewall rule to allow immediate packet dropping on established sessions).
+        /// </summary>
         [Input("action", required: true)]
         public Input<string> Action { get; set; } = null!;
 
+        /// <summary>
+        /// Description of the policy. Example: "This is policy no.1".
+        /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
+        /// <summary>
+        /// Destination address, a valid IPv4 address or tag name such "HR" or "marketing" etc. Example: "10.30.0.0/16". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
+        /// </summary>
         [Input("dstIp", required: true)]
         public Input<string> DstIp { get; set; } = null!;
 
+        /// <summary>
+        /// Valid values: true, false. Default value: false.
+        /// </summary>
         [Input("logEnabled")]
         public Input<bool>? LogEnabled { get; set; }
 
+        /// <summary>
+        /// A single port or a range of port numbers. Example: "25", "25:1024".
+        /// </summary>
         [Input("port", required: true)]
         public Input<string> Port { get; set; } = null!;
 
+        /// <summary>
+        /// : Valid values: "all", "tcp", "udp", "icmp", "sctp", "rdp", "dccp". Default value: "all".
+        /// </summary>
         [Input("protocol")]
         public Input<string>? Protocol { get; set; }
 
+        /// <summary>
+        /// Source address, a valid IPv4 address or tag name such "HR" or "marketing" etc. Example: "10.30.0.0/16". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
+        /// </summary>
         [Input("srcIp", required: true)]
         public Input<string> SrcIp { get; set; } = null!;
 

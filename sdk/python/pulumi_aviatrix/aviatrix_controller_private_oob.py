@@ -17,7 +17,7 @@ class AviatrixControllerPrivateOobArgs:
                  enable_private_oob: Optional[pulumi.Input[bool]] = None):
         """
         The set of arguments for constructing a AviatrixControllerPrivateOob resource.
-        :param pulumi.Input[bool] enable_private_oob: Switch to enable/disable Aviatrix controller private OOB.
+        :param pulumi.Input[bool] enable_private_oob: Switch to enable/disable Aviatrix controller private OOB. Valid values: true, false. Default value: false.
         """
         if enable_private_oob is not None:
             pulumi.set(__self__, "enable_private_oob", enable_private_oob)
@@ -26,7 +26,7 @@ class AviatrixControllerPrivateOobArgs:
     @pulumi.getter(name="enablePrivateOob")
     def enable_private_oob(self) -> Optional[pulumi.Input[bool]]:
         """
-        Switch to enable/disable Aviatrix controller private OOB.
+        Switch to enable/disable Aviatrix controller private OOB. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_private_oob")
 
@@ -41,7 +41,7 @@ class _AviatrixControllerPrivateOobState:
                  enable_private_oob: Optional[pulumi.Input[bool]] = None):
         """
         Input properties used for looking up and filtering AviatrixControllerPrivateOob resources.
-        :param pulumi.Input[bool] enable_private_oob: Switch to enable/disable Aviatrix controller private OOB.
+        :param pulumi.Input[bool] enable_private_oob: Switch to enable/disable Aviatrix controller private OOB. Valid values: true, false. Default value: false.
         """
         if enable_private_oob is not None:
             pulumi.set(__self__, "enable_private_oob", enable_private_oob)
@@ -50,7 +50,7 @@ class _AviatrixControllerPrivateOobState:
     @pulumi.getter(name="enablePrivateOob")
     def enable_private_oob(self) -> Optional[pulumi.Input[bool]]:
         """
-        Switch to enable/disable Aviatrix controller private OOB.
+        Switch to enable/disable Aviatrix controller private OOB. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_private_oob")
 
@@ -67,10 +67,29 @@ class AviatrixControllerPrivateOob(pulumi.CustomResource):
                  enable_private_oob: Optional[pulumi.Input[bool]] = None,
                  __props__=None):
         """
-        Create a AviatrixControllerPrivateOob resource with the given unique name, props, and options.
+        The **aviatrix_controller_private_oob** resource allows management of an Aviatrix Controller's private OOB configurations.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Controller Private OOB
+        test_private_oob = aviatrix.AviatrixControllerPrivateOob("testPrivateOob", enable_private_oob=True)
+        ```
+
+        ## Import
+
+        **controller_private_oob** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixControllerPrivateOob:AviatrixControllerPrivateOob test 10-11-12-13
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[bool] enable_private_oob: Switch to enable/disable Aviatrix controller private OOB.
+        :param pulumi.Input[bool] enable_private_oob: Switch to enable/disable Aviatrix controller private OOB. Valid values: true, false. Default value: false.
         """
         ...
     @overload
@@ -79,7 +98,26 @@ class AviatrixControllerPrivateOob(pulumi.CustomResource):
                  args: Optional[AviatrixControllerPrivateOobArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixControllerPrivateOob resource with the given unique name, props, and options.
+        The **aviatrix_controller_private_oob** resource allows management of an Aviatrix Controller's private OOB configurations.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Controller Private OOB
+        test_private_oob = aviatrix.AviatrixControllerPrivateOob("testPrivateOob", enable_private_oob=True)
+        ```
+
+        ## Import
+
+        **controller_private_oob** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixControllerPrivateOob:AviatrixControllerPrivateOob test 10-11-12-13
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixControllerPrivateOobArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -124,7 +162,7 @@ class AviatrixControllerPrivateOob(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[bool] enable_private_oob: Switch to enable/disable Aviatrix controller private OOB.
+        :param pulumi.Input[bool] enable_private_oob: Switch to enable/disable Aviatrix controller private OOB. Valid values: true, false. Default value: false.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -137,7 +175,7 @@ class AviatrixControllerPrivateOob(pulumi.CustomResource):
     @pulumi.getter(name="enablePrivateOob")
     def enable_private_oob(self) -> pulumi.Output[Optional[bool]]:
         """
-        Switch to enable/disable Aviatrix controller private OOB.
+        Switch to enable/disable Aviatrix controller private OOB. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_private_oob")
 

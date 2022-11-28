@@ -11,6 +11,7 @@ import (
 )
 
 type AviatrixAppDomainSelector struct {
+	// List of match expressions. The App Domain will be a union of all resources matched by each `matchExpressions`.`matchExpressions` blocks cannot be empty.
 	MatchExpressions []AviatrixAppDomainSelectorMatchExpression `pulumi:"matchExpressions"`
 }
 
@@ -26,6 +27,7 @@ type AviatrixAppDomainSelectorInput interface {
 }
 
 type AviatrixAppDomainSelectorArgs struct {
+	// List of match expressions. The App Domain will be a union of all resources matched by each `matchExpressions`.`matchExpressions` blocks cannot be empty.
 	MatchExpressions AviatrixAppDomainSelectorMatchExpressionArrayInput `pulumi:"matchExpressions"`
 }
 
@@ -106,6 +108,7 @@ func (o AviatrixAppDomainSelectorOutput) ToAviatrixAppDomainSelectorPtrOutputWit
 	}).(AviatrixAppDomainSelectorPtrOutput)
 }
 
+// List of match expressions. The App Domain will be a union of all resources matched by each `matchExpressions`.`matchExpressions` blocks cannot be empty.
 func (o AviatrixAppDomainSelectorOutput) MatchExpressions() AviatrixAppDomainSelectorMatchExpressionArrayOutput {
 	return o.ApplyT(func(v AviatrixAppDomainSelector) []AviatrixAppDomainSelectorMatchExpression {
 		return v.MatchExpressions
@@ -136,6 +139,7 @@ func (o AviatrixAppDomainSelectorPtrOutput) Elem() AviatrixAppDomainSelectorOutp
 	}).(AviatrixAppDomainSelectorOutput)
 }
 
+// List of match expressions. The App Domain will be a union of all resources matched by each `matchExpressions`.`matchExpressions` blocks cannot be empty.
 func (o AviatrixAppDomainSelectorPtrOutput) MatchExpressions() AviatrixAppDomainSelectorMatchExpressionArrayOutput {
 	return o.ApplyT(func(v *AviatrixAppDomainSelector) []AviatrixAppDomainSelectorMatchExpression {
 		if v == nil {
@@ -146,14 +150,22 @@ func (o AviatrixAppDomainSelectorPtrOutput) MatchExpressions() AviatrixAppDomain
 }
 
 type AviatrixAppDomainSelectorMatchExpression struct {
-	AccountId   *string           `pulumi:"accountId"`
-	AccountName *string           `pulumi:"accountName"`
-	Cidr        *string           `pulumi:"cidr"`
-	Region      *string           `pulumi:"region"`
-	ResId       *string           `pulumi:"resId"`
-	Tags        map[string]string `pulumi:"tags"`
-	Type        *string           `pulumi:"type"`
-	Zone        *string           `pulumi:"zone"`
+	// - Account ID this expression matches.
+	AccountId *string `pulumi:"accountId"`
+	// - Account name this expression matches.
+	AccountName *string `pulumi:"accountName"`
+	// - CIDR block or IP Address this expression matches. `cidr` cannot be used with any other filters in the same `matchExpressions` block.
+	Cidr *string `pulumi:"cidr"`
+	// - Region this expression matches.
+	Region *string `pulumi:"region"`
+	// - Resource ID this expression matches.
+	ResId *string `pulumi:"resId"`
+	// - Map of tags this expression matches.
+	Tags map[string]string `pulumi:"tags"`
+	// - Type of resource this expression matches. Must be one of "vm", "vpc" or "subnet". `type` is required when `cidr` is not used.
+	Type *string `pulumi:"type"`
+	// - Zone this expression matches.
+	Zone *string `pulumi:"zone"`
 }
 
 // AviatrixAppDomainSelectorMatchExpressionInput is an input type that accepts AviatrixAppDomainSelectorMatchExpressionArgs and AviatrixAppDomainSelectorMatchExpressionOutput values.
@@ -168,14 +180,22 @@ type AviatrixAppDomainSelectorMatchExpressionInput interface {
 }
 
 type AviatrixAppDomainSelectorMatchExpressionArgs struct {
-	AccountId   pulumi.StringPtrInput `pulumi:"accountId"`
+	// - Account ID this expression matches.
+	AccountId pulumi.StringPtrInput `pulumi:"accountId"`
+	// - Account name this expression matches.
 	AccountName pulumi.StringPtrInput `pulumi:"accountName"`
-	Cidr        pulumi.StringPtrInput `pulumi:"cidr"`
-	Region      pulumi.StringPtrInput `pulumi:"region"`
-	ResId       pulumi.StringPtrInput `pulumi:"resId"`
-	Tags        pulumi.StringMapInput `pulumi:"tags"`
-	Type        pulumi.StringPtrInput `pulumi:"type"`
-	Zone        pulumi.StringPtrInput `pulumi:"zone"`
+	// - CIDR block or IP Address this expression matches. `cidr` cannot be used with any other filters in the same `matchExpressions` block.
+	Cidr pulumi.StringPtrInput `pulumi:"cidr"`
+	// - Region this expression matches.
+	Region pulumi.StringPtrInput `pulumi:"region"`
+	// - Resource ID this expression matches.
+	ResId pulumi.StringPtrInput `pulumi:"resId"`
+	// - Map of tags this expression matches.
+	Tags pulumi.StringMapInput `pulumi:"tags"`
+	// - Type of resource this expression matches. Must be one of "vm", "vpc" or "subnet". `type` is required when `cidr` is not used.
+	Type pulumi.StringPtrInput `pulumi:"type"`
+	// - Zone this expression matches.
+	Zone pulumi.StringPtrInput `pulumi:"zone"`
 }
 
 func (AviatrixAppDomainSelectorMatchExpressionArgs) ElementType() reflect.Type {
@@ -229,34 +249,42 @@ func (o AviatrixAppDomainSelectorMatchExpressionOutput) ToAviatrixAppDomainSelec
 	return o
 }
 
+// - Account ID this expression matches.
 func (o AviatrixAppDomainSelectorMatchExpressionOutput) AccountId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixAppDomainSelectorMatchExpression) *string { return v.AccountId }).(pulumi.StringPtrOutput)
 }
 
+// - Account name this expression matches.
 func (o AviatrixAppDomainSelectorMatchExpressionOutput) AccountName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixAppDomainSelectorMatchExpression) *string { return v.AccountName }).(pulumi.StringPtrOutput)
 }
 
+// - CIDR block or IP Address this expression matches. `cidr` cannot be used with any other filters in the same `matchExpressions` block.
 func (o AviatrixAppDomainSelectorMatchExpressionOutput) Cidr() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixAppDomainSelectorMatchExpression) *string { return v.Cidr }).(pulumi.StringPtrOutput)
 }
 
+// - Region this expression matches.
 func (o AviatrixAppDomainSelectorMatchExpressionOutput) Region() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixAppDomainSelectorMatchExpression) *string { return v.Region }).(pulumi.StringPtrOutput)
 }
 
+// - Resource ID this expression matches.
 func (o AviatrixAppDomainSelectorMatchExpressionOutput) ResId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixAppDomainSelectorMatchExpression) *string { return v.ResId }).(pulumi.StringPtrOutput)
 }
 
+// - Map of tags this expression matches.
 func (o AviatrixAppDomainSelectorMatchExpressionOutput) Tags() pulumi.StringMapOutput {
 	return o.ApplyT(func(v AviatrixAppDomainSelectorMatchExpression) map[string]string { return v.Tags }).(pulumi.StringMapOutput)
 }
 
+// - Type of resource this expression matches. Must be one of "vm", "vpc" or "subnet". `type` is required when `cidr` is not used.
 func (o AviatrixAppDomainSelectorMatchExpressionOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixAppDomainSelectorMatchExpression) *string { return v.Type }).(pulumi.StringPtrOutput)
 }
 
+// - Zone this expression matches.
 func (o AviatrixAppDomainSelectorMatchExpressionOutput) Zone() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixAppDomainSelectorMatchExpression) *string { return v.Zone }).(pulumi.StringPtrOutput)
 }
@@ -282,13 +310,20 @@ func (o AviatrixAppDomainSelectorMatchExpressionArrayOutput) Index(i pulumi.IntI
 }
 
 type AviatrixAwsTgwSecurityDomainType struct {
+	// A list of VPCs attached to the domain (name: `securityDomainName`) together with its creation. This list needs to be null for "Aviatrix_Edge_Domain".
+	//
 	// Deprecated: Please set `manage_vpc_attachment` to false, and use the standalone aviatrix_aws_tgw_vpc_attachment resource instead.
-	AttachedVpcs       []AviatrixAwsTgwSecurityDomainAttachedVpc `pulumi:"attachedVpcs"`
-	AviatrixFirewall   *bool                                     `pulumi:"aviatrixFirewall"`
-	ConnectedDomains   []string                                  `pulumi:"connectedDomains"`
-	NativeEgress       *bool                                     `pulumi:"nativeEgress"`
-	NativeFirewall     *bool                                     `pulumi:"nativeFirewall"`
-	SecurityDomainName string                                    `pulumi:"securityDomainName"`
+	AttachedVpcs []AviatrixAwsTgwSecurityDomainAttachedVpc `pulumi:"attachedVpcs"`
+	// Set to true if the security domain is to be used as an Aviatrix Firewall Domain for the Aviatrix Firewall Network. Valid values: true, false. Default value: false.
+	AviatrixFirewall *bool `pulumi:"aviatrixFirewall"`
+	// A list of domains connected to the domain (name: `securityDomainName`) together with its creation.
+	ConnectedDomains []string `pulumi:"connectedDomains"`
+	// Set to true if the security domain is to be used as a native egress domain (for non-Aviatrix Firewall Network-based central Internet bound traffic). Valid values: true, false. Default value: false.
+	NativeEgress *bool `pulumi:"nativeEgress"`
+	// Set to true if the security domain is to be used as a native firewall domain (for non-Aviatrix Firewall Network-based firewall traffic inspection). Valid values: true, false. Default value: false.
+	NativeFirewall *bool `pulumi:"nativeFirewall"`
+	// Three default domains ("Aviatrix_Edge_Domain", "Default_Domain" and "Shared_Service_Domain") are required with AWS TGW's creation.
+	SecurityDomainName string `pulumi:"securityDomainName"`
 }
 
 // AviatrixAwsTgwSecurityDomainTypeInput is an input type that accepts AviatrixAwsTgwSecurityDomainTypeArgs and AviatrixAwsTgwSecurityDomainTypeOutput values.
@@ -303,13 +338,20 @@ type AviatrixAwsTgwSecurityDomainTypeInput interface {
 }
 
 type AviatrixAwsTgwSecurityDomainTypeArgs struct {
+	// A list of VPCs attached to the domain (name: `securityDomainName`) together with its creation. This list needs to be null for "Aviatrix_Edge_Domain".
+	//
 	// Deprecated: Please set `manage_vpc_attachment` to false, and use the standalone aviatrix_aws_tgw_vpc_attachment resource instead.
-	AttachedVpcs       AviatrixAwsTgwSecurityDomainAttachedVpcArrayInput `pulumi:"attachedVpcs"`
-	AviatrixFirewall   pulumi.BoolPtrInput                               `pulumi:"aviatrixFirewall"`
-	ConnectedDomains   pulumi.StringArrayInput                           `pulumi:"connectedDomains"`
-	NativeEgress       pulumi.BoolPtrInput                               `pulumi:"nativeEgress"`
-	NativeFirewall     pulumi.BoolPtrInput                               `pulumi:"nativeFirewall"`
-	SecurityDomainName pulumi.StringInput                                `pulumi:"securityDomainName"`
+	AttachedVpcs AviatrixAwsTgwSecurityDomainAttachedVpcArrayInput `pulumi:"attachedVpcs"`
+	// Set to true if the security domain is to be used as an Aviatrix Firewall Domain for the Aviatrix Firewall Network. Valid values: true, false. Default value: false.
+	AviatrixFirewall pulumi.BoolPtrInput `pulumi:"aviatrixFirewall"`
+	// A list of domains connected to the domain (name: `securityDomainName`) together with its creation.
+	ConnectedDomains pulumi.StringArrayInput `pulumi:"connectedDomains"`
+	// Set to true if the security domain is to be used as a native egress domain (for non-Aviatrix Firewall Network-based central Internet bound traffic). Valid values: true, false. Default value: false.
+	NativeEgress pulumi.BoolPtrInput `pulumi:"nativeEgress"`
+	// Set to true if the security domain is to be used as a native firewall domain (for non-Aviatrix Firewall Network-based firewall traffic inspection). Valid values: true, false. Default value: false.
+	NativeFirewall pulumi.BoolPtrInput `pulumi:"nativeFirewall"`
+	// Three default domains ("Aviatrix_Edge_Domain", "Default_Domain" and "Shared_Service_Domain") are required with AWS TGW's creation.
+	SecurityDomainName pulumi.StringInput `pulumi:"securityDomainName"`
 }
 
 func (AviatrixAwsTgwSecurityDomainTypeArgs) ElementType() reflect.Type {
@@ -363,6 +405,8 @@ func (o AviatrixAwsTgwSecurityDomainTypeOutput) ToAviatrixAwsTgwSecurityDomainTy
 	return o
 }
 
+// A list of VPCs attached to the domain (name: `securityDomainName`) together with its creation. This list needs to be null for "Aviatrix_Edge_Domain".
+//
 // Deprecated: Please set `manage_vpc_attachment` to false, and use the standalone aviatrix_aws_tgw_vpc_attachment resource instead.
 func (o AviatrixAwsTgwSecurityDomainTypeOutput) AttachedVpcs() AviatrixAwsTgwSecurityDomainAttachedVpcArrayOutput {
 	return o.ApplyT(func(v AviatrixAwsTgwSecurityDomainType) []AviatrixAwsTgwSecurityDomainAttachedVpc {
@@ -370,22 +414,27 @@ func (o AviatrixAwsTgwSecurityDomainTypeOutput) AttachedVpcs() AviatrixAwsTgwSec
 	}).(AviatrixAwsTgwSecurityDomainAttachedVpcArrayOutput)
 }
 
+// Set to true if the security domain is to be used as an Aviatrix Firewall Domain for the Aviatrix Firewall Network. Valid values: true, false. Default value: false.
 func (o AviatrixAwsTgwSecurityDomainTypeOutput) AviatrixFirewall() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v AviatrixAwsTgwSecurityDomainType) *bool { return v.AviatrixFirewall }).(pulumi.BoolPtrOutput)
 }
 
+// A list of domains connected to the domain (name: `securityDomainName`) together with its creation.
 func (o AviatrixAwsTgwSecurityDomainTypeOutput) ConnectedDomains() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v AviatrixAwsTgwSecurityDomainType) []string { return v.ConnectedDomains }).(pulumi.StringArrayOutput)
 }
 
+// Set to true if the security domain is to be used as a native egress domain (for non-Aviatrix Firewall Network-based central Internet bound traffic). Valid values: true, false. Default value: false.
 func (o AviatrixAwsTgwSecurityDomainTypeOutput) NativeEgress() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v AviatrixAwsTgwSecurityDomainType) *bool { return v.NativeEgress }).(pulumi.BoolPtrOutput)
 }
 
+// Set to true if the security domain is to be used as a native firewall domain (for non-Aviatrix Firewall Network-based firewall traffic inspection). Valid values: true, false. Default value: false.
 func (o AviatrixAwsTgwSecurityDomainTypeOutput) NativeFirewall() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v AviatrixAwsTgwSecurityDomainType) *bool { return v.NativeFirewall }).(pulumi.BoolPtrOutput)
 }
 
+// Three default domains ("Aviatrix_Edge_Domain", "Default_Domain" and "Shared_Service_Domain") are required with AWS TGW's creation.
 func (o AviatrixAwsTgwSecurityDomainTypeOutput) SecurityDomainName() pulumi.StringOutput {
 	return o.ApplyT(func(v AviatrixAwsTgwSecurityDomainType) string { return v.SecurityDomainName }).(pulumi.StringOutput)
 }
@@ -411,14 +460,22 @@ func (o AviatrixAwsTgwSecurityDomainTypeArrayOutput) Index(i pulumi.IntInput) Av
 }
 
 type AviatrixAwsTgwSecurityDomainAttachedVpc struct {
+	// Advanced option. Customized route(s) to be advertised to other VPCs that are connected to the same TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
 	CustomizedRouteAdvertisement *string `pulumi:"customizedRouteAdvertisement"`
-	CustomizedRoutes             *string `pulumi:"customizedRoutes"`
-	DisableLocalRoutePropagation *bool   `pulumi:"disableLocalRoutePropagation"`
-	RouteTables                  *string `pulumi:"routeTables"`
-	Subnets                      *string `pulumi:"subnets"`
-	VpcAccountName               string  `pulumi:"vpcAccountName"`
-	VpcId                        string  `pulumi:"vpcId"`
-	VpcRegion                    string  `pulumi:"vpcRegion"`
+	// Advanced option. Customized Spoke VPC Routes. It allows the admin to enter non-RFC1918 routes in the VPC route table targeting the TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
+	CustomizedRoutes *string `pulumi:"customizedRoutes"`
+	// Advanced option. If set to true, it disables automatic route propagation of this VPC to other VPCs within the same security domain. Valid values: true, false. Default value: false.
+	DisableLocalRoutePropagation *bool `pulumi:"disableLocalRoutePropagation"`
+	// Advanced option. Route tables separated by ',' to participate in TGW Orchestrator, i.e., learned routes will be propagated to these route tables. Example: "rtb-212ff547,rtb-045397874c170c745".
+	RouteTables *string `pulumi:"routeTables"`
+	// Advanced option. VPC subnets separated by ',' to attach to the VPC. If left blank, the Aviatrix Controller automatically selects a subnet representing each AZ for the VPC attachment. Example: "subnet-214f5646,subnet-085e8c81a89d70846".
+	Subnets *string `pulumi:"subnets"`
+	// Cloud account name of the VPC in the Aviatrix controller.
+	VpcAccountName string `pulumi:"vpcAccountName"`
+	// VPC ID of the VPC to be attached to the security domain
+	VpcId string `pulumi:"vpcId"`
+	// Region of the VPC, needs to be consistent with AWS TGW's region.
+	VpcRegion string `pulumi:"vpcRegion"`
 }
 
 // AviatrixAwsTgwSecurityDomainAttachedVpcInput is an input type that accepts AviatrixAwsTgwSecurityDomainAttachedVpcArgs and AviatrixAwsTgwSecurityDomainAttachedVpcOutput values.
@@ -433,14 +490,22 @@ type AviatrixAwsTgwSecurityDomainAttachedVpcInput interface {
 }
 
 type AviatrixAwsTgwSecurityDomainAttachedVpcArgs struct {
+	// Advanced option. Customized route(s) to be advertised to other VPCs that are connected to the same TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
 	CustomizedRouteAdvertisement pulumi.StringPtrInput `pulumi:"customizedRouteAdvertisement"`
-	CustomizedRoutes             pulumi.StringPtrInput `pulumi:"customizedRoutes"`
-	DisableLocalRoutePropagation pulumi.BoolPtrInput   `pulumi:"disableLocalRoutePropagation"`
-	RouteTables                  pulumi.StringPtrInput `pulumi:"routeTables"`
-	Subnets                      pulumi.StringPtrInput `pulumi:"subnets"`
-	VpcAccountName               pulumi.StringInput    `pulumi:"vpcAccountName"`
-	VpcId                        pulumi.StringInput    `pulumi:"vpcId"`
-	VpcRegion                    pulumi.StringInput    `pulumi:"vpcRegion"`
+	// Advanced option. Customized Spoke VPC Routes. It allows the admin to enter non-RFC1918 routes in the VPC route table targeting the TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
+	CustomizedRoutes pulumi.StringPtrInput `pulumi:"customizedRoutes"`
+	// Advanced option. If set to true, it disables automatic route propagation of this VPC to other VPCs within the same security domain. Valid values: true, false. Default value: false.
+	DisableLocalRoutePropagation pulumi.BoolPtrInput `pulumi:"disableLocalRoutePropagation"`
+	// Advanced option. Route tables separated by ',' to participate in TGW Orchestrator, i.e., learned routes will be propagated to these route tables. Example: "rtb-212ff547,rtb-045397874c170c745".
+	RouteTables pulumi.StringPtrInput `pulumi:"routeTables"`
+	// Advanced option. VPC subnets separated by ',' to attach to the VPC. If left blank, the Aviatrix Controller automatically selects a subnet representing each AZ for the VPC attachment. Example: "subnet-214f5646,subnet-085e8c81a89d70846".
+	Subnets pulumi.StringPtrInput `pulumi:"subnets"`
+	// Cloud account name of the VPC in the Aviatrix controller.
+	VpcAccountName pulumi.StringInput `pulumi:"vpcAccountName"`
+	// VPC ID of the VPC to be attached to the security domain
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+	// Region of the VPC, needs to be consistent with AWS TGW's region.
+	VpcRegion pulumi.StringInput `pulumi:"vpcRegion"`
 }
 
 func (AviatrixAwsTgwSecurityDomainAttachedVpcArgs) ElementType() reflect.Type {
@@ -494,34 +559,42 @@ func (o AviatrixAwsTgwSecurityDomainAttachedVpcOutput) ToAviatrixAwsTgwSecurityD
 	return o
 }
 
+// Advanced option. Customized route(s) to be advertised to other VPCs that are connected to the same TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
 func (o AviatrixAwsTgwSecurityDomainAttachedVpcOutput) CustomizedRouteAdvertisement() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixAwsTgwSecurityDomainAttachedVpc) *string { return v.CustomizedRouteAdvertisement }).(pulumi.StringPtrOutput)
 }
 
+// Advanced option. Customized Spoke VPC Routes. It allows the admin to enter non-RFC1918 routes in the VPC route table targeting the TGW. Example: "10.8.0.0/16,10.9.0.0/16,10.10.0.0/16".
 func (o AviatrixAwsTgwSecurityDomainAttachedVpcOutput) CustomizedRoutes() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixAwsTgwSecurityDomainAttachedVpc) *string { return v.CustomizedRoutes }).(pulumi.StringPtrOutput)
 }
 
+// Advanced option. If set to true, it disables automatic route propagation of this VPC to other VPCs within the same security domain. Valid values: true, false. Default value: false.
 func (o AviatrixAwsTgwSecurityDomainAttachedVpcOutput) DisableLocalRoutePropagation() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v AviatrixAwsTgwSecurityDomainAttachedVpc) *bool { return v.DisableLocalRoutePropagation }).(pulumi.BoolPtrOutput)
 }
 
+// Advanced option. Route tables separated by ',' to participate in TGW Orchestrator, i.e., learned routes will be propagated to these route tables. Example: "rtb-212ff547,rtb-045397874c170c745".
 func (o AviatrixAwsTgwSecurityDomainAttachedVpcOutput) RouteTables() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixAwsTgwSecurityDomainAttachedVpc) *string { return v.RouteTables }).(pulumi.StringPtrOutput)
 }
 
+// Advanced option. VPC subnets separated by ',' to attach to the VPC. If left blank, the Aviatrix Controller automatically selects a subnet representing each AZ for the VPC attachment. Example: "subnet-214f5646,subnet-085e8c81a89d70846".
 func (o AviatrixAwsTgwSecurityDomainAttachedVpcOutput) Subnets() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixAwsTgwSecurityDomainAttachedVpc) *string { return v.Subnets }).(pulumi.StringPtrOutput)
 }
 
+// Cloud account name of the VPC in the Aviatrix controller.
 func (o AviatrixAwsTgwSecurityDomainAttachedVpcOutput) VpcAccountName() pulumi.StringOutput {
 	return o.ApplyT(func(v AviatrixAwsTgwSecurityDomainAttachedVpc) string { return v.VpcAccountName }).(pulumi.StringOutput)
 }
 
+// VPC ID of the VPC to be attached to the security domain
 func (o AviatrixAwsTgwSecurityDomainAttachedVpcOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v AviatrixAwsTgwSecurityDomainAttachedVpc) string { return v.VpcId }).(pulumi.StringOutput)
 }
 
+// Region of the VPC, needs to be consistent with AWS TGW's region.
 func (o AviatrixAwsTgwSecurityDomainAttachedVpcOutput) VpcRegion() pulumi.StringOutput {
 	return o.ApplyT(func(v AviatrixAwsTgwSecurityDomainAttachedVpc) string { return v.VpcRegion }).(pulumi.StringOutput)
 }
@@ -683,14 +756,22 @@ func (o AviatrixAwsTgwVpnConnVpnTunnelDataArrayOutput) Index(i pulumi.IntInput) 
 }
 
 type AviatrixFirenetFirewallInstanceAssociation struct {
-	Attached            *bool   `pulumi:"attached"`
-	EgressInterface     *string `pulumi:"egressInterface"`
-	FirenetGwName       string  `pulumi:"firenetGwName"`
-	FirewallName        *string `pulumi:"firewallName"`
-	InstanceId          string  `pulumi:"instanceId"`
-	LanInterface        *string `pulumi:"lanInterface"`
+	// Switch to attach/detach firewall instance to/from FireNet. Valid values: true, false. Default value: false.
+	Attached *bool `pulumi:"attached"`
+	// Egress interface ID. **Required if it is a firewall instance.**
+	EgressInterface *string `pulumi:"egressInterface"`
+	// Name of the primary FireNet gateway.
+	FirenetGwName string `pulumi:"firenetGwName"`
+	// Firewall instance name. **Required if it is a firewall instance.**
+	FirewallName *string `pulumi:"firewallName"`
+	// ID of Firewall instance.
+	InstanceId string `pulumi:"instanceId"`
+	// Lan interface ID. **Required if it is a firewall instance or FQDN gateway in Azure.**
+	LanInterface *string `pulumi:"lanInterface"`
+	// Management interface ID. **Required if it is a firewall instance.**
 	ManagementInterface *string `pulumi:"managementInterface"`
-	VendorType          *string `pulumi:"vendorType"`
+	// Type of firewall. Valid values: "Generic", "fqdnGateway". Default value: "Generic". Value "fqdnGateway" is required for FQDN gateway.
+	VendorType *string `pulumi:"vendorType"`
 }
 
 // AviatrixFirenetFirewallInstanceAssociationInput is an input type that accepts AviatrixFirenetFirewallInstanceAssociationArgs and AviatrixFirenetFirewallInstanceAssociationOutput values.
@@ -705,14 +786,22 @@ type AviatrixFirenetFirewallInstanceAssociationInput interface {
 }
 
 type AviatrixFirenetFirewallInstanceAssociationArgs struct {
-	Attached            pulumi.BoolPtrInput   `pulumi:"attached"`
-	EgressInterface     pulumi.StringPtrInput `pulumi:"egressInterface"`
-	FirenetGwName       pulumi.StringInput    `pulumi:"firenetGwName"`
-	FirewallName        pulumi.StringPtrInput `pulumi:"firewallName"`
-	InstanceId          pulumi.StringInput    `pulumi:"instanceId"`
-	LanInterface        pulumi.StringPtrInput `pulumi:"lanInterface"`
+	// Switch to attach/detach firewall instance to/from FireNet. Valid values: true, false. Default value: false.
+	Attached pulumi.BoolPtrInput `pulumi:"attached"`
+	// Egress interface ID. **Required if it is a firewall instance.**
+	EgressInterface pulumi.StringPtrInput `pulumi:"egressInterface"`
+	// Name of the primary FireNet gateway.
+	FirenetGwName pulumi.StringInput `pulumi:"firenetGwName"`
+	// Firewall instance name. **Required if it is a firewall instance.**
+	FirewallName pulumi.StringPtrInput `pulumi:"firewallName"`
+	// ID of Firewall instance.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Lan interface ID. **Required if it is a firewall instance or FQDN gateway in Azure.**
+	LanInterface pulumi.StringPtrInput `pulumi:"lanInterface"`
+	// Management interface ID. **Required if it is a firewall instance.**
 	ManagementInterface pulumi.StringPtrInput `pulumi:"managementInterface"`
-	VendorType          pulumi.StringPtrInput `pulumi:"vendorType"`
+	// Type of firewall. Valid values: "Generic", "fqdnGateway". Default value: "Generic". Value "fqdnGateway" is required for FQDN gateway.
+	VendorType pulumi.StringPtrInput `pulumi:"vendorType"`
 }
 
 func (AviatrixFirenetFirewallInstanceAssociationArgs) ElementType() reflect.Type {
@@ -766,34 +855,42 @@ func (o AviatrixFirenetFirewallInstanceAssociationOutput) ToAviatrixFirenetFirew
 	return o
 }
 
+// Switch to attach/detach firewall instance to/from FireNet. Valid values: true, false. Default value: false.
 func (o AviatrixFirenetFirewallInstanceAssociationOutput) Attached() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v AviatrixFirenetFirewallInstanceAssociation) *bool { return v.Attached }).(pulumi.BoolPtrOutput)
 }
 
+// Egress interface ID. **Required if it is a firewall instance.**
 func (o AviatrixFirenetFirewallInstanceAssociationOutput) EgressInterface() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixFirenetFirewallInstanceAssociation) *string { return v.EgressInterface }).(pulumi.StringPtrOutput)
 }
 
+// Name of the primary FireNet gateway.
 func (o AviatrixFirenetFirewallInstanceAssociationOutput) FirenetGwName() pulumi.StringOutput {
 	return o.ApplyT(func(v AviatrixFirenetFirewallInstanceAssociation) string { return v.FirenetGwName }).(pulumi.StringOutput)
 }
 
+// Firewall instance name. **Required if it is a firewall instance.**
 func (o AviatrixFirenetFirewallInstanceAssociationOutput) FirewallName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixFirenetFirewallInstanceAssociation) *string { return v.FirewallName }).(pulumi.StringPtrOutput)
 }
 
+// ID of Firewall instance.
 func (o AviatrixFirenetFirewallInstanceAssociationOutput) InstanceId() pulumi.StringOutput {
 	return o.ApplyT(func(v AviatrixFirenetFirewallInstanceAssociation) string { return v.InstanceId }).(pulumi.StringOutput)
 }
 
+// Lan interface ID. **Required if it is a firewall instance or FQDN gateway in Azure.**
 func (o AviatrixFirenetFirewallInstanceAssociationOutput) LanInterface() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixFirenetFirewallInstanceAssociation) *string { return v.LanInterface }).(pulumi.StringPtrOutput)
 }
 
+// Management interface ID. **Required if it is a firewall instance.**
 func (o AviatrixFirenetFirewallInstanceAssociationOutput) ManagementInterface() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixFirenetFirewallInstanceAssociation) *string { return v.ManagementInterface }).(pulumi.StringPtrOutput)
 }
 
+// Type of firewall. Valid values: "Generic", "fqdnGateway". Default value: "Generic". Value "fqdnGateway" is required for FQDN gateway.
 func (o AviatrixFirenetFirewallInstanceAssociationOutput) VendorType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixFirenetFirewallInstanceAssociation) *string { return v.VendorType }).(pulumi.StringPtrOutput)
 }
@@ -819,13 +916,20 @@ func (o AviatrixFirenetFirewallInstanceAssociationArrayOutput) Index(i pulumi.In
 }
 
 type AviatrixFirewallPolicyType struct {
-	Action      string  `pulumi:"action"`
+	// Valid values: "allow", "deny" and "force-drop" (in stateful firewall rule to allow immediate packet dropping on established sessions).
+	Action string `pulumi:"action"`
+	// Description of the policy. Example: "This is policy no.1".
 	Description *string `pulumi:"description"`
-	DstIp       string  `pulumi:"dstIp"`
-	LogEnabled  *bool   `pulumi:"logEnabled"`
-	Port        string  `pulumi:"port"`
-	Protocol    *string `pulumi:"protocol"`
-	SrcIp       string  `pulumi:"srcIp"`
+	// Destination address, a valid IPv4 address or tag name such "HR" or "marketing" etc. Example: "10.30.0.0/16". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
+	DstIp string `pulumi:"dstIp"`
+	// Valid values: true, false. Default value: false.
+	LogEnabled *bool `pulumi:"logEnabled"`
+	// A single port or a range of port numbers. Example: "25", "25:1024".
+	Port string `pulumi:"port"`
+	// : Valid values: "all", "tcp", "udp", "icmp", "sctp", "rdp", "dccp". Default value: "all".
+	Protocol *string `pulumi:"protocol"`
+	// Source address, a valid IPv4 address or tag name such "HR" or "marketing" etc. Example: "10.30.0.0/16". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
+	SrcIp string `pulumi:"srcIp"`
 }
 
 // AviatrixFirewallPolicyTypeInput is an input type that accepts AviatrixFirewallPolicyTypeArgs and AviatrixFirewallPolicyTypeOutput values.
@@ -840,13 +944,20 @@ type AviatrixFirewallPolicyTypeInput interface {
 }
 
 type AviatrixFirewallPolicyTypeArgs struct {
-	Action      pulumi.StringInput    `pulumi:"action"`
+	// Valid values: "allow", "deny" and "force-drop" (in stateful firewall rule to allow immediate packet dropping on established sessions).
+	Action pulumi.StringInput `pulumi:"action"`
+	// Description of the policy. Example: "This is policy no.1".
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	DstIp       pulumi.StringInput    `pulumi:"dstIp"`
-	LogEnabled  pulumi.BoolPtrInput   `pulumi:"logEnabled"`
-	Port        pulumi.StringInput    `pulumi:"port"`
-	Protocol    pulumi.StringPtrInput `pulumi:"protocol"`
-	SrcIp       pulumi.StringInput    `pulumi:"srcIp"`
+	// Destination address, a valid IPv4 address or tag name such "HR" or "marketing" etc. Example: "10.30.0.0/16". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
+	DstIp pulumi.StringInput `pulumi:"dstIp"`
+	// Valid values: true, false. Default value: false.
+	LogEnabled pulumi.BoolPtrInput `pulumi:"logEnabled"`
+	// A single port or a range of port numbers. Example: "25", "25:1024".
+	Port pulumi.StringInput `pulumi:"port"`
+	// : Valid values: "all", "tcp", "udp", "icmp", "sctp", "rdp", "dccp". Default value: "all".
+	Protocol pulumi.StringPtrInput `pulumi:"protocol"`
+	// Source address, a valid IPv4 address or tag name such "HR" or "marketing" etc. Example: "10.30.0.0/16". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
+	SrcIp pulumi.StringInput `pulumi:"srcIp"`
 }
 
 func (AviatrixFirewallPolicyTypeArgs) ElementType() reflect.Type {
@@ -900,30 +1011,37 @@ func (o AviatrixFirewallPolicyTypeOutput) ToAviatrixFirewallPolicyTypeOutputWith
 	return o
 }
 
+// Valid values: "allow", "deny" and "force-drop" (in stateful firewall rule to allow immediate packet dropping on established sessions).
 func (o AviatrixFirewallPolicyTypeOutput) Action() pulumi.StringOutput {
 	return o.ApplyT(func(v AviatrixFirewallPolicyType) string { return v.Action }).(pulumi.StringOutput)
 }
 
+// Description of the policy. Example: "This is policy no.1".
 func (o AviatrixFirewallPolicyTypeOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixFirewallPolicyType) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// Destination address, a valid IPv4 address or tag name such "HR" or "marketing" etc. Example: "10.30.0.0/16". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
 func (o AviatrixFirewallPolicyTypeOutput) DstIp() pulumi.StringOutput {
 	return o.ApplyT(func(v AviatrixFirewallPolicyType) string { return v.DstIp }).(pulumi.StringOutput)
 }
 
+// Valid values: true, false. Default value: false.
 func (o AviatrixFirewallPolicyTypeOutput) LogEnabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v AviatrixFirewallPolicyType) *bool { return v.LogEnabled }).(pulumi.BoolPtrOutput)
 }
 
+// A single port or a range of port numbers. Example: "25", "25:1024".
 func (o AviatrixFirewallPolicyTypeOutput) Port() pulumi.StringOutput {
 	return o.ApplyT(func(v AviatrixFirewallPolicyType) string { return v.Port }).(pulumi.StringOutput)
 }
 
+// : Valid values: "all", "tcp", "udp", "icmp", "sctp", "rdp", "dccp". Default value: "all".
 func (o AviatrixFirewallPolicyTypeOutput) Protocol() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixFirewallPolicyType) *string { return v.Protocol }).(pulumi.StringPtrOutput)
 }
 
+// Source address, a valid IPv4 address or tag name such "HR" or "marketing" etc. Example: "10.30.0.0/16". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
 func (o AviatrixFirewallPolicyTypeOutput) SrcIp() pulumi.StringOutput {
 	return o.ApplyT(func(v AviatrixFirewallPolicyType) string { return v.SrcIp }).(pulumi.StringOutput)
 }
@@ -949,7 +1067,9 @@ func (o AviatrixFirewallPolicyTypeArrayOutput) Index(i pulumi.IntInput) Aviatrix
 }
 
 type AviatrixFirewallTagCidrList struct {
-	Cidr        string `pulumi:"cidr"`
+	// CIDR address to filter. Example: "10.88.88.88/32".
+	Cidr string `pulumi:"cidr"`
+	// A name to identify the CIDR. Example: "policy1".
 	CidrTagName string `pulumi:"cidrTagName"`
 }
 
@@ -965,7 +1085,9 @@ type AviatrixFirewallTagCidrListInput interface {
 }
 
 type AviatrixFirewallTagCidrListArgs struct {
-	Cidr        pulumi.StringInput `pulumi:"cidr"`
+	// CIDR address to filter. Example: "10.88.88.88/32".
+	Cidr pulumi.StringInput `pulumi:"cidr"`
+	// A name to identify the CIDR. Example: "policy1".
 	CidrTagName pulumi.StringInput `pulumi:"cidrTagName"`
 }
 
@@ -1020,10 +1142,12 @@ func (o AviatrixFirewallTagCidrListOutput) ToAviatrixFirewallTagCidrListOutputWi
 	return o
 }
 
+// CIDR address to filter. Example: "10.88.88.88/32".
 func (o AviatrixFirewallTagCidrListOutput) Cidr() pulumi.StringOutput {
 	return o.ApplyT(func(v AviatrixFirewallTagCidrList) string { return v.Cidr }).(pulumi.StringOutput)
 }
 
+// A name to identify the CIDR. Example: "policy1".
 func (o AviatrixFirewallTagCidrListOutput) CidrTagName() pulumi.StringOutput {
 	return o.ApplyT(func(v AviatrixFirewallTagCidrList) string { return v.CidrTagName }).(pulumi.StringOutput)
 }
@@ -1049,10 +1173,16 @@ func (o AviatrixFirewallTagCidrListArrayOutput) Index(i pulumi.IntInput) Aviatri
 }
 
 type AviatrixFqdnDomainName struct {
+	// What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base Policy' if no value provided.
+	// * For protocol "all", port must be set to "all".
+	// * For protocol “icmp”, port must be set to “ping”.
 	Action *string `pulumi:"action"`
-	Fqdn   string  `pulumi:"fqdn"`
-	Port   string  `pulumi:"port"`
-	Proto  string  `pulumi:"proto"`
+	// FQDN. Example: "facebook.com".
+	Fqdn string `pulumi:"fqdn"`
+	// Port. Example "25".
+	Port string `pulumi:"port"`
+	// Protocol. Valid values: "all", "tcp", "udp", "icmp".
+	Proto string `pulumi:"proto"`
 }
 
 // AviatrixFqdnDomainNameInput is an input type that accepts AviatrixFqdnDomainNameArgs and AviatrixFqdnDomainNameOutput values.
@@ -1067,10 +1197,16 @@ type AviatrixFqdnDomainNameInput interface {
 }
 
 type AviatrixFqdnDomainNameArgs struct {
+	// What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base Policy' if no value provided.
+	// * For protocol "all", port must be set to "all".
+	// * For protocol “icmp”, port must be set to “ping”.
 	Action pulumi.StringPtrInput `pulumi:"action"`
-	Fqdn   pulumi.StringInput    `pulumi:"fqdn"`
-	Port   pulumi.StringInput    `pulumi:"port"`
-	Proto  pulumi.StringInput    `pulumi:"proto"`
+	// FQDN. Example: "facebook.com".
+	Fqdn pulumi.StringInput `pulumi:"fqdn"`
+	// Port. Example "25".
+	Port pulumi.StringInput `pulumi:"port"`
+	// Protocol. Valid values: "all", "tcp", "udp", "icmp".
+	Proto pulumi.StringInput `pulumi:"proto"`
 }
 
 func (AviatrixFqdnDomainNameArgs) ElementType() reflect.Type {
@@ -1124,18 +1260,24 @@ func (o AviatrixFqdnDomainNameOutput) ToAviatrixFqdnDomainNameOutputWithContext(
 	return o
 }
 
+// What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base Policy' if no value provided.
+// * For protocol "all", port must be set to "all".
+// * For protocol “icmp”, port must be set to “ping”.
 func (o AviatrixFqdnDomainNameOutput) Action() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixFqdnDomainName) *string { return v.Action }).(pulumi.StringPtrOutput)
 }
 
+// FQDN. Example: "facebook.com".
 func (o AviatrixFqdnDomainNameOutput) Fqdn() pulumi.StringOutput {
 	return o.ApplyT(func(v AviatrixFqdnDomainName) string { return v.Fqdn }).(pulumi.StringOutput)
 }
 
+// Port. Example "25".
 func (o AviatrixFqdnDomainNameOutput) Port() pulumi.StringOutput {
 	return o.ApplyT(func(v AviatrixFqdnDomainName) string { return v.Port }).(pulumi.StringOutput)
 }
 
+// Protocol. Valid values: "all", "tcp", "udp", "icmp".
 func (o AviatrixFqdnDomainNameOutput) Proto() pulumi.StringOutput {
 	return o.ApplyT(func(v AviatrixFqdnDomainName) string { return v.Proto }).(pulumi.StringOutput)
 }
@@ -1161,7 +1303,9 @@ func (o AviatrixFqdnDomainNameArrayOutput) Index(i pulumi.IntInput) AviatrixFqdn
 }
 
 type AviatrixFqdnGwFilterTagList struct {
-	GwName        string   `pulumi:"gwName"`
+	// Name of the gateway to attach to the specific tag.
+	GwName string `pulumi:"gwName"`
+	// List of source IPs in the VPC qualified for a specific tag.
 	SourceIpLists []string `pulumi:"sourceIpLists"`
 }
 
@@ -1177,7 +1321,9 @@ type AviatrixFqdnGwFilterTagListInput interface {
 }
 
 type AviatrixFqdnGwFilterTagListArgs struct {
-	GwName        pulumi.StringInput      `pulumi:"gwName"`
+	// Name of the gateway to attach to the specific tag.
+	GwName pulumi.StringInput `pulumi:"gwName"`
+	// List of source IPs in the VPC qualified for a specific tag.
 	SourceIpLists pulumi.StringArrayInput `pulumi:"sourceIpLists"`
 }
 
@@ -1232,10 +1378,12 @@ func (o AviatrixFqdnGwFilterTagListOutput) ToAviatrixFqdnGwFilterTagListOutputWi
 	return o
 }
 
+// Name of the gateway to attach to the specific tag.
 func (o AviatrixFqdnGwFilterTagListOutput) GwName() pulumi.StringOutput {
 	return o.ApplyT(func(v AviatrixFqdnGwFilterTagList) string { return v.GwName }).(pulumi.StringOutput)
 }
 
+// List of source IPs in the VPC qualified for a specific tag.
 func (o AviatrixFqdnGwFilterTagListOutput) SourceIpLists() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v AviatrixFqdnGwFilterTagList) []string { return v.SourceIpLists }).(pulumi.StringArrayOutput)
 }
@@ -1261,18 +1409,30 @@ func (o AviatrixFqdnGwFilterTagListArrayOutput) Index(i pulumi.IntInput) Aviatri
 }
 
 type AviatrixGatewayDnatConnectionPolicy struct {
-	ApplyRouteEntry *bool   `pulumi:"applyRouteEntry"`
-	Connection      *string `pulumi:"connection"`
-	DnatIps         *string `pulumi:"dnatIps"`
-	DnatPort        *string `pulumi:"dnatPort"`
-	DstCidr         *string `pulumi:"dstCidr"`
-	DstPort         *string `pulumi:"dstPort"`
-	ExcludeRtb      *string `pulumi:"excludeRtb"`
-	Interface       *string `pulumi:"interface"`
-	Mark            *string `pulumi:"mark"`
-	Protocol        *string `pulumi:"protocol"`
-	SrcCidr         *string `pulumi:"srcCidr"`
-	SrcPort         *string `pulumi:"srcPort"`
+	// This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.19.2+.
+	ApplyRouteEntry *bool `pulumi:"applyRouteEntry"`
+	// This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+	Connection *string `pulumi:"connection"`
+	// This is a rule field that specifies the translated destination IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+	DnatIps *string `pulumi:"dnatIps"`
+	// This is a rule field that specifies the translated destination port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+	DnatPort *string `pulumi:"dnatPort"`
+	// This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+	DstCidr *string `pulumi:"dstCidr"`
+	// This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+	DstPort *string `pulumi:"dstPort"`
+	// This field specifies which VPC private route table will not be programmed with the default route entry.
+	ExcludeRtb *string `pulumi:"excludeRtb"`
+	// This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+	Interface *string `pulumi:"interface"`
+	// This is a rule field that specifies a tag or mark of a TCP session when all qualifier conditions meet. When not specified, this field is not used.
+	Mark *string `pulumi:"mark"`
+	// This is a qualifier condition that specifies a destination port protocol where the rule applies. When not specified, this field is not used.
+	Protocol *string `pulumi:"protocol"`
+	// This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+	SrcCidr *string `pulumi:"srcCidr"`
+	// This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+	SrcPort *string `pulumi:"srcPort"`
 }
 
 // AviatrixGatewayDnatConnectionPolicyInput is an input type that accepts AviatrixGatewayDnatConnectionPolicyArgs and AviatrixGatewayDnatConnectionPolicyOutput values.
@@ -1287,18 +1447,30 @@ type AviatrixGatewayDnatConnectionPolicyInput interface {
 }
 
 type AviatrixGatewayDnatConnectionPolicyArgs struct {
-	ApplyRouteEntry pulumi.BoolPtrInput   `pulumi:"applyRouteEntry"`
-	Connection      pulumi.StringPtrInput `pulumi:"connection"`
-	DnatIps         pulumi.StringPtrInput `pulumi:"dnatIps"`
-	DnatPort        pulumi.StringPtrInput `pulumi:"dnatPort"`
-	DstCidr         pulumi.StringPtrInput `pulumi:"dstCidr"`
-	DstPort         pulumi.StringPtrInput `pulumi:"dstPort"`
-	ExcludeRtb      pulumi.StringPtrInput `pulumi:"excludeRtb"`
-	Interface       pulumi.StringPtrInput `pulumi:"interface"`
-	Mark            pulumi.StringPtrInput `pulumi:"mark"`
-	Protocol        pulumi.StringPtrInput `pulumi:"protocol"`
-	SrcCidr         pulumi.StringPtrInput `pulumi:"srcCidr"`
-	SrcPort         pulumi.StringPtrInput `pulumi:"srcPort"`
+	// This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.19.2+.
+	ApplyRouteEntry pulumi.BoolPtrInput `pulumi:"applyRouteEntry"`
+	// This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+	Connection pulumi.StringPtrInput `pulumi:"connection"`
+	// This is a rule field that specifies the translated destination IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+	DnatIps pulumi.StringPtrInput `pulumi:"dnatIps"`
+	// This is a rule field that specifies the translated destination port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+	DnatPort pulumi.StringPtrInput `pulumi:"dnatPort"`
+	// This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+	DstCidr pulumi.StringPtrInput `pulumi:"dstCidr"`
+	// This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+	DstPort pulumi.StringPtrInput `pulumi:"dstPort"`
+	// This field specifies which VPC private route table will not be programmed with the default route entry.
+	ExcludeRtb pulumi.StringPtrInput `pulumi:"excludeRtb"`
+	// This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+	Interface pulumi.StringPtrInput `pulumi:"interface"`
+	// This is a rule field that specifies a tag or mark of a TCP session when all qualifier conditions meet. When not specified, this field is not used.
+	Mark pulumi.StringPtrInput `pulumi:"mark"`
+	// This is a qualifier condition that specifies a destination port protocol where the rule applies. When not specified, this field is not used.
+	Protocol pulumi.StringPtrInput `pulumi:"protocol"`
+	// This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+	SrcCidr pulumi.StringPtrInput `pulumi:"srcCidr"`
+	// This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+	SrcPort pulumi.StringPtrInput `pulumi:"srcPort"`
 }
 
 func (AviatrixGatewayDnatConnectionPolicyArgs) ElementType() reflect.Type {
@@ -1352,50 +1524,62 @@ func (o AviatrixGatewayDnatConnectionPolicyOutput) ToAviatrixGatewayDnatConnecti
 	return o
 }
 
+// This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.19.2+.
 func (o AviatrixGatewayDnatConnectionPolicyOutput) ApplyRouteEntry() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatConnectionPolicy) *bool { return v.ApplyRouteEntry }).(pulumi.BoolPtrOutput)
 }
 
+// This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
 func (o AviatrixGatewayDnatConnectionPolicyOutput) Connection() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatConnectionPolicy) *string { return v.Connection }).(pulumi.StringPtrOutput)
 }
 
+// This is a rule field that specifies the translated destination IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
 func (o AviatrixGatewayDnatConnectionPolicyOutput) DnatIps() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatConnectionPolicy) *string { return v.DnatIps }).(pulumi.StringPtrOutput)
 }
 
+// This is a rule field that specifies the translated destination port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
 func (o AviatrixGatewayDnatConnectionPolicyOutput) DnatPort() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatConnectionPolicy) *string { return v.DnatPort }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
 func (o AviatrixGatewayDnatConnectionPolicyOutput) DstCidr() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatConnectionPolicy) *string { return v.DstCidr }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
 func (o AviatrixGatewayDnatConnectionPolicyOutput) DstPort() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatConnectionPolicy) *string { return v.DstPort }).(pulumi.StringPtrOutput)
 }
 
+// This field specifies which VPC private route table will not be programmed with the default route entry.
 func (o AviatrixGatewayDnatConnectionPolicyOutput) ExcludeRtb() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatConnectionPolicy) *string { return v.ExcludeRtb }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
 func (o AviatrixGatewayDnatConnectionPolicyOutput) Interface() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatConnectionPolicy) *string { return v.Interface }).(pulumi.StringPtrOutput)
 }
 
+// This is a rule field that specifies a tag or mark of a TCP session when all qualifier conditions meet. When not specified, this field is not used.
 func (o AviatrixGatewayDnatConnectionPolicyOutput) Mark() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatConnectionPolicy) *string { return v.Mark }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a destination port protocol where the rule applies. When not specified, this field is not used.
 func (o AviatrixGatewayDnatConnectionPolicyOutput) Protocol() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatConnectionPolicy) *string { return v.Protocol }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
 func (o AviatrixGatewayDnatConnectionPolicyOutput) SrcCidr() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatConnectionPolicy) *string { return v.SrcCidr }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
 func (o AviatrixGatewayDnatConnectionPolicyOutput) SrcPort() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatConnectionPolicy) *string { return v.SrcPort }).(pulumi.StringPtrOutput)
 }
@@ -1421,18 +1605,30 @@ func (o AviatrixGatewayDnatConnectionPolicyArrayOutput) Index(i pulumi.IntInput)
 }
 
 type AviatrixGatewayDnatDnatPolicy struct {
-	ApplyRouteEntry *bool   `pulumi:"applyRouteEntry"`
-	Connection      *string `pulumi:"connection"`
-	DnatIps         *string `pulumi:"dnatIps"`
-	DnatPort        *string `pulumi:"dnatPort"`
-	DstCidr         *string `pulumi:"dstCidr"`
-	DstPort         *string `pulumi:"dstPort"`
-	ExcludeRtb      *string `pulumi:"excludeRtb"`
-	Interface       *string `pulumi:"interface"`
-	Mark            *string `pulumi:"mark"`
-	Protocol        *string `pulumi:"protocol"`
-	SrcCidr         *string `pulumi:"srcCidr"`
-	SrcPort         *string `pulumi:"srcPort"`
+	// This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.19.2+.
+	ApplyRouteEntry *bool `pulumi:"applyRouteEntry"`
+	// This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+	Connection *string `pulumi:"connection"`
+	// This is a rule field that specifies the translated destination IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+	DnatIps *string `pulumi:"dnatIps"`
+	// This is a rule field that specifies the translated destination port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+	DnatPort *string `pulumi:"dnatPort"`
+	// This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+	DstCidr *string `pulumi:"dstCidr"`
+	// This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+	DstPort *string `pulumi:"dstPort"`
+	// This field specifies which VPC private route table will not be programmed with the default route entry.
+	ExcludeRtb *string `pulumi:"excludeRtb"`
+	// This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+	Interface *string `pulumi:"interface"`
+	// This is a rule field that specifies a tag or mark of a TCP session when all qualifier conditions meet. When not specified, this field is not used.
+	Mark *string `pulumi:"mark"`
+	// This is a qualifier condition that specifies a destination port protocol where the rule applies. When not specified, this field is not used.
+	Protocol *string `pulumi:"protocol"`
+	// This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+	SrcCidr *string `pulumi:"srcCidr"`
+	// This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+	SrcPort *string `pulumi:"srcPort"`
 }
 
 // AviatrixGatewayDnatDnatPolicyInput is an input type that accepts AviatrixGatewayDnatDnatPolicyArgs and AviatrixGatewayDnatDnatPolicyOutput values.
@@ -1447,18 +1643,30 @@ type AviatrixGatewayDnatDnatPolicyInput interface {
 }
 
 type AviatrixGatewayDnatDnatPolicyArgs struct {
-	ApplyRouteEntry pulumi.BoolPtrInput   `pulumi:"applyRouteEntry"`
-	Connection      pulumi.StringPtrInput `pulumi:"connection"`
-	DnatIps         pulumi.StringPtrInput `pulumi:"dnatIps"`
-	DnatPort        pulumi.StringPtrInput `pulumi:"dnatPort"`
-	DstCidr         pulumi.StringPtrInput `pulumi:"dstCidr"`
-	DstPort         pulumi.StringPtrInput `pulumi:"dstPort"`
-	ExcludeRtb      pulumi.StringPtrInput `pulumi:"excludeRtb"`
-	Interface       pulumi.StringPtrInput `pulumi:"interface"`
-	Mark            pulumi.StringPtrInput `pulumi:"mark"`
-	Protocol        pulumi.StringPtrInput `pulumi:"protocol"`
-	SrcCidr         pulumi.StringPtrInput `pulumi:"srcCidr"`
-	SrcPort         pulumi.StringPtrInput `pulumi:"srcPort"`
+	// This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.19.2+.
+	ApplyRouteEntry pulumi.BoolPtrInput `pulumi:"applyRouteEntry"`
+	// This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+	Connection pulumi.StringPtrInput `pulumi:"connection"`
+	// This is a rule field that specifies the translated destination IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+	DnatIps pulumi.StringPtrInput `pulumi:"dnatIps"`
+	// This is a rule field that specifies the translated destination port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+	DnatPort pulumi.StringPtrInput `pulumi:"dnatPort"`
+	// This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+	DstCidr pulumi.StringPtrInput `pulumi:"dstCidr"`
+	// This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+	DstPort pulumi.StringPtrInput `pulumi:"dstPort"`
+	// This field specifies which VPC private route table will not be programmed with the default route entry.
+	ExcludeRtb pulumi.StringPtrInput `pulumi:"excludeRtb"`
+	// This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+	Interface pulumi.StringPtrInput `pulumi:"interface"`
+	// This is a rule field that specifies a tag or mark of a TCP session when all qualifier conditions meet. When not specified, this field is not used.
+	Mark pulumi.StringPtrInput `pulumi:"mark"`
+	// This is a qualifier condition that specifies a destination port protocol where the rule applies. When not specified, this field is not used.
+	Protocol pulumi.StringPtrInput `pulumi:"protocol"`
+	// This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+	SrcCidr pulumi.StringPtrInput `pulumi:"srcCidr"`
+	// This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+	SrcPort pulumi.StringPtrInput `pulumi:"srcPort"`
 }
 
 func (AviatrixGatewayDnatDnatPolicyArgs) ElementType() reflect.Type {
@@ -1512,50 +1720,62 @@ func (o AviatrixGatewayDnatDnatPolicyOutput) ToAviatrixGatewayDnatDnatPolicyOutp
 	return o
 }
 
+// This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.19.2+.
 func (o AviatrixGatewayDnatDnatPolicyOutput) ApplyRouteEntry() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatDnatPolicy) *bool { return v.ApplyRouteEntry }).(pulumi.BoolPtrOutput)
 }
 
+// This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
 func (o AviatrixGatewayDnatDnatPolicyOutput) Connection() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatDnatPolicy) *string { return v.Connection }).(pulumi.StringPtrOutput)
 }
 
+// This is a rule field that specifies the translated destination IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
 func (o AviatrixGatewayDnatDnatPolicyOutput) DnatIps() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatDnatPolicy) *string { return v.DnatIps }).(pulumi.StringPtrOutput)
 }
 
+// This is a rule field that specifies the translated destination port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
 func (o AviatrixGatewayDnatDnatPolicyOutput) DnatPort() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatDnatPolicy) *string { return v.DnatPort }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
 func (o AviatrixGatewayDnatDnatPolicyOutput) DstCidr() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatDnatPolicy) *string { return v.DstCidr }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
 func (o AviatrixGatewayDnatDnatPolicyOutput) DstPort() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatDnatPolicy) *string { return v.DstPort }).(pulumi.StringPtrOutput)
 }
 
+// This field specifies which VPC private route table will not be programmed with the default route entry.
 func (o AviatrixGatewayDnatDnatPolicyOutput) ExcludeRtb() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatDnatPolicy) *string { return v.ExcludeRtb }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
 func (o AviatrixGatewayDnatDnatPolicyOutput) Interface() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatDnatPolicy) *string { return v.Interface }).(pulumi.StringPtrOutput)
 }
 
+// This is a rule field that specifies a tag or mark of a TCP session when all qualifier conditions meet. When not specified, this field is not used.
 func (o AviatrixGatewayDnatDnatPolicyOutput) Mark() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatDnatPolicy) *string { return v.Mark }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a destination port protocol where the rule applies. When not specified, this field is not used.
 func (o AviatrixGatewayDnatDnatPolicyOutput) Protocol() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatDnatPolicy) *string { return v.Protocol }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
 func (o AviatrixGatewayDnatDnatPolicyOutput) SrcCidr() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatDnatPolicy) *string { return v.SrcCidr }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
 func (o AviatrixGatewayDnatDnatPolicyOutput) SrcPort() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatDnatPolicy) *string { return v.SrcPort }).(pulumi.StringPtrOutput)
 }
@@ -1581,18 +1801,30 @@ func (o AviatrixGatewayDnatDnatPolicyArrayOutput) Index(i pulumi.IntInput) Aviat
 }
 
 type AviatrixGatewayDnatInterfacePolicy struct {
-	ApplyRouteEntry *bool   `pulumi:"applyRouteEntry"`
-	Connection      *string `pulumi:"connection"`
-	DnatIps         *string `pulumi:"dnatIps"`
-	DnatPort        *string `pulumi:"dnatPort"`
-	DstCidr         *string `pulumi:"dstCidr"`
-	DstPort         *string `pulumi:"dstPort"`
-	ExcludeRtb      *string `pulumi:"excludeRtb"`
-	Interface       *string `pulumi:"interface"`
-	Mark            *string `pulumi:"mark"`
-	Protocol        *string `pulumi:"protocol"`
-	SrcCidr         *string `pulumi:"srcCidr"`
-	SrcPort         *string `pulumi:"srcPort"`
+	// This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.19.2+.
+	ApplyRouteEntry *bool `pulumi:"applyRouteEntry"`
+	// This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+	Connection *string `pulumi:"connection"`
+	// This is a rule field that specifies the translated destination IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+	DnatIps *string `pulumi:"dnatIps"`
+	// This is a rule field that specifies the translated destination port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+	DnatPort *string `pulumi:"dnatPort"`
+	// This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+	DstCidr *string `pulumi:"dstCidr"`
+	// This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+	DstPort *string `pulumi:"dstPort"`
+	// This field specifies which VPC private route table will not be programmed with the default route entry.
+	ExcludeRtb *string `pulumi:"excludeRtb"`
+	// This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+	Interface *string `pulumi:"interface"`
+	// This is a rule field that specifies a tag or mark of a TCP session when all qualifier conditions meet. When not specified, this field is not used.
+	Mark *string `pulumi:"mark"`
+	// This is a qualifier condition that specifies a destination port protocol where the rule applies. When not specified, this field is not used.
+	Protocol *string `pulumi:"protocol"`
+	// This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+	SrcCidr *string `pulumi:"srcCidr"`
+	// This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+	SrcPort *string `pulumi:"srcPort"`
 }
 
 // AviatrixGatewayDnatInterfacePolicyInput is an input type that accepts AviatrixGatewayDnatInterfacePolicyArgs and AviatrixGatewayDnatInterfacePolicyOutput values.
@@ -1607,18 +1839,30 @@ type AviatrixGatewayDnatInterfacePolicyInput interface {
 }
 
 type AviatrixGatewayDnatInterfacePolicyArgs struct {
-	ApplyRouteEntry pulumi.BoolPtrInput   `pulumi:"applyRouteEntry"`
-	Connection      pulumi.StringPtrInput `pulumi:"connection"`
-	DnatIps         pulumi.StringPtrInput `pulumi:"dnatIps"`
-	DnatPort        pulumi.StringPtrInput `pulumi:"dnatPort"`
-	DstCidr         pulumi.StringPtrInput `pulumi:"dstCidr"`
-	DstPort         pulumi.StringPtrInput `pulumi:"dstPort"`
-	ExcludeRtb      pulumi.StringPtrInput `pulumi:"excludeRtb"`
-	Interface       pulumi.StringPtrInput `pulumi:"interface"`
-	Mark            pulumi.StringPtrInput `pulumi:"mark"`
-	Protocol        pulumi.StringPtrInput `pulumi:"protocol"`
-	SrcCidr         pulumi.StringPtrInput `pulumi:"srcCidr"`
-	SrcPort         pulumi.StringPtrInput `pulumi:"srcPort"`
+	// This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.19.2+.
+	ApplyRouteEntry pulumi.BoolPtrInput `pulumi:"applyRouteEntry"`
+	// This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+	Connection pulumi.StringPtrInput `pulumi:"connection"`
+	// This is a rule field that specifies the translated destination IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+	DnatIps pulumi.StringPtrInput `pulumi:"dnatIps"`
+	// This is a rule field that specifies the translated destination port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
+	DnatPort pulumi.StringPtrInput `pulumi:"dnatPort"`
+	// This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+	DstCidr pulumi.StringPtrInput `pulumi:"dstCidr"`
+	// This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+	DstPort pulumi.StringPtrInput `pulumi:"dstPort"`
+	// This field specifies which VPC private route table will not be programmed with the default route entry.
+	ExcludeRtb pulumi.StringPtrInput `pulumi:"excludeRtb"`
+	// This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+	Interface pulumi.StringPtrInput `pulumi:"interface"`
+	// This is a rule field that specifies a tag or mark of a TCP session when all qualifier conditions meet. When not specified, this field is not used.
+	Mark pulumi.StringPtrInput `pulumi:"mark"`
+	// This is a qualifier condition that specifies a destination port protocol where the rule applies. When not specified, this field is not used.
+	Protocol pulumi.StringPtrInput `pulumi:"protocol"`
+	// This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+	SrcCidr pulumi.StringPtrInput `pulumi:"srcCidr"`
+	// This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+	SrcPort pulumi.StringPtrInput `pulumi:"srcPort"`
 }
 
 func (AviatrixGatewayDnatInterfacePolicyArgs) ElementType() reflect.Type {
@@ -1672,50 +1916,62 @@ func (o AviatrixGatewayDnatInterfacePolicyOutput) ToAviatrixGatewayDnatInterface
 	return o
 }
 
+// This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.19.2+.
 func (o AviatrixGatewayDnatInterfacePolicyOutput) ApplyRouteEntry() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatInterfacePolicy) *bool { return v.ApplyRouteEntry }).(pulumi.BoolPtrOutput)
 }
 
+// This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
 func (o AviatrixGatewayDnatInterfacePolicyOutput) Connection() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatInterfacePolicy) *string { return v.Connection }).(pulumi.StringPtrOutput)
 }
 
+// This is a rule field that specifies the translated destination IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
 func (o AviatrixGatewayDnatInterfacePolicyOutput) DnatIps() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatInterfacePolicy) *string { return v.DnatIps }).(pulumi.StringPtrOutput)
 }
 
+// This is a rule field that specifies the translated destination port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule field must be specified for this rule to take effect.
 func (o AviatrixGatewayDnatInterfacePolicyOutput) DnatPort() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatInterfacePolicy) *string { return v.DnatPort }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
 func (o AviatrixGatewayDnatInterfacePolicyOutput) DstCidr() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatInterfacePolicy) *string { return v.DstCidr }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
 func (o AviatrixGatewayDnatInterfacePolicyOutput) DstPort() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatInterfacePolicy) *string { return v.DstPort }).(pulumi.StringPtrOutput)
 }
 
+// This field specifies which VPC private route table will not be programmed with the default route entry.
 func (o AviatrixGatewayDnatInterfacePolicyOutput) ExcludeRtb() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatInterfacePolicy) *string { return v.ExcludeRtb }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
 func (o AviatrixGatewayDnatInterfacePolicyOutput) Interface() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatInterfacePolicy) *string { return v.Interface }).(pulumi.StringPtrOutput)
 }
 
+// This is a rule field that specifies a tag or mark of a TCP session when all qualifier conditions meet. When not specified, this field is not used.
 func (o AviatrixGatewayDnatInterfacePolicyOutput) Mark() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatInterfacePolicy) *string { return v.Mark }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a destination port protocol where the rule applies. When not specified, this field is not used.
 func (o AviatrixGatewayDnatInterfacePolicyOutput) Protocol() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatInterfacePolicy) *string { return v.Protocol }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
 func (o AviatrixGatewayDnatInterfacePolicyOutput) SrcCidr() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatInterfacePolicy) *string { return v.SrcCidr }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
 func (o AviatrixGatewayDnatInterfacePolicyOutput) SrcPort() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewayDnatInterfacePolicy) *string { return v.SrcPort }).(pulumi.StringPtrOutput)
 }
@@ -1741,18 +1997,30 @@ func (o AviatrixGatewayDnatInterfacePolicyArrayOutput) Index(i pulumi.IntInput) 
 }
 
 type AviatrixGatewaySnatConnectionPolicy struct {
-	ApplyRouteEntry *bool   `pulumi:"applyRouteEntry"`
-	Connection      *string `pulumi:"connection"`
-	DstCidr         *string `pulumi:"dstCidr"`
-	DstPort         *string `pulumi:"dstPort"`
-	ExcludeRtb      *string `pulumi:"excludeRtb"`
-	Interface       *string `pulumi:"interface"`
-	Mark            *string `pulumi:"mark"`
-	Protocol        *string `pulumi:"protocol"`
-	SnatIps         *string `pulumi:"snatIps"`
-	SnatPort        *string `pulumi:"snatPort"`
-	SrcCidr         *string `pulumi:"srcCidr"`
-	SrcPort         *string `pulumi:"srcPort"`
+	// This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.21.0+.
+	ApplyRouteEntry *bool `pulumi:"applyRouteEntry"`
+	// This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+	Connection *string `pulumi:"connection"`
+	// This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+	DstCidr *string `pulumi:"dstCidr"`
+	// This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+	DstPort *string `pulumi:"dstPort"`
+	// This field specifies which VPC private route table will not be programmed with the default route entry.
+	ExcludeRtb *string `pulumi:"excludeRtb"`
+	// This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+	Interface *string `pulumi:"interface"`
+	// This is a qualifier condition that specifies a tag or mark of a TCP session where the rule applies. When not specified, this field is not used.
+	Mark *string `pulumi:"mark"`
+	// This is a qualifier condition that specifies a destination port protocol where the rule applies. Valid values: 'all', 'tcp', 'udp', 'icmp'. 'Default: 'all'.
+	Protocol *string `pulumi:"protocol"`
+	// This is a rule field that specifies the changed source IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+	SnatIps *string `pulumi:"snatIps"`
+	// This is a rule field that specifies the changed source port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+	SnatPort *string `pulumi:"snatPort"`
+	// This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+	SrcCidr *string `pulumi:"srcCidr"`
+	// This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+	SrcPort *string `pulumi:"srcPort"`
 }
 
 // AviatrixGatewaySnatConnectionPolicyInput is an input type that accepts AviatrixGatewaySnatConnectionPolicyArgs and AviatrixGatewaySnatConnectionPolicyOutput values.
@@ -1767,18 +2035,30 @@ type AviatrixGatewaySnatConnectionPolicyInput interface {
 }
 
 type AviatrixGatewaySnatConnectionPolicyArgs struct {
-	ApplyRouteEntry pulumi.BoolPtrInput   `pulumi:"applyRouteEntry"`
-	Connection      pulumi.StringPtrInput `pulumi:"connection"`
-	DstCidr         pulumi.StringPtrInput `pulumi:"dstCidr"`
-	DstPort         pulumi.StringPtrInput `pulumi:"dstPort"`
-	ExcludeRtb      pulumi.StringPtrInput `pulumi:"excludeRtb"`
-	Interface       pulumi.StringPtrInput `pulumi:"interface"`
-	Mark            pulumi.StringPtrInput `pulumi:"mark"`
-	Protocol        pulumi.StringPtrInput `pulumi:"protocol"`
-	SnatIps         pulumi.StringPtrInput `pulumi:"snatIps"`
-	SnatPort        pulumi.StringPtrInput `pulumi:"snatPort"`
-	SrcCidr         pulumi.StringPtrInput `pulumi:"srcCidr"`
-	SrcPort         pulumi.StringPtrInput `pulumi:"srcPort"`
+	// This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.21.0+.
+	ApplyRouteEntry pulumi.BoolPtrInput `pulumi:"applyRouteEntry"`
+	// This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+	Connection pulumi.StringPtrInput `pulumi:"connection"`
+	// This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+	DstCidr pulumi.StringPtrInput `pulumi:"dstCidr"`
+	// This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+	DstPort pulumi.StringPtrInput `pulumi:"dstPort"`
+	// This field specifies which VPC private route table will not be programmed with the default route entry.
+	ExcludeRtb pulumi.StringPtrInput `pulumi:"excludeRtb"`
+	// This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+	Interface pulumi.StringPtrInput `pulumi:"interface"`
+	// This is a qualifier condition that specifies a tag or mark of a TCP session where the rule applies. When not specified, this field is not used.
+	Mark pulumi.StringPtrInput `pulumi:"mark"`
+	// This is a qualifier condition that specifies a destination port protocol where the rule applies. Valid values: 'all', 'tcp', 'udp', 'icmp'. 'Default: 'all'.
+	Protocol pulumi.StringPtrInput `pulumi:"protocol"`
+	// This is a rule field that specifies the changed source IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+	SnatIps pulumi.StringPtrInput `pulumi:"snatIps"`
+	// This is a rule field that specifies the changed source port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+	SnatPort pulumi.StringPtrInput `pulumi:"snatPort"`
+	// This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+	SrcCidr pulumi.StringPtrInput `pulumi:"srcCidr"`
+	// This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+	SrcPort pulumi.StringPtrInput `pulumi:"srcPort"`
 }
 
 func (AviatrixGatewaySnatConnectionPolicyArgs) ElementType() reflect.Type {
@@ -1832,50 +2112,62 @@ func (o AviatrixGatewaySnatConnectionPolicyOutput) ToAviatrixGatewaySnatConnecti
 	return o
 }
 
+// This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.21.0+.
 func (o AviatrixGatewaySnatConnectionPolicyOutput) ApplyRouteEntry() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatConnectionPolicy) *bool { return v.ApplyRouteEntry }).(pulumi.BoolPtrOutput)
 }
 
+// This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
 func (o AviatrixGatewaySnatConnectionPolicyOutput) Connection() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatConnectionPolicy) *string { return v.Connection }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
 func (o AviatrixGatewaySnatConnectionPolicyOutput) DstCidr() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatConnectionPolicy) *string { return v.DstCidr }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
 func (o AviatrixGatewaySnatConnectionPolicyOutput) DstPort() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatConnectionPolicy) *string { return v.DstPort }).(pulumi.StringPtrOutput)
 }
 
+// This field specifies which VPC private route table will not be programmed with the default route entry.
 func (o AviatrixGatewaySnatConnectionPolicyOutput) ExcludeRtb() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatConnectionPolicy) *string { return v.ExcludeRtb }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
 func (o AviatrixGatewaySnatConnectionPolicyOutput) Interface() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatConnectionPolicy) *string { return v.Interface }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a tag or mark of a TCP session where the rule applies. When not specified, this field is not used.
 func (o AviatrixGatewaySnatConnectionPolicyOutput) Mark() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatConnectionPolicy) *string { return v.Mark }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a destination port protocol where the rule applies. Valid values: 'all', 'tcp', 'udp', 'icmp'. 'Default: 'all'.
 func (o AviatrixGatewaySnatConnectionPolicyOutput) Protocol() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatConnectionPolicy) *string { return v.Protocol }).(pulumi.StringPtrOutput)
 }
 
+// This is a rule field that specifies the changed source IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
 func (o AviatrixGatewaySnatConnectionPolicyOutput) SnatIps() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatConnectionPolicy) *string { return v.SnatIps }).(pulumi.StringPtrOutput)
 }
 
+// This is a rule field that specifies the changed source port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
 func (o AviatrixGatewaySnatConnectionPolicyOutput) SnatPort() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatConnectionPolicy) *string { return v.SnatPort }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
 func (o AviatrixGatewaySnatConnectionPolicyOutput) SrcCidr() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatConnectionPolicy) *string { return v.SrcCidr }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
 func (o AviatrixGatewaySnatConnectionPolicyOutput) SrcPort() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatConnectionPolicy) *string { return v.SrcPort }).(pulumi.StringPtrOutput)
 }
@@ -1901,18 +2193,30 @@ func (o AviatrixGatewaySnatConnectionPolicyArrayOutput) Index(i pulumi.IntInput)
 }
 
 type AviatrixGatewaySnatInterfacePolicy struct {
-	ApplyRouteEntry *bool   `pulumi:"applyRouteEntry"`
-	Connection      *string `pulumi:"connection"`
-	DstCidr         *string `pulumi:"dstCidr"`
-	DstPort         *string `pulumi:"dstPort"`
-	ExcludeRtb      *string `pulumi:"excludeRtb"`
-	Interface       *string `pulumi:"interface"`
-	Mark            *string `pulumi:"mark"`
-	Protocol        *string `pulumi:"protocol"`
-	SnatIps         *string `pulumi:"snatIps"`
-	SnatPort        *string `pulumi:"snatPort"`
-	SrcCidr         *string `pulumi:"srcCidr"`
-	SrcPort         *string `pulumi:"srcPort"`
+	// This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.21.0+.
+	ApplyRouteEntry *bool `pulumi:"applyRouteEntry"`
+	// This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+	Connection *string `pulumi:"connection"`
+	// This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+	DstCidr *string `pulumi:"dstCidr"`
+	// This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+	DstPort *string `pulumi:"dstPort"`
+	// This field specifies which VPC private route table will not be programmed with the default route entry.
+	ExcludeRtb *string `pulumi:"excludeRtb"`
+	// This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+	Interface *string `pulumi:"interface"`
+	// This is a qualifier condition that specifies a tag or mark of a TCP session where the rule applies. When not specified, this field is not used.
+	Mark *string `pulumi:"mark"`
+	// This is a qualifier condition that specifies a destination port protocol where the rule applies. Valid values: 'all', 'tcp', 'udp', 'icmp'. 'Default: 'all'.
+	Protocol *string `pulumi:"protocol"`
+	// This is a rule field that specifies the changed source IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+	SnatIps *string `pulumi:"snatIps"`
+	// This is a rule field that specifies the changed source port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+	SnatPort *string `pulumi:"snatPort"`
+	// This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+	SrcCidr *string `pulumi:"srcCidr"`
+	// This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+	SrcPort *string `pulumi:"srcPort"`
 }
 
 // AviatrixGatewaySnatInterfacePolicyInput is an input type that accepts AviatrixGatewaySnatInterfacePolicyArgs and AviatrixGatewaySnatInterfacePolicyOutput values.
@@ -1927,18 +2231,30 @@ type AviatrixGatewaySnatInterfacePolicyInput interface {
 }
 
 type AviatrixGatewaySnatInterfacePolicyArgs struct {
-	ApplyRouteEntry pulumi.BoolPtrInput   `pulumi:"applyRouteEntry"`
-	Connection      pulumi.StringPtrInput `pulumi:"connection"`
-	DstCidr         pulumi.StringPtrInput `pulumi:"dstCidr"`
-	DstPort         pulumi.StringPtrInput `pulumi:"dstPort"`
-	ExcludeRtb      pulumi.StringPtrInput `pulumi:"excludeRtb"`
-	Interface       pulumi.StringPtrInput `pulumi:"interface"`
-	Mark            pulumi.StringPtrInput `pulumi:"mark"`
-	Protocol        pulumi.StringPtrInput `pulumi:"protocol"`
-	SnatIps         pulumi.StringPtrInput `pulumi:"snatIps"`
-	SnatPort        pulumi.StringPtrInput `pulumi:"snatPort"`
-	SrcCidr         pulumi.StringPtrInput `pulumi:"srcCidr"`
-	SrcPort         pulumi.StringPtrInput `pulumi:"srcPort"`
+	// This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.21.0+.
+	ApplyRouteEntry pulumi.BoolPtrInput `pulumi:"applyRouteEntry"`
+	// This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+	Connection pulumi.StringPtrInput `pulumi:"connection"`
+	// This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+	DstCidr pulumi.StringPtrInput `pulumi:"dstCidr"`
+	// This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+	DstPort pulumi.StringPtrInput `pulumi:"dstPort"`
+	// This field specifies which VPC private route table will not be programmed with the default route entry.
+	ExcludeRtb pulumi.StringPtrInput `pulumi:"excludeRtb"`
+	// This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+	Interface pulumi.StringPtrInput `pulumi:"interface"`
+	// This is a qualifier condition that specifies a tag or mark of a TCP session where the rule applies. When not specified, this field is not used.
+	Mark pulumi.StringPtrInput `pulumi:"mark"`
+	// This is a qualifier condition that specifies a destination port protocol where the rule applies. Valid values: 'all', 'tcp', 'udp', 'icmp'. 'Default: 'all'.
+	Protocol pulumi.StringPtrInput `pulumi:"protocol"`
+	// This is a rule field that specifies the changed source IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+	SnatIps pulumi.StringPtrInput `pulumi:"snatIps"`
+	// This is a rule field that specifies the changed source port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+	SnatPort pulumi.StringPtrInput `pulumi:"snatPort"`
+	// This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+	SrcCidr pulumi.StringPtrInput `pulumi:"srcCidr"`
+	// This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+	SrcPort pulumi.StringPtrInput `pulumi:"srcPort"`
 }
 
 func (AviatrixGatewaySnatInterfacePolicyArgs) ElementType() reflect.Type {
@@ -1992,50 +2308,62 @@ func (o AviatrixGatewaySnatInterfacePolicyOutput) ToAviatrixGatewaySnatInterface
 	return o
 }
 
+// This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.21.0+.
 func (o AviatrixGatewaySnatInterfacePolicyOutput) ApplyRouteEntry() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatInterfacePolicy) *bool { return v.ApplyRouteEntry }).(pulumi.BoolPtrOutput)
 }
 
+// This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
 func (o AviatrixGatewaySnatInterfacePolicyOutput) Connection() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatInterfacePolicy) *string { return v.Connection }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
 func (o AviatrixGatewaySnatInterfacePolicyOutput) DstCidr() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatInterfacePolicy) *string { return v.DstCidr }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
 func (o AviatrixGatewaySnatInterfacePolicyOutput) DstPort() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatInterfacePolicy) *string { return v.DstPort }).(pulumi.StringPtrOutput)
 }
 
+// This field specifies which VPC private route table will not be programmed with the default route entry.
 func (o AviatrixGatewaySnatInterfacePolicyOutput) ExcludeRtb() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatInterfacePolicy) *string { return v.ExcludeRtb }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
 func (o AviatrixGatewaySnatInterfacePolicyOutput) Interface() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatInterfacePolicy) *string { return v.Interface }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a tag or mark of a TCP session where the rule applies. When not specified, this field is not used.
 func (o AviatrixGatewaySnatInterfacePolicyOutput) Mark() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatInterfacePolicy) *string { return v.Mark }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a destination port protocol where the rule applies. Valid values: 'all', 'tcp', 'udp', 'icmp'. 'Default: 'all'.
 func (o AviatrixGatewaySnatInterfacePolicyOutput) Protocol() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatInterfacePolicy) *string { return v.Protocol }).(pulumi.StringPtrOutput)
 }
 
+// This is a rule field that specifies the changed source IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
 func (o AviatrixGatewaySnatInterfacePolicyOutput) SnatIps() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatInterfacePolicy) *string { return v.SnatIps }).(pulumi.StringPtrOutput)
 }
 
+// This is a rule field that specifies the changed source port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
 func (o AviatrixGatewaySnatInterfacePolicyOutput) SnatPort() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatInterfacePolicy) *string { return v.SnatPort }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
 func (o AviatrixGatewaySnatInterfacePolicyOutput) SrcCidr() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatInterfacePolicy) *string { return v.SrcCidr }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
 func (o AviatrixGatewaySnatInterfacePolicyOutput) SrcPort() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatInterfacePolicy) *string { return v.SrcPort }).(pulumi.StringPtrOutput)
 }
@@ -2061,18 +2389,30 @@ func (o AviatrixGatewaySnatInterfacePolicyArrayOutput) Index(i pulumi.IntInput) 
 }
 
 type AviatrixGatewaySnatSnatPolicy struct {
-	ApplyRouteEntry *bool   `pulumi:"applyRouteEntry"`
-	Connection      *string `pulumi:"connection"`
-	DstCidr         *string `pulumi:"dstCidr"`
-	DstPort         *string `pulumi:"dstPort"`
-	ExcludeRtb      *string `pulumi:"excludeRtb"`
-	Interface       *string `pulumi:"interface"`
-	Mark            *string `pulumi:"mark"`
-	Protocol        *string `pulumi:"protocol"`
-	SnatIps         *string `pulumi:"snatIps"`
-	SnatPort        *string `pulumi:"snatPort"`
-	SrcCidr         *string `pulumi:"srcCidr"`
-	SrcPort         *string `pulumi:"srcPort"`
+	// This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.21.0+.
+	ApplyRouteEntry *bool `pulumi:"applyRouteEntry"`
+	// This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+	Connection *string `pulumi:"connection"`
+	// This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+	DstCidr *string `pulumi:"dstCidr"`
+	// This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+	DstPort *string `pulumi:"dstPort"`
+	// This field specifies which VPC private route table will not be programmed with the default route entry.
+	ExcludeRtb *string `pulumi:"excludeRtb"`
+	// This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+	Interface *string `pulumi:"interface"`
+	// This is a qualifier condition that specifies a tag or mark of a TCP session where the rule applies. When not specified, this field is not used.
+	Mark *string `pulumi:"mark"`
+	// This is a qualifier condition that specifies a destination port protocol where the rule applies. Valid values: 'all', 'tcp', 'udp', 'icmp'. 'Default: 'all'.
+	Protocol *string `pulumi:"protocol"`
+	// This is a rule field that specifies the changed source IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+	SnatIps *string `pulumi:"snatIps"`
+	// This is a rule field that specifies the changed source port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+	SnatPort *string `pulumi:"snatPort"`
+	// This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+	SrcCidr *string `pulumi:"srcCidr"`
+	// This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+	SrcPort *string `pulumi:"srcPort"`
 }
 
 // AviatrixGatewaySnatSnatPolicyInput is an input type that accepts AviatrixGatewaySnatSnatPolicyArgs and AviatrixGatewaySnatSnatPolicyOutput values.
@@ -2087,18 +2427,30 @@ type AviatrixGatewaySnatSnatPolicyInput interface {
 }
 
 type AviatrixGatewaySnatSnatPolicyArgs struct {
-	ApplyRouteEntry pulumi.BoolPtrInput   `pulumi:"applyRouteEntry"`
-	Connection      pulumi.StringPtrInput `pulumi:"connection"`
-	DstCidr         pulumi.StringPtrInput `pulumi:"dstCidr"`
-	DstPort         pulumi.StringPtrInput `pulumi:"dstPort"`
-	ExcludeRtb      pulumi.StringPtrInput `pulumi:"excludeRtb"`
-	Interface       pulumi.StringPtrInput `pulumi:"interface"`
-	Mark            pulumi.StringPtrInput `pulumi:"mark"`
-	Protocol        pulumi.StringPtrInput `pulumi:"protocol"`
-	SnatIps         pulumi.StringPtrInput `pulumi:"snatIps"`
-	SnatPort        pulumi.StringPtrInput `pulumi:"snatPort"`
-	SrcCidr         pulumi.StringPtrInput `pulumi:"srcCidr"`
-	SrcPort         pulumi.StringPtrInput `pulumi:"srcPort"`
+	// This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.21.0+.
+	ApplyRouteEntry pulumi.BoolPtrInput `pulumi:"applyRouteEntry"`
+	// This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
+	Connection pulumi.StringPtrInput `pulumi:"connection"`
+	// This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
+	DstCidr pulumi.StringPtrInput `pulumi:"dstCidr"`
+	// This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
+	DstPort pulumi.StringPtrInput `pulumi:"dstPort"`
+	// This field specifies which VPC private route table will not be programmed with the default route entry.
+	ExcludeRtb pulumi.StringPtrInput `pulumi:"excludeRtb"`
+	// This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
+	Interface pulumi.StringPtrInput `pulumi:"interface"`
+	// This is a qualifier condition that specifies a tag or mark of a TCP session where the rule applies. When not specified, this field is not used.
+	Mark pulumi.StringPtrInput `pulumi:"mark"`
+	// This is a qualifier condition that specifies a destination port protocol where the rule applies. Valid values: 'all', 'tcp', 'udp', 'icmp'. 'Default: 'all'.
+	Protocol pulumi.StringPtrInput `pulumi:"protocol"`
+	// This is a rule field that specifies the changed source IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+	SnatIps pulumi.StringPtrInput `pulumi:"snatIps"`
+	// This is a rule field that specifies the changed source port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
+	SnatPort pulumi.StringPtrInput `pulumi:"snatPort"`
+	// This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
+	SrcCidr pulumi.StringPtrInput `pulumi:"srcCidr"`
+	// This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
+	SrcPort pulumi.StringPtrInput `pulumi:"srcPort"`
 }
 
 func (AviatrixGatewaySnatSnatPolicyArgs) ElementType() reflect.Type {
@@ -2152,50 +2504,62 @@ func (o AviatrixGatewaySnatSnatPolicyOutput) ToAviatrixGatewaySnatSnatPolicyOutp
 	return o
 }
 
+// This is an option to program the route entry 'DST CIDR pointing to Aviatrix Gateway' into Cloud platform routing table. Type: Boolean. Default: True. Available as of provider version R2.21.0+.
 func (o AviatrixGatewaySnatSnatPolicyOutput) ApplyRouteEntry() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatSnatPolicy) *bool { return v.ApplyRouteEntry }).(pulumi.BoolPtrOutput)
 }
 
+// This is a qualifier condition that specifies output connection where the rule applies. Default value: "None".
 func (o AviatrixGatewaySnatSnatPolicyOutput) Connection() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatSnatPolicy) *string { return v.Connection }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a destination IP address range where the rule applies. When not specified, this field is not used.
 func (o AviatrixGatewaySnatSnatPolicyOutput) DstCidr() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatSnatPolicy) *string { return v.DstCidr }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a destination port where the rule applies. When not specified, this field is not used.
 func (o AviatrixGatewaySnatSnatPolicyOutput) DstPort() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatSnatPolicy) *string { return v.DstPort }).(pulumi.StringPtrOutput)
 }
 
+// This field specifies which VPC private route table will not be programmed with the default route entry.
 func (o AviatrixGatewaySnatSnatPolicyOutput) ExcludeRtb() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatSnatPolicy) *string { return v.ExcludeRtb }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies output interface where the rule applies. When not specified, this field is not used. Must be empty when `connection` is set.
 func (o AviatrixGatewaySnatSnatPolicyOutput) Interface() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatSnatPolicy) *string { return v.Interface }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a tag or mark of a TCP session where the rule applies. When not specified, this field is not used.
 func (o AviatrixGatewaySnatSnatPolicyOutput) Mark() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatSnatPolicy) *string { return v.Mark }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a destination port protocol where the rule applies. Valid values: 'all', 'tcp', 'udp', 'icmp'. 'Default: 'all'.
 func (o AviatrixGatewaySnatSnatPolicyOutput) Protocol() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatSnatPolicy) *string { return v.Protocol }).(pulumi.StringPtrOutput)
 }
 
+// This is a rule field that specifies the changed source IP address when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
 func (o AviatrixGatewaySnatSnatPolicyOutput) SnatIps() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatSnatPolicy) *string { return v.SnatIps }).(pulumi.StringPtrOutput)
 }
 
+// This is a rule field that specifies the changed source port when all specified qualifier conditions meet. When not specified, this field is not used. One of the rule fields must be specified for this rule to take effect.
 func (o AviatrixGatewaySnatSnatPolicyOutput) SnatPort() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatSnatPolicy) *string { return v.SnatPort }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a source IP address range where the rule applies. When not specified, this field is not used.
 func (o AviatrixGatewaySnatSnatPolicyOutput) SrcCidr() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatSnatPolicy) *string { return v.SrcCidr }).(pulumi.StringPtrOutput)
 }
 
+// This is a qualifier condition that specifies a source port that the rule applies. When not specified, this field is not used.
 func (o AviatrixGatewaySnatSnatPolicyOutput) SrcPort() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixGatewaySnatSnatPolicy) *string { return v.SrcPort }).(pulumi.StringPtrOutput)
 }
@@ -2221,16 +2585,26 @@ func (o AviatrixGatewaySnatSnatPolicyArrayOutput) Index(i pulumi.IntInput) Aviat
 }
 
 type AviatrixMicrosegPolicyListPolicy struct {
-	Action        string                                      `pulumi:"action"`
-	DstAppDomains []string                                    `pulumi:"dstAppDomains"`
-	Logging       *bool                                       `pulumi:"logging"`
-	Name          string                                      `pulumi:"name"`
-	PortRanges    []AviatrixMicrosegPolicyListPolicyPortRange `pulumi:"portRanges"`
-	Priority      *int                                        `pulumi:"priority"`
-	Protocol      string                                      `pulumi:"protocol"`
-	SrcAppDomains []string                                    `pulumi:"srcAppDomains"`
-	Uuid          *string                                     `pulumi:"uuid"`
-	Watch         *bool                                       `pulumi:"watch"`
+	// Action for the policy. Must be one of PERMIT or DENY.
+	Action string `pulumi:"action"`
+	// List of App Domain UUIDs for the destination for the policy.
+	DstAppDomains []string `pulumi:"dstAppDomains"`
+	// Whether to enable logging for packets that match the policy. Type: Boolean.
+	Logging *bool `pulumi:"logging"`
+	// Name of the policy.
+	Name string `pulumi:"name"`
+	// List of port ranges for the policy. Cannot be used when `protocol` is "ICMP".
+	PortRanges []AviatrixMicrosegPolicyListPolicyPortRange `pulumi:"portRanges"`
+	// Priority for the policy. Default: 0. Type: Integer.
+	Priority *int `pulumi:"priority"`
+	// Protocol for the policy. Must be one of TCP, UDP, ICMP or ANY.
+	Protocol string `pulumi:"protocol"`
+	// List of App Domain UUIDs for the source for the policy.
+	SrcAppDomains []string `pulumi:"srcAppDomains"`
+	// UUID for the Policy.
+	Uuid *string `pulumi:"uuid"`
+	// Whether to enforce the policy or only watch packets. If "true" packets are only watched. This allows you to observe if the traffic impacted by this rule causes any inadvertent issues (such as traffic being dropped). Type: Boolean.
+	Watch *bool `pulumi:"watch"`
 }
 
 // AviatrixMicrosegPolicyListPolicyInput is an input type that accepts AviatrixMicrosegPolicyListPolicyArgs and AviatrixMicrosegPolicyListPolicyOutput values.
@@ -2245,16 +2619,26 @@ type AviatrixMicrosegPolicyListPolicyInput interface {
 }
 
 type AviatrixMicrosegPolicyListPolicyArgs struct {
-	Action        pulumi.StringInput                                  `pulumi:"action"`
-	DstAppDomains pulumi.StringArrayInput                             `pulumi:"dstAppDomains"`
-	Logging       pulumi.BoolPtrInput                                 `pulumi:"logging"`
-	Name          pulumi.StringInput                                  `pulumi:"name"`
-	PortRanges    AviatrixMicrosegPolicyListPolicyPortRangeArrayInput `pulumi:"portRanges"`
-	Priority      pulumi.IntPtrInput                                  `pulumi:"priority"`
-	Protocol      pulumi.StringInput                                  `pulumi:"protocol"`
-	SrcAppDomains pulumi.StringArrayInput                             `pulumi:"srcAppDomains"`
-	Uuid          pulumi.StringPtrInput                               `pulumi:"uuid"`
-	Watch         pulumi.BoolPtrInput                                 `pulumi:"watch"`
+	// Action for the policy. Must be one of PERMIT or DENY.
+	Action pulumi.StringInput `pulumi:"action"`
+	// List of App Domain UUIDs for the destination for the policy.
+	DstAppDomains pulumi.StringArrayInput `pulumi:"dstAppDomains"`
+	// Whether to enable logging for packets that match the policy. Type: Boolean.
+	Logging pulumi.BoolPtrInput `pulumi:"logging"`
+	// Name of the policy.
+	Name pulumi.StringInput `pulumi:"name"`
+	// List of port ranges for the policy. Cannot be used when `protocol` is "ICMP".
+	PortRanges AviatrixMicrosegPolicyListPolicyPortRangeArrayInput `pulumi:"portRanges"`
+	// Priority for the policy. Default: 0. Type: Integer.
+	Priority pulumi.IntPtrInput `pulumi:"priority"`
+	// Protocol for the policy. Must be one of TCP, UDP, ICMP or ANY.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// List of App Domain UUIDs for the source for the policy.
+	SrcAppDomains pulumi.StringArrayInput `pulumi:"srcAppDomains"`
+	// UUID for the Policy.
+	Uuid pulumi.StringPtrInput `pulumi:"uuid"`
+	// Whether to enforce the policy or only watch packets. If "true" packets are only watched. This allows you to observe if the traffic impacted by this rule causes any inadvertent issues (such as traffic being dropped). Type: Boolean.
+	Watch pulumi.BoolPtrInput `pulumi:"watch"`
 }
 
 func (AviatrixMicrosegPolicyListPolicyArgs) ElementType() reflect.Type {
@@ -2308,44 +2692,54 @@ func (o AviatrixMicrosegPolicyListPolicyOutput) ToAviatrixMicrosegPolicyListPoli
 	return o
 }
 
+// Action for the policy. Must be one of PERMIT or DENY.
 func (o AviatrixMicrosegPolicyListPolicyOutput) Action() pulumi.StringOutput {
 	return o.ApplyT(func(v AviatrixMicrosegPolicyListPolicy) string { return v.Action }).(pulumi.StringOutput)
 }
 
+// List of App Domain UUIDs for the destination for the policy.
 func (o AviatrixMicrosegPolicyListPolicyOutput) DstAppDomains() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v AviatrixMicrosegPolicyListPolicy) []string { return v.DstAppDomains }).(pulumi.StringArrayOutput)
 }
 
+// Whether to enable logging for packets that match the policy. Type: Boolean.
 func (o AviatrixMicrosegPolicyListPolicyOutput) Logging() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v AviatrixMicrosegPolicyListPolicy) *bool { return v.Logging }).(pulumi.BoolPtrOutput)
 }
 
+// Name of the policy.
 func (o AviatrixMicrosegPolicyListPolicyOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v AviatrixMicrosegPolicyListPolicy) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// List of port ranges for the policy. Cannot be used when `protocol` is "ICMP".
 func (o AviatrixMicrosegPolicyListPolicyOutput) PortRanges() AviatrixMicrosegPolicyListPolicyPortRangeArrayOutput {
 	return o.ApplyT(func(v AviatrixMicrosegPolicyListPolicy) []AviatrixMicrosegPolicyListPolicyPortRange {
 		return v.PortRanges
 	}).(AviatrixMicrosegPolicyListPolicyPortRangeArrayOutput)
 }
 
+// Priority for the policy. Default: 0. Type: Integer.
 func (o AviatrixMicrosegPolicyListPolicyOutput) Priority() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v AviatrixMicrosegPolicyListPolicy) *int { return v.Priority }).(pulumi.IntPtrOutput)
 }
 
+// Protocol for the policy. Must be one of TCP, UDP, ICMP or ANY.
 func (o AviatrixMicrosegPolicyListPolicyOutput) Protocol() pulumi.StringOutput {
 	return o.ApplyT(func(v AviatrixMicrosegPolicyListPolicy) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
+// List of App Domain UUIDs for the source for the policy.
 func (o AviatrixMicrosegPolicyListPolicyOutput) SrcAppDomains() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v AviatrixMicrosegPolicyListPolicy) []string { return v.SrcAppDomains }).(pulumi.StringArrayOutput)
 }
 
+// UUID for the Policy.
 func (o AviatrixMicrosegPolicyListPolicyOutput) Uuid() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixMicrosegPolicyListPolicy) *string { return v.Uuid }).(pulumi.StringPtrOutput)
 }
 
+// Whether to enforce the policy or only watch packets. If "true" packets are only watched. This allows you to observe if the traffic impacted by this rule causes any inadvertent issues (such as traffic being dropped). Type: Boolean.
 func (o AviatrixMicrosegPolicyListPolicyOutput) Watch() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v AviatrixMicrosegPolicyListPolicy) *bool { return v.Watch }).(pulumi.BoolPtrOutput)
 }
@@ -2371,8 +2765,10 @@ func (o AviatrixMicrosegPolicyListPolicyArrayOutput) Index(i pulumi.IntInput) Av
 }
 
 type AviatrixMicrosegPolicyListPolicyPortRange struct {
+	// Upper bound for the range of ports. When not set, `lo` is the only port that matches the policy.
 	Hi *int `pulumi:"hi"`
-	Lo int  `pulumi:"lo"`
+	// Lower bound for the range of ports.
+	Lo int `pulumi:"lo"`
 }
 
 // AviatrixMicrosegPolicyListPolicyPortRangeInput is an input type that accepts AviatrixMicrosegPolicyListPolicyPortRangeArgs and AviatrixMicrosegPolicyListPolicyPortRangeOutput values.
@@ -2387,8 +2783,10 @@ type AviatrixMicrosegPolicyListPolicyPortRangeInput interface {
 }
 
 type AviatrixMicrosegPolicyListPolicyPortRangeArgs struct {
+	// Upper bound for the range of ports. When not set, `lo` is the only port that matches the policy.
 	Hi pulumi.IntPtrInput `pulumi:"hi"`
-	Lo pulumi.IntInput    `pulumi:"lo"`
+	// Lower bound for the range of ports.
+	Lo pulumi.IntInput `pulumi:"lo"`
 }
 
 func (AviatrixMicrosegPolicyListPolicyPortRangeArgs) ElementType() reflect.Type {
@@ -2442,10 +2840,12 @@ func (o AviatrixMicrosegPolicyListPolicyPortRangeOutput) ToAviatrixMicrosegPolic
 	return o
 }
 
+// Upper bound for the range of ports. When not set, `lo` is the only port that matches the policy.
 func (o AviatrixMicrosegPolicyListPolicyPortRangeOutput) Hi() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v AviatrixMicrosegPolicyListPolicyPortRange) *int { return v.Hi }).(pulumi.IntPtrOutput)
 }
 
+// Lower bound for the range of ports.
 func (o AviatrixMicrosegPolicyListPolicyPortRangeOutput) Lo() pulumi.IntOutput {
 	return o.ApplyT(func(v AviatrixMicrosegPolicyListPolicyPortRange) int { return v.Lo }).(pulumi.IntOutput)
 }
@@ -2471,8 +2871,10 @@ func (o AviatrixMicrosegPolicyListPolicyPortRangeArrayOutput) Index(i pulumi.Int
 }
 
 type AviatrixPrivateModeLbProxy struct {
+	// Instance ID of the proxy.
 	InstanceId string `pulumi:"instanceId"`
-	VpcId      string `pulumi:"vpcId"`
+	// VPC ID of the proxy.
+	VpcId string `pulumi:"vpcId"`
 }
 
 // AviatrixPrivateModeLbProxyInput is an input type that accepts AviatrixPrivateModeLbProxyArgs and AviatrixPrivateModeLbProxyOutput values.
@@ -2487,8 +2889,10 @@ type AviatrixPrivateModeLbProxyInput interface {
 }
 
 type AviatrixPrivateModeLbProxyArgs struct {
+	// Instance ID of the proxy.
 	InstanceId pulumi.StringInput `pulumi:"instanceId"`
-	VpcId      pulumi.StringInput `pulumi:"vpcId"`
+	// VPC ID of the proxy.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
 }
 
 func (AviatrixPrivateModeLbProxyArgs) ElementType() reflect.Type {
@@ -2542,10 +2946,12 @@ func (o AviatrixPrivateModeLbProxyOutput) ToAviatrixPrivateModeLbProxyOutputWith
 	return o
 }
 
+// Instance ID of the proxy.
 func (o AviatrixPrivateModeLbProxyOutput) InstanceId() pulumi.StringOutput {
 	return o.ApplyT(func(v AviatrixPrivateModeLbProxy) string { return v.InstanceId }).(pulumi.StringOutput)
 }
 
+// VPC ID of the proxy.
 func (o AviatrixPrivateModeLbProxyOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v AviatrixPrivateModeLbProxy) string { return v.VpcId }).(pulumi.StringOutput)
 }
@@ -2571,12 +2977,18 @@ func (o AviatrixPrivateModeLbProxyArrayOutput) Index(i pulumi.IntInput) Aviatrix
 }
 
 type AviatrixSite2CloudCaCertTagCaCertificate struct {
-	CertContent    string  `pulumi:"certContent"`
-	CommonName     *string `pulumi:"commonName"`
+	// Content of cert certificate to create only one cert. One CA cert only per file.
+	CertContent string `pulumi:"certContent"`
+	// Common name of created cert.
+	CommonName *string `pulumi:"commonName"`
+	// Expiration time of created cert.
 	ExpirationTime *string `pulumi:"expirationTime"`
-	Id             *string `pulumi:"id"`
-	IssuerName     *string `pulumi:"issuerName"`
-	UniqueSerial   *string `pulumi:"uniqueSerial"`
+	// Unique id of created cert.
+	Id *string `pulumi:"id"`
+	// Issuer name of created cert.
+	IssuerName *string `pulumi:"issuerName"`
+	// Unique serial of created cert.
+	UniqueSerial *string `pulumi:"uniqueSerial"`
 }
 
 // AviatrixSite2CloudCaCertTagCaCertificateInput is an input type that accepts AviatrixSite2CloudCaCertTagCaCertificateArgs and AviatrixSite2CloudCaCertTagCaCertificateOutput values.
@@ -2591,12 +3003,18 @@ type AviatrixSite2CloudCaCertTagCaCertificateInput interface {
 }
 
 type AviatrixSite2CloudCaCertTagCaCertificateArgs struct {
-	CertContent    pulumi.StringInput    `pulumi:"certContent"`
-	CommonName     pulumi.StringPtrInput `pulumi:"commonName"`
+	// Content of cert certificate to create only one cert. One CA cert only per file.
+	CertContent pulumi.StringInput `pulumi:"certContent"`
+	// Common name of created cert.
+	CommonName pulumi.StringPtrInput `pulumi:"commonName"`
+	// Expiration time of created cert.
 	ExpirationTime pulumi.StringPtrInput `pulumi:"expirationTime"`
-	Id             pulumi.StringPtrInput `pulumi:"id"`
-	IssuerName     pulumi.StringPtrInput `pulumi:"issuerName"`
-	UniqueSerial   pulumi.StringPtrInput `pulumi:"uniqueSerial"`
+	// Unique id of created cert.
+	Id pulumi.StringPtrInput `pulumi:"id"`
+	// Issuer name of created cert.
+	IssuerName pulumi.StringPtrInput `pulumi:"issuerName"`
+	// Unique serial of created cert.
+	UniqueSerial pulumi.StringPtrInput `pulumi:"uniqueSerial"`
 }
 
 func (AviatrixSite2CloudCaCertTagCaCertificateArgs) ElementType() reflect.Type {
@@ -2650,26 +3068,32 @@ func (o AviatrixSite2CloudCaCertTagCaCertificateOutput) ToAviatrixSite2CloudCaCe
 	return o
 }
 
+// Content of cert certificate to create only one cert. One CA cert only per file.
 func (o AviatrixSite2CloudCaCertTagCaCertificateOutput) CertContent() pulumi.StringOutput {
 	return o.ApplyT(func(v AviatrixSite2CloudCaCertTagCaCertificate) string { return v.CertContent }).(pulumi.StringOutput)
 }
 
+// Common name of created cert.
 func (o AviatrixSite2CloudCaCertTagCaCertificateOutput) CommonName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixSite2CloudCaCertTagCaCertificate) *string { return v.CommonName }).(pulumi.StringPtrOutput)
 }
 
+// Expiration time of created cert.
 func (o AviatrixSite2CloudCaCertTagCaCertificateOutput) ExpirationTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixSite2CloudCaCertTagCaCertificate) *string { return v.ExpirationTime }).(pulumi.StringPtrOutput)
 }
 
+// Unique id of created cert.
 func (o AviatrixSite2CloudCaCertTagCaCertificateOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixSite2CloudCaCertTagCaCertificate) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// Issuer name of created cert.
 func (o AviatrixSite2CloudCaCertTagCaCertificateOutput) IssuerName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixSite2CloudCaCertTagCaCertificate) *string { return v.IssuerName }).(pulumi.StringPtrOutput)
 }
 
+// Unique serial of created cert.
 func (o AviatrixSite2CloudCaCertTagCaCertificateOutput) UniqueSerial() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixSite2CloudCaCertTagCaCertificate) *string { return v.UniqueSerial }).(pulumi.StringPtrOutput)
 }
@@ -2695,8 +3119,10 @@ func (o AviatrixSite2CloudCaCertTagCaCertificateArrayOutput) Index(i pulumi.IntI
 }
 
 type AviatrixTransitGatewayBgpLanInterface struct {
+	// A VPC Network address range selected from one of the available network ranges.
 	Subnet string `pulumi:"subnet"`
-	VpcId  string `pulumi:"vpcId"`
+	// VPC-ID/VNet-Name of cloud provider.
+	VpcId string `pulumi:"vpcId"`
 }
 
 // AviatrixTransitGatewayBgpLanInterfaceInput is an input type that accepts AviatrixTransitGatewayBgpLanInterfaceArgs and AviatrixTransitGatewayBgpLanInterfaceOutput values.
@@ -2711,8 +3137,10 @@ type AviatrixTransitGatewayBgpLanInterfaceInput interface {
 }
 
 type AviatrixTransitGatewayBgpLanInterfaceArgs struct {
+	// A VPC Network address range selected from one of the available network ranges.
 	Subnet pulumi.StringInput `pulumi:"subnet"`
-	VpcId  pulumi.StringInput `pulumi:"vpcId"`
+	// VPC-ID/VNet-Name of cloud provider.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
 }
 
 func (AviatrixTransitGatewayBgpLanInterfaceArgs) ElementType() reflect.Type {
@@ -2766,10 +3194,12 @@ func (o AviatrixTransitGatewayBgpLanInterfaceOutput) ToAviatrixTransitGatewayBgp
 	return o
 }
 
+// A VPC Network address range selected from one of the available network ranges.
 func (o AviatrixTransitGatewayBgpLanInterfaceOutput) Subnet() pulumi.StringOutput {
 	return o.ApplyT(func(v AviatrixTransitGatewayBgpLanInterface) string { return v.Subnet }).(pulumi.StringOutput)
 }
 
+// VPC-ID/VNet-Name of cloud provider.
 func (o AviatrixTransitGatewayBgpLanInterfaceOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v AviatrixTransitGatewayBgpLanInterface) string { return v.VpcId }).(pulumi.StringOutput)
 }
@@ -2795,8 +3225,10 @@ func (o AviatrixTransitGatewayBgpLanInterfaceArrayOutput) Index(i pulumi.IntInpu
 }
 
 type AviatrixTransitGatewayHaBgpLanInterface struct {
+	// A VPC Network address range selected from one of the available network ranges.
 	Subnet string `pulumi:"subnet"`
-	VpcId  string `pulumi:"vpcId"`
+	// VPC-ID/VNet-Name of cloud provider.
+	VpcId string `pulumi:"vpcId"`
 }
 
 // AviatrixTransitGatewayHaBgpLanInterfaceInput is an input type that accepts AviatrixTransitGatewayHaBgpLanInterfaceArgs and AviatrixTransitGatewayHaBgpLanInterfaceOutput values.
@@ -2811,8 +3243,10 @@ type AviatrixTransitGatewayHaBgpLanInterfaceInput interface {
 }
 
 type AviatrixTransitGatewayHaBgpLanInterfaceArgs struct {
+	// A VPC Network address range selected from one of the available network ranges.
 	Subnet pulumi.StringInput `pulumi:"subnet"`
-	VpcId  pulumi.StringInput `pulumi:"vpcId"`
+	// VPC-ID/VNet-Name of cloud provider.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
 }
 
 func (AviatrixTransitGatewayHaBgpLanInterfaceArgs) ElementType() reflect.Type {
@@ -2866,10 +3300,12 @@ func (o AviatrixTransitGatewayHaBgpLanInterfaceOutput) ToAviatrixTransitGatewayH
 	return o
 }
 
+// A VPC Network address range selected from one of the available network ranges.
 func (o AviatrixTransitGatewayHaBgpLanInterfaceOutput) Subnet() pulumi.StringOutput {
 	return o.ApplyT(func(v AviatrixTransitGatewayHaBgpLanInterface) string { return v.Subnet }).(pulumi.StringOutput)
 }
 
+// VPC-ID/VNet-Name of cloud provider.
 func (o AviatrixTransitGatewayHaBgpLanInterfaceOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v AviatrixTransitGatewayHaBgpLanInterface) string { return v.VpcId }).(pulumi.StringOutput)
 }
@@ -2895,8 +3331,11 @@ func (o AviatrixTransitGatewayHaBgpLanInterfaceArrayOutput) Index(i pulumi.IntIn
 }
 
 type AviatrixVpcPrivateSubnet struct {
-	Cidr     *string `pulumi:"cidr"`
-	Name     *string `pulumi:"name"`
+	// CIDR block.
+	Cidr *string `pulumi:"cidr"`
+	// Name of this subnet.
+	Name *string `pulumi:"name"`
+	// ID of this subnet.
 	SubnetId *string `pulumi:"subnetId"`
 }
 
@@ -2912,8 +3351,11 @@ type AviatrixVpcPrivateSubnetInput interface {
 }
 
 type AviatrixVpcPrivateSubnetArgs struct {
-	Cidr     pulumi.StringPtrInput `pulumi:"cidr"`
-	Name     pulumi.StringPtrInput `pulumi:"name"`
+	// CIDR block.
+	Cidr pulumi.StringPtrInput `pulumi:"cidr"`
+	// Name of this subnet.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// ID of this subnet.
 	SubnetId pulumi.StringPtrInput `pulumi:"subnetId"`
 }
 
@@ -2968,14 +3410,17 @@ func (o AviatrixVpcPrivateSubnetOutput) ToAviatrixVpcPrivateSubnetOutputWithCont
 	return o
 }
 
+// CIDR block.
 func (o AviatrixVpcPrivateSubnetOutput) Cidr() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixVpcPrivateSubnet) *string { return v.Cidr }).(pulumi.StringPtrOutput)
 }
 
+// Name of this subnet.
 func (o AviatrixVpcPrivateSubnetOutput) Name() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixVpcPrivateSubnet) *string { return v.Name }).(pulumi.StringPtrOutput)
 }
 
+// ID of this subnet.
 func (o AviatrixVpcPrivateSubnetOutput) SubnetId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixVpcPrivateSubnet) *string { return v.SubnetId }).(pulumi.StringPtrOutput)
 }
@@ -3001,8 +3446,11 @@ func (o AviatrixVpcPrivateSubnetArrayOutput) Index(i pulumi.IntInput) AviatrixVp
 }
 
 type AviatrixVpcPublicSubnet struct {
-	Cidr     *string `pulumi:"cidr"`
-	Name     *string `pulumi:"name"`
+	// CIDR block.
+	Cidr *string `pulumi:"cidr"`
+	// Name of this subnet.
+	Name *string `pulumi:"name"`
+	// ID of this subnet.
 	SubnetId *string `pulumi:"subnetId"`
 }
 
@@ -3018,8 +3466,11 @@ type AviatrixVpcPublicSubnetInput interface {
 }
 
 type AviatrixVpcPublicSubnetArgs struct {
-	Cidr     pulumi.StringPtrInput `pulumi:"cidr"`
-	Name     pulumi.StringPtrInput `pulumi:"name"`
+	// CIDR block.
+	Cidr pulumi.StringPtrInput `pulumi:"cidr"`
+	// Name of this subnet.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// ID of this subnet.
 	SubnetId pulumi.StringPtrInput `pulumi:"subnetId"`
 }
 
@@ -3074,14 +3525,17 @@ func (o AviatrixVpcPublicSubnetOutput) ToAviatrixVpcPublicSubnetOutputWithContex
 	return o
 }
 
+// CIDR block.
 func (o AviatrixVpcPublicSubnetOutput) Cidr() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixVpcPublicSubnet) *string { return v.Cidr }).(pulumi.StringPtrOutput)
 }
 
+// Name of this subnet.
 func (o AviatrixVpcPublicSubnetOutput) Name() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixVpcPublicSubnet) *string { return v.Name }).(pulumi.StringPtrOutput)
 }
 
+// ID of this subnet.
 func (o AviatrixVpcPublicSubnetOutput) SubnetId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixVpcPublicSubnet) *string { return v.SubnetId }).(pulumi.StringPtrOutput)
 }
@@ -3107,9 +3561,13 @@ func (o AviatrixVpcPublicSubnetArrayOutput) Index(i pulumi.IntInput) AviatrixVpc
 }
 
 type AviatrixVpcSubnet struct {
-	Cidr     *string `pulumi:"cidr"`
-	Name     *string `pulumi:"name"`
-	Region   *string `pulumi:"region"`
+	// CIDR block.
+	Cidr *string `pulumi:"cidr"`
+	// Name of this subnet.
+	Name *string `pulumi:"name"`
+	// Region of this subnet.
+	Region *string `pulumi:"region"`
+	// ID of this subnet.
 	SubnetId *string `pulumi:"subnetId"`
 }
 
@@ -3125,9 +3583,13 @@ type AviatrixVpcSubnetInput interface {
 }
 
 type AviatrixVpcSubnetArgs struct {
-	Cidr     pulumi.StringPtrInput `pulumi:"cidr"`
-	Name     pulumi.StringPtrInput `pulumi:"name"`
-	Region   pulumi.StringPtrInput `pulumi:"region"`
+	// CIDR block.
+	Cidr pulumi.StringPtrInput `pulumi:"cidr"`
+	// Name of this subnet.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// Region of this subnet.
+	Region pulumi.StringPtrInput `pulumi:"region"`
+	// ID of this subnet.
 	SubnetId pulumi.StringPtrInput `pulumi:"subnetId"`
 }
 
@@ -3182,18 +3644,22 @@ func (o AviatrixVpcSubnetOutput) ToAviatrixVpcSubnetOutputWithContext(ctx contex
 	return o
 }
 
+// CIDR block.
 func (o AviatrixVpcSubnetOutput) Cidr() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixVpcSubnet) *string { return v.Cidr }).(pulumi.StringPtrOutput)
 }
 
+// Name of this subnet.
 func (o AviatrixVpcSubnetOutput) Name() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixVpcSubnet) *string { return v.Name }).(pulumi.StringPtrOutput)
 }
 
+// Region of this subnet.
 func (o AviatrixVpcSubnetOutput) Region() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixVpcSubnet) *string { return v.Region }).(pulumi.StringPtrOutput)
 }
 
+// ID of this subnet.
 func (o AviatrixVpcSubnetOutput) SubnetId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AviatrixVpcSubnet) *string { return v.SubnetId }).(pulumi.StringPtrOutput)
 }
@@ -3219,9 +3685,13 @@ func (o AviatrixVpcSubnetArrayOutput) Index(i pulumi.IntInput) AviatrixVpcSubnet
 }
 
 type AviatrixVpnProfilePolicy struct {
+	// Should be the opposite of the base rule for correct behavior. Valid values for action: "allow", "deny".
 	Action string `pulumi:"action"`
-	Port   string `pulumi:"port"`
-	Proto  string `pulumi:"proto"`
+	// Port to be allowed or denied. Valid values for port: a single port or a range of port numbers e.g.: "25", "25:1024". For "all" and "icmp", port should only be "0:65535".
+	Port string `pulumi:"port"`
+	// Protocol to allow or deny. Valid values for protocol: "all", "tcp", "udp", "icmp", "sctp", "rdp", "dccp".
+	Proto string `pulumi:"proto"`
+	// CIDR to be allowed or denied. Valid values for target: IPv4 CIDRs. Example: "10.30.0.0/16".
 	Target string `pulumi:"target"`
 }
 
@@ -3237,9 +3707,13 @@ type AviatrixVpnProfilePolicyInput interface {
 }
 
 type AviatrixVpnProfilePolicyArgs struct {
+	// Should be the opposite of the base rule for correct behavior. Valid values for action: "allow", "deny".
 	Action pulumi.StringInput `pulumi:"action"`
-	Port   pulumi.StringInput `pulumi:"port"`
-	Proto  pulumi.StringInput `pulumi:"proto"`
+	// Port to be allowed or denied. Valid values for port: a single port or a range of port numbers e.g.: "25", "25:1024". For "all" and "icmp", port should only be "0:65535".
+	Port pulumi.StringInput `pulumi:"port"`
+	// Protocol to allow or deny. Valid values for protocol: "all", "tcp", "udp", "icmp", "sctp", "rdp", "dccp".
+	Proto pulumi.StringInput `pulumi:"proto"`
+	// CIDR to be allowed or denied. Valid values for target: IPv4 CIDRs. Example: "10.30.0.0/16".
 	Target pulumi.StringInput `pulumi:"target"`
 }
 
@@ -3294,18 +3768,22 @@ func (o AviatrixVpnProfilePolicyOutput) ToAviatrixVpnProfilePolicyOutputWithCont
 	return o
 }
 
+// Should be the opposite of the base rule for correct behavior. Valid values for action: "allow", "deny".
 func (o AviatrixVpnProfilePolicyOutput) Action() pulumi.StringOutput {
 	return o.ApplyT(func(v AviatrixVpnProfilePolicy) string { return v.Action }).(pulumi.StringOutput)
 }
 
+// Port to be allowed or denied. Valid values for port: a single port or a range of port numbers e.g.: "25", "25:1024". For "all" and "icmp", port should only be "0:65535".
 func (o AviatrixVpnProfilePolicyOutput) Port() pulumi.StringOutput {
 	return o.ApplyT(func(v AviatrixVpnProfilePolicy) string { return v.Port }).(pulumi.StringOutput)
 }
 
+// Protocol to allow or deny. Valid values for protocol: "all", "tcp", "udp", "icmp", "sctp", "rdp", "dccp".
 func (o AviatrixVpnProfilePolicyOutput) Proto() pulumi.StringOutput {
 	return o.ApplyT(func(v AviatrixVpnProfilePolicy) string { return v.Proto }).(pulumi.StringOutput)
 }
 
+// CIDR to be allowed or denied. Valid values for target: IPv4 CIDRs. Example: "10.30.0.0/16".
 func (o AviatrixVpnProfilePolicyOutput) Target() pulumi.StringOutput {
 	return o.ApplyT(func(v AviatrixVpnProfilePolicy) string { return v.Target }).(pulumi.StringOutput)
 }
@@ -3479,7 +3957,9 @@ func (o ProviderIgnoreTagsPtrOutput) Keys() pulumi.StringArrayOutput {
 }
 
 type GetAviatrixDeviceInterfacesWanInterface struct {
-	WanPrimaryInterface         string `pulumi:"wanPrimaryInterface"`
+	// Name of the WAN primary interface.
+	WanPrimaryInterface string `pulumi:"wanPrimaryInterface"`
+	// The WAN Primary interface public IP.
 	WanPrimaryInterfacePublicIp string `pulumi:"wanPrimaryInterfacePublicIp"`
 }
 
@@ -3495,7 +3975,9 @@ type GetAviatrixDeviceInterfacesWanInterfaceInput interface {
 }
 
 type GetAviatrixDeviceInterfacesWanInterfaceArgs struct {
-	WanPrimaryInterface         pulumi.StringInput `pulumi:"wanPrimaryInterface"`
+	// Name of the WAN primary interface.
+	WanPrimaryInterface pulumi.StringInput `pulumi:"wanPrimaryInterface"`
+	// The WAN Primary interface public IP.
 	WanPrimaryInterfacePublicIp pulumi.StringInput `pulumi:"wanPrimaryInterfacePublicIp"`
 }
 
@@ -3550,10 +4032,12 @@ func (o GetAviatrixDeviceInterfacesWanInterfaceOutput) ToGetAviatrixDeviceInterf
 	return o
 }
 
+// Name of the WAN primary interface.
 func (o GetAviatrixDeviceInterfacesWanInterfaceOutput) WanPrimaryInterface() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixDeviceInterfacesWanInterface) string { return v.WanPrimaryInterface }).(pulumi.StringOutput)
 }
 
+// The WAN Primary interface public IP.
 func (o GetAviatrixDeviceInterfacesWanInterfaceOutput) WanPrimaryInterfacePublicIp() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixDeviceInterfacesWanInterface) string { return v.WanPrimaryInterfacePublicIp }).(pulumi.StringOutput)
 }
@@ -3579,14 +4063,22 @@ func (o GetAviatrixDeviceInterfacesWanInterfaceArrayOutput) Index(i pulumi.IntIn
 }
 
 type GetAviatrixFirenetFirewallInstanceAssociation struct {
-	Attached            bool   `pulumi:"attached"`
-	EgressInterface     string `pulumi:"egressInterface"`
-	FirenetGwName       string `pulumi:"firenetGwName"`
-	FirewallName        string `pulumi:"firewallName"`
-	InstanceId          string `pulumi:"instanceId"`
-	LanInterface        string `pulumi:"lanInterface"`
+	Attached        bool   `pulumi:"attached"`
+	EgressInterface string `pulumi:"egressInterface"`
+	// Name of the primary FireNet gateway.
+	FirenetGwName string `pulumi:"firenetGwName"`
+	// Firewall instance name.
+	// * `lanInterface`- Lan interface ID.
+	FirewallName string `pulumi:"firewallName"`
+	// ID of Firewall instance.
+	InstanceId   string `pulumi:"instanceId"`
+	LanInterface string `pulumi:"lanInterface"`
+	// Management interface ID.
+	// * `egressInterface`- Egress interface ID.
+	// * `attached`- Switch to attach/detach firewall instance to/from fireNet.
 	ManagementInterface string `pulumi:"managementInterface"`
-	VendorType          string `pulumi:"vendorType"`
+	// Type of the firewall.
+	VendorType string `pulumi:"vendorType"`
 }
 
 // GetAviatrixFirenetFirewallInstanceAssociationInput is an input type that accepts GetAviatrixFirenetFirewallInstanceAssociationArgs and GetAviatrixFirenetFirewallInstanceAssociationOutput values.
@@ -3601,14 +4093,22 @@ type GetAviatrixFirenetFirewallInstanceAssociationInput interface {
 }
 
 type GetAviatrixFirenetFirewallInstanceAssociationArgs struct {
-	Attached            pulumi.BoolInput   `pulumi:"attached"`
-	EgressInterface     pulumi.StringInput `pulumi:"egressInterface"`
-	FirenetGwName       pulumi.StringInput `pulumi:"firenetGwName"`
-	FirewallName        pulumi.StringInput `pulumi:"firewallName"`
-	InstanceId          pulumi.StringInput `pulumi:"instanceId"`
-	LanInterface        pulumi.StringInput `pulumi:"lanInterface"`
+	Attached        pulumi.BoolInput   `pulumi:"attached"`
+	EgressInterface pulumi.StringInput `pulumi:"egressInterface"`
+	// Name of the primary FireNet gateway.
+	FirenetGwName pulumi.StringInput `pulumi:"firenetGwName"`
+	// Firewall instance name.
+	// * `lanInterface`- Lan interface ID.
+	FirewallName pulumi.StringInput `pulumi:"firewallName"`
+	// ID of Firewall instance.
+	InstanceId   pulumi.StringInput `pulumi:"instanceId"`
+	LanInterface pulumi.StringInput `pulumi:"lanInterface"`
+	// Management interface ID.
+	// * `egressInterface`- Egress interface ID.
+	// * `attached`- Switch to attach/detach firewall instance to/from fireNet.
 	ManagementInterface pulumi.StringInput `pulumi:"managementInterface"`
-	VendorType          pulumi.StringInput `pulumi:"vendorType"`
+	// Type of the firewall.
+	VendorType pulumi.StringInput `pulumi:"vendorType"`
 }
 
 func (GetAviatrixFirenetFirewallInstanceAssociationArgs) ElementType() reflect.Type {
@@ -3670,14 +4170,18 @@ func (o GetAviatrixFirenetFirewallInstanceAssociationOutput) EgressInterface() p
 	return o.ApplyT(func(v GetAviatrixFirenetFirewallInstanceAssociation) string { return v.EgressInterface }).(pulumi.StringOutput)
 }
 
+// Name of the primary FireNet gateway.
 func (o GetAviatrixFirenetFirewallInstanceAssociationOutput) FirenetGwName() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixFirenetFirewallInstanceAssociation) string { return v.FirenetGwName }).(pulumi.StringOutput)
 }
 
+// Firewall instance name.
+// * `lanInterface`- Lan interface ID.
 func (o GetAviatrixFirenetFirewallInstanceAssociationOutput) FirewallName() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixFirenetFirewallInstanceAssociation) string { return v.FirewallName }).(pulumi.StringOutput)
 }
 
+// ID of Firewall instance.
 func (o GetAviatrixFirenetFirewallInstanceAssociationOutput) InstanceId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixFirenetFirewallInstanceAssociation) string { return v.InstanceId }).(pulumi.StringOutput)
 }
@@ -3686,10 +4190,14 @@ func (o GetAviatrixFirenetFirewallInstanceAssociationOutput) LanInterface() pulu
 	return o.ApplyT(func(v GetAviatrixFirenetFirewallInstanceAssociation) string { return v.LanInterface }).(pulumi.StringOutput)
 }
 
+// Management interface ID.
+// * `egressInterface`- Egress interface ID.
+// * `attached`- Switch to attach/detach firewall instance to/from fireNet.
 func (o GetAviatrixFirenetFirewallInstanceAssociationOutput) ManagementInterface() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixFirenetFirewallInstanceAssociation) string { return v.ManagementInterface }).(pulumi.StringOutput)
 }
 
+// Type of the firewall.
 func (o GetAviatrixFirenetFirewallInstanceAssociationOutput) VendorType() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixFirenetFirewallInstanceAssociation) string { return v.VendorType }).(pulumi.StringOutput)
 }
@@ -3715,9 +4223,12 @@ func (o GetAviatrixFirenetFirewallInstanceAssociationArrayOutput) Index(i pulumi
 }
 
 type GetAviatrixFirewallInstanceImagesFirewallImage struct {
-	FirewallImage         string   `pulumi:"firewallImage"`
+	// Name of the firewall image.
+	FirewallImage string `pulumi:"firewallImage"`
+	// List of firewall image versions.
 	FirewallImageVersions []string `pulumi:"firewallImageVersions"`
-	FirewallSizes         []string `pulumi:"firewallSizes"`
+	// List of firewall instance sizes.
+	FirewallSizes []string `pulumi:"firewallSizes"`
 }
 
 // GetAviatrixFirewallInstanceImagesFirewallImageInput is an input type that accepts GetAviatrixFirewallInstanceImagesFirewallImageArgs and GetAviatrixFirewallInstanceImagesFirewallImageOutput values.
@@ -3732,9 +4243,12 @@ type GetAviatrixFirewallInstanceImagesFirewallImageInput interface {
 }
 
 type GetAviatrixFirewallInstanceImagesFirewallImageArgs struct {
-	FirewallImage         pulumi.StringInput      `pulumi:"firewallImage"`
+	// Name of the firewall image.
+	FirewallImage pulumi.StringInput `pulumi:"firewallImage"`
+	// List of firewall image versions.
 	FirewallImageVersions pulumi.StringArrayInput `pulumi:"firewallImageVersions"`
-	FirewallSizes         pulumi.StringArrayInput `pulumi:"firewallSizes"`
+	// List of firewall instance sizes.
+	FirewallSizes pulumi.StringArrayInput `pulumi:"firewallSizes"`
 }
 
 func (GetAviatrixFirewallInstanceImagesFirewallImageArgs) ElementType() reflect.Type {
@@ -3788,14 +4302,17 @@ func (o GetAviatrixFirewallInstanceImagesFirewallImageOutput) ToGetAviatrixFirew
 	return o
 }
 
+// Name of the firewall image.
 func (o GetAviatrixFirewallInstanceImagesFirewallImageOutput) FirewallImage() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixFirewallInstanceImagesFirewallImage) string { return v.FirewallImage }).(pulumi.StringOutput)
 }
 
+// List of firewall image versions.
 func (o GetAviatrixFirewallInstanceImagesFirewallImageOutput) FirewallImageVersions() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetAviatrixFirewallInstanceImagesFirewallImage) []string { return v.FirewallImageVersions }).(pulumi.StringArrayOutput)
 }
 
+// List of firewall instance sizes.
 func (o GetAviatrixFirewallInstanceImagesFirewallImageOutput) FirewallSizes() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetAviatrixFirewallInstanceImagesFirewallImage) []string { return v.FirewallSizes }).(pulumi.StringArrayOutput)
 }
@@ -3823,11 +4340,18 @@ func (o GetAviatrixFirewallInstanceImagesFirewallImageArrayOutput) Index(i pulum
 type GetAviatrixFirewallPolicyType struct {
 	Action      string `pulumi:"action"`
 	Description string `pulumi:"description"`
-	DstIp       string `pulumi:"dstIp"`
-	LogEnabled  bool   `pulumi:"logEnabled"`
-	Port        string `pulumi:"port"`
-	Protocol    string `pulumi:"protocol"`
-	SrcIp       string `pulumi:"srcIp"`
+	// CIDRs separated by a comma or tag names such 'HR' or 'marketing' etc.
+	DstIp string `pulumi:"dstIp"`
+	// Indicates whether logging is enabled or not.
+	// * `description`- Policy description.
+	LogEnabled bool `pulumi:"logEnabled"`
+	// A single port or a range of port numbers.
+	// * `action`- `allow`, `deny` or `force-drop`(allow immediate packet dropping on established sessions).
+	Port string `pulumi:"port"`
+	// `all`, `tcp`, `udp`, `icmp`, `sctp`, `rdp` or `dccp`.
+	Protocol string `pulumi:"protocol"`
+	// CIDRs separated by a comma or tag names such 'HR' or 'marketing' etc.
+	SrcIp string `pulumi:"srcIp"`
 }
 
 // GetAviatrixFirewallPolicyTypeInput is an input type that accepts GetAviatrixFirewallPolicyTypeArgs and GetAviatrixFirewallPolicyTypeOutput values.
@@ -3844,11 +4368,18 @@ type GetAviatrixFirewallPolicyTypeInput interface {
 type GetAviatrixFirewallPolicyTypeArgs struct {
 	Action      pulumi.StringInput `pulumi:"action"`
 	Description pulumi.StringInput `pulumi:"description"`
-	DstIp       pulumi.StringInput `pulumi:"dstIp"`
-	LogEnabled  pulumi.BoolInput   `pulumi:"logEnabled"`
-	Port        pulumi.StringInput `pulumi:"port"`
-	Protocol    pulumi.StringInput `pulumi:"protocol"`
-	SrcIp       pulumi.StringInput `pulumi:"srcIp"`
+	// CIDRs separated by a comma or tag names such 'HR' or 'marketing' etc.
+	DstIp pulumi.StringInput `pulumi:"dstIp"`
+	// Indicates whether logging is enabled or not.
+	// * `description`- Policy description.
+	LogEnabled pulumi.BoolInput `pulumi:"logEnabled"`
+	// A single port or a range of port numbers.
+	// * `action`- `allow`, `deny` or `force-drop`(allow immediate packet dropping on established sessions).
+	Port pulumi.StringInput `pulumi:"port"`
+	// `all`, `tcp`, `udp`, `icmp`, `sctp`, `rdp` or `dccp`.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// CIDRs separated by a comma or tag names such 'HR' or 'marketing' etc.
+	SrcIp pulumi.StringInput `pulumi:"srcIp"`
 }
 
 func (GetAviatrixFirewallPolicyTypeArgs) ElementType() reflect.Type {
@@ -3910,22 +4441,29 @@ func (o GetAviatrixFirewallPolicyTypeOutput) Description() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixFirewallPolicyType) string { return v.Description }).(pulumi.StringOutput)
 }
 
+// CIDRs separated by a comma or tag names such 'HR' or 'marketing' etc.
 func (o GetAviatrixFirewallPolicyTypeOutput) DstIp() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixFirewallPolicyType) string { return v.DstIp }).(pulumi.StringOutput)
 }
 
+// Indicates whether logging is enabled or not.
+// * `description`- Policy description.
 func (o GetAviatrixFirewallPolicyTypeOutput) LogEnabled() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetAviatrixFirewallPolicyType) bool { return v.LogEnabled }).(pulumi.BoolOutput)
 }
 
+// A single port or a range of port numbers.
+// * `action`- `allow`, `deny` or `force-drop`(allow immediate packet dropping on established sessions).
 func (o GetAviatrixFirewallPolicyTypeOutput) Port() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixFirewallPolicyType) string { return v.Port }).(pulumi.StringOutput)
 }
 
+// `all`, `tcp`, `udp`, `icmp`, `sctp`, `rdp` or `dccp`.
 func (o GetAviatrixFirewallPolicyTypeOutput) Protocol() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixFirewallPolicyType) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
+// CIDRs separated by a comma or tag names such 'HR' or 'marketing' etc.
 func (o GetAviatrixFirewallPolicyTypeOutput) SrcIp() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixFirewallPolicyType) string { return v.SrcIp }).(pulumi.StringOutput)
 }
@@ -3951,18 +4489,30 @@ func (o GetAviatrixFirewallPolicyTypeArrayOutput) Index(i pulumi.IntInput) GetAv
 }
 
 type GetAviatrixNetworkDomainsNetworkDomain struct {
-	Account                   string `pulumi:"account"`
-	CloudType                 string `pulumi:"cloudType"`
-	EgressInspection          bool   `pulumi:"egressInspection"`
-	EgressInspectionName      string `pulumi:"egressInspectionName"`
-	InspectionPolicy          string `pulumi:"inspectionPolicy"`
-	IntraDomainInspection     bool   `pulumi:"intraDomainInspection"`
+	// Access Account name.
+	Account string `pulumi:"account"`
+	// Type of cloud service provider.
+	CloudType string `pulumi:"cloudType"`
+	// Egress inspection is enable or not.
+	EgressInspection bool `pulumi:"egressInspection"`
+	// Egress inspection name.
+	EgressInspectionName string `pulumi:"egressInspectionName"`
+	// Inspection policy name.
+	InspectionPolicy string `pulumi:"inspectionPolicy"`
+	// Firewall inspection for traffic within one Security Domain.
+	IntraDomainInspection bool `pulumi:"intraDomainInspection"`
+	// Intra domain inspection name.
 	IntraDomainInspectionName string `pulumi:"intraDomainInspectionName"`
-	Name                      string `pulumi:"name"`
-	Region                    string `pulumi:"region"`
-	RouteTableId              string `pulumi:"routeTableId"`
-	TgwName                   string `pulumi:"tgwName"`
-	Type                      string `pulumi:"type"`
+	// Network Domain name.
+	Name string `pulumi:"name"`
+	// Region of cloud provider.
+	Region string `pulumi:"region"`
+	// Route table's id.
+	RouteTableId string `pulumi:"routeTableId"`
+	// AWS TGW name.
+	TgwName string `pulumi:"tgwName"`
+	// Type of network domain.
+	Type string `pulumi:"type"`
 }
 
 // GetAviatrixNetworkDomainsNetworkDomainInput is an input type that accepts GetAviatrixNetworkDomainsNetworkDomainArgs and GetAviatrixNetworkDomainsNetworkDomainOutput values.
@@ -3977,18 +4527,30 @@ type GetAviatrixNetworkDomainsNetworkDomainInput interface {
 }
 
 type GetAviatrixNetworkDomainsNetworkDomainArgs struct {
-	Account                   pulumi.StringInput `pulumi:"account"`
-	CloudType                 pulumi.StringInput `pulumi:"cloudType"`
-	EgressInspection          pulumi.BoolInput   `pulumi:"egressInspection"`
-	EgressInspectionName      pulumi.StringInput `pulumi:"egressInspectionName"`
-	InspectionPolicy          pulumi.StringInput `pulumi:"inspectionPolicy"`
-	IntraDomainInspection     pulumi.BoolInput   `pulumi:"intraDomainInspection"`
+	// Access Account name.
+	Account pulumi.StringInput `pulumi:"account"`
+	// Type of cloud service provider.
+	CloudType pulumi.StringInput `pulumi:"cloudType"`
+	// Egress inspection is enable or not.
+	EgressInspection pulumi.BoolInput `pulumi:"egressInspection"`
+	// Egress inspection name.
+	EgressInspectionName pulumi.StringInput `pulumi:"egressInspectionName"`
+	// Inspection policy name.
+	InspectionPolicy pulumi.StringInput `pulumi:"inspectionPolicy"`
+	// Firewall inspection for traffic within one Security Domain.
+	IntraDomainInspection pulumi.BoolInput `pulumi:"intraDomainInspection"`
+	// Intra domain inspection name.
 	IntraDomainInspectionName pulumi.StringInput `pulumi:"intraDomainInspectionName"`
-	Name                      pulumi.StringInput `pulumi:"name"`
-	Region                    pulumi.StringInput `pulumi:"region"`
-	RouteTableId              pulumi.StringInput `pulumi:"routeTableId"`
-	TgwName                   pulumi.StringInput `pulumi:"tgwName"`
-	Type                      pulumi.StringInput `pulumi:"type"`
+	// Network Domain name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Region of cloud provider.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Route table's id.
+	RouteTableId pulumi.StringInput `pulumi:"routeTableId"`
+	// AWS TGW name.
+	TgwName pulumi.StringInput `pulumi:"tgwName"`
+	// Type of network domain.
+	Type pulumi.StringInput `pulumi:"type"`
 }
 
 func (GetAviatrixNetworkDomainsNetworkDomainArgs) ElementType() reflect.Type {
@@ -4042,50 +4604,62 @@ func (o GetAviatrixNetworkDomainsNetworkDomainOutput) ToGetAviatrixNetworkDomain
 	return o
 }
 
+// Access Account name.
 func (o GetAviatrixNetworkDomainsNetworkDomainOutput) Account() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixNetworkDomainsNetworkDomain) string { return v.Account }).(pulumi.StringOutput)
 }
 
+// Type of cloud service provider.
 func (o GetAviatrixNetworkDomainsNetworkDomainOutput) CloudType() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixNetworkDomainsNetworkDomain) string { return v.CloudType }).(pulumi.StringOutput)
 }
 
+// Egress inspection is enable or not.
 func (o GetAviatrixNetworkDomainsNetworkDomainOutput) EgressInspection() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetAviatrixNetworkDomainsNetworkDomain) bool { return v.EgressInspection }).(pulumi.BoolOutput)
 }
 
+// Egress inspection name.
 func (o GetAviatrixNetworkDomainsNetworkDomainOutput) EgressInspectionName() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixNetworkDomainsNetworkDomain) string { return v.EgressInspectionName }).(pulumi.StringOutput)
 }
 
+// Inspection policy name.
 func (o GetAviatrixNetworkDomainsNetworkDomainOutput) InspectionPolicy() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixNetworkDomainsNetworkDomain) string { return v.InspectionPolicy }).(pulumi.StringOutput)
 }
 
+// Firewall inspection for traffic within one Security Domain.
 func (o GetAviatrixNetworkDomainsNetworkDomainOutput) IntraDomainInspection() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetAviatrixNetworkDomainsNetworkDomain) bool { return v.IntraDomainInspection }).(pulumi.BoolOutput)
 }
 
+// Intra domain inspection name.
 func (o GetAviatrixNetworkDomainsNetworkDomainOutput) IntraDomainInspectionName() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixNetworkDomainsNetworkDomain) string { return v.IntraDomainInspectionName }).(pulumi.StringOutput)
 }
 
+// Network Domain name.
 func (o GetAviatrixNetworkDomainsNetworkDomainOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixNetworkDomainsNetworkDomain) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// Region of cloud provider.
 func (o GetAviatrixNetworkDomainsNetworkDomainOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixNetworkDomainsNetworkDomain) string { return v.Region }).(pulumi.StringOutput)
 }
 
+// Route table's id.
 func (o GetAviatrixNetworkDomainsNetworkDomainOutput) RouteTableId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixNetworkDomainsNetworkDomain) string { return v.RouteTableId }).(pulumi.StringOutput)
 }
 
+// AWS TGW name.
 func (o GetAviatrixNetworkDomainsNetworkDomainOutput) TgwName() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixNetworkDomainsNetworkDomain) string { return v.TgwName }).(pulumi.StringOutput)
 }
 
+// Type of network domain.
 func (o GetAviatrixNetworkDomainsNetworkDomainOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixNetworkDomainsNetworkDomain) string { return v.Type }).(pulumi.StringOutput)
 }
@@ -4111,8 +4685,10 @@ func (o GetAviatrixNetworkDomainsNetworkDomainArrayOutput) Index(i pulumi.IntInp
 }
 
 type GetAviatrixTransitGatewayBgpLanInterface struct {
+	// Subnet Info.
 	Subnet string `pulumi:"subnet"`
-	VpcId  string `pulumi:"vpcId"`
+	// VPC-ID of GCP cloud provider.
+	VpcId string `pulumi:"vpcId"`
 }
 
 // GetAviatrixTransitGatewayBgpLanInterfaceInput is an input type that accepts GetAviatrixTransitGatewayBgpLanInterfaceArgs and GetAviatrixTransitGatewayBgpLanInterfaceOutput values.
@@ -4127,8 +4703,10 @@ type GetAviatrixTransitGatewayBgpLanInterfaceInput interface {
 }
 
 type GetAviatrixTransitGatewayBgpLanInterfaceArgs struct {
+	// Subnet Info.
 	Subnet pulumi.StringInput `pulumi:"subnet"`
-	VpcId  pulumi.StringInput `pulumi:"vpcId"`
+	// VPC-ID of GCP cloud provider.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
 }
 
 func (GetAviatrixTransitGatewayBgpLanInterfaceArgs) ElementType() reflect.Type {
@@ -4182,10 +4760,12 @@ func (o GetAviatrixTransitGatewayBgpLanInterfaceOutput) ToGetAviatrixTransitGate
 	return o
 }
 
+// Subnet Info.
 func (o GetAviatrixTransitGatewayBgpLanInterfaceOutput) Subnet() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewayBgpLanInterface) string { return v.Subnet }).(pulumi.StringOutput)
 }
 
+// VPC-ID of GCP cloud provider.
 func (o GetAviatrixTransitGatewayBgpLanInterfaceOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewayBgpLanInterface) string { return v.VpcId }).(pulumi.StringOutput)
 }
@@ -4211,8 +4791,10 @@ func (o GetAviatrixTransitGatewayBgpLanInterfaceArrayOutput) Index(i pulumi.IntI
 }
 
 type GetAviatrixTransitGatewayHaBgpLanInterface struct {
+	// Subnet Info.
 	Subnet string `pulumi:"subnet"`
-	VpcId  string `pulumi:"vpcId"`
+	// VPC-ID of GCP cloud provider.
+	VpcId string `pulumi:"vpcId"`
 }
 
 // GetAviatrixTransitGatewayHaBgpLanInterfaceInput is an input type that accepts GetAviatrixTransitGatewayHaBgpLanInterfaceArgs and GetAviatrixTransitGatewayHaBgpLanInterfaceOutput values.
@@ -4227,8 +4809,10 @@ type GetAviatrixTransitGatewayHaBgpLanInterfaceInput interface {
 }
 
 type GetAviatrixTransitGatewayHaBgpLanInterfaceArgs struct {
+	// Subnet Info.
 	Subnet pulumi.StringInput `pulumi:"subnet"`
-	VpcId  pulumi.StringInput `pulumi:"vpcId"`
+	// VPC-ID of GCP cloud provider.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
 }
 
 func (GetAviatrixTransitGatewayHaBgpLanInterfaceArgs) ElementType() reflect.Type {
@@ -4282,10 +4866,12 @@ func (o GetAviatrixTransitGatewayHaBgpLanInterfaceOutput) ToGetAviatrixTransitGa
 	return o
 }
 
+// Subnet Info.
 func (o GetAviatrixTransitGatewayHaBgpLanInterfaceOutput) Subnet() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewayHaBgpLanInterface) string { return v.Subnet }).(pulumi.StringOutput)
 }
 
+// VPC-ID of GCP cloud provider.
 func (o GetAviatrixTransitGatewayHaBgpLanInterfaceOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewayHaBgpLanInterface) string { return v.VpcId }).(pulumi.StringOutput)
 }
@@ -4311,63 +4897,120 @@ func (o GetAviatrixTransitGatewayHaBgpLanInterfaceArrayOutput) Index(i pulumi.In
 }
 
 type GetAviatrixTransitGatewaysGatewayList struct {
-	AccountName                     string                                                   `pulumi:"accountName"`
-	AllocateNewEip                  bool                                                     `pulumi:"allocateNewEip"`
-	AvailabilityDomain              string                                                   `pulumi:"availabilityDomain"`
-	AzureEipNameResourceGroup       string                                                   `pulumi:"azureEipNameResourceGroup"`
-	BgpEcmp                         bool                                                     `pulumi:"bgpEcmp"`
-	BgpHoldTime                     int                                                      `pulumi:"bgpHoldTime"`
-	BgpLanInterfaces                []GetAviatrixTransitGatewaysGatewayListBgpLanInterface   `pulumi:"bgpLanInterfaces"`
-	BgpLanIpLists                   []string                                                 `pulumi:"bgpLanIpLists"`
-	BgpPollingTime                  string                                                   `pulumi:"bgpPollingTime"`
-	CloudInstanceId                 string                                                   `pulumi:"cloudInstanceId"`
-	CloudType                       int                                                      `pulumi:"cloudType"`
-	ConnectedTransit                bool                                                     `pulumi:"connectedTransit"`
-	CustomizedSpokeVpcRoutes        string                                                   `pulumi:"customizedSpokeVpcRoutes"`
-	EnableActiveStandby             bool                                                     `pulumi:"enableActiveStandby"`
-	EnableActiveStandbyPreemptive   bool                                                     `pulumi:"enableActiveStandbyPreemptive"`
-	EnableBgpOverLan                bool                                                     `pulumi:"enableBgpOverLan"`
-	EnableEncryptVolume             bool                                                     `pulumi:"enableEncryptVolume"`
-	EnableGatewayLoadBalancer       bool                                                     `pulumi:"enableGatewayLoadBalancer"`
-	EnableHybridConnection          bool                                                     `pulumi:"enableHybridConnection"`
-	EnableJumboFrame                bool                                                     `pulumi:"enableJumboFrame"`
-	EnableMonitorGatewaySubnets     bool                                                     `pulumi:"enableMonitorGatewaySubnets"`
-	EnableMultiTierTransit          bool                                                     `pulumi:"enableMultiTierTransit"`
-	EnablePrivateOob                bool                                                     `pulumi:"enablePrivateOob"`
-	EnableSegmentation              bool                                                     `pulumi:"enableSegmentation"`
-	EnableSpotInstance              bool                                                     `pulumi:"enableSpotInstance"`
-	EnableTransitSummarizeCidrToTgw bool                                                     `pulumi:"enableTransitSummarizeCidrToTgw"`
-	EnableVpcDnsServer              bool                                                     `pulumi:"enableVpcDnsServer"`
-	ExcludedAdvertisedSpokeRoutes   string                                                   `pulumi:"excludedAdvertisedSpokeRoutes"`
-	FaultDomain                     string                                                   `pulumi:"faultDomain"`
-	FilteredSpokeVpcRoutes          string                                                   `pulumi:"filteredSpokeVpcRoutes"`
-	GwName                          string                                                   `pulumi:"gwName"`
-	GwSize                          string                                                   `pulumi:"gwSize"`
-	HaBgpLanInterfaces              []GetAviatrixTransitGatewaysGatewayListHaBgpLanInterface `pulumi:"haBgpLanInterfaces"`
-	HaBgpLanIpLists                 []string                                                 `pulumi:"haBgpLanIpLists"`
-	ImageVersion                    string                                                   `pulumi:"imageVersion"`
-	InsaneMode                      bool                                                     `pulumi:"insaneMode"`
-	InsaneModeAz                    string                                                   `pulumi:"insaneModeAz"`
-	LanPrivateSubnet                string                                                   `pulumi:"lanPrivateSubnet"`
-	LanVpcId                        string                                                   `pulumi:"lanVpcId"`
-	LearnedCidrsApprovalMode        string                                                   `pulumi:"learnedCidrsApprovalMode"`
-	LocalAsNumber                   string                                                   `pulumi:"localAsNumber"`
-	MonitorExcludeLists             []string                                                 `pulumi:"monitorExcludeLists"`
-	OobAvailabilityZone             string                                                   `pulumi:"oobAvailabilityZone"`
-	OobManagementSubnet             string                                                   `pulumi:"oobManagementSubnet"`
-	PrependAsPaths                  []string                                                 `pulumi:"prependAsPaths"`
-	PrivateIp                       string                                                   `pulumi:"privateIp"`
-	PublicIp                        string                                                   `pulumi:"publicIp"`
-	SecurityGroupId                 string                                                   `pulumi:"securityGroupId"`
-	SingleAzHa                      bool                                                     `pulumi:"singleAzHa"`
-	SingleIpSnat                    bool                                                     `pulumi:"singleIpSnat"`
-	SoftwareVersion                 string                                                   `pulumi:"softwareVersion"`
-	SpotPrice                       string                                                   `pulumi:"spotPrice"`
-	Subnet                          string                                                   `pulumi:"subnet"`
-	TunnelDetectionTime             int                                                      `pulumi:"tunnelDetectionTime"`
-	VpcId                           string                                                   `pulumi:"vpcId"`
-	VpcReg                          string                                                   `pulumi:"vpcReg"`
-	Zone                            string                                                   `pulumi:"zone"`
+	// Aviatrix account name.
+	AccountName string `pulumi:"accountName"`
+	// When value is false, an idle address in Elastic IP pool is reused for this gateway. Otherwise, a new Elastic IP is allocated and used for this gateway.
+	AllocateNewEip bool `pulumi:"allocateNewEip"`
+	// Availability domain for OCI.
+	AvailabilityDomain string `pulumi:"availabilityDomain"`
+	// The name of the public IP address and its resource group in Azure to assign to this Transit Gateway.
+	AzureEipNameResourceGroup string `pulumi:"azureEipNameResourceGroup"`
+	// Enable Equal Cost Multi Path (ECMP) routing for the next hop.
+	BgpEcmp bool `pulumi:"bgpEcmp"`
+	// BGP Hold Time.
+	BgpHoldTime int `pulumi:"bgpHoldTime"`
+	// Interfaces to run BGP protocol on top of the ethernet interface, to connect to the onprem/remote peer. Only available for GCP Transit.
+	BgpLanInterfaces []GetAviatrixTransitGatewaysGatewayListBgpLanInterface `pulumi:"bgpLanInterfaces"`
+	// List of available BGP LAN interface IPs for transit external device connection creation. Only supports GCP. Available as of provider version R2.21.0+.
+	BgpLanIpLists []string `pulumi:"bgpLanIpLists"`
+	// BGP route polling time. Unit is in seconds.
+	BgpPollingTime string `pulumi:"bgpPollingTime"`
+	// Instance ID of the transit gateway.
+	CloudInstanceId string `pulumi:"cloudInstanceId"`
+	// Type of cloud service provider.
+	// * `connectedTransit"` -  Status of Connected Transit of transit gateway.
+	CloudType        int  `pulumi:"cloudType"`
+	ConnectedTransit bool `pulumi:"connectedTransit"`
+	// A list of comma separated CIDRs to be customized for the spoke VPC routes.
+	CustomizedSpokeVpcRoutes string `pulumi:"customizedSpokeVpcRoutes"`
+	// Enables Active-Standby Mode, available only with HA enabled.
+	EnableActiveStandby bool `pulumi:"enableActiveStandby"`
+	// Enables Preemptive Mode for Active-Standby, available only with Active-Standby enabled.
+	EnableActiveStandbyPreemptive bool `pulumi:"enableActiveStandbyPreemptive"`
+	// Pre-allocate a network interface(eth4) for \"BGP over LAN\" functionality. Only valid for cloudType = 4 (GCP) and 8 (Azure). Available as of provider version R2.18+
+	EnableBgpOverLan bool `pulumi:"enableBgpOverLan"`
+	// Status of Encrypt Gateway EBS Volume of the transit gateway.
+	EnableEncryptVolume bool `pulumi:"enableEncryptVolume"`
+	// Enable firenet interfaces with AWS Gateway Load Balancer.
+	EnableGatewayLoadBalancer bool `pulumi:"enableGatewayLoadBalancer"`
+	// Sign of readiness for TGW connection.
+	EnableHybridConnection bool `pulumi:"enableHybridConnection"`
+	// Enable jumbo frame support for transit gateway.
+	EnableJumboFrame bool `pulumi:"enableJumboFrame"`
+	// Enable [monitor gateway subnets](https://docs.aviatrix.com/HowTos/gateway.html#monitor-gateway-subnet). Only valid for cloudType = 1 (AWS) or 256 (AWSGov).
+	EnableMonitorGatewaySubnets bool `pulumi:"enableMonitorGatewaySubnets"`
+	// Status of multi-tier transit mode on transit gateway.
+	EnableMultiTierTransit bool `pulumi:"enableMultiTierTransit"`
+	// Status of private OOB for the transit gateway.
+	EnablePrivateOob bool `pulumi:"enablePrivateOob"`
+	// Enable segmentation to allow association of transit gateway to security domains.
+	EnableSegmentation bool `pulumi:"enableSegmentation"`
+	// Enable spot instance. NOT supported for production deployment.
+	EnableSpotInstance bool `pulumi:"enableSpotInstance"`
+	// Enable summarize CIDR to TGW.
+	EnableTransitSummarizeCidrToTgw bool `pulumi:"enableTransitSummarizeCidrToTgw"`
+	// Status of Vpc Dns Server of the transit Gateway.
+	EnableVpcDnsServer bool `pulumi:"enableVpcDnsServer"`
+	// A list of comma separated CIDRs to be advertised to on-prem as "Excluded CIDR List".
+	ExcludedAdvertisedSpokeRoutes string `pulumi:"excludedAdvertisedSpokeRoutes"`
+	// Fault domain for OCI.
+	FaultDomain string `pulumi:"faultDomain"`
+	// A list of comma separated CIDRs to be filtered from the spoke VPC route table.
+	FilteredSpokeVpcRoutes string `pulumi:"filteredSpokeVpcRoutes"`
+	// Aviatrix transit gateway name.
+	GwName string `pulumi:"gwName"`
+	// Size of transit gateway instance.
+	GwSize string `pulumi:"gwSize"`
+	// Interfaces to run BGP protocol on top of the ethernet interface, to connect to the onprem/remote peer. Only available for GCP HA Transit.
+	HaBgpLanInterfaces []GetAviatrixTransitGatewaysGatewayListHaBgpLanInterface `pulumi:"haBgpLanInterfaces"`
+	// List of available BGP LAN interface IPs for transit external device HA connection creation. Only supports GCP. Available as of provider version R2.21.0+.
+	HaBgpLanIpLists []string `pulumi:"haBgpLanIpLists"`
+	// The image version of the gateway.
+	ImageVersion string `pulumi:"imageVersion"`
+	// Status of Insane Mode of the transit gateway.
+	InsaneMode bool `pulumi:"insaneMode"`
+	// AZ of subnet being created for Insane Mode transit gateway.
+	InsaneModeAz string `pulumi:"insaneModeAz"`
+	// LAN Private Subnet. Only used for GCP Transit FireNet.
+	LanPrivateSubnet string `pulumi:"lanPrivateSubnet"`
+	// LAN VPC ID. Only used for GCP Transit FireNet.
+	LanVpcId string `pulumi:"lanVpcId"`
+	// Set the learned CIDRs approval mode.
+	LearnedCidrsApprovalMode string `pulumi:"learnedCidrsApprovalMode"`
+	// Changes the Aviatrix Transit Gateway ASN number before you setup Aviatrix Transit Gateway connection configurations.
+	LocalAsNumber string `pulumi:"localAsNumber"`
+	// A set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true.
+	MonitorExcludeLists []string `pulumi:"monitorExcludeLists"`
+	// OOB availability zone.
+	OobAvailabilityZone string `pulumi:"oobAvailabilityZone"`
+	// OOB management subnet.
+	OobManagementSubnet string `pulumi:"oobManagementSubnet"`
+	// List of AS numbers to populate BGP AP_PATH field when it advertises to VGW or peer devices.
+	PrependAsPaths []string `pulumi:"prependAsPaths"`
+	// Private IP address of the transit gateway created.
+	PrivateIp string `pulumi:"privateIp"`
+	// Public IP address of the Transit Gateway created.
+	PublicIp string `pulumi:"publicIp"`
+	// Security group used for the transit gateway.
+	SecurityGroupId string `pulumi:"securityGroupId"`
+	// Status of Single AZ HA of transit gateway.
+	SingleAzHa bool `pulumi:"singleAzHa"`
+	// Status of Single IP Source Nat mode of the transit gateway.
+	SingleIpSnat bool `pulumi:"singleIpSnat"`
+	// The software version of the gateway.
+	SoftwareVersion string `pulumi:"softwareVersion"`
+	// Price for spot instance. NOT supported for production deployment.
+	SpotPrice string `pulumi:"spotPrice"`
+	// A VPC Network address range selected from one of the available network ranges.
+	Subnet string `pulumi:"subnet"`
+	// The IPSec tunnel down detection time for the transit gateway.
+	TunnelDetectionTime int `pulumi:"tunnelDetectionTime"`
+	// VPC-ID/VNet-Name of cloud provider.
+	VpcId string `pulumi:"vpcId"`
+	// Region of cloud provider.
+	VpcReg string `pulumi:"vpcReg"`
+	// Availability Zone. Only available for cloudType = 8 (Azure). Must be in the form 'az-n', for example, 'az-2'.
+	Zone string `pulumi:"zone"`
 }
 
 // GetAviatrixTransitGatewaysGatewayListInput is an input type that accepts GetAviatrixTransitGatewaysGatewayListArgs and GetAviatrixTransitGatewaysGatewayListOutput values.
@@ -4382,63 +5025,120 @@ type GetAviatrixTransitGatewaysGatewayListInput interface {
 }
 
 type GetAviatrixTransitGatewaysGatewayListArgs struct {
-	AccountName                     pulumi.StringInput                                               `pulumi:"accountName"`
-	AllocateNewEip                  pulumi.BoolInput                                                 `pulumi:"allocateNewEip"`
-	AvailabilityDomain              pulumi.StringInput                                               `pulumi:"availabilityDomain"`
-	AzureEipNameResourceGroup       pulumi.StringInput                                               `pulumi:"azureEipNameResourceGroup"`
-	BgpEcmp                         pulumi.BoolInput                                                 `pulumi:"bgpEcmp"`
-	BgpHoldTime                     pulumi.IntInput                                                  `pulumi:"bgpHoldTime"`
-	BgpLanInterfaces                GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayInput   `pulumi:"bgpLanInterfaces"`
-	BgpLanIpLists                   pulumi.StringArrayInput                                          `pulumi:"bgpLanIpLists"`
-	BgpPollingTime                  pulumi.StringInput                                               `pulumi:"bgpPollingTime"`
-	CloudInstanceId                 pulumi.StringInput                                               `pulumi:"cloudInstanceId"`
-	CloudType                       pulumi.IntInput                                                  `pulumi:"cloudType"`
-	ConnectedTransit                pulumi.BoolInput                                                 `pulumi:"connectedTransit"`
-	CustomizedSpokeVpcRoutes        pulumi.StringInput                                               `pulumi:"customizedSpokeVpcRoutes"`
-	EnableActiveStandby             pulumi.BoolInput                                                 `pulumi:"enableActiveStandby"`
-	EnableActiveStandbyPreemptive   pulumi.BoolInput                                                 `pulumi:"enableActiveStandbyPreemptive"`
-	EnableBgpOverLan                pulumi.BoolInput                                                 `pulumi:"enableBgpOverLan"`
-	EnableEncryptVolume             pulumi.BoolInput                                                 `pulumi:"enableEncryptVolume"`
-	EnableGatewayLoadBalancer       pulumi.BoolInput                                                 `pulumi:"enableGatewayLoadBalancer"`
-	EnableHybridConnection          pulumi.BoolInput                                                 `pulumi:"enableHybridConnection"`
-	EnableJumboFrame                pulumi.BoolInput                                                 `pulumi:"enableJumboFrame"`
-	EnableMonitorGatewaySubnets     pulumi.BoolInput                                                 `pulumi:"enableMonitorGatewaySubnets"`
-	EnableMultiTierTransit          pulumi.BoolInput                                                 `pulumi:"enableMultiTierTransit"`
-	EnablePrivateOob                pulumi.BoolInput                                                 `pulumi:"enablePrivateOob"`
-	EnableSegmentation              pulumi.BoolInput                                                 `pulumi:"enableSegmentation"`
-	EnableSpotInstance              pulumi.BoolInput                                                 `pulumi:"enableSpotInstance"`
-	EnableTransitSummarizeCidrToTgw pulumi.BoolInput                                                 `pulumi:"enableTransitSummarizeCidrToTgw"`
-	EnableVpcDnsServer              pulumi.BoolInput                                                 `pulumi:"enableVpcDnsServer"`
-	ExcludedAdvertisedSpokeRoutes   pulumi.StringInput                                               `pulumi:"excludedAdvertisedSpokeRoutes"`
-	FaultDomain                     pulumi.StringInput                                               `pulumi:"faultDomain"`
-	FilteredSpokeVpcRoutes          pulumi.StringInput                                               `pulumi:"filteredSpokeVpcRoutes"`
-	GwName                          pulumi.StringInput                                               `pulumi:"gwName"`
-	GwSize                          pulumi.StringInput                                               `pulumi:"gwSize"`
-	HaBgpLanInterfaces              GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayInput `pulumi:"haBgpLanInterfaces"`
-	HaBgpLanIpLists                 pulumi.StringArrayInput                                          `pulumi:"haBgpLanIpLists"`
-	ImageVersion                    pulumi.StringInput                                               `pulumi:"imageVersion"`
-	InsaneMode                      pulumi.BoolInput                                                 `pulumi:"insaneMode"`
-	InsaneModeAz                    pulumi.StringInput                                               `pulumi:"insaneModeAz"`
-	LanPrivateSubnet                pulumi.StringInput                                               `pulumi:"lanPrivateSubnet"`
-	LanVpcId                        pulumi.StringInput                                               `pulumi:"lanVpcId"`
-	LearnedCidrsApprovalMode        pulumi.StringInput                                               `pulumi:"learnedCidrsApprovalMode"`
-	LocalAsNumber                   pulumi.StringInput                                               `pulumi:"localAsNumber"`
-	MonitorExcludeLists             pulumi.StringArrayInput                                          `pulumi:"monitorExcludeLists"`
-	OobAvailabilityZone             pulumi.StringInput                                               `pulumi:"oobAvailabilityZone"`
-	OobManagementSubnet             pulumi.StringInput                                               `pulumi:"oobManagementSubnet"`
-	PrependAsPaths                  pulumi.StringArrayInput                                          `pulumi:"prependAsPaths"`
-	PrivateIp                       pulumi.StringInput                                               `pulumi:"privateIp"`
-	PublicIp                        pulumi.StringInput                                               `pulumi:"publicIp"`
-	SecurityGroupId                 pulumi.StringInput                                               `pulumi:"securityGroupId"`
-	SingleAzHa                      pulumi.BoolInput                                                 `pulumi:"singleAzHa"`
-	SingleIpSnat                    pulumi.BoolInput                                                 `pulumi:"singleIpSnat"`
-	SoftwareVersion                 pulumi.StringInput                                               `pulumi:"softwareVersion"`
-	SpotPrice                       pulumi.StringInput                                               `pulumi:"spotPrice"`
-	Subnet                          pulumi.StringInput                                               `pulumi:"subnet"`
-	TunnelDetectionTime             pulumi.IntInput                                                  `pulumi:"tunnelDetectionTime"`
-	VpcId                           pulumi.StringInput                                               `pulumi:"vpcId"`
-	VpcReg                          pulumi.StringInput                                               `pulumi:"vpcReg"`
-	Zone                            pulumi.StringInput                                               `pulumi:"zone"`
+	// Aviatrix account name.
+	AccountName pulumi.StringInput `pulumi:"accountName"`
+	// When value is false, an idle address in Elastic IP pool is reused for this gateway. Otherwise, a new Elastic IP is allocated and used for this gateway.
+	AllocateNewEip pulumi.BoolInput `pulumi:"allocateNewEip"`
+	// Availability domain for OCI.
+	AvailabilityDomain pulumi.StringInput `pulumi:"availabilityDomain"`
+	// The name of the public IP address and its resource group in Azure to assign to this Transit Gateway.
+	AzureEipNameResourceGroup pulumi.StringInput `pulumi:"azureEipNameResourceGroup"`
+	// Enable Equal Cost Multi Path (ECMP) routing for the next hop.
+	BgpEcmp pulumi.BoolInput `pulumi:"bgpEcmp"`
+	// BGP Hold Time.
+	BgpHoldTime pulumi.IntInput `pulumi:"bgpHoldTime"`
+	// Interfaces to run BGP protocol on top of the ethernet interface, to connect to the onprem/remote peer. Only available for GCP Transit.
+	BgpLanInterfaces GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayInput `pulumi:"bgpLanInterfaces"`
+	// List of available BGP LAN interface IPs for transit external device connection creation. Only supports GCP. Available as of provider version R2.21.0+.
+	BgpLanIpLists pulumi.StringArrayInput `pulumi:"bgpLanIpLists"`
+	// BGP route polling time. Unit is in seconds.
+	BgpPollingTime pulumi.StringInput `pulumi:"bgpPollingTime"`
+	// Instance ID of the transit gateway.
+	CloudInstanceId pulumi.StringInput `pulumi:"cloudInstanceId"`
+	// Type of cloud service provider.
+	// * `connectedTransit"` -  Status of Connected Transit of transit gateway.
+	CloudType        pulumi.IntInput  `pulumi:"cloudType"`
+	ConnectedTransit pulumi.BoolInput `pulumi:"connectedTransit"`
+	// A list of comma separated CIDRs to be customized for the spoke VPC routes.
+	CustomizedSpokeVpcRoutes pulumi.StringInput `pulumi:"customizedSpokeVpcRoutes"`
+	// Enables Active-Standby Mode, available only with HA enabled.
+	EnableActiveStandby pulumi.BoolInput `pulumi:"enableActiveStandby"`
+	// Enables Preemptive Mode for Active-Standby, available only with Active-Standby enabled.
+	EnableActiveStandbyPreemptive pulumi.BoolInput `pulumi:"enableActiveStandbyPreemptive"`
+	// Pre-allocate a network interface(eth4) for \"BGP over LAN\" functionality. Only valid for cloudType = 4 (GCP) and 8 (Azure). Available as of provider version R2.18+
+	EnableBgpOverLan pulumi.BoolInput `pulumi:"enableBgpOverLan"`
+	// Status of Encrypt Gateway EBS Volume of the transit gateway.
+	EnableEncryptVolume pulumi.BoolInput `pulumi:"enableEncryptVolume"`
+	// Enable firenet interfaces with AWS Gateway Load Balancer.
+	EnableGatewayLoadBalancer pulumi.BoolInput `pulumi:"enableGatewayLoadBalancer"`
+	// Sign of readiness for TGW connection.
+	EnableHybridConnection pulumi.BoolInput `pulumi:"enableHybridConnection"`
+	// Enable jumbo frame support for transit gateway.
+	EnableJumboFrame pulumi.BoolInput `pulumi:"enableJumboFrame"`
+	// Enable [monitor gateway subnets](https://docs.aviatrix.com/HowTos/gateway.html#monitor-gateway-subnet). Only valid for cloudType = 1 (AWS) or 256 (AWSGov).
+	EnableMonitorGatewaySubnets pulumi.BoolInput `pulumi:"enableMonitorGatewaySubnets"`
+	// Status of multi-tier transit mode on transit gateway.
+	EnableMultiTierTransit pulumi.BoolInput `pulumi:"enableMultiTierTransit"`
+	// Status of private OOB for the transit gateway.
+	EnablePrivateOob pulumi.BoolInput `pulumi:"enablePrivateOob"`
+	// Enable segmentation to allow association of transit gateway to security domains.
+	EnableSegmentation pulumi.BoolInput `pulumi:"enableSegmentation"`
+	// Enable spot instance. NOT supported for production deployment.
+	EnableSpotInstance pulumi.BoolInput `pulumi:"enableSpotInstance"`
+	// Enable summarize CIDR to TGW.
+	EnableTransitSummarizeCidrToTgw pulumi.BoolInput `pulumi:"enableTransitSummarizeCidrToTgw"`
+	// Status of Vpc Dns Server of the transit Gateway.
+	EnableVpcDnsServer pulumi.BoolInput `pulumi:"enableVpcDnsServer"`
+	// A list of comma separated CIDRs to be advertised to on-prem as "Excluded CIDR List".
+	ExcludedAdvertisedSpokeRoutes pulumi.StringInput `pulumi:"excludedAdvertisedSpokeRoutes"`
+	// Fault domain for OCI.
+	FaultDomain pulumi.StringInput `pulumi:"faultDomain"`
+	// A list of comma separated CIDRs to be filtered from the spoke VPC route table.
+	FilteredSpokeVpcRoutes pulumi.StringInput `pulumi:"filteredSpokeVpcRoutes"`
+	// Aviatrix transit gateway name.
+	GwName pulumi.StringInput `pulumi:"gwName"`
+	// Size of transit gateway instance.
+	GwSize pulumi.StringInput `pulumi:"gwSize"`
+	// Interfaces to run BGP protocol on top of the ethernet interface, to connect to the onprem/remote peer. Only available for GCP HA Transit.
+	HaBgpLanInterfaces GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayInput `pulumi:"haBgpLanInterfaces"`
+	// List of available BGP LAN interface IPs for transit external device HA connection creation. Only supports GCP. Available as of provider version R2.21.0+.
+	HaBgpLanIpLists pulumi.StringArrayInput `pulumi:"haBgpLanIpLists"`
+	// The image version of the gateway.
+	ImageVersion pulumi.StringInput `pulumi:"imageVersion"`
+	// Status of Insane Mode of the transit gateway.
+	InsaneMode pulumi.BoolInput `pulumi:"insaneMode"`
+	// AZ of subnet being created for Insane Mode transit gateway.
+	InsaneModeAz pulumi.StringInput `pulumi:"insaneModeAz"`
+	// LAN Private Subnet. Only used for GCP Transit FireNet.
+	LanPrivateSubnet pulumi.StringInput `pulumi:"lanPrivateSubnet"`
+	// LAN VPC ID. Only used for GCP Transit FireNet.
+	LanVpcId pulumi.StringInput `pulumi:"lanVpcId"`
+	// Set the learned CIDRs approval mode.
+	LearnedCidrsApprovalMode pulumi.StringInput `pulumi:"learnedCidrsApprovalMode"`
+	// Changes the Aviatrix Transit Gateway ASN number before you setup Aviatrix Transit Gateway connection configurations.
+	LocalAsNumber pulumi.StringInput `pulumi:"localAsNumber"`
+	// A set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true.
+	MonitorExcludeLists pulumi.StringArrayInput `pulumi:"monitorExcludeLists"`
+	// OOB availability zone.
+	OobAvailabilityZone pulumi.StringInput `pulumi:"oobAvailabilityZone"`
+	// OOB management subnet.
+	OobManagementSubnet pulumi.StringInput `pulumi:"oobManagementSubnet"`
+	// List of AS numbers to populate BGP AP_PATH field when it advertises to VGW or peer devices.
+	PrependAsPaths pulumi.StringArrayInput `pulumi:"prependAsPaths"`
+	// Private IP address of the transit gateway created.
+	PrivateIp pulumi.StringInput `pulumi:"privateIp"`
+	// Public IP address of the Transit Gateway created.
+	PublicIp pulumi.StringInput `pulumi:"publicIp"`
+	// Security group used for the transit gateway.
+	SecurityGroupId pulumi.StringInput `pulumi:"securityGroupId"`
+	// Status of Single AZ HA of transit gateway.
+	SingleAzHa pulumi.BoolInput `pulumi:"singleAzHa"`
+	// Status of Single IP Source Nat mode of the transit gateway.
+	SingleIpSnat pulumi.BoolInput `pulumi:"singleIpSnat"`
+	// The software version of the gateway.
+	SoftwareVersion pulumi.StringInput `pulumi:"softwareVersion"`
+	// Price for spot instance. NOT supported for production deployment.
+	SpotPrice pulumi.StringInput `pulumi:"spotPrice"`
+	// A VPC Network address range selected from one of the available network ranges.
+	Subnet pulumi.StringInput `pulumi:"subnet"`
+	// The IPSec tunnel down detection time for the transit gateway.
+	TunnelDetectionTime pulumi.IntInput `pulumi:"tunnelDetectionTime"`
+	// VPC-ID/VNet-Name of cloud provider.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+	// Region of cloud provider.
+	VpcReg pulumi.StringInput `pulumi:"vpcReg"`
+	// Availability Zone. Only available for cloudType = 8 (Azure). Must be in the form 'az-n', for example, 'az-2'.
+	Zone pulumi.StringInput `pulumi:"zone"`
 }
 
 func (GetAviatrixTransitGatewaysGatewayListArgs) ElementType() reflect.Type {
@@ -4492,48 +5192,60 @@ func (o GetAviatrixTransitGatewaysGatewayListOutput) ToGetAviatrixTransitGateway
 	return o
 }
 
+// Aviatrix account name.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) AccountName() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.AccountName }).(pulumi.StringOutput)
 }
 
+// When value is false, an idle address in Elastic IP pool is reused for this gateway. Otherwise, a new Elastic IP is allocated and used for this gateway.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) AllocateNewEip() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.AllocateNewEip }).(pulumi.BoolOutput)
 }
 
+// Availability domain for OCI.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) AvailabilityDomain() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.AvailabilityDomain }).(pulumi.StringOutput)
 }
 
+// The name of the public IP address and its resource group in Azure to assign to this Transit Gateway.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) AzureEipNameResourceGroup() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.AzureEipNameResourceGroup }).(pulumi.StringOutput)
 }
 
+// Enable Equal Cost Multi Path (ECMP) routing for the next hop.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) BgpEcmp() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.BgpEcmp }).(pulumi.BoolOutput)
 }
 
+// BGP Hold Time.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) BgpHoldTime() pulumi.IntOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) int { return v.BgpHoldTime }).(pulumi.IntOutput)
 }
 
+// Interfaces to run BGP protocol on top of the ethernet interface, to connect to the onprem/remote peer. Only available for GCP Transit.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) BgpLanInterfaces() GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) []GetAviatrixTransitGatewaysGatewayListBgpLanInterface {
 		return v.BgpLanInterfaces
 	}).(GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayOutput)
 }
 
+// List of available BGP LAN interface IPs for transit external device connection creation. Only supports GCP. Available as of provider version R2.21.0+.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) BgpLanIpLists() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) []string { return v.BgpLanIpLists }).(pulumi.StringArrayOutput)
 }
 
+// BGP route polling time. Unit is in seconds.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) BgpPollingTime() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.BgpPollingTime }).(pulumi.StringOutput)
 }
 
+// Instance ID of the transit gateway.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) CloudInstanceId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.CloudInstanceId }).(pulumi.StringOutput)
 }
 
+// Type of cloud service provider.
+// * `connectedTransit"` -  Status of Connected Transit of transit gateway.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) CloudType() pulumi.IntOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) int { return v.CloudType }).(pulumi.IntOutput)
 }
@@ -4542,184 +5254,229 @@ func (o GetAviatrixTransitGatewaysGatewayListOutput) ConnectedTransit() pulumi.B
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.ConnectedTransit }).(pulumi.BoolOutput)
 }
 
+// A list of comma separated CIDRs to be customized for the spoke VPC routes.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) CustomizedSpokeVpcRoutes() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.CustomizedSpokeVpcRoutes }).(pulumi.StringOutput)
 }
 
+// Enables Active-Standby Mode, available only with HA enabled.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) EnableActiveStandby() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.EnableActiveStandby }).(pulumi.BoolOutput)
 }
 
+// Enables Preemptive Mode for Active-Standby, available only with Active-Standby enabled.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) EnableActiveStandbyPreemptive() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.EnableActiveStandbyPreemptive }).(pulumi.BoolOutput)
 }
 
+// Pre-allocate a network interface(eth4) for \"BGP over LAN\" functionality. Only valid for cloudType = 4 (GCP) and 8 (Azure). Available as of provider version R2.18+
 func (o GetAviatrixTransitGatewaysGatewayListOutput) EnableBgpOverLan() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.EnableBgpOverLan }).(pulumi.BoolOutput)
 }
 
+// Status of Encrypt Gateway EBS Volume of the transit gateway.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) EnableEncryptVolume() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.EnableEncryptVolume }).(pulumi.BoolOutput)
 }
 
+// Enable firenet interfaces with AWS Gateway Load Balancer.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) EnableGatewayLoadBalancer() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.EnableGatewayLoadBalancer }).(pulumi.BoolOutput)
 }
 
+// Sign of readiness for TGW connection.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) EnableHybridConnection() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.EnableHybridConnection }).(pulumi.BoolOutput)
 }
 
+// Enable jumbo frame support for transit gateway.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) EnableJumboFrame() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.EnableJumboFrame }).(pulumi.BoolOutput)
 }
 
+// Enable [monitor gateway subnets](https://docs.aviatrix.com/HowTos/gateway.html#monitor-gateway-subnet). Only valid for cloudType = 1 (AWS) or 256 (AWSGov).
 func (o GetAviatrixTransitGatewaysGatewayListOutput) EnableMonitorGatewaySubnets() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.EnableMonitorGatewaySubnets }).(pulumi.BoolOutput)
 }
 
+// Status of multi-tier transit mode on transit gateway.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) EnableMultiTierTransit() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.EnableMultiTierTransit }).(pulumi.BoolOutput)
 }
 
+// Status of private OOB for the transit gateway.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) EnablePrivateOob() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.EnablePrivateOob }).(pulumi.BoolOutput)
 }
 
+// Enable segmentation to allow association of transit gateway to security domains.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) EnableSegmentation() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.EnableSegmentation }).(pulumi.BoolOutput)
 }
 
+// Enable spot instance. NOT supported for production deployment.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) EnableSpotInstance() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.EnableSpotInstance }).(pulumi.BoolOutput)
 }
 
+// Enable summarize CIDR to TGW.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) EnableTransitSummarizeCidrToTgw() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.EnableTransitSummarizeCidrToTgw }).(pulumi.BoolOutput)
 }
 
+// Status of Vpc Dns Server of the transit Gateway.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) EnableVpcDnsServer() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.EnableVpcDnsServer }).(pulumi.BoolOutput)
 }
 
+// A list of comma separated CIDRs to be advertised to on-prem as "Excluded CIDR List".
 func (o GetAviatrixTransitGatewaysGatewayListOutput) ExcludedAdvertisedSpokeRoutes() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.ExcludedAdvertisedSpokeRoutes }).(pulumi.StringOutput)
 }
 
+// Fault domain for OCI.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) FaultDomain() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.FaultDomain }).(pulumi.StringOutput)
 }
 
+// A list of comma separated CIDRs to be filtered from the spoke VPC route table.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) FilteredSpokeVpcRoutes() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.FilteredSpokeVpcRoutes }).(pulumi.StringOutput)
 }
 
+// Aviatrix transit gateway name.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) GwName() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.GwName }).(pulumi.StringOutput)
 }
 
+// Size of transit gateway instance.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) GwSize() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.GwSize }).(pulumi.StringOutput)
 }
 
+// Interfaces to run BGP protocol on top of the ethernet interface, to connect to the onprem/remote peer. Only available for GCP HA Transit.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) HaBgpLanInterfaces() GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) []GetAviatrixTransitGatewaysGatewayListHaBgpLanInterface {
 		return v.HaBgpLanInterfaces
 	}).(GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayOutput)
 }
 
+// List of available BGP LAN interface IPs for transit external device HA connection creation. Only supports GCP. Available as of provider version R2.21.0+.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) HaBgpLanIpLists() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) []string { return v.HaBgpLanIpLists }).(pulumi.StringArrayOutput)
 }
 
+// The image version of the gateway.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) ImageVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.ImageVersion }).(pulumi.StringOutput)
 }
 
+// Status of Insane Mode of the transit gateway.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) InsaneMode() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.InsaneMode }).(pulumi.BoolOutput)
 }
 
+// AZ of subnet being created for Insane Mode transit gateway.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) InsaneModeAz() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.InsaneModeAz }).(pulumi.StringOutput)
 }
 
+// LAN Private Subnet. Only used for GCP Transit FireNet.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) LanPrivateSubnet() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.LanPrivateSubnet }).(pulumi.StringOutput)
 }
 
+// LAN VPC ID. Only used for GCP Transit FireNet.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) LanVpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.LanVpcId }).(pulumi.StringOutput)
 }
 
+// Set the learned CIDRs approval mode.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) LearnedCidrsApprovalMode() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.LearnedCidrsApprovalMode }).(pulumi.StringOutput)
 }
 
+// Changes the Aviatrix Transit Gateway ASN number before you setup Aviatrix Transit Gateway connection configurations.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) LocalAsNumber() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.LocalAsNumber }).(pulumi.StringOutput)
 }
 
+// A set of monitored instance ids. Only valid when 'enable_monitor_gateway_subnets' = true.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) MonitorExcludeLists() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) []string { return v.MonitorExcludeLists }).(pulumi.StringArrayOutput)
 }
 
+// OOB availability zone.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) OobAvailabilityZone() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.OobAvailabilityZone }).(pulumi.StringOutput)
 }
 
+// OOB management subnet.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) OobManagementSubnet() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.OobManagementSubnet }).(pulumi.StringOutput)
 }
 
+// List of AS numbers to populate BGP AP_PATH field when it advertises to VGW or peer devices.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) PrependAsPaths() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) []string { return v.PrependAsPaths }).(pulumi.StringArrayOutput)
 }
 
+// Private IP address of the transit gateway created.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) PrivateIp() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.PrivateIp }).(pulumi.StringOutput)
 }
 
+// Public IP address of the Transit Gateway created.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) PublicIp() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.PublicIp }).(pulumi.StringOutput)
 }
 
+// Security group used for the transit gateway.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) SecurityGroupId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.SecurityGroupId }).(pulumi.StringOutput)
 }
 
+// Status of Single AZ HA of transit gateway.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) SingleAzHa() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.SingleAzHa }).(pulumi.BoolOutput)
 }
 
+// Status of Single IP Source Nat mode of the transit gateway.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) SingleIpSnat() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) bool { return v.SingleIpSnat }).(pulumi.BoolOutput)
 }
 
+// The software version of the gateway.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) SoftwareVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.SoftwareVersion }).(pulumi.StringOutput)
 }
 
+// Price for spot instance. NOT supported for production deployment.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) SpotPrice() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.SpotPrice }).(pulumi.StringOutput)
 }
 
+// A VPC Network address range selected from one of the available network ranges.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) Subnet() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.Subnet }).(pulumi.StringOutput)
 }
 
+// The IPSec tunnel down detection time for the transit gateway.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) TunnelDetectionTime() pulumi.IntOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) int { return v.TunnelDetectionTime }).(pulumi.IntOutput)
 }
 
+// VPC-ID/VNet-Name of cloud provider.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.VpcId }).(pulumi.StringOutput)
 }
 
+// Region of cloud provider.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) VpcReg() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.VpcReg }).(pulumi.StringOutput)
 }
 
+// Availability Zone. Only available for cloudType = 8 (Azure). Must be in the form 'az-n', for example, 'az-2'.
 func (o GetAviatrixTransitGatewaysGatewayListOutput) Zone() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayList) string { return v.Zone }).(pulumi.StringOutput)
 }
@@ -4745,8 +5502,10 @@ func (o GetAviatrixTransitGatewaysGatewayListArrayOutput) Index(i pulumi.IntInpu
 }
 
 type GetAviatrixTransitGatewaysGatewayListBgpLanInterface struct {
+	// A VPC Network address range selected from one of the available network ranges.
 	Subnet string `pulumi:"subnet"`
-	VpcId  string `pulumi:"vpcId"`
+	// VPC-ID/VNet-Name of cloud provider.
+	VpcId string `pulumi:"vpcId"`
 }
 
 // GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceInput is an input type that accepts GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArgs and GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceOutput values.
@@ -4761,8 +5520,10 @@ type GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceInput interface {
 }
 
 type GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArgs struct {
+	// A VPC Network address range selected from one of the available network ranges.
 	Subnet pulumi.StringInput `pulumi:"subnet"`
-	VpcId  pulumi.StringInput `pulumi:"vpcId"`
+	// VPC-ID/VNet-Name of cloud provider.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
 }
 
 func (GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArgs) ElementType() reflect.Type {
@@ -4816,10 +5577,12 @@ func (o GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceOutput) ToGetAviatri
 	return o
 }
 
+// A VPC Network address range selected from one of the available network ranges.
 func (o GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceOutput) Subnet() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayListBgpLanInterface) string { return v.Subnet }).(pulumi.StringOutput)
 }
 
+// VPC-ID/VNet-Name of cloud provider.
 func (o GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayListBgpLanInterface) string { return v.VpcId }).(pulumi.StringOutput)
 }
@@ -4845,8 +5608,10 @@ func (o GetAviatrixTransitGatewaysGatewayListBgpLanInterfaceArrayOutput) Index(i
 }
 
 type GetAviatrixTransitGatewaysGatewayListHaBgpLanInterface struct {
+	// A VPC Network address range selected from one of the available network ranges.
 	Subnet string `pulumi:"subnet"`
-	VpcId  string `pulumi:"vpcId"`
+	// VPC-ID/VNet-Name of cloud provider.
+	VpcId string `pulumi:"vpcId"`
 }
 
 // GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceInput is an input type that accepts GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArgs and GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceOutput values.
@@ -4861,8 +5626,10 @@ type GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceInput interface {
 }
 
 type GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArgs struct {
+	// A VPC Network address range selected from one of the available network ranges.
 	Subnet pulumi.StringInput `pulumi:"subnet"`
-	VpcId  pulumi.StringInput `pulumi:"vpcId"`
+	// VPC-ID/VNet-Name of cloud provider.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
 }
 
 func (GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArgs) ElementType() reflect.Type {
@@ -4916,10 +5683,12 @@ func (o GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceOutput) ToGetAviat
 	return o
 }
 
+// A VPC Network address range selected from one of the available network ranges.
 func (o GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceOutput) Subnet() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayListHaBgpLanInterface) string { return v.Subnet }).(pulumi.StringOutput)
 }
 
+// VPC-ID/VNet-Name of cloud provider.
 func (o GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixTransitGatewaysGatewayListHaBgpLanInterface) string { return v.VpcId }).(pulumi.StringOutput)
 }
@@ -4945,8 +5714,11 @@ func (o GetAviatrixTransitGatewaysGatewayListHaBgpLanInterfaceArrayOutput) Index
 }
 
 type GetAviatrixVpcPrivateSubnet struct {
-	Cidr     string `pulumi:"cidr"`
-	Name     string `pulumi:"name"`
+	// Private subnet CIDR.
+	Cidr string `pulumi:"cidr"`
+	// Name of the Aviatrix VPC.
+	Name string `pulumi:"name"`
+	// Private subnet ID.
 	SubnetId string `pulumi:"subnetId"`
 }
 
@@ -4962,8 +5734,11 @@ type GetAviatrixVpcPrivateSubnetInput interface {
 }
 
 type GetAviatrixVpcPrivateSubnetArgs struct {
-	Cidr     pulumi.StringInput `pulumi:"cidr"`
-	Name     pulumi.StringInput `pulumi:"name"`
+	// Private subnet CIDR.
+	Cidr pulumi.StringInput `pulumi:"cidr"`
+	// Name of the Aviatrix VPC.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Private subnet ID.
 	SubnetId pulumi.StringInput `pulumi:"subnetId"`
 }
 
@@ -5018,14 +5793,17 @@ func (o GetAviatrixVpcPrivateSubnetOutput) ToGetAviatrixVpcPrivateSubnetOutputWi
 	return o
 }
 
+// Private subnet CIDR.
 func (o GetAviatrixVpcPrivateSubnetOutput) Cidr() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixVpcPrivateSubnet) string { return v.Cidr }).(pulumi.StringOutput)
 }
 
+// Name of the Aviatrix VPC.
 func (o GetAviatrixVpcPrivateSubnetOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixVpcPrivateSubnet) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// Private subnet ID.
 func (o GetAviatrixVpcPrivateSubnetOutput) SubnetId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixVpcPrivateSubnet) string { return v.SubnetId }).(pulumi.StringOutput)
 }
@@ -5051,8 +5829,11 @@ func (o GetAviatrixVpcPrivateSubnetArrayOutput) Index(i pulumi.IntInput) GetAvia
 }
 
 type GetAviatrixVpcPublicSubnet struct {
-	Cidr     string `pulumi:"cidr"`
-	Name     string `pulumi:"name"`
+	// Private subnet CIDR.
+	Cidr string `pulumi:"cidr"`
+	// Name of the Aviatrix VPC.
+	Name string `pulumi:"name"`
+	// Private subnet ID.
 	SubnetId string `pulumi:"subnetId"`
 }
 
@@ -5068,8 +5849,11 @@ type GetAviatrixVpcPublicSubnetInput interface {
 }
 
 type GetAviatrixVpcPublicSubnetArgs struct {
-	Cidr     pulumi.StringInput `pulumi:"cidr"`
-	Name     pulumi.StringInput `pulumi:"name"`
+	// Private subnet CIDR.
+	Cidr pulumi.StringInput `pulumi:"cidr"`
+	// Name of the Aviatrix VPC.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Private subnet ID.
 	SubnetId pulumi.StringInput `pulumi:"subnetId"`
 }
 
@@ -5124,14 +5908,17 @@ func (o GetAviatrixVpcPublicSubnetOutput) ToGetAviatrixVpcPublicSubnetOutputWith
 	return o
 }
 
+// Private subnet CIDR.
 func (o GetAviatrixVpcPublicSubnetOutput) Cidr() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixVpcPublicSubnet) string { return v.Cidr }).(pulumi.StringOutput)
 }
 
+// Name of the Aviatrix VPC.
 func (o GetAviatrixVpcPublicSubnetOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixVpcPublicSubnet) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// Private subnet ID.
 func (o GetAviatrixVpcPublicSubnetOutput) SubnetId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixVpcPublicSubnet) string { return v.SubnetId }).(pulumi.StringOutput)
 }
@@ -5157,8 +5944,11 @@ func (o GetAviatrixVpcPublicSubnetArrayOutput) Index(i pulumi.IntInput) GetAviat
 }
 
 type GetAviatrixVpcSubnet struct {
-	Cidr     string `pulumi:"cidr"`
-	Name     string `pulumi:"name"`
+	// Private subnet CIDR.
+	Cidr string `pulumi:"cidr"`
+	// Name of the Aviatrix VPC.
+	Name string `pulumi:"name"`
+	// Private subnet ID.
 	SubnetId string `pulumi:"subnetId"`
 }
 
@@ -5174,8 +5964,11 @@ type GetAviatrixVpcSubnetInput interface {
 }
 
 type GetAviatrixVpcSubnetArgs struct {
-	Cidr     pulumi.StringInput `pulumi:"cidr"`
-	Name     pulumi.StringInput `pulumi:"name"`
+	// Private subnet CIDR.
+	Cidr pulumi.StringInput `pulumi:"cidr"`
+	// Name of the Aviatrix VPC.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Private subnet ID.
 	SubnetId pulumi.StringInput `pulumi:"subnetId"`
 }
 
@@ -5230,14 +6023,17 @@ func (o GetAviatrixVpcSubnetOutput) ToGetAviatrixVpcSubnetOutputWithContext(ctx 
 	return o
 }
 
+// Private subnet CIDR.
 func (o GetAviatrixVpcSubnetOutput) Cidr() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixVpcSubnet) string { return v.Cidr }).(pulumi.StringOutput)
 }
 
+// Name of the Aviatrix VPC.
 func (o GetAviatrixVpcSubnetOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixVpcSubnet) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// Private subnet ID.
 func (o GetAviatrixVpcSubnetOutput) SubnetId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixVpcSubnet) string { return v.SubnetId }).(pulumi.StringOutput)
 }
@@ -5263,14 +6059,22 @@ func (o GetAviatrixVpcSubnetArrayOutput) Index(i pulumi.IntInput) GetAviatrixVpc
 }
 
 type GetAviatrixVpcTrackerVpcList struct {
-	AccountName   string                               `pulumi:"accountName"`
-	Cidr          string                               `pulumi:"cidr"`
-	CloudType     int                                  `pulumi:"cloudType"`
-	InstanceCount int                                  `pulumi:"instanceCount"`
-	Name          string                               `pulumi:"name"`
-	Region        string                               `pulumi:"region"`
-	Subnets       []GetAviatrixVpcTrackerVpcListSubnet `pulumi:"subnets"`
-	VpcId         string                               `pulumi:"vpcId"`
+	// Filters VPC list by access account name.
+	AccountName string `pulumi:"accountName"`
+	// Filters VPC list by CIDR (AWS/Azure only).
+	Cidr string `pulumi:"cidr"`
+	// Filters VPC list by cloud provider id. For example, cloudType = 1 will give all AWS VPCs.
+	CloudType int `pulumi:"cloudType"`
+	// Number of running instances in the VPC.
+	InstanceCount int `pulumi:"instanceCount"`
+	// Subnet name.
+	Name string `pulumi:"name"`
+	// Filters VPC list by region (AWS/Azure only).
+	Region string `pulumi:"region"`
+	// List of subnets within this VPC (GCP only).
+	Subnets []GetAviatrixVpcTrackerVpcListSubnet `pulumi:"subnets"`
+	// VPC id.
+	VpcId string `pulumi:"vpcId"`
 }
 
 // GetAviatrixVpcTrackerVpcListInput is an input type that accepts GetAviatrixVpcTrackerVpcListArgs and GetAviatrixVpcTrackerVpcListOutput values.
@@ -5285,14 +6089,22 @@ type GetAviatrixVpcTrackerVpcListInput interface {
 }
 
 type GetAviatrixVpcTrackerVpcListArgs struct {
-	AccountName   pulumi.StringInput                           `pulumi:"accountName"`
-	Cidr          pulumi.StringInput                           `pulumi:"cidr"`
-	CloudType     pulumi.IntInput                              `pulumi:"cloudType"`
-	InstanceCount pulumi.IntInput                              `pulumi:"instanceCount"`
-	Name          pulumi.StringInput                           `pulumi:"name"`
-	Region        pulumi.StringInput                           `pulumi:"region"`
-	Subnets       GetAviatrixVpcTrackerVpcListSubnetArrayInput `pulumi:"subnets"`
-	VpcId         pulumi.StringInput                           `pulumi:"vpcId"`
+	// Filters VPC list by access account name.
+	AccountName pulumi.StringInput `pulumi:"accountName"`
+	// Filters VPC list by CIDR (AWS/Azure only).
+	Cidr pulumi.StringInput `pulumi:"cidr"`
+	// Filters VPC list by cloud provider id. For example, cloudType = 1 will give all AWS VPCs.
+	CloudType pulumi.IntInput `pulumi:"cloudType"`
+	// Number of running instances in the VPC.
+	InstanceCount pulumi.IntInput `pulumi:"instanceCount"`
+	// Subnet name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Filters VPC list by region (AWS/Azure only).
+	Region pulumi.StringInput `pulumi:"region"`
+	// List of subnets within this VPC (GCP only).
+	Subnets GetAviatrixVpcTrackerVpcListSubnetArrayInput `pulumi:"subnets"`
+	// VPC id.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
 }
 
 func (GetAviatrixVpcTrackerVpcListArgs) ElementType() reflect.Type {
@@ -5346,34 +6158,42 @@ func (o GetAviatrixVpcTrackerVpcListOutput) ToGetAviatrixVpcTrackerVpcListOutput
 	return o
 }
 
+// Filters VPC list by access account name.
 func (o GetAviatrixVpcTrackerVpcListOutput) AccountName() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixVpcTrackerVpcList) string { return v.AccountName }).(pulumi.StringOutput)
 }
 
+// Filters VPC list by CIDR (AWS/Azure only).
 func (o GetAviatrixVpcTrackerVpcListOutput) Cidr() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixVpcTrackerVpcList) string { return v.Cidr }).(pulumi.StringOutput)
 }
 
+// Filters VPC list by cloud provider id. For example, cloudType = 1 will give all AWS VPCs.
 func (o GetAviatrixVpcTrackerVpcListOutput) CloudType() pulumi.IntOutput {
 	return o.ApplyT(func(v GetAviatrixVpcTrackerVpcList) int { return v.CloudType }).(pulumi.IntOutput)
 }
 
+// Number of running instances in the VPC.
 func (o GetAviatrixVpcTrackerVpcListOutput) InstanceCount() pulumi.IntOutput {
 	return o.ApplyT(func(v GetAviatrixVpcTrackerVpcList) int { return v.InstanceCount }).(pulumi.IntOutput)
 }
 
+// Subnet name.
 func (o GetAviatrixVpcTrackerVpcListOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixVpcTrackerVpcList) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// Filters VPC list by region (AWS/Azure only).
 func (o GetAviatrixVpcTrackerVpcListOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixVpcTrackerVpcList) string { return v.Region }).(pulumi.StringOutput)
 }
 
+// List of subnets within this VPC (GCP only).
 func (o GetAviatrixVpcTrackerVpcListOutput) Subnets() GetAviatrixVpcTrackerVpcListSubnetArrayOutput {
 	return o.ApplyT(func(v GetAviatrixVpcTrackerVpcList) []GetAviatrixVpcTrackerVpcListSubnet { return v.Subnets }).(GetAviatrixVpcTrackerVpcListSubnetArrayOutput)
 }
 
+// VPC id.
 func (o GetAviatrixVpcTrackerVpcListOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixVpcTrackerVpcList) string { return v.VpcId }).(pulumi.StringOutput)
 }
@@ -5399,9 +6219,13 @@ func (o GetAviatrixVpcTrackerVpcListArrayOutput) Index(i pulumi.IntInput) GetAvi
 }
 
 type GetAviatrixVpcTrackerVpcListSubnet struct {
-	Cidr   string `pulumi:"cidr"`
-	GwIp   string `pulumi:"gwIp"`
-	Name   string `pulumi:"name"`
+	// Filters VPC list by CIDR (AWS/Azure only).
+	Cidr string `pulumi:"cidr"`
+	// Subnet gateway ip.
+	GwIp string `pulumi:"gwIp"`
+	// Subnet name.
+	Name string `pulumi:"name"`
+	// Filters VPC list by region (AWS/Azure only).
 	Region string `pulumi:"region"`
 }
 
@@ -5417,9 +6241,13 @@ type GetAviatrixVpcTrackerVpcListSubnetInput interface {
 }
 
 type GetAviatrixVpcTrackerVpcListSubnetArgs struct {
-	Cidr   pulumi.StringInput `pulumi:"cidr"`
-	GwIp   pulumi.StringInput `pulumi:"gwIp"`
-	Name   pulumi.StringInput `pulumi:"name"`
+	// Filters VPC list by CIDR (AWS/Azure only).
+	Cidr pulumi.StringInput `pulumi:"cidr"`
+	// Subnet gateway ip.
+	GwIp pulumi.StringInput `pulumi:"gwIp"`
+	// Subnet name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Filters VPC list by region (AWS/Azure only).
 	Region pulumi.StringInput `pulumi:"region"`
 }
 
@@ -5474,18 +6302,22 @@ func (o GetAviatrixVpcTrackerVpcListSubnetOutput) ToGetAviatrixVpcTrackerVpcList
 	return o
 }
 
+// Filters VPC list by CIDR (AWS/Azure only).
 func (o GetAviatrixVpcTrackerVpcListSubnetOutput) Cidr() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixVpcTrackerVpcListSubnet) string { return v.Cidr }).(pulumi.StringOutput)
 }
 
+// Subnet gateway ip.
 func (o GetAviatrixVpcTrackerVpcListSubnetOutput) GwIp() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixVpcTrackerVpcListSubnet) string { return v.GwIp }).(pulumi.StringOutput)
 }
 
+// Subnet name.
 func (o GetAviatrixVpcTrackerVpcListSubnetOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixVpcTrackerVpcListSubnet) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// Filters VPC list by region (AWS/Azure only).
 func (o GetAviatrixVpcTrackerVpcListSubnetOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAviatrixVpcTrackerVpcListSubnet) string { return v.Region }).(pulumi.StringOutput)
 }

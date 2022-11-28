@@ -194,7 +194,36 @@ class AviatrixGeoVpn(pulumi.CustomResource):
                  service_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixGeoVpn resource with the given unique name, props, and options.
+        The **aviatrix_geo_vpn** resource enables and manages the [Aviatrix Geo VPN feature](https://docs.aviatrix.com/HowTos/GeoVPN.html).
+
+        > **NOTE:** If ELBs/gateways are being managed by the Geo VPN, in order to update VPN configurations of the Geo VPN, all the VPN configurations of the ELBs/gateways must be updated simultaneously and share the same values. This can be achieved by managing the VPN configurations through variables and updating their values accordingly.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Geo VPN
+        test_geo_vpn = aviatrix.AviatrixGeoVpn("testGeoVpn",
+            account_name="devops-aws",
+            cloud_type=1,
+            domain_name="aviatrix.live",
+            elb_dns_names=[
+                "elb-test1-497f5e89.elb.us-west-1.amazonaws.com",
+                "elb-test2-974f895e.elb.us-east-2.amazonaws.com",
+            ],
+            service_name="vpn")
+        ```
+
+        ## Import
+
+        **geo_vpn** can be imported using the `service_name` and `domain_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixGeoVpn:AviatrixGeoVpn test service_name~domain_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] account_name: This parameter represents the name of a Cloud-Account in Aviatrix controller.
@@ -210,7 +239,36 @@ class AviatrixGeoVpn(pulumi.CustomResource):
                  args: AviatrixGeoVpnArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixGeoVpn resource with the given unique name, props, and options.
+        The **aviatrix_geo_vpn** resource enables and manages the [Aviatrix Geo VPN feature](https://docs.aviatrix.com/HowTos/GeoVPN.html).
+
+        > **NOTE:** If ELBs/gateways are being managed by the Geo VPN, in order to update VPN configurations of the Geo VPN, all the VPN configurations of the ELBs/gateways must be updated simultaneously and share the same values. This can be achieved by managing the VPN configurations through variables and updating their values accordingly.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Geo VPN
+        test_geo_vpn = aviatrix.AviatrixGeoVpn("testGeoVpn",
+            account_name="devops-aws",
+            cloud_type=1,
+            domain_name="aviatrix.live",
+            elb_dns_names=[
+                "elb-test1-497f5e89.elb.us-west-1.amazonaws.com",
+                "elb-test2-974f895e.elb.us-east-2.amazonaws.com",
+            ],
+            service_name="vpn")
+        ```
+
+        ## Import
+
+        **geo_vpn** can be imported using the `service_name` and `domain_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixGeoVpn:AviatrixGeoVpn test service_name~domain_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixGeoVpnArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

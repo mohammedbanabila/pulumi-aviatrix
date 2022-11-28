@@ -13,7 +13,13 @@ namespace Pulumi.Aviatrix.Outputs
     [OutputType]
     public sealed class GetAviatrixDeviceInterfacesWanInterfaceResult
     {
+        /// <summary>
+        /// Name of the WAN primary interface.
+        /// </summary>
         public readonly string WanPrimaryInterface;
+        /// <summary>
+        /// The WAN Primary interface public IP.
+        /// </summary>
         public readonly string WanPrimaryInterfacePublicIp;
 
         [OutputConstructor]

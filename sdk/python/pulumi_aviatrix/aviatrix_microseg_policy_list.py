@@ -19,7 +19,7 @@ class AviatrixMicrosegPolicyListArgs:
                  policies: pulumi.Input[Sequence[pulumi.Input['AviatrixMicrosegPolicyListPolicyArgs']]]):
         """
         The set of arguments for constructing a AviatrixMicrosegPolicyList resource.
-        :param pulumi.Input[Sequence[pulumi.Input['AviatrixMicrosegPolicyListPolicyArgs']]] policies: List of micro-segmentation policies.
+        :param pulumi.Input[Sequence[pulumi.Input['AviatrixMicrosegPolicyListPolicyArgs']]] policies: List of policies.
         """
         pulumi.set(__self__, "policies", policies)
 
@@ -27,7 +27,7 @@ class AviatrixMicrosegPolicyListArgs:
     @pulumi.getter
     def policies(self) -> pulumi.Input[Sequence[pulumi.Input['AviatrixMicrosegPolicyListPolicyArgs']]]:
         """
-        List of micro-segmentation policies.
+        List of policies.
         """
         return pulumi.get(self, "policies")
 
@@ -42,7 +42,7 @@ class _AviatrixMicrosegPolicyListState:
                  policies: Optional[pulumi.Input[Sequence[pulumi.Input['AviatrixMicrosegPolicyListPolicyArgs']]]] = None):
         """
         Input properties used for looking up and filtering AviatrixMicrosegPolicyList resources.
-        :param pulumi.Input[Sequence[pulumi.Input['AviatrixMicrosegPolicyListPolicyArgs']]] policies: List of micro-segmentation policies.
+        :param pulumi.Input[Sequence[pulumi.Input['AviatrixMicrosegPolicyListPolicyArgs']]] policies: List of policies.
         """
         if policies is not None:
             pulumi.set(__self__, "policies", policies)
@@ -51,7 +51,7 @@ class _AviatrixMicrosegPolicyListState:
     @pulumi.getter
     def policies(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['AviatrixMicrosegPolicyListPolicyArgs']]]]:
         """
-        List of micro-segmentation policies.
+        List of policies.
         """
         return pulumi.get(self, "policies")
 
@@ -68,10 +68,54 @@ class AviatrixMicrosegPolicyList(pulumi.CustomResource):
                  policies: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixMicrosegPolicyListPolicyArgs']]]]] = None,
                  __props__=None):
         """
-        Create a AviatrixMicrosegPolicyList resource with the given unique name, props, and options.
+        !> **WARNING** **aviatrix_microseg_policy_list** is part of the Micro-segmentation private preview feature for R2.22.0. If you wish to enable a private preview mode feature, please contact your sales representative or Aviatrix Support.
+
+        The **aviatrix_microseg_policy_list** resource handles the creation and management of Micro-segmentation Policies. Available as of Provider R2.22.0+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Microseg Policy
+        test = aviatrix.AviatrixMicrosegPolicyList("test", policies=[
+            aviatrix.AviatrixMicrosegPolicyListPolicyArgs(
+                action="DENY",
+                dst_app_domains=["82e50c85-82bf-4b3b-b9da-aaed34a3aa53"],
+                logging=False,
+                name="microseg-policy-1",
+                priority=1,
+                protocol="ICMP",
+                src_app_domains=["f15c9890-c8c4-4c1a-a2b5-ef0ab34d2e30"],
+                watch=False,
+            ),
+            aviatrix.AviatrixMicrosegPolicyListPolicyArgs(
+                action="PERMIT",
+                dst_app_domains=["f05b0ad7-d2d7-4d16-b2f6-48492319414c"],
+                name="microseg-policy",
+                port_ranges=[aviatrix.AviatrixMicrosegPolicyListPolicyPortRangeArgs(
+                    hi=50000,
+                    lo=49000,
+                )],
+                priority=0,
+                protocol="TCP",
+                src_app_domains=["7e7d1573-7a7a-4a53-bcb5-1ad5041961e0"],
+            ),
+        ])
+        ```
+
+        ## Import
+
+        **aviatrix_microseg_policy_list** can be imported using the controller IP, e.g. controller IP is 10.11.12.13
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixMicrosegPolicyList:AviatrixMicrosegPolicyList test 10-11-12-13
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixMicrosegPolicyListPolicyArgs']]]] policies: List of micro-segmentation policies.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixMicrosegPolicyListPolicyArgs']]]] policies: List of policies.
         """
         ...
     @overload
@@ -80,7 +124,51 @@ class AviatrixMicrosegPolicyList(pulumi.CustomResource):
                  args: AviatrixMicrosegPolicyListArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixMicrosegPolicyList resource with the given unique name, props, and options.
+        !> **WARNING** **aviatrix_microseg_policy_list** is part of the Micro-segmentation private preview feature for R2.22.0. If you wish to enable a private preview mode feature, please contact your sales representative or Aviatrix Support.
+
+        The **aviatrix_microseg_policy_list** resource handles the creation and management of Micro-segmentation Policies. Available as of Provider R2.22.0+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Microseg Policy
+        test = aviatrix.AviatrixMicrosegPolicyList("test", policies=[
+            aviatrix.AviatrixMicrosegPolicyListPolicyArgs(
+                action="DENY",
+                dst_app_domains=["82e50c85-82bf-4b3b-b9da-aaed34a3aa53"],
+                logging=False,
+                name="microseg-policy-1",
+                priority=1,
+                protocol="ICMP",
+                src_app_domains=["f15c9890-c8c4-4c1a-a2b5-ef0ab34d2e30"],
+                watch=False,
+            ),
+            aviatrix.AviatrixMicrosegPolicyListPolicyArgs(
+                action="PERMIT",
+                dst_app_domains=["f05b0ad7-d2d7-4d16-b2f6-48492319414c"],
+                name="microseg-policy",
+                port_ranges=[aviatrix.AviatrixMicrosegPolicyListPolicyPortRangeArgs(
+                    hi=50000,
+                    lo=49000,
+                )],
+                priority=0,
+                protocol="TCP",
+                src_app_domains=["7e7d1573-7a7a-4a53-bcb5-1ad5041961e0"],
+            ),
+        ])
+        ```
+
+        ## Import
+
+        **aviatrix_microseg_policy_list** can be imported using the controller IP, e.g. controller IP is 10.11.12.13
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixMicrosegPolicyList:AviatrixMicrosegPolicyList test 10-11-12-13
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixMicrosegPolicyListArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -127,7 +215,7 @@ class AviatrixMicrosegPolicyList(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixMicrosegPolicyListPolicyArgs']]]] policies: List of micro-segmentation policies.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixMicrosegPolicyListPolicyArgs']]]] policies: List of policies.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -140,7 +228,7 @@ class AviatrixMicrosegPolicyList(pulumi.CustomResource):
     @pulumi.getter
     def policies(self) -> pulumi.Output[Sequence['outputs.AviatrixMicrosegPolicyListPolicy']]:
         """
-        List of micro-segmentation policies.
+        List of policies.
         """
         return pulumi.get(self, "policies")
 

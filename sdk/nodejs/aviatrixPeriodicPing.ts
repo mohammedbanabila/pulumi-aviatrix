@@ -4,6 +4,31 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_periodic_ping** resource manages the periodic ping feature for Aviatrix gateways.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Enable Periodic Ping for a Gateway
+ * const testPing = new aviatrix.AviatrixPeriodicPing("test_ping", {
+ *     gwName: "test-gw",
+ *     interval: 600,
+ *     ipAddress: "127.0.0.1",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **aviatrix_periodic_ping** can be imported using the `gw_name`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixPeriodicPing:AviatrixPeriodicPing test gw_name
+ * ```
+ */
 export class AviatrixPeriodicPing extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixPeriodicPing resource's state with the given name, ID, and optional extra
@@ -33,7 +58,7 @@ export class AviatrixPeriodicPing extends pulumi.CustomResource {
     }
 
     /**
-     * Name of gateway.
+     * Name of the gateway.
      */
     public readonly gwName!: pulumi.Output<string>;
     /**
@@ -86,7 +111,7 @@ export class AviatrixPeriodicPing extends pulumi.CustomResource {
  */
 export interface AviatrixPeriodicPingState {
     /**
-     * Name of gateway.
+     * Name of the gateway.
      */
     gwName?: pulumi.Input<string>;
     /**
@@ -104,7 +129,7 @@ export interface AviatrixPeriodicPingState {
  */
 export interface AviatrixPeriodicPingArgs {
     /**
-     * Name of gateway.
+     * Name of the gateway.
      */
     gwName: pulumi.Input<string>;
     /**

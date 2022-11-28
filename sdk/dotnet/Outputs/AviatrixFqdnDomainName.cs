@@ -13,9 +13,23 @@ namespace Pulumi.Aviatrix.Outputs
     [OutputType]
     public sealed class AviatrixFqdnDomainName
     {
+        /// <summary>
+        /// What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base Policy' if no value provided.
+        /// * For protocol "all", port must be set to "all".
+        /// * For protocol “icmp”, port must be set to “ping”.
+        /// </summary>
         public readonly string? Action;
+        /// <summary>
+        /// FQDN. Example: "facebook.com".
+        /// </summary>
         public readonly string Fqdn;
+        /// <summary>
+        /// Port. Example "25".
+        /// </summary>
         public readonly string Port;
+        /// <summary>
+        /// Protocol. Valid values: "all", "tcp", "udp", "icmp".
+        /// </summary>
         public readonly string Proto;
 
         [OutputConstructor]

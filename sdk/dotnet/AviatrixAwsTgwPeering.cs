@@ -9,17 +9,47 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_aws_tgw_peering** resource allows the creation and management of Aviatrix-created inter-region peerings between AWS TGWs.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix AWS Tgw Peering
+    ///     var test = new Aviatrix.AviatrixAwsTgwPeering("test", new()
+    ///     {
+    ///         TgwName1 = "tgw1",
+    ///         TgwName2 = "tgw2",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **aws_tgw_peering** can be imported using the `tgw_name1` and `tgw_name2`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixAwsTgwPeering:AviatrixAwsTgwPeering test tgw_name1~tgw_name2
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixAwsTgwPeering:AviatrixAwsTgwPeering")]
     public partial class AviatrixAwsTgwPeering : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Name of the first AWS tgw to make a peer pair.
+        /// This parameter represents name of the first AWS TGW to make a peer pair.
         /// </summary>
         [Output("tgwName1")]
         public Output<string> TgwName1 { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the second AWS tgw to make a peer pair.
+        /// This parameter represents name of the second AWS TGW to make a peer pair.
         /// </summary>
         [Output("tgwName2")]
         public Output<string> TgwName2 { get; private set; } = null!;
@@ -72,13 +102,13 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixAwsTgwPeeringArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Name of the first AWS tgw to make a peer pair.
+        /// This parameter represents name of the first AWS TGW to make a peer pair.
         /// </summary>
         [Input("tgwName1", required: true)]
         public Input<string> TgwName1 { get; set; } = null!;
 
         /// <summary>
-        /// Name of the second AWS tgw to make a peer pair.
+        /// This parameter represents name of the second AWS TGW to make a peer pair.
         /// </summary>
         [Input("tgwName2", required: true)]
         public Input<string> TgwName2 { get; set; } = null!;
@@ -92,13 +122,13 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixAwsTgwPeeringState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Name of the first AWS tgw to make a peer pair.
+        /// This parameter represents name of the first AWS TGW to make a peer pair.
         /// </summary>
         [Input("tgwName1")]
         public Input<string>? TgwName1 { get; set; }
 
         /// <summary>
-        /// Name of the second AWS tgw to make a peer pair.
+        /// This parameter represents name of the second AWS TGW to make a peer pair.
         /// </summary>
         [Input("tgwName2")]
         public Input<string>? TgwName2 { get; set; }

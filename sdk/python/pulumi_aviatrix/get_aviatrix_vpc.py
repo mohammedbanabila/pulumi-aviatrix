@@ -87,41 +87,65 @@ class GetAviatrixVpcResult:
     @property
     @pulumi.getter(name="accountName")
     def account_name(self) -> str:
+        """
+        Account name of the VPC created.
+        """
         return pulumi.get(self, "account_name")
 
     @property
     @pulumi.getter(name="availabilityDomains")
     def availability_domains(self) -> Sequence[str]:
+        """
+        List of OCI availability domains.
+        """
         return pulumi.get(self, "availability_domains")
 
     @property
     @pulumi.getter(name="aviatrixFirenetVpc")
     def aviatrix_firenet_vpc(self) -> bool:
+        """
+        Switch if the VPC created is an Aviatrix FireNet VPC or not.
+        """
         return pulumi.get(self, "aviatrix_firenet_vpc")
 
     @property
     @pulumi.getter(name="aviatrixTransitVpc")
     def aviatrix_transit_vpc(self) -> bool:
+        """
+        Switch if the VPC created is an Aviatrix Transit VPC or not.
+        """
         return pulumi.get(self, "aviatrix_transit_vpc")
 
     @property
     @pulumi.getter(name="azureVnetResourceId")
     def azure_vnet_resource_id(self) -> str:
+        """
+        Azure vnet resource ID.
+        """
         return pulumi.get(self, "azure_vnet_resource_id")
 
     @property
     @pulumi.getter
     def cidr(self) -> str:
+        """
+        Private subnet CIDR.
+        """
         return pulumi.get(self, "cidr")
 
     @property
     @pulumi.getter(name="cloudType")
     def cloud_type(self) -> int:
+        """
+        Type of cloud service provider.
+        """
         return pulumi.get(self, "cloud_type")
 
     @property
     @pulumi.getter(name="faultDomains")
     def fault_domains(self) -> Sequence[str]:
+        """
+        List of OCI fault domains.
+        """
         return pulumi.get(self, "fault_domains")
 
     @property
@@ -135,36 +159,57 @@ class GetAviatrixVpcResult:
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Private subnet name.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="numOfSubnetPairs")
     def num_of_subnet_pairs(self) -> int:
+        """
+        Number of public subnet and private subnet pair created. Only supported for AWS, Azure provider.
+        """
         return pulumi.get(self, "num_of_subnet_pairs")
 
     @property
     @pulumi.getter(name="privateSubnets")
     def private_subnets(self) -> Sequence['outputs.GetAviatrixVpcPrivateSubnetResult']:
+        """
+        List of private subnet of the VPC(AWS, Azure) created.
+        """
         return pulumi.get(self, "private_subnets")
 
     @property
     @pulumi.getter(name="publicSubnets")
     def public_subnets(self) -> Sequence['outputs.GetAviatrixVpcPublicSubnetResult']:
+        """
+        List of public subnet of the VPC(AWS, Azure) created.
+        """
         return pulumi.get(self, "public_subnets")
 
     @property
     @pulumi.getter
     def region(self) -> str:
+        """
+        Region of the VPC created.
+        """
         return pulumi.get(self, "region")
 
     @property
     @pulumi.getter(name="resourceGroup")
     def resource_group(self) -> str:
+        """
+        Resource group of the Azure VPC created.
+        """
         return pulumi.get(self, "resource_group")
 
     @property
     @pulumi.getter(name="routeTables")
     def route_tables(self) -> Sequence[str]:
+        """
+        List of route table ids associated with this VPC. Only populated for AWS, AWSGov and Azure vpc.
+        """
         return pulumi.get(self, "route_tables")
 
     @property
@@ -175,16 +220,25 @@ class GetAviatrixVpcResult:
     @property
     @pulumi.getter(name="subnetSize")
     def subnet_size(self) -> int:
+        """
+        Subnet size. Only supported for AWS, Azure provider.
+        """
         return pulumi.get(self, "subnet_size")
 
     @property
     @pulumi.getter
     def subnets(self) -> Sequence['outputs.GetAviatrixVpcSubnetResult']:
+        """
+        List of subnet of the VPC created.
+        """
         return pulumi.get(self, "subnets")
 
     @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> str:
+        """
+        ID of the VPC created.
+        """
         return pulumi.get(self, "vpc_id")
 
 
@@ -220,7 +274,22 @@ def get_aviatrix_vpc(name: Optional[str] = None,
                      route_tables_filter: Optional[str] = None,
                      opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetAviatrixVpcResult:
     """
-    Use this data source to access information about an existing resource.
+    The **aviatrix_vpc** data source provides details about a specific VPC created by the Aviatrix Controller.
+
+    This data source can prove useful when a module accepts any form of VPC detail as an input variable. For example, requiring a subnet CIDR specification when creating a gateway.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_aviatrix as aviatrix
+
+    test = aviatrix.get_aviatrix_vpc(name="vpc-test")
+    ```
+
+
+    :param str name: Name of the Aviatrix VPC.
+    :param str route_tables_filter: Filters the `route_tables` list to contain only public or private route tables. Valid values are 'private' or 'public'. If not set `route_tables` is not filtered.
     """
     __args__ = dict()
     __args__['name'] = name
@@ -256,6 +325,21 @@ def get_aviatrix_vpc_output(name: Optional[pulumi.Input[str]] = None,
                             route_tables_filter: Optional[pulumi.Input[Optional[str]]] = None,
                             opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetAviatrixVpcResult]:
     """
-    Use this data source to access information about an existing resource.
+    The **aviatrix_vpc** data source provides details about a specific VPC created by the Aviatrix Controller.
+
+    This data source can prove useful when a module accepts any form of VPC detail as an input variable. For example, requiring a subnet CIDR specification when creating a gateway.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_aviatrix as aviatrix
+
+    test = aviatrix.get_aviatrix_vpc(name="vpc-test")
+    ```
+
+
+    :param str name: Name of the Aviatrix VPC.
+    :param str route_tables_filter: Filters the `route_tables` list to contain only public or private route tables. Valid values are 'private' or 'public'. If not set `route_tables` is not filtered.
     """
     ...

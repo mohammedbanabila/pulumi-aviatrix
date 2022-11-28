@@ -40,6 +40,9 @@ class GetAviatrixNetworkDomainsResult:
     @property
     @pulumi.getter(name="networkDomains")
     def network_domains(self) -> Sequence['outputs.GetAviatrixNetworkDomainsNetworkDomainResult']:
+        """
+        The list of all Network Domains
+        """
         return pulumi.get(self, "network_domains")
 
 
@@ -55,7 +58,9 @@ class AwaitableGetAviatrixNetworkDomainsResult(GetAviatrixNetworkDomainsResult):
 
 def get_aviatrix_network_domains(opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetAviatrixNetworkDomainsResult:
     """
-    Use this data source to access information about an existing resource.
+    The **aviatrix_network_domains** data source provides details about all Network Domains created by the Aviatrix Controller. Available as of provider version 2.23+.
+
+    ## Example Usage
     """
     __args__ = dict()
     opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)

@@ -25,16 +25,15 @@ class AviatrixFirewallPolicyInitArgs:
                  protocol: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a AviatrixFirewallPolicy resource.
-        :param pulumi.Input[str] action: Valid values: 'allow', 'deny' or 'force-drop'(in stateful firewall rule to allow immediate packet dropping on
-               established sessions).
-        :param pulumi.Input[str] dst_ip: CIDRs separated by comma or tag names such 'HR' or 'marketing' etc.
-        :param pulumi.Input[str] gw_name: The name of gateway.
-        :param pulumi.Input[str] port: A single port or a range of port numbers.
-        :param pulumi.Input[str] src_ip: CIDRs separated by comma or tag names such 'HR' or 'marketing' etc.
-        :param pulumi.Input[str] description: Description of this firewall policy.
-        :param pulumi.Input[bool] log_enabled: Valid values: true or false.
-        :param pulumi.Input[int] position: Position in the policy list, where the firewall policy will be inserted to.
-        :param pulumi.Input[str] protocol: 'all', 'tcp', 'udp', 'icmp', 'sctp', 'rdp', 'dccp'.
+        :param pulumi.Input[str] action: Valid values: "allow", "deny" and "force-drop" (in stateful firewall rule to allow immediate packet dropping on established sessions).
+        :param pulumi.Input[str] dst_ip: CIDRs separated by comma or tag names such "HR" or "marketing" etc. Example: "10.30.0.0/16,10.45.0.0/20". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
+        :param pulumi.Input[str] gw_name: Gateway name to attach firewall policy to.
+        :param pulumi.Input[str] port: A single port or a range of port numbers. Example: "25", "25:1024".
+        :param pulumi.Input[str] src_ip: CIDRs separated by comma or tag names such "HR" or "marketing" etc. Example: "10.30.0.0/16,10.45.0.0/20". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
+        :param pulumi.Input[str] description: Description of the policy. Example: "This is policy no.1".
+        :param pulumi.Input[bool] log_enabled: Valid values: true, false. Default value: false.
+        :param pulumi.Input[int] position: Position in the policy list, where the firewall policy will be inserted to. Valid values: any positive integer. Example: 2. If it is larger than the size of policy list, the policy will be inserted to the end.
+        :param pulumi.Input[str] protocol: : "all", "tcp", "udp", "icmp", "sctp", "rdp", "dccp".
         """
         pulumi.set(__self__, "action", action)
         pulumi.set(__self__, "dst_ip", dst_ip)
@@ -54,8 +53,7 @@ class AviatrixFirewallPolicyInitArgs:
     @pulumi.getter
     def action(self) -> pulumi.Input[str]:
         """
-        Valid values: 'allow', 'deny' or 'force-drop'(in stateful firewall rule to allow immediate packet dropping on
-        established sessions).
+        Valid values: "allow", "deny" and "force-drop" (in stateful firewall rule to allow immediate packet dropping on established sessions).
         """
         return pulumi.get(self, "action")
 
@@ -67,7 +65,7 @@ class AviatrixFirewallPolicyInitArgs:
     @pulumi.getter(name="dstIp")
     def dst_ip(self) -> pulumi.Input[str]:
         """
-        CIDRs separated by comma or tag names such 'HR' or 'marketing' etc.
+        CIDRs separated by comma or tag names such "HR" or "marketing" etc. Example: "10.30.0.0/16,10.45.0.0/20". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
         """
         return pulumi.get(self, "dst_ip")
 
@@ -79,7 +77,7 @@ class AviatrixFirewallPolicyInitArgs:
     @pulumi.getter(name="gwName")
     def gw_name(self) -> pulumi.Input[str]:
         """
-        The name of gateway.
+        Gateway name to attach firewall policy to.
         """
         return pulumi.get(self, "gw_name")
 
@@ -91,7 +89,7 @@ class AviatrixFirewallPolicyInitArgs:
     @pulumi.getter
     def port(self) -> pulumi.Input[str]:
         """
-        A single port or a range of port numbers.
+        A single port or a range of port numbers. Example: "25", "25:1024".
         """
         return pulumi.get(self, "port")
 
@@ -103,7 +101,7 @@ class AviatrixFirewallPolicyInitArgs:
     @pulumi.getter(name="srcIp")
     def src_ip(self) -> pulumi.Input[str]:
         """
-        CIDRs separated by comma or tag names such 'HR' or 'marketing' etc.
+        CIDRs separated by comma or tag names such "HR" or "marketing" etc. Example: "10.30.0.0/16,10.45.0.0/20". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
         """
         return pulumi.get(self, "src_ip")
 
@@ -115,7 +113,7 @@ class AviatrixFirewallPolicyInitArgs:
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
         """
-        Description of this firewall policy.
+        Description of the policy. Example: "This is policy no.1".
         """
         return pulumi.get(self, "description")
 
@@ -127,7 +125,7 @@ class AviatrixFirewallPolicyInitArgs:
     @pulumi.getter(name="logEnabled")
     def log_enabled(self) -> Optional[pulumi.Input[bool]]:
         """
-        Valid values: true or false.
+        Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "log_enabled")
 
@@ -139,7 +137,7 @@ class AviatrixFirewallPolicyInitArgs:
     @pulumi.getter
     def position(self) -> Optional[pulumi.Input[int]]:
         """
-        Position in the policy list, where the firewall policy will be inserted to.
+        Position in the policy list, where the firewall policy will be inserted to. Valid values: any positive integer. Example: 2. If it is larger than the size of policy list, the policy will be inserted to the end.
         """
         return pulumi.get(self, "position")
 
@@ -151,7 +149,7 @@ class AviatrixFirewallPolicyInitArgs:
     @pulumi.getter
     def protocol(self) -> Optional[pulumi.Input[str]]:
         """
-        'all', 'tcp', 'udp', 'icmp', 'sctp', 'rdp', 'dccp'.
+        : "all", "tcp", "udp", "icmp", "sctp", "rdp", "dccp".
         """
         return pulumi.get(self, "protocol")
 
@@ -174,16 +172,15 @@ class _AviatrixFirewallPolicyState:
                  src_ip: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixFirewallPolicy resources.
-        :param pulumi.Input[str] action: Valid values: 'allow', 'deny' or 'force-drop'(in stateful firewall rule to allow immediate packet dropping on
-               established sessions).
-        :param pulumi.Input[str] description: Description of this firewall policy.
-        :param pulumi.Input[str] dst_ip: CIDRs separated by comma or tag names such 'HR' or 'marketing' etc.
-        :param pulumi.Input[str] gw_name: The name of gateway.
-        :param pulumi.Input[bool] log_enabled: Valid values: true or false.
-        :param pulumi.Input[str] port: A single port or a range of port numbers.
-        :param pulumi.Input[int] position: Position in the policy list, where the firewall policy will be inserted to.
-        :param pulumi.Input[str] protocol: 'all', 'tcp', 'udp', 'icmp', 'sctp', 'rdp', 'dccp'.
-        :param pulumi.Input[str] src_ip: CIDRs separated by comma or tag names such 'HR' or 'marketing' etc.
+        :param pulumi.Input[str] action: Valid values: "allow", "deny" and "force-drop" (in stateful firewall rule to allow immediate packet dropping on established sessions).
+        :param pulumi.Input[str] description: Description of the policy. Example: "This is policy no.1".
+        :param pulumi.Input[str] dst_ip: CIDRs separated by comma or tag names such "HR" or "marketing" etc. Example: "10.30.0.0/16,10.45.0.0/20". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
+        :param pulumi.Input[str] gw_name: Gateway name to attach firewall policy to.
+        :param pulumi.Input[bool] log_enabled: Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] port: A single port or a range of port numbers. Example: "25", "25:1024".
+        :param pulumi.Input[int] position: Position in the policy list, where the firewall policy will be inserted to. Valid values: any positive integer. Example: 2. If it is larger than the size of policy list, the policy will be inserted to the end.
+        :param pulumi.Input[str] protocol: : "all", "tcp", "udp", "icmp", "sctp", "rdp", "dccp".
+        :param pulumi.Input[str] src_ip: CIDRs separated by comma or tag names such "HR" or "marketing" etc. Example: "10.30.0.0/16,10.45.0.0/20". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
         """
         if action is not None:
             pulumi.set(__self__, "action", action)
@@ -208,8 +205,7 @@ class _AviatrixFirewallPolicyState:
     @pulumi.getter
     def action(self) -> Optional[pulumi.Input[str]]:
         """
-        Valid values: 'allow', 'deny' or 'force-drop'(in stateful firewall rule to allow immediate packet dropping on
-        established sessions).
+        Valid values: "allow", "deny" and "force-drop" (in stateful firewall rule to allow immediate packet dropping on established sessions).
         """
         return pulumi.get(self, "action")
 
@@ -221,7 +217,7 @@ class _AviatrixFirewallPolicyState:
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
         """
-        Description of this firewall policy.
+        Description of the policy. Example: "This is policy no.1".
         """
         return pulumi.get(self, "description")
 
@@ -233,7 +229,7 @@ class _AviatrixFirewallPolicyState:
     @pulumi.getter(name="dstIp")
     def dst_ip(self) -> Optional[pulumi.Input[str]]:
         """
-        CIDRs separated by comma or tag names such 'HR' or 'marketing' etc.
+        CIDRs separated by comma or tag names such "HR" or "marketing" etc. Example: "10.30.0.0/16,10.45.0.0/20". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
         """
         return pulumi.get(self, "dst_ip")
 
@@ -245,7 +241,7 @@ class _AviatrixFirewallPolicyState:
     @pulumi.getter(name="gwName")
     def gw_name(self) -> Optional[pulumi.Input[str]]:
         """
-        The name of gateway.
+        Gateway name to attach firewall policy to.
         """
         return pulumi.get(self, "gw_name")
 
@@ -257,7 +253,7 @@ class _AviatrixFirewallPolicyState:
     @pulumi.getter(name="logEnabled")
     def log_enabled(self) -> Optional[pulumi.Input[bool]]:
         """
-        Valid values: true or false.
+        Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "log_enabled")
 
@@ -269,7 +265,7 @@ class _AviatrixFirewallPolicyState:
     @pulumi.getter
     def port(self) -> Optional[pulumi.Input[str]]:
         """
-        A single port or a range of port numbers.
+        A single port or a range of port numbers. Example: "25", "25:1024".
         """
         return pulumi.get(self, "port")
 
@@ -281,7 +277,7 @@ class _AviatrixFirewallPolicyState:
     @pulumi.getter
     def position(self) -> Optional[pulumi.Input[int]]:
         """
-        Position in the policy list, where the firewall policy will be inserted to.
+        Position in the policy list, where the firewall policy will be inserted to. Valid values: any positive integer. Example: 2. If it is larger than the size of policy list, the policy will be inserted to the end.
         """
         return pulumi.get(self, "position")
 
@@ -293,7 +289,7 @@ class _AviatrixFirewallPolicyState:
     @pulumi.getter
     def protocol(self) -> Optional[pulumi.Input[str]]:
         """
-        'all', 'tcp', 'udp', 'icmp', 'sctp', 'rdp', 'dccp'.
+        : "all", "tcp", "udp", "icmp", "sctp", "rdp", "dccp".
         """
         return pulumi.get(self, "protocol")
 
@@ -305,7 +301,7 @@ class _AviatrixFirewallPolicyState:
     @pulumi.getter(name="srcIp")
     def src_ip(self) -> Optional[pulumi.Input[str]]:
         """
-        CIDRs separated by comma or tag names such 'HR' or 'marketing' etc.
+        CIDRs separated by comma or tag names such "HR" or "marketing" etc. Example: "10.30.0.0/16,10.45.0.0/20". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
         """
         return pulumi.get(self, "src_ip")
 
@@ -330,19 +326,59 @@ class AviatrixFirewallPolicy(pulumi.CustomResource):
                  src_ip: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixFirewallPolicy resource with the given unique name, props, and options.
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Stateful Firewall Policy
+        test_firewall_policy = aviatrix.AviatrixFirewallPolicy("testFirewallPolicy",
+            gw_name=aviatrix_firewall["test_firewall"]["gw_name"],
+            src_ip="10.15.0.224/32",
+            dst_ip="10.12.0.172/32",
+            protocol="tcp",
+            port="0:65535",
+            action="allow",
+            log_enabled=True,
+            description="Test policy.")
+        ```
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Stateful Firewall Policy and insert it to a specific position
+        test_firewall_policy = aviatrix.AviatrixFirewallPolicy("testFirewallPolicy",
+            gw_name=aviatrix_firewall["test_firewall"]["gw_name"],
+            src_ip="10.15.0.225/32",
+            dst_ip="10.12.0.173/32",
+            protocol="tcp",
+            port="0:65535",
+            action="allow",
+            log_enabled=True,
+            description="Test policy.",
+            position=2)
+        ```
+
+        ## Import
+
+        **firewall_policy** can be imported using the `gw_name`, `src_ip`, `dst_ip`, `protocol`, `port` and `action` separated by `~`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixFirewallPolicy:AviatrixFirewallPolicy test "gw_name~src_ip~dst_ip~protocol~port~action"
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] action: Valid values: 'allow', 'deny' or 'force-drop'(in stateful firewall rule to allow immediate packet dropping on
-               established sessions).
-        :param pulumi.Input[str] description: Description of this firewall policy.
-        :param pulumi.Input[str] dst_ip: CIDRs separated by comma or tag names such 'HR' or 'marketing' etc.
-        :param pulumi.Input[str] gw_name: The name of gateway.
-        :param pulumi.Input[bool] log_enabled: Valid values: true or false.
-        :param pulumi.Input[str] port: A single port or a range of port numbers.
-        :param pulumi.Input[int] position: Position in the policy list, where the firewall policy will be inserted to.
-        :param pulumi.Input[str] protocol: 'all', 'tcp', 'udp', 'icmp', 'sctp', 'rdp', 'dccp'.
-        :param pulumi.Input[str] src_ip: CIDRs separated by comma or tag names such 'HR' or 'marketing' etc.
+        :param pulumi.Input[str] action: Valid values: "allow", "deny" and "force-drop" (in stateful firewall rule to allow immediate packet dropping on established sessions).
+        :param pulumi.Input[str] description: Description of the policy. Example: "This is policy no.1".
+        :param pulumi.Input[str] dst_ip: CIDRs separated by comma or tag names such "HR" or "marketing" etc. Example: "10.30.0.0/16,10.45.0.0/20". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
+        :param pulumi.Input[str] gw_name: Gateway name to attach firewall policy to.
+        :param pulumi.Input[bool] log_enabled: Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] port: A single port or a range of port numbers. Example: "25", "25:1024".
+        :param pulumi.Input[int] position: Position in the policy list, where the firewall policy will be inserted to. Valid values: any positive integer. Example: 2. If it is larger than the size of policy list, the policy will be inserted to the end.
+        :param pulumi.Input[str] protocol: : "all", "tcp", "udp", "icmp", "sctp", "rdp", "dccp".
+        :param pulumi.Input[str] src_ip: CIDRs separated by comma or tag names such "HR" or "marketing" etc. Example: "10.30.0.0/16,10.45.0.0/20". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
         """
         ...
     @overload
@@ -351,7 +387,48 @@ class AviatrixFirewallPolicy(pulumi.CustomResource):
                  args: AviatrixFirewallPolicyInitArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixFirewallPolicy resource with the given unique name, props, and options.
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Stateful Firewall Policy
+        test_firewall_policy = aviatrix.AviatrixFirewallPolicy("testFirewallPolicy",
+            gw_name=aviatrix_firewall["test_firewall"]["gw_name"],
+            src_ip="10.15.0.224/32",
+            dst_ip="10.12.0.172/32",
+            protocol="tcp",
+            port="0:65535",
+            action="allow",
+            log_enabled=True,
+            description="Test policy.")
+        ```
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Stateful Firewall Policy and insert it to a specific position
+        test_firewall_policy = aviatrix.AviatrixFirewallPolicy("testFirewallPolicy",
+            gw_name=aviatrix_firewall["test_firewall"]["gw_name"],
+            src_ip="10.15.0.225/32",
+            dst_ip="10.12.0.173/32",
+            protocol="tcp",
+            port="0:65535",
+            action="allow",
+            log_enabled=True,
+            description="Test policy.",
+            position=2)
+        ```
+
+        ## Import
+
+        **firewall_policy** can be imported using the `gw_name`, `src_ip`, `dst_ip`, `protocol`, `port` and `action` separated by `~`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixFirewallPolicy:AviatrixFirewallPolicy test "gw_name~src_ip~dst_ip~protocol~port~action"
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixFirewallPolicyInitArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -430,16 +507,15 @@ class AviatrixFirewallPolicy(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] action: Valid values: 'allow', 'deny' or 'force-drop'(in stateful firewall rule to allow immediate packet dropping on
-               established sessions).
-        :param pulumi.Input[str] description: Description of this firewall policy.
-        :param pulumi.Input[str] dst_ip: CIDRs separated by comma or tag names such 'HR' or 'marketing' etc.
-        :param pulumi.Input[str] gw_name: The name of gateway.
-        :param pulumi.Input[bool] log_enabled: Valid values: true or false.
-        :param pulumi.Input[str] port: A single port or a range of port numbers.
-        :param pulumi.Input[int] position: Position in the policy list, where the firewall policy will be inserted to.
-        :param pulumi.Input[str] protocol: 'all', 'tcp', 'udp', 'icmp', 'sctp', 'rdp', 'dccp'.
-        :param pulumi.Input[str] src_ip: CIDRs separated by comma or tag names such 'HR' or 'marketing' etc.
+        :param pulumi.Input[str] action: Valid values: "allow", "deny" and "force-drop" (in stateful firewall rule to allow immediate packet dropping on established sessions).
+        :param pulumi.Input[str] description: Description of the policy. Example: "This is policy no.1".
+        :param pulumi.Input[str] dst_ip: CIDRs separated by comma or tag names such "HR" or "marketing" etc. Example: "10.30.0.0/16,10.45.0.0/20". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
+        :param pulumi.Input[str] gw_name: Gateway name to attach firewall policy to.
+        :param pulumi.Input[bool] log_enabled: Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] port: A single port or a range of port numbers. Example: "25", "25:1024".
+        :param pulumi.Input[int] position: Position in the policy list, where the firewall policy will be inserted to. Valid values: any positive integer. Example: 2. If it is larger than the size of policy list, the policy will be inserted to the end.
+        :param pulumi.Input[str] protocol: : "all", "tcp", "udp", "icmp", "sctp", "rdp", "dccp".
+        :param pulumi.Input[str] src_ip: CIDRs separated by comma or tag names such "HR" or "marketing" etc. Example: "10.30.0.0/16,10.45.0.0/20". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -460,8 +536,7 @@ class AviatrixFirewallPolicy(pulumi.CustomResource):
     @pulumi.getter
     def action(self) -> pulumi.Output[str]:
         """
-        Valid values: 'allow', 'deny' or 'force-drop'(in stateful firewall rule to allow immediate packet dropping on
-        established sessions).
+        Valid values: "allow", "deny" and "force-drop" (in stateful firewall rule to allow immediate packet dropping on established sessions).
         """
         return pulumi.get(self, "action")
 
@@ -469,7 +544,7 @@ class AviatrixFirewallPolicy(pulumi.CustomResource):
     @pulumi.getter
     def description(self) -> pulumi.Output[Optional[str]]:
         """
-        Description of this firewall policy.
+        Description of the policy. Example: "This is policy no.1".
         """
         return pulumi.get(self, "description")
 
@@ -477,7 +552,7 @@ class AviatrixFirewallPolicy(pulumi.CustomResource):
     @pulumi.getter(name="dstIp")
     def dst_ip(self) -> pulumi.Output[str]:
         """
-        CIDRs separated by comma or tag names such 'HR' or 'marketing' etc.
+        CIDRs separated by comma or tag names such "HR" or "marketing" etc. Example: "10.30.0.0/16,10.45.0.0/20". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
         """
         return pulumi.get(self, "dst_ip")
 
@@ -485,7 +560,7 @@ class AviatrixFirewallPolicy(pulumi.CustomResource):
     @pulumi.getter(name="gwName")
     def gw_name(self) -> pulumi.Output[str]:
         """
-        The name of gateway.
+        Gateway name to attach firewall policy to.
         """
         return pulumi.get(self, "gw_name")
 
@@ -493,7 +568,7 @@ class AviatrixFirewallPolicy(pulumi.CustomResource):
     @pulumi.getter(name="logEnabled")
     def log_enabled(self) -> pulumi.Output[Optional[bool]]:
         """
-        Valid values: true or false.
+        Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "log_enabled")
 
@@ -501,7 +576,7 @@ class AviatrixFirewallPolicy(pulumi.CustomResource):
     @pulumi.getter
     def port(self) -> pulumi.Output[str]:
         """
-        A single port or a range of port numbers.
+        A single port or a range of port numbers. Example: "25", "25:1024".
         """
         return pulumi.get(self, "port")
 
@@ -509,7 +584,7 @@ class AviatrixFirewallPolicy(pulumi.CustomResource):
     @pulumi.getter
     def position(self) -> pulumi.Output[int]:
         """
-        Position in the policy list, where the firewall policy will be inserted to.
+        Position in the policy list, where the firewall policy will be inserted to. Valid values: any positive integer. Example: 2. If it is larger than the size of policy list, the policy will be inserted to the end.
         """
         return pulumi.get(self, "position")
 
@@ -517,7 +592,7 @@ class AviatrixFirewallPolicy(pulumi.CustomResource):
     @pulumi.getter
     def protocol(self) -> pulumi.Output[Optional[str]]:
         """
-        'all', 'tcp', 'udp', 'icmp', 'sctp', 'rdp', 'dccp'.
+        : "all", "tcp", "udp", "icmp", "sctp", "rdp", "dccp".
         """
         return pulumi.get(self, "protocol")
 
@@ -525,7 +600,7 @@ class AviatrixFirewallPolicy(pulumi.CustomResource):
     @pulumi.getter(name="srcIp")
     def src_ip(self) -> pulumi.Output[str]:
         """
-        CIDRs separated by comma or tag names such 'HR' or 'marketing' etc.
+        CIDRs separated by comma or tag names such "HR" or "marketing" etc. Example: "10.30.0.0/16,10.45.0.0/20". The **aviatrix_firewall_tag** resource should be created prior to using the tag name.
         """
         return pulumi.get(self, "src_ip")
 

@@ -22,10 +22,10 @@ class AviatrixGatewaySnatArgs:
                  sync_to_ha: Optional[pulumi.Input[bool]] = None):
         """
         The set of arguments for constructing a AviatrixGatewaySnat resource.
-        :param pulumi.Input[str] gw_name: Name of the gateway.
-        :param pulumi.Input[str] snat_mode: Nat mode. Currently only supports 'customized_snat'.
-        :param pulumi.Input[Sequence[pulumi.Input['AviatrixGatewaySnatSnatPolicyArgs']]] snat_policies: Policy rules applied for 'snat_mode'' of 'customized_snat'.'
-        :param pulumi.Input[bool] sync_to_ha: Whether to sync the policies to the HA gateway.
+        :param pulumi.Input[str] gw_name: Name of the Aviatrix gateway the custom SNAT will be configured for.
+        :param pulumi.Input[str] snat_mode: NAT mode. Valid values: "customized_snat". Default value: "customized_snat".
+        :param pulumi.Input[Sequence[pulumi.Input['AviatrixGatewaySnatSnatPolicyArgs']]] snat_policies: Policy rule applied for enabling source NAT (mode: "customized_snat"). Currently only supports AWS(1) and Azure(8).
+        :param pulumi.Input[bool] sync_to_ha: Sync the policies to the HA gateway. Valid values: true, false. Default: false.
         """
         pulumi.set(__self__, "gw_name", gw_name)
         if snat_mode is not None:
@@ -39,7 +39,7 @@ class AviatrixGatewaySnatArgs:
     @pulumi.getter(name="gwName")
     def gw_name(self) -> pulumi.Input[str]:
         """
-        Name of the gateway.
+        Name of the Aviatrix gateway the custom SNAT will be configured for.
         """
         return pulumi.get(self, "gw_name")
 
@@ -51,7 +51,7 @@ class AviatrixGatewaySnatArgs:
     @pulumi.getter(name="snatMode")
     def snat_mode(self) -> Optional[pulumi.Input[str]]:
         """
-        Nat mode. Currently only supports 'customized_snat'.
+        NAT mode. Valid values: "customized_snat". Default value: "customized_snat".
         """
         return pulumi.get(self, "snat_mode")
 
@@ -63,7 +63,7 @@ class AviatrixGatewaySnatArgs:
     @pulumi.getter(name="snatPolicies")
     def snat_policies(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['AviatrixGatewaySnatSnatPolicyArgs']]]]:
         """
-        Policy rules applied for 'snat_mode'' of 'customized_snat'.'
+        Policy rule applied for enabling source NAT (mode: "customized_snat"). Currently only supports AWS(1) and Azure(8).
         """
         return pulumi.get(self, "snat_policies")
 
@@ -75,7 +75,7 @@ class AviatrixGatewaySnatArgs:
     @pulumi.getter(name="syncToHa")
     def sync_to_ha(self) -> Optional[pulumi.Input[bool]]:
         """
-        Whether to sync the policies to the HA gateway.
+        Sync the policies to the HA gateway. Valid values: true, false. Default: false.
         """
         return pulumi.get(self, "sync_to_ha")
 
@@ -96,11 +96,11 @@ class _AviatrixGatewaySnatState:
         """
         Input properties used for looking up and filtering AviatrixGatewaySnat resources.
         :param pulumi.Input[Sequence[pulumi.Input['AviatrixGatewaySnatConnectionPolicyArgs']]] connection_policies: Computed attribute to store the previous connection policy.
-        :param pulumi.Input[str] gw_name: Name of the gateway.
+        :param pulumi.Input[str] gw_name: Name of the Aviatrix gateway the custom SNAT will be configured for.
         :param pulumi.Input[Sequence[pulumi.Input['AviatrixGatewaySnatInterfacePolicyArgs']]] interface_policies: Computed attribute to store the previous interface policy.
-        :param pulumi.Input[str] snat_mode: Nat mode. Currently only supports 'customized_snat'.
-        :param pulumi.Input[Sequence[pulumi.Input['AviatrixGatewaySnatSnatPolicyArgs']]] snat_policies: Policy rules applied for 'snat_mode'' of 'customized_snat'.'
-        :param pulumi.Input[bool] sync_to_ha: Whether to sync the policies to the HA gateway.
+        :param pulumi.Input[str] snat_mode: NAT mode. Valid values: "customized_snat". Default value: "customized_snat".
+        :param pulumi.Input[Sequence[pulumi.Input['AviatrixGatewaySnatSnatPolicyArgs']]] snat_policies: Policy rule applied for enabling source NAT (mode: "customized_snat"). Currently only supports AWS(1) and Azure(8).
+        :param pulumi.Input[bool] sync_to_ha: Sync the policies to the HA gateway. Valid values: true, false. Default: false.
         """
         if connection_policies is not None:
             pulumi.set(__self__, "connection_policies", connection_policies)
@@ -131,7 +131,7 @@ class _AviatrixGatewaySnatState:
     @pulumi.getter(name="gwName")
     def gw_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the gateway.
+        Name of the Aviatrix gateway the custom SNAT will be configured for.
         """
         return pulumi.get(self, "gw_name")
 
@@ -155,7 +155,7 @@ class _AviatrixGatewaySnatState:
     @pulumi.getter(name="snatMode")
     def snat_mode(self) -> Optional[pulumi.Input[str]]:
         """
-        Nat mode. Currently only supports 'customized_snat'.
+        NAT mode. Valid values: "customized_snat". Default value: "customized_snat".
         """
         return pulumi.get(self, "snat_mode")
 
@@ -167,7 +167,7 @@ class _AviatrixGatewaySnatState:
     @pulumi.getter(name="snatPolicies")
     def snat_policies(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['AviatrixGatewaySnatSnatPolicyArgs']]]]:
         """
-        Policy rules applied for 'snat_mode'' of 'customized_snat'.'
+        Policy rule applied for enabling source NAT (mode: "customized_snat"). Currently only supports AWS(1) and Azure(8).
         """
         return pulumi.get(self, "snat_policies")
 
@@ -179,7 +179,7 @@ class _AviatrixGatewaySnatState:
     @pulumi.getter(name="syncToHa")
     def sync_to_ha(self) -> Optional[pulumi.Input[bool]]:
         """
-        Whether to sync the policies to the HA gateway.
+        Sync the policies to the HA gateway. Valid values: true, false. Default: false.
         """
         return pulumi.get(self, "sync_to_ha")
 
@@ -199,13 +199,20 @@ class AviatrixGatewaySnat(pulumi.CustomResource):
                  sync_to_ha: Optional[pulumi.Input[bool]] = None,
                  __props__=None):
         """
-        Create a AviatrixGatewaySnat resource with the given unique name, props, and options.
+        ## Import
+
+        **gateway_snat** can be imported using the `gw_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixGatewaySnat:AviatrixGatewaySnat test gw_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] gw_name: Name of the gateway.
-        :param pulumi.Input[str] snat_mode: Nat mode. Currently only supports 'customized_snat'.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixGatewaySnatSnatPolicyArgs']]]] snat_policies: Policy rules applied for 'snat_mode'' of 'customized_snat'.'
-        :param pulumi.Input[bool] sync_to_ha: Whether to sync the policies to the HA gateway.
+        :param pulumi.Input[str] gw_name: Name of the Aviatrix gateway the custom SNAT will be configured for.
+        :param pulumi.Input[str] snat_mode: NAT mode. Valid values: "customized_snat". Default value: "customized_snat".
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixGatewaySnatSnatPolicyArgs']]]] snat_policies: Policy rule applied for enabling source NAT (mode: "customized_snat"). Currently only supports AWS(1) and Azure(8).
+        :param pulumi.Input[bool] sync_to_ha: Sync the policies to the HA gateway. Valid values: true, false. Default: false.
         """
         ...
     @overload
@@ -214,7 +221,14 @@ class AviatrixGatewaySnat(pulumi.CustomResource):
                  args: AviatrixGatewaySnatArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixGatewaySnat resource with the given unique name, props, and options.
+        ## Import
+
+        **gateway_snat** can be imported using the `gw_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixGatewaySnat:AviatrixGatewaySnat test gw_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixGatewaySnatArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -275,11 +289,11 @@ class AviatrixGatewaySnat(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixGatewaySnatConnectionPolicyArgs']]]] connection_policies: Computed attribute to store the previous connection policy.
-        :param pulumi.Input[str] gw_name: Name of the gateway.
+        :param pulumi.Input[str] gw_name: Name of the Aviatrix gateway the custom SNAT will be configured for.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixGatewaySnatInterfacePolicyArgs']]]] interface_policies: Computed attribute to store the previous interface policy.
-        :param pulumi.Input[str] snat_mode: Nat mode. Currently only supports 'customized_snat'.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixGatewaySnatSnatPolicyArgs']]]] snat_policies: Policy rules applied for 'snat_mode'' of 'customized_snat'.'
-        :param pulumi.Input[bool] sync_to_ha: Whether to sync the policies to the HA gateway.
+        :param pulumi.Input[str] snat_mode: NAT mode. Valid values: "customized_snat". Default value: "customized_snat".
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AviatrixGatewaySnatSnatPolicyArgs']]]] snat_policies: Policy rule applied for enabling source NAT (mode: "customized_snat"). Currently only supports AWS(1) and Azure(8).
+        :param pulumi.Input[bool] sync_to_ha: Sync the policies to the HA gateway. Valid values: true, false. Default: false.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -305,7 +319,7 @@ class AviatrixGatewaySnat(pulumi.CustomResource):
     @pulumi.getter(name="gwName")
     def gw_name(self) -> pulumi.Output[str]:
         """
-        Name of the gateway.
+        Name of the Aviatrix gateway the custom SNAT will be configured for.
         """
         return pulumi.get(self, "gw_name")
 
@@ -321,7 +335,7 @@ class AviatrixGatewaySnat(pulumi.CustomResource):
     @pulumi.getter(name="snatMode")
     def snat_mode(self) -> pulumi.Output[Optional[str]]:
         """
-        Nat mode. Currently only supports 'customized_snat'.
+        NAT mode. Valid values: "customized_snat". Default value: "customized_snat".
         """
         return pulumi.get(self, "snat_mode")
 
@@ -329,7 +343,7 @@ class AviatrixGatewaySnat(pulumi.CustomResource):
     @pulumi.getter(name="snatPolicies")
     def snat_policies(self) -> pulumi.Output[Optional[Sequence['outputs.AviatrixGatewaySnatSnatPolicy']]]:
         """
-        Policy rules applied for 'snat_mode'' of 'customized_snat'.'
+        Policy rule applied for enabling source NAT (mode: "customized_snat"). Currently only supports AWS(1) and Azure(8).
         """
         return pulumi.get(self, "snat_policies")
 
@@ -337,7 +351,7 @@ class AviatrixGatewaySnat(pulumi.CustomResource):
     @pulumi.getter(name="syncToHa")
     def sync_to_ha(self) -> pulumi.Output[Optional[bool]]:
         """
-        Whether to sync the policies to the HA gateway.
+        Sync the policies to the HA gateway. Valid values: true, false. Default: false.
         """
         return pulumi.get(self, "sync_to_ha")
 

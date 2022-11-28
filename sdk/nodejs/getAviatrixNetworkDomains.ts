@@ -2,9 +2,15 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_network_domains** data source provides details about all Network Domains created by the Aviatrix Controller. Available as of provider version 2.23+.
+ *
+ * ## Example Usage
+ */
 export function getAviatrixNetworkDomains(opts?: pulumi.InvokeOptions): Promise<GetAviatrixNetworkDomainsResult> {
     if (!opts) {
         opts = {}
@@ -23,5 +29,8 @@ export interface GetAviatrixNetworkDomainsResult {
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * The list of all Network Domains
+     */
     readonly networkDomains: outputs.GetAviatrixNetworkDomainsNetworkDomain[];
 }

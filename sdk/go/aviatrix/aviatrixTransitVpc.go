@@ -11,6 +11,75 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The AviatrixTransitVpc resource creates and manages the Aviatrix Transit Network Gateways.
+//
+// !> **WARNING:** The `AviatrixTransitVpc` resource is deprecated as of **Release 2.0**. It is currently kept for backward-compatibility and will be removed in the future. Please use the transit gateway resource instead. If this is already in the state, please remove it from state file and import as `AviatrixTransitGateway`.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixTransitVpc(ctx, "testTransitGwAws", &aviatrix.AviatrixTransitVpcArgs{
+//				AccountName:            pulumi.String("devops_aws"),
+//				CloudType:              pulumi.Int(1),
+//				ConnectedTransit:       pulumi.String("yes"),
+//				EnableHybridConnection: pulumi.Bool(true),
+//				GwName:                 pulumi.String("transit"),
+//				HaGwSize:               pulumi.String("t2.micro"),
+//				HaSubnet:               pulumi.String("10.1.0.0/24"),
+//				Subnet:                 pulumi.String("10.1.0.0/24"),
+//				TagLists: pulumi.StringArray{
+//					pulumi.String("name:value"),
+//					pulumi.String("name1:value1"),
+//					pulumi.String("name2:value2"),
+//				},
+//				VpcId:   pulumi.String("vpc-abcd1234"),
+//				VpcReg:  pulumi.String("us-east-1"),
+//				VpcSize: pulumi.String("t2.micro"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = aviatrix.NewAviatrixTransitVpc(ctx, "testTransitGwAzure", &aviatrix.AviatrixTransitVpcArgs{
+//				AccountName:      pulumi.String("devops_azure"),
+//				CloudType:        pulumi.Int(8),
+//				ConnectedTransit: pulumi.String("yes"),
+//				GwName:           pulumi.String("transit"),
+//				HaGwSize:         pulumi.String("Standard_B1s"),
+//				HaSubnet:         pulumi.String("10.30.0.0/24"),
+//				Subnet:           pulumi.String("10.30.0.0/24"),
+//				VpcId:            pulumi.String("vnet1:hello"),
+//				VpcReg:           pulumi.String("West US"),
+//				VpcSize:          pulumi.String("Standard_B1s"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// Instance transit_vpc can be imported using the gw_name, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixTransitVpc:AviatrixTransitVpc test gw_name
+//
+// ```
 type AviatrixTransitVpc struct {
 	pulumi.CustomResourceState
 
@@ -18,36 +87,35 @@ type AviatrixTransitVpc struct {
 	AccountName pulumi.StringOutput `pulumi:"accountName"`
 	// Type of cloud service provider, requires an integer value. Use 1 for AWS.
 	CloudType pulumi.IntOutput `pulumi:"cloudType"`
-	// Specify Connected Transit status.
+	// Specify Connected Transit status. Supported values: true, false.
 	ConnectedTransit pulumi.StringPtrOutput `pulumi:"connectedTransit"`
-	// Specify whether to enable firenet interfaces or not.
+	// Sign of readiness for FireNet connection. Valid values: true and false. Default: false.
 	EnableFirenetInterfaces pulumi.BoolPtrOutput `pulumi:"enableFirenetInterfaces"`
-	// Sign of readiness for TGW connection.
+	// Sign of readiness for TGW connection. Only supported for aws. Example: false.
 	EnableHybridConnection pulumi.BoolPtrOutput `pulumi:"enableHybridConnection"`
 	// Enable NAT for this container.
 	EnableNat pulumi.StringPtrOutput `pulumi:"enableNat"`
 	// Name of the gateway which is going to be created.
 	GwName pulumi.StringOutput `pulumi:"gwName"`
-	// HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set).
+	// HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set). Example: "t2.micro".
 	HaGwSize pulumi.StringPtrOutput `pulumi:"haGwSize"`
-	// AZ of subnet being created for Insane Mode Transit HA Gateway. Required if insane_mode is enabled and ha_subnet is set.
+	// AZ of subnet being created for Insane Mode Transit HA Gateway. Required if insaneMode is enabled and haSubnet is set.
 	HaInsaneModeAz pulumi.StringPtrOutput `pulumi:"haInsaneModeAz"`
-	// HA Subnet.
+	// HA Subnet CIDR. Example: "10.12.0.0/24".Setting to empty/unset will disable HA. Setting to a valid subnet CIDR will create an HA gateway on the subnet.
 	HaSubnet pulumi.StringPtrOutput `pulumi:"haSubnet"`
-	// Enable Insane Mode for Transit. Valid values: true, false. If insane mode is enabled, gateway size has to at least be c5
-	// size.
+	// Specify Insane Mode high performance gateway. Insane Mode gateway size must be at least c5 size. If enabled, will look for spare /26 segment to create a new subnet. Only available for AWS. Supported values: true, false.
 	InsaneMode pulumi.BoolPtrOutput `pulumi:"insaneMode"`
-	// AZ of subnet being created for Insane Mode Transit Gateway. Required if insane_mode is enabled.
+	// AZ of subnet being created for Insane Mode Transit Gateway. Required if insaneMode is enabled.
 	InsaneModeAz pulumi.StringPtrOutput `pulumi:"insaneModeAz"`
-	// Public Subnet Name.
+	// Public Subnet CIDR. Example: AWS: "10.0.0.0/24". Copy/paste from AWS Console to get the right subnet CIDR.
 	Subnet pulumi.StringOutput `pulumi:"subnet"`
-	// Instance tag of cloud provider.
+	// Instance tag of cloud provider. Only supported for aws. Example: ["key1:value1","key002:value002"]
 	TagLists pulumi.StringArrayOutput `pulumi:"tagLists"`
-	// VPC-ID/VNet-Name of cloud provider.
+	// VPC-ID/VNet-Name of cloud provider. Required if for aws. Example: AWS: "vpc-abcd1234", GCP: "mygooglecloudvpcname", etc...
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
-	// Region of cloud provider.
+	// Region of cloud provider. Example: AWS: "us-east-1", ARM: "East US 2", etc...
 	VpcReg pulumi.StringOutput `pulumi:"vpcReg"`
-	// Size of the gateway instance.
+	// Size of the gateway instance. Example: AWS: "t2.large", etc...
 	VpcSize pulumi.StringOutput `pulumi:"vpcSize"`
 }
 
@@ -106,36 +174,35 @@ type aviatrixTransitVpcState struct {
 	AccountName *string `pulumi:"accountName"`
 	// Type of cloud service provider, requires an integer value. Use 1 for AWS.
 	CloudType *int `pulumi:"cloudType"`
-	// Specify Connected Transit status.
+	// Specify Connected Transit status. Supported values: true, false.
 	ConnectedTransit *string `pulumi:"connectedTransit"`
-	// Specify whether to enable firenet interfaces or not.
+	// Sign of readiness for FireNet connection. Valid values: true and false. Default: false.
 	EnableFirenetInterfaces *bool `pulumi:"enableFirenetInterfaces"`
-	// Sign of readiness for TGW connection.
+	// Sign of readiness for TGW connection. Only supported for aws. Example: false.
 	EnableHybridConnection *bool `pulumi:"enableHybridConnection"`
 	// Enable NAT for this container.
 	EnableNat *string `pulumi:"enableNat"`
 	// Name of the gateway which is going to be created.
 	GwName *string `pulumi:"gwName"`
-	// HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set).
+	// HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set). Example: "t2.micro".
 	HaGwSize *string `pulumi:"haGwSize"`
-	// AZ of subnet being created for Insane Mode Transit HA Gateway. Required if insane_mode is enabled and ha_subnet is set.
+	// AZ of subnet being created for Insane Mode Transit HA Gateway. Required if insaneMode is enabled and haSubnet is set.
 	HaInsaneModeAz *string `pulumi:"haInsaneModeAz"`
-	// HA Subnet.
+	// HA Subnet CIDR. Example: "10.12.0.0/24".Setting to empty/unset will disable HA. Setting to a valid subnet CIDR will create an HA gateway on the subnet.
 	HaSubnet *string `pulumi:"haSubnet"`
-	// Enable Insane Mode for Transit. Valid values: true, false. If insane mode is enabled, gateway size has to at least be c5
-	// size.
+	// Specify Insane Mode high performance gateway. Insane Mode gateway size must be at least c5 size. If enabled, will look for spare /26 segment to create a new subnet. Only available for AWS. Supported values: true, false.
 	InsaneMode *bool `pulumi:"insaneMode"`
-	// AZ of subnet being created for Insane Mode Transit Gateway. Required if insane_mode is enabled.
+	// AZ of subnet being created for Insane Mode Transit Gateway. Required if insaneMode is enabled.
 	InsaneModeAz *string `pulumi:"insaneModeAz"`
-	// Public Subnet Name.
+	// Public Subnet CIDR. Example: AWS: "10.0.0.0/24". Copy/paste from AWS Console to get the right subnet CIDR.
 	Subnet *string `pulumi:"subnet"`
-	// Instance tag of cloud provider.
+	// Instance tag of cloud provider. Only supported for aws. Example: ["key1:value1","key002:value002"]
 	TagLists []string `pulumi:"tagLists"`
-	// VPC-ID/VNet-Name of cloud provider.
+	// VPC-ID/VNet-Name of cloud provider. Required if for aws. Example: AWS: "vpc-abcd1234", GCP: "mygooglecloudvpcname", etc...
 	VpcId *string `pulumi:"vpcId"`
-	// Region of cloud provider.
+	// Region of cloud provider. Example: AWS: "us-east-1", ARM: "East US 2", etc...
 	VpcReg *string `pulumi:"vpcReg"`
-	// Size of the gateway instance.
+	// Size of the gateway instance. Example: AWS: "t2.large", etc...
 	VpcSize *string `pulumi:"vpcSize"`
 }
 
@@ -144,36 +211,35 @@ type AviatrixTransitVpcState struct {
 	AccountName pulumi.StringPtrInput
 	// Type of cloud service provider, requires an integer value. Use 1 for AWS.
 	CloudType pulumi.IntPtrInput
-	// Specify Connected Transit status.
+	// Specify Connected Transit status. Supported values: true, false.
 	ConnectedTransit pulumi.StringPtrInput
-	// Specify whether to enable firenet interfaces or not.
+	// Sign of readiness for FireNet connection. Valid values: true and false. Default: false.
 	EnableFirenetInterfaces pulumi.BoolPtrInput
-	// Sign of readiness for TGW connection.
+	// Sign of readiness for TGW connection. Only supported for aws. Example: false.
 	EnableHybridConnection pulumi.BoolPtrInput
 	// Enable NAT for this container.
 	EnableNat pulumi.StringPtrInput
 	// Name of the gateway which is going to be created.
 	GwName pulumi.StringPtrInput
-	// HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set).
+	// HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set). Example: "t2.micro".
 	HaGwSize pulumi.StringPtrInput
-	// AZ of subnet being created for Insane Mode Transit HA Gateway. Required if insane_mode is enabled and ha_subnet is set.
+	// AZ of subnet being created for Insane Mode Transit HA Gateway. Required if insaneMode is enabled and haSubnet is set.
 	HaInsaneModeAz pulumi.StringPtrInput
-	// HA Subnet.
+	// HA Subnet CIDR. Example: "10.12.0.0/24".Setting to empty/unset will disable HA. Setting to a valid subnet CIDR will create an HA gateway on the subnet.
 	HaSubnet pulumi.StringPtrInput
-	// Enable Insane Mode for Transit. Valid values: true, false. If insane mode is enabled, gateway size has to at least be c5
-	// size.
+	// Specify Insane Mode high performance gateway. Insane Mode gateway size must be at least c5 size. If enabled, will look for spare /26 segment to create a new subnet. Only available for AWS. Supported values: true, false.
 	InsaneMode pulumi.BoolPtrInput
-	// AZ of subnet being created for Insane Mode Transit Gateway. Required if insane_mode is enabled.
+	// AZ of subnet being created for Insane Mode Transit Gateway. Required if insaneMode is enabled.
 	InsaneModeAz pulumi.StringPtrInput
-	// Public Subnet Name.
+	// Public Subnet CIDR. Example: AWS: "10.0.0.0/24". Copy/paste from AWS Console to get the right subnet CIDR.
 	Subnet pulumi.StringPtrInput
-	// Instance tag of cloud provider.
+	// Instance tag of cloud provider. Only supported for aws. Example: ["key1:value1","key002:value002"]
 	TagLists pulumi.StringArrayInput
-	// VPC-ID/VNet-Name of cloud provider.
+	// VPC-ID/VNet-Name of cloud provider. Required if for aws. Example: AWS: "vpc-abcd1234", GCP: "mygooglecloudvpcname", etc...
 	VpcId pulumi.StringPtrInput
-	// Region of cloud provider.
+	// Region of cloud provider. Example: AWS: "us-east-1", ARM: "East US 2", etc...
 	VpcReg pulumi.StringPtrInput
-	// Size of the gateway instance.
+	// Size of the gateway instance. Example: AWS: "t2.large", etc...
 	VpcSize pulumi.StringPtrInput
 }
 
@@ -186,36 +252,35 @@ type aviatrixTransitVpcArgs struct {
 	AccountName string `pulumi:"accountName"`
 	// Type of cloud service provider, requires an integer value. Use 1 for AWS.
 	CloudType int `pulumi:"cloudType"`
-	// Specify Connected Transit status.
+	// Specify Connected Transit status. Supported values: true, false.
 	ConnectedTransit *string `pulumi:"connectedTransit"`
-	// Specify whether to enable firenet interfaces or not.
+	// Sign of readiness for FireNet connection. Valid values: true and false. Default: false.
 	EnableFirenetInterfaces *bool `pulumi:"enableFirenetInterfaces"`
-	// Sign of readiness for TGW connection.
+	// Sign of readiness for TGW connection. Only supported for aws. Example: false.
 	EnableHybridConnection *bool `pulumi:"enableHybridConnection"`
 	// Enable NAT for this container.
 	EnableNat *string `pulumi:"enableNat"`
 	// Name of the gateway which is going to be created.
 	GwName string `pulumi:"gwName"`
-	// HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set).
+	// HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set). Example: "t2.micro".
 	HaGwSize *string `pulumi:"haGwSize"`
-	// AZ of subnet being created for Insane Mode Transit HA Gateway. Required if insane_mode is enabled and ha_subnet is set.
+	// AZ of subnet being created for Insane Mode Transit HA Gateway. Required if insaneMode is enabled and haSubnet is set.
 	HaInsaneModeAz *string `pulumi:"haInsaneModeAz"`
-	// HA Subnet.
+	// HA Subnet CIDR. Example: "10.12.0.0/24".Setting to empty/unset will disable HA. Setting to a valid subnet CIDR will create an HA gateway on the subnet.
 	HaSubnet *string `pulumi:"haSubnet"`
-	// Enable Insane Mode for Transit. Valid values: true, false. If insane mode is enabled, gateway size has to at least be c5
-	// size.
+	// Specify Insane Mode high performance gateway. Insane Mode gateway size must be at least c5 size. If enabled, will look for spare /26 segment to create a new subnet. Only available for AWS. Supported values: true, false.
 	InsaneMode *bool `pulumi:"insaneMode"`
-	// AZ of subnet being created for Insane Mode Transit Gateway. Required if insane_mode is enabled.
+	// AZ of subnet being created for Insane Mode Transit Gateway. Required if insaneMode is enabled.
 	InsaneModeAz *string `pulumi:"insaneModeAz"`
-	// Public Subnet Name.
+	// Public Subnet CIDR. Example: AWS: "10.0.0.0/24". Copy/paste from AWS Console to get the right subnet CIDR.
 	Subnet string `pulumi:"subnet"`
-	// Instance tag of cloud provider.
+	// Instance tag of cloud provider. Only supported for aws. Example: ["key1:value1","key002:value002"]
 	TagLists []string `pulumi:"tagLists"`
-	// VPC-ID/VNet-Name of cloud provider.
+	// VPC-ID/VNet-Name of cloud provider. Required if for aws. Example: AWS: "vpc-abcd1234", GCP: "mygooglecloudvpcname", etc...
 	VpcId string `pulumi:"vpcId"`
-	// Region of cloud provider.
+	// Region of cloud provider. Example: AWS: "us-east-1", ARM: "East US 2", etc...
 	VpcReg string `pulumi:"vpcReg"`
-	// Size of the gateway instance.
+	// Size of the gateway instance. Example: AWS: "t2.large", etc...
 	VpcSize string `pulumi:"vpcSize"`
 }
 
@@ -225,36 +290,35 @@ type AviatrixTransitVpcArgs struct {
 	AccountName pulumi.StringInput
 	// Type of cloud service provider, requires an integer value. Use 1 for AWS.
 	CloudType pulumi.IntInput
-	// Specify Connected Transit status.
+	// Specify Connected Transit status. Supported values: true, false.
 	ConnectedTransit pulumi.StringPtrInput
-	// Specify whether to enable firenet interfaces or not.
+	// Sign of readiness for FireNet connection. Valid values: true and false. Default: false.
 	EnableFirenetInterfaces pulumi.BoolPtrInput
-	// Sign of readiness for TGW connection.
+	// Sign of readiness for TGW connection. Only supported for aws. Example: false.
 	EnableHybridConnection pulumi.BoolPtrInput
 	// Enable NAT for this container.
 	EnableNat pulumi.StringPtrInput
 	// Name of the gateway which is going to be created.
 	GwName pulumi.StringInput
-	// HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set).
+	// HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set). Example: "t2.micro".
 	HaGwSize pulumi.StringPtrInput
-	// AZ of subnet being created for Insane Mode Transit HA Gateway. Required if insane_mode is enabled and ha_subnet is set.
+	// AZ of subnet being created for Insane Mode Transit HA Gateway. Required if insaneMode is enabled and haSubnet is set.
 	HaInsaneModeAz pulumi.StringPtrInput
-	// HA Subnet.
+	// HA Subnet CIDR. Example: "10.12.0.0/24".Setting to empty/unset will disable HA. Setting to a valid subnet CIDR will create an HA gateway on the subnet.
 	HaSubnet pulumi.StringPtrInput
-	// Enable Insane Mode for Transit. Valid values: true, false. If insane mode is enabled, gateway size has to at least be c5
-	// size.
+	// Specify Insane Mode high performance gateway. Insane Mode gateway size must be at least c5 size. If enabled, will look for spare /26 segment to create a new subnet. Only available for AWS. Supported values: true, false.
 	InsaneMode pulumi.BoolPtrInput
-	// AZ of subnet being created for Insane Mode Transit Gateway. Required if insane_mode is enabled.
+	// AZ of subnet being created for Insane Mode Transit Gateway. Required if insaneMode is enabled.
 	InsaneModeAz pulumi.StringPtrInput
-	// Public Subnet Name.
+	// Public Subnet CIDR. Example: AWS: "10.0.0.0/24". Copy/paste from AWS Console to get the right subnet CIDR.
 	Subnet pulumi.StringInput
-	// Instance tag of cloud provider.
+	// Instance tag of cloud provider. Only supported for aws. Example: ["key1:value1","key002:value002"]
 	TagLists pulumi.StringArrayInput
-	// VPC-ID/VNet-Name of cloud provider.
+	// VPC-ID/VNet-Name of cloud provider. Required if for aws. Example: AWS: "vpc-abcd1234", GCP: "mygooglecloudvpcname", etc...
 	VpcId pulumi.StringInput
-	// Region of cloud provider.
+	// Region of cloud provider. Example: AWS: "us-east-1", ARM: "East US 2", etc...
 	VpcReg pulumi.StringInput
-	// Size of the gateway instance.
+	// Size of the gateway instance. Example: AWS: "t2.large", etc...
 	VpcSize pulumi.StringInput
 }
 
@@ -355,17 +419,17 @@ func (o AviatrixTransitVpcOutput) CloudType() pulumi.IntOutput {
 	return o.ApplyT(func(v *AviatrixTransitVpc) pulumi.IntOutput { return v.CloudType }).(pulumi.IntOutput)
 }
 
-// Specify Connected Transit status.
+// Specify Connected Transit status. Supported values: true, false.
 func (o AviatrixTransitVpcOutput) ConnectedTransit() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitVpc) pulumi.StringPtrOutput { return v.ConnectedTransit }).(pulumi.StringPtrOutput)
 }
 
-// Specify whether to enable firenet interfaces or not.
+// Sign of readiness for FireNet connection. Valid values: true and false. Default: false.
 func (o AviatrixTransitVpcOutput) EnableFirenetInterfaces() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitVpc) pulumi.BoolPtrOutput { return v.EnableFirenetInterfaces }).(pulumi.BoolPtrOutput)
 }
 
-// Sign of readiness for TGW connection.
+// Sign of readiness for TGW connection. Only supported for aws. Example: false.
 func (o AviatrixTransitVpcOutput) EnableHybridConnection() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitVpc) pulumi.BoolPtrOutput { return v.EnableHybridConnection }).(pulumi.BoolPtrOutput)
 }
@@ -380,53 +444,52 @@ func (o AviatrixTransitVpcOutput) GwName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixTransitVpc) pulumi.StringOutput { return v.GwName }).(pulumi.StringOutput)
 }
 
-// HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set).
+// HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set). Example: "t2.micro".
 func (o AviatrixTransitVpcOutput) HaGwSize() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitVpc) pulumi.StringPtrOutput { return v.HaGwSize }).(pulumi.StringPtrOutput)
 }
 
-// AZ of subnet being created for Insane Mode Transit HA Gateway. Required if insane_mode is enabled and ha_subnet is set.
+// AZ of subnet being created for Insane Mode Transit HA Gateway. Required if insaneMode is enabled and haSubnet is set.
 func (o AviatrixTransitVpcOutput) HaInsaneModeAz() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitVpc) pulumi.StringPtrOutput { return v.HaInsaneModeAz }).(pulumi.StringPtrOutput)
 }
 
-// HA Subnet.
+// HA Subnet CIDR. Example: "10.12.0.0/24".Setting to empty/unset will disable HA. Setting to a valid subnet CIDR will create an HA gateway on the subnet.
 func (o AviatrixTransitVpcOutput) HaSubnet() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitVpc) pulumi.StringPtrOutput { return v.HaSubnet }).(pulumi.StringPtrOutput)
 }
 
-// Enable Insane Mode for Transit. Valid values: true, false. If insane mode is enabled, gateway size has to at least be c5
-// size.
+// Specify Insane Mode high performance gateway. Insane Mode gateway size must be at least c5 size. If enabled, will look for spare /26 segment to create a new subnet. Only available for AWS. Supported values: true, false.
 func (o AviatrixTransitVpcOutput) InsaneMode() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitVpc) pulumi.BoolPtrOutput { return v.InsaneMode }).(pulumi.BoolPtrOutput)
 }
 
-// AZ of subnet being created for Insane Mode Transit Gateway. Required if insane_mode is enabled.
+// AZ of subnet being created for Insane Mode Transit Gateway. Required if insaneMode is enabled.
 func (o AviatrixTransitVpcOutput) InsaneModeAz() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixTransitVpc) pulumi.StringPtrOutput { return v.InsaneModeAz }).(pulumi.StringPtrOutput)
 }
 
-// Public Subnet Name.
+// Public Subnet CIDR. Example: AWS: "10.0.0.0/24". Copy/paste from AWS Console to get the right subnet CIDR.
 func (o AviatrixTransitVpcOutput) Subnet() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixTransitVpc) pulumi.StringOutput { return v.Subnet }).(pulumi.StringOutput)
 }
 
-// Instance tag of cloud provider.
+// Instance tag of cloud provider. Only supported for aws. Example: ["key1:value1","key002:value002"]
 func (o AviatrixTransitVpcOutput) TagLists() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixTransitVpc) pulumi.StringArrayOutput { return v.TagLists }).(pulumi.StringArrayOutput)
 }
 
-// VPC-ID/VNet-Name of cloud provider.
+// VPC-ID/VNet-Name of cloud provider. Required if for aws. Example: AWS: "vpc-abcd1234", GCP: "mygooglecloudvpcname", etc...
 func (o AviatrixTransitVpcOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixTransitVpc) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
 }
 
-// Region of cloud provider.
+// Region of cloud provider. Example: AWS: "us-east-1", ARM: "East US 2", etc...
 func (o AviatrixTransitVpcOutput) VpcReg() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixTransitVpc) pulumi.StringOutput { return v.VpcReg }).(pulumi.StringOutput)
 }
 
-// Size of the gateway instance.
+// Size of the gateway instance. Example: AWS: "t2.large", etc...
 func (o AviatrixTransitVpcOutput) VpcSize() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixTransitVpc) pulumi.StringOutput { return v.VpcSize }).(pulumi.StringOutput)
 }

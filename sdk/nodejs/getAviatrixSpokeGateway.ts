@@ -4,6 +4,23 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_spoke_gateway** data source provides details about a specific spoke gateway created by the Aviatrix Controller.
+ *
+ * This data source can prove useful when a module accepts a spoke gateway's detail as an input variable.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Aviatrix Spoke Gateway Data Source
+ * const foo = pulumi.output(aviatrix.getAviatrixSpokeGateway({
+ *     gwName: "gatewayname",
+ * }));
+ * ```
+ */
 export function getAviatrixSpokeGateway(args: GetAviatrixSpokeGatewayArgs, opts?: pulumi.InvokeOptions): Promise<GetAviatrixSpokeGatewayResult> {
     if (!opts) {
         opts = {}
@@ -19,6 +36,9 @@ export function getAviatrixSpokeGateway(args: GetAviatrixSpokeGatewayArgs, opts?
  * A collection of arguments for invoking getAviatrixSpokeGateway.
  */
 export interface GetAviatrixSpokeGatewayArgs {
+    /**
+     * Spoke gateway name. It can be used for getting spoke gateway.
+     */
     gwName: string;
 }
 
@@ -26,81 +46,219 @@ export interface GetAviatrixSpokeGatewayArgs {
  * A collection of values returned by getAviatrixSpokeGateway.
  */
 export interface GetAviatrixSpokeGatewayResult {
+    /**
+     * Aviatrix account name.
+     */
     readonly accountName: string;
+    /**
+     * When value is false, an idle address in Elastic IP pool is reused for this gateway. Otherwise, a new Elastic IP is allocated and used for this gateway.
+     */
     readonly allocateNewEip: boolean;
     readonly approvedLearnedCidrs: string[];
+    /**
+     * Availability domain for OCI.
+     */
     readonly availabilityDomain: string;
     readonly azureEipNameResourceGroup: string;
     readonly bgpEcmp: boolean;
     readonly bgpHoldTime: number;
     readonly bgpPollingTime: number;
+    /**
+     * Cloud instance ID.
+     */
     readonly cloudInstanceId: string;
+    /**
+     * Type of cloud service provider.
+     */
     readonly cloudType: number;
+    /**
+     * A list of comma separated CIDRs to be customized for the spoke VPC routes.
+     */
     readonly customizedSpokeVpcRoutes: string;
     readonly disableRoutePropagation: boolean;
+    /**
+     * The EIP address of the Spoke Gateway.
+     */
     readonly eip: string;
     readonly enableActiveStandby: boolean;
     readonly enableActiveStandbyPreemptive: boolean;
     readonly enableAutoAdvertiseS2cCidrs: boolean;
     readonly enableBgp: boolean;
+    /**
+     * Status of Encrypt Volume of spoke gateway.
+     */
     readonly enableEncryptVolume: boolean;
     readonly enableJumboFrame: boolean;
     readonly enableLearnedCidrsApproval: boolean;
     readonly enableMonitorGatewaySubnets: boolean;
+    /**
+     * Status of private OOB for the spoke gateway.
+     */
     readonly enablePrivateOob: boolean;
     readonly enablePrivateVpcDefaultRoute: boolean;
     readonly enableSkipPublicRouteTableUpdate: boolean;
     readonly enableSpotInstance: boolean;
+    /**
+     * Status of VPC Dns Server of spoke gateway.
+     */
     readonly enableVpcDnsServer: boolean;
+    /**
+     * Fault domain for OCI.
+     */
     readonly faultDomain: string;
+    /**
+     * A list of comma separated CIDRs to be filtered from the spoke VPC route table.
+     */
     readonly filteredSpokeVpcRoutes: string;
+    /**
+     * Aviatrix spoke gateway name.
+     */
     readonly gwName: string;
+    /**
+     * Size of spoke gateway instance.
+     */
     readonly gwSize: string;
+    /**
+     * HA gateway availability domain for OCI.
+     */
     readonly haAvailabilityDomain: string;
     readonly haAzureEipNameResourceGroup: string;
+    /**
+     * Cloud instance ID of HA spoke gateway.
+     */
     readonly haCloudInstanceId: string;
+    /**
+     * The EIP address of the HA Spoke Gateway.
+     */
     readonly haEip: string;
+    /**
+     * HA gateway fault domain for OCI.
+     */
     readonly haFaultDomain: string;
+    /**
+     * Aviatrix spoke gateway unique name of HA spoke gateway.
+     */
     readonly haGwName: string;
+    /**
+     * HA Gateway Size.
+     */
     readonly haGwSize: string;
+    /**
+     * The image version of the HA gateway.
+     */
     readonly haImageVersion: string;
+    /**
+     * AZ of subnet being created for Insane Mode Spoke HA Gateway.
+     */
     readonly haInsaneModeAz: string;
+    /**
+     * HA OOB availability zone.
+     */
     readonly haOobAvailabilityZone: string;
+    /**
+     * HA OOB management subnet.
+     */
     readonly haOobManagementSubnet: string;
+    /**
+     * Private IP address of HA spoke gateway.
+     */
     readonly haPrivateIp: string;
+    /**
+     * Public IP address of the HA spoke gateway.
+     */
     readonly haPublicIp: string;
     readonly haSecurityGroupId: string;
+    /**
+     * The software version of the HA gateway.
+     */
     readonly haSoftwareVersion: string;
+    /**
+     * HA Subnet.
+     */
     readonly haSubnet: string;
+    /**
+     * HA Zone.
+     */
     readonly haZone: string;
     /**
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * The image version of the gateway.
+     */
     readonly imageVersion: string;
+    /**
+     * A list of comma separated CIDRs to be advertised to on-prem as "Included CIDR List".
+     */
     readonly includedAdvertisedSpokeRoutes: string;
+    /**
+     * Status of Insane Mode for Spoke Gateway.
+     */
     readonly insaneMode: boolean;
+    /**
+     * AZ of subnet being created for Insane Mode spoke gateway.
+     */
     readonly insaneModeAz: string;
     readonly learnedCidrsApprovalMode: string;
     readonly localAsNumber: string;
     readonly monitorExcludeLists: string[];
+    /**
+     * OOB availability zone.
+     */
     readonly oobAvailabilityZone: string;
+    /**
+     * OOB management subnet.
+     */
     readonly oobManagementSubnet: string;
     readonly prependAsPaths: string[];
+    /**
+     * Private IP address of the spoke gateway.
+     */
     readonly privateIp: string;
+    /**
+     * Public IP of spoke gateway.
+     */
     readonly publicIp: string;
+    /**
+     * Security group used of the spoke gateway.
+     */
     readonly securityGroupId: string;
+    /**
+     * Status of Single AZ HA of spoke gateway.
+     */
     readonly singleAzHa: boolean;
+    /**
+     * Status of Single IP Source NAT mode of the spoke gateway.
+     */
     readonly singleIpSnat: boolean;
+    /**
+     * The software version of the gateway.
+     */
     readonly softwareVersion: string;
     readonly spokeBgpManualAdvertiseCidrs: string[];
     readonly spotPrice: string;
+    /**
+     * A VPC Network address range selected from one of the available network ranges.
+     */
     readonly subnet: string;
+    /**
+     * Instance tag of cloud provider.
+     */
     readonly tagLists: string[];
     readonly tags: {[key: string]: string};
+    /**
+     * Transit gateways attached to this spoke gateway.
+     */
     readonly transitGw: string;
     readonly tunnelDetectionTime: number;
+    /**
+     * VPC-ID/VNet-Name of cloud provider.
+     */
     readonly vpcId: string;
+    /**
+     * Region of cloud provider.
+     */
     readonly vpcReg: string;
     readonly zone: string;
 }
@@ -113,5 +271,8 @@ export function getAviatrixSpokeGatewayOutput(args: GetAviatrixSpokeGatewayOutpu
  * A collection of arguments for invoking getAviatrixSpokeGateway.
  */
 export interface GetAviatrixSpokeGatewayOutputArgs {
+    /**
+     * Spoke gateway name. It can be used for getting spoke gateway.
+     */
     gwName: pulumi.Input<string>;
 }

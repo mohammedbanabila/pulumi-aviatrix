@@ -4,6 +4,30 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_rbac_group_user_attachment** resource allows the creation and management of user attachments to Aviatrix (Role-Based Access Control) RBAC groups.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix RBAC Group User Attachment
+ * const testAttachment = new aviatrix.AviatrixRbacGroupUserAttachment("test_attachment", {
+ *     groupName: "write_only",
+ *     userName: "user_name",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **rbac_group_user_attachment** can be imported using the `group_name` and `user_name`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixRbacGroupUserAttachment:AviatrixRbacGroupUserAttachment test group_name~user_name
+ * ```
+ */
 export class AviatrixRbacGroupUserAttachment extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixRbacGroupUserAttachment resource's state with the given name, ID, and optional extra
@@ -33,11 +57,11 @@ export class AviatrixRbacGroupUserAttachment extends pulumi.CustomResource {
     }
 
     /**
-     * RBAC permission group name.
+     * This parameter represents the name of a RBAC group.
      */
     public readonly groupName!: pulumi.Output<string>;
     /**
-     * Account user name.
+     * Username of the account user.
      */
     public readonly userName!: pulumi.Output<string>;
 
@@ -77,11 +101,11 @@ export class AviatrixRbacGroupUserAttachment extends pulumi.CustomResource {
  */
 export interface AviatrixRbacGroupUserAttachmentState {
     /**
-     * RBAC permission group name.
+     * This parameter represents the name of a RBAC group.
      */
     groupName?: pulumi.Input<string>;
     /**
-     * Account user name.
+     * Username of the account user.
      */
     userName?: pulumi.Input<string>;
 }
@@ -91,11 +115,11 @@ export interface AviatrixRbacGroupUserAttachmentState {
  */
 export interface AviatrixRbacGroupUserAttachmentArgs {
     /**
-     * RBAC permission group name.
+     * This parameter represents the name of a RBAC group.
      */
     groupName: pulumi.Input<string>;
     /**
-     * Account user name.
+     * Username of the account user.
      */
     userName: pulumi.Input<string>;
 }

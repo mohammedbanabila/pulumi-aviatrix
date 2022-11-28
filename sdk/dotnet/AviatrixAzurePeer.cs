@@ -9,17 +9,51 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_azure_peer** resource allows the creation and management of the Aviatrix-created peerings between Azure VNets.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Azure Peering
+    ///     var testAzurepeer = new Aviatrix.AviatrixAzurePeer("testAzurepeer", new()
+    ///     {
+    ///         AccountName1 = "test1-account",
+    ///         AccountName2 = "test2-account",
+    ///         VnetNameResourceGroup1 = "Foo_VNet1:Bar_RG1:GUID1",
+    ///         VnetNameResourceGroup2 = "Foo_VNet2:Bar_RG2:GUID2",
+    ///         VnetReg1 = "Central US",
+    ///         VnetReg2 = "East US",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **azure_peer** can be imported using the `vnet_name_resource_group1` and `vnet_name_resource_group2`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixAzurePeer:AviatrixAzurePeer test vnet_name_resource_group1~vnet_name_resource_group2
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixAzurePeer:AviatrixAzurePeer")]
     public partial class AviatrixAzurePeer : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.
+        /// Name of the Azure cloud account in the Aviatrix controller for VNet 1.
         /// </summary>
         [Output("accountName1")]
         public Output<string> AccountName1 { get; private set; } = null!;
 
         /// <summary>
-        /// This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.
+        /// Name of the Azure cloud account in the Aviatrix controller for VNet 2.
         /// </summary>
         [Output("accountName2")]
         public Output<string> AccountName2 { get; private set; } = null!;
@@ -37,25 +71,25 @@ namespace Pulumi.Aviatrix
         public Output<ImmutableArray<string>> VnetCidr2s { get; private set; } = null!;
 
         /// <summary>
-        /// VNet-Name of Azure cloud.
+        /// Azure VNet 1's name. Example: "VNet_Name1:Resource_Group_Name1:GUID1".
         /// </summary>
         [Output("vnetNameResourceGroup1")]
         public Output<string> VnetNameResourceGroup1 { get; private set; } = null!;
 
         /// <summary>
-        /// VNet-Name of Azure cloud.
+        /// Azure VNet 2's name. Example: "VNet_Name2:Resource_Group_Name2:GUID2".
         /// </summary>
         [Output("vnetNameResourceGroup2")]
         public Output<string> VnetNameResourceGroup2 { get; private set; } = null!;
 
         /// <summary>
-        /// Region of Azure cloud.
+        /// Region of Azure VNet 1. Example: "East US 2".
         /// </summary>
         [Output("vnetReg1")]
         public Output<string> VnetReg1 { get; private set; } = null!;
 
         /// <summary>
-        /// Region of Azure cloud.
+        /// Region of Azure VNet 2. Example: "East US 2".
         /// </summary>
         [Output("vnetReg2")]
         public Output<string> VnetReg2 { get; private set; } = null!;
@@ -108,37 +142,37 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixAzurePeerArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.
+        /// Name of the Azure cloud account in the Aviatrix controller for VNet 1.
         /// </summary>
         [Input("accountName1", required: true)]
         public Input<string> AccountName1 { get; set; } = null!;
 
         /// <summary>
-        /// This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.
+        /// Name of the Azure cloud account in the Aviatrix controller for VNet 2.
         /// </summary>
         [Input("accountName2", required: true)]
         public Input<string> AccountName2 { get; set; } = null!;
 
         /// <summary>
-        /// VNet-Name of Azure cloud.
+        /// Azure VNet 1's name. Example: "VNet_Name1:Resource_Group_Name1:GUID1".
         /// </summary>
         [Input("vnetNameResourceGroup1", required: true)]
         public Input<string> VnetNameResourceGroup1 { get; set; } = null!;
 
         /// <summary>
-        /// VNet-Name of Azure cloud.
+        /// Azure VNet 2's name. Example: "VNet_Name2:Resource_Group_Name2:GUID2".
         /// </summary>
         [Input("vnetNameResourceGroup2", required: true)]
         public Input<string> VnetNameResourceGroup2 { get; set; } = null!;
 
         /// <summary>
-        /// Region of Azure cloud.
+        /// Region of Azure VNet 1. Example: "East US 2".
         /// </summary>
         [Input("vnetReg1", required: true)]
         public Input<string> VnetReg1 { get; set; } = null!;
 
         /// <summary>
-        /// Region of Azure cloud.
+        /// Region of Azure VNet 2. Example: "East US 2".
         /// </summary>
         [Input("vnetReg2", required: true)]
         public Input<string> VnetReg2 { get; set; } = null!;
@@ -152,13 +186,13 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixAzurePeerState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.
+        /// Name of the Azure cloud account in the Aviatrix controller for VNet 1.
         /// </summary>
         [Input("accountName1")]
         public Input<string>? AccountName1 { get; set; }
 
         /// <summary>
-        /// This parameter represents the name of an Azure Cloud-Account in Aviatrix controller.
+        /// Name of the Azure cloud account in the Aviatrix controller for VNet 2.
         /// </summary>
         [Input("accountName2")]
         public Input<string>? AccountName2 { get; set; }
@@ -188,25 +222,25 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// VNet-Name of Azure cloud.
+        /// Azure VNet 1's name. Example: "VNet_Name1:Resource_Group_Name1:GUID1".
         /// </summary>
         [Input("vnetNameResourceGroup1")]
         public Input<string>? VnetNameResourceGroup1 { get; set; }
 
         /// <summary>
-        /// VNet-Name of Azure cloud.
+        /// Azure VNet 2's name. Example: "VNet_Name2:Resource_Group_Name2:GUID2".
         /// </summary>
         [Input("vnetNameResourceGroup2")]
         public Input<string>? VnetNameResourceGroup2 { get; set; }
 
         /// <summary>
-        /// Region of Azure cloud.
+        /// Region of Azure VNet 1. Example: "East US 2".
         /// </summary>
         [Input("vnetReg1")]
         public Input<string>? VnetReg1 { get; set; }
 
         /// <summary>
-        /// Region of Azure cloud.
+        /// Region of Azure VNet 2. Example: "East US 2".
         /// </summary>
         [Input("vnetReg2")]
         public Input<string>? VnetReg2 { get; set; }

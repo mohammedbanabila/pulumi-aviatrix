@@ -19,9 +19,9 @@ class AviatrixDeviceInterfaceConfigArgs:
                  wan_primary_interface_public_ip: pulumi.Input[str]):
         """
         The set of arguments for constructing a AviatrixDeviceInterfaceConfig resource.
-        :param pulumi.Input[str] device_name: Name of device.
-        :param pulumi.Input[str] wan_primary_interface: WAN primary interface of the device.
-        :param pulumi.Input[str] wan_primary_interface_public_ip: WAN primary interface public IP address.
+        :param pulumi.Input[str] device_name: Name of the device.
+        :param pulumi.Input[str] wan_primary_interface: Name of the WAN primary interface.
+        :param pulumi.Input[str] wan_primary_interface_public_ip: The WAN Primary interface public IP.
         """
         pulumi.set(__self__, "device_name", device_name)
         pulumi.set(__self__, "wan_primary_interface", wan_primary_interface)
@@ -31,7 +31,7 @@ class AviatrixDeviceInterfaceConfigArgs:
     @pulumi.getter(name="deviceName")
     def device_name(self) -> pulumi.Input[str]:
         """
-        Name of device.
+        Name of the device.
         """
         return pulumi.get(self, "device_name")
 
@@ -43,7 +43,7 @@ class AviatrixDeviceInterfaceConfigArgs:
     @pulumi.getter(name="wanPrimaryInterface")
     def wan_primary_interface(self) -> pulumi.Input[str]:
         """
-        WAN primary interface of the device.
+        Name of the WAN primary interface.
         """
         return pulumi.get(self, "wan_primary_interface")
 
@@ -55,7 +55,7 @@ class AviatrixDeviceInterfaceConfigArgs:
     @pulumi.getter(name="wanPrimaryInterfacePublicIp")
     def wan_primary_interface_public_ip(self) -> pulumi.Input[str]:
         """
-        WAN primary interface public IP address.
+        The WAN Primary interface public IP.
         """
         return pulumi.get(self, "wan_primary_interface_public_ip")
 
@@ -72,9 +72,9 @@ class _AviatrixDeviceInterfaceConfigState:
                  wan_primary_interface_public_ip: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixDeviceInterfaceConfig resources.
-        :param pulumi.Input[str] device_name: Name of device.
-        :param pulumi.Input[str] wan_primary_interface: WAN primary interface of the device.
-        :param pulumi.Input[str] wan_primary_interface_public_ip: WAN primary interface public IP address.
+        :param pulumi.Input[str] device_name: Name of the device.
+        :param pulumi.Input[str] wan_primary_interface: Name of the WAN primary interface.
+        :param pulumi.Input[str] wan_primary_interface_public_ip: The WAN Primary interface public IP.
         """
         if device_name is not None:
             pulumi.set(__self__, "device_name", device_name)
@@ -87,7 +87,7 @@ class _AviatrixDeviceInterfaceConfigState:
     @pulumi.getter(name="deviceName")
     def device_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of device.
+        Name of the device.
         """
         return pulumi.get(self, "device_name")
 
@@ -99,7 +99,7 @@ class _AviatrixDeviceInterfaceConfigState:
     @pulumi.getter(name="wanPrimaryInterface")
     def wan_primary_interface(self) -> Optional[pulumi.Input[str]]:
         """
-        WAN primary interface of the device.
+        Name of the WAN primary interface.
         """
         return pulumi.get(self, "wan_primary_interface")
 
@@ -111,7 +111,7 @@ class _AviatrixDeviceInterfaceConfigState:
     @pulumi.getter(name="wanPrimaryInterfacePublicIp")
     def wan_primary_interface_public_ip(self) -> Optional[pulumi.Input[str]]:
         """
-        WAN primary interface public IP address.
+        The WAN Primary interface public IP.
         """
         return pulumi.get(self, "wan_primary_interface_public_ip")
 
@@ -130,12 +130,34 @@ class AviatrixDeviceInterfaceConfig(pulumi.CustomResource):
                  wan_primary_interface_public_ip: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixDeviceInterfaceConfig resource with the given unique name, props, and options.
+        The **aviatrix_device_interface_config** resource allows the configuration of the WAN primary interface and IP for a device, for use in CloudN.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Configure the primary WAN interface and IP for a device.
+        test_device_interface_config = aviatrix.AviatrixDeviceInterfaceConfig("testDeviceInterfaceConfig",
+            device_name="test-device",
+            wan_primary_interface="eth0",
+            wan_primary_interface_public_ip="181.12.43.21")
+        ```
+
+        ## Import
+
+        **device_interface_config** can be imported using the `device_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixDeviceInterfaceConfig:AviatrixDeviceInterfaceConfig test device_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] device_name: Name of device.
-        :param pulumi.Input[str] wan_primary_interface: WAN primary interface of the device.
-        :param pulumi.Input[str] wan_primary_interface_public_ip: WAN primary interface public IP address.
+        :param pulumi.Input[str] device_name: Name of the device.
+        :param pulumi.Input[str] wan_primary_interface: Name of the WAN primary interface.
+        :param pulumi.Input[str] wan_primary_interface_public_ip: The WAN Primary interface public IP.
         """
         ...
     @overload
@@ -144,7 +166,29 @@ class AviatrixDeviceInterfaceConfig(pulumi.CustomResource):
                  args: AviatrixDeviceInterfaceConfigArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixDeviceInterfaceConfig resource with the given unique name, props, and options.
+        The **aviatrix_device_interface_config** resource allows the configuration of the WAN primary interface and IP for a device, for use in CloudN.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Configure the primary WAN interface and IP for a device.
+        test_device_interface_config = aviatrix.AviatrixDeviceInterfaceConfig("testDeviceInterfaceConfig",
+            device_name="test-device",
+            wan_primary_interface="eth0",
+            wan_primary_interface_public_ip="181.12.43.21")
+        ```
+
+        ## Import
+
+        **device_interface_config** can be imported using the `device_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixDeviceInterfaceConfig:AviatrixDeviceInterfaceConfig test device_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixDeviceInterfaceConfigArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -201,9 +245,9 @@ class AviatrixDeviceInterfaceConfig(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] device_name: Name of device.
-        :param pulumi.Input[str] wan_primary_interface: WAN primary interface of the device.
-        :param pulumi.Input[str] wan_primary_interface_public_ip: WAN primary interface public IP address.
+        :param pulumi.Input[str] device_name: Name of the device.
+        :param pulumi.Input[str] wan_primary_interface: Name of the WAN primary interface.
+        :param pulumi.Input[str] wan_primary_interface_public_ip: The WAN Primary interface public IP.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -218,7 +262,7 @@ class AviatrixDeviceInterfaceConfig(pulumi.CustomResource):
     @pulumi.getter(name="deviceName")
     def device_name(self) -> pulumi.Output[str]:
         """
-        Name of device.
+        Name of the device.
         """
         return pulumi.get(self, "device_name")
 
@@ -226,7 +270,7 @@ class AviatrixDeviceInterfaceConfig(pulumi.CustomResource):
     @pulumi.getter(name="wanPrimaryInterface")
     def wan_primary_interface(self) -> pulumi.Output[str]:
         """
-        WAN primary interface of the device.
+        Name of the WAN primary interface.
         """
         return pulumi.get(self, "wan_primary_interface")
 
@@ -234,7 +278,7 @@ class AviatrixDeviceInterfaceConfig(pulumi.CustomResource):
     @pulumi.getter(name="wanPrimaryInterfacePublicIp")
     def wan_primary_interface_public_ip(self) -> pulumi.Output[str]:
         """
-        WAN primary interface public IP address.
+        The WAN Primary interface public IP.
         """
         return pulumi.get(self, "wan_primary_interface_public_ip")
 

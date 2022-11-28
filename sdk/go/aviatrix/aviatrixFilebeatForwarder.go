@@ -11,20 +11,74 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_filebeat_forwarder** resource allows the enabling and disabling of filebeat forwarder.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"io/ioutil"
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func readFileOrPanic(path string) pulumi.StringPtrInput {
+//		data, err := ioutil.ReadFile(path)
+//		if err != nil {
+//			panic(err.Error())
+//		}
+//		return pulumi.String(string(data))
+//	}
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixFilebeatForwarder(ctx, "testFilebeatForwarder", &aviatrix.AviatrixFilebeatForwarderArgs{
+//				Server:        pulumi.String("1.2.3.4"),
+//				Port:          pulumi.Int(10),
+//				TrustedCaFile: readFileOrPanic("/path/to/ca.pem"),
+//				ConfigFile:    readFileOrPanic("/path/to/config.txt"),
+//				ExcludedGateways: pulumi.StringArray{
+//					pulumi.String("a"),
+//					pulumi.String("b"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **filebeat_forwarder** can be imported using "filebeat_forwarder", e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixFilebeatForwarder:AviatrixFilebeatForwarder test filebeat_forwarder
+//
+// ```
 type AviatrixFilebeatForwarder struct {
 	pulumi.CustomResourceState
 
-	// Configuration file.
+	// The config file. Use the `file` function to read from a file.
 	ConfigFile pulumi.StringPtrOutput `pulumi:"configFile"`
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways pulumi.StringArrayOutput `pulumi:"excludedGateways"`
 	// Port number.
 	Port pulumi.IntOutput `pulumi:"port"`
 	// Server IP.
 	Server pulumi.StringOutput `pulumi:"server"`
-	// Enabled or not.
+	// The status of filebeat forwarder.
 	Status pulumi.StringOutput `pulumi:"status"`
-	// Trusted CA file.
+	// The trusted CA file. Use the `file` function to read from a file.
 	TrustedCaFile pulumi.StringPtrOutput `pulumi:"trustedCaFile"`
 }
 
@@ -64,32 +118,32 @@ func GetAviatrixFilebeatForwarder(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixFilebeatForwarder resources.
 type aviatrixFilebeatForwarderState struct {
-	// Configuration file.
+	// The config file. Use the `file` function to read from a file.
 	ConfigFile *string `pulumi:"configFile"`
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways []string `pulumi:"excludedGateways"`
 	// Port number.
 	Port *int `pulumi:"port"`
 	// Server IP.
 	Server *string `pulumi:"server"`
-	// Enabled or not.
+	// The status of filebeat forwarder.
 	Status *string `pulumi:"status"`
-	// Trusted CA file.
+	// The trusted CA file. Use the `file` function to read from a file.
 	TrustedCaFile *string `pulumi:"trustedCaFile"`
 }
 
 type AviatrixFilebeatForwarderState struct {
-	// Configuration file.
+	// The config file. Use the `file` function to read from a file.
 	ConfigFile pulumi.StringPtrInput
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways pulumi.StringArrayInput
 	// Port number.
 	Port pulumi.IntPtrInput
 	// Server IP.
 	Server pulumi.StringPtrInput
-	// Enabled or not.
+	// The status of filebeat forwarder.
 	Status pulumi.StringPtrInput
-	// Trusted CA file.
+	// The trusted CA file. Use the `file` function to read from a file.
 	TrustedCaFile pulumi.StringPtrInput
 }
 
@@ -98,29 +152,29 @@ func (AviatrixFilebeatForwarderState) ElementType() reflect.Type {
 }
 
 type aviatrixFilebeatForwarderArgs struct {
-	// Configuration file.
+	// The config file. Use the `file` function to read from a file.
 	ConfigFile *string `pulumi:"configFile"`
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways []string `pulumi:"excludedGateways"`
 	// Port number.
 	Port int `pulumi:"port"`
 	// Server IP.
 	Server string `pulumi:"server"`
-	// Trusted CA file.
+	// The trusted CA file. Use the `file` function to read from a file.
 	TrustedCaFile *string `pulumi:"trustedCaFile"`
 }
 
 // The set of arguments for constructing a AviatrixFilebeatForwarder resource.
 type AviatrixFilebeatForwarderArgs struct {
-	// Configuration file.
+	// The config file. Use the `file` function to read from a file.
 	ConfigFile pulumi.StringPtrInput
-	// List of excluded gateways.
+	// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 	ExcludedGateways pulumi.StringArrayInput
 	// Port number.
 	Port pulumi.IntInput
 	// Server IP.
 	Server pulumi.StringInput
-	// Trusted CA file.
+	// The trusted CA file. Use the `file` function to read from a file.
 	TrustedCaFile pulumi.StringPtrInput
 }
 
@@ -211,12 +265,12 @@ func (o AviatrixFilebeatForwarderOutput) ToAviatrixFilebeatForwarderOutputWithCo
 	return o
 }
 
-// Configuration file.
+// The config file. Use the `file` function to read from a file.
 func (o AviatrixFilebeatForwarderOutput) ConfigFile() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixFilebeatForwarder) pulumi.StringPtrOutput { return v.ConfigFile }).(pulumi.StringPtrOutput)
 }
 
-// List of excluded gateways.
+// List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
 func (o AviatrixFilebeatForwarderOutput) ExcludedGateways() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixFilebeatForwarder) pulumi.StringArrayOutput { return v.ExcludedGateways }).(pulumi.StringArrayOutput)
 }
@@ -231,12 +285,12 @@ func (o AviatrixFilebeatForwarderOutput) Server() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixFilebeatForwarder) pulumi.StringOutput { return v.Server }).(pulumi.StringOutput)
 }
 
-// Enabled or not.
+// The status of filebeat forwarder.
 func (o AviatrixFilebeatForwarderOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixFilebeatForwarder) pulumi.StringOutput { return v.Status }).(pulumi.StringOutput)
 }
 
-// Trusted CA file.
+// The trusted CA file. Use the `file` function to read from a file.
 func (o AviatrixFilebeatForwarderOutput) TrustedCaFile() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixFilebeatForwarder) pulumi.StringPtrOutput { return v.TrustedCaFile }).(pulumi.StringPtrOutput)
 }

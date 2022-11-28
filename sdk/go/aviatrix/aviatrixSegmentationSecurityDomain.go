@@ -11,10 +11,47 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_segmentation_security_domain** resource handles creation of [Transit Segmentation](https://docs.aviatrix.com/HowTos/transit_segmentation_faq.html) Security Domains.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixSegmentationSecurityDomain(ctx, "testSegmentationSecurityDomain", &aviatrix.AviatrixSegmentationSecurityDomainArgs{
+//				DomainName: pulumi.String("domain-a"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **aviatrix_segmentation_security_domain** can be imported using the `domain_name`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixSegmentationSecurityDomain:AviatrixSegmentationSecurityDomain test domain_name
+//
+// ```
 type AviatrixSegmentationSecurityDomain struct {
 	pulumi.CustomResourceState
 
-	// Security domain name.
+	// Name of the Security Domain.
 	DomainName pulumi.StringOutput `pulumi:"domainName"`
 }
 
@@ -51,12 +88,12 @@ func GetAviatrixSegmentationSecurityDomain(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixSegmentationSecurityDomain resources.
 type aviatrixSegmentationSecurityDomainState struct {
-	// Security domain name.
+	// Name of the Security Domain.
 	DomainName *string `pulumi:"domainName"`
 }
 
 type AviatrixSegmentationSecurityDomainState struct {
-	// Security domain name.
+	// Name of the Security Domain.
 	DomainName pulumi.StringPtrInput
 }
 
@@ -65,13 +102,13 @@ func (AviatrixSegmentationSecurityDomainState) ElementType() reflect.Type {
 }
 
 type aviatrixSegmentationSecurityDomainArgs struct {
-	// Security domain name.
+	// Name of the Security Domain.
 	DomainName string `pulumi:"domainName"`
 }
 
 // The set of arguments for constructing a AviatrixSegmentationSecurityDomain resource.
 type AviatrixSegmentationSecurityDomainArgs struct {
-	// Security domain name.
+	// Name of the Security Domain.
 	DomainName pulumi.StringInput
 }
 
@@ -162,7 +199,7 @@ func (o AviatrixSegmentationSecurityDomainOutput) ToAviatrixSegmentationSecurity
 	return o
 }
 
-// Security domain name.
+// Name of the Security Domain.
 func (o AviatrixSegmentationSecurityDomainOutput) DomainName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSegmentationSecurityDomain) pulumi.StringOutput { return v.DomainName }).(pulumi.StringOutput)
 }

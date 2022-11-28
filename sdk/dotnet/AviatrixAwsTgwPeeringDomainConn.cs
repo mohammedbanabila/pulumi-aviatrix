@@ -9,6 +9,38 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_aws_tgw_peering_domain_conn** resource allows the creation and management of Aviatrix domain connections between peered AWS TGWs.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Domian Connection between Peered AWS Tgws
+    ///     var test = new Aviatrix.AviatrixAwsTgwPeeringDomainConn("test", new()
+    ///     {
+    ///         DomainName1 = "Default_Domain",
+    ///         DomainName2 = "Default_Domain",
+    ///         TgwName1 = "tgw1",
+    ///         TgwName2 = "tgw2",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **aws_tgw_peering_domain_conn** can be imported using the `tgw_name1`, `domain_name1`, `tgw_name2` and `domain_name2`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixAwsTgwPeeringDomainConn:AviatrixAwsTgwPeeringDomainConn test tgw_name1:domain_name1~tgw_name2:domain_name2
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixAwsTgwPeeringDomainConn:AviatrixAwsTgwPeeringDomainConn")]
     public partial class AviatrixAwsTgwPeeringDomainConn : global::Pulumi.CustomResource
     {
@@ -25,13 +57,13 @@ namespace Pulumi.Aviatrix
         public Output<string> DomainName2 { get; private set; } = null!;
 
         /// <summary>
-        /// The AWS tgw name of the source domain to make a connection.
+        /// The AWS TGW name of the source domain to make a connection.
         /// </summary>
         [Output("tgwName1")]
         public Output<string> TgwName1 { get; private set; } = null!;
 
         /// <summary>
-        /// The AWS tgw name of the destination domain to make a connection.
+        /// The AWS TGW name of the destination domain to make a connection.
         /// </summary>
         [Output("tgwName2")]
         public Output<string> TgwName2 { get; private set; } = null!;
@@ -96,13 +128,13 @@ namespace Pulumi.Aviatrix
         public Input<string> DomainName2 { get; set; } = null!;
 
         /// <summary>
-        /// The AWS tgw name of the source domain to make a connection.
+        /// The AWS TGW name of the source domain to make a connection.
         /// </summary>
         [Input("tgwName1", required: true)]
         public Input<string> TgwName1 { get; set; } = null!;
 
         /// <summary>
-        /// The AWS tgw name of the destination domain to make a connection.
+        /// The AWS TGW name of the destination domain to make a connection.
         /// </summary>
         [Input("tgwName2", required: true)]
         public Input<string> TgwName2 { get; set; } = null!;
@@ -128,13 +160,13 @@ namespace Pulumi.Aviatrix
         public Input<string>? DomainName2 { get; set; }
 
         /// <summary>
-        /// The AWS tgw name of the source domain to make a connection.
+        /// The AWS TGW name of the source domain to make a connection.
         /// </summary>
         [Input("tgwName1")]
         public Input<string>? TgwName1 { get; set; }
 
         /// <summary>
-        /// The AWS tgw name of the destination domain to make a connection.
+        /// The AWS TGW name of the destination domain to make a connection.
         /// </summary>
         [Input("tgwName2")]
         public Input<string>? TgwName2 { get; set; }

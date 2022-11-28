@@ -9,6 +9,41 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_edge_spoke_external_device_conn** resource creates and manages the connection between Edge as a Spoke and an External Device. This resource is available as of provider version R2.23+.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Edge as a Spoke External Device Connection
+    ///     var test = new Aviatrix.AviatrixEdgeSpokeExternalDeviceConn("test", new()
+    ///     {
+    ///         BgpLocalAsNum = "123",
+    ///         BgpRemoteAsNum = "345",
+    ///         ConnectionName = "conn",
+    ///         GwName = "eaas",
+    ///         LocalLanIp = "10.230.3.23",
+    ///         RemoteLanIp = "10.0.60.1",
+    ///         SiteId = "site-abcd1234",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **edge_spoke_external_device_conn** can be imported using the `connection_name` and `site_id`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixEdgeSpokeExternalDeviceConn:AviatrixEdgeSpokeExternalDeviceConn test connection_name~site_id
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixEdgeSpokeExternalDeviceConn:AviatrixEdgeSpokeExternalDeviceConn")]
     public partial class AviatrixEdgeSpokeExternalDeviceConn : global::Pulumi.CustomResource
     {
@@ -25,19 +60,19 @@ namespace Pulumi.Aviatrix
         public Output<string> BgpRemoteAsNum { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the spoke external device connection which is going to be created.
+        /// Connection name.
         /// </summary>
         [Output("connectionName")]
         public Output<string> ConnectionName { get; private set; } = null!;
 
         /// <summary>
-        /// Connection type. Valid values: 'bgp'. Default value: 'bgp'.
+        /// Connection type. Valid value: 'bgp'. Default value: 'bgp'.
         /// </summary>
         [Output("connectionType")]
         public Output<string?> ConnectionType { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the BGP Spoke Gateway.
+        /// Edge as a Spoke name.
         /// </summary>
         [Output("gwName")]
         public Output<string> GwName { get; private set; } = null!;
@@ -55,13 +90,13 @@ namespace Pulumi.Aviatrix
         public Output<string> RemoteLanIp { get; private set; } = null!;
 
         /// <summary>
-        /// ID of the VPC where the BGP Spoke Gateway is located.
+        /// Edge as a Spoke site iD.
         /// </summary>
         [Output("siteId")]
         public Output<string> SiteId { get; private set; } = null!;
 
         /// <summary>
-        /// Tunnel Protocol. Valid value: 'LAN'. Default value: 'LAN'. Case insensitive.
+        /// Tunnel protocol. Valid value: 'LAN'. Default value: 'LAN'. Case insensitive.
         /// </summary>
         [Output("tunnelProtocol")]
         public Output<string?> TunnelProtocol { get; private set; } = null!;
@@ -126,19 +161,19 @@ namespace Pulumi.Aviatrix
         public Input<string> BgpRemoteAsNum { get; set; } = null!;
 
         /// <summary>
-        /// The name of the spoke external device connection which is going to be created.
+        /// Connection name.
         /// </summary>
         [Input("connectionName", required: true)]
         public Input<string> ConnectionName { get; set; } = null!;
 
         /// <summary>
-        /// Connection type. Valid values: 'bgp'. Default value: 'bgp'.
+        /// Connection type. Valid value: 'bgp'. Default value: 'bgp'.
         /// </summary>
         [Input("connectionType")]
         public Input<string>? ConnectionType { get; set; }
 
         /// <summary>
-        /// Name of the BGP Spoke Gateway.
+        /// Edge as a Spoke name.
         /// </summary>
         [Input("gwName", required: true)]
         public Input<string> GwName { get; set; } = null!;
@@ -156,13 +191,13 @@ namespace Pulumi.Aviatrix
         public Input<string> RemoteLanIp { get; set; } = null!;
 
         /// <summary>
-        /// ID of the VPC where the BGP Spoke Gateway is located.
+        /// Edge as a Spoke site iD.
         /// </summary>
         [Input("siteId", required: true)]
         public Input<string> SiteId { get; set; } = null!;
 
         /// <summary>
-        /// Tunnel Protocol. Valid value: 'LAN'. Default value: 'LAN'. Case insensitive.
+        /// Tunnel protocol. Valid value: 'LAN'. Default value: 'LAN'. Case insensitive.
         /// </summary>
         [Input("tunnelProtocol")]
         public Input<string>? TunnelProtocol { get; set; }
@@ -188,19 +223,19 @@ namespace Pulumi.Aviatrix
         public Input<string>? BgpRemoteAsNum { get; set; }
 
         /// <summary>
-        /// The name of the spoke external device connection which is going to be created.
+        /// Connection name.
         /// </summary>
         [Input("connectionName")]
         public Input<string>? ConnectionName { get; set; }
 
         /// <summary>
-        /// Connection type. Valid values: 'bgp'. Default value: 'bgp'.
+        /// Connection type. Valid value: 'bgp'. Default value: 'bgp'.
         /// </summary>
         [Input("connectionType")]
         public Input<string>? ConnectionType { get; set; }
 
         /// <summary>
-        /// Name of the BGP Spoke Gateway.
+        /// Edge as a Spoke name.
         /// </summary>
         [Input("gwName")]
         public Input<string>? GwName { get; set; }
@@ -218,13 +253,13 @@ namespace Pulumi.Aviatrix
         public Input<string>? RemoteLanIp { get; set; }
 
         /// <summary>
-        /// ID of the VPC where the BGP Spoke Gateway is located.
+        /// Edge as a Spoke site iD.
         /// </summary>
         [Input("siteId")]
         public Input<string>? SiteId { get; set; }
 
         /// <summary>
-        /// Tunnel Protocol. Valid value: 'LAN'. Default value: 'LAN'. Case insensitive.
+        /// Tunnel protocol. Valid value: 'LAN'. Default value: 'LAN'. Case insensitive.
         /// </summary>
         [Input("tunnelProtocol")]
         public Input<string>? TunnelProtocol { get; set; }

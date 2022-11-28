@@ -47,35 +47,35 @@ class AviatrixEdgeSpokeArgs:
         """
         The set of arguments for constructing a AviatrixEdgeSpoke resource.
         :param pulumi.Input[str] gw_name: Edge as a Spoke name.
-        :param pulumi.Input[str] lan_interface_ip_prefix: LAN interface IP/prefix.
-        :param pulumi.Input[str] management_interface_config: Management interface configuration. Valid values: 'DHCP' and 'Static'.
+        :param pulumi.Input[str] lan_interface_ip_prefix: LAN interface IP and subnet prefix.
+        :param pulumi.Input[str] management_interface_config: Management interface configuration. Valid values: "DHCP", "Static".
         :param pulumi.Input[str] site_id: Site ID.
         :param pulumi.Input[str] wan_default_gateway_ip: WAN default gateway IP.
-        :param pulumi.Input[str] wan_interface_ip_prefix: WAN interface IP/prefix.
-        :param pulumi.Input[str] ztp_file_download_path: The location where the Edge as a CaaG ZTP file will be stored.
-        :param pulumi.Input[str] ztp_file_type: ZTP file type.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] approved_learned_cidrs: Approved learned CIDRs for BGP Spoke Gateway.
-        :param pulumi.Input[int] bgp_hold_time: BGP Hold Time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 12 and 360.
-        :param pulumi.Input[int] bgp_polling_time: BGP route polling time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 10 and 50.
-        :param pulumi.Input[str] dns_server_ip: DNS server IP.
-        :param pulumi.Input[bool] enable_edge_active_standby: Enables Edge Active-Standby Mode.
-        :param pulumi.Input[bool] enable_edge_active_standby_preemptive: Enables Preemptive Mode for Edge Active-Standby, available only with Active-Standby enabled.
-        :param pulumi.Input[bool] enable_edge_transitive_routing: Enable Edge transitive routing.
-        :param pulumi.Input[bool] enable_jumbo_frame: Enable jumbo frame.
-        :param pulumi.Input[bool] enable_learned_cidrs_approval: Switch to enable/disable learned CIDR approval for BGP Spoke Gateway. Valid values: true, false.
-        :param pulumi.Input[bool] enable_management_over_private_network: Enable management over private network.
-        :param pulumi.Input[bool] enable_preserve_as_path: Enable preserve as path when advertising manual summary CIDRs on BGP spoke gateway.
-        :param pulumi.Input[str] latitude: The latitude of the Edge as a Spoke.
-        :param pulumi.Input[str] local_as_number: Local AS number.
-        :param pulumi.Input[str] longitude: The longitude of the Edge as a Spoke.
-        :param pulumi.Input[str] management_default_gateway_ip: Management default gateway IP.
-        :param pulumi.Input[str] management_egress_ip_prefix: Management egress gateway IP/prefix.
-        :param pulumi.Input[str] management_interface_ip_prefix: Management interface IP/prefix.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: List of AS numbers to prepend gateway BGP AS_Path field.
-        :param pulumi.Input[str] rx_queue_size: Ethernet interface RX queue size.
-        :param pulumi.Input[str] secondary_dns_server_ip: Secondary DNS server IP.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] spoke_bgp_manual_advertise_cidrs: Intended CIDR list to be advertised to external BGP router.
-        :param pulumi.Input[str] wan_public_ip: WAN interface public IP.
+        :param pulumi.Input[str] wan_interface_ip_prefix: WAN interface IP and subnet prefix.
+        :param pulumi.Input[str] ztp_file_download_path: The folder path where the ZTP file will be downloaded.
+        :param pulumi.Input[str] ztp_file_type: ZTP file type. Valid values: "iso", "cloud-init".
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] approved_learned_cidrs: Set of approved learned CIDRs. Valid only when `enable_learned_cidrs_approval` is set to true. Example: ["10.1.0.0/116", "10.2.0.0/16"].
+        :param pulumi.Input[int] bgp_hold_time: BGP hold time. Unit is in seconds. Valid values are between 12 and 360. Default value: 180.
+        :param pulumi.Input[int] bgp_polling_time: BGP route polling time. Unit is in seconds. Valid values are between 10 and 50. Default value: 50.
+        :param pulumi.Input[str] dns_server_ip: DNS server IP. Required and valid when `management_interface_config` is "Static".
+        :param pulumi.Input[bool] enable_edge_active_standby: Switch to enable Edge Active-Standby mode. Valid values: true, false. Default value: false.
+        :param pulumi.Input[bool] enable_edge_active_standby_preemptive: Switch to enable Preemptive Mode for Edge Active-Standby. Valid values: true, false. Default value: false.
+        :param pulumi.Input[bool] enable_edge_transitive_routing: Switch to enable Edge transitive routing. Valid values: true, false. Default value: false.
+        :param pulumi.Input[bool] enable_jumbo_frame: Switch to enable jumbo frame. Valid values: true, false. Default value: false.
+        :param pulumi.Input[bool] enable_learned_cidrs_approval: Switch to enable learned CIDR approval. Valid values: true, false. Default value: false.
+        :param pulumi.Input[bool] enable_management_over_private_network: Switch to enable management over the private network. Valid values: true, false. Default value: false.
+        :param pulumi.Input[bool] enable_preserve_as_path: Switch to enable preserve as_path when advertising manual summary CIDRs. Valid values: true, false. Default value: false.
+        :param pulumi.Input[str] latitude: Latitude of Edge as a Spoke. Valid values are between -90 and 90. Example: "47.7511".
+        :param pulumi.Input[str] local_as_number: BGP AS Number to assign to Edge as a Spoke.
+        :param pulumi.Input[str] longitude: Longitude of Edge as a Spoke. Valid values are between -180 and 180. Example: "120.7401".
+        :param pulumi.Input[str] management_default_gateway_ip: Management default gateway IP. Required and valid when `management_interface_config` is "Static".
+        :param pulumi.Input[str] management_egress_ip_prefix: Management egress gateway IP and subnet prefix.
+        :param pulumi.Input[str] management_interface_ip_prefix: Management interface IP and subnet prefix. Required and valid when `management_interface_config` is "Static".
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: List of AS numbers to prepend gateway BGP AS_Path field. Valid only when `local_as_number` is set. Example: ["65023", "65023"].
+        :param pulumi.Input[str] rx_queue_size: Ethernet interface RX queue size. Once set, can't be deleted or disabled. Valid values: "1K", "2K", "4K".
+        :param pulumi.Input[str] secondary_dns_server_ip: Secondary DNS server IP. Required and valid when `management_interface_config` is "Static".
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] spoke_bgp_manual_advertise_cidrs: Set of intended CIDRs to be advertised to external BGP router. Example: ["10.1.0.0/116", "10.2.0.0/16"].
+        :param pulumi.Input[str] wan_public_ip: WAN public IP. Required for attaching connections over the Internet.
         """
         pulumi.set(__self__, "gw_name", gw_name)
         pulumi.set(__self__, "lan_interface_ip_prefix", lan_interface_ip_prefix)
@@ -146,7 +146,7 @@ class AviatrixEdgeSpokeArgs:
     @pulumi.getter(name="lanInterfaceIpPrefix")
     def lan_interface_ip_prefix(self) -> pulumi.Input[str]:
         """
-        LAN interface IP/prefix.
+        LAN interface IP and subnet prefix.
         """
         return pulumi.get(self, "lan_interface_ip_prefix")
 
@@ -158,7 +158,7 @@ class AviatrixEdgeSpokeArgs:
     @pulumi.getter(name="managementInterfaceConfig")
     def management_interface_config(self) -> pulumi.Input[str]:
         """
-        Management interface configuration. Valid values: 'DHCP' and 'Static'.
+        Management interface configuration. Valid values: "DHCP", "Static".
         """
         return pulumi.get(self, "management_interface_config")
 
@@ -194,7 +194,7 @@ class AviatrixEdgeSpokeArgs:
     @pulumi.getter(name="wanInterfaceIpPrefix")
     def wan_interface_ip_prefix(self) -> pulumi.Input[str]:
         """
-        WAN interface IP/prefix.
+        WAN interface IP and subnet prefix.
         """
         return pulumi.get(self, "wan_interface_ip_prefix")
 
@@ -206,7 +206,7 @@ class AviatrixEdgeSpokeArgs:
     @pulumi.getter(name="ztpFileDownloadPath")
     def ztp_file_download_path(self) -> pulumi.Input[str]:
         """
-        The location where the Edge as a CaaG ZTP file will be stored.
+        The folder path where the ZTP file will be downloaded.
         """
         return pulumi.get(self, "ztp_file_download_path")
 
@@ -218,7 +218,7 @@ class AviatrixEdgeSpokeArgs:
     @pulumi.getter(name="ztpFileType")
     def ztp_file_type(self) -> pulumi.Input[str]:
         """
-        ZTP file type.
+        ZTP file type. Valid values: "iso", "cloud-init".
         """
         return pulumi.get(self, "ztp_file_type")
 
@@ -230,7 +230,7 @@ class AviatrixEdgeSpokeArgs:
     @pulumi.getter(name="approvedLearnedCidrs")
     def approved_learned_cidrs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Approved learned CIDRs for BGP Spoke Gateway.
+        Set of approved learned CIDRs. Valid only when `enable_learned_cidrs_approval` is set to true. Example: ["10.1.0.0/116", "10.2.0.0/16"].
         """
         return pulumi.get(self, "approved_learned_cidrs")
 
@@ -242,7 +242,7 @@ class AviatrixEdgeSpokeArgs:
     @pulumi.getter(name="bgpHoldTime")
     def bgp_hold_time(self) -> Optional[pulumi.Input[int]]:
         """
-        BGP Hold Time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 12 and 360.
+        BGP hold time. Unit is in seconds. Valid values are between 12 and 360. Default value: 180.
         """
         return pulumi.get(self, "bgp_hold_time")
 
@@ -254,7 +254,7 @@ class AviatrixEdgeSpokeArgs:
     @pulumi.getter(name="bgpPollingTime")
     def bgp_polling_time(self) -> Optional[pulumi.Input[int]]:
         """
-        BGP route polling time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 10 and 50.
+        BGP route polling time. Unit is in seconds. Valid values are between 10 and 50. Default value: 50.
         """
         return pulumi.get(self, "bgp_polling_time")
 
@@ -266,7 +266,7 @@ class AviatrixEdgeSpokeArgs:
     @pulumi.getter(name="dnsServerIp")
     def dns_server_ip(self) -> Optional[pulumi.Input[str]]:
         """
-        DNS server IP.
+        DNS server IP. Required and valid when `management_interface_config` is "Static".
         """
         return pulumi.get(self, "dns_server_ip")
 
@@ -278,7 +278,7 @@ class AviatrixEdgeSpokeArgs:
     @pulumi.getter(name="enableEdgeActiveStandby")
     def enable_edge_active_standby(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enables Edge Active-Standby Mode.
+        Switch to enable Edge Active-Standby mode. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_edge_active_standby")
 
@@ -290,7 +290,7 @@ class AviatrixEdgeSpokeArgs:
     @pulumi.getter(name="enableEdgeActiveStandbyPreemptive")
     def enable_edge_active_standby_preemptive(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enables Preemptive Mode for Edge Active-Standby, available only with Active-Standby enabled.
+        Switch to enable Preemptive Mode for Edge Active-Standby. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_edge_active_standby_preemptive")
 
@@ -302,7 +302,7 @@ class AviatrixEdgeSpokeArgs:
     @pulumi.getter(name="enableEdgeTransitiveRouting")
     def enable_edge_transitive_routing(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable Edge transitive routing.
+        Switch to enable Edge transitive routing. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_edge_transitive_routing")
 
@@ -314,7 +314,7 @@ class AviatrixEdgeSpokeArgs:
     @pulumi.getter(name="enableJumboFrame")
     def enable_jumbo_frame(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable jumbo frame.
+        Switch to enable jumbo frame. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_jumbo_frame")
 
@@ -326,7 +326,7 @@ class AviatrixEdgeSpokeArgs:
     @pulumi.getter(name="enableLearnedCidrsApproval")
     def enable_learned_cidrs_approval(self) -> Optional[pulumi.Input[bool]]:
         """
-        Switch to enable/disable learned CIDR approval for BGP Spoke Gateway. Valid values: true, false.
+        Switch to enable learned CIDR approval. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_learned_cidrs_approval")
 
@@ -338,7 +338,7 @@ class AviatrixEdgeSpokeArgs:
     @pulumi.getter(name="enableManagementOverPrivateNetwork")
     def enable_management_over_private_network(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable management over private network.
+        Switch to enable management over the private network. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_management_over_private_network")
 
@@ -350,7 +350,7 @@ class AviatrixEdgeSpokeArgs:
     @pulumi.getter(name="enablePreserveAsPath")
     def enable_preserve_as_path(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable preserve as path when advertising manual summary CIDRs on BGP spoke gateway.
+        Switch to enable preserve as_path when advertising manual summary CIDRs. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_preserve_as_path")
 
@@ -362,7 +362,7 @@ class AviatrixEdgeSpokeArgs:
     @pulumi.getter
     def latitude(self) -> Optional[pulumi.Input[str]]:
         """
-        The latitude of the Edge as a Spoke.
+        Latitude of Edge as a Spoke. Valid values are between -90 and 90. Example: "47.7511".
         """
         return pulumi.get(self, "latitude")
 
@@ -374,7 +374,7 @@ class AviatrixEdgeSpokeArgs:
     @pulumi.getter(name="localAsNumber")
     def local_as_number(self) -> Optional[pulumi.Input[str]]:
         """
-        Local AS number.
+        BGP AS Number to assign to Edge as a Spoke.
         """
         return pulumi.get(self, "local_as_number")
 
@@ -386,7 +386,7 @@ class AviatrixEdgeSpokeArgs:
     @pulumi.getter
     def longitude(self) -> Optional[pulumi.Input[str]]:
         """
-        The longitude of the Edge as a Spoke.
+        Longitude of Edge as a Spoke. Valid values are between -180 and 180. Example: "120.7401".
         """
         return pulumi.get(self, "longitude")
 
@@ -398,7 +398,7 @@ class AviatrixEdgeSpokeArgs:
     @pulumi.getter(name="managementDefaultGatewayIp")
     def management_default_gateway_ip(self) -> Optional[pulumi.Input[str]]:
         """
-        Management default gateway IP.
+        Management default gateway IP. Required and valid when `management_interface_config` is "Static".
         """
         return pulumi.get(self, "management_default_gateway_ip")
 
@@ -410,7 +410,7 @@ class AviatrixEdgeSpokeArgs:
     @pulumi.getter(name="managementEgressIpPrefix")
     def management_egress_ip_prefix(self) -> Optional[pulumi.Input[str]]:
         """
-        Management egress gateway IP/prefix.
+        Management egress gateway IP and subnet prefix.
         """
         return pulumi.get(self, "management_egress_ip_prefix")
 
@@ -422,7 +422,7 @@ class AviatrixEdgeSpokeArgs:
     @pulumi.getter(name="managementInterfaceIpPrefix")
     def management_interface_ip_prefix(self) -> Optional[pulumi.Input[str]]:
         """
-        Management interface IP/prefix.
+        Management interface IP and subnet prefix. Required and valid when `management_interface_config` is "Static".
         """
         return pulumi.get(self, "management_interface_ip_prefix")
 
@@ -434,7 +434,7 @@ class AviatrixEdgeSpokeArgs:
     @pulumi.getter(name="prependAsPaths")
     def prepend_as_paths(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of AS numbers to prepend gateway BGP AS_Path field.
+        List of AS numbers to prepend gateway BGP AS_Path field. Valid only when `local_as_number` is set. Example: ["65023", "65023"].
         """
         return pulumi.get(self, "prepend_as_paths")
 
@@ -446,7 +446,7 @@ class AviatrixEdgeSpokeArgs:
     @pulumi.getter(name="rxQueueSize")
     def rx_queue_size(self) -> Optional[pulumi.Input[str]]:
         """
-        Ethernet interface RX queue size.
+        Ethernet interface RX queue size. Once set, can't be deleted or disabled. Valid values: "1K", "2K", "4K".
         """
         return pulumi.get(self, "rx_queue_size")
 
@@ -458,7 +458,7 @@ class AviatrixEdgeSpokeArgs:
     @pulumi.getter(name="secondaryDnsServerIp")
     def secondary_dns_server_ip(self) -> Optional[pulumi.Input[str]]:
         """
-        Secondary DNS server IP.
+        Secondary DNS server IP. Required and valid when `management_interface_config` is "Static".
         """
         return pulumi.get(self, "secondary_dns_server_ip")
 
@@ -470,7 +470,7 @@ class AviatrixEdgeSpokeArgs:
     @pulumi.getter(name="spokeBgpManualAdvertiseCidrs")
     def spoke_bgp_manual_advertise_cidrs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Intended CIDR list to be advertised to external BGP router.
+        Set of intended CIDRs to be advertised to external BGP router. Example: ["10.1.0.0/116", "10.2.0.0/16"].
         """
         return pulumi.get(self, "spoke_bgp_manual_advertise_cidrs")
 
@@ -482,7 +482,7 @@ class AviatrixEdgeSpokeArgs:
     @pulumi.getter(name="wanPublicIp")
     def wan_public_ip(self) -> Optional[pulumi.Input[str]]:
         """
-        WAN interface public IP.
+        WAN public IP. Required for attaching connections over the Internet.
         """
         return pulumi.get(self, "wan_public_ip")
 
@@ -527,37 +527,37 @@ class _AviatrixEdgeSpokeState:
                  ztp_file_type: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixEdgeSpoke resources.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] approved_learned_cidrs: Approved learned CIDRs for BGP Spoke Gateway.
-        :param pulumi.Input[int] bgp_hold_time: BGP Hold Time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 12 and 360.
-        :param pulumi.Input[int] bgp_polling_time: BGP route polling time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 10 and 50.
-        :param pulumi.Input[str] dns_server_ip: DNS server IP.
-        :param pulumi.Input[bool] enable_edge_active_standby: Enables Edge Active-Standby Mode.
-        :param pulumi.Input[bool] enable_edge_active_standby_preemptive: Enables Preemptive Mode for Edge Active-Standby, available only with Active-Standby enabled.
-        :param pulumi.Input[bool] enable_edge_transitive_routing: Enable Edge transitive routing.
-        :param pulumi.Input[bool] enable_jumbo_frame: Enable jumbo frame.
-        :param pulumi.Input[bool] enable_learned_cidrs_approval: Switch to enable/disable learned CIDR approval for BGP Spoke Gateway. Valid values: true, false.
-        :param pulumi.Input[bool] enable_management_over_private_network: Enable management over private network.
-        :param pulumi.Input[bool] enable_preserve_as_path: Enable preserve as path when advertising manual summary CIDRs on BGP spoke gateway.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] approved_learned_cidrs: Set of approved learned CIDRs. Valid only when `enable_learned_cidrs_approval` is set to true. Example: ["10.1.0.0/116", "10.2.0.0/16"].
+        :param pulumi.Input[int] bgp_hold_time: BGP hold time. Unit is in seconds. Valid values are between 12 and 360. Default value: 180.
+        :param pulumi.Input[int] bgp_polling_time: BGP route polling time. Unit is in seconds. Valid values are between 10 and 50. Default value: 50.
+        :param pulumi.Input[str] dns_server_ip: DNS server IP. Required and valid when `management_interface_config` is "Static".
+        :param pulumi.Input[bool] enable_edge_active_standby: Switch to enable Edge Active-Standby mode. Valid values: true, false. Default value: false.
+        :param pulumi.Input[bool] enable_edge_active_standby_preemptive: Switch to enable Preemptive Mode for Edge Active-Standby. Valid values: true, false. Default value: false.
+        :param pulumi.Input[bool] enable_edge_transitive_routing: Switch to enable Edge transitive routing. Valid values: true, false. Default value: false.
+        :param pulumi.Input[bool] enable_jumbo_frame: Switch to enable jumbo frame. Valid values: true, false. Default value: false.
+        :param pulumi.Input[bool] enable_learned_cidrs_approval: Switch to enable learned CIDR approval. Valid values: true, false. Default value: false.
+        :param pulumi.Input[bool] enable_management_over_private_network: Switch to enable management over the private network. Valid values: true, false. Default value: false.
+        :param pulumi.Input[bool] enable_preserve_as_path: Switch to enable preserve as_path when advertising manual summary CIDRs. Valid values: true, false. Default value: false.
         :param pulumi.Input[str] gw_name: Edge as a Spoke name.
-        :param pulumi.Input[str] lan_interface_ip_prefix: LAN interface IP/prefix.
-        :param pulumi.Input[str] latitude: The latitude of the Edge as a Spoke.
-        :param pulumi.Input[str] local_as_number: Local AS number.
-        :param pulumi.Input[str] longitude: The longitude of the Edge as a Spoke.
-        :param pulumi.Input[str] management_default_gateway_ip: Management default gateway IP.
-        :param pulumi.Input[str] management_egress_ip_prefix: Management egress gateway IP/prefix.
-        :param pulumi.Input[str] management_interface_config: Management interface configuration. Valid values: 'DHCP' and 'Static'.
-        :param pulumi.Input[str] management_interface_ip_prefix: Management interface IP/prefix.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: List of AS numbers to prepend gateway BGP AS_Path field.
-        :param pulumi.Input[str] rx_queue_size: Ethernet interface RX queue size.
-        :param pulumi.Input[str] secondary_dns_server_ip: Secondary DNS server IP.
+        :param pulumi.Input[str] lan_interface_ip_prefix: LAN interface IP and subnet prefix.
+        :param pulumi.Input[str] latitude: Latitude of Edge as a Spoke. Valid values are between -90 and 90. Example: "47.7511".
+        :param pulumi.Input[str] local_as_number: BGP AS Number to assign to Edge as a Spoke.
+        :param pulumi.Input[str] longitude: Longitude of Edge as a Spoke. Valid values are between -180 and 180. Example: "120.7401".
+        :param pulumi.Input[str] management_default_gateway_ip: Management default gateway IP. Required and valid when `management_interface_config` is "Static".
+        :param pulumi.Input[str] management_egress_ip_prefix: Management egress gateway IP and subnet prefix.
+        :param pulumi.Input[str] management_interface_config: Management interface configuration. Valid values: "DHCP", "Static".
+        :param pulumi.Input[str] management_interface_ip_prefix: Management interface IP and subnet prefix. Required and valid when `management_interface_config` is "Static".
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: List of AS numbers to prepend gateway BGP AS_Path field. Valid only when `local_as_number` is set. Example: ["65023", "65023"].
+        :param pulumi.Input[str] rx_queue_size: Ethernet interface RX queue size. Once set, can't be deleted or disabled. Valid values: "1K", "2K", "4K".
+        :param pulumi.Input[str] secondary_dns_server_ip: Secondary DNS server IP. Required and valid when `management_interface_config` is "Static".
         :param pulumi.Input[str] site_id: Site ID.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] spoke_bgp_manual_advertise_cidrs: Intended CIDR list to be advertised to external BGP router.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] spoke_bgp_manual_advertise_cidrs: Set of intended CIDRs to be advertised to external BGP router. Example: ["10.1.0.0/116", "10.2.0.0/16"].
         :param pulumi.Input[str] state: State of Edge as a Spoke.
         :param pulumi.Input[str] wan_default_gateway_ip: WAN default gateway IP.
-        :param pulumi.Input[str] wan_interface_ip_prefix: WAN interface IP/prefix.
-        :param pulumi.Input[str] wan_public_ip: WAN interface public IP.
-        :param pulumi.Input[str] ztp_file_download_path: The location where the Edge as a CaaG ZTP file will be stored.
-        :param pulumi.Input[str] ztp_file_type: ZTP file type.
+        :param pulumi.Input[str] wan_interface_ip_prefix: WAN interface IP and subnet prefix.
+        :param pulumi.Input[str] wan_public_ip: WAN public IP. Required for attaching connections over the Internet.
+        :param pulumi.Input[str] ztp_file_download_path: The folder path where the ZTP file will be downloaded.
+        :param pulumi.Input[str] ztp_file_type: ZTP file type. Valid values: "iso", "cloud-init".
         """
         if approved_learned_cidrs is not None:
             pulumi.set(__self__, "approved_learned_cidrs", approved_learned_cidrs)
@@ -626,7 +626,7 @@ class _AviatrixEdgeSpokeState:
     @pulumi.getter(name="approvedLearnedCidrs")
     def approved_learned_cidrs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Approved learned CIDRs for BGP Spoke Gateway.
+        Set of approved learned CIDRs. Valid only when `enable_learned_cidrs_approval` is set to true. Example: ["10.1.0.0/116", "10.2.0.0/16"].
         """
         return pulumi.get(self, "approved_learned_cidrs")
 
@@ -638,7 +638,7 @@ class _AviatrixEdgeSpokeState:
     @pulumi.getter(name="bgpHoldTime")
     def bgp_hold_time(self) -> Optional[pulumi.Input[int]]:
         """
-        BGP Hold Time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 12 and 360.
+        BGP hold time. Unit is in seconds. Valid values are between 12 and 360. Default value: 180.
         """
         return pulumi.get(self, "bgp_hold_time")
 
@@ -650,7 +650,7 @@ class _AviatrixEdgeSpokeState:
     @pulumi.getter(name="bgpPollingTime")
     def bgp_polling_time(self) -> Optional[pulumi.Input[int]]:
         """
-        BGP route polling time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 10 and 50.
+        BGP route polling time. Unit is in seconds. Valid values are between 10 and 50. Default value: 50.
         """
         return pulumi.get(self, "bgp_polling_time")
 
@@ -662,7 +662,7 @@ class _AviatrixEdgeSpokeState:
     @pulumi.getter(name="dnsServerIp")
     def dns_server_ip(self) -> Optional[pulumi.Input[str]]:
         """
-        DNS server IP.
+        DNS server IP. Required and valid when `management_interface_config` is "Static".
         """
         return pulumi.get(self, "dns_server_ip")
 
@@ -674,7 +674,7 @@ class _AviatrixEdgeSpokeState:
     @pulumi.getter(name="enableEdgeActiveStandby")
     def enable_edge_active_standby(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enables Edge Active-Standby Mode.
+        Switch to enable Edge Active-Standby mode. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_edge_active_standby")
 
@@ -686,7 +686,7 @@ class _AviatrixEdgeSpokeState:
     @pulumi.getter(name="enableEdgeActiveStandbyPreemptive")
     def enable_edge_active_standby_preemptive(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enables Preemptive Mode for Edge Active-Standby, available only with Active-Standby enabled.
+        Switch to enable Preemptive Mode for Edge Active-Standby. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_edge_active_standby_preemptive")
 
@@ -698,7 +698,7 @@ class _AviatrixEdgeSpokeState:
     @pulumi.getter(name="enableEdgeTransitiveRouting")
     def enable_edge_transitive_routing(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable Edge transitive routing.
+        Switch to enable Edge transitive routing. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_edge_transitive_routing")
 
@@ -710,7 +710,7 @@ class _AviatrixEdgeSpokeState:
     @pulumi.getter(name="enableJumboFrame")
     def enable_jumbo_frame(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable jumbo frame.
+        Switch to enable jumbo frame. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_jumbo_frame")
 
@@ -722,7 +722,7 @@ class _AviatrixEdgeSpokeState:
     @pulumi.getter(name="enableLearnedCidrsApproval")
     def enable_learned_cidrs_approval(self) -> Optional[pulumi.Input[bool]]:
         """
-        Switch to enable/disable learned CIDR approval for BGP Spoke Gateway. Valid values: true, false.
+        Switch to enable learned CIDR approval. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_learned_cidrs_approval")
 
@@ -734,7 +734,7 @@ class _AviatrixEdgeSpokeState:
     @pulumi.getter(name="enableManagementOverPrivateNetwork")
     def enable_management_over_private_network(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable management over private network.
+        Switch to enable management over the private network. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_management_over_private_network")
 
@@ -746,7 +746,7 @@ class _AviatrixEdgeSpokeState:
     @pulumi.getter(name="enablePreserveAsPath")
     def enable_preserve_as_path(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable preserve as path when advertising manual summary CIDRs on BGP spoke gateway.
+        Switch to enable preserve as_path when advertising manual summary CIDRs. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_preserve_as_path")
 
@@ -770,7 +770,7 @@ class _AviatrixEdgeSpokeState:
     @pulumi.getter(name="lanInterfaceIpPrefix")
     def lan_interface_ip_prefix(self) -> Optional[pulumi.Input[str]]:
         """
-        LAN interface IP/prefix.
+        LAN interface IP and subnet prefix.
         """
         return pulumi.get(self, "lan_interface_ip_prefix")
 
@@ -782,7 +782,7 @@ class _AviatrixEdgeSpokeState:
     @pulumi.getter
     def latitude(self) -> Optional[pulumi.Input[str]]:
         """
-        The latitude of the Edge as a Spoke.
+        Latitude of Edge as a Spoke. Valid values are between -90 and 90. Example: "47.7511".
         """
         return pulumi.get(self, "latitude")
 
@@ -794,7 +794,7 @@ class _AviatrixEdgeSpokeState:
     @pulumi.getter(name="localAsNumber")
     def local_as_number(self) -> Optional[pulumi.Input[str]]:
         """
-        Local AS number.
+        BGP AS Number to assign to Edge as a Spoke.
         """
         return pulumi.get(self, "local_as_number")
 
@@ -806,7 +806,7 @@ class _AviatrixEdgeSpokeState:
     @pulumi.getter
     def longitude(self) -> Optional[pulumi.Input[str]]:
         """
-        The longitude of the Edge as a Spoke.
+        Longitude of Edge as a Spoke. Valid values are between -180 and 180. Example: "120.7401".
         """
         return pulumi.get(self, "longitude")
 
@@ -818,7 +818,7 @@ class _AviatrixEdgeSpokeState:
     @pulumi.getter(name="managementDefaultGatewayIp")
     def management_default_gateway_ip(self) -> Optional[pulumi.Input[str]]:
         """
-        Management default gateway IP.
+        Management default gateway IP. Required and valid when `management_interface_config` is "Static".
         """
         return pulumi.get(self, "management_default_gateway_ip")
 
@@ -830,7 +830,7 @@ class _AviatrixEdgeSpokeState:
     @pulumi.getter(name="managementEgressIpPrefix")
     def management_egress_ip_prefix(self) -> Optional[pulumi.Input[str]]:
         """
-        Management egress gateway IP/prefix.
+        Management egress gateway IP and subnet prefix.
         """
         return pulumi.get(self, "management_egress_ip_prefix")
 
@@ -842,7 +842,7 @@ class _AviatrixEdgeSpokeState:
     @pulumi.getter(name="managementInterfaceConfig")
     def management_interface_config(self) -> Optional[pulumi.Input[str]]:
         """
-        Management interface configuration. Valid values: 'DHCP' and 'Static'.
+        Management interface configuration. Valid values: "DHCP", "Static".
         """
         return pulumi.get(self, "management_interface_config")
 
@@ -854,7 +854,7 @@ class _AviatrixEdgeSpokeState:
     @pulumi.getter(name="managementInterfaceIpPrefix")
     def management_interface_ip_prefix(self) -> Optional[pulumi.Input[str]]:
         """
-        Management interface IP/prefix.
+        Management interface IP and subnet prefix. Required and valid when `management_interface_config` is "Static".
         """
         return pulumi.get(self, "management_interface_ip_prefix")
 
@@ -866,7 +866,7 @@ class _AviatrixEdgeSpokeState:
     @pulumi.getter(name="prependAsPaths")
     def prepend_as_paths(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of AS numbers to prepend gateway BGP AS_Path field.
+        List of AS numbers to prepend gateway BGP AS_Path field. Valid only when `local_as_number` is set. Example: ["65023", "65023"].
         """
         return pulumi.get(self, "prepend_as_paths")
 
@@ -878,7 +878,7 @@ class _AviatrixEdgeSpokeState:
     @pulumi.getter(name="rxQueueSize")
     def rx_queue_size(self) -> Optional[pulumi.Input[str]]:
         """
-        Ethernet interface RX queue size.
+        Ethernet interface RX queue size. Once set, can't be deleted or disabled. Valid values: "1K", "2K", "4K".
         """
         return pulumi.get(self, "rx_queue_size")
 
@@ -890,7 +890,7 @@ class _AviatrixEdgeSpokeState:
     @pulumi.getter(name="secondaryDnsServerIp")
     def secondary_dns_server_ip(self) -> Optional[pulumi.Input[str]]:
         """
-        Secondary DNS server IP.
+        Secondary DNS server IP. Required and valid when `management_interface_config` is "Static".
         """
         return pulumi.get(self, "secondary_dns_server_ip")
 
@@ -914,7 +914,7 @@ class _AviatrixEdgeSpokeState:
     @pulumi.getter(name="spokeBgpManualAdvertiseCidrs")
     def spoke_bgp_manual_advertise_cidrs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Intended CIDR list to be advertised to external BGP router.
+        Set of intended CIDRs to be advertised to external BGP router. Example: ["10.1.0.0/116", "10.2.0.0/16"].
         """
         return pulumi.get(self, "spoke_bgp_manual_advertise_cidrs")
 
@@ -950,7 +950,7 @@ class _AviatrixEdgeSpokeState:
     @pulumi.getter(name="wanInterfaceIpPrefix")
     def wan_interface_ip_prefix(self) -> Optional[pulumi.Input[str]]:
         """
-        WAN interface IP/prefix.
+        WAN interface IP and subnet prefix.
         """
         return pulumi.get(self, "wan_interface_ip_prefix")
 
@@ -962,7 +962,7 @@ class _AviatrixEdgeSpokeState:
     @pulumi.getter(name="wanPublicIp")
     def wan_public_ip(self) -> Optional[pulumi.Input[str]]:
         """
-        WAN interface public IP.
+        WAN public IP. Required for attaching connections over the Internet.
         """
         return pulumi.get(self, "wan_public_ip")
 
@@ -974,7 +974,7 @@ class _AviatrixEdgeSpokeState:
     @pulumi.getter(name="ztpFileDownloadPath")
     def ztp_file_download_path(self) -> Optional[pulumi.Input[str]]:
         """
-        The location where the Edge as a CaaG ZTP file will be stored.
+        The folder path where the ZTP file will be downloaded.
         """
         return pulumi.get(self, "ztp_file_download_path")
 
@@ -986,7 +986,7 @@ class _AviatrixEdgeSpokeState:
     @pulumi.getter(name="ztpFileType")
     def ztp_file_type(self) -> Optional[pulumi.Input[str]]:
         """
-        ZTP file type.
+        ZTP file type. Valid values: "iso", "cloud-init".
         """
         return pulumi.get(self, "ztp_file_type")
 
@@ -1032,39 +1032,95 @@ class AviatrixEdgeSpoke(pulumi.CustomResource):
                  ztp_file_type: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixEdgeSpoke resource with the given unique name, props, and options.
+        The **aviatrix_edge_spoke** resource creates the Aviatrix Edge as a Spoke. This resource is available as of provider version R2.23+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create a DHCP Edge as a Spoke
+        test = aviatrix.AviatrixEdgeSpoke("test",
+            gw_name="edge-test",
+            lan_interface_ip_prefix="10.60.0.0/24",
+            local_as_number="65000",
+            management_interface_config="DHCP",
+            prepend_as_paths=[
+                "65000",
+                "65000",
+            ],
+            site_id="site-123",
+            wan_default_gateway_ip="10.60.0.0",
+            wan_interface_ip_prefix="10.60.0.0/24",
+            ztp_file_download_path="/ztp/download/path",
+            ztp_file_type="iso")
+        ```
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create a Static Edge as a Spoke
+        test = aviatrix.AviatrixEdgeSpoke("test",
+            dns_server_ip="10.60.0.0",
+            gw_name="edge-test",
+            lan_interface_ip_prefix="10.60.0.0/24",
+            local_as_number="65000",
+            management_default_gateway_ip="10.60.0.0",
+            management_interface_config="Static",
+            management_interface_ip_prefix="10.60.0.0/24",
+            prepend_as_paths=[
+                "65000",
+                "65000",
+            ],
+            secondary_dns_server_ip="10.60.0.0",
+            site_id="site-123",
+            wan_default_gateway_ip="10.60.0.0",
+            wan_interface_ip_prefix="10.60.0.0/24",
+            ztp_file_download_path="/ztp/download/path",
+            ztp_file_type="iso")
+        ```
+
+        ## Import
+
+        **edge_spoke** can be imported using the `gw_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixEdgeSpoke:AviatrixEdgeSpoke test gw_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] approved_learned_cidrs: Approved learned CIDRs for BGP Spoke Gateway.
-        :param pulumi.Input[int] bgp_hold_time: BGP Hold Time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 12 and 360.
-        :param pulumi.Input[int] bgp_polling_time: BGP route polling time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 10 and 50.
-        :param pulumi.Input[str] dns_server_ip: DNS server IP.
-        :param pulumi.Input[bool] enable_edge_active_standby: Enables Edge Active-Standby Mode.
-        :param pulumi.Input[bool] enable_edge_active_standby_preemptive: Enables Preemptive Mode for Edge Active-Standby, available only with Active-Standby enabled.
-        :param pulumi.Input[bool] enable_edge_transitive_routing: Enable Edge transitive routing.
-        :param pulumi.Input[bool] enable_jumbo_frame: Enable jumbo frame.
-        :param pulumi.Input[bool] enable_learned_cidrs_approval: Switch to enable/disable learned CIDR approval for BGP Spoke Gateway. Valid values: true, false.
-        :param pulumi.Input[bool] enable_management_over_private_network: Enable management over private network.
-        :param pulumi.Input[bool] enable_preserve_as_path: Enable preserve as path when advertising manual summary CIDRs on BGP spoke gateway.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] approved_learned_cidrs: Set of approved learned CIDRs. Valid only when `enable_learned_cidrs_approval` is set to true. Example: ["10.1.0.0/116", "10.2.0.0/16"].
+        :param pulumi.Input[int] bgp_hold_time: BGP hold time. Unit is in seconds. Valid values are between 12 and 360. Default value: 180.
+        :param pulumi.Input[int] bgp_polling_time: BGP route polling time. Unit is in seconds. Valid values are between 10 and 50. Default value: 50.
+        :param pulumi.Input[str] dns_server_ip: DNS server IP. Required and valid when `management_interface_config` is "Static".
+        :param pulumi.Input[bool] enable_edge_active_standby: Switch to enable Edge Active-Standby mode. Valid values: true, false. Default value: false.
+        :param pulumi.Input[bool] enable_edge_active_standby_preemptive: Switch to enable Preemptive Mode for Edge Active-Standby. Valid values: true, false. Default value: false.
+        :param pulumi.Input[bool] enable_edge_transitive_routing: Switch to enable Edge transitive routing. Valid values: true, false. Default value: false.
+        :param pulumi.Input[bool] enable_jumbo_frame: Switch to enable jumbo frame. Valid values: true, false. Default value: false.
+        :param pulumi.Input[bool] enable_learned_cidrs_approval: Switch to enable learned CIDR approval. Valid values: true, false. Default value: false.
+        :param pulumi.Input[bool] enable_management_over_private_network: Switch to enable management over the private network. Valid values: true, false. Default value: false.
+        :param pulumi.Input[bool] enable_preserve_as_path: Switch to enable preserve as_path when advertising manual summary CIDRs. Valid values: true, false. Default value: false.
         :param pulumi.Input[str] gw_name: Edge as a Spoke name.
-        :param pulumi.Input[str] lan_interface_ip_prefix: LAN interface IP/prefix.
-        :param pulumi.Input[str] latitude: The latitude of the Edge as a Spoke.
-        :param pulumi.Input[str] local_as_number: Local AS number.
-        :param pulumi.Input[str] longitude: The longitude of the Edge as a Spoke.
-        :param pulumi.Input[str] management_default_gateway_ip: Management default gateway IP.
-        :param pulumi.Input[str] management_egress_ip_prefix: Management egress gateway IP/prefix.
-        :param pulumi.Input[str] management_interface_config: Management interface configuration. Valid values: 'DHCP' and 'Static'.
-        :param pulumi.Input[str] management_interface_ip_prefix: Management interface IP/prefix.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: List of AS numbers to prepend gateway BGP AS_Path field.
-        :param pulumi.Input[str] rx_queue_size: Ethernet interface RX queue size.
-        :param pulumi.Input[str] secondary_dns_server_ip: Secondary DNS server IP.
+        :param pulumi.Input[str] lan_interface_ip_prefix: LAN interface IP and subnet prefix.
+        :param pulumi.Input[str] latitude: Latitude of Edge as a Spoke. Valid values are between -90 and 90. Example: "47.7511".
+        :param pulumi.Input[str] local_as_number: BGP AS Number to assign to Edge as a Spoke.
+        :param pulumi.Input[str] longitude: Longitude of Edge as a Spoke. Valid values are between -180 and 180. Example: "120.7401".
+        :param pulumi.Input[str] management_default_gateway_ip: Management default gateway IP. Required and valid when `management_interface_config` is "Static".
+        :param pulumi.Input[str] management_egress_ip_prefix: Management egress gateway IP and subnet prefix.
+        :param pulumi.Input[str] management_interface_config: Management interface configuration. Valid values: "DHCP", "Static".
+        :param pulumi.Input[str] management_interface_ip_prefix: Management interface IP and subnet prefix. Required and valid when `management_interface_config` is "Static".
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: List of AS numbers to prepend gateway BGP AS_Path field. Valid only when `local_as_number` is set. Example: ["65023", "65023"].
+        :param pulumi.Input[str] rx_queue_size: Ethernet interface RX queue size. Once set, can't be deleted or disabled. Valid values: "1K", "2K", "4K".
+        :param pulumi.Input[str] secondary_dns_server_ip: Secondary DNS server IP. Required and valid when `management_interface_config` is "Static".
         :param pulumi.Input[str] site_id: Site ID.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] spoke_bgp_manual_advertise_cidrs: Intended CIDR list to be advertised to external BGP router.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] spoke_bgp_manual_advertise_cidrs: Set of intended CIDRs to be advertised to external BGP router. Example: ["10.1.0.0/116", "10.2.0.0/16"].
         :param pulumi.Input[str] wan_default_gateway_ip: WAN default gateway IP.
-        :param pulumi.Input[str] wan_interface_ip_prefix: WAN interface IP/prefix.
-        :param pulumi.Input[str] wan_public_ip: WAN interface public IP.
-        :param pulumi.Input[str] ztp_file_download_path: The location where the Edge as a CaaG ZTP file will be stored.
-        :param pulumi.Input[str] ztp_file_type: ZTP file type.
+        :param pulumi.Input[str] wan_interface_ip_prefix: WAN interface IP and subnet prefix.
+        :param pulumi.Input[str] wan_public_ip: WAN public IP. Required for attaching connections over the Internet.
+        :param pulumi.Input[str] ztp_file_download_path: The folder path where the ZTP file will be downloaded.
+        :param pulumi.Input[str] ztp_file_type: ZTP file type. Valid values: "iso", "cloud-init".
         """
         ...
     @overload
@@ -1073,7 +1129,63 @@ class AviatrixEdgeSpoke(pulumi.CustomResource):
                  args: AviatrixEdgeSpokeArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixEdgeSpoke resource with the given unique name, props, and options.
+        The **aviatrix_edge_spoke** resource creates the Aviatrix Edge as a Spoke. This resource is available as of provider version R2.23+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create a DHCP Edge as a Spoke
+        test = aviatrix.AviatrixEdgeSpoke("test",
+            gw_name="edge-test",
+            lan_interface_ip_prefix="10.60.0.0/24",
+            local_as_number="65000",
+            management_interface_config="DHCP",
+            prepend_as_paths=[
+                "65000",
+                "65000",
+            ],
+            site_id="site-123",
+            wan_default_gateway_ip="10.60.0.0",
+            wan_interface_ip_prefix="10.60.0.0/24",
+            ztp_file_download_path="/ztp/download/path",
+            ztp_file_type="iso")
+        ```
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create a Static Edge as a Spoke
+        test = aviatrix.AviatrixEdgeSpoke("test",
+            dns_server_ip="10.60.0.0",
+            gw_name="edge-test",
+            lan_interface_ip_prefix="10.60.0.0/24",
+            local_as_number="65000",
+            management_default_gateway_ip="10.60.0.0",
+            management_interface_config="Static",
+            management_interface_ip_prefix="10.60.0.0/24",
+            prepend_as_paths=[
+                "65000",
+                "65000",
+            ],
+            secondary_dns_server_ip="10.60.0.0",
+            site_id="site-123",
+            wan_default_gateway_ip="10.60.0.0",
+            wan_interface_ip_prefix="10.60.0.0/24",
+            ztp_file_download_path="/ztp/download/path",
+            ztp_file_type="iso")
+        ```
+
+        ## Import
+
+        **edge_spoke** can be imported using the `gw_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixEdgeSpoke:AviatrixEdgeSpoke test gw_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixEdgeSpokeArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -1223,37 +1335,37 @@ class AviatrixEdgeSpoke(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] approved_learned_cidrs: Approved learned CIDRs for BGP Spoke Gateway.
-        :param pulumi.Input[int] bgp_hold_time: BGP Hold Time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 12 and 360.
-        :param pulumi.Input[int] bgp_polling_time: BGP route polling time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 10 and 50.
-        :param pulumi.Input[str] dns_server_ip: DNS server IP.
-        :param pulumi.Input[bool] enable_edge_active_standby: Enables Edge Active-Standby Mode.
-        :param pulumi.Input[bool] enable_edge_active_standby_preemptive: Enables Preemptive Mode for Edge Active-Standby, available only with Active-Standby enabled.
-        :param pulumi.Input[bool] enable_edge_transitive_routing: Enable Edge transitive routing.
-        :param pulumi.Input[bool] enable_jumbo_frame: Enable jumbo frame.
-        :param pulumi.Input[bool] enable_learned_cidrs_approval: Switch to enable/disable learned CIDR approval for BGP Spoke Gateway. Valid values: true, false.
-        :param pulumi.Input[bool] enable_management_over_private_network: Enable management over private network.
-        :param pulumi.Input[bool] enable_preserve_as_path: Enable preserve as path when advertising manual summary CIDRs on BGP spoke gateway.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] approved_learned_cidrs: Set of approved learned CIDRs. Valid only when `enable_learned_cidrs_approval` is set to true. Example: ["10.1.0.0/116", "10.2.0.0/16"].
+        :param pulumi.Input[int] bgp_hold_time: BGP hold time. Unit is in seconds. Valid values are between 12 and 360. Default value: 180.
+        :param pulumi.Input[int] bgp_polling_time: BGP route polling time. Unit is in seconds. Valid values are between 10 and 50. Default value: 50.
+        :param pulumi.Input[str] dns_server_ip: DNS server IP. Required and valid when `management_interface_config` is "Static".
+        :param pulumi.Input[bool] enable_edge_active_standby: Switch to enable Edge Active-Standby mode. Valid values: true, false. Default value: false.
+        :param pulumi.Input[bool] enable_edge_active_standby_preemptive: Switch to enable Preemptive Mode for Edge Active-Standby. Valid values: true, false. Default value: false.
+        :param pulumi.Input[bool] enable_edge_transitive_routing: Switch to enable Edge transitive routing. Valid values: true, false. Default value: false.
+        :param pulumi.Input[bool] enable_jumbo_frame: Switch to enable jumbo frame. Valid values: true, false. Default value: false.
+        :param pulumi.Input[bool] enable_learned_cidrs_approval: Switch to enable learned CIDR approval. Valid values: true, false. Default value: false.
+        :param pulumi.Input[bool] enable_management_over_private_network: Switch to enable management over the private network. Valid values: true, false. Default value: false.
+        :param pulumi.Input[bool] enable_preserve_as_path: Switch to enable preserve as_path when advertising manual summary CIDRs. Valid values: true, false. Default value: false.
         :param pulumi.Input[str] gw_name: Edge as a Spoke name.
-        :param pulumi.Input[str] lan_interface_ip_prefix: LAN interface IP/prefix.
-        :param pulumi.Input[str] latitude: The latitude of the Edge as a Spoke.
-        :param pulumi.Input[str] local_as_number: Local AS number.
-        :param pulumi.Input[str] longitude: The longitude of the Edge as a Spoke.
-        :param pulumi.Input[str] management_default_gateway_ip: Management default gateway IP.
-        :param pulumi.Input[str] management_egress_ip_prefix: Management egress gateway IP/prefix.
-        :param pulumi.Input[str] management_interface_config: Management interface configuration. Valid values: 'DHCP' and 'Static'.
-        :param pulumi.Input[str] management_interface_ip_prefix: Management interface IP/prefix.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: List of AS numbers to prepend gateway BGP AS_Path field.
-        :param pulumi.Input[str] rx_queue_size: Ethernet interface RX queue size.
-        :param pulumi.Input[str] secondary_dns_server_ip: Secondary DNS server IP.
+        :param pulumi.Input[str] lan_interface_ip_prefix: LAN interface IP and subnet prefix.
+        :param pulumi.Input[str] latitude: Latitude of Edge as a Spoke. Valid values are between -90 and 90. Example: "47.7511".
+        :param pulumi.Input[str] local_as_number: BGP AS Number to assign to Edge as a Spoke.
+        :param pulumi.Input[str] longitude: Longitude of Edge as a Spoke. Valid values are between -180 and 180. Example: "120.7401".
+        :param pulumi.Input[str] management_default_gateway_ip: Management default gateway IP. Required and valid when `management_interface_config` is "Static".
+        :param pulumi.Input[str] management_egress_ip_prefix: Management egress gateway IP and subnet prefix.
+        :param pulumi.Input[str] management_interface_config: Management interface configuration. Valid values: "DHCP", "Static".
+        :param pulumi.Input[str] management_interface_ip_prefix: Management interface IP and subnet prefix. Required and valid when `management_interface_config` is "Static".
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prepend_as_paths: List of AS numbers to prepend gateway BGP AS_Path field. Valid only when `local_as_number` is set. Example: ["65023", "65023"].
+        :param pulumi.Input[str] rx_queue_size: Ethernet interface RX queue size. Once set, can't be deleted or disabled. Valid values: "1K", "2K", "4K".
+        :param pulumi.Input[str] secondary_dns_server_ip: Secondary DNS server IP. Required and valid when `management_interface_config` is "Static".
         :param pulumi.Input[str] site_id: Site ID.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] spoke_bgp_manual_advertise_cidrs: Intended CIDR list to be advertised to external BGP router.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] spoke_bgp_manual_advertise_cidrs: Set of intended CIDRs to be advertised to external BGP router. Example: ["10.1.0.0/116", "10.2.0.0/16"].
         :param pulumi.Input[str] state: State of Edge as a Spoke.
         :param pulumi.Input[str] wan_default_gateway_ip: WAN default gateway IP.
-        :param pulumi.Input[str] wan_interface_ip_prefix: WAN interface IP/prefix.
-        :param pulumi.Input[str] wan_public_ip: WAN interface public IP.
-        :param pulumi.Input[str] ztp_file_download_path: The location where the Edge as a CaaG ZTP file will be stored.
-        :param pulumi.Input[str] ztp_file_type: ZTP file type.
+        :param pulumi.Input[str] wan_interface_ip_prefix: WAN interface IP and subnet prefix.
+        :param pulumi.Input[str] wan_public_ip: WAN public IP. Required for attaching connections over the Internet.
+        :param pulumi.Input[str] ztp_file_download_path: The folder path where the ZTP file will be downloaded.
+        :param pulumi.Input[str] ztp_file_type: ZTP file type. Valid values: "iso", "cloud-init".
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -1296,7 +1408,7 @@ class AviatrixEdgeSpoke(pulumi.CustomResource):
     @pulumi.getter(name="approvedLearnedCidrs")
     def approved_learned_cidrs(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        Approved learned CIDRs for BGP Spoke Gateway.
+        Set of approved learned CIDRs. Valid only when `enable_learned_cidrs_approval` is set to true. Example: ["10.1.0.0/116", "10.2.0.0/16"].
         """
         return pulumi.get(self, "approved_learned_cidrs")
 
@@ -1304,7 +1416,7 @@ class AviatrixEdgeSpoke(pulumi.CustomResource):
     @pulumi.getter(name="bgpHoldTime")
     def bgp_hold_time(self) -> pulumi.Output[Optional[int]]:
         """
-        BGP Hold Time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 12 and 360.
+        BGP hold time. Unit is in seconds. Valid values are between 12 and 360. Default value: 180.
         """
         return pulumi.get(self, "bgp_hold_time")
 
@@ -1312,7 +1424,7 @@ class AviatrixEdgeSpoke(pulumi.CustomResource):
     @pulumi.getter(name="bgpPollingTime")
     def bgp_polling_time(self) -> pulumi.Output[Optional[int]]:
         """
-        BGP route polling time for BGP Spoke Gateway. Unit is in seconds. Valid values are between 10 and 50.
+        BGP route polling time. Unit is in seconds. Valid values are between 10 and 50. Default value: 50.
         """
         return pulumi.get(self, "bgp_polling_time")
 
@@ -1320,7 +1432,7 @@ class AviatrixEdgeSpoke(pulumi.CustomResource):
     @pulumi.getter(name="dnsServerIp")
     def dns_server_ip(self) -> pulumi.Output[Optional[str]]:
         """
-        DNS server IP.
+        DNS server IP. Required and valid when `management_interface_config` is "Static".
         """
         return pulumi.get(self, "dns_server_ip")
 
@@ -1328,7 +1440,7 @@ class AviatrixEdgeSpoke(pulumi.CustomResource):
     @pulumi.getter(name="enableEdgeActiveStandby")
     def enable_edge_active_standby(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enables Edge Active-Standby Mode.
+        Switch to enable Edge Active-Standby mode. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_edge_active_standby")
 
@@ -1336,7 +1448,7 @@ class AviatrixEdgeSpoke(pulumi.CustomResource):
     @pulumi.getter(name="enableEdgeActiveStandbyPreemptive")
     def enable_edge_active_standby_preemptive(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enables Preemptive Mode for Edge Active-Standby, available only with Active-Standby enabled.
+        Switch to enable Preemptive Mode for Edge Active-Standby. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_edge_active_standby_preemptive")
 
@@ -1344,7 +1456,7 @@ class AviatrixEdgeSpoke(pulumi.CustomResource):
     @pulumi.getter(name="enableEdgeTransitiveRouting")
     def enable_edge_transitive_routing(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enable Edge transitive routing.
+        Switch to enable Edge transitive routing. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_edge_transitive_routing")
 
@@ -1352,7 +1464,7 @@ class AviatrixEdgeSpoke(pulumi.CustomResource):
     @pulumi.getter(name="enableJumboFrame")
     def enable_jumbo_frame(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enable jumbo frame.
+        Switch to enable jumbo frame. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_jumbo_frame")
 
@@ -1360,7 +1472,7 @@ class AviatrixEdgeSpoke(pulumi.CustomResource):
     @pulumi.getter(name="enableLearnedCidrsApproval")
     def enable_learned_cidrs_approval(self) -> pulumi.Output[Optional[bool]]:
         """
-        Switch to enable/disable learned CIDR approval for BGP Spoke Gateway. Valid values: true, false.
+        Switch to enable learned CIDR approval. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_learned_cidrs_approval")
 
@@ -1368,7 +1480,7 @@ class AviatrixEdgeSpoke(pulumi.CustomResource):
     @pulumi.getter(name="enableManagementOverPrivateNetwork")
     def enable_management_over_private_network(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enable management over private network.
+        Switch to enable management over the private network. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_management_over_private_network")
 
@@ -1376,7 +1488,7 @@ class AviatrixEdgeSpoke(pulumi.CustomResource):
     @pulumi.getter(name="enablePreserveAsPath")
     def enable_preserve_as_path(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enable preserve as path when advertising manual summary CIDRs on BGP spoke gateway.
+        Switch to enable preserve as_path when advertising manual summary CIDRs. Valid values: true, false. Default value: false.
         """
         return pulumi.get(self, "enable_preserve_as_path")
 
@@ -1392,7 +1504,7 @@ class AviatrixEdgeSpoke(pulumi.CustomResource):
     @pulumi.getter(name="lanInterfaceIpPrefix")
     def lan_interface_ip_prefix(self) -> pulumi.Output[str]:
         """
-        LAN interface IP/prefix.
+        LAN interface IP and subnet prefix.
         """
         return pulumi.get(self, "lan_interface_ip_prefix")
 
@@ -1400,7 +1512,7 @@ class AviatrixEdgeSpoke(pulumi.CustomResource):
     @pulumi.getter
     def latitude(self) -> pulumi.Output[str]:
         """
-        The latitude of the Edge as a Spoke.
+        Latitude of Edge as a Spoke. Valid values are between -90 and 90. Example: "47.7511".
         """
         return pulumi.get(self, "latitude")
 
@@ -1408,7 +1520,7 @@ class AviatrixEdgeSpoke(pulumi.CustomResource):
     @pulumi.getter(name="localAsNumber")
     def local_as_number(self) -> pulumi.Output[str]:
         """
-        Local AS number.
+        BGP AS Number to assign to Edge as a Spoke.
         """
         return pulumi.get(self, "local_as_number")
 
@@ -1416,7 +1528,7 @@ class AviatrixEdgeSpoke(pulumi.CustomResource):
     @pulumi.getter
     def longitude(self) -> pulumi.Output[str]:
         """
-        The longitude of the Edge as a Spoke.
+        Longitude of Edge as a Spoke. Valid values are between -180 and 180. Example: "120.7401".
         """
         return pulumi.get(self, "longitude")
 
@@ -1424,7 +1536,7 @@ class AviatrixEdgeSpoke(pulumi.CustomResource):
     @pulumi.getter(name="managementDefaultGatewayIp")
     def management_default_gateway_ip(self) -> pulumi.Output[Optional[str]]:
         """
-        Management default gateway IP.
+        Management default gateway IP. Required and valid when `management_interface_config` is "Static".
         """
         return pulumi.get(self, "management_default_gateway_ip")
 
@@ -1432,7 +1544,7 @@ class AviatrixEdgeSpoke(pulumi.CustomResource):
     @pulumi.getter(name="managementEgressIpPrefix")
     def management_egress_ip_prefix(self) -> pulumi.Output[Optional[str]]:
         """
-        Management egress gateway IP/prefix.
+        Management egress gateway IP and subnet prefix.
         """
         return pulumi.get(self, "management_egress_ip_prefix")
 
@@ -1440,7 +1552,7 @@ class AviatrixEdgeSpoke(pulumi.CustomResource):
     @pulumi.getter(name="managementInterfaceConfig")
     def management_interface_config(self) -> pulumi.Output[str]:
         """
-        Management interface configuration. Valid values: 'DHCP' and 'Static'.
+        Management interface configuration. Valid values: "DHCP", "Static".
         """
         return pulumi.get(self, "management_interface_config")
 
@@ -1448,7 +1560,7 @@ class AviatrixEdgeSpoke(pulumi.CustomResource):
     @pulumi.getter(name="managementInterfaceIpPrefix")
     def management_interface_ip_prefix(self) -> pulumi.Output[Optional[str]]:
         """
-        Management interface IP/prefix.
+        Management interface IP and subnet prefix. Required and valid when `management_interface_config` is "Static".
         """
         return pulumi.get(self, "management_interface_ip_prefix")
 
@@ -1456,7 +1568,7 @@ class AviatrixEdgeSpoke(pulumi.CustomResource):
     @pulumi.getter(name="prependAsPaths")
     def prepend_as_paths(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        List of AS numbers to prepend gateway BGP AS_Path field.
+        List of AS numbers to prepend gateway BGP AS_Path field. Valid only when `local_as_number` is set. Example: ["65023", "65023"].
         """
         return pulumi.get(self, "prepend_as_paths")
 
@@ -1464,7 +1576,7 @@ class AviatrixEdgeSpoke(pulumi.CustomResource):
     @pulumi.getter(name="rxQueueSize")
     def rx_queue_size(self) -> pulumi.Output[Optional[str]]:
         """
-        Ethernet interface RX queue size.
+        Ethernet interface RX queue size. Once set, can't be deleted or disabled. Valid values: "1K", "2K", "4K".
         """
         return pulumi.get(self, "rx_queue_size")
 
@@ -1472,7 +1584,7 @@ class AviatrixEdgeSpoke(pulumi.CustomResource):
     @pulumi.getter(name="secondaryDnsServerIp")
     def secondary_dns_server_ip(self) -> pulumi.Output[Optional[str]]:
         """
-        Secondary DNS server IP.
+        Secondary DNS server IP. Required and valid when `management_interface_config` is "Static".
         """
         return pulumi.get(self, "secondary_dns_server_ip")
 
@@ -1488,7 +1600,7 @@ class AviatrixEdgeSpoke(pulumi.CustomResource):
     @pulumi.getter(name="spokeBgpManualAdvertiseCidrs")
     def spoke_bgp_manual_advertise_cidrs(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        Intended CIDR list to be advertised to external BGP router.
+        Set of intended CIDRs to be advertised to external BGP router. Example: ["10.1.0.0/116", "10.2.0.0/16"].
         """
         return pulumi.get(self, "spoke_bgp_manual_advertise_cidrs")
 
@@ -1512,7 +1624,7 @@ class AviatrixEdgeSpoke(pulumi.CustomResource):
     @pulumi.getter(name="wanInterfaceIpPrefix")
     def wan_interface_ip_prefix(self) -> pulumi.Output[str]:
         """
-        WAN interface IP/prefix.
+        WAN interface IP and subnet prefix.
         """
         return pulumi.get(self, "wan_interface_ip_prefix")
 
@@ -1520,7 +1632,7 @@ class AviatrixEdgeSpoke(pulumi.CustomResource):
     @pulumi.getter(name="wanPublicIp")
     def wan_public_ip(self) -> pulumi.Output[str]:
         """
-        WAN interface public IP.
+        WAN public IP. Required for attaching connections over the Internet.
         """
         return pulumi.get(self, "wan_public_ip")
 
@@ -1528,7 +1640,7 @@ class AviatrixEdgeSpoke(pulumi.CustomResource):
     @pulumi.getter(name="ztpFileDownloadPath")
     def ztp_file_download_path(self) -> pulumi.Output[str]:
         """
-        The location where the Edge as a CaaG ZTP file will be stored.
+        The folder path where the ZTP file will be downloaded.
         """
         return pulumi.get(self, "ztp_file_download_path")
 
@@ -1536,7 +1648,7 @@ class AviatrixEdgeSpoke(pulumi.CustomResource):
     @pulumi.getter(name="ztpFileType")
     def ztp_file_type(self) -> pulumi.Output[str]:
         """
-        ZTP file type.
+        ZTP file type. Valid values: "iso", "cloud-init".
         """
         return pulumi.get(self, "ztp_file_type")
 

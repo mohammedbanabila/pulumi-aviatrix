@@ -19,9 +19,9 @@ class AviatrixControllerPrivateModeConfigArgs:
                  proxies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a AviatrixControllerPrivateModeConfig resource.
-        :param pulumi.Input[bool] enable_private_mode: Whether to enable Private Mode on the Controller.
-        :param pulumi.Input[str] copilot_instance_id: Copilot instance ID to associate with the Controller for Private Mode.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] proxies: Set of proxies.
+        :param pulumi.Input[bool] enable_private_mode: Whether to enable Private Mode on an Aviatrix Controller.
+        :param pulumi.Input[str] copilot_instance_id: Instance ID of a copilot instance to associate with an Aviatrix Controller in Private Mode. The copilot instance must be in the same VPC as the Aviatrix Controller.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] proxies: Set of Controller proxies for Private Mode.
         """
         pulumi.set(__self__, "enable_private_mode", enable_private_mode)
         if copilot_instance_id is not None:
@@ -33,7 +33,7 @@ class AviatrixControllerPrivateModeConfigArgs:
     @pulumi.getter(name="enablePrivateMode")
     def enable_private_mode(self) -> pulumi.Input[bool]:
         """
-        Whether to enable Private Mode on the Controller.
+        Whether to enable Private Mode on an Aviatrix Controller.
         """
         return pulumi.get(self, "enable_private_mode")
 
@@ -45,7 +45,7 @@ class AviatrixControllerPrivateModeConfigArgs:
     @pulumi.getter(name="copilotInstanceId")
     def copilot_instance_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Copilot instance ID to associate with the Controller for Private Mode.
+        Instance ID of a copilot instance to associate with an Aviatrix Controller in Private Mode. The copilot instance must be in the same VPC as the Aviatrix Controller.
         """
         return pulumi.get(self, "copilot_instance_id")
 
@@ -57,7 +57,7 @@ class AviatrixControllerPrivateModeConfigArgs:
     @pulumi.getter
     def proxies(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Set of proxies.
+        Set of Controller proxies for Private Mode.
         """
         return pulumi.get(self, "proxies")
 
@@ -74,9 +74,9 @@ class _AviatrixControllerPrivateModeConfigState:
                  proxies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering AviatrixControllerPrivateModeConfig resources.
-        :param pulumi.Input[str] copilot_instance_id: Copilot instance ID to associate with the Controller for Private Mode.
-        :param pulumi.Input[bool] enable_private_mode: Whether to enable Private Mode on the Controller.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] proxies: Set of proxies.
+        :param pulumi.Input[str] copilot_instance_id: Instance ID of a copilot instance to associate with an Aviatrix Controller in Private Mode. The copilot instance must be in the same VPC as the Aviatrix Controller.
+        :param pulumi.Input[bool] enable_private_mode: Whether to enable Private Mode on an Aviatrix Controller.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] proxies: Set of Controller proxies for Private Mode.
         """
         if copilot_instance_id is not None:
             pulumi.set(__self__, "copilot_instance_id", copilot_instance_id)
@@ -89,7 +89,7 @@ class _AviatrixControllerPrivateModeConfigState:
     @pulumi.getter(name="copilotInstanceId")
     def copilot_instance_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Copilot instance ID to associate with the Controller for Private Mode.
+        Instance ID of a copilot instance to associate with an Aviatrix Controller in Private Mode. The copilot instance must be in the same VPC as the Aviatrix Controller.
         """
         return pulumi.get(self, "copilot_instance_id")
 
@@ -101,7 +101,7 @@ class _AviatrixControllerPrivateModeConfigState:
     @pulumi.getter(name="enablePrivateMode")
     def enable_private_mode(self) -> Optional[pulumi.Input[bool]]:
         """
-        Whether to enable Private Mode on the Controller.
+        Whether to enable Private Mode on an Aviatrix Controller.
         """
         return pulumi.get(self, "enable_private_mode")
 
@@ -113,7 +113,7 @@ class _AviatrixControllerPrivateModeConfigState:
     @pulumi.getter
     def proxies(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Set of proxies.
+        Set of Controller proxies for Private Mode.
         """
         return pulumi.get(self, "proxies")
 
@@ -132,12 +132,31 @@ class AviatrixControllerPrivateModeConfig(pulumi.CustomResource):
                  proxies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
-        Create a AviatrixControllerPrivateModeConfig resource with the given unique name, props, and options.
+        The **aviatrix_controller_private_mode_config** resource allows management of an Aviatrix Controller's Private Mode configuration. This resource is available as of provider version R2.23+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Controller Private Mode config
+        test = aviatrix.AviatrixControllerPrivateModeConfig("test", enable_private_mode=True)
+        ```
+
+        ## Import
+
+        **aviatrix_controller_private_mode_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixControllerPrivateModeConfig:AviatrixControllerPrivateModeConfig test 10-11-12-13
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] copilot_instance_id: Copilot instance ID to associate with the Controller for Private Mode.
-        :param pulumi.Input[bool] enable_private_mode: Whether to enable Private Mode on the Controller.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] proxies: Set of proxies.
+        :param pulumi.Input[str] copilot_instance_id: Instance ID of a copilot instance to associate with an Aviatrix Controller in Private Mode. The copilot instance must be in the same VPC as the Aviatrix Controller.
+        :param pulumi.Input[bool] enable_private_mode: Whether to enable Private Mode on an Aviatrix Controller.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] proxies: Set of Controller proxies for Private Mode.
         """
         ...
     @overload
@@ -146,7 +165,26 @@ class AviatrixControllerPrivateModeConfig(pulumi.CustomResource):
                  args: AviatrixControllerPrivateModeConfigArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixControllerPrivateModeConfig resource with the given unique name, props, and options.
+        The **aviatrix_controller_private_mode_config** resource allows management of an Aviatrix Controller's Private Mode configuration. This resource is available as of provider version R2.23+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Controller Private Mode config
+        test = aviatrix.AviatrixControllerPrivateModeConfig("test", enable_private_mode=True)
+        ```
+
+        ## Import
+
+        **aviatrix_controller_private_mode_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixControllerPrivateModeConfig:AviatrixControllerPrivateModeConfig test 10-11-12-13
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixControllerPrivateModeConfigArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -199,9 +237,9 @@ class AviatrixControllerPrivateModeConfig(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] copilot_instance_id: Copilot instance ID to associate with the Controller for Private Mode.
-        :param pulumi.Input[bool] enable_private_mode: Whether to enable Private Mode on the Controller.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] proxies: Set of proxies.
+        :param pulumi.Input[str] copilot_instance_id: Instance ID of a copilot instance to associate with an Aviatrix Controller in Private Mode. The copilot instance must be in the same VPC as the Aviatrix Controller.
+        :param pulumi.Input[bool] enable_private_mode: Whether to enable Private Mode on an Aviatrix Controller.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] proxies: Set of Controller proxies for Private Mode.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -216,7 +254,7 @@ class AviatrixControllerPrivateModeConfig(pulumi.CustomResource):
     @pulumi.getter(name="copilotInstanceId")
     def copilot_instance_id(self) -> pulumi.Output[Optional[str]]:
         """
-        Copilot instance ID to associate with the Controller for Private Mode.
+        Instance ID of a copilot instance to associate with an Aviatrix Controller in Private Mode. The copilot instance must be in the same VPC as the Aviatrix Controller.
         """
         return pulumi.get(self, "copilot_instance_id")
 
@@ -224,7 +262,7 @@ class AviatrixControllerPrivateModeConfig(pulumi.CustomResource):
     @pulumi.getter(name="enablePrivateMode")
     def enable_private_mode(self) -> pulumi.Output[bool]:
         """
-        Whether to enable Private Mode on the Controller.
+        Whether to enable Private Mode on an Aviatrix Controller.
         """
         return pulumi.get(self, "enable_private_mode")
 
@@ -232,7 +270,7 @@ class AviatrixControllerPrivateModeConfig(pulumi.CustomResource):
     @pulumi.getter
     def proxies(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        Set of proxies.
+        Set of Controller proxies for Private Mode.
         """
         return pulumi.get(self, "proxies")
 

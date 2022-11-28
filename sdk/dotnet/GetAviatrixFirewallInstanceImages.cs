@@ -11,16 +11,71 @@ namespace Pulumi.Aviatrix
 {
     public static class GetAviatrixFirewallInstanceImages
     {
+        /// <summary>
+        /// Use this data source to get the list of firewall instance images for use in other resources.
+        /// 
+        /// **NOTE:** A firenet enabled gateway in a security VPC is required for this data source. 
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using Pulumi;
+        /// using Aviatrix = Pulumi.Aviatrix;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var foo = Aviatrix.GetAviatrixFirewallInstanceImages.Invoke(new()
+        ///     {
+        ///         VpcId = "vpc-1234567",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
         public static Task<GetAviatrixFirewallInstanceImagesResult> InvokeAsync(GetAviatrixFirewallInstanceImagesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAviatrixFirewallInstanceImagesResult>("aviatrix:index/getAviatrixFirewallInstanceImages:getAviatrixFirewallInstanceImages", args ?? new GetAviatrixFirewallInstanceImagesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAviatrixFirewallInstanceImagesResult>("aviatrix:index/getAviatrixFirewallInstanceImages:getAviatrixFirewallInstanceImages", args ?? new GetAviatrixFirewallInstanceImagesArgs(), options.WithDefaults());
 
+        /// <summary>
+        /// Use this data source to get the list of firewall instance images for use in other resources.
+        /// 
+        /// **NOTE:** A firenet enabled gateway in a security VPC is required for this data source. 
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using Pulumi;
+        /// using Aviatrix = Pulumi.Aviatrix;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var foo = Aviatrix.GetAviatrixFirewallInstanceImages.Invoke(new()
+        ///     {
+        ///         VpcId = "vpc-1234567",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
         public static Output<GetAviatrixFirewallInstanceImagesResult> Invoke(GetAviatrixFirewallInstanceImagesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAviatrixFirewallInstanceImagesResult>("aviatrix:index/getAviatrixFirewallInstanceImages:getAviatrixFirewallInstanceImages", args ?? new GetAviatrixFirewallInstanceImagesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAviatrixFirewallInstanceImagesResult>("aviatrix:index/getAviatrixFirewallInstanceImages:getAviatrixFirewallInstanceImages", args ?? new GetAviatrixFirewallInstanceImagesInvokeArgs(), options.WithDefaults());
     }
 
 
     public sealed class GetAviatrixFirewallInstanceImagesArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// VPC ID. Example: AWS: "vpc-abcd1234", GCP: "vpc-gcp-test~-~project_id", Azure: "vnet_name:rg_name:resource_guid", OCI: "vpc-oracle-test1".
+        /// </summary>
         [Input("vpcId", required: true)]
         public string VpcId { get; set; } = null!;
 
@@ -32,6 +87,9 @@ namespace Pulumi.Aviatrix
 
     public sealed class GetAviatrixFirewallInstanceImagesInvokeArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// VPC ID. Example: AWS: "vpc-abcd1234", GCP: "vpc-gcp-test~-~project_id", Azure: "vnet_name:rg_name:resource_guid", OCI: "vpc-oracle-test1".
+        /// </summary>
         [Input("vpcId", required: true)]
         public Input<string> VpcId { get; set; } = null!;
 
@@ -45,6 +103,9 @@ namespace Pulumi.Aviatrix
     [OutputType]
     public sealed class GetAviatrixFirewallInstanceImagesResult
     {
+        /// <summary>
+        /// List of firewall images.
+        /// </summary>
         public readonly ImmutableArray<Outputs.GetAviatrixFirewallInstanceImagesFirewallImageResult> FirewallImages;
         /// <summary>
         /// The provider-assigned unique ID for this managed resource.

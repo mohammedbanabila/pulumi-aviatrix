@@ -12,15 +12,29 @@ namespace Pulumi.Aviatrix.Inputs
 
     public sealed class AviatrixFqdnDomainNameArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// What action should happen to matching requests. Possible values are: 'Base Policy', 'Allow' or 'Deny'. Defaults to 'Base Policy' if no value provided.
+        /// * For protocol "all", port must be set to "all".
+        /// * For protocol “icmp”, port must be set to “ping”.
+        /// </summary>
         [Input("action")]
         public Input<string>? Action { get; set; }
 
+        /// <summary>
+        /// FQDN. Example: "facebook.com".
+        /// </summary>
         [Input("fqdn", required: true)]
         public Input<string> Fqdn { get; set; } = null!;
 
+        /// <summary>
+        /// Port. Example "25".
+        /// </summary>
         [Input("port", required: true)]
         public Input<string> Port { get; set; } = null!;
 
+        /// <summary>
+        /// Protocol. Valid values: "all", "tcp", "udp", "icmp".
+        /// </summary>
         [Input("proto", required: true)]
         public Input<string> Proto { get; set; } = null!;
 

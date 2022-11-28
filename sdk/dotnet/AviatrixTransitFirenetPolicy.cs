@@ -9,17 +9,47 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_transit_firenet_policy** resource allows the creation and management of Aviatrix Transit FireNet policies that determine which resources should be inspected in the Transit FireNet solution.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Transit FireNet Policy
+    ///     var testTransitFirenetPolicy = new Aviatrix.AviatrixTransitFirenetPolicy("testTransitFirenetPolicy", new()
+    ///     {
+    ///         InspectedResourceName = "SPOKE:spokeGw1",
+    ///         TransitFirenetGatewayName = "transitGw1",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **transit_firenet_policy** can be imported using the `transit_firenet_gateway_name` and `inspected_resource_name`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixTransitFirenetPolicy:AviatrixTransitFirenetPolicy test transit_firenet_gateway_name~inspected_resource_name
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixTransitFirenetPolicy:AviatrixTransitFirenetPolicy")]
     public partial class AviatrixTransitFirenetPolicy : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Name of the resource to be added to transit firenet policy.
+        /// The name of the resource which will be inspected.
         /// </summary>
         [Output("inspectedResourceName")]
         public Output<string> InspectedResourceName { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the transit firenet gateway.
+        /// Name of the Transit FireNet-enabled transit gateway. Currently supports AWS and Azure.
         /// </summary>
         [Output("transitFirenetGatewayName")]
         public Output<string> TransitFirenetGatewayName { get; private set; } = null!;
@@ -72,13 +102,13 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixTransitFirenetPolicyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Name of the resource to be added to transit firenet policy.
+        /// The name of the resource which will be inspected.
         /// </summary>
         [Input("inspectedResourceName", required: true)]
         public Input<string> InspectedResourceName { get; set; } = null!;
 
         /// <summary>
-        /// Name of the transit firenet gateway.
+        /// Name of the Transit FireNet-enabled transit gateway. Currently supports AWS and Azure.
         /// </summary>
         [Input("transitFirenetGatewayName", required: true)]
         public Input<string> TransitFirenetGatewayName { get; set; } = null!;
@@ -92,13 +122,13 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixTransitFirenetPolicyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Name of the resource to be added to transit firenet policy.
+        /// The name of the resource which will be inspected.
         /// </summary>
         [Input("inspectedResourceName")]
         public Input<string>? InspectedResourceName { get; set; }
 
         /// <summary>
-        /// Name of the transit firenet gateway.
+        /// Name of the Transit FireNet-enabled transit gateway. Currently supports AWS and Azure.
         /// </summary>
         [Input("transitFirenetGatewayName")]
         public Input<string>? TransitFirenetGatewayName { get; set; }

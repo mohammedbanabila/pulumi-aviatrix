@@ -11,6 +11,45 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_trans_peer** resource allows the creation and management of Aviatrix [Encrypted Transitive Peering](https://docs.aviatrix.com/HowTos/TransPeering.html).
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixTransPeer(ctx, "testTransPeer", &aviatrix.AviatrixTransPeerArgs{
+//				Nexthop:       pulumi.String("avtx-us-east-gw2"),
+//				ReachableCidr: pulumi.String("10.152.0.0/16"),
+//				Source:        pulumi.String("avtx-us-east-gw1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **trans_peer** can be imported using the `source`, `nexthop` and `reachable_cidr`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixTransPeer:AviatrixTransPeer test source~nexthop~reachable_cidr
+//
+// ```
 type AviatrixTransPeer struct {
 	pulumi.CustomResourceState
 

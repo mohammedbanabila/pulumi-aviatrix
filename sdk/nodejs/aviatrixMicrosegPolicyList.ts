@@ -2,9 +2,58 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * !> **WARNING** **aviatrix_microseg_policy_list** is part of the Micro-segmentation private preview feature for R2.22.0. If you wish to enable a private preview mode feature, please contact your sales representative or Aviatrix Support.
+ *
+ * The **aviatrix_microseg_policy_list** resource handles the creation and management of Micro-segmentation Policies. Available as of Provider R2.22.0+.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Microseg Policy
+ * const test = new aviatrix.AviatrixMicrosegPolicyList("test", {
+ *     policies: [
+ *         {
+ *             action: "DENY",
+ *             dstAppDomains: ["82e50c85-82bf-4b3b-b9da-aaed34a3aa53"],
+ *             logging: false,
+ *             name: "microseg-policy-1",
+ *             priority: 1,
+ *             protocol: "ICMP",
+ *             srcAppDomains: ["f15c9890-c8c4-4c1a-a2b5-ef0ab34d2e30"],
+ *             watch: false,
+ *         },
+ *         {
+ *             action: "PERMIT",
+ *             dstAppDomains: ["f05b0ad7-d2d7-4d16-b2f6-48492319414c"],
+ *             name: "microseg-policy",
+ *             portRanges: [{
+ *                 hi: 50000,
+ *                 lo: 49000,
+ *             }],
+ *             priority: 0,
+ *             protocol: "TCP",
+ *             srcAppDomains: ["7e7d1573-7a7a-4a53-bcb5-1ad5041961e0"],
+ *         },
+ *     ],
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **aviatrix_microseg_policy_list** can be imported using the controller IP, e.g. controller IP is 10.11.12.13
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixMicrosegPolicyList:AviatrixMicrosegPolicyList test 10-11-12-13
+ * ```
+ */
 export class AviatrixMicrosegPolicyList extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixMicrosegPolicyList resource's state with the given name, ID, and optional extra
@@ -34,7 +83,7 @@ export class AviatrixMicrosegPolicyList extends pulumi.CustomResource {
     }
 
     /**
-     * List of micro-segmentation policies.
+     * List of policies.
      */
     public readonly policies!: pulumi.Output<outputs.AviatrixMicrosegPolicyListPolicy[]>;
 
@@ -69,7 +118,7 @@ export class AviatrixMicrosegPolicyList extends pulumi.CustomResource {
  */
 export interface AviatrixMicrosegPolicyListState {
     /**
-     * List of micro-segmentation policies.
+     * List of policies.
      */
     policies?: pulumi.Input<pulumi.Input<inputs.AviatrixMicrosegPolicyListPolicy>[]>;
 }
@@ -79,7 +128,7 @@ export interface AviatrixMicrosegPolicyListState {
  */
 export interface AviatrixMicrosegPolicyListArgs {
     /**
-     * List of micro-segmentation policies.
+     * List of policies.
      */
     policies: pulumi.Input<pulumi.Input<inputs.AviatrixMicrosegPolicyListPolicy>[]>;
 }

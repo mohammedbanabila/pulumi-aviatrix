@@ -11,32 +11,43 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_firenet** resource allows the creation and management of [Aviatrix Firewall Networks](https://docs.aviatrix.com/HowTos/firewall_network_faq.html).
+//
+// > **NOTE:** This resource is used in conjunction with multiple other resources that may include, and are not limited to: **firewall_instance**, **firewall_instance_association**, **aws_tgw**, and **transit_gateway** resources or even **aviatrix_fqdn**, under the Aviatrix FireNet solution. Explicit dependencies may be set using `dependsOn`. For more information on proper FireNet configuration, please see the workflow [here](https://docs.aviatrix.com/HowTos/firewall_network_workflow.html).
+//
+// ## Import
+//
+// **firenet** can be imported using the `vpc_id`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixFirenet:AviatrixFirenet test vpc_id
+//
+// ```
 type AviatrixFirenet struct {
 	pulumi.CustomResourceState
 
-	// Network List Excluded From East-West Inspection. CIDRs to be excluded from inspection. Type: Set(String). Available as
-	// of provider version R2.19.2+.
+	// Network List Excluded From East-West Inspection. CIDRs to be excluded from inspection. Type: Set(String). Available as of provider version R2.19.5+.
 	EastWestInspectionExcludedCidrs pulumi.StringArrayOutput `pulumi:"eastWestInspectionExcludedCidrs"`
-	// Enable/Disable egress through firewall.
+	// Enable/disable egress through firewall. Valid values: true, false. Default value: false.
 	EgressEnabled pulumi.BoolPtrOutput `pulumi:"egressEnabled"`
-	// List of egress static cidrs.
+	// List of egress static CIDRs. Egress is required to be enabled. Example: ["1.171.15.184/32", "1.171.15.185/32"]. Available as of provider version R2.19+.
 	EgressStaticCidrs pulumi.StringArrayOutput `pulumi:"egressStaticCidrs"`
-	// List of firewall instances to be associated with fireNet.
+	// Dynamic block of firewall instance(s) to be associated with the FireNet.
 	//
 	// Deprecated: Please set `manage_firewall_instance_association` to false, and use the standalone aviatrix_firewall_instance_association resource instead.
 	FirewallInstanceAssociations AviatrixFirenetFirewallInstanceAssociationArrayOutput `pulumi:"firewallInstanceAssociations"`
-	// Hashing algorithm to load balance traffic across the firewall.
+	// Hashing algorithm to load balance traffic across the firewall. Valid values: "2-Tuple", "5-Tuple". Default value: "5-Tuple".
 	HashingAlgorithm pulumi.StringPtrOutput `pulumi:"hashingAlgorithm"`
-	// Enable/Disable traffic inspection.
+	// Enable/disable traffic inspection. Valid values: true, false. Default value: true.
 	InspectionEnabled pulumi.BoolPtrOutput `pulumi:"inspectionEnabled"`
-	// Enable Keep Alive via Firewall LAN Interface.
+	// Enable Keep Alive via Firewall LAN Interface. Valid values: true or false. Default value: false. Available as of provider version R2.18.1+.
 	KeepAliveViaLanInterfaceEnabled pulumi.BoolPtrOutput `pulumi:"keepAliveViaLanInterfaceEnabled"`
-	// Enable this to manage firewall_instance_associations in-line. If this is false, associations must be managed via
-	// standalone aviatrix_firewall_instance_association resources. Type: boolean, Default: true, Valid values: true/false.
+	// Enable this attribute to manage firewall associations in-line. If set to true, in-line `firewallInstanceAssociation` blocks can be used. If set to false, all firewall associations must be managed via standalone `AviatrixFirewallInstanceAssociation` resources. Default value: true. Valid values: true or false. Available in provider version R2.17.1+.
 	ManageFirewallInstanceAssociation pulumi.BoolPtrOutput `pulumi:"manageFirewallInstanceAssociation"`
-	// Enable TGW segmentation for egress.
+	// Enable TGW segmentation for egress. Valid values: true or false. Default value: false. Available as of provider version R2.19+.
 	TgwSegmentationForEgressEnabled pulumi.BoolPtrOutput `pulumi:"tgwSegmentationForEgressEnabled"`
-	// VPC ID.
+	// VPC ID of the Security VPC.
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
 }
 
@@ -73,56 +84,52 @@ func GetAviatrixFirenet(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixFirenet resources.
 type aviatrixFirenetState struct {
-	// Network List Excluded From East-West Inspection. CIDRs to be excluded from inspection. Type: Set(String). Available as
-	// of provider version R2.19.2+.
+	// Network List Excluded From East-West Inspection. CIDRs to be excluded from inspection. Type: Set(String). Available as of provider version R2.19.5+.
 	EastWestInspectionExcludedCidrs []string `pulumi:"eastWestInspectionExcludedCidrs"`
-	// Enable/Disable egress through firewall.
+	// Enable/disable egress through firewall. Valid values: true, false. Default value: false.
 	EgressEnabled *bool `pulumi:"egressEnabled"`
-	// List of egress static cidrs.
+	// List of egress static CIDRs. Egress is required to be enabled. Example: ["1.171.15.184/32", "1.171.15.185/32"]. Available as of provider version R2.19+.
 	EgressStaticCidrs []string `pulumi:"egressStaticCidrs"`
-	// List of firewall instances to be associated with fireNet.
+	// Dynamic block of firewall instance(s) to be associated with the FireNet.
 	//
 	// Deprecated: Please set `manage_firewall_instance_association` to false, and use the standalone aviatrix_firewall_instance_association resource instead.
 	FirewallInstanceAssociations []AviatrixFirenetFirewallInstanceAssociation `pulumi:"firewallInstanceAssociations"`
-	// Hashing algorithm to load balance traffic across the firewall.
+	// Hashing algorithm to load balance traffic across the firewall. Valid values: "2-Tuple", "5-Tuple". Default value: "5-Tuple".
 	HashingAlgorithm *string `pulumi:"hashingAlgorithm"`
-	// Enable/Disable traffic inspection.
+	// Enable/disable traffic inspection. Valid values: true, false. Default value: true.
 	InspectionEnabled *bool `pulumi:"inspectionEnabled"`
-	// Enable Keep Alive via Firewall LAN Interface.
+	// Enable Keep Alive via Firewall LAN Interface. Valid values: true or false. Default value: false. Available as of provider version R2.18.1+.
 	KeepAliveViaLanInterfaceEnabled *bool `pulumi:"keepAliveViaLanInterfaceEnabled"`
-	// Enable this to manage firewall_instance_associations in-line. If this is false, associations must be managed via
-	// standalone aviatrix_firewall_instance_association resources. Type: boolean, Default: true, Valid values: true/false.
+	// Enable this attribute to manage firewall associations in-line. If set to true, in-line `firewallInstanceAssociation` blocks can be used. If set to false, all firewall associations must be managed via standalone `AviatrixFirewallInstanceAssociation` resources. Default value: true. Valid values: true or false. Available in provider version R2.17.1+.
 	ManageFirewallInstanceAssociation *bool `pulumi:"manageFirewallInstanceAssociation"`
-	// Enable TGW segmentation for egress.
+	// Enable TGW segmentation for egress. Valid values: true or false. Default value: false. Available as of provider version R2.19+.
 	TgwSegmentationForEgressEnabled *bool `pulumi:"tgwSegmentationForEgressEnabled"`
-	// VPC ID.
+	// VPC ID of the Security VPC.
 	VpcId *string `pulumi:"vpcId"`
 }
 
 type AviatrixFirenetState struct {
-	// Network List Excluded From East-West Inspection. CIDRs to be excluded from inspection. Type: Set(String). Available as
-	// of provider version R2.19.2+.
+	// Network List Excluded From East-West Inspection. CIDRs to be excluded from inspection. Type: Set(String). Available as of provider version R2.19.5+.
 	EastWestInspectionExcludedCidrs pulumi.StringArrayInput
-	// Enable/Disable egress through firewall.
+	// Enable/disable egress through firewall. Valid values: true, false. Default value: false.
 	EgressEnabled pulumi.BoolPtrInput
-	// List of egress static cidrs.
+	// List of egress static CIDRs. Egress is required to be enabled. Example: ["1.171.15.184/32", "1.171.15.185/32"]. Available as of provider version R2.19+.
 	EgressStaticCidrs pulumi.StringArrayInput
-	// List of firewall instances to be associated with fireNet.
+	// Dynamic block of firewall instance(s) to be associated with the FireNet.
 	//
 	// Deprecated: Please set `manage_firewall_instance_association` to false, and use the standalone aviatrix_firewall_instance_association resource instead.
 	FirewallInstanceAssociations AviatrixFirenetFirewallInstanceAssociationArrayInput
-	// Hashing algorithm to load balance traffic across the firewall.
+	// Hashing algorithm to load balance traffic across the firewall. Valid values: "2-Tuple", "5-Tuple". Default value: "5-Tuple".
 	HashingAlgorithm pulumi.StringPtrInput
-	// Enable/Disable traffic inspection.
+	// Enable/disable traffic inspection. Valid values: true, false. Default value: true.
 	InspectionEnabled pulumi.BoolPtrInput
-	// Enable Keep Alive via Firewall LAN Interface.
+	// Enable Keep Alive via Firewall LAN Interface. Valid values: true or false. Default value: false. Available as of provider version R2.18.1+.
 	KeepAliveViaLanInterfaceEnabled pulumi.BoolPtrInput
-	// Enable this to manage firewall_instance_associations in-line. If this is false, associations must be managed via
-	// standalone aviatrix_firewall_instance_association resources. Type: boolean, Default: true, Valid values: true/false.
+	// Enable this attribute to manage firewall associations in-line. If set to true, in-line `firewallInstanceAssociation` blocks can be used. If set to false, all firewall associations must be managed via standalone `AviatrixFirewallInstanceAssociation` resources. Default value: true. Valid values: true or false. Available in provider version R2.17.1+.
 	ManageFirewallInstanceAssociation pulumi.BoolPtrInput
-	// Enable TGW segmentation for egress.
+	// Enable TGW segmentation for egress. Valid values: true or false. Default value: false. Available as of provider version R2.19+.
 	TgwSegmentationForEgressEnabled pulumi.BoolPtrInput
-	// VPC ID.
+	// VPC ID of the Security VPC.
 	VpcId pulumi.StringPtrInput
 }
 
@@ -131,57 +138,53 @@ func (AviatrixFirenetState) ElementType() reflect.Type {
 }
 
 type aviatrixFirenetArgs struct {
-	// Network List Excluded From East-West Inspection. CIDRs to be excluded from inspection. Type: Set(String). Available as
-	// of provider version R2.19.2+.
+	// Network List Excluded From East-West Inspection. CIDRs to be excluded from inspection. Type: Set(String). Available as of provider version R2.19.5+.
 	EastWestInspectionExcludedCidrs []string `pulumi:"eastWestInspectionExcludedCidrs"`
-	// Enable/Disable egress through firewall.
+	// Enable/disable egress through firewall. Valid values: true, false. Default value: false.
 	EgressEnabled *bool `pulumi:"egressEnabled"`
-	// List of egress static cidrs.
+	// List of egress static CIDRs. Egress is required to be enabled. Example: ["1.171.15.184/32", "1.171.15.185/32"]. Available as of provider version R2.19+.
 	EgressStaticCidrs []string `pulumi:"egressStaticCidrs"`
-	// List of firewall instances to be associated with fireNet.
+	// Dynamic block of firewall instance(s) to be associated with the FireNet.
 	//
 	// Deprecated: Please set `manage_firewall_instance_association` to false, and use the standalone aviatrix_firewall_instance_association resource instead.
 	FirewallInstanceAssociations []AviatrixFirenetFirewallInstanceAssociation `pulumi:"firewallInstanceAssociations"`
-	// Hashing algorithm to load balance traffic across the firewall.
+	// Hashing algorithm to load balance traffic across the firewall. Valid values: "2-Tuple", "5-Tuple". Default value: "5-Tuple".
 	HashingAlgorithm *string `pulumi:"hashingAlgorithm"`
-	// Enable/Disable traffic inspection.
+	// Enable/disable traffic inspection. Valid values: true, false. Default value: true.
 	InspectionEnabled *bool `pulumi:"inspectionEnabled"`
-	// Enable Keep Alive via Firewall LAN Interface.
+	// Enable Keep Alive via Firewall LAN Interface. Valid values: true or false. Default value: false. Available as of provider version R2.18.1+.
 	KeepAliveViaLanInterfaceEnabled *bool `pulumi:"keepAliveViaLanInterfaceEnabled"`
-	// Enable this to manage firewall_instance_associations in-line. If this is false, associations must be managed via
-	// standalone aviatrix_firewall_instance_association resources. Type: boolean, Default: true, Valid values: true/false.
+	// Enable this attribute to manage firewall associations in-line. If set to true, in-line `firewallInstanceAssociation` blocks can be used. If set to false, all firewall associations must be managed via standalone `AviatrixFirewallInstanceAssociation` resources. Default value: true. Valid values: true or false. Available in provider version R2.17.1+.
 	ManageFirewallInstanceAssociation *bool `pulumi:"manageFirewallInstanceAssociation"`
-	// Enable TGW segmentation for egress.
+	// Enable TGW segmentation for egress. Valid values: true or false. Default value: false. Available as of provider version R2.19+.
 	TgwSegmentationForEgressEnabled *bool `pulumi:"tgwSegmentationForEgressEnabled"`
-	// VPC ID.
+	// VPC ID of the Security VPC.
 	VpcId string `pulumi:"vpcId"`
 }
 
 // The set of arguments for constructing a AviatrixFirenet resource.
 type AviatrixFirenetArgs struct {
-	// Network List Excluded From East-West Inspection. CIDRs to be excluded from inspection. Type: Set(String). Available as
-	// of provider version R2.19.2+.
+	// Network List Excluded From East-West Inspection. CIDRs to be excluded from inspection. Type: Set(String). Available as of provider version R2.19.5+.
 	EastWestInspectionExcludedCidrs pulumi.StringArrayInput
-	// Enable/Disable egress through firewall.
+	// Enable/disable egress through firewall. Valid values: true, false. Default value: false.
 	EgressEnabled pulumi.BoolPtrInput
-	// List of egress static cidrs.
+	// List of egress static CIDRs. Egress is required to be enabled. Example: ["1.171.15.184/32", "1.171.15.185/32"]. Available as of provider version R2.19+.
 	EgressStaticCidrs pulumi.StringArrayInput
-	// List of firewall instances to be associated with fireNet.
+	// Dynamic block of firewall instance(s) to be associated with the FireNet.
 	//
 	// Deprecated: Please set `manage_firewall_instance_association` to false, and use the standalone aviatrix_firewall_instance_association resource instead.
 	FirewallInstanceAssociations AviatrixFirenetFirewallInstanceAssociationArrayInput
-	// Hashing algorithm to load balance traffic across the firewall.
+	// Hashing algorithm to load balance traffic across the firewall. Valid values: "2-Tuple", "5-Tuple". Default value: "5-Tuple".
 	HashingAlgorithm pulumi.StringPtrInput
-	// Enable/Disable traffic inspection.
+	// Enable/disable traffic inspection. Valid values: true, false. Default value: true.
 	InspectionEnabled pulumi.BoolPtrInput
-	// Enable Keep Alive via Firewall LAN Interface.
+	// Enable Keep Alive via Firewall LAN Interface. Valid values: true or false. Default value: false. Available as of provider version R2.18.1+.
 	KeepAliveViaLanInterfaceEnabled pulumi.BoolPtrInput
-	// Enable this to manage firewall_instance_associations in-line. If this is false, associations must be managed via
-	// standalone aviatrix_firewall_instance_association resources. Type: boolean, Default: true, Valid values: true/false.
+	// Enable this attribute to manage firewall associations in-line. If set to true, in-line `firewallInstanceAssociation` blocks can be used. If set to false, all firewall associations must be managed via standalone `AviatrixFirewallInstanceAssociation` resources. Default value: true. Valid values: true or false. Available in provider version R2.17.1+.
 	ManageFirewallInstanceAssociation pulumi.BoolPtrInput
-	// Enable TGW segmentation for egress.
+	// Enable TGW segmentation for egress. Valid values: true or false. Default value: false. Available as of provider version R2.19+.
 	TgwSegmentationForEgressEnabled pulumi.BoolPtrInput
-	// VPC ID.
+	// VPC ID of the Security VPC.
 	VpcId pulumi.StringInput
 }
 
@@ -272,23 +275,22 @@ func (o AviatrixFirenetOutput) ToAviatrixFirenetOutputWithContext(ctx context.Co
 	return o
 }
 
-// Network List Excluded From East-West Inspection. CIDRs to be excluded from inspection. Type: Set(String). Available as
-// of provider version R2.19.2+.
+// Network List Excluded From East-West Inspection. CIDRs to be excluded from inspection. Type: Set(String). Available as of provider version R2.19.5+.
 func (o AviatrixFirenetOutput) EastWestInspectionExcludedCidrs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixFirenet) pulumi.StringArrayOutput { return v.EastWestInspectionExcludedCidrs }).(pulumi.StringArrayOutput)
 }
 
-// Enable/Disable egress through firewall.
+// Enable/disable egress through firewall. Valid values: true, false. Default value: false.
 func (o AviatrixFirenetOutput) EgressEnabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixFirenet) pulumi.BoolPtrOutput { return v.EgressEnabled }).(pulumi.BoolPtrOutput)
 }
 
-// List of egress static cidrs.
+// List of egress static CIDRs. Egress is required to be enabled. Example: ["1.171.15.184/32", "1.171.15.185/32"]. Available as of provider version R2.19+.
 func (o AviatrixFirenetOutput) EgressStaticCidrs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixFirenet) pulumi.StringArrayOutput { return v.EgressStaticCidrs }).(pulumi.StringArrayOutput)
 }
 
-// List of firewall instances to be associated with fireNet.
+// Dynamic block of firewall instance(s) to be associated with the FireNet.
 //
 // Deprecated: Please set `manage_firewall_instance_association` to false, and use the standalone aviatrix_firewall_instance_association resource instead.
 func (o AviatrixFirenetOutput) FirewallInstanceAssociations() AviatrixFirenetFirewallInstanceAssociationArrayOutput {
@@ -297,33 +299,32 @@ func (o AviatrixFirenetOutput) FirewallInstanceAssociations() AviatrixFirenetFir
 	}).(AviatrixFirenetFirewallInstanceAssociationArrayOutput)
 }
 
-// Hashing algorithm to load balance traffic across the firewall.
+// Hashing algorithm to load balance traffic across the firewall. Valid values: "2-Tuple", "5-Tuple". Default value: "5-Tuple".
 func (o AviatrixFirenetOutput) HashingAlgorithm() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixFirenet) pulumi.StringPtrOutput { return v.HashingAlgorithm }).(pulumi.StringPtrOutput)
 }
 
-// Enable/Disable traffic inspection.
+// Enable/disable traffic inspection. Valid values: true, false. Default value: true.
 func (o AviatrixFirenetOutput) InspectionEnabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixFirenet) pulumi.BoolPtrOutput { return v.InspectionEnabled }).(pulumi.BoolPtrOutput)
 }
 
-// Enable Keep Alive via Firewall LAN Interface.
+// Enable Keep Alive via Firewall LAN Interface. Valid values: true or false. Default value: false. Available as of provider version R2.18.1+.
 func (o AviatrixFirenetOutput) KeepAliveViaLanInterfaceEnabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixFirenet) pulumi.BoolPtrOutput { return v.KeepAliveViaLanInterfaceEnabled }).(pulumi.BoolPtrOutput)
 }
 
-// Enable this to manage firewall_instance_associations in-line. If this is false, associations must be managed via
-// standalone aviatrix_firewall_instance_association resources. Type: boolean, Default: true, Valid values: true/false.
+// Enable this attribute to manage firewall associations in-line. If set to true, in-line `firewallInstanceAssociation` blocks can be used. If set to false, all firewall associations must be managed via standalone `AviatrixFirewallInstanceAssociation` resources. Default value: true. Valid values: true or false. Available in provider version R2.17.1+.
 func (o AviatrixFirenetOutput) ManageFirewallInstanceAssociation() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixFirenet) pulumi.BoolPtrOutput { return v.ManageFirewallInstanceAssociation }).(pulumi.BoolPtrOutput)
 }
 
-// Enable TGW segmentation for egress.
+// Enable TGW segmentation for egress. Valid values: true or false. Default value: false. Available as of provider version R2.19+.
 func (o AviatrixFirenetOutput) TgwSegmentationForEgressEnabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixFirenet) pulumi.BoolPtrOutput { return v.TgwSegmentationForEgressEnabled }).(pulumi.BoolPtrOutput)
 }
 
-// VPC ID.
+// VPC ID of the Security VPC.
 func (o AviatrixFirenetOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixFirenet) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
 }

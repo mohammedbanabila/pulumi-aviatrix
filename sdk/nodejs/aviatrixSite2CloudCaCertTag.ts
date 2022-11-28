@@ -2,9 +2,58 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_site2cloud_ca_cert_tag** resource creates and manages Aviatrix-created Site2Cloud CA Cert Tags.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@astipkovits/aviatrix";
+ * import * as fs from "fs";
+ *
+ * // Create an Aviatrix Site2cloud CA Cert Tag Containing One Cert
+ * const test = new aviatrix.AviatrixSite2CloudCaCertTag("test", {
+ *     tagName: "test",
+ *     caCertificates: [{
+ *         certContent: fs.readFileSync("/home/ubuntu/avx_gw_ca_cert_in_ui_root_only.crt"),
+ *     }],
+ * });
+ * ```
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@astipkovits/aviatrix";
+ * import * as fs from "fs";
+ *
+ * // Create an Aviatrix Site2cloud CA Cert Tag Containing Multiple Certs
+ * const test = new aviatrix.AviatrixSite2CloudCaCertTag("test", {
+ *     tagName: "test",
+ *     caCertificates: [
+ *         {
+ *             certContent: fs.readFileSync("/home/ubuntu/avx_gw_ca_cert_root.crt"),
+ *         },
+ *         {
+ *             certContent: fs.readFileSync("/home/ubuntu/avx_gw_ca_cert_intermediate.crt"),
+ *         },
+ *         {
+ *             certContent: fs.readFileSync("/home/ubuntu/avx_gw_ca_cert_intermediate2.crt"),
+ *         },
+ *     ],
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **site2cloud_ca_cert_tag** can be imported using the `tag_name` and, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixSite2CloudCaCertTag:AviatrixSite2CloudCaCertTag test tag_name
+ * ```
+ */
 export class AviatrixSite2CloudCaCertTag extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixSite2CloudCaCertTag resource's state with the given name, ID, and optional extra
@@ -38,7 +87,7 @@ export class AviatrixSite2CloudCaCertTag extends pulumi.CustomResource {
      */
     public readonly caCertificates!: pulumi.Output<outputs.AviatrixSite2CloudCaCertTagCaCertificate[]>;
     /**
-     * Unique name of the ca cert tag.
+     * Site2Cloud ca cert tag name.
      */
     public readonly tagName!: pulumi.Output<string>;
 
@@ -82,7 +131,7 @@ export interface AviatrixSite2CloudCaCertTagState {
      */
     caCertificates?: pulumi.Input<pulumi.Input<inputs.AviatrixSite2CloudCaCertTagCaCertificate>[]>;
     /**
-     * Unique name of the ca cert tag.
+     * Site2Cloud ca cert tag name.
      */
     tagName?: pulumi.Input<string>;
 }
@@ -96,7 +145,7 @@ export interface AviatrixSite2CloudCaCertTagArgs {
      */
     caCertificates: pulumi.Input<pulumi.Input<inputs.AviatrixSite2CloudCaCertTagCaCertificate>[]>;
     /**
-     * Unique name of the ca cert tag.
+     * Site2Cloud ca cert tag name.
      */
     tagName: pulumi.Input<string>;
 }

@@ -22,8 +22,8 @@ class AviatrixNetflowAgentArgs:
         The set of arguments for constructing a AviatrixNetflowAgent resource.
         :param pulumi.Input[int] port: Netflow server port.
         :param pulumi.Input[str] server_ip: Netflow server IP address.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of excluded gateways.
-        :param pulumi.Input[int] version: Netflow version.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
+        :param pulumi.Input[int] version: Netflow version (5 or 9). 5 by default.
         """
         pulumi.set(__self__, "port", port)
         pulumi.set(__self__, "server_ip", server_ip)
@@ -60,7 +60,7 @@ class AviatrixNetflowAgentArgs:
     @pulumi.getter(name="excludedGateways")
     def excluded_gateways(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of excluded gateways.
+        List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         """
         return pulumi.get(self, "excluded_gateways")
 
@@ -72,7 +72,7 @@ class AviatrixNetflowAgentArgs:
     @pulumi.getter
     def version(self) -> Optional[pulumi.Input[int]]:
         """
-        Netflow version.
+        Netflow version (5 or 9). 5 by default.
         """
         return pulumi.get(self, "version")
 
@@ -91,11 +91,11 @@ class _AviatrixNetflowAgentState:
                  version: Optional[pulumi.Input[int]] = None):
         """
         Input properties used for looking up and filtering AviatrixNetflowAgent resources.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of excluded gateways.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         :param pulumi.Input[int] port: Netflow server port.
         :param pulumi.Input[str] server_ip: Netflow server IP address.
-        :param pulumi.Input[str] status: Enabled or not.
-        :param pulumi.Input[int] version: Netflow version.
+        :param pulumi.Input[str] status: The status of netflow agent.
+        :param pulumi.Input[int] version: Netflow version (5 or 9). 5 by default.
         """
         if excluded_gateways is not None:
             pulumi.set(__self__, "excluded_gateways", excluded_gateways)
@@ -112,7 +112,7 @@ class _AviatrixNetflowAgentState:
     @pulumi.getter(name="excludedGateways")
     def excluded_gateways(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of excluded gateways.
+        List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         """
         return pulumi.get(self, "excluded_gateways")
 
@@ -148,7 +148,7 @@ class _AviatrixNetflowAgentState:
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[str]]:
         """
-        Enabled or not.
+        The status of netflow agent.
         """
         return pulumi.get(self, "status")
 
@@ -160,7 +160,7 @@ class _AviatrixNetflowAgentState:
     @pulumi.getter
     def version(self) -> Optional[pulumi.Input[int]]:
         """
-        Netflow version.
+        Netflow version (5 or 9). 5 by default.
         """
         return pulumi.get(self, "version")
 
@@ -180,13 +180,39 @@ class AviatrixNetflowAgent(pulumi.CustomResource):
                  version: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
-        Create a AviatrixNetflowAgent resource with the given unique name, props, and options.
+        The **aviatrix_netflow_agent** resource allows the enabling and disabling of netflow agent.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Enable netflow agent
+        test_netflow_agent = aviatrix.AviatrixNetflowAgent("testNetflowAgent",
+            excluded_gateways=[
+                "a",
+                "b",
+            ],
+            port=10,
+            server_ip="1.2.3.4",
+            version=5)
+        ```
+
+        ## Import
+
+        **netflow_agent** can be imported using "netflow_agent", e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixNetflowAgent:AviatrixNetflowAgent test netflow_agent
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of excluded gateways.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         :param pulumi.Input[int] port: Netflow server port.
         :param pulumi.Input[str] server_ip: Netflow server IP address.
-        :param pulumi.Input[int] version: Netflow version.
+        :param pulumi.Input[int] version: Netflow version (5 or 9). 5 by default.
         """
         ...
     @overload
@@ -195,7 +221,33 @@ class AviatrixNetflowAgent(pulumi.CustomResource):
                  args: AviatrixNetflowAgentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixNetflowAgent resource with the given unique name, props, and options.
+        The **aviatrix_netflow_agent** resource allows the enabling and disabling of netflow agent.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Enable netflow agent
+        test_netflow_agent = aviatrix.AviatrixNetflowAgent("testNetflowAgent",
+            excluded_gateways=[
+                "a",
+                "b",
+            ],
+            port=10,
+            server_ip="1.2.3.4",
+            version=5)
+        ```
+
+        ## Import
+
+        **netflow_agent** can be imported using "netflow_agent", e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixNetflowAgent:AviatrixNetflowAgent test netflow_agent
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixNetflowAgentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -255,11 +307,11 @@ class AviatrixNetflowAgent(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of excluded gateways.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         :param pulumi.Input[int] port: Netflow server port.
         :param pulumi.Input[str] server_ip: Netflow server IP address.
-        :param pulumi.Input[str] status: Enabled or not.
-        :param pulumi.Input[int] version: Netflow version.
+        :param pulumi.Input[str] status: The status of netflow agent.
+        :param pulumi.Input[int] version: Netflow version (5 or 9). 5 by default.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -276,7 +328,7 @@ class AviatrixNetflowAgent(pulumi.CustomResource):
     @pulumi.getter(name="excludedGateways")
     def excluded_gateways(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        List of excluded gateways.
+        List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         """
         return pulumi.get(self, "excluded_gateways")
 
@@ -300,7 +352,7 @@ class AviatrixNetflowAgent(pulumi.CustomResource):
     @pulumi.getter
     def status(self) -> pulumi.Output[str]:
         """
-        Enabled or not.
+        The status of netflow agent.
         """
         return pulumi.get(self, "status")
 
@@ -308,7 +360,7 @@ class AviatrixNetflowAgent(pulumi.CustomResource):
     @pulumi.getter
     def version(self) -> pulumi.Output[Optional[int]]:
         """
-        Netflow version.
+        Netflow version (5 or 9). 5 by default.
         """
         return pulumi.get(self, "version")
 

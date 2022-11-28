@@ -17,7 +17,7 @@ class AviatrixCopilotAssociationArgs:
                  copilot_address: pulumi.Input[str]):
         """
         The set of arguments for constructing a AviatrixCopilotAssociation resource.
-        :param pulumi.Input[str] copilot_address: CoPilot IP Address or Hostname.
+        :param pulumi.Input[str] copilot_address: CoPilot instance IP Address or Hostname.
         """
         pulumi.set(__self__, "copilot_address", copilot_address)
 
@@ -25,7 +25,7 @@ class AviatrixCopilotAssociationArgs:
     @pulumi.getter(name="copilotAddress")
     def copilot_address(self) -> pulumi.Input[str]:
         """
-        CoPilot IP Address or Hostname.
+        CoPilot instance IP Address or Hostname.
         """
         return pulumi.get(self, "copilot_address")
 
@@ -40,7 +40,7 @@ class _AviatrixCopilotAssociationState:
                  copilot_address: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AviatrixCopilotAssociation resources.
-        :param pulumi.Input[str] copilot_address: CoPilot IP Address or Hostname.
+        :param pulumi.Input[str] copilot_address: CoPilot instance IP Address or Hostname.
         """
         if copilot_address is not None:
             pulumi.set(__self__, "copilot_address", copilot_address)
@@ -49,7 +49,7 @@ class _AviatrixCopilotAssociationState:
     @pulumi.getter(name="copilotAddress")
     def copilot_address(self) -> Optional[pulumi.Input[str]]:
         """
-        CoPilot IP Address or Hostname.
+        CoPilot instance IP Address or Hostname.
         """
         return pulumi.get(self, "copilot_address")
 
@@ -66,10 +66,29 @@ class AviatrixCopilotAssociation(pulumi.CustomResource):
                  copilot_address: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixCopilotAssociation resource with the given unique name, props, and options.
+        The **aviatrix_copilot_association** resource allows management of controller CoPilot Association. This resource is available as of provider version R2.19+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create a CoPilot Association
+        test_copilot_association = aviatrix.AviatrixCopilotAssociation("testCopilotAssociation", copilot_address="copilot.aviatrix.com")
+        ```
+
+        ## Import
+
+        **aviatrix_copilot_association** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixCopilotAssociation:AviatrixCopilotAssociation test_copilot_association 10-11-12-13
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] copilot_address: CoPilot IP Address or Hostname.
+        :param pulumi.Input[str] copilot_address: CoPilot instance IP Address or Hostname.
         """
         ...
     @overload
@@ -78,7 +97,26 @@ class AviatrixCopilotAssociation(pulumi.CustomResource):
                  args: AviatrixCopilotAssociationArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixCopilotAssociation resource with the given unique name, props, and options.
+        The **aviatrix_copilot_association** resource allows management of controller CoPilot Association. This resource is available as of provider version R2.19+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create a CoPilot Association
+        test_copilot_association = aviatrix.AviatrixCopilotAssociation("testCopilotAssociation", copilot_address="copilot.aviatrix.com")
+        ```
+
+        ## Import
+
+        **aviatrix_copilot_association** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixCopilotAssociation:AviatrixCopilotAssociation test_copilot_association 10-11-12-13
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixCopilotAssociationArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -125,7 +163,7 @@ class AviatrixCopilotAssociation(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] copilot_address: CoPilot IP Address or Hostname.
+        :param pulumi.Input[str] copilot_address: CoPilot instance IP Address or Hostname.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -138,7 +176,7 @@ class AviatrixCopilotAssociation(pulumi.CustomResource):
     @pulumi.getter(name="copilotAddress")
     def copilot_address(self) -> pulumi.Output[str]:
         """
-        CoPilot IP Address or Hostname.
+        CoPilot instance IP Address or Hostname.
         """
         return pulumi.get(self, "copilot_address")
 

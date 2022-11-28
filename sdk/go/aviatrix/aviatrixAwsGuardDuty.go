@@ -11,12 +11,52 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixAwsGuardDuty(ctx, "testAwsGuardDuty", &aviatrix.AviatrixAwsGuardDutyArgs{
+//				AccountName: pulumi.Any(aviatrix_account.Account_1.Account_name),
+//				Region:      pulumi.String("us-west-1"),
+//				ExcludedIps: pulumi.StringArray{
+//					pulumi.String("127.0.0.1"),
+//					pulumi.String("10.0.0.1"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **aws_guard_duty** resource can be imported with the `account_name` and `region` in the form "account_name~~region", e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixAwsGuardDuty:AviatrixAwsGuardDuty test_aws_guard_duty devops-acc~~us-west-1
+//
+// ```
 type AviatrixAwsGuardDuty struct {
 	pulumi.CustomResourceState
 
-	// Account name
+	// Account name.
 	AccountName pulumi.StringOutput `pulumi:"accountName"`
-	// Excluded IPs.
+	// Set of excluded IPs.
 	ExcludedIps pulumi.StringArrayOutput `pulumi:"excludedIps"`
 	// Region.
 	Region pulumi.StringOutput `pulumi:"region"`
@@ -58,18 +98,18 @@ func GetAviatrixAwsGuardDuty(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixAwsGuardDuty resources.
 type aviatrixAwsGuardDutyState struct {
-	// Account name
+	// Account name.
 	AccountName *string `pulumi:"accountName"`
-	// Excluded IPs.
+	// Set of excluded IPs.
 	ExcludedIps []string `pulumi:"excludedIps"`
 	// Region.
 	Region *string `pulumi:"region"`
 }
 
 type AviatrixAwsGuardDutyState struct {
-	// Account name
+	// Account name.
 	AccountName pulumi.StringPtrInput
-	// Excluded IPs.
+	// Set of excluded IPs.
 	ExcludedIps pulumi.StringArrayInput
 	// Region.
 	Region pulumi.StringPtrInput
@@ -80,9 +120,9 @@ func (AviatrixAwsGuardDutyState) ElementType() reflect.Type {
 }
 
 type aviatrixAwsGuardDutyArgs struct {
-	// Account name
+	// Account name.
 	AccountName string `pulumi:"accountName"`
-	// Excluded IPs.
+	// Set of excluded IPs.
 	ExcludedIps []string `pulumi:"excludedIps"`
 	// Region.
 	Region string `pulumi:"region"`
@@ -90,9 +130,9 @@ type aviatrixAwsGuardDutyArgs struct {
 
 // The set of arguments for constructing a AviatrixAwsGuardDuty resource.
 type AviatrixAwsGuardDutyArgs struct {
-	// Account name
+	// Account name.
 	AccountName pulumi.StringInput
-	// Excluded IPs.
+	// Set of excluded IPs.
 	ExcludedIps pulumi.StringArrayInput
 	// Region.
 	Region pulumi.StringInput
@@ -185,12 +225,12 @@ func (o AviatrixAwsGuardDutyOutput) ToAviatrixAwsGuardDutyOutputWithContext(ctx 
 	return o
 }
 
-// Account name
+// Account name.
 func (o AviatrixAwsGuardDutyOutput) AccountName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAwsGuardDuty) pulumi.StringOutput { return v.AccountName }).(pulumi.StringOutput)
 }
 
-// Excluded IPs.
+// Set of excluded IPs.
 func (o AviatrixAwsGuardDutyOutput) ExcludedIps() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AviatrixAwsGuardDuty) pulumi.StringArrayOutput { return v.ExcludedIps }).(pulumi.StringArrayOutput)
 }

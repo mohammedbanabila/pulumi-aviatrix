@@ -9,6 +9,57 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_controller_email_config** resource allows management of an Aviatrix Controller's notification email configurations.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Controller Email Config
+    ///     var testEmailConfig = new Aviatrix.AviatrixControllerEmailConfig("testEmailConfig", new()
+    ///     {
+    ///         AdminAlertEmail = "administrator@mycompany.com",
+    ///         CriticalAlertEmail = "it-support@mycompany.com",
+    ///         SecurityEventEmail = "security-admin-group@mycompany.com",
+    ///         StatusChangeEmail = "it-admin-group@mycompany.com",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Controller Email Config and configure the Status Change Notification Interval
+    ///     var testEmailConfig = new Aviatrix.AviatrixControllerEmailConfig("testEmailConfig", new()
+    ///     {
+    ///         AdminAlertEmail = "administrator@mycompany.com",
+    ///         CriticalAlertEmail = "it-support@mycompany.com",
+    ///         SecurityEventEmail = "security-admin-group@mycompany.com",
+    ///         StatusChangeEmail = "it-admin-group@mycompany.com",
+    ///         StatusChangeNotificationInterval = 20,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Instance controller_email_config can be imported using controller IP, e.g. controller IP is 10.11.12.13
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixControllerEmailConfig:AviatrixControllerEmailConfig test 10-11-12-13
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixControllerEmailConfig:AviatrixControllerEmailConfig")]
     public partial class AviatrixControllerEmailConfig : global::Pulumi.CustomResource
     {
@@ -61,7 +112,7 @@ namespace Pulumi.Aviatrix
         public Output<bool> StatusChangeEmailVerified { get; private set; } = null!;
 
         /// <summary>
-        /// Status change notification interval in seconds.
+        /// Status change notification interval in seconds. Default value: 60.
         /// </summary>
         [Output("statusChangeNotificationInterval")]
         public Output<int?> StatusChangeNotificationInterval { get; private set; } = null!;
@@ -138,7 +189,7 @@ namespace Pulumi.Aviatrix
         public Input<string> StatusChangeEmail { get; set; } = null!;
 
         /// <summary>
-        /// Status change notification interval in seconds.
+        /// Status change notification interval in seconds. Default value: 60.
         /// </summary>
         [Input("statusChangeNotificationInterval")]
         public Input<int>? StatusChangeNotificationInterval { get; set; }
@@ -200,7 +251,7 @@ namespace Pulumi.Aviatrix
         public Input<bool>? StatusChangeEmailVerified { get; set; }
 
         /// <summary>
-        /// Status change notification interval in seconds.
+        /// Status change notification interval in seconds. Default value: 60.
         /// </summary>
         [Input("statusChangeNotificationInterval")]
         public Input<int>? StatusChangeNotificationInterval { get; set; }

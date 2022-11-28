@@ -176,7 +176,40 @@ def get_aviatrix_firenet_firewall_manager(gateway_name: Optional[str] = None,
                                           vpc_id: Optional[str] = None,
                                           opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetAviatrixFirenetFirewallManagerResult:
     """
-    Use this data source to access information about an existing resource.
+    Use this data source to do 'save' or 'sync' for Aviatrix FireNet firewall manager.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_aviatrix as aviatrix
+
+    foo = aviatrix.get_aviatrix_firenet_firewall_manager(gateway_name="transit",
+        password="password",
+        public_ip="1.2.3.4",
+        route_table="router",
+        save=True,
+        template="template",
+        template_stack="templatestack",
+        username="admin-api",
+        vendor_type="Palo Alto Networks Panorama",
+        vpc_id="vpc-abcd123")
+    ```
+
+
+    :param str gateway_name: The FireNet gateway name.
+    :param int number_of_retries: Number of retries for `save` or `synchronize`. Example: 1. Default value: 0.
+    :param str password: Panorama login password for API calls. Required for vendor type "Palo Alto Networks Panorama".
+    :param str public_ip: The public IP address of the Panorama instance. Required for vendor type "Palo Alto Networks Panorama".
+    :param int retry_interval: Retry interval in seconds for `save` or `synchronize`. Example: 120. Default value: 300.
+    :param str route_table: The name of firewall virtual router to program. If left unspecified, the Controller programs the Panorama template’s first router.
+    :param bool save: Switch to save or not.
+    :param bool synchronize: Switch to sync or not.
+    :param str template: Panorama template for each FireNet gateway. Required for vendor type "Palo Alto Networks Panorama".
+    :param str template_stack: Panorama template stack for each FireNet gateway. Required for vendor type "Palo Alto Networks Panorama".
+    :param str username: Panorama login name for API calls from the Controller. Required for vendor type "Palo Alto Networks Panorama".
+    :param str vendor_type: Vendor type. Valid values: "Generic" and "Palo Alto Networks Panorama".
+    :param str vpc_id: VPC ID.
     """
     __args__ = dict()
     __args__['gatewayName'] = gateway_name
@@ -228,6 +261,39 @@ def get_aviatrix_firenet_firewall_manager_output(gateway_name: Optional[pulumi.I
                                                  vpc_id: Optional[pulumi.Input[str]] = None,
                                                  opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetAviatrixFirenetFirewallManagerResult]:
     """
-    Use this data source to access information about an existing resource.
+    Use this data source to do 'save' or 'sync' for Aviatrix FireNet firewall manager.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_aviatrix as aviatrix
+
+    foo = aviatrix.get_aviatrix_firenet_firewall_manager(gateway_name="transit",
+        password="password",
+        public_ip="1.2.3.4",
+        route_table="router",
+        save=True,
+        template="template",
+        template_stack="templatestack",
+        username="admin-api",
+        vendor_type="Palo Alto Networks Panorama",
+        vpc_id="vpc-abcd123")
+    ```
+
+
+    :param str gateway_name: The FireNet gateway name.
+    :param int number_of_retries: Number of retries for `save` or `synchronize`. Example: 1. Default value: 0.
+    :param str password: Panorama login password for API calls. Required for vendor type "Palo Alto Networks Panorama".
+    :param str public_ip: The public IP address of the Panorama instance. Required for vendor type "Palo Alto Networks Panorama".
+    :param int retry_interval: Retry interval in seconds for `save` or `synchronize`. Example: 120. Default value: 300.
+    :param str route_table: The name of firewall virtual router to program. If left unspecified, the Controller programs the Panorama template’s first router.
+    :param bool save: Switch to save or not.
+    :param bool synchronize: Switch to sync or not.
+    :param str template: Panorama template for each FireNet gateway. Required for vendor type "Palo Alto Networks Panorama".
+    :param str template_stack: Panorama template stack for each FireNet gateway. Required for vendor type "Palo Alto Networks Panorama".
+    :param str username: Panorama login name for API calls from the Controller. Required for vendor type "Palo Alto Networks Panorama".
+    :param str vendor_type: Vendor type. Valid values: "Generic" and "Palo Alto Networks Panorama".
+    :param str vpc_id: VPC ID.
     """
     ...

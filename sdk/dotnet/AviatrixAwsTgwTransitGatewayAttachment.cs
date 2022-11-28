@@ -9,11 +9,44 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_aws_tgw_transit_gateway_attachment** resource manages the attachment of the Aviatrix transit gateway to the AWS TGW.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix AWS TGW Transit Gateway Attachment
+    ///     var testTransitGatewayAttachment = new Aviatrix.AviatrixAwsTgwTransitGatewayAttachment("testTransitGatewayAttachment", new()
+    ///     {
+    ///         Region = "us-east-1",
+    ///         TgwName = "test-tgw",
+    ///         TransitGatewayName = "transit-gw-1",
+    ///         VpcAccountName = "test-account",
+    ///         VpcId = "vpc-0e2fac2b91c6697b3",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **aws_tgw_transit_gateway_attachment** can be imported using the `tgw_name` and `vpc_id`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixAwsTgwTransitGatewayAttachment:AviatrixAwsTgwTransitGatewayAttachment test tgw_name~vpc_id
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixAwsTgwTransitGatewayAttachment:AviatrixAwsTgwTransitGatewayAttachment")]
     public partial class AviatrixAwsTgwTransitGatewayAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Region of cloud provider.
+        /// AWS Region of the TGW.
         /// </summary>
         [Output("region")]
         public Output<string> Region { get; private set; } = null!;
@@ -25,19 +58,19 @@ namespace Pulumi.Aviatrix
         public Output<string> TgwName { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the transit gateway to be attached to tgw.
+        /// Name of the transit gateway to be attached to the AWS TGW.
         /// </summary>
         [Output("transitGatewayName")]
         public Output<string> TransitGatewayName { get; private set; } = null!;
 
         /// <summary>
-        /// This parameter represents the name of a Cloud-Account in Aviatrix controller.
+        /// The name of the cloud account in the Aviatrix controller, which is associated with the VPC.
         /// </summary>
         [Output("vpcAccountName")]
         public Output<string> VpcAccountName { get; private set; } = null!;
 
         /// <summary>
-        /// This parameter represents the ID of the VPC.
+        /// VPC ID of the VPC, where transit gateway is launched.
         /// </summary>
         [Output("vpcId")]
         public Output<string> VpcId { get; private set; } = null!;
@@ -90,7 +123,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixAwsTgwTransitGatewayAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Region of cloud provider.
+        /// AWS Region of the TGW.
         /// </summary>
         [Input("region", required: true)]
         public Input<string> Region { get; set; } = null!;
@@ -102,19 +135,19 @@ namespace Pulumi.Aviatrix
         public Input<string> TgwName { get; set; } = null!;
 
         /// <summary>
-        /// Name of the transit gateway to be attached to tgw.
+        /// Name of the transit gateway to be attached to the AWS TGW.
         /// </summary>
         [Input("transitGatewayName", required: true)]
         public Input<string> TransitGatewayName { get; set; } = null!;
 
         /// <summary>
-        /// This parameter represents the name of a Cloud-Account in Aviatrix controller.
+        /// The name of the cloud account in the Aviatrix controller, which is associated with the VPC.
         /// </summary>
         [Input("vpcAccountName", required: true)]
         public Input<string> VpcAccountName { get; set; } = null!;
 
         /// <summary>
-        /// This parameter represents the ID of the VPC.
+        /// VPC ID of the VPC, where transit gateway is launched.
         /// </summary>
         [Input("vpcId", required: true)]
         public Input<string> VpcId { get; set; } = null!;
@@ -128,7 +161,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixAwsTgwTransitGatewayAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Region of cloud provider.
+        /// AWS Region of the TGW.
         /// </summary>
         [Input("region")]
         public Input<string>? Region { get; set; }
@@ -140,19 +173,19 @@ namespace Pulumi.Aviatrix
         public Input<string>? TgwName { get; set; }
 
         /// <summary>
-        /// Name of the transit gateway to be attached to tgw.
+        /// Name of the transit gateway to be attached to the AWS TGW.
         /// </summary>
         [Input("transitGatewayName")]
         public Input<string>? TransitGatewayName { get; set; }
 
         /// <summary>
-        /// This parameter represents the name of a Cloud-Account in Aviatrix controller.
+        /// The name of the cloud account in the Aviatrix controller, which is associated with the VPC.
         /// </summary>
         [Input("vpcAccountName")]
         public Input<string>? VpcAccountName { get; set; }
 
         /// <summary>
-        /// This parameter represents the ID of the VPC.
+        /// VPC ID of the VPC, where transit gateway is launched.
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }

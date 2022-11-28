@@ -4,6 +4,34 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_copilot_security_group_management_config** resource allows management of controller CoPilot security group management configuration. This resource is available as of provider version R2.23+.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Enable the CoPilot Security Group Management
+ * const test = new aviatrix.AviatrixCopilotSecurityGroupManagementConfig("test", {
+ *     accountName: "aws-account",
+ *     cloudType: 1,
+ *     enableCopilotSecurityGroupManagement: true,
+ *     instanceId: "i-1234567890",
+ *     region: "us-east-1",
+ *     vpcId: "vpc-1234567890",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **aviatrix_copilot_security_group_management_config** can be imported using controller IP, e.g. controller IP is 10.11.12.13
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixCopilotSecurityGroupManagementConfig:AviatrixCopilotSecurityGroupManagementConfig test 10-11-12-13
+ * ```
+ */
 export class AviatrixCopilotSecurityGroupManagementConfig extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixCopilotSecurityGroupManagementConfig resource's state with the given name, ID, and optional extra
@@ -33,31 +61,31 @@ export class AviatrixCopilotSecurityGroupManagementConfig extends pulumi.CustomR
     }
 
     /**
-     * Access account name.
+     * Aviatrix access account name. Required to enable copilot security group management.
      */
     public readonly accountName!: pulumi.Output<string | undefined>;
     /**
-     * Cloud type.
+     * Cloud type. The type of this attribute is Integer. Only support AWS, Azure and OCI. Required to enable copilot security group management.
      */
     public readonly cloudType!: pulumi.Output<number | undefined>;
     /**
-     * Switch to enable copilot security group management.
+     * Switch to enable copilot security group management. Valid values: true, false.
      */
     public readonly enableCopilotSecurityGroupManagement!: pulumi.Output<boolean>;
     /**
-     * Copilot instance ID.
+     * CoPilot instance ID. Required to enable copilot security group management.
      */
     public readonly instanceId!: pulumi.Output<string | undefined>;
     /**
-     * Copilot region. Valid for AWS and Azure.
+     * Region where CoPilot is deployed. Required and valid for AWS and Azure.
      */
     public readonly region!: pulumi.Output<string | undefined>;
     /**
-     * VPC ID.
+     * VPC ID. Required to enable copilot security group management.
      */
     public readonly vpcId!: pulumi.Output<string | undefined>;
     /**
-     * Copilot zone. Valid for GCP.
+     * Zone where CoPilot is deployed. Required and valid for GCP.
      */
     public readonly zone!: pulumi.Output<string | undefined>;
 
@@ -104,31 +132,31 @@ export class AviatrixCopilotSecurityGroupManagementConfig extends pulumi.CustomR
  */
 export interface AviatrixCopilotSecurityGroupManagementConfigState {
     /**
-     * Access account name.
+     * Aviatrix access account name. Required to enable copilot security group management.
      */
     accountName?: pulumi.Input<string>;
     /**
-     * Cloud type.
+     * Cloud type. The type of this attribute is Integer. Only support AWS, Azure and OCI. Required to enable copilot security group management.
      */
     cloudType?: pulumi.Input<number>;
     /**
-     * Switch to enable copilot security group management.
+     * Switch to enable copilot security group management. Valid values: true, false.
      */
     enableCopilotSecurityGroupManagement?: pulumi.Input<boolean>;
     /**
-     * Copilot instance ID.
+     * CoPilot instance ID. Required to enable copilot security group management.
      */
     instanceId?: pulumi.Input<string>;
     /**
-     * Copilot region. Valid for AWS and Azure.
+     * Region where CoPilot is deployed. Required and valid for AWS and Azure.
      */
     region?: pulumi.Input<string>;
     /**
-     * VPC ID.
+     * VPC ID. Required to enable copilot security group management.
      */
     vpcId?: pulumi.Input<string>;
     /**
-     * Copilot zone. Valid for GCP.
+     * Zone where CoPilot is deployed. Required and valid for GCP.
      */
     zone?: pulumi.Input<string>;
 }
@@ -138,31 +166,31 @@ export interface AviatrixCopilotSecurityGroupManagementConfigState {
  */
 export interface AviatrixCopilotSecurityGroupManagementConfigArgs {
     /**
-     * Access account name.
+     * Aviatrix access account name. Required to enable copilot security group management.
      */
     accountName?: pulumi.Input<string>;
     /**
-     * Cloud type.
+     * Cloud type. The type of this attribute is Integer. Only support AWS, Azure and OCI. Required to enable copilot security group management.
      */
     cloudType?: pulumi.Input<number>;
     /**
-     * Switch to enable copilot security group management.
+     * Switch to enable copilot security group management. Valid values: true, false.
      */
     enableCopilotSecurityGroupManagement: pulumi.Input<boolean>;
     /**
-     * Copilot instance ID.
+     * CoPilot instance ID. Required to enable copilot security group management.
      */
     instanceId?: pulumi.Input<string>;
     /**
-     * Copilot region. Valid for AWS and Azure.
+     * Region where CoPilot is deployed. Required and valid for AWS and Azure.
      */
     region?: pulumi.Input<string>;
     /**
-     * VPC ID.
+     * VPC ID. Required to enable copilot security group management.
      */
     vpcId?: pulumi.Input<string>;
     /**
-     * Copilot zone. Valid for GCP.
+     * Zone where CoPilot is deployed. Required and valid for GCP.
      */
     zone?: pulumi.Input<string>;
 }

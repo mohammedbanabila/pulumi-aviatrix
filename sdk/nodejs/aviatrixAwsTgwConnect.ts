@@ -4,6 +4,38 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_aws_tgw_connect** resource allows the creation and management of AWS TGW Connect connections. To create
+ * and manage TGW Connect peers, please use `aviatrix.AviatrixAwsTgwConnectPeer` resources. This resource is available as of
+ * provider version R2.18.1+.
+ *
+ * > **NOTE:** Before creating an AWS TGW Connect, the AWS TGW must have an attached VPC via
+ * the `aviatrix.AviatrixAwsTgwVpcAttachment` resource. Also, the AWS TGW must have configured CIDRs via
+ * the `aviatrix.AviatrixAwsTgw` `cidrs` attribute.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@astipkovits/aviatrix";
+ *
+ * // Create an Aviatrix AWS TGW Connect
+ * const testAwsTgwConnect = new aviatrix.AviatrixAwsTgwConnect("testAwsTgwConnect", {
+ *     tgwName: aviatrix_aws_tgw.test_aws_tgw.tgw_name,
+ *     connectionName: "aws-tgw-connect",
+ *     transportVpcId: aviatrix_aws_tgw_vpc_attachment.test_aws_tgw_vpc_attachment.vpc_id,
+ *     networkDomainName: aviatrix_aws_tgw_vpc_attachment.test_aws_tgw_vpc_attachment.network_domain_name,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **aws_tgw_connect** can be imported using the `tgw_name` and `connection_name`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixAwsTgwConnect:AviatrixAwsTgwConnect test tgw_name~~connection_name
+ * ```
+ */
 export class AviatrixAwsTgwConnect extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixAwsTgwConnect resource's state with the given name, ID, and optional extra
@@ -37,21 +69,21 @@ export class AviatrixAwsTgwConnect extends pulumi.CustomResource {
      */
     public /*out*/ readonly connectAttachmentId!: pulumi.Output<string>;
     /**
-     * Connection Name.
+     * Connection name.
      */
     public readonly connectionName!: pulumi.Output<string>;
     /**
-     * Network Domain Name.
+     * Network Domain name.
      */
     public readonly networkDomainName!: pulumi.Output<string | undefined>;
     /**
-     * Security Domain Name.
+     * Security Domain name.
      *
      * @deprecated Please use network_domain_name instead.
      */
     public readonly securityDomainName!: pulumi.Output<string | undefined>;
     /**
-     * AWS TGW Name.
+     * AWS TGW name.
      */
     public readonly tgwName!: pulumi.Output<string>;
     /**
@@ -116,21 +148,21 @@ export interface AviatrixAwsTgwConnectState {
      */
     connectAttachmentId?: pulumi.Input<string>;
     /**
-     * Connection Name.
+     * Connection name.
      */
     connectionName?: pulumi.Input<string>;
     /**
-     * Network Domain Name.
+     * Network Domain name.
      */
     networkDomainName?: pulumi.Input<string>;
     /**
-     * Security Domain Name.
+     * Security Domain name.
      *
      * @deprecated Please use network_domain_name instead.
      */
     securityDomainName?: pulumi.Input<string>;
     /**
-     * AWS TGW Name.
+     * AWS TGW name.
      */
     tgwName?: pulumi.Input<string>;
     /**
@@ -148,21 +180,21 @@ export interface AviatrixAwsTgwConnectState {
  */
 export interface AviatrixAwsTgwConnectArgs {
     /**
-     * Connection Name.
+     * Connection name.
      */
     connectionName: pulumi.Input<string>;
     /**
-     * Network Domain Name.
+     * Network Domain name.
      */
     networkDomainName?: pulumi.Input<string>;
     /**
-     * Security Domain Name.
+     * Security Domain name.
      *
      * @deprecated Please use network_domain_name instead.
      */
     securityDomainName?: pulumi.Input<string>;
     /**
-     * AWS TGW Name.
+     * AWS TGW name.
      */
     tgwName: pulumi.Input<string>;
     /**

@@ -4,6 +4,35 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_spoke_gateway_subnet_group** resource creates and manages the spoke gateway subnet groups.
+ *
+ * > **NOTE:** This feature is only valid for Azure.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix Spoke Inspection Subnet Group
+ * const test = new aviatrix.AviatrixSpokeGatewaySubnetGroup("test", {
+ *     gwName: "spoke",
+ *     subnets: [
+ *         "10.2.48.0/20~~subnet1",
+ *         "10.2.64.0/20~~subnet2",
+ *     ],
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **spoke_gateway_subnet_group** can be imported using the `gw_name` and `name`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixSpokeGatewaySubnetGroup:AviatrixSpokeGatewaySubnetGroup test gw_name~name
+ * ```
+ */
 export class AviatrixSpokeGatewaySubnetGroup extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixSpokeGatewaySubnetGroup resource's state with the given name, ID, and optional extra
@@ -33,15 +62,15 @@ export class AviatrixSpokeGatewaySubnetGroup extends pulumi.CustomResource {
     }
 
     /**
-     * Spoke gateway name.
+     * Aviatrix spoke gateway name.
      */
     public readonly gwName!: pulumi.Output<string>;
     /**
-     * Subnet group name.
+     * Name of spoke gateway subnet group.
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * A set of subnets in the subnet group.
+     * A set of subnets in the subnet group. The format of each subnet must be "CIDR~~subnet name". Example: `["10.2.48.0/20~~subnet1", "10.2.64.0/20~~subnet2"]`
      */
     public readonly subnets!: pulumi.Output<string[] | undefined>;
 
@@ -80,15 +109,15 @@ export class AviatrixSpokeGatewaySubnetGroup extends pulumi.CustomResource {
  */
 export interface AviatrixSpokeGatewaySubnetGroupState {
     /**
-     * Spoke gateway name.
+     * Aviatrix spoke gateway name.
      */
     gwName?: pulumi.Input<string>;
     /**
-     * Subnet group name.
+     * Name of spoke gateway subnet group.
      */
     name?: pulumi.Input<string>;
     /**
-     * A set of subnets in the subnet group.
+     * A set of subnets in the subnet group. The format of each subnet must be "CIDR~~subnet name". Example: `["10.2.48.0/20~~subnet1", "10.2.64.0/20~~subnet2"]`
      */
     subnets?: pulumi.Input<pulumi.Input<string>[]>;
 }
@@ -98,15 +127,15 @@ export interface AviatrixSpokeGatewaySubnetGroupState {
  */
 export interface AviatrixSpokeGatewaySubnetGroupArgs {
     /**
-     * Spoke gateway name.
+     * Aviatrix spoke gateway name.
      */
     gwName: pulumi.Input<string>;
     /**
-     * Subnet group name.
+     * Name of spoke gateway subnet group.
      */
     name?: pulumi.Input<string>;
     /**
-     * A set of subnets in the subnet group.
+     * A set of subnets in the subnet group. The format of each subnet must be "CIDR~~subnet name". Example: `["10.2.48.0/20~~subnet1", "10.2.64.0/20~~subnet2"]`
      */
     subnets?: pulumi.Input<pulumi.Input<string>[]>;
 }

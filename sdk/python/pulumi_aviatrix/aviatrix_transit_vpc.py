@@ -36,21 +36,20 @@ class AviatrixTransitVpcArgs:
         :param pulumi.Input[str] account_name: This parameter represents the name of a Cloud-Account in Aviatrix controller.
         :param pulumi.Input[int] cloud_type: Type of cloud service provider, requires an integer value. Use 1 for AWS.
         :param pulumi.Input[str] gw_name: Name of the gateway which is going to be created.
-        :param pulumi.Input[str] subnet: Public Subnet Name.
-        :param pulumi.Input[str] vpc_id: VPC-ID/VNet-Name of cloud provider.
-        :param pulumi.Input[str] vpc_reg: Region of cloud provider.
-        :param pulumi.Input[str] vpc_size: Size of the gateway instance.
-        :param pulumi.Input[str] connected_transit: Specify Connected Transit status.
-        :param pulumi.Input[bool] enable_firenet_interfaces: Specify whether to enable firenet interfaces or not.
-        :param pulumi.Input[bool] enable_hybrid_connection: Sign of readiness for TGW connection.
+        :param pulumi.Input[str] subnet: Public Subnet CIDR. Example: AWS: "10.0.0.0/24". Copy/paste from AWS Console to get the right subnet CIDR.
+        :param pulumi.Input[str] vpc_id: VPC-ID/VNet-Name of cloud provider. Required if for aws. Example: AWS: "vpc-abcd1234", GCP: "mygooglecloudvpcname", etc...
+        :param pulumi.Input[str] vpc_reg: Region of cloud provider. Example: AWS: "us-east-1", ARM: "East US 2", etc...
+        :param pulumi.Input[str] vpc_size: Size of the gateway instance. Example: AWS: "t2.large", etc...
+        :param pulumi.Input[str] connected_transit: Specify Connected Transit status. Supported values: true, false.
+        :param pulumi.Input[bool] enable_firenet_interfaces: Sign of readiness for FireNet connection. Valid values: true and false. Default: false.
+        :param pulumi.Input[bool] enable_hybrid_connection: Sign of readiness for TGW connection. Only supported for aws. Example: false.
         :param pulumi.Input[str] enable_nat: Enable NAT for this container.
-        :param pulumi.Input[str] ha_gw_size: HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set).
+        :param pulumi.Input[str] ha_gw_size: HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set). Example: "t2.micro".
         :param pulumi.Input[str] ha_insane_mode_az: AZ of subnet being created for Insane Mode Transit HA Gateway. Required if insane_mode is enabled and ha_subnet is set.
-        :param pulumi.Input[str] ha_subnet: HA Subnet.
-        :param pulumi.Input[bool] insane_mode: Enable Insane Mode for Transit. Valid values: true, false. If insane mode is enabled, gateway size has to at least be c5
-               size.
+        :param pulumi.Input[str] ha_subnet: HA Subnet CIDR. Example: "10.12.0.0/24".Setting to empty/unset will disable HA. Setting to a valid subnet CIDR will create an HA gateway on the subnet.
+        :param pulumi.Input[bool] insane_mode: Specify Insane Mode high performance gateway. Insane Mode gateway size must be at least c5 size. If enabled, will look for spare /26 segment to create a new subnet. Only available for AWS. Supported values: true, false.
         :param pulumi.Input[str] insane_mode_az: AZ of subnet being created for Insane Mode Transit Gateway. Required if insane_mode is enabled.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] tag_lists: Instance tag of cloud provider.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tag_lists: Instance tag of cloud provider. Only supported for aws. Example: ["key1:value1","key002:value002"]
         """
         pulumi.set(__self__, "account_name", account_name)
         pulumi.set(__self__, "cloud_type", cloud_type)
@@ -120,7 +119,7 @@ class AviatrixTransitVpcArgs:
     @pulumi.getter
     def subnet(self) -> pulumi.Input[str]:
         """
-        Public Subnet Name.
+        Public Subnet CIDR. Example: AWS: "10.0.0.0/24". Copy/paste from AWS Console to get the right subnet CIDR.
         """
         return pulumi.get(self, "subnet")
 
@@ -132,7 +131,7 @@ class AviatrixTransitVpcArgs:
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> pulumi.Input[str]:
         """
-        VPC-ID/VNet-Name of cloud provider.
+        VPC-ID/VNet-Name of cloud provider. Required if for aws. Example: AWS: "vpc-abcd1234", GCP: "mygooglecloudvpcname", etc...
         """
         return pulumi.get(self, "vpc_id")
 
@@ -144,7 +143,7 @@ class AviatrixTransitVpcArgs:
     @pulumi.getter(name="vpcReg")
     def vpc_reg(self) -> pulumi.Input[str]:
         """
-        Region of cloud provider.
+        Region of cloud provider. Example: AWS: "us-east-1", ARM: "East US 2", etc...
         """
         return pulumi.get(self, "vpc_reg")
 
@@ -156,7 +155,7 @@ class AviatrixTransitVpcArgs:
     @pulumi.getter(name="vpcSize")
     def vpc_size(self) -> pulumi.Input[str]:
         """
-        Size of the gateway instance.
+        Size of the gateway instance. Example: AWS: "t2.large", etc...
         """
         return pulumi.get(self, "vpc_size")
 
@@ -168,7 +167,7 @@ class AviatrixTransitVpcArgs:
     @pulumi.getter(name="connectedTransit")
     def connected_transit(self) -> Optional[pulumi.Input[str]]:
         """
-        Specify Connected Transit status.
+        Specify Connected Transit status. Supported values: true, false.
         """
         return pulumi.get(self, "connected_transit")
 
@@ -180,7 +179,7 @@ class AviatrixTransitVpcArgs:
     @pulumi.getter(name="enableFirenetInterfaces")
     def enable_firenet_interfaces(self) -> Optional[pulumi.Input[bool]]:
         """
-        Specify whether to enable firenet interfaces or not.
+        Sign of readiness for FireNet connection. Valid values: true and false. Default: false.
         """
         return pulumi.get(self, "enable_firenet_interfaces")
 
@@ -192,7 +191,7 @@ class AviatrixTransitVpcArgs:
     @pulumi.getter(name="enableHybridConnection")
     def enable_hybrid_connection(self) -> Optional[pulumi.Input[bool]]:
         """
-        Sign of readiness for TGW connection.
+        Sign of readiness for TGW connection. Only supported for aws. Example: false.
         """
         return pulumi.get(self, "enable_hybrid_connection")
 
@@ -216,7 +215,7 @@ class AviatrixTransitVpcArgs:
     @pulumi.getter(name="haGwSize")
     def ha_gw_size(self) -> Optional[pulumi.Input[str]]:
         """
-        HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set).
+        HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set). Example: "t2.micro".
         """
         return pulumi.get(self, "ha_gw_size")
 
@@ -240,7 +239,7 @@ class AviatrixTransitVpcArgs:
     @pulumi.getter(name="haSubnet")
     def ha_subnet(self) -> Optional[pulumi.Input[str]]:
         """
-        HA Subnet.
+        HA Subnet CIDR. Example: "10.12.0.0/24".Setting to empty/unset will disable HA. Setting to a valid subnet CIDR will create an HA gateway on the subnet.
         """
         return pulumi.get(self, "ha_subnet")
 
@@ -252,8 +251,7 @@ class AviatrixTransitVpcArgs:
     @pulumi.getter(name="insaneMode")
     def insane_mode(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable Insane Mode for Transit. Valid values: true, false. If insane mode is enabled, gateway size has to at least be c5
-        size.
+        Specify Insane Mode high performance gateway. Insane Mode gateway size must be at least c5 size. If enabled, will look for spare /26 segment to create a new subnet. Only available for AWS. Supported values: true, false.
         """
         return pulumi.get(self, "insane_mode")
 
@@ -277,7 +275,7 @@ class AviatrixTransitVpcArgs:
     @pulumi.getter(name="tagLists")
     def tag_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Instance tag of cloud provider.
+        Instance tag of cloud provider. Only supported for aws. Example: ["key1:value1","key002:value002"]
         """
         return pulumi.get(self, "tag_lists")
 
@@ -310,22 +308,21 @@ class _AviatrixTransitVpcState:
         Input properties used for looking up and filtering AviatrixTransitVpc resources.
         :param pulumi.Input[str] account_name: This parameter represents the name of a Cloud-Account in Aviatrix controller.
         :param pulumi.Input[int] cloud_type: Type of cloud service provider, requires an integer value. Use 1 for AWS.
-        :param pulumi.Input[str] connected_transit: Specify Connected Transit status.
-        :param pulumi.Input[bool] enable_firenet_interfaces: Specify whether to enable firenet interfaces or not.
-        :param pulumi.Input[bool] enable_hybrid_connection: Sign of readiness for TGW connection.
+        :param pulumi.Input[str] connected_transit: Specify Connected Transit status. Supported values: true, false.
+        :param pulumi.Input[bool] enable_firenet_interfaces: Sign of readiness for FireNet connection. Valid values: true and false. Default: false.
+        :param pulumi.Input[bool] enable_hybrid_connection: Sign of readiness for TGW connection. Only supported for aws. Example: false.
         :param pulumi.Input[str] enable_nat: Enable NAT for this container.
         :param pulumi.Input[str] gw_name: Name of the gateway which is going to be created.
-        :param pulumi.Input[str] ha_gw_size: HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set).
+        :param pulumi.Input[str] ha_gw_size: HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set). Example: "t2.micro".
         :param pulumi.Input[str] ha_insane_mode_az: AZ of subnet being created for Insane Mode Transit HA Gateway. Required if insane_mode is enabled and ha_subnet is set.
-        :param pulumi.Input[str] ha_subnet: HA Subnet.
-        :param pulumi.Input[bool] insane_mode: Enable Insane Mode for Transit. Valid values: true, false. If insane mode is enabled, gateway size has to at least be c5
-               size.
+        :param pulumi.Input[str] ha_subnet: HA Subnet CIDR. Example: "10.12.0.0/24".Setting to empty/unset will disable HA. Setting to a valid subnet CIDR will create an HA gateway on the subnet.
+        :param pulumi.Input[bool] insane_mode: Specify Insane Mode high performance gateway. Insane Mode gateway size must be at least c5 size. If enabled, will look for spare /26 segment to create a new subnet. Only available for AWS. Supported values: true, false.
         :param pulumi.Input[str] insane_mode_az: AZ of subnet being created for Insane Mode Transit Gateway. Required if insane_mode is enabled.
-        :param pulumi.Input[str] subnet: Public Subnet Name.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] tag_lists: Instance tag of cloud provider.
-        :param pulumi.Input[str] vpc_id: VPC-ID/VNet-Name of cloud provider.
-        :param pulumi.Input[str] vpc_reg: Region of cloud provider.
-        :param pulumi.Input[str] vpc_size: Size of the gateway instance.
+        :param pulumi.Input[str] subnet: Public Subnet CIDR. Example: AWS: "10.0.0.0/24". Copy/paste from AWS Console to get the right subnet CIDR.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tag_lists: Instance tag of cloud provider. Only supported for aws. Example: ["key1:value1","key002:value002"]
+        :param pulumi.Input[str] vpc_id: VPC-ID/VNet-Name of cloud provider. Required if for aws. Example: AWS: "vpc-abcd1234", GCP: "mygooglecloudvpcname", etc...
+        :param pulumi.Input[str] vpc_reg: Region of cloud provider. Example: AWS: "us-east-1", ARM: "East US 2", etc...
+        :param pulumi.Input[str] vpc_size: Size of the gateway instance. Example: AWS: "t2.large", etc...
         """
         if account_name is not None:
             pulumi.set(__self__, "account_name", account_name)
@@ -390,7 +387,7 @@ class _AviatrixTransitVpcState:
     @pulumi.getter(name="connectedTransit")
     def connected_transit(self) -> Optional[pulumi.Input[str]]:
         """
-        Specify Connected Transit status.
+        Specify Connected Transit status. Supported values: true, false.
         """
         return pulumi.get(self, "connected_transit")
 
@@ -402,7 +399,7 @@ class _AviatrixTransitVpcState:
     @pulumi.getter(name="enableFirenetInterfaces")
     def enable_firenet_interfaces(self) -> Optional[pulumi.Input[bool]]:
         """
-        Specify whether to enable firenet interfaces or not.
+        Sign of readiness for FireNet connection. Valid values: true and false. Default: false.
         """
         return pulumi.get(self, "enable_firenet_interfaces")
 
@@ -414,7 +411,7 @@ class _AviatrixTransitVpcState:
     @pulumi.getter(name="enableHybridConnection")
     def enable_hybrid_connection(self) -> Optional[pulumi.Input[bool]]:
         """
-        Sign of readiness for TGW connection.
+        Sign of readiness for TGW connection. Only supported for aws. Example: false.
         """
         return pulumi.get(self, "enable_hybrid_connection")
 
@@ -450,7 +447,7 @@ class _AviatrixTransitVpcState:
     @pulumi.getter(name="haGwSize")
     def ha_gw_size(self) -> Optional[pulumi.Input[str]]:
         """
-        HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set).
+        HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set). Example: "t2.micro".
         """
         return pulumi.get(self, "ha_gw_size")
 
@@ -474,7 +471,7 @@ class _AviatrixTransitVpcState:
     @pulumi.getter(name="haSubnet")
     def ha_subnet(self) -> Optional[pulumi.Input[str]]:
         """
-        HA Subnet.
+        HA Subnet CIDR. Example: "10.12.0.0/24".Setting to empty/unset will disable HA. Setting to a valid subnet CIDR will create an HA gateway on the subnet.
         """
         return pulumi.get(self, "ha_subnet")
 
@@ -486,8 +483,7 @@ class _AviatrixTransitVpcState:
     @pulumi.getter(name="insaneMode")
     def insane_mode(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable Insane Mode for Transit. Valid values: true, false. If insane mode is enabled, gateway size has to at least be c5
-        size.
+        Specify Insane Mode high performance gateway. Insane Mode gateway size must be at least c5 size. If enabled, will look for spare /26 segment to create a new subnet. Only available for AWS. Supported values: true, false.
         """
         return pulumi.get(self, "insane_mode")
 
@@ -511,7 +507,7 @@ class _AviatrixTransitVpcState:
     @pulumi.getter
     def subnet(self) -> Optional[pulumi.Input[str]]:
         """
-        Public Subnet Name.
+        Public Subnet CIDR. Example: AWS: "10.0.0.0/24". Copy/paste from AWS Console to get the right subnet CIDR.
         """
         return pulumi.get(self, "subnet")
 
@@ -523,7 +519,7 @@ class _AviatrixTransitVpcState:
     @pulumi.getter(name="tagLists")
     def tag_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Instance tag of cloud provider.
+        Instance tag of cloud provider. Only supported for aws. Example: ["key1:value1","key002:value002"]
         """
         return pulumi.get(self, "tag_lists")
 
@@ -535,7 +531,7 @@ class _AviatrixTransitVpcState:
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
-        VPC-ID/VNet-Name of cloud provider.
+        VPC-ID/VNet-Name of cloud provider. Required if for aws. Example: AWS: "vpc-abcd1234", GCP: "mygooglecloudvpcname", etc...
         """
         return pulumi.get(self, "vpc_id")
 
@@ -547,7 +543,7 @@ class _AviatrixTransitVpcState:
     @pulumi.getter(name="vpcReg")
     def vpc_reg(self) -> Optional[pulumi.Input[str]]:
         """
-        Region of cloud provider.
+        Region of cloud provider. Example: AWS: "us-east-1", ARM: "East US 2", etc...
         """
         return pulumi.get(self, "vpc_reg")
 
@@ -559,7 +555,7 @@ class _AviatrixTransitVpcState:
     @pulumi.getter(name="vpcSize")
     def vpc_size(self) -> Optional[pulumi.Input[str]]:
         """
-        Size of the gateway instance.
+        Size of the gateway instance. Example: AWS: "t2.large", etc...
         """
         return pulumi.get(self, "vpc_size")
 
@@ -592,27 +588,75 @@ class AviatrixTransitVpc(pulumi.CustomResource):
                  vpc_size: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixTransitVpc resource with the given unique name, props, and options.
+        The AviatrixTransitVpc resource creates and manages the Aviatrix Transit Network Gateways.
+
+        !> **WARNING:** The `AviatrixTransitVpc` resource is deprecated as of **Release 2.0**. It is currently kept for backward-compatibility and will be removed in the future. Please use the transit gateway resource instead. If this is already in the state, please remove it from state file and import as `AviatrixTransitGateway`.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Manage Aviatrix Transit Network Gateways in aws
+        test_transit_gw_aws = aviatrix.AviatrixTransitVpc("testTransitGwAws",
+            account_name="devops_aws",
+            cloud_type=1,
+            connected_transit="yes",
+            enable_hybrid_connection=True,
+            gw_name="transit",
+            ha_gw_size="t2.micro",
+            ha_subnet="10.1.0.0/24",
+            subnet="10.1.0.0/24",
+            tag_lists=[
+                "name:value",
+                "name1:value1",
+                "name2:value2",
+            ],
+            vpc_id="vpc-abcd1234",
+            vpc_reg="us-east-1",
+            vpc_size="t2.micro")
+        # Manage Aviatrix Transit Network Gateways in azure
+        test_transit_gw_azure = aviatrix.AviatrixTransitVpc("testTransitGwAzure",
+            account_name="devops_azure",
+            cloud_type=8,
+            connected_transit="yes",
+            gw_name="transit",
+            ha_gw_size="Standard_B1s",
+            ha_subnet="10.30.0.0/24",
+            subnet="10.30.0.0/24",
+            vpc_id="vnet1:hello",
+            vpc_reg="West US",
+            vpc_size="Standard_B1s")
+        ```
+
+        ## Import
+
+        Instance transit_vpc can be imported using the gw_name, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixTransitVpc:AviatrixTransitVpc test gw_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] account_name: This parameter represents the name of a Cloud-Account in Aviatrix controller.
         :param pulumi.Input[int] cloud_type: Type of cloud service provider, requires an integer value. Use 1 for AWS.
-        :param pulumi.Input[str] connected_transit: Specify Connected Transit status.
-        :param pulumi.Input[bool] enable_firenet_interfaces: Specify whether to enable firenet interfaces or not.
-        :param pulumi.Input[bool] enable_hybrid_connection: Sign of readiness for TGW connection.
+        :param pulumi.Input[str] connected_transit: Specify Connected Transit status. Supported values: true, false.
+        :param pulumi.Input[bool] enable_firenet_interfaces: Sign of readiness for FireNet connection. Valid values: true and false. Default: false.
+        :param pulumi.Input[bool] enable_hybrid_connection: Sign of readiness for TGW connection. Only supported for aws. Example: false.
         :param pulumi.Input[str] enable_nat: Enable NAT for this container.
         :param pulumi.Input[str] gw_name: Name of the gateway which is going to be created.
-        :param pulumi.Input[str] ha_gw_size: HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set).
+        :param pulumi.Input[str] ha_gw_size: HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set). Example: "t2.micro".
         :param pulumi.Input[str] ha_insane_mode_az: AZ of subnet being created for Insane Mode Transit HA Gateway. Required if insane_mode is enabled and ha_subnet is set.
-        :param pulumi.Input[str] ha_subnet: HA Subnet.
-        :param pulumi.Input[bool] insane_mode: Enable Insane Mode for Transit. Valid values: true, false. If insane mode is enabled, gateway size has to at least be c5
-               size.
+        :param pulumi.Input[str] ha_subnet: HA Subnet CIDR. Example: "10.12.0.0/24".Setting to empty/unset will disable HA. Setting to a valid subnet CIDR will create an HA gateway on the subnet.
+        :param pulumi.Input[bool] insane_mode: Specify Insane Mode high performance gateway. Insane Mode gateway size must be at least c5 size. If enabled, will look for spare /26 segment to create a new subnet. Only available for AWS. Supported values: true, false.
         :param pulumi.Input[str] insane_mode_az: AZ of subnet being created for Insane Mode Transit Gateway. Required if insane_mode is enabled.
-        :param pulumi.Input[str] subnet: Public Subnet Name.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] tag_lists: Instance tag of cloud provider.
-        :param pulumi.Input[str] vpc_id: VPC-ID/VNet-Name of cloud provider.
-        :param pulumi.Input[str] vpc_reg: Region of cloud provider.
-        :param pulumi.Input[str] vpc_size: Size of the gateway instance.
+        :param pulumi.Input[str] subnet: Public Subnet CIDR. Example: AWS: "10.0.0.0/24". Copy/paste from AWS Console to get the right subnet CIDR.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tag_lists: Instance tag of cloud provider. Only supported for aws. Example: ["key1:value1","key002:value002"]
+        :param pulumi.Input[str] vpc_id: VPC-ID/VNet-Name of cloud provider. Required if for aws. Example: AWS: "vpc-abcd1234", GCP: "mygooglecloudvpcname", etc...
+        :param pulumi.Input[str] vpc_reg: Region of cloud provider. Example: AWS: "us-east-1", ARM: "East US 2", etc...
+        :param pulumi.Input[str] vpc_size: Size of the gateway instance. Example: AWS: "t2.large", etc...
         """
         ...
     @overload
@@ -621,7 +665,56 @@ class AviatrixTransitVpc(pulumi.CustomResource):
                  args: AviatrixTransitVpcArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixTransitVpc resource with the given unique name, props, and options.
+        The AviatrixTransitVpc resource creates and manages the Aviatrix Transit Network Gateways.
+
+        !> **WARNING:** The `AviatrixTransitVpc` resource is deprecated as of **Release 2.0**. It is currently kept for backward-compatibility and will be removed in the future. Please use the transit gateway resource instead. If this is already in the state, please remove it from state file and import as `AviatrixTransitGateway`.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Manage Aviatrix Transit Network Gateways in aws
+        test_transit_gw_aws = aviatrix.AviatrixTransitVpc("testTransitGwAws",
+            account_name="devops_aws",
+            cloud_type=1,
+            connected_transit="yes",
+            enable_hybrid_connection=True,
+            gw_name="transit",
+            ha_gw_size="t2.micro",
+            ha_subnet="10.1.0.0/24",
+            subnet="10.1.0.0/24",
+            tag_lists=[
+                "name:value",
+                "name1:value1",
+                "name2:value2",
+            ],
+            vpc_id="vpc-abcd1234",
+            vpc_reg="us-east-1",
+            vpc_size="t2.micro")
+        # Manage Aviatrix Transit Network Gateways in azure
+        test_transit_gw_azure = aviatrix.AviatrixTransitVpc("testTransitGwAzure",
+            account_name="devops_azure",
+            cloud_type=8,
+            connected_transit="yes",
+            gw_name="transit",
+            ha_gw_size="Standard_B1s",
+            ha_subnet="10.30.0.0/24",
+            subnet="10.30.0.0/24",
+            vpc_id="vnet1:hello",
+            vpc_reg="West US",
+            vpc_size="Standard_B1s")
+        ```
+
+        ## Import
+
+        Instance transit_vpc can be imported using the gw_name, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixTransitVpc:AviatrixTransitVpc test gw_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixTransitVpcArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -730,22 +823,21 @@ class AviatrixTransitVpc(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] account_name: This parameter represents the name of a Cloud-Account in Aviatrix controller.
         :param pulumi.Input[int] cloud_type: Type of cloud service provider, requires an integer value. Use 1 for AWS.
-        :param pulumi.Input[str] connected_transit: Specify Connected Transit status.
-        :param pulumi.Input[bool] enable_firenet_interfaces: Specify whether to enable firenet interfaces or not.
-        :param pulumi.Input[bool] enable_hybrid_connection: Sign of readiness for TGW connection.
+        :param pulumi.Input[str] connected_transit: Specify Connected Transit status. Supported values: true, false.
+        :param pulumi.Input[bool] enable_firenet_interfaces: Sign of readiness for FireNet connection. Valid values: true and false. Default: false.
+        :param pulumi.Input[bool] enable_hybrid_connection: Sign of readiness for TGW connection. Only supported for aws. Example: false.
         :param pulumi.Input[str] enable_nat: Enable NAT for this container.
         :param pulumi.Input[str] gw_name: Name of the gateway which is going to be created.
-        :param pulumi.Input[str] ha_gw_size: HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set).
+        :param pulumi.Input[str] ha_gw_size: HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set). Example: "t2.micro".
         :param pulumi.Input[str] ha_insane_mode_az: AZ of subnet being created for Insane Mode Transit HA Gateway. Required if insane_mode is enabled and ha_subnet is set.
-        :param pulumi.Input[str] ha_subnet: HA Subnet.
-        :param pulumi.Input[bool] insane_mode: Enable Insane Mode for Transit. Valid values: true, false. If insane mode is enabled, gateway size has to at least be c5
-               size.
+        :param pulumi.Input[str] ha_subnet: HA Subnet CIDR. Example: "10.12.0.0/24".Setting to empty/unset will disable HA. Setting to a valid subnet CIDR will create an HA gateway on the subnet.
+        :param pulumi.Input[bool] insane_mode: Specify Insane Mode high performance gateway. Insane Mode gateway size must be at least c5 size. If enabled, will look for spare /26 segment to create a new subnet. Only available for AWS. Supported values: true, false.
         :param pulumi.Input[str] insane_mode_az: AZ of subnet being created for Insane Mode Transit Gateway. Required if insane_mode is enabled.
-        :param pulumi.Input[str] subnet: Public Subnet Name.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] tag_lists: Instance tag of cloud provider.
-        :param pulumi.Input[str] vpc_id: VPC-ID/VNet-Name of cloud provider.
-        :param pulumi.Input[str] vpc_reg: Region of cloud provider.
-        :param pulumi.Input[str] vpc_size: Size of the gateway instance.
+        :param pulumi.Input[str] subnet: Public Subnet CIDR. Example: AWS: "10.0.0.0/24". Copy/paste from AWS Console to get the right subnet CIDR.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tag_lists: Instance tag of cloud provider. Only supported for aws. Example: ["key1:value1","key002:value002"]
+        :param pulumi.Input[str] vpc_id: VPC-ID/VNet-Name of cloud provider. Required if for aws. Example: AWS: "vpc-abcd1234", GCP: "mygooglecloudvpcname", etc...
+        :param pulumi.Input[str] vpc_reg: Region of cloud provider. Example: AWS: "us-east-1", ARM: "East US 2", etc...
+        :param pulumi.Input[str] vpc_size: Size of the gateway instance. Example: AWS: "t2.large", etc...
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -790,7 +882,7 @@ class AviatrixTransitVpc(pulumi.CustomResource):
     @pulumi.getter(name="connectedTransit")
     def connected_transit(self) -> pulumi.Output[Optional[str]]:
         """
-        Specify Connected Transit status.
+        Specify Connected Transit status. Supported values: true, false.
         """
         return pulumi.get(self, "connected_transit")
 
@@ -798,7 +890,7 @@ class AviatrixTransitVpc(pulumi.CustomResource):
     @pulumi.getter(name="enableFirenetInterfaces")
     def enable_firenet_interfaces(self) -> pulumi.Output[Optional[bool]]:
         """
-        Specify whether to enable firenet interfaces or not.
+        Sign of readiness for FireNet connection. Valid values: true and false. Default: false.
         """
         return pulumi.get(self, "enable_firenet_interfaces")
 
@@ -806,7 +898,7 @@ class AviatrixTransitVpc(pulumi.CustomResource):
     @pulumi.getter(name="enableHybridConnection")
     def enable_hybrid_connection(self) -> pulumi.Output[Optional[bool]]:
         """
-        Sign of readiness for TGW connection.
+        Sign of readiness for TGW connection. Only supported for aws. Example: false.
         """
         return pulumi.get(self, "enable_hybrid_connection")
 
@@ -830,7 +922,7 @@ class AviatrixTransitVpc(pulumi.CustomResource):
     @pulumi.getter(name="haGwSize")
     def ha_gw_size(self) -> pulumi.Output[Optional[str]]:
         """
-        HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set).
+        HA Gateway Size. Mandatory if HA is enabled (ha_subnet is set). Example: "t2.micro".
         """
         return pulumi.get(self, "ha_gw_size")
 
@@ -846,7 +938,7 @@ class AviatrixTransitVpc(pulumi.CustomResource):
     @pulumi.getter(name="haSubnet")
     def ha_subnet(self) -> pulumi.Output[Optional[str]]:
         """
-        HA Subnet.
+        HA Subnet CIDR. Example: "10.12.0.0/24".Setting to empty/unset will disable HA. Setting to a valid subnet CIDR will create an HA gateway on the subnet.
         """
         return pulumi.get(self, "ha_subnet")
 
@@ -854,8 +946,7 @@ class AviatrixTransitVpc(pulumi.CustomResource):
     @pulumi.getter(name="insaneMode")
     def insane_mode(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enable Insane Mode for Transit. Valid values: true, false. If insane mode is enabled, gateway size has to at least be c5
-        size.
+        Specify Insane Mode high performance gateway. Insane Mode gateway size must be at least c5 size. If enabled, will look for spare /26 segment to create a new subnet. Only available for AWS. Supported values: true, false.
         """
         return pulumi.get(self, "insane_mode")
 
@@ -871,7 +962,7 @@ class AviatrixTransitVpc(pulumi.CustomResource):
     @pulumi.getter
     def subnet(self) -> pulumi.Output[str]:
         """
-        Public Subnet Name.
+        Public Subnet CIDR. Example: AWS: "10.0.0.0/24". Copy/paste from AWS Console to get the right subnet CIDR.
         """
         return pulumi.get(self, "subnet")
 
@@ -879,7 +970,7 @@ class AviatrixTransitVpc(pulumi.CustomResource):
     @pulumi.getter(name="tagLists")
     def tag_lists(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        Instance tag of cloud provider.
+        Instance tag of cloud provider. Only supported for aws. Example: ["key1:value1","key002:value002"]
         """
         return pulumi.get(self, "tag_lists")
 
@@ -887,7 +978,7 @@ class AviatrixTransitVpc(pulumi.CustomResource):
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> pulumi.Output[str]:
         """
-        VPC-ID/VNet-Name of cloud provider.
+        VPC-ID/VNet-Name of cloud provider. Required if for aws. Example: AWS: "vpc-abcd1234", GCP: "mygooglecloudvpcname", etc...
         """
         return pulumi.get(self, "vpc_id")
 
@@ -895,7 +986,7 @@ class AviatrixTransitVpc(pulumi.CustomResource):
     @pulumi.getter(name="vpcReg")
     def vpc_reg(self) -> pulumi.Output[str]:
         """
-        Region of cloud provider.
+        Region of cloud provider. Example: AWS: "us-east-1", ARM: "East US 2", etc...
         """
         return pulumi.get(self, "vpc_reg")
 
@@ -903,7 +994,7 @@ class AviatrixTransitVpc(pulumi.CustomResource):
     @pulumi.getter(name="vpcSize")
     def vpc_size(self) -> pulumi.Output[str]:
         """
-        Size of the gateway instance.
+        Size of the gateway instance. Example: AWS: "t2.large", etc...
         """
         return pulumi.get(self, "vpc_size")
 

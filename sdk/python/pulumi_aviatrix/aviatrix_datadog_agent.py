@@ -21,9 +21,9 @@ class AviatrixDatadogAgentArgs:
         """
         The set of arguments for constructing a AviatrixDatadogAgent resource.
         :param pulumi.Input[str] api_key: API key.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of excluded gateways.
-        :param pulumi.Input[bool] metrics_only: Only export metrics without exporting logs.
-        :param pulumi.Input[str] site: Site preference.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
+        :param pulumi.Input[bool] metrics_only: Only export metrics without exporting logs. False by default.
+        :param pulumi.Input[str] site: Site preference ("datadoghq.com" or" datadoghq.eu"). "datadoghq.com" by default.
         """
         pulumi.set(__self__, "api_key", api_key)
         if excluded_gateways is not None:
@@ -49,7 +49,7 @@ class AviatrixDatadogAgentArgs:
     @pulumi.getter(name="excludedGateways")
     def excluded_gateways(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of excluded gateways.
+        List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         """
         return pulumi.get(self, "excluded_gateways")
 
@@ -61,7 +61,7 @@ class AviatrixDatadogAgentArgs:
     @pulumi.getter(name="metricsOnly")
     def metrics_only(self) -> Optional[pulumi.Input[bool]]:
         """
-        Only export metrics without exporting logs.
+        Only export metrics without exporting logs. False by default.
         """
         return pulumi.get(self, "metrics_only")
 
@@ -73,7 +73,7 @@ class AviatrixDatadogAgentArgs:
     @pulumi.getter
     def site(self) -> Optional[pulumi.Input[str]]:
         """
-        Site preference.
+        Site preference ("datadoghq.com" or" datadoghq.eu"). "datadoghq.com" by default.
         """
         return pulumi.get(self, "site")
 
@@ -93,10 +93,10 @@ class _AviatrixDatadogAgentState:
         """
         Input properties used for looking up and filtering AviatrixDatadogAgent resources.
         :param pulumi.Input[str] api_key: API key.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of excluded gateways.
-        :param pulumi.Input[bool] metrics_only: Only export metrics without exporting logs.
-        :param pulumi.Input[str] site: Site preference.
-        :param pulumi.Input[str] status: Enabled or not.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
+        :param pulumi.Input[bool] metrics_only: Only export metrics without exporting logs. False by default.
+        :param pulumi.Input[str] site: Site preference ("datadoghq.com" or" datadoghq.eu"). "datadoghq.com" by default.
+        :param pulumi.Input[str] status: The status of datadog agent.
         """
         if api_key is not None:
             pulumi.set(__self__, "api_key", api_key)
@@ -125,7 +125,7 @@ class _AviatrixDatadogAgentState:
     @pulumi.getter(name="excludedGateways")
     def excluded_gateways(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of excluded gateways.
+        List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         """
         return pulumi.get(self, "excluded_gateways")
 
@@ -137,7 +137,7 @@ class _AviatrixDatadogAgentState:
     @pulumi.getter(name="metricsOnly")
     def metrics_only(self) -> Optional[pulumi.Input[bool]]:
         """
-        Only export metrics without exporting logs.
+        Only export metrics without exporting logs. False by default.
         """
         return pulumi.get(self, "metrics_only")
 
@@ -149,7 +149,7 @@ class _AviatrixDatadogAgentState:
     @pulumi.getter
     def site(self) -> Optional[pulumi.Input[str]]:
         """
-        Site preference.
+        Site preference ("datadoghq.com" or" datadoghq.eu"). "datadoghq.com" by default.
         """
         return pulumi.get(self, "site")
 
@@ -161,7 +161,7 @@ class _AviatrixDatadogAgentState:
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[str]]:
         """
-        Enabled or not.
+        The status of datadog agent.
         """
         return pulumi.get(self, "status")
 
@@ -181,13 +181,38 @@ class AviatrixDatadogAgent(pulumi.CustomResource):
                  site: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixDatadogAgent resource with the given unique name, props, and options.
+        The **aviatrix_datadog_agent** resource allows the enabling and disabling of datadog agent.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Enable datadog agent
+        test_datadog_agent = aviatrix.AviatrixDatadogAgent("testDatadogAgent",
+            api_key="your_api_key",
+            excluded_gateways=[
+                "a",
+                "b",
+            ],
+            site="datadoghq.com")
+        ```
+
+        ## Import
+
+        **datadog_agent** can be imported using "datadog_agent", e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixDatadogAgent:AviatrixDatadogAgent test datadog_agent
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] api_key: API key.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of excluded gateways.
-        :param pulumi.Input[bool] metrics_only: Only export metrics without exporting logs.
-        :param pulumi.Input[str] site: Site preference.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
+        :param pulumi.Input[bool] metrics_only: Only export metrics without exporting logs. False by default.
+        :param pulumi.Input[str] site: Site preference ("datadoghq.com" or" datadoghq.eu"). "datadoghq.com" by default.
         """
         ...
     @overload
@@ -196,7 +221,32 @@ class AviatrixDatadogAgent(pulumi.CustomResource):
                  args: AviatrixDatadogAgentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixDatadogAgent resource with the given unique name, props, and options.
+        The **aviatrix_datadog_agent** resource allows the enabling and disabling of datadog agent.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Enable datadog agent
+        test_datadog_agent = aviatrix.AviatrixDatadogAgent("testDatadogAgent",
+            api_key="your_api_key",
+            excluded_gateways=[
+                "a",
+                "b",
+            ],
+            site="datadoghq.com")
+        ```
+
+        ## Import
+
+        **datadog_agent** can be imported using "datadog_agent", e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixDatadogAgent:AviatrixDatadogAgent test datadog_agent
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixDatadogAgentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -227,11 +277,13 @@ class AviatrixDatadogAgent(pulumi.CustomResource):
 
             if api_key is None and not opts.urn:
                 raise TypeError("Missing required property 'api_key'")
-            __props__.__dict__["api_key"] = api_key
+            __props__.__dict__["api_key"] = None if api_key is None else pulumi.Output.secret(api_key)
             __props__.__dict__["excluded_gateways"] = excluded_gateways
             __props__.__dict__["metrics_only"] = metrics_only
             __props__.__dict__["site"] = site
             __props__.__dict__["status"] = None
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["apiKey"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(AviatrixDatadogAgent, __self__).__init__(
             'aviatrix:index/aviatrixDatadogAgent:AviatrixDatadogAgent',
             resource_name,
@@ -255,10 +307,10 @@ class AviatrixDatadogAgent(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] api_key: API key.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of excluded gateways.
-        :param pulumi.Input[bool] metrics_only: Only export metrics without exporting logs.
-        :param pulumi.Input[str] site: Site preference.
-        :param pulumi.Input[str] status: Enabled or not.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] excluded_gateways: List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
+        :param pulumi.Input[bool] metrics_only: Only export metrics without exporting logs. False by default.
+        :param pulumi.Input[str] site: Site preference ("datadoghq.com" or" datadoghq.eu"). "datadoghq.com" by default.
+        :param pulumi.Input[str] status: The status of datadog agent.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -283,7 +335,7 @@ class AviatrixDatadogAgent(pulumi.CustomResource):
     @pulumi.getter(name="excludedGateways")
     def excluded_gateways(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        List of excluded gateways.
+        List of gateways to be excluded from logging. e.g.: ["gateway01", "gateway02", "gateway01-hagw"].
         """
         return pulumi.get(self, "excluded_gateways")
 
@@ -291,7 +343,7 @@ class AviatrixDatadogAgent(pulumi.CustomResource):
     @pulumi.getter(name="metricsOnly")
     def metrics_only(self) -> pulumi.Output[Optional[bool]]:
         """
-        Only export metrics without exporting logs.
+        Only export metrics without exporting logs. False by default.
         """
         return pulumi.get(self, "metrics_only")
 
@@ -299,7 +351,7 @@ class AviatrixDatadogAgent(pulumi.CustomResource):
     @pulumi.getter
     def site(self) -> pulumi.Output[Optional[str]]:
         """
-        Site preference.
+        Site preference ("datadoghq.com" or" datadoghq.eu"). "datadoghq.com" by default.
         """
         return pulumi.get(self, "site")
 
@@ -307,7 +359,7 @@ class AviatrixDatadogAgent(pulumi.CustomResource):
     @pulumi.getter
     def status(self) -> pulumi.Output[str]:
         """
-        Enabled or not.
+        The status of datadog agent.
         """
         return pulumi.get(self, "status")
 

@@ -1,0 +1,6 @@
+name: spoke-transit-azure-py
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+description: Test Aviatrix VNET creation and Spoke/Transit deployment with peering them together

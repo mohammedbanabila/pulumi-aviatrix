@@ -45,16 +45,25 @@ class GetAviatrixVpcTrackerResult:
     @property
     @pulumi.getter(name="accountName")
     def account_name(self) -> Optional[str]:
+        """
+        Aviatrix access account associated with the VPC.
+        """
         return pulumi.get(self, "account_name")
 
     @property
     @pulumi.getter
     def cidr(self) -> Optional[str]:
+        """
+        Subnet CIDR.
+        """
         return pulumi.get(self, "cidr")
 
     @property
     @pulumi.getter(name="cloudType")
     def cloud_type(self) -> Optional[int]:
+        """
+        Cloud provider id hosting this VPC.
+        """
         return pulumi.get(self, "cloud_type")
 
     @property
@@ -68,11 +77,17 @@ class GetAviatrixVpcTrackerResult:
     @property
     @pulumi.getter
     def region(self) -> Optional[str]:
+        """
+        Subnet region.
+        """
         return pulumi.get(self, "region")
 
     @property
     @pulumi.getter(name="vpcLists")
     def vpc_lists(self) -> Sequence['outputs.GetAviatrixVpcTrackerVpcListResult']:
+        """
+        List of VPCs from the VPC tracker.
+        """
         return pulumi.get(self, "vpc_lists")
 
 
@@ -96,7 +111,28 @@ def get_aviatrix_vpc_tracker(account_name: Optional[str] = None,
                              region: Optional[str] = None,
                              opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetAviatrixVpcTrackerResult:
     """
-    Use this data source to access information about an existing resource.
+    Use this data source to get the list of VPC's for use in other resources.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_aviatrix as aviatrix
+
+    foo = aviatrix.get_aviatrix_vpc_tracker(account_name="bar",
+        cidr="10.0.0.1/24",
+        cloud_type=1,
+        region="us-west-1")
+    ```
+    ## Notes
+
+    * Please be aware this data source could take up to 20 minutes to refresh depending on the number of VPCs and cloud accounts.
+
+
+    :param str account_name: Filters VPC list by access account name.
+    :param str cidr: Filters VPC list by CIDR (AWS/Azure only).
+    :param int cloud_type: Filters VPC list by cloud provider id. For example, cloud_type = 1 will give all AWS VPCs.
+    :param str region: Filters VPC list by region (AWS/Azure only).
     """
     __args__ = dict()
     __args__['accountName'] = account_name
@@ -122,6 +158,27 @@ def get_aviatrix_vpc_tracker_output(account_name: Optional[pulumi.Input[Optional
                                     region: Optional[pulumi.Input[Optional[str]]] = None,
                                     opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetAviatrixVpcTrackerResult]:
     """
-    Use this data source to access information about an existing resource.
+    Use this data source to get the list of VPC's for use in other resources.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_aviatrix as aviatrix
+
+    foo = aviatrix.get_aviatrix_vpc_tracker(account_name="bar",
+        cidr="10.0.0.1/24",
+        cloud_type=1,
+        region="us-west-1")
+    ```
+    ## Notes
+
+    * Please be aware this data source could take up to 20 minutes to refresh depending on the number of VPCs and cloud accounts.
+
+
+    :param str account_name: Filters VPC list by access account name.
+    :param str cidr: Filters VPC list by CIDR (AWS/Azure only).
+    :param int cloud_type: Filters VPC list by cloud provider id. For example, cloud_type = 1 will give all AWS VPCs.
+    :param str region: Filters VPC list by region (AWS/Azure only).
     """
     ...

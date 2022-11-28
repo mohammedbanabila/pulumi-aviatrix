@@ -36,6 +36,9 @@ class GetAviatrixFirewallInstanceImagesResult:
     @property
     @pulumi.getter(name="firewallImages")
     def firewall_images(self) -> Sequence['outputs.GetAviatrixFirewallInstanceImagesFirewallImageResult']:
+        """
+        List of firewall images.
+        """
         return pulumi.get(self, "firewall_images")
 
     @property
@@ -66,7 +69,21 @@ class AwaitableGetAviatrixFirewallInstanceImagesResult(GetAviatrixFirewallInstan
 def get_aviatrix_firewall_instance_images(vpc_id: Optional[str] = None,
                                           opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetAviatrixFirewallInstanceImagesResult:
     """
-    Use this data source to access information about an existing resource.
+    Use this data source to get the list of firewall instance images for use in other resources.
+
+    **NOTE:** A firenet enabled gateway in a security VPC is required for this data source.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_aviatrix as aviatrix
+
+    foo = aviatrix.get_aviatrix_firewall_instance_images(vpc_id="vpc-1234567")
+    ```
+
+
+    :param str vpc_id: VPC ID. Example: AWS: "vpc-abcd1234", GCP: "vpc-gcp-test~-~project_id", Azure: "vnet_name:rg_name:resource_guid", OCI: "vpc-oracle-test1".
     """
     __args__ = dict()
     __args__['vpcId'] = vpc_id
@@ -83,6 +100,20 @@ def get_aviatrix_firewall_instance_images(vpc_id: Optional[str] = None,
 def get_aviatrix_firewall_instance_images_output(vpc_id: Optional[pulumi.Input[str]] = None,
                                                  opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetAviatrixFirewallInstanceImagesResult]:
     """
-    Use this data source to access information about an existing resource.
+    Use this data source to get the list of firewall instance images for use in other resources.
+
+    **NOTE:** A firenet enabled gateway in a security VPC is required for this data source.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_aviatrix as aviatrix
+
+    foo = aviatrix.get_aviatrix_firewall_instance_images(vpc_id="vpc-1234567")
+    ```
+
+
+    :param str vpc_id: VPC ID. Example: AWS: "vpc-abcd1234", GCP: "vpc-gcp-test~-~project_id", Azure: "vnet_name:rg_name:resource_guid", OCI: "vpc-oracle-test1".
     """
     ...

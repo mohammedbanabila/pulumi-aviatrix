@@ -11,10 +11,47 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_segmentation_network_domain** resource handles creation of [Transit Segmentation](https://docs.aviatrix.com/HowTos/transit_segmentation_faq.html) Network Domains.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixSegmentationNetworkDomain(ctx, "testSegmentationNetworkDomain", &aviatrix.AviatrixSegmentationNetworkDomainArgs{
+//				DomainName: pulumi.String("domain-a"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **aviatrix_segmentation_network_domain** can be imported using the `domain_name`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixSegmentationNetworkDomain:AviatrixSegmentationNetworkDomain test domain_name
+//
+// ```
 type AviatrixSegmentationNetworkDomain struct {
 	pulumi.CustomResourceState
 
-	// Network domain name.
+	// Name of the Network Domain.
 	DomainName pulumi.StringOutput `pulumi:"domainName"`
 }
 
@@ -51,12 +88,12 @@ func GetAviatrixSegmentationNetworkDomain(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixSegmentationNetworkDomain resources.
 type aviatrixSegmentationNetworkDomainState struct {
-	// Network domain name.
+	// Name of the Network Domain.
 	DomainName *string `pulumi:"domainName"`
 }
 
 type AviatrixSegmentationNetworkDomainState struct {
-	// Network domain name.
+	// Name of the Network Domain.
 	DomainName pulumi.StringPtrInput
 }
 
@@ -65,13 +102,13 @@ func (AviatrixSegmentationNetworkDomainState) ElementType() reflect.Type {
 }
 
 type aviatrixSegmentationNetworkDomainArgs struct {
-	// Network domain name.
+	// Name of the Network Domain.
 	DomainName string `pulumi:"domainName"`
 }
 
 // The set of arguments for constructing a AviatrixSegmentationNetworkDomain resource.
 type AviatrixSegmentationNetworkDomainArgs struct {
-	// Network domain name.
+	// Name of the Network Domain.
 	DomainName pulumi.StringInput
 }
 
@@ -162,7 +199,7 @@ func (o AviatrixSegmentationNetworkDomainOutput) ToAviatrixSegmentationNetworkDo
 	return o
 }
 
-// Network domain name.
+// Name of the Network Domain.
 func (o AviatrixSegmentationNetworkDomainOutput) DomainName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixSegmentationNetworkDomain) pulumi.StringOutput { return v.DomainName }).(pulumi.StringOutput)
 }

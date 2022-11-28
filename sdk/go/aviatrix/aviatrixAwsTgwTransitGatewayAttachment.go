@@ -11,18 +11,59 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_aws_tgw_transit_gateway_attachment** resource manages the attachment of the Aviatrix transit gateway to the AWS TGW.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixAwsTgwTransitGatewayAttachment(ctx, "testTransitGatewayAttachment", &aviatrix.AviatrixAwsTgwTransitGatewayAttachmentArgs{
+//				Region:             pulumi.String("us-east-1"),
+//				TgwName:            pulumi.String("test-tgw"),
+//				TransitGatewayName: pulumi.String("transit-gw-1"),
+//				VpcAccountName:     pulumi.String("test-account"),
+//				VpcId:              pulumi.String("vpc-0e2fac2b91c6697b3"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **aws_tgw_transit_gateway_attachment** can be imported using the `tgw_name` and `vpc_id`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixAwsTgwTransitGatewayAttachment:AviatrixAwsTgwTransitGatewayAttachment test tgw_name~vpc_id
+//
+// ```
 type AviatrixAwsTgwTransitGatewayAttachment struct {
 	pulumi.CustomResourceState
 
-	// Region of cloud provider.
+	// AWS Region of the TGW.
 	Region pulumi.StringOutput `pulumi:"region"`
 	// Name of the AWS TGW.
 	TgwName pulumi.StringOutput `pulumi:"tgwName"`
-	// Name of the transit gateway to be attached to tgw.
+	// Name of the transit gateway to be attached to the AWS TGW.
 	TransitGatewayName pulumi.StringOutput `pulumi:"transitGatewayName"`
-	// This parameter represents the name of a Cloud-Account in Aviatrix controller.
+	// The name of the cloud account in the Aviatrix controller, which is associated with the VPC.
 	VpcAccountName pulumi.StringOutput `pulumi:"vpcAccountName"`
-	// This parameter represents the ID of the VPC.
+	// VPC ID of the VPC, where transit gateway is launched.
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
 }
 
@@ -71,28 +112,28 @@ func GetAviatrixAwsTgwTransitGatewayAttachment(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixAwsTgwTransitGatewayAttachment resources.
 type aviatrixAwsTgwTransitGatewayAttachmentState struct {
-	// Region of cloud provider.
+	// AWS Region of the TGW.
 	Region *string `pulumi:"region"`
 	// Name of the AWS TGW.
 	TgwName *string `pulumi:"tgwName"`
-	// Name of the transit gateway to be attached to tgw.
+	// Name of the transit gateway to be attached to the AWS TGW.
 	TransitGatewayName *string `pulumi:"transitGatewayName"`
-	// This parameter represents the name of a Cloud-Account in Aviatrix controller.
+	// The name of the cloud account in the Aviatrix controller, which is associated with the VPC.
 	VpcAccountName *string `pulumi:"vpcAccountName"`
-	// This parameter represents the ID of the VPC.
+	// VPC ID of the VPC, where transit gateway is launched.
 	VpcId *string `pulumi:"vpcId"`
 }
 
 type AviatrixAwsTgwTransitGatewayAttachmentState struct {
-	// Region of cloud provider.
+	// AWS Region of the TGW.
 	Region pulumi.StringPtrInput
 	// Name of the AWS TGW.
 	TgwName pulumi.StringPtrInput
-	// Name of the transit gateway to be attached to tgw.
+	// Name of the transit gateway to be attached to the AWS TGW.
 	TransitGatewayName pulumi.StringPtrInput
-	// This parameter represents the name of a Cloud-Account in Aviatrix controller.
+	// The name of the cloud account in the Aviatrix controller, which is associated with the VPC.
 	VpcAccountName pulumi.StringPtrInput
-	// This parameter represents the ID of the VPC.
+	// VPC ID of the VPC, where transit gateway is launched.
 	VpcId pulumi.StringPtrInput
 }
 
@@ -101,29 +142,29 @@ func (AviatrixAwsTgwTransitGatewayAttachmentState) ElementType() reflect.Type {
 }
 
 type aviatrixAwsTgwTransitGatewayAttachmentArgs struct {
-	// Region of cloud provider.
+	// AWS Region of the TGW.
 	Region string `pulumi:"region"`
 	// Name of the AWS TGW.
 	TgwName string `pulumi:"tgwName"`
-	// Name of the transit gateway to be attached to tgw.
+	// Name of the transit gateway to be attached to the AWS TGW.
 	TransitGatewayName string `pulumi:"transitGatewayName"`
-	// This parameter represents the name of a Cloud-Account in Aviatrix controller.
+	// The name of the cloud account in the Aviatrix controller, which is associated with the VPC.
 	VpcAccountName string `pulumi:"vpcAccountName"`
-	// This parameter represents the ID of the VPC.
+	// VPC ID of the VPC, where transit gateway is launched.
 	VpcId string `pulumi:"vpcId"`
 }
 
 // The set of arguments for constructing a AviatrixAwsTgwTransitGatewayAttachment resource.
 type AviatrixAwsTgwTransitGatewayAttachmentArgs struct {
-	// Region of cloud provider.
+	// AWS Region of the TGW.
 	Region pulumi.StringInput
 	// Name of the AWS TGW.
 	TgwName pulumi.StringInput
-	// Name of the transit gateway to be attached to tgw.
+	// Name of the transit gateway to be attached to the AWS TGW.
 	TransitGatewayName pulumi.StringInput
-	// This parameter represents the name of a Cloud-Account in Aviatrix controller.
+	// The name of the cloud account in the Aviatrix controller, which is associated with the VPC.
 	VpcAccountName pulumi.StringInput
-	// This parameter represents the ID of the VPC.
+	// VPC ID of the VPC, where transit gateway is launched.
 	VpcId pulumi.StringInput
 }
 
@@ -214,7 +255,7 @@ func (o AviatrixAwsTgwTransitGatewayAttachmentOutput) ToAviatrixAwsTgwTransitGat
 	return o
 }
 
-// Region of cloud provider.
+// AWS Region of the TGW.
 func (o AviatrixAwsTgwTransitGatewayAttachmentOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwTransitGatewayAttachment) pulumi.StringOutput { return v.Region }).(pulumi.StringOutput)
 }
@@ -224,17 +265,17 @@ func (o AviatrixAwsTgwTransitGatewayAttachmentOutput) TgwName() pulumi.StringOut
 	return o.ApplyT(func(v *AviatrixAwsTgwTransitGatewayAttachment) pulumi.StringOutput { return v.TgwName }).(pulumi.StringOutput)
 }
 
-// Name of the transit gateway to be attached to tgw.
+// Name of the transit gateway to be attached to the AWS TGW.
 func (o AviatrixAwsTgwTransitGatewayAttachmentOutput) TransitGatewayName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwTransitGatewayAttachment) pulumi.StringOutput { return v.TransitGatewayName }).(pulumi.StringOutput)
 }
 
-// This parameter represents the name of a Cloud-Account in Aviatrix controller.
+// The name of the cloud account in the Aviatrix controller, which is associated with the VPC.
 func (o AviatrixAwsTgwTransitGatewayAttachmentOutput) VpcAccountName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwTransitGatewayAttachment) pulumi.StringOutput { return v.VpcAccountName }).(pulumi.StringOutput)
 }
 
-// This parameter represents the ID of the VPC.
+// VPC ID of the VPC, where transit gateway is launched.
 func (o AviatrixAwsTgwTransitGatewayAttachmentOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixAwsTgwTransitGatewayAttachment) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
 }

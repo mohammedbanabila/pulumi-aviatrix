@@ -9,6 +9,17 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_private_mode_lb** resource allows management of a Private Mode load balancer. This resource is available as of provider version R2.23+.
+    /// 
+    /// ## Import
+    /// 
+    /// **aviatrix_private_mode_lb** can be imported using the `vpc_id`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixPrivateModeLb:AviatrixPrivateModeLb test vpc-1234567
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixPrivateModeLb:AviatrixPrivateModeLb")]
     public partial class AviatrixPrivateModeLb : global::Pulumi.CustomResource
     {
@@ -25,25 +36,25 @@ namespace Pulumi.Aviatrix
         public Output<string> LbType { get; private set; } = null!;
 
         /// <summary>
-        /// VPC ID of multicloud access VPC to connect to. Required when lb_type is multicloud.
+        /// ID of the VPC with a multicloud endpoint. Required when `lb_type` is multicloud.
         /// </summary>
         [Output("multicloudAccessVpcId")]
         public Output<string?> MulticloudAccessVpcId { get; private set; } = null!;
 
         /// <summary>
-        /// List of multicloud proxies.
+        /// List of multicloud proxies. Only valid when `lb_type` is multicloud.
         /// </summary>
         [Output("proxies")]
         public Output<ImmutableArray<Outputs.AviatrixPrivateModeLbProxy>> Proxies { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the VPC region.
+        /// Name of the region containing the VPC.
         /// </summary>
         [Output("region")]
         public Output<string> Region { get; private set; } = null!;
 
         /// <summary>
-        /// ID of the VPC for the load balancer.
+        /// VPC ID of the proxy.
         /// </summary>
         [Output("vpcId")]
         public Output<string> VpcId { get; private set; } = null!;
@@ -108,7 +119,7 @@ namespace Pulumi.Aviatrix
         public Input<string> LbType { get; set; } = null!;
 
         /// <summary>
-        /// VPC ID of multicloud access VPC to connect to. Required when lb_type is multicloud.
+        /// ID of the VPC with a multicloud endpoint. Required when `lb_type` is multicloud.
         /// </summary>
         [Input("multicloudAccessVpcId")]
         public Input<string>? MulticloudAccessVpcId { get; set; }
@@ -117,7 +128,7 @@ namespace Pulumi.Aviatrix
         private InputList<Inputs.AviatrixPrivateModeLbProxyArgs>? _proxies;
 
         /// <summary>
-        /// List of multicloud proxies.
+        /// List of multicloud proxies. Only valid when `lb_type` is multicloud.
         /// </summary>
         public InputList<Inputs.AviatrixPrivateModeLbProxyArgs> Proxies
         {
@@ -126,13 +137,13 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Name of the VPC region.
+        /// Name of the region containing the VPC.
         /// </summary>
         [Input("region", required: true)]
         public Input<string> Region { get; set; } = null!;
 
         /// <summary>
-        /// ID of the VPC for the load balancer.
+        /// VPC ID of the proxy.
         /// </summary>
         [Input("vpcId", required: true)]
         public Input<string> VpcId { get; set; } = null!;
@@ -158,7 +169,7 @@ namespace Pulumi.Aviatrix
         public Input<string>? LbType { get; set; }
 
         /// <summary>
-        /// VPC ID of multicloud access VPC to connect to. Required when lb_type is multicloud.
+        /// ID of the VPC with a multicloud endpoint. Required when `lb_type` is multicloud.
         /// </summary>
         [Input("multicloudAccessVpcId")]
         public Input<string>? MulticloudAccessVpcId { get; set; }
@@ -167,7 +178,7 @@ namespace Pulumi.Aviatrix
         private InputList<Inputs.AviatrixPrivateModeLbProxyGetArgs>? _proxies;
 
         /// <summary>
-        /// List of multicloud proxies.
+        /// List of multicloud proxies. Only valid when `lb_type` is multicloud.
         /// </summary>
         public InputList<Inputs.AviatrixPrivateModeLbProxyGetArgs> Proxies
         {
@@ -176,13 +187,13 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Name of the VPC region.
+        /// Name of the region containing the VPC.
         /// </summary>
         [Input("region")]
         public Input<string>? Region { get; set; }
 
         /// <summary>
-        /// ID of the VPC for the load balancer.
+        /// VPC ID of the proxy.
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }

@@ -11,19 +11,77 @@ namespace Pulumi.Aviatrix
 {
     public static class GetAviatrixVpc
     {
+        /// <summary>
+        /// The **aviatrix_vpc** data source provides details about a specific VPC created by the Aviatrix Controller.
+        /// 
+        /// This data source can prove useful when a module accepts any form of VPC detail as an input variable. For example, requiring a subnet CIDR specification when creating a gateway.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using Pulumi;
+        /// using Aviatrix = Pulumi.Aviatrix;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var test = Aviatrix.GetAviatrixVpc.Invoke(new()
+        ///     {
+        ///         Name = "vpc-test",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
         public static Task<GetAviatrixVpcResult> InvokeAsync(GetAviatrixVpcArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAviatrixVpcResult>("aviatrix:index/getAviatrixVpc:getAviatrixVpc", args ?? new GetAviatrixVpcArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAviatrixVpcResult>("aviatrix:index/getAviatrixVpc:getAviatrixVpc", args ?? new GetAviatrixVpcArgs(), options.WithDefaults());
 
+        /// <summary>
+        /// The **aviatrix_vpc** data source provides details about a specific VPC created by the Aviatrix Controller.
+        /// 
+        /// This data source can prove useful when a module accepts any form of VPC detail as an input variable. For example, requiring a subnet CIDR specification when creating a gateway.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using Pulumi;
+        /// using Aviatrix = Pulumi.Aviatrix;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var test = Aviatrix.GetAviatrixVpc.Invoke(new()
+        ///     {
+        ///         Name = "vpc-test",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
         public static Output<GetAviatrixVpcResult> Invoke(GetAviatrixVpcInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAviatrixVpcResult>("aviatrix:index/getAviatrixVpc:getAviatrixVpc", args ?? new GetAviatrixVpcInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAviatrixVpcResult>("aviatrix:index/getAviatrixVpc:getAviatrixVpc", args ?? new GetAviatrixVpcInvokeArgs(), options.WithDefaults());
     }
 
 
     public sealed class GetAviatrixVpcArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// Name of the Aviatrix VPC.
+        /// </summary>
         [Input("name", required: true)]
         public string Name { get; set; } = null!;
 
+        /// <summary>
+        /// Filters the `route_tables` list to contain only public or private route tables. Valid values are 'private' or 'public'. If not set `route_tables` is not filtered.
+        /// </summary>
         [Input("routeTablesFilter")]
         public string? RouteTablesFilter { get; set; }
 
@@ -35,9 +93,15 @@ namespace Pulumi.Aviatrix
 
     public sealed class GetAviatrixVpcInvokeArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// Name of the Aviatrix VPC.
+        /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
+        /// <summary>
+        /// Filters the `route_tables` list to contain only public or private route tables. Valid values are 'private' or 'public'. If not set `route_tables` is not filtered.
+        /// </summary>
         [Input("routeTablesFilter")]
         public Input<string>? RouteTablesFilter { get; set; }
 
@@ -51,28 +115,82 @@ namespace Pulumi.Aviatrix
     [OutputType]
     public sealed class GetAviatrixVpcResult
     {
+        /// <summary>
+        /// Account name of the VPC created.
+        /// </summary>
         public readonly string AccountName;
+        /// <summary>
+        /// List of OCI availability domains.
+        /// </summary>
         public readonly ImmutableArray<string> AvailabilityDomains;
+        /// <summary>
+        /// Switch if the VPC created is an Aviatrix FireNet VPC or not.
+        /// </summary>
         public readonly bool AviatrixFirenetVpc;
+        /// <summary>
+        /// Switch if the VPC created is an Aviatrix Transit VPC or not.
+        /// </summary>
         public readonly bool AviatrixTransitVpc;
+        /// <summary>
+        /// Azure vnet resource ID.
+        /// </summary>
         public readonly string AzureVnetResourceId;
+        /// <summary>
+        /// Private subnet CIDR.
+        /// </summary>
         public readonly string Cidr;
+        /// <summary>
+        /// Type of cloud service provider.
+        /// </summary>
         public readonly int CloudType;
+        /// <summary>
+        /// List of OCI fault domains.
+        /// </summary>
         public readonly ImmutableArray<string> FaultDomains;
         /// <summary>
         /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// Private subnet name.
+        /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// Number of public subnet and private subnet pair created. Only supported for AWS, Azure provider.
+        /// </summary>
         public readonly int NumOfSubnetPairs;
+        /// <summary>
+        /// List of private subnet of the VPC(AWS, Azure) created.
+        /// </summary>
         public readonly ImmutableArray<Outputs.GetAviatrixVpcPrivateSubnetResult> PrivateSubnets;
+        /// <summary>
+        /// List of public subnet of the VPC(AWS, Azure) created.
+        /// </summary>
         public readonly ImmutableArray<Outputs.GetAviatrixVpcPublicSubnetResult> PublicSubnets;
+        /// <summary>
+        /// Region of the VPC created.
+        /// </summary>
         public readonly string Region;
+        /// <summary>
+        /// Resource group of the Azure VPC created.
+        /// </summary>
         public readonly string ResourceGroup;
+        /// <summary>
+        /// List of route table ids associated with this VPC. Only populated for AWS, AWSGov and Azure vpc.
+        /// </summary>
         public readonly ImmutableArray<string> RouteTables;
         public readonly string? RouteTablesFilter;
+        /// <summary>
+        /// Subnet size. Only supported for AWS, Azure provider.
+        /// </summary>
         public readonly int SubnetSize;
+        /// <summary>
+        /// List of subnet of the VPC created.
+        /// </summary>
         public readonly ImmutableArray<Outputs.GetAviatrixVpcSubnetResult> Subnets;
+        /// <summary>
+        /// ID of the VPC created.
+        /// </summary>
         public readonly string VpcId;
 
         [OutputConstructor]

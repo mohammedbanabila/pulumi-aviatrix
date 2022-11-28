@@ -11,6 +11,52 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_geo_vpn** resource enables and manages the [Aviatrix Geo VPN feature](https://docs.aviatrix.com/HowTos/GeoVPN.html).
+//
+// > **NOTE:** If ELBs/gateways are being managed by the Geo VPN, in order to update VPN configurations of the Geo VPN, all the VPN configurations of the ELBs/gateways must be updated simultaneously and share the same values. This can be achieved by managing the VPN configurations through variables and updating their values accordingly.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixGeoVpn(ctx, "testGeoVpn", &aviatrix.AviatrixGeoVpnArgs{
+//				AccountName: pulumi.String("devops-aws"),
+//				CloudType:   pulumi.Int(1),
+//				DomainName:  pulumi.String("aviatrix.live"),
+//				ElbDnsNames: pulumi.StringArray{
+//					pulumi.String("elb-test1-497f5e89.elb.us-west-1.amazonaws.com"),
+//					pulumi.String("elb-test2-974f895e.elb.us-east-2.amazonaws.com"),
+//				},
+//				ServiceName: pulumi.String("vpn"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **geo_vpn** can be imported using the `service_name` and `domain_name`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixGeoVpn:AviatrixGeoVpn test service_name~domain_name
+//
+// ```
 type AviatrixGeoVpn struct {
 	pulumi.CustomResourceState
 

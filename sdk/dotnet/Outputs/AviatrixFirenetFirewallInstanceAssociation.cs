@@ -13,13 +13,37 @@ namespace Pulumi.Aviatrix.Outputs
     [OutputType]
     public sealed class AviatrixFirenetFirewallInstanceAssociation
     {
+        /// <summary>
+        /// Switch to attach/detach firewall instance to/from FireNet. Valid values: true, false. Default value: false.
+        /// </summary>
         public readonly bool? Attached;
+        /// <summary>
+        /// Egress interface ID. **Required if it is a firewall instance.**
+        /// </summary>
         public readonly string? EgressInterface;
+        /// <summary>
+        /// Name of the primary FireNet gateway.
+        /// </summary>
         public readonly string FirenetGwName;
+        /// <summary>
+        /// Firewall instance name. **Required if it is a firewall instance.**
+        /// </summary>
         public readonly string? FirewallName;
+        /// <summary>
+        /// ID of Firewall instance.
+        /// </summary>
         public readonly string InstanceId;
+        /// <summary>
+        /// Lan interface ID. **Required if it is a firewall instance or FQDN gateway in Azure.**
+        /// </summary>
         public readonly string? LanInterface;
+        /// <summary>
+        /// Management interface ID. **Required if it is a firewall instance.**
+        /// </summary>
         public readonly string? ManagementInterface;
+        /// <summary>
+        /// Type of firewall. Valid values: "Generic", "fqdn_gateway". Default value: "Generic". Value "fqdn_gateway" is required for FQDN gateway.
+        /// </summary>
         public readonly string? VendorType;
 
         [OutputConstructor]

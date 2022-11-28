@@ -275,26 +275,41 @@ class GetAviatrixGatewayResult:
     @property
     @pulumi.getter(name="accountName")
     def account_name(self) -> str:
+        """
+        Aviatrix account name.
+        """
         return pulumi.get(self, "account_name")
 
     @property
     @pulumi.getter(name="additionalCidrs")
     def additional_cidrs(self) -> str:
+        """
+        A list of destination CIDR ranges that will also go through the VPN tunnel when Split Tunnel Mode is enabled.
+        """
         return pulumi.get(self, "additional_cidrs")
 
     @property
     @pulumi.getter(name="additionalCidrsDesignatedGateway")
     def additional_cidrs_designated_gateway(self) -> str:
+        """
+        A list of CIDR ranges separated by comma to configure when 'designated_gateway' feature is enabled.
+        """
         return pulumi.get(self, "additional_cidrs_designated_gateway")
 
     @property
     @pulumi.getter(name="allocateNewEip")
     def allocate_new_eip(self) -> bool:
+        """
+        When value is false, an idle address in Elastic IP pool is reused for this gateway. Otherwise, a new Elastic IP is allocated and used for this gateway.
+        """
         return pulumi.get(self, "allocate_new_eip")
 
     @property
     @pulumi.getter(name="availabilityDomain")
     def availability_domain(self) -> str:
+        """
+        Availability domain for OCI.
+        """
         return pulumi.get(self, "availability_domain")
 
     @property
@@ -305,51 +320,81 @@ class GetAviatrixGatewayResult:
     @property
     @pulumi.getter(name="cloudInstanceId")
     def cloud_instance_id(self) -> str:
+        """
+        Instance ID of the gateway.
+        """
         return pulumi.get(self, "cloud_instance_id")
 
     @property
     @pulumi.getter(name="cloudType")
     def cloud_type(self) -> int:
+        """
+        Type of cloud service provider.
+        """
         return pulumi.get(self, "cloud_type")
 
     @property
     @pulumi.getter(name="duoApiHostname")
     def duo_api_hostname(self) -> str:
+        """
+        API hostname for DUO auth mode.
+        """
         return pulumi.get(self, "duo_api_hostname")
 
     @property
     @pulumi.getter(name="duoIntegrationKey")
     def duo_integration_key(self) -> str:
+        """
+        Integration key for DUO auth mode.
+        """
         return pulumi.get(self, "duo_integration_key")
 
     @property
     @pulumi.getter(name="duoPushMode")
     def duo_push_mode(self) -> str:
+        """
+        Push mode for DUO auth.
+        """
         return pulumi.get(self, "duo_push_mode")
 
     @property
     @pulumi.getter(name="elbDnsName")
     def elb_dns_name(self) -> str:
+        """
+        ELB DNS Name.
+        """
         return pulumi.get(self, "elb_dns_name")
 
     @property
     @pulumi.getter(name="elbName")
     def elb_name(self) -> str:
+        """
+        Name of the ELB created.
+        """
         return pulumi.get(self, "elb_name")
 
     @property
     @pulumi.getter(name="enableDesignatedGateway")
     def enable_designated_gateway(self) -> bool:
+        """
+        Status of Designated Gateway feature for Gateway.
+        """
         return pulumi.get(self, "enable_designated_gateway")
 
     @property
     @pulumi.getter(name="enableElb")
     def enable_elb(self) -> bool:
+        """
+        Status of ELB for the gateway.
+        """
         return pulumi.get(self, "enable_elb")
 
     @property
     @pulumi.getter(name="enableEncryptVolume")
     def enable_encrypt_volume(self) -> bool:
+        """
+        Enable encrypt gateway EBS volume. Only supported for AWS provider.
+        """
         return pulumi.get(self, "enable_encrypt_volume")
 
     @property
@@ -360,6 +405,9 @@ class GetAviatrixGatewayResult:
     @property
     @pulumi.getter(name="enableLdap")
     def enable_ldap(self) -> bool:
+        """
+        Status LDAP or not.
+        """
         return pulumi.get(self, "enable_ldap")
 
     @property
@@ -380,16 +428,25 @@ class GetAviatrixGatewayResult:
     @property
     @pulumi.getter(name="enableVpcDnsServer")
     def enable_vpc_dns_server(self) -> bool:
+        """
+        Status of VPC Dns Server for Gateway.
+        """
         return pulumi.get(self, "enable_vpc_dns_server")
 
     @property
     @pulumi.getter(name="enableVpnNat")
     def enable_vpn_nat(self) -> bool:
+        """
+        Status of VPN NAT.
+        """
         return pulumi.get(self, "enable_vpn_nat")
 
     @property
     @pulumi.getter(name="faultDomain")
     def fault_domain(self) -> str:
+        """
+        Fault domain for OCI.
+        """
         return pulumi.get(self, "fault_domain")
 
     @property
@@ -410,11 +467,17 @@ class GetAviatrixGatewayResult:
     @property
     @pulumi.getter(name="gwName")
     def gw_name(self) -> str:
+        """
+        Aviatrix gateway name.
+        """
         return pulumi.get(self, "gw_name")
 
     @property
     @pulumi.getter(name="gwSize")
     def gw_size(self) -> str:
+        """
+        Size of gateway Instance.
+        """
         return pulumi.get(self, "gw_size")
 
     @property
@@ -433,41 +496,65 @@ class GetAviatrixGatewayResult:
     @property
     @pulumi.getter(name="imageVersion")
     def image_version(self) -> str:
+        """
+        The image version of the gateway.
+        """
         return pulumi.get(self, "image_version")
 
     @property
     @pulumi.getter(name="insaneMode")
     def insane_mode(self) -> bool:
+        """
+        Status of Insane Mode for Gateway.
+        """
         return pulumi.get(self, "insane_mode")
 
     @property
     @pulumi.getter(name="insaneModeAz")
     def insane_mode_az(self) -> str:
+        """
+        AZ of subnet being created for Insane Mode gateway.
+        """
         return pulumi.get(self, "insane_mode_az")
 
     @property
     @pulumi.getter(name="ldapBaseDn")
     def ldap_base_dn(self) -> str:
+        """
+        LDAP base DN.
+        """
         return pulumi.get(self, "ldap_base_dn")
 
     @property
     @pulumi.getter(name="ldapBindDn")
     def ldap_bind_dn(self) -> str:
+        """
+        LDAP bind DN.
+        """
         return pulumi.get(self, "ldap_bind_dn")
 
     @property
     @pulumi.getter(name="ldapServer")
     def ldap_server(self) -> str:
+        """
+        LDAP server address.
+        """
         return pulumi.get(self, "ldap_server")
 
     @property
     @pulumi.getter(name="ldapUsernameAttribute")
     def ldap_username_attribute(self) -> str:
+        """
+        LDAP user attribute.
+        """
         return pulumi.get(self, "ldap_username_attribute")
 
     @property
     @pulumi.getter(name="maxVpnConn")
     def max_vpn_conn(self) -> str:
+        """
+        Maximum connection of VPN access.
+        """
         return pulumi.get(self, "max_vpn_conn")
 
     @property
@@ -478,26 +565,41 @@ class GetAviatrixGatewayResult:
     @property
     @pulumi.getter(name="nameServers")
     def name_servers(self) -> str:
+        """
+        A list of DNS servers used to resolve domain names by a connected VPN user when Split Tunnel Mode is enabled.
+        """
         return pulumi.get(self, "name_servers")
 
     @property
     @pulumi.getter(name="oktaUrl")
     def okta_url(self) -> str:
+        """
+        URL for Okta auth mode.
+        """
         return pulumi.get(self, "okta_url")
 
     @property
     @pulumi.getter(name="oktaUsernameSuffix")
     def okta_username_suffix(self) -> str:
+        """
+        Username suffix for Okta auth mode.
+        """
         return pulumi.get(self, "okta_username_suffix")
 
     @property
     @pulumi.getter(name="otpMode")
     def otp_mode(self) -> str:
+        """
+        Two step authentication mode.
+        """
         return pulumi.get(self, "otp_mode")
 
     @property
     @pulumi.getter(name="peeringHaAvailabilityDomain")
     def peering_ha_availability_domain(self) -> str:
+        """
+        HA gateway availability domain for OCI.
+        """
         return pulumi.get(self, "peering_ha_availability_domain")
 
     @property
@@ -508,41 +610,65 @@ class GetAviatrixGatewayResult:
     @property
     @pulumi.getter(name="peeringHaCloudInstanceId")
     def peering_ha_cloud_instance_id(self) -> str:
+        """
+        Instance ID of the peering HA gateway.
+        """
         return pulumi.get(self, "peering_ha_cloud_instance_id")
 
     @property
     @pulumi.getter(name="peeringHaFaultDomain")
     def peering_ha_fault_domain(self) -> str:
+        """
+        HA gateway fault domain for OCI.
+        """
         return pulumi.get(self, "peering_ha_fault_domain")
 
     @property
     @pulumi.getter(name="peeringHaGwName")
     def peering_ha_gw_name(self) -> str:
+        """
+        Aviatrix gateway unique name of HA gateway.
+        """
         return pulumi.get(self, "peering_ha_gw_name")
 
     @property
     @pulumi.getter(name="peeringHaGwSize")
     def peering_ha_gw_size(self) -> str:
+        """
+        Peering HA Gateway Size.
+        """
         return pulumi.get(self, "peering_ha_gw_size")
 
     @property
     @pulumi.getter(name="peeringHaImageVersion")
     def peering_ha_image_version(self) -> str:
+        """
+        The image version of the HA gateway.
+        """
         return pulumi.get(self, "peering_ha_image_version")
 
     @property
     @pulumi.getter(name="peeringHaInsaneModeAz")
     def peering_ha_insane_mode_az(self) -> str:
+        """
+        AZ of subnet being created for Insane Mode Peering HA Gateway. Required if insane_mode is set.
+        """
         return pulumi.get(self, "peering_ha_insane_mode_az")
 
     @property
     @pulumi.getter(name="peeringHaPrivateIp")
     def peering_ha_private_ip(self) -> str:
+        """
+        Private IP address of HA gateway.
+        """
         return pulumi.get(self, "peering_ha_private_ip")
 
     @property
     @pulumi.getter(name="peeringHaPublicIp")
     def peering_ha_public_ip(self) -> str:
+        """
+        Public IP address that you want assigned to the HA peering instance.
+        """
         return pulumi.get(self, "peering_ha_public_ip")
 
     @property
@@ -553,31 +679,49 @@ class GetAviatrixGatewayResult:
     @property
     @pulumi.getter(name="peeringHaSoftwareVersion")
     def peering_ha_software_version(self) -> str:
+        """
+        The software version of the HA gateway.
+        """
         return pulumi.get(self, "peering_ha_software_version")
 
     @property
     @pulumi.getter(name="peeringHaSubnet")
     def peering_ha_subnet(self) -> str:
+        """
+        Public Subnet Information while creating Peering HA Gateway, only subnet is accepted. Required to create peering ha gateway if cloud_type = 1 or 8 (AWS or Azure).
+        """
         return pulumi.get(self, "peering_ha_subnet")
 
     @property
     @pulumi.getter(name="peeringHaZone")
     def peering_ha_zone(self) -> str:
+        """
+        Zone information for creating Peering HA Gateway. Required to create peering ha gateway if cloud_type = 4 (GCP).
+        """
         return pulumi.get(self, "peering_ha_zone")
 
     @property
     @pulumi.getter(name="privateIp")
     def private_ip(self) -> str:
+        """
+        Private IP address of the Gateway created.
+        """
         return pulumi.get(self, "private_ip")
 
     @property
     @pulumi.getter(name="publicDnsServer")
     def public_dns_server(self) -> str:
+        """
+        NS server used by the gateway.
+        """
         return pulumi.get(self, "public_dns_server")
 
     @property
     @pulumi.getter(name="publicIp")
     def public_ip(self) -> str:
+        """
+        Public IP address of the Gateway created.
+        """
         return pulumi.get(self, "public_ip")
 
     @property
@@ -603,36 +747,57 @@ class GetAviatrixGatewayResult:
     @property
     @pulumi.getter(name="samlEnabled")
     def saml_enabled(self) -> bool:
+        """
+        Status of SAML.
+        """
         return pulumi.get(self, "saml_enabled")
 
     @property
     @pulumi.getter(name="searchDomains")
     def search_domains(self) -> str:
+        """
+        A list of domain names that will use the NameServer when a specific name is not in the destination when Split Tunnel Mode is enabled.
+        """
         return pulumi.get(self, "search_domains")
 
     @property
     @pulumi.getter(name="securityGroupId")
     def security_group_id(self) -> str:
+        """
+        Security group used for the gateway.
+        """
         return pulumi.get(self, "security_group_id")
 
     @property
     @pulumi.getter(name="singleAzHa")
     def single_az_ha(self) -> bool:
+        """
+        Status of Single AZ HA.
+        """
         return pulumi.get(self, "single_az_ha")
 
     @property
     @pulumi.getter(name="singleIpSnat")
     def single_ip_snat(self) -> bool:
+        """
+        Single IP Source NAT status for the container.
+        """
         return pulumi.get(self, "single_ip_snat")
 
     @property
     @pulumi.getter(name="softwareVersion")
     def software_version(self) -> str:
+        """
+        The software version of the gateway.
+        """
         return pulumi.get(self, "software_version")
 
     @property
     @pulumi.getter(name="splitTunnel")
     def split_tunnel(self) -> bool:
+        """
+        Status of split tunnel mode.
+        """
         return pulumi.get(self, "split_tunnel")
 
     @property
@@ -643,11 +808,17 @@ class GetAviatrixGatewayResult:
     @property
     @pulumi.getter
     def subnet(self) -> str:
+        """
+        A VPC Network address range selected from one of the available network ranges.
+        """
         return pulumi.get(self, "subnet")
 
     @property
     @pulumi.getter(name="tagLists")
     def tag_lists(self) -> Sequence[str]:
+        """
+        Instance tag of cloud provider.
+        """
         return pulumi.get(self, "tag_lists")
 
     @property
@@ -663,26 +834,41 @@ class GetAviatrixGatewayResult:
     @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> str:
+        """
+        VPC-ID/VNet-Name of cloud provider.
+        """
         return pulumi.get(self, "vpc_id")
 
     @property
     @pulumi.getter(name="vpcReg")
     def vpc_reg(self) -> str:
+        """
+        Region of cloud provider.
+        """
         return pulumi.get(self, "vpc_reg")
 
     @property
     @pulumi.getter(name="vpnAccess")
     def vpn_access(self) -> bool:
+        """
+        Status of user access through VPN to the container.
+        """
         return pulumi.get(self, "vpn_access")
 
     @property
     @pulumi.getter(name="vpnCidr")
     def vpn_cidr(self) -> str:
+        """
+        VPN CIDR block for the container.
+        """
         return pulumi.get(self, "vpn_cidr")
 
     @property
     @pulumi.getter(name="vpnProtocol")
     def vpn_protocol(self) -> str:
+        """
+        ELB protocol for VPN gateway with ELB enabled.
+        """
         return pulumi.get(self, "vpn_protocol")
 
     @property
@@ -785,7 +971,21 @@ class AwaitableGetAviatrixGatewayResult(GetAviatrixGatewayResult):
 def get_aviatrix_gateway(gw_name: Optional[str] = None,
                          opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetAviatrixGatewayResult:
     """
-    Use this data source to access information about an existing resource.
+    The **aviatrix_gateway** data source provides details about a specific gateway created by the Aviatrix Controller.
+
+    This data source can prove useful when a module accepts a gateway's detail as an input variable. For example, requiring the gateway's name configuring a site2cloud connection.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_aviatrix as aviatrix
+
+    foo = aviatrix.get_aviatrix_gateway(gw_name="gatewayname")
+    ```
+
+
+    :param str gw_name: Gateway name.
     """
     __args__ = dict()
     __args__['gwName'] = gw_name
@@ -882,6 +1082,20 @@ def get_aviatrix_gateway(gw_name: Optional[str] = None,
 def get_aviatrix_gateway_output(gw_name: Optional[pulumi.Input[str]] = None,
                                 opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetAviatrixGatewayResult]:
     """
-    Use this data source to access information about an existing resource.
+    The **aviatrix_gateway** data source provides details about a specific gateway created by the Aviatrix Controller.
+
+    This data source can prove useful when a module accepts a gateway's detail as an input variable. For example, requiring the gateway's name configuring a site2cloud connection.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_aviatrix as aviatrix
+
+    foo = aviatrix.get_aviatrix_gateway(gw_name="gatewayname")
+    ```
+
+
+    :param str gw_name: Gateway name.
     """
     ...

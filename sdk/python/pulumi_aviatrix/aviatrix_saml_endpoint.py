@@ -26,15 +26,15 @@ class AviatrixSamlEndpointArgs:
                  sign_authn_requests: Optional[pulumi.Input[bool]] = None):
         """
         The set of arguments for constructing a AviatrixSamlEndpoint resource.
-        :param pulumi.Input[str] endpoint_name: SAML Endpoint Name.
-        :param pulumi.Input[str] idp_metadata_type: Type of IDP Metadata.
-        :param pulumi.Input[str] access_set_by: Access type.
-        :param pulumi.Input[bool] controller_login: Switch to differentiate if it is for controller login.
-        :param pulumi.Input[str] custom_entity_id: Custom Entity ID. Required to be non-empty for 'Custom' Entity ID type, empty for 'Hostname'.
-        :param pulumi.Input[str] custom_saml_request_template: Custom SAML Request Template.
-        :param pulumi.Input[str] idp_metadata: IDP Metadata.
-        :param pulumi.Input[str] idp_metadata_url: IDP Metadata.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] rbac_groups: List of RBAC groups.
+        :param pulumi.Input[str] endpoint_name: The SAML endpoint name.
+        :param pulumi.Input[str] idp_metadata_type: The IDP Metadata type. Can be either "Text" or "URL".
+        :param pulumi.Input[str] access_set_by: Access type. Valid values: "controller", "profile_attribute". Default value: "controller".
+        :param pulumi.Input[bool] controller_login: Valid values: true, false. Default value: false. Set true for creating a saml endpoint for controller login.
+        :param pulumi.Input[str] custom_entity_id: Custom Entity ID. Required to be non-empty for 'Custom' Entity ID type, empty for 'Hostname' Entity ID type.
+        :param pulumi.Input[str] custom_saml_request_template: Custom SAML Request Template in string.
+        :param pulumi.Input[str] idp_metadata: The IDP Metadata from SAML provider. Required if `idp_metadata_type` is "Text" and should be unset if type is "URL". Normally the metadata is in XML format which may contain special characters. Best practice is to use the file function to read from a local Metadata XML file.
+        :param pulumi.Input[str] idp_metadata_url: The IDP Metadata URL from SAML provider. Required if `idp_metadata_type` is "URL" and should be unset if type is "Text".
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] rbac_groups: List of rbac groups. Required for controller login and "access_set_by" of "controller".
         :param pulumi.Input[bool] sign_authn_requests: Whether to sign SAML AuthnRequests
         """
         pulumi.set(__self__, "endpoint_name", endpoint_name)
@@ -60,7 +60,7 @@ class AviatrixSamlEndpointArgs:
     @pulumi.getter(name="endpointName")
     def endpoint_name(self) -> pulumi.Input[str]:
         """
-        SAML Endpoint Name.
+        The SAML endpoint name.
         """
         return pulumi.get(self, "endpoint_name")
 
@@ -72,7 +72,7 @@ class AviatrixSamlEndpointArgs:
     @pulumi.getter(name="idpMetadataType")
     def idp_metadata_type(self) -> pulumi.Input[str]:
         """
-        Type of IDP Metadata.
+        The IDP Metadata type. Can be either "Text" or "URL".
         """
         return pulumi.get(self, "idp_metadata_type")
 
@@ -84,7 +84,7 @@ class AviatrixSamlEndpointArgs:
     @pulumi.getter(name="accessSetBy")
     def access_set_by(self) -> Optional[pulumi.Input[str]]:
         """
-        Access type.
+        Access type. Valid values: "controller", "profile_attribute". Default value: "controller".
         """
         return pulumi.get(self, "access_set_by")
 
@@ -96,7 +96,7 @@ class AviatrixSamlEndpointArgs:
     @pulumi.getter(name="controllerLogin")
     def controller_login(self) -> Optional[pulumi.Input[bool]]:
         """
-        Switch to differentiate if it is for controller login.
+        Valid values: true, false. Default value: false. Set true for creating a saml endpoint for controller login.
         """
         return pulumi.get(self, "controller_login")
 
@@ -108,7 +108,7 @@ class AviatrixSamlEndpointArgs:
     @pulumi.getter(name="customEntityId")
     def custom_entity_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Custom Entity ID. Required to be non-empty for 'Custom' Entity ID type, empty for 'Hostname'.
+        Custom Entity ID. Required to be non-empty for 'Custom' Entity ID type, empty for 'Hostname' Entity ID type.
         """
         return pulumi.get(self, "custom_entity_id")
 
@@ -120,7 +120,7 @@ class AviatrixSamlEndpointArgs:
     @pulumi.getter(name="customSamlRequestTemplate")
     def custom_saml_request_template(self) -> Optional[pulumi.Input[str]]:
         """
-        Custom SAML Request Template.
+        Custom SAML Request Template in string.
         """
         return pulumi.get(self, "custom_saml_request_template")
 
@@ -132,7 +132,7 @@ class AviatrixSamlEndpointArgs:
     @pulumi.getter(name="idpMetadata")
     def idp_metadata(self) -> Optional[pulumi.Input[str]]:
         """
-        IDP Metadata.
+        The IDP Metadata from SAML provider. Required if `idp_metadata_type` is "Text" and should be unset if type is "URL". Normally the metadata is in XML format which may contain special characters. Best practice is to use the file function to read from a local Metadata XML file.
         """
         return pulumi.get(self, "idp_metadata")
 
@@ -144,7 +144,7 @@ class AviatrixSamlEndpointArgs:
     @pulumi.getter(name="idpMetadataUrl")
     def idp_metadata_url(self) -> Optional[pulumi.Input[str]]:
         """
-        IDP Metadata.
+        The IDP Metadata URL from SAML provider. Required if `idp_metadata_type` is "URL" and should be unset if type is "Text".
         """
         return pulumi.get(self, "idp_metadata_url")
 
@@ -156,7 +156,7 @@ class AviatrixSamlEndpointArgs:
     @pulumi.getter(name="rbacGroups")
     def rbac_groups(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of RBAC groups.
+        List of rbac groups. Required for controller login and "access_set_by" of "controller".
         """
         return pulumi.get(self, "rbac_groups")
 
@@ -192,15 +192,15 @@ class _AviatrixSamlEndpointState:
                  sign_authn_requests: Optional[pulumi.Input[bool]] = None):
         """
         Input properties used for looking up and filtering AviatrixSamlEndpoint resources.
-        :param pulumi.Input[str] access_set_by: Access type.
-        :param pulumi.Input[bool] controller_login: Switch to differentiate if it is for controller login.
-        :param pulumi.Input[str] custom_entity_id: Custom Entity ID. Required to be non-empty for 'Custom' Entity ID type, empty for 'Hostname'.
-        :param pulumi.Input[str] custom_saml_request_template: Custom SAML Request Template.
-        :param pulumi.Input[str] endpoint_name: SAML Endpoint Name.
-        :param pulumi.Input[str] idp_metadata: IDP Metadata.
-        :param pulumi.Input[str] idp_metadata_type: Type of IDP Metadata.
-        :param pulumi.Input[str] idp_metadata_url: IDP Metadata.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] rbac_groups: List of RBAC groups.
+        :param pulumi.Input[str] access_set_by: Access type. Valid values: "controller", "profile_attribute". Default value: "controller".
+        :param pulumi.Input[bool] controller_login: Valid values: true, false. Default value: false. Set true for creating a saml endpoint for controller login.
+        :param pulumi.Input[str] custom_entity_id: Custom Entity ID. Required to be non-empty for 'Custom' Entity ID type, empty for 'Hostname' Entity ID type.
+        :param pulumi.Input[str] custom_saml_request_template: Custom SAML Request Template in string.
+        :param pulumi.Input[str] endpoint_name: The SAML endpoint name.
+        :param pulumi.Input[str] idp_metadata: The IDP Metadata from SAML provider. Required if `idp_metadata_type` is "Text" and should be unset if type is "URL". Normally the metadata is in XML format which may contain special characters. Best practice is to use the file function to read from a local Metadata XML file.
+        :param pulumi.Input[str] idp_metadata_type: The IDP Metadata type. Can be either "Text" or "URL".
+        :param pulumi.Input[str] idp_metadata_url: The IDP Metadata URL from SAML provider. Required if `idp_metadata_type` is "URL" and should be unset if type is "Text".
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] rbac_groups: List of rbac groups. Required for controller login and "access_set_by" of "controller".
         :param pulumi.Input[bool] sign_authn_requests: Whether to sign SAML AuthnRequests
         """
         if access_set_by is not None:
@@ -228,7 +228,7 @@ class _AviatrixSamlEndpointState:
     @pulumi.getter(name="accessSetBy")
     def access_set_by(self) -> Optional[pulumi.Input[str]]:
         """
-        Access type.
+        Access type. Valid values: "controller", "profile_attribute". Default value: "controller".
         """
         return pulumi.get(self, "access_set_by")
 
@@ -240,7 +240,7 @@ class _AviatrixSamlEndpointState:
     @pulumi.getter(name="controllerLogin")
     def controller_login(self) -> Optional[pulumi.Input[bool]]:
         """
-        Switch to differentiate if it is for controller login.
+        Valid values: true, false. Default value: false. Set true for creating a saml endpoint for controller login.
         """
         return pulumi.get(self, "controller_login")
 
@@ -252,7 +252,7 @@ class _AviatrixSamlEndpointState:
     @pulumi.getter(name="customEntityId")
     def custom_entity_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Custom Entity ID. Required to be non-empty for 'Custom' Entity ID type, empty for 'Hostname'.
+        Custom Entity ID. Required to be non-empty for 'Custom' Entity ID type, empty for 'Hostname' Entity ID type.
         """
         return pulumi.get(self, "custom_entity_id")
 
@@ -264,7 +264,7 @@ class _AviatrixSamlEndpointState:
     @pulumi.getter(name="customSamlRequestTemplate")
     def custom_saml_request_template(self) -> Optional[pulumi.Input[str]]:
         """
-        Custom SAML Request Template.
+        Custom SAML Request Template in string.
         """
         return pulumi.get(self, "custom_saml_request_template")
 
@@ -276,7 +276,7 @@ class _AviatrixSamlEndpointState:
     @pulumi.getter(name="endpointName")
     def endpoint_name(self) -> Optional[pulumi.Input[str]]:
         """
-        SAML Endpoint Name.
+        The SAML endpoint name.
         """
         return pulumi.get(self, "endpoint_name")
 
@@ -288,7 +288,7 @@ class _AviatrixSamlEndpointState:
     @pulumi.getter(name="idpMetadata")
     def idp_metadata(self) -> Optional[pulumi.Input[str]]:
         """
-        IDP Metadata.
+        The IDP Metadata from SAML provider. Required if `idp_metadata_type` is "Text" and should be unset if type is "URL". Normally the metadata is in XML format which may contain special characters. Best practice is to use the file function to read from a local Metadata XML file.
         """
         return pulumi.get(self, "idp_metadata")
 
@@ -300,7 +300,7 @@ class _AviatrixSamlEndpointState:
     @pulumi.getter(name="idpMetadataType")
     def idp_metadata_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Type of IDP Metadata.
+        The IDP Metadata type. Can be either "Text" or "URL".
         """
         return pulumi.get(self, "idp_metadata_type")
 
@@ -312,7 +312,7 @@ class _AviatrixSamlEndpointState:
     @pulumi.getter(name="idpMetadataUrl")
     def idp_metadata_url(self) -> Optional[pulumi.Input[str]]:
         """
-        IDP Metadata.
+        The IDP Metadata URL from SAML provider. Required if `idp_metadata_type` is "URL" and should be unset if type is "Text".
         """
         return pulumi.get(self, "idp_metadata_url")
 
@@ -324,7 +324,7 @@ class _AviatrixSamlEndpointState:
     @pulumi.getter(name="rbacGroups")
     def rbac_groups(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of RBAC groups.
+        List of rbac groups. Required for controller login and "access_set_by" of "controller".
         """
         return pulumi.get(self, "rbac_groups")
 
@@ -362,18 +362,64 @@ class AviatrixSamlEndpoint(pulumi.CustomResource):
                  sign_authn_requests: Optional[pulumi.Input[bool]] = None,
                  __props__=None):
         """
-        Create a AviatrixSamlEndpoint resource with the given unique name, props, and options.
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS SAML Endpoint
+        test_saml_endpoint = aviatrix.AviatrixSamlEndpoint("testSamlEndpoint",
+            endpoint_name="saml-test",
+            idp_metadata_type="Text",
+            idp_metadata=(lambda path: open(path).read())("idp_metadata.xml"))
+        ```
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS SAML Endpoint using Metadata UDL
+        test_saml_endpoint = aviatrix.AviatrixSamlEndpoint("testSamlEndpoint",
+            endpoint_name="saml-test",
+            idp_metadata_type="URL",
+            idp_metadata_url="https://dev-xyzz.okta.com/app/asdfasdfwfwf/sso/saml/metadata")
+        ```
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS SAML Endpoint for Controller Login
+        test_saml_endpoint = aviatrix.AviatrixSamlEndpoint("testSamlEndpoint",
+            access_set_by="controller",
+            controller_login=True,
+            endpoint_name="saml-test",
+            idp_metadata=var["idp_metadata"],
+            idp_metadata_type="Text",
+            rbac_groups=[
+                "admin",
+                "read_only",
+            ])
+        ```
+
+        ## Import
+
+        **saml_endpoint** can be imported using the SAML `endpoint_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixSamlEndpoint:AviatrixSamlEndpoint test saml-test
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] access_set_by: Access type.
-        :param pulumi.Input[bool] controller_login: Switch to differentiate if it is for controller login.
-        :param pulumi.Input[str] custom_entity_id: Custom Entity ID. Required to be non-empty for 'Custom' Entity ID type, empty for 'Hostname'.
-        :param pulumi.Input[str] custom_saml_request_template: Custom SAML Request Template.
-        :param pulumi.Input[str] endpoint_name: SAML Endpoint Name.
-        :param pulumi.Input[str] idp_metadata: IDP Metadata.
-        :param pulumi.Input[str] idp_metadata_type: Type of IDP Metadata.
-        :param pulumi.Input[str] idp_metadata_url: IDP Metadata.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] rbac_groups: List of RBAC groups.
+        :param pulumi.Input[str] access_set_by: Access type. Valid values: "controller", "profile_attribute". Default value: "controller".
+        :param pulumi.Input[bool] controller_login: Valid values: true, false. Default value: false. Set true for creating a saml endpoint for controller login.
+        :param pulumi.Input[str] custom_entity_id: Custom Entity ID. Required to be non-empty for 'Custom' Entity ID type, empty for 'Hostname' Entity ID type.
+        :param pulumi.Input[str] custom_saml_request_template: Custom SAML Request Template in string.
+        :param pulumi.Input[str] endpoint_name: The SAML endpoint name.
+        :param pulumi.Input[str] idp_metadata: The IDP Metadata from SAML provider. Required if `idp_metadata_type` is "Text" and should be unset if type is "URL". Normally the metadata is in XML format which may contain special characters. Best practice is to use the file function to read from a local Metadata XML file.
+        :param pulumi.Input[str] idp_metadata_type: The IDP Metadata type. Can be either "Text" or "URL".
+        :param pulumi.Input[str] idp_metadata_url: The IDP Metadata URL from SAML provider. Required if `idp_metadata_type` is "URL" and should be unset if type is "Text".
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] rbac_groups: List of rbac groups. Required for controller login and "access_set_by" of "controller".
         :param pulumi.Input[bool] sign_authn_requests: Whether to sign SAML AuthnRequests
         """
         ...
@@ -383,7 +429,53 @@ class AviatrixSamlEndpoint(pulumi.CustomResource):
                  args: AviatrixSamlEndpointArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixSamlEndpoint resource with the given unique name, props, and options.
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS SAML Endpoint
+        test_saml_endpoint = aviatrix.AviatrixSamlEndpoint("testSamlEndpoint",
+            endpoint_name="saml-test",
+            idp_metadata_type="Text",
+            idp_metadata=(lambda path: open(path).read())("idp_metadata.xml"))
+        ```
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS SAML Endpoint using Metadata UDL
+        test_saml_endpoint = aviatrix.AviatrixSamlEndpoint("testSamlEndpoint",
+            endpoint_name="saml-test",
+            idp_metadata_type="URL",
+            idp_metadata_url="https://dev-xyzz.okta.com/app/asdfasdfwfwf/sso/saml/metadata")
+        ```
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix AWS SAML Endpoint for Controller Login
+        test_saml_endpoint = aviatrix.AviatrixSamlEndpoint("testSamlEndpoint",
+            access_set_by="controller",
+            controller_login=True,
+            endpoint_name="saml-test",
+            idp_metadata=var["idp_metadata"],
+            idp_metadata_type="Text",
+            rbac_groups=[
+                "admin",
+                "read_only",
+            ])
+        ```
+
+        ## Import
+
+        **saml_endpoint** can be imported using the SAML `endpoint_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixSamlEndpoint:AviatrixSamlEndpoint test saml-test
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixSamlEndpointArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -459,15 +551,15 @@ class AviatrixSamlEndpoint(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] access_set_by: Access type.
-        :param pulumi.Input[bool] controller_login: Switch to differentiate if it is for controller login.
-        :param pulumi.Input[str] custom_entity_id: Custom Entity ID. Required to be non-empty for 'Custom' Entity ID type, empty for 'Hostname'.
-        :param pulumi.Input[str] custom_saml_request_template: Custom SAML Request Template.
-        :param pulumi.Input[str] endpoint_name: SAML Endpoint Name.
-        :param pulumi.Input[str] idp_metadata: IDP Metadata.
-        :param pulumi.Input[str] idp_metadata_type: Type of IDP Metadata.
-        :param pulumi.Input[str] idp_metadata_url: IDP Metadata.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] rbac_groups: List of RBAC groups.
+        :param pulumi.Input[str] access_set_by: Access type. Valid values: "controller", "profile_attribute". Default value: "controller".
+        :param pulumi.Input[bool] controller_login: Valid values: true, false. Default value: false. Set true for creating a saml endpoint for controller login.
+        :param pulumi.Input[str] custom_entity_id: Custom Entity ID. Required to be non-empty for 'Custom' Entity ID type, empty for 'Hostname' Entity ID type.
+        :param pulumi.Input[str] custom_saml_request_template: Custom SAML Request Template in string.
+        :param pulumi.Input[str] endpoint_name: The SAML endpoint name.
+        :param pulumi.Input[str] idp_metadata: The IDP Metadata from SAML provider. Required if `idp_metadata_type` is "Text" and should be unset if type is "URL". Normally the metadata is in XML format which may contain special characters. Best practice is to use the file function to read from a local Metadata XML file.
+        :param pulumi.Input[str] idp_metadata_type: The IDP Metadata type. Can be either "Text" or "URL".
+        :param pulumi.Input[str] idp_metadata_url: The IDP Metadata URL from SAML provider. Required if `idp_metadata_type` is "URL" and should be unset if type is "Text".
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] rbac_groups: List of rbac groups. Required for controller login and "access_set_by" of "controller".
         :param pulumi.Input[bool] sign_authn_requests: Whether to sign SAML AuthnRequests
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -490,7 +582,7 @@ class AviatrixSamlEndpoint(pulumi.CustomResource):
     @pulumi.getter(name="accessSetBy")
     def access_set_by(self) -> pulumi.Output[Optional[str]]:
         """
-        Access type.
+        Access type. Valid values: "controller", "profile_attribute". Default value: "controller".
         """
         return pulumi.get(self, "access_set_by")
 
@@ -498,7 +590,7 @@ class AviatrixSamlEndpoint(pulumi.CustomResource):
     @pulumi.getter(name="controllerLogin")
     def controller_login(self) -> pulumi.Output[Optional[bool]]:
         """
-        Switch to differentiate if it is for controller login.
+        Valid values: true, false. Default value: false. Set true for creating a saml endpoint for controller login.
         """
         return pulumi.get(self, "controller_login")
 
@@ -506,7 +598,7 @@ class AviatrixSamlEndpoint(pulumi.CustomResource):
     @pulumi.getter(name="customEntityId")
     def custom_entity_id(self) -> pulumi.Output[Optional[str]]:
         """
-        Custom Entity ID. Required to be non-empty for 'Custom' Entity ID type, empty for 'Hostname'.
+        Custom Entity ID. Required to be non-empty for 'Custom' Entity ID type, empty for 'Hostname' Entity ID type.
         """
         return pulumi.get(self, "custom_entity_id")
 
@@ -514,7 +606,7 @@ class AviatrixSamlEndpoint(pulumi.CustomResource):
     @pulumi.getter(name="customSamlRequestTemplate")
     def custom_saml_request_template(self) -> pulumi.Output[Optional[str]]:
         """
-        Custom SAML Request Template.
+        Custom SAML Request Template in string.
         """
         return pulumi.get(self, "custom_saml_request_template")
 
@@ -522,7 +614,7 @@ class AviatrixSamlEndpoint(pulumi.CustomResource):
     @pulumi.getter(name="endpointName")
     def endpoint_name(self) -> pulumi.Output[str]:
         """
-        SAML Endpoint Name.
+        The SAML endpoint name.
         """
         return pulumi.get(self, "endpoint_name")
 
@@ -530,7 +622,7 @@ class AviatrixSamlEndpoint(pulumi.CustomResource):
     @pulumi.getter(name="idpMetadata")
     def idp_metadata(self) -> pulumi.Output[Optional[str]]:
         """
-        IDP Metadata.
+        The IDP Metadata from SAML provider. Required if `idp_metadata_type` is "Text" and should be unset if type is "URL". Normally the metadata is in XML format which may contain special characters. Best practice is to use the file function to read from a local Metadata XML file.
         """
         return pulumi.get(self, "idp_metadata")
 
@@ -538,7 +630,7 @@ class AviatrixSamlEndpoint(pulumi.CustomResource):
     @pulumi.getter(name="idpMetadataType")
     def idp_metadata_type(self) -> pulumi.Output[str]:
         """
-        Type of IDP Metadata.
+        The IDP Metadata type. Can be either "Text" or "URL".
         """
         return pulumi.get(self, "idp_metadata_type")
 
@@ -546,7 +638,7 @@ class AviatrixSamlEndpoint(pulumi.CustomResource):
     @pulumi.getter(name="idpMetadataUrl")
     def idp_metadata_url(self) -> pulumi.Output[Optional[str]]:
         """
-        IDP Metadata.
+        The IDP Metadata URL from SAML provider. Required if `idp_metadata_type` is "URL" and should be unset if type is "Text".
         """
         return pulumi.get(self, "idp_metadata_url")
 
@@ -554,7 +646,7 @@ class AviatrixSamlEndpoint(pulumi.CustomResource):
     @pulumi.getter(name="rbacGroups")
     def rbac_groups(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        List of RBAC groups.
+        List of rbac groups. Required for controller login and "access_set_by" of "controller".
         """
         return pulumi.get(self, "rbac_groups")
 

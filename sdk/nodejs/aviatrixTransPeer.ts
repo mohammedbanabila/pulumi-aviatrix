@@ -4,6 +4,31 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_trans_peer** resource allows the creation and management of Aviatrix [Encrypted Transitive Peering](https://docs.aviatrix.com/HowTos/TransPeering.html).
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix AWS Transitive Peering
+ * const testTransPeer = new aviatrix.AviatrixTransPeer("test_trans_peer", {
+ *     nexthop: "avtx-us-east-gw2",
+ *     reachableCidr: "10.152.0.0/16",
+ *     source: "avtx-us-east-gw1",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **trans_peer** can be imported using the `source`, `nexthop` and `reachable_cidr`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixTransPeer:AviatrixTransPeer test source~nexthop~reachable_cidr
+ * ```
+ */
 export class AviatrixTransPeer extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixTransPeer resource's state with the given name, ID, and optional extra

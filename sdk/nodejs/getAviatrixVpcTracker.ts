@@ -2,9 +2,31 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * Use this data source to get the list of VPC's for use in other resources.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Aviatrix VPC Tracker Data Source
+ * const foo = pulumi.output(aviatrix.getAviatrixVpcTracker({
+ *     accountName: "bar",
+ *     cidr: "10.0.0.1/24",
+ *     cloudType: 1,
+ *     region: "us-west-1",
+ * }));
+ * ```
+ * ## Notes
+ *
+ * * Please be aware this data source could take up to 20 minutes to refresh depending on the number of VPCs and cloud accounts.
+ */
 export function getAviatrixVpcTracker(args?: GetAviatrixVpcTrackerArgs, opts?: pulumi.InvokeOptions): Promise<GetAviatrixVpcTrackerResult> {
     args = args || {};
     if (!opts) {
@@ -24,9 +46,21 @@ export function getAviatrixVpcTracker(args?: GetAviatrixVpcTrackerArgs, opts?: p
  * A collection of arguments for invoking getAviatrixVpcTracker.
  */
 export interface GetAviatrixVpcTrackerArgs {
+    /**
+     * Filters VPC list by access account name.
+     */
     accountName?: string;
+    /**
+     * Filters VPC list by CIDR (AWS/Azure only).
+     */
     cidr?: string;
+    /**
+     * Filters VPC list by cloud provider id. For example, cloudType = 1 will give all AWS VPCs.
+     */
     cloudType?: number;
+    /**
+     * Filters VPC list by region (AWS/Azure only).
+     */
     region?: string;
 }
 
@@ -34,14 +68,29 @@ export interface GetAviatrixVpcTrackerArgs {
  * A collection of values returned by getAviatrixVpcTracker.
  */
 export interface GetAviatrixVpcTrackerResult {
+    /**
+     * Aviatrix access account associated with the VPC.
+     */
     readonly accountName?: string;
+    /**
+     * Subnet CIDR.
+     */
     readonly cidr?: string;
+    /**
+     * Cloud provider id hosting this VPC.
+     */
     readonly cloudType?: number;
     /**
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * Subnet region.
+     */
     readonly region?: string;
+    /**
+     * List of VPCs from the VPC tracker.
+     */
     readonly vpcLists: outputs.GetAviatrixVpcTrackerVpcList[];
 }
 
@@ -53,8 +102,20 @@ export function getAviatrixVpcTrackerOutput(args?: GetAviatrixVpcTrackerOutputAr
  * A collection of arguments for invoking getAviatrixVpcTracker.
  */
 export interface GetAviatrixVpcTrackerOutputArgs {
+    /**
+     * Filters VPC list by access account name.
+     */
     accountName?: pulumi.Input<string>;
+    /**
+     * Filters VPC list by CIDR (AWS/Azure only).
+     */
     cidr?: pulumi.Input<string>;
+    /**
+     * Filters VPC list by cloud provider id. For example, cloudType = 1 will give all AWS VPCs.
+     */
     cloudType?: pulumi.Input<number>;
+    /**
+     * Filters VPC list by region (AWS/Azure only).
+     */
     region?: pulumi.Input<string>;
 }

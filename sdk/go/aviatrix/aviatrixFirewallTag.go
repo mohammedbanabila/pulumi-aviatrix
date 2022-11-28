@@ -11,12 +11,59 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_firewall_tag** resource allows the creation and management of [Aviatrix Stateful Firewall tags](https://docs.aviatrix.com/HowTos/tag_firewall.html) for tag-based security for gateways.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixFirewallTag(ctx, "testFirewallTag", &aviatrix.AviatrixFirewallTagArgs{
+//				CidrLists: AviatrixFirewallTagCidrListArray{
+//					&AviatrixFirewallTagCidrListArgs{
+//						Cidr:        pulumi.String("10.1.0.0/24"),
+//						CidrTagName: pulumi.String("a1"),
+//					},
+//					&AviatrixFirewallTagCidrListArgs{
+//						Cidr:        pulumi.String("10.2.0.0/24"),
+//						CidrTagName: pulumi.String("b1"),
+//					},
+//				},
+//				FirewallTag: pulumi.String("test-firewall-tag"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **firewall_tag** can be imported using the `firewall_tag`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixFirewallTag:AviatrixFirewallTag test firewall_tag
+//
+// ```
 type AviatrixFirewallTag struct {
 	pulumi.CustomResourceState
 
-	// A JSON file with information of 'cidr_tag_name' and 'cidr'.
+	// Dynamic block representing a CIDR to filter, and a name to identify it:
 	CidrLists AviatrixFirewallTagCidrListArrayOutput `pulumi:"cidrLists"`
-	// This parameter represents the name of a Cloud-Account in Aviatrix controller.
+	// Name of the stateful firewall tag to be created.
 	FirewallTag pulumi.StringOutput `pulumi:"firewallTag"`
 }
 
@@ -53,16 +100,16 @@ func GetAviatrixFirewallTag(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixFirewallTag resources.
 type aviatrixFirewallTagState struct {
-	// A JSON file with information of 'cidr_tag_name' and 'cidr'.
+	// Dynamic block representing a CIDR to filter, and a name to identify it:
 	CidrLists []AviatrixFirewallTagCidrList `pulumi:"cidrLists"`
-	// This parameter represents the name of a Cloud-Account in Aviatrix controller.
+	// Name of the stateful firewall tag to be created.
 	FirewallTag *string `pulumi:"firewallTag"`
 }
 
 type AviatrixFirewallTagState struct {
-	// A JSON file with information of 'cidr_tag_name' and 'cidr'.
+	// Dynamic block representing a CIDR to filter, and a name to identify it:
 	CidrLists AviatrixFirewallTagCidrListArrayInput
-	// This parameter represents the name of a Cloud-Account in Aviatrix controller.
+	// Name of the stateful firewall tag to be created.
 	FirewallTag pulumi.StringPtrInput
 }
 
@@ -71,17 +118,17 @@ func (AviatrixFirewallTagState) ElementType() reflect.Type {
 }
 
 type aviatrixFirewallTagArgs struct {
-	// A JSON file with information of 'cidr_tag_name' and 'cidr'.
+	// Dynamic block representing a CIDR to filter, and a name to identify it:
 	CidrLists []AviatrixFirewallTagCidrList `pulumi:"cidrLists"`
-	// This parameter represents the name of a Cloud-Account in Aviatrix controller.
+	// Name of the stateful firewall tag to be created.
 	FirewallTag string `pulumi:"firewallTag"`
 }
 
 // The set of arguments for constructing a AviatrixFirewallTag resource.
 type AviatrixFirewallTagArgs struct {
-	// A JSON file with information of 'cidr_tag_name' and 'cidr'.
+	// Dynamic block representing a CIDR to filter, and a name to identify it:
 	CidrLists AviatrixFirewallTagCidrListArrayInput
-	// This parameter represents the name of a Cloud-Account in Aviatrix controller.
+	// Name of the stateful firewall tag to be created.
 	FirewallTag pulumi.StringInput
 }
 
@@ -172,12 +219,12 @@ func (o AviatrixFirewallTagOutput) ToAviatrixFirewallTagOutputWithContext(ctx co
 	return o
 }
 
-// A JSON file with information of 'cidr_tag_name' and 'cidr'.
+// Dynamic block representing a CIDR to filter, and a name to identify it:
 func (o AviatrixFirewallTagOutput) CidrLists() AviatrixFirewallTagCidrListArrayOutput {
 	return o.ApplyT(func(v *AviatrixFirewallTag) AviatrixFirewallTagCidrListArrayOutput { return v.CidrLists }).(AviatrixFirewallTagCidrListArrayOutput)
 }
 
-// This parameter represents the name of a Cloud-Account in Aviatrix controller.
+// Name of the stateful firewall tag to be created.
 func (o AviatrixFirewallTagOutput) FirewallTag() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixFirewallTag) pulumi.StringOutput { return v.FirewallTag }).(pulumi.StringOutput)
 }

@@ -9,11 +9,40 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_segmentation_security_domain** resource handles creation of [Transit Segmentation](https://docs.aviatrix.com/HowTos/transit_segmentation_faq.html) Security Domains.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Segmentation Security Domain
+    ///     var testSegmentationSecurityDomain = new Aviatrix.AviatrixSegmentationSecurityDomain("testSegmentationSecurityDomain", new()
+    ///     {
+    ///         DomainName = "domain-a",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **aviatrix_segmentation_security_domain** can be imported using the `domain_name`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixSegmentationSecurityDomain:AviatrixSegmentationSecurityDomain test domain_name
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixSegmentationSecurityDomain:AviatrixSegmentationSecurityDomain")]
     public partial class AviatrixSegmentationSecurityDomain : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Security domain name.
+        /// Name of the Security Domain.
         /// </summary>
         [Output("domainName")]
         public Output<string> DomainName { get; private set; } = null!;
@@ -66,7 +95,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixSegmentationSecurityDomainArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Security domain name.
+        /// Name of the Security Domain.
         /// </summary>
         [Input("domainName", required: true)]
         public Input<string> DomainName { get; set; } = null!;
@@ -80,7 +109,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixSegmentationSecurityDomainState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Security domain name.
+        /// Name of the Security Domain.
         /// </summary>
         [Input("domainName")]
         public Input<string>? DomainName { get; set; }

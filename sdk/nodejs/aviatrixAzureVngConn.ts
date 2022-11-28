@@ -4,6 +4,30 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_azure_vng_conn** resource allows the creation and management of the connection between Aviatrix Transit Gateway and Azure VNG.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Attach an Azure VNG to an Aviatrix Transit Gateway
+ * const test = new aviatrix.AviatrixAzureVngConn("test", {
+ *     connectionName: "connection",
+ *     primaryGatewayName: "primary-gateway",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **aviatrix_azure_vng_conn** can be imported using the `connection_name`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixAzureVngConn:AviatrixAzureVngConn test connection
+ * ```
+ */
 export class AviatrixAzureVngConn extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixAzureVngConn resource's state with the given name, ID, and optional extra
@@ -33,23 +57,23 @@ export class AviatrixAzureVngConn extends pulumi.CustomResource {
     }
 
     /**
-     * VNG attached or not
+     * The status of the connection.
      */
     public /*out*/ readonly attached!: pulumi.Output<boolean>;
     /**
-     * Connection name
+     * Connection name.
      */
     public readonly connectionName!: pulumi.Output<string>;
     /**
-     * Primary gateway name
+     * Primary Aviatrix transit gateway name.
      */
     public readonly primaryGatewayName!: pulumi.Output<string>;
     /**
-     * VNG name
+     * Name of Azure VNG.
      */
     public /*out*/ readonly vngName!: pulumi.Output<string>;
     /**
-     * VPC ID
+     * VPC ID.
      */
     public /*out*/ readonly vpcId!: pulumi.Output<string>;
 
@@ -95,23 +119,23 @@ export class AviatrixAzureVngConn extends pulumi.CustomResource {
  */
 export interface AviatrixAzureVngConnState {
     /**
-     * VNG attached or not
+     * The status of the connection.
      */
     attached?: pulumi.Input<boolean>;
     /**
-     * Connection name
+     * Connection name.
      */
     connectionName?: pulumi.Input<string>;
     /**
-     * Primary gateway name
+     * Primary Aviatrix transit gateway name.
      */
     primaryGatewayName?: pulumi.Input<string>;
     /**
-     * VNG name
+     * Name of Azure VNG.
      */
     vngName?: pulumi.Input<string>;
     /**
-     * VPC ID
+     * VPC ID.
      */
     vpcId?: pulumi.Input<string>;
 }
@@ -121,11 +145,11 @@ export interface AviatrixAzureVngConnState {
  */
 export interface AviatrixAzureVngConnArgs {
     /**
-     * Connection name
+     * Connection name.
      */
     connectionName: pulumi.Input<string>;
     /**
-     * Primary gateway name
+     * Primary Aviatrix transit gateway name.
      */
     primaryGatewayName: pulumi.Input<string>;
 }

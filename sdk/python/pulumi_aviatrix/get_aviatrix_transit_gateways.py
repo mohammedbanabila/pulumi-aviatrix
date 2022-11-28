@@ -32,6 +32,9 @@ class GetAviatrixTransitGatewaysResult:
     @property
     @pulumi.getter(name="gatewayLists")
     def gateway_lists(self) -> Sequence['outputs.GetAviatrixTransitGatewaysGatewayListResult']:
+        """
+        The list of all transit gateways
+        """
         return pulumi.get(self, "gateway_lists")
 
     @property
@@ -55,7 +58,7 @@ class AwaitableGetAviatrixTransitGatewaysResult(GetAviatrixTransitGatewaysResult
 
 def get_aviatrix_transit_gateways(opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetAviatrixTransitGatewaysResult:
     """
-    Use this data source to access information about an existing resource.
+    The **aviatrix_transit_gateways** data source provides details about all transit gateways created by the Aviatrix Controller.
     """
     __args__ = dict()
     opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)

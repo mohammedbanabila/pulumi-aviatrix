@@ -9,29 +9,38 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// ## Import
+    /// 
+    /// **fqdn** can be imported using the `fqdn_tag`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixFqdn:AviatrixFqdn test fqdn_tag
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixFqdn:AviatrixFqdn")]
     public partial class AviatrixFqdn : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// A list of one or more domain names/tag rules.
+        /// One or more domain names in a list with details as listed below:
         /// </summary>
         [Output("domainNames")]
         public Output<ImmutableArray<Outputs.AviatrixFqdnDomainName>> DomainNames { get; private set; } = null!;
 
         /// <summary>
-        /// FQDN Filter Tag Status. Valid values: true or false.
+        /// FQDN Filter tag status. Valid values: true, false.
         /// </summary>
         [Output("fqdnEnabled")]
         public Output<bool?> FqdnEnabled { get; private set; } = null!;
 
         /// <summary>
-        /// Specify the tag color to be a white-list tag or black-list tag. 'white' or 'black'
+        /// Specify FQDN mode: whitelist or blacklist. Valid values: "white", "black".
         /// </summary>
         [Output("fqdnMode")]
         public Output<string?> FqdnMode { get; private set; } = null!;
 
         /// <summary>
-        /// FQDN Filter Tag Name.
+        /// FQDN Filter tag name.
         /// </summary>
         [Output("fqdnTag")]
         public Output<string> FqdnTag { get; private set; } = null!;
@@ -43,8 +52,7 @@ namespace Pulumi.Aviatrix
         public Output<ImmutableArray<Outputs.AviatrixFqdnGwFilterTagList>> GwFilterTagLists { get; private set; } = null!;
 
         /// <summary>
-        /// Enable to manage domain name rules in-line. If false, domain name rules must be managed using `aviatrix_fqdn_tag_rule`
-        /// resources.
+        /// Enable to manage domain name rules in-line. If false, domain name rules must be managed using `aviatrix.AviatrixFqdnTagRule` resources. Default: true. Valid values: true, false. Available in provider version R2.17+.
         /// </summary>
         [Output("manageDomainNames")]
         public Output<bool?> ManageDomainNames { get; private set; } = null!;
@@ -100,7 +108,7 @@ namespace Pulumi.Aviatrix
         private InputList<Inputs.AviatrixFqdnDomainNameArgs>? _domainNames;
 
         /// <summary>
-        /// A list of one or more domain names/tag rules.
+        /// One or more domain names in a list with details as listed below:
         /// </summary>
         public InputList<Inputs.AviatrixFqdnDomainNameArgs> DomainNames
         {
@@ -109,19 +117,19 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// FQDN Filter Tag Status. Valid values: true or false.
+        /// FQDN Filter tag status. Valid values: true, false.
         /// </summary>
         [Input("fqdnEnabled")]
         public Input<bool>? FqdnEnabled { get; set; }
 
         /// <summary>
-        /// Specify the tag color to be a white-list tag or black-list tag. 'white' or 'black'
+        /// Specify FQDN mode: whitelist or blacklist. Valid values: "white", "black".
         /// </summary>
         [Input("fqdnMode")]
         public Input<string>? FqdnMode { get; set; }
 
         /// <summary>
-        /// FQDN Filter Tag Name.
+        /// FQDN Filter tag name.
         /// </summary>
         [Input("fqdnTag", required: true)]
         public Input<string> FqdnTag { get; set; } = null!;
@@ -139,8 +147,7 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Enable to manage domain name rules in-line. If false, domain name rules must be managed using `aviatrix_fqdn_tag_rule`
-        /// resources.
+        /// Enable to manage domain name rules in-line. If false, domain name rules must be managed using `aviatrix.AviatrixFqdnTagRule` resources. Default: true. Valid values: true, false. Available in provider version R2.17+.
         /// </summary>
         [Input("manageDomainNames")]
         public Input<bool>? ManageDomainNames { get; set; }
@@ -157,7 +164,7 @@ namespace Pulumi.Aviatrix
         private InputList<Inputs.AviatrixFqdnDomainNameGetArgs>? _domainNames;
 
         /// <summary>
-        /// A list of one or more domain names/tag rules.
+        /// One or more domain names in a list with details as listed below:
         /// </summary>
         public InputList<Inputs.AviatrixFqdnDomainNameGetArgs> DomainNames
         {
@@ -166,19 +173,19 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// FQDN Filter Tag Status. Valid values: true or false.
+        /// FQDN Filter tag status. Valid values: true, false.
         /// </summary>
         [Input("fqdnEnabled")]
         public Input<bool>? FqdnEnabled { get; set; }
 
         /// <summary>
-        /// Specify the tag color to be a white-list tag or black-list tag. 'white' or 'black'
+        /// Specify FQDN mode: whitelist or blacklist. Valid values: "white", "black".
         /// </summary>
         [Input("fqdnMode")]
         public Input<string>? FqdnMode { get; set; }
 
         /// <summary>
-        /// FQDN Filter Tag Name.
+        /// FQDN Filter tag name.
         /// </summary>
         [Input("fqdnTag")]
         public Input<string>? FqdnTag { get; set; }
@@ -196,8 +203,7 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Enable to manage domain name rules in-line. If false, domain name rules must be managed using `aviatrix_fqdn_tag_rule`
-        /// resources.
+        /// Enable to manage domain name rules in-line. If false, domain name rules must be managed using `aviatrix.AviatrixFqdnTagRule` resources. Default: true. Valid values: true, false. Available in provider version R2.17+.
         /// </summary>
         [Input("manageDomainNames")]
         public Input<bool>? ManageDomainNames { get; set; }

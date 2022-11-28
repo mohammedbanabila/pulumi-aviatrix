@@ -21,9 +21,9 @@ class AviatrixPrivateModeMulticloudEndpointArgs:
         """
         The set of arguments for constructing a AviatrixPrivateModeMulticloudEndpoint resource.
         :param pulumi.Input[str] account_name: Name of the access account.
-        :param pulumi.Input[str] controller_lb_vpc_id: ID of the VPC with the Controller load balancer.
-        :param pulumi.Input[str] region: Name of the VPC region.
-        :param pulumi.Input[str] vpc_id: VPC ID.
+        :param pulumi.Input[str] controller_lb_vpc_id: ID of the VPC containing a Private Mode controller load balancer.
+        :param pulumi.Input[str] region: Region of the VPC.
+        :param pulumi.Input[str] vpc_id: ID of the VPC to create the endpoint in.
         """
         pulumi.set(__self__, "account_name", account_name)
         pulumi.set(__self__, "controller_lb_vpc_id", controller_lb_vpc_id)
@@ -46,7 +46,7 @@ class AviatrixPrivateModeMulticloudEndpointArgs:
     @pulumi.getter(name="controllerLbVpcId")
     def controller_lb_vpc_id(self) -> pulumi.Input[str]:
         """
-        ID of the VPC with the Controller load balancer.
+        ID of the VPC containing a Private Mode controller load balancer.
         """
         return pulumi.get(self, "controller_lb_vpc_id")
 
@@ -58,7 +58,7 @@ class AviatrixPrivateModeMulticloudEndpointArgs:
     @pulumi.getter
     def region(self) -> pulumi.Input[str]:
         """
-        Name of the VPC region.
+        Region of the VPC.
         """
         return pulumi.get(self, "region")
 
@@ -70,7 +70,7 @@ class AviatrixPrivateModeMulticloudEndpointArgs:
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> pulumi.Input[str]:
         """
-        VPC ID.
+        ID of the VPC to create the endpoint in.
         """
         return pulumi.get(self, "vpc_id")
 
@@ -90,10 +90,10 @@ class _AviatrixPrivateModeMulticloudEndpointState:
         """
         Input properties used for looking up and filtering AviatrixPrivateModeMulticloudEndpoint resources.
         :param pulumi.Input[str] account_name: Name of the access account.
-        :param pulumi.Input[str] controller_lb_vpc_id: ID of the VPC with the Controller load balancer.
-        :param pulumi.Input[str] dns_entry: DNS entry of this endpoint.
-        :param pulumi.Input[str] region: Name of the VPC region.
-        :param pulumi.Input[str] vpc_id: VPC ID.
+        :param pulumi.Input[str] controller_lb_vpc_id: ID of the VPC containing a Private Mode controller load balancer.
+        :param pulumi.Input[str] dns_entry: DNS entry of the endpoint.
+        :param pulumi.Input[str] region: Region of the VPC.
+        :param pulumi.Input[str] vpc_id: ID of the VPC to create the endpoint in.
         """
         if account_name is not None:
             pulumi.set(__self__, "account_name", account_name)
@@ -122,7 +122,7 @@ class _AviatrixPrivateModeMulticloudEndpointState:
     @pulumi.getter(name="controllerLbVpcId")
     def controller_lb_vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
-        ID of the VPC with the Controller load balancer.
+        ID of the VPC containing a Private Mode controller load balancer.
         """
         return pulumi.get(self, "controller_lb_vpc_id")
 
@@ -134,7 +134,7 @@ class _AviatrixPrivateModeMulticloudEndpointState:
     @pulumi.getter(name="dnsEntry")
     def dns_entry(self) -> Optional[pulumi.Input[str]]:
         """
-        DNS entry of this endpoint.
+        DNS entry of the endpoint.
         """
         return pulumi.get(self, "dns_entry")
 
@@ -146,7 +146,7 @@ class _AviatrixPrivateModeMulticloudEndpointState:
     @pulumi.getter
     def region(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the VPC region.
+        Region of the VPC.
         """
         return pulumi.get(self, "region")
 
@@ -158,7 +158,7 @@ class _AviatrixPrivateModeMulticloudEndpointState:
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
-        VPC ID.
+        ID of the VPC to create the endpoint in.
         """
         return pulumi.get(self, "vpc_id")
 
@@ -178,13 +178,36 @@ class AviatrixPrivateModeMulticloudEndpoint(pulumi.CustomResource):
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AviatrixPrivateModeMulticloudEndpoint resource with the given unique name, props, and options.
+        The **aviatrix_private_mode_multicloud_endpoint** resource allows management of a Private Mode multicloud endpoint. This resource is available as of provider version R2.23+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Controller Private Mode config
+        test = aviatrix.AviatrixPrivateModeMulticloudEndpoint("test",
+            account_name="devops",
+            controller_lb_vpc_id="vpc-abcdefg",
+            region="us-east-1",
+            vpc_id="vpc-abcdef")
+        ```
+
+        ## Import
+
+        **aviatrix_private_mode_multicloud_endpoint** can be imported using the `vpc_id`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixPrivateModeMulticloudEndpoint:AviatrixPrivateModeMulticloudEndpoint test vpc-1234567
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] account_name: Name of the access account.
-        :param pulumi.Input[str] controller_lb_vpc_id: ID of the VPC with the Controller load balancer.
-        :param pulumi.Input[str] region: Name of the VPC region.
-        :param pulumi.Input[str] vpc_id: VPC ID.
+        :param pulumi.Input[str] controller_lb_vpc_id: ID of the VPC containing a Private Mode controller load balancer.
+        :param pulumi.Input[str] region: Region of the VPC.
+        :param pulumi.Input[str] vpc_id: ID of the VPC to create the endpoint in.
         """
         ...
     @overload
@@ -193,7 +216,30 @@ class AviatrixPrivateModeMulticloudEndpoint(pulumi.CustomResource):
                  args: AviatrixPrivateModeMulticloudEndpointArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixPrivateModeMulticloudEndpoint resource with the given unique name, props, and options.
+        The **aviatrix_private_mode_multicloud_endpoint** resource allows management of a Private Mode multicloud endpoint. This resource is available as of provider version R2.23+.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Controller Private Mode config
+        test = aviatrix.AviatrixPrivateModeMulticloudEndpoint("test",
+            account_name="devops",
+            controller_lb_vpc_id="vpc-abcdefg",
+            region="us-east-1",
+            vpc_id="vpc-abcdef")
+        ```
+
+        ## Import
+
+        **aviatrix_private_mode_multicloud_endpoint** can be imported using the `vpc_id`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixPrivateModeMulticloudEndpoint:AviatrixPrivateModeMulticloudEndpoint test vpc-1234567
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixPrivateModeMulticloudEndpointArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -258,10 +304,10 @@ class AviatrixPrivateModeMulticloudEndpoint(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] account_name: Name of the access account.
-        :param pulumi.Input[str] controller_lb_vpc_id: ID of the VPC with the Controller load balancer.
-        :param pulumi.Input[str] dns_entry: DNS entry of this endpoint.
-        :param pulumi.Input[str] region: Name of the VPC region.
-        :param pulumi.Input[str] vpc_id: VPC ID.
+        :param pulumi.Input[str] controller_lb_vpc_id: ID of the VPC containing a Private Mode controller load balancer.
+        :param pulumi.Input[str] dns_entry: DNS entry of the endpoint.
+        :param pulumi.Input[str] region: Region of the VPC.
+        :param pulumi.Input[str] vpc_id: ID of the VPC to create the endpoint in.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -286,7 +332,7 @@ class AviatrixPrivateModeMulticloudEndpoint(pulumi.CustomResource):
     @pulumi.getter(name="controllerLbVpcId")
     def controller_lb_vpc_id(self) -> pulumi.Output[str]:
         """
-        ID of the VPC with the Controller load balancer.
+        ID of the VPC containing a Private Mode controller load balancer.
         """
         return pulumi.get(self, "controller_lb_vpc_id")
 
@@ -294,7 +340,7 @@ class AviatrixPrivateModeMulticloudEndpoint(pulumi.CustomResource):
     @pulumi.getter(name="dnsEntry")
     def dns_entry(self) -> pulumi.Output[str]:
         """
-        DNS entry of this endpoint.
+        DNS entry of the endpoint.
         """
         return pulumi.get(self, "dns_entry")
 
@@ -302,7 +348,7 @@ class AviatrixPrivateModeMulticloudEndpoint(pulumi.CustomResource):
     @pulumi.getter
     def region(self) -> pulumi.Output[str]:
         """
-        Name of the VPC region.
+        Region of the VPC.
         """
         return pulumi.get(self, "region")
 
@@ -310,7 +356,7 @@ class AviatrixPrivateModeMulticloudEndpoint(pulumi.CustomResource):
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> pulumi.Output[str]:
         """
-        VPC ID.
+        ID of the VPC to create the endpoint in.
         """
         return pulumi.get(self, "vpc_id")
 

@@ -9,17 +9,47 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_firewall_management_access** resource allows the management of which resource to permit visibility into the Transit (FireNet) VPC.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Firewall Management Access
+    ///     var testFirewallManagementAccess = new Aviatrix.AviatrixFirewallManagementAccess("testFirewallManagementAccess", new()
+    ///     {
+    ///         ManagementAccessResourceName = "SPOKE:spoke-gw",
+    ///         TransitFirenetGatewayName = "transit-gw",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **firewall_management_access** can be imported using the `transit_firenet_gateway_name`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixFirewallManagementAccess:AviatrixFirewallManagementAccess test transit_firenet_gateway_name
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixFirewallManagementAccess:AviatrixFirewallManagementAccess")]
     public partial class AviatrixFirewallManagementAccess : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Name of the resource to be enabled firewall management access.
+        /// Name of the resource to enable Firewall Management Access.
         /// </summary>
         [Output("managementAccessResourceName")]
         public Output<string> ManagementAccessResourceName { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the transit firenet gateway.
+        /// Name of the Transit FireNet-enabled transit gateway. Currently supports AWS(1) and Azure(8) providers.
         /// </summary>
         [Output("transitFirenetGatewayName")]
         public Output<string> TransitFirenetGatewayName { get; private set; } = null!;
@@ -72,13 +102,13 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixFirewallManagementAccessArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Name of the resource to be enabled firewall management access.
+        /// Name of the resource to enable Firewall Management Access.
         /// </summary>
         [Input("managementAccessResourceName", required: true)]
         public Input<string> ManagementAccessResourceName { get; set; } = null!;
 
         /// <summary>
-        /// Name of the transit firenet gateway.
+        /// Name of the Transit FireNet-enabled transit gateway. Currently supports AWS(1) and Azure(8) providers.
         /// </summary>
         [Input("transitFirenetGatewayName", required: true)]
         public Input<string> TransitFirenetGatewayName { get; set; } = null!;
@@ -92,13 +122,13 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixFirewallManagementAccessState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Name of the resource to be enabled firewall management access.
+        /// Name of the resource to enable Firewall Management Access.
         /// </summary>
         [Input("managementAccessResourceName")]
         public Input<string>? ManagementAccessResourceName { get; set; }
 
         /// <summary>
-        /// Name of the transit firenet gateway.
+        /// Name of the Transit FireNet-enabled transit gateway. Currently supports AWS(1) and Azure(8) providers.
         /// </summary>
         [Input("transitFirenetGatewayName")]
         public Input<string>? TransitFirenetGatewayName { get; set; }

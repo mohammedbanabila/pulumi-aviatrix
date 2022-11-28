@@ -18,8 +18,8 @@ class AviatrixRbacGroupArgs:
                  local_login: Optional[pulumi.Input[bool]] = None):
         """
         The set of arguments for constructing a AviatrixRbacGroup resource.
-        :param pulumi.Input[str] group_name: RBAC permission group name.
-        :param pulumi.Input[bool] local_login: Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login
+        :param pulumi.Input[str] group_name: This parameter represents the name of a RBAC group to be created.
+        :param pulumi.Input[bool] local_login: Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login . Supported values: true, false. Default value: false. Available in provider version R2.17.1+.
         """
         pulumi.set(__self__, "group_name", group_name)
         if local_login is not None:
@@ -29,7 +29,7 @@ class AviatrixRbacGroupArgs:
     @pulumi.getter(name="groupName")
     def group_name(self) -> pulumi.Input[str]:
         """
-        RBAC permission group name.
+        This parameter represents the name of a RBAC group to be created.
         """
         return pulumi.get(self, "group_name")
 
@@ -41,7 +41,7 @@ class AviatrixRbacGroupArgs:
     @pulumi.getter(name="localLogin")
     def local_login(self) -> Optional[pulumi.Input[bool]]:
         """
-        Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login
+        Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login . Supported values: true, false. Default value: false. Available in provider version R2.17.1+.
         """
         return pulumi.get(self, "local_login")
 
@@ -57,8 +57,8 @@ class _AviatrixRbacGroupState:
                  local_login: Optional[pulumi.Input[bool]] = None):
         """
         Input properties used for looking up and filtering AviatrixRbacGroup resources.
-        :param pulumi.Input[str] group_name: RBAC permission group name.
-        :param pulumi.Input[bool] local_login: Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login
+        :param pulumi.Input[str] group_name: This parameter represents the name of a RBAC group to be created.
+        :param pulumi.Input[bool] local_login: Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login . Supported values: true, false. Default value: false. Available in provider version R2.17.1+.
         """
         if group_name is not None:
             pulumi.set(__self__, "group_name", group_name)
@@ -69,7 +69,7 @@ class _AviatrixRbacGroupState:
     @pulumi.getter(name="groupName")
     def group_name(self) -> Optional[pulumi.Input[str]]:
         """
-        RBAC permission group name.
+        This parameter represents the name of a RBAC group to be created.
         """
         return pulumi.get(self, "group_name")
 
@@ -81,7 +81,7 @@ class _AviatrixRbacGroupState:
     @pulumi.getter(name="localLogin")
     def local_login(self) -> Optional[pulumi.Input[bool]]:
         """
-        Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login
+        Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login . Supported values: true, false. Default value: false. Available in provider version R2.17.1+.
         """
         return pulumi.get(self, "local_login")
 
@@ -99,11 +99,30 @@ class AviatrixRbacGroup(pulumi.CustomResource):
                  local_login: Optional[pulumi.Input[bool]] = None,
                  __props__=None):
         """
-        Create a AviatrixRbacGroup resource with the given unique name, props, and options.
+        The **aviatrix_rbac_group** resource allows the creation and management of [Aviatrix (Role-Based Access Control) RBAC groups](https://docs.aviatrix.com/HowTos/rbac_faq.html).
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix RBAC Group
+        test_group = aviatrix.AviatrixRbacGroup("testGroup", group_name="write_only")
+        ```
+
+        ## Import
+
+        **rbac_group** can be imported using the `group_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixRbacGroup:AviatrixRbacGroup test group_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] group_name: RBAC permission group name.
-        :param pulumi.Input[bool] local_login: Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login
+        :param pulumi.Input[str] group_name: This parameter represents the name of a RBAC group to be created.
+        :param pulumi.Input[bool] local_login: Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login . Supported values: true, false. Default value: false. Available in provider version R2.17.1+.
         """
         ...
     @overload
@@ -112,7 +131,26 @@ class AviatrixRbacGroup(pulumi.CustomResource):
                  args: AviatrixRbacGroupArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixRbacGroup resource with the given unique name, props, and options.
+        The **aviatrix_rbac_group** resource allows the creation and management of [Aviatrix (Role-Based Access Control) RBAC groups](https://docs.aviatrix.com/HowTos/rbac_faq.html).
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix RBAC Group
+        test_group = aviatrix.AviatrixRbacGroup("testGroup", group_name="write_only")
+        ```
+
+        ## Import
+
+        **rbac_group** can be imported using the `group_name`, e.g.
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixRbacGroup:AviatrixRbacGroup test group_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixRbacGroupArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -162,8 +200,8 @@ class AviatrixRbacGroup(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] group_name: RBAC permission group name.
-        :param pulumi.Input[bool] local_login: Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login
+        :param pulumi.Input[str] group_name: This parameter represents the name of a RBAC group to be created.
+        :param pulumi.Input[bool] local_login: Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login . Supported values: true, false. Default value: false. Available in provider version R2.17.1+.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -177,7 +215,7 @@ class AviatrixRbacGroup(pulumi.CustomResource):
     @pulumi.getter(name="groupName")
     def group_name(self) -> pulumi.Output[str]:
         """
-        RBAC permission group name.
+        This parameter represents the name of a RBAC group to be created.
         """
         return pulumi.get(self, "group_name")
 
@@ -185,7 +223,7 @@ class AviatrixRbacGroup(pulumi.CustomResource):
     @pulumi.getter(name="localLogin")
     def local_login(self) -> pulumi.Output[Optional[bool]]:
         """
-        Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login
+        Whether to allow members of an RBAC group to bypass LDAP/MFA for Duo login . Supported values: true, false. Default value: false. Available in provider version R2.17.1+.
         """
         return pulumi.get(self, "local_login")
 

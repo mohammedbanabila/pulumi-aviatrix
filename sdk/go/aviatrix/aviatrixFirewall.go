@@ -11,19 +11,120 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixFirewall(ctx, "statefulFirewall1", &aviatrix.AviatrixFirewallArgs{
+//				BaseLogEnabled:         pulumi.Bool(true),
+//				BasePolicy:             pulumi.String("allow-all"),
+//				GwName:                 pulumi.String("gateway-1"),
+//				ManageFirewallPolicies: pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := aviatrix.NewAviatrixFirewall(ctx, "statefulFirewall1", &aviatrix.AviatrixFirewallArgs{
+//				GwName:         pulumi.String("gateway-1"),
+//				BasePolicy:     pulumi.String("allow-all"),
+//				BaseLogEnabled: pulumi.Bool(true),
+//				Policies: AviatrixFirewallPolicyTypeArray{
+//					&AviatrixFirewallPolicyTypeArgs{
+//						Protocol:    pulumi.String("all"),
+//						SrcIp:       pulumi.String("10.17.0.224/32"),
+//						LogEnabled:  pulumi.Bool(true),
+//						DstIp:       pulumi.String("10.12.0.172/32"),
+//						Action:      pulumi.String("force-drop"),
+//						Port:        pulumi.String("0:65535"),
+//						Description: pulumi.String("first_policy"),
+//					},
+//					&AviatrixFirewallPolicyTypeArgs{
+//						Protocol:    pulumi.String("tcp"),
+//						SrcIp:       pulumi.String("10.16.0.224/32"),
+//						LogEnabled:  pulumi.Bool(false),
+//						DstIp:       pulumi.String("10.12.1.172/32"),
+//						Action:      pulumi.String("force-drop"),
+//						Port:        pulumi.String("325"),
+//						Description: pulumi.String("second_policy"),
+//					},
+//					&AviatrixFirewallPolicyTypeArgs{
+//						Protocol:    pulumi.String("udp"),
+//						SrcIp:       pulumi.String("10.14.0.225/32"),
+//						LogEnabled:  pulumi.Bool(false),
+//						DstIp:       pulumi.String("10.13.1.173/32"),
+//						Action:      pulumi.String("deny"),
+//						Port:        pulumi.String("325"),
+//						Description: pulumi.String("third_policy"),
+//					},
+//					&AviatrixFirewallPolicyTypeArgs{
+//						Protocol:    pulumi.String("tcp"),
+//						SrcIp:       pulumi.Any(aviatrix_firewall_tag.Test.Firewall_tag),
+//						LogEnabled:  pulumi.Bool(false),
+//						DstIp:       pulumi.String("10.13.1.173/32"),
+//						Action:      pulumi.String("deny"),
+//						Port:        pulumi.String("325"),
+//						Description: pulumi.String("fourth_policy"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// **firewall** can be imported using the `gw_name`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import aviatrix:index/aviatrixFirewall:AviatrixFirewall test gw_name
+//
+// ```
 type AviatrixFirewall struct {
 	pulumi.CustomResourceState
 
-	// Indicates whether enable logging or not. Valid values: true, false. Default value: false.
+	// Indicates whether enable logging or not. Valid Values: true, false. Default value: false.
 	BaseLogEnabled pulumi.BoolPtrOutput `pulumi:"baseLogEnabled"`
-	// New base policy.
+	// New base policy. Valid Values: "allow-all", "deny-all". Default value: "deny-all"
 	BasePolicy pulumi.StringPtrOutput `pulumi:"basePolicy"`
-	// The name of gateway.
+	// Gateway name to attach firewall policy to.
 	GwName pulumi.StringOutput `pulumi:"gwName"`
-	// Enable to manage firewall policies via in-line rules. If false, policies must be managed using
-	// `aviatrix_firewall_policy` resources.
+	// Enable to manage firewall policies via in-line rules. If false, policies must be managed using `AviatrixFirewallPolicy` resources. Default: true. Valid values: true, false. Available in provider version R2.17+.
 	ManageFirewallPolicies pulumi.BoolPtrOutput `pulumi:"manageFirewallPolicies"`
-	// New access policy for the gateway.
+	// New access policy for the gateway. Seven fields are required for each policy item: `srcIp`, `dstIp`, `protocol`, `port`, `action`, `logEnabled` and `description`. No duplicate rules (with same `srcIp`, `dstIp`, `protocol` and `port`) are allowed.
 	Policies AviatrixFirewallPolicyTypeArrayOutput `pulumi:"policies"`
 }
 
@@ -60,30 +161,28 @@ func GetAviatrixFirewall(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AviatrixFirewall resources.
 type aviatrixFirewallState struct {
-	// Indicates whether enable logging or not. Valid values: true, false. Default value: false.
+	// Indicates whether enable logging or not. Valid Values: true, false. Default value: false.
 	BaseLogEnabled *bool `pulumi:"baseLogEnabled"`
-	// New base policy.
+	// New base policy. Valid Values: "allow-all", "deny-all". Default value: "deny-all"
 	BasePolicy *string `pulumi:"basePolicy"`
-	// The name of gateway.
+	// Gateway name to attach firewall policy to.
 	GwName *string `pulumi:"gwName"`
-	// Enable to manage firewall policies via in-line rules. If false, policies must be managed using
-	// `aviatrix_firewall_policy` resources.
+	// Enable to manage firewall policies via in-line rules. If false, policies must be managed using `AviatrixFirewallPolicy` resources. Default: true. Valid values: true, false. Available in provider version R2.17+.
 	ManageFirewallPolicies *bool `pulumi:"manageFirewallPolicies"`
-	// New access policy for the gateway.
+	// New access policy for the gateway. Seven fields are required for each policy item: `srcIp`, `dstIp`, `protocol`, `port`, `action`, `logEnabled` and `description`. No duplicate rules (with same `srcIp`, `dstIp`, `protocol` and `port`) are allowed.
 	Policies []AviatrixFirewallPolicyType `pulumi:"policies"`
 }
 
 type AviatrixFirewallState struct {
-	// Indicates whether enable logging or not. Valid values: true, false. Default value: false.
+	// Indicates whether enable logging or not. Valid Values: true, false. Default value: false.
 	BaseLogEnabled pulumi.BoolPtrInput
-	// New base policy.
+	// New base policy. Valid Values: "allow-all", "deny-all". Default value: "deny-all"
 	BasePolicy pulumi.StringPtrInput
-	// The name of gateway.
+	// Gateway name to attach firewall policy to.
 	GwName pulumi.StringPtrInput
-	// Enable to manage firewall policies via in-line rules. If false, policies must be managed using
-	// `aviatrix_firewall_policy` resources.
+	// Enable to manage firewall policies via in-line rules. If false, policies must be managed using `AviatrixFirewallPolicy` resources. Default: true. Valid values: true, false. Available in provider version R2.17+.
 	ManageFirewallPolicies pulumi.BoolPtrInput
-	// New access policy for the gateway.
+	// New access policy for the gateway. Seven fields are required for each policy item: `srcIp`, `dstIp`, `protocol`, `port`, `action`, `logEnabled` and `description`. No duplicate rules (with same `srcIp`, `dstIp`, `protocol` and `port`) are allowed.
 	Policies AviatrixFirewallPolicyTypeArrayInput
 }
 
@@ -92,31 +191,29 @@ func (AviatrixFirewallState) ElementType() reflect.Type {
 }
 
 type aviatrixFirewallArgs struct {
-	// Indicates whether enable logging or not. Valid values: true, false. Default value: false.
+	// Indicates whether enable logging or not. Valid Values: true, false. Default value: false.
 	BaseLogEnabled *bool `pulumi:"baseLogEnabled"`
-	// New base policy.
+	// New base policy. Valid Values: "allow-all", "deny-all". Default value: "deny-all"
 	BasePolicy *string `pulumi:"basePolicy"`
-	// The name of gateway.
+	// Gateway name to attach firewall policy to.
 	GwName string `pulumi:"gwName"`
-	// Enable to manage firewall policies via in-line rules. If false, policies must be managed using
-	// `aviatrix_firewall_policy` resources.
+	// Enable to manage firewall policies via in-line rules. If false, policies must be managed using `AviatrixFirewallPolicy` resources. Default: true. Valid values: true, false. Available in provider version R2.17+.
 	ManageFirewallPolicies *bool `pulumi:"manageFirewallPolicies"`
-	// New access policy for the gateway.
+	// New access policy for the gateway. Seven fields are required for each policy item: `srcIp`, `dstIp`, `protocol`, `port`, `action`, `logEnabled` and `description`. No duplicate rules (with same `srcIp`, `dstIp`, `protocol` and `port`) are allowed.
 	Policies []AviatrixFirewallPolicyType `pulumi:"policies"`
 }
 
 // The set of arguments for constructing a AviatrixFirewall resource.
 type AviatrixFirewallArgs struct {
-	// Indicates whether enable logging or not. Valid values: true, false. Default value: false.
+	// Indicates whether enable logging or not. Valid Values: true, false. Default value: false.
 	BaseLogEnabled pulumi.BoolPtrInput
-	// New base policy.
+	// New base policy. Valid Values: "allow-all", "deny-all". Default value: "deny-all"
 	BasePolicy pulumi.StringPtrInput
-	// The name of gateway.
+	// Gateway name to attach firewall policy to.
 	GwName pulumi.StringInput
-	// Enable to manage firewall policies via in-line rules. If false, policies must be managed using
-	// `aviatrix_firewall_policy` resources.
+	// Enable to manage firewall policies via in-line rules. If false, policies must be managed using `AviatrixFirewallPolicy` resources. Default: true. Valid values: true, false. Available in provider version R2.17+.
 	ManageFirewallPolicies pulumi.BoolPtrInput
-	// New access policy for the gateway.
+	// New access policy for the gateway. Seven fields are required for each policy item: `srcIp`, `dstIp`, `protocol`, `port`, `action`, `logEnabled` and `description`. No duplicate rules (with same `srcIp`, `dstIp`, `protocol` and `port`) are allowed.
 	Policies AviatrixFirewallPolicyTypeArrayInput
 }
 
@@ -207,28 +304,27 @@ func (o AviatrixFirewallOutput) ToAviatrixFirewallOutputWithContext(ctx context.
 	return o
 }
 
-// Indicates whether enable logging or not. Valid values: true, false. Default value: false.
+// Indicates whether enable logging or not. Valid Values: true, false. Default value: false.
 func (o AviatrixFirewallOutput) BaseLogEnabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixFirewall) pulumi.BoolPtrOutput { return v.BaseLogEnabled }).(pulumi.BoolPtrOutput)
 }
 
-// New base policy.
+// New base policy. Valid Values: "allow-all", "deny-all". Default value: "deny-all"
 func (o AviatrixFirewallOutput) BasePolicy() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AviatrixFirewall) pulumi.StringPtrOutput { return v.BasePolicy }).(pulumi.StringPtrOutput)
 }
 
-// The name of gateway.
+// Gateway name to attach firewall policy to.
 func (o AviatrixFirewallOutput) GwName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AviatrixFirewall) pulumi.StringOutput { return v.GwName }).(pulumi.StringOutput)
 }
 
-// Enable to manage firewall policies via in-line rules. If false, policies must be managed using
-// `aviatrix_firewall_policy` resources.
+// Enable to manage firewall policies via in-line rules. If false, policies must be managed using `AviatrixFirewallPolicy` resources. Default: true. Valid values: true, false. Available in provider version R2.17+.
 func (o AviatrixFirewallOutput) ManageFirewallPolicies() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AviatrixFirewall) pulumi.BoolPtrOutput { return v.ManageFirewallPolicies }).(pulumi.BoolPtrOutput)
 }
 
-// New access policy for the gateway.
+// New access policy for the gateway. Seven fields are required for each policy item: `srcIp`, `dstIp`, `protocol`, `port`, `action`, `logEnabled` and `description`. No duplicate rules (with same `srcIp`, `dstIp`, `protocol` and `port`) are allowed.
 func (o AviatrixFirewallOutput) Policies() AviatrixFirewallPolicyTypeArrayOutput {
 	return o.ApplyT(func(v *AviatrixFirewall) AviatrixFirewallPolicyTypeArrayOutput { return v.Policies }).(AviatrixFirewallPolicyTypeArrayOutput)
 }

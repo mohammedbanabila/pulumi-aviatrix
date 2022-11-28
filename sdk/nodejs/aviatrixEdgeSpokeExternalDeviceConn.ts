@@ -4,6 +4,35 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_edge_spoke_external_device_conn** resource creates and manages the connection between Edge as a Spoke and an External Device. This resource is available as of provider version R2.23+.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Edge as a Spoke External Device Connection
+ * const test = new aviatrix.AviatrixEdgeSpokeExternalDeviceConn("test", {
+ *     bgpLocalAsNum: "123",
+ *     bgpRemoteAsNum: "345",
+ *     connectionName: "conn",
+ *     gwName: "eaas",
+ *     localLanIp: "10.230.3.23",
+ *     remoteLanIp: "10.0.60.1",
+ *     siteId: "site-abcd1234",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **edge_spoke_external_device_conn** can be imported using the `connection_name` and `site_id`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixEdgeSpokeExternalDeviceConn:AviatrixEdgeSpokeExternalDeviceConn test connection_name~site_id
+ * ```
+ */
 export class AviatrixEdgeSpokeExternalDeviceConn extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixEdgeSpokeExternalDeviceConn resource's state with the given name, ID, and optional extra
@@ -41,15 +70,15 @@ export class AviatrixEdgeSpokeExternalDeviceConn extends pulumi.CustomResource {
      */
     public readonly bgpRemoteAsNum!: pulumi.Output<string>;
     /**
-     * The name of the spoke external device connection which is going to be created.
+     * Connection name.
      */
     public readonly connectionName!: pulumi.Output<string>;
     /**
-     * Connection type. Valid values: 'bgp'. Default value: 'bgp'.
+     * Connection type. Valid value: 'bgp'. Default value: 'bgp'.
      */
     public readonly connectionType!: pulumi.Output<string | undefined>;
     /**
-     * Name of the BGP Spoke Gateway.
+     * Edge as a Spoke name.
      */
     public readonly gwName!: pulumi.Output<string>;
     /**
@@ -61,11 +90,11 @@ export class AviatrixEdgeSpokeExternalDeviceConn extends pulumi.CustomResource {
      */
     public readonly remoteLanIp!: pulumi.Output<string>;
     /**
-     * ID of the VPC where the BGP Spoke Gateway is located.
+     * Edge as a Spoke site iD.
      */
     public readonly siteId!: pulumi.Output<string>;
     /**
-     * Tunnel Protocol. Valid value: 'LAN'. Default value: 'LAN'. Case insensitive.
+     * Tunnel protocol. Valid value: 'LAN'. Default value: 'LAN'. Case insensitive.
      */
     public readonly tunnelProtocol!: pulumi.Output<string | undefined>;
 
@@ -142,15 +171,15 @@ export interface AviatrixEdgeSpokeExternalDeviceConnState {
      */
     bgpRemoteAsNum?: pulumi.Input<string>;
     /**
-     * The name of the spoke external device connection which is going to be created.
+     * Connection name.
      */
     connectionName?: pulumi.Input<string>;
     /**
-     * Connection type. Valid values: 'bgp'. Default value: 'bgp'.
+     * Connection type. Valid value: 'bgp'. Default value: 'bgp'.
      */
     connectionType?: pulumi.Input<string>;
     /**
-     * Name of the BGP Spoke Gateway.
+     * Edge as a Spoke name.
      */
     gwName?: pulumi.Input<string>;
     /**
@@ -162,11 +191,11 @@ export interface AviatrixEdgeSpokeExternalDeviceConnState {
      */
     remoteLanIp?: pulumi.Input<string>;
     /**
-     * ID of the VPC where the BGP Spoke Gateway is located.
+     * Edge as a Spoke site iD.
      */
     siteId?: pulumi.Input<string>;
     /**
-     * Tunnel Protocol. Valid value: 'LAN'. Default value: 'LAN'. Case insensitive.
+     * Tunnel protocol. Valid value: 'LAN'. Default value: 'LAN'. Case insensitive.
      */
     tunnelProtocol?: pulumi.Input<string>;
 }
@@ -184,15 +213,15 @@ export interface AviatrixEdgeSpokeExternalDeviceConnArgs {
      */
     bgpRemoteAsNum: pulumi.Input<string>;
     /**
-     * The name of the spoke external device connection which is going to be created.
+     * Connection name.
      */
     connectionName: pulumi.Input<string>;
     /**
-     * Connection type. Valid values: 'bgp'. Default value: 'bgp'.
+     * Connection type. Valid value: 'bgp'. Default value: 'bgp'.
      */
     connectionType?: pulumi.Input<string>;
     /**
-     * Name of the BGP Spoke Gateway.
+     * Edge as a Spoke name.
      */
     gwName: pulumi.Input<string>;
     /**
@@ -204,11 +233,11 @@ export interface AviatrixEdgeSpokeExternalDeviceConnArgs {
      */
     remoteLanIp: pulumi.Input<string>;
     /**
-     * ID of the VPC where the BGP Spoke Gateway is located.
+     * Edge as a Spoke site iD.
      */
     siteId: pulumi.Input<string>;
     /**
-     * Tunnel Protocol. Valid value: 'LAN'. Default value: 'LAN'. Case insensitive.
+     * Tunnel protocol. Valid value: 'LAN'. Default value: 'LAN'. Case insensitive.
      */
     tunnelProtocol?: pulumi.Input<string>;
 }

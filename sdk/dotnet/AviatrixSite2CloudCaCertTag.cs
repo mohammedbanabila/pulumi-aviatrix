@@ -9,6 +9,74 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_site2cloud_ca_cert_tag** resource creates and manages Aviatrix-created Site2Cloud CA Cert Tags.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.IO;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Site2cloud CA Cert Tag Containing One Cert
+    ///     var test = new Aviatrix.AviatrixSite2CloudCaCertTag("test", new()
+    ///     {
+    ///         TagName = "test",
+    ///         CaCertificates = new[]
+    ///         {
+    ///             new Aviatrix.Inputs.AviatrixSite2CloudCaCertTagCaCertificateArgs
+    ///             {
+    ///                 CertContent = File.ReadAllText("/home/ubuntu/avx_gw_ca_cert_in_ui_root_only.crt"),
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.IO;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix Site2cloud CA Cert Tag Containing Multiple Certs
+    ///     var test = new Aviatrix.AviatrixSite2CloudCaCertTag("test", new()
+    ///     {
+    ///         TagName = "test",
+    ///         CaCertificates = new[]
+    ///         {
+    ///             new Aviatrix.Inputs.AviatrixSite2CloudCaCertTagCaCertificateArgs
+    ///             {
+    ///                 CertContent = File.ReadAllText("/home/ubuntu/avx_gw_ca_cert_root.crt"),
+    ///             },
+    ///             new Aviatrix.Inputs.AviatrixSite2CloudCaCertTagCaCertificateArgs
+    ///             {
+    ///                 CertContent = File.ReadAllText("/home/ubuntu/avx_gw_ca_cert_intermediate.crt"),
+    ///             },
+    ///             new Aviatrix.Inputs.AviatrixSite2CloudCaCertTagCaCertificateArgs
+    ///             {
+    ///                 CertContent = File.ReadAllText("/home/ubuntu/avx_gw_ca_cert_intermediate2.crt"),
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **site2cloud_ca_cert_tag** can be imported using the `tag_name` and, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixSite2CloudCaCertTag:AviatrixSite2CloudCaCertTag test tag_name
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixSite2CloudCaCertTag:AviatrixSite2CloudCaCertTag")]
     public partial class AviatrixSite2CloudCaCertTag : global::Pulumi.CustomResource
     {
@@ -19,7 +87,7 @@ namespace Pulumi.Aviatrix
         public Output<ImmutableArray<Outputs.AviatrixSite2CloudCaCertTagCaCertificate>> CaCertificates { get; private set; } = null!;
 
         /// <summary>
-        /// Unique name of the ca cert tag.
+        /// Site2Cloud ca cert tag name.
         /// </summary>
         [Output("tagName")]
         public Output<string> TagName { get; private set; } = null!;
@@ -84,7 +152,7 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Unique name of the ca cert tag.
+        /// Site2Cloud ca cert tag name.
         /// </summary>
         [Input("tagName", required: true)]
         public Input<string> TagName { get; set; } = null!;
@@ -110,7 +178,7 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// Unique name of the ca cert tag.
+        /// Site2Cloud ca cert tag name.
         /// </summary>
         [Input("tagName")]
         public Input<string>? TagName { get; set; }

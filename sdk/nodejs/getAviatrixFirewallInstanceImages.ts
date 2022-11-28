@@ -2,9 +2,27 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * Use this data source to get the list of firewall instance images for use in other resources.
+ *
+ * **NOTE:** A firenet enabled gateway in a security VPC is required for this data source.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Aviatrix Firewall Instance Images Data Source
+ * const foo = pulumi.output(aviatrix.getAviatrixFirewallInstanceImages({
+ *     vpcId: "vpc-1234567",
+ * }));
+ * ```
+ */
 export function getAviatrixFirewallInstanceImages(args: GetAviatrixFirewallInstanceImagesArgs, opts?: pulumi.InvokeOptions): Promise<GetAviatrixFirewallInstanceImagesResult> {
     if (!opts) {
         opts = {}
@@ -20,6 +38,9 @@ export function getAviatrixFirewallInstanceImages(args: GetAviatrixFirewallInsta
  * A collection of arguments for invoking getAviatrixFirewallInstanceImages.
  */
 export interface GetAviatrixFirewallInstanceImagesArgs {
+    /**
+     * VPC ID. Example: AWS: "vpc-abcd1234", GCP: "vpc-gcp-test~-~project_id", Azure: "vnet_name:rg_name:resource_guid", OCI: "vpc-oracle-test1".
+     */
     vpcId: string;
 }
 
@@ -27,6 +48,9 @@ export interface GetAviatrixFirewallInstanceImagesArgs {
  * A collection of values returned by getAviatrixFirewallInstanceImages.
  */
 export interface GetAviatrixFirewallInstanceImagesResult {
+    /**
+     * List of firewall images.
+     */
     readonly firewallImages: outputs.GetAviatrixFirewallInstanceImagesFirewallImage[];
     /**
      * The provider-assigned unique ID for this managed resource.
@@ -43,5 +67,8 @@ export function getAviatrixFirewallInstanceImagesOutput(args: GetAviatrixFirewal
  * A collection of arguments for invoking getAviatrixFirewallInstanceImages.
  */
 export interface GetAviatrixFirewallInstanceImagesOutputArgs {
+    /**
+     * VPC ID. Example: AWS: "vpc-abcd1234", GCP: "vpc-gcp-test~-~project_id", Azure: "vnet_name:rg_name:resource_guid", OCI: "vpc-oracle-test1".
+     */
     vpcId: pulumi.Input<string>;
 }

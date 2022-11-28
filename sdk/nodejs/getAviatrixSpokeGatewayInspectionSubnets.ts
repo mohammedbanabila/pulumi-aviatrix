@@ -4,6 +4,21 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * The **aviatrix_spoke_gateway_inspection_subnets** data source provides all subnets available for the subnet inspection feature.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Aviatrix Spoke Gateway Inspection Subnets Data Source
+ * const foo = pulumi.output(aviatrix.getAviatrixSpokeGatewayInspectionSubnets({
+ *     gwName: "gatewayname",
+ * }));
+ * ```
+ */
 export function getAviatrixSpokeGatewayInspectionSubnets(args: GetAviatrixSpokeGatewayInspectionSubnetsArgs, opts?: pulumi.InvokeOptions): Promise<GetAviatrixSpokeGatewayInspectionSubnetsResult> {
     if (!opts) {
         opts = {}
@@ -19,6 +34,9 @@ export function getAviatrixSpokeGatewayInspectionSubnets(args: GetAviatrixSpokeG
  * A collection of arguments for invoking getAviatrixSpokeGatewayInspectionSubnets.
  */
 export interface GetAviatrixSpokeGatewayInspectionSubnetsArgs {
+    /**
+     * Spoke gateway name.
+     */
     gwName: string;
 }
 
@@ -31,6 +49,9 @@ export interface GetAviatrixSpokeGatewayInspectionSubnetsResult {
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * The list of all subnets available for the subnet inspection feature. This attribute is only supported for Azure.
+     */
     readonly subnetsForInspections: string[];
 }
 
@@ -42,5 +63,8 @@ export function getAviatrixSpokeGatewayInspectionSubnetsOutput(args: GetAviatrix
  * A collection of arguments for invoking getAviatrixSpokeGatewayInspectionSubnets.
  */
 export interface GetAviatrixSpokeGatewayInspectionSubnetsOutputArgs {
+    /**
+     * Spoke gateway name.
+     */
     gwName: pulumi.Input<string>;
 }

@@ -11,14 +11,20 @@ namespace Pulumi.Aviatrix
 {
     public static class GetAviatrixTransitGateways
     {
+        /// <summary>
+        /// The **aviatrix_transit_gateways** data source provides details about all transit gateways created by the Aviatrix Controller.
+        /// </summary>
         public static Task<GetAviatrixTransitGatewaysResult> InvokeAsync(InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAviatrixTransitGatewaysResult>("aviatrix:index/getAviatrixTransitGateways:getAviatrixTransitGateways", InvokeArgs.Empty, options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAviatrixTransitGatewaysResult>("aviatrix:index/getAviatrixTransitGateways:getAviatrixTransitGateways", InvokeArgs.Empty, options.WithDefaults());
     }
 
 
     [OutputType]
     public sealed class GetAviatrixTransitGatewaysResult
     {
+        /// <summary>
+        /// The list of all transit gateways
+        /// </summary>
         public readonly ImmutableArray<Outputs.GetAviatrixTransitGatewaysGatewayListResult> GatewayLists;
         /// <summary>
         /// The provider-assigned unique ID for this managed resource.

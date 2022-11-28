@@ -12,27 +12,51 @@ namespace Pulumi.Aviatrix.Inputs
 
     public sealed class AviatrixFirenetFirewallInstanceAssociationArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Switch to attach/detach firewall instance to/from FireNet. Valid values: true, false. Default value: false.
+        /// </summary>
         [Input("attached")]
         public Input<bool>? Attached { get; set; }
 
+        /// <summary>
+        /// Egress interface ID. **Required if it is a firewall instance.**
+        /// </summary>
         [Input("egressInterface")]
         public Input<string>? EgressInterface { get; set; }
 
+        /// <summary>
+        /// Name of the primary FireNet gateway.
+        /// </summary>
         [Input("firenetGwName", required: true)]
         public Input<string> FirenetGwName { get; set; } = null!;
 
+        /// <summary>
+        /// Firewall instance name. **Required if it is a firewall instance.**
+        /// </summary>
         [Input("firewallName")]
         public Input<string>? FirewallName { get; set; }
 
+        /// <summary>
+        /// ID of Firewall instance.
+        /// </summary>
         [Input("instanceId", required: true)]
         public Input<string> InstanceId { get; set; } = null!;
 
+        /// <summary>
+        /// Lan interface ID. **Required if it is a firewall instance or FQDN gateway in Azure.**
+        /// </summary>
         [Input("lanInterface")]
         public Input<string>? LanInterface { get; set; }
 
+        /// <summary>
+        /// Management interface ID. **Required if it is a firewall instance.**
+        /// </summary>
         [Input("managementInterface")]
         public Input<string>? ManagementInterface { get; set; }
 
+        /// <summary>
+        /// Type of firewall. Valid values: "Generic", "fqdn_gateway". Default value: "Generic". Value "fqdn_gateway" is required for FQDN gateway.
+        /// </summary>
         [Input("vendorType")]
         public Input<string>? VendorType { get; set; }
 

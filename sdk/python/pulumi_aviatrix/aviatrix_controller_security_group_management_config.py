@@ -18,8 +18,8 @@ class AviatrixControllerSecurityGroupManagementConfigArgs:
                  account_name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a AviatrixControllerSecurityGroupManagementConfig resource.
-        :param pulumi.Input[bool] enable_security_group_management: Used to manage the Controller instance’s inbound rules from gateways.
-        :param pulumi.Input[str] account_name: Cloud account name of user.
+        :param pulumi.Input[bool] enable_security_group_management: Enable to allow Controller to automatically manage inbound rules from gateways. Valid values: true, false.
+        :param pulumi.Input[str] account_name: Select the [primary access account](https://docs.aviatrix.com/HowTos/aviatrix_account.html#setup-primary-access-account-for-aws-cloud).
         """
         pulumi.set(__self__, "enable_security_group_management", enable_security_group_management)
         if account_name is not None:
@@ -29,7 +29,7 @@ class AviatrixControllerSecurityGroupManagementConfigArgs:
     @pulumi.getter(name="enableSecurityGroupManagement")
     def enable_security_group_management(self) -> pulumi.Input[bool]:
         """
-        Used to manage the Controller instance’s inbound rules from gateways.
+        Enable to allow Controller to automatically manage inbound rules from gateways. Valid values: true, false.
         """
         return pulumi.get(self, "enable_security_group_management")
 
@@ -41,7 +41,7 @@ class AviatrixControllerSecurityGroupManagementConfigArgs:
     @pulumi.getter(name="accountName")
     def account_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Cloud account name of user.
+        Select the [primary access account](https://docs.aviatrix.com/HowTos/aviatrix_account.html#setup-primary-access-account-for-aws-cloud).
         """
         return pulumi.get(self, "account_name")
 
@@ -57,8 +57,8 @@ class _AviatrixControllerSecurityGroupManagementConfigState:
                  enable_security_group_management: Optional[pulumi.Input[bool]] = None):
         """
         Input properties used for looking up and filtering AviatrixControllerSecurityGroupManagementConfig resources.
-        :param pulumi.Input[str] account_name: Cloud account name of user.
-        :param pulumi.Input[bool] enable_security_group_management: Used to manage the Controller instance’s inbound rules from gateways.
+        :param pulumi.Input[str] account_name: Select the [primary access account](https://docs.aviatrix.com/HowTos/aviatrix_account.html#setup-primary-access-account-for-aws-cloud).
+        :param pulumi.Input[bool] enable_security_group_management: Enable to allow Controller to automatically manage inbound rules from gateways. Valid values: true, false.
         """
         if account_name is not None:
             pulumi.set(__self__, "account_name", account_name)
@@ -69,7 +69,7 @@ class _AviatrixControllerSecurityGroupManagementConfigState:
     @pulumi.getter(name="accountName")
     def account_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Cloud account name of user.
+        Select the [primary access account](https://docs.aviatrix.com/HowTos/aviatrix_account.html#setup-primary-access-account-for-aws-cloud).
         """
         return pulumi.get(self, "account_name")
 
@@ -81,7 +81,7 @@ class _AviatrixControllerSecurityGroupManagementConfigState:
     @pulumi.getter(name="enableSecurityGroupManagement")
     def enable_security_group_management(self) -> Optional[pulumi.Input[bool]]:
         """
-        Used to manage the Controller instance’s inbound rules from gateways.
+        Enable to allow Controller to automatically manage inbound rules from gateways. Valid values: true, false.
         """
         return pulumi.get(self, "enable_security_group_management")
 
@@ -99,11 +99,39 @@ class AviatrixControllerSecurityGroupManagementConfig(pulumi.CustomResource):
                  enable_security_group_management: Optional[pulumi.Input[bool]] = None,
                  __props__=None):
         """
-        Create a AviatrixControllerSecurityGroupManagementConfig resource with the given unique name, props, and options.
+        The **aviatrix_controller_security_group_management_config** resource allows management of an Aviatrix Controller's security group management configurations. This resource is available as of v2.20.1.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Controller Security Group Management Config to Enable Security Group Management
+        test_sqm_config = aviatrix.AviatrixControllerSecurityGroupManagementConfig("testSqmConfig",
+            account_name="devops",
+            enable_security_group_management=True)
+        ```
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Controller Security Group Management Config to Disable Security Group Management
+        test_sqm_config = aviatrix.AviatrixControllerSecurityGroupManagementConfig("testSqmConfig", enable_security_group_management=False)
+        ```
+
+        ## Import
+
+        Instance controller_security_group_management_config can be imported using controller IP, e.g. controller IP is 10.11.12.13
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixControllerSecurityGroupManagementConfig:AviatrixControllerSecurityGroupManagementConfig test 10-11-12-13
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] account_name: Cloud account name of user.
-        :param pulumi.Input[bool] enable_security_group_management: Used to manage the Controller instance’s inbound rules from gateways.
+        :param pulumi.Input[str] account_name: Select the [primary access account](https://docs.aviatrix.com/HowTos/aviatrix_account.html#setup-primary-access-account-for-aws-cloud).
+        :param pulumi.Input[bool] enable_security_group_management: Enable to allow Controller to automatically manage inbound rules from gateways. Valid values: true, false.
         """
         ...
     @overload
@@ -112,7 +140,35 @@ class AviatrixControllerSecurityGroupManagementConfig(pulumi.CustomResource):
                  args: AviatrixControllerSecurityGroupManagementConfigArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AviatrixControllerSecurityGroupManagementConfig resource with the given unique name, props, and options.
+        The **aviatrix_controller_security_group_management_config** resource allows management of an Aviatrix Controller's security group management configurations. This resource is available as of v2.20.1.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Controller Security Group Management Config to Enable Security Group Management
+        test_sqm_config = aviatrix.AviatrixControllerSecurityGroupManagementConfig("testSqmConfig",
+            account_name="devops",
+            enable_security_group_management=True)
+        ```
+        ```python
+        import pulumi
+        import pulumi_aviatrix as aviatrix
+
+        # Create an Aviatrix Controller Security Group Management Config to Disable Security Group Management
+        test_sqm_config = aviatrix.AviatrixControllerSecurityGroupManagementConfig("testSqmConfig", enable_security_group_management=False)
+        ```
+
+        ## Import
+
+        Instance controller_security_group_management_config can be imported using controller IP, e.g. controller IP is 10.11.12.13
+
+        ```sh
+         $ pulumi import aviatrix:index/aviatrixControllerSecurityGroupManagementConfig:AviatrixControllerSecurityGroupManagementConfig test 10-11-12-13
+        ```
+
         :param str resource_name: The name of the resource.
         :param AviatrixControllerSecurityGroupManagementConfigArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -162,8 +218,8 @@ class AviatrixControllerSecurityGroupManagementConfig(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] account_name: Cloud account name of user.
-        :param pulumi.Input[bool] enable_security_group_management: Used to manage the Controller instance’s inbound rules from gateways.
+        :param pulumi.Input[str] account_name: Select the [primary access account](https://docs.aviatrix.com/HowTos/aviatrix_account.html#setup-primary-access-account-for-aws-cloud).
+        :param pulumi.Input[bool] enable_security_group_management: Enable to allow Controller to automatically manage inbound rules from gateways. Valid values: true, false.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -177,7 +233,7 @@ class AviatrixControllerSecurityGroupManagementConfig(pulumi.CustomResource):
     @pulumi.getter(name="accountName")
     def account_name(self) -> pulumi.Output[Optional[str]]:
         """
-        Cloud account name of user.
+        Select the [primary access account](https://docs.aviatrix.com/HowTos/aviatrix_account.html#setup-primary-access-account-for-aws-cloud).
         """
         return pulumi.get(self, "account_name")
 
@@ -185,7 +241,7 @@ class AviatrixControllerSecurityGroupManagementConfig(pulumi.CustomResource):
     @pulumi.getter(name="enableSecurityGroupManagement")
     def enable_security_group_management(self) -> pulumi.Output[bool]:
         """
-        Used to manage the Controller instance’s inbound rules from gateways.
+        Enable to allow Controller to automatically manage inbound rules from gateways. Valid values: true, false.
         """
         return pulumi.get(self, "enable_security_group_management")
 

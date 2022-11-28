@@ -10,6 +10,35 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// The **aviatrix_firenet** data source provides details about a specific FireNet created by the Aviatrix Controller.
+//
+// This data source can prove useful when a module accepts a FireNet's detail as an input variable.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/astipkovits/pulumi-aviatrix/sdk/go/aviatrix"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err = aviatrix.LookupAviatrixFirenet(ctx, &GetAviatrixFirenetArgs{
+//				VpcId: "vpc-abcdef",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 func LookupAviatrixFirenet(ctx *pulumi.Context, args *LookupAviatrixFirenetArgs, opts ...pulumi.InvokeOption) (*LookupAviatrixFirenetResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)
 	var rv LookupAviatrixFirenetResult
@@ -22,22 +51,32 @@ func LookupAviatrixFirenet(ctx *pulumi.Context, args *LookupAviatrixFirenetArgs,
 
 // A collection of arguments for invoking getAviatrixFirenet.
 type LookupAviatrixFirenetArgs struct {
+	// List of firewall instances associated with fireNet.
 	FirewallInstanceAssociations []GetAviatrixFirenetFirewallInstanceAssociation `pulumi:"firewallInstanceAssociations"`
-	VpcId                        string                                          `pulumi:"vpcId"`
+	// ID of the Security VPC.
+	VpcId string `pulumi:"vpcId"`
 }
 
 // A collection of values returned by getAviatrixFirenet.
 type LookupAviatrixFirenetResult struct {
-	EgressEnabled                bool                                            `pulumi:"egressEnabled"`
-	EgressStaticCidrs            []string                                        `pulumi:"egressStaticCidrs"`
+	// Enable/Disable egress through firewall.
+	EgressEnabled bool `pulumi:"egressEnabled"`
+	// List of egress static CIDRs.
+	EgressStaticCidrs []string `pulumi:"egressStaticCidrs"`
+	// List of firewall instances associated with fireNet.
 	FirewallInstanceAssociations []GetAviatrixFirenetFirewallInstanceAssociation `pulumi:"firewallInstanceAssociations"`
-	HashingAlgorithm             string                                          `pulumi:"hashingAlgorithm"`
+	// (Optional) Hashing algorithm to load balance traffic across the firewall.
+	HashingAlgorithm string `pulumi:"hashingAlgorithm"`
 	// The provider-assigned unique ID for this managed resource.
-	Id                              string `pulumi:"id"`
-	InspectionEnabled               bool   `pulumi:"inspectionEnabled"`
-	KeepAliveViaLanInterfaceEnabled bool   `pulumi:"keepAliveViaLanInterfaceEnabled"`
-	TgwSegmentationForEgressEnabled bool   `pulumi:"tgwSegmentationForEgressEnabled"`
-	VpcId                           string `pulumi:"vpcId"`
+	Id string `pulumi:"id"`
+	// Enable/Disable traffic inspection.
+	InspectionEnabled bool `pulumi:"inspectionEnabled"`
+	// (Optional) Enable Keep Alive via Firewall LAN Interface.
+	KeepAliveViaLanInterfaceEnabled bool `pulumi:"keepAliveViaLanInterfaceEnabled"`
+	// Enable TGW segmentation for egress.
+	TgwSegmentationForEgressEnabled bool `pulumi:"tgwSegmentationForEgressEnabled"`
+	// ID of the Security VPC.
+	VpcId string `pulumi:"vpcId"`
 }
 
 func LookupAviatrixFirenetOutput(ctx *pulumi.Context, args LookupAviatrixFirenetOutputArgs, opts ...pulumi.InvokeOption) LookupAviatrixFirenetResultOutput {
@@ -55,8 +94,10 @@ func LookupAviatrixFirenetOutput(ctx *pulumi.Context, args LookupAviatrixFirenet
 
 // A collection of arguments for invoking getAviatrixFirenet.
 type LookupAviatrixFirenetOutputArgs struct {
+	// List of firewall instances associated with fireNet.
 	FirewallInstanceAssociations GetAviatrixFirenetFirewallInstanceAssociationArrayInput `pulumi:"firewallInstanceAssociations"`
-	VpcId                        pulumi.StringInput                                      `pulumi:"vpcId"`
+	// ID of the Security VPC.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
 }
 
 func (LookupAviatrixFirenetOutputArgs) ElementType() reflect.Type {
@@ -78,20 +119,24 @@ func (o LookupAviatrixFirenetResultOutput) ToLookupAviatrixFirenetResultOutputWi
 	return o
 }
 
+// Enable/Disable egress through firewall.
 func (o LookupAviatrixFirenetResultOutput) EgressEnabled() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupAviatrixFirenetResult) bool { return v.EgressEnabled }).(pulumi.BoolOutput)
 }
 
+// List of egress static CIDRs.
 func (o LookupAviatrixFirenetResultOutput) EgressStaticCidrs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v LookupAviatrixFirenetResult) []string { return v.EgressStaticCidrs }).(pulumi.StringArrayOutput)
 }
 
+// List of firewall instances associated with fireNet.
 func (o LookupAviatrixFirenetResultOutput) FirewallInstanceAssociations() GetAviatrixFirenetFirewallInstanceAssociationArrayOutput {
 	return o.ApplyT(func(v LookupAviatrixFirenetResult) []GetAviatrixFirenetFirewallInstanceAssociation {
 		return v.FirewallInstanceAssociations
 	}).(GetAviatrixFirenetFirewallInstanceAssociationArrayOutput)
 }
 
+// (Optional) Hashing algorithm to load balance traffic across the firewall.
 func (o LookupAviatrixFirenetResultOutput) HashingAlgorithm() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixFirenetResult) string { return v.HashingAlgorithm }).(pulumi.StringOutput)
 }
@@ -101,18 +146,22 @@ func (o LookupAviatrixFirenetResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixFirenetResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
+// Enable/Disable traffic inspection.
 func (o LookupAviatrixFirenetResultOutput) InspectionEnabled() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupAviatrixFirenetResult) bool { return v.InspectionEnabled }).(pulumi.BoolOutput)
 }
 
+// (Optional) Enable Keep Alive via Firewall LAN Interface.
 func (o LookupAviatrixFirenetResultOutput) KeepAliveViaLanInterfaceEnabled() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupAviatrixFirenetResult) bool { return v.KeepAliveViaLanInterfaceEnabled }).(pulumi.BoolOutput)
 }
 
+// Enable TGW segmentation for egress.
 func (o LookupAviatrixFirenetResultOutput) TgwSegmentationForEgressEnabled() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupAviatrixFirenetResult) bool { return v.TgwSegmentationForEgressEnabled }).(pulumi.BoolOutput)
 }
 
+// ID of the Security VPC.
 func (o LookupAviatrixFirenetResultOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAviatrixFirenetResult) string { return v.VpcId }).(pulumi.StringOutput)
 }

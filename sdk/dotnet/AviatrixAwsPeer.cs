@@ -9,6 +9,48 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_aws_peer** resource allows the creation and management of Aviatrix-created native AWS intra and inter-region VPC peerings.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix AWS Peering
+    ///     var testAwspeer = new Aviatrix.AviatrixAwsPeer("testAwspeer", new()
+    ///     {
+    ///         AccountName1 = "test1-account",
+    ///         AccountName2 = "test2-account",
+    ///         RtbList1s = new[]
+    ///         {
+    ///             "rtb-abcd1234",
+    ///         },
+    ///         RtbList2s = new[]
+    ///         {
+    ///             "rtb-wxyz5678",
+    ///         },
+    ///         VpcId1 = "vpc-abcd1234",
+    ///         VpcId2 = "vpc-rdef3333",
+    ///         VpcReg1 = "us-east-1",
+    ///         VpcReg2 = "us-west-1",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **aws_peer** can be imported using the `vpc_id1` and `vpc_id2`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixAwsPeer:AviatrixAwsPeer test vpc_id1~vpc_id2
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixAwsPeer:AviatrixAwsPeer")]
     public partial class AviatrixAwsPeer : global::Pulumi.CustomResource
     {
@@ -31,7 +73,7 @@ namespace Pulumi.Aviatrix
         public Output<ImmutableArray<string>> RtbList1Outputs { get; private set; } = null!;
 
         /// <summary>
-        /// List of Route table ID.
+        /// List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
         /// </summary>
         [Output("rtbList1s")]
         public Output<ImmutableArray<string>> RtbList1s { get; private set; } = null!;
@@ -43,31 +85,31 @@ namespace Pulumi.Aviatrix
         public Output<ImmutableArray<string>> RtbList2Outputs { get; private set; } = null!;
 
         /// <summary>
-        /// List of Route table ID.
+        /// List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
         /// </summary>
         [Output("rtbList2s")]
         public Output<ImmutableArray<string>> RtbList2s { get; private set; } = null!;
 
         /// <summary>
-        /// VPC-ID of AWS cloud.
+        /// VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
         /// </summary>
         [Output("vpcId1")]
         public Output<string> VpcId1 { get; private set; } = null!;
 
         /// <summary>
-        /// VPC-ID of AWS cloud.
+        /// VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
         /// </summary>
         [Output("vpcId2")]
         public Output<string> VpcId2 { get; private set; } = null!;
 
         /// <summary>
-        /// Region of AWS cloud.
+        /// Region of AWS cloud. Example: AWS: "us-east-1".
         /// </summary>
         [Output("vpcReg1")]
         public Output<string> VpcReg1 { get; private set; } = null!;
 
         /// <summary>
-        /// Region of AWS cloud.
+        /// Region of AWS cloud. Example: AWS: "us-east-1".
         /// </summary>
         [Output("vpcReg2")]
         public Output<string> VpcReg2 { get; private set; } = null!;
@@ -135,7 +177,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _rtbList1s;
 
         /// <summary>
-        /// List of Route table ID.
+        /// List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
         /// </summary>
         public InputList<string> RtbList1s
         {
@@ -147,7 +189,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _rtbList2s;
 
         /// <summary>
-        /// List of Route table ID.
+        /// List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
         /// </summary>
         public InputList<string> RtbList2s
         {
@@ -156,25 +198,25 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// VPC-ID of AWS cloud.
+        /// VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
         /// </summary>
         [Input("vpcId1", required: true)]
         public Input<string> VpcId1 { get; set; } = null!;
 
         /// <summary>
-        /// VPC-ID of AWS cloud.
+        /// VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
         /// </summary>
         [Input("vpcId2", required: true)]
         public Input<string> VpcId2 { get; set; } = null!;
 
         /// <summary>
-        /// Region of AWS cloud.
+        /// Region of AWS cloud. Example: AWS: "us-east-1".
         /// </summary>
         [Input("vpcReg1", required: true)]
         public Input<string> VpcReg1 { get; set; } = null!;
 
         /// <summary>
-        /// Region of AWS cloud.
+        /// Region of AWS cloud. Example: AWS: "us-east-1".
         /// </summary>
         [Input("vpcReg2", required: true)]
         public Input<string> VpcReg2 { get; set; } = null!;
@@ -215,7 +257,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _rtbList1s;
 
         /// <summary>
-        /// List of Route table ID.
+        /// List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
         /// </summary>
         public InputList<string> RtbList1s
         {
@@ -239,7 +281,7 @@ namespace Pulumi.Aviatrix
         private InputList<string>? _rtbList2s;
 
         /// <summary>
-        /// List of Route table ID.
+        /// List of Route table ID. Valid Values: ["all"], ["rtb-abcd1234"] OR ["rtb-abcd1234,rtb-wxyz5678"].
         /// </summary>
         public InputList<string> RtbList2s
         {
@@ -248,25 +290,25 @@ namespace Pulumi.Aviatrix
         }
 
         /// <summary>
-        /// VPC-ID of AWS cloud.
+        /// VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
         /// </summary>
         [Input("vpcId1")]
         public Input<string>? VpcId1 { get; set; }
 
         /// <summary>
-        /// VPC-ID of AWS cloud.
+        /// VPC ID of AWS cloud. Example: AWS: "vpc-abcd1234".
         /// </summary>
         [Input("vpcId2")]
         public Input<string>? VpcId2 { get; set; }
 
         /// <summary>
-        /// Region of AWS cloud.
+        /// Region of AWS cloud. Example: AWS: "us-east-1".
         /// </summary>
         [Input("vpcReg1")]
         public Input<string>? VpcReg1 { get; set; }
 
         /// <summary>
-        /// Region of AWS cloud.
+        /// Region of AWS cloud. Example: AWS: "us-east-1".
         /// </summary>
         [Input("vpcReg2")]
         public Input<string>? VpcReg2 { get; set; }

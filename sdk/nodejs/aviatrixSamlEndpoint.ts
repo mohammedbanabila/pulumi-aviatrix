@@ -4,6 +4,58 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@astipkovits/aviatrix";
+ * import * as fs from "fs";
+ *
+ * // Create an Aviatrix AWS SAML Endpoint
+ * const testSamlEndpoint = new aviatrix.AviatrixSamlEndpoint("testSamlEndpoint", {
+ *     endpointName: "saml-test",
+ *     idpMetadataType: "Text",
+ *     idpMetadata: fs.readFileSync("idp_metadata.xml"),
+ * });
+ * ```
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix AWS SAML Endpoint using Metadata UDL
+ * const testSamlEndpoint = new aviatrix.AviatrixSamlEndpoint("test_saml_endpoint", {
+ *     endpointName: "saml-test",
+ *     idpMetadataType: "URL",
+ *     idpMetadataUrl: "https://dev-xyzz.okta.com/app/asdfasdfwfwf/sso/saml/metadata",
+ * });
+ * ```
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Create an Aviatrix AWS SAML Endpoint for Controller Login
+ * const testSamlEndpoint = new aviatrix.AviatrixSamlEndpoint("test_saml_endpoint", {
+ *     accessSetBy: "controller",
+ *     controllerLogin: true,
+ *     endpointName: "saml-test",
+ *     idpMetadata: var_idp_metadata,
+ *     idpMetadataType: "Text",
+ *     rbacGroups: [
+ *         "admin",
+ *         "read_only",
+ *     ],
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * **saml_endpoint** can be imported using the SAML `endpoint_name`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import aviatrix:index/aviatrixSamlEndpoint:AviatrixSamlEndpoint test saml-test
+ * ```
+ */
 export class AviatrixSamlEndpoint extends pulumi.CustomResource {
     /**
      * Get an existing AviatrixSamlEndpoint resource's state with the given name, ID, and optional extra
@@ -33,39 +85,39 @@ export class AviatrixSamlEndpoint extends pulumi.CustomResource {
     }
 
     /**
-     * Access type.
+     * Access type. Valid values: "controller", "profileAttribute". Default value: "controller".
      */
     public readonly accessSetBy!: pulumi.Output<string | undefined>;
     /**
-     * Switch to differentiate if it is for controller login.
+     * Valid values: true, false. Default value: false. Set true for creating a saml endpoint for controller login.
      */
     public readonly controllerLogin!: pulumi.Output<boolean | undefined>;
     /**
-     * Custom Entity ID. Required to be non-empty for 'Custom' Entity ID type, empty for 'Hostname'.
+     * Custom Entity ID. Required to be non-empty for 'Custom' Entity ID type, empty for 'Hostname' Entity ID type.
      */
     public readonly customEntityId!: pulumi.Output<string | undefined>;
     /**
-     * Custom SAML Request Template.
+     * Custom SAML Request Template in string.
      */
     public readonly customSamlRequestTemplate!: pulumi.Output<string | undefined>;
     /**
-     * SAML Endpoint Name.
+     * The SAML endpoint name.
      */
     public readonly endpointName!: pulumi.Output<string>;
     /**
-     * IDP Metadata.
+     * The IDP Metadata from SAML provider. Required if `idpMetadataType` is "Text" and should be unset if type is "URL". Normally the metadata is in XML format which may contain special characters. Best practice is to use the file function to read from a local Metadata XML file.
      */
     public readonly idpMetadata!: pulumi.Output<string | undefined>;
     /**
-     * Type of IDP Metadata.
+     * The IDP Metadata type. Can be either "Text" or "URL".
      */
     public readonly idpMetadataType!: pulumi.Output<string>;
     /**
-     * IDP Metadata.
+     * The IDP Metadata URL from SAML provider. Required if `idpMetadataType` is "URL" and should be unset if type is "Text".
      */
     public readonly idpMetadataUrl!: pulumi.Output<string | undefined>;
     /**
-     * List of RBAC groups.
+     * List of rbac groups. Required for controller login and "accessSetBy" of "controller".
      */
     public readonly rbacGroups!: pulumi.Output<string[] | undefined>;
     /**
@@ -125,39 +177,39 @@ export class AviatrixSamlEndpoint extends pulumi.CustomResource {
  */
 export interface AviatrixSamlEndpointState {
     /**
-     * Access type.
+     * Access type. Valid values: "controller", "profileAttribute". Default value: "controller".
      */
     accessSetBy?: pulumi.Input<string>;
     /**
-     * Switch to differentiate if it is for controller login.
+     * Valid values: true, false. Default value: false. Set true for creating a saml endpoint for controller login.
      */
     controllerLogin?: pulumi.Input<boolean>;
     /**
-     * Custom Entity ID. Required to be non-empty for 'Custom' Entity ID type, empty for 'Hostname'.
+     * Custom Entity ID. Required to be non-empty for 'Custom' Entity ID type, empty for 'Hostname' Entity ID type.
      */
     customEntityId?: pulumi.Input<string>;
     /**
-     * Custom SAML Request Template.
+     * Custom SAML Request Template in string.
      */
     customSamlRequestTemplate?: pulumi.Input<string>;
     /**
-     * SAML Endpoint Name.
+     * The SAML endpoint name.
      */
     endpointName?: pulumi.Input<string>;
     /**
-     * IDP Metadata.
+     * The IDP Metadata from SAML provider. Required if `idpMetadataType` is "Text" and should be unset if type is "URL". Normally the metadata is in XML format which may contain special characters. Best practice is to use the file function to read from a local Metadata XML file.
      */
     idpMetadata?: pulumi.Input<string>;
     /**
-     * Type of IDP Metadata.
+     * The IDP Metadata type. Can be either "Text" or "URL".
      */
     idpMetadataType?: pulumi.Input<string>;
     /**
-     * IDP Metadata.
+     * The IDP Metadata URL from SAML provider. Required if `idpMetadataType` is "URL" and should be unset if type is "Text".
      */
     idpMetadataUrl?: pulumi.Input<string>;
     /**
-     * List of RBAC groups.
+     * List of rbac groups. Required for controller login and "accessSetBy" of "controller".
      */
     rbacGroups?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -171,39 +223,39 @@ export interface AviatrixSamlEndpointState {
  */
 export interface AviatrixSamlEndpointArgs {
     /**
-     * Access type.
+     * Access type. Valid values: "controller", "profileAttribute". Default value: "controller".
      */
     accessSetBy?: pulumi.Input<string>;
     /**
-     * Switch to differentiate if it is for controller login.
+     * Valid values: true, false. Default value: false. Set true for creating a saml endpoint for controller login.
      */
     controllerLogin?: pulumi.Input<boolean>;
     /**
-     * Custom Entity ID. Required to be non-empty for 'Custom' Entity ID type, empty for 'Hostname'.
+     * Custom Entity ID. Required to be non-empty for 'Custom' Entity ID type, empty for 'Hostname' Entity ID type.
      */
     customEntityId?: pulumi.Input<string>;
     /**
-     * Custom SAML Request Template.
+     * Custom SAML Request Template in string.
      */
     customSamlRequestTemplate?: pulumi.Input<string>;
     /**
-     * SAML Endpoint Name.
+     * The SAML endpoint name.
      */
     endpointName: pulumi.Input<string>;
     /**
-     * IDP Metadata.
+     * The IDP Metadata from SAML provider. Required if `idpMetadataType` is "Text" and should be unset if type is "URL". Normally the metadata is in XML format which may contain special characters. Best practice is to use the file function to read from a local Metadata XML file.
      */
     idpMetadata?: pulumi.Input<string>;
     /**
-     * Type of IDP Metadata.
+     * The IDP Metadata type. Can be either "Text" or "URL".
      */
     idpMetadataType: pulumi.Input<string>;
     /**
-     * IDP Metadata.
+     * The IDP Metadata URL from SAML provider. Required if `idpMetadataType` is "URL" and should be unset if type is "Text".
      */
     idpMetadataUrl?: pulumi.Input<string>;
     /**
-     * List of RBAC groups.
+     * List of rbac groups. Required for controller login and "accessSetBy" of "controller".
      */
     rbacGroups?: pulumi.Input<pulumi.Input<string>[]>;
     /**

@@ -9,11 +9,44 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Aviatrix
 {
+    /// <summary>
+    /// The **aviatrix_aws_tgw_directconnect** resource allows the creation and management of Aviatrix-created AWS TGW DirectConnect connections.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using Pulumi;
+    /// using Aviatrix = Pulumi.Aviatrix;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // Create an Aviatrix AWS TGW Directconnect
+    ///     var testAwsTgwDirectconnect = new Aviatrix.AviatrixAwsTgwDirectconnect("testAwsTgwDirectconnect", new()
+    ///     {
+    ///         AllowedPrefix = "10.12.0.0/24",
+    ///         DirectconnectAccountName = "username",
+    ///         DxGatewayId = "30321d76-dd01-49bf",
+    ///         NetworkDomainName = "my-ndn-1",
+    ///         TgwName = "my-aws-tgw-1",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// **aws_tgw_directconnect** can be imported using the `tgw_name` and `dx_gateway_id`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import aviatrix:index/aviatrixAwsTgwDirectconnect:AviatrixAwsTgwDirectconnect test tgw_name~dx_gateway_id
+    /// ```
+    /// </summary>
     [AviatrixResourceType("aviatrix:index/aviatrixAwsTgwDirectconnect:AviatrixAwsTgwDirectconnect")]
     public partial class AviatrixAwsTgwDirectconnect : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Public IP address. Example: '40.0.0.0'.
+        /// A list of comma separated CIDRs for DXGW to advertise to remote(on-prem).
         /// </summary>
         [Output("allowedPrefix")]
         public Output<string> AllowedPrefix { get; private set; } = null!;
@@ -31,19 +64,19 @@ namespace Pulumi.Aviatrix
         public Output<string> DxGatewayId { get; private set; } = null!;
 
         /// <summary>
-        /// Switch to enable/disable encrypted transit approval for direct connection. Valid values: true, false.
+        /// Switch to enable/disable [encrypted transit approval](https://docs.aviatrix.com/HowTos/tgw_approval.html) for AWS TGW DirectConnect. Valid values: true, false. Default value: false.
         /// </summary>
         [Output("enableLearnedCidrsApproval")]
         public Output<bool?> EnableLearnedCidrsApproval { get; private set; } = null!;
 
         /// <summary>
-        /// The name of an Aviatrix network domain, to which the direct connect gateway will be attached.
+        /// The name of a network domain, to which the direct connect gateway will be attached.
         /// </summary>
         [Output("networkDomainName")]
         public Output<string?> NetworkDomainName { get; private set; } = null!;
 
         /// <summary>
-        /// The name of an Aviatrix security domain, to which the direct connect gateway will be attached.
+        /// The name of a security domain, to which the direct connect gateway will be attached.
         /// </summary>
         [Output("securityDomainName")]
         public Output<string?> SecurityDomainName { get; private set; } = null!;
@@ -102,7 +135,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixAwsTgwDirectconnectArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Public IP address. Example: '40.0.0.0'.
+        /// A list of comma separated CIDRs for DXGW to advertise to remote(on-prem).
         /// </summary>
         [Input("allowedPrefix", required: true)]
         public Input<string> AllowedPrefix { get; set; } = null!;
@@ -120,19 +153,19 @@ namespace Pulumi.Aviatrix
         public Input<string> DxGatewayId { get; set; } = null!;
 
         /// <summary>
-        /// Switch to enable/disable encrypted transit approval for direct connection. Valid values: true, false.
+        /// Switch to enable/disable [encrypted transit approval](https://docs.aviatrix.com/HowTos/tgw_approval.html) for AWS TGW DirectConnect. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableLearnedCidrsApproval")]
         public Input<bool>? EnableLearnedCidrsApproval { get; set; }
 
         /// <summary>
-        /// The name of an Aviatrix network domain, to which the direct connect gateway will be attached.
+        /// The name of a network domain, to which the direct connect gateway will be attached.
         /// </summary>
         [Input("networkDomainName")]
         public Input<string>? NetworkDomainName { get; set; }
 
         /// <summary>
-        /// The name of an Aviatrix security domain, to which the direct connect gateway will be attached.
+        /// The name of a security domain, to which the direct connect gateway will be attached.
         /// </summary>
         [Input("securityDomainName")]
         public Input<string>? SecurityDomainName { get; set; }
@@ -152,7 +185,7 @@ namespace Pulumi.Aviatrix
     public sealed class AviatrixAwsTgwDirectconnectState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Public IP address. Example: '40.0.0.0'.
+        /// A list of comma separated CIDRs for DXGW to advertise to remote(on-prem).
         /// </summary>
         [Input("allowedPrefix")]
         public Input<string>? AllowedPrefix { get; set; }
@@ -170,19 +203,19 @@ namespace Pulumi.Aviatrix
         public Input<string>? DxGatewayId { get; set; }
 
         /// <summary>
-        /// Switch to enable/disable encrypted transit approval for direct connection. Valid values: true, false.
+        /// Switch to enable/disable [encrypted transit approval](https://docs.aviatrix.com/HowTos/tgw_approval.html) for AWS TGW DirectConnect. Valid values: true, false. Default value: false.
         /// </summary>
         [Input("enableLearnedCidrsApproval")]
         public Input<bool>? EnableLearnedCidrsApproval { get; set; }
 
         /// <summary>
-        /// The name of an Aviatrix network domain, to which the direct connect gateway will be attached.
+        /// The name of a network domain, to which the direct connect gateway will be attached.
         /// </summary>
         [Input("networkDomainName")]
         public Input<string>? NetworkDomainName { get; set; }
 
         /// <summary>
-        /// The name of an Aviatrix security domain, to which the direct connect gateway will be attached.
+        /// The name of a security domain, to which the direct connect gateway will be attached.
         /// </summary>
         [Input("securityDomainName")]
         public Input<string>? SecurityDomainName { get; set; }

@@ -4,6 +4,30 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Use this data source to do 'save' or 'sync' for vendor integration purposes for Aviatrix FireNet.
+ *
+ * > **NOTE:** FireNet with Panorama should be set up using the **aviatrix_firenet_firewall_manager** data source. Do not use `save` or `sync` options listed below.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aviatrix from "@pulumi/aviatrix";
+ *
+ * // Aviatrix FireNet Vendor Integration Data Source
+ * const foo = pulumi.output(aviatrix.getAviatrixFirenetVendorIntegration({
+ *     firewallName: "Avx-Firewall-Instance",
+ *     instanceId: "i-09ade2592661316f8",
+ *     password: "Avx123456#",
+ *     publicIp: "10.11.12.13",
+ *     save: true,
+ *     username: "admin",
+ *     vendorType: "Palo Alto Networks VM-Series",
+ *     vpcId: "vpc-abcd123",
+ * }));
+ * ```
+ */
 export function getAviatrixFirenetVendorIntegration(args: GetAviatrixFirenetVendorIntegrationArgs, opts?: pulumi.InvokeOptions): Promise<GetAviatrixFirenetVendorIntegrationResult> {
     if (!opts) {
         opts = {}
@@ -32,19 +56,61 @@ export function getAviatrixFirenetVendorIntegration(args: GetAviatrixFirenetVend
  * A collection of arguments for invoking getAviatrixFirenetVendorIntegration.
  */
 export interface GetAviatrixFirenetVendorIntegrationArgs {
+    /**
+     * API token for API calls. Required and valid only for vendor type "Fortinet FortiGate".
+     */
     apiToken?: string;
+    /**
+     * Name of firewall instance.
+     */
     firewallName?: string;
+    /**
+     * ID of Firewall instance.
+     */
     instanceId: string;
+    /**
+     * Number of retries for `save` or `synchronize`. Example: 1. Default value: 0.
+     */
     numberOfRetries?: number;
+    /**
+     * Firewall login password for API calls. Required for vendor type "Generic", "Palo Alto Networks VM-Series" and "Aviatrix FQDN Gateway".
+     */
     password?: string;
+    /**
+     * Private key file. Valid only for vendor type "Check Point Cloud Guard". Use the `file` function to read from a file.
+     */
     privateKeyFile?: string;
+    /**
+     * The IP address of the firewall management interface for API calls from the Aviatrix Controller. If not set, the public IP of the firewall instance will be used. If the private IP is provided, please make sure that the controller can access the firewall.
+     */
     publicIp?: string;
+    /**
+     * Retry interval in seconds for `save` or `synchronize`. Example: 120. Default value: 300.
+     */
     retryInterval?: number;
+    /**
+     * Specify the firewall virtual Router name you wish the Controller to program. If left unspecified, the Controller programs the firewall’s default router.
+     */
     routeTable?: string;
+    /**
+     * Switch to save or not.
+     */
     save?: boolean;
+    /**
+     * Switch to sync or not.
+     */
     synchronize?: boolean;
+    /**
+     * Firewall login name for API calls from the Controller. Required for vendor type "Generic", "Palo Alto Networks VM-Series" and "Aviatrix FQDN Gateway".
+     */
     username?: string;
+    /**
+     * Select PAN. Valid values: "Generic", "Palo Alto Networks VM-Series", "Aviatrix FQDN Gateway" and "Fortinet FortiGate".
+     */
     vendorType: string;
+    /**
+     * VPC ID.
+     */
     vpcId: string;
 }
 
@@ -80,18 +146,60 @@ export function getAviatrixFirenetVendorIntegrationOutput(args: GetAviatrixFiren
  * A collection of arguments for invoking getAviatrixFirenetVendorIntegration.
  */
 export interface GetAviatrixFirenetVendorIntegrationOutputArgs {
+    /**
+     * API token for API calls. Required and valid only for vendor type "Fortinet FortiGate".
+     */
     apiToken?: pulumi.Input<string>;
+    /**
+     * Name of firewall instance.
+     */
     firewallName?: pulumi.Input<string>;
+    /**
+     * ID of Firewall instance.
+     */
     instanceId: pulumi.Input<string>;
+    /**
+     * Number of retries for `save` or `synchronize`. Example: 1. Default value: 0.
+     */
     numberOfRetries?: pulumi.Input<number>;
+    /**
+     * Firewall login password for API calls. Required for vendor type "Generic", "Palo Alto Networks VM-Series" and "Aviatrix FQDN Gateway".
+     */
     password?: pulumi.Input<string>;
+    /**
+     * Private key file. Valid only for vendor type "Check Point Cloud Guard". Use the `file` function to read from a file.
+     */
     privateKeyFile?: pulumi.Input<string>;
+    /**
+     * The IP address of the firewall management interface for API calls from the Aviatrix Controller. If not set, the public IP of the firewall instance will be used. If the private IP is provided, please make sure that the controller can access the firewall.
+     */
     publicIp?: pulumi.Input<string>;
+    /**
+     * Retry interval in seconds for `save` or `synchronize`. Example: 120. Default value: 300.
+     */
     retryInterval?: pulumi.Input<number>;
+    /**
+     * Specify the firewall virtual Router name you wish the Controller to program. If left unspecified, the Controller programs the firewall’s default router.
+     */
     routeTable?: pulumi.Input<string>;
+    /**
+     * Switch to save or not.
+     */
     save?: pulumi.Input<boolean>;
+    /**
+     * Switch to sync or not.
+     */
     synchronize?: pulumi.Input<boolean>;
+    /**
+     * Firewall login name for API calls from the Controller. Required for vendor type "Generic", "Palo Alto Networks VM-Series" and "Aviatrix FQDN Gateway".
+     */
     username?: pulumi.Input<string>;
+    /**
+     * Select PAN. Valid values: "Generic", "Palo Alto Networks VM-Series", "Aviatrix FQDN Gateway" and "Fortinet FortiGate".
+     */
     vendorType: pulumi.Input<string>;
+    /**
+     * VPC ID.
+     */
     vpcId: pulumi.Input<string>;
 }
