@@ -11,7 +11,7 @@
     "license": "Apache-2.0",
     "attribution": "This Pulumi package is based on the [`aviatrix` Terraform Provider](https://github.com/AviatrixSystems/terraform-provider-aviatrix).",
     "repository": "https://github.com/astipkovits/pulumi-aviatrix",
-    "logoUrl": "https://raw.githubusercontent.com/astipkovits/pulumi-aviatrix/main/aviatrix_logo.png",
+    "logoUrl": "https://raw.githubusercontent.com/astipkovits/pulumi-aviatrix/main/aviatrix_logo.svg",
     "pluginDownloadURL": "github://api.github.com/astipkovits",
     "publisher": "Aviatrix",
     "meta": {
