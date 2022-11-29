@@ -4,7 +4,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Aviatrix</Authors>
     <Company>Aviatrix</Company>
-    <Description>A Pulumi package for creating and managing aviatrix cloud resources.</Description>
+    <Description>A Pulumi package for creating and managing Aviatrix cloud resources.</Description>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://www.aviatrix.com</PackageProjectUrl>
     <RepositoryUrl>https://github.com/astipkovits/pulumi-aviatrix</RepositoryUrl>

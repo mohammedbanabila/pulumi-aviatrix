@@ -39,7 +39,7 @@ def readme():
 
 setup(name='pulumi_aviatrix',
       version=VERSION,
-      description="A Pulumi package for creating and managing aviatrix cloud resources.",
+      description="A Pulumi package for creating and managing Aviatrix cloud resources.",
       long_description=readme(),
       long_description_content_type='text/markdown',
       cmdclass={

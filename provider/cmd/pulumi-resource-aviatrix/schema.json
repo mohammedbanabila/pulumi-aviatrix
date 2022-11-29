@@ -1,7 +1,7 @@
 {
     "name": "aviatrix",
     "displayName": "Aviatrix",
-    "description": "A Pulumi package for creating and managing aviatrix cloud resources.",
+    "description": "A Pulumi package for creating and managing Aviatrix cloud resources.",
     "keywords": [
         "pulumi",
         "aviatrix",
@@ -11,6 +11,7 @@
     "license": "Apache-2.0",
     "attribution": "This Pulumi package is based on the [`aviatrix` Terraform Provider](https://github.com/AviatrixSystems/terraform-provider-aviatrix).",
     "repository": "https://github.com/astipkovits/pulumi-aviatrix",
+    "logoUrl": "https://raw.githubusercontent.com/astipkovits/pulumi-aviatrix/main/aviatrix_logo.png",
     "pluginDownloadURL": "github://api.github.com/astipkovits",
     "publisher": "Aviatrix",
     "meta": {
@@ -39,7 +40,7 @@
                 "@types/node": "^10.0.0"
             },
             "disableUnionOutputTypes": true,
-            "packageDescription": "A Pulumi package for creating and managing aviatrix cloud resources.. Based on terraform-provider-aviatrix: version v2.24.1",
+            "packageDescription": "A Pulumi package for creating and managing Aviatrix cloud resources.. Based on terraform-provider-aviatrix: version v2.24.1",
             "packageName": "@astipkovits/aviatrix",
             "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/AviatrixSystems/terraform-provider-aviatrix)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-aviatrix` repo](https://github.com/astipkovits/pulumi-aviatrix/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-aviatrix` repo](https://github.com/AviatrixSystems/terraform-provider-aviatrix/issues).",
             "typescriptVersion": ""

@@ -1,7 +1,7 @@
 {
     "name": "@astipkovits/aviatrix",
     "version": "${VERSION}",
-    "description": "A Pulumi package for creating and managing aviatrix cloud resources.. Based on terraform-provider-aviatrix: version v2.24.1",
+    "description": "A Pulumi package for creating and managing Aviatrix cloud resources.. Based on terraform-provider-aviatrix: version v2.24.1",
     "keywords": [
         "pulumi",
         "aviatrix",
