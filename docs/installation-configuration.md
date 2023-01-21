@@ -32,7 +32,7 @@ Optional:
 
 ## Controller compatibility
 
-This package has feature parity with the Aviatrix Terraform porvider version 2.24.1. For controller version compatibility please visit the [compatibility page](https://registry.terraform.io/providers/AviatrixSystems/aviatrix/latest/docs/guides/release-compatibility).
+This package has feature parity with the Aviatrix Terraform provider version 2.24.1. For controller version compatibility please visit the [compatibility page](https://registry.terraform.io/providers/AviatrixSystems/aviatrix/latest/docs/guides/release-compatibility).
 
 ## Reference
 
