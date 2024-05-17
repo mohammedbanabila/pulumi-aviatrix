@@ -86,7 +86,7 @@ func Provider() tfbridge.ProviderInfo {
 		// should match the TF provider module's require directive, not any replace directives.
 		GitHubOrg: "AviatrixSystems",
 		//Version: "",
-		TFProviderVersion: "2.24.1",
+		TFProviderVersion: "3.1.4",
 		TFProviderModuleVersion: "v2",
 		Config:    map[string]*tfbridge.SchemaInfo{
 			// Add any required configuration here, or remove the example below if
